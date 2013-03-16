@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[My Octopress Blog]]></title>
-  <link href="http://biaobiaoqi.github.com/atom.xml" rel="self"/>
+  <title><![CDATA[Category: 历程 | My Octopress Blog]]></title>
+  <link href="http://biaobiaoqi.github.com/blog/categories/li-cheng/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
   <updated>2013-03-17T00:29:12+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
@@ -33,16 +33,6 @@
 <p>身后，是梦想的脚印。</p>
 
 <p>希望多年后的自己，能在这里找到一切的意义和希望。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[hello]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/03/16/hello/"/>
-    <updated>2013-03-16T17:11:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/03/16/hello</id>
-    <content type="html"><![CDATA[<p>大家好，这个博客刚搭起来，最近在探索哈，不要慌。
-最近会先写写基础数据结构和git方面的学习笔记。</p>
 ]]></content>
   </entry>
   
