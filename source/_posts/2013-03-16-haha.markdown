@@ -1,0 +1,8 @@
+---
+layout: post
+title: "haha"
+date: 2013-03-16 19:43
+comments: true
+categories: [Try]
+---
+This is my first post in this site.
