@@ -93,3 +93,11 @@ google_analytics_tracking_id:
 
 # Facebook Like
 #facebook_like: false
+
+#Weibo share
+weibo_share: true
+
+#duoshuo
+#duoshuo_show_comment_count: true
+#duoshuo_comments: true
+#duoshuo_short_name: biaobiaoqi
