@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Biaobiaoqi的技术博客]]></title>
-  <link href="http://biaobiaoqi.github.com/atom.xml" rel="self"/>
+  <title><![CDATA[Category: git | Biaobiaoqi的技术博客]]></title>
+  <link href="http://biaobiaoqi.github.com/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
   <updated>2013-03-22T00:41:07+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
@@ -22,7 +22,7 @@
 
 <p>自己从网上搜到了很多中文的博客描述如何安装配置octopress，有些博客讲得算是清晰，但终归每台电脑有不同的环境，每个人的叙述也或多或少的主观。最要命的是，我发现好几篇博文所讲述的命令都不太一样，走了不少弯路之后，倒腾了一下午，最终还是官网救了我。这也让我进一步认识到，信息的流通中的失真在所难免，最好的方法还是直接探寻最权威的内容。</p>
 
-<p>如果对octopress不太了解，不用急着动手，首先看看几个概念。（当然，lz现在也并非精通这几点，初来乍到的，先做出来再说，以后不断学习&#8230;）</p>
+<p>如果对octopress不太了解，不用急着动手，首先看看几个概念。（当然，lz现在也并非精通这几点，初来乍到的，先做出来再说，以后不断学习...）</p>
 
 <ul>
 <li> Ruby：octopress框架的实现语言。rvm（ruby version manager）是用于管理ruby版本的，rake是ruby中类似于make工具。</li>
@@ -87,21 +87,6 @@
 <p><a href="http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html">http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html</a>
 <a href="http://octopress.org/docs/deploying/github/">http://octopress.org/docs/deploying/github/</a>
 <a href="http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/">http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[开篇]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/03/17/kai-pian/"/>
-    <updated>2013-03-17T10:18:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/03/17/kai-pian</id>
-    <content type="html"><![CDATA[<p>花了一下午时间，终于搭起了这个博客。</p>
-
-<p>我会陆续将原来csdn博客中的内容筛选过来，将这个博客作为技术主博客。</p>
-
-<p>github真是神器啊。感谢github，“感谢”tc最终没有封锁github，让我得以有机会搭建这个独立博客。</p>
-
-<p>希望五年、十年、二十年过后，回过头来，依然能在这个博客中找到自己的脚印和梦想。</p>
 ]]></content>
   </entry>
   
