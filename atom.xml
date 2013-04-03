@@ -4,7 +4,7 @@
   <title><![CDATA[Biaobiaoqi的技术博客]]></title>
   <link href="http://biaobiaoqi.github.com/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-04-04T02:38:22+08:00</updated>
+  <updated>2013-04-04T03:15:17+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -59,75 +59,114 @@
     <link href="http://biaobiaoqi.github.com/blog/2013/03/21/building-octopress-in-github-mac/"/>
     <updated>2013-03-21T23:43:00+08:00</updated>
     <id>http://biaobiaoqi.github.com/blog/2013/03/21/building-octopress-in-github-mac</id>
-    <content type="html"><![CDATA[<p>在网上看到不少技术博客都是用octopress搭建，界面简约、大方，比wordpress更有亲近感。其中很多人都是使用github托管代码，完全不用自己租服务器，实在方便。考虑到原先在csdn上的技术博客圈子鱼龙混杂，各种限制，于是也自己动手装上octopress。</p>
+    <content type="html"><![CDATA[<p>最早的时候，是看见了<a href="http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/">唐巧大哥的博客</a>，UI上已是觉得耳目一新。后来读到过<a href="http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html">阮一峰的博文</a>，当知道这是搭建在Github这个程序员的facebook上时，更是心头一震，什么时候自己也搭这么个博客呢。直接用github托管代码，完全不用自己租服务器，实在方便。自己之前也有在csdn上维护了一个博客，虽然那已经是一年前的事情了。深刻的记得，当时想将自己的weibo账户贴到博客页面上，却发现它不支持一般用户潜入javascript代码:(。这更让我对octopress的感情与日俱增。</p>
 
-<p>自己从网上搜到了很多中文的博客描述如何安装配置octopress，有些博客讲得算是清晰，但终归每台电脑有不同的环境，每个人的叙述也或多或少的主观。最要命的是，我发现好几篇博文所讲述的命令都不太一样，走了不少弯路之后，倒腾了一下午，最终还是官网救了我。这也让我进一步认识到，信息的流通中的失真在所难免，最好的方法还是直接探寻最权威的内容。</p>
+<p>今天终于动手啦。自己从网上搜到了很多中文的博客描述如何安装配置octopress，有些博客讲得算是清晰，但终归每台电脑有不同的环境，每个人的叙述也或多或少的主观。最要命的是，我发现好几篇博文所讲述的命令都不太一样，走了不少弯路之后，倒腾了一下午，最终还是官网救了我。这也让我进一步认识到，信息的流通中的失真在所难免，最好的方法还是直接探寻最权威的内容。</p>
 
 <p>如果对octopress不太了解，不用急着动手，首先看看几个概念。（当然，lz现在也并非精通这几点，初来乍到的，先做出来再说，以后不断学习&#8230;）</p>
 
-<ul>
+<blockquote><ul>
 <li> Ruby：octopress框架的实现语言。rvm（ruby version manager）是用于管理ruby版本的，rake是ruby中类似于make工具。</li>
 <li> 静态站点生成工具：简单地说，不用数据库，直接生成网页文件。Jekyll就是这样的工具，而octopress是构建于它的上层的框架。</li>
 <li> Git：我主观的认为完虐svn的分布式版本控制工具。git官网貌似被gfw墙了=.=</li>
 <li> <a href="https://github.com/">Github</a>：程序员的Facebook,为程序员托管了很多代码的站点。</li>
 <li> <a href="https://help.github.com/categories/20/articles">Github pages</a>:github推出的，给与程序员自由创造静态网页的功能。支持Jekyll，因此也支持octopress。</li>
 <li> <a href="http://mxcl.github.com/homebrew/">homebrew</a>：mac os下的软件包管理工具，类似于linux下的dpkg。它使用ruby脚本，mac os下自带了ruby。</li>
-<li> <a href="http://octopress.org/">octopress</a></li>
+<li> <a href="http://octopress.org/">octopress</a> 其官网的help中有搭建octopress的足够的权威指导</li>
 </ul>
-
+</blockquote>
 
 <p>窃以为，最好的学习方式还是从最源头的资料入手。这里仅针对我的配置过程做简单描述，经验浅薄，有差错的地方还请指教:)</p>
 
-<ol>
-<li><p>配环境</p>
+<h1>1. 配环境</h1>
 
-<p> 1.0
- 万事开头难，第一步还是配环境。为了软件包安装的方便，可以先安装好homebrew.
- <code>
- $ ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
-</code></p>
+<h3>1.0 homebrew</h3>
 
-<p> 其使用方法，参见官网。</p>
+<p>万事开头难，第一步还是配环境。为了软件包安装的方便，可以先安装好homebrew.</p>
 
-<p> 1.1 ruby
- mac os x 10.8.1 的系统自带了Ruby，但是版本是1.8.3，而octopress官网所支持 的最新版是1.9.3（2013.3），兼容起见，先对版本进行升级。
- <code>
- $ rvm install 1.9.3 &amp;&amp; rvm use 1.9.3
- $ rvm ruby gems latest
-</code></p>
-
-<p> lz在升级过程中遇到了奇怪的错误，于是又参考另一篇博文，重新安装了rvm，再升级ruby到1.9.3版本。
- http://wj1s.iteye.com/blog/1118672</p>
-
-<p> 1.2 git
- 使用homebrew安装git。
- <code>
- $ brew install git
-</code></p></li>
-<li><p>搭建octopress
-环境配置完成后，就可以开始参照官网的指导搭建octopress，并在github建代码仓库，同步管理啦。</p></li>
-<li><p>配置
-发现_config.yml的配置中，配置项和值之间必须有空格。否则会报错。</p></li>
-<li><p>自定义的调整：
-装饰边栏（加weibo、豆瓣信息）：&lt;http://icodeit.org/2012/10/how-to-embed-douban-show-in-your-octopress-site/ ></p>
-
-<p>  增加weibo评论：</p>
-
-<ul>
-<li><p>友言版<a href="http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/">http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/</a></p></li>
-<li><p>多说版<a href="http://yangdd.github.com/blog/2012/08/23/comment/">http://yangdd.github.com/blog/2012/08/23/comment/</a>
-<a href="http://gangmax.me/blog/2012/01/20/how-to-use-disqus-in-octopress/">http://gangmax.me/blog/2012/01/20/how-to-use-disqus-in-octopress/</a></p></li>
-<li><p>【只有友言的分享成功了。评论还没成功。这个功能得有才行】</p></li>
-</ul>
-</li>
-</ol>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"</span></code></pre></td></tr></table></div></figure>
 
 
-<p>主要参考资料：</p>
+<p>其使用方法，参见<a href="http://mxcl.github.com/homebrew/">官网</a>。</p>
 
-<p><a href="http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html">http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html</a>
-<a href="http://octopress.org/docs/deploying/github/">http://octopress.org/docs/deploying/github/</a>
-<a href="http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/">http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/</a></p>
+<h3>1.1 ruby</h3>
+
+<p>mac os x 10.8.1 的系统自带了Ruby，但是版本是1.8.3，而octopress官网所支持的最新版是1.9.3（2013.3），兼容起见，先对版本进行升级。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rvm install 1.9.3 && rvm use 1.9.3 
+</span><span class='line'>$ rvm ruby gems latest</span></code></pre></td></tr></table></div></figure>
+
+
+<p>lz在升级过程中遇到了奇怪的错误，于是又参考<a href="http://wj1s.iteye.com/blog/1118672">另一篇博文</a>，重新安装了rvm，再升级ruby到1.9.3版本。</p>
+
+<h3>1.2 git</h3>
+
+<p>使用homebrew安装git。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ brew install git</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>2. 搭建octopress</h1>
+
+<p>环境配置完成后，就可以开始参照<a href="http://octopress.org/help/">官网</a>的指导搭建octopress，并在github建代码仓库，同步管理啦。</p>
+
+<h1>3. 配置</h1>
+
+<p>具体配置同见<a href="http://octopress.org/help/">官网</a>。</p>
+
+<p>经过试错，发现_config.yml的配置中，配置项和值之间必须有空格。否则会报错。</p>
+
+<h1>4. 自定义的调整：</h1>
+
+<p><a href="http://icodeit.org/2012/10/how-to-embed-douban-show-in-your-octopress-site/">装饰边栏（加weibo、豆瓣信息)</a></p>
+
+<p>增加weibo评论：  <a href="http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/">友言版</a>     <a href="http://yangdd.github.com/blog/2012/08/23/comment/">多说版</a></p>
+
+<h1>5. 发博文和在线部署</h1>
+
+<p>同样的，参考<a href="http://octopress.org/help/">官网</a>即可。
+这里大致的列出我所常用到的几条命令：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>#创建一篇博文
+</span><span class='line'>rake new_post["post title"] #octopress将在工作目录的source/_post/目录下生成相应的markdown文件。然后可以使用mou工具去修改编辑内容。
+</span><span class='line'>
+</span><span class='line'>#生成预览
+</span><span class='line'>rake preview #可以通过localhost:4000在本机实时观察最新的编辑效果。
+</span><span class='line'>
+</span><span class='line'>#在线发布
+</span><span class='line'>rake deploy #完成编辑后，可以将最新的内容部署到github上去。成功后，即可在线访问。
+</span><span class='line'>
+</span><span class='line'>#向github提交源文件更新
+</span><span class='line'>git add -A
+</span><span class='line'>git commit -m "提交内容"
+</span><span class='line'>git push
+</span><span class='line'>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>其中推荐到的<a href="http://mouapp.com/">mou</a>，是一个mac下的markdown编辑器。试用后发现有些格式兼容问题，但似乎mac下也只有他这个可视化工具了=。=</p>
+
+<p>另附<a href="http://wowubuntu.com/markdown/index.html">markdown语法</a></p>
 ]]></content>
   </entry>
   
