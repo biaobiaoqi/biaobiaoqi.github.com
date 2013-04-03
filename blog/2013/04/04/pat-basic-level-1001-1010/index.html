@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Biaobiaoqi的技术博客</title>
+  <title>PAT Basic Level 1001-1010 - Biaobiaoqi的技术博客</title>
   <meta name="author" content="Biaobiaoqi">
 
   
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://biaobiaoqi.github.com">
+  <link rel="canonical" href="http://biaobiaoqi.github.com/blog/2013/04/04/pat-basic-level-1001-1010">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Biaobiaoqi的技术博客" type="application/atom+xml">
@@ -64,15 +64,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/04/04/pat-basic-level-1001-1010/">PAT Basic Level 1001-1010</a></h1>
+      <h1 class="entry-title">PAT Basic Level 1001-1010</h1>
     
     
       <p class="meta">
@@ -98,7 +95,7 @@
   </header>
 
 
-  <div class="entry-content"><h2>背景</h2>
+<div class="entry-content"><h2>背景</h2>
 
 <p>算法开始练手了。从最简单的做起。</p>
 
@@ -132,129 +129,16 @@
 
 <p>到现在为止，还没有找到一个顺手的排版工具。此文出自mou，但不知道是不是因为我的姿势不对，对所有格式的支持并非那么完美。有空研究下，好让简陋的排版有脸见人吧。</p>
 </div>
-  
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/03/21/building-octopress-in-github-mac/">在github上搭建octopress博客 Mac</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
   
 
+<span class="byline author vcard">Posted by <span class="fn">Biaobiaoqi</span></span>
 
-<time datetime="2013-03-21T23:43:00+08:00" pubdate data-updated="true">Mar 21<span>st</span>, 2013</time>
-        
-
-
-
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>在网上看到不少技术博客都是用octopress搭建，界面简约、大方，比wordpress更有亲近感。其中很多人都是使用github托管代码，完全不用自己租服务器，实在方便。考虑到原先在csdn上的技术博客圈子鱼龙混杂，各种限制，于是也自己动手装上octopress。</p>
-
-<p>自己从网上搜到了很多中文的博客描述如何安装配置octopress，有些博客讲得算是清晰，但终归每台电脑有不同的环境，每个人的叙述也或多或少的主观。最要命的是，我发现好几篇博文所讲述的命令都不太一样，走了不少弯路之后，倒腾了一下午，最终还是官网救了我。这也让我进一步认识到，信息的流通中的失真在所难免，最好的方法还是直接探寻最权威的内容。</p>
-
-<p>如果对octopress不太了解，不用急着动手，首先看看几个概念。（当然，lz现在也并非精通这几点，初来乍到的，先做出来再说，以后不断学习&#8230;）</p>
-
-<ul>
-<li> Ruby：octopress框架的实现语言。rvm（ruby version manager）是用于管理ruby版本的，rake是ruby中类似于make工具。</li>
-<li> 静态站点生成工具：简单地说，不用数据库，直接生成网页文件。Jekyll就是这样的工具，而octopress是构建于它的上层的框架。</li>
-<li> Git：我主观的认为完虐svn的分布式版本控制工具。git官网貌似被gfw墙了=.=</li>
-<li> <a href="https://github.com/">Github</a>：程序员的Facebook,为程序员托管了很多代码的站点。</li>
-<li> <a href="https://help.github.com/categories/20/articles">Github pages</a>:github推出的，给与程序员自由创造静态网页的功能。支持Jekyll，因此也支持octopress。</li>
-<li> <a href="http://mxcl.github.com/homebrew/">homebrew</a>：mac os下的软件包管理工具，类似于linux下的dpkg。它使用ruby脚本，mac os下自带了ruby。</li>
-<li> <a href="http://octopress.org/">octopress</a></li>
-</ul>
-
-
-<p>窃以为，最好的学习方式还是从最源头的资料入手。这里仅针对我的配置过程做简单描述，经验浅薄，有差错的地方还请指教:)</p>
-
-<ol>
-<li><p>配环境</p>
-
-<p> 1.0
- 万事开头难，第一步还是配环境。为了软件包安装的方便，可以先安装好homebrew.
- <code>
- $ ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
-</code></p>
-
-<p> 其使用方法，参见官网。</p>
-
-<p> 1.1 ruby
- mac os x 10.8.1 的系统自带了Ruby，但是版本是1.8.3，而octopress官网所支持 的最新版是1.9.3（2013.3），兼容起见，先对版本进行升级。
- <code>
- $ rvm install 1.9.3 &amp;&amp; rvm use 1.9.3
- $ rvm ruby gems latest
-</code></p>
-
-<p> lz在升级过程中遇到了奇怪的错误，于是又参考另一篇博文，重新安装了rvm，再升级ruby到1.9.3版本。
- http://wj1s.iteye.com/blog/1118672</p>
-
-<p> 1.2 git
- 使用homebrew安装git。
- <code>
- $ brew install git
-</code></p></li>
-<li><p>搭建octopress
-环境配置完成后，就可以开始参照官网的指导搭建octopress，并在github建代码仓库，同步管理啦。</p></li>
-<li><p>配置
-发现_config.yml的配置中，配置项和值之间必须有空格。否则会报错。</p></li>
-<li><p>自定义的调整：
-装饰边栏（加weibo、豆瓣信息）：&lt;http://icodeit.org/2012/10/how-to-embed-douban-show-in-your-octopress-site/ ></p>
-
-<p>  增加weibo评论：</p>
-
-<ul>
-<li><p>友言版<a href="http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/">http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/</a></p></li>
-<li><p>多说版<a href="http://yangdd.github.com/blog/2012/08/23/comment/">http://yangdd.github.com/blog/2012/08/23/comment/</a>
-<a href="http://gangmax.me/blog/2012/01/20/how-to-use-disqus-in-octopress/">http://gangmax.me/blog/2012/01/20/how-to-use-disqus-in-octopress/</a></p></li>
-<li><p>【只有友言的分享成功了。评论还没成功。这个功能得有才行】</p></li>
-</ul>
-</li>
-</ol>
-
-
-<p>主要参考资料：</p>
-
-<p><a href="http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html">http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html</a>
-<a href="http://octopress.org/docs/deploying/github/">http://octopress.org/docs/deploying/github/</a>
-<a href="http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/">http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/03/17/kai-pian/">开篇</a></h1>
-    
-    
-      <p class="meta">
-        
 
 
 
@@ -266,36 +150,60 @@
   
 
 
-<time datetime="2013-03-17T10:18:00+08:00" pubdate data-updated="true">Mar 17<span>th</span>, 2013</time>
-        
+<time datetime="2013-04-04T01:50:00+08:00" pubdate data-updated="true">Apr 4<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/algorithm/'>Algorithm</a>, <a class='category' href='/blog/categories/java/'>Java</a>
+  
+</span>
 
 
-
-      </p>
+    </p>
     
-  </header>
-
-
-  <div class="entry-content"><p>花了一下午时间，终于搭起了这个博客。</p>
-
-<p>我会陆续将原来csdn博客中的内容筛选过来，将这个博客作为技术主博客。</p>
-
-<p>github真是神器啊。感谢github，“感谢”tc最终没有封锁github，让我得以有机会搭建这个独立博客。</p>
-
-<p>希望五年、十年、二十年过后，回过头来，依然能在这个博客中找到自己的脚印和梦想。</p>
+      <div class="sharing">
+  
+  
+  
+  
+      <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+	<span class="jiathis_txt">分享到：</span>
+	<a class="jiathis_button_tsina">新浪微博</a>
+	<a class="jiathis_button_tqq">腾讯微博</a>
+	<a class="jiathis_button_renren">人人网</a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+	<a class="jiathis_counter_style"></a>
 </div>
-  
-  
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1354814218267188" charset="utf-8"></script>
+<!-- JiaThis Button END -->
 
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1755742" async=""></script>
+<!-- UY END -->
 
-    </article>
   
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
 </div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/03/21/building-octopress-in-github-mac/" title="Previous Post: 在github上搭建octopress博客 mac">&laquo; 在github上搭建octopress博客 mac</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+
+
+
+
+
+</div>
+
 <aside class="sidebar">
   
     <section>
@@ -330,6 +238,9 @@
 
   
 </aside>
+
+
+
 
     </div>
   </div>
