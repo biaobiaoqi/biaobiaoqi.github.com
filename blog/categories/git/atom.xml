@@ -4,7 +4,7 @@
   <title><![CDATA[Category: git | Biaobiaoqi的技术博客]]></title>
   <link href="http://biaobiaoqi.github.com/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-04-04T03:15:17+08:00</updated>
+  <updated>2013-04-04T22:55:29+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -18,7 +18,12 @@
     <link href="http://biaobiaoqi.github.com/blog/2013/03/21/building-octopress-in-github-mac/"/>
     <updated>2013-03-21T23:43:00+08:00</updated>
     <id>http://biaobiaoqi.github.com/blog/2013/03/21/building-octopress-in-github-mac</id>
-    <content type="html"><![CDATA[<p>最早的时候，是看见了<a href="http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/">唐巧大哥的博客</a>，UI上已是觉得耳目一新。后来读到过<a href="http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html">阮一峰的博文</a>，当知道这是搭建在Github这个程序员的facebook上时，更是心头一震，什么时候自己也搭这么个博客呢。直接用github托管代码，完全不用自己租服务器，实在方便。自己之前也有在csdn上维护了一个博客，虽然那已经是一年前的事情了。深刻的记得，当时想将自己的weibo账户贴到博客页面上，却发现它不支持一般用户潜入javascript代码:(。这更让我对octopress的感情与日俱增。</p>
+    <content type="html"><![CDATA[<p>最早的时候，是看见了<a href="http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/">唐巧大哥的博客</a>，UI上已是觉得耳目一新。后来读到过<a href="http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html">阮一峰的博文</a>，当知道这是搭建在Github这个程序员的facebook上时，更是心头一震，什么时候自己也搭这么个博客呢。直接用github托管代码，完全不用自己租服务器，实在方便。自己之前也有在csdn上维护了一个博客，虽然那已经是一年前的事情了。</p>
+
+<!--more-->
+
+
+<p>深刻的记得，当时想将自己的weibo账户贴到博客页面上，却发现它不支持一般用户潜入javascript代码:(。这更让我对octopress的感情与日俱增。</p>
 
 <p>今天终于动手啦。自己从网上搜到了很多中文的博客描述如何安装配置octopress，有些博客讲得算是清晰，但终归每台电脑有不同的环境，每个人的叙述也或多或少的主观。最要命的是，我发现好几篇博文所讲述的命令都不太一样，走了不少弯路之后，倒腾了一下午，最终还是官网救了我。这也让我进一步认识到，信息的流通中的失真在所难免，最好的方法还是直接探寻最权威的内容。</p>
 

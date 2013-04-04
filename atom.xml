@@ -4,7 +4,7 @@
   <title><![CDATA[Biaobiaoqi的技术博客]]></title>
   <link href="http://biaobiaoqi.github.com/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-04-04T03:15:17+08:00</updated>
+  <updated>2013-04-04T22:55:29+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -12,6 +12,48 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[PAT Advanced Level (1) easy problems]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/04/04/pat-advanced-level-1-easy-problems/"/>
+    <updated>2013-04-04T20:58:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/04/04/pat-advanced-level-1-easy-problems</id>
+    <content type="html"><![CDATA[<p>今天做的这批题目，总的来说几乎不需要数据结构基础。几个小时刷完。</p>
+
+<blockquote><ul>
+<li>1001: 数字的格式转换。第一次做的时候，将正负数分两种情况处理了，其实负数可以拆成正数加上一个负号。太简单的道理，竟然没注意。另外，Java完全可以使用NumberFormat实现格式转换。好简单的说。</li>
+</ul>
+</blockquote>
+
+<!-- more -->
+
+
+<blockquote><ul>
+<li><p>1002：一元多项式求导问题。有三点需要注意：1.输出中的小数精确的位数；2.浮点数操作过程中需要使用到eps做判定；<em>3.在我的实现中，主循环逻辑中，将判定游标越界的逻辑统一的提出到最外层，让代码更加简洁，利于维护。</em></p></li>
+<li><p>1005: 简单的hash。注意Java可以直接实现int转string，string转int。</p></li>
+<li><p>1006: 简单的找最大最小。用到了Java中String的split方法划分子串和Integer.parseInt()转String为int。</p></li>
+<li><p>1008: 纯水题。</p></li>
+<li><p>1009: 一元多项式相乘。基于桶排序的思想，将子项相乘的结果加到数组中去实现。第一次提交时，算错了“桶”的大小。。</p></li>
+<li><p>1011: 水题，求组最大值的问题。</p></li>
+<li><p>1027: 水题，hash求解。</p></li>
+</ul>
+</blockquote>
+
+<h2>资料</h2>
+
+<p><a href="http://pat.zju.edu.cn/contests/pat-a-practise">题目列表</a></p>
+
+<p><a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/pat/advancedlevel">我的代码</a></p>
+
+<h2>PS</h2>
+
+<p>除了这几道题，其他的题目似乎都需要树、图、DP的思想。明天开干！</p>
+
+<p>用了那么久eclipse，其实对eclipse的掌握并不好。比如他对（）和“”等的支持方式：</p>
+
+<blockquote><p><strong>只需要输入左单边括号，即可获得一个完整的括号，并定位到括号内输入内容。完成内容输入后，回车即可跳到反括号外，继续输入。同理于调用方法时参数的输入等。</strong></p></blockquote>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[PAT Basic Level 1001-1010]]></title>
@@ -23,6 +65,9 @@
 <p>算法开始练手了。从最简单的做起。</p>
 
 <p>由于实验室用的是Java，为了节省时间，也为了更好的掌握这门语言，我先用Java来实现了。在并非以比赛为目的的前提下，这并不妨碍什么，唯一的可能就是没有足够的参考代码咯。:(话说，自己也并不是特别喜欢一些“简洁”的代码。我现在的手速是不快，但过于简介的南与维护的代码，也不在我的目标之列。</p>
+
+<!--more-->
+
 
 <h2>资料</h2>
 
@@ -59,7 +104,12 @@
     <link href="http://biaobiaoqi.github.com/blog/2013/03/21/building-octopress-in-github-mac/"/>
     <updated>2013-03-21T23:43:00+08:00</updated>
     <id>http://biaobiaoqi.github.com/blog/2013/03/21/building-octopress-in-github-mac</id>
-    <content type="html"><![CDATA[<p>最早的时候，是看见了<a href="http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/">唐巧大哥的博客</a>，UI上已是觉得耳目一新。后来读到过<a href="http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html">阮一峰的博文</a>，当知道这是搭建在Github这个程序员的facebook上时，更是心头一震，什么时候自己也搭这么个博客呢。直接用github托管代码，完全不用自己租服务器，实在方便。自己之前也有在csdn上维护了一个博客，虽然那已经是一年前的事情了。深刻的记得，当时想将自己的weibo账户贴到博客页面上，却发现它不支持一般用户潜入javascript代码:(。这更让我对octopress的感情与日俱增。</p>
+    <content type="html"><![CDATA[<p>最早的时候，是看见了<a href="http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/">唐巧大哥的博客</a>，UI上已是觉得耳目一新。后来读到过<a href="http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html">阮一峰的博文</a>，当知道这是搭建在Github这个程序员的facebook上时，更是心头一震，什么时候自己也搭这么个博客呢。直接用github托管代码，完全不用自己租服务器，实在方便。自己之前也有在csdn上维护了一个博客，虽然那已经是一年前的事情了。</p>
+
+<!--more-->
+
+
+<p>深刻的记得，当时想将自己的weibo账户贴到博客页面上，却发现它不支持一般用户潜入javascript代码:(。这更让我对octopress的感情与日俱增。</p>
 
 <p>今天终于动手啦。自己从网上搜到了很多中文的博客描述如何安装配置octopress，有些博客讲得算是清晰，但终归每台电脑有不同的环境，每个人的叙述也或多或少的主观。最要命的是，我发现好几篇博文所讲述的命令都不太一样，走了不少弯路之后，倒腾了一下午，最终还是官网救了我。这也让我进一步认识到，信息的流通中的失真在所难免，最好的方法还是直接探寻最权威的内容。</p>
 
