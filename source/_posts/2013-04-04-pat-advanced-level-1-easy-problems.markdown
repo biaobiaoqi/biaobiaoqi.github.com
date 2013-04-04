@@ -3,7 +3,7 @@ layout: post
 title: "PAT Advanced Level (1) easy problems"
 date: 2013-04-04 20:58
 comments: true
-categories: [algorithm, pat]
+categories: [algorithm, pat, java, tech]
 ---
 
 今天做的这批题目，总的来说几乎不需要数据结构基础。几个小时刷完。

@@ -3,7 +3,7 @@ layout: post
 title: "开篇"
 date: 2013-03-17 10:18
 comments: true
-categories: [历程]
+categories: [life]
 ---
 花了一下午时间，终于搭起了这个博客。
 

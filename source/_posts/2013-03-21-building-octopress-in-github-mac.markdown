@@ -3,8 +3,10 @@ layout: post
 title: "在github上搭建octopress博客 mac"
 date: 2013-03-21 23:43
 comments: true
-categories: ["git"] 
+categories: [git, tech, octopress] 
 ---
+{% img http://pikipity.github.com/images/post/octopress.jpg %}
+
 最早的时候，是看见了[唐巧大哥的博客](http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/)，UI上已是觉得耳目一新。后来读到过[阮一峰的博文](http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html)，当知道这是搭建在Github这个程序员的facebook上时，更是心头一震，什么时候自己也搭这么个博客呢。直接用github托管代码，完全不用自己租服务器，实在方便。自己之前也有在csdn上维护了一个博客，虽然那已经是一年前的事情了。
 <!--more-->深刻的记得，当时想将自己的weibo账户贴到博客页面上，却发现它不支持一般用户潜入javascript代码:(。这更让我对octopress的感情与日俱增。
 
