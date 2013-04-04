@@ -5,7 +5,8 @@ date: 2013-03-21 23:43
 comments: true
 categories: ["git"] 
 ---
-最早的时候，是看见了[唐巧大哥的博客](http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/)，UI上已是觉得耳目一新。后来读到过[阮一峰的博文](http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html)，当知道这是搭建在Github这个程序员的facebook上时，更是心头一震，什么时候自己也搭这么个博客呢。直接用github托管代码，完全不用自己租服务器，实在方便。自己之前也有在csdn上维护了一个博客，虽然那已经是一年前的事情了。深刻的记得，当时想将自己的weibo账户贴到博客页面上，却发现它不支持一般用户潜入javascript代码:(。这更让我对octopress的感情与日俱增。
+最早的时候，是看见了[唐巧大哥的博客](http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/)，UI上已是觉得耳目一新。后来读到过[阮一峰的博文](http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html)，当知道这是搭建在Github这个程序员的facebook上时，更是心头一震，什么时候自己也搭这么个博客呢。直接用github托管代码，完全不用自己租服务器，实在方便。自己之前也有在csdn上维护了一个博客，虽然那已经是一年前的事情了。
+<!--more-->深刻的记得，当时想将自己的weibo账户贴到博客页面上，却发现它不支持一般用户潜入javascript代码:(。这更让我对octopress的感情与日俱增。
 
 今天终于动手啦。自己从网上搜到了很多中文的博客描述如何安装配置octopress，有些博客讲得算是清晰，但终归每台电脑有不同的环境，每个人的叙述也或多或少的主观。最要命的是，我发现好几篇博文所讲述的命令都不太一样，走了不少弯路之后，倒腾了一下午，最终还是官网救了我。这也让我进一步认识到，信息的流通中的失真在所难免，最好的方法还是直接探寻最权威的内容。
 
