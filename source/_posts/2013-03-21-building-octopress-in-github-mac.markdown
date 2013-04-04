@@ -63,13 +63,24 @@ $ brew install git
 
 经过试错，发现_config.yml的配置中，配置项和值之间必须有空格。否则会报错。
 
-#4. 自定义的调整：
+另附个性化配置方案：（其实这些内容都能在官网文档中找到）
 
-[装饰边栏（加weibo、豆瓣信息)](http://icodeit.org/2012/10/how-to-embed-douban-show-in-your-octopress-site/)
+###3.1 [装饰边栏（加weibo、豆瓣信息)](http://icodeit.org/2012/10/how-to-embed-douban-show-in-your-octopress-site/)
 
-增加weibo评论：  [友言版](http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/)     [多说版](http://yangdd.github.com/blog/2012/08/23/comment/)
+###3.2 增加weibo评论：  [友言版](http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/)     [多说版](http://yangdd.github.com/blog/2012/08/23/comment/)
 
-#5. 发博文和在线部署
+###3.3 CNAME
+如果你有自己的域名，可以CNAME到github pages上。以我的配置为例。
+
+1.在工作目录的source目录下创建CNAME文件，并输入新域名：biaobiaoqi.com
+
+2.在域名管理中，创建或修改A记录，指向204.232.175.78这个地址。
+
+3.创建CNAME记录，www.biaobiaoqi.com -> biaobiaoqi.github.com
+
+网上很多CNAME的操作指南，对于A记录的IP都写着~~207.97.227.245~~，或者其他的IP。实际上，这是github pages更换了地址所致。再一次证明**官方文档才是最可靠的！**
+
+#4. 发博文和在线部署
 同样的，参考[官网](http://octopress.org/help/)即可。
 这里大致的列出我所常用到的几条命令：
 
