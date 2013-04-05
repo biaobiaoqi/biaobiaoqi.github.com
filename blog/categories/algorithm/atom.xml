@@ -4,7 +4,7 @@
   <title><![CDATA[Category: algorithm | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-04-05T21:36:55+08:00</updated>
+  <updated>2013-04-05T21:43:37+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -14,19 +14,20 @@
 
   
   <entry>
-    <title type="html"><![CDATA[最大合的连续字串问题 (PAT 1007)]]></title>
+    <title type="html"><![CDATA[分治、时间空间的权衡:最大合的连续字串问题 (PAT 1007)]]></title>
     <link href="http://biaobiaoqi.github.com/blog/2013/04/05/maximum-subsequence-sum/"/>
     <updated>2013-04-05T20:16:00+08:00</updated>
     <id>http://biaobiaoqi.github.com/blog/2013/04/05/maximum-subsequence-sum</id>
-    <content type="html"><![CDATA[<p>给定一个整数串，找出连续子串中合最大的子串。</p>
+    <content type="html"><![CDATA[<p><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1007">PAT1007</a>：给定一个整数串，找出连续子串中合最大的子串。</p>
 
-<p><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1007">PAT1007</a></p>
+<p>《编程珠玑》中用专门的一章对这个问题进行了讲解。（《编程珠玑（第2版）》P73 第8章 算法设计技术）</p>
 
-<p>在PAT上遇到这个题目。我的思路如下：</p>
+<p>第一次在PAT上遇到这个题目时，我的思路如下：</p>
 
 <p><del>最简单的淡然是一个三层循环咯，O(n3)，肯定会超时。节省时间的话，用动态规划吧。但简单的动态规划，显然是会超出内存限制的。有没有更巧妙的子问题划分方法呢？</del>先找到子问题：因为要求的串必须连续，分治的时候需要考虑如何延续这个连续性，那么每个子问题中就得考虑找出三个串：1.即左端连续的最大串，2.右端连续的最大串，3.整个串中的最大串.<del>由于每个问题都有三个量要维护，难道我得造出三个表来？卡主:(</del></p>
 
-<p>网上搜索思路的过程中，发现《编程珠玑》中用专门的一章对这个问题进行了讲解。（《编程珠玑（第2版）》P73 第8章 算法设计技术）</p>
+<!--more-->
+
 
 <p>《编程珠玑》列出了性能上依次递进的四个算法。这里我结合个人理解和感悟做一些阐释。</p>
 
@@ -138,6 +139,7 @@ maxsofar = max(maxsofar, maxendingright)
 <ul>
 <li>保存状态，避免重复计算：在算法整体框架没有大的优化的情况下，时间和空间的trade-off或许会有奇效。memoization本身就是一种用空间换时间的思想，而DP中用一种方式实现了这种思想。不过不要被DP算法所禁锢。因为，这个trade-off的实现是很多变的，就像这题的第2种算法。</li>
 <li>分治：它的重要性不必多说了。同样的，DP中有分治的思想，但分治本身也是非常灵活的。</li>
+<li>数学归纳证明，对算法的设计和正确性佐证很有帮助。话说它也类似于分治的思想呢。</li>
 </ul>
 
 ]]></content>
