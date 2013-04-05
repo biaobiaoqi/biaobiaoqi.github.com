@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: PAT | Biaobiaoqi的博客]]></title>
+  <title><![CDATA[Category: pat | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/blog/categories/pat/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-04-05T21:43:37+08:00</updated>
+  <updated>2013-04-05T21:50:58+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -142,6 +142,94 @@ maxsofar = max(maxsofar, maxendingright)
 <li>数学归纳证明，对算法的设计和正确性佐证很有帮助。话说它也类似于分治的思想呢。</li>
 </ul>
 
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[PAT Advanced Level (1) easy problems]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/04/04/pat-advanced-level-1-easy-problems/"/>
+    <updated>2013-04-04T20:58:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/04/04/pat-advanced-level-1-easy-problems</id>
+    <content type="html"><![CDATA[<p><img class="left" src="http://visualcaffeine.com/ws/wp-content/uploads/2012/04/computer_guy.jpg" title="Place Kitten #2" ></p>
+
+<p>今天做的这批题目，总的来说几乎不需要数据结构基础。几个小时刷完。</p>
+
+<blockquote><ul>
+<li>1001: 数字的格式转换。第一次做的时候，将正负数分两种情况处理了，其实负数可以拆成正数加上一个负号。太简单的道理，竟然没注意。另外，Java完全可以使用NumberFormat实现格式转换。好简单的说。</li>
+</ul>
+</blockquote>
+
+<!-- more -->
+
+
+<blockquote><ul>
+<li><p>1002：一元多项式求导问题。有三点需要注意：1.输出中的小数精确的位数；2.浮点数操作过程中需要使用到eps做判定；<em>3.在我的实现中，主循环逻辑中，将判定游标越界的逻辑统一的提出到最外层，让代码更加简洁，利于维护。</em></p></li>
+<li><p>1005: 简单的hash。注意Java可以直接实现int转string，string转int。</p></li>
+<li><p>1006: 简单的找最大最小。用到了Java中String的split方法划分子串和Integer.parseInt()转String为int。</p></li>
+<li><p>1008: 纯水题。</p></li>
+<li><p>1009: 一元多项式相乘。基于桶排序的思想，将子项相乘的结果加到数组中去实现。第一次提交时，算错了“桶”的大小。。</p></li>
+<li><p>1011: 水题，求组最大值的问题。</p></li>
+<li><p>1027: 水题，hash求解。</p></li>
+</ul>
+</blockquote>
+
+<h2>资料</h2>
+
+<p><a href="http://pat.zju.edu.cn/contests/pat-a-practise">题目列表</a></p>
+
+<p><a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/pat/advancedlevel">我的代码</a></p>
+
+<h2>PS</h2>
+
+<p>除了这几道题，其他的题目似乎都需要树、图、DP的思想。明天开干！</p>
+
+<p>用了那么久eclipse，其实对eclipse的掌握并不好。比如他对（）和“”等的支持方式：</p>
+
+<blockquote><p><strong>只需要输入左单边括号，即可获得一个完整的括号，并定位到括号内输入内容。完成内容输入后，回车即可跳到反括号外，继续输入。同理于调用方法时参数的输入等。</strong></p></blockquote>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[PAT Basic Level 1001-1010]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/04/04/pat-basic-level-1001-1010/"/>
+    <updated>2013-04-04T01:50:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/04/04/pat-basic-level-1001-1010</id>
+    <content type="html"><![CDATA[<h2>背景</h2>
+
+<p>算法开始练手了。从最简单的做起。</p>
+
+<p>由于实验室用的是Java，为了节省时间，也为了更好的掌握这门语言，我先用Java来实现了。在并非以比赛为目的的前提下，这并不妨碍什么，唯一的可能就是没有足够的参考代码咯。:(话说，自己也并不是特别喜欢一些“简洁”的代码。我现在的手速是不快，但过于简介的南与维护的代码，也不在我的目标之列。</p>
+
+<!--more-->
+
+
+<h2>资料</h2>
+
+<p><strong><a href="http://pat.zju.edu.cn/contests/pat-b-practise">题目看这里</a></strong></p>
+
+<p>我把所有AC过的<strong><a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/practice">解题代码都贴到了我的github</a></strong>上，可以直接去那边儿看，就不贴到blog里啦。（确切的说，这个博客本身就是在github里，不是么:)）</p>
+
+<h2>总结：</h2>
+
+<blockquote><ul>
+<li><p>1001：第一次用Java在PAT上提交，遇到了【返回非零】的问题，两个原因：1.需要去掉package信息；2.程序跑异常也会出现这个问题。</p></li>
+<li><p>1002：简单的将输入加起来，再对应到的显示出来。</p></li>
+<li><p>1003：<em>题目像是用自动机构建的字符串？理论基础不够，没想太明白，或许需要个词法分析器？</em> 这里是利用字符串的统计规律计数字符串出现个数的出来的。在识别的过程中，有些小坑需要注意。</p></li>
+<li><p>1004：求最大最小，想必是一道不能更水的题了=。=</p></li>
+<li><p>1005：各个元素间互相影响。如果简单的全部计算覆盖数，当然能解出来，但显然不是最优的方法。需要尽量介绍重复计算的过程。<em>感觉解题方式没有美感</em></p></li>
+<li><p>1006：转换格式。无坑。</p></li>
+<li><p>1007：素数相关的题目。按照最原始的素数原理，固然可以解出，但优化的路还很长。参考了这篇博客（<a href="http://www.cnblogs.com/luluping/archive/2010/03/03/1677552.html">《浅析求素数算法》介绍的挺有味道的</a>）的内容。</p></li>
+<li><p>1008：只要注意别先把所有数据都存到数组，再做操作，就ok了。无坑。</p></li>
+<li><p>1009：充分利用了Java的String操作，无坑。</p></li>
+<li><p>1010：有坑。需要考虑将无input的case输出为0 0.花了我很长时间。不想再纠结这个题目本身的正确性了。。</p></li>
+</ul>
+</blockquote>
+
+<h2>PS：</h2>
+
+<p>写代码的速度确实太慢了。得练。一个是敲代码本身的速度。一个是思维的速度。</p>
+
+<p>到现在为止，还没有找到一个顺手的排版工具。此文出自mou，但不知道是不是因为我的姿势不对，对所有格式的支持并非那么完美。有空研究下，好让简陋的排版有脸见人吧。</p>
 ]]></content>
   </entry>
   
