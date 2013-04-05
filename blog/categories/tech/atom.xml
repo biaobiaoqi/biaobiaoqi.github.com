@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tech | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-04-05T12:52:46+08:00</updated>
+  <updated>2013-04-05T13:06:07+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -18,7 +18,9 @@
     <link href="http://biaobiaoqi.github.com/blog/2013/04/04/pat-advanced-level-1-easy-problems/"/>
     <updated>2013-04-04T20:58:00+08:00</updated>
     <id>http://biaobiaoqi.github.com/blog/2013/04/04/pat-advanced-level-1-easy-problems</id>
-    <content type="html"><![CDATA[<p>今天做的这批题目，总的来说几乎不需要数据结构基础。几个小时刷完。</p>
+    <content type="html"><![CDATA[<p><img class="left" src="http://visualcaffeine.com/ws/wp-content/uploads/2012/04/computer_guy.jpg" title="Place Kitten #2" ></p>
+
+<p>今天做的这批题目，总的来说几乎不需要数据结构基础。几个小时刷完。</p>
 
 <blockquote><ul>
 <li>1001: 数字的格式转换。第一次做的时候，将正负数分两种情况处理了，其实负数可以拆成正数加上一个负号。太简单的道理，竟然没注意。另外，Java完全可以使用NumberFormat实现格式转换。好简单的说。</li>
