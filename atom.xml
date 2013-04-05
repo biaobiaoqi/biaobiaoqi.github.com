@@ -4,7 +4,7 @@
   <title><![CDATA[Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-04-05T21:50:58+08:00</updated>
+  <updated>2013-04-05T23:12:09+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -359,11 +359,11 @@
 
 <p>经过试错，发现_config.yml的配置中，配置项和值之间必须有空格。否则会报错。</p>
 
-<p>另附个性化配置方案：（其实这些内容都能在官网文档中找到）</p>
+<p>另附个性化配置方案：（这些内容大都能在官网文档中找到）</p>
 
 <h3>3.1 <a href="http://icodeit.org/2012/10/how-to-embed-douban-show-in-your-octopress-site/">装饰边栏（加weibo、豆瓣信息)</a></h3>
 
-<h3>3.2 增加weibo评论：  <a href="http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/">友言版</a>     <a href="http://yangdd.github.com/blog/2012/08/23/comment/">多说版</a></h3>
+<h3>3.2 增加weibo评论：  <a href="http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/">友言版</a></h3>
 
 <h3>3.3 CNAME</h3>
 
@@ -376,6 +376,34 @@
 <p>3.创建CNAME记录，www.biaobiaoqi.com -> biaobiaoqi.github.com</p>
 
 <p>网上很多CNAME的操作指南，对于A记录的IP都写着<del>207.97.227.245</del>，或者其他的IP。实际上，这是github pages更换了地址所致。再一次证明<strong>官方文档才是最可靠的！</strong></p>
+
+<h3>3.4 让链接在新窗口中打开</h3>
+
+<p>markdown不支持这一语法，如果要自己用html标签实现，也太得不偿失了。参考<a href="http://www.blogjava.net/lishunli/archive/2013/01/20/394478.html">这篇博文</a>，可以通过将如下代码添加到 {OCTOPRESS_HOME}/source/_includes/custom/head.html文件末尾来实现：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;script type="text/javascript"&gt;
+</span><span class='line'>function addBlankTargetForLinks () {
+</span><span class='line'>  $('a[href^="http"]').each(function(){
+</span><span class='line'>      $(this).attr('target', '_blank');
+</span><span class='line'>  });
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>$(document).bind('DOMNodeInserted', function(event) {
+</span><span class='line'>  addBlankTargetForLinks();
+</span><span class='line'>});
+</span><span class='line'>&lt;/script&gt;</span></code></pre></td></tr></table></div></figure>
+
 
 <h1>4. 发博文和在线部署</h1>
 
