@@ -63,11 +63,11 @@ $ brew install git
 
 经过试错，发现_config.yml的配置中，配置项和值之间必须有空格。否则会报错。
 
-另附个性化配置方案：（其实这些内容都能在官网文档中找到）
+另附个性化配置方案：（这些内容大都能在官网文档中找到）
 
 ###3.1 [装饰边栏（加weibo、豆瓣信息)](http://icodeit.org/2012/10/how-to-embed-douban-show-in-your-octopress-site/)
 
-###3.2 增加weibo评论：  [友言版](http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/)     [多说版](http://yangdd.github.com/blog/2012/08/23/comment/)
+###3.2 增加weibo评论：  [友言版](http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/)
 
 ###3.3 CNAME
 如果你有自己的域名，可以CNAME到github pages上。以我的配置为例。
@@ -79,6 +79,23 @@ $ brew install git
 3.创建CNAME记录，www.biaobiaoqi.com -> biaobiaoqi.github.com
 
 网上很多CNAME的操作指南，对于A记录的IP都写着~~207.97.227.245~~，或者其他的IP。实际上，这是github pages更换了地址所致。再一次证明**官方文档才是最可靠的！**
+
+###3.4 让链接在新窗口中打开
+markdown不支持这一语法，如果要自己用html标签实现，也太得不偿失了。参考[这篇博文](http://www.blogjava.net/lishunli/archive/2013/01/20/394478.html)，可以通过将如下代码添加到 {OCTOPRESS_HOME}/source/_includes/custom/head.html文件末尾来实现：
+
+```
+<script type="text/javascript">
+function addBlankTargetForLinks () {
+  $('a[href^="http"]').each(function(){
+      $(this).attr('target', '_blank');
+  });
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+  addBlankTargetForLinks();
+});
+</script>
+```
 
 #4. 发博文和在线部署
 同样的，参考[官网](http://octopress.org/help/)即可。
