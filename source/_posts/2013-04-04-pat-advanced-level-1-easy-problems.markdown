@@ -6,6 +6,13 @@ comments: true
 categories: [algorithm, pat, java, tech]
 ---
 
+
+
+{% img left http://visualcaffeine.com/ws/wp-content/uploads/2012/04/computer_guy.jpg Place Kitten #2 %}
+
+
+
+
 今天做的这批题目，总的来说几乎不需要数据结构基础。几个小时刷完。
 
 > * 1001: 数字的格式转换。第一次做的时候，将正负数分两种情况处理了，其实负数可以拆成正数加上一个负号。太简单的道理，竟然没注意。另外，Java完全可以使用NumberFormat实现格式转换。好简单的说。
