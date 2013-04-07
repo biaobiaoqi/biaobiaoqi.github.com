@@ -4,7 +4,7 @@
   <title><![CDATA[Category: think | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/blog/categories/think/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-04-07T23:43:05+08:00</updated>
+  <updated>2013-04-07T23:49:33+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -24,9 +24,14 @@
 
 <p>2012年的7月份下旬，XB学长联系了我。那时候我有半吊子的iOS开发经验。因为对ITP早有耳闻，而自己也对创业一直有着一些念想，在没有对Seeme的团队和产品做深入的了解的情况下，我加入了。这也意味着，实验室那头的内容被暂时搁置。</p>
 
+<!--more-->
+
+
 <p>查好友iOS版本的开发周期很急，临危受命，我和几乎同时加入的没有ios开发经验的乐乐简单的认识后，就开始了编码。有android的版本作为原型，我们依照着“功能-交互-UI”的原则，开始了没日没夜的开发。9月份开学后，我们两从全职转型为兼职，9月下旬，正式在appstore发布了查好友的iOS v1.0。在我看来，那是最刺激的一段时间了，我和LL共同摸索着前进，看着开发进度条一天天向满状态增进，时而掉进坑里，也挣扎着爬起，别无他念，Done is better than perfect.</p>
 
 <p>发版后几天的休息时间，我满怀着对技术实现的热情，琢磨着经验总结和未来的开发规划。遗憾的是，这些想法在之后的时间里并没有被自己重视，也没有很好的向其他人传递。它们从项目初期的疯狂建设中被勾起，又在项目开展的紧锣密鼓和实验室任务的双重压力下被遗忘。</p>
+
+<p><img src="http://g.hiphotos.baidu.com/baike/c%3DbaikeA2%2C10%2C95/sign=b5413922fc039245b5b5b65eeeffc183/30adcbef76094b36da20d402a3cc7cd98c1001e93801bd93.jpg"></p>
 
 <p>忙碌的时间过的很快，从2012年10月开始，到2013年的1月底，我们给查好友iOS版本加入了不少的新功能，比如公共组织通讯录、消息盒子（包括联系人更新、活动提醒和生日提醒）、应用分享、群发短信等，也发布了两个定制版的app到appstore。也是在这忙碌的几个月间，我的思想开始从最初的团队合作的“蜜月期”，渐渐过度到了一个新的阶段。</p>
 
