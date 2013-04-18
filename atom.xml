@@ -4,7 +4,7 @@
   <title><![CDATA[Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-04-18T18:47:11+08:00</updated>
+  <updated>2013-04-18T18:49:36+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -115,11 +115,48 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[分治、时间空间的权衡:最大合的连续字串问题 (PAT 1007)]]></title>
+    <title type="html"><![CDATA[《痛并快乐着》]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/04/05/tong-bing-kuai-le-zhe/"/>
+    <updated>2013-04-05T02:30:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/04/05/tong-bing-kuai-le-zhe</id>
+    <content type="html"><![CDATA[<h2>儿时没烙印下的痛与快乐</h2>
+
+<p><img class="left" src="http://img3.douban.com/lpic/s4599357.jpg" width="150" height="250" title="Place Kitten #2" ></p>
+
+<p>这是一本让我内心平静的书。或许是因为他所讲，都是那十年来有亲身经历到过的。</p>
+
+<p>《痛并快乐着》有二十来篇文章，每篇一个主题。所有的主题都围着个人在中国二十世纪后十年中的发展和社会的变迁中展开。文中，描述了白岩松如何从大学毕业后，几经波折获得了一个并非自己当初所想的工作，又如何在计划之外的点点滴滴中，将人生的珠子穿成了一根线。</p>
+
+<!--more-->
+
+
+<p>作者在记叙自身的成长历程之余，也抛出了对所深处新闻行业的思考，从他的视角展现了十年来行业如何从重重束缚中不断的开放和进步。更进一步的，文中表达了对中国改革开放过程中一步步脚印的反思，比如在于世界磨合的初期表现出的对体育特有的狂热等等。</p>
+
+<p>从沉稳的文字中，我读到了曾经所身处的过往，一些属于上一辈人的积淀。虽然模糊，却深刻。作为90年出生的非典型90后，渡过了懵懂的人生头二十年，对那个时代缺乏了解。这些空白难以填补，但在阅读和思考中也渐渐瞧得出时代的痕迹，一个逐渐开放的社会在残酷的现实中前行的身影。</p>
+
+<p>以前，总会觉得父母过于保守，他们感激改革开放带来的新政策，忍受着在我辈人看来一无是处的社会现象。这本书的沉重和乐观，让我对此的看法有所改观。</p>
+
+<p>新年的烟花撒满夜空，是符号，是兴奋，是新时代的到来，而我们依旧是我们。我们能做的，不是自欺欺人的仗着仪式感享乐现在，不是否认过去，不是怨恨，而是不断前行。</p>
+
+<p>有评论说这本书歌功颂德，政府喉舌。但我倒觉得，看到了其中的真诚。一种生命的沉淀。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Maximum Subsequence Sum]]></title>
     <link href="http://biaobiaoqi.github.com/blog/2013/04/05/maximum-subsequence-sum/"/>
-    <updated>2013-04-05T20:16:00+08:00</updated>
+    <updated>2013-04-05T00:00:00+08:00</updated>
     <id>http://biaobiaoqi.github.com/blog/2013/04/05/maximum-subsequence-sum</id>
-    <content type="html"><![CDATA[<p><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1007">PAT1007</a>：给定一个整数串，找出连续子串中合最大的子串。</p>
+    <content type="html"><![CDATA[<hr />
+
+<p>layout: post
+title: &#8220;分治、时间空间的权衡:最大合的连续字串问题 (PAT 1007)&#8221;
+date: 2013-04-05 20:16
+comments: true</p>
+
+<h2>categories: [algorithm, tech, pat, think]</h2>
+
+<p><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1007">PAT1007</a>：给定一个整数串，找出连续子串中合最大的子串。</p>
 
 <p>《编程珠玑》中用专门的一章对这个问题进行了讲解。（《编程珠玑（第2版）》P73 第8章 算法设计技术）</p>
 
@@ -268,34 +305,6 @@
 <li>数学归纳证明，对算法的设计和正确性佐证很有帮助。话说它也类似于分治的思想呢。</li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[《痛并快乐着》]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/04/05/tong-bing-kuai-le-zhe/"/>
-    <updated>2013-04-05T02:30:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/04/05/tong-bing-kuai-le-zhe</id>
-    <content type="html"><![CDATA[<h2>儿时没烙印下的痛与快乐</h2>
-
-<p><img class="left" src="http://img3.douban.com/lpic/s4599357.jpg" width="150" height="250" title="Place Kitten #2" ></p>
-
-<p>这是一本让我内心平静的书。或许是因为他所讲，都是那十年来有亲身经历到过的。</p>
-
-<p>《痛并快乐着》有二十来篇文章，每篇一个主题。所有的主题都围着个人在中国二十世纪后十年中的发展和社会的变迁中展开。文中，描述了白岩松如何从大学毕业后，几经波折获得了一个并非自己当初所想的工作，又如何在计划之外的点点滴滴中，将人生的珠子穿成了一根线。</p>
-
-<!--more-->
-
-
-<p>作者在记叙自身的成长历程之余，也抛出了对所深处新闻行业的思考，从他的视角展现了十年来行业如何从重重束缚中不断的开放和进步。更进一步的，文中表达了对中国改革开放过程中一步步脚印的反思，比如在于世界磨合的初期表现出的对体育特有的狂热等等。</p>
-
-<p>从沉稳的文字中，我读到了曾经所身处的过往，一些属于上一辈人的积淀。虽然模糊，却深刻。作为90年出生的非典型90后，渡过了懵懂的人生头二十年，对那个时代缺乏了解。这些空白难以填补，但在阅读和思考中也渐渐瞧得出时代的痕迹，一个逐渐开放的社会在残酷的现实中前行的身影。</p>
-
-<p>以前，总会觉得父母过于保守，他们感激改革开放带来的新政策，忍受着在我辈人看来一无是处的社会现象。这本书的沉重和乐观，让我对此的看法有所改观。</p>
-
-<p>新年的烟花撒满夜空，是符号，是兴奋，是新时代的到来，而我们依旧是我们。我们能做的，不是自欺欺人的仗着仪式感享乐现在，不是否认过去，不是怨恨，而是不断前行。</p>
-
-<p>有评论说这本书歌功颂德，政府喉舌。但我倒觉得，看到了其中的真诚。一种生命的沉淀。</p>
 ]]></content>
   </entry>
   
