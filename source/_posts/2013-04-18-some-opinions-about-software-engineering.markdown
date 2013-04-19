@@ -3,7 +3,7 @@ layout: post
 title: "关于软件工程的一些看法"
 date: 2013-04-18 18:03
 comments: true
-categories: 
+categories: [tech, think]
 ---
 标题党了，其实实际的内容是[自己的项目经验总结和反思]。
 
