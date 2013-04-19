@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tech | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-04-18T18:49:36+08:00</updated>
+  <updated>2013-04-19T22:15:30+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -12,6 +12,190 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[SSH原理和使用]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/04/19/use-ssh/"/>
+    <updated>2013-04-19T21:44:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/04/19/use-ssh</id>
+    <content type="html"><![CDATA[<p>在linux上工作，ssh是必须要了解的技术方法。它可以建立起多台主机之间的安全的加密传输，以进行远程的访问、操控、传输数据。</p>
+
+<h2>ssh是什么</h2>
+
+<p>SSH為Secure Shell的縮寫。為建立在应用层和传输层基础上的安全协议。</p>
+
+<p>传统的网络服务程序，如FTP、POP和Telnet其本质上都是不安全的；因为它们在网络上用明文传送数据、用户帐号和用户口令，很容易受到中间人（man-in-the-middle）攻击方式的攻击。就是存在另一个人或者一台机器冒充真正的服务器接收用户传给服务器的数据，然后再冒充用户把数据传给真正的服务器。
+而SSH是目前较可靠，專为远程登录会话和其他网络服务提供安全性的协议。利用SSH协议可以有效防止远程管理过程中的信息泄露问题。透過SSH可以對所有传输的数据进行加密，也能够防止DNS欺骗和IP欺骗。
+SSH之另一項優點為其传输的数据是经过压缩的，所以可以加快传输的速度。SSH有很多功能，它既可以代替Telnet，又可以为FTP、POP、甚至为PPP提供一个安全的「通道」。
+了解这么多就好了，其实ssh连接也就是可以理解成经过加密的远程访问啦。</p>
+
+<!--more-->
+
+
+<p>---（来自中文维基）</p>
+
+<h2>ssh连接的验证、加密方式</h2>
+
+<p>ssh连接是CS模型（客户端-服务器），客户端发出连接申请，服务器对客户端进行验证，再考虑是否接受连接申请。</p>
+
+<p>ssh的安全加密方式的理论基础是非对称加密体系。而非对称加密中，常见的一种就是RSA加密算法。在使用ssh，务必先弄清楚非对称加密和rsa的算法流程。详情参见<a href="http://zh.wikipedia.org/wiki/RSA%E5%8A%A0%E5%AF%86%E6%BC%94%E7%AE%97%E6%B3%95">RSA加密算法</a>。</p>
+
+<p>ssh有两种级别的安全验证：账户口令验证、rsa加密验证。详细参数，可以在sshd_config配置文件中设置(Ubuntu是/etc/ssh/sshd_config，mac下是/etc/sshd_config)</p>
+
+<h3>账号口令验证</h3>
+
+<p>直接输入所要登陆的用户的口令是默认的方式。不需要修改配置文件。</p>
+
+<p>如果直接从客户端将用户密码传输到服务器，那么密码信息很容易被中间人截获，从而实现重放攻击。ssh的实现方式是：</p>
+
+<ul>
+<li>1.客户端向ssh服务器发出请求，服务器将自己的公钥返回给客户端；</li>
+<li>2.客户端用服务器的公钥加密自己的登录密码，再将信息发送给服务器；</li>
+<li>3.服务器接收到客户端传送的密码，用自己的私钥解码，如果结果正确，则同意登录，建立起连接。</li>
+</ul>
+
+
+<p>这种方式还是有漏洞的，中间人可以假扮成服务器，骗取客户端的密码。</p>
+
+<h3>RSA加密验证</h3>
+
+<p>rsa加密验证方式，充分利用了非对称加密体系的优势，不需要在网络传输密码，完全杜绝了中间人攻击的可能。步骤如下：</p>
+
+<h5>准备工作</h5>
+
+<ul>
+<li>-1.客户端先使用 ssh-keygen 命令，生成私钥和公钥。按照默认配置，私钥会被保存在~/.ssh/id_rsa中，公钥则在~/.ssh/id_rsa.pub中。(一般别修改这里的文件)</li>
+<li>0.客户端通过安全的方式将公钥发送给服务器。在服务器端，将客户端发的公钥写入到~/.ssh/authorized_keys文件末尾。</li>
+</ul>
+
+
+<h5>建立连接</h5>
+
+<ul>
+<li>1.客户端发出申请。服务器产生session密钥对，返回通过对应客户端的公钥加密后的session公钥。</li>
+<li>2.客户端用自己的密钥解密信息，得到session公钥。</li>
+<li>3.之后的数据交互，都通过对方方公钥加密，对方收到信息后，用其私钥解密，实现安全加密过程。</li>
+</ul>
+
+
+<h2>免密码的RSA加密方式实施过程</h2>
+
+<ul>
+<li>1.安装ssh</li>
+</ul>
+
+
+<p>mac下自带的有，ubuntu下直接sudo apt-get install ssh。</p>
+
+<ul>
+<li>2.在客户端生成私钥公钥</li>
+</ul>
+
+
+<p>使用ssh-keygen命令生成密钥对。遇到提示都直接回车（其中passphrase是保护rsa密钥的另一套加密方式）。</p>
+
+<p><code>
+$ ssh-keygen   
+Generating public/private rsa key pair.  
+Enter file in which to save the key (/Users/biaobiaoqi/.ssh/id_rsa): /Users/biaobiaoqi/.ssh/id_rsa  
+Enter passphrase (empty for no passphrase):   
+Enter same passphrase again:   
+Your identification has been saved in /Users/biaobiaoqi/.ssh/id_rsa.  
+Your public key has been saved in /Users/biaobiaoqi/.ssh/id_rsa.pub.  
+The key fingerprint is:  
+b7:c2:5c:3f:83:5e:5e:93:a4:42:db:51:d8:ac:07:66 biaobiaoqi@biaobiaoqi.local  
+The key's randomart image is:  
++--[ RSA 2048]----+  
+|                 |  
+|             +   |  
+|            E +  |  
+|           o +   |  
+|        S + o o  |  
+|       o + * = . |  
+|        + = B +  |  
+|         o + + . |  
+|          . .    |  
++-----------------+  
+</code></p>
+
+<p>结果是在~/.ssh/下生成了 id_rsa（私钥）和id_rsa.pub（公钥）</p>
+
+<ul>
+<li>3.将客户端的公钥id_rsa.pub传递给服务器</li>
+</ul>
+
+
+<p>传送id_rsa.pub到服务器上，并将其内容写入到~/.ssh/authorized_keys文件尾。</p>
+
+<p>可以物理的用U盘转运（似乎更安全），也可以使用scp指令（这个时候就需要运用到口令验证的ssh方式)</p>
+
+<p><code>
+$scp ~/.ssh/id_rsa.pub user@host:~/.ssh/tmp_id_rsa.pub
+$ssh user@host "cat ~./ssh/tmp_id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys"
+</code></p>
+
+<p>在执行scp传输的过程中，如果是第一次ssh连接到服务器，客户端会提示是否信任这个主机，比如：
+<code>
+$scp ~/.ssh/id_rsa.pub user@host:~/.ssh/tmp_id_rsa.pub
+The authenticity of host XXX can't be established.
+ECDSA key fingerprint is xxxxxxxxxxxxxxxxxxxxxx.
+Are you sure you want to continue connecting (yes/no)?
+</code>
+原因是，客户端不确定所连接的host是否是真正的host。一般情况，直接输入yes，继续就好了。这里有较详细的解释：<a href="http://stackoverflow.com/questions/3663895/ssh-the-authenticity-of-host-hostname-cant-be-established">点击连接</a></p>
+
+<p>然后就可以免密码、更安全的登录啦
+<code>
+ ssh xxxx@hostAddress
+</code></p>
+
+<p>在ssh登录服务器时，如果出现如下问题：<em>Agent admitted failure to sign using the key</em>则需要手工将客户端私钥加入到ssh管理体系中。使用 ssh-add 指令。（具体机理还不太清楚）
+<code>
+$ssh-add   ~/.ssh/id_rsa
+</code></p>
+
+<h2>and one more thing;)</h2>
+
+<h4>ssh+firefox+autoproy</h4>
+
+<p>看看wall外面的世界，是多么美好的事情。ssh能帮我们做到，只要有一台在wall外的主机做代理。
+具体方式参见博文：<a href="http://reverland.bitbucket.org/ssh_climbe.html">ssh+firefox-autoproxy</a></p>
+
+<h4>SCP命令加密赋值数据</h4>
+
+<p>```</p>
+
+<h1>将本地文件复制到远程主机上</h1>
+
+<p>$scp ~./tmp user@rehost:~/tmp</p>
+
+<h1>见远程主机上的文件复制到本地</h1>
+
+<p>$scp user@rehost:~/tmp ~./tmp</p>
+
+<h1>复制的是目录，需要迭代，添加-r参数</h1>
+
+<p>$scp -r user@rehost:~/tmpDir ~./tmpDir
+```</p>
+
+<h4>SSH的配置</h4>
+
+<p>具体参数细节参见博文：<a href="http://www.ibm.com/developerworks/cn/aix/library/au-sshsecurity/">SSH 安全性和配置入门</a>
+<a href="http://blog.licess.org/sshd_config/">sshd_config配置 详解</a></p>
+
+<h2>推荐阅读：</h2>
+
+<ul>
+<li><a href="http://blog.lizhigang.net/archives/249">《linux ssh 使用深度解析（key登录详解）》</a></li>
+<li><a href="http://wiki.tuna.tsinghua.edu.cn/SshKeyHowto">《使用 RSA 密钥对进行 SSH 登录验证》</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2011/12/ssh_remote_login.html">《SSH原理与运用（一）：远程登录》</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2011/12/ssh_port_forwarding.html">《SSH原理与运用（二）：远程操作与端口转发》</a></li>
+<li><a href="http://reverland.bitbucket.org/ssh_climbe.html">ssh+firefox-autoproxy</a></li>
+<li><a href="http://www.ibm.com/developerworks/cn/aix/library/au-sshsecurity/">SSH 安全性和配置入门</a></li>
+<li><a href="http://blog.licess.org/sshd_config/">sshd_config配置 详解</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[关于软件工程的一些看法]]></title>
@@ -55,6 +239,138 @@
 <p>值得指出的是，所谓的ReCERD小团队项目能力成长模型其实是我根据自身经历所总结的一套方法模型;)， slides中有详细介绍，见笑了，欢迎拍砖。</p>
 
 <p>slides下载地址：<a href="https://www.dropbox.com/s/0b084ccqao8igq8/course-slides.pdf">请点击</a> （使用的dropbox存储文档，可能不太稳定，海涵）</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[分治、时间空间的权衡:最大合的连续字串问题 (PAT 1007)]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/04/05/maximum-subsequence-sum/"/>
+    <updated>2013-04-05T20:16:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/04/05/maximum-subsequence-sum</id>
+    <content type="html"><![CDATA[<p><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1007">PAT1007</a>：给定一个整数串，找出连续子串中合最大的子串。</p>
+
+<p>《编程珠玑》中用专门的一章对这个问题进行了讲解。（《编程珠玑（第2版）》P73 第8章 算法设计技术）</p>
+
+<p>第一次在PAT上遇到这个题目时，我的思路如下：</p>
+
+<p><del>最简单的淡然是一个三层循环咯，O(n3)，肯定会超时。节省时间的话，用动态规划吧。但简单的动态规划，显然是会超出内存限制的。有没有更巧妙的子问题划分方法呢？</del>先找到子问题：因为要求的串必须连续，分治的时候需要考虑如何延续这个连续性，那么每个子问题中就得考虑找出三个串：1.即左端连续的最大串，2.右端连续的最大串，3.整个串中的最大串.<del>由于每个问题都有三个量要维护，难道我得造出三个表来？卡主:(</del></p>
+
+<!--more-->
+
+
+<p>《编程珠玑》列出了性能上依次递进的四个算法。这里我结合个人理解和感悟做一些阐释。</p>
+
+<ul>
+<li>1.粗暴的brute forse。三层循环嵌套，据说当n 为100000的时候，就需要运行15天时间=.=</li>
+</ul>
+
+
+<p>```
+maxsofar = 0
+for i = 0 [0, n)</p>
+
+<pre><code>for j = [i, n)
+    sum = 0;
+    for k = [i, j]
+     sum += x[k]
+     /*sum is sum of x[i..j]*/
+     maxsofar = max(maxsofar, sum)
+</code></pre>
+
+<p>```</p>
+
+<ul>
+<li>2.针对第一个算法做出了优化。利用零时变量保存状态，避免了过多的重复操作，即所谓的<strong>memoization思想</strong>。时间复杂度下降到O(n*logn)。不过这份代码在PAT的OJ上仍然会超时。</li>
+</ul>
+
+
+<p>```
+maxsofar = 0;
+for i = [0, n)</p>
+
+<pre><code>sum = 0;
+for j = [i, n)
+    sum += x[j]
+    /* sum is sum of x[i..j]*/
+    max sofar = max(maxsofar, sum)
+</code></pre>
+
+<p>```</p>
+
+<p>相比之下，动态规划的策略也是有memoization的思想在的，不过，在这里用DP将会创建一张很大的表。。。超出内存限定。</p>
+
+<ul>
+<li><p>3.分治算法</p>
+
+<p>  其实之前我自己在思考DP更好的子问题划分时，已经考虑到了这种分治策略。但它的实现，<strong>并非需要DP支持</strong>。</p>
+
+<p>  divide：将串平均分为两段，如下代码第6行。分别处理两个子串，并拼接计算。</p>
+
+<p>  conquer： 计算1.自身包含左端的最大子串；2.包含右端的最大子串；（这两个子串用于与其他子串拼接）；3.自身的最大子串。</p></li>
+</ul>
+
+
+<p>```
+float maxsum3(l, u)</p>
+
+<pre><code>if (l &gt; u) /* zero elements*/
+    return 0
+if (l == u) /* one element*/
+    return max (0, x[l]);
+m = (1 + u) / 2
+
+/* find max crossing to left */
+lmax = sum = 0
+for (i = m; i &gt;= 1; i--)
+    sum += x[i]
+lmax = max(lmax, sum)
+
+/* find max croosing to right */
+rmax = sum = 0;
+for i = (m, u]
+    sum += x[i]
+rmax = max(rmax, sum)
+
+return max(lmax+rmax, maxsum3(l, m), maxsum3(m+1, u))   
+</code></pre>
+
+<p>```</p>
+
+<ul>
+<li><p>4.扫描算法</p>
+
+<p>  类似于<strong>数学归纳法</strong>的思想。从串的最左端开始扫描。对于子串[0, k],其最大子串要么存在于[0, k-1]中而不包含[k]，称其为maxsofar，要么包含[k]，称其maxendingright。</p>
+
+<p>  maxsofar和maxendingright是可能重合的。maxendingright的作用在于对[0,k+1]的子串而言，新的元素[k+1]可以与之结合，从而产生可能的新的子串。</p>
+
+<p>  如果[k+1]本身就是负数呢？不要紧，将[k+1]加入到maxendingright的过程本身就是试错以产生可能的过程。当maxendingright降到0以下时，放弃掉这一子串就好了，因为无论如何扩张，它都是会拖后退的。别忘了，我们还维护着maxsofar，它记录最大的子串。有点绕，但是可以严格的证明算法的正确性。</p>
+
+<p>  伪代码如下：</p></li>
+</ul>
+
+
+<p>```
+maxsofa = 0
+maxendingright = 0
+for i = [0, n)</p>
+
+<pre><code>/* invariant: maxendingright and maxsofar are accurate for x[0..i-1]*/
+maxendingright = max(maxendingright + x[i], 0)
+maxsofar = max(maxsofar, maxendingright)
+</code></pre>
+
+<p>```</p>
+
+<p>根据这个思路，写出<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/pat/advancedlevel/APAT1007.java">代码</a>，一遍AC:)</p>
+
+<h2>总结：</h2>
+
+<ul>
+<li>保存状态，避免重复计算：在算法整体框架没有大的优化的情况下，时间和空间的trade-off或许会有奇效。memoization本身就是一种用空间换时间的思想，而DP中用一种方式实现了这种思想。不过不要被DP算法所禁锢。因为，这个trade-off的实现是很多变的，就像这题的第2种算法。</li>
+<li>分治：它的重要性不必多说了。同样的，DP中有分治的思想，但分治本身也是非常灵活的。</li>
+<li>数学归纳证明，对算法的设计和正确性佐证很有帮助。话说它也类似于分治的思想呢。</li>
+</ul>
+
 ]]></content>
   </entry>
   
@@ -143,150 +459,6 @@
 <p>写代码的速度确实太慢了。得练。一个是敲代码本身的速度。一个是思维的速度。</p>
 
 <p>到现在为止，还没有找到一个顺手的排版工具。此文出自mou，但不知道是不是因为我的姿势不对，对所有格式的支持并非那么完美。有空研究下，好让简陋的排版有脸见人吧。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[在github上搭建octopress博客 mac]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/03/21/building-octopress-in-github-mac/"/>
-    <updated>2013-03-21T23:43:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/03/21/building-octopress-in-github-mac</id>
-    <content type="html"><![CDATA[<p><img src="http://pikipity.github.com/images/post/octopress.jpg"></p>
-
-<p>最早的时候，是看见了<a href="http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/">唐巧大哥的博客</a>，UI上已是觉得耳目一新。后来读到过<a href="http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html">阮一峰的博文</a>，当知道这是搭建在Github这个程序员的facebook上时，更是心头一震，什么时候自己也搭这么个博客呢。直接用github托管代码，完全不用自己租服务器，实在方便。自己之前也有在csdn上维护了一个博客，虽然那已经是一年前的事情了。</p>
-
-<!--more-->
-
-
-<p>深刻的记得，当时想将自己的weibo账户贴到博客页面上，却发现它不支持一般用户潜入javascript代码:(。这更让我对octopress的感情与日俱增。</p>
-
-<p>今天终于动手啦。自己从网上搜到了很多中文的博客描述如何安装配置octopress，有些博客讲得算是清晰，但终归每台电脑有不同的环境，每个人的叙述也或多或少的主观。最要命的是，我发现好几篇博文所讲述的命令都不太一样，走了不少弯路之后，倒腾了一下午，最终还是官网救了我。这也让我进一步认识到，信息的流通中的失真在所难免，最好的方法还是直接探寻最权威的内容。</p>
-
-<p>如果对octopress不太了解，不用急着动手，首先看看几个概念。（当然，lz现在也并非精通这几点，初来乍到的，先做出来再说，以后不断学习...）</p>
-
-<blockquote><ul>
-<li> Ruby：octopress框架的实现语言。rvm（ruby version manager）是用于管理ruby版本的，rake是ruby中类似于make工具。</li>
-<li> 静态站点生成工具：简单地说，不用数据库，直接生成网页文件。Jekyll就是这样的工具，而octopress是构建于它的上层的框架。</li>
-<li> Git：我主观的认为完虐svn的分布式版本控制工具。git官网貌似被gfw墙了=.=</li>
-<li> <a href="https://github.com/">Github</a>：程序员的Facebook,为程序员托管了很多代码的站点。</li>
-<li> <a href="https://help.github.com/categories/20/articles">Github pages</a>:github推出的，给与程序员自由创造静态网页的功能。支持Jekyll，因此也支持octopress。</li>
-<li> <a href="http://mxcl.github.com/homebrew/">homebrew</a>：mac os下的软件包管理工具，类似于linux下的dpkg。它使用ruby脚本，mac os下自带了ruby。</li>
-<li> <a href="http://octopress.org/">octopress</a> 其官网的help中有搭建octopress的足够的权威指导</li>
-</ul>
-</blockquote>
-
-<p>窃以为，最好的学习方式还是从最源头的资料入手。这里仅针对我的配置过程做简单描述，经验浅薄，有差错的地方还请指教:)</p>
-
-<h1>1. 配环境</h1>
-
-<h3>1.0 homebrew</h3>
-
-<p>万事开头难，第一步还是配环境。为了软件包安装的方便，可以先安装好homebrew.</p>
-
-<p><code>
-$ ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
-</code></p>
-
-<p>其使用方法，参见<a href="http://mxcl.github.com/homebrew/">官网</a>。</p>
-
-<h3>1.1 ruby</h3>
-
-<p>mac os x 10.8.1 的系统自带了Ruby，但是版本是1.8.3，而octopress官网所支持的最新版是1.9.3（2013.3），兼容起见，先对版本进行升级。</p>
-
-<p><code>
-$ rvm install 1.9.3 &amp;&amp; rvm use 1.9.3
-$ rvm ruby gems latest
-</code></p>
-
-<p>lz在升级过程中遇到了奇怪的错误，于是又参考<a href="http://wj1s.iteye.com/blog/1118672">另一篇博文</a>，重新安装了rvm，再升级ruby到1.9.3版本。</p>
-
-<h3>1.2 git</h3>
-
-<p>使用homebrew安装git。</p>
-
-<p><code>
-$ brew install git
-</code></p>
-
-<h1>2. 搭建octopress</h1>
-
-<p>环境配置完成后，就可以开始参照<a href="http://octopress.org/help/">官网</a>的指导搭建octopress，并在github建代码仓库，同步管理啦。</p>
-
-<h1>3. 配置</h1>
-
-<p>具体配置同见<a href="http://octopress.org/help/">官网</a>。</p>
-
-<p>经过试错，发现_config.yml的配置中，配置项和值之间必须有空格。否则会报错。</p>
-
-<p>另附个性化配置方案：（这些内容大都能在官网文档中找到）</p>
-
-<h3>3.1 <a href="http://icodeit.org/2012/10/how-to-embed-douban-show-in-your-octopress-site/">装饰边栏（加weibo、豆瓣信息)</a></h3>
-
-<h3>3.2 增加weibo评论：  <a href="http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/">友言版</a></h3>
-
-<h3>3.3 CNAME</h3>
-
-<p>如果你有自己的域名，可以CNAME到github pages上。以我的配置为例。</p>
-
-<p>1.在工作目录的source目录下创建CNAME文件，并输入新域名：biaobiaoqi.com</p>
-
-<p>2.在域名管理中，创建或修改A记录，指向204.232.175.78这个地址。</p>
-
-<p>3.创建CNAME记录，www.biaobiaoqi.com -> biaobiaoqi.github.com</p>
-
-<p>网上很多CNAME的操作指南，对于A记录的IP都写着<del>207.97.227.245</del>，或者其他的IP。实际上，这是github pages更换了地址所致。再一次证明<strong>官方文档才是最可靠的！</strong></p>
-
-<h3>3.4 让链接在新窗口中打开</h3>
-
-<p>markdown不支持这一语法，如果要自己用html标签实现，也太得不偿失了。参考<a href="http://www.blogjava.net/lishunli/archive/2013/01/20/394478.html">这篇博文</a>，可以通过将如下代码添加到 {OCTOPRESS_HOME}/source/_includes/custom/head.html文件末尾来实现：</p>
-
-<p>```</p>
-
-<script type="text/javascript">
-function addBlankTargetForLinks () {
-  $('a[href^="http"]').each(function(){
-      $(this).attr('target', '_blank');
-  });
-}
-
-$(document).bind('DOMNodeInserted', function(event) {
-  addBlankTargetForLinks();
-});
-</script>
-
-
-<p>```</p>
-
-<h1>4. 发博文和在线部署</h1>
-
-<p>同样的，参考<a href="http://octopress.org/help/">官网</a>即可。
-这里大致的列出我所常用到的几条命令：</p>
-
-<p>```</p>
-
-<h1>创建一篇博文</h1>
-
-<p>rake new_post["post title"] #octopress将在工作目录的source/_post/目录下生成相应的markdown文件。然后可以使用mou工具去修改编辑内容。</p>
-
-<h1>生成预览</h1>
-
-<p>rake preview #可以通过localhost:4000在本机实时观察最新的编辑效果。</p>
-
-<h1>在线发布</h1>
-
-<p>rake deploy #完成编辑后，可以将最新的内容部署到github上去。成功后，即可在线访问。</p>
-
-<h1>向github提交源文件更新</h1>
-
-<p>git add -A
-git commit -m "提交内容"
-git push</p>
-
-<p>```</p>
-
-<p>其中推荐到的<a href="http://mouapp.com/">mou</a>，是一个mac下的markdown编辑器。试用后发现有些格式兼容问题，但似乎mac下也只有他这个可视化工具了=。=</p>
-
-<p>另附<a href="http://wowubuntu.com/markdown/index.html">markdown语法</a></p>
 ]]></content>
   </entry>
   

@@ -9,7 +9,7 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="标题党了，其实实际的内容是[自己的项目经验总结和反思]。 今天在高级软件工程课上，做了一次关于项目经验的展示。展示的主题围绕自己参与的移动互联网团队开发经验展开。借此机会，我整理了一下思路，于是有了以下的slides。没时间码字，就先把slides直接贴上来啦:) 提纲如下： 背景： &hellip;">
+  <meta name="description" content="在linux上工作，ssh是必须要了解的技术方法。它可以建立起多台主机之间的安全的加密传输，以进行远程的访问、操控、传输数据。 ssh是什么 SSH為Secure Shell的縮寫。為建立在应用层和传输层基础上的安全协议。 传统的网络服务程序，如FTP、POP和Telnet其本质上都是不安全的； &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -95,6 +95,59 @@ $(document).bind('DOMNodeInserted', function(event) {
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/19/use-ssh/">SSH原理和使用</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-19T21:44:00+08:00" pubdate data-updated="true">Apr 19<span>th</span>, 2013</time>
+        
+
+
+
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>在linux上工作，ssh是必须要了解的技术方法。它可以建立起多台主机之间的安全的加密传输，以进行远程的访问、操控、传输数据。</p>
+
+<h2>ssh是什么</h2>
+
+<p>SSH為Secure Shell的縮寫。為建立在应用层和传输层基础上的安全协议。</p>
+
+<p>传统的网络服务程序，如FTP、POP和Telnet其本质上都是不安全的；因为它们在网络上用明文传送数据、用户帐号和用户口令，很容易受到中间人（man-in-the-middle）攻击方式的攻击。就是存在另一个人或者一台机器冒充真正的服务器接收用户传给服务器的数据，然后再冒充用户把数据传给真正的服务器。
+而SSH是目前较可靠，專为远程登录会话和其他网络服务提供安全性的协议。利用SSH协议可以有效防止远程管理过程中的信息泄露问题。透過SSH可以對所有传输的数据进行加密，也能够防止DNS欺骗和IP欺骗。
+SSH之另一項優點為其传输的数据是经过压缩的，所以可以加快传输的速度。SSH有很多功能，它既可以代替Telnet，又可以为FTP、POP、甚至为PPP提供一个安全的「通道」。
+了解这么多就好了，其实ssh连接也就是可以理解成经过加密的远程访问啦。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/04/19/use-ssh/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -201,6 +254,56 @@ $(document).bind('DOMNodeInserted', function(event) {
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2013/04/05/maximum-subsequence-sum/">分治、时间空间的权衡:最大合的连续字串问题 (PAT 1007)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-05T20:16:00+08:00" pubdate data-updated="true">Apr 5<span>th</span>, 2013</time>
+        
+
+
+
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1007">PAT1007</a>：给定一个整数串，找出连续子串中合最大的子串。</p>
+
+<p>《编程珠玑》中用专门的一章对这个问题进行了讲解。（《编程珠玑（第2版）》P73 第8章 算法设计技术）</p>
+
+<p>第一次在PAT上遇到这个题目时，我的思路如下：</p>
+
+<p><del>最简单的淡然是一个三层循环咯，O(n3)，肯定会超时。节省时间的话，用动态规划吧。但简单的动态规划，显然是会超出内存限制的。有没有更巧妙的子问题划分方法呢？</del>先找到子问题：因为要求的串必须连续，分治的时候需要考虑如何延续这个连续性，那么每个子问题中就得考虑找出三个串：1.即左端连续的最大串，2.右端连续的最大串，3.整个串中的最大串.<del>由于每个问题都有三个量要维护，难道我得造出三个表来？卡主:(</del></p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/04/05/maximum-subsequence-sum/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2013/04/05/tong-bing-kuai-le-zhe/">《痛并快乐着》</a></h1>
     
     
@@ -240,65 +343,6 @@ $(document).bind('DOMNodeInserted', function(event) {
   
     <footer>
       <a rel="full-article" href="/blog/2013/04/05/tong-bing-kuai-le-zhe/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/04/05/maximum-subsequence-sum/">Maximum Subsequence Sum</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-05T00:00:00+08:00" pubdate data-updated="true">Apr 5<span>th</span>, 2013</time>
-        
-
-
-
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><hr />
-
-<p>layout: post
-title: &#8220;分治、时间空间的权衡:最大合的连续字串问题 (PAT 1007)&#8221;
-date: 2013-04-05 20:16
-comments: true</p>
-
-<h2>categories: [algorithm, tech, pat, think]</h2>
-
-<p><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1007">PAT1007</a>：给定一个整数串，找出连续子串中合最大的子串。</p>
-
-<p>《编程珠玑》中用专门的一章对这个问题进行了讲解。（《编程珠玑（第2版）》P73 第8章 算法设计技术）</p>
-
-<p>第一次在PAT上遇到这个题目时，我的思路如下：</p>
-
-<p><del>最简单的淡然是一个三层循环咯，O(n3)，肯定会超时。节省时间的话，用动态规划吧。但简单的动态规划，显然是会超出内存限制的。有没有更巧妙的子问题划分方法呢？</del>先找到子问题：因为要求的串必须连续，分治的时候需要考虑如何延续这个连续性，那么每个子问题中就得考虑找出三个串：1.即左端连续的最大串，2.右端连续的最大串，3.整个串中的最大串.<del>由于每个问题都有三个量要维护，难道我得造出三个表来？卡主:(</del></p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/04/05/maximum-subsequence-sum/">Read on &rarr;</a>
     </footer>
   
 
@@ -508,6 +552,10 @@ comments: true</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/04/19/use-ssh/">SSH原理和使用</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/04/18/some-opinions-about-software-engineering/">关于软件工程的一些看法</a>
       </li>
     
@@ -516,15 +564,11 @@ comments: true</p>
       </li>
     
       <li class="post">
+        <a href="/blog/2013/04/05/maximum-subsequence-sum/">分治、时间空间的权衡:最大合的连续字串问题 (PAT 1007)</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/04/05/tong-bing-kuai-le-zhe/">《痛并快乐着》</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/04/05/maximum-subsequence-sum/">Maximum Subsequence Sum</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/04/04/pat-advanced-level-1-easy-problems/">PAT Advanced Level (1) easy problems</a>
       </li>
     
   </ul>
