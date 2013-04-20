@@ -8,7 +8,7 @@ categories: [git, tech, octopress]
 {% img http://pikipity.github.com/images/post/octopress.jpg %}
 
 最早的时候，是看见了[唐巧大哥的博客](http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/)，UI上已是觉得耳目一新。后来读到过[阮一峰的博文](http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html)，当知道这是搭建在Github这个程序员的facebook上时，更是心头一震，什么时候自己也搭这么个博客呢。直接用github托管代码，完全不用自己租服务器，实在方便。自己之前也有在csdn上维护了一个博客，虽然那已经是一年前的事情了。
-<!--more-->深刻的记得，当时想将自己的weibo账户贴到博客页面上，却发现它不支持一般用户潜入javascript代码:(。这更让我对octopress的感情与日俱增。
+<!--more-->深刻的记得，当时想将自己的weibo账户贴到博客页面上，却发现它不支持一般用户嵌入javascript代码:(。这更让我对octopress的感情与日俱增。
 
 今天终于动手啦。自己从网上搜到了很多中文的博客描述如何安装配置octopress，有些博客讲得算是清晰，但终归每台电脑有不同的环境，每个人的叙述也或多或少的主观。最要命的是，我发现好几篇博文所讲述的命令都不太一样，走了不少弯路之后，倒腾了一下午，最终还是官网救了我。这也让我进一步认识到，信息的流通中的失真在所难免，最好的方法还是直接探寻最权威的内容。
 
@@ -21,6 +21,7 @@ categories: [git, tech, octopress]
 >*    [Github pages](https://help.github.com/categories/20/articles):github推出的，给与程序员自由创造静态网页的功能。支持Jekyll，因此也支持octopress。
 >*    [homebrew](http://mxcl.github.com/homebrew/ )：mac os下的软件包管理工具，类似于linux下的dpkg。它使用ruby脚本，mac os下自带了ruby。
 >*    [octopress](http://octopress.org/) 其官网的help中有搭建octopress的足够的权威指导
+>* [YAML](http://www.ibm.com/developerworks/cn/xml/x-cn-yamlintro/): YAML 试图用一种比 XML 更敏捷的方式，来完成 XML 所完成的任务。在octopress中，是使用yaml做配置文件的书写的。
 
  
 窃以为，最好的学习方式还是从最源头的资料入手。这里仅针对我的配置过程做简单描述，经验浅薄，有差错的地方还请指教:)
@@ -61,7 +62,7 @@ $ brew install git
 #3. 配置
 具体配置同见[官网](http://octopress.org/help/)。
 
-经过试错，发现_config.yml的配置中，配置项和值之间必须有空格。否则会报错。
+在配置_config.yml的过程中要注意，配置项的:后有空格。否则会报错。
 
 另附个性化配置方案：（这些内容大都能在官网文档中找到）
 
@@ -96,6 +97,31 @@ $(document).bind('DOMNodeInserted', function(event) {
 });
 </script>
 ```
+
+###3.5 列表的排版
+
+默认情况，所有文字的排头会对齐，但如果有列表项的情况下也如此，列表头就会冲出文章的主体区块了。
+
+在octopress/sass/custom/_layout.scss文件中找到#$indented-lists: true行，去掉#注释即可。
+```
+$indented-lists: true
+```
+
+###3.6 404ERROR页面
+
+在ocotopress/source目录下，增加404.markdown，并做出自定义的呃编辑。本博客使用了腾讯公益404，推荐大家使用，为社会贡献一分正能量。[公益404](http://www.qq.com/404/)
+```
+---
+layout: page
+title: "404 Error"
+date: 2013-4-21 02:35
+comments: false
+sharing: false
+footer: false
+---
+<script type="text/javascript" src="http://www.qq.com/404/search_children.js" charset="utf-8"></script>
+```
+
 
 #4. 发博文和在线部署
 同样的，参考[官网](http://octopress.org/help/)即可。
