@@ -9,7 +9,7 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="道理都明白，还得靠自己 关于本书 藉由大多数程序员天然的对google怀有的朝圣般的向往和喜爱，开始看这本书。 书中的中文版序的标题就是“跳出框框来思考”，这种观点倒不是第一次见到了，甚至可以说，这些观点充斥于互联网上的各种流传、经验贴中。但这并不意味着我们不需要再花时间在这种书上。道理都懂， &hellip;">
+  <meta name="description" content="背景 实验室有二十来台PC机，30+的服务器集群，网络拓扑比较复杂。简单地说，有网关连着校网，校网无法直接访问学校外的网络，只能通过拨vpn来实现外网访问。而校网最近也不稳定，时常断网。 今天，实验室的一台电脑今天突然出无法上网了，而其他人则在正常上网。症状很奇怪： 浏览器只能上google， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -95,6 +95,61 @@ $(document).bind('DOMNodeInserted', function(event) {
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/23/winsock-kills-internet/">Winsock出错引起的断网</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-23T22:24:00+08:00" pubdate data-updated="true">Apr 23<span>rd</span>, 2013</time>
+        
+
+
+
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>背景</h3>
+
+<p>实验室有二十来台PC机，30+的服务器集群，网络拓扑比较复杂。简单地说，有网关连着校网，校网无法直接访问学校外的网络，只能通过拨vpn来实现外网访问。而校网最近也不稳定，时常断网。</p>
+
+<p>今天，实验室的一台电脑今天突然出无法上网了，而其他人则在正常上网。症状很奇怪：</p>
+
+<ul>
+<li>浏览器只能上google，其他任何网站都上不去。</li>
+<li>QQ、ftp等各种需要连网的软件也都无法正常连网。</li>
+<li>一切的发生，只是在PC使用者认为正常的操作中发生：上网，连网下围棋，聊QQ，然后…</li>
+</ul>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/04/23/winsock-kills-internet/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -554,52 +609,9 @@ SSH之另一項優點為其传输的数据是经过压缩的，所以可以加�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/03/17/kai-pian/">开篇</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-17T10:18:00+08:00" pubdate data-updated="true">Mar 17<span>th</span>, 2013</time>
-        
-
-
-
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>花了一下午时间，终于搭起了这个博客。</p>
-
-<p>我会陆续将原来csdn博客中的内容筛选过来，将这个博客作为技术主博客。</p>
-
-<p>github真是神器啊。感谢github，“感谢”tc最终没有封锁github，让我得以有机会搭建这个独立博客。</p>
-
-<p>希望五年、十年、二十年过后，回过头来，依然能在这个博客中找到自己的脚印和梦想。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
+    
+      <a class="prev" href="/blog/page/2/">&larr; Older</a>
     
     <a href="/blog/archives">biaobiaoqi的博文</a>
     
@@ -610,6 +622,10 @@ SSH之另一項優點為其传输的数据是经过压缩的，所以可以加�
     <section>
   <h1>最近发表</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/04/23/winsock-kills-internet/">winsock出错引起的断网</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/04/20/are-you-smart-enough-to-work-at-google/">《谁是谷歌想要的人才？》</a>
@@ -625,10 +641,6 @@ SSH之另一項優點為其传输的数据是经过压缩的，所以可以加�
     
       <li class="post">
         <a href="/blog/2013/04/07/goodbye-seeme/">再见，Seeme</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/04/05/maximum-subsequence-sum/">分治、时间空间的权衡:最大合的连续字串问题 (PAT 1007)</a>
       </li>
     
   </ul>

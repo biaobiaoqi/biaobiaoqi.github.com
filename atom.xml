@@ -4,7 +4,7 @@
   <title><![CDATA[Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-04-21T02:58:03+08:00</updated>
+  <updated>2013-04-23T23:00:53+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -12,6 +12,72 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[winsock出错引起的断网]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/04/23/winsock-kills-internet/"/>
+    <updated>2013-04-23T22:24:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/04/23/winsock-kills-internet</id>
+    <content type="html"><![CDATA[<h3>背景</h3>
+
+<p>实验室有二十来台PC机，30+的服务器集群，网络拓扑比较复杂。简单地说，有网关连着校网，校网无法直接访问学校外的网络，只能通过拨vpn来实现外网访问。而校网最近也不稳定，时常断网。</p>
+
+<p>今天，实验室的一台电脑今天突然出无法上网了，而其他人则在正常上网。症状很奇怪：</p>
+
+<ul>
+<li>浏览器只能上google，其他任何网站都上不去。</li>
+<li>QQ、ftp等各种需要连网的软件也都无法正常连网。</li>
+<li>一切的发生，只是在PC使用者认为正常的操作中发生：上网，连网下围棋，聊QQ，然后…</li>
+</ul>
+
+
+<!--more-->
+
+
+<p>没有经验的我做出了如下一系列的<em>排查</em>：</p>
+
+<h3>1st：</h3>
+
+<p>为了排除网络环境的因素，我尝试对比了连vpn和不连vpn的情况.</p>
+
+<p>症状没有丝毫改变。</p>
+
+<h3>2nd：</h3>
+
+<p>我尝试着ping了许多网站，检查是否是dns污染。</p>
+
+<p>结果包括学校内部网络和外部网络，都能ping通。</p>
+
+<p>这意味着网络层是没有问题的。那只能是传输层或者更上层的问题了。但奇怪的是，google是能连接上的，大概不会是驱动的问题吧？ =.=，对windows环境的不熟悉，让我无所适从。</p>
+
+<h3>3rd:</h3>
+
+<p>看到了运行着的360安全卫士 =_=!，对它没好感，删单个进程还杀不死，会有其他进程重新将他开启！果断删除。同时，重启，碰碰运气。windows的问题印象里总是各种奇葩。</p>
+
+<p>以失败告终。</p>
+
+<h3>Final:</h3>
+
+<p>最终还是zfz童鞋从网上搜得了解决方法：
+打开cmd，输入如下指令，然后重启即可。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; netsh winsock reset</span></code></pre></td></tr></table></div></figure>
+
+
+<p>原来是windows的socket接口出了问题，通过重置来解决。</p>
+
+<p>每每想到windows的不可控性，不禁唏嘘，这次又长见识了。</p>
+
+<h6>参考资料：</h6>
+
+<ul>
+<li><a href="http://www.zoublog.com/technology/can-ping-dns-resolution-can-not-open-page-solution.html">《能Ping通，能DNS解析，不能打开网页(登陆QQ等)的解决办法》</a></li>
+<li><a href="http://en.wikipedia.org/wiki/Winsock">winsock</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[《谁是谷歌想要的人才？》]]></title>
