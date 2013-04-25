@@ -9,7 +9,7 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="背景 实验室有二十来台PC机，30+的服务器集群，网络拓扑比较复杂。简单地说，有网关连着校网，校网无法直接访问学校外的网络，只能通过拨vpn来实现外网访问。而校网最近也不稳定，时常断网。 今天，实验室的一台电脑今天突然出无法上网了，而其他人则在正常上网。症状很奇怪： 浏览器只能上google， &hellip;">
+  <meta name="description" content="最近看了关于SQL Server的分布式处理方面的论文，觉得它提出的Polybase跟之前看过的HadoopDB有些神似，这里做个小总结（抽空再把HadoopDB的总结贴出来）。 不算翻译，只是挑出自己认为是重点的部分。详细情况，还请论文查阅原文，引用中有写明出处。文章末尾有我总结的slides， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -95,6 +95,61 @@ $(document).bind('DOMNodeInserted', function(event) {
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/25/split-querying-process-in-polybase/">PDW中的Split Querying Process</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-25T22:59:00+08:00" pubdate data-updated="true">Apr 25<span>th</span>, 2013</time>
+        
+
+
+
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>最近看了关于SQL Server的分布式处理方面的论文，觉得它提出的Polybase跟之前看过的HadoopDB有些神似，这里做个小总结（抽空再把HadoopDB的总结贴出来）。</p>
+
+<p>不算翻译，只是挑出自己认为是重点的部分。详细情况，还请论文查阅原文，引用中有写明出处。文章末尾有我总结的slides，可以辅助查阅。</p>
+
+<p>由于缺乏实践经验，很多东西未必能理解其本质。如有其他观点，还请多指教。</p>
+
+<p>当下的计划就是开始自己搭环境，实践起来!~</p>
+
+<h2>背景</h2>
+
+<p>商业应用中，越来越多的需要将结构化数据和非结构化数据存储、处理混合起来。
+目前，已经有很多公司、产品致力于这部分的研究，微软发的这篇论文，也正是基于PDW V2的这一新功能提出的新的解决方案。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/04/25/split-querying-process-in-polybase/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -563,52 +618,6 @@ SSH之另一項優點為其传输的数据是经过压缩的，所以可以加�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/03/21/building-octopress-in-github-mac/">在github上搭建octopress博客 Mac</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-21T23:43:00+08:00" pubdate data-updated="true">Mar 21<span>st</span>, 2013</time>
-        
-
-
-
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="http://pikipity.github.com/images/post/octopress.jpg"></p>
-
-<p>最早的时候，是看见了<a href="http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/">唐巧大哥的博客</a>，UI上已是觉得耳目一新。后来读到过<a href="http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html">阮一峰的博文</a>，当知道这是搭建在Github这个程序员的facebook上时，更是心头一震，什么时候自己也搭这么个博客呢。直接用github托管代码，完全不用自己租服务器，实在方便。自己之前也有在csdn上维护了一个博客，虽然那已经是一年前的事情了。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/03/21/building-octopress-in-github-mac/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -624,6 +633,10 @@ SSH之另一項優點為其传输的数据是经过压缩的，所以可以加�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/04/25/split-querying-process-in-polybase/">PDW中的Split Querying Process</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/04/23/winsock-kills-internet/">winsock出错引起的断网</a>
       </li>
     
@@ -637,10 +650,6 @@ SSH之另一項優點為其传输的数据是经过压缩的，所以可以加�
     
       <li class="post">
         <a href="/blog/2013/04/18/some-opinions-about-software-engineering/">关于软件工程的一些看法</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/04/07/goodbye-seeme/">再见，Seeme</a>
       </li>
     
   </ul>
