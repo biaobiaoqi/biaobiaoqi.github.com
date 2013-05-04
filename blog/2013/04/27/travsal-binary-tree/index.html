@@ -1,0 +1,657 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>二叉树的遍历（递归、非递归）分析 - Biaobiaoqi的博客</title>
+  <meta name="author" content="Biaobiaoqi">
+
+  
+  <meta name="description" content="背景 二叉树是一种很基本的数据结构。很多地方能看到它的身影，比如大名鼎鼎的霍夫曼编码（好了，别问我再比如了，见识浅薄，真不知道更多了。。。）它的结构很简洁、巧妙。 本文讨论二叉树的常见遍历方式的代码实现（这里贴出的是Java），包括前序(preorder)、中序(inorder)、后序( &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://biaobiaoqi.github.com/blog/2013/04/27/travsal-binary-tree">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Biaobiaoqi的博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+	<script type="text/javascript" >
+function addBlankTargetForLinks () {
+  $('a[href^="http"]').each(function(){
+      $(this).attr('target', '_blank');
+  });
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+  addBlankTargetForLinks();
+});
+
+</script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39900036-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Biaobiaoqi的博客</a></h1>
+  
+    <h2>共享、和平、自由</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:biaobiaoqi.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="搜索"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+<!--
+  <li><a href="/blog/archives/">技术</a></li>
+-->
+  <li><a href="/blog/categories/tech/">技术</a></li>
+  <li><a href="/blog/categories/life/">生活</a></li>
+  <li><a href="/about">关于</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">二叉树的遍历（递归、非递归）分析</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-27T21:03:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2013</time>
+        
+
+
+
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2>背景</h2>
+
+<p>二叉树是一种很基本的数据结构。很多地方能看到它的身影，比如大名鼎鼎的霍夫曼编码（好了，别问我再比如了，见识浅薄，真不知道更多了。。。）它的结构很简洁、巧妙。</p>
+
+<p>本文讨论二叉树的常见遍历方式的代码实现（这里贴出的是Java），包括前序(preorder)、中序(inorder)、后序(postorder)、层序(level order)，进一步，考虑递归和非递归的实现方式。递归方法的实现相对简单，但递归的执行方式由于每次都会产生一个新的方法调用栈，如果递归层级较深，会消耗较大的内存，转化为非递归则没那么简单了，往往需要实现一个栈来保存状态信息。</p>
+
+<!--more-->
+
+
+<p>在此之前，先简单定义节点的数据结构：</p>
+
+<p>二叉树节点最多只有两个儿子，并保存一个节点的值，为了实验的方便，假定它为int。同时，我们直接使用Java的System.out.print方法来输出节点值，以显示遍历结果。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>public class Node {
+</span><span class='line'>      public int value;
+</span><span class='line'>      public Node leftNode;
+</span><span class='line'>      public Node rightNode;
+</span><span class='line'>      
+</span><span class='line'>      public Node(int i) {
+</span><span class='line'>          value = i;
+</span><span class='line'>      }
+</span><span class='line'>  }</span></code></pre></td></tr></table></div></figure>
+
+
+<p>详细代码参见链接:<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/algorithm/tree/BinarySearchTree.java">BST及其各种便利的详细实现代码</a></p>
+
+<h2>前序遍历</h2>
+
+<ul>
+<li>递归实现：递归实现很简单，在每次访问到某个节点时，先输出节点值，然后再依次递归的对左儿子、右儿子调用遍历的方法。代码如下</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>public void preOrderTrav(Node n) {
+</span><span class='line'>  if (n != null) {
+</span><span class='line'>      System.out.print(n.value + " ");
+</span><span class='line'>      preOrderTrav(n.leftNode);
+</span><span class='line'>      preOrderTrav(n.rightNode);
+</span><span class='line'>  }
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>非递归调实现：</li>
+</ul>
+
+
+<p>1.第一种实现方式相对容易理解：</p>
+
+<p>初始：维护一个栈，将根节点压入栈中。</p>
+
+<p>循环：每次从栈顶读出一个节点信息，直接将节点值<strong>输出</strong>，同时将儿子节点按从左到右的顺序推到栈顶。</p>
+
+<p>分析：跟递归调用的整体思路一样，不同的是，递归调用时是利用运行时系统所维护的程序调用栈来维护顺序，而这个非递归方法是用过自己维护的栈来保存信息。如此节省了调用栈的空间。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>public void preOrderTravNoRecur(Node n) {
+</span><span class='line'>  Stack&lt;Node&gt; stack = new Stack&lt;Node&gt;();
+</span><span class='line'>  stack.add(root);
+</span><span class='line'>  while (!stack.empty()) {
+</span><span class='line'>      Node t = stack.pop();
+</span><span class='line'>      System.out.print(t.value + " ");
+</span><span class='line'>      if (t.rightNode != null)
+</span><span class='line'>          stack.add(t.rightNode);
+</span><span class='line'>      if (t.leftNode != null)
+</span><span class='line'>          stack.add(t.leftNode);
+</span><span class='line'>  }
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>2.第二种实现方式更普遍（中序遍历的非递归使用了同样的思路）：</p>
+
+<p>初始：维护一个栈S和一个节点变量N。节点变量赋值为根节点。</p>
+
+<p>循环：将节点变量N的左儿子循环的<strong>输出</strong>，并推入栈S中，直到没有左儿子；推出栈S的顶节点，节点变量N赋值为栈S顶节点的右节点。</p>
+
+<p>分析：不同于递归调用的思路。栈S用于实现对某节点的左边支递归值的存储，以便回溯；节点变量N则用于遍历某节点的右边枝（这些节点是从栈S顶读出的节点，依次做处理），由于右边枝是最后才会被访问到的，故在处理右边枝的时候，不需要存储右边枝的信息，依次处理即可。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>public void preOrderTravNoRecurII(Node n) {
+</span><span class='line'>  System.out.println("No Recursive: ");
+</span><span class='line'>  Stack&lt;Node&gt; s = new Stack&lt;Node&gt;();
+</span><span class='line'>  while (n != null | !s.empty()){
+</span><span class='line'>      while (n!=null ){
+</span><span class='line'>          System.out.print(n.value + " ");
+</span><span class='line'>          s.add(n);
+</span><span class='line'>          n = n.leftNode;
+</span><span class='line'>      }
+</span><span class='line'>      n = s.pop();
+</span><span class='line'>      n = n.rightNode;
+</span><span class='line'>  }
+</span><span class='line'>  System.out.println();
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>中序遍历</h3>
+
+<ul>
+<li>递归实现</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>public void inorderTrav(Node n) {
+</span><span class='line'>  if (n != null) {
+</span><span class='line'>      inorderTrav(n.leftNode);
+</span><span class='line'>      System.out.print(n.value + " ");
+</span><span class='line'>      inorderTrav(n.rightNode);
+</span><span class='line'>  }
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>非递归实现</li>
+</ul>
+
+
+<p>初始：维护一个栈S和一个节点变量N。节点变量赋值为根节点。</p>
+
+<p>循环：将节点变量N的左儿子循环的<strong>输出</strong>，并推入栈S中，直到没有左儿子；节点变量N赋值为栈S顶节点的右节点。</p>
+
+<p>分析：跟前序遍历的非递归实现方法二很类似。唯一的不同是输出的时机不同：前序遍历在入栈时输出，而中序遍历在出栈时输出。可以跟深刻的理解到，栈在这里是为了回溯而存在的。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>public void inorderTravNoRecu(Node n) {
+</span><span class='line'>  System.out.println("No Recursive: ");
+</span><span class='line'>  Stack&lt;Node&gt; s = new Stack&lt;Node&gt;();
+</span><span class='line'>  while (n != null | !s.empty()){
+</span><span class='line'>      while (n!=null ){
+</span><span class='line'>          s.add(n);
+</span><span class='line'>          n = n.leftNode;
+</span><span class='line'>      }
+</span><span class='line'>      n = s.pop();
+</span><span class='line'>      System.out.print(n.value + " ");
+</span><span class='line'>      n = n.rightNode;
+</span><span class='line'>  }
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>后序遍历</h3>
+
+<ul>
+<li>递归实现</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>public void preOrderTravNoRecurII(Node n) {
+</span><span class='line'>      System.out.println("No Recursive: ");
+</span><span class='line'>      Stack&lt;Node&gt; s = new Stack&lt;Node&gt;();
+</span><span class='line'>      while (n != null | !s.empty()){
+</span><span class='line'>          while (n!=null ){
+</span><span class='line'>              System.out.print(n.value + " ");
+</span><span class='line'>              s.add(n);
+</span><span class='line'>              n = n.leftNode;
+</span><span class='line'>          }
+</span><span class='line'>          n = s.pop();
+</span><span class='line'>          
+</span><span class='line'>          n = n.rightNode;
+</span><span class='line'>      }
+</span><span class='line'>      System.out.println();
+</span><span class='line'>  }</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>非递归实现</li>
+</ul>
+
+
+<p>初始：1.维护一个栈S、一个节点变量N和一个标记数组。节点变量赋值为根节点，栈暂时存储便利到的节点，标记数组用于标记栈中的节点是否已经访问过右边节点。2.将根节点的所有左儿子压入栈中。</p>
+
+<p>循环：依次处理栈中节点。如果节点有右儿子，且没有被处理过（通过标记数组判定），则将右子树的根节点及其左儿子全部压入栈中；如果已经处理过或者没有右儿子，则输出并出栈。</p>
+
+<p>分析：与前序和中序的一个大的不同在于需要用标记数组标记节点的右子树是否已经访问过。对每个节点进行处理的时候，都保证已经处理完了左右子树（通过先压入左边儿子为主线，处理栈中的每个节点时，再压入右边儿子来实现）。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>public void postOrderTravNoRecu(Node n) {        
+</span><span class='line'>      Stack&lt;Node&gt; stack = new Stack&lt;Node&gt;();
+</span><span class='line'>      int[] flag = new int[max];
+</span><span class='line'>      
+</span><span class='line'>      while (n != null) {
+</span><span class='line'>          stack.push(n);
+</span><span class='line'>          flag[stack.size()] = 0;
+</span><span class='line'>          n = n.leftNode;
+</span><span class='line'>      }
+</span><span class='line'>      
+</span><span class='line'>      while (!stack.empty()) {
+</span><span class='line'>          n = stack.peek();
+</span><span class='line'>          while(n.rightNode != null && flag[stack.size()] == 0) {
+</span><span class='line'>              n = n.rightNode;
+</span><span class='line'>              flag[stack.size()] = 1;
+</span><span class='line'>              while (n != null) {
+</span><span class='line'>                  stack.push(n);
+</span><span class='line'>                  flag[stack.size()] = 0;
+</span><span class='line'>                  n = n.leftNode;
+</span><span class='line'>              }
+</span><span class='line'>              n = stack.peek();//TODO be careful about this
+</span><span class='line'>          }
+</span><span class='line'>          n = stack.pop();
+</span><span class='line'>          System.out.print(n.value + " ");
+</span><span class='line'>      }
+</span><span class='line'>      
+</span><span class='line'>  }</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>层序遍历</h3>
+
+<ul>
+<li>无法使用递归方法</li>
+</ul>
+
+
+<p>层序遍历不同于其他的遍历。可以通过反证法证明：</p>
+
+<p>如果能实现对A节点的层序递归，在对A节点处理的过程中，应该递归的对两个儿子B和C分别调用了层序遍历。在这种情况下，我们无法让B和C的同一个层级的儿子在集中的时间中被遍历到，换言之，B的第一层儿子在对B的调用中被遍历，而C的第一层儿子，则在对C的调用中遍历，这是分离开的。不成立，得证。</p>
+
+<ul>
+<li>非递归方法：</li>
+</ul>
+
+
+<p>分析：此方法类似于前序遍历的非递归方法的第一种。用一个栈维护信息。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>public void levelOrderTrav(Node n) {
+</span><span class='line'>  System.out.print("Level OrderTrav: ");
+</span><span class='line'>  
+</span><span class='line'>  Queue&lt;Node&gt; q = new LinkedList&lt;Node&gt;();
+</span><span class='line'>  q.add(n);
+</span><span class='line'>  while (q.size() != 0) {
+</span><span class='line'>      n = q.poll();
+</span><span class='line'>      System.out.print(" " + n.value);
+</span><span class='line'>      if (n.leftNode != null) 
+</span><span class='line'>          q.add(n.leftNode);
+</span><span class='line'>      if (n.rightNode != null)
+</span><span class='line'>          q.add(n.rightNode);
+</span><span class='line'>
+</span><span class='line'>  }
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>总结</h2>
+
+<p>非递归实现的代码相对来说没有递归实现的直观。其核心都是维护了一个栈来保存状态，避免了产生过多方法调用栈浪费内存空间。</p>
+
+<p>本文中针对二叉树的几种遍历方式，描述了递归和非递归的解决方案。普遍意义的递归转非递归的方法和思想，将在另外一篇博文中介绍;)。欢迎交流。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Biaobiaoqi</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-27T21:03:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/algorithm/'>algorithm</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+      <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+	<span class="jiathis_txt">分享到：</span>
+	<a class="jiathis_button_tsina">新浪微博</a>
+	<a class="jiathis_button_tqq">腾讯微博</a>
+	<a class="jiathis_button_renren">人人网</a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1354814218267188" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1755742" async=""></script>
+<!-- UY END -->
+
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/04/25/split-querying-process-in-polybase/" title="Previous Post: PDW中的Split Querying Process">&laquo; PDW中的Split Querying Process</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+
+
+
+
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>最近发表</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/04/27/travsal-binary-tree/">二叉树的遍历（递归、非递归）分析</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/04/25/split-querying-process-in-polybase/">PDW中的Split Querying Process</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/04/23/winsock-kills-internet/">winsock出错引起的断网</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/04/20/are-you-smart-enough-to-work-at-google/">《谁是谷歌想要的人才？》</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/04/19/use-ssh/">SSH原理和使用</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/biaobiaoqi">@biaobiaoqi</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'biaobiaoqi',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+<section>
+<h2>我的社区</h2>
+<div>
+<script type="text/javascript" src="http://www.douban.com/service/badge/42071652/?show=dolist&amp;select=random&amp;n=6&amp;columns=3&amp;cat=book" ></script>
+</div>
+</section>
+<iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=1829882343&verifier=efc8c820&dpc=1"></iframe>
+
+
+
+
+  
+</aside>
+
+
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Biaobiaoqi -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
