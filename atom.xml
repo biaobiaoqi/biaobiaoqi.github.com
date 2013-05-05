@@ -4,7 +4,7 @@
   <title><![CDATA[Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-05-04T23:36:24+08:00</updated>
+  <updated>2013-05-06T00:25:41+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -12,6 +12,116 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[根据前中后序和层序重建二叉树(PAT1020、PAT1043)]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/04/27/pat1020-pat1043-rebuild-binary-tree/"/>
+    <updated>2013-04-27T22:33:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/04/27/pat1020-pat1043-rebuild-binary-tree</id>
+    <content type="html"><![CDATA[<h2>背景</h2>
+
+<p><a href="http://biaobiaoqi.github.com/blog/2013/04/27/travsal-binary-tree/">《二叉树的遍历（递归、非递归）分析》</a>总结了二叉树不同遍历方式的递归和非递归实现，本文则讨论如何针对不同遍历方式的组合重建二叉树。为了简化问题的考虑，假定二叉树中不会出现重复值。列入考虑范围的有前序、中序、后序、层序遍历这四种的组合。前中后序比较常见，而层序则相对特殊一点了。</p>
+
+<p><a href="http://pat.zju.edu.cn/contests/pat-a-practise">PAT</a>的1043和1020题是遍历相关的模板题，正好派上用场。</p>
+
+<!--more-->
+
+
+<h2>中序+前序</h2>
+
+<h5>算法描述：</h5>
+
+<ul>
+<li><p>初始：用前序遍历序列确定根节点，在中序遍历序列中找到该根节点，则左右子树分别为中序中该节点左右的序列。</p></li>
+<li><p>迭代：对各个子树分别执行三步操作，1.在前序序列中找子树的根节点；2。在中序序列中找子树的根节点，并划分开根节点的左右子树；3.根据新生成的左右子树，在前序序列中划分开这些节点，从而得到了两颗子树的前序、中序序列。</p></li>
+</ul>
+
+
+<h5>练习：<a href="http://pat.zju.edu.cn/contests/pat-a-practise/1043">PAT1043:Is It a Binary Search Tree</a></h5>
+
+<h5>题意：</h5>
+
+<p>输入一个树的前序遍历序列，判定这个树是否是二叉搜索树或者BST的镜像树，如果是，则用后序序列输出。</p>
+
+<h5>解题思路：</h5>
+
+<ul>
+<li><p>1.BST很特殊，实质上BST的所有节点的顺序排列就是中序遍历了。</p></li>
+<li><p>2.要检查树是否是BST或者镜像BST，只需按照重建树的思路，在每次重建的过程中做适当检查即可。检查思路是：检查前序遍历序列中，根节点之后的节点排序是否符合BST的二分规则（即前一段都是小于根节点的，后一段都是大于根节点的）。</p></li>
+<li><p>3.最后的输出是后序遍历。过程中其实并不用构建整个树，直接在处理过程中，按后序的方式存储节点到队列中即可。</p></li>
+</ul>
+
+
+<p>有了这些考虑，就可以写出代码啦。详细解题代码见链接<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/pat/advancedlevel/APAT1043.java">PAT1043</a></p>
+
+<h2>中序+后序</h2>
+
+<h5>算法描述：</h5>
+
+<ul>
+<li><p>初始：用后序遍历序列确定根节点，在中序遍历序列中找到该根节点，则左右子树分别为中序中该节点左右的序列。</p></li>
+<li><p>迭代：对各个子树分别执行三步操作，1.在后序序列中找子树的根节点；2。在中序序列中找子树的根节点，并划分开根节点的左右子树；3.根据新生成的左右子树，在后序序列中划分开这些节点，从而得到了两颗子树的后序、中序序列。</p></li>
+</ul>
+
+
+<h5>练习：<a href="http://pat.zju.edu.cn/contests/pat-a-practise/1020">PAT1020:Tree Traversals</a></h5>
+
+<h5>题意：</h5>
+
+<p>输入为一棵二叉树的后序遍历序列和中序遍历序列。求树的前序遍历序列。</p>
+
+<h5>解题思路：</h5>
+
+<ul>
+<li><p>1.有了中序和后序，就能重建树。</p></li>
+<li><p>2.最后的输出是前序遍历。过程中其实并不用构建整个树。直接在处理过程中，按前序的方式存储节点到队列中即可。</p></li>
+</ul>
+
+
+<p>详细解题代码见链接<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/pat/advancedlevel/APAT1020.java">PAT1020</a></p>
+
+<h2>中序+层序</h2>
+
+<h5>算法描述：</h5>
+
+<ul>
+<li><p>初始：用层序遍历确定顶节点，在中序遍历中，利用顶节点划分出左右子树。</p></li>
+<li><p>迭代：对各个子树分别执行三步操作，1.在层序序列中，找出子树节点集合中，最靠前的节点，这个节点即为子树的顶节点；2.在中序序列中找1中得到的顶节点，并划分开顶节点的左右子树；</p></li>
+<li><p>跟（中序+前序）和（中序+后序）不同之处在于没有迭代的第3步，层序是无法直接划分得到左右子树的节点集合的。但这并不妨碍正常的处理。层序是用来找到子树的顶节点的，而顶节点即是所有子树的节点中，在层序遍历中最靠前的节点。</p></li>
+</ul>
+
+
+<h2><del>前序+后序</del></h2>
+
+<p>这个组合是<strong>无法</strong>重建确定的二叉树的。</p>
+
+<p>对于满二叉树，利用子树节点的排列顺序能区分开左右子树节点集合，构建是没有问题的。但一旦有单个叶子的节点存在，则无法确定叶子是左儿子还是右儿子。因为无论是前序还是后序序列，都无法体现单个儿子情况下，儿子的位置。前序会将左右子树的点置于节点之后，后序则是将左右子树的点置于节点之前。</p>
+
+<ul>
+<li>举个简单的反例：</li>
+</ul>
+
+
+<blockquote><p>给出如下的前序序列和后序序列：
+preorder: A, B;
+postorder: B, A</p>
+
+<p>能构建的二叉树有两种可能，1.A是根节点，B是A左儿子； 2.A是根节点， B是A的右儿子。无法得到一个唯一的结果。</p></blockquote>
+
+<h2><del>前序+层序</del></h2>
+
+<p>这个组合也是无法重建确定的二叉树的。同样于后序+层序的情况。</p>
+
+<p>道理跟（前序+后序）的道理一样，无论是前序、后序，还是层序，都是无法确定单个儿子节点情况下儿子节点的顺序。</p>
+
+<h2>总结</h2>
+
+<ul>
+<li>中序遍历配合另外任何一个遍历，能重建二叉树。其他的任意两个序列的组合都不能唯一的确定重建的二叉树。</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[二叉树的遍历（递归、非递归）分析]]></title>
