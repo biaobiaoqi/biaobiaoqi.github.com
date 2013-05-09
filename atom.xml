@@ -4,7 +4,7 @@
   <title><![CDATA[Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-05-09T23:09:26+08:00</updated>
+  <updated>2013-05-09T23:31:49+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -18,9 +18,7 @@
     <link href="http://biaobiaoqi.github.com/blog/2013/05/09/networking-in-virtual-machine/"/>
     <updated>2013-05-09T22:39:00+08:00</updated>
     <id>http://biaobiaoqi.github.com/blog/2013/05/09/networking-in-virtual-machine</id>
-    <content type="html"><![CDATA[<h2>背景</h2>
-
-<p>本文介绍三种虚拟机中常用的网络配置模式：NAT(网络地址转换模式)、Bridged nerworking（桥接网络模式）和Host-only（主机模式）。</p>
+    <content type="html"><![CDATA[<p>本文介绍三种虚拟机中常用的网络配置模式：NAT(网络地址转换模式)、Bridged nerworking（桥接网络模式）和Host-only（主机模式）。</p>
 
 <h3>Network Address Translation (NAT)</h3>
 
