@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-05-06T02:05:17+08:00</updated>
+  <updated>2013-05-09T23:09:26+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -18,19 +18,20 @@
     <link href="http://biaobiaoqi.github.com/blog/2013/04/19/use-ssh/"/>
     <updated>2013-04-19T21:44:00+08:00</updated>
     <id>http://biaobiaoqi.github.com/blog/2013/04/19/use-ssh</id>
-    <content type="html"><![CDATA[<p>在linux上工作，ssh是必须要了解的技术方法。它可以建立起多台主机之间的安全的加密传输，以进行远程的访问、操控、传输数据。</p>
+    <content type="html"><![CDATA[<h2>ssh是什么</h2>
 
-<h2>ssh是什么</h2>
+<p>在linux上工作，ssh是必须要了解的技术方法。它可以建立起多台主机之间的安全的加密传输，以进行远程的访问、操控、传输数据。</p>
 
 <p>SSH為Secure Shell的縮寫。為建立在应用层和传输层基础上的安全协议。</p>
 
 <p>传统的网络服务程序，如FTP、POP和Telnet其本质上都是不安全的；因为它们在网络上用明文传送数据、用户帐号和用户口令，很容易受到中间人（man-in-the-middle）攻击方式的攻击。就是存在另一个人或者一台机器冒充真正的服务器接收用户传给服务器的数据，然后再冒充用户把数据传给真正的服务器。
-而SSH是目前较可靠，專为远程登录会话和其他网络服务提供安全性的协议。利用SSH协议可以有效防止远程管理过程中的信息泄露问题。透過SSH可以對所有传输的数据进行加密，也能够防止DNS欺骗和IP欺骗。
-SSH之另一項優點為其传输的数据是经过压缩的，所以可以加快传输的速度。SSH有很多功能，它既可以代替Telnet，又可以为FTP、POP、甚至为PPP提供一个安全的「通道」。
-了解这么多就好了，其实ssh连接也就是可以理解成经过加密的远程访问啦。</p>
+而SSH是目前较可靠，專为远程登录会话和其他网络服务提供安全性的协议。利用SSH协议可以有效防止远程管理过程中的信息泄露问题。透過SSH可以對所有传输的数据进行加密，也能够防止DNS欺骗和IP欺骗。</p>
 
 <!--more-->
 
+
+<p>SSH之另一項優點為其传输的数据是经过压缩的，所以可以加快传输的速度。SSH有很多功能，它既可以代替Telnet，又可以为FTP、POP、甚至为PPP提供一个安全的「通道」。
+了解这么多就好了，其实ssh连接也就是可以理解成经过加密的远程访问啦。</p>
 
 <p>---（来自中文维基）</p>
 

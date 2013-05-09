@@ -9,7 +9,7 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="背景 《二叉树的遍历（递归、非递归）分析》总结了二叉树不同遍历方式的递归和非递归实现，本文则讨论如何针对不同遍历方式的组合重建二叉树。为了简化问题的考虑，假定二叉树中不会出现重复值。列入考虑范围的有前序、中序、后序、层序遍历这四种的组合。前中后序比较常见，而层序则相对特殊一点了。 &hellip;">
+  <meta name="description" content="背景 本文介绍三种虚拟机中常用的网络配置模式：NAT(网络地址转换模式)、Bridged nerworking（桥接网络模式）和Host-only（主机模式）。 Network Address Translation (NAT) NAT模式使用了NAT服务来给虚拟网络提供网络连接。 这种模式下， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -99,6 +99,58 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/09/networking-in-virtual-machine/">虚拟机中的网络配置</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-09T22:39:00+08:00" pubdate data-updated="true">May 9<span>th</span>, 2013</time>
+        
+
+
+
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>背景</h2>
+
+<p>本文介绍三种虚拟机中常用的网络配置模式：NAT(网络地址转换模式)、Bridged nerworking（桥接网络模式）和Host-only（主机模式）。</p>
+
+<h3>Network Address Translation (NAT)</h3>
+
+<p>NAT模式使用了<a href="http://zh.wikipedia.org/wiki/%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2">NAT</a>服务来给虚拟网络提供网络连接。</p>
+
+<p>这种模式下，虚拟机能访问外部网络，外部无法直接连接到内部网络，除非使用端口映射<a href="http://nxlhero.blog.51cto.com/962631/742140">port forwarding</a>。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/05/09/networking-in-virtual-machine/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -235,11 +287,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <p>当下的计划就是开始自己搭环境，实践起来!~</p>
 
-<h2>背景</h2>
-
-<p>商业应用中，越来越多的需要将结构化数据和非结构化数据存储、处理混合起来。
-目前，已经有很多公司、产品致力于这部分的研究，微软发的这篇论文，也正是基于PDW V2的这一新功能提出的新的解决方案。</p>
-
 </div>
   
   
@@ -347,14 +394,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <p>书中的中文版序的标题就是“跳出框框来思考”，这种观点倒不是第一次见到了，甚至可以说，这些观点充斥于互联网上的各种流传、经验贴中。但这并不意味着我们不需要再花时间在这种书上。道理都懂，就是做不好已经成为这个信息通畅的时代的特征之一。正所谓“纸上得来终觉浅，绝知此事要躬行”。</p>
 
-<p>而如果有一个“躬行”过的人再将他的感受娓娓道来，辅以自己的用心体会，或许会事半功倍呢。这就是我想通过这本书得到的。如下几点，让这个想法成为可能：</p>
-
-<ul>
-<li>1.这本书并不单单是一个题集，大约有一般的篇目是在讲述题记，另外一半的篇目，则是代入感颇强的为什么要这么思考的叙述。后者看似无关功利，但却可以给人足够的心理暗示和支撑，以提升良好思考习惯在内心的重要性。</li>
-<li>2.作者庞德斯通写过不少充满思维的力量书。</li>
-</ul>
-
-
 </div>
   
   
@@ -397,16 +436,14 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   </header>
 
 
-  <div class="entry-content"><p>在linux上工作，ssh是必须要了解的技术方法。它可以建立起多台主机之间的安全的加密传输，以进行远程的访问、操控、传输数据。</p>
+  <div class="entry-content"><h2>ssh是什么</h2>
 
-<h2>ssh是什么</h2>
+<p>在linux上工作，ssh是必须要了解的技术方法。它可以建立起多台主机之间的安全的加密传输，以进行远程的访问、操控、传输数据。</p>
 
 <p>SSH為Secure Shell的縮寫。為建立在应用层和传输层基础上的安全协议。</p>
 
 <p>传统的网络服务程序，如FTP、POP和Telnet其本质上都是不安全的；因为它们在网络上用明文传送数据、用户帐号和用户口令，很容易受到中间人（man-in-the-middle）攻击方式的攻击。就是存在另一个人或者一台机器冒充真正的服务器接收用户传给服务器的数据，然后再冒充用户把数据传给真正的服务器。
-而SSH是目前较可靠，專为远程登录会话和其他网络服务提供安全性的协议。利用SSH协议可以有效防止远程管理过程中的信息泄露问题。透過SSH可以對所有传输的数据进行加密，也能够防止DNS欺骗和IP欺骗。
-SSH之另一項優點為其传输的数据是经过压缩的，所以可以加快传输的速度。SSH有很多功能，它既可以代替Telnet，又可以为FTP、POP、甚至为PPP提供一个安全的「通道」。
-了解这么多就好了，其实ssh连接也就是可以理解成经过加密的远程访问啦。</p>
+而SSH是目前较可靠，專为远程登录会话和其他网络服务提供安全性的协议。利用SSH协议可以有效防止远程管理过程中的信息泄露问题。透過SSH可以對所有传输的数据进行加密，也能够防止DNS欺骗和IP欺骗。</p>
 
 </div>
   
@@ -454,13 +491,7 @@ SSH之另一項優點為其传输的数据是经过压缩的，所以可以加�
 
 <p>今天在高级软件工程课上，做了一次关于项目经验的展示。展示的主题围绕自己参与的移动互联网团队开发经验展开。借此机会，我整理了一下思路，于是有了以下的slides。没时间码字，就先把slides直接贴上来啦:)</p>
 
-<h2>提纲如下：</h2>
-
-<ul>
-<li>背景：对传统软件工程方法和移动互联网项目开发的对比</li>
-<li>项目总结体会：</li>
-<li><ul>
-<li>协同目标</div>
+</div>
   
   
     <footer>
@@ -503,10 +534,6 @@ SSH之另一項優點為其传输的数据是经过压缩的，所以可以加�
 
 
   <div class="entry-content"><p>过年算是仪式感最强的节日之一了。不想将过年作为成熟的时间节点，因为生命总是在时间里沉淀。但社会的周期运作确确实实的依着四季来过度，于是总有些决定、变化需要在此执行和接受。真诚的向过去的一切道一声感谢。</p>
-
-<h2>半年小结</h2>
-
-<p>2012年的7月份下旬，XB学长联系了我。那时候我有半吊子的iOS开发经验。因为对ITP早有耳闻，而自己也对创业一直有着一些念想，在没有对Seeme的团队和产品做深入的了解的情况下，我加入了。这也意味着，实验室那头的内容被暂时搁置。</p>
 
 </div>
   
@@ -569,56 +596,6 @@ SSH之另一項優點為其传输的数据是经过压缩的，所以可以加�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/04/05/tong-bing-kuai-le-zhe/">《痛并快乐着》</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-05T02:30:00+08:00" pubdate data-updated="true">Apr 5<span>th</span>, 2013</time>
-        
-
-
-
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>儿时没烙印下的痛与快乐</h2>
-
-<p><img class="left" src="http://img3.douban.com/lpic/s4599357.jpg" width="150" height="250" title="Place Kitten #2" ></p>
-
-<p>这是一本让我内心平静的书。或许是因为他所讲，都是那十年来有亲身经历到过的。</p>
-
-<p>《痛并快乐着》有二十来篇文章，每篇一个主题。所有的主题都围着个人在中国二十世纪后十年中的发展和社会的变迁中展开。文中，描述了白岩松如何从大学毕业后，几经波折获得了一个并非自己当初所想的工作，又如何在计划之外的点点滴滴中，将人生的珠子穿成了一根线。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/04/05/tong-bing-kuai-le-zhe/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -634,6 +611,10 @@ SSH之另一項優點為其传输的数据是经过压缩的，所以可以加�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/05/09/networking-in-virtual-machine/">虚拟机中的网络配置</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/04/27/pat1020-pat1043-rebuild-binary-tree/">根据前中后序和层序重建二叉树(PAT1020、PAT1043)</a>
       </li>
     
@@ -647,10 +628,6 @@ SSH之另一項優點為其传输的数据是经过压缩的，所以可以加�
     
       <li class="post">
         <a href="/blog/2013/04/23/winsock-kills-internet/">winsock出错引起的断网</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/04/20/are-you-smart-enough-to-work-at-google/">《谁是谷歌想要的人才？》</a>
       </li>
     
   </ul>

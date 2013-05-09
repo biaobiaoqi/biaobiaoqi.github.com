@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tech | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-05-06T02:05:17+08:00</updated>
+  <updated>2013-05-09T23:09:26+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -12,6 +12,104 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[虚拟机中的网络配置]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/05/09/networking-in-virtual-machine/"/>
+    <updated>2013-05-09T22:39:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/05/09/networking-in-virtual-machine</id>
+    <content type="html"><![CDATA[<h2>背景</h2>
+
+<p>本文介绍三种虚拟机中常用的网络配置模式：NAT(网络地址转换模式)、Bridged nerworking（桥接网络模式）和Host-only（主机模式）。</p>
+
+<h3>Network Address Translation (NAT)</h3>
+
+<p>NAT模式使用了<a href="http://zh.wikipedia.org/wiki/%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2">NAT</a>服务来给虚拟网络提供网络连接。</p>
+
+<p>这种模式下，虚拟机能访问外部网络，外部无法直接连接到内部网络，除非使用端口映射<a href="http://nxlhero.blog.51cto.com/962631/742140">port forwarding</a>。</p>
+
+<!--more-->
+
+
+<p>NAT一般与<a href="http://zh.wikipedia.org/wiki/DHCP">DHCP</a>一起使用，以动态分配虚拟机内网IP，无序手动配置内外部网络环境。当然，为了让虚拟机每次开机时拥有固定的IP，也可以关闭掉DHCP服务，转而自己配置虚拟机的网络。虚拟机是linux的情况下，可以通过修改/etc/network/interfaces实现开机固定IP，示例如下：</p>
+
+<p>```</p>
+
+<h1>This file describes the network interfaces available on your system</h1>
+
+<h1>and how to activate them. For more information, see interfaces(5).</h1>
+
+<h1>The loopback network interface</h1>
+
+<p>auto lo
+iface lo inet loopback</p>
+
+<p>auto eth0
+iface eth0 inet static
+address 172.21.2.43
+netmask 255.255.0.0
+gateway 172.21.1.1</p>
+
+<p>```</p>
+
+<p>实现原理如图：</p>
+
+<p><img src="http://dl.dropboxusercontent.com/u/64021093/network/2.jpg"></p>
+
+<h3>Bridged networking(桥接)</h3>
+
+<p>在桥接模式下，本地物理网卡和虚拟网卡通过虚拟交换机进行桥接（无需在host上再开启新的虚拟网卡），物理网卡和虚拟网卡在拓扑图上处于同等地位，虚拟机就像是一台真实主机一样存在于局域网中。</p>
+
+<p>桥接模式无法与DHCP一起使用，需要手动的配置虚拟机的网络参数，包括IP、网关、子网掩码和dns。其中网关、子网掩码、dns都应该与host设置相同值。在linux虚拟机中的设置示例如下：</p>
+
+<p>```</p>
+
+<h1>设置ip、子网掩码</h1>
+
+<p>$ifconfig eth0 172.21.2.43 netmask 255.255.0.0</p>
+
+<h1>设置默认网关</h1>
+
+<p>$route add default gw 172.21.1.1</p>
+
+<h1>设置dns</h1>
+
+<p>$sudo vim /etc/resolv.conf
+nameserver 172.21.1.1</p>
+
+<p>```</p>
+
+<p>实现原理如图：</p>
+
+<p><img src="http://dl.dropboxusercontent.com/u/64021093/network/1.jpg"></p>
+
+<p>相比NAT，桥接模式有一个前提条件，就是要获得另外一个host所在网段的IP。在内网环境中还很容易，如果是ADSL宽带就比较麻烦了，ISP一般是不会大方的多提供一个公网IP的，那种情况下，使用NAT或许是更好的选择。</p>
+
+<p><a href="http://blog.chinaunix.net/uid-26212859-id-3051291.html">VMware的桥接网络配置</a></p>
+
+<h3>Host-only networking(主机)</h3>
+
+<p>以host为网关建立了新的虚拟网络，虚拟机无法访问外部网络，因此很安全。</p>
+
+<p>和NAT一样，也使用了DHCP服务做虚拟网络内的IP自动分配。</p>
+
+<p>另外，host-only模式下也可以进行扩展配置，让虚拟网络的机器也能访问到外网，比如自定制nat和dhcp的使用等等。</p>
+
+<p>如图：</p>
+
+<p><img src="http://dl.dropboxusercontent.com/u/64021093/network/3.jpg"></p>
+
+<h2>参考资料</h2>
+
+<ul>
+<li><p><a href="http://networking.ctocio.com.cn/tips/110/8897610.shtml">解析虚拟VMware三种网络模式根本区别</a></p></li>
+<li><p><a href="http://www.virtualbox.org/manual/ch06.html">virtualbox的网络模式详解</a></p></li>
+</ul>
+
+
+<p>图片引用自 ：<a href="http://networking.ctocio.com.cn/tips/110/8897610.shtml">解析虚拟VMware三种网络模式根本区别</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[根据前中后序和层序重建二叉树(PAT1020、PAT1043)]]></title>
@@ -418,13 +516,13 @@ public void postOrderTravNoRecu(Node n) {</p>
 
 <p>当下的计划就是开始自己搭环境，实践起来!~</p>
 
+<!--more-->
+
+
 <h2>背景</h2>
 
 <p>商业应用中，越来越多的需要将结构化数据和非结构化数据存储、处理混合起来。
 目前，已经有很多公司、产品致力于这部分的研究，微软发的这篇论文，也正是基于PDW V2的这一新功能提出的新的解决方案。</p>
-
-<!--more-->
-
 
 <h3>Polybase简介：</h3>
 
@@ -730,190 +828,6 @@ hdfsCustomer (c_custkey);
 <ul>
 <li><a href="http://www.zoublog.com/technology/can-ping-dns-resolution-can-not-open-page-solution.html">《能Ping通，能DNS解析，不能打开网页(登陆QQ等)的解决办法》</a></li>
 <li><a href="http://en.wikipedia.org/wiki/Winsock">winsock</a></li>
-</ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[SSH原理和使用]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/04/19/use-ssh/"/>
-    <updated>2013-04-19T21:44:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/04/19/use-ssh</id>
-    <content type="html"><![CDATA[<p>在linux上工作，ssh是必须要了解的技术方法。它可以建立起多台主机之间的安全的加密传输，以进行远程的访问、操控、传输数据。</p>
-
-<h2>ssh是什么</h2>
-
-<p>SSH為Secure Shell的縮寫。為建立在应用层和传输层基础上的安全协议。</p>
-
-<p>传统的网络服务程序，如FTP、POP和Telnet其本质上都是不安全的；因为它们在网络上用明文传送数据、用户帐号和用户口令，很容易受到中间人（man-in-the-middle）攻击方式的攻击。就是存在另一个人或者一台机器冒充真正的服务器接收用户传给服务器的数据，然后再冒充用户把数据传给真正的服务器。
-而SSH是目前较可靠，專为远程登录会话和其他网络服务提供安全性的协议。利用SSH协议可以有效防止远程管理过程中的信息泄露问题。透過SSH可以對所有传输的数据进行加密，也能够防止DNS欺骗和IP欺骗。
-SSH之另一項優點為其传输的数据是经过压缩的，所以可以加快传输的速度。SSH有很多功能，它既可以代替Telnet，又可以为FTP、POP、甚至为PPP提供一个安全的「通道」。
-了解这么多就好了，其实ssh连接也就是可以理解成经过加密的远程访问啦。</p>
-
-<!--more-->
-
-
-<p>---（来自中文维基）</p>
-
-<h2>ssh连接的验证、加密方式</h2>
-
-<p>ssh连接是CS模型（客户端-服务器），客户端发出连接申请，服务器对客户端进行验证，再考虑是否接受连接申请。</p>
-
-<p>ssh的安全加密方式的理论基础是非对称加密体系。而非对称加密中，常见的一种就是RSA加密算法。在使用ssh，务必先弄清楚非对称加密和rsa的算法流程。详情参见<a href="http://zh.wikipedia.org/wiki/RSA%E5%8A%A0%E5%AF%86%E6%BC%94%E7%AE%97%E6%B3%95">RSA加密算法</a>。</p>
-
-<p>ssh有两种级别的安全验证：账户口令验证、rsa加密验证。详细参数，可以在sshd_config配置文件中设置(Ubuntu是/etc/ssh/sshd_config，mac下是/etc/sshd_config)</p>
-
-<h3>账号口令验证</h3>
-
-<p>直接输入所要登陆的用户的口令是默认的方式。不需要修改配置文件。</p>
-
-<p>如果直接从客户端将用户密码传输到服务器，那么密码信息很容易被中间人截获，从而实现重放攻击。ssh的实现方式是：</p>
-
-<ul>
-<li>1.客户端向ssh服务器发出请求，服务器将自己的公钥返回给客户端；</li>
-<li>2.客户端用服务器的公钥加密自己的登录密码，再将信息发送给服务器；</li>
-<li>3.服务器接收到客户端传送的密码，用自己的私钥解码，如果结果正确，则同意登录，建立起连接。</li>
-</ul>
-
-
-<p>这种方式还是有漏洞的，中间人可以假扮成服务器，骗取客户端的密码。</p>
-
-<h3>RSA加密验证</h3>
-
-<p>rsa加密验证方式，充分利用了非对称加密体系的优势，不需要在网络传输密码，完全杜绝了中间人攻击的可能。步骤如下：</p>
-
-<h5>准备工作</h5>
-
-<ul>
-<li>-1.客户端先使用 ssh-keygen 命令，生成私钥和公钥。按照默认配置，私钥会被保存在~/.ssh/id_rsa中，公钥则在~/.ssh/id_rsa.pub中。(一般别修改这里的文件)</li>
-<li>0.客户端通过安全的方式将公钥发送给服务器。在服务器端，将客户端发的公钥写入到~/.ssh/authorized_keys文件末尾。</li>
-</ul>
-
-
-<h5>建立连接</h5>
-
-<ul>
-<li>1.客户端发出申请。服务器产生session密钥对，返回通过对应客户端的公钥加密后的session公钥。</li>
-<li>2.客户端用自己的密钥解密信息，得到session公钥。</li>
-<li>3.之后的数据交互，都通过对方方公钥加密，对方收到信息后，用其私钥解密，实现安全加密过程。</li>
-</ul>
-
-
-<h2>免密码的RSA加密方式实施过程</h2>
-
-<ul>
-<li>1.安装ssh</li>
-</ul>
-
-
-<p>mac下自带的有，ubuntu下直接sudo apt-get install ssh。</p>
-
-<ul>
-<li>2.在客户端生成私钥公钥</li>
-</ul>
-
-
-<p>使用ssh-keygen命令生成密钥对。遇到提示都直接回车（其中passphrase是保护rsa密钥的另一套加密方式）。</p>
-
-<p><code>
-$ ssh-keygen   
-Generating public/private rsa key pair.  
-Enter file in which to save the key (/Users/biaobiaoqi/.ssh/id_rsa): /Users/biaobiaoqi/.ssh/id_rsa  
-Enter passphrase (empty for no passphrase):   
-Enter same passphrase again:   
-Your identification has been saved in /Users/biaobiaoqi/.ssh/id_rsa.  
-Your public key has been saved in /Users/biaobiaoqi/.ssh/id_rsa.pub.  
-The key fingerprint is:  
-b7:c2:5c:3f:83:5e:5e:93:a4:42:db:51:d8:ac:07:66 biaobiaoqi@biaobiaoqi.local  
-The key's randomart image is:  
-+--[ RSA 2048]----+  
-|                 |  
-|             +   |  
-|            E +  |  
-|           o +   |  
-|        S + o o  |  
-|       o + * = . |  
-|        + = B +  |  
-|         o + + . |  
-|          . .    |  
-+-----------------+  
-</code></p>
-
-<p>结果是在~/.ssh/下生成了 id_rsa（私钥）和id_rsa.pub（公钥）</p>
-
-<ul>
-<li>3.将客户端的公钥id_rsa.pub传递给服务器</li>
-</ul>
-
-
-<p>传送id_rsa.pub到服务器上，并将其内容写入到~/.ssh/authorized_keys文件尾。</p>
-
-<p>可以物理的用U盘转运（似乎更安全），也可以使用scp指令（这个时候就需要运用到口令验证的ssh方式)</p>
-
-<p><code>
-$scp ~/.ssh/id_rsa.pub user@host:~/.ssh/tmp_id_rsa.pub
-$ssh user@host "cat ~./ssh/tmp_id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys"
-</code></p>
-
-<p>在执行scp传输的过程中，如果是第一次ssh连接到服务器，客户端会提示是否信任这个主机，比如：
-<code>
-$scp ~/.ssh/id_rsa.pub user@host:~/.ssh/tmp_id_rsa.pub
-The authenticity of host XXX can't be established.
-ECDSA key fingerprint is xxxxxxxxxxxxxxxxxxxxxx.
-Are you sure you want to continue connecting (yes/no)?
-</code>
-原因是，客户端不确定所连接的host是否是真正的host。一般情况，直接输入yes，继续就好了。这里有较详细的解释：<a href="http://stackoverflow.com/questions/3663895/ssh-the-authenticity-of-host-hostname-cant-be-established">点击连接</a></p>
-
-<p>然后就可以免密码、更安全的登录啦
-<code>
- ssh xxxx@hostAddress
-</code></p>
-
-<p>在ssh登录服务器时，如果出现如下问题：<em>Agent admitted failure to sign using the key</em>则需要手工将客户端私钥加入到ssh管理体系中。使用 ssh-add 指令。（具体机理还不太清楚）
-<code>
-$ssh-add   ~/.ssh/id_rsa
-</code></p>
-
-<h2>and one more thing;)</h2>
-
-<h4>ssh+firefox+autoproy</h4>
-
-<p>看看wall外面的世界，是多么美好的事情。ssh能帮我们做到，只要有一台在wall外的主机做代理。
-具体方式参见博文：<a href="http://reverland.bitbucket.org/ssh_climbe.html">ssh+firefox-autoproxy</a></p>
-
-<h4>SCP命令加密赋值数据</h4>
-
-<p>```</p>
-
-<h1>将本地文件复制到远程主机上</h1>
-
-<p>$scp ~./tmp user@rehost:~/tmp</p>
-
-<h1>见远程主机上的文件复制到本地</h1>
-
-<p>$scp user@rehost:~/tmp ~./tmp</p>
-
-<h1>复制的是目录，需要迭代，添加-r参数</h1>
-
-<p>$scp -r user@rehost:~/tmpDir ~./tmpDir
-```</p>
-
-<h4>SSH的配置</h4>
-
-<p>具体参数细节参见博文：<a href="http://www.ibm.com/developerworks/cn/aix/library/au-sshsecurity/">SSH 安全性和配置入门</a>
-<a href="http://blog.licess.org/sshd_config/">sshd_config配置 详解</a></p>
-
-<h2>推荐阅读：</h2>
-
-<ul>
-<li><a href="http://blog.lizhigang.net/archives/249">《linux ssh 使用深度解析（key登录详解）》</a></li>
-<li><a href="http://wiki.tuna.tsinghua.edu.cn/SshKeyHowto">《使用 RSA 密钥对进行 SSH 登录验证》</a></li>
-<li><a href="http://www.ruanyifeng.com/blog/2011/12/ssh_remote_login.html">《SSH原理与运用（一）：远程登录》</a></li>
-<li><a href="http://www.ruanyifeng.com/blog/2011/12/ssh_port_forwarding.html">《SSH原理与运用（二）：远程操作与端口转发》</a></li>
-<li><a href="http://reverland.bitbucket.org/ssh_climbe.html">ssh+firefox-autoproxy</a></li>
-<li><a href="http://www.ibm.com/developerworks/cn/aix/library/au-sshsecurity/">SSH 安全性和配置入门</a></li>
-<li><a href="http://blog.licess.org/sshd_config/">sshd_config配置 详解</a></li>
 </ul>
 
 ]]></content>

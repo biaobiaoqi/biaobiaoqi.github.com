@@ -4,7 +4,7 @@
   <title><![CDATA[Category: think | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/blog/categories/think/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-05-06T02:05:17+08:00</updated>
+  <updated>2013-05-09T23:09:26+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -28,15 +28,15 @@
 
 <p>书中的中文版序的标题就是“跳出框框来思考”，这种观点倒不是第一次见到了，甚至可以说，这些观点充斥于互联网上的各种流传、经验贴中。但这并不意味着我们不需要再花时间在这种书上。道理都懂，就是做不好已经成为这个信息通畅的时代的特征之一。正所谓“纸上得来终觉浅，绝知此事要躬行”。</p>
 
+<!--more-->
+
+
 <p>而如果有一个“躬行”过的人再将他的感受娓娓道来，辅以自己的用心体会，或许会事半功倍呢。这就是我想通过这本书得到的。如下几点，让这个想法成为可能：</p>
 
 <ul>
 <li>1.这本书并不单单是一个题集，大约有一般的篇目是在讲述题记，另外一半的篇目，则是代入感颇强的为什么要这么思考的叙述。后者看似无关功利，但却可以给人足够的心理暗示和支撑，以提升良好思考习惯在内心的重要性。</li>
 <li>2.作者庞德斯通写过不少充满思维的力量书。</li>
 </ul>
-
-
-<!--more-->
 
 
 <p>认同归认同，关键的还是自己的所得。下面是我的一些思考。</p>
@@ -121,13 +121,16 @@
 
 <p>今天在高级软件工程课上，做了一次关于项目经验的展示。展示的主题围绕自己参与的移动互联网团队开发经验展开。借此机会，我整理了一下思路，于是有了以下的slides。没时间码字，就先把slides直接贴上来啦:)</p>
 
-<h2>提纲如下：</h2>
+<!--more-->
+
+
+<h3>提纲如下：</h3>
 
 <ul>
 <li>背景：对传统软件工程方法和移动互联网项目开发的对比</li>
 <li>项目总结体会：</li>
 <li><ul>
-<li>协同目标<!--more--></li>
+<li>协同目标</li>
 </ul>
 </li>
 <li><ul>
@@ -153,7 +156,18 @@
 
 <p>值得指出的是，所谓的ReCERD小团队项目能力成长模型其实是我根据自身经历所总结的一套方法模型;)， slides中有详细介绍，见笑了，欢迎拍砖。</p>
 
-<p>slides下载地址：<a href="https://www.dropbox.com/s/0b084ccqao8igq8/course-slides.pdf">请点击</a> （使用的dropbox存储文档，可能不太稳定，海涵）</p>
+<p>刚发现speakerdeck是个很好的slides分享平台，试着用一下：</p>
+
+<script async class="speakerdeck-embed" data-slide="1" data-id="a4e4c53097650130957c1e87fe6147c9" data-ratio="1.2994923857868" src="http://biaobiaoqi.github.com//speakerdeck.com/assets/embed.js"></script>
+
+
+<p>slides下载：</p>
+
+<ul>
+<li><p>dropbox 下载地址：<a href="https://www.dropbox.com/s/0b084ccqao8igq8/course-slides.pdf">点击下载</a></p></li>
+<li><p>speackerdeck下载地址：<a href="https://speakerdeck.com/biaobiaoqi/thinking-in-software-engineering?slide=1">点击下载</a></p></li>
+</ul>
+
 ]]></content>
   </entry>
   
@@ -164,12 +178,12 @@
     <id>http://biaobiaoqi.github.com/blog/2013/04/07/goodbye-seeme</id>
     <content type="html"><![CDATA[<p>过年算是仪式感最强的节日之一了。不想将过年作为成熟的时间节点，因为生命总是在时间里沉淀。但社会的周期运作确确实实的依着四季来过度，于是总有些决定、变化需要在此执行和接受。真诚的向过去的一切道一声感谢。</p>
 
+<!--more-->
+
+
 <h2>半年小结</h2>
 
 <p>2012年的7月份下旬，XB学长联系了我。那时候我有半吊子的iOS开发经验。因为对ITP早有耳闻，而自己也对创业一直有着一些念想，在没有对Seeme的团队和产品做深入的了解的情况下，我加入了。这也意味着，实验室那头的内容被暂时搁置。</p>
-
-<!--more-->
-
 
 <p>查好友iOS版本的开发周期很急，临危受命，我和几乎同时加入的没有ios开发经验的乐乐简单的认识后，就开始了编码。有android的版本作为原型，我们依照着“功能-交互-UI”的原则，开始了没日没夜的开发。9月份开学后，我们两从全职转型为兼职，9月下旬，正式在appstore发布了查好友的iOS v1.0。在我看来，那是最刺激的一段时间了，我和LL共同摸索着前进，看着开发进度条一天天向满状态增进，时而掉进坑里，也挣扎着爬起，别无他念，Done is better than perfect.</p>
 
