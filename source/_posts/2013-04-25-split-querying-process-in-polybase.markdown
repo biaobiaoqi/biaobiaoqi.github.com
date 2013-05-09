@@ -3,6 +3,11 @@ layout: post
 title: "PDW中的Split Querying Process"
 date: 2013-04-25 22:59
 comments: true
+description: "最近看了关于SQL Server的分布式处理方面的论文，觉得它提出的Polybase跟之前看过的HadoopDB有些神似，这里做个小总结（抽空再把HadoopDB的总结贴出来）。
+
+不算翻译，只是挑出自己认为是重点的部分。详细情况，还请论文查阅原文，引用中有写明出处。文章末尾有我总结的slides，可以辅助查阅。
+
+由于缺乏实践经验，很多东西未必能理解其本质。如有其他观点，还请多指教。"
 categories: [tech, distributed]
 ---
 最近看了关于SQL Server的分布式处理方面的论文，觉得它提出的Polybase跟之前看过的HadoopDB有些神似，这里做个小总结（抽空再把HadoopDB的总结贴出来）。
@@ -13,13 +18,13 @@ categories: [tech, distributed]
 
 当下的计划就是开始自己搭环境，实践起来!~
 
+<!--more-->
 
 背景
 ---
 商业应用中，越来越多的需要将结构化数据和非结构化数据存储、处理混合起来。
 目前，已经有很多公司、产品致力于这部分的研究，微软发的这篇论文，也正是基于PDW V2的这一新功能提出的新的解决方案。
 
-<!--more-->
 
 ###Polybase简介：
 

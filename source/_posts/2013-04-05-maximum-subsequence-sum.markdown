@@ -3,6 +3,7 @@ layout: post
 title: "分治、时间空间的权衡:最大合的连续字串问题 (PAT 1007)"
 date: 2013-04-05 20:16
 comments: true
+description: "算法题，《编程珠玑》中用专门的一章对这个问题进行了讲解。（《编程珠玑（第2版）》P73 第8章 算法设计技术）"
 categories: [algorithm, tech, pat, think]
 ---
 

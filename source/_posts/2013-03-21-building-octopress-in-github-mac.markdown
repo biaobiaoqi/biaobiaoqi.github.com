@@ -3,6 +3,7 @@ layout: post
 title: "在github上搭建octopress博客 mac"
 date: 2013-03-21 23:43
 comments: true
+description: "在github上搭建octopress博客 mac"
 categories: [git, tech, octopress] 
 ---
 {% img http://pikipity.github.com/images/post/octopress.jpg %}
