@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>关于 - Biaobiaoqi的博客</title>
+  <title>CAP and Eventual Consistent - Biaobiaoqi的博客</title>
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="关于 Mar 17th, 2013 博客构建中&#8230; 初步开放时间：2013-5 可移步：http://blog.csdn.net/BIAOBIAOqi :) Mar 17th, 2013 分享到： 新浪微博 腾讯微博 人人网 更多 最近发表 CAP and Eventual &hellip;">
+  <meta name="description" content="查阅资料整理了最终一致性、CAP相关的内容。由于图省事儿，没有做文字的整理记载，只有slides和一些查阅过的链接，大家将就着看。欢迎指正。 slides： slides链接：请戳这里 背景 为什么系统要扩张？历史的发展路径是怎么样的？请看《系统可扩展性演化》 CAP理论 CAP理论的提出： &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://biaobiaoqi.github.com/about">
+  <link rel="canonical" href="http://biaobiaoqi.github.com/blog/2013/05/15/cap-and-eventual-consistent">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Biaobiaoqi的博客" type="application/atom+xml">
@@ -98,38 +98,15 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">关于</h1>
-    <p class="meta">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-17T12:03:00+08:00" pubdate data-updated="true">Mar 17<span>th</span>, 2013</time></p>
-  </header>
-  
-  <p>博客构建中&#8230;</p>
-
-<p>初步开放时间：2013-5</p>
-
-<p>可移步：<a href="http://blog.csdn.net/BIAOBIAOqi">http://blog.csdn.net/BIAOBIAOqi</a></p>
-
-<p>:)</p>
-
-  
-    <footer>
+    
+      <h1 class="entry-title">CAP and Eventual Consistent</h1>
+    
+    
       <p class="meta">
         
-        
 
 
 
@@ -141,11 +118,95 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
 
 
-<time datetime="2013-03-17T12:03:00+08:00" pubdate data-updated="true">Mar 17<span>th</span>, 2013</time>
+<time datetime="2013-05-15T00:30:00+08:00" pubdate data-updated="true">May 15<span>th</span>, 2013</time>
         
+
+
+
       </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>查阅资料整理了最终一致性、CAP相关的内容。由于图省事儿，没有做文字的整理记载，只有slides和一些查阅过的链接，大家将就着看。欢迎指正。</p>
+
+<p>slides：</p>
+
+<script async class="speakerdeck-embed" data-id="cca07ce09e92013076c646310b996896" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+
+
+
+
+<!--more-->
+
+
+<p>slides链接：<a href="https://speakerdeck.com/biaobiaoqi/cap-and-eventually-consistent">请戳这里</a></p>
+
+<h2>背景</h2>
+
+<p>为什么系统要扩张？历史的发展路径是怎么样的？请看<a href="http://rdc.taobao.com/blog/cs/?p=614">《系统可扩展性演化》</a></p>
+
+<h2>CAP理论</h2>
+
+<ul>
+<li><p>CAP理论的提出：分布式系统的CAP理论是2000年左右被提出的概念，直到Dynamo的出现，开始在工业界被广泛实践：
+<a href="http://www.julianbrowne.com/article/viewer/brewers-cap-theorem">《Brewer&#8217;s CAP Theorem》</a>/<a href="http://code.alibabatech.com/blog/dev_related_728/brewers-cap-theorem.html">中文翻译</a></p></li>
+<li><p>对CAP的理解：<a href="http://www.douban.com/group/topic/11765014/">《谈正确理解CAP理论》</a>\ <a href="http://rdc.taobao.com/blog/cs/?p=631">《CAP理论及分布式系统一致性》</a></p></li>
+</ul>
+
+
+<h2>BASE理论</h2>
+
+<ul>
+<li>BASE的理论解释：<a href="http://rdc.taobao.com/blog/cs/?p=637">《分布式事务工程实现》</a></li>
+</ul>
+
+
+<h2>最终一致性</h2>
+
+<ul>
+<li><p>amazon的CTO分析最终一致性：<a href="http://www.allthingsdistributed.com/2008/12/eventually_consistent.html">Eventually Consistent - Revisited</a>/<a href="http://blog.csdn.net/xiaoqiangxx/article/details/7566654">中文翻译</a></p></li>
+<li><p>Dynamo论文：<a href="http://www.read.seas.harvard.edu/~kohler/class/cs239-w08/decandia07dynamo.pdf">Dynamo: Amazon’s Highly Available Key-value Store</a></p>
+
+<p>关于Dynamo的一篇中文简述：<a href="http://www.infoq.com/cn/articles/nosql-dynamo">《解读NoSQL技术代表之作Dynamo》</a></p></li>
+</ul>
+
+
+<h2>引申</h2>
+
+<ul>
+<li>CAP原作者对CAP的反思和澄清：<a href="http://www.infoq.com/cn/articles/cap-twelve-years-later-how-the-rules-have-changed">《CAP十二年回顾：规则变了》</a></li>
+</ul>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
       
-        <div class="sharing">
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Biaobiaoqi</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-15T00:30:00+08:00" pubdate data-updated="true">May 15<span>th</span>, 2013</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
   
   
   
@@ -170,10 +231,20 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
 </div>
 
+    
+    <p class="meta">
       
-    </footer>
-  
+        <a class="basic-alignment left" href="/blog/2013/05/13/free-the-bit-economics/" title="Previous Post: 《免费》">&laquo; 《免费》</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+
+
+
+
 
 </div>
 
@@ -248,6 +319,8 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
   
 </aside>
+
+
 
 
     </div>
