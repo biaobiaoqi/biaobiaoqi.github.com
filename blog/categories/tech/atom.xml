@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tech | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-05-16T01:38:53+08:00</updated>
+  <updated>2013-05-17T01:39:15+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -12,6 +12,97 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[iOS的安全性和越狱]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/05/17/jail-break-your-ios/"/>
+    <updated>2013-05-17T00:10:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/05/17/jail-break-your-ios</id>
+    <content type="html"><![CDATA[<p><img src="https://dl.dropboxusercontent.com/u/64021093/2013-5-16.jpg" title="Jailbrek" alt="alt jailbreak" /></p>
+
+<p>提到<a href="http://en.wikipedia.org/wiki/IOS_jailbreaking#Security.2C_privacy.2C_and_stability">越狱</a>，很多人第一反应大概是免费的游戏和app。</p>
+
+<p>作为软件从业人员，深知中国的大环境的特殊性。内有用户想吃免费午餐的不良付费习惯，外有行业内大头诸如某讯对创新的绞杀。大家对越狱是为了免费、盗版软件的认识，也就不奇怪了。</p>
+
+<p>还有另一派人。越狱对他们来说，意味着开放。个人认为这也是Hack精神的精髓之一。事实上，iOS越狱也有自己的生态圈：Cydia就是越狱设备上App Store。</p>
+
+<!--more-->
+
+
+<h2>越狱的合法性</h2>
+
+<p>数字千年版权法对iphone的越狱进行了特赦，直到2015年，对iPhone、iPod touch的越狱依然有效。但注意，iPad就没这么幸运了。</p>
+
+<p>详情参见博文<a href="http://www.cultofmac.com/213144/unlocking-a-new-iphone-is-now-illegal-but-jailbreaking-is-still-safe-what-it-all-means-for-you/">《Unlocking A New iPhone Is Now Illegal, But Jailbreaking Is Still Safe — What It All Means For You》</a></p>
+
+<h2>iOS安全性</h2>
+
+<p>由于iOS没有开源，学术界和工业界对它的安全机制的论述资料很少。我在网上找到了上交一位学长对ios安全机制的分析文章，是他的硕士学位<a href="http://www.doc88.com/p-405566264292.html">论文</a>。作为参考，我整理了一些关键知识点。</p>
+
+<h4>基于信任链的启动</h4>
+
+<p>iOS的信任机制从系统启动那一刻起已经开始。
+系统可信启动<a href="http://elinux.org/images/2/28/Trusted_Boot_Loader.pdf">trustedboot</a>：启动每一步都会检测签名，构成整个信任链。</p>
+
+<p>还有另一种启动方式，是设备固件升级方式（DFU，Device Firmware Update），也是由签名构建信任链。</p>
+
+<h4>程序签名</h4>
+
+<p>iOS应用的ipa压缩包中包含可执行文件和数据文件。可执行文件只有在已签名的前提下才能运行。确保应用经过苹果认证。</p>
+
+<p>越狱提升运行权限到root，修改引用加载策略，接受任意签名的应用。
+“通过软件保证软件安全是不可能的”，iOS使用了硬件来做保护，但硬件部分也遭到了越狱的破解。</p>
+
+<h4>沙盒技术</h4>
+
+<p>iOS用沙盒技术实现访问控制
+trustedBSD ：http://www.trustedbsd.org/
+http://www.freebsd.org/doc/zh_CN/books/arch-handbook/mac-synopsis.html</p>
+
+<h4>ASLR和PIE</h4>
+
+<p>使用地址空间布局随机化（ASLR， address space layout randomization）和位置无关可执行代码（PIE，position independent executable）编译用来防止经典的缓冲区溢出攻击。</p>
+
+<h4>数据保护机制：</h4>
+
+<ul>
+<li>硬件加密：AES协处理器，存储着UID，GID</li>
+<li>软件加密：系统中每个文件、数据都用一个唯一的秘钥来加密。秘钥是有UID、GID一起产生的，存在keybag中，keybag通过用户的4位密码来保护。</li>
+</ul>
+
+
+<h2>越狱</h2>
+
+<p>越狱主要就是在信任链的根bootrom阶段攻击。由于系统不断升级，攻击的方式也在不断演进，这个<a href="http://bbs.gean.cn/archiver/showtopic-213.aspx">链接</a>介绍了其中的一种情况。</p>
+
+<h4>越狱后注意</h4>
+
+<p>总的来说，越狱打破了iOS封闭的生态环境，也打破了它特有的保护壳。手机获得了root权限，恶意代码有了可趁之机。不要轻易的使用来源不明的应用和插件。</p>
+
+<ul>
+<li>非越狱手机：仅允许用户访问照片、视频数据；通过备份，可在pc端获取所有数据</li>
+<li>越狱手机：拥有root权限。可以通过许多渠道如ssh，ftp获取系统数据。</li>
+</ul>
+
+
+<p>更多细节参见
+* <a href="http://bbs.weiphone.com/read-htm-tid-1750886.html">《浅谈iOS越狱前后的安全问题以及安全风险》</a>
+* <a href="http://www.pcpop.com/doc/0/890/890768_all.shtml">《iPad越狱不安全!安装应用/插件需谨慎》</a>
+* <a href="http://www.cnbeta.com/articles/229192.htm">《iOS完美越狱 - 福利还是阴谋？》</a></p>
+
+<h4>SHSH</h4>
+
+<p>iPhone 3GS出来时候，苹果为加强对iPhone OS的控制对恢复(Restore)固件(Firmware)采用了验证过程，每次iTunes要恢复固件的时候都要连接苹果的服务器验证。手机的ECID和所刷系统版本号一起签名出一个SHSH文件，发送给服务器，服务器检测SHSH是否为新版本的系统所产生，如果是，则允许继续进行刷机，否则传回组织继续的信号。</p>
+
+<p>SHSH是存储在苹果公司的服务器上的，用户需要通过备份原来的SHSH，并伪装一台苹果服务器来协助验证。　　</p>
+
+<p>网络上SHSH备份方法的介绍很多，不了解的朋友自行Google吧。</p>
+
+<h2>附录</h2>
+
+<p>对于想开发iOS应用而又没有开发者账号的朋友，可以参考这篇文章<a href="http://kqwd.blog.163.com/blog/static/4122344820117191351263/">《Xcode 4.1~4.6 + iOS 5、iOS 6免证书(iDP)开发+真机调试+生成IPA全攻略》</a>，Xcode4.6 iOS6.0 亲测有效。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[CAP和最终一致性]]></title>
@@ -633,288 +724,6 @@ postorder: B, A</p>
 <li>中序遍历配合另外任何一个遍历，能重建二叉树。其他的任意两个序列的组合都不能唯一的确定重建的二叉树。</li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[二叉树的遍历（递归、非递归）分析]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/04/27/travsal-binary-tree/"/>
-    <updated>2013-04-27T21:03:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/04/27/travsal-binary-tree</id>
-    <content type="html"><![CDATA[<h2>背景</h2>
-
-<p>二叉树是一种很基本的数据结构。很多地方能看到它的身影，比如大名鼎鼎的霍夫曼编码（好了，别问我再比如了，见识浅薄，真不知道更多了。。。）它的结构很简洁、巧妙。</p>
-
-<p>本文讨论二叉树的常见遍历方式的代码实现（这里贴出的是Java），包括前序(preorder)、中序(inorder)、后序(postorder)、层序(level order)，进一步，考虑递归和非递归的实现方式。递归方法的实现相对简单，但递归的执行方式由于每次都会产生一个新的方法调用栈，如果递归层级较深，会消耗较大的内存，转化为非递归则没那么简单了，往往需要实现一个栈来保存状态信息。</p>
-
-<!--more-->
-
-
-<p>在此之前，先简单定义节点的数据结构：</p>
-
-<p>二叉树节点最多只有两个儿子，并保存一个节点的值，为了实验的方便，假定它为int。同时，我们直接使用Java的System.out.print方法来输出节点值，以显示遍历结果。</p>
-
-<p>```
-public class Node {</p>
-
-<pre><code>    public int value;
-    public Node leftNode;
-    public Node rightNode;
-
-    public Node(int i) {
-        value = i;
-    }
-}
-</code></pre>
-
-<p>```
-详细代码参见链接:<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/algorithm/tree/BinarySearchTree.java">BST及其各种便利的详细实现代码</a></p>
-
-<h2>前序遍历</h2>
-
-<ul>
-<li>递归实现：递归实现很简单，在每次访问到某个节点时，先输出节点值，然后再依次递归的对左儿子、右儿子调用遍历的方法。代码如下</li>
-</ul>
-
-
-<p>```</p>
-
-<pre><code>public void preOrderTrav(Node n) {
-    if (n != null) {
-        System.out.print(n.value + " ");
-        preOrderTrav(n.leftNode);
-        preOrderTrav(n.rightNode);
-    }
-}
-</code></pre>
-
-<p>```</p>
-
-<ul>
-<li>非递归调实现：</li>
-</ul>
-
-
-<p>1.第一种实现方式相对容易理解：</p>
-
-<p>初始：维护一个栈，将根节点压入栈中。</p>
-
-<p>循环：每次从栈顶读出一个节点信息，直接将节点值<strong>输出</strong>，同时将儿子节点按从左到右的顺序推到栈顶。</p>
-
-<p>分析：跟递归调用的整体思路一样，不同的是，递归调用时是利用运行时系统所维护的程序调用栈来维护顺序，而这个非递归方法是用过自己维护的栈来保存信息。如此节省了调用栈的空间。</p>
-
-<p>```</p>
-
-<pre><code>public void preOrderTravNoRecur(Node n) {
-    Stack&lt;Node&gt; stack = new Stack&lt;Node&gt;();
-    stack.add(root);
-    while (!stack.empty()) {
-        Node t = stack.pop();
-        System.out.print(t.value + " ");
-        if (t.rightNode != null)
-            stack.add(t.rightNode);
-        if (t.leftNode != null)
-            stack.add(t.leftNode);
-    }
-}
-</code></pre>
-
-<p>```</p>
-
-<p>2.第二种实现方式更普遍（中序遍历的非递归使用了同样的思路）：</p>
-
-<p>初始：维护一个栈S和一个节点变量N。节点变量赋值为根节点。</p>
-
-<p>循环：将节点变量N的左儿子循环的<strong>输出</strong>，并推入栈S中，直到没有左儿子；推出栈S的顶节点，节点变量N赋值为栈S顶节点的右节点。</p>
-
-<p>分析：不同于递归调用的思路。栈S用于实现对某节点的左边支递归值的存储，以便回溯；节点变量N则用于遍历某节点的右边枝（这些节点是从栈S顶读出的节点，依次做处理），由于右边枝是最后才会被访问到的，故在处理右边枝的时候，不需要存储右边枝的信息，依次处理即可。</p>
-
-<p>```</p>
-
-<pre><code>public void preOrderTravNoRecurII(Node n) {
-    System.out.println("No Recursive: ");
-    Stack&lt;Node&gt; s = new Stack&lt;Node&gt;();
-    while (n != null | !s.empty()){
-        while (n!=null ){
-            System.out.print(n.value + " ");
-            s.add(n);
-            n = n.leftNode;
-        }
-        n = s.pop();
-        n = n.rightNode;
-    }
-    System.out.println();
-}
-</code></pre>
-
-<p>```</p>
-
-<h3>中序遍历</h3>
-
-<ul>
-<li>递归实现</li>
-</ul>
-
-
-<p>```</p>
-
-<pre><code>public void inorderTrav(Node n) {
-    if (n != null) {
-        inorderTrav(n.leftNode);
-        System.out.print(n.value + " ");
-        inorderTrav(n.rightNode);
-    }
-}
-</code></pre>
-
-<p>```</p>
-
-<ul>
-<li>非递归实现</li>
-</ul>
-
-
-<p>初始：维护一个栈S和一个节点变量N。节点变量赋值为根节点。</p>
-
-<p>循环：将节点变量N的左儿子循环的<strong>输出</strong>，并推入栈S中，直到没有左儿子；节点变量N赋值为栈S顶节点的右节点。</p>
-
-<p>分析：跟前序遍历的非递归实现方法二很类似。唯一的不同是输出的时机不同：前序遍历在入栈时输出，而中序遍历在出栈时输出。可以跟深刻的理解到，栈在这里是为了回溯而存在的。</p>
-
-<p>```</p>
-
-<pre><code>public void inorderTravNoRecu(Node n) {
-    System.out.println("No Recursive: ");
-    Stack&lt;Node&gt; s = new Stack&lt;Node&gt;();
-    while (n != null | !s.empty()){
-        while (n!=null ){
-            s.add(n);
-            n = n.leftNode;
-        }
-        n = s.pop();
-        System.out.print(n.value + " ");
-        n = n.rightNode;
-    }
-}
-</code></pre>
-
-<p>```</p>
-
-<h3>后序遍历</h3>
-
-<ul>
-<li>递归实现</li>
-</ul>
-
-
-<p>```
-public void preOrderTravNoRecurII(Node n) {</p>
-
-<pre><code>    System.out.println("No Recursive: ");
-    Stack&lt;Node&gt; s = new Stack&lt;Node&gt;();
-    while (n != null | !s.empty()){
-        while (n!=null ){
-            System.out.print(n.value + " ");
-            s.add(n);
-            n = n.leftNode;
-        }
-        n = s.pop();
-
-        n = n.rightNode;
-    }
-    System.out.println();
-}
-</code></pre>
-
-<p>```</p>
-
-<ul>
-<li>非递归实现</li>
-</ul>
-
-
-<p>初始：1.维护一个栈S、一个节点变量N和一个标记数组。节点变量赋值为根节点，栈暂时存储便利到的节点，标记数组用于标记栈中的节点是否已经访问过右边节点。2.将根节点的所有左儿子压入栈中。</p>
-
-<p>循环：依次处理栈中节点。如果节点有右儿子，且没有被处理过（通过标记数组判定），则将右子树的根节点及其左儿子全部压入栈中；如果已经处理过或者没有右儿子，则输出并出栈。</p>
-
-<p>分析：与前序和中序的一个大的不同在于需要用标记数组标记节点的右子树是否已经访问过。对每个节点进行处理的时候，都保证已经处理完了左右子树（通过先压入左边儿子为主线，处理栈中的每个节点时，再压入右边儿子来实现）。</p>
-
-<p>```
-public void postOrderTravNoRecu(Node n) {</p>
-
-<pre><code>    Stack&lt;Node&gt; stack = new Stack&lt;Node&gt;();
-    int[] flag = new int[max];
-
-    while (n != null) {
-        stack.push(n);
-        flag[stack.size()] = 0;
-        n = n.leftNode;
-    }
-
-    while (!stack.empty()) {
-        n = stack.peek();
-        while(n.rightNode != null &amp;&amp; flag[stack.size()] == 0) {
-            n = n.rightNode;
-            flag[stack.size()] = 1;
-            while (n != null) {
-                stack.push(n);
-                flag[stack.size()] = 0;
-                n = n.leftNode;
-            }
-            n = stack.peek();//TODO be careful about this
-        }
-        n = stack.pop();
-        System.out.print(n.value + " ");
-    }
-
-}
-</code></pre>
-
-<p>```</p>
-
-<h3>层序遍历</h3>
-
-<ul>
-<li>无法使用递归方法</li>
-</ul>
-
-
-<p>层序遍历不同于其他的遍历。可以通过反证法证明：</p>
-
-<p>如果能实现对A节点的层序递归，在对A节点处理的过程中，应该递归的对两个儿子B和C分别调用了层序遍历。在这种情况下，我们无法让B和C的同一个层级的儿子在集中的时间中被遍历到，换言之，B的第一层儿子在对B的调用中被遍历，而C的第一层儿子，则在对C的调用中遍历，这是分离开的。不成立，得证。</p>
-
-<ul>
-<li>非递归方法：</li>
-</ul>
-
-
-<p>分析：此方法类似于前序遍历的非递归方法的第一种。用一个栈维护信息。</p>
-
-<p>```</p>
-
-<pre><code>public void levelOrderTrav(Node n) {
-    System.out.print("Level OrderTrav: ");
-
-    Queue&lt;Node&gt; q = new LinkedList&lt;Node&gt;();
-    q.add(n);
-    while (q.size() != 0) {
-        n = q.poll();
-        System.out.print(" " + n.value);
-        if (n.leftNode != null) 
-            q.add(n.leftNode);
-        if (n.rightNode != null)
-            q.add(n.rightNode);
-
-    }
-}
-</code></pre>
-
-<p>```</p>
-
-<h2>总结</h2>
-
-<p>非递归实现的代码相对来说没有递归实现的直观。其核心都是维护了一个栈来保存状态，避免了产生过多方法调用栈浪费内存空间。</p>
-
-<p>本文中针对二叉树的几种遍历方式，描述了递归和非递归的解决方案。普遍意义的递归转非递归的方法和思想，将在另外一篇博文中介绍;)。欢迎交流。</p>
 ]]></content>
   </entry>
   
