@@ -4,7 +4,8 @@ title: "全分布式的Hadoop初体验"
 date: 2013-05-12 00:26
 comments: true
 description: "之前的时间里对Hadoop的使用都是基于学长所搭建起的实验环境的，没有完整的自己部署和维护过，最近抽时间初体验了在集群环境下装机、配置、运行的全过程，梳理总结到本文中。"
-categories: [tech, distributed, linux, hadoop]
+categories: [tech] 
+tags: [distributed, linux, hadoop]
 ---
 
 背景

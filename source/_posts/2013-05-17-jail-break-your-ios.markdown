@@ -4,7 +4,8 @@ title: "iOS的安全性和越狱"
 date: 2013-05-17 00:10
 comments: true
 description: "本文讲解了iOS平台的安全性，越狱的注意事项等"
-categories: [tech, ios, security, os]
+categories: [tech]
+tags: [ios, security, os]
 ---
 
 ![alt jailbreak](https://dl.dropboxusercontent.com/u/64021093/2013-5-16.jpg "Jailbrek")

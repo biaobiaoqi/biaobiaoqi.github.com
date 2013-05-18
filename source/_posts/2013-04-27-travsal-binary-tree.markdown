@@ -4,7 +4,9 @@ title: "二叉树的遍历（递归、非递归）分析"
 date: 2013-04-27 21:03
 comments: true
 description: "本文讨论二叉树的常见遍历方式的代码实现（这里贴出的是Java），包括前序(preorder)、中序(inorder)、后序(postorder)、层序(level order)，进一步，考虑递归和非递归的实现方式。递归方法的实现相对简单，但递归的执行方式由于每次都会产生一个新的方法调用栈，如果递归层级较深，会消耗较大的内存，转化为非递归则没那么简单了，往往需要实现一个栈来保存状态信息。"
-categories: [tech, algorithm]
+categories: [tech]
+tags: [algorithm]
+
 ---
 背景
 ---

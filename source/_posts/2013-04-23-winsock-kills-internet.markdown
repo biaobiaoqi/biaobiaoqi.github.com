@@ -4,7 +4,9 @@ title: "winsock出错引起的断网"
 date: 2013-04-23 22:24
 comments: true
 description: "今天，实验室的一台电脑今天突然出无法上网了，而其他人则在正常上网。症状很奇怪："
-categories: [tech, windows, net]
+categories: [tech]
+tags: [windows, net]
+
 ---
 ###背景
 实验室有二十来台PC机，30+的服务器集群，网络拓扑比较复杂。简单地说，有网关连着校网，校网无法直接访问学校外的网络，只能通过拨vpn来实现外网访问。而校网最近也不稳定，时常断网。

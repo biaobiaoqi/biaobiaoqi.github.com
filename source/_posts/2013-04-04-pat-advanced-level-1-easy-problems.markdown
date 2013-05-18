@@ -3,7 +3,9 @@ layout: post
 title: "PAT Advanced Level (1) easy problems"
 date: 2013-04-04 20:58
 comments: true
-categories: [algorithm, pat, java, tech]
+categories: [tech]
+tags: [algorithm, pat, java]
+
 ---
 
 

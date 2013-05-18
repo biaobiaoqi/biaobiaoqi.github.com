@@ -4,7 +4,9 @@ title: "《谁是谷歌想要的人才？》"
 date: 2013-04-20 00:47
 comments: true
 description: "书中的中文版序的标题就是'跳出框框来思考'，这种观点倒不是第一次见到了，甚至可以说，这些观点充斥于互联网上的各种流传、经验贴中。但这并不意味着我们不需要再花时间在这种书上。道理都懂，就是做不好已经成为这个信息通畅的时代的特征之一。正所谓纸上得来终觉浅，绝知此事要躬行。"
-categories: [life, think, book, algorithm]
+categories: [book]
+tags: [think, algorithm, methodology]
+
 ---
 
 *道理都明白，还得靠自己*

@@ -4,7 +4,9 @@ title: "根据前中后序和层序重建二叉树(PAT1020、PAT1043)"
 date: 2013-04-27 22:33
 comments: true
 description: "[《二叉树的遍历（递归、非递归）分析》](/blog/2013/04/27/travsal-binary-tree/)总结了二叉树不同遍历方式的递归和非递归实现，本文则讨论如何针对不同遍历方式的组合重建二叉树。为了简化问题的考虑，假定二叉树中不会出现重复值。列入考虑范围的有前序、中序、后序、层序遍历这四种的组合。前中后序比较常见，而层序则相对特殊一点了。"
-categories: [tech, algorithm, pat]
+categories: [tech]
+tags: [algorithm, pat]
+
 ---
 背景
 ---

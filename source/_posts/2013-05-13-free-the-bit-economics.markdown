@@ -4,7 +4,9 @@ title: "《免费》"
 date: 2013-05-13 00:46
 comments: true
 description: "当然，这种了解层面显然是无法发挥《免费》的效力的。正文安德森所言，那些懂得“免费”将会统摄明日市场并摧毁今日市场的人其实已经走在前面了，而《免费》所能带来的思考能点亮的新的商业模式，还得沉淀到对生活、市场的探索中去。"
-categories: [life, book, think]
+categories: [book]
+tags: [think, economic, internet, infomation]
+
 ---
 
 

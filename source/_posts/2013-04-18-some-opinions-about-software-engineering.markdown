@@ -4,7 +4,9 @@ title: "关于软件工程的一些看法"
 date: 2013-04-18 18:03
 comments: true
 description: "今天在高级软件工程课上，做了一次关于项目经验的展示。展示的主题围绕自己参与的移动互联网团队开发经验展开。借此机会，我整理了一下思路，于是有了以下的slides。没时间码字，就先把slides直接贴上来啦:)"
-categories: [tech, think]
+categories: [tech]
+tags: [think, software_engineering]
+
 ---
 标题党了，其实实际的内容是[自己的项目经验总结和反思]。
 
