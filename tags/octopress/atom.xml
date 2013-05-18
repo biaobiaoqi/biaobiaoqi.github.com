@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: octopress | Biaobiaoqi的博客]]></title>
+  <link href="http://biaobiaoqi.github.com/tags/octopress/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.github.com/"/>
+  <updated>2013-05-18T21:40:57+08:00</updated>
+  <id>http://biaobiaoqi.github.com/</id>
+  <author>
+    <name><![CDATA[Biaobiaoqi]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[在github上搭建octopress博客 mac]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/03/21/building-octopress-in-github-mac/"/>
+    <updated>2013-03-21T23:43:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/03/21/building-octopress-in-github-mac</id>
+    <content type="html"><![CDATA[<p><img src="http://pikipity.github.com/images/post/octopress.jpg"></p>
+
+<p>最早的时候，是看见了<a href="http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/">唐巧大哥的博客</a>，UI上已是觉得耳目一新。后来读到过<a href="http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html">阮一峰的博文</a>，当知道这是搭建在Github这个程序员的facebook上时，更是心头一震，什么时候自己也搭这么个博客呢。直接用github托管代码，完全不用自己租服务器，实在方便。自己之前也有在csdn上维护了一个博客，虽然那已经是一年前的事情了。</p>
+
+<!--more-->
+
+
+<p>深刻的记得，当时想将自己的weibo账户贴到博客页面上，却发现它不支持一般用户嵌入javascript代码:(。这更让我对octopress的感情与日俱增。</p>
+
+<p>今天终于动手啦。自己从网上搜到了很多中文的博客描述如何安装配置octopress，有些博客讲得算是清晰，但终归每台电脑有不同的环境，每个人的叙述也或多或少的主观。最要命的是，我发现好几篇博文所讲述的命令都不太一样，走了不少弯路之后，倒腾了一下午，最终还是官网救了我。这也让我进一步认识到，信息的流通中的失真在所难免，最好的方法还是直接探寻最权威的内容。</p>
+
+<p>如果对octopress不太了解，不用急着动手，首先看看几个概念。（当然，lz现在也并非精通这几点，初来乍到的，先做出来再说，以后不断学习...）</p>
+
+<blockquote><ul>
+<li> Ruby：octopress框架的实现语言。rvm（ruby version manager）是用于管理ruby版本的，rake是ruby中类似于make工具。</li>
+<li> 静态站点生成工具：简单地说，不用数据库，直接生成网页文件。Jekyll就是这样的工具，而octopress是构建于它的上层的框架。</li>
+<li> Git：我主观的认为完虐svn的分布式版本控制工具。git官网貌似被gfw墙了=.=</li>
+<li> <a href="https://github.com/">Github</a>：程序员的Facebook,为程序员托管了很多代码的站点。</li>
+<li> <a href="https://help.github.com/categories/20/articles">Github pages</a>:github推出的，给与程序员自由创造静态网页的功能。支持Jekyll，因此也支持octopress。</li>
+<li> <a href="http://mxcl.github.com/homebrew/">homebrew</a>：mac os下的软件包管理工具，类似于linux下的dpkg。它使用ruby脚本，mac os下自带了ruby。</li>
+<li> <a href="http://octopress.org/">octopress</a> 其官网的help中有搭建octopress的足够的权威指导</li>
+<li><a href="http://www.ibm.com/developerworks/cn/xml/x-cn-yamlintro/">YAML</a>: YAML 试图用一种比 XML 更敏捷的方式，来完成 XML 所完成的任务。在octopress中，是使用yaml做配置文件的书写的。</li>
+</ul>
+</blockquote>
+
+<p>窃以为，最好的学习方式还是从最源头的资料入手。这里仅针对我的配置过程做简单描述，经验浅薄，有差错的地方还请指教:)</p>
+
+<h1>1. 配环境</h1>
+
+<h3>1.0 homebrew</h3>
+
+<p>万事开头难，第一步还是配环境。为了软件包安装的方便，可以先安装好homebrew.</p>
+
+<p><code>
+$ ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
+</code></p>
+
+<p>其使用方法，参见<a href="http://mxcl.github.com/homebrew/">官网</a>。</p>
+
+<h3>1.1 ruby</h3>
+
+<p>mac os x 10.8.1 的系统自带了Ruby，但是版本是1.8.3，而octopress官网所支持的最新版是1.9.3（2013.3），兼容起见，先对版本进行升级。</p>
+
+<p><code>
+$ rvm install 1.9.3 &amp;&amp; rvm use 1.9.3
+$ rvm ruby gems latest
+</code></p>
+
+<p>lz在升级过程中遇到了奇怪的错误，于是又参考<a href="http://wj1s.iteye.com/blog/1118672">另一篇博文</a>，重新安装了rvm，再升级ruby到1.9.3版本。</p>
+
+<h3>1.2 git</h3>
+
+<p>使用homebrew安装git。</p>
+
+<p><code>
+$ brew install git
+</code></p>
+
+<h1>2. 搭建octopress</h1>
+
+<p>环境配置完成后，就可以开始参照<a href="http://octopress.org/help/">官网</a>的指导搭建octopress，并在github建代码仓库，同步管理啦。</p>
+
+<h1>3. 配置</h1>
+
+<p>具体配置同见<a href="http://octopress.org/help/">官网</a>。</p>
+
+<p>在配置_config.yml的过程中要注意，配置项的:后有空格。否则会报错。</p>
+
+<p>另附个性化配置方案：（这些内容大都能在官网文档中找到）</p>
+
+<h3>3.1 <a href="http://icodeit.org/2012/10/how-to-embed-douban-show-in-your-octopress-site/">装饰边栏（加weibo、豆瓣信息)</a></h3>
+
+<h3>3.2 增加weibo评论：  <a href="http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/">友言版</a></h3>
+
+<h3>3.3 CNAME</h3>
+
+<p>如果你有自己的域名，可以CNAME到github pages上。以我的配置为例。</p>
+
+<p>1.在工作目录的source目录下创建CNAME文件，并输入新域名：biaobiaoqi.com</p>
+
+<p>2.在域名管理中，创建或修改A记录，指向204.232.175.78这个地址。</p>
+
+<p>3.创建CNAME记录，www.biaobiaoqi.com -> biaobiaoqi.github.com</p>
+
+<p>网上很多CNAME的操作指南，对于A记录的IP都写着<del>207.97.227.245</del>，或者其他的IP。实际上，这是github pages更换了地址所致。再一次证明<strong>官方文档才是最可靠的！</strong></p>
+
+<h3>3.4 让链接在新窗口中打开</h3>
+
+<p>markdown不支持这一语法，如果要自己用html标签实现，也太得不偿失了。参考<a href="http://www.blogjava.net/lishunli/archive/2013/01/20/394478.html">这篇博文</a>，可以通过将如下代码添加到 {OCTOPRESS_HOME}/source/_includes/custom/head.html文件末尾来实现：</p>
+
+<p>```</p>
+
+<script type="text/javascript">
+function addBlankTargetForLinks () {
+  $('a[href^="http"]').each(function(){
+      $(this).attr('target', '_blank');
+  });
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+  addBlankTargetForLinks();
+});
+</script>
+
+
+<p>```</p>
+
+<h3>3.5 列表的排版</h3>
+
+<p>默认情况，所有文字的排头会对齐，但如果有列表项的情况下也如此，列表头就会冲出文章的主体区块了。</p>
+
+<p>在octopress/sass/custom/_layout.scss文件中找到#$indented-lists: true行，去掉#注释即可。
+<code>
+$indented-lists: true
+</code></p>
+
+<h3>3.6 404ERROR页面</h3>
+
+<p>在ocotopress/source目录下，增加404.markdown，并做出自定义的呃编辑。本博客使用了腾讯公益404，推荐大家使用，为社会贡献一分正能量。<a href="http://www.qq.com/404/">公益404</a></p>
+
+<h2>```</h2>
+
+<p>layout: page
+title: "404 Error"
+date: 2013-4-21 02:35
+comments: false
+sharing: false</p>
+
+<h2>footer: false</h2>
+
+<script type="text/javascript" src="http://www.qq.com/404/search_children.js" charset="utf-8"></script>
+
+
+<p>```</p>
+
+<h1>4. 发博文和在线部署</h1>
+
+<p>同样的，参考<a href="http://octopress.org/help/">官网</a>即可。
+这里大致的列出我所常用到的几条命令：</p>
+
+<p>```</p>
+
+<h1>创建一篇博文</h1>
+
+<p>rake new_post["post title"] #octopress将在工作目录的source/_post/目录下生成相应的markdown文件。然后可以使用mou工具去修改编辑内容。</p>
+
+<h1>生成预览</h1>
+
+<p>rake preview #可以通过localhost:4000在本机实时观察最新的编辑效果。</p>
+
+<h1>在线发布</h1>
+
+<p>rake deploy #完成编辑后，可以将最新的内容部署到github上去。成功后，即可在线访问。</p>
+
+<h1>向github提交源文件更新</h1>
+
+<p>git add -A
+git commit -m "提交内容"
+git push</p>
+
+<p>```</p>
+
+<p>其中推荐到的<a href="http://mouapp.com/">mou</a>，是一个mac下的markdown编辑器。试用后发现有些格式兼容问题，但似乎mac下也只有他这个可视化工具了=。=</p>
+
+<p>另附<a href="http://wowubuntu.com/markdown/index.html">markdown语法</a></p>
+]]></content>
+  </entry>
+  
+</feed>

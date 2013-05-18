@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: pat | Biaobiaoqi的博客]]></title>
+  <link href="http://biaobiaoqi.github.com/tags/pat/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.github.com/"/>
+  <updated>2013-05-18T21:40:57+08:00</updated>
+  <id>http://biaobiaoqi.github.com/</id>
+  <author>
+    <name><![CDATA[Biaobiaoqi]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[根据前中后序和层序重建二叉树(PAT1020、PAT1043)]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/04/27/pat1020-pat1043-rebuild-binary-tree/"/>
+    <updated>2013-04-27T22:33:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/04/27/pat1020-pat1043-rebuild-binary-tree</id>
+    <content type="html"><![CDATA[<h2>背景</h2>
+
+<p><a href="/blog/2013/04/27/travsal-binary-tree/">《二叉树的遍历（递归、非递归）分析》</a>总结了二叉树不同遍历方式的递归和非递归实现，本文则讨论如何针对不同遍历方式的组合重建二叉树。为了简化问题的考虑，假定二叉树中不会出现重复值。列入考虑范围的有前序、中序、后序、层序遍历这四种的组合。前中后序比较常见，而层序则相对特殊一点了。</p>
+
+<p><a href="http://pat.zju.edu.cn/contests/pat-a-practise">PAT</a>的1043和1020题是遍历相关的模板题，正好派上用场。</p>
+
+<!--more-->
+
+
+<h2>中序+前序</h2>
+
+<h5>算法描述：</h5>
+
+<ul>
+<li><p>初始：用前序遍历序列确定根节点，在中序遍历序列中找到该根节点，则左右子树分别为中序中该节点左右的序列。</p></li>
+<li><p>迭代：对各个子树分别执行三步操作，1.在前序序列中找子树的根节点；2。在中序序列中找子树的根节点，并划分开根节点的左右子树；3.根据新生成的左右子树，在前序序列中划分开这些节点，从而得到了两颗子树的前序、中序序列。</p></li>
+</ul>
+
+
+<h5>练习：<a href="http://pat.zju.edu.cn/contests/pat-a-practise/1043">PAT1043:Is It a Binary Search Tree</a></h5>
+
+<h5>题意：</h5>
+
+<p>输入一个树的前序遍历序列，判定这个树是否是二叉搜索树或者BST的镜像树，如果是，则用后序序列输出。</p>
+
+<h5>解题思路：</h5>
+
+<ul>
+<li><p>1.BST很特殊，实质上BST的所有节点的顺序排列就是中序遍历了。</p></li>
+<li><p>2.要检查树是否是BST或者镜像BST，只需按照重建树的思路，在每次重建的过程中做适当检查即可。检查思路是：检查前序遍历序列中，根节点之后的节点排序是否符合BST的二分规则（即前一段都是小于根节点的，后一段都是大于根节点的）。</p></li>
+<li><p>3.最后的输出是后序遍历。过程中其实并不用构建整个树，直接在处理过程中，按后序的方式存储节点到队列中即可。</p></li>
+</ul>
+
+
+<p>有了这些考虑，就可以写出代码啦。详细解题代码见链接<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/pat/advancedlevel/APAT1043.java">PAT1043</a></p>
+
+<h2>中序+后序</h2>
+
+<h5>算法描述：</h5>
+
+<ul>
+<li><p>初始：用后序遍历序列确定根节点，在中序遍历序列中找到该根节点，则左右子树分别为中序中该节点左右的序列。</p></li>
+<li><p>迭代：对各个子树分别执行三步操作，1.在后序序列中找子树的根节点；2。在中序序列中找子树的根节点，并划分开根节点的左右子树；3.根据新生成的左右子树，在后序序列中划分开这些节点，从而得到了两颗子树的后序、中序序列。</p></li>
+</ul>
+
+
+<h5>练习：<a href="http://pat.zju.edu.cn/contests/pat-a-practise/1020">PAT1020:Tree Traversals</a></h5>
+
+<h5>题意：</h5>
+
+<p>输入为一棵二叉树的后序遍历序列和中序遍历序列。求树的前序遍历序列。</p>
+
+<h5>解题思路：</h5>
+
+<ul>
+<li><p>1.有了中序和后序，就能重建树。</p></li>
+<li><p>2.最后的输出是前序遍历。过程中其实并不用构建整个树。直接在处理过程中，按前序的方式存储节点到队列中即可。</p></li>
+</ul>
+
+
+<p>详细解题代码见链接<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/pat/advancedlevel/APAT1020.java">PAT1020</a></p>
+
+<h2>中序+层序</h2>
+
+<h5>算法描述：</h5>
+
+<ul>
+<li><p>初始：用层序遍历确定顶节点，在中序遍历中，利用顶节点划分出左右子树。</p></li>
+<li><p>迭代：对各个子树分别执行三步操作，1.在层序序列中，找出子树节点集合中，最靠前的节点，这个节点即为子树的顶节点；2.在中序序列中找1中得到的顶节点，并划分开顶节点的左右子树；</p></li>
+<li><p>跟（中序+前序）和（中序+后序）不同之处在于没有迭代的第3步，层序是无法直接划分得到左右子树的节点集合的。但这并不妨碍正常的处理。层序是用来找到子树的顶节点的，而顶节点即是所有子树的节点中，在层序遍历中最靠前的节点。</p></li>
+</ul>
+
+
+<h2><del>前序+后序</del></h2>
+
+<p>这个组合是<strong>无法</strong>重建确定的二叉树的。</p>
+
+<p>对于满二叉树，利用子树节点的排列顺序能区分开左右子树节点集合，构建是没有问题的。但一旦有单个叶子的节点存在，则无法确定叶子是左儿子还是右儿子。因为无论是前序还是后序序列，都无法体现单个儿子情况下，儿子的位置。前序会将左右子树的点置于节点之后，后序则是将左右子树的点置于节点之前。</p>
+
+<ul>
+<li>举个简单的反例：</li>
+</ul>
+
+
+<blockquote><p>给出如下的前序序列和后序序列：
+preorder: A, B;
+postorder: B, A</p>
+
+<p>能构建的二叉树有两种可能，1.A是根节点，B是A左儿子； 2.A是根节点， B是A的右儿子。无法得到一个唯一的结果。</p></blockquote>
+
+<h2><del>前序+层序</del></h2>
+
+<p>这个组合也是无法重建确定的二叉树的。同样于后序+层序的情况。</p>
+
+<p>道理跟（前序+后序）的道理一样，无论是前序、后序，还是层序，都是无法确定单个儿子节点情况下儿子节点的顺序。</p>
+
+<h2>总结</h2>
+
+<ul>
+<li>中序遍历配合另外任何一个遍历，能重建二叉树。其他的任意两个序列的组合都不能唯一的确定重建的二叉树。</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[分治、时间空间的权衡:最大合的连续字串问题 (PAT 1007)]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/04/05/maximum-subsequence-sum/"/>
+    <updated>2013-04-05T20:16:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/04/05/maximum-subsequence-sum</id>
+    <content type="html"><![CDATA[<p><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1007">PAT1007</a>：给定一个整数串，找出连续子串中合最大的子串。</p>
+
+<p>《编程珠玑》中用专门的一章对这个问题进行了讲解。（《编程珠玑（第2版）》P73 第8章 算法设计技术）</p>
+
+<p>第一次在PAT上遇到这个题目时，我的思路如下：</p>
+
+<p><del>最简单的淡然是一个三层循环咯，O(n3)，肯定会超时。节省时间的话，用动态规划吧。但简单的动态规划，显然是会超出内存限制的。有没有更巧妙的子问题划分方法呢？</del>先找到子问题：因为要求的串必须连续，分治的时候需要考虑如何延续这个连续性，那么每个子问题中就得考虑找出三个串：1.即左端连续的最大串，2.右端连续的最大串，3.整个串中的最大串.<del>由于每个问题都有三个量要维护，难道我得造出三个表来？卡主:(</del></p>
+
+<!--more-->
+
+
+<p>《编程珠玑》列出了性能上依次递进的四个算法。这里我结合个人理解和感悟做一些阐释。</p>
+
+<ul>
+<li>1.粗暴的brute forse。三层循环嵌套，据说当n 为100000的时候，就需要运行15天时间=.=</li>
+</ul>
+
+
+<p>```
+maxsofar = 0
+for i = 0 [0, n)</p>
+
+<pre><code>for j = [i, n)
+    sum = 0;
+    for k = [i, j]
+     sum += x[k]
+     /*sum is sum of x[i..j]*/
+     maxsofar = max(maxsofar, sum)
+</code></pre>
+
+<p>```</p>
+
+<ul>
+<li>2.针对第一个算法做出了优化。利用零时变量保存状态，避免了过多的重复操作，即所谓的<strong>memoization思想</strong>。时间复杂度下降到O(n*logn)。不过这份代码在PAT的OJ上仍然会超时。</li>
+</ul>
+
+
+<p>```
+maxsofar = 0;
+for i = [0, n)</p>
+
+<pre><code>sum = 0;
+for j = [i, n)
+    sum += x[j]
+    /* sum is sum of x[i..j]*/
+    max sofar = max(maxsofar, sum)
+</code></pre>
+
+<p>```</p>
+
+<p>相比之下，动态规划的策略也是有memoization的思想在的，不过，在这里用DP将会创建一张很大的表。。。超出内存限定。</p>
+
+<ul>
+<li><p>3.分治算法</p>
+
+<p>  其实之前我自己在思考DP更好的子问题划分时，已经考虑到了这种分治策略。但它的实现，<strong>并非需要DP支持</strong>。</p>
+
+<p>  divide：将串平均分为两段，如下代码第6行。分别处理两个子串，并拼接计算。</p>
+
+<p>  conquer： 计算1.自身包含左端的最大子串；2.包含右端的最大子串；（这两个子串用于与其他子串拼接）；3.自身的最大子串。</p></li>
+</ul>
+
+
+<p>```
+float maxsum3(l, u)</p>
+
+<pre><code>if (l &gt; u) /* zero elements*/
+    return 0
+if (l == u) /* one element*/
+    return max (0, x[l]);
+m = (1 + u) / 2
+
+/* find max crossing to left */
+lmax = sum = 0
+for (i = m; i &gt;= 1; i--)
+    sum += x[i]
+lmax = max(lmax, sum)
+
+/* find max croosing to right */
+rmax = sum = 0;
+for i = (m, u]
+    sum += x[i]
+rmax = max(rmax, sum)
+
+return max(lmax+rmax, maxsum3(l, m), maxsum3(m+1, u))   
+</code></pre>
+
+<p>```</p>
+
+<ul>
+<li><p>4.扫描算法</p>
+
+<p>  类似于<strong>数学归纳法</strong>的思想。从串的最左端开始扫描。对于子串[0, k],其最大子串要么存在于[0, k-1]中而不包含[k]，称其为maxsofar，要么包含[k]，称其maxendingright。</p>
+
+<p>  maxsofar和maxendingright是可能重合的。maxendingright的作用在于对[0,k+1]的子串而言，新的元素[k+1]可以与之结合，从而产生可能的新的子串。</p>
+
+<p>  如果[k+1]本身就是负数呢？不要紧，将[k+1]加入到maxendingright的过程本身就是试错以产生可能的过程。当maxendingright降到0以下时，放弃掉这一子串就好了，因为无论如何扩张，它都是会拖后退的。别忘了，我们还维护着maxsofar，它记录最大的子串。有点绕，但是可以严格的证明算法的正确性。</p>
+
+<p>  伪代码如下：</p></li>
+</ul>
+
+
+<p>```
+maxsofa = 0
+maxendingright = 0
+for i = [0, n)</p>
+
+<pre><code>/* invariant: maxendingright and maxsofar are accurate for x[0..i-1]*/
+maxendingright = max(maxendingright + x[i], 0)
+maxsofar = max(maxsofar, maxendingright)
+</code></pre>
+
+<p>```</p>
+
+<p>根据这个思路，写出<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/pat/advancedlevel/APAT1007.java">代码</a>，一遍AC:)</p>
+
+<h2>总结：</h2>
+
+<ul>
+<li>保存状态，避免重复计算：在算法整体框架没有大的优化的情况下，时间和空间的trade-off或许会有奇效。memoization本身就是一种用空间换时间的思想，而DP中用一种方式实现了这种思想。不过不要被DP算法所禁锢。因为，这个trade-off的实现是很多变的，就像这题的第2种算法。</li>
+<li>分治：它的重要性不必多说了。同样的，DP中有分治的思想，但分治本身也是非常灵活的。</li>
+<li>数学归纳证明，对算法的设计和正确性佐证很有帮助。话说它也类似于分治的思想呢。</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[PAT Advanced Level (1) easy problems]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/04/04/pat-advanced-level-1-easy-problems/"/>
+    <updated>2013-04-04T20:58:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/04/04/pat-advanced-level-1-easy-problems</id>
+    <content type="html"><![CDATA[<p><img class="left" src="http://visualcaffeine.com/ws/wp-content/uploads/2012/04/computer_guy.jpg" title="Place Kitten #2" ></p>
+
+<p>今天做的这批题目，总的来说几乎不需要数据结构基础。几个小时刷完。</p>
+
+<blockquote><ul>
+<li>1001: 数字的格式转换。第一次做的时候，将正负数分两种情况处理了，其实负数可以拆成正数加上一个负号。太简单的道理，竟然没注意。另外，Java完全可以使用NumberFormat实现格式转换。好简单的说。</li>
+</ul>
+</blockquote>
+
+<!-- more -->
+
+
+<blockquote><ul>
+<li><p>1002：一元多项式求导问题。有三点需要注意：1.输出中的小数精确的位数；2.浮点数操作过程中需要使用到eps做判定；<em>3.在我的实现中，主循环逻辑中，将判定游标越界的逻辑统一的提出到最外层，让代码更加简洁，利于维护。</em></p></li>
+<li><p>1005: 简单的hash。注意Java可以直接实现int转string，string转int。</p></li>
+<li><p>1006: 简单的找最大最小。用到了Java中String的split方法划分子串和Integer.parseInt()转String为int。</p></li>
+<li><p>1008: 纯水题。</p></li>
+<li><p>1009: 一元多项式相乘。基于桶排序的思想，将子项相乘的结果加到数组中去实现。第一次提交时，算错了“桶”的大小。。</p></li>
+<li><p>1011: 水题，求组最大值的问题。</p></li>
+<li><p>1027: 水题，hash求解。</p></li>
+</ul>
+</blockquote>
+
+<h2>资料</h2>
+
+<p><a href="http://pat.zju.edu.cn/contests/pat-a-practise">题目列表</a></p>
+
+<p><a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/pat/advancedlevel">我的代码</a></p>
+
+<h2>PS</h2>
+
+<p>除了这几道题，其他的题目似乎都需要树、图、DP的思想。明天开干！</p>
+
+<p>用了那么久eclipse，其实对eclipse的掌握并不好。比如他对（）和“”等的支持方式：</p>
+
+<blockquote><p><strong>只需要输入左单边括号，即可获得一个完整的括号，并定位到括号内输入内容。完成内容输入后，回车即可跳到反括号外，继续输入。同理于调用方法时参数的输入等。</strong></p></blockquote>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[PAT Basic Level 1001-1010]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/04/04/pat-basic-level-1001-1010/"/>
+    <updated>2013-04-04T01:50:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/04/04/pat-basic-level-1001-1010</id>
+    <content type="html"><![CDATA[<h2>背景</h2>
+
+<p>算法开始练手了。从最简单的做起。</p>
+
+<p>由于实验室用的是Java，为了节省时间，也为了更好的掌握这门语言，我先用Java来实现了。在并非以比赛为目的的前提下，这并不妨碍什么，唯一的可能就是没有足够的参考代码咯。:(话说，自己也并不是特别喜欢一些“简洁”的代码。我现在的手速是不快，但过于简介的南与维护的代码，也不在我的目标之列。</p>
+
+<!--more-->
+
+
+<h2>资料</h2>
+
+<p><strong><a href="http://pat.zju.edu.cn/contests/pat-b-practise">题目看这里</a></strong></p>
+
+<p>我把所有AC过的<strong><a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/practice">解题代码都贴到了我的github</a></strong>上，可以直接去那边儿看，就不贴到blog里啦。（确切的说，这个博客本身就是在github里，不是么:)）</p>
+
+<h2>总结：</h2>
+
+<blockquote><ul>
+<li><p>1001：第一次用Java在PAT上提交，遇到了【返回非零】的问题，两个原因：1.需要去掉package信息；2.程序跑异常也会出现这个问题。</p></li>
+<li><p>1002：简单的将输入加起来，再对应到的显示出来。</p></li>
+<li><p>1003：<em>题目像是用自动机构建的字符串？理论基础不够，没想太明白，或许需要个词法分析器？</em> 这里是利用字符串的统计规律计数字符串出现个数的出来的。在识别的过程中，有些小坑需要注意。</p></li>
+<li><p>1004：求最大最小，想必是一道不能更水的题了=。=</p></li>
+<li><p>1005：各个元素间互相影响。如果简单的全部计算覆盖数，当然能解出来，但显然不是最优的方法。需要尽量介绍重复计算的过程。<em>感觉解题方式没有美感</em></p></li>
+<li><p>1006：转换格式。无坑。</p></li>
+<li><p>1007：素数相关的题目。按照最原始的素数原理，固然可以解出，但优化的路还很长。参考了这篇博客（<a href="http://www.cnblogs.com/luluping/archive/2010/03/03/1677552.html">《浅析求素数算法》介绍的挺有味道的</a>）的内容。</p></li>
+<li><p>1008：只要注意别先把所有数据都存到数组，再做操作，就ok了。无坑。</p></li>
+<li><p>1009：充分利用了Java的String操作，无坑。</p></li>
+<li><p>1010：有坑。需要考虑将无input的case输出为0 0.花了我很长时间。不想再纠结这个题目本身的正确性了。。</p></li>
+</ul>
+</blockquote>
+
+<h2>PS：</h2>
+
+<p>写代码的速度确实太慢了。得练。一个是敲代码本身的速度。一个是思维的速度。</p>
+
+<p>到现在为止，还没有找到一个顺手的排版工具。此文出自mou，但不知道是不是因为我的姿势不对，对所有格式的支持并非那么完美。有空研究下，好让简陋的排版有脸见人吧。</p>
+]]></content>
+  </entry>
+  
+</feed>
