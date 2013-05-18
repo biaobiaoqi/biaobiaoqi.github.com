@@ -249,7 +249,7 @@ probe side经过hash后对比hash表，做正确的链接。
 当然，build side也可能被复制多分，以提高效率。
 
 
-[本文演示slides下载链接，点击获取](http://dl.dropboxusercontent.com/u/64021093/pdw/Split%20Query%20Processing%20in%20Polybase.pptx)
+[本文演示slides下载链接，点击获取](https://dl.dropboxusercontent.com/u/64021093/pdw/Split%20Query%20Processing%20in%20Polybase%20%5Brevised%20on%202013-05-18%5D.pptx)
 
 
 引用
