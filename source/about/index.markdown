@@ -25,4 +25,4 @@ footer: true
 
 我希望做一个现实的理想主义者，做一个互联网时代的手艺人，在世界留下一些脚印。于是，有了这个博客。将来，还会有更多的有趣的products, let's c ;)
 
-我的联系方式是 shenyapeng#gmail#com，志同道合的朋友们不吝赐教
+我的联系方式是 `echo 'c2hlbnlhcGVuZ0BnbWFpbC5jb20K' | base64 -D`，志同道合的朋友们不吝赐教
