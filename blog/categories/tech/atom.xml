@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tech | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-05-17T01:39:15+08:00</updated>
+  <updated>2013-05-18T18:05:27+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -12,6 +12,146 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[分布式系统：HadoopDB]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/05/18/a-hybrid-system-hadoopdb/"/>
+    <updated>2013-05-18T17:58:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/05/18/a-hybrid-system-hadoopdb</id>
+    <content type="html"><![CDATA[<p>HadoopDB是一个Mapreduce和传统关系型数据库的结合方案，以充分利用RDBMS的性能和Hadoop的容错、分布特性。2009年被Yale大学教授Abadi提出，继而商业化为<a href="http://hadapt.com/">Hadapt</a>，据称从VC那儿拉到了10M刀投资。</p>
+
+<p>本文是对HadoopDB论文的总结。其中不免掺杂些自己的不成熟想法，更详细的内容，还请参见原论文 HadoopDB: An Architectural Hybrid of MapReduce and DBMS Technologies for Analytical Workloads</p>
+
+<!--more-->
+
+
+<h2>背景</h2>
+
+<h3>PB级数据分析系统的能力要求</h3>
+
+<ul>
+<li>1.性能：节省开销（时间、资金）。</li>
+<li>2.容错：数据分析系统（即使有故障节点也能顺利工作） 不同于 事务型的系统的容错（从故障中无损的恢复）。节点故障时，原来的查询操作不需要重启。</li>
+<li>3.在异构型环境中运行的能力。即使所有机器硬件一样，但某些机器在某些时候可能因为软件原因、网络原因也会性能降低。分布式操作时，要防止木桶效应。</li>
+<li>4.活的查询接口：商业化的数据分析一般建立在SQL查询上，UDF等non-SQL也是需要的。</li>
+</ul>
+
+
+<h5>并行数据库</h5>
+
+<p>满足1,4：利用分表的方式，扩散到多个节点。一般情况下节点最多为几十个，原因：1.每增加一个节点，失败率增加；2.并行数据库假设各个机器都是同质化的，但这往往不太可能</p>
+
+<h5>MapReduce</h5>
+
+<p>满足2,3,4：Map - repartition - Reduce原为非结构化数据，但也可以适用结构化数据。</p>
+
+<ul>
+<li>2：（错误节点）动态的规划节点执行任务，将错误节点任务发放给新节点。并在本地磁盘做checkpoint存储。</li>
+<li>3：（拖后腿的节点）节点间冗余的执行。执行慢的节点的任务交付给速度快的节点执行</li>
+<li>4：Hive的HQL</li>
+</ul>
+
+
+<h5>HadoopDB</h5>
+
+<p>融合了之前两者，做出系统层面的改进，而不仅仅是语言和接口层面。</p>
+
+<p>这三个解决方案对4个指标的关系如下图：</p>
+
+<p><img src="http://dl.dropboxusercontent.com/u/64021093/hadoopDB/QQ%E6%88%AA%E5%9B%BE20130518135802.png" title="compare" alt="alt compare" /></p>
+
+<h2>架构</h2>
+
+<p>如图
+<img src="https://dl.dropboxusercontent.com/u/64021093/hadoopDB/QQ%E6%88%AA%E5%9B%BE20130518135814.png" title="framework" alt="alt framework" /></p>
+
+<h2>组件介绍</h2>
+
+<h5>Databse Connector:</h5>
+
+<ul>
+<li><p>作用</p>
+
+<p>  hadoopTask &lt;-通信-> Database on Node。节点上的DB类似于Hadoop中的数据源HDFS</p></li>
+<li><p>实现</p>
+
+<p>  扩展了Hadoop的InputFormat</p></li>
+</ul>
+
+
+<h5>Catalog：</h5>
+
+<ul>
+<li><p>作用</p>
+
+<p>  1.链接参数如数据库位置，驱动类和证书；
+  2.一些元数据如数据簇中的数据集，副本的位置，数据的划分。</p></li>
+<li><p>实现</p>
+
+<p>  HDFS上的XML。希望做成类似于Hadoop的namenode。</p></li>
+</ul>
+
+
+<h5>Data Loader</h5>
+
+<ul>
+<li><p>作用</p>
+
+<p>  将数据合理划分，从HDFS转移到节点中的本地文件系统</p></li>
+<li><p>实现</p>
+
+<p>  global hasher：分配到不同节点
+  local hasher：继续划分为不同chunks</p></li>
+</ul>
+
+
+<h5>SQL to MapReduce to SQL (SMS) Planner</h5>
+
+<ul>
+<li><p>作用</p>
+
+<p>  将HiveQL转化为特定执行计划，在hadoopDB中执行。原则是尽可能的讲操作推向节点上的RDBMS上执行，以此提高执行效率。</p></li>
+<li><p>实现</p>
+
+<p>  扩展Hive：
+  1.执行查找前，用catolog的信息更新Hive的metastore，定向到节点数据库的表
+  2.执行前，决定划分的键；将部分查询语句推到节点的数据库中执行。</p></li>
+</ul>
+
+
+<h2>示例</h2>
+
+<p>示例参见下文的slides</p>
+
+<h2>总结</h2>
+
+<p>对hadoopDB的一些看法：</p>
+
+<ul>
+<li>其数据预处理代价过高：数据需要进行两次分解和一次数据库加载操作后才能使用；</li>
+<li>将查询推向数据库层只是少数情况，大多数情况下，查询仍由Ｈive完成．因为数据仓库查询往往涉及多表连接，由于连接的复杂性，难以做到在保持连接数据局部性的前提下将参与连接的多张表按照某种模式划分；</li>
+<li>维护代价过高．不仅要维护Ｈadoop系统，还要维护每个数据库节点；</li>
+<li>目前尚不支持数据的动态划分，需要手工一次划分好</li>
+</ul>
+
+
+<p>slides：</p>
+
+<script async class="speakerdeck-embed" data-id="48c5e680a1ab0130e1707290244918d4" data-ratio="1.33333333333333" src="http://biaobiaoqi.github.com//speakerdeck.com/assets/embed.js"></script>
+
+
+<p>下载slides，请猛戳<a href="https://dl.dropboxusercontent.com/u/64021093/hadoopDB/%5B2013-05-18%5DHadoopDB.pptx">这里</a></p>
+
+<h2>参考资料</h2>
+
+<ul>
+<li>HadoopDB: An Architectural Hybrid of MapReduce and DBMS Technologies for Analytical Workloads</li>
+<li><a href="http://dbanotes.net/database/hadoopdb.html">《HadoopDB》 —— Fenng</a></li>
+<li>《架构大数据:挑战、现状与展望》 计算机学报 王珊</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[iOS的安全性和越狱]]></title>
@@ -614,116 +754,6 @@ nameserver 172.21.1.1</p>
 
 
 <p>图片引用自 ：<a href="http://networking.ctocio.com.cn/tips/110/8897610.shtml">解析虚拟VMware三种网络模式根本区别</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[根据前中后序和层序重建二叉树(PAT1020、PAT1043)]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/04/27/pat1020-pat1043-rebuild-binary-tree/"/>
-    <updated>2013-04-27T22:33:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/04/27/pat1020-pat1043-rebuild-binary-tree</id>
-    <content type="html"><![CDATA[<h2>背景</h2>
-
-<p><a href="/blog/2013/04/27/travsal-binary-tree/">《二叉树的遍历（递归、非递归）分析》</a>总结了二叉树不同遍历方式的递归和非递归实现，本文则讨论如何针对不同遍历方式的组合重建二叉树。为了简化问题的考虑，假定二叉树中不会出现重复值。列入考虑范围的有前序、中序、后序、层序遍历这四种的组合。前中后序比较常见，而层序则相对特殊一点了。</p>
-
-<p><a href="http://pat.zju.edu.cn/contests/pat-a-practise">PAT</a>的1043和1020题是遍历相关的模板题，正好派上用场。</p>
-
-<!--more-->
-
-
-<h2>中序+前序</h2>
-
-<h5>算法描述：</h5>
-
-<ul>
-<li><p>初始：用前序遍历序列确定根节点，在中序遍历序列中找到该根节点，则左右子树分别为中序中该节点左右的序列。</p></li>
-<li><p>迭代：对各个子树分别执行三步操作，1.在前序序列中找子树的根节点；2。在中序序列中找子树的根节点，并划分开根节点的左右子树；3.根据新生成的左右子树，在前序序列中划分开这些节点，从而得到了两颗子树的前序、中序序列。</p></li>
-</ul>
-
-
-<h5>练习：<a href="http://pat.zju.edu.cn/contests/pat-a-practise/1043">PAT1043:Is It a Binary Search Tree</a></h5>
-
-<h5>题意：</h5>
-
-<p>输入一个树的前序遍历序列，判定这个树是否是二叉搜索树或者BST的镜像树，如果是，则用后序序列输出。</p>
-
-<h5>解题思路：</h5>
-
-<ul>
-<li><p>1.BST很特殊，实质上BST的所有节点的顺序排列就是中序遍历了。</p></li>
-<li><p>2.要检查树是否是BST或者镜像BST，只需按照重建树的思路，在每次重建的过程中做适当检查即可。检查思路是：检查前序遍历序列中，根节点之后的节点排序是否符合BST的二分规则（即前一段都是小于根节点的，后一段都是大于根节点的）。</p></li>
-<li><p>3.最后的输出是后序遍历。过程中其实并不用构建整个树，直接在处理过程中，按后序的方式存储节点到队列中即可。</p></li>
-</ul>
-
-
-<p>有了这些考虑，就可以写出代码啦。详细解题代码见链接<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/pat/advancedlevel/APAT1043.java">PAT1043</a></p>
-
-<h2>中序+后序</h2>
-
-<h5>算法描述：</h5>
-
-<ul>
-<li><p>初始：用后序遍历序列确定根节点，在中序遍历序列中找到该根节点，则左右子树分别为中序中该节点左右的序列。</p></li>
-<li><p>迭代：对各个子树分别执行三步操作，1.在后序序列中找子树的根节点；2。在中序序列中找子树的根节点，并划分开根节点的左右子树；3.根据新生成的左右子树，在后序序列中划分开这些节点，从而得到了两颗子树的后序、中序序列。</p></li>
-</ul>
-
-
-<h5>练习：<a href="http://pat.zju.edu.cn/contests/pat-a-practise/1020">PAT1020:Tree Traversals</a></h5>
-
-<h5>题意：</h5>
-
-<p>输入为一棵二叉树的后序遍历序列和中序遍历序列。求树的前序遍历序列。</p>
-
-<h5>解题思路：</h5>
-
-<ul>
-<li><p>1.有了中序和后序，就能重建树。</p></li>
-<li><p>2.最后的输出是前序遍历。过程中其实并不用构建整个树。直接在处理过程中，按前序的方式存储节点到队列中即可。</p></li>
-</ul>
-
-
-<p>详细解题代码见链接<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/pat/advancedlevel/APAT1020.java">PAT1020</a></p>
-
-<h2>中序+层序</h2>
-
-<h5>算法描述：</h5>
-
-<ul>
-<li><p>初始：用层序遍历确定顶节点，在中序遍历中，利用顶节点划分出左右子树。</p></li>
-<li><p>迭代：对各个子树分别执行三步操作，1.在层序序列中，找出子树节点集合中，最靠前的节点，这个节点即为子树的顶节点；2.在中序序列中找1中得到的顶节点，并划分开顶节点的左右子树；</p></li>
-<li><p>跟（中序+前序）和（中序+后序）不同之处在于没有迭代的第3步，层序是无法直接划分得到左右子树的节点集合的。但这并不妨碍正常的处理。层序是用来找到子树的顶节点的，而顶节点即是所有子树的节点中，在层序遍历中最靠前的节点。</p></li>
-</ul>
-
-
-<h2><del>前序+后序</del></h2>
-
-<p>这个组合是<strong>无法</strong>重建确定的二叉树的。</p>
-
-<p>对于满二叉树，利用子树节点的排列顺序能区分开左右子树节点集合，构建是没有问题的。但一旦有单个叶子的节点存在，则无法确定叶子是左儿子还是右儿子。因为无论是前序还是后序序列，都无法体现单个儿子情况下，儿子的位置。前序会将左右子树的点置于节点之后，后序则是将左右子树的点置于节点之前。</p>
-
-<ul>
-<li>举个简单的反例：</li>
-</ul>
-
-
-<blockquote><p>给出如下的前序序列和后序序列：
-preorder: A, B;
-postorder: B, A</p>
-
-<p>能构建的二叉树有两种可能，1.A是根节点，B是A左儿子； 2.A是根节点， B是A的右儿子。无法得到一个唯一的结果。</p></blockquote>
-
-<h2><del>前序+层序</del></h2>
-
-<p>这个组合也是无法重建确定的二叉树的。同样于后序+层序的情况。</p>
-
-<p>道理跟（前序+后序）的道理一样，无论是前序、后序，还是层序，都是无法确定单个儿子节点情况下儿子节点的顺序。</p>
-
-<h2>总结</h2>
-
-<ul>
-<li>中序遍历配合另外任何一个遍历，能重建二叉树。其他的任意两个序列的组合都不能唯一的确定重建的二叉树。</li>
-</ul>
-
 ]]></content>
   </entry>
   

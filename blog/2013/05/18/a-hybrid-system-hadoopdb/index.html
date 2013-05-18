@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>PAT Basic Level 1001-1010 - Biaobiaoqi的博客</title>
+  <title>分布式系统：HadoopDB - Biaobiaoqi的博客</title>
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="算法题，PAT测试，计算机算法">
+  <meta name="description" content="HadoopDB是一个Mapreduce和传统关系型数据库的结合方案，以充分利用RDBMS的性能和Hadoop的容错、分布特性。2009年被Yale大学教授Abadi提出，继而商业化为[Hadapt](http://hadapt.com/)，据称从VC那儿拉到了10M刀投资。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://biaobiaoqi.github.com/blog/2013/04/04/pat-basic-level-1001-1010">
+  <link rel="canonical" href="http://biaobiaoqi.github.com/blog/2013/05/18/a-hybrid-system-hadoopdb">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Biaobiaoqi的博客" type="application/atom+xml">
@@ -102,7 +102,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
   <header>
     
-      <h1 class="entry-title">PAT Basic Level 1001-1010</h1>
+      <h1 class="entry-title">分布式系统：HadoopDB</h1>
     
     
       <p class="meta">
@@ -118,7 +118,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
 
 
-<time datetime="2013-04-04T01:50:00+08:00" pubdate data-updated="true">Apr 4<span>th</span>, 2013</time>
+<time datetime="2013-05-18T17:58:00+08:00" pubdate data-updated="true">May 18<span>th</span>, 2013</time>
         
 
 
@@ -128,42 +128,138 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   </header>
 
 
-<div class="entry-content"><h2>背景</h2>
+<div class="entry-content"><p>HadoopDB是一个Mapreduce和传统关系型数据库的结合方案，以充分利用RDBMS的性能和Hadoop的容错、分布特性。2009年被Yale大学教授Abadi提出，继而商业化为<a href="http://hadapt.com/">Hadapt</a>，据称从VC那儿拉到了10M刀投资。</p>
 
-<p>算法开始练手了。从最简单的做起。</p>
-
-<p>由于实验室用的是Java，为了节省时间，也为了更好的掌握这门语言，我先用Java来实现了。在并非以比赛为目的的前提下，这并不妨碍什么，唯一的可能就是没有足够的参考代码咯。:(话说，自己也并不是特别喜欢一些“简洁”的代码。我现在的手速是不快，但过于简介的南与维护的代码，也不在我的目标之列。</p>
+<p>本文是对HadoopDB论文的总结。其中不免掺杂些自己的不成熟想法，更详细的内容，还请参见原论文 HadoopDB: An Architectural Hybrid of MapReduce and DBMS Technologies for Analytical Workloads</p>
 
 <!--more-->
 
 
-<h2>资料</h2>
+<h2>背景</h2>
 
-<p><strong><a href="http://pat.zju.edu.cn/contests/pat-b-practise">题目看这里</a></strong></p>
+<h3>PB级数据分析系统的能力要求</h3>
 
-<p>我把所有AC过的<strong><a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/practice">解题代码都贴到了我的github</a></strong>上，可以直接去那边儿看，就不贴到blog里啦。（确切的说，这个博客本身就是在github里，不是么:)）</p>
-
-<h2>总结：</h2>
-
-<blockquote><ul>
-<li><p>1001：第一次用Java在PAT上提交，遇到了【返回非零】的问题，两个原因：1.需要去掉package信息；2.程序跑异常也会出现这个问题。</p></li>
-<li><p>1002：简单的将输入加起来，再对应到的显示出来。</p></li>
-<li><p>1003：<em>题目像是用自动机构建的字符串？理论基础不够，没想太明白，或许需要个词法分析器？</em> 这里是利用字符串的统计规律计数字符串出现个数的出来的。在识别的过程中，有些小坑需要注意。</p></li>
-<li><p>1004：求最大最小，想必是一道不能更水的题了=。=</p></li>
-<li><p>1005：各个元素间互相影响。如果简单的全部计算覆盖数，当然能解出来，但显然不是最优的方法。需要尽量介绍重复计算的过程。<em>感觉解题方式没有美感</em></p></li>
-<li><p>1006：转换格式。无坑。</p></li>
-<li><p>1007：素数相关的题目。按照最原始的素数原理，固然可以解出，但优化的路还很长。参考了这篇博客（<a href="http://www.cnblogs.com/luluping/archive/2010/03/03/1677552.html">《浅析求素数算法》介绍的挺有味道的</a>）的内容。</p></li>
-<li><p>1008：只要注意别先把所有数据都存到数组，再做操作，就ok了。无坑。</p></li>
-<li><p>1009：充分利用了Java的String操作，无坑。</p></li>
-<li><p>1010：有坑。需要考虑将无input的case输出为0 0.花了我很长时间。不想再纠结这个题目本身的正确性了。。</p></li>
+<ul>
+<li>1.性能：节省开销（时间、资金）。</li>
+<li>2.容错：数据分析系统（即使有故障节点也能顺利工作） 不同于 事务型的系统的容错（从故障中无损的恢复）。节点故障时，原来的查询操作不需要重启。</li>
+<li>3.在异构型环境中运行的能力。即使所有机器硬件一样，但某些机器在某些时候可能因为软件原因、网络原因也会性能降低。分布式操作时，要防止木桶效应。</li>
+<li>4.活的查询接口：商业化的数据分析一般建立在SQL查询上，UDF等non-SQL也是需要的。</li>
 </ul>
-</blockquote>
 
-<h2>PS：</h2>
 
-<p>写代码的速度确实太慢了。得练。一个是敲代码本身的速度。一个是思维的速度。</p>
+<h5>并行数据库</h5>
 
-<p>到现在为止，还没有找到一个顺手的排版工具。此文出自mou，但不知道是不是因为我的姿势不对，对所有格式的支持并非那么完美。有空研究下，好让简陋的排版有脸见人吧。</p>
+<p>满足1,4：利用分表的方式，扩散到多个节点。一般情况下节点最多为几十个，原因：1.每增加一个节点，失败率增加；2.并行数据库假设各个机器都是同质化的，但这往往不太可能</p>
+
+<h5>MapReduce</h5>
+
+<p>满足2,3,4：Map - repartition - Reduce原为非结构化数据，但也可以适用结构化数据。</p>
+
+<ul>
+<li>2：（错误节点）动态的规划节点执行任务，将错误节点任务发放给新节点。并在本地磁盘做checkpoint存储。</li>
+<li>3：（拖后腿的节点）节点间冗余的执行。执行慢的节点的任务交付给速度快的节点执行</li>
+<li>4：Hive的HQL</li>
+</ul>
+
+
+<h5>HadoopDB</h5>
+
+<p>融合了之前两者，做出系统层面的改进，而不仅仅是语言和接口层面。</p>
+
+<p>这三个解决方案对4个指标的关系如下图：</p>
+
+<p><img src="http://dl.dropboxusercontent.com/u/64021093/hadoopDB/QQ%E6%88%AA%E5%9B%BE20130518135802.png" title="compare" alt="alt compare" /></p>
+
+<h2>架构</h2>
+
+<p>如图
+<img src="https://dl.dropboxusercontent.com/u/64021093/hadoopDB/QQ%E6%88%AA%E5%9B%BE20130518135814.png" title="framework" alt="alt framework" /></p>
+
+<h2>组件介绍</h2>
+
+<h5>Databse Connector:</h5>
+
+<ul>
+<li><p>作用</p>
+
+<p>  hadoopTask &lt;-通信-> Database on Node。节点上的DB类似于Hadoop中的数据源HDFS</p></li>
+<li><p>实现</p>
+
+<p>  扩展了Hadoop的InputFormat</p></li>
+</ul>
+
+
+<h5>Catalog：</h5>
+
+<ul>
+<li><p>作用</p>
+
+<p>  1.链接参数如数据库位置，驱动类和证书；
+  2.一些元数据如数据簇中的数据集，副本的位置，数据的划分。</p></li>
+<li><p>实现</p>
+
+<p>  HDFS上的XML。希望做成类似于Hadoop的namenode。</p></li>
+</ul>
+
+
+<h5>Data Loader</h5>
+
+<ul>
+<li><p>作用</p>
+
+<p>  将数据合理划分，从HDFS转移到节点中的本地文件系统</p></li>
+<li><p>实现</p>
+
+<p>  global hasher：分配到不同节点
+  local hasher：继续划分为不同chunks</p></li>
+</ul>
+
+
+<h5>SQL to MapReduce to SQL (SMS) Planner</h5>
+
+<ul>
+<li><p>作用</p>
+
+<p>  将HiveQL转化为特定执行计划，在hadoopDB中执行。原则是尽可能的讲操作推向节点上的RDBMS上执行，以此提高执行效率。</p></li>
+<li><p>实现</p>
+
+<p>  扩展Hive：
+  1.执行查找前，用catolog的信息更新Hive的metastore，定向到节点数据库的表
+  2.执行前，决定划分的键；将部分查询语句推到节点的数据库中执行。</p></li>
+</ul>
+
+
+<h2>示例</h2>
+
+<p>示例参见下文的slides</p>
+
+<h2>总结</h2>
+
+<p>对hadoopDB的一些看法：</p>
+
+<ul>
+<li>其数据预处理代价过高：数据需要进行两次分解和一次数据库加载操作后才能使用；</li>
+<li>将查询推向数据库层只是少数情况，大多数情况下，查询仍由Ｈive完成．因为数据仓库查询往往涉及多表连接，由于连接的复杂性，难以做到在保持连接数据局部性的前提下将参与连接的多张表按照某种模式划分；</li>
+<li>维护代价过高．不仅要维护Ｈadoop系统，还要维护每个数据库节点；</li>
+<li>目前尚不支持数据的动态划分，需要手工一次划分好</li>
+</ul>
+
+
+<p>slides：</p>
+
+<script async class="speakerdeck-embed" data-id="48c5e680a1ab0130e1707290244918d4" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+
+
+<p>下载slides，请猛戳<a href="https://dl.dropboxusercontent.com/u/64021093/hadoopDB/%5B2013-05-18%5DHadoopDB.pptx">这里</a></p>
+
+<h2>参考资料</h2>
+
+<ul>
+<li>HadoopDB: An Architectural Hybrid of MapReduce and DBMS Technologies for Analytical Workloads</li>
+<li><a href="http://dbanotes.net/database/hadoopdb.html">《HadoopDB》 —— Fenng</a></li>
+<li>《架构大数据:挑战、现状与展望》 计算机学报 王珊</li>
+</ul>
+
 </div>
 
 
@@ -186,12 +282,12 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
 
 
-<time datetime="2013-04-04T01:50:00+08:00" pubdate data-updated="true">Apr 4<span>th</span>, 2013</time>
+<time datetime="2013-05-18T17:58:00+08:00" pubdate data-updated="true">May 18<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/algorithm/'>algorithm</a>, <a class='category' href='/blog/categories/java/'>java</a>, <a class='category' href='/blog/categories/pat/'>pat</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+    <a class='category' href='/blog/categories/distributed/'>distributed</a>, <a class='category' href='/blog/categories/hadoop/'>hadoop</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
   
 </span>
 
@@ -226,10 +322,8 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/03/21/building-octopress-in-github-mac/" title="Previous Post: 在github上搭建octopress博客 mac">&laquo; 在github上搭建octopress博客 mac</a>
+        <a class="basic-alignment left" href="/blog/2013/05/17/jail-break-your-ios/" title="Previous Post: iOS的安全性和越狱">&laquo; iOS的安全性和越狱</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/04/04/pat-advanced-level-1-easy-problems/" title="Next Post: PAT Advanced Level (1) easy problems">PAT Advanced Level (1) easy problems &raquo;</a>
       
     </p>
   </footer>
