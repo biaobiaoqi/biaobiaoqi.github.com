@@ -5,7 +5,7 @@ date: 2013-04-05 20:16
 comments: true
 description: "算法题，《编程珠玑》中用专门的一章对这个问题进行了讲解。（《编程珠玑（第2版）》P73 第8章 算法设计技术）"
 categories: [tech]
-tags: [algorithm, pat, think]
+tags: [algorithm, pat]
 
 ---
 
