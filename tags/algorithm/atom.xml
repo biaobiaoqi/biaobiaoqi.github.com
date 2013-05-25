@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: algorithm | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/tags/algorithm/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-05-22T02:41:09+08:00</updated>
+  <updated>2013-05-26T01:46:26+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -12,6 +12,148 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[KMP算法实现]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/05/25/kmp-algorithm/"/>
+    <updated>2013-05-25T21:22:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/05/25/kmp-algorithm</id>
+    <content type="html"><![CDATA[<p>本文描述了单模式的字符串匹配的经典算法KMP算法的实现。首先对字符串匹配算法做简单的介绍，然后是KMP算法的实现描述，最后推荐两道简单的ACM模板题做练手用。</p>
+
+<h2>字符串匹配算法</h2>
+
+<p>字符串匹配(String Matchiing)也称字符串搜索(String Searching)是字符串算法中重要的一种，是指从一个大字符串或文本中找到模式串出现的位置。一个基本的字符串匹配算法分类如下：</p>
+
+<ul>
+<li>单模式匹配：即每次算法执行只需匹配出一个模式串。</li>
+<li>有限集合的多模式匹配：即算法需要同时找出多个模式串的匹配结果，而这个模式串集合是有限的。</li>
+<li>无限集合的多模式匹配：如正则表达式的匹配。</li>
+</ul>
+
+
+<p>单模式匹配最容易理解，构造也非常简单。一个最朴素的思路就是从文本的第一个字符顺次比较模式串，不匹配则重新从下一个字符开始匹配，直到文本末尾。Java实现代码如下：</p>
+
+<p>```</p>
+
+<pre><code>public static boolean bruteforce(String str1, String str2) {
+     for (int i = 0, j = 0; i!= str1.length(); ) {
+           if (str1.charAt(i) == str2.charAt(j)) {
+                j ++;
+                i ++;
+                if (j == str2.length()) return true;
+           }else {         
+                i = i - j + 1;
+                j = 0;                        
+           }
+      }
+      return false;
+ }
+</code></pre>
+
+<p>```
+但是这种算法，有明显的效率黑洞。因为每次匹配失败后，都会回到原来的匹配起点的下一个字符开始匹配，这些步骤很多情况下，并不是必要的。</p>
+
+<p>实际上这些字符很有可能已经被读入了一次。理论上，如果我们能对所有被读入过的字符有足够的了解，那就能判定是否能避免再次读入一遍做匹配运算了。经典的KMP算法正是基于这点思考，对原有的蛮力算法做出了优化。</p>
+
+<h2>KMP算法</h2>
+
+<p>网络上关于KMP算法的描述很多，其中个人觉得阮一峰老师的<a href="http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html">《字符串匹配的KMP算法》</a>对KMP的描述最为简明和清晰。图例展示的算法流程更容易让人接受和理解。这里仅记录我所认为重点的知识点。</p>
+
+<h5>算法的思想</h5>
+
+<p>相比蛮力算法，KMP算法预先计算出了一个哈希表，用来指导在匹配过程中匹配失败后尝试下次匹配的起始位置，以此避免重复的读入和匹配过程。这个哈希表被叫做“部分匹配值表(<strong>Particial match table</strong>)”，它的设计是算法精妙之处。</p>
+
+<h5>部分匹配值表</h5>
+
+<p>要理解部分匹配值表，就得先了解字符串的前缀(prefix)和后缀(postfix)。</p>
+
+<ul>
+<li>前缀:除字符串最后一个字符以外的所有头部串的组合。</li>
+<li>后缀：除字符串第一个字符以外的所有尾部串的组合。</li>
+<li>部分匹配值：一个字符串的前缀和后缀中最长共有元素的长度。</li>
+</ul>
+
+
+<p>举例说明：字符串<code>ABCAB</code></p>
+
+<ul>
+<li>前缀：{A， AB， ABC， ABCA}</li>
+<li>后缀：{BCAB， CAB， AB， B}</li>
+<li>部分匹配值：2 （AB）</li>
+</ul>
+
+
+<p>而所谓的部分匹配值表，则为模式串的所有前缀以及其本身的部分匹配值。</p>
+
+<p>还是针对字符串<code>ABCAB</code>，它的部分匹配值表为：</p>
+
+<p><code>
+A B C A B
+0 0 0 1 2
+</code></p>
+
+<h5>算法实现</h5>
+
+<p>```</p>
+
+<pre><code>public static int[] next;
+
+public static boolean kmp(String str, String dest) {
+     for (int i = 0, j = 0; i &lt; str.length(); i ++) {
+           while (j &gt; 0 &amp;&amp; str.charAt(i) != dest.charAt(j))//iterate to find out the right next position
+                j = next[j - 1];
+
+           if (str.charAt(i) == dest.charAt(j))
+                j ++;
+
+           if (j == dest.length())
+                return true;
+      }
+      return false;
+ }
+
+ public static int[] kmpNext(String str) {
+      int[] next = new int[str.length()];
+      next[0]  = 0;
+      for (int i = 1, j = 0; i &lt; str.length(); i ++) {//j == 0 means the cursor points to nothing.
+           //the j here stands for the number of same characters for postfix and prefix, instead of
+           //the index of the end of prefix.
+            while (j &gt; 0 &amp;&amp; strt.charAt(j) != sr.charAt(i))
+                j = next[j - 1]; //watch out here! it's j - 1 here, instead of j
+
+           if (str.charAt(i) == str.charAt(j))
+                j ++;
+
+           next[i] = j;
+      }
+      return next;
+ }
+</code></pre>
+
+<p>```
+值得注意的是，kmp的循环代码和部分匹配值表生成的循环代码很类似。两者使用了相同的迭代方式找到匹配失败后，新的可匹配情况。</p>
+
+<h2>其他</h2>
+
+<p>KMP算法虽然能达到O(M+N)的算法复杂度，但在实际使用中，KMP算法的性能并不如<a href="http://www.ruanyifeng.com/blog/2013/05/boyer-moore_string_search_algorithm.html">BM</a>算法强。</p>
+
+<h2>模板题</h2>
+
+<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=2203">HDOJ的2203题</a>是一个能检验算法正确性的模板题。Java实现的答案代码<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/practice/hdoj/HDOJ2203.java">请戳这里</a></p>
+
+<p>另有<a href="http://poj.org/problem?id=2406">POJ的2406题</a>，对考察点做了巧妙的变形，对更深入的理解KMP中的部分匹配表很有帮助。Java实现的答案代码<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/practice/poj/POJ2406.java">请戳这里</a></p>
+
+<h3>其他参考资料：</h3>
+
+<ul>
+<li><p><a href="http://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm">wiki:Knuth–Morris–Pratt Algorithm</a></p></li>
+<li><p><a href="http://en.wikipedia.org/wiki/String_searching_algorithm">wiki:String Searching Algorithm</a></p></li>
+<li><p><a href="http://www.cppblog.com/converse/archive/2006/07/05/9447.html">《KMP算法的实现》</a></p></li>
+<li><p><a href="http://wangcong.org/blog/archives/2090">《Linux 内核中的 KMP 实现》</a></p></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[根据前中后序和层序重建二叉树(PAT1020、PAT1043)]]></title>
@@ -633,50 +775,6 @@ maxsofar = max(maxsofar, maxendingright)
 <li>数学归纳证明，对算法的设计和正确性佐证很有帮助。话说它也类似于分治的思想呢。</li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[PAT Advanced Level (1) easy problems]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/04/04/pat-advanced-level-1-easy-problems/"/>
-    <updated>2013-04-04T20:58:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/04/04/pat-advanced-level-1-easy-problems</id>
-    <content type="html"><![CDATA[<p><img class="left" src="http://visualcaffeine.com/ws/wp-content/uploads/2012/04/computer_guy.jpg" title="Place Kitten #2" ></p>
-
-<p>今天做的这批题目，总的来说几乎不需要数据结构基础。几个小时刷完。</p>
-
-<blockquote><ul>
-<li>1001: 数字的格式转换。第一次做的时候，将正负数分两种情况处理了，其实负数可以拆成正数加上一个负号。太简单的道理，竟然没注意。另外，Java完全可以使用NumberFormat实现格式转换。好简单的说。</li>
-</ul>
-</blockquote>
-
-<!-- more -->
-
-
-<blockquote><ul>
-<li><p>1002：一元多项式求导问题。有三点需要注意：1.输出中的小数精确的位数；2.浮点数操作过程中需要使用到eps做判定；<em>3.在我的实现中，主循环逻辑中，将判定游标越界的逻辑统一的提出到最外层，让代码更加简洁，利于维护。</em></p></li>
-<li><p>1005: 简单的hash。注意Java可以直接实现int转string，string转int。</p></li>
-<li><p>1006: 简单的找最大最小。用到了Java中String的split方法划分子串和Integer.parseInt()转String为int。</p></li>
-<li><p>1008: 纯水题。</p></li>
-<li><p>1009: 一元多项式相乘。基于桶排序的思想，将子项相乘的结果加到数组中去实现。第一次提交时，算错了“桶”的大小。。</p></li>
-<li><p>1011: 水题，求组最大值的问题。</p></li>
-<li><p>1027: 水题，hash求解。</p></li>
-</ul>
-</blockquote>
-
-<h2>资料</h2>
-
-<p><a href="http://pat.zju.edu.cn/contests/pat-a-practise">题目列表</a></p>
-
-<p><a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/pat/advancedlevel">我的代码</a></p>
-
-<h2>PS</h2>
-
-<p>除了这几道题，其他的题目似乎都需要树、图、DP的思想。明天开干！</p>
-
-<p>用了那么久eclipse，其实对eclipse的掌握并不好。比如他对（）和“”等的支持方式：</p>
-
-<blockquote><p><strong>只需要输入左单边括号，即可获得一个完整的括号，并定位到括号内输入内容。完成内容输入后，回车即可跳到反括号外，继续输入。同理于调用方法时参数的输入等。</strong></p></blockquote>
 ]]></content>
   </entry>
   

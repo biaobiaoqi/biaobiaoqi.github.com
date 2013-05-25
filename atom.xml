@@ -4,7 +4,7 @@
   <title><![CDATA[Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-05-22T02:41:09+08:00</updated>
+  <updated>2013-05-26T01:46:26+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -12,6 +12,201 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[对基于BT协议的同步方式的思考]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/05/25/some-ideas-about-using-bt-protocol-to-sync/"/>
+    <updated>2013-05-25T22:47:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/05/25/some-ideas-about-using-bt-protocol-to-sync</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[KMP算法实现]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/05/25/kmp-algorithm/"/>
+    <updated>2013-05-25T21:22:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/05/25/kmp-algorithm</id>
+    <content type="html"><![CDATA[<p>本文描述了单模式的字符串匹配的经典算法KMP算法的实现。首先对字符串匹配算法做简单的介绍，然后是KMP算法的实现描述，最后推荐两道简单的ACM模板题做练手用。</p>
+
+<h2>字符串匹配算法</h2>
+
+<p>字符串匹配(String Matchiing)也称字符串搜索(String Searching)是字符串算法中重要的一种，是指从一个大字符串或文本中找到模式串出现的位置。一个基本的字符串匹配算法分类如下：</p>
+
+<ul>
+<li>单模式匹配：即每次算法执行只需匹配出一个模式串。</li>
+<li>有限集合的多模式匹配：即算法需要同时找出多个模式串的匹配结果，而这个模式串集合是有限的。</li>
+<li>无限集合的多模式匹配：如正则表达式的匹配。</li>
+</ul>
+
+
+<p>单模式匹配最容易理解，构造也非常简单。一个最朴素的思路就是从文本的第一个字符顺次比较模式串，不匹配则重新从下一个字符开始匹配，直到文本末尾。Java实现代码如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>public static boolean bruteforce(String str1, String str2) {
+</span><span class='line'>     for (int i = 0, j = 0; i!= str1.length(); ) {
+</span><span class='line'>           if (str1.charAt(i) == str2.charAt(j)) {
+</span><span class='line'>                j ++;
+</span><span class='line'>                i ++;
+</span><span class='line'>                if (j == str2.length()) return true;
+</span><span class='line'>           }else {         
+</span><span class='line'>                i = i - j + 1;
+</span><span class='line'>                j = 0;                        
+</span><span class='line'>           }
+</span><span class='line'>      }
+</span><span class='line'>      return false;
+</span><span class='line'> }
+</span><span class='line'>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>但是这种算法，有明显的效率黑洞。因为每次匹配失败后，都会回到原来的匹配起点的下一个字符开始匹配，这些步骤很多情况下，并不是必要的。</p>
+
+<p>实际上这些字符很有可能已经被读入了一次。理论上，如果我们能对所有被读入过的字符有足够的了解，那就能判定是否能避免再次读入一遍做匹配运算了。经典的KMP算法正是基于这点思考，对原有的蛮力算法做出了优化。</p>
+
+<h2>KMP算法</h2>
+
+<p>网络上关于KMP算法的描述很多，其中个人觉得阮一峰老师的<a href="http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html">《字符串匹配的KMP算法》</a>对KMP的描述最为简明和清晰。图例展示的算法流程更容易让人接受和理解。这里仅记录我所认为重点的知识点。</p>
+
+<h5>算法的思想</h5>
+
+<p>相比蛮力算法，KMP算法预先计算出了一个哈希表，用来指导在匹配过程中匹配失败后尝试下次匹配的起始位置，以此避免重复的读入和匹配过程。这个哈希表被叫做“部分匹配值表(<strong>Particial match table</strong>)”，它的设计是算法精妙之处。</p>
+
+<h5>部分匹配值表</h5>
+
+<p>要理解部分匹配值表，就得先了解字符串的前缀(prefix)和后缀(postfix)。</p>
+
+<ul>
+<li>前缀:除字符串最后一个字符以外的所有头部串的组合。</li>
+<li>后缀：除字符串第一个字符以外的所有尾部串的组合。</li>
+<li>部分匹配值：一个字符串的前缀和后缀中最长共有元素的长度。</li>
+</ul>
+
+
+<p>举例说明：字符串<code>ABCAB</code></p>
+
+<ul>
+<li>前缀：{A， AB， ABC， ABCA}</li>
+<li>后缀：{BCAB， CAB， AB， B}</li>
+<li>部分匹配值：2 （AB）</li>
+</ul>
+
+
+<p>而所谓的部分匹配值表，则为模式串的所有前缀以及其本身的部分匹配值。</p>
+
+<p>还是针对字符串<code>ABCAB</code>，它的部分匹配值表为：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>A B C A B
+</span><span class='line'>0 0 0 1 2</span></code></pre></td></tr></table></div></figure>
+
+
+<h5>算法实现</h5>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>public static int[] next;
+</span><span class='line'>
+</span><span class='line'>public static boolean kmp(String str, String dest) {
+</span><span class='line'>     for (int i = 0, j = 0; i &lt; str.length(); i ++) {
+</span><span class='line'>           while (j &gt; 0 && str.charAt(i) != dest.charAt(j))//iterate to find out the right next position
+</span><span class='line'>                j = next[j - 1];
+</span><span class='line'>                                                   
+</span><span class='line'>           if (str.charAt(i) == dest.charAt(j))
+</span><span class='line'>                j ++;
+</span><span class='line'>          
+</span><span class='line'>           if (j == dest.length())
+</span><span class='line'>                return true;
+</span><span class='line'>      }
+</span><span class='line'>      return false;
+</span><span class='line'> }
+</span><span class='line'>
+</span><span class='line'> public static int[] kmpNext(String str) {
+</span><span class='line'>      int[] next = new int[str.length()];
+</span><span class='line'>      next[0]  = 0;
+</span><span class='line'>      for (int i = 1, j = 0; i &lt; str.length(); i ++) {//j == 0 means the cursor points to nothing.
+</span><span class='line'>           //the j here stands for the number of same characters for postfix and prefix, instead of
+</span><span class='line'>           //the index of the end of prefix.
+</span><span class='line'>          while (j &gt; 0 && strt.charAt(j) != sr.charAt(i))
+</span><span class='line'>                j = next[j - 1]; //watch out here! it's j - 1 here, instead of j
+</span><span class='line'>
+</span><span class='line'>           if (str.charAt(i) == str.charAt(j))
+</span><span class='line'>                j ++;
+</span><span class='line'>
+</span><span class='line'>           next[i] = j;
+</span><span class='line'>      }
+</span><span class='line'>      return next;
+</span><span class='line'> }
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>值得注意的是，kmp的循环代码和部分匹配值表生成的循环代码很类似。两者使用了相同的迭代方式找到匹配失败后，新的可匹配情况。</p>
+
+<h2>其他</h2>
+
+<p>KMP算法虽然能达到O(M+N)的算法复杂度，但在实际使用中，KMP算法的性能并不如<a href="http://www.ruanyifeng.com/blog/2013/05/boyer-moore_string_search_algorithm.html">BM</a>算法强。</p>
+
+<h2>模板题</h2>
+
+<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=2203">HDOJ的2203题</a>是一个能检验算法正确性的模板题。Java实现的答案代码<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/practice/hdoj/HDOJ2203.java">请戳这里</a></p>
+
+<p>另有<a href="http://poj.org/problem?id=2406">POJ的2406题</a>，对考察点做了巧妙的变形，对更深入的理解KMP中的部分匹配表很有帮助。Java实现的答案代码<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/practice/poj/POJ2406.java">请戳这里</a></p>
+
+<h3>其他参考资料：</h3>
+
+<ul>
+<li><p><a href="http://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm">wiki:Knuth–Morris–Pratt Algorithm</a></p></li>
+<li><p><a href="http://en.wikipedia.org/wiki/String_searching_algorithm">wiki:String Searching Algorithm</a></p></li>
+<li><p><a href="http://www.cppblog.com/converse/archive/2006/07/05/9447.html">《KMP算法的实现》</a></p></li>
+<li><p><a href="http://wangcong.org/blog/archives/2090">《Linux 内核中的 KMP 实现》</a></p></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[《程序员的思维修炼》]]></title>
@@ -2919,219 +3114,6 @@ postorder: B, A</p>
 <ul>
 <li><p>dropbox 下载地址：<a href="https://www.dropbox.com/s/0b084ccqao8igq8/course-slides.pdf">点击下载</a></p></li>
 <li><p>speackerdeck下载地址：<a href="https://speakerdeck.com/biaobiaoqi/thinking-in-software-engineering?slide=1">点击下载</a></p></li>
-</ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[再见，Seeme]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/04/07/goodbye-seeme/"/>
-    <updated>2013-04-07T23:26:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/04/07/goodbye-seeme</id>
-    <content type="html"><![CDATA[<p>过年算是仪式感最强的节日之一了。不想将过年作为成熟的时间节点，因为生命总是在时间里沉淀。但社会的周期运作确确实实的依着四季来过度，于是总有些决定、变化需要在此执行和接受。真诚的向过去的一切道一声感谢。</p>
-
-<!--more-->
-
-
-<h2>半年小结</h2>
-
-<p>2012年的7月份下旬，XB学长联系了我。那时候我有半吊子的iOS开发经验。因为对ITP早有耳闻，而自己也对创业一直有着一些念想，在没有对Seeme的团队和产品做深入的了解的情况下，我加入了。这也意味着，实验室那头的内容被暂时搁置。</p>
-
-<p>查好友iOS版本的开发周期很急，临危受命，我和几乎同时加入的没有ios开发经验的乐乐简单的认识后，就开始了编码。有android的版本作为原型，我们依照着“功能-交互-UI”的原则，开始了没日没夜的开发。9月份开学后，我们两从全职转型为兼职，9月下旬，正式在appstore发布了查好友的iOS v1.0。在我看来，那是最刺激的一段时间了，我和LL共同摸索着前进，看着开发进度条一天天向满状态增进，时而掉进坑里，也挣扎着爬起，别无他念，Done is better than perfect.</p>
-
-<p>发版后几天的休息时间，我满怀着对技术实现的热情，琢磨着经验总结和未来的开发规划。遗憾的是，这些想法在之后的时间里并没有被自己重视，也没有很好的向其他人传递。它们从项目初期的疯狂建设中被勾起，又在项目开展的紧锣密鼓和实验室任务的双重压力下被遗忘。</p>
-
-<p><img src="http://g.hiphotos.baidu.com/baike/c%3DbaikeA2%2C10%2C95/sign=b5413922fc039245b5b5b65eeeffc183/30adcbef76094b36da20d402a3cc7cd98c1001e93801bd93.jpg"></p>
-
-<p>忙碌的时间过的很快，从2012年10月开始，到2013年的1月底，我们给查好友iOS版本加入了不少的新功能，比如公共组织通讯录、消息盒子（包括联系人更新、活动提醒和生日提醒）、应用分享、群发短信等，也发布了两个定制版的app到appstore。也是在这忙碌的几个月间，我的思想开始从最初的团队合作的“蜜月期”，渐渐过度到了一个新的阶段。</p>
-
-<p>在这半年时间里，每个阶段，我们都在挑战自我。大家都有太多的优点让我学习。LL的认真负责、XX的敏捷，LY的乐观，RL的积极和对产品的探求，RK从技术角度对产品的感知，XK对设计的见解，更不用说XB学长一肩挑起的团队的运营、详实的数据分析，LP哥思维的缜密、理性，LP和YY学长在会议上思想的碰撞，YY学长对大局观的把控。也是Seemed团队带来的资源，让我有幸见识到LD的风采，思维的发散、活跃以及对产品的把控，见识到CJL大哥在面对实际应用场景时对框架设计的精准。</p>
-
-<p>能够在这个凝聚而内省的团队里成长，我倍感荣幸。</p>
-
-<p>所有的这些经历让我切切实实的了解到一个商业级的产品从设计到运营的不易，以及知识技能的学习和其应用之间微妙的trade-off。</p>
-
-<h2>转折</h2>
-
-<p>每个人的成长过程都充满着无数的选择。是对自我价值实现的追求，让我半年前抓住了机会，加入了Seeme。12月中旬，也是同样的原因，让我开始犹豫。我开始反思自己所做的是不是自己真正所想要的。如果是，那么我会毫不犹豫的走下去；如果不是，那么为什么我会在当前的位置，又如何改变。这两个月，我一直在寻找答案。</p>
-
-<p>主观的看，我渐渐清晰了我的理想：藉由网络对信息分享自由的促进，将人类社会向自由平等推进。听起来有些黑客精神，有些狂妄，不过既然是理想，就不需要太靠谱。另一方面，我希望是做一个对用户负责的开发者，不论用什么开发语言，什么平台。我渴望挑战，虽然现在的技术能力并没有什么优势，但这不是理由，我需要时间。</p>
-
-<p>客观上，首先，虽然我认为技术只是手段，但自己的技术能力并没有达到应用自如的高度。边干边学会将自己抛向了一个充满着更多不确定性的空间，这是现阶段的我所不希望接受的。坦率的说，我更希望在研究生的两年里以一种更有效率、更有针对性的方式学习和提升。</p>
-
-<p>其次，虽然自己做事有一定的主动性，但由于种种原因，一直以来也没在团队中发挥出足够的执行力，来带动大家更高效的调整好自身进步和产品进度之间的平衡。从这个角度而言，我本身也是不适合目前的团队的。</p>
-
-<p>记得刚开始接触团队的时候，我曾经对YY学长说过，“既是对自己负责，也是对团队负责，我无法保证自己在团队的贡献时间”。现在的状况也是如此。我想，我的情况已经不适合Seeme团队的健康成长。既然双方都无法有所助益，理智告诉我，是时候离开了。     </p>
-
-<p>我享受半年来大家的一起奋斗，享受共同构建的产品中一批批用户数据流入的成就感，享受跟优秀的大家合作所激发的自己的斗志。</p>
-
-<p>最后，感谢YY学长，让我接触到了产品从需求到设计、到实现的过程，让我了解到一个IT人对行业所应具有的的触觉和热情，让我学习到要认真的对待每一件事；感谢PG，让我见识到一个冷静理性的思维所能带来的力量；感谢XB学长，让我了解了运营产品过程的复杂，是你将我介绍到团队中，这是一切的引子；感谢XX，我一直在学习你的雷厉风行；感谢LL，你的诚恳和踏实让我自叹不如；感谢XK，见面不多，但合作一直很愉快；感谢RL，你的积极主动也一直感染者我；感谢LY和RK童鞋，合作不多，却很上心。</p>
-
-<p>真心的祝Seeme团队继续壮大，在移动互联网圈子里闯出一片天地。</p>
-
-<p>再见了，半年多的奋斗，承载的梦想和远方。</p>
-
-<p>再见，Seeme。</p>
-
-<hr />
-
-<p>2013/02</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[分治、时间空间的权衡:最大合的连续字串问题 (PAT 1007)]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/04/05/maximum-subsequence-sum/"/>
-    <updated>2013-04-05T20:16:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/04/05/maximum-subsequence-sum</id>
-    <content type="html"><![CDATA[<p><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1007">PAT1007</a>：给定一个整数串，找出连续子串中合最大的子串。</p>
-
-<p>《编程珠玑》中用专门的一章对这个问题进行了讲解。（《编程珠玑（第2版）》P73 第8章 算法设计技术）</p>
-
-<p>第一次在PAT上遇到这个题目时，我的思路如下：</p>
-
-<p><del>最简单的淡然是一个三层循环咯，O(n3)，肯定会超时。节省时间的话，用动态规划吧。但简单的动态规划，显然是会超出内存限制的。有没有更巧妙的子问题划分方法呢？</del>先找到子问题：因为要求的串必须连续，分治的时候需要考虑如何延续这个连续性，那么每个子问题中就得考虑找出三个串：1.即左端连续的最大串，2.右端连续的最大串，3.整个串中的最大串.<del>由于每个问题都有三个量要维护，难道我得造出三个表来？卡主:(</del></p>
-
-<!--more-->
-
-
-<p>《编程珠玑》列出了性能上依次递进的四个算法。这里我结合个人理解和感悟做一些阐释。</p>
-
-<ul>
-<li>1.粗暴的brute forse。三层循环嵌套，据说当n 为100000的时候，就需要运行15天时间=.=</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>maxsofar = 0
-</span><span class='line'>for i = 0 [0, n)
-</span><span class='line'>  for j = [i, n)
-</span><span class='line'>      sum = 0;
-</span><span class='line'>      for k = [i, j]
-</span><span class='line'>       sum += x[k]
-</span><span class='line'>       /*sum is sum of x[i..j]*/
-</span><span class='line'>       maxsofar = max(maxsofar, sum)</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>2.针对第一个算法做出了优化。利用零时变量保存状态，避免了过多的重复操作，即所谓的<strong>memoization思想</strong>。时间复杂度下降到O(n*logn)。不过这份代码在PAT的OJ上仍然会超时。</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>maxsofar = 0;
-</span><span class='line'>for i = [0, n)
-</span><span class='line'>  sum = 0;
-</span><span class='line'>  for j = [i, n)
-</span><span class='line'>      sum += x[j]
-</span><span class='line'>      /* sum is sum of x[i..j]*/
-</span><span class='line'>      max sofar = max(maxsofar, sum)</span></code></pre></td></tr></table></div></figure>
-
-
-<p>相比之下，动态规划的策略也是有memoization的思想在的，不过，在这里用DP将会创建一张很大的表。。。超出内存限定。</p>
-
-<ul>
-<li><p>3.分治算法</p>
-
-<p>  其实之前我自己在思考DP更好的子问题划分时，已经考虑到了这种分治策略。但它的实现，<strong>并非需要DP支持</strong>。</p>
-
-<p>  divide：将串平均分为两段，如下代码第6行。分别处理两个子串，并拼接计算。</p>
-
-<p>  conquer： 计算1.自身包含左端的最大子串；2.包含右端的最大子串；（这两个子串用于与其他子串拼接）；3.自身的最大子串。</p></li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>float maxsum3(l, u)
-</span><span class='line'>  if (l &gt; u) /* zero elements*/
-</span><span class='line'>      return 0
-</span><span class='line'>  if (l == u) /* one element*/
-</span><span class='line'>      return max (0, x[l]);
-</span><span class='line'>  m = (1 + u) / 2
-</span><span class='line'>  
-</span><span class='line'>  /* find max crossing to left */
-</span><span class='line'>  lmax = sum = 0
-</span><span class='line'>  for (i = m; i &gt;= 1; i--)
-</span><span class='line'>      sum += x[i]
-</span><span class='line'>  lmax = max(lmax, sum)
-</span><span class='line'>  
-</span><span class='line'>  /* find max croosing to right */
-</span><span class='line'>  rmax = sum = 0;
-</span><span class='line'>  for i = (m, u]
-</span><span class='line'>      sum += x[i]
-</span><span class='line'>  rmax = max(rmax, sum)
-</span><span class='line'>  
-</span><span class='line'>  return max(lmax+rmax, maxsum3(l, m), maxsum3(m+1, u))   </span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li><p>4.扫描算法</p>
-
-<p>  类似于<strong>数学归纳法</strong>的思想。从串的最左端开始扫描。对于子串[0, k],其最大子串要么存在于[0, k-1]中而不包含[k]，称其为maxsofar，要么包含[k]，称其maxendingright。</p>
-
-<p>  maxsofar和maxendingright是可能重合的。maxendingright的作用在于对[0,k+1]的子串而言，新的元素[k+1]可以与之结合，从而产生可能的新的子串。</p>
-
-<p>  如果[k+1]本身就是负数呢？不要紧，将[k+1]加入到maxendingright的过程本身就是试错以产生可能的过程。当maxendingright降到0以下时，放弃掉这一子串就好了，因为无论如何扩张，它都是会拖后退的。别忘了，我们还维护着maxsofar，它记录最大的子串。有点绕，但是可以严格的证明算法的正确性。</p>
-
-<p>  伪代码如下：</p></li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>maxsofa = 0
-</span><span class='line'>maxendingright = 0
-</span><span class='line'>for i = [0, n)
-</span><span class='line'>  /* invariant: maxendingright and maxsofar are accurate for x[0..i-1]*/
-</span><span class='line'>  maxendingright = max(maxendingright + x[i], 0)
-</span><span class='line'>  maxsofar = max(maxsofar, maxendingright)</span></code></pre></td></tr></table></div></figure>
-
-
-<p>根据这个思路，写出<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/pat/advancedlevel/APAT1007.java">代码</a>，一遍AC:)</p>
-
-<h2>总结：</h2>
-
-<ul>
-<li>保存状态，避免重复计算：在算法整体框架没有大的优化的情况下，时间和空间的trade-off或许会有奇效。memoization本身就是一种用空间换时间的思想，而DP中用一种方式实现了这种思想。不过不要被DP算法所禁锢。因为，这个trade-off的实现是很多变的，就像这题的第2种算法。</li>
-<li>分治：它的重要性不必多说了。同样的，DP中有分治的思想，但分治本身也是非常灵活的。</li>
-<li>数学归纳证明，对算法的设计和正确性佐证很有帮助。话说它也类似于分治的思想呢。</li>
 </ul>
 
 ]]></content>

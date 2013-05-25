@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: idea | Biaobiaoqi的博客]]></title>
+  <link href="http://biaobiaoqi.github.com/tags/idea/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.github.com/"/>
+  <updated>2013-05-26T01:46:26+08:00</updated>
+  <id>http://biaobiaoqi.github.com/</id>
+  <author>
+    <name><![CDATA[Biaobiaoqi]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[对基于BT协议的同步方式的思考]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/05/25/some-ideas-about-using-bt-protocol-to-sync/"/>
+    <updated>2013-05-25T22:47:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/05/25/some-ideas-about-using-bt-protocol-to-sync</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
+  
+</feed>

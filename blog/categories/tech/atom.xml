@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tech | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-05-22T02:41:09+08:00</updated>
+  <updated>2013-05-26T01:46:26+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -12,6 +12,157 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[对基于BT协议的同步方式的思考]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/05/25/some-ideas-about-using-bt-protocol-to-sync/"/>
+    <updated>2013-05-25T22:47:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/05/25/some-ideas-about-using-bt-protocol-to-sync</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[KMP算法实现]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/05/25/kmp-algorithm/"/>
+    <updated>2013-05-25T21:22:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/05/25/kmp-algorithm</id>
+    <content type="html"><![CDATA[<p>本文描述了单模式的字符串匹配的经典算法KMP算法的实现。首先对字符串匹配算法做简单的介绍，然后是KMP算法的实现描述，最后推荐两道简单的ACM模板题做练手用。</p>
+
+<h2>字符串匹配算法</h2>
+
+<p>字符串匹配(String Matchiing)也称字符串搜索(String Searching)是字符串算法中重要的一种，是指从一个大字符串或文本中找到模式串出现的位置。一个基本的字符串匹配算法分类如下：</p>
+
+<ul>
+<li>单模式匹配：即每次算法执行只需匹配出一个模式串。</li>
+<li>有限集合的多模式匹配：即算法需要同时找出多个模式串的匹配结果，而这个模式串集合是有限的。</li>
+<li>无限集合的多模式匹配：如正则表达式的匹配。</li>
+</ul>
+
+
+<p>单模式匹配最容易理解，构造也非常简单。一个最朴素的思路就是从文本的第一个字符顺次比较模式串，不匹配则重新从下一个字符开始匹配，直到文本末尾。Java实现代码如下：</p>
+
+<p>```</p>
+
+<pre><code>public static boolean bruteforce(String str1, String str2) {
+     for (int i = 0, j = 0; i!= str1.length(); ) {
+           if (str1.charAt(i) == str2.charAt(j)) {
+                j ++;
+                i ++;
+                if (j == str2.length()) return true;
+           }else {         
+                i = i - j + 1;
+                j = 0;                        
+           }
+      }
+      return false;
+ }
+</code></pre>
+
+<p>```
+但是这种算法，有明显的效率黑洞。因为每次匹配失败后，都会回到原来的匹配起点的下一个字符开始匹配，这些步骤很多情况下，并不是必要的。</p>
+
+<p>实际上这些字符很有可能已经被读入了一次。理论上，如果我们能对所有被读入过的字符有足够的了解，那就能判定是否能避免再次读入一遍做匹配运算了。经典的KMP算法正是基于这点思考，对原有的蛮力算法做出了优化。</p>
+
+<h2>KMP算法</h2>
+
+<p>网络上关于KMP算法的描述很多，其中个人觉得阮一峰老师的<a href="http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html">《字符串匹配的KMP算法》</a>对KMP的描述最为简明和清晰。图例展示的算法流程更容易让人接受和理解。这里仅记录我所认为重点的知识点。</p>
+
+<h5>算法的思想</h5>
+
+<p>相比蛮力算法，KMP算法预先计算出了一个哈希表，用来指导在匹配过程中匹配失败后尝试下次匹配的起始位置，以此避免重复的读入和匹配过程。这个哈希表被叫做“部分匹配值表(<strong>Particial match table</strong>)”，它的设计是算法精妙之处。</p>
+
+<h5>部分匹配值表</h5>
+
+<p>要理解部分匹配值表，就得先了解字符串的前缀(prefix)和后缀(postfix)。</p>
+
+<ul>
+<li>前缀:除字符串最后一个字符以外的所有头部串的组合。</li>
+<li>后缀：除字符串第一个字符以外的所有尾部串的组合。</li>
+<li>部分匹配值：一个字符串的前缀和后缀中最长共有元素的长度。</li>
+</ul>
+
+
+<p>举例说明：字符串<code>ABCAB</code></p>
+
+<ul>
+<li>前缀：{A， AB， ABC， ABCA}</li>
+<li>后缀：{BCAB， CAB， AB， B}</li>
+<li>部分匹配值：2 （AB）</li>
+</ul>
+
+
+<p>而所谓的部分匹配值表，则为模式串的所有前缀以及其本身的部分匹配值。</p>
+
+<p>还是针对字符串<code>ABCAB</code>，它的部分匹配值表为：</p>
+
+<p><code>
+A B C A B
+0 0 0 1 2
+</code></p>
+
+<h5>算法实现</h5>
+
+<p>```</p>
+
+<pre><code>public static int[] next;
+
+public static boolean kmp(String str, String dest) {
+     for (int i = 0, j = 0; i &lt; str.length(); i ++) {
+           while (j &gt; 0 &amp;&amp; str.charAt(i) != dest.charAt(j))//iterate to find out the right next position
+                j = next[j - 1];
+
+           if (str.charAt(i) == dest.charAt(j))
+                j ++;
+
+           if (j == dest.length())
+                return true;
+      }
+      return false;
+ }
+
+ public static int[] kmpNext(String str) {
+      int[] next = new int[str.length()];
+      next[0]  = 0;
+      for (int i = 1, j = 0; i &lt; str.length(); i ++) {//j == 0 means the cursor points to nothing.
+           //the j here stands for the number of same characters for postfix and prefix, instead of
+           //the index of the end of prefix.
+            while (j &gt; 0 &amp;&amp; strt.charAt(j) != sr.charAt(i))
+                j = next[j - 1]; //watch out here! it's j - 1 here, instead of j
+
+           if (str.charAt(i) == str.charAt(j))
+                j ++;
+
+           next[i] = j;
+      }
+      return next;
+ }
+</code></pre>
+
+<p>```
+值得注意的是，kmp的循环代码和部分匹配值表生成的循环代码很类似。两者使用了相同的迭代方式找到匹配失败后，新的可匹配情况。</p>
+
+<h2>其他</h2>
+
+<p>KMP算法虽然能达到O(M+N)的算法复杂度，但在实际使用中，KMP算法的性能并不如<a href="http://www.ruanyifeng.com/blog/2013/05/boyer-moore_string_search_algorithm.html">BM</a>算法强。</p>
+
+<h2>模板题</h2>
+
+<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=2203">HDOJ的2203题</a>是一个能检验算法正确性的模板题。Java实现的答案代码<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/practice/hdoj/HDOJ2203.java">请戳这里</a></p>
+
+<p>另有<a href="http://poj.org/problem?id=2406">POJ的2406题</a>，对考察点做了巧妙的变形，对更深入的理解KMP中的部分匹配表很有帮助。Java实现的答案代码<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/practice/poj/POJ2406.java">请戳这里</a></p>
+
+<h3>其他参考资料：</h3>
+
+<ul>
+<li><p><a href="http://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm">wiki:Knuth–Morris–Pratt Algorithm</a></p></li>
+<li><p><a href="http://en.wikipedia.org/wiki/String_searching_algorithm">wiki:String Searching Algorithm</a></p></li>
+<li><p><a href="http://www.cppblog.com/converse/archive/2006/07/05/9447.html">《KMP算法的实现》</a></p></li>
+<li><p><a href="http://wangcong.org/blog/archives/2090">《Linux 内核中的 KMP 实现》</a></p></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Hadoop和RDBMS的混合系统介绍]]></title>
@@ -358,155 +509,6 @@
 <li>HadoopDB: An Architectural Hybrid of MapReduce and DBMS Technologies for Analytical Workloads</li>
 <li><a href="http://dbanotes.net/database/hadoopdb.html">《HadoopDB》 —— Fenng</a></li>
 <li>《架构大数据:挑战、现状与展望》 计算机学报 王珊</li>
-</ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[iOS的安全性和越狱]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/05/17/jail-break-your-ios/"/>
-    <updated>2013-05-17T00:10:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/05/17/jail-break-your-ios</id>
-    <content type="html"><![CDATA[<p><img src="https://dl.dropboxusercontent.com/u/64021093/2013-5-16.jpg" title="Jailbrek" alt="alt jailbreak" /></p>
-
-<p>提到<a href="http://en.wikipedia.org/wiki/IOS_jailbreaking#Security.2C_privacy.2C_and_stability">越狱</a>，很多人第一反应大概是免费的游戏和app。</p>
-
-<p>作为软件从业人员，深知中国的大环境的特殊性。内有用户想吃免费午餐的不良付费习惯，外有行业内大头诸如某讯对创新的绞杀。大家对越狱是为了免费、盗版软件的认识，也就不奇怪了。</p>
-
-<p>还有另一派人。越狱对他们来说，意味着开放。个人认为这也是Hack精神的精髓之一。事实上，iOS越狱也有自己的生态圈：Cydia就是越狱设备上App Store。</p>
-
-<!--more-->
-
-
-<h2>越狱的合法性</h2>
-
-<p>数字千年版权法对iphone的越狱进行了特赦，直到2015年，对iPhone、iPod touch的越狱依然有效。但注意，iPad就没这么幸运了。</p>
-
-<p>详情参见博文<a href="http://www.cultofmac.com/213144/unlocking-a-new-iphone-is-now-illegal-but-jailbreaking-is-still-safe-what-it-all-means-for-you/">《Unlocking A New iPhone Is Now Illegal, But Jailbreaking Is Still Safe — What It All Means For You》</a></p>
-
-<h2>iOS安全性</h2>
-
-<p>由于iOS没有开源，学术界和工业界对它的安全机制的论述资料很少。我在网上找到了上交一位学长对ios安全机制的分析文章，是他的硕士学位<a href="http://www.doc88.com/p-405566264292.html">论文</a>。作为参考，我整理了一些关键知识点。</p>
-
-<h4>基于信任链的启动</h4>
-
-<p>iOS的信任机制从系统启动那一刻起已经开始。
-系统可信启动<a href="http://elinux.org/images/2/28/Trusted_Boot_Loader.pdf">trustedboot</a>：启动每一步都会检测签名，构成整个信任链。</p>
-
-<p>还有另一种启动方式，是设备固件升级方式（DFU，Device Firmware Update），也是由签名构建信任链。</p>
-
-<h4>程序签名</h4>
-
-<p>iOS应用的ipa压缩包中包含可执行文件和数据文件。可执行文件只有在已签名的前提下才能运行。确保应用经过苹果认证。</p>
-
-<p>越狱提升运行权限到root，修改引用加载策略，接受任意签名的应用。
-“通过软件保证软件安全是不可能的”，iOS使用了硬件来做保护，但硬件部分也遭到了越狱的破解。</p>
-
-<h4>沙盒技术</h4>
-
-<p>iOS用沙盒技术实现访问控制
-trustedBSD ：http://www.trustedbsd.org/
-http://www.freebsd.org/doc/zh_CN/books/arch-handbook/mac-synopsis.html</p>
-
-<h4>ASLR和PIE</h4>
-
-<p>使用地址空间布局随机化（ASLR， address space layout randomization）和位置无关可执行代码（PIE，position independent executable）编译用来防止经典的缓冲区溢出攻击。</p>
-
-<h4>数据保护机制：</h4>
-
-<ul>
-<li>硬件加密：AES协处理器，存储着UID，GID</li>
-<li>软件加密：系统中每个文件、数据都用一个唯一的秘钥来加密。秘钥是有UID、GID一起产生的，存在keybag中，keybag通过用户的4位密码来保护。</li>
-</ul>
-
-
-<h2>越狱</h2>
-
-<p>越狱主要就是在信任链的根bootrom阶段攻击。由于系统不断升级，攻击的方式也在不断演进，这个<a href="http://bbs.gean.cn/archiver/showtopic-213.aspx">链接</a>介绍了其中的一种情况。</p>
-
-<h4>越狱后注意</h4>
-
-<p>总的来说，越狱打破了iOS封闭的生态环境，也打破了它特有的保护壳。手机获得了root权限，恶意代码有了可趁之机。不要轻易的使用来源不明的应用和插件。</p>
-
-<ul>
-<li>非越狱手机：仅允许用户访问照片、视频数据；通过备份，可在pc端获取所有数据</li>
-<li>越狱手机：拥有root权限。可以通过许多渠道如ssh，ftp获取系统数据。</li>
-</ul>
-
-
-<p>更多细节参见
-* <a href="http://bbs.weiphone.com/read-htm-tid-1750886.html">《浅谈iOS越狱前后的安全问题以及安全风险》</a>
-* <a href="http://www.pcpop.com/doc/0/890/890768_all.shtml">《iPad越狱不安全!安装应用/插件需谨慎》</a>
-* <a href="http://www.cnbeta.com/articles/229192.htm">《iOS完美越狱 - 福利还是阴谋？》</a></p>
-
-<h4>SHSH</h4>
-
-<p>iPhone 3GS出来时候，苹果为加强对iPhone OS的控制对恢复(Restore)固件(Firmware)采用了验证过程，每次iTunes要恢复固件的时候都要连接苹果的服务器验证。手机的ECID和所刷系统版本号一起签名出一个SHSH文件，发送给服务器，服务器检测SHSH是否为新版本的系统所产生，如果是，则允许继续进行刷机，否则传回组织继续的信号。</p>
-
-<p>SHSH是存储在苹果公司的服务器上的，用户需要通过备份原来的SHSH，并伪装一台苹果服务器来协助验证。　　</p>
-
-<p>网络上SHSH备份方法的介绍很多，不了解的朋友自行Google吧。</p>
-
-<h2>附录</h2>
-
-<p>对于想开发iOS应用而又没有开发者账号的朋友，可以参考这篇文章<a href="http://kqwd.blog.163.com/blog/static/4122344820117191351263/">《Xcode 4.1~4.6 + iOS 5、iOS 6免证书(iDP)开发+真机调试+生成IPA全攻略》</a>，Xcode4.6 iOS6.0 亲测有效。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[CAP和最终一致性]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/05/15/cap-and-eventual-consistent/"/>
-    <updated>2013-05-15T00:30:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/05/15/cap-and-eventual-consistent</id>
-    <content type="html"><![CDATA[<p>查阅资料整理了最终一致性、CAP相关的内容。由于图省事儿，没有做文字的整理记载，只有slides和一些查阅过的链接，大家将就着看。欢迎指正。</p>
-
-<p>slides：</p>
-
-<script async class="speakerdeck-embed" data-id="cca07ce09e92013076c646310b996896" data-ratio="1.33333333333333" src="http://biaobiaoqi.github.com//speakerdeck.com/assets/embed.js"></script>
-
-
-
-
-<!--more-->
-
-
-<p>slides链接：<a href="https://speakerdeck.com/biaobiaoqi/cap-and-eventually-consistent">请戳这里</a></p>
-
-<h2>背景</h2>
-
-<p>为什么系统要扩张？历史的发展路径是怎么样的？请看<a href="http://rdc.taobao.com/blog/cs/?p=614">《系统可扩展性演化》</a></p>
-
-<h2>CAP理论</h2>
-
-<ul>
-<li><p>CAP理论的提出：分布式系统的CAP理论是2000年左右被提出的概念，直到Dynamo的出现，开始在工业界被广泛实践：
-<a href="http://www.julianbrowne.com/article/viewer/brewers-cap-theorem">《Brewer's CAP Theorem》</a>/<a href="http://code.alibabatech.com/blog/dev_related_728/brewers-cap-theorem.html">中文翻译</a></p></li>
-<li><p>对CAP的理解：<a href="http://www.douban.com/group/topic/11765014/">《谈正确理解CAP理论》</a>\ <a href="http://rdc.taobao.com/blog/cs/?p=631">《CAP理论及分布式系统一致性》</a></p></li>
-</ul>
-
-
-<h2>BASE理论</h2>
-
-<ul>
-<li>BASE的理论解释：<a href="http://rdc.taobao.com/blog/cs/?p=637">《分布式事务工程实现》</a></li>
-</ul>
-
-
-<h2>最终一致性</h2>
-
-<ul>
-<li><p>amazon的CTO分析最终一致性：<a href="http://www.allthingsdistributed.com/2008/12/eventually_consistent.html">Eventually Consistent - Revisited</a>/<a href="http://blog.csdn.net/xiaoqiangxx/article/details/7566654">中文翻译</a></p></li>
-<li><p>Dynamo论文：<a href="http://www.read.seas.harvard.edu/~kohler/class/cs239-w08/decandia07dynamo.pdf">Dynamo: Amazon’s Highly Available Key-value Store</a></p>
-
-<p>关于Dynamo的一篇中文简述：<a href="http://www.infoq.com/cn/articles/nosql-dynamo">《解读NoSQL技术代表之作Dynamo》</a></p></li>
-</ul>
-
-
-<h2>引申</h2>
-
-<ul>
-<li>CAP原作者对CAP的反思和澄清：<a href="http://www.infoq.com/cn/articles/cap-twelve-years-later-how-the-rules-have-changed">《CAP十二年回顾：规则变了》</a></li>
 </ul>
 
 ]]></content>
