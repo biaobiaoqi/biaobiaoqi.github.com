@@ -9,7 +9,7 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="背景 毕业季到了，女朋友跟班里同学们一起拍了很多照片。由于照片分散在不同的人的手机、相机里，她也无法立即给我传来她的照片。这个情景一年前我也遇到过，只是当时自己比较忙，加上考虑着还会在本校读研，也没太在意毕业季照片的手机这一需求，以至于到现在我的电脑里甚至没有一张我穿学士服的照片:-=。而现在， &hellip;">
+  <meta name="description" content="本文是《hadoop技术内幕——深入解析Hadoop Common和HDFS架构设计与实现原理》第4章的1-3节的学习笔记。内容为Hadoop IPC部分的基础知识介绍。 知识框架 由于Hadoop分布式环境需要一个更高效和正对性优化的IPC机制，传统的诸如RMI的解决方案无法满足这一要求， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -100,6 +100,72 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/08/ipc-in-hadoop/">《Hadoop技术内幕》学习笔记——RPC和动态代理</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-08T00:24:00+08:00" pubdate data-updated="true">Jun 8<span>th</span>, 2013</time>
+        
+
+
+
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>本文是《hadoop技术内幕——深入解析Hadoop Common和HDFS架构设计与实现原理》第4章的1-3节的学习笔记。内容为Hadoop IPC部分的基础知识介绍。</p>
+
+<h2>知识框架</h2>
+
+<p>由于Hadoop分布式环境需要一个更高效和正对性优化的IPC机制，传统的诸如RMI的解决方案无法满足这一要求，Hadoop自己实现了一套IPC方法。</p>
+
+<p>第4章第1节讲解了RPC的原理，包括Stub-Skeleton的架构等，进而用<code>RMI</code>举例（可以参考的<a href="">演示代码</a>）。RMI的调用实现主要包括了服务器端的registry和客户端的lookup。虽然Hadoop不是使用RMI做IPC，但了解一下其调用方式对感性的认识到如何进行分布式环境下的远程调用还是有作用的。</p>
+
+<p>接下来的2,3小节，简单的介绍了IPC过程所依赖的技术方法：Java的动态代理方式和NIO的网络传输方式。</p>
+
+<p>第2节讲<code>动态代理</code>，这里需要理解面向对象的代理模式和<em>动态</em>的原因。代理模式分很多种，这里用到的是简单的对行为的传递。动态代理的动态特性，则是因为框架能提供动态创建某个接口的实现的能力(可以参考的<a href="">演示代码</a>)。</p>
+
+<p>更系统的看动态代理过程，分为两个阶段：</p>
+
+<ul>
+<li>1.代理接口的实现：静态方法Proxy.newInstance()生成动态对象。</li>
+<li>2.调用转发过程：InvocationHandler实现</li>
+</ul>
+
+
+<p>第3节的<code>NIO</code>，跟传统的套接字(Socket)通信过程做了对比。需要了解Socket通信的特点：同步，阻塞，基于字节，理解这种特点带来的服务器端的线程闲置的压力。对应的，NIO则是可异步的，非阻塞的，基于块的。具体的实现上，需要了解缓冲区(Buffer)的原理和使用方式，通道(Channel)和选择器(Selector)配合的使用方式。</p>
+
+<p>我总结了一份slides，如下：(挂在speackerdeck上，如果加载缓慢，请稍候:))</p>
+
+<script async class="speakerdeck-embed" data-id="fbcb8590b1540130690c2e6f0be13e84" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+
+
+<p>slides下载地址：<a href="https://dl.dropboxusercontent.com/u/64021093/slides/%E8%BF%9C%E7%A8%8B%E8%BF%87%E7%A8%8B%E8%B0%83%E7%94%A8%E5%92%8CNIO.pdf">请戳</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -781,56 +847,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/05/13/free-the-bit-economics/">《免费》</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-13T00:46:00+08:00" pubdate data-updated="true">May 13<span>th</span>, 2013</time>
-        
-
-
-
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>比特经济的到来</h2>
-
-<p><a href="http://en.wikipedia.org/wiki/Chris_Andersen">克里斯·安德森</a>人称鸟人安德森，现效力于热火队，一直以来都是值得信赖的角色球员，板凳匪徒，内线尖兵。好了，不扯了……回到另外一个<a href="http://t.cn/akRhip">克里斯·安德森</a>的思想世界来。</p>
-
-<p>长尾理论早就为人熟知了，最早就是由安德森提出的，用于解释Amazon和Netflix的商业和经济模式。虽然没有阅读过原书，只是从网络接收了一些二手甚至三手的相关观点，但也可以从当今互联网的新兴中发现许多端倪。</p>
-
-<p>按作者的话来说，“免费”是<a href="http://book.douban.com/subject/1919072/">《长尾理论》</a>没讨论完的话题，它并非新生事物，但是一直在变化，它的变化促使我们要反思人类行为和经济动因方面最根深蒂固的一些观念。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/05/13/free-the-bit-economics/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -846,13 +862,17 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   <ul id="categories">
     <li class='category'><a href='/blog/categories/book/'>book (5)</a></li>
 <li class='category'><a href='/blog/categories/life/'>life (3)</a></li>
-<li class='category'><a href='/blog/categories/tech/'>tech (19)</a></li>
+<li class='category'><a href='/blog/categories/tech/'>tech (20)</a></li>
 
   </ul>
 </section>
 <section>
   <h1>最近发表</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/06/08/ipc-in-hadoop/">《Hadoop技术内幕》学习笔记——RPC和动态代理</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/05/25/some-ideas-about-using-bt-protocol-to-sync/">关于毕业季照片分享的思考</a>
@@ -870,25 +890,21 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
         <a href="/blog/2013/05/21/the-facebook-effect/">《Facebook效应》</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/05/20/hybrid-distributed-data-management-system/">Hadoop和RDBMS的混合系统介绍</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>标签云</h1>
   <ul class="tag-cloud">
-    <a style="font-size: 210%" href="/tags/algorithm/">algorithm</a>
+    <a style="font-size: 202%" href="/tags/algorithm/">algorithm</a>
 <a style="font-size: 210%" href="/tags/distributed/">distributed</a>
-<a style="font-size: 175%" href="/tags/hadoop/">hadoop</a>
-<a style="font-size: 133%" href="/tags/java/">java</a>
-<a style="font-size: 133%" href="/tags/linux/">linux</a>
+<a style="font-size: 183%" href="/tags/hadoop/">hadoop</a>
+<a style="font-size: 153%" href="/tags/java/">java</a>
+<a style="font-size: 130%" href="/tags/linux/">linux</a>
 <a style="font-size: 90%" href="/tags/networks/">networks</a>
-<a style="font-size: 133%" href="/tags/os/">os</a>
-<a style="font-size: 175%" href="/tags/pat/">pat</a>
-<a style="font-size: 133%" href="/tags/security/">security</a>
-<a style="font-size: 210%" href="/tags/think/">think</a>
+<a style="font-size: 130%" href="/tags/os/">os</a>
+<a style="font-size: 170%" href="/tags/pat/">pat</a>
+<a style="font-size: 130%" href="/tags/security/">security</a>
+<a style="font-size: 202%" href="/tags/think/">think</a>
 
   </ul>
 </section>
