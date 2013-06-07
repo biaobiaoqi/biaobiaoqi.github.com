@@ -11,9 +11,7 @@ footer: true
 
 `biaobiaoqi`是我2008年开始在浙大CC98论坛使用的ID(最早是`BIAOBIAO齐`，由于不便于书写和描述，后来简化为`biaobiaoqi`)，也是我的[微博](http://weibo.com/biaobiaoqi)、[豆瓣](http://www.douban.com/people/biaobiaoqi/)、[Github](https://github.com/biaobiaoqi)、[StackOverFlow](http://stackoverflow.com/users/1019336/biaobiaoqi)的用户名。
 
-我曾经尝试过移动开发，写过Android应用。大三暑假参加了Google第二届Android应用开发中国大学生挑战赛，与另外两位同学一起，从零基础自学Java并开发了基于重力感应控制的贪吃蛇游戏[“功夫蛇”](http://www.google.cn/university/androidchallenge/2011/gallery.html#tab=d1-13)，获得了全国总决赛二等奖。
-
-2012年用8个月的时间参与到学长的创业团队中，负责一款在线通讯录的iOS开发（[查好友](http://chahaoyou.com/)），直到2.2.0版本发布（2013-02），那时候总用户数达到了1w。现已退出团队，iOS开发也退化为我的业余兴趣爱好。
+我曾经尝试过移动开发，写过[Android应用](http://www.google.cn/university/androidchallenge/2011/gallery.html#tab=d1-13)，参与过创业团队的[iOS开发](http://chahaoyou.com/)。
 
 本科毕设，做了一些Java字节码的分析研究分析。研究生阶段，在实验室干着跟分布式相关的活儿，并负责实验室集群的运维。最近很想学ruby~
 
