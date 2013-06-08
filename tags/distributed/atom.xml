@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: distributed | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/tags/distributed/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-06-08T00:32:55+08:00</updated>
+  <updated>2013-06-09T00:54:14+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -12,6 +12,70 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[SDN：软件定义网络]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/06/08/software-defined-network/"/>
+    <updated>2013-06-08T00:39:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/06/08/software-defined-network</id>
+    <content type="html"><![CDATA[<p>最近高级网络课的小组任务是在老师给定的范围内自选方向主题研究并做展示报告。我们组选了sdn。原以为这东西会是工业界无人问津的概念化产品，Google了一下却发现其实sdn挺火的，由于它可能带来的可扩展性，一些大互联网企业也在开始涉足相关的研发，比如Google呵Facebook。这里简要的梳理下我对SDN概念性的认识。</p>
+
+<h2>背景</h2>
+
+<h3>虚拟化的大趋势</h3>
+
+<p>近年来，大数据、云计算兴起，虚拟化技术的重要性越发突出。提到虚拟化，不得不提的是计算机行业里的一句老话：</p>
+
+<blockquote><p>计算机世界的绝大部分问题都可以通过分层的方法来解决</p></blockquote>
+
+<p>其实虚拟化也可以理解成一种分层的思想。就拿云计算这个应用场景来说，虚拟化的技术就是在原有的<code>硬件-操作系统-用户</code>层次中，增添了<code>虚拟机</code>这么一层，变成了<code>硬件-虚拟机-操作系统-用户</code>，用虚拟机来管理硬件资源，增加了动态调整硬件资源的语义。</p>
+
+<p>纵观计算机的发展历程，各方面都可以看到通过增加类似的虚拟化层次来提高生产效率的案例。比如高级语言之于汇编，比如图形界面之于命令行。这种添加层次的解决方案，总是能让问题得到更清晰的解决。</p>
+
+<h3>网络虚拟化</h3>
+
+<p>网络经历了<a href="http://article.yeeyan.org/view/100437/70880">数十年的发展</a>，如今在人们的生产、生活中发挥着巨大的作用。全球的网络拓扑结构结构错综复杂，有许多的自制系统组成。数据包从中国的一台PC机发出，访问到美国的主机，需经过一系列的路由、转发，而经由的网络拓扑节点由层层网关、路由器支配，难于控制。一些组织，在架设自身的可扩展、大规模网络环境时，也同样遇到了拓扑结构复杂、难于维护的问题。</p>
+
+<p>如果能剥离开网络的物理拓扑结构，将网络资源虚拟化，隐藏物理结构的复杂性，统一的进行逻辑层的管理控制，就能满足多变的网络需求了。</p>
+
+<p>SDN和OpenFlow就是一个这样的解决方案。</p>
+
+<h2>OpenFlow和SDN</h2>
+
+<p>OpenFlow起源于斯坦福的Ethane项目。该项目试图通过一个集中式的控制器，让网络管理员可以方便地定义基于网络流的安全控制策略，并将这些安全策略应用到各种网络设备中，从而实现对整个网络通讯的安全控制。受到此项目的启发，斯坦福的老师和学生将Ethane的设计更一般化，将传统网络设备的数据转发(data plane)和路由控制(control plane)两个功能模块相分离，通过集中式的控制器(Controller)以标准化的接口对各种网络设备进行管理和配置。2008年，他们提出了OpenFlow的概念。</p>
+
+<p>这种分布式的实现方式，让控制平面可以和转发平面物理的分离开，控制平面完全可以运行在运算能力更强的服务器上，而不是路由器。OpenFlow协议则是分离的两者之间的通信协议。关于OpenFlow的技术细节，<a href="http://network.51cto.com/art/201306/397443.htm">《虚拟化的逆袭：OpenFlow和SDN》</a>一文中有简明介绍。</p>
+
+<p>基于OpenFlow为网络带来的可编程的特性，有研究人员提出了SDN即Software Defined Network（2009年）。在这个概念中，网络中所有的网络设备被视为被管理的资源，以此抽象出一个网络操作系统(Network OS)的概念，这个网络操作系统一方面抽象了底层网络设备的具体细节，同时还为上层应用提供了统一的管理视图和编程接口。SDN的架构细节，参见<a href="http://network.51cto.com/art/201211/366278.htm">《SDN是生意 OpenFlow是技术》</a>。</p>
+
+<p>SDN和OpenFlow的关系，就像互联网之于TCP/IP协议栈。OpenFlow是SDN的核心协议，用于控制转发面设备的控制转发。而SDN是上层的变成界面。</p>
+
+<p>有观点认为，『OpenFlow是技术，SDN是生意』。最近对SDN唱衰的报道也证明了这桩『生意』的前途未仆。</p>
+
+<h2>SDN的发展</h2>
+
+<p>在云计算飞速发展的同时，SDN也喧嚣尘上。Google,Facebook等大公司也结成了产业联盟，来推动其发展。</p>
+
+<p>但其现状也并非一片明朗：</p>
+
+<blockquote><p>根据IDC的研究结果显示，在2013年，整个企业网络行业的市场价值为420亿美元，其中将近一半来自2-3层网络交换机市场。SDN只能产生约37亿美元的价值(8.8%)，而且要到2016年才能达到这个数字。与早前的预测相比，IDC的预测数字有所增加，但从整个网络行业来看，SDN仍然相去甚远。</p></blockquote>
+
+<p>一方面，SDN的性能还有待改善，另一方面，由于SDN的统一平台的思想，会带来硬件设备的同质化，威胁到厂商的利益，将会面临来自厂商锁定的阻力。<a href="http://www.csdn.net/article/2013-06-08/2815714">《理性看待SDN》</a>一文中有较详细的解释。</p>
+
+<p>虽然虚拟化能解放生产力，是大势所趋，但就像功耗更大的复杂指令集在市场上战胜了精简指令集一样，市场是残酷的。只能期待开源和开放的脚步不要停下。</p>
+
+<h3>参考</h3>
+
+<ul>
+<li><a href="http://blog.sina.com.cn/s/blog_72628e9f0100yg3b.html">什么是SDN(Software Defined Networking)？</a>
+*</li>
+<li><a href="http://blog.sina.com.cn/s/blog_5385c0b901010pu3.html">OpenFlow/SDN本质论</a></li>
+<li><a href="http://article.yeeyan.org/view/323168/358956">软件定义网络(SDN)：是什么，如何工作，为什么重要</a></li>
+<li><a href="http://network.51cto.com/art/201305/394648.htm">SDN：仍处于起步阶段</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[《Hadoop技术内幕》学习笔记——RPC和动态代理]]></title>
@@ -355,146 +419,6 @@
 
 
 <p>也就是类似于投票获得读写的锁。在Dynamo系统中可以配置这种wrn参数以自持特定的一致性。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[HadoopDB：混合分布式系统]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/05/18/a-hybrid-system-hadoopdb/"/>
-    <updated>2013-05-18T17:58:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/05/18/a-hybrid-system-hadoopdb</id>
-    <content type="html"><![CDATA[<p>HadoopDB是一个Mapreduce和传统关系型数据库的结合方案，以充分利用RDBMS的性能和Hadoop的容错、分布特性。2009年被Yale大学教授Abadi提出，继而商业化为<a href="http://hadapt.com/">Hadapt</a>，据称从VC那儿拉到了10M刀投资。</p>
-
-<p>本文是对HadoopDB论文的总结。其中不免掺杂些自己的不成熟想法，更详细的内容，还请参见原论文 HadoopDB: An Architectural Hybrid of MapReduce and DBMS Technologies for Analytical Workloads</p>
-
-<!--more-->
-
-
-<h2>背景</h2>
-
-<h3>PB级数据分析系统的能力要求</h3>
-
-<ul>
-<li>1.性能：节省开销（时间、资金）。</li>
-<li>2.容错：数据分析系统（即使有故障节点也能顺利工作） 不同于 事务型的系统的容错（从故障中无损的恢复）。节点故障时，原来的查询操作不需要重启。</li>
-<li>3.在异构型环境中运行的能力。即使所有机器硬件一样，但某些机器在某些时候可能因为软件原因、网络原因也会性能降低。分布式操作时，要防止木桶效应。</li>
-<li>4.活的查询接口：商业化的数据分析一般建立在SQL查询上，UDF等non-SQL也是需要的。</li>
-</ul>
-
-
-<h5>并行数据库</h5>
-
-<p>满足1,4：利用分表的方式，扩散到多个节点。一般情况下节点最多为几十个，原因：1.每增加一个节点，失败率增加；2.并行数据库假设各个机器都是同质化的，但这往往不太可能</p>
-
-<h5>MapReduce</h5>
-
-<p>满足2,3,4：Map - repartition - Reduce原为非结构化数据，但也可以适用结构化数据。</p>
-
-<ul>
-<li>2：（错误节点）动态的规划节点执行任务，将错误节点任务发放给新节点。并在本地磁盘做checkpoint存储。</li>
-<li>3：（拖后腿的节点）节点间冗余的执行。执行慢的节点的任务交付给速度快的节点执行</li>
-<li>4：Hive的HQL</li>
-</ul>
-
-
-<h5>HadoopDB</h5>
-
-<p>融合了之前两者，做出系统层面的改进，而不仅仅是语言和接口层面。</p>
-
-<p>这三个解决方案对4个指标的关系如下图：</p>
-
-<p><img src="http://dl.dropboxusercontent.com/u/64021093/hadoopDB/QQ%E6%88%AA%E5%9B%BE20130518135802.png" title="compare" alt="alt compare" /></p>
-
-<h2>架构</h2>
-
-<p>如图
-<img src="https://dl.dropboxusercontent.com/u/64021093/hadoopDB/QQ%E6%88%AA%E5%9B%BE20130518135814.png" title="framework" alt="alt framework" /></p>
-
-<h2>组件介绍</h2>
-
-<h5>Databse Connector:</h5>
-
-<ul>
-<li><p>作用</p>
-
-<p>  hadoopTask &lt;-通信-> Database on Node。节点上的DB类似于Hadoop中的数据源HDFS</p></li>
-<li><p>实现</p>
-
-<p>  扩展了Hadoop的InputFormat</p></li>
-</ul>
-
-
-<h5>Catalog：</h5>
-
-<ul>
-<li><p>作用</p>
-
-<p>  1.链接参数如数据库位置，驱动类和证书；
-  2.一些元数据如数据簇中的数据集，副本的位置，数据的划分。</p></li>
-<li><p>实现</p>
-
-<p>  HDFS上的XML。希望做成类似于Hadoop的namenode。</p></li>
-</ul>
-
-
-<h5>Data Loader</h5>
-
-<ul>
-<li><p>作用</p>
-
-<p>  将数据合理划分，从HDFS转移到节点中的本地文件系统</p></li>
-<li><p>实现</p>
-
-<p>  global hasher：分配到不同节点
-  local hasher：继续划分为不同chunks</p></li>
-</ul>
-
-
-<h5>SQL to MapReduce to SQL (SMS) Planner</h5>
-
-<ul>
-<li><p>作用</p>
-
-<p>  将HiveQL转化为特定执行计划，在hadoopDB中执行。原则是尽可能的讲操作推向节点上的RDBMS上执行，以此提高执行效率。</p></li>
-<li><p>实现</p>
-
-<p>  扩展Hive：
-  1.执行查找前，用catolog的信息更新Hive的metastore，定向到节点数据库的表
-  2.执行前，决定划分的键；将部分查询语句推到节点的数据库中执行。</p></li>
-</ul>
-
-
-<h2>示例</h2>
-
-<p>示例参见下文的slides</p>
-
-<h2>总结</h2>
-
-<p>对hadoopDB的一些看法：</p>
-
-<ul>
-<li>其数据预处理代价过高：数据需要进行两次分解和一次数据库加载操作后才能使用；</li>
-<li>将查询推向数据库层只是少数情况，大多数情况下，查询仍由Ｈive完成．因为数据仓库查询往往涉及多表连接，由于连接的复杂性，难以做到在保持连接数据局部性的前提下将参与连接的多张表按照某种模式划分；</li>
-<li>维护代价过高．不仅要维护Ｈadoop系统，还要维护每个数据库节点；</li>
-<li>目前尚不支持数据的动态划分，需要手工一次划分好</li>
-</ul>
-
-
-<p>slides：</p>
-
-<script async class="speakerdeck-embed" data-id="48c5e680a1ab0130e1707290244918d4" data-ratio="1.33333333333333" src="http://biaobiaoqi.github.com//speakerdeck.com/assets/embed.js"></script>
-
-
-<p>下载slides，请猛戳<a href="https://dl.dropboxusercontent.com/u/64021093/hadoopDB/%5B2013-05-18%5DHadoopDB.pptx">这里</a></p>
-
-<h2>参考资料</h2>
-
-<ul>
-<li>HadoopDB: An Architectural Hybrid of MapReduce and DBMS Technologies for Analytical Workloads</li>
-<li><a href="http://dbanotes.net/database/hadoopdb.html">《HadoopDB》 —— Fenng</a></li>
-<li>《架构大数据:挑战、现状与展望》 计算机学报 王珊</li>
-</ul>
-
 ]]></content>
   </entry>
   

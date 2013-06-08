@@ -4,7 +4,7 @@
   <title><![CDATA[Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-06-08T00:32:55+08:00</updated>
+  <updated>2013-06-09T00:54:14+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -12,6 +12,70 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[SDN：软件定义网络]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/06/08/software-defined-network/"/>
+    <updated>2013-06-08T00:39:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/06/08/software-defined-network</id>
+    <content type="html"><![CDATA[<p>最近高级网络课的小组任务是在老师给定的范围内自选方向主题研究并做展示报告。我们组选了sdn。原以为这东西会是工业界无人问津的概念化产品，Google了一下却发现其实sdn挺火的，由于它可能带来的可扩展性，一些大互联网企业也在开始涉足相关的研发，比如Google呵Facebook。这里简要的梳理下我对SDN概念性的认识。</p>
+
+<h2>背景</h2>
+
+<h3>虚拟化的大趋势</h3>
+
+<p>近年来，大数据、云计算兴起，虚拟化技术的重要性越发突出。提到虚拟化，不得不提的是计算机行业里的一句老话：</p>
+
+<blockquote><p>计算机世界的绝大部分问题都可以通过分层的方法来解决</p></blockquote>
+
+<p>其实虚拟化也可以理解成一种分层的思想。就拿云计算这个应用场景来说，虚拟化的技术就是在原有的<code>硬件-操作系统-用户</code>层次中，增添了<code>虚拟机</code>这么一层，变成了<code>硬件-虚拟机-操作系统-用户</code>，用虚拟机来管理硬件资源，增加了动态调整硬件资源的语义。</p>
+
+<p>纵观计算机的发展历程，各方面都可以看到通过增加类似的虚拟化层次来提高生产效率的案例。比如高级语言之于汇编，比如图形界面之于命令行。这种添加层次的解决方案，总是能让问题得到更清晰的解决。</p>
+
+<h3>网络虚拟化</h3>
+
+<p>网络经历了<a href="http://article.yeeyan.org/view/100437/70880">数十年的发展</a>，如今在人们的生产、生活中发挥着巨大的作用。全球的网络拓扑结构结构错综复杂，有许多的自制系统组成。数据包从中国的一台PC机发出，访问到美国的主机，需经过一系列的路由、转发，而经由的网络拓扑节点由层层网关、路由器支配，难于控制。一些组织，在架设自身的可扩展、大规模网络环境时，也同样遇到了拓扑结构复杂、难于维护的问题。</p>
+
+<p>如果能剥离开网络的物理拓扑结构，将网络资源虚拟化，隐藏物理结构的复杂性，统一的进行逻辑层的管理控制，就能满足多变的网络需求了。</p>
+
+<p>SDN和OpenFlow就是一个这样的解决方案。</p>
+
+<h2>OpenFlow和SDN</h2>
+
+<p>OpenFlow起源于斯坦福的Ethane项目。该项目试图通过一个集中式的控制器，让网络管理员可以方便地定义基于网络流的安全控制策略，并将这些安全策略应用到各种网络设备中，从而实现对整个网络通讯的安全控制。受到此项目的启发，斯坦福的老师和学生将Ethane的设计更一般化，将传统网络设备的数据转发(data plane)和路由控制(control plane)两个功能模块相分离，通过集中式的控制器(Controller)以标准化的接口对各种网络设备进行管理和配置。2008年，他们提出了OpenFlow的概念。</p>
+
+<p>这种分布式的实现方式，让控制平面可以和转发平面物理的分离开，控制平面完全可以运行在运算能力更强的服务器上，而不是路由器。OpenFlow协议则是分离的两者之间的通信协议。关于OpenFlow的技术细节，<a href="http://network.51cto.com/art/201306/397443.htm">《虚拟化的逆袭：OpenFlow和SDN》</a>一文中有简明介绍。</p>
+
+<p>基于OpenFlow为网络带来的可编程的特性，有研究人员提出了SDN即Software Defined Network（2009年）。在这个概念中，网络中所有的网络设备被视为被管理的资源，以此抽象出一个网络操作系统(Network OS)的概念，这个网络操作系统一方面抽象了底层网络设备的具体细节，同时还为上层应用提供了统一的管理视图和编程接口。SDN的架构细节，参见<a href="http://network.51cto.com/art/201211/366278.htm">《SDN是生意 OpenFlow是技术》</a>。</p>
+
+<p>SDN和OpenFlow的关系，就像互联网之于TCP/IP协议栈。OpenFlow是SDN的核心协议，用于控制转发面设备的控制转发。而SDN是上层的变成界面。</p>
+
+<p>有观点认为，『OpenFlow是技术，SDN是生意』。最近对SDN唱衰的报道也证明了这桩『生意』的前途未仆。</p>
+
+<h2>SDN的发展</h2>
+
+<p>在云计算飞速发展的同时，SDN也喧嚣尘上。Google,Facebook等大公司也结成了产业联盟，来推动其发展。</p>
+
+<p>但其现状也并非一片明朗：</p>
+
+<blockquote><p>根据IDC的研究结果显示，在2013年，整个企业网络行业的市场价值为420亿美元，其中将近一半来自2-3层网络交换机市场。SDN只能产生约37亿美元的价值(8.8%)，而且要到2016年才能达到这个数字。与早前的预测相比，IDC的预测数字有所增加，但从整个网络行业来看，SDN仍然相去甚远。</p></blockquote>
+
+<p>一方面，SDN的性能还有待改善，另一方面，由于SDN的统一平台的思想，会带来硬件设备的同质化，威胁到厂商的利益，将会面临来自厂商锁定的阻力。<a href="http://www.csdn.net/article/2013-06-08/2815714">《理性看待SDN》</a>一文中有较详细的解释。</p>
+
+<p>虽然虚拟化能解放生产力，是大势所趋，但就像功耗更大的复杂指令集在市场上战胜了精简指令集一样，市场是残酷的。只能期待开源和开放的脚步不要停下。</p>
+
+<h3>参考</h3>
+
+<ul>
+<li><a href="http://blog.sina.com.cn/s/blog_72628e9f0100yg3b.html">什么是SDN(Software Defined Networking)？</a>
+*</li>
+<li><a href="http://blog.sina.com.cn/s/blog_5385c0b901010pu3.html">OpenFlow/SDN本质论</a></li>
+<li><a href="http://article.yeeyan.org/view/323168/358956">软件定义网络(SDN)：是什么，如何工作，为什么重要</a></li>
+<li><a href="http://network.51cto.com/art/201305/394648.htm">SDN：仍处于起步阶段</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[《Hadoop技术内幕》学习笔记——RPC和动态代理]]></title>
@@ -2967,222 +3031,6 @@ postorder: B, A</p>
 <hr />
 
 <p>PS：书中有几个小错误，比如.P208 4题的答案的笔误，以及P210 第5题解题思路中的纰漏。不过，无伤大雅，译者翻译的已经很是舒畅了。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[SSH原理和使用]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/04/19/use-ssh/"/>
-    <updated>2013-04-19T21:44:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/04/19/use-ssh</id>
-    <content type="html"><![CDATA[<h2>ssh是什么</h2>
-
-<p>在linux上工作，ssh是必须要了解的技术方法。它可以建立起多台主机之间的安全的加密传输，以进行远程的访问、操控、传输数据。</p>
-
-<p>SSH為Secure Shell的縮寫。為建立在应用层和传输层基础上的安全协议。</p>
-
-<p>传统的网络服务程序，如FTP、POP和Telnet其本质上都是不安全的；因为它们在网络上用明文传送数据、用户帐号和用户口令，很容易受到中间人（man-in-the-middle）攻击方式的攻击。就是存在另一个人或者一台机器冒充真正的服务器接收用户传给服务器的数据，然后再冒充用户把数据传给真正的服务器。
-而SSH是目前较可靠，專为远程登录会话和其他网络服务提供安全性的协议。利用SSH协议可以有效防止远程管理过程中的信息泄露问题。透過SSH可以對所有传输的数据进行加密，也能够防止DNS欺骗和IP欺骗。</p>
-
-<!--more-->
-
-
-<p>SSH之另一項優點為其传输的数据是经过压缩的，所以可以加快传输的速度。SSH有很多功能，它既可以代替Telnet，又可以为FTP、POP、甚至为PPP提供一个安全的「通道」。
-了解这么多就好了，其实ssh连接也就是可以理解成经过加密的远程访问啦。</p>
-
-<p>&#8212;（来自中文维基）</p>
-
-<h2>ssh连接的验证、加密方式</h2>
-
-<p>ssh连接是CS模型（客户端-服务器），客户端发出连接申请，服务器对客户端进行验证，再考虑是否接受连接申请。</p>
-
-<p>ssh的安全加密方式的理论基础是非对称加密体系。而非对称加密中，常见的一种就是RSA加密算法。在使用ssh，务必先弄清楚非对称加密和rsa的算法流程。详情参见<a href="http://zh.wikipedia.org/wiki/RSA%E5%8A%A0%E5%AF%86%E6%BC%94%E7%AE%97%E6%B3%95">RSA加密算法</a>。</p>
-
-<p>ssh有两种级别的安全验证：账户口令验证、rsa加密验证。详细参数，可以在sshd_config配置文件中设置(Ubuntu是/etc/ssh/sshd_config，mac下是/etc/sshd_config)</p>
-
-<h3>账号口令验证</h3>
-
-<p>直接输入所要登陆的用户的口令是默认的方式。不需要修改配置文件。</p>
-
-<p>如果直接从客户端将用户密码传输到服务器，那么密码信息很容易被中间人截获，从而实现重放攻击。ssh的实现方式是：</p>
-
-<ul>
-<li>1.客户端向ssh服务器发出请求，服务器将自己的公钥返回给客户端；</li>
-<li>2.客户端用服务器的公钥加密自己的登录密码，再将信息发送给服务器；</li>
-<li>3.服务器接收到客户端传送的密码，用自己的私钥解码，如果结果正确，则同意登录，建立起连接。</li>
-</ul>
-
-
-<p>这种方式还是有漏洞的，中间人可以假扮成服务器，骗取客户端的密码。</p>
-
-<h3>RSA加密验证</h3>
-
-<p>rsa加密验证方式，充分利用了非对称加密体系的优势，不需要在网络传输密码，完全杜绝了中间人攻击的可能。步骤如下：</p>
-
-<h5>准备工作</h5>
-
-<ul>
-<li>-1.客户端先使用 ssh-keygen 命令，生成私钥和公钥。按照默认配置，私钥会被保存在~/.ssh/id_rsa中，公钥则在~/.ssh/id_rsa.pub中。(一般别修改这里的文件)</li>
-<li>0.客户端通过安全的方式将公钥发送给服务器。在服务器端，将客户端发的公钥写入到~/.ssh/authorized_keys文件末尾。</li>
-</ul>
-
-
-<h5>建立连接</h5>
-
-<ul>
-<li>1.客户端发出申请。服务器产生session密钥对，返回通过对应客户端的公钥加密后的session公钥。</li>
-<li>2.客户端用自己的密钥解密信息，得到session公钥。</li>
-<li>3.之后的数据交互，都通过对方方公钥加密，对方收到信息后，用其私钥解密，实现安全加密过程。</li>
-</ul>
-
-
-<h2>免密码的RSA加密方式实施过程</h2>
-
-<ul>
-<li>1.安装ssh</li>
-</ul>
-
-
-<p>mac下自带的有，ubuntu下直接sudo apt-get install ssh。</p>
-
-<ul>
-<li>2.在客户端生成私钥公钥</li>
-</ul>
-
-
-<p>使用ssh-keygen命令生成密钥对。遇到提示都直接回车（其中passphrase是保护rsa密钥的另一套加密方式）。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ ssh-keygen   
-</span><span class='line'>Generating public/private rsa key pair.  
-</span><span class='line'>Enter file in which to save the key (/Users/biaobiaoqi/.ssh/id_rsa): /Users/biaobiaoqi/.ssh/id_rsa  
-</span><span class='line'>Enter passphrase (empty for no passphrase):   
-</span><span class='line'>Enter same passphrase again:   
-</span><span class='line'>Your identification has been saved in /Users/biaobiaoqi/.ssh/id_rsa.  
-</span><span class='line'>Your public key has been saved in /Users/biaobiaoqi/.ssh/id_rsa.pub.  
-</span><span class='line'>The key fingerprint is:  
-</span><span class='line'>b7:c2:5c:3f:83:5e:5e:93:a4:42:db:51:d8:ac:07:66 biaobiaoqi@biaobiaoqi.local  
-</span><span class='line'>The key's randomart image is:  
-</span><span class='line'>+--[ RSA 2048]----+  
-</span><span class='line'>|                 |  
-</span><span class='line'>|             +   |  
-</span><span class='line'>|            E +  |  
-</span><span class='line'>|           o +   |  
-</span><span class='line'>|        S + o o  |  
-</span><span class='line'>|       o + * = . |  
-</span><span class='line'>|        + = B +  |  
-</span><span class='line'>|         o + + . |  
-</span><span class='line'>|          . .    |  
-</span><span class='line'>+-----------------+  </span></code></pre></td></tr></table></div></figure>
-
-
-<p>结果是在~/.ssh/下生成了 id_rsa（私钥）和id_rsa.pub（公钥）</p>
-
-<ul>
-<li>3.将客户端的公钥id_rsa.pub传递给服务器</li>
-</ul>
-
-
-<p>传送id_rsa.pub到服务器上，并将其内容写入到~/.ssh/authorized_keys文件尾。</p>
-
-<p>可以物理的用U盘转运（似乎更安全），也可以使用scp指令（这个时候就需要运用到口令验证的ssh方式)</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$scp ~/.ssh/id_rsa.pub user@host:~/.ssh/tmp_id_rsa.pub
-</span><span class='line'>$ssh user@host "cat ~./ssh/tmp_id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys"</span></code></pre></td></tr></table></div></figure>
-
-
-<p>在执行scp传输的过程中，如果是第一次ssh连接到服务器，客户端会提示是否信任这个主机，比如：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$scp ~/.ssh/id_rsa.pub user@host:~/.ssh/tmp_id_rsa.pub
-</span><span class='line'>The authenticity of host XXX can't be established.
-</span><span class='line'>ECDSA key fingerprint is xxxxxxxxxxxxxxxxxxxxxx.
-</span><span class='line'>Are you sure you want to continue connecting (yes/no)?</span></code></pre></td></tr></table></div></figure>
-
-
-<p>原因是，客户端不确定所连接的host是否是真正的host。一般情况，直接输入yes，继续就好了。这里有较详细的解释：<a href="http://stackoverflow.com/questions/3663895/ssh-the-authenticity-of-host-hostname-cant-be-established">点击连接</a></p>
-
-<p>然后就可以免密码、更安全的登录啦</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'> ssh xxxx@hostAddress</span></code></pre></td></tr></table></div></figure>
-
-
-<p>在ssh登录服务器时，如果出现如下问题：<em>Agent admitted failure to sign using the key</em>则需要手工将客户端私钥加入到ssh管理体系中。使用 ssh-add 指令。（具体机理还不太清楚）</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ssh-add   ~/.ssh/id_rsa</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>and one more thing;)</h2>
-
-<h4>ssh+firefox+autoproy</h4>
-
-<p>看看wall外面的世界，是多么美好的事情。ssh能帮我们做到，只要有一台在wall外的主机做代理。
-具体方式参见博文：<a href="http://reverland.bitbucket.org/ssh_climbe.html">ssh+firefox-autoproxy</a></p>
-
-<h4>SCP命令加密赋值数据</h4>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#将本地文件复制到远程主机上
-</span><span class='line'>$scp ~./tmp user@rehost:~/tmp
-</span><span class='line'>
-</span><span class='line'>#见远程主机上的文件复制到本地
-</span><span class='line'>$scp user@rehost:~/tmp ~./tmp
-</span><span class='line'>
-</span><span class='line'>#复制的是目录，需要迭代，添加-r参数
-</span><span class='line'>$scp -r user@rehost:~/tmpDir ~./tmpDir</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>SSH的配置</h4>
-
-<p>具体参数细节参见博文：<a href="http://www.ibm.com/developerworks/cn/aix/library/au-sshsecurity/">SSH 安全性和配置入门</a>
-<a href="http://blog.licess.org/sshd_config/">sshd_config配置 详解</a></p>
-
-<h2>推荐阅读：</h2>
-
-<ul>
-<li><a href="http://blog.lizhigang.net/archives/249">《linux ssh 使用深度解析（key登录详解）》</a></li>
-<li><a href="http://wiki.tuna.tsinghua.edu.cn/SshKeyHowto">《使用 RSA 密钥对进行 SSH 登录验证》</a></li>
-<li><a href="http://www.ruanyifeng.com/blog/2011/12/ssh_remote_login.html">《SSH原理与运用（一）：远程登录》</a></li>
-<li><a href="http://www.ruanyifeng.com/blog/2011/12/ssh_port_forwarding.html">《SSH原理与运用（二）：远程操作与端口转发》</a></li>
-<li><a href="http://reverland.bitbucket.org/ssh_climbe.html">ssh+firefox-autoproxy</a></li>
-<li><a href="http://www.ibm.com/developerworks/cn/aix/library/au-sshsecurity/">SSH 安全性和配置入门</a></li>
-<li><a href="http://blog.licess.org/sshd_config/">sshd_config配置 详解</a></li>
-</ul>
-
 ]]></content>
   </entry>
   
