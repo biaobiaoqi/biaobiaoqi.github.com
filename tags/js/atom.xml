@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: js | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/tags/js/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-06-11T22:19:20+08:00</updated>
+  <updated>2013-06-11T22:21:42+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -74,7 +74,7 @@
 
 <h5>1.项目启动</h5>
 
-<p>我在github上fork了<a href="https://github.com/hackerzhou/Love">hackerzhou的代码</a>。</p>
+<p>我在github上fork了<a href="https://github.com/hackerzhou/Love">hackerzhou的代码</a>。(<a href="https://github.com/biaobiaoqi/Love">我fork的版本</a>)</p>
 
 <p>clone到本地，尝试阅读js代码，尝试做小改动，找到动画开始的调用。</p>
 
@@ -107,6 +107,8 @@ document.getElementById('start_btn').style.display = ""; //show start button
 <h5>4.部署</h5>
 
 <p>github为每个项目提供了静态网页展示的功能，应付这个项目的网页展示完全够了。具体操作流程参见<a href="http://www.worldhello.net/gotgithub/03-project-hosting/050-homepage.html#project-homepage">《GotGithub》3.5.2. 创建项目主页</a>。实际上，链接中介绍的几种创造干净的gh-pages分支的方法，在这个项目的发布里是不必的。因为项目主页的展示代码跟master分支里的代码本身就是一样的，那么需要做的就只是开启gh-pages分支，并提交代码了。</p>
+
+<p>项目成果：<a href="http://biaobiaoqi.me/Love">请戳这里</a></p>
 
 <h2>结语</h2>
 
