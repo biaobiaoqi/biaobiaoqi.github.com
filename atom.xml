@@ -4,7 +4,7 @@
   <title><![CDATA[Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-06-11T16:18:35+08:00</updated>
+  <updated>2013-06-11T22:19:20+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -12,6 +12,107 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[给女朋友的礼物]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/06/11/gift-to-girl-friend/"/>
+    <updated>2013-06-11T17:12:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/06/11/gift-to-girl-friend</id>
+    <content type="html"><![CDATA[<h2>背景</h2>
+
+<p>一个月前发现了<a href="http://v2ex.com">V2EX</a>这个网站，用创始人<a href="http://www.v2ex.com/member/Livid">Livid</a>的话来说，『这是一个主要关于做事儿的地方』。确实如此，我在这里收获了很多想法和灵感。</p>
+
+<p>本文所记的，也是得益于某天的对<a href="http://www.v2ex.com/t/69145">某个主题</a>的浏览。帖子中，大家分享了很多给女朋友做的网页，说『技术宅改变世界』太过了，但拥有这样一个礼物，确实是一种属于程序员的快乐和程序员的女友的幸福。</p>
+
+<p>快到我跟我妹子恋爱四周年的日子了，也正逢她本科毕业，无论如何都是个有趣的时间点。受了那个帖子的刺激，我也筹划着给女朋友做一个小网页，以示纪念。</p>
+
+<p>遗憾的是，我自己从来没有写过网页，javascript和css只知道概念，html也只是知道一些简单的标签，这些可是完成一个小网页所必备的技能呢。技术能力直接阻碍了创造性成果出现的可能:(。于是，解决方案只能是搜集开源代码，然后自己做定制了。实际上，最后的产出，也就是三份代码的拼接。</p>
+
+<h2>资料搜集</h2>
+
+<p>通过各方搜寻，我找到了如下几个网页：</p>
+
+<ul>
+<li>1.<a href="http://love.hackerzhou.me/">复旦的学长hackzhou的爱心动画</a>，<a href="https://github.com/hackerzhou/Love">github托管代码</a>。</li>
+</ul>
+
+
+<p>网页用到了html5的一些特性实现了动态的心形花的绘制和类似程序代码敲击的文字呈现形式。由于内容仅仅是文字的，可定制性强。如下图：
+<img src="https://dl.dropboxusercontent.com/u/64021093/Pics/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202013-06-11%20%E4%B8%8B%E5%8D%888.12.01.png" title="hackerzhou's page" alt="hackerzhou's love project" /></p>
+
+<ul>
+<li>2.<a href="http://carfieldloverita.sinaapp.com/">一对异国情侣的Google地图应用</a>，<a href="https://github.com/wong2/lovegift">github托管代码</a>。</li>
+</ul>
+
+
+<p>网页调用了Google地图的API，可以定义聚焦的地理位置和坐标尺，显示照片，像日记一样记录了点点滴滴，有背景音乐。最后还以地点输入框的形式做了表白。很有创意！
+<img src="https://dl.dropboxusercontent.com/u/64021093/Pics/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202013-06-11%20%E4%B8%8B%E5%8D%888.12.18.png" title="Googlemap app" alt="Google map app" /></p>
+
+<ul>
+<li>3.<a href="http://liumeijun.com/">v2ex上某童鞋基于百度地图的应用</a>。</li>
+</ul>
+
+
+<p>跟2类似，调用了百度API，配上『Lemon tree』的背景音乐，很有调调！
+<img src="https://dl.dropboxusercontent.com/u/64021093/Pics/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202013-06-11%20%E4%B8%8B%E5%8D%888.16.00.png" title="baidumap app" alt="baidumap app" /></p>
+
+<h2>定制计划</h2>
+
+<p>限于没有前端的基础，开发效率会很低，只能硬顶着拿着前面的三个项目做混搭了。其中项目1和2都有在github上开源代码，而3则在v2ex的帖子里被作者授权直接查源码使用了。</p>
+
+<p>我做了简单的混搭修改计划：</p>
+
+<ul>
+<li>1.以hackzhou的项目为基础，修改文字内容和基本布局。</li>
+<li>2.添加加载等待过程，加载背景音乐。</li>
+<li>3.加载完成后，出现开始按钮，按开始按钮播放背景音乐，进入动画效果。</li>
+<li>4.增加全屏效果。</li>
+</ul>
+
+
+<h2>实施</h2>
+
+<h5>1.项目启动</h5>
+
+<p>我在github上fork了<a href="https://github.com/hackerzhou/Love">hackerzhou的代码</a>。</p>
+
+<p>clone到本地，尝试阅读js代码，尝试做小改动，找到动画开始的调用。</p>
+
+<h5>2.尝试添加背景音乐</h5>
+
+<p>网上查资料，找到了<code>&lt;embeded&gt;</code>可以用来添加背景音乐，测试成功。但这个音乐播放无法支持同步的加载，不可控，在网络环境差的情况下，如果没有配乐动画过程会缺少表现力。放弃这种方案。</p>
+
+<p>在<a href="http://liumeijun.com/">v2ex上某童鞋基于百度地图的应用</a>源码中找到了一个第三方音乐播放库：<a href="http://www.schillmania.com/projects/soundmanager2/">soundmanager2</a>。查看官方文档，确认能满足项目需求，于是加入到代码中。</p>
+
+<p>为了让页面展现更加顺畅，需要音乐文件越小越好。我尝试了MIDI格式，但是很多浏览器并不支持，作罢。而soundmanager似乎对wma的支持有问题，于是只剩下mp3文件。我选择了JJ的『小酒窝』做背景音乐，在mac下使用ocenaudio将原来3MB的mp3文件截取了前一半，并导出为不同设定采样率的版本，经过测试，发现56kb采样率下，音质没有受到大的影响，且大小也足够小了，于是确定用这种格式的mp3。最终MP3文件的大小为500KB！</p>
+
+<h5>3.加载逻辑和开始按键</h5>
+
+<p>需求：加载过程需要隐藏前景内容，在音乐加载完成后，显示开始按钮，开始按钮能触发动画效果。</p>
+
+<p>通过Google找到了使用js隐藏和显示内容的方式</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>document.getElementById('hint').style.display = "none"; //hide hint
+</span><span class='line'>document.getElementById('start_btn').style.display = ""; //show start button</span></code></pre></td></tr></table></div></figure>
+
+
+<p>虽然不是特别理解js引擎的单线程运作机制，但经过简单的试错、调试后，就完成了加载等待和开始按钮触发的原型。</p>
+
+<p>之后是对按钮和加载提示配置css。由于懒得理解css的一些细节，直接使用了<a href="https://github.com/wong2/lovegift">这份项目</a>中的css代码。</p>
+
+<h5>4.部署</h5>
+
+<p>github为每个项目提供了静态网页展示的功能，应付这个项目的网页展示完全够了。具体操作流程参见<a href="http://www.worldhello.net/gotgithub/03-project-hosting/050-homepage.html#project-homepage">《GotGithub》3.5.2. 创建项目主页</a>。实际上，链接中介绍的几种创造干净的gh-pages分支的方法，在这个项目的发布里是不必的。因为项目主页的展示代码跟master分支里的代码本身就是一样的，那么需要做的就只是开启gh-pages分支，并提交代码了。</p>
+
+<h2>结语</h2>
+
+<p>感谢v2ex，感谢hackerzhou、loo2k和wong2童鞋，我参考了你们很多代码。</p>
+
+<p>创造力需要靠技术手段实现。混迹在互联网上，没有自己建站的能力实在是很苦逼的一件事情。之后自己准备花些时间在RoR上。积累技术实力，努力做出好产品;)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[《写给大家看的设计书》]]></title>
@@ -2780,294 +2881,6 @@ postorder: B, A</p>
 <p>非递归实现的代码相对来说没有递归实现的直观。其核心都是维护了一个栈来保存状态，避免了产生过多方法调用栈浪费内存空间。</p>
 
 <p>本文中针对二叉树的几种遍历方式，描述了递归和非递归的解决方案。普遍意义的递归转非递归的方法和思想，将在另外一篇博文中介绍;)。欢迎交流。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[PDW中的Split Querying Process]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/04/25/split-querying-process-in-polybase/"/>
-    <updated>2013-04-25T22:59:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/04/25/split-querying-process-in-polybase</id>
-    <content type="html"><![CDATA[<p>最近看了关于SQL Server的分布式处理方面的论文，觉得它提出的Polybase跟之前看过的HadoopDB有些神似，这里做个小总结（抽空再把HadoopDB的总结贴出来）。</p>
-
-<p>不算翻译，只是挑出自己认为是重点的部分。详细情况，还请论文查阅原文，引用中有写明出处。文章末尾有我总结的slides，可以辅助查阅。</p>
-
-<p>由于缺乏实践经验，很多东西未必能理解其本质。如有其他观点，还请多指教。</p>
-
-<p>当下的计划就是开始自己搭环境，实践起来!~</p>
-
-<!--more-->
-
-
-<h2>背景</h2>
-
-<p>商业应用中，越来越多的需要将结构化数据和非结构化数据存储、处理混合起来。
-目前，已经有很多公司、产品致力于这部分的研究，微软发的这篇论文，也正是基于PDW V2的这一新功能提出的新的解决方案。</p>
-
-<h3>Polybase简介：</h3>
-
-<p>是SQL Server PDW V2的一个新功能：通过使用SQL来管理和查询hadoop集群中的数据。
-它同时能处理结构化和非结构化的数据，特点是结合了HDFS的外部表，使用基于开销的查询优化器来做分裂查询处理。</p>
-
-<h2>相关研究</h2>
-
-<ul>
-<li><p>sqoop：用于在hadoop和结构化数据9比如关系型数据库之间传输数据。</p></li>
-<li><p>teradata&amp; Asterdata&amp; Greenplum&amp; Vertica：通过外部表（external table）实现基于SQL的对hadoop中所存数据的操作。</p></li>
-<li><p>Orable：基本机制也是建立外部表；另外还开发了用于加载hadoop的大数据到Oracle自家数据库的工具OLH(Oracle loader for Hadoop)。</p></li>
-<li><p>IBM、Netezza:使用mapreduce方法获取分布式环境下各个节点的数据执行处理。</p></li>
-<li><p>Hadapt: (HadoopDB)：HadoopDB是来自耶鲁大学的创意，并商业化为Hadapt项目。这是首个提出使用类SQL语言、集合Hadoop系统实现对RDBMS的操作的想法。实现相对简单，源代码3千多行，在Hadoop中对其中的几个模块做了二次开发。</p></li>
-</ul>
-
-
-<h2>PDW</h2>
-
-<p>Polybase是PDW V2的一个新feature，那么，首先，让我们来看一下所谓的PDW是什么。</p>
-
-<p>PDW是一个基于SQL Server的shared-nothing的并行数据库系统。</p>
-
-<p>PDW（Parallel Data Warehouse）架构图：</p>
-
-<p><img src="http://dl.dropboxusercontent.com/u/64021093/pdw/Image0.png"></p>
-
-<h3>PDW系统中的组件：</h3>
-
-<h5>节点</h5>
-
-<ul>
-<li>control node：</li>
-</ul>
-
-
-<p>类似于Hadoop中的master节点。运行着PDW Engine，负责：查询语法分析，优化，生成分布式执行计划DSQL，控制计划实施</p>
-
-<ul>
-<li>compute node：</li>
-</ul>
-
-
-<p>类似于Hadoop中的slave节点。数据存储和查询执行</p>
-
-<h4>DMS</h4>
-
-<p>Data Moving Service，起功能有：</p>
-
-<ul>
-<li><p>1.repartition rows of a table among SQL Server instances on PDW compute nodes</p></li>
-<li><p>2.针对ODBC的类型转换。</p></li>
-</ul>
-
-
-<h2>Polybase</h2>
-
-<h3>Polybase使用场景</h3>
-
-<p>如图</p>
-
-<p><img src="http://dl.dropboxusercontent.com/u/64021093/pdw/Image1.png"></p>
-
-<p>（a）中PDW与Hadoop一起完成了数据处理任务，并输出结果；</p>
-
-<p>（b）中处理数据后，结果直接存储到HDFS中</p>
-
-<p>充分利用SQL Server PDW的性能优势，特别是它的基于开销的并行查询优化器和执行引擎。</p>
-
-<h3>Polybase的环境需求</h3>
-
-<ul>
-<li>1.PDW与Hadoop集群可以重叠，也可以分离。</li>
-<li>2.windows 和 linux部署的hadoop集群都支持。</li>
-<li>3.支持所有标准的HDFS文件格式，包括文本、序列化文件、RCFiles。只要定义好对应的Inputformat和outputFormat，所有定制文件格式也支持。</li>
-</ul>
-
-
-<h3>核心组件</h3>
-
-<ul>
-<li>1.外部表：用于在PDW中实现对数据的操作语义。</li>
-<li>2.HDFS Bridge：DMS中的组件，用于实现PDW节点域Hadoop的通信。</li>
-<li>3.基于开销的查询优化器：将常规SQL查询语句转化为DSQL（分布式SQL查询语句），并结合集群状况（比如Hadoop和PDW集群规模，运行状况等），合理选择优化方式。</li>
-</ul>
-
-
-<h3>1.外部表</h3>
-
-<p>PDW需要了解到Hadoop集群中数据的模型。于是就有了这个外部表。
-实例如下：</p>
-
-<p>创建集群：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>CREATE HADOOP_CLUSTER GSL_CLUSTER
-</span><span class='line'>
-</span><span class='line'>      WITH (namenode=‘hadoop-head’,namenode_port=9000,
-</span><span class='line'>
-</span><span class='line'>      jobtracker=‘hadoop-head’,jobtracker_port=9010);</span></code></pre></td></tr></table></div></figure>
-
-
-<p>创建文件格式：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>CREATE HADOOP_FILEFORMAT TEXT_FORMAT
-</span><span class='line'>
-</span><span class='line'>  WITH (INPUT_FORMAT=‘polybase.TextInputFormat’,
-</span><span class='line'>
-</span><span class='line'>  OUTPUT_FORMAT = ‘polybase.TextOutputFormat’,
-</span><span class='line'>
-</span><span class='line'>  ROW_DELIMITER = '\n', COLUMN_DELIMITER = ‘|’);
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>根据集群和文件信息，创建外部表</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>CREATE EXTERNAL TABLE hdfsCustomer
-</span><span class='line'>
-</span><span class='line'>  ( c_custkey       bigint not null,   
-</span><span class='line'>
-</span><span class='line'>    c_name          varchar(25) not null,
-</span><span class='line'>
-</span><span class='line'>     .......
-</span><span class='line'>    )
-</span><span class='line'>
-</span><span class='line'>WITH (LOCATION='/tpch1gb/customer.tbl',
-</span><span class='line'>
-</span><span class='line'>FORMAT_OPTIONS (EXTERNAL_CLUSTER = GSL_CLUSTER,
-</span><span class='line'>
-</span><span class='line'>EXTERNAL_FILEFORMAT = TEXT_FORMAT));</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>2.HDFS Bridge</h3>
-
-<p>结构如图：
-<img src="http://dl.dropboxusercontent.com/u/64021093/pdw/Image2.png"></p>
-
-<p>HDFS shuffle阶段：通过DMS从hadoop读取数据的阶段。
-涉及到hdfs中的数据处理时，处理过程如下：</p>
-
-<ul>
-<li><p>1.跟namenode通信，获得hdfs中文件的信息</p></li>
-<li><p>2.hdfs中文件信息 +  DMS实例个数 -> 每个DMS的输入文件（offset、长度） #力求负载均衡</p></li>
-<li><p>3.将DMS的输入文件信息传递给各个DMS，DMS通过 openRecordReader（）方法构建RecordReader实例，直接与对应的datanode通信，获取数据，并转换为ODBC格式（有时候类型转换提前到mapreduce中以利用hadoop集群的计算能力）。读取过程中，使用了buffer机制提高效率。有时候数据会被提前到从HDFS中读出时执行，而不是到DMS中执行。这是为了充分利用hadoop集群的计算能力，节约CPU秘籍的DMS shuffle的计算。</p></li>
-</ul>
-
-
-<p>写入hadoop的过程与此类似。</p>
-
-<h3>3.查询优化</h3>
-
-<ul>
-<li><p>1.PDW Parser(在PDW Engine的进程中完成)。</p></li>
-<li><p>2.SQL Server Query Optimizer(在control node的SQL Server的进程中完成)：使用bottom-up的方式进行查询优化，并在合理的位置插入数据迁移的操作符（用于分布式环境的数据迁移指令），:生成查询计划，存储在Memo数据结构（http://www.benjaminnevarez.com/2012/04/inside-the-query-optimizer-memo-structure/）中 。</p></li>
-<li><p>3.XML geneator(在control node的SQL Server的进程中完成)。接收Memo，并转换格式，往下传递。</p></li>
-<li><p>4.Query Optimizer(在PDW Engine的进程中完成)：根据Memo生成DSQL。</p></li>
-<li><p>5.基于开销的查询优化：判定是否将SQL语句推送到Hadoop中执行。</p>
-
-<p>  考虑外部表的样本数据的直方图、集群的规模等因素&#8230;选择最优优化方案。</p></li>
-</ul>
-
-
-<h5>样本数据处理:</h5>
-
-<p>定义对应外部表列的详细样本数据：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>CREATE STATISTICS hdfsCustomerStats ON
-</span><span class='line'>hdfsCustomer (c_custkey);</span></code></pre></td></tr></table></div></figure>
-
-
-<p>对样本数据的处理的方式如下：</p>
-
-<ul>
-<li>1.通过DMS或者map job读取sample数据，</li>
-<li>2.分发到不同的comute节点的暂存表。</li>
-<li>3.每个节点分别计算直方图。</li>
-<li>4.汇总直方图，存储到control node数据库的catalog中</li>
-</ul>
-
-
-<p>缺点是在此过程中没有利用好hadoop集群的计算能力。</p>
-
-<h3>语义兼容</h3>
-
-<p>涉及到Java和SQL以及之间的转换。包括这三个方面：</p>
-
-<ul>
-<li>数据类型的语义.</li>
-<li>表达式的语义</li>
-<li>异常处理机制</li>
-</ul>
-
-
-<p>例如：&#8221;a+b&#8221;，其中a，b都为null，SQL结果为NULL，而Java则会抛出NullException。</p>
-
-<p>处理原则是：能转化的类型则做好转化包装；不能转换的则标记为无法实现，仅限PDW实现。</p>
-
-<h3>举例：</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>   SELECT count (*) from Customer
-</span><span class='line'>  WHERE acctbal &lt; 0
-</span><span class='line'>  GROUP BY nationkey</span></code></pre></td></tr></table></div></figure>
-
-
-<p>如图所示为处理过程</p>
-
-<p><img src="http://dl.dropboxusercontent.com/u/64021093/pdw/Image4.png"></p>
-
-<p><img src="http://dl.dropboxusercontent.com/u/64021093/pdw/Image5.png"></p>
-
-<p><img src="http://dl.dropboxusercontent.com/u/64021093/pdw/Image6.png"></p>
-
-<h3>Polybase的MapReduce Join实现</h3>
-
-<p>使用distributed hash join实现（只有equi-join能被在mapreduce中完成）</p>
-
-<p>小表作为build side ，并被物化（materialized）到HDFS，大表作为probe side。</p>
-
-<p>在Hadoop的Map任务中：读取物化好的build side到内存，构成hash table。</p>
-
-<p>probe side经过hash后对比hash表，做正确的链接。</p>
-
-<p>为了让build side置于内存中，需要计算build side的大小、每个task拥有的内存大小，task中执行其他操作需要的内存空间。
-当然，build side也可能被复制多分，以提高效率。</p>
-
-<p><a href="https://dl.dropboxusercontent.com/u/64021093/pdw/Split%20Query%20Processing%20in%20Polybase%20%5Brevised%20on%202013-05-18%5D.pptx">本文演示slides下载链接，点击获取</a></p>
-
-<h2>引用</h2>
-
-<ul>
-<li>Split Query Processing in Polybase(SIGMOD’13， June 22-27,2013,New York,USA.) Microsoft Corporation</li>
-<li>Polybase:  What, Why, How(ppt) Microsoft Corporation</li>
-<li>Query Optimization in Microsoft SQL Server PDW(SIGMOD&#8217;12, May 20-24,2012,Scottsdale,Arizona,USA) Microsoft Corporation</li>
-</ul>
-
 ]]></content>
   </entry>
   

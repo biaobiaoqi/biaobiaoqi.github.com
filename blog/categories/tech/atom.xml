@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tech | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-06-11T16:18:35+08:00</updated>
+  <updated>2013-06-11T22:19:20+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -12,6 +12,109 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[给女朋友的礼物]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/06/11/gift-to-girl-friend/"/>
+    <updated>2013-06-11T17:12:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/06/11/gift-to-girl-friend</id>
+    <content type="html"><![CDATA[<h2>背景</h2>
+
+<p>一个月前发现了<a href="http://v2ex.com">V2EX</a>这个网站，用创始人<a href="http://www.v2ex.com/member/Livid">Livid</a>的话来说，『这是一个主要关于做事儿的地方』。确实如此，我在这里收获了很多想法和灵感。</p>
+
+<p>本文所记的，也是得益于某天的对<a href="http://www.v2ex.com/t/69145">某个主题</a>的浏览。帖子中，大家分享了很多给女朋友做的网页，说『技术宅改变世界』太过了，但拥有这样一个礼物，确实是一种属于程序员的快乐和程序员的女友的幸福。</p>
+
+<p>快到我跟我妹子恋爱四周年的日子了，也正逢她本科毕业，无论如何都是个有趣的时间点。受了那个帖子的刺激，我也筹划着给女朋友做一个小网页，以示纪念。</p>
+
+<p>遗憾的是，我自己从来没有写过网页，javascript和css只知道概念，html也只是知道一些简单的标签，这些可是完成一个小网页所必备的技能呢。技术能力直接阻碍了创造性成果出现的可能:(。于是，解决方案只能是搜集开源代码，然后自己做定制了。实际上，最后的产出，也就是三份代码的拼接。</p>
+
+<h2>资料搜集</h2>
+
+<p>通过各方搜寻，我找到了如下几个网页：</p>
+
+<ul>
+<li>1.<a href="http://love.hackerzhou.me/">复旦的学长hackzhou的爱心动画</a>，<a href="https://github.com/hackerzhou/Love">github托管代码</a>。</li>
+</ul>
+
+
+<p>网页用到了html5的一些特性实现了动态的心形花的绘制和类似程序代码敲击的文字呈现形式。由于内容仅仅是文字的，可定制性强。如下图：
+<img src="https://dl.dropboxusercontent.com/u/64021093/Pics/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202013-06-11%20%E4%B8%8B%E5%8D%888.12.01.png" title="hackerzhou's page" alt="hackerzhou's love project" /></p>
+
+<ul>
+<li>2.<a href="http://carfieldloverita.sinaapp.com/">一对异国情侣的Google地图应用</a>，<a href="https://github.com/wong2/lovegift">github托管代码</a>。</li>
+</ul>
+
+
+<p>网页调用了Google地图的API，可以定义聚焦的地理位置和坐标尺，显示照片，像日记一样记录了点点滴滴，有背景音乐。最后还以地点输入框的形式做了表白。很有创意！
+<img src="https://dl.dropboxusercontent.com/u/64021093/Pics/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202013-06-11%20%E4%B8%8B%E5%8D%888.12.18.png" title="Googlemap app" alt="Google map app" /></p>
+
+<ul>
+<li>3.<a href="http://liumeijun.com/">v2ex上某童鞋基于百度地图的应用</a>。</li>
+</ul>
+
+
+<p>跟2类似，调用了百度API，配上『Lemon tree』的背景音乐，很有调调！
+<img src="https://dl.dropboxusercontent.com/u/64021093/Pics/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202013-06-11%20%E4%B8%8B%E5%8D%888.16.00.png" title="baidumap app" alt="baidumap app" /></p>
+
+<h2>定制计划</h2>
+
+<p>限于没有前端的基础，开发效率会很低，只能硬顶着拿着前面的三个项目做混搭了。其中项目1和2都有在github上开源代码，而3则在v2ex的帖子里被作者授权直接查源码使用了。</p>
+
+<p>我做了简单的混搭修改计划：</p>
+
+<ul>
+<li>1.以hackzhou的项目为基础，修改文字内容和基本布局。</li>
+<li>2.添加加载等待过程，加载背景音乐。</li>
+<li>3.加载完成后，出现开始按钮，按开始按钮播放背景音乐，进入动画效果。</li>
+<li>4.增加全屏效果。</li>
+</ul>
+
+
+<h2>实施</h2>
+
+<h5>1.项目启动</h5>
+
+<p>我在github上fork了<a href="https://github.com/hackerzhou/Love">hackerzhou的代码</a>。</p>
+
+<p>clone到本地，尝试阅读js代码，尝试做小改动，找到动画开始的调用。</p>
+
+<h5>2.尝试添加背景音乐</h5>
+
+<p>网上查资料，找到了<code>&lt;embeded&gt;</code>可以用来添加背景音乐，测试成功。但这个音乐播放无法支持同步的加载，不可控，在网络环境差的情况下，如果没有配乐动画过程会缺少表现力。放弃这种方案。</p>
+
+<p>在<a href="http://liumeijun.com/">v2ex上某童鞋基于百度地图的应用</a>源码中找到了一个第三方音乐播放库：<a href="http://www.schillmania.com/projects/soundmanager2/">soundmanager2</a>。查看官方文档，确认能满足项目需求，于是加入到代码中。</p>
+
+<p>为了让页面展现更加顺畅，需要音乐文件越小越好。我尝试了MIDI格式，但是很多浏览器并不支持，作罢。而soundmanager似乎对wma的支持有问题，于是只剩下mp3文件。我选择了JJ的『小酒窝』做背景音乐，在mac下使用ocenaudio将原来3MB的mp3文件截取了前一半，并导出为不同设定采样率的版本，经过测试，发现56kb采样率下，音质没有受到大的影响，且大小也足够小了，于是确定用这种格式的mp3。最终MP3文件的大小为500KB！</p>
+
+<h5>3.加载逻辑和开始按键</h5>
+
+<p>需求：加载过程需要隐藏前景内容，在音乐加载完成后，显示开始按钮，开始按钮能触发动画效果。</p>
+
+<p>通过Google找到了使用js隐藏和显示内容的方式</p>
+
+<p>```</p>
+
+<pre><code>document.getElementById('hint').style.display = "none"; //hide hint
+document.getElementById('start_btn').style.display = ""; //show start button
+</code></pre>
+
+<p>```</p>
+
+<p>虽然不是特别理解js引擎的单线程运作机制，但经过简单的试错、调试后，就完成了加载等待和开始按钮触发的原型。</p>
+
+<p>之后是对按钮和加载提示配置css。由于懒得理解css的一些细节，直接使用了<a href="https://github.com/wong2/lovegift">这份项目</a>中的css代码。</p>
+
+<h5>4.部署</h5>
+
+<p>github为每个项目提供了静态网页展示的功能，应付这个项目的网页展示完全够了。具体操作流程参见<a href="http://www.worldhello.net/gotgithub/03-project-hosting/050-homepage.html#project-homepage">《GotGithub》3.5.2. 创建项目主页</a>。实际上，链接中介绍的几种创造干净的gh-pages分支的方法，在这个项目的发布里是不必的。因为项目主页的展示代码跟master分支里的代码本身就是一样的，那么需要做的就只是开启gh-pages分支，并提交代码了。</p>
+
+<h2>结语</h2>
+
+<p>感谢v2ex，感谢hackerzhou、loo2k和wong2童鞋，我参考了你们很多代码。</p>
+
+<p>创造力需要靠技术手段实现。混迹在互联网上，没有自己建站的能力实在是很苦逼的一件事情。之后自己准备花些时间在RoR上。积累技术实力，努力做出好产品;)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Mac的GUI哲学]]></title>
@@ -295,148 +398,6 @@
 <p>BitTorrent  Sync的优势，则在于能动态的集合分散在不同节点中的数据</p>
 
 <p>感觉这种去中心化的分布式系统，前景大大的有啊;)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[KMP算法实现]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/05/25/kmp-algorithm/"/>
-    <updated>2013-05-25T21:22:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/05/25/kmp-algorithm</id>
-    <content type="html"><![CDATA[<p>本文描述了单模式的字符串匹配的经典算法KMP算法的实现。首先对字符串匹配算法做简单的介绍，然后是KMP算法的实现描述，最后推荐两道简单的ACM模板题做练手用。</p>
-
-<h2>字符串匹配算法</h2>
-
-<p>字符串匹配(String Matchiing)也称字符串搜索(String Searching)是字符串算法中重要的一种，是指从一个大字符串或文本中找到模式串出现的位置。一个基本的字符串匹配算法分类如下：</p>
-
-<ul>
-<li>单模式匹配：即每次算法执行只需匹配出一个模式串。</li>
-<li>有限集合的多模式匹配：即算法需要同时找出多个模式串的匹配结果，而这个模式串集合是有限的。</li>
-<li>无限集合的多模式匹配：如正则表达式的匹配。</li>
-</ul>
-
-
-<p>单模式匹配最容易理解，构造也非常简单。一个最朴素的思路就是从文本的第一个字符顺次比较模式串，不匹配则重新从下一个字符开始匹配，直到文本末尾。Java实现代码如下：</p>
-
-<p>```</p>
-
-<pre><code>public static boolean bruteforce(String str1, String str2) {
-     for (int i = 0, j = 0; i!= str1.length(); ) {
-           if (str1.charAt(i) == str2.charAt(j)) {
-                j ++;
-                i ++;
-                if (j == str2.length()) return true;
-           }else {         
-                i = i - j + 1;
-                j = 0;                        
-           }
-      }
-      return false;
- }
-</code></pre>
-
-<p>```
-但是这种算法，有明显的效率黑洞。因为每次匹配失败后，都会回到原来的匹配起点的下一个字符开始匹配，这些步骤很多情况下，并不是必要的。</p>
-
-<p>实际上这些字符很有可能已经被读入了一次。理论上，如果我们能对所有被读入过的字符有足够的了解，那就能判定是否能避免再次读入一遍做匹配运算了。经典的KMP算法正是基于这点思考，对原有的蛮力算法做出了优化。</p>
-
-<h2>KMP算法</h2>
-
-<p>网络上关于KMP算法的描述很多，其中个人觉得阮一峰老师的<a href="http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html">《字符串匹配的KMP算法》</a>对KMP的描述最为简明和清晰。图例展示的算法流程更容易让人接受和理解。这里仅记录我所认为重点的知识点。</p>
-
-<h5>算法的思想</h5>
-
-<p>相比蛮力算法，KMP算法预先计算出了一个哈希表，用来指导在匹配过程中匹配失败后尝试下次匹配的起始位置，以此避免重复的读入和匹配过程。这个哈希表被叫做“部分匹配值表(<strong>Particial match table</strong>)”，它的设计是算法精妙之处。</p>
-
-<h5>部分匹配值表</h5>
-
-<p>要理解部分匹配值表，就得先了解字符串的前缀(prefix)和后缀(postfix)。</p>
-
-<ul>
-<li>前缀:除字符串最后一个字符以外的所有头部串的组合。</li>
-<li>后缀：除字符串第一个字符以外的所有尾部串的组合。</li>
-<li>部分匹配值：一个字符串的前缀和后缀中最长共有元素的长度。</li>
-</ul>
-
-
-<p>举例说明：字符串<code>ABCAB</code></p>
-
-<ul>
-<li>前缀：{A， AB， ABC， ABCA}</li>
-<li>后缀：{BCAB， CAB， AB， B}</li>
-<li>部分匹配值：2 （AB）</li>
-</ul>
-
-
-<p>而所谓的部分匹配值表，则为模式串的所有前缀以及其本身的部分匹配值。</p>
-
-<p>还是针对字符串<code>ABCAB</code>，它的部分匹配值表为：</p>
-
-<p><code>
-A B C A B
-0 0 0 1 2
-</code></p>
-
-<h5>算法实现</h5>
-
-<p>```</p>
-
-<pre><code>public static int[] next;
-
-public static boolean kmp(String str, String dest) {
-     for (int i = 0, j = 0; i &lt; str.length(); i ++) {
-           while (j &gt; 0 &amp;&amp; str.charAt(i) != dest.charAt(j))//iterate to find out the right next position
-                j = next[j - 1];
-
-           if (str.charAt(i) == dest.charAt(j))
-                j ++;
-
-           if (j == dest.length())
-                return true;
-      }
-      return false;
- }
-
- public static int[] kmpNext(String str) {
-      int[] next = new int[str.length()];
-      next[0]  = 0;
-      for (int i = 1, j = 0; i &lt; str.length(); i ++) {//j == 0 means the cursor points to nothing.
-           //the j here stands for the number of same characters for postfix and prefix, instead of
-           //the index of the end of prefix.
-            while (j &gt; 0 &amp;&amp; strt.charAt(j) != sr.charAt(i))
-                j = next[j - 1]; //watch out here! it's j - 1 here, instead of j
-
-           if (str.charAt(i) == str.charAt(j))
-                j ++;
-
-           next[i] = j;
-      }
-      return next;
- }
-</code></pre>
-
-<p>```
-值得注意的是，kmp的循环代码和部分匹配值表生成的循环代码很类似。两者使用了相同的迭代方式找到匹配失败后，新的可匹配情况。</p>
-
-<h2>其他</h2>
-
-<p>KMP算法虽然能达到O(M+N)的算法复杂度，但在实际使用中，KMP算法的性能并不如<a href="http://www.ruanyifeng.com/blog/2013/05/boyer-moore_string_search_algorithm.html">BM</a>算法强。</p>
-
-<h2>模板题</h2>
-
-<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=2203">HDOJ的2203题</a>是一个能检验算法正确性的模板题。Java实现的答案代码<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/practice/hdoj/HDOJ2203.java">请戳这里</a></p>
-
-<p>另有<a href="http://poj.org/problem?id=2406">POJ的2406题</a>，对考察点做了巧妙的变形，对更深入的理解KMP中的部分匹配表很有帮助。Java实现的答案代码<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/practice/poj/POJ2406.java">请戳这里</a></p>
-
-<h3>其他参考资料：</h3>
-
-<ul>
-<li><p><a href="http://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm">wiki:Knuth–Morris–Pratt Algorithm</a></p></li>
-<li><p><a href="http://en.wikipedia.org/wiki/String_searching_algorithm">wiki:String Searching Algorithm</a></p></li>
-<li><p><a href="http://www.cppblog.com/converse/archive/2006/07/05/9447.html">《KMP算法的实现》</a></p></li>
-<li><p><a href="http://wangcong.org/blog/archives/2090">《Linux 内核中的 KMP 实现》</a></p></li>
-</ul>
-
 ]]></content>
   </entry>
   
