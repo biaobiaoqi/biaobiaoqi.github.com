@@ -3,7 +3,7 @@ layout: post
 title: "KMP算法实现"
 date: 2013-05-25 21:22
 comments: true
-description: "本文描述了单模式的字符串匹配的经典算法KMP算法的实现。首先对字符串匹配算法做简单的介绍，然后是KMP算法的实现描述，最后推荐两道简单的ACM模板题做练手用。"
+description: "本文描述了单模式的字符串匹配的经典算法KMP算法的实现。首先对字符串匹配算法做简单的介绍，然后是KMP算法的实现描述，最后推荐三道简单的ACM模板题做kmp练手用，也可以加深对kmp细节过程的理解。"
 categories: [tech] 
 tags: [algorithm, Java]
 
@@ -21,7 +21,8 @@ tags: [algorithm, Java]
 
 单模式匹配最容易理解，构造也非常简单。一个最朴素的思路就是从文本的第一个字符顺次比较模式串，不匹配则重新从下一个字符开始匹配，直到文本末尾。Java实现代码如下：
 
-```
+{% codeblock bruteforce java code lang:java %}
+
 	public static boolean bruteforce(String str1, String str2) {
          for (int i = 0, j = 0; i!= str1.length(); ) {
                if (str1.charAt(i) == str2.charAt(j)) {
@@ -36,8 +37,8 @@ tags: [algorithm, Java]
           return false;
      }
 
+{% endcodeblock %}
 
-```
 但是这种算法，有明显的效率黑洞。因为每次匹配失败后，都会回到原来的匹配起点的下一个字符开始匹配，这些步骤很多情况下，并不是必要的。
 
 实际上这些字符很有可能已经被读入了一次。理论上，如果我们能对所有被读入过的字符有足够的了解，那就能判定是否能避免再次读入一遍做匹配运算了。经典的KMP算法正是基于这点思考，对原有的蛮力算法做出了优化。
@@ -67,52 +68,74 @@ KMP算法
 
 而所谓的部分匹配值表，则为模式串的所有前缀以及其本身的部分匹配值。
 
-还是针对字符串`ABCAB`，它的部分匹配值表为：
+举例如下：还是针对字符串`ABCAB`，它的部分匹配值表为：
 
 ```
 A B C A B
 0 0 0 1 2
 ```
 
+这代表着：字符串`A B C A B` 中，子串`A B C`的部分匹配值为0，而子串`A B C A`的部分匹配值为1，诸如此理。
+
 #####算法实现
 
 
-```
+{% codeblock kmp java code lang:java %}
 	public static int[] next;
 
 	public static boolean kmp(String str, String dest) {
-         for (int i = 0, j = 0; i < str.length(); i ++) {
-               while (j > 0 && str.charAt(i) != dest.charAt(j))//iterate to find out the right next position
-                    j = next[j - 1];
-                                                       
-               if (str.charAt(i) == dest.charAt(j))
-                    j ++;
-              
-               if (j == dest.length())
-                    return true;
-          }
-          return false;
-     }
+		// i stands for index of str string, j stands for index in dest string.
+		// At the beginning of each loop process, j is the new position of dest
+		// taht should be compared.
+		for (int i = 0, j = 0; i < str.length(); i++) {
+			while (j > 0 && str.charAt(i) != dest.charAt(j))
+				// This loop is to get a matching character recursively. Another
+				// stop condition is when particial match value meets end.
+				j = next[j - 1];// As i in str and j in dest is comparing,
+								// recomputing of j should be in the former
+								// character substring, which is next[j-1]
 
-     public static int[] kmpNext(String str) {
-          int[] next = new int[str.length()];
-          next[0]  = 0;
-          for (int i = 1, j = 0; i < str.length(); i ++) {//j == 0 means the cursor points to nothing.
-               //the j here stands for the number of same characters for postfix and prefix, instead of
-               //the index of the end of prefix.
-				while (j > 0 && strt.charAt(j) != sr.charAt(i))
-                    j = next[j - 1]; //watch out here! it's j - 1 here, instead of j
+			if (str.charAt(i) == dest.charAt(j))
+				j++;
 
-               if (str.charAt(i) == str.charAt(j))
-                    j ++;
+			if (j == dest.length())
+				return true;
+		}
 
-               next[i] = j;
-          }
-          return next;
-     }
+		return false;
+	}
 
-```
-值得注意的是，kmp的循环代码和部分匹配值表生成的循环代码很类似。两者使用了相同的迭代方式找到匹配失败后，新的可匹配情况。
+	public static int[] kmpNext(String str) {
+		int[] next = new int[str.length()];
+		next[0] = 0;
+		// i stands for index of string, j is temporary for particail match
+		// values computing, at the beginning of each loop process, j is the
+		// particial match value of former character .
+		for (int i = 1, j = 0; i < str.length(); ++i) {
+			while (j > 0 && str.charAt(i) != str.charAt(j))
+				// This loop is to get a matching character recursively. Another
+				// stop condition is when particial match value meets end.
+				j = next[j - 1];// j will be recomputed in the recursion. Take
+								// care that next[j-1] is the particial match
+								// value of the first j characters substirng.
+
+			if (str.charAt(i) == str.charAt(j)) // If not in this case, j must
+												// meets end, equals to zero.
+				++j;
+
+			next[i] = j;
+		}
+		return next;
+	}
+
+{% endcodeblock %}
+
+理解算法实现时，有几点特别需要注意：
+
+* 在生成部分匹配值数组的kmpNext()方法中，第一层循环内，`i`是字符串的索引，而`j`则在每次循环开始时代表了`i`所指定字符之前的子串的部分匹配值。
+* kmpNext()方法的内层while()循环，是为了迭代得到让`i`指定字符匹配到的情况。有另外一种实现方案：不有用这一层循环，而是直接使用一层循环，在大循环内部做j值变更的判定即可。
+* kmpNext()方法的while()循环中，需要特别注意是`next[j -1]`，部分匹配值j对应到的是字符串中的第`j-1`个字符。
+* kmp()的循环代码和kmpNext()部分匹配值表生成的循环代码很类似。两者使用了相同方式，在字符匹配失败后迭代获取新的可匹配情况，且都是利用了next数组。
 
 
 
@@ -127,10 +150,15 @@ KMP算法虽然能达到O(M+N)的算法复杂度，但在实际使用中，KMP�
 模板题
 ---
 
-[HDOJ的2203题](http://acm.hdu.edu.cn/showproblem.php?pid=2203)是一个能检验算法正确性的模板题。Java实现的答案代码[请戳这里](https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/practice/hdoj/HDOJ2203.java)
+####基础模板题
+[HDOJ的2203题](http://acm.hdu.edu.cn/showproblem.php?pid=2203)是一个能检验算法正确性的模板题。Java实现的答案代码[请戳这里](https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/practice/hdoj/HDOJ2203.java)。
 
-另有[POJ的2406题](http://poj.org/problem?id=2406)，对考察点做了巧妙的变形，对更深入的理解KMP中的部分匹配表很有帮助。Java实现的答案代码[请戳这里](https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/practice/poj/POJ2406.java)
 
+####延伸模板题
+
+[POJ的2406题](http://poj.org/problem?id=2406)，对考察点做了巧妙的变形，对更深入的理解KMP中的部分匹配表（即next数组）很有帮助。Java实现的答案代码[请戳这里](https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/practice/poj/POJ2406.java)。
+
+[HDOJ的1867题](http://acm.hdu.edu.cn/showproblem.php?pid=1867)也属于kmp的变形。要求对kmp利用next数组进行比较的过程有清晰的认识。Java实现的答案代码[请戳这里](https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/practice/hdoj/HDOJ1867.java)。
 
 
 
