@@ -21,7 +21,7 @@ tags: [algorithm, Java]
 
 单模式匹配最容易理解，构造也非常简单。一个最朴素的思路就是从文本的第一个字符顺次比较模式串，不匹配则重新从下一个字符开始匹配，直到文本末尾。Java实现代码如下：
 
-{% codeblock bruteforce java code lang:java %}
+``` java
 
 	public static boolean bruteforce(String str1, String str2) {
          for (int i = 0, j = 0; i!= str1.length(); ) {
@@ -37,7 +37,7 @@ tags: [algorithm, Java]
           return false;
      }
 
-{% endcodeblock %}
+```
 
 但是这种算法，有明显的效率黑洞。因为每次匹配失败后，都会回到原来的匹配起点的下一个字符开始匹配，这些步骤很多情况下，并不是必要的。
 
@@ -80,7 +80,7 @@ A B C A B
 #####算法实现
 
 
-{% codeblock kmp java code lang:java %}
+``` java
 	public static int[] next;
 
 	public static boolean kmp(String str, String dest) {
@@ -128,7 +128,7 @@ A B C A B
 		return next;
 	}
 
-{% endcodeblock %}
+```
 
 理解算法实现时，有几点特别需要注意：
 
