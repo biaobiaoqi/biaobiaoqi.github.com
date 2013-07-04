@@ -9,7 +9,7 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="最近看了关于SQL Server的分布式处理方面的论文，觉得它提出的Polybase跟之前看过的HadoopDB有些神似，这里做个小总结（抽空再把HadoopDB的总结贴出来）。 不算翻译，只是挑出自己认为是重点的部分。详细情况，还请论文查阅原文，引用中有写明出处。文章末尾有我总结的slides， &hellip;">
+  <meta name="description" content="背景 二叉树是一种很基本的数据结构。很多地方能看到它的身影，比如大名鼎鼎的霍夫曼编码（好了，别问我再比如了，见识浅薄，真不知道更多了。。。）它的结构很简洁、巧妙。 本文讨论二叉树的常见遍历方式的代码实现（这里贴出的是Java），包括前序(preorder)、中序(inorder)、后序( &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -100,6 +100,54 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/27/travsal-binary-tree/">二叉树的遍历（递归、非递归）分析</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-27T21:03:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2013</time>
+        
+
+
+
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>背景</h2>
+
+<p>二叉树是一种很基本的数据结构。很多地方能看到它的身影，比如大名鼎鼎的霍夫曼编码（好了，别问我再比如了，见识浅薄，真不知道更多了。。。）它的结构很简洁、巧妙。</p>
+
+<p>本文讨论二叉树的常见遍历方式的代码实现（这里贴出的是Java），包括前序(preorder)、中序(inorder)、后序(postorder)、层序(level order)，进一步，考虑递归和非递归的实现方式。递归方法的实现相对简单，但递归的执行方式由于每次都会产生一个新的方法调用栈，如果递归层级较深，会消耗较大的内存，转化为非递归则没那么简单了，往往需要实现一个栈来保存状态信息。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/04/27/travsal-binary-tree/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -550,54 +598,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/04/04/pat-basic-level-1001-1010/">PAT Basic Level 1001-1010</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-04T01:50:00+08:00" pubdate data-updated="true">Apr 4<span>th</span>, 2013</time>
-        
-
-
-
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>背景</h2>
-
-<p>算法开始练手了。从最简单的做起。</p>
-
-<p>由于实验室用的是Java，为了节省时间，也为了更好的掌握这门语言，我先用Java来实现了。在并非以比赛为目的的前提下，这并不妨碍什么，唯一的可能就是没有足够的参考代码咯。:(话说，自己也并不是特别喜欢一些“简洁”的代码。我现在的手速是不快，但过于简介的南与维护的代码，也不在我的目标之列。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/04/04/pat-basic-level-1001-1010/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -622,7 +622,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <a style="font-size: 70%" href="/tags/internet/">internet</a> &nbsp 
 <a style="font-size: 130%" href="/tags/java/">java</a> &nbsp 
 <a style="font-size: 108%" href="/tags/linux/">linux</a> &nbsp 
-<a style="font-size: 70%" href="/tags/methodology/">methodology</a> &nbsp 
+<a style="font-size: 108%" href="/tags/methodology/">methodology</a> &nbsp 
 <a style="font-size: 108%" href="/tags/network/">network</a> &nbsp 
 <a style="font-size: 130%" href="/tags/os/">os</a> &nbsp 
 <a style="font-size: 146%" href="/tags/pat/">pat</a> &nbsp 
@@ -635,6 +635,10 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <section>
   <h1>最近发表</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/07/05/checklist-manifesto/">《清单革命》</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/06/11/gift-to-girl-friend/">给女朋友的礼物</a>
@@ -650,10 +654,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     
       <li class="post">
         <a href="/blog/2013/06/08/software-defined-network/">SDN：软件定义网络</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/06/08/ipc-in-hadoop/">《Hadoop技术内幕》学习笔记——RPC和动态代理</a>
       </li>
     
   </ul>
