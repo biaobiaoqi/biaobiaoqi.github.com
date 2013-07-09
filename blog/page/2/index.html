@@ -9,7 +9,7 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="现在大数据概念被时常提起，社会各界对其关注度越来越高。往往越是火热的东西，人们越容易忽略它的本质。在slides中，我首先按照自己的理解，简单的理顺数据处理领域的发展历程。之后，落脚点是两个比较有代表性的混合的分布式系统：HadoopDB和微软的Polybase。由于缺乏实战经验， &hellip;">
+  <meta name="description" content="别鄙视方法论 曾经很长时间里，我这么认为：方法论的东西没什么实际的用处，不过是其他人按照自己的喜好来处理事物的途径而已，何必照着他人的思路。比如，作为一只不靠谱的程序猴子，在一些偏颇的思维习惯的影响下，我甚至对许多图形化的东西比较反感，自以为文本信息已经足以表达清楚事实且更有效率， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -100,6 +100,104 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/22/pragmatic-thinking-and-learning-refactor-your-wetware/">《程序员的思维修炼》</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-22T01:14:00+08:00" pubdate data-updated="true">May 22<span>nd</span>, 2013</time>
+        
+
+
+
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>别鄙视方法论</h3>
+
+<p>曾经很长时间里，我这么认为：方法论的东西没什么实际的用处，不过是其他人按照自己的喜好来处理事物的途径而已，何必照着他人的思路。比如，作为一只不靠谱的程序猴子，在一些偏颇的思维习惯的影响下，我甚至对许多图形化的东西比较反感，自以为文本信息已经足以表达清楚事实且更有效率，从而本能的回避能造成视觉冲击的事物。直到后来，发现自己每每定下的计划都无法完整实施，自然也是没有收到预期的效果。我开始关注到方法本身是否合理，寻找那把平衡效率和体验的钥匙。</p>
+
+<p>这本书给出了一个很好的答案。</p>
+
+<p>虽然标题上赫然是“程序员”几个大字，但其实并没有这么局限。这是一本谈论思维习惯的书，对所有想了解大脑认知过程以更好的发觉其潜能的读者而言，都是可以参考的。虽然自己只是看完了这本书，而没有长期实践的效果证明，但从以往的经验来看，它的观点总能让我信服。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/05/22/pragmatic-thinking-and-learning-refactor-your-wetware/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/21/the-facebook-effect/">《Facebook效应》</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-21T00:23:00+08:00" pubdate data-updated="true">May 21<span>st</span>, 2013</time>
+        
+
+
+
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>前两年风靡了一阵子的电影《社交网络》毕竟是电影，一种艺术的方式的表达。虽然无法完全的印证《Facebook效应》一书中记载的正确性，但其细节足以给人启示。</p>
+
+<p>电影中，主人公炫酷的人生经历能催生观者产生极强的代入感，不少同学看后可能就会想着自己在寝室特立独行的捣鼓几下，也来做出个震惊世界的产品。且慢。细读本书，就会了解到，成功并非像电影中所描述的那么轻松愉快和力所能及。</p>
+
+<p>以下是我的一些总结。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/05/21/the-facebook-effect/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -494,104 +592,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/05/09/networking-in-virtual-machine/">虚拟机中的网络配置</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-09T22:39:00+08:00" pubdate data-updated="true">May 9<span>th</span>, 2013</time>
-        
-
-
-
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>本文介绍三种虚拟机中常用的网络配置模式：NAT(网络地址转换模式)、Bridged nerworking（桥接网络模式）和Host-only（主机模式）。</p>
-
-<h3>Network Address Translation (NAT)</h3>
-
-<p>NAT模式使用了<a href="http://zh.wikipedia.org/wiki/%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2">NAT</a>服务来给虚拟网络提供网络连接。</p>
-
-<p>这种模式下，虚拟机能访问外部网络，外部无法直接连接到内部网络，除非使用端口映射<a href="http://nxlhero.blog.51cto.com/962631/742140">port forwarding</a>。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/05/09/networking-in-virtual-machine/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/04/27/pat1020-pat1043-rebuild-binary-tree/">根据前中后序和层序重建二叉树(PAT1020、PAT1043)</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-27T22:33:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2013</time>
-        
-
-
-
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>背景</h2>
-
-<p><a href="/blog/2013/04/27/travsal-binary-tree/">《二叉树的遍历（递归、非递归）分析》</a>总结了二叉树不同遍历方式的递归和非递归实现，本文则讨论如何针对不同遍历方式的组合重建二叉树。为了简化问题的考虑，假定二叉树中不会出现重复值。列入考虑范围的有前序、中序、后序、层序遍历这四种的组合。前中后序比较常见，而层序则相对特殊一点了。</p>
-
-<p><a href="http://pat.zju.edu.cn/contests/pat-a-practise">PAT</a>的1043和1020题是遍历相关的模板题，正好派上用场。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/04/27/pat1020-pat1043-rebuild-binary-tree/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -608,27 +608,35 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   <h1>标签云</h1>
  <br /> 
   <ul class="tag-cloud">
-    <a style="font-size: 176%" href="/tags/algorithm/">algorithm</a> &nbsp 
-<a style="font-size: 190%" href="/tags/distributed/">distributed</a> &nbsp 
-<a style="font-size: 108%" href="/tags/gui/">gui</a> &nbsp 
-<a style="font-size: 158%" href="/tags/hadoop/">hadoop</a> &nbsp 
-<a style="font-size: 108%" href="/tags/idea/">idea</a> &nbsp 
-<a style="font-size: 70%" href="/tags/internet/">internet</a> &nbsp 
-<a style="font-size: 130%" href="/tags/java/">java</a> &nbsp 
-<a style="font-size: 108%" href="/tags/linux/">linux</a> &nbsp 
-<a style="font-size: 108%" href="/tags/methodology/">methodology</a> &nbsp 
-<a style="font-size: 108%" href="/tags/network/">network</a> &nbsp 
-<a style="font-size: 130%" href="/tags/os/">os</a> &nbsp 
-<a style="font-size: 146%" href="/tags/pat/">pat</a> &nbsp 
-<a style="font-size: 108%" href="/tags/security/">security</a> &nbsp 
-<a style="font-size: 176%" href="/tags/think/">think</a> &nbsp 
-<a style="font-size: 70%" href="/tags/windows/">windows</a>
+    <a style="font-size: 167%" href="/tags/algorithm/">algorithm</a> &nbsp 
+<a style="font-size: 180%" href="/tags/distributed/">distributed</a> &nbsp 
+<a style="font-size: 105%" href="/tags/entrepreneurship/">entrepreneurship</a> &nbsp 
+<a style="font-size: 105%" href="/tags/gui/">gui</a> &nbsp 
+<a style="font-size: 151%" href="/tags/hadoop/">hadoop</a> &nbsp 
+<a style="font-size: 105%" href="/tags/idea/">idea</a> &nbsp 
+<a style="font-size: 125%" href="/tags/java/">java</a> &nbsp 
+<a style="font-size: 105%" href="/tags/life/">life</a> &nbsp 
+<a style="font-size: 105%" href="/tags/linux/">linux</a> &nbsp 
+<a style="font-size: 125%" href="/tags/methodology/">methodology</a> &nbsp 
+<a style="font-size: 105%" href="/tags/network/">network</a> &nbsp 
+<a style="font-size: 125%" href="/tags/os/">os</a> &nbsp 
+<a style="font-size: 139%" href="/tags/pat/">pat</a> &nbsp 
+<a style="font-size: 105%" href="/tags/security/">security</a> &nbsp 
+<a style="font-size: 167%" href="/tags/think/">think</a>
 
   </ul>
 </section>
 <section>
   <h1>最近发表</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/07/10/decorate-octopress/">decorate octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/07/yuminhong/">《俞敏洪口述》</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/07/05/checklist-manifesto/">《清单革命》</a>
@@ -640,14 +648,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     
       <li class="post">
         <a href="/blog/2013/06/11/the-non-designers-design-book/">《写给大家看的设计书》</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/06/09/something-about-mac-gui/">Mac的GUI哲学</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/06/08/software-defined-network/">SDN：软件定义网络</a>
       </li>
     
   </ul>
