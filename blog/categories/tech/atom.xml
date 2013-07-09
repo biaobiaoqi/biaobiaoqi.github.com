@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tech | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-07-10T03:53:21+08:00</updated>
+  <updated>2013-07-10T04:01:41+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -86,6 +86,9 @@ $indented-lists: true</p>
 
 <p>```</p>
 
+<!--more-->
+
+
 <h2>6.404ERROR页面</h2>
 
 <p>在ocotopress/source目录下，增加404.markdown，并做出自定义的呃编辑。本博客使用了腾讯公益404，推荐大家使用，为社会贡献一分正能量。<a href="http://www.qq.com/404/">公益404</a></p>
@@ -116,24 +119,12 @@ $indented-lists: true</p>
 <p>octopress默认只有分类，没有标签。这对于博文的组织和管理很不友好。有人开源出了自己定制的tag生成和tag cloud展现的代码，可以引入到自己的博客中来。</p>
 
 <p>详细操作参见博文：<a href="http://codemacro.com/2012/07/18/add-tag-to-octopress/">《为octopress添加tag Cloud》</a>。不过博文中没有讲解标签云的UI配置参数的使用，为了让UI适应页面，请参考原作者的官方说明:<a href="https://github.com/robbyedwards/octopress-tag-cloud">octopress-tag-cloud</a>。我所实践出的较合理的参数值如下
-<code>
-<a style="font-size: 167%" href="/tags/algorithm/">algorithm</a> &amp;nbsp 
-<a style="font-size: 180%" href="/tags/distributed/">distributed</a> &amp;nbsp 
-<a style="font-size: 105%" href="/tags/entrepreneurship/">entrepreneurship</a> &amp;nbsp 
-<a style="font-size: 105%" href="/tags/gui/">gui</a> &amp;nbsp 
-<a style="font-size: 151%" href="/tags/hadoop/">hadoop</a> &amp;nbsp 
-<a style="font-size: 105%" href="/tags/idea/">idea</a> &amp;nbsp 
-<a style="font-size: 139%" href="/tags/java/">java</a> &amp;nbsp 
-<a style="font-size: 105%" href="/tags/linux/">linux</a> &amp;nbsp 
-<a style="font-size: 125%" href="/tags/methodology/">methodology</a> &amp;nbsp 
-<a style="font-size: 105%" href="/tags/network/">network</a> &amp;nbsp 
-<a style="font-size: 125%" href="/tags/os/">os</a> &amp;nbsp 
-<a style="font-size: 139%" href="/tags/pat/">pat</a> &amp;nbsp 
-<a style="font-size: 105%" href="/tags/security/">security</a> &amp;nbsp 
-<a style="font-size: 174%" href="/tags/think/">think</a> &amp;nbsp 
-<a style="font-size: 105%" href="/tags/web/">web</a>
+```</p>
 
-</code></p>
+<h1>注意，下面一行的escape反斜杠在正常使用时需要去掉</h1>
+
+<p>{\% tag_cloud font-size: 70-180%, limit: 15, order: rand, style: para  { &amp;nbsp }\%}
+```</p>
 
 <p>如果想将文章分类（category）也放在侧边栏，可以参考这篇博文：<a href="http://paz.am/blog/blog/2012/06/25/octopress-category-list-plugin/">《Octopress - Category List Plug-in》</a></p>
 
