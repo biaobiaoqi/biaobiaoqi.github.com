@@ -4,7 +4,7 @@
   <title><![CDATA[Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-07-10T01:53:20+08:00</updated>
+  <updated>2013-07-10T03:53:21+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -14,11 +14,246 @@
 
   
   <entry>
-    <title type="html"><![CDATA[decorate octopress]]></title>
+    <title type="html"><![CDATA[定制自己的octopress]]></title>
     <link href="http://biaobiaoqi.github.com/blog/2013/07/10/decorate-octopress/"/>
     <updated>2013-07-10T01:53:00+08:00</updated>
     <id>http://biaobiaoqi.github.com/blog/2013/07/10/decorate-octopress</id>
-    <content type="html"><![CDATA[
+    <content type="html"><![CDATA[<p>在github pages上搭建好octopress博客之后，博客的基本功能就能使用了。如果想自己定制也是没问题的，octopress有较详尽的官方文档，原则上有问题求助官方即可：<a href="http://octopress.org/help/">octopress-help</a>。官方没有包纳的也可以去询问<a href="http://stackoverflow.com/questions/tagged/octopress">stackoverflow</a>。 当然，中文的看起来总会省事儿点。我做了如下一些总结;)</p>
+
+<p>不会ruby的童鞋特别注意：配置_config.yml的过程中特别注意，配置项『:』后要留空格，否则会报错。</p>
+
+<h2>1.装饰边栏</h2>
+
+<p>以增加豆瓣展示框为例。参加正反反长大哥的博客<a href="http://icodeit.org/2012/10/how-to-embed-douban-show-in-your-octopress-site/">How to Embed Douban-Show in Your Octopress Site</a></p>
+
+<h2>2.增加国内的第三方评论</h2>
+
+<p>虽然octopress内置的评论系统也很不错，但国内的第三方评论更接地气，将微博、人人等各方SNS都纳入旗下。比较出名的有友言、多说。</p>
+
+<p>这里以唐巧大哥的博文<a href="http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/">《象写程序一样写博客：搭建基于github的博客》</a>为例，他使用的是友言。</p>
+
+<h2>3.定制域名</h2>
+
+<p>如果你拥有自己的域名，可以CNAME到github pages上。以我的配置为例（我的域名为<code>biaobiaoqi.me</code>）。</p>
+
+<p>1.在octopress的source目录下创建CNAME文件，并输入新域名：biaobiaoqi.com</p>
+
+<p>2.在域名管理中，创建或修改A记录，指向207.97.227.245这个地址。</p>
+
+<p>3.创建CNAME记录，www.biaobiaoqi.com -> biaobiaoqi.github.com</p>
+
+<p>这一过程可能需要好几天才能生效，请耐心等待:)</p>
+
+<h2>4.让博客中连接在新窗口打开</h2>
+
+<p>由于markdown不支持这一语法，如果要自己用html标签实现，又有些违背了markdown以内容为重的立意。</p>
+
+<p>参考博文<a href="http://www.blogjava.net/lishunli/archive/2013/01/20/394478.html">《在Octopress中为markdown的超链接加上target=&#8221;_blank&#8221;》</a>，可以通过将如下代码添加到 {OCTOPRESS_HOME}/source/_includes/custom/head.html文件末尾来实现：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;script type="text/javascript"&gt;
+</span><span class='line'>
+</span><span class='line'>function addBlankTargetForLinks () {
+</span><span class='line'>
+</span><span class='line'>  $('a[href^="http"]').each(function(){
+</span><span class='line'>
+</span><span class='line'>      $(this).attr('target', '_blank');
+</span><span class='line'>
+</span><span class='line'>  });
+</span><span class='line'>
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>$(document).bind('DOMNodeInserted', function(event) {
+</span><span class='line'>
+</span><span class='line'>  addBlankTargetForLinks();
+</span><span class='line'>
+</span><span class='line'>});
+</span><span class='line'>
+</span><span class='line'>&lt;/script&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>5.列表的排版</h2>
+
+<p>默认情况，所有文字的排头会对齐，但如果有列表项的情况下也如此，列表头就会冲出文章的主体区块了。</p>
+
+<p>在octopress/sass/custom/_layout.scss文件中找到#$indented-lists: true行，去掉#注释即可。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$indented-lists: true
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>6.404ERROR页面</h2>
+
+<p>在ocotopress/source目录下，增加404.markdown，并做出自定义的呃编辑。本博客使用了腾讯公益404，推荐大家使用，为社会贡献一分正能量。<a href="http://www.qq.com/404/">公益404</a></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>---
+</span><span class='line'>
+</span><span class='line'>layout: page
+</span><span class='line'>
+</span><span class='line'>title: "404 Error"
+</span><span class='line'>
+</span><span class='line'>date: 2013-4-21 02:35
+</span><span class='line'>
+</span><span class='line'>comments: false
+</span><span class='line'>
+</span><span class='line'>sharing: false
+</span><span class='line'>
+</span><span class='line'>footer: false
+</span><span class='line'>
+</span><span class='line'>---
+</span><span class='line'>
+</span><span class='line'>&lt;script type="text/javascript" src="http://www.qq.com/404/search_children.js" charset="utf-8"&gt;&lt;/script&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>7.在侧边栏增加标签云(tag cloud)</h2>
+
+<p>octopress默认只有分类，没有标签。这对于博文的组织和管理很不友好。有人开源出了自己定制的tag生成和tag cloud展现的代码，可以引入到自己的博客中来。</p>
+
+<p>详细操作参见博文：<a href="http://codemacro.com/2012/07/18/add-tag-to-octopress/">《为octopress添加tag Cloud》</a>。不过博文中没有讲解标签云的UI配置参数的使用，为了让UI适应页面，请参考原作者的官方说明:<a href="https://github.com/robbyedwards/octopress-tag-cloud">octopress-tag-cloud</a>。我所实践出的较合理的参数值如下</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'><a style="font-size: 167%" href="http://biaobiaoqi.github.com/tags/algorithm/">algorithm</a> &nbsp 
+<a style="font-size: 180%" href="http://biaobiaoqi.github.com/tags/distributed/">distributed</a> &nbsp 
+<a style="font-size: 105%" href="http://biaobiaoqi.github.com/tags/entrepreneurship/">entrepreneurship</a> &nbsp 
+<a style="font-size: 105%" href="http://biaobiaoqi.github.com/tags/gui/">gui</a> &nbsp 
+<a style="font-size: 151%" href="http://biaobiaoqi.github.com/tags/hadoop/">hadoop</a> &nbsp 
+<a style="font-size: 105%" href="http://biaobiaoqi.github.com/tags/idea/">idea</a> &nbsp 
+<a style="font-size: 139%" href="http://biaobiaoqi.github.com/tags/java/">java</a> &nbsp 
+<a style="font-size: 105%" href="http://biaobiaoqi.github.com/tags/linux/">linux</a> &nbsp 
+<a style="font-size: 125%" href="http://biaobiaoqi.github.com/tags/methodology/">methodology</a> &nbsp 
+<a style="font-size: 105%" href="http://biaobiaoqi.github.com/tags/network/">network</a> &nbsp 
+<a style="font-size: 125%" href="http://biaobiaoqi.github.com/tags/os/">os</a> &nbsp 
+<a style="font-size: 139%" href="http://biaobiaoqi.github.com/tags/pat/">pat</a> &nbsp 
+<a style="font-size: 105%" href="http://biaobiaoqi.github.com/tags/security/">security</a> &nbsp 
+<a style="font-size: 174%" href="http://biaobiaoqi.github.com/tags/think/">think</a> &nbsp 
+<a style="font-size: 105%" href="http://biaobiaoqi.github.com/tags/web/">web</a>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果想将文章分类（category）也放在侧边栏，可以参考这篇博文：<a href="http://paz.am/blog/blog/2012/06/25/octopress-category-list-plugin/">《Octopress - Category List Plug-in》</a></p>
+
+<h2>8.在顶栏增加标签云页面tab</h2>
+
+<p>1.生成新网页</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake new_page["tag-cloud"] #在octopress/source/中将生成tag-cloud/文件夹</span></code></pre></td></tr></table></div></figure>
+
+
+<p>2.在顶栏增加新页面</p>
+
+<p>修改<code>source/_includes/custom/navigation.html</code></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;ul class="main-navigation"&gt;
+</span><span class='line'>  &lt;li&gt;&lt;a href="http://biaobiaoqi.github.com/"&gt;首页&lt;/a&gt;&lt;/li&gt;
+</span><span class='line'>  &lt;li&gt;&lt;a href="http://biaobiaoqi.github.com/blog/categories/tech/"&gt;技术&lt;/a&gt;&lt;/li&gt;
+</span><span class='line'>  &lt;li&gt;&lt;a href="http://biaobiaoqi.github.com/blog/categories/life/"&gt;生活&lt;/a&gt;&lt;/li&gt;
+</span><span class='line'>  &lt;li&gt;&lt;a href="http://biaobiaoqi.github.com/blog/categories/book/"&gt;读书&lt;/a&gt;&lt;/li&gt;
+</span><span class='line'>  &lt;li&gt;&lt;a href="http://biaobiaoqi.github.com/tag-cloud/"&gt;标签云&lt;/a&gt;&lt;/li&gt;
+</span><span class='line'>  &lt;li&gt;&lt;a href="http://biaobiaoqi.github.com/about"&gt;关于&lt;/a&gt;&lt;/li&gt;
+</span><span class='line'>&lt;/ul&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在需要的位置增加<code>&lt;li&gt;&lt;a href="http://biaobiaoqi.github.com/tag-cloud/"&gt;标签云&lt;/a&gt;&lt;/li&gt;</code>。如此一来，可以在网页顶栏看到『标签云』一栏了。不过此时，点击进入，页面为空。</p>
+
+<p>3.修改标签云页面内容。</p>
+
+<p>修改<code>octopress/source/tag-cloud/index.markdown</code>，增加标签云执行脚本。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>---
+</span><span class='line'>layout: page
+</span><span class='line'>title: "标签云"
+</span><span class='line'>date: 2013-07-10 02:53
+</span><span class='line'>comments: true
+</span><span class='line'>sharing: true
+</span><span class='line'>footer: true
+</span><span class='line'>---
+</span><span class='line'>  &lt;ul class="tag-cloud"&gt;
+</span><span class='line'>  #注意，下面一行的escape反斜杠在正常使用时需要去掉
+</span><span class='line'>    \{\% tag_cloud font-size: 90-210%, limit: 1000, style: para \%\}
+</span><span class='line'>  &lt;/ul&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>9.博客末尾增加原文链接、版权等</h2>
+
+<p>最近发现有其他小网站未经授权直接copy我的博客内容，在违章的末尾加上版权、原文链接变得很有必要了。</p>
+
+<p>详情参见博客<a href="http://codemacro.com/2012/07/26/post-footer-plugin-for-octopress/">《为octopress每篇文章添加一个文章信息》</a>。</p>
+
+<h2>10.给中英文之间加空格</h2>
+
+<p>参见博文<a href="http://xoyo.name/2012/04/auto-spacing-for-octopress/">《给中英文间加个空格》</a>。</p>
+
+<h2>Tips</h2>
+
+<p>既然是个博客站点，就算是web产品啦，可以考虑下SEO。推荐博文<a href="http://codemacro.com/2012/09/06/octopress-seo/">《Octopress中的SEO》</a><p class='post-footer'></p>
+
+<pre><code>        original link:
+        &lt;a href='http://biaobiaoqi.github.com/blog/2013/07/10/decorate-octopress/'&gt;http://biaobiaoqi.github.com/blog/2013/07/10/decorate-octopress/&lt;/a&gt;&lt;br/&gt;
+        &amp;nbsp;written by &lt;a href='http://biaobiaoqi.github.com'&gt;Biaobiaoqi&lt;/a&gt;
+        &amp;nbsp;posted at &lt;a href='http://biaobiaoqi.github.com'&gt;http://biaobiaoqi.github.com&lt;/a&gt;
+        &lt;/p&gt;
+</code></pre>
 ]]></content>
   </entry>
   
@@ -62,6 +297,14 @@
 <p>最后，以老俞的一句话结尾：</p>
 
 <blockquote><p>人生的苦难肯定是没有尽头的，人要做的是在苦难中奋发起来，做自己能够做的和应该做的事儿，这就是我的世界观。</p></blockquote>
+
+<p class='post-footer'>
+            original link:
+            <a href='http://biaobiaoqi.github.com/blog/2013/07/07/yuminhong/'>http://biaobiaoqi.github.com/blog/2013/07/07/yuminhong/</a><br/>
+            &nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>
+            &nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a>
+            </p>
+
 ]]></content>
   </entry>
   
@@ -125,6 +368,14 @@
 <li>复杂问题： 可以拆分为许多的简单问题，分由多人管理和复杂，再辅以清单解决。另外，需要注意人与人之间沟通，这能降低出错的可能性，提高个人效率。</li>
 <li>极端复杂的问题：更多的需要不断的试错、调整。</li>
 </ul>
+
+
+<p class='post-footer'>
+            original link:
+            <a href='http://biaobiaoqi.github.com/blog/2013/07/05/checklist-manifesto/'>http://biaobiaoqi.github.com/blog/2013/07/05/checklist-manifesto/</a><br/>
+            &nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>
+            &nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a>
+            </p>
 
 ]]></content>
   </entry>
@@ -229,6 +480,14 @@
 <p>感谢v2ex，感谢hackerzhou、loo2k和wong2童鞋，我参考了你们很多代码。</p>
 
 <p>创造力需要靠技术手段实现。混迹在互联网上，没有自己建站的能力实在是很苦逼的一件事情。之后自己准备花些时间在RoR上。积累技术实力，努力做出好产品;)</p>
+
+<p class='post-footer'>
+            original link:
+            <a href='http://biaobiaoqi.github.com/blog/2013/06/11/gift-to-girl-friend/'>http://biaobiaoqi.github.com/blog/2013/06/11/gift-to-girl-friend/</a><br/>
+            &nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>
+            &nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a>
+            </p>
+
 ]]></content>
   </entry>
   
@@ -345,6 +604,14 @@
 <p>相对而言，乔布斯推崇的拟物风格中，所秉承的是让所有用户能快速的学会如何使用它。而随着时代的发展，这种降低学习成本的方式渐渐的不是必须，数码产品充斥着生活，大多数人已经有足够的经验来应对新的操作体验。从这个角度讲，扁平化在现阶段或许是更有好的选择。</p>
 
 <p>不管怎么样，WWDC以后，苹果股价已经持续下跌了，祝福苹果吧，希望Ive不要成为苹果的罪人，据说他是最懂乔布斯的人呢。</p>
+
+<p class='post-footer'>
+            original link:
+            <a href='http://biaobiaoqi.github.com/blog/2013/06/11/the-non-designers-design-book/'>http://biaobiaoqi.github.com/blog/2013/06/11/the-non-designers-design-book/</a><br/>
+            &nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>
+            &nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a>
+            </p>
+
 ]]></content>
   </entry>
   
@@ -431,6 +698,14 @@
 <li><a href="http://ksmx.me/blog/2012/03/18/customize-mac-desktop/">矮矬穷Mac桌面美化得瑟教程</a></li>
 </ul>
 
+
+<p class='post-footer'>
+            original link:
+            <a href='http://biaobiaoqi.github.com/blog/2013/06/09/something-about-mac-gui/'>http://biaobiaoqi.github.com/blog/2013/06/09/something-about-mac-gui/</a><br/>
+            &nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>
+            &nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a>
+            </p>
+
 ]]></content>
   </entry>
   
@@ -492,7 +767,14 @@
 *</li>
 <li><a href="http://blog.sina.com.cn/s/blog_5385c0b901010pu3.html">OpenFlow/SDN本质论</a></li>
 <li><a href="http://article.yeeyan.org/view/323168/358956">软件定义网络(SDN)：是什么，如何工作，为什么重要</a></li>
-<li><a href="http://network.51cto.com/art/201305/394648.htm">SDN：仍处于起步阶段</a></li>
+<li><a href="http://network.51cto.com/art/201305/394648.htm">SDN：仍处于起步阶段</a><p class='post-footer'>
+
+<pre><code>      original link:
+      &lt;a href='http://biaobiaoqi.github.com/blog/2013/06/08/software-defined-network/'&gt;http://biaobiaoqi.github.com/blog/2013/06/08/software-defined-network/&lt;/a&gt;&lt;br/&gt;
+      &amp;nbsp;written by &lt;a href='http://biaobiaoqi.github.com'&gt;Biaobiaoqi&lt;/a&gt;
+      &amp;nbsp;posted at &lt;a href='http://biaobiaoqi.github.com'&gt;http://biaobiaoqi.github.com&lt;/a&gt;
+      &lt;/p&gt;
+</code></pre></li>
 </ul>
 
 ]]></content>
@@ -530,7 +812,14 @@
 <script async class="speakerdeck-embed" data-id="fbcb8590b1540130690c2e6f0be13e84" data-ratio="1.33333333333333" src="http://biaobiaoqi.github.com//speakerdeck.com/assets/embed.js"></script>
 
 
-<p>slides下载地址：<a href="https://dl.dropboxusercontent.com/u/64021093/slides/%E8%BF%9C%E7%A8%8B%E8%BF%87%E7%A8%8B%E8%B0%83%E7%94%A8%E5%92%8CNIO.pdf">请戳</a></p>
+<p>slides下载地址：<a href="https://dl.dropboxusercontent.com/u/64021093/slides/%E8%BF%9C%E7%A8%8B%E8%BF%87%E7%A8%8B%E8%B0%83%E7%94%A8%E5%92%8CNIO.pdf">请戳</a><p class='post-footer'></p>
+
+<pre><code>        original link:
+        &lt;a href='http://biaobiaoqi.github.com/blog/2013/06/08/ipc-in-hadoop/'&gt;http://biaobiaoqi.github.com/blog/2013/06/08/ipc-in-hadoop/&lt;/a&gt;&lt;br/&gt;
+        &amp;nbsp;written by &lt;a href='http://biaobiaoqi.github.com'&gt;Biaobiaoqi&lt;/a&gt;
+        &amp;nbsp;posted at &lt;a href='http://biaobiaoqi.github.com'&gt;http://biaobiaoqi.github.com&lt;/a&gt;
+        &lt;/p&gt;
+</code></pre>
 ]]></content>
   </entry>
   
@@ -629,7 +918,14 @@
 
 <p>BitTorrent  Sync的优势，则在于能动态的集合分散在不同节点中的数据</p>
 
-<p>感觉这种去中心化的分布式系统，前景大大的有啊;)</p>
+<p>感觉这种去中心化的分布式系统，前景大大的有啊;)<p class='post-footer'></p>
+
+<pre><code>        original link:
+        &lt;a href='http://biaobiaoqi.github.com/blog/2013/05/25/some-ideas-about-using-bt-protocol-to-sync/'&gt;http://biaobiaoqi.github.com/blog/2013/05/25/some-ideas-about-using-bt-protocol-to-sync/&lt;/a&gt;&lt;br/&gt;
+        &amp;nbsp;written by &lt;a href='http://biaobiaoqi.github.com'&gt;Biaobiaoqi&lt;/a&gt;
+        &amp;nbsp;posted at &lt;a href='http://biaobiaoqi.github.com'&gt;http://biaobiaoqi.github.com&lt;/a&gt;
+        &lt;/p&gt;
+</code></pre>
 ]]></content>
   </entry>
   
@@ -856,7 +1152,14 @@
 <li><p><a href="http://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm">wiki:Knuth–Morris–Pratt Algorithm</a></p></li>
 <li><p><a href="http://en.wikipedia.org/wiki/String_searching_algorithm">wiki:String Searching Algorithm</a></p></li>
 <li><p><a href="http://www.cppblog.com/converse/archive/2006/07/05/9447.html">《KMP算法的实现》</a></p></li>
-<li><p><a href="http://wangcong.org/blog/archives/2090">《Linux 内核中的 KMP 实现》</a></p></li>
+<li><p><a href="http://wangcong.org/blog/archives/2090">《Linux 内核中的 KMP 实现》</a><p class='post-footer'></p>
+
+<pre><code>      original link:
+      &lt;a href='http://biaobiaoqi.github.com/blog/2013/05/25/kmp-algorithm/'&gt;http://biaobiaoqi.github.com/blog/2013/05/25/kmp-algorithm/&lt;/a&gt;&lt;br/&gt;
+      &amp;nbsp;written by &lt;a href='http://biaobiaoqi.github.com'&gt;Biaobiaoqi&lt;/a&gt;
+      &amp;nbsp;posted at &lt;a href='http://biaobiaoqi.github.com'&gt;http://biaobiaoqi.github.com&lt;/a&gt;
+      &lt;/p&gt;
+</code></pre></li>
 </ul>
 
 ]]></content>
@@ -1041,6 +1344,14 @@
 <p>做到有效的改变很难。以前的习惯依然存在在大脑里。当回到某个旧习惯时，不用懊恼。承认它，大脑就是这样工作的。当意识到它的出现时，重新回到正确的道路上去。</p>
 
 <p>即使成为专家，也要意识到局限性：可能创新不足，过于相信意识等。</p>
+
+<p class='post-footer'>
+            original link:
+            <a href='http://biaobiaoqi.github.com/blog/2013/05/22/pragmatic-thinking-and-learning-refactor-your-wetware/'>http://biaobiaoqi.github.com/blog/2013/05/22/pragmatic-thinking-and-learning-refactor-your-wetware/</a><br/>
+            &nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>
+            &nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a>
+            </p>
+
 ]]></content>
   </entry>
   
@@ -1218,6 +1529,14 @@
 <li><p>当Facebook打通了支付渠道，成为一个全球化的经济体，银行不高兴了</p></li>
 </ul>
 
+
+<p class='post-footer'>
+            original link:
+            <a href='http://biaobiaoqi.github.com/blog/2013/05/21/the-facebook-effect/'>http://biaobiaoqi.github.com/blog/2013/05/21/the-facebook-effect/</a><br/>
+            &nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>
+            &nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a>
+            </p>
+
 ]]></content>
   </entry>
   
@@ -1273,6 +1592,14 @@
 
 <p>slides下载：
 <a href="https://dl.dropboxusercontent.com/u/64021093/slides/Hybrid%20system.pdf">请戳这里</a></p>
+
+<p class='post-footer'>
+            original link:
+            <a href='http://biaobiaoqi.github.com/blog/2013/05/20/hybrid-distributed-data-management-system/'>http://biaobiaoqi.github.com/blog/2013/05/20/hybrid-distributed-data-management-system/</a><br/>
+            &nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>
+            &nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a>
+            </p>
+
 ]]></content>
   </entry>
   
@@ -1428,6 +1755,14 @@
 
 
 <p>也就是类似于投票获得读写的锁。在Dynamo系统中可以配置这种wrn参数以自持特定的一致性。</p>
+
+<p class='post-footer'>
+            original link:
+            <a href='http://biaobiaoqi.github.com/blog/2013/05/18/distributed-consistency/'>http://biaobiaoqi.github.com/blog/2013/05/18/distributed-consistency/</a><br/>
+            &nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>
+            &nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a>
+            </p>
+
 ]]></content>
   </entry>
   
@@ -1565,7 +1900,14 @@
 <ul>
 <li>HadoopDB: An Architectural Hybrid of MapReduce and DBMS Technologies for Analytical Workloads</li>
 <li><a href="http://dbanotes.net/database/hadoopdb.html">《HadoopDB》 —— Fenng</a></li>
-<li>《架构大数据:挑战、现状与展望》 计算机学报 王珊</li>
+<li>《架构大数据:挑战、现状与展望》 计算机学报 王珊<p class='post-footer'>
+
+<pre><code>      original link:
+      &lt;a href='http://biaobiaoqi.github.com/blog/2013/05/18/a-hybrid-system-hadoopdb/'&gt;http://biaobiaoqi.github.com/blog/2013/05/18/a-hybrid-system-hadoopdb/&lt;/a&gt;&lt;br/&gt;
+      &amp;nbsp;written by &lt;a href='http://biaobiaoqi.github.com'&gt;Biaobiaoqi&lt;/a&gt;
+      &amp;nbsp;posted at &lt;a href='http://biaobiaoqi.github.com'&gt;http://biaobiaoqi.github.com&lt;/a&gt;
+      &lt;/p&gt;
+</code></pre></li>
 </ul>
 
 ]]></content>
@@ -1658,7 +2000,14 @@ http://www.freebsd.org/doc/zh_CN/books/arch-handbook/mac-synopsis.html</p>
 
 <h2>附录</h2>
 
-<p>对于想开发iOS应用而又没有开发者账号的朋友，可以参考这篇文章<a href="http://kqwd.blog.163.com/blog/static/4122344820117191351263/">《Xcode 4.1~4.6 + iOS 5、iOS 6免证书(iDP)开发+真机调试+生成IPA全攻略》</a>，Xcode4.6 iOS6.0 亲测有效。</p>
+<p>对于想开发iOS应用而又没有开发者账号的朋友，可以参考这篇文章<a href="http://kqwd.blog.163.com/blog/static/4122344820117191351263/">《Xcode 4.1~4.6 + iOS 5、iOS 6免证书(iDP)开发+真机调试+生成IPA全攻略》</a>，Xcode4.6 iOS6.0 亲测有效。  <p class='post-footer'></p>
+
+<pre><code>        original link:
+        &lt;a href='http://biaobiaoqi.github.com/blog/2013/05/17/jail-break-your-ios/'&gt;http://biaobiaoqi.github.com/blog/2013/05/17/jail-break-your-ios/&lt;/a&gt;&lt;br/&gt;
+        &amp;nbsp;written by &lt;a href='http://biaobiaoqi.github.com'&gt;Biaobiaoqi&lt;/a&gt;
+        &amp;nbsp;posted at &lt;a href='http://biaobiaoqi.github.com'&gt;http://biaobiaoqi.github.com&lt;/a&gt;
+        &lt;/p&gt;
+</code></pre>
 ]]></content>
   </entry>
   
@@ -1714,7 +2063,14 @@ http://www.freebsd.org/doc/zh_CN/books/arch-handbook/mac-synopsis.html</p>
 <h2>引申</h2>
 
 <ul>
-<li>CAP原作者对CAP的反思和澄清：<a href="http://www.infoq.com/cn/articles/cap-twelve-years-later-how-the-rules-have-changed">《CAP十二年回顾：规则变了》</a></li>
+<li>CAP原作者对CAP的反思和澄清：<a href="http://www.infoq.com/cn/articles/cap-twelve-years-later-how-the-rules-have-changed">《CAP十二年回顾：规则变了》</a><p class='post-footer'>
+
+<pre><code>      original link:
+      &lt;a href='http://biaobiaoqi.github.com/blog/2013/05/15/cap-and-eventual-consistent/'&gt;http://biaobiaoqi.github.com/blog/2013/05/15/cap-and-eventual-consistent/&lt;/a&gt;&lt;br/&gt;
+      &amp;nbsp;written by &lt;a href='http://biaobiaoqi.github.com'&gt;Biaobiaoqi&lt;/a&gt;
+      &amp;nbsp;posted at &lt;a href='http://biaobiaoqi.github.com'&gt;http://biaobiaoqi.github.com&lt;/a&gt;
+      &lt;/p&gt;
+</code></pre></li>
 </ul>
 
 ]]></content>
@@ -1864,7 +2220,14 @@ http://www.freebsd.org/doc/zh_CN/books/arch-handbook/mac-synopsis.html</p>
 
 <p>从经济学角度看，充裕是创新和增长的推进器。但从心理学角度看，匮乏才是我们真正理解的一切。</p>
 
-<p>时尚经济学：“诱导性过时”，将一种专有设计方案转化成一大众商品广泛复制。</p>
+<p>时尚经济学：“诱导性过时”，将一种专有设计方案转化成一大众商品广泛复制。<p class='post-footer'></p>
+
+<pre><code>        original link:
+        &lt;a href='http://biaobiaoqi.github.com/blog/2013/05/13/free-the-bit-economics/'&gt;http://biaobiaoqi.github.com/blog/2013/05/13/free-the-bit-economics/&lt;/a&gt;&lt;br/&gt;
+        &amp;nbsp;written by &lt;a href='http://biaobiaoqi.github.com'&gt;Biaobiaoqi&lt;/a&gt;
+        &amp;nbsp;posted at &lt;a href='http://biaobiaoqi.github.com'&gt;http://biaobiaoqi.github.com&lt;/a&gt;
+        &lt;/p&gt;
+</code></pre>
 ]]></content>
   </entry>
   
@@ -2006,6 +2369,14 @@ http://www.freebsd.org/doc/zh_CN/books/arch-handbook/mac-synopsis.html</p>
 
 <p>你考虑问题非常理智，很少受无关因素影响。你没有时间和兴趣去体会情感，容易忽略他人的感受，显得不尽人情。但当你的感情被忽视或没有表达出来的时候，你会非常敏感。你们需要给自己一点儿时间来了解自己的真实感情，学会正确地释放自己的情感，而不是爆发，并获得自己期望和为之努力的地位。
 你容易夸大自己的经验、能力。 你需要接受他人实际而有价值的协助，才能更好的提高能力并获得成功。</p>
+
+<p class='post-footer'>
+            original link:
+            <a href='http://biaobiaoqi.github.com/blog/2013/05/12/mbti-test/'>http://biaobiaoqi.github.com/blog/2013/05/12/mbti-test/</a><br/>
+            &nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>
+            &nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a>
+            </p>
+
 ]]></content>
   </entry>
   
@@ -2458,6 +2829,14 @@ http://www.freebsd.org/doc/zh_CN/books/arch-handbook/mac-synopsis.html</p>
 <h2>参考</h2>
 
 <p><a href="http://hadoop.apache.org/docs/stable/cluster_setup.html">offical document: Cluster Setup</a></p>
+
+<p class='post-footer'>
+            original link:
+            <a href='http://biaobiaoqi.github.com/blog/2013/05/12/touch-hadoop/'>http://biaobiaoqi.github.com/blog/2013/05/12/touch-hadoop/</a><br/>
+            &nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>
+            &nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a>
+            </p>
+
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tech | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-07-10T01:53:20+08:00</updated>
+  <updated>2013-07-10T03:53:21+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -12,6 +12,197 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[定制自己的octopress]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/07/10/decorate-octopress/"/>
+    <updated>2013-07-10T01:53:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/07/10/decorate-octopress</id>
+    <content type="html"><![CDATA[<p>在github pages上搭建好octopress博客之后，博客的基本功能就能使用了。如果想自己定制也是没问题的，octopress有较详尽的官方文档，原则上有问题求助官方即可：<a href="http://octopress.org/help/">octopress-help</a>。官方没有包纳的也可以去询问<a href="http://stackoverflow.com/questions/tagged/octopress">stackoverflow</a>。 当然，中文的看起来总会省事儿点。我做了如下一些总结;)</p>
+
+<p>不会ruby的童鞋特别注意：配置_config.yml的过程中特别注意，配置项『:』后要留空格，否则会报错。</p>
+
+<h2>1.装饰边栏</h2>
+
+<p>以增加豆瓣展示框为例。参加正反反长大哥的博客<a href="http://icodeit.org/2012/10/how-to-embed-douban-show-in-your-octopress-site/">How to Embed Douban-Show in Your Octopress Site</a></p>
+
+<h2>2.增加国内的第三方评论</h2>
+
+<p>虽然octopress内置的评论系统也很不错，但国内的第三方评论更接地气，将微博、人人等各方SNS都纳入旗下。比较出名的有友言、多说。</p>
+
+<p>这里以唐巧大哥的博文<a href="http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/">《象写程序一样写博客：搭建基于github的博客》</a>为例，他使用的是友言。</p>
+
+<h2>3.定制域名</h2>
+
+<p>如果你拥有自己的域名，可以CNAME到github pages上。以我的配置为例（我的域名为<code>biaobiaoqi.me</code>）。</p>
+
+<p>1.在octopress的source目录下创建CNAME文件，并输入新域名：biaobiaoqi.com</p>
+
+<p>2.在域名管理中，创建或修改A记录，指向207.97.227.245这个地址。</p>
+
+<p>3.创建CNAME记录，www.biaobiaoqi.com -> biaobiaoqi.github.com</p>
+
+<p>这一过程可能需要好几天才能生效，请耐心等待:)</p>
+
+<h2>4.让博客中连接在新窗口打开</h2>
+
+<p>由于markdown不支持这一语法，如果要自己用html标签实现，又有些违背了markdown以内容为重的立意。</p>
+
+<p>参考博文<a href="http://www.blogjava.net/lishunli/archive/2013/01/20/394478.html">《在Octopress中为markdown的超链接加上target="_blank"》</a>，可以通过将如下代码添加到 {OCTOPRESS_HOME}/source/_includes/custom/head.html文件末尾来实现：</p>
+
+<p>```</p>
+
+<script type="text/javascript">
+
+function addBlankTargetForLinks () {
+
+  $('a[href^="http"]').each(function(){
+
+      $(this).attr('target', '_blank');
+
+  });
+
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+
+  addBlankTargetForLinks();
+
+});
+
+</script>
+
+
+<p>```</p>
+
+<h2>5.列表的排版</h2>
+
+<p>默认情况，所有文字的排头会对齐，但如果有列表项的情况下也如此，列表头就会冲出文章的主体区块了。</p>
+
+<p>在octopress/sass/custom/_layout.scss文件中找到#$indented-lists: true行，去掉#注释即可。</p>
+
+<p>```
+$indented-lists: true</p>
+
+<p>```</p>
+
+<h2>6.404ERROR页面</h2>
+
+<p>在ocotopress/source目录下，增加404.markdown，并做出自定义的呃编辑。本博客使用了腾讯公益404，推荐大家使用，为社会贡献一分正能量。<a href="http://www.qq.com/404/">公益404</a></p>
+
+<h2>```</h2>
+
+<p>layout: page</p>
+
+<p>title: "404 Error"</p>
+
+<p>date: 2013-4-21 02:35</p>
+
+<p>comments: false</p>
+
+<p>sharing: false</p>
+
+<p>footer: false</p>
+
+<hr />
+
+<script type="text/javascript" src="http://www.qq.com/404/search_children.js" charset="utf-8"></script>
+
+
+<p>```</p>
+
+<h2>7.在侧边栏增加标签云(tag cloud)</h2>
+
+<p>octopress默认只有分类，没有标签。这对于博文的组织和管理很不友好。有人开源出了自己定制的tag生成和tag cloud展现的代码，可以引入到自己的博客中来。</p>
+
+<p>详细操作参见博文：<a href="http://codemacro.com/2012/07/18/add-tag-to-octopress/">《为octopress添加tag Cloud》</a>。不过博文中没有讲解标签云的UI配置参数的使用，为了让UI适应页面，请参考原作者的官方说明:<a href="https://github.com/robbyedwards/octopress-tag-cloud">octopress-tag-cloud</a>。我所实践出的较合理的参数值如下
+<code>
+<a style="font-size: 167%" href="/tags/algorithm/">algorithm</a> &amp;nbsp 
+<a style="font-size: 180%" href="/tags/distributed/">distributed</a> &amp;nbsp 
+<a style="font-size: 105%" href="/tags/entrepreneurship/">entrepreneurship</a> &amp;nbsp 
+<a style="font-size: 105%" href="/tags/gui/">gui</a> &amp;nbsp 
+<a style="font-size: 151%" href="/tags/hadoop/">hadoop</a> &amp;nbsp 
+<a style="font-size: 105%" href="/tags/idea/">idea</a> &amp;nbsp 
+<a style="font-size: 139%" href="/tags/java/">java</a> &amp;nbsp 
+<a style="font-size: 105%" href="/tags/linux/">linux</a> &amp;nbsp 
+<a style="font-size: 125%" href="/tags/methodology/">methodology</a> &amp;nbsp 
+<a style="font-size: 105%" href="/tags/network/">network</a> &amp;nbsp 
+<a style="font-size: 125%" href="/tags/os/">os</a> &amp;nbsp 
+<a style="font-size: 139%" href="/tags/pat/">pat</a> &amp;nbsp 
+<a style="font-size: 105%" href="/tags/security/">security</a> &amp;nbsp 
+<a style="font-size: 174%" href="/tags/think/">think</a> &amp;nbsp 
+<a style="font-size: 105%" href="/tags/web/">web</a>
+
+</code></p>
+
+<p>如果想将文章分类（category）也放在侧边栏，可以参考这篇博文：<a href="http://paz.am/blog/blog/2012/06/25/octopress-category-list-plugin/">《Octopress - Category List Plug-in》</a></p>
+
+<h2>8.在顶栏增加标签云页面tab</h2>
+
+<p>1.生成新网页
+<code>
+rake new_page["tag-cloud"] #在octopress/source/中将生成tag-cloud/文件夹
+</code></p>
+
+<p>2.在顶栏增加新页面</p>
+
+<p>修改<code>source/_includes/custom/navigation.html</code></p>
+
+<p>```</p>
+
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/categories/tech/">技术</a></li>
+  <li><a href="/blog/categories/life/">生活</a></li>
+  <li><a href="/blog/categories/book/">读书</a></li>
+  <li><a href="/tag-cloud/">标签云</a></li>
+  <li><a href="/about">关于</a></li>
+</ul>
+
+
+<p><code>``
+在需要的位置增加</code><li><a href="/tag-cloud/">标签云</a></li>`。如此一来，可以在网页顶栏看到『标签云』一栏了。不过此时，点击进入，页面为空。</p>
+
+<p>3.修改标签云页面内容。</p>
+
+<p>修改<code>octopress/source/tag-cloud/index.markdown</code>，增加标签云执行脚本。</p>
+
+<p>```</p>
+
+<hr />
+
+<p>layout: page
+title: "标签云"
+date: 2013-07-10 02:53
+comments: true
+sharing: true</p>
+
+<h2>footer: true</h2>
+
+<p>  <ul class="tag-cloud">
+  #注意，下面一行的escape反斜杠在正常使用时需要去掉</p>
+
+<pre><code>\{\% tag_cloud font-size: 90-210%, limit: 1000, style: para \%\}
+</code></pre>
+
+<p>  </ul>
+```</p>
+
+<h2>9.博客末尾增加原文链接、版权等</h2>
+
+<p>最近发现有其他小网站未经授权直接copy我的博客内容，在违章的末尾加上版权、原文链接变得很有必要了。</p>
+
+<p>详情参见博客<a href="http://codemacro.com/2012/07/26/post-footer-plugin-for-octopress/">《为octopress每篇文章添加一个文章信息》</a>。</p>
+
+<h2>10.给中英文之间加空格</h2>
+
+<p>参见博文<a href="http://xoyo.name/2012/04/auto-spacing-for-octopress/">《给中英文间加个空格》</a>。</p>
+
+<h2>Tips</h2>
+
+<p>既然是个博客站点，就算是web产品啦，可以考虑下SEO。推荐博文<a href="http://codemacro.com/2012/09/06/octopress-seo/">《Octopress中的SEO》</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[给女朋友的礼物]]></title>
@@ -301,105 +492,6 @@ document.getElementById('start_btn').style.display = ""; //show start button
 
 
 <p>slides下载地址：<a href="https://dl.dropboxusercontent.com/u/64021093/slides/%E8%BF%9C%E7%A8%8B%E8%BF%87%E7%A8%8B%E8%B0%83%E7%94%A8%E5%92%8CNIO.pdf">请戳</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[关于毕业季照片分享的思考]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/05/25/some-ideas-about-using-bt-protocol-to-sync/"/>
-    <updated>2013-05-25T22:47:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/05/25/some-ideas-about-using-bt-protocol-to-sync</id>
-    <content type="html"><![CDATA[<h2>背景</h2>
-
-<p>毕业季到了，女朋友跟班里同学们一起拍了很多照片。由于照片分散在不同的人的手机、相机里，她也无法立即给我传来她的照片。这个情景一年前我也遇到过，只是当时自己比较忙，加上考虑着还会在本校读研，也没太在意毕业季照片的手机这一需求，以至于到现在我的电脑里甚至没有一张我穿学士服的照片:-=。而现在，当我想看看gf的照片时，这个需求横亘在我面前，让我特别的想解决掉它。</p>
-
-<p>让我们从事实出发，理清问题的思路。</p>
-
-<h2>需求的产生</h2>
-
-<p>大学生拍毕业季照的现状：</p>
-
-<ul>
-<li>1.大学生在毕业季拍照留念是刚需，几乎平日爱拍照、不爱拍照的所有人都会参与其中。</li>
-<li>2.拍照一般以小团体为基本单元进行。多是班级、社团这种常见的凝聚力较强的团体。</li>
-<li>3.随着科技的发展和生活水平的提高，越来越多的人具备了拍出高质量照片的设备和实力。</li>
-</ul>
-
-
-<p>由于这种以小团体为单位的照片的大量产生，每个团体中的照片会交叉散落在较多人手中。在这种分散的格局面前，单独挑选出自己的照片并保存的成本巨大，直接导致了大家最终需求的统一：</p>
-
-<ul>
-<li>将所有的照片分发到所有人手中。</li>
-</ul>
-
-
-<h2>原有解决方案</h2>
-
-<p>现有的解决方案主要方案归纳为如下四种：</p>
-
-<ul>
-<li><p>1.用移动硬盘等设备人力拷贝</p>
-
-<p>  这种方式太过古老和原始，缺点费时费力。</p></li>
-<li><p>2.使用公邮、网盘、QQ群共享等方式统一上传、下载</p>
-
-<p>  主要缺点是外网网速限制；另外，网速的限制让用户上传和下载的门槛变高，影响了上传积极性，如果有人迟迟不上传，最终下载完整数据的时间也会一直拖延，带来消极的体验；如果注册一次性账号，这也不见得是环保的行为（或许这想法有点数据洁癖吧>&lt;），如果使用非一次性账号，那么权限管理将比较头疼。</p></li>
-<li><p>3.使用内网BT资源站分别打包上传、下载</p>
-
-<p>  优点是利用了内网网速的优势。缺点是每个人都打包做种，会让资源分散的很厉害，难于汇集。且做种等步骤对于部分用户而言，有操作门槛。</p></li>
-<li><p>4.先使用1中方法，统一手机照片数据，然后按照2或3的方法发布数据</p>
-
-<p>  这大概是最靠谱的方式了，缺点集中在需要有人费时费力的手机数据上。当然，如果班里有一个任劳任怨的好班长，这个问题就解决了。</p></li>
-</ul>
-
-
-<h4>总结：</h4>
-
-<p>对于一个懒人而言，现有的解决方案都是蹩脚的。这些解决方案都不约而同的希望首先将数据聚合到一个外部空间中，然后再统一的分发给大家。这个步骤必要吗？实际上，我们只是需要每个人都方便、快捷的获得所有照片。</p>
-
-<h2>一个简单的设计</h2>
-
-<p>我将问题抽象为：</p>
-
-<ul>
-<li>完整的数据分散在10至20个数据拥有者手中，需要通过一定手段，让每个个体都不重复的拥有完整的数据。</li>
-</ul>
-
-
-<p>由于外网网速的限制，基于校园内网建立的工具就有了天然的优势。但如果使用内网，就不得不抛弃各大公司免费提供的邮箱存储空间、网盘存储空间。而校内的资源是有限的，没有自己的服务器，没有足够的空间存储大家的数据，这也就迫使我们考虑到了p2p的系统架构。于是，有了这样的解决方案，设定代号为BBT：</p>
-
-<ul>
-<li>PC机安装BBT工具软件后，可以设定<code>共享目录</code>和对应的<code>分享ID</code></li>
-<li>放入特定<code>共享目录</code>的文件，将使用基于p2p同步的方式，在拥有相同的<code>分享ID</code>的<code>共享目录</code>间同步数据，目的是让所有人都获得到每个人的数据</li>
-</ul>
-
-
-<p>在跟阿豪童鞋的交流中，他建议为了进一步简化用户操作，可以尝试这样一种体验方式：</p>
-
-<ul>
-<li>班级内所有人在同一个链接下载工具软件。保证这一链接下载的软件能互相通信，实现数据同步。这杨就节省了用户自己设定相同的<code>分享ID</code>的流程，而将这一过程转移到班长请求下载链接的过程中。</li>
-</ul>
-
-
-<p>确实够简洁，很赞，实现成本还需要调研。</p>
-
-<h6>BitTorrent Sync</h6>
-
-<p>在构思的过程中，突然想起前几天在start up news上看到了一个基于BT协议的同步软件<a href="http://labs.bittorrent.com/experiments/sync.html">BitTorrent Sync</a>。</p>
-
-<p><img src="http://labs.bittorrent.com/img/wide/sync.png" title="BitTorrent Sync" alt="BitTorrent Sync" /></p>
-
-<p>它的实现方式大概是我们所需要的。可惜的是，由于它的功能全面，界面略显复杂。而同时，它并没有开放二次开发接口。</p>
-
-<p>或许我需要自己搭建一个p2p的系统？</p>
-
-<h6>PS:</h6>
-
-<p>BT的优势，在于利用了所有节点的存储和传输能力，节点数量越多，下载越快</p>
-
-<p>BitTorrent  Sync的优势，则在于能动态的集合分散在不同节点中的数据</p>
-
-<p>感觉这种去中心化的分布式系统，前景大大的有啊;)</p>
 ]]></content>
   </entry>
   

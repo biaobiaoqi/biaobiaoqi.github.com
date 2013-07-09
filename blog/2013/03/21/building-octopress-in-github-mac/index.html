@@ -92,6 +92,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   <li><a href="/blog/categories/tech/">技术</a></li>
   <li><a href="/blog/categories/life/">生活</a></li>
   <li><a href="/blog/categories/book/">读书</a></li>
+  <li><a href="/tag-cloud/">标签云</a></li>
   <li><a href="/about">关于</a></li>
 </ul>
 
@@ -192,93 +193,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <p>环境配置完成后，就可以开始参照<a href="http://octopress.org/help/">官网</a>的指导搭建octopress，并在github建代码仓库，同步管理啦。</p>
 
-<h1>3. 配置</h1>
-
-<p>具体配置同见<a href="http://octopress.org/help/">官网</a>。</p>
-
-<p>在配置_config.yml的过程中要注意，配置项的:后有空格。否则会报错。</p>
-
-<p>另附个性化配置方案：（这些内容大都能在官网文档中找到）</p>
-
-<h3>3.1 <a href="http://icodeit.org/2012/10/how-to-embed-douban-show-in-your-octopress-site/">装饰边栏（加weibo、豆瓣信息)</a></h3>
-
-<h3>3.2 增加weibo评论：  <a href="http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/">友言版</a></h3>
-
-<h3>3.3 CNAME</h3>
-
-<p>如果你有自己的域名，可以CNAME到github pages上。以我的配置为例。</p>
-
-<p>1.在工作目录的source目录下创建CNAME文件，并输入新域名：biaobiaoqi.com</p>
-
-<p>2.在域名管理中，创建或修改A记录，指向204.232.175.78这个地址。</p>
-
-<p>3.创建CNAME记录，www.biaobiaoqi.com -> biaobiaoqi.github.com</p>
-
-<p>网上很多CNAME的操作指南，对于A记录的IP都写着<del>207.97.227.245</del>，或者其他的IP。实际上，这是github pages更换了地址所致。再一次证明<strong>官方文档才是最可靠的！</strong></p>
-
-<h3>3.4 让链接在新窗口中打开</h3>
-
-<p>markdown不支持这一语法，如果要自己用html标签实现，也太得不偿失了。参考<a href="http://www.blogjava.net/lishunli/archive/2013/01/20/394478.html">这篇博文</a>，可以通过将如下代码添加到 {OCTOPRESS_HOME}/source/_includes/custom/head.html文件末尾来实现：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;script type="text/javascript"&gt;
-</span><span class='line'>function addBlankTargetForLinks () {
-</span><span class='line'>  $('a[href^="http"]').each(function(){
-</span><span class='line'>      $(this).attr('target', '_blank');
-</span><span class='line'>  });
-</span><span class='line'>}
-</span><span class='line'>
-</span><span class='line'>$(document).bind('DOMNodeInserted', function(event) {
-</span><span class='line'>  addBlankTargetForLinks();
-</span><span class='line'>});
-</span><span class='line'>&lt;/script&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>3.5 列表的排版</h3>
-
-<p>默认情况，所有文字的排头会对齐，但如果有列表项的情况下也如此，列表头就会冲出文章的主体区块了。</p>
-
-<p>在octopress/sass/custom/_layout.scss文件中找到#$indented-lists: true行，去掉#注释即可。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$indented-lists: true</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>3.6 404ERROR页面</h3>
-
-<p>在ocotopress/source目录下，增加404.markdown，并做出自定义的呃编辑。本博客使用了腾讯公益404，推荐大家使用，为社会贡献一分正能量。<a href="http://www.qq.com/404/">公益404</a></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>---
-</span><span class='line'>layout: page
-</span><span class='line'>title: "404 Error"
-</span><span class='line'>date: 2013-4-21 02:35
-</span><span class='line'>comments: false
-</span><span class='line'>sharing: false
-</span><span class='line'>footer: false
-</span><span class='line'>---
-</span><span class='line'>&lt;script type="text/javascript" src="http://www.qq.com/404/search_children.js" charset="utf-8"&gt;&lt;/script&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<h1>4. 发博文和在线部署</h1>
+<h1>3. 发博文和在线部署</h1>
 
 <p>同样的，参考<a href="http://octopress.org/help/">官网</a>即可。
 这里大致的列出我所常用到的几条命令：</p>
@@ -319,6 +234,16 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <p>其中推荐到的<a href="http://mouapp.com/">mou</a>，是一个mac下的markdown编辑器。试用后发现有些格式兼容问题，但似乎mac下也只有他这个可视化工具了=。=</p>
 
 <p>另附<a href="http://wowubuntu.com/markdown/index.html">markdown语法</a></p>
+
+<p>进一步的octopress博客定制，参见博客<a href="">《定制自己的octopress》</a></p>
+
+<p class='post-footer'>
+            original link:
+            <a href='http://biaobiaoqi.github.com/blog/2013/03/21/building-octopress-in-github-mac/'>http://biaobiaoqi.github.com/blog/2013/03/21/building-octopress-in-github-mac/</a><br/>
+            &nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>
+            &nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a>
+            </p>
+
 </div>
 
 
@@ -409,15 +334,15 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <a style="font-size: 105%" href="/tags/gui/">gui</a> &nbsp 
 <a style="font-size: 151%" href="/tags/hadoop/">hadoop</a> &nbsp 
 <a style="font-size: 105%" href="/tags/idea/">idea</a> &nbsp 
-<a style="font-size: 125%" href="/tags/java/">java</a> &nbsp 
-<a style="font-size: 105%" href="/tags/life/">life</a> &nbsp 
+<a style="font-size: 139%" href="/tags/java/">java</a> &nbsp 
 <a style="font-size: 105%" href="/tags/linux/">linux</a> &nbsp 
 <a style="font-size: 125%" href="/tags/methodology/">methodology</a> &nbsp 
 <a style="font-size: 105%" href="/tags/network/">network</a> &nbsp 
 <a style="font-size: 125%" href="/tags/os/">os</a> &nbsp 
 <a style="font-size: 139%" href="/tags/pat/">pat</a> &nbsp 
 <a style="font-size: 105%" href="/tags/security/">security</a> &nbsp 
-<a style="font-size: 167%" href="/tags/think/">think</a>
+<a style="font-size: 174%" href="/tags/think/">think</a> &nbsp 
+<a style="font-size: 105%" href="/tags/web/">web</a>
 
   </ul>
 </section>
@@ -426,7 +351,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2013/07/10/decorate-octopress/">decorate octopress</a>
+        <a href="/blog/2013/07/10/decorate-octopress/">定制自己的octopress</a>
       </li>
     
       <li class="post">

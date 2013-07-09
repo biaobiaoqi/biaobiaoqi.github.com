@@ -6,7 +6,7 @@
     </url>
     <url>
         <loc>http://biaobiaoqi.github.com/blog/2013/03/21/building-octopress-in-github-mac/</loc>
-        <lastmod>2013-05-18T20:58:43+08:00</lastmod>
+        <lastmod>2013-07-10T02:39:50+08:00</lastmod>
     </url>
     <url>
         <loc>http://biaobiaoqi.github.com/blog/2013/04/04/pat-basic-level-1001-1010/</loc>
@@ -106,7 +106,7 @@
     </url>
     <url>
         <loc>http://biaobiaoqi.github.com/blog/2013/05/21/the-facebook-effect/</loc>
-        <lastmod>2013-05-21T01:40:51+08:00</lastmod>
+        <lastmod>2013-07-10T03:16:54+08:00</lastmod>
     </url>
     <url>
         <loc>
@@ -116,7 +116,7 @@
     </url>
     <url>
         <loc>http://biaobiaoqi.github.com/blog/2013/05/25/kmp-algorithm/</loc>
-        <lastmod>2013-06-12T20:50:30+08:00</lastmod>
+        <lastmod>2013-07-10T03:17:14+08:00</lastmod>
     </url>
     <url>
         <loc>
@@ -150,11 +150,11 @@
     </url>
     <url>
         <loc>http://biaobiaoqi.github.com/blog/2013/07/07/yuminhong/</loc>
-        <lastmod>2013-07-10T01:52:27+08:00</lastmod>
+        <lastmod>2013-07-10T03:18:17+08:00</lastmod>
     </url>
     <url>
         <loc>http://biaobiaoqi.github.com/blog/2013/07/10/decorate-octopress/</loc>
-        <lastmod>2013-07-10T01:53:14+08:00</lastmod>
+        <lastmod>2013-07-10T03:45:27+08:00</lastmod>
     </url>
     <url>
         <loc>http://biaobiaoqi.github.com/404.html</loc>
@@ -166,11 +166,11 @@
     </url>
     <url>
         <loc>http://biaobiaoqi.github.com/blog/archives/</loc>
-        <lastmod>2013-07-10T01:53:14+08:00</lastmod>
+        <lastmod>2013-07-10T03:45:27+08:00</lastmod>
     </url>
     <url>
         <loc>http://biaobiaoqi.github.com/</loc>
-        <lastmod>2013-07-10T01:53:14+08:00</lastmod>
+        <lastmod>2013-07-10T03:45:27+08:00</lastmod>
     </url>
     <url>
         <loc>http://biaobiaoqi.github.com/resume/</loc>
@@ -179,5 +179,9 @@
     <url>
         <loc>http://biaobiaoqi.github.com/robots.txt</loc>
         <lastmod>2013-04-21T02:32:43+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://biaobiaoqi.github.com/tag-cloud/</loc>
+        <lastmod>2013-07-10T03:28:03+08:00</lastmod>
     </url>
 </urlset>

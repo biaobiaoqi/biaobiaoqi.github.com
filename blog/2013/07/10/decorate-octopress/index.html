@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>decorate octopress - Biaobiaoqi的博客</title>
+  <title>定制自己的octopress - Biaobiaoqi的博客</title>
   <meta name="author" content="Biaobiaoqi">
 
   
@@ -92,6 +92,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   <li><a href="/blog/categories/tech/">技术</a></li>
   <li><a href="/blog/categories/life/">生活</a></li>
   <li><a href="/blog/categories/book/">读书</a></li>
+  <li><a href="/tag-cloud/">标签云</a></li>
   <li><a href="/about">关于</a></li>
 </ul>
 
@@ -103,7 +104,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
   <header>
     
-      <h1 class="entry-title">Decorate Octopress</h1>
+      <h1 class="entry-title">定制自己的octopress</h1>
     
     
       <p class="meta">
@@ -129,7 +130,242 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   </header>
 
 
-<div class="entry-content">
+<div class="entry-content"><p>在github pages上搭建好octopress博客之后，博客的基本功能就能使用了。如果想自己定制也是没问题的，octopress有较详尽的官方文档，原则上有问题求助官方即可：<a href="http://octopress.org/help/">octopress-help</a>。官方没有包纳的也可以去询问<a href="http://stackoverflow.com/questions/tagged/octopress">stackoverflow</a>。 当然，中文的看起来总会省事儿点。我做了如下一些总结;)</p>
+
+<p>不会ruby的童鞋特别注意：配置_config.yml的过程中特别注意，配置项『:』后要留空格，否则会报错。</p>
+
+<h2>1.装饰边栏</h2>
+
+<p>以增加豆瓣展示框为例。参加正反反长大哥的博客<a href="http://icodeit.org/2012/10/how-to-embed-douban-show-in-your-octopress-site/">How to Embed Douban-Show in Your Octopress Site</a></p>
+
+<h2>2.增加国内的第三方评论</h2>
+
+<p>虽然octopress内置的评论系统也很不错，但国内的第三方评论更接地气，将微博、人人等各方SNS都纳入旗下。比较出名的有友言、多说。</p>
+
+<p>这里以唐巧大哥的博文<a href="http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/">《象写程序一样写博客：搭建基于github的博客》</a>为例，他使用的是友言。</p>
+
+<h2>3.定制域名</h2>
+
+<p>如果你拥有自己的域名，可以CNAME到github pages上。以我的配置为例（我的域名为<code>biaobiaoqi.me</code>）。</p>
+
+<p>1.在octopress的source目录下创建CNAME文件，并输入新域名：biaobiaoqi.com</p>
+
+<p>2.在域名管理中，创建或修改A记录，指向207.97.227.245这个地址。</p>
+
+<p>3.创建CNAME记录，www.biaobiaoqi.com -> biaobiaoqi.github.com</p>
+
+<p>这一过程可能需要好几天才能生效，请耐心等待:)</p>
+
+<h2>4.让博客中连接在新窗口打开</h2>
+
+<p>由于markdown不支持这一语法，如果要自己用html标签实现，又有些违背了markdown以内容为重的立意。</p>
+
+<p>参考博文<a href="http://www.blogjava.net/lishunli/archive/2013/01/20/394478.html">《在Octopress中为markdown的超链接加上target=&#8221;_blank&#8221;》</a>，可以通过将如下代码添加到 {OCTOPRESS_HOME}/source/_includes/custom/head.html文件末尾来实现：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;script type="text/javascript"&gt;
+</span><span class='line'>
+</span><span class='line'>function addBlankTargetForLinks () {
+</span><span class='line'>
+</span><span class='line'>  $('a[href^="http"]').each(function(){
+</span><span class='line'>
+</span><span class='line'>      $(this).attr('target', '_blank');
+</span><span class='line'>
+</span><span class='line'>  });
+</span><span class='line'>
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>$(document).bind('DOMNodeInserted', function(event) {
+</span><span class='line'>
+</span><span class='line'>  addBlankTargetForLinks();
+</span><span class='line'>
+</span><span class='line'>});
+</span><span class='line'>
+</span><span class='line'>&lt;/script&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>5.列表的排版</h2>
+
+<p>默认情况，所有文字的排头会对齐，但如果有列表项的情况下也如此，列表头就会冲出文章的主体区块了。</p>
+
+<p>在octopress/sass/custom/_layout.scss文件中找到#$indented-lists: true行，去掉#注释即可。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$indented-lists: true
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>6.404ERROR页面</h2>
+
+<p>在ocotopress/source目录下，增加404.markdown，并做出自定义的呃编辑。本博客使用了腾讯公益404，推荐大家使用，为社会贡献一分正能量。<a href="http://www.qq.com/404/">公益404</a></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>---
+</span><span class='line'>
+</span><span class='line'>layout: page
+</span><span class='line'>
+</span><span class='line'>title: "404 Error"
+</span><span class='line'>
+</span><span class='line'>date: 2013-4-21 02:35
+</span><span class='line'>
+</span><span class='line'>comments: false
+</span><span class='line'>
+</span><span class='line'>sharing: false
+</span><span class='line'>
+</span><span class='line'>footer: false
+</span><span class='line'>
+</span><span class='line'>---
+</span><span class='line'>
+</span><span class='line'>&lt;script type="text/javascript" src="http://www.qq.com/404/search_children.js" charset="utf-8"&gt;&lt;/script&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>7.在侧边栏增加标签云(tag cloud)</h2>
+
+<p>octopress默认只有分类，没有标签。这对于博文的组织和管理很不友好。有人开源出了自己定制的tag生成和tag cloud展现的代码，可以引入到自己的博客中来。</p>
+
+<p>详细操作参见博文：<a href="http://codemacro.com/2012/07/18/add-tag-to-octopress/">《为octopress添加tag Cloud》</a>。不过博文中没有讲解标签云的UI配置参数的使用，为了让UI适应页面，请参考原作者的官方说明:<a href="https://github.com/robbyedwards/octopress-tag-cloud">octopress-tag-cloud</a>。我所实践出的较合理的参数值如下</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'><a style="font-size: 167%" href="/tags/algorithm/">algorithm</a> &nbsp 
+<a style="font-size: 180%" href="/tags/distributed/">distributed</a> &nbsp 
+<a style="font-size: 105%" href="/tags/entrepreneurship/">entrepreneurship</a> &nbsp 
+<a style="font-size: 105%" href="/tags/gui/">gui</a> &nbsp 
+<a style="font-size: 151%" href="/tags/hadoop/">hadoop</a> &nbsp 
+<a style="font-size: 105%" href="/tags/idea/">idea</a> &nbsp 
+<a style="font-size: 139%" href="/tags/java/">java</a> &nbsp 
+<a style="font-size: 105%" href="/tags/linux/">linux</a> &nbsp 
+<a style="font-size: 125%" href="/tags/methodology/">methodology</a> &nbsp 
+<a style="font-size: 105%" href="/tags/network/">network</a> &nbsp 
+<a style="font-size: 125%" href="/tags/os/">os</a> &nbsp 
+<a style="font-size: 139%" href="/tags/pat/">pat</a> &nbsp 
+<a style="font-size: 105%" href="/tags/security/">security</a> &nbsp 
+<a style="font-size: 174%" href="/tags/think/">think</a> &nbsp 
+<a style="font-size: 105%" href="/tags/web/">web</a>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果想将文章分类（category）也放在侧边栏，可以参考这篇博文：<a href="http://paz.am/blog/blog/2012/06/25/octopress-category-list-plugin/">《Octopress - Category List Plug-in》</a></p>
+
+<h2>8.在顶栏增加标签云页面tab</h2>
+
+<p>1.生成新网页</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake new_page["tag-cloud"] #在octopress/source/中将生成tag-cloud/文件夹</span></code></pre></td></tr></table></div></figure>
+
+
+<p>2.在顶栏增加新页面</p>
+
+<p>修改<code>source/_includes/custom/navigation.html</code></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;ul class="main-navigation"&gt;
+</span><span class='line'>  &lt;li&gt;&lt;a href="/"&gt;首页&lt;/a&gt;&lt;/li&gt;
+</span><span class='line'>  &lt;li&gt;&lt;a href="/blog/categories/tech/"&gt;技术&lt;/a&gt;&lt;/li&gt;
+</span><span class='line'>  &lt;li&gt;&lt;a href="/blog/categories/life/"&gt;生活&lt;/a&gt;&lt;/li&gt;
+</span><span class='line'>  &lt;li&gt;&lt;a href="/blog/categories/book/"&gt;读书&lt;/a&gt;&lt;/li&gt;
+</span><span class='line'>  &lt;li&gt;&lt;a href="/tag-cloud/"&gt;标签云&lt;/a&gt;&lt;/li&gt;
+</span><span class='line'>  &lt;li&gt;&lt;a href="/about"&gt;关于&lt;/a&gt;&lt;/li&gt;
+</span><span class='line'>&lt;/ul&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在需要的位置增加<code>&lt;li&gt;&lt;a href="/tag-cloud/"&gt;标签云&lt;/a&gt;&lt;/li&gt;</code>。如此一来，可以在网页顶栏看到『标签云』一栏了。不过此时，点击进入，页面为空。</p>
+
+<p>3.修改标签云页面内容。</p>
+
+<p>修改<code>octopress/source/tag-cloud/index.markdown</code>，增加标签云执行脚本。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>---
+</span><span class='line'>layout: page
+</span><span class='line'>title: "标签云"
+</span><span class='line'>date: 2013-07-10 02:53
+</span><span class='line'>comments: true
+</span><span class='line'>sharing: true
+</span><span class='line'>footer: true
+</span><span class='line'>---
+</span><span class='line'>  &lt;ul class="tag-cloud"&gt;
+</span><span class='line'>  #注意，下面一行的escape反斜杠在正常使用时需要去掉
+</span><span class='line'>    \{\% tag_cloud font-size: 90-210%, limit: 1000, style: para \%\}
+</span><span class='line'>  &lt;/ul&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>9.博客末尾增加原文链接、版权等</h2>
+
+<p>最近发现有其他小网站未经授权直接copy我的博客内容，在违章的末尾加上版权、原文链接变得很有必要了。</p>
+
+<p>详情参见博客<a href="http://codemacro.com/2012/07/26/post-footer-plugin-for-octopress/">《为octopress每篇文章添加一个文章信息》</a>。</p>
+
+<h2>10.给中英文之间加空格</h2>
+
+<p>参见博文<a href="http://xoyo.name/2012/04/auto-spacing-for-octopress/">《给中英文间加个空格》</a>。</p>
+
+<h2>Tips</h2>
+
+<p>既然是个博客站点，就算是web产品啦，可以考虑下SEO。推荐博文<a href="http://codemacro.com/2012/09/06/octopress-seo/">《Octopress中的SEO》</a><p class='post-footer'></p>
+
+<pre><code>        original link:
+        &lt;a href='http://biaobiaoqi.github.com/blog/2013/07/10/decorate-octopress/'&gt;http://biaobiaoqi.github.com/blog/2013/07/10/decorate-octopress/&lt;/a&gt;&lt;br/&gt;
+        &amp;nbsp;written by &lt;a href='http://biaobiaoqi.github.com'&gt;Biaobiaoqi&lt;/a&gt;
+        &amp;nbsp;posted at &lt;a href='http://biaobiaoqi.github.com'&gt;http://biaobiaoqi.github.com&lt;/a&gt;
+        &lt;/p&gt;
+</code></pre>
 </div>
 
 
@@ -154,6 +390,12 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <time datetime="2013-07-10T01:53:00+08:00" pubdate data-updated="true">Jul 10<span>th</span>, 2013</time>
       
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
 
 
     </p>
@@ -212,15 +454,15 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <a style="font-size: 105%" href="/tags/gui/">gui</a> &nbsp 
 <a style="font-size: 151%" href="/tags/hadoop/">hadoop</a> &nbsp 
 <a style="font-size: 105%" href="/tags/idea/">idea</a> &nbsp 
-<a style="font-size: 125%" href="/tags/java/">java</a> &nbsp 
-<a style="font-size: 105%" href="/tags/life/">life</a> &nbsp 
+<a style="font-size: 139%" href="/tags/java/">java</a> &nbsp 
 <a style="font-size: 105%" href="/tags/linux/">linux</a> &nbsp 
 <a style="font-size: 125%" href="/tags/methodology/">methodology</a> &nbsp 
 <a style="font-size: 105%" href="/tags/network/">network</a> &nbsp 
 <a style="font-size: 125%" href="/tags/os/">os</a> &nbsp 
 <a style="font-size: 139%" href="/tags/pat/">pat</a> &nbsp 
 <a style="font-size: 105%" href="/tags/security/">security</a> &nbsp 
-<a style="font-size: 167%" href="/tags/think/">think</a>
+<a style="font-size: 174%" href="/tags/think/">think</a> &nbsp 
+<a style="font-size: 105%" href="/tags/web/">web</a>
 
   </ul>
 </section>
@@ -229,7 +471,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2013/07/10/decorate-octopress/">decorate octopress</a>
+        <a href="/blog/2013/07/10/decorate-octopress/">定制自己的octopress</a>
       </li>
     
       <li class="post">
