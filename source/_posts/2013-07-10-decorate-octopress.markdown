@@ -194,9 +194,7 @@ post.content + %Q[<p class='post-footer'>
 
 参见博文[《给中英文间加个空格》](http://xoyo.name/2012/04/auto-spacing-for-octopress/)。
 
-
-
-
+特别注意ruby文件的编码：复制博文中的代码时，需要去掉前几行的描述性注释，让`#encoding:UTF-8`语句暴露在.rb文件的第一句。否则，`rake generate`时，会报错无法识别`\p{Han}`。
 
 
 ##Tips
