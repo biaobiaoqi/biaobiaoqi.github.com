@@ -187,11 +187,11 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </ul>
 
 
-<p>由于外网网速的限制，基于校园内网建立的工具就有了天然的优势。但如果使用内网，就不得不抛弃各大公司免费提供的邮箱存储空间、网盘存储空间。而校内的资源是有限的，没有自己的服务器，没有足够的空间存储大家的数据，这也就迫使我们考虑到了p 2 p的系统架构。于是，有了这样的解决方案，设定代号为BBT：</p>
+<p>由于外网网速的限制，基于校园内网建立的工具就有了天然的优势。但如果使用内网，就不得不抛弃各大公司免费提供的邮箱存储空间、网盘存储空间。而校内的资源是有限的，没有自己的服务器，没有足够的空间存储大家的数据，这也就迫使我们考虑到了p2p的系统架构。于是，有了这样的解决方案，设定代号为BBT：</p>
 
 <ul>
 <li>PC机安装BBT工具软件后，可以设定<code>共享目录</code>和对应的<code>分享ID</code></li>
-<li>放入特定<code>共享目录</code>的文件，将使用基于p 2 p同步的方式，在拥有相同的<code>分享ID</code>的<code>共享目录</code>间同步数据，目的是让所有人都获得到每个人的数据</li>
+<li>放入特定<code>共享目录</code>的文件，将使用基于p2p同步的方式，在拥有相同的<code>分享ID</code>的<code>共享目录</code>间同步数据，目的是让所有人都获得到每个人的数据</li>
 </ul>
 
 
@@ -204,21 +204,21 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <p>确实够简洁，很赞，实现成本还需要调研。</p>
 
-<h6>B it T orrent S ync</h6>
+<h6>BitTorrent Sync</h6>
 
-<p>在构思的过程中，突然想起前几天在start up news上看到了一个基于BT协议的同步软件<a href="http://labs.bittorrent.com/experiments/sync.html">B it T orrent S ync</a>。</p>
+<p>在构思的过程中，突然想起前几天在start up news上看到了一个基于BT协议的同步软件<a href="http://labs.bittorrent.com/experiments/sync.html">BitTorrent Sync</a>。</p>
 
-<p><img src="http://labs.bittorrent.com/img/wide/sync.png" title="B it T orrent S ync" alt="B it T orrent S ync" /></p>
+<p><img src="http://labs.bittorrent.com/img/wide/sync.png" title="BitTorrent Sync" alt="BitTorrent Sync" /></p>
 
 <p>它的实现方式大概是我们所需要的。可惜的是，由于它的功能全面，界面略显复杂。而同时，它并没有开放二次开发接口。</p>
 
-<p>或许我需要自己搭建一个p 2 p的系统？</p>
+<p>或许我需要自己搭建一个p2p的系统？</p>
 
 <h6>PS:</h6>
 
 <p>BT的优势，在于利用了所有节点的存储和传输能力，节点数量越多，下载越快</p>
 
-<p>B it T orrent  S ync的优势，则在于能动态的集合分散在不同节点中的数据</p>
+<p>BitTorrent  Sync的优势，则在于能动态的集合分散在不同节点中的数据</p>
 
 <p>感觉这种去中心化的分布式系统，前景大大的有啊;)<p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/05/25/some-ideas-about-using-bt-protocol-to-sync/'>http://biaobiaoqi.github.com/blog/2013/05/25/some-ideas-about-using-bt-protocol-to-sync/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p></p>
 </div>

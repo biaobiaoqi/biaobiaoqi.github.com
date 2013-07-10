@@ -130,9 +130,9 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   </header>
 
 
-<div class="entry-content"><p>H adoop DB是一个M apreduce和传统关系型数据库的结合方案，以充分利用RDBMS的性能和H adoop的容错、分布特性。2009年被Y ale大学教授A badi提出，继而商业化为<a href="http://hadapt.com/">H adapt</a>，据称从VC那儿拉到了10M刀投资。</p>
+<div class="entry-content"><p>HadoopDB是一个Mapreduce和传统关系型数据库的结合方案，以充分利用RDBMS的性能和Hadoop的容错、分布特性。2009年被Yale大学教授Abadi提出，继而商业化为<a href="http://hadapt.com/">Hadapt</a>，据称从VC那儿拉到了10M刀投资。</p>
 
-<p>本文是对H adoop DB论文的总结。其中不免掺杂些自己的不成熟想法，更详细的内容，还请参见原论文 H adoop DB: A n A rchitectural H ybrid of M ap R educe and DBMS T echnologies for A nalytical W orkloads</p>
+<p>本文是对HadoopDB论文的总结。其中不免掺杂些自己的不成熟想法，更详细的内容，还请参见原论文 HadoopDB: An Architectural Hybrid of MapReduce and DBMS Technologies for Analytical Workloads</p>
 
 <!--more-->
 
@@ -153,45 +153,45 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <p>满足1,4：利用分表的方式，扩散到多个节点。一般情况下节点最多为几十个，原因：1.每增加一个节点，失败率增加；2.并行数据库假设各个机器都是同质化的，但这往往不太可能</p>
 
-<h5>M ap R educe</h5>
+<h5>MapReduce</h5>
 
-<p>满足2,3,4：M ap - repartition - R educe原为非结构化数据，但也可以适用结构化数据。</p>
+<p>满足2,3,4：Map - repartition - Reduce原为非结构化数据，但也可以适用结构化数据。</p>
 
 <ul>
 <li>2：（错误节点）动态的规划节点执行任务，将错误节点任务发放给新节点。并在本地磁盘做checkpoint存储。</li>
 <li>3：（拖后腿的节点）节点间冗余的执行。执行慢的节点的任务交付给速度快的节点执行</li>
-<li>4：H ive的HQL</li>
+<li>4：Hive的HQL</li>
 </ul>
 
 
-<h5>H adoop DB</h5>
+<h5>HadoopDB</h5>
 
 <p>融合了之前两者，做出系统层面的改进，而不仅仅是语言和接口层面。</p>
 
 <p>这三个解决方案对4个指标的关系如下图：</p>
 
-<p><img src="http://dl.dropboxusercontent.com/u/64021093/hadoop%20DB/QQ%E6%88%AA%E5%9B%BE20130518135802.png" title="compare" alt="alt compare" /></p>
+<p><img src="http://dl.dropboxusercontent.com/u/64021093/hadoopDB/QQ%E6%88%AA%E5%9B%BE20130518135802.png" title="compare" alt="alt compare" /></p>
 
 <h2>架构</h2>
 
 <p>如图
-<img src="https://dl.dropboxusercontent.com/u/64021093/hadoop%20DB/QQ%E6%88%AA%E5%9B%BE20130518135814.png" title="framework" alt="alt framework" /></p>
+<img src="https://dl.dropboxusercontent.com/u/64021093/hadoopDB/QQ%E6%88%AA%E5%9B%BE20130518135814.png" title="framework" alt="alt framework" /></p>
 
 <h2>组件介绍</h2>
 
-<h5>D atabse C onnector:</h5>
+<h5>Databse Connector:</h5>
 
 <ul>
 <li><p>作用</p>
 
-<p>  hadoop T ask &lt;-通信-> D atabase on N ode。节点上的DB类似于H adoop中的数据源HDFS</p></li>
+<p>  hadoopTask &lt;-通信-> Database on Node。节点上的DB类似于Hadoop中的数据源HDFS</p></li>
 <li><p>实现</p>
 
-<p>  扩展了H adoop的I nput F ormat</p></li>
+<p>  扩展了Hadoop的InputFormat</p></li>
 </ul>
 
 
-<h5>C atalog：</h5>
+<h5>Catalog：</h5>
 
 <ul>
 <li><p>作用</p>
@@ -200,11 +200,11 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   2.一些元数据如数据簇中的数据集，副本的位置，数据的划分。</p></li>
 <li><p>实现</p>
 
-<p>  HDFS上的XML。希望做成类似于H adoop的namenode。</p></li>
+<p>  HDFS上的XML。希望做成类似于Hadoop的namenode。</p></li>
 </ul>
 
 
-<h5>D ata L oader</h5>
+<h5>Data Loader</h5>
 
 <ul>
 <li><p>作用</p>
@@ -217,16 +217,16 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </ul>
 
 
-<h5>SQL to M ap R educe to SQL (SMS) P lanner</h5>
+<h5>SQL to MapReduce to SQL (SMS) Planner</h5>
 
 <ul>
 <li><p>作用</p>
 
-<p>  将H ive QL转化为特定执行计划，在hadoop DB中执行。原则是尽可能的讲操作推向节点上的RDBMS上执行，以此提高执行效率。</p></li>
+<p>  将HiveQL转化为特定执行计划，在hadoopDB中执行。原则是尽可能的讲操作推向节点上的RDBMS上执行，以此提高执行效率。</p></li>
 <li><p>实现</p>
 
-<p>  扩展H ive：
-  1.执行查找前，用catolog的信息更新H ive的metastore，定向到节点数据库的表
+<p>  扩展Hive：
+  1.执行查找前，用catolog的信息更新Hive的metastore，定向到节点数据库的表
   2.执行前，决定划分的键；将部分查询语句推到节点的数据库中执行。</p></li>
 </ul>
 
@@ -237,7 +237,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <h2>总结</h2>
 
-<p>对hadoop DB的一些看法：</p>
+<p>对hadoopDB的一些看法：</p>
 
 <ul>
 <li>其数据预处理代价过高：数据需要进行两次分解和一次数据库加载操作后才能使用；</li>
@@ -249,16 +249,16 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <p>slides：</p>
 
-<script async class="speakerdeck-embed" data-id="48 c 5 e 680 a 1 ab 0130 e 1707290244918 d 4" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+<script async class="speakerdeck-embed" data-id="48c5e680a1ab0130e1707290244918d4" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
 
 
-<p>下载slides，请猛戳<a href="https://dl.dropboxusercontent.com/u/64021093/hadoop%20DB/%5B2013-05-18%5DH%20adoop%20DB.pptx">这里</a></p>
+<p>下载slides，请猛戳<a href="https://dl.dropboxusercontent.com/u/64021093/hadoopDB/%5B2013-05-18%5DHadoopDB.pptx">这里</a></p>
 
 <h2>参考资料</h2>
 
 <ul>
-<li>H adoop DB: A n A rchitectural H ybrid of M ap R educe and DBMS T echnologies for A nalytical W orkloads</li>
-<li><a href="http://dbanotes.net/database/hadoopdb.html">《H adoop DB》 —— F enng</a></li>
+<li>HadoopDB: An Architectural Hybrid of MapReduce and DBMS Technologies for Analytical Workloads</li>
+<li><a href="http://dbanotes.net/database/hadoopdb.html">《HadoopDB》 —— Fenng</a></li>
 <li>《架构大数据:挑战、现状与展望》 计算机学报 王珊<p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/05/18/a-hybrid-system-hadoopdb/'>http://biaobiaoqi.github.com/blog/2013/05/18/a-hybrid-system-hadoopdb/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p></li>
 </ul>
 

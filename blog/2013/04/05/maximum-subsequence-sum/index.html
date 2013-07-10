@@ -136,7 +136,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <p>第一次在PAT上遇到这个题目时，我的思路如下：</p>
 
-<p><del>最简单的淡然是一个三层循环咯，O(n 3)，肯定会超时。节省时间的话，用动态规划吧。但简单的动态规划，显然是会超出内存限制的。有没有更巧妙的子问题划分方法呢？</del>先找到子问题：因为要求的串必须连续，分治的时候需要考虑如何延续这个连续性，那么每个子问题中就得考虑找出三个串：1.即左端连续的最大串，2.右端连续的最大串，3.整个串中的最大串.<del>由于每个问题都有三个量要维护，难道我得造出三个表来？卡主:(</del></p>
+<p><del>最简单的淡然是一个三层循环咯，O(n3)，肯定会超时。节省时间的话，用动态规划吧。但简单的动态规划，显然是会超出内存限制的。有没有更巧妙的子问题划分方法呢？</del>先找到子问题：因为要求的串必须连续，分治的时候需要考虑如何延续这个连续性，那么每个子问题中就得考虑找出三个串：1.即左端连续的最大串，2.右端连续的最大串，3.整个串中的最大串.<del>由于每个问题都有三个量要维护，难道我得造出三个表来？卡主:(</del></p>
 
 <!--more-->
 
@@ -220,7 +220,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <span class='line-number'>18</span>
 <span class='line-number'>19</span>
 <span class='line-number'>20</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>float maxsum 3(l, u)
+</pre></td><td class='code'><pre><code class=''><span class='line'>float maxsum3(l, u)
 </span><span class='line'>  if (l &gt; u) /* zero elements*/
 </span><span class='line'>      return 0
 </span><span class='line'>  if (l == u) /* one element*/
@@ -239,7 +239,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </span><span class='line'>      sum += x[i]
 </span><span class='line'>  rmax = max(rmax, sum)
 </span><span class='line'>  
-</span><span class='line'>  return max(lmax+rmax, maxsum 3(l, m), maxsum 3(m+1, u)) </span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>  return max(lmax+rmax, maxsum3(l, m), maxsum3(m+1, u))   </span></code></pre></td></tr></table></div></figure>
 
 
 <ul>
@@ -264,12 +264,12 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </pre></td><td class='code'><pre><code class=''><span class='line'>maxsofa = 0
 </span><span class='line'>maxendingright = 0
 </span><span class='line'>for i = [0, n)
-</span><span class='line'>  /* invariant: maxendingright and maxsofar are accurate for x [0..i-1]*/
+</span><span class='line'>  /* invariant: maxendingright and maxsofar are accurate for x[0..i-1]*/
 </span><span class='line'>  maxendingright = max(maxendingright + x[i], 0)
 </span><span class='line'>  maxsofar = max(maxsofar, maxendingright)</span></code></pre></td></tr></table></div></figure>
 
 
-<p>根据这个思路，写出<a href="https://github.com/biaobiaoqi/biaobiaoqi%20C%20ode/blob/master/src/biaobiaoqi/pat/advancedlevel/APAT1007.java">代码</a>，一遍AC:)</p>
+<p>根据这个思路，写出<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/pat/advancedlevel/APAT1007.java">代码</a>，一遍AC:)</p>
 
 <h2>总结：</h2>
 

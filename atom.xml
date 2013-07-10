@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w 3.org/2005/A tom">
+<feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-07-10T11:12:36+08:00</updated>
+  <updated>2013-07-10T11:46:53+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
     
   </author>
-  <generator uri="http://octopress.org/">O ctopress</generator>
+  <generator uri="http://octopress.org/">Octopress</generator>
 
   
   <entry>
@@ -24,7 +24,7 @@
 
 <h2>1.装饰边栏</h2>
 
-<p>以增加豆瓣展示框为例。参加正反反长大哥的博客<a href="http://icodeit.org/2012/10/how-to-embed-douban-show-in-your-octopress-site/">H ow to E mbed D ouban-S how in Y our O ctopress S ite</a></p>
+<p>以增加豆瓣展示框为例。参加正反反长大哥的博客<a href="http://icodeit.org/2012/10/how-to-embed-douban-show-in-your-octopress-site/">How to Embed Douban-Show in Your Octopress Site</a></p>
 
 <h2>2.增加国内的第三方评论</h2>
 
@@ -48,7 +48,7 @@
 
 <p>由于markdown不支持这一语法，如果要自己用html标签实现，又有些违背了markdown以内容为重的立意。</p>
 
-<p>参考博文<a href="http://www.blogjava.net/lishunli/archive/2013/01/20/394478.html">《在O ctopress中为markdown的超链接加上target=&#8221;_blank&#8221;》</a>，可以通过将如下代码添加到 {OCTOPRESS_HOME}/source/_includes/custom/head.html文件末尾来实现：</p>
+<p>参考博文<a href="http://www.blogjava.net/lishunli/archive/2013/01/20/394478.html">《在Octopress中为markdown的超链接加上target=&#8221;_blank&#8221;》</a>，可以通过将如下代码添加到 {OCTOPRESS_HOME}/source/_includes/custom/head.html文件末尾来实现：</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -71,7 +71,7 @@
 <span class='line-number'>19</span>
 </pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;</span>
 </span><span class='line'>
-</span><span class='line'><span class="kd">function</span> <span class="nx">add</span> <span class="nx">B</span> <span class="nx">lank</span> <span class="nx">T</span> <span class="nx">arget</span> <span class="nx">F</span> <span class="nx">or</span> <span class="nx">L</span> <span class="nx">inks</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'><span class="kd">function</span> <span class="nx">addBlankTargetForLinks</span> <span class="p">()</span> <span class="p">{</span>
 </span><span class='line'>
 </span><span class='line'>  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;a[href^=&quot;http&quot;]&#39;</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
 </span><span class='line'>
@@ -81,9 +81,9 @@
 </span><span class='line'>
 </span><span class='line'><span class="p">}</span>
 </span><span class='line'>
-</span><span class='line'><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">bind</span><span class="p">(</span><span class="s1">&#39;DOMN ode I nserted&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">bind</span><span class="p">(</span><span class="s1">&#39;DOMNodeInserted&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
 </span><span class='line'>
-</span><span class='line'>  <span class="nx">add</span> <span class="nx">B</span> <span class="nx">lank</span> <span class="nx">T</span> <span class="nx">arget</span> <span class="nx">F</span> <span class="nx">or</span> <span class="nx">L</span> <span class="nx">inks</span><span class="p">();</span>
+</span><span class='line'>  <span class="nx">addBlankTargetForLinks</span><span class="p">();</span>
 </span><span class='line'>
 </span><span class='line'><span class="p">});</span>
 </span><span class='line'>
@@ -132,7 +132,7 @@
 </span><span class='line'>
 </span><span class='line'><span class="nx">layout</span><span class="o">:</span> <span class="nx">page</span>
 </span><span class='line'>
-</span><span class='line'><span class="nx">title</span><span class="o">:</span> <span class="s2">&quot;404 E rror&quot;</span>
+</span><span class='line'><span class="nx">title</span><span class="o">:</span> <span class="s2">&quot;404 Error&quot;</span>
 </span><span class='line'>
 </span><span class='line'><span class="nx">date</span><span class="o">:</span> <span class="mi">2013</span><span class="o">-</span><span class="mi">4</span><span class="o">-</span><span class="mi">21</span> <span class="mi">02</span><span class="o">:</span><span class="mi">35</span>
 </span><span class='line'>
@@ -152,7 +152,7 @@
 
 <p>octopress默认只有分类，没有标签。这对于博文的组织和管理很不友好。有人开源出了自己定制的tag生成和tag cloud展现的代码，可以引入到自己的博客中来。</p>
 
-<p>详细操作参见博文：<a href="http://codemacro.com/2012/07/18/add-tag-to-octopress/">《为octopress添加tag C loud》</a>。不过博文中没有讲解标签云的UI配置参数的使用，为了让UI适应页面，请参考原作者的官方说明:<a href="https://github.com/robbyedwards/octopress-tag-cloud">octopress-tag-cloud</a>。我所实践出的较合理的参数值如下</p>
+<p>详细操作参见博文：<a href="http://codemacro.com/2012/07/18/add-tag-to-octopress/">《为octopress添加tag Cloud》</a>。不过博文中没有讲解标签云的UI配置参数的使用，为了让UI适应页面，请参考原作者的官方说明:<a href="https://github.com/robbyedwards/octopress-tag-cloud">octopress-tag-cloud</a>。我所实践出的较合理的参数值如下</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -161,7 +161,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>如果想将文章分类（category）也放在侧边栏，可以参考这篇博文：<a href="http://paz.am/blog/blog/2012/06/25/octopress-category-list-plugin/">《O ctopress - C ategory L ist P lug-in》</a></p>
+<p>如果想将文章分类（category）也放在侧边栏，可以参考这篇博文：<a href="http://paz.am/blog/blog/2012/06/25/octopress-category-list-plugin/">《Octopress - Category List Plug-in》</a></p>
 
 <h2>8.在顶栏增加标签云页面tab</h2>
 
@@ -258,7 +258,7 @@
 <p>编辑<code>sass/custom/_style.scss</code>，在末尾增加如下内容：</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.post-footer</span><span class="p">{</span><span class="k">margin-top</span><span class="o">:</span><span class="m">10</span> <span class="k">px</span><span class="p">;</span><span class="k">padding</span><span class="o">:</span><span class="m">5</span> <span class="k">px</span><span class="p">;</span><span class="k">background</span><span class="o">:</span><span class="k">none</span> <span class="k">repeat</span> <span class="k">scroll</span> <span class="m">0</span> <span class="n">pt</span> <span class="m">0</span> <span class="n">pt</span> <span class="m">#eee</span><span class="p">;</span><span class="k">font-size</span><span class="o">:</span><span class="m">90</span><span class="o">%</span><span class="p">;</span><span class="k">color</span><span class="o">:</span><span class="nb">gray</span><span class="p">}</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.post-footer</span><span class="p">{</span><span class="k">margin-top</span><span class="o">:</span><span class="m">10px</span><span class="p">;</span><span class="k">padding</span><span class="o">:</span><span class="m">5px</span><span class="p">;</span><span class="k">background</span><span class="o">:</span><span class="k">none</span> <span class="k">repeat</span> <span class="k">scroll</span> <span class="m">0pt</span> <span class="m">0pt</span> <span class="m">#eee</span><span class="p">;</span><span class="k">font-size</span><span class="o">:</span><span class="m">90</span><span class="o">%</span><span class="p">;</span><span class="k">color</span><span class="o">:</span><span class="nb">gray</span><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -268,9 +268,9 @@
 
 <p>参见博文<a href="http://xoyo.name/2012/04/auto-spacing-for-octopress/">《给中英文间加个空格》</a>。</p>
 
-<h2>T ips</h2>
+<h2>Tips</h2>
 
-<p>既然是个博客站点，就算是web产品啦，可以考虑下SEO。推荐博文<a href="http://codemacro.com/2012/09/06/octopress-seo/">《O ctopress中的SEO》</a><p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/07/10/decorate-octopress/'>http://biaobiaoqi.github.com/blog/2013/07/10/decorate-octopress/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p></p>
+<p>既然是个博客站点，就算是web产品啦，可以考虑下SEO。推荐博文<a href="http://codemacro.com/2012/09/06/octopress-seo/">《Octopress中的SEO》</a><p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/07/10/decorate-octopress/'>http://biaobiaoqi.github.com/blog/2013/07/10/decorate-octopress/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p></p>
 ]]></content>
   </entry>
   
@@ -281,7 +281,7 @@
     <id>http://biaobiaoqi.github.com/blog/2013/07/07/yuminhong</id>
     <content type="html"><![CDATA[<h2>质朴、诚恳和坚韧</h2>
 
-<p>这本书是某次在A mazon上购书『满100送书一本』时挑的。放在抽屉里有段日子了。</p>
+<p>这本书是某次在Amazon上购书『满100送书一本』时挑的。放在抽屉里有段日子了。</p>
 
 <p>一直挺崇拜俞敏洪老师。初次了解到他是高中的时候看的『赢在中国』，俞敏洪老师是嘉宾点评。而后混在考T的大流中去上了新东方的课程，几个老师讲得不错，比较可惜的是远离了老俞的时代。恰好前两天热映的『中国合伙人』，又把他拉回视野前沿。周日，趁着没心情码代码，忙里偷闲的读完了这本自传体的文字。</p>
 
@@ -327,9 +327,9 @@
     <id>http://biaobiaoqi.github.com/blog/2013/07/05/checklist-manifesto</id>
     <content type="html"><![CDATA[<h2>应该叫『清单宣言』</h2>
 
-<p>在A mazon上『满100送一本』的活动中随手挑到了它。鉴于其空洞的标题，被束之高阁半年多，最近关注个人管理方面的知识，才拍拍灰尘读起来。</p>
+<p>在Amazon上『满100送一本』的活动中随手挑到了它。鉴于其空洞的标题，被束之高阁半年多，最近关注个人管理方面的知识，才拍拍灰尘读起来。</p>
 
-<p>书的英文原名是『T he C hecklist M anifesto: H ow to G et T hings R ight』，直译成『清单宣言』在我看来更贴切，而非充满噱头的『清单革命』。正如一个小功能难以做成独立的产品，一个方法改进也难以成就革命。『清单能大大的改善效率，降低失败概率』这一观点，在医生出生的作者手中翻来覆去的被各种事例证明着，案例的行业背景从医学到建筑，到航天，再到投资，实在乏味。当然，这不妨碍『清单』这一工具对生活工作的助力所带给我们的思考。</p>
+<p>书的英文原名是『The Checklist Manifesto: How to Get Things Right』，直译成『清单宣言』在我看来更贴切，而非充满噱头的『清单革命』。正如一个小功能难以做成独立的产品，一个方法改进也难以成就革命。『清单能大大的改善效率，降低失败概率』这一观点，在医生出生的作者手中翻来覆去的被各种事例证明着，案例的行业背景从医学到建筑，到航天，再到投资，实在乏味。当然，这不妨碍『清单』这一工具对生活工作的助力所带给我们的思考。</p>
 
 <h2>三类问题</h2>
 
@@ -394,9 +394,9 @@
     <id>http://biaobiaoqi.github.com/blog/2013/06/11/gift-to-girl-friend</id>
     <content type="html"><![CDATA[<h2>背景</h2>
 
-<p>一个月前发现了<a href="http://v%202%20ex.com">V2EX</a>这个网站，用创始人<a href="http://www.v%202%20ex.com/member/L%20ivid">L ivid</a>的话来说，『这是一个主要关于做事儿的地方』。确实如此，我在这里收获了很多想法和灵感。</p>
+<p>一个月前发现了<a href="http://v2ex.com">V2EX</a>这个网站，用创始人<a href="http://www.v2ex.com/member/Livid">Livid</a>的话来说，『这是一个主要关于做事儿的地方』。确实如此，我在这里收获了很多想法和灵感。</p>
 
-<p>本文所记的，也是得益于某天的对<a href="http://www.v%202%20ex.com/t/69145">某个主题</a>的浏览。帖子中，大家分享了很多给女朋友做的网页，说『技术宅改变世界』太过了，但拥有这样一个礼物，确实是一种属于程序员的快乐和程序员的女友的幸福。</p>
+<p>本文所记的，也是得益于某天的对<a href="http://www.v2ex.com/t/69145">某个主题</a>的浏览。帖子中，大家分享了很多给女朋友做的网页，说『技术宅改变世界』太过了，但拥有这样一个礼物，确实是一种属于程序员的快乐和程序员的女友的幸福。</p>
 
 <p>快到我跟我妹子恋爱四周年的日子了，也正逢她本科毕业，无论如何都是个有趣的时间点。受了那个帖子的刺激，我也筹划着给女朋友做一个小网页，以示纪念。</p>
 
@@ -407,32 +407,32 @@
 <p>通过各方搜寻，我找到了如下几个网页：</p>
 
 <ul>
-<li>1.<a href="http://love.hackerzhou.me/">复旦的学长hackzhou的爱心动画</a>，<a href="https://github.com/hackerzhou/L%20ove">github托管代码</a>。</li>
+<li>1.<a href="http://love.hackerzhou.me/">复旦的学长hackzhou的爱心动画</a>，<a href="https://github.com/hackerzhou/Love">github托管代码</a>。</li>
 </ul>
 
 
-<p>网页用到了html 5的一些特性实现了动态的心形花的绘制和类似程序代码敲击的文字呈现形式。由于内容仅仅是文字的，可定制性强。如下图：
-<img src="https://dl.dropboxusercontent.com/u/64021093/P%20ics/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202013-06-11%20%E4%B8%8B%E5%8D%888.12.01.png" title="hackerzhou's page" alt="hackerzhou's love project" /></p>
+<p>网页用到了html5的一些特性实现了动态的心形花的绘制和类似程序代码敲击的文字呈现形式。由于内容仅仅是文字的，可定制性强。如下图：
+<img src="https://dl.dropboxusercontent.com/u/64021093/Pics/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202013-06-11%20%E4%B8%8B%E5%8D%888.12.01.png" title="hackerzhou's page" alt="hackerzhou's love project" /></p>
 
 <ul>
-<li>2.<a href="http://carfieldloverita.sinaapp.com/">一对异国情侣的G oogle地图应用</a>，<a href="https://github.com/wong%202/lovegift">github托管代码</a>。</li>
+<li>2.<a href="http://carfieldloverita.sinaapp.com/">一对异国情侣的Google地图应用</a>，<a href="https://github.com/wong2/lovegift">github托管代码</a>。</li>
 </ul>
 
 
-<p>网页调用了G oogle地图的API，可以定义聚焦的地理位置和坐标尺，显示照片，像日记一样记录了点点滴滴，有背景音乐。最后还以地点输入框的形式做了表白。很有创意！
-<img src="https://dl.dropboxusercontent.com/u/64021093/P%20ics/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202013-06-11%20%E4%B8%8B%E5%8D%888.12.18.png" title="G ooglemap app" alt="G oogle map app" /></p>
+<p>网页调用了Google地图的API，可以定义聚焦的地理位置和坐标尺，显示照片，像日记一样记录了点点滴滴，有背景音乐。最后还以地点输入框的形式做了表白。很有创意！
+<img src="https://dl.dropboxusercontent.com/u/64021093/Pics/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202013-06-11%20%E4%B8%8B%E5%8D%888.12.18.png" title="Googlemap app" alt="Google map app" /></p>
 
 <ul>
-<li>3.<a href="http://liumeijun.com/">v 2 ex上某童鞋基于百度地图的应用</a>。</li>
+<li>3.<a href="http://liumeijun.com/">v2ex上某童鞋基于百度地图的应用</a>。</li>
 </ul>
 
 
-<p>跟2类似，调用了百度API，配上『L emon tree』的背景音乐，很有调调！
-<img src="https://dl.dropboxusercontent.com/u/64021093/P%20ics/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202013-06-11%20%E4%B8%8B%E5%8D%888.16.00.png" title="baidumap app" alt="baidumap app" /></p>
+<p>跟2类似，调用了百度API，配上『Lemon tree』的背景音乐，很有调调！
+<img src="https://dl.dropboxusercontent.com/u/64021093/Pics/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202013-06-11%20%E4%B8%8B%E5%8D%888.16.00.png" title="baidumap app" alt="baidumap app" /></p>
 
 <h2>定制计划</h2>
 
-<p>限于没有前端的基础，开发效率会很低，只能硬顶着拿着前面的三个项目做混搭了。其中项目1和2都有在github上开源代码，而3则在v 2 ex的帖子里被作者授权直接查源码使用了。</p>
+<p>限于没有前端的基础，开发效率会很低，只能硬顶着拿着前面的三个项目做混搭了。其中项目1和2都有在github上开源代码，而3则在v2ex的帖子里被作者授权直接查源码使用了。</p>
 
 <p>我做了简单的混搭修改计划：</p>
 
@@ -448,7 +448,7 @@
 
 <h5>1.项目启动</h5>
 
-<p>我在github上fork了<a href="https://github.com/hackerzhou/L%20ove">hackerzhou的代码</a>。(<a href="https://github.com/biaobiaoqi/L%20ove">我fork的版本</a>)</p>
+<p>我在github上fork了<a href="https://github.com/hackerzhou/Love">hackerzhou的代码</a>。(<a href="https://github.com/biaobiaoqi/Love">我fork的版本</a>)</p>
 
 <p>clone到本地，尝试阅读js代码，尝试做小改动，找到动画开始的调用。</p>
 
@@ -456,37 +456,37 @@
 
 <p>网上查资料，找到了<code>&lt;embeded&gt;</code>可以用来添加背景音乐，测试成功。但这个音乐播放无法支持同步的加载，不可控，在网络环境差的情况下，如果没有配乐动画过程会缺少表现力。放弃这种方案。</p>
 
-<p>在<a href="http://liumeijun.com/">v 2 ex上某童鞋基于百度地图的应用</a>源码中找到了一个第三方音乐播放库：<a href="http://www.schillmania.com/projects/soundmanager%202/">soundmanager 2</a>。查看官方文档，确认能满足项目需求，于是加入到代码中。</p>
+<p>在<a href="http://liumeijun.com/">v2ex上某童鞋基于百度地图的应用</a>源码中找到了一个第三方音乐播放库：<a href="http://www.schillmania.com/projects/soundmanager2/">soundmanager2</a>。查看官方文档，确认能满足项目需求，于是加入到代码中。</p>
 
-<p>为了让页面展现更加顺畅，需要音乐文件越小越好。我尝试了MIDI格式，但是很多浏览器并不支持，作罢。而soundmanager似乎对wma的支持有问题，于是只剩下mp 3文件。我选择了JJ的『小酒窝』做背景音乐，在mac下使用ocenaudio将原来3MB的mp 3文件截取了前一半，并导出为不同设定采样率的版本，经过测试，发现56 kb采样率下，音质没有受到大的影响，且大小也足够小了，于是确定用这种格式的mp 3。最终MP3文件的大小为500KB！</p>
+<p>为了让页面展现更加顺畅，需要音乐文件越小越好。我尝试了MIDI格式，但是很多浏览器并不支持，作罢。而soundmanager似乎对wma的支持有问题，于是只剩下mp3文件。我选择了JJ的『小酒窝』做背景音乐，在mac下使用ocenaudio将原来3MB的mp3文件截取了前一半，并导出为不同设定采样率的版本，经过测试，发现56kb采样率下，音质没有受到大的影响，且大小也足够小了，于是确定用这种格式的mp3。最终MP3文件的大小为500KB！</p>
 
 <h5>3.加载逻辑和开始按键</h5>
 
 <p>需求：加载过程需要隐藏前景内容，在音乐加载完成后，显示开始按钮，开始按钮能触发动画效果。</p>
 
-<p>通过G oogle找到了使用js隐藏和显示内容的方式</p>
+<p>通过Google找到了使用js隐藏和显示内容的方式</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>document.get E lement B y I d('hint').style.display = "none"; //hide hint
-</span><span class='line'>document.get E lement B y I d('start_btn').style.display = ""; //show start button</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>document.getElementById('hint').style.display = "none"; //hide hint
+</span><span class='line'>document.getElementById('start_btn').style.display = ""; //show start button</span></code></pre></td></tr></table></div></figure>
 
 
 <p>虽然不是特别理解js引擎的单线程运作机制，但经过简单的试错、调试后，就完成了加载等待和开始按钮触发的原型。</p>
 
-<p>之后是对按钮和加载提示配置css。由于懒得理解css的一些细节，直接使用了<a href="https://github.com/wong%202/lovegift">这份项目</a>中的css代码。</p>
+<p>之后是对按钮和加载提示配置css。由于懒得理解css的一些细节，直接使用了<a href="https://github.com/wong2/lovegift">这份项目</a>中的css代码。</p>
 
 <h5>4.部署</h5>
 
-<p>github为每个项目提供了静态网页展示的功能，应付这个项目的网页展示完全够了。具体操作流程参见<a href="http://www.worldhello.net/gotgithub/03-project-hosting/050-homepage.html#project-homepage">《G ot G ithub》3.5.2. 创建项目主页</a>。实际上，链接中介绍的几种创造干净的gh-pages分支的方法，在这个项目的发布里是不必的。因为项目主页的展示代码跟master分支里的代码本身就是一样的，那么需要做的就只是开启gh-pages分支，并提交代码了。</p>
+<p>github为每个项目提供了静态网页展示的功能，应付这个项目的网页展示完全够了。具体操作流程参见<a href="http://www.worldhello.net/gotgithub/03-project-hosting/050-homepage.html#project-homepage">《GotGithub》3.5.2. 创建项目主页</a>。实际上，链接中介绍的几种创造干净的gh-pages分支的方法，在这个项目的发布里是不必的。因为项目主页的展示代码跟master分支里的代码本身就是一样的，那么需要做的就只是开启gh-pages分支，并提交代码了。</p>
 
-<p>项目成果：<a href="http://biaobiaoqi.me/L%20ove">请戳这里</a></p>
+<p>项目成果：<a href="http://biaobiaoqi.me/Love">请戳这里</a></p>
 
 <h2>结语</h2>
 
-<p>感谢v 2 ex，感谢hackerzhou、loo 2 k和wong 2童鞋，我参考了你们很多代码。</p>
+<p>感谢v2ex，感谢hackerzhou、loo2k和wong2童鞋，我参考了你们很多代码。</p>
 
-<p>创造力需要靠技术手段实现。混迹在互联网上，没有自己建站的能力实在是很苦逼的一件事情。之后自己准备花些时间在R o R上。积累技术实力，努力做出好产品;)</p>
+<p>创造力需要靠技术手段实现。混迹在互联网上，没有自己建站的能力实在是很苦逼的一件事情。之后自己准备花些时间在RoR上。积累技术实力，努力做出好产品;)</p>
 
 <p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/06/11/gift-to-girl-friend/'>http://biaobiaoqi.github.com/blog/2013/06/11/gift-to-girl-friend/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p>
 
@@ -498,16 +498,16 @@
     <link href="http://biaobiaoqi.github.com/blog/2013/06/11/the-non-designers-design-book/"/>
     <updated>2013-06-11T13:58:00+08:00</updated>
     <id>http://biaobiaoqi.github.com/blog/2013/06/11/the-non-designers-design-book</id>
-    <content type="html"><![CDATA[<h3>从i OS7的扁平化谈起</h3>
+    <content type="html"><![CDATA[<h3>从iOS7的扁平化谈起</h3>
 
-<p>昨晚看了WWDC2013的直播，i OS7以扁平化UI的方式展现在世人面前。于是接下来进入了微博吐槽时间。</p>
+<p>昨晚看了WWDC2013的直播，iOS7以扁平化UI的方式展现在世人面前。于是接下来进入了微博吐槽时间。</p>
 
-<p>大象要跳舞是很难的，这正是苹果面临的情况。现在无论是A ndroid还是W inphone，与i OS系统体验上的差异已经不是难以企及的，甚至有些方面更能为大众接受。于是I ve带领他的团队开始拥抱<strong>F lat D esign</strong>。乔布斯子不知道会怎么想，他可是坚持了一辈子的拟物风格。当然，无论乔老爷子怎么想，时势如此，由不得苹果不变。</p>
+<p>大象要跳舞是很难的，这正是苹果面临的情况。现在无论是Android还是Winphone，与iOS系统体验上的差异已经不是难以企及的，甚至有些方面更能为大众接受。于是Ive带领他的团队开始拥抱<strong>Flat Design</strong>。乔布斯子不知道会怎么想，他可是坚持了一辈子的拟物风格。当然，无论乔老爷子怎么想，时势如此，由不得苹果不变。</p>
 
-<p>从微博疯狂的i OS7刷屏中挑出了些有价值的信息，关于扁平化和拟物化的：</p>
+<p>从微博疯狂的iOS7刷屏中挑出了些有价值的信息，关于扁平化和拟物化的：</p>
 
 <ul>
-<li><a href="http://www.zhihu.com/question/20881633">什么是扁平化设计（F lat D esign）？扁平化设计是未来的趋势吗？</a></li>
+<li><a href="http://www.zhihu.com/question/20881633">什么是扁平化设计（Flat Design）？扁平化设计是未来的趋势吗？</a></li>
 <li><a href="http://www.inside.com.tw/2013/03/25/flat-design">UI 美學趨勢備忘錄─淺析扁平化設計</a></li>
 <li><a href="http://www.oschina.net/translate/flat-design-principles">扁平化设计原则</a></li>
 </ul>
@@ -521,7 +521,7 @@
 
 <p>读这本书之前，在不同平台上看见它的好多推荐了。不过鉴于大多数设计类书都是『手把手教你画马』的效果（详情参见下图），一直不太感冒。</p>
 
-<p><img src="https://dl.dropboxusercontent.com/u/64021093/P%20ics/307-12110Q62915932.jpg" title="画马" alt="怎样画马" /></p>
+<p><img src="https://dl.dropboxusercontent.com/u/64021093/Pics/307-12110Q62915932.jpg" title="画马" alt="怎样画马" /></p>
 
 <p>后来码代码太烦躁，抱着试一试的态度在多看上下载了下来，一着眼便被吸引住了。书本本身的排版设计就透露着简洁明了的设计感，配色也恰到好处的清新。</p>
 
@@ -605,7 +605,7 @@
 
 <p>相对而言，乔布斯推崇的拟物风格中，所秉承的是让所有用户能快速的学会如何使用它。而随着时代的发展，这种降低学习成本的方式渐渐的不是必须，数码产品充斥着生活，大多数人已经有足够的经验来应对新的操作体验。从这个角度讲，扁平化在现阶段或许是更有好的选择。</p>
 
-<p>不管怎么样，WWDC以后，苹果股价已经持续下跌了，祝福苹果吧，希望I ve不要成为苹果的罪人，据说他是最懂乔布斯的人呢。</p>
+<p>不管怎么样，WWDC以后，苹果股价已经持续下跌了，祝福苹果吧，希望Ive不要成为苹果的罪人，据说他是最懂乔布斯的人呢。</p>
 
 <p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/06/11/the-non-designers-design-book/'>http://biaobiaoqi.github.com/blog/2013/06/11/the-non-designers-design-book/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p>
 
@@ -619,80 +619,80 @@
     <id>http://biaobiaoqi.github.com/blog/2013/06/09/something-about-mac-gui</id>
     <content type="html"><![CDATA[<h2>GUI哲学</h2>
 
-<p>前些日子，看了T inyfool老师的一篇文章<a href="http://blogread.cn/it/article/1089?f=wb">《开发人员为何应该使用 M ac OS X 兼 OS X 小史》</a>，才恍然M ac系统可不仅仅是UI上与W indows大相径庭，而是自底而上的区别。这种区别渗透到了整个系统框架的设计理念中。</p>
+<p>前些日子，看了Tinyfool老师的一篇文章<a href="http://blogread.cn/it/article/1089?f=wb">《开发人员为何应该使用 Mac OS X 兼 OS X 小史》</a>，才恍然Mac系统可不仅仅是UI上与Windows大相径庭，而是自底而上的区别。这种区别渗透到了整个系统框架的设计理念中。</p>
 
-<p>简单概括下我的认识：相比W indows和L inux两大阵营，M ac OS X除了『品味』上的优势之外，最重要的两点是：1.对GUI应用程序脚本化的有力支持；2.能实现GUI程序之间快捷的进程间通信。</p>
+<p>简单概括下我的认识：相比Windows和Linux两大阵营，Mac OS X除了『品味』上的优势之外，最重要的两点是：1.对GUI应用程序脚本化的有力支持；2.能实现GUI程序之间快捷的进程间通信。</p>
 
 <h4>GUI程序之间的进程间通信</h4>
 
-<p>IPC对于多用户分时系统的重要性不言而喻。其中从用户视角来看，如何让多个程序之间能更友好的交互是非常重要的。C++语言虽然面向对象，但在底层来看，其实依旧是冷冰冰的汇编代码，没有更整体的对象环境支撑，而以此构建的L inux也无法对进程间通信形成强力的支持。相比之下，乔布斯的团队借助于S mall T alk的消息传递机制创造了O bjective-C，并搭建了自己的运行时和类库框架C ocoa，让系统无论从自身的迭代开发还是应用开发，得到了很大提升。值得一提的是，O bjc虽然最近才由于i OS、M ac平台的开发的火热进入热门编程语言的行列，其实它比J ava还早十年出生。像最近由于R ails框架而火爆起来的R uby和持续坚挺的J ava，都从S amll T alk中吸收了很多设计理念，就别提C#了。</p>
+<p>IPC对于多用户分时系统的重要性不言而喻。其中从用户视角来看，如何让多个程序之间能更友好的交互是非常重要的。C++语言虽然面向对象，但在底层来看，其实依旧是冷冰冰的汇编代码，没有更整体的对象环境支撑，而以此构建的Linux也无法对进程间通信形成强力的支持。相比之下，乔布斯的团队借助于SmallTalk的消息传递机制创造了Objective-C，并搭建了自己的运行时和类库框架Cocoa，让系统无论从自身的迭代开发还是应用开发，得到了很大提升。值得一提的是，Objc虽然最近才由于iOS、Mac平台的开发的火热进入热门编程语言的行列，其实它比Java还早十年出生。像最近由于Rails框架而火爆起来的Ruby和持续坚挺的Java，都从SamllTalk中吸收了很多设计理念，就别提C#了。</p>
 
 <h4>GUI应用程序的脚本化</h4>
 
-<p>图形的交互方式确实人性化，但应用程序脚本化控制的方式在一些特定的场景里也可以大大提高生产效率。比如微软O ffice的VBS cript。即使是一般用户，不愿意自己写脚本，脚本化的方式也能让开发人员更方便快捷的开发出新颖的功能和产品。</p>
+<p>图形的交互方式确实人性化，但应用程序脚本化控制的方式在一些特定的场景里也可以大大提高生产效率。比如微软Office的VBScript。即使是一般用户，不愿意自己写脚本，脚本化的方式也能让开发人员更方便快捷的开发出新颖的功能和产品。</p>
 
 <p>让应用全部统一开放脚本很难，特别是从市场的层面而言，如果没有一直贯彻这一战略，造成平台很多应用不支持这一功能，则很难推广。苹果九十年代已经开始积累这方面的基础，有先见之明。</p>
 
 <h2>GUI工具</h2>
 
-<p>下面是我接触过的一些M ac下的GUI工具。它们大都散发着对开发者的自由开放的态度:)</p>
+<p>下面是我接触过的一些Mac下的GUI工具。它们大都散发着对开发者的自由开放的态度:)</p>
 
-<h3>Q uicksilver</h3>
+<h3>Quicksilver</h3>
 
-<p>『为了不把M ac当W indows用』，可以从<a href="http://qsapp.com/">Q uicksilver</a>入手。它能将双手从触摸板中解脱出来，或许这是很多开发者的梦想吧;)。只需用热键激活输入框，输入简单的匹配字符串，就可召唤出某个应用，或者执行某些搜索、查找任务，快哉！</p>
+<p>『为了不把Mac当Windows用』，可以从<a href="http://qsapp.com/">Quicksilver</a>入手。它能将双手从触摸板中解脱出来，或许这是很多开发者的梦想吧;)。只需用热键激活输入框，输入简单的匹配字符串，就可召唤出某个应用，或者执行某些搜索、查找任务，快哉！</p>
 
 <p>简单说说配置和使用方式：</p>
 
 <ul>
-<li>1.安装好后，在preference -> command中可以设置H ot K ey（唤醒的虚拟按键），我的习惯设置是<code>control+enter</code>。preference -> application可以设置是否需要在dock中显示，以及登入时自动启动。</li>
-<li>2.基本功能：快捷打开应用。按下Q uicksliver的H ot K ey（我的是<code>control+enter</code>）,在弹出的输入框中输入所需应用的头几个字母或者缩写，Q uicksliver会自动匹配最可能的应用，并显示出来，如果不是自己想要的，可以移动「上下光标」打开下拉菜单选择。选中后回车即可，如图。</li>
+<li>1.安装好后，在preference -> command中可以设置HotKey（唤醒的虚拟按键），我的习惯设置是<code>control+enter</code>。preference -> application可以设置是否需要在dock中显示，以及登入时自动启动。</li>
+<li>2.基本功能：快捷打开应用。按下Quicksliver的HotKey（我的是<code>control+enter</code>）,在弹出的输入框中输入所需应用的头几个字母或者缩写，Quicksliver会自动匹配最可能的应用，并显示出来，如果不是自己想要的，可以移动「上下光标」打开下拉菜单选择。选中后回车即可，如图。</li>
 </ul>
 
 
-<p><img src="https://dl.dropboxusercontent.com/u/64021093/P%20ics/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202013-06-09%20%E4%B8%8B%E5%8D%881.23.22.png" title="Q uicksilver示例" alt="Q uicksilver" /></p>
+<p><img src="https://dl.dropboxusercontent.com/u/64021093/Pics/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202013-06-09%20%E4%B8%8B%E5%8D%881.23.22.png" title="Quicksilver示例" alt="Quicksilver" /></p>
 
 <ul>
-<li>3.还有很多其他的细节功能，通过Q uicksliver的插件实现，可以根据自己的需求来定制。</li>
+<li>3.还有很多其他的细节功能，通过Quicksliver的插件实现，可以根据自己的需求来定制。</li>
 </ul>
 
 
-<h3>S hortcat</h3>
+<h3>Shortcat</h3>
 
-<p><a href="http://shortcatapp.com/">shortcat</a>是M ac下的快捷操作利器。相比Q uicksilver，S hortcat有不同的定位：通过键盘定位到屏幕上某窗体内的某个位置。其官网的示例就是如何通过S hortcat使用键盘更改DNS设置，注意，是完全不用鼠标噢。有人可能会想那为什么卜直接使用cmd呢？我想答案是S hortcat就是基于GUI的解决方案，是GUI和键盘快捷键的完美组合，与cmd并不冲突。</p>
+<p><a href="http://shortcatapp.com/">shortcat</a>是Mac下的快捷操作利器。相比Quicksilver，Shortcat有不同的定位：通过键盘定位到屏幕上某窗体内的某个位置。其官网的示例就是如何通过Shortcat使用键盘更改DNS设置，注意，是完全不用鼠标噢。有人可能会想那为什么卜直接使用cmd呢？我想答案是Shortcat就是基于GUI的解决方案，是GUI和键盘快捷键的完美组合，与cmd并不冲突。</p>
 
-<p>下面简单的交代下S hortcat的使用方式：</p>
+<p>下面简单的交代下Shortcat的使用方式：</p>
 
 <ul>
-<li>1.快捷键<code>C md+S hift+S pace</code>用来激活输入框。使用关键字的定位方式类似于Q uicksilver。比如：如果目的是『L anguage &amp; T ext』，那么输入『lt』、『lang』；『sa』代表show all，显示所能用于文字定位的区域。『.』能展示出所有可控制区域，包括没有文字定位的区域。</li>
+<li>1.快捷键<code>Cmd+Shift+Space</code>用来激活输入框。使用关键字的定位方式类似于Quicksilver。比如：如果目的是『Language &amp; Text』，那么输入『lt』、『lang』；『sa』代表show all，显示所能用于文字定位的区域。『.』能展示出所有可控制区域，包括没有文字定位的区域。</li>
 <li>2.输入了关键字后，界面中被匹配到的模块会被套上不同颜色的方框。接下来，可以使用<code>control+key</code>重定位到对应位置，其中key为对应的匹配上的模块的字符标识。</li>
 </ul>
 
 
-<p><img src="https://dl.dropboxusercontent.com/u/64021093/P%20ics/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202013-06-09%20%E4%B8%8B%E5%8D%881.42.39.png" title="S hortcat示例" alt="S hortcat" /></p>
+<p><img src="https://dl.dropboxusercontent.com/u/64021093/Pics/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202013-06-09%20%E4%B8%8B%E5%8D%881.42.39.png" title="Shortcat示例" alt="Shortcat" /></p>
 
 <ul>
 <li>3.定位到合适的位置后，按下<code>enter</code>，可执行单击动作；对应的，双击<code>enter</code>为鼠标双击动作；如果需要配合其他按键的点击，比如<code>command+click</code>，执行<code>command+enter</code>即可；鼠标悬浮为<code>control</code>；双击<code>control</code>可实现聚焦。</li>
 </ul>
 
 
-<h3>G eek T ool</h3>
+<h3>GeekTool</h3>
 
-<p><a href="http://projects.tynsoe.org/en/geektool/">G eek T ool</a>类似于W indows下的widget，可以个性化的定制自己的桌面，添加插件，将CPU、HDD信息直接展示在桌面上，正如其名，G eek而又文艺!如下效果图：</p>
+<p><a href="http://projects.tynsoe.org/en/geektool/">GeekTool</a>类似于Windows下的widget，可以个性化的定制自己的桌面，添加插件，将CPU、HDD信息直接展示在桌面上，正如其名，Geek而又文艺!如下效果图：</p>
 
-<p><img src="http://bbs.dgtle.com/data/attachment/album/201111/10/011505943%20pmpmm%2068%20enxwwd.png" title="G eek T ool示例桌面" alt="G eek T ool" /></p>
+<p><img src="http://bbs.dgtle.com/data/attachment/album/201111/10/011505943pmpmm68enxwwd.png" title="GeekTool示例桌面" alt="GeekTool" /></p>
 
-<p>详细配置可参考这篇文章<a href="http://www.dgtle.com/article-797-1.html">《教你装小清新—— G eektool &amp;&amp; R ainmeter 桌面皮肤推荐》</a></p>
+<p>详细配置可参考这篇文章<a href="http://www.dgtle.com/article-797-1.html">《教你装小清新—— Geektool &amp;&amp; Rainmeter 桌面皮肤推荐》</a></p>
 
-<h3>N octurne</h3>
+<h3>Nocturne</h3>
 
-<p><a href="http://code.google.com/p/blacktree-nocturne/downloads/detail?name=N%20octurne.2.0.0.zip">N octurne</a>这是桌面颜色控制的工具，与Q uicksilver同为blacktree公司的产品。</p>
+<p><a href="http://code.google.com/p/blacktree-nocturne/downloads/detail?name=Nocturne.2.0.0.zip">Nocturne</a>这是桌面颜色控制的工具，与Quicksilver同为blacktree公司的产品。</p>
 
-<p>使用方式：下载N octurne 2.0.0，解压后拖入应用程序文件夹，打开。在preference中可很直观的配置各项属性。其中，switch to night功能可以将M ac界面切换到黑夜模式，很好玩;)。</p>
+<p>使用方式：下载Nocturne2.0.0，解压后拖入应用程序文件夹，打开。在preference中可很直观的配置各项属性。其中，switch to night功能可以将Mac界面切换到黑夜模式，很好玩;)。</p>
 
 <h3>参考：</h3>
 
 <ul>
-<li><a href="http://ksmx.me/blog/2012/03/18/customize-mac-desktop/">矮矬穷M ac桌面美化得瑟教程</a></li>
+<li><a href="http://ksmx.me/blog/2012/03/18/customize-mac-desktop/">矮矬穷Mac桌面美化得瑟教程</a></li>
 </ul>
 
 
@@ -706,7 +706,7 @@
     <link href="http://biaobiaoqi.github.com/blog/2013/06/08/software-defined-network/"/>
     <updated>2013-06-08T00:39:00+08:00</updated>
     <id>http://biaobiaoqi.github.com/blog/2013/06/08/software-defined-network</id>
-    <content type="html"><![CDATA[<p>最近高级网络课的小组任务是在老师给定的范围内自选方向主题研究并做展示报告。我们组选了sdn。原以为这东西会是工业界无人问津的概念化产品，G oogle了一下却发现其实sdn挺火的，由于它可能带来的可扩展性，一些大互联网企业也在开始涉足相关的研发，比如G oogle呵F acebook。这里简要的梳理下我对SDN概念性的认识。</p>
+    <content type="html"><![CDATA[<p>最近高级网络课的小组任务是在老师给定的范围内自选方向主题研究并做展示报告。我们组选了sdn。原以为这东西会是工业界无人问津的概念化产品，Google了一下却发现其实sdn挺火的，由于它可能带来的可扩展性，一些大互联网企业也在开始涉足相关的研发，比如Google呵Facebook。这里简要的梳理下我对SDN概念性的认识。</p>
 
 <h2>背景</h2>
 
@@ -726,23 +726,23 @@
 
 <p>如果能剥离开网络的物理拓扑结构，将网络资源虚拟化，隐藏物理结构的复杂性，统一的进行逻辑层的管理控制，就能满足多变的网络需求了。</p>
 
-<p>SDN和O pen F low就是一个这样的解决方案。</p>
+<p>SDN和OpenFlow就是一个这样的解决方案。</p>
 
-<h2>O pen F low和SDN</h2>
+<h2>OpenFlow和SDN</h2>
 
-<p>O pen F low起源于斯坦福的E thane项目。该项目试图通过一个集中式的控制器，让网络管理员可以方便地定义基于网络流的安全控制策略，并将这些安全策略应用到各种网络设备中，从而实现对整个网络通讯的安全控制。受到此项目的启发，斯坦福的老师和学生将E thane的设计更一般化，将传统网络设备的数据转发(data plane)和路由控制(control plane)两个功能模块相分离，通过集中式的控制器(C ontroller)以标准化的接口对各种网络设备进行管理和配置。2008年，他们提出了O pen F low的概念。</p>
+<p>OpenFlow起源于斯坦福的Ethane项目。该项目试图通过一个集中式的控制器，让网络管理员可以方便地定义基于网络流的安全控制策略，并将这些安全策略应用到各种网络设备中，从而实现对整个网络通讯的安全控制。受到此项目的启发，斯坦福的老师和学生将Ethane的设计更一般化，将传统网络设备的数据转发(data plane)和路由控制(control plane)两个功能模块相分离，通过集中式的控制器(Controller)以标准化的接口对各种网络设备进行管理和配置。2008年，他们提出了OpenFlow的概念。</p>
 
-<p>这种分布式的实现方式，让控制平面可以和转发平面物理的分离开，控制平面完全可以运行在运算能力更强的服务器上，而不是路由器。O pen F low协议则是分离的两者之间的通信协议。关于O pen F low的技术细节，<a href="http://network.51%20cto.com/art/201306/397443.htm">《虚拟化的逆袭：O pen F low和SDN》</a>一文中有简明介绍。</p>
+<p>这种分布式的实现方式，让控制平面可以和转发平面物理的分离开，控制平面完全可以运行在运算能力更强的服务器上，而不是路由器。OpenFlow协议则是分离的两者之间的通信协议。关于OpenFlow的技术细节，<a href="http://network.51cto.com/art/201306/397443.htm">《虚拟化的逆袭：OpenFlow和SDN》</a>一文中有简明介绍。</p>
 
-<p>基于O pen F low为网络带来的可编程的特性，有研究人员提出了SDN即S oftware D efined N etwork（2009年）。在这个概念中，网络中所有的网络设备被视为被管理的资源，以此抽象出一个网络操作系统(N etwork OS)的概念，这个网络操作系统一方面抽象了底层网络设备的具体细节，同时还为上层应用提供了统一的管理视图和编程接口。SDN的架构细节，参见<a href="http://network.51%20cto.com/art/201211/366278.htm">《SDN是生意 O pen F low是技术》</a>。</p>
+<p>基于OpenFlow为网络带来的可编程的特性，有研究人员提出了SDN即Software Defined Network（2009年）。在这个概念中，网络中所有的网络设备被视为被管理的资源，以此抽象出一个网络操作系统(Network OS)的概念，这个网络操作系统一方面抽象了底层网络设备的具体细节，同时还为上层应用提供了统一的管理视图和编程接口。SDN的架构细节，参见<a href="http://network.51cto.com/art/201211/366278.htm">《SDN是生意 OpenFlow是技术》</a>。</p>
 
-<p>SDN和O pen F low的关系，就像互联网之于TCP/IP协议栈。O pen F low是SDN的核心协议，用于控制转发面设备的控制转发。而SDN是上层的变成界面。</p>
+<p>SDN和OpenFlow的关系，就像互联网之于TCP/IP协议栈。OpenFlow是SDN的核心协议，用于控制转发面设备的控制转发。而SDN是上层的变成界面。</p>
 
-<p>有观点认为，『O pen F low是技术，SDN是生意』。最近对SDN唱衰的报道也证明了这桩『生意』的前途未仆。</p>
+<p>有观点认为，『OpenFlow是技术，SDN是生意』。最近对SDN唱衰的报道也证明了这桩『生意』的前途未仆。</p>
 
 <h2>SDN的发展</h2>
 
-<p>在云计算飞速发展的同时，SDN也喧嚣尘上。G oogle,F acebook等大公司也结成了产业联盟，来推动其发展。</p>
+<p>在云计算飞速发展的同时，SDN也喧嚣尘上。Google,Facebook等大公司也结成了产业联盟，来推动其发展。</p>
 
 <p>但其现状也并非一片明朗：</p>
 
@@ -755,11 +755,11 @@
 <h3>参考</h3>
 
 <ul>
-<li><a href="http://blog.sina.com.cn/s/blog%20_72628%20e%209%20f%200100%20yg%203%20b.html">什么是SDN(S oftware D efined N etworking)？</a>
+<li><a href="http://blog.sina.com.cn/s/blog_72628e9f0100yg3b.html">什么是SDN(Software Defined Networking)？</a>
 *</li>
-<li><a href="http://blog.sina.com.cn/s/blog%20_5385%20c%200%20b%20901010%20pu%203.html">O pen F low/SDN本质论</a></li>
+<li><a href="http://blog.sina.com.cn/s/blog_5385c0b901010pu3.html">OpenFlow/SDN本质论</a></li>
 <li><a href="http://article.yeeyan.org/view/323168/358956">软件定义网络(SDN)：是什么，如何工作，为什么重要</a></li>
-<li><a href="http://network.51%20cto.com/art/201305/394648.htm">SDN：仍处于起步阶段</a><p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/06/08/software-defined-network/'>http://biaobiaoqi.github.com/blog/2013/06/08/software-defined-network/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p></li>
+<li><a href="http://network.51cto.com/art/201305/394648.htm">SDN：仍处于起步阶段</a><p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/06/08/software-defined-network/'>http://biaobiaoqi.github.com/blog/2013/06/08/software-defined-network/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p></li>
 </ul>
 
 ]]></content>
@@ -770,31 +770,31 @@
     <link href="http://biaobiaoqi.github.com/blog/2013/06/08/ipc-in-hadoop/"/>
     <updated>2013-06-08T00:24:00+08:00</updated>
     <id>http://biaobiaoqi.github.com/blog/2013/06/08/ipc-in-hadoop</id>
-    <content type="html"><![CDATA[<p>本文是《hadoop技术内幕——深入解析H adoop C ommon和HDFS架构设计与实现原理》第4章的1-3节的学习笔记。内容为H adoop IPC部分的基础知识介绍。</p>
+    <content type="html"><![CDATA[<p>本文是《hadoop技术内幕——深入解析Hadoop Common和HDFS架构设计与实现原理》第4章的1-3节的学习笔记。内容为Hadoop IPC部分的基础知识介绍。</p>
 
 <h2>知识框架</h2>
 
-<p>由于H adoop分布式环境需要一个更高效和正对性优化的IPC机制，传统的诸如RMI的解决方案无法满足这一要求，H adoop自己实现了一套IPC方法。</p>
+<p>由于Hadoop分布式环境需要一个更高效和正对性优化的IPC机制，传统的诸如RMI的解决方案无法满足这一要求，Hadoop自己实现了一套IPC方法。</p>
 
-<p>第4章第1节讲解了RPC的原理，包括S tub-S keleton的架构等，进而用<code>RMI</code>举例（可以参考的<a href="">演示代码</a>）。RMI的调用实现主要包括了服务器端的registry和客户端的lookup。虽然H adoop不是使用RMI做IPC，但了解一下其调用方式对感性的认识到如何进行分布式环境下的远程调用还是有作用的。</p>
+<p>第4章第1节讲解了RPC的原理，包括Stub-Skeleton的架构等，进而用<code>RMI</code>举例（可以参考的<a href="">演示代码</a>）。RMI的调用实现主要包括了服务器端的registry和客户端的lookup。虽然Hadoop不是使用RMI做IPC，但了解一下其调用方式对感性的认识到如何进行分布式环境下的远程调用还是有作用的。</p>
 
-<p>接下来的2,3小节，简单的介绍了IPC过程所依赖的技术方法：J ava的动态代理方式和NIO的网络传输方式。</p>
+<p>接下来的2,3小节，简单的介绍了IPC过程所依赖的技术方法：Java的动态代理方式和NIO的网络传输方式。</p>
 
 <p>第2节讲<code>动态代理</code>，这里需要理解面向对象的代理模式和<em>动态</em>的原因。代理模式分很多种，这里用到的是简单的对行为的传递。动态代理的动态特性，则是因为框架能提供动态创建某个接口的实现的能力(可以参考的<a href="">演示代码</a>)。</p>
 
 <p>更系统的看动态代理过程，分为两个阶段：</p>
 
 <ul>
-<li>1.代理接口的实现：静态方法P roxy.new I nstance()生成动态对象。</li>
-<li>2.调用转发过程：I nvocation H andler实现</li>
+<li>1.代理接口的实现：静态方法Proxy.newInstance()生成动态对象。</li>
+<li>2.调用转发过程：InvocationHandler实现</li>
 </ul>
 
 
-<p>第3节的<code>NIO</code>，跟传统的套接字(S ocket)通信过程做了对比。需要了解S ocket通信的特点：同步，阻塞，基于字节，理解这种特点带来的服务器端的线程闲置的压力。对应的，NIO则是可异步的，非阻塞的，基于块的。具体的实现上，需要了解缓冲区(B uffer)的原理和使用方式，通道(C hannel)和选择器(S elector)配合的使用方式。</p>
+<p>第3节的<code>NIO</code>，跟传统的套接字(Socket)通信过程做了对比。需要了解Socket通信的特点：同步，阻塞，基于字节，理解这种特点带来的服务器端的线程闲置的压力。对应的，NIO则是可异步的，非阻塞的，基于块的。具体的实现上，需要了解缓冲区(Buffer)的原理和使用方式，通道(Channel)和选择器(Selector)配合的使用方式。</p>
 
 <p>我总结了一份slides，如下：(挂在speackerdeck上，如果加载缓慢，请稍候:))</p>
 
-<script async class="speakerdeck-embed" data-id="fbcb 8590 b 1540130690 c 2 e 6 f 0 be 13 e 84" data-ratio="1.33333333333333" src="http://biaobiaoqi.github.com//speakerdeck.com/assets/embed.js"></script>
+<script async class="speakerdeck-embed" data-id="fbcb8590b1540130690c2e6f0be13e84" data-ratio="1.33333333333333" src="http://biaobiaoqi.github.com//speakerdeck.com/assets/embed.js"></script>
 
 
 <p>slides下载地址：<a href="https://dl.dropboxusercontent.com/u/64021093/slides/%E8%BF%9C%E7%A8%8B%E8%BF%87%E7%A8%8B%E8%B0%83%E7%94%A8%E5%92%8CNIO.pdf">请戳</a><p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/06/08/ipc-in-hadoop/'>http://biaobiaoqi.github.com/blog/2013/06/08/ipc-in-hadoop/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p></p>
@@ -863,11 +863,11 @@
 </ul>
 
 
-<p>由于外网网速的限制，基于校园内网建立的工具就有了天然的优势。但如果使用内网，就不得不抛弃各大公司免费提供的邮箱存储空间、网盘存储空间。而校内的资源是有限的，没有自己的服务器，没有足够的空间存储大家的数据，这也就迫使我们考虑到了p 2 p的系统架构。于是，有了这样的解决方案，设定代号为BBT：</p>
+<p>由于外网网速的限制，基于校园内网建立的工具就有了天然的优势。但如果使用内网，就不得不抛弃各大公司免费提供的邮箱存储空间、网盘存储空间。而校内的资源是有限的，没有自己的服务器，没有足够的空间存储大家的数据，这也就迫使我们考虑到了p2p的系统架构。于是，有了这样的解决方案，设定代号为BBT：</p>
 
 <ul>
 <li>PC机安装BBT工具软件后，可以设定<code>共享目录</code>和对应的<code>分享ID</code></li>
-<li>放入特定<code>共享目录</code>的文件，将使用基于p 2 p同步的方式，在拥有相同的<code>分享ID</code>的<code>共享目录</code>间同步数据，目的是让所有人都获得到每个人的数据</li>
+<li>放入特定<code>共享目录</code>的文件，将使用基于p2p同步的方式，在拥有相同的<code>分享ID</code>的<code>共享目录</code>间同步数据，目的是让所有人都获得到每个人的数据</li>
 </ul>
 
 
@@ -880,21 +880,21 @@
 
 <p>确实够简洁，很赞，实现成本还需要调研。</p>
 
-<h6>B it T orrent S ync</h6>
+<h6>BitTorrent Sync</h6>
 
-<p>在构思的过程中，突然想起前几天在start up news上看到了一个基于BT协议的同步软件<a href="http://labs.bittorrent.com/experiments/sync.html">B it T orrent S ync</a>。</p>
+<p>在构思的过程中，突然想起前几天在start up news上看到了一个基于BT协议的同步软件<a href="http://labs.bittorrent.com/experiments/sync.html">BitTorrent Sync</a>。</p>
 
-<p><img src="http://labs.bittorrent.com/img/wide/sync.png" title="B it T orrent S ync" alt="B it T orrent S ync" /></p>
+<p><img src="http://labs.bittorrent.com/img/wide/sync.png" title="BitTorrent Sync" alt="BitTorrent Sync" /></p>
 
 <p>它的实现方式大概是我们所需要的。可惜的是，由于它的功能全面，界面略显复杂。而同时，它并没有开放二次开发接口。</p>
 
-<p>或许我需要自己搭建一个p 2 p的系统？</p>
+<p>或许我需要自己搭建一个p2p的系统？</p>
 
 <h6>PS:</h6>
 
 <p>BT的优势，在于利用了所有节点的存储和传输能力，节点数量越多，下载越快</p>
 
-<p>B it T orrent  S ync的优势，则在于能动态的集合分散在不同节点中的数据</p>
+<p>BitTorrent  Sync的优势，则在于能动态的集合分散在不同节点中的数据</p>
 
 <p>感觉这种去中心化的分布式系统，前景大大的有啊;)<p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/05/25/some-ideas-about-using-bt-protocol-to-sync/'>http://biaobiaoqi.github.com/blog/2013/05/25/some-ideas-about-using-bt-protocol-to-sync/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p></p>
 ]]></content>
@@ -909,7 +909,7 @@
 
 <h2>字符串匹配算法</h2>
 
-<p>字符串匹配(S tring M atchiing)也称字符串搜索(S tring S earching)是字符串算法中重要的一种，是指从一个大字符串或文本中找到模式串出现的位置。一个基本的字符串匹配算法分类如下：</p>
+<p>字符串匹配(String Matchiing)也称字符串搜索(String Searching)是字符串算法中重要的一种，是指从一个大字符串或文本中找到模式串出现的位置。一个基本的字符串匹配算法分类如下：</p>
 
 <ul>
 <li>单模式匹配：即每次算法执行只需匹配出一个模式串。</li>
@@ -918,7 +918,7 @@
 </ul>
 
 
-<p>单模式匹配最容易理解，构造也非常简单。一个最朴素的思路就是从文本的第一个字符顺次比较模式串，不匹配则重新从下一个字符开始匹配，直到文本末尾。J ava实现代码如下：</p>
+<p>单模式匹配最容易理解，构造也非常简单。一个最朴素的思路就是从文本的第一个字符顺次比较模式串，不匹配则重新从下一个字符开始匹配，直到文本末尾。Java实现代码如下：</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -933,12 +933,12 @@
 <span class='line-number'>11</span>
 <span class='line-number'>12</span>
 <span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'> <span class="kd">public</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">bruteforce</span><span class="o">(</span><span class="n">S</span> <span class="n">tring</span> <span class="n">str</span> <span class="mi">1</span><span class="o">,</span> <span class="n">S</span> <span class="n">tring</span> <span class="n">str</span> <span class="mi">2</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>         <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">!=</span> <span class="n">str</span> <span class="mi">1</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>               <span class="k">if</span> <span class="o">(</span><span class="n">str</span> <span class="mi">1</span><span class="o">.</span><span class="na">char</span> <span class="n">A</span> <span class="n">t</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">==</span> <span class="n">str</span> <span class="mi">2</span><span class="o">.</span><span class="na">char</span> <span class="n">A</span> <span class="n">t</span><span class="o">(</span><span class="n">j</span><span class="o">))</span> <span class="o">{</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'> <span class="kd">public</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">bruteforce</span><span class="o">(</span><span class="n">String</span> <span class="n">str1</span><span class="o">,</span> <span class="n">String</span> <span class="n">str2</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>         <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">!=</span> <span class="n">str1</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>               <span class="k">if</span> <span class="o">(</span><span class="n">str1</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">==</span> <span class="n">str2</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">j</span><span class="o">))</span> <span class="o">{</span>
 </span><span class='line'>                    <span class="n">j</span> <span class="o">++;</span>
 </span><span class='line'>                    <span class="n">i</span> <span class="o">++;</span>
-</span><span class='line'>                    <span class="k">if</span> <span class="o">(</span><span class="n">j</span> <span class="o">==</span> <span class="n">str</span> <span class="mi">2</span><span class="o">.</span><span class="na">length</span><span class="o">())</span> <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+</span><span class='line'>                    <span class="k">if</span> <span class="o">(</span><span class="n">j</span> <span class="o">==</span> <span class="n">str2</span><span class="o">.</span><span class="na">length</span><span class="o">())</span> <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
 </span><span class='line'>               <span class="o">}</span><span class="k">else</span> <span class="o">{</span>
 </span><span class='line'>                    <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
 </span><span class='line'>                    <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
@@ -955,11 +955,11 @@
 
 <h2>KMP算法</h2>
 
-<p>网络上关于KMP算法的描述很多，其中个人觉得阮一峰老师的<a href="http://www.ruanyifeng.com/blog/2013/05/K%20nuth%E2%80%93M%20orris%E2%80%93P%20ratt_algorithm.html">《字符串匹配的KMP算法》</a>对KMP的描述最为简明和清晰。图例展示的算法流程更容易让人接受和理解。这里仅记录我所认为重点的知识点。</p>
+<p>网络上关于KMP算法的描述很多，其中个人觉得阮一峰老师的<a href="http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html">《字符串匹配的KMP算法》</a>对KMP的描述最为简明和清晰。图例展示的算法流程更容易让人接受和理解。这里仅记录我所认为重点的知识点。</p>
 
 <h5>算法的思想</h5>
 
-<p>相比蛮力算法，KMP算法预先计算出了一个哈希表，用来指导在匹配过程中匹配失败后尝试下次匹配的起始位置，以此避免重复的读入和匹配过程。这个哈希表被叫做“部分匹配值表(<strong>P articial match table</strong>)”，它的设计是算法精妙之处。</p>
+<p>相比蛮力算法，KMP算法预先计算出了一个哈希表，用来指导在匹配过程中匹配失败后尝试下次匹配的起始位置，以此避免重复的读入和匹配过程。这个哈希表被叫做“部分匹配值表(<strong>Particial match table</strong>)”，它的设计是算法精妙之处。</p>
 
 <h5>部分匹配值表</h5>
 
@@ -1044,19 +1044,19 @@
 <span class='line-number'>46</span>
 </pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">next</span><span class="o">;</span>
 </span><span class='line'>
-</span><span class='line'><span class="kd">public</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">kmp</span><span class="o">(</span><span class="n">S</span> <span class="n">tring</span> <span class="n">str</span><span class="o">,</span> <span class="n">S</span> <span class="n">tring</span> <span class="n">dest</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'><span class="kd">public</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">kmp</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span><span class="o">,</span> <span class="n">String</span> <span class="n">dest</span><span class="o">)</span> <span class="o">{</span>
 </span><span class='line'>  <span class="c1">// i stands for index of str string, j stands for index in dest string.</span>
-</span><span class='line'>  <span class="c1">// A t the beginning of each loop process, j is the new position of dest</span>
+</span><span class='line'>  <span class="c1">// At the beginning of each loop process, j is the new position of dest</span>
 </span><span class='line'>  <span class="c1">// taht should be compared.</span>
 </span><span class='line'>  <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">str</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-</span><span class='line'>      <span class="k">while</span> <span class="o">(</span><span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">str</span><span class="o">.</span><span class="na">char</span> <span class="n">A</span> <span class="n">t</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">!=</span> <span class="n">dest</span><span class="o">.</span><span class="na">char</span> <span class="n">A</span> <span class="n">t</span><span class="o">(</span><span class="n">j</span><span class="o">))</span>
-</span><span class='line'>          <span class="c1">// T his loop is to get a matching character recursively. A nother</span>
+</span><span class='line'>      <span class="k">while</span> <span class="o">(</span><span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">!=</span> <span class="n">dest</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">j</span><span class="o">))</span>
+</span><span class='line'>          <span class="c1">// This loop is to get a matching character recursively. Another</span>
 </span><span class='line'>          <span class="c1">// stop condition is when particial match value meets end.</span>
-</span><span class='line'>          <span class="n">j</span> <span class="o">=</span> <span class="n">next</span><span class="o">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="o">];</span><span class="c1">// A s i in str and j in dest is comparing,</span>
+</span><span class='line'>          <span class="n">j</span> <span class="o">=</span> <span class="n">next</span><span class="o">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="o">];</span><span class="c1">// As i in str and j in dest is comparing,</span>
 </span><span class='line'>                          <span class="c1">// recomputing of j should be in the former</span>
 </span><span class='line'>                          <span class="c1">// character substring, which is next[j-1]</span>
 </span><span class='line'>
-</span><span class='line'>      <span class="k">if</span> <span class="o">(</span><span class="n">str</span><span class="o">.</span><span class="na">char</span> <span class="n">A</span> <span class="n">t</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">==</span> <span class="n">dest</span><span class="o">.</span><span class="na">char</span> <span class="n">A</span> <span class="n">t</span><span class="o">(</span><span class="n">j</span><span class="o">))</span>
+</span><span class='line'>      <span class="k">if</span> <span class="o">(</span><span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">==</span> <span class="n">dest</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">j</span><span class="o">))</span>
 </span><span class='line'>          <span class="n">j</span><span class="o">++;</span>
 </span><span class='line'>
 </span><span class='line'>      <span class="k">if</span> <span class="o">(</span><span class="n">j</span> <span class="o">==</span> <span class="n">dest</span><span class="o">.</span><span class="na">length</span><span class="o">())</span>
@@ -1066,21 +1066,21 @@
 </span><span class='line'>  <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
 </span><span class='line'><span class="o">}</span>
 </span><span class='line'>
-</span><span class='line'><span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">kmp</span> <span class="n">N</span> <span class="nf">ext</span><span class="o">(</span><span class="n">S</span> <span class="n">tring</span> <span class="n">str</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'><span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">kmpNext</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span><span class="o">)</span> <span class="o">{</span>
 </span><span class='line'>  <span class="kt">int</span><span class="o">[]</span> <span class="n">next</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">str</span><span class="o">.</span><span class="na">length</span><span class="o">()];</span>
-</span><span class='line'>  <span class="n">next</span> <span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span><span class='line'>  <span class="n">next</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
 </span><span class='line'>  <span class="c1">// i stands for index of string, j is temporary for particail match</span>
 </span><span class='line'>  <span class="c1">// values computing, at the beginning of each loop process, j is the</span>
 </span><span class='line'>  <span class="c1">// particial match value of former character .</span>
 </span><span class='line'>  <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">str</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="o">++</span><span class="n">i</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>      <span class="k">while</span> <span class="o">(</span><span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">str</span><span class="o">.</span><span class="na">char</span> <span class="n">A</span> <span class="n">t</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">!=</span> <span class="n">str</span><span class="o">.</span><span class="na">char</span> <span class="n">A</span> <span class="n">t</span><span class="o">(</span><span class="n">j</span><span class="o">))</span>
-</span><span class='line'>          <span class="c1">// T his loop is to get a matching character recursively. A nother</span>
+</span><span class='line'>      <span class="k">while</span> <span class="o">(</span><span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">!=</span> <span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">j</span><span class="o">))</span>
+</span><span class='line'>          <span class="c1">// This loop is to get a matching character recursively. Another</span>
 </span><span class='line'>          <span class="c1">// stop condition is when particial match value meets end.</span>
-</span><span class='line'>          <span class="n">j</span> <span class="o">=</span> <span class="n">next</span><span class="o">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="o">];</span><span class="c1">// j will be recomputed in the recursion. T ake</span>
+</span><span class='line'>          <span class="n">j</span> <span class="o">=</span> <span class="n">next</span><span class="o">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="o">];</span><span class="c1">// j will be recomputed in the recursion. Take</span>
 </span><span class='line'>                          <span class="c1">// care that next[j-1] is the particial match</span>
 </span><span class='line'>                          <span class="c1">// value of the first j characters substirng.</span>
 </span><span class='line'>
-</span><span class='line'>      <span class="k">if</span> <span class="o">(</span><span class="n">str</span><span class="o">.</span><span class="na">char</span> <span class="n">A</span> <span class="n">t</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">==</span> <span class="n">str</span><span class="o">.</span><span class="na">char</span> <span class="n">A</span> <span class="n">t</span><span class="o">(</span><span class="n">j</span><span class="o">))</span> <span class="c1">// I f not in this case, j must</span>
+</span><span class='line'>      <span class="k">if</span> <span class="o">(</span><span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">==</span> <span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">j</span><span class="o">))</span> <span class="c1">// If not in this case, j must</span>
 </span><span class='line'>                                          <span class="c1">// meets end, equals to zero.</span>
 </span><span class='line'>          <span class="o">++</span><span class="n">j</span><span class="o">;</span>
 </span><span class='line'>
@@ -1094,10 +1094,10 @@
 <p>理解算法实现时，有几点特别需要注意：</p>
 
 <ul>
-<li>在生成部分匹配值数组的kmp N ext()方法中，第一层循环内，<code>i</code>是字符串的索引，而<code>j</code>则在每次循环开始时代表了<code>i</code>所指定字符之前的子串的部分匹配值。</li>
-<li>kmp N ext()方法的内层while()循环，是为了迭代得到让<code>i</code>指定字符匹配到的情况。有另外一种实现方案：不有用这一层循环，而是直接使用一层循环，在大循环内部做j值变更的判定即可。</li>
-<li>kmp N ext()方法的while()循环中，需要特别注意是<code>next[j -1]</code>，部分匹配值j对应到的是字符串中的第<code>j-1</code>个字符。</li>
-<li>kmp()的循环代码和kmp N ext()部分匹配值表生成的循环代码很类似。两者使用了相同方式，在字符匹配失败后迭代获取新的可匹配情况，且都是利用了next数组。</li>
+<li>在生成部分匹配值数组的kmpNext()方法中，第一层循环内，<code>i</code>是字符串的索引，而<code>j</code>则在每次循环开始时代表了<code>i</code>所指定字符之前的子串的部分匹配值。</li>
+<li>kmpNext()方法的内层while()循环，是为了迭代得到让<code>i</code>指定字符匹配到的情况。有另外一种实现方案：不有用这一层循环，而是直接使用一层循环，在大循环内部做j值变更的判定即可。</li>
+<li>kmpNext()方法的while()循环中，需要特别注意是<code>next[j -1]</code>，部分匹配值j对应到的是字符串中的第<code>j-1</code>个字符。</li>
+<li>kmp()的循环代码和kmpNext()部分匹配值表生成的循环代码很类似。两者使用了相同方式，在字符匹配失败后迭代获取新的可匹配情况，且都是利用了next数组。</li>
 </ul>
 
 
@@ -1109,21 +1109,21 @@
 
 <h4>基础模板题</h4>
 
-<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=2203">HDOJ的2203题</a>是一个能检验算法正确性的模板题。J ava实现的答案代码<a href="https://github.com/biaobiaoqi/biaobiaoqi%20C%20ode/blob/master/src/biaobiaoqi/practice/hdoj/HDOJ2203.java">请戳这里</a>。</p>
+<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=2203">HDOJ的2203题</a>是一个能检验算法正确性的模板题。Java实现的答案代码<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/practice/hdoj/HDOJ2203.java">请戳这里</a>。</p>
 
 <h4>延伸模板题</h4>
 
-<p><a href="http://poj.org/problem?id=2406">POJ的2406题</a>，对考察点做了巧妙的变形，对更深入的理解KMP中的部分匹配表（即next数组）很有帮助。J ava实现的答案代码<a href="https://github.com/biaobiaoqi/biaobiaoqi%20C%20ode/blob/master/src/biaobiaoqi/practice/poj/POJ2406.java">请戳这里</a>。</p>
+<p><a href="http://poj.org/problem?id=2406">POJ的2406题</a>，对考察点做了巧妙的变形，对更深入的理解KMP中的部分匹配表（即next数组）很有帮助。Java实现的答案代码<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/practice/poj/POJ2406.java">请戳这里</a>。</p>
 
-<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1867">HDOJ的1867题</a>也属于kmp的变形。要求对kmp利用next数组进行比较的过程有清晰的认识。J ava实现的答案代码<a href="https://github.com/biaobiaoqi/biaobiaoqi%20C%20ode/blob/master/src/biaobiaoqi/practice/hdoj/HDOJ1867.java">请戳这里</a>。</p>
+<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1867">HDOJ的1867题</a>也属于kmp的变形。要求对kmp利用next数组进行比较的过程有清晰的认识。Java实现的答案代码<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/practice/hdoj/HDOJ1867.java">请戳这里</a>。</p>
 
 <h3>其他参考资料：</h3>
 
 <ul>
-<li><p><a href="http://en.wikipedia.org/wiki/K%20nuth%E2%80%93M%20orris%E2%80%93P%20ratt_algorithm">wiki:K nuth–M orris–P ratt A lgorithm</a></p></li>
-<li><p><a href="http://en.wikipedia.org/wiki/S%20tring_searching_algorithm">wiki:S tring S earching A lgorithm</a></p></li>
+<li><p><a href="http://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm">wiki:Knuth–Morris–Pratt Algorithm</a></p></li>
+<li><p><a href="http://en.wikipedia.org/wiki/String_searching_algorithm">wiki:String Searching Algorithm</a></p></li>
 <li><p><a href="http://www.cppblog.com/converse/archive/2006/07/05/9447.html">《KMP算法的实现》</a></p></li>
-<li><p><a href="http://wangcong.org/blog/archives/2090">《L inux 内核中的 KMP 实现》</a><p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/05/25/kmp-algorithm/'>http://biaobiaoqi.github.com/blog/2013/05/25/kmp-algorithm/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p></p></li>
+<li><p><a href="http://wangcong.org/blog/archives/2090">《Linux 内核中的 KMP 实现》</a><p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/05/25/kmp-algorithm/'>http://biaobiaoqi.github.com/blog/2013/05/25/kmp-algorithm/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p></p></li>
 </ul>
 
 ]]></content>
@@ -1147,7 +1147,7 @@
 
 <p>下面是我印象最深刻的观点的总结：</p>
 
-<h2>德雷福斯模型（D reyfus）</h2>
+<h2>德雷福斯模型（Dreyfus）</h2>
 
 <p>技能获取领域的模型。这个模型针对于某个技能而言，是一个情景模型。他将技能的掌握分为5个阶段：</p>
 
@@ -1164,7 +1164,7 @@
 
 <ul>
 <li>线性模式的L（左脑）：主要负责线性、【逻辑思维】和【语言处理】。它按部就班的处理指令，相对缓慢，使用了大脑中较少的一部分资源。</li>
-<li>富模式的R（右脑）：大脑的G oogle，负责搜索、模式匹配。它是异步执行的，【非理性】的。可能某个想法几天后才突然跳出来。它不做任何语言处理，这意味着它的结果也不是语言能表达的。它的处理只能邀请，不能强制命令 。我们可以时常记录各种想法，让它运转，以激发它的活跃状态。</li>
+<li>富模式的R（右脑）：大脑的Google，负责搜索、模式匹配。它是异步执行的，【非理性】的。可能某个想法几天后才突然跳出来。它不做任何语言处理，这意味着它的结果也不是语言能表达的。它的处理只能邀请，不能强制命令 。我们可以时常记录各种想法，让它运转，以激发它的活跃状态。</li>
 </ul>
 
 
@@ -1209,11 +1209,11 @@
 <p>学习过程中，使用目标激励的方式会很有效（早年自己没目标，还老找借口说没目标自己也会不断努力的…汗颜）遵循SMART方法（这么多条，没必要全记住，核心就在用目标激励前进）：</p>
 
 <ul>
-<li>S pecific：将目标具体化</li>
-<li>M easurable：让目标能度量</li>
-<li>A chievable：目标不能是空想，要能够实现</li>
-<li>R elevant：要与自己足够相关，才能更大化其效益</li>
-<li>T ime-boxed：时间上可控，有最后期限</li>
+<li>Specific：将目标具体化</li>
+<li>Measurable：让目标能度量</li>
+<li>Achievable：目标不能是空想，要能够实现</li>
+<li>Relevant：要与自己足够相关，才能更大化其效益</li>
+<li>Time-boxed：时间上可控，有最后期限</li>
 </ul>
 
 
@@ -1238,23 +1238,23 @@
 
 <ul>
 <li><ol>
-<li>调查（S urvey）：扫描目录和每章总结，得出总体看法。</li>
+<li>调查（Survey）：扫描目录和每章总结，得出总体看法。</li>
 </ol>
 </li>
 <li><ol>
-<li>问题（Q uestion）：记录所有问题</li>
+<li>问题（Question）：记录所有问题</li>
 </ol>
 </li>
 <li><ol>
-<li>阅读（R ead）：阅读内容</li>
+<li>阅读（Read）：阅读内容</li>
 </ol>
 </li>
 <li><ol>
-<li>复述（R ecite）：总结</li>
+<li>复述（Recite）：总结</li>
 </ol>
 </li>
 <li><ol>
-<li>回顾（R eview）：重读，拓展笔记，与同事讨论。</li>
+<li>回顾（Review）：重读，拓展笔记，与同事讨论。</li>
 </ol>
 </li>
 </ul>
@@ -1319,7 +1319,7 @@
     <link href="http://biaobiaoqi.github.com/blog/2013/05/21/the-facebook-effect/"/>
     <updated>2013-05-21T00:23:00+08:00</updated>
     <id>http://biaobiaoqi.github.com/blog/2013/05/21/the-facebook-effect</id>
-    <content type="html"><![CDATA[<p>前两年风靡了一阵子的电影《社交网络》毕竟是电影，一种艺术的方式的表达。虽然无法完全的印证《F acebook效应》一书中记载的正确性，但其细节足以给人启示。</p>
+    <content type="html"><![CDATA[<p>前两年风靡了一阵子的电影《社交网络》毕竟是电影，一种艺术的方式的表达。虽然无法完全的印证《Facebook效应》一书中记载的正确性，但其细节足以给人启示。</p>
 
 <p>电影中，主人公炫酷的人生经历能催生观者产生极强的代入感，不少同学看后可能就会想着自己在寝室特立独行的捣鼓几下，也来做出个震惊世界的产品。且慢。细读本书，就会了解到，成功并非像电影中所描述的那么轻松愉快和力所能及。</p>
 
@@ -1340,7 +1340,7 @@
 
 <p>“扎克伯格如今这样说，‘那一年我做了12个项目。当然，那个项目都不是我全权负责的‘，他说，大多数都是关于’发现人们如何通过相互参照建立联系‘’”。</p></blockquote>
 
-<p>而之后的T he F acebook，也并非一蹴而就的发展为如今的F acebook，它的想法来自于当时常春藤名校之间关于在线花名册、照片的需求以及对社交、分享的一直以来的思考，而非电影中几杯啤酒、几个小时的facemesh。实际上，扎克伯格也并非孤注一掷。一直到2004年夏天之前，他还只是将飞速发展的F acebook当做自己经手的一个项目，以规避自己所投入中存在的风险，他同时又与另一个天才程序员合作了另外一个项目wirehog，甚至为它成立了公司，直到试运行失败后才收手。</p>
+<p>而之后的TheFacebook，也并非一蹴而就的发展为如今的Facebook，它的想法来自于当时常春藤名校之间关于在线花名册、照片的需求以及对社交、分享的一直以来的思考，而非电影中几杯啤酒、几个小时的facemesh。实际上，扎克伯格也并非孤注一掷。一直到2004年夏天之前，他还只是将飞速发展的Facebook当做自己经手的一个项目，以规避自己所投入中存在的风险，他同时又与另一个天才程序员合作了另外一个项目wirehog，甚至为它成立了公司，直到试运行失败后才收手。</p>
 
 <p>另外，扎克伯格的各路圈子的朋友中不乏IT界精英，他们有着高智商，良好的教育背景或者传奇的过往经历和远大理想。他们可能在中学时就已经写出影响行业圈的软件，可能有各行业经营公司的职业背景、经历，可能精通文史、商业哲学。记得以前被老师告知了一句话，“一个人的收入约等于最亲密的六个朋友的收入的平均值”。可能扎克伯格做不到这一点了，他会是最高的吧=。=</p>
 
@@ -1358,14 +1358,14 @@
 </ul>
 
 
-<p>在F acebook发展到06年时，扎克伯格的角色开始发生变化，但他似乎没有控制好这个变化。在前期为他招揽人才的罗宾说“公司高管们的士气正在跌落，流言满天飞，而马克没有对任何人说明真正发生着什么。管理团队几乎准备要把扎克伯格拉下马”。这引起了罗宾的不满。扎克伯格对待罗宾的指责时，并没有抵触，而是欣然接受。这种气魄是他对产品本身追求大过对虚荣的提现。他善于倾听，吸取意见。他顺利的转变了CEO的角色。</p>
+<p>在Facebook发展到06年时，扎克伯格的角色开始发生变化，但他似乎没有控制好这个变化。在前期为他招揽人才的罗宾说“公司高管们的士气正在跌落，流言满天飞，而马克没有对任何人说明真正发生着什么。管理团队几乎准备要把扎克伯格拉下马”。这引起了罗宾的不满。扎克伯格对待罗宾的指责时，并没有抵触，而是欣然接受。这种气魄是他对产品本身追求大过对虚荣的提现。他善于倾听，吸取意见。他顺利的转变了CEO的角色。</p>
 
 <ul>
 <li>理想远大，目标明确</li>
 </ul>
 
 
-<p>他对F acebook的决策，从来都是为了让它在之后成为更伟大的产品，而不是为了一时的利益。因此一直以来都排斥一般形式的广告。他也一直坚持着对公司的控制权，让一切在他的掌握之下。</p>
+<p>他对Facebook的决策，从来都是为了让它在之后成为更伟大的产品，而不是为了一时的利益。因此一直以来都排斥一般形式的广告。他也一直坚持着对公司的控制权，让一切在他的掌握之下。</p>
 
 <ul>
 <li>坚韧</li>
@@ -1376,14 +1376,14 @@
 
 <h2>产品的演变</h2>
 
-<p>F acebook的发展过程中，并非是一直特立独行。与此同时的互联网世界，在社交范围内的公司也是层出不穷，不乏竞争对手。但经过不断的产品迭代创新，F acebook达到了目前的高度。</p>
+<p>Facebook的发展过程中，并非是一直特立独行。与此同时的互联网世界，在社交范围内的公司也是层出不穷，不乏竞争对手。但经过不断的产品迭代创新，Facebook达到了目前的高度。</p>
 
 <ul>
 <li>1.图片分享</li>
 </ul>
 
 
-<p>曾在F acebook上尝试wirehog，一个多媒体分享工具，没有成功。之后，当发现用户对更换主页图片感兴趣后，F acebook准备开发新的图片分享功能。而为了与挖掘出社交的能力，考虑到了以图片中的人名来设置标签，并相应的给标记的人发送消息通知。这是扎克伯格的理想中重要的一环，他以越来越广泛的理论来阐释了社交的意义。</p>
+<p>曾在Facebook上尝试wirehog，一个多媒体分享工具，没有成功。之后，当发现用户对更换主页图片感兴趣后，Facebook准备开发新的图片分享功能。而为了与挖掘出社交的能力，考虑到了以图片中的人名来设置标签，并相应的给标记的人发送消息通知。这是扎克伯格的理想中重要的一环，他以越来越广泛的理论来阐释了社交的意义。</p>
 
 <ul>
 <li>2.动态新闻</li>
@@ -1397,21 +1397,21 @@
 </ul>
 
 
-<p>经过对全社会开发注册和动态新闻的两件事情的领导之后，扎克伯格作为一个领袖的声望在F acebook腾云直上。</p>
+<p>经过对全社会开发注册和动态新闻的两件事情的领导之后，扎克伯格作为一个领袖的声望在Facebook腾云直上。</p>
 
 <ul>
 <li>4.应用平台。</li>
 </ul>
 
 
-<p>成为其他应用程序在上面运行的软件平台是软件技术一行最为光荣的终极目标。F acebook有着自传播力，这是平台的优势。</p>
+<p>成为其他应用程序在上面运行的软件平台是软件技术一行最为光荣的终极目标。Facebook有着自传播力，这是平台的优势。</p>
 
 <ul>
 <li>5.定制式的广告系统</li>
 </ul>
 
 
-<p>精准的广告。相比G oogle按需求搜索广告，F acebook则是希望利用人际关系网，为用户产生需求，让用户找到自己所想要的东西。桑德伯格的到来，让F acebook建立起了合理的商业模式。</p>
+<p>精准的广告。相比Google按需求搜索广告，Facebook则是希望利用人际关系网，为用户产生需求，让用户找到自己所想要的东西。桑德伯格的到来，让Facebook建立起了合理的商业模式。</p>
 
 <ul>
 <li>6.翻译</li>
@@ -1421,60 +1421,60 @@
 <p>利用用户产生翻译内容的自动化翻译工具。在世界扩张。</p>
 
 <ul>
-<li>7.F acebook联谊会</li>
+<li>7.Facebook联谊会</li>
 </ul>
 
 
-<p>授权其他网站调用F acebook的资料等</p>
+<p>授权其他网站调用Facebook的资料等</p>
 
 <ul>
 <li>8.twitter迅速发展</li>
 </ul>
 
 
-<p>twitter迅速发展对F acebook形成了压力。F acebook为此进行了改版。改版被不少用户反对，扎克伯格提出了公平投票的方式来决定。他把用户视作公民。</p>
+<p>twitter迅速发展对Facebook形成了压力。Facebook为此进行了改版。改版被不少用户反对，扎克伯格提出了公平投票的方式来决定。他把用户视作公民。</p>
 
 <ul>
 <li>9.开放信息流API。</li>
 </ul>
 
 
-<p>F acebook不怕流量因此被分流，他们希望F acebook成为一个基础架构。</p>
+<p>Facebook不怕流量因此被分流，他们希望Facebook成为一个基础架构。</p>
 
 <h2>初期发展</h2>
 
-<p>初期发展中，F acebook的团队也会犯严重的错误，比如源代码被开放给所有用户，比如广告导引错误。但相信那种自由状态下的发展，是足够<strong>高效</strong>的。</p>
+<p>初期发展中，Facebook的团队也会犯严重的错误，比如源代码被开放给所有用户，比如广告导引错误。但相信那种自由状态下的发展，是足够<strong>高效</strong>的。</p>
 
 <blockquote><p>马克安德森支持扎克伯格：“一个快速成长的公司，是没有办法可以一直做出正确的决定的。更好的办法是，快速修正不可避免的错误决定。”</p></blockquote>
 
-<p>虽然王淮描述工程师文化时说道，需要重复两遍以上的事儿，F acebook都会开发出工具去自动化的实现。个人推论，这更多的是在公司获得千万投资，开始扩招员工以后的事情。在初期的发展阶段，即使是牛逼如扎克伯格、莫斯科为茨的人，也被快速发展的步伐所牵制。而当员工数量达到一定规模，有了足够多的人才后，才开始逐步形成了现在的F acebook的工程师文化。</p>
+<p>虽然王淮描述工程师文化时说道，需要重复两遍以上的事儿，Facebook都会开发出工具去自动化的实现。个人推论，这更多的是在公司获得千万投资，开始扩招员工以后的事情。在初期的发展阶段，即使是牛逼如扎克伯格、莫斯科为茨的人，也被快速发展的步伐所牵制。而当员工数量达到一定规模，有了足够多的人才后，才开始逐步形成了现在的Facebook的工程师文化。</p>
 
 <h2>市场</h2>
 
 <p>大学生市场是一块宝地。</p>
 
-<p>大学生们不看电视，不看报纸，而他们将迎来第一张信用卡，第一个银行账户等等。名校更是拥有强大的号召力，优越感。早期F acebook发展时，没有对外开放，将各个学校一一增加到可注册用户范围内，用一种自己可以把控的节奏，维持了发展的平衡。避免了飞速发展带来的服务器端的巨大压力。</p>
+<p>大学生们不看电视，不看报纸，而他们将迎来第一张信用卡，第一个银行账户等等。名校更是拥有强大的号召力，优越感。早期Facebook发展时，没有对外开放，将各个学校一一增加到可注册用户范围内，用一种自己可以把控的节奏，维持了发展的平衡。避免了飞速发展带来的服务器端的巨大压力。</p>
 
-<h2>F acebook的定位</h2>
+<h2>Facebook的定位</h2>
 
 <p>社交需求的理论基础是馈赠型经济。更多介绍，参见<a href="http://biaobiaoqi.me/blog/2013/05/13/free-the-bit-economics/">《免费》中关于非货币市场章节描述</a></p>
 
-<p>扎克伯格的梦想是赋予每个人权利，对于他自己来说，F acebook能解决的最重要的问题就是给人们提供工具，让他们更好的交流。</p>
+<p>扎克伯格的梦想是赋予每个人权利，对于他自己来说，Facebook能解决的最重要的问题就是给人们提供工具，让他们更好的交流。</p>
 
-<p>F acebook建立在一个激进的社会假说下，即认为现代社会在不可避免的逐步超公开透明的方向发展。扎克伯格说“这个世界的透明程度将不会再允许一个人拥有双重身份。换句话说，即使你希望把私生活和职场分开，你也不可能做到，因为关于你的信息正在互联网和其他各个地方传播。”</p>
+<p>Facebook建立在一个激进的社会假说下，即认为现代社会在不可避免的逐步超公开透明的方向发展。扎克伯格说“这个世界的透明程度将不会再允许一个人拥有双重身份。换句话说，即使你希望把私生活和职场分开，你也不可能做到，因为关于你的信息正在互联网和其他各个地方传播。”</p>
 
-<p>F acebook希望最终成为一个基础架构。F acebook只是其用户集体行动的表征，除此之外，它什么都不是，F acebook上会发生什么完全取决于用户兴趣所在。但扎克伯格对无聊的应用感到失望，那确实很多用户的真实需求。</p>
+<p>Facebook希望最终成为一个基础架构。Facebook只是其用户集体行动的表征，除此之外，它什么都不是，Facebook上会发生什么完全取决于用户兴趣所在。但扎克伯格对无聊的应用感到失望，那确实很多用户的真实需求。</p>
 
-<p>F acebook不是浪费时间，而是帮助人们理解他们身边的世界。扎克伯格不希望人们太粘F acebook，希望他们多花时间去找朋友，与他人交流互动。<em>所以F acebook的界面是中性的，没有表现出态度</em>。</p>
+<p>Facebook不是浪费时间，而是帮助人们理解他们身边的世界。扎克伯格不希望人们太粘Facebook，希望他们多花时间去找朋友，与他人交流互动。<em>所以Facebook的界面是中性的，没有表现出态度</em>。</p>
 
 <p>有管理学家如是评价“历史上只有两个基本方法去集中和扩散人们的才能，它们就是<em>官阶体制</em>和<em>市场</em>。而在最近十年，增加了第三个——网络，他让我们能够协同工作对付一些棘手的问题，但也削弱了掌权者的力量，通常只有掌权者可以决定谁可以知道什么。”</p>
 
-<h2>F acebook vs  G oogle：</h2>
+<h2>Facebook vs  Google：</h2>
 
 <ul>
-<li>G oogle是针对于数据的，认为整合全世界的数据是最重要的事情，而F acebook是针对于人的。</li>
-<li>G oogle会收集到所有数据，而F acebook是在用户乐于分享的前提下，自己上传数据</li>
-<li>G oogle：不作恶；F acebook ：别因为赚钱而做差劲的事儿。</li>
+<li>Google是针对于数据的，认为整合全世界的数据是最重要的事情，而Facebook是针对于人的。</li>
+<li>Google会收集到所有数据，而Facebook是在用户乐于分享的前提下，自己上传数据</li>
+<li>Google：不作恶；Facebook ：别因为赚钱而做差劲的事儿。</li>
 </ul>
 
 
@@ -1482,10 +1482,10 @@
 
 <ul>
 <li><p>在可靠的控制个人信息的愿望与不经意间的社会沟通之间，很可能存在着不可协调的矛盾。</p></li>
-<li><p>F acebook应该鼓励用户纰漏多少个人信息。有关这个话题的讨论一直贯穿了公司的整个发展历程。</p></li>
+<li><p>Facebook应该鼓励用户纰漏多少个人信息。有关这个话题的讨论一直贯穿了公司的整个发展历程。</p></li>
 <li><p>身份识别系统可能妨碍公民的自由。</p></li>
-<li><p>F acebook为何有权利拥有大家的真实身份。</p></li>
-<li><p>当F acebook打通了支付渠道，成为一个全球化的经济体，银行不高兴了</p></li>
+<li><p>Facebook为何有权利拥有大家的真实身份。</p></li>
+<li><p>当Facebook打通了支付渠道，成为一个全球化的经济体，银行不高兴了</p></li>
 </ul>
 
 
@@ -1499,7 +1499,7 @@
     <link href="http://biaobiaoqi.github.com/blog/2013/05/20/hybrid-distributed-data-management-system/"/>
     <updated>2013-05-20T14:52:00+08:00</updated>
     <id>http://biaobiaoqi.github.com/blog/2013/05/20/hybrid-distributed-data-management-system</id>
-    <content type="html"><![CDATA[<p>现在大数据概念被时常提起，社会各界对其关注度越来越高。往往越是火热的东西，人们越容易忽略它的本质。在slides中，我首先按照自己的理解，简单的理顺数据处理领域的发展历程。之后，落脚点是两个比较有代表性的混合的分布式系统：<a href="http://biaobiaoqi.me/blog/2013/05/18/a-hybrid-system-hadoopdb/">H adoop DB</a>和微软的<a href="http://biaobiaoqi.me/blog/2013/04/25/split-querying-process-in-polybase/">P olybase</a>。由于缺乏实战经验，很多东西由各方论文和博文中得到，有不恰当的地方，欢迎大家拍砖讨论;)</p>
+    <content type="html"><![CDATA[<p>现在大数据概念被时常提起，社会各界对其关注度越来越高。往往越是火热的东西，人们越容易忽略它的本质。在slides中，我首先按照自己的理解，简单的理顺数据处理领域的发展历程。之后，落脚点是两个比较有代表性的混合的分布式系统：<a href="http://biaobiaoqi.me/blog/2013/05/18/a-hybrid-system-hadoopdb/">HadoopDB</a>和微软的<a href="http://biaobiaoqi.me/blog/2013/04/25/split-querying-process-in-polybase/">Polybase</a>。由于缺乏实战经验，很多东西由各方论文和博文中得到，有不恰当的地方，欢迎大家拍砖讨论;)</p>
 
 <p>slides的提纲如下：</p>
 
@@ -1513,39 +1513,39 @@
 <ul>
 <li>RDBMS的出现</li>
 <li>大数据时代到来</li>
-<li>N o SQL技术</li>
+<li>NoSQL技术</li>
 <li>新时代的挑战</li>
 </ul>
 
 
-<h3>H adoop DB</h3>
+<h3>HadoopDB</h3>
 
 <ul>
 <li>PB级数据分析</li>
-<li>H adoop DB是什么</li>
+<li>HadoopDB是什么</li>
 <li>框架和组件介绍</li>
 <li>示例</li>
 <li>总结</li>
 </ul>
 
 
-<h3>P olybase</h3>
+<h3>Polybase</h3>
 
 <ul>
-<li>P olybase总览</li>
+<li>Polybase总览</li>
 <li>PDW结构</li>
-<li>P olybase的实现</li>
+<li>Polybase的实现</li>
 <li>性能分析</li>
 </ul>
 
 
 <p>slides在线展示：</p>
 
-<script async class="speakerdeck-embed" data-id="77 bdc 950 a 3460130 c 98 a 12 e 3 c 5740641" data-ratio="1.33333333333333" src="http://biaobiaoqi.github.com//speakerdeck.com/assets/embed.js"></script>
+<script async class="speakerdeck-embed" data-id="77bdc950a3460130c98a12e3c5740641" data-ratio="1.33333333333333" src="http://biaobiaoqi.github.com//speakerdeck.com/assets/embed.js"></script>
 
 
 <p>slides下载：
-<a href="https://dl.dropboxusercontent.com/u/64021093/slides/H%20ybrid%20%20system.pdf">请戳这里</a></p>
+<a href="https://dl.dropboxusercontent.com/u/64021093/slides/Hybrid%20system.pdf">请戳这里</a></p>
 
 <p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/05/20/hybrid-distributed-data-management-system/'>http://biaobiaoqi.github.com/blog/2013/05/20/hybrid-distributed-data-management-system/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p>
 
@@ -1584,7 +1584,7 @@
 
 <p>数值偏差可以这样理解：已应用于其他的副本，但还没有应用于给定副本的更新数目。</p>
 
-<p>文中使用了<a href="http://en.wikipedia.org/wiki/V%20ector_clock">向量时钟</a>来举例对一致性单元进行持续抑制性分析，</p>
+<p>文中使用了<a href="http://en.wikipedia.org/wiki/Vector_clock">向量时钟</a>来举例对一致性单元进行持续抑制性分析，</p>
 
 <h4>2.2 严格一致性</h4>
 
@@ -1597,7 +1597,7 @@
 
 <p>那么，很自然对于同一个进程执行的操作，必然要按照它们执行的顺序出现。</p>
 
-<h4>2.4因果一致性（C asual C onsitency）</h4>
+<h4>2.4因果一致性（Casual Consitency）</h4>
 
 <p>要求：</p>
 
@@ -1614,7 +1614,7 @@
 
 <p>相比顺序一致性，去掉了那些没有联系的操作达成一致顺序观点的要求，只是保留那些必要的顺序（有因果关系的）。</p>
 
-<h4>2.5入口一致性（E ntry C onsistency）</h4>
+<h4>2.5入口一致性（Entry Consistency）</h4>
 
 <p>其实也就是对每个共享数据定义一个同步变量（即：锁）。当然，没有进行同步就进行的读操作结果是不保证的。</p>
 
@@ -1628,31 +1628,31 @@
 
 <p>对于最终一致性的的数据存储而言，这个示例很有代表性。问题是由用户有时可能对不同的副本进行操作的事实引起的。以客户为中心的一致性分为如下几大类：</p>
 
-<h4>3.1 单调读（M onotonic R eads）</h4>
+<h4>3.1 单调读（Monotonic Reads）</h4>
 
 <p>当进程从一个地方读出数据x，那么这个以后再读到的x应该是和当前x相同或比当前更新的版本。也就是如果进程迁移到了别的位置，那么对x的更新应该比进程先到达。这里的客户就是指这个进程。</p>
 
-<h4>3.2 单调写（M onotonic W rites）</h4>
+<h4>3.2 单调写（Monotonic Writes）</h4>
 
 <p>跟单调读相应，如果一个进程写一个数据x，那么它在本地或者迁移到别的地方再进行写操作的时候，原来的写操作必须要先传播到这个位置。也就是进程要在任何地方至少和上一次写一样新的数据。</p>
 
-<h4>3.3 R ead your writes</h4>
+<h4>3.3 Read your writes</h4>
 
 <p>一个进程对于数据x的写操作，那么进程无论到任何副本上都应该看到这个写操作的影响，也就是看到和自己写操作的影响或者更新的值。</p>
 
-<h4>3.4 W rites follow reads</h4>
+<h4>3.4 Writes follow reads</h4>
 
 <p>顾名思义了，也就是在读操作后面的写操作要是基于至少跟上一次读出来一样新的值。也就是如果进程在地点1读了x，那么在地点2要写x的副本的话，至少写的时候应该是基于至少和地点1读出的一样新的值。</p>
 
-<h3>4 副本放置（R eplica P lacement）</h3>
+<h3>4 副本放置（Replica Placement）</h3>
 
 <h4>4.1 放置的三个方法</h4>
 
-<p>P ermanent replica/永久副本: 选几个固定位置放置副本，镜像呈现。</p>
+<p>Permanent replica/永久副本: 选几个固定位置放置副本，镜像呈现。</p>
 
-<p>S erver-initiated/服务端发起: 服务端动态决定什么时候向什么地方分发副本，又称push cache</p>
+<p>Server-initiated/服务端发起: 服务端动态决定什么时候向什么地方分发副本，又称push cache</p>
 
-<p>C lient-initiated/客户端发起: 客户端缓存,client cache</p>
+<p>Client-initiated/客户端发起: 客户端缓存,client cache</p>
 
 <h4>4.2 更新传播</h4>
 
@@ -1679,21 +1679,21 @@
 </ul>
 
 
-<h4>4.3 复制协议（R eplication P rotocols）</h4>
+<h4>4.3 复制协议（Replication Protocols）</h4>
 
-<h5>4.3.1 远程写（R emote-W rite）协议</h5>
+<h5>4.3.1 远程写（Remote-Write）协议</h5>
 
 <p>对于数据x有一个主副本，当没有x副本的服务器操作x的时候就会得到一个x的副本。而有x副本的服务器响应客户读请求的时候可以立刻返回。而当客户进行写操作的时候，写操作首先在主副本完成，然后再通知其他副本更新。</p>
 
-<h5>4.3.2 本地写（L ocal-W rite）协议</h5>
+<h5>4.3.2 本地写（Local-Write）协议</h5>
 
 <p>和远程写比较类似，不同点是当一个服务器得到了副本以后就成了新的主副本，以后的写操作首先在本地完成，然后再通知其他的副本，本地写的名字由此而来。</p>
 
-<h5>4.3.3 主动复制（A ctive R eplication）</h5>
+<h5>4.3.3 主动复制（Active Replication）</h5>
 
 <p>对于副本的操作要设计到另外一个单一对象。比如，n个副本代理对象C的一个接口，如果向所有副本发出请求，每个副本都会发一个请求到C，那么同样的操作就执行了n次。所以需要一个协调者。另外，多副本返回值的时候也会有同样的情况。所以这种只执行一次的动作需要副本种有一个协调者，保证操作只被执行一次或者只返回一次。</p>
 
-<h5>3.3.4 基于候选团（Q uorum-B ased）协议</h5>
+<h5>3.3.4 基于候选团（Quorum-Based）协议</h5>
 
 <p>也就是读操作要得到r个服务器的同意，写操作要得到w个进程的同意。总共有n个进程。r和w要满足以下条件：</p>
 
@@ -1703,7 +1703,7 @@
 </ul>
 
 
-<p>也就是类似于投票获得读写的锁。在D ynamo系统中可以配置这种wrn参数以自持特定的一致性。</p>
+<p>也就是类似于投票获得读写的锁。在Dynamo系统中可以配置这种wrn参数以自持特定的一致性。</p>
 
 <p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/05/18/distributed-consistency/'>http://biaobiaoqi.github.com/blog/2013/05/18/distributed-consistency/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p>
 
@@ -1715,9 +1715,9 @@
     <link href="http://biaobiaoqi.github.com/blog/2013/05/18/a-hybrid-system-hadoopdb/"/>
     <updated>2013-05-18T17:58:00+08:00</updated>
     <id>http://biaobiaoqi.github.com/blog/2013/05/18/a-hybrid-system-hadoopdb</id>
-    <content type="html"><![CDATA[<p>H adoop DB是一个M apreduce和传统关系型数据库的结合方案，以充分利用RDBMS的性能和H adoop的容错、分布特性。2009年被Y ale大学教授A badi提出，继而商业化为<a href="http://hadapt.com/">H adapt</a>，据称从VC那儿拉到了10M刀投资。</p>
+    <content type="html"><![CDATA[<p>HadoopDB是一个Mapreduce和传统关系型数据库的结合方案，以充分利用RDBMS的性能和Hadoop的容错、分布特性。2009年被Yale大学教授Abadi提出，继而商业化为<a href="http://hadapt.com/">Hadapt</a>，据称从VC那儿拉到了10M刀投资。</p>
 
-<p>本文是对H adoop DB论文的总结。其中不免掺杂些自己的不成熟想法，更详细的内容，还请参见原论文 H adoop DB: A n A rchitectural H ybrid of M ap R educe and DBMS T echnologies for A nalytical W orkloads</p>
+<p>本文是对HadoopDB论文的总结。其中不免掺杂些自己的不成熟想法，更详细的内容，还请参见原论文 HadoopDB: An Architectural Hybrid of MapReduce and DBMS Technologies for Analytical Workloads</p>
 
 <!--more-->
 
@@ -1738,45 +1738,45 @@
 
 <p>满足1,4：利用分表的方式，扩散到多个节点。一般情况下节点最多为几十个，原因：1.每增加一个节点，失败率增加；2.并行数据库假设各个机器都是同质化的，但这往往不太可能</p>
 
-<h5>M ap R educe</h5>
+<h5>MapReduce</h5>
 
-<p>满足2,3,4：M ap - repartition - R educe原为非结构化数据，但也可以适用结构化数据。</p>
+<p>满足2,3,4：Map - repartition - Reduce原为非结构化数据，但也可以适用结构化数据。</p>
 
 <ul>
 <li>2：（错误节点）动态的规划节点执行任务，将错误节点任务发放给新节点。并在本地磁盘做checkpoint存储。</li>
 <li>3：（拖后腿的节点）节点间冗余的执行。执行慢的节点的任务交付给速度快的节点执行</li>
-<li>4：H ive的HQL</li>
+<li>4：Hive的HQL</li>
 </ul>
 
 
-<h5>H adoop DB</h5>
+<h5>HadoopDB</h5>
 
 <p>融合了之前两者，做出系统层面的改进，而不仅仅是语言和接口层面。</p>
 
 <p>这三个解决方案对4个指标的关系如下图：</p>
 
-<p><img src="http://dl.dropboxusercontent.com/u/64021093/hadoop%20DB/QQ%E6%88%AA%E5%9B%BE20130518135802.png" title="compare" alt="alt compare" /></p>
+<p><img src="http://dl.dropboxusercontent.com/u/64021093/hadoopDB/QQ%E6%88%AA%E5%9B%BE20130518135802.png" title="compare" alt="alt compare" /></p>
 
 <h2>架构</h2>
 
 <p>如图
-<img src="https://dl.dropboxusercontent.com/u/64021093/hadoop%20DB/QQ%E6%88%AA%E5%9B%BE20130518135814.png" title="framework" alt="alt framework" /></p>
+<img src="https://dl.dropboxusercontent.com/u/64021093/hadoopDB/QQ%E6%88%AA%E5%9B%BE20130518135814.png" title="framework" alt="alt framework" /></p>
 
 <h2>组件介绍</h2>
 
-<h5>D atabse C onnector:</h5>
+<h5>Databse Connector:</h5>
 
 <ul>
 <li><p>作用</p>
 
-<p>  hadoop T ask &lt;-通信-> D atabase on N ode。节点上的DB类似于H adoop中的数据源HDFS</p></li>
+<p>  hadoopTask &lt;-通信-> Database on Node。节点上的DB类似于Hadoop中的数据源HDFS</p></li>
 <li><p>实现</p>
 
-<p>  扩展了H adoop的I nput F ormat</p></li>
+<p>  扩展了Hadoop的InputFormat</p></li>
 </ul>
 
 
-<h5>C atalog：</h5>
+<h5>Catalog：</h5>
 
 <ul>
 <li><p>作用</p>
@@ -1785,11 +1785,11 @@
   2.一些元数据如数据簇中的数据集，副本的位置，数据的划分。</p></li>
 <li><p>实现</p>
 
-<p>  HDFS上的XML。希望做成类似于H adoop的namenode。</p></li>
+<p>  HDFS上的XML。希望做成类似于Hadoop的namenode。</p></li>
 </ul>
 
 
-<h5>D ata L oader</h5>
+<h5>Data Loader</h5>
 
 <ul>
 <li><p>作用</p>
@@ -1802,16 +1802,16 @@
 </ul>
 
 
-<h5>SQL to M ap R educe to SQL (SMS) P lanner</h5>
+<h5>SQL to MapReduce to SQL (SMS) Planner</h5>
 
 <ul>
 <li><p>作用</p>
 
-<p>  将H ive QL转化为特定执行计划，在hadoop DB中执行。原则是尽可能的讲操作推向节点上的RDBMS上执行，以此提高执行效率。</p></li>
+<p>  将HiveQL转化为特定执行计划，在hadoopDB中执行。原则是尽可能的讲操作推向节点上的RDBMS上执行，以此提高执行效率。</p></li>
 <li><p>实现</p>
 
-<p>  扩展H ive：
-  1.执行查找前，用catolog的信息更新H ive的metastore，定向到节点数据库的表
+<p>  扩展Hive：
+  1.执行查找前，用catolog的信息更新Hive的metastore，定向到节点数据库的表
   2.执行前，决定划分的键；将部分查询语句推到节点的数据库中执行。</p></li>
 </ul>
 
@@ -1822,7 +1822,7 @@
 
 <h2>总结</h2>
 
-<p>对hadoop DB的一些看法：</p>
+<p>对hadoopDB的一些看法：</p>
 
 <ul>
 <li>其数据预处理代价过高：数据需要进行两次分解和一次数据库加载操作后才能使用；</li>
@@ -1834,16 +1834,16 @@
 
 <p>slides：</p>
 
-<script async class="speakerdeck-embed" data-id="48 c 5 e 680 a 1 ab 0130 e 1707290244918 d 4" data-ratio="1.33333333333333" src="http://biaobiaoqi.github.com//speakerdeck.com/assets/embed.js"></script>
+<script async class="speakerdeck-embed" data-id="48c5e680a1ab0130e1707290244918d4" data-ratio="1.33333333333333" src="http://biaobiaoqi.github.com//speakerdeck.com/assets/embed.js"></script>
 
 
-<p>下载slides，请猛戳<a href="https://dl.dropboxusercontent.com/u/64021093/hadoop%20DB/%5B2013-05-18%5DH%20adoop%20DB.pptx">这里</a></p>
+<p>下载slides，请猛戳<a href="https://dl.dropboxusercontent.com/u/64021093/hadoopDB/%5B2013-05-18%5DHadoopDB.pptx">这里</a></p>
 
 <h2>参考资料</h2>
 
 <ul>
-<li>H adoop DB: A n A rchitectural H ybrid of M ap R educe and DBMS T echnologies for A nalytical W orkloads</li>
-<li><a href="http://dbanotes.net/database/hadoopdb.html">《H adoop DB》 —— F enng</a></li>
+<li>HadoopDB: An Architectural Hybrid of MapReduce and DBMS Technologies for Analytical Workloads</li>
+<li><a href="http://dbanotes.net/database/hadoopdb.html">《HadoopDB》 —— Fenng</a></li>
 <li>《架构大数据:挑战、现状与展望》 计算机学报 王珊<p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/05/18/a-hybrid-system-hadoopdb/'>http://biaobiaoqi.github.com/blog/2013/05/18/a-hybrid-system-hadoopdb/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p></li>
 </ul>
 
@@ -1855,46 +1855,46 @@
     <link href="http://biaobiaoqi.github.com/blog/2013/05/17/jail-break-your-ios/"/>
     <updated>2013-05-17T00:10:00+08:00</updated>
     <id>http://biaobiaoqi.github.com/blog/2013/05/17/jail-break-your-ios</id>
-    <content type="html"><![CDATA[<p><img src="https://dl.dropboxusercontent.com/u/64021093/2013-5-16.jpg" title="J ailbrek" alt="alt jailbreak" /></p>
+    <content type="html"><![CDATA[<p><img src="https://dl.dropboxusercontent.com/u/64021093/2013-5-16.jpg" title="Jailbrek" alt="alt jailbreak" /></p>
 
-<p>提到<a href="http://en.wikipedia.org/wiki/IOS_%20jailbreaking#S%20ecurity.2C_%20privacy.2C_%20and_stability">越狱</a>，很多人第一反应大概是免费的游戏和app。</p>
+<p>提到<a href="http://en.wikipedia.org/wiki/IOS_jailbreaking#Security.2C_privacy.2C_and_stability">越狱</a>，很多人第一反应大概是免费的游戏和app。</p>
 
 <p>作为软件从业人员，深知中国的大环境的特殊性。内有用户想吃免费午餐的不良付费习惯，外有行业内大头诸如某讯对创新的绞杀。大家对越狱是为了免费、盗版软件的认识，也就不奇怪了。</p>
 
-<p>还有另一派人。越狱对他们来说，意味着开放。个人认为这也是H ack精神的精髓之一。事实上，i OS越狱也有自己的生态圈：C ydia就是越狱设备上A pp S tore。</p>
+<p>还有另一派人。越狱对他们来说，意味着开放。个人认为这也是Hack精神的精髓之一。事实上，iOS越狱也有自己的生态圈：Cydia就是越狱设备上App Store。</p>
 
 <!--more-->
 
 
 <h2>越狱的合法性</h2>
 
-<p>数字千年版权法对iphone的越狱进行了特赦，直到2015年，对i P hone、i P od touch的越狱依然有效。但注意，i P ad就没这么幸运了。</p>
+<p>数字千年版权法对iphone的越狱进行了特赦，直到2015年，对iPhone、iPod touch的越狱依然有效。但注意，iPad就没这么幸运了。</p>
 
-<p>详情参见博文<a href="http://www.cultofmac.com/213144/unlocking-a-new-iphone-is-now-illegal-but-jailbreaking-is-still-safe-what-it-all-means-for-you/">《U nlocking A N ew i P hone I s N ow I llegal, B ut J ailbreaking I s S till S afe — W hat I t A ll M eans F or Y ou》</a></p>
+<p>详情参见博文<a href="http://www.cultofmac.com/213144/unlocking-a-new-iphone-is-now-illegal-but-jailbreaking-is-still-safe-what-it-all-means-for-you/">《Unlocking A New iPhone Is Now Illegal, But Jailbreaking Is Still Safe — What It All Means For You》</a></p>
 
-<h2>i OS安全性</h2>
+<h2>iOS安全性</h2>
 
-<p>由于i OS没有开源，学术界和工业界对它的安全机制的论述资料很少。我在网上找到了上交一位学长对ios安全机制的分析文章，是他的硕士学位<a href="http://www.doc%2088.com/p-405566264292.html">论文</a>。作为参考，我整理了一些关键知识点。</p>
+<p>由于iOS没有开源，学术界和工业界对它的安全机制的论述资料很少。我在网上找到了上交一位学长对ios安全机制的分析文章，是他的硕士学位<a href="http://www.doc88.com/p-405566264292.html">论文</a>。作为参考，我整理了一些关键知识点。</p>
 
 <h4>基于信任链的启动</h4>
 
-<p>i OS的信任机制从系统启动那一刻起已经开始。
-系统可信启动<a href="http://elinux.org/images/2/28/T%20rusted%20_B%20oot%20_L%20oader.pdf">trustedboot</a>：启动每一步都会检测签名，构成整个信任链。</p>
+<p>iOS的信任机制从系统启动那一刻起已经开始。
+系统可信启动<a href="http://elinux.org/images/2/28/Trusted_Boot_Loader.pdf">trustedboot</a>：启动每一步都会检测签名，构成整个信任链。</p>
 
-<p>还有另一种启动方式，是设备固件升级方式（DFU，D evice F irmware U pdate），也是由签名构建信任链。</p>
+<p>还有另一种启动方式，是设备固件升级方式（DFU，Device Firmware Update），也是由签名构建信任链。</p>
 
 <h4>程序签名</h4>
 
-<p>i OS应用的ipa压缩包中包含可执行文件和数据文件。可执行文件只有在已签名的前提下才能运行。确保应用经过苹果认证。</p>
+<p>iOS应用的ipa压缩包中包含可执行文件和数据文件。可执行文件只有在已签名的前提下才能运行。确保应用经过苹果认证。</p>
 
 <p>越狱提升运行权限到root，修改引用加载策略，接受任意签名的应用。
-“通过软件保证软件安全是不可能的”，i OS使用了硬件来做保护，但硬件部分也遭到了越狱的破解。</p>
+“通过软件保证软件安全是不可能的”，iOS使用了硬件来做保护，但硬件部分也遭到了越狱的破解。</p>
 
 <h4>沙盒技术</h4>
 
-<p>i OS用沙盒技术实现访问控制
-trusted BSD ：http://www.trustedbsd.org/
-http://www.freebsd.org/doc/zh _CN/books/arch-handbook/mac-synopsis.html</p>
+<p>iOS用沙盒技术实现访问控制
+trustedBSD ：http://www.trustedbsd.org/
+http://www.freebsd.org/doc/zh_CN/books/arch-handbook/mac-synopsis.html</p>
 
 <h4>ASLR和PIE</h4>
 
@@ -1914,7 +1914,7 @@ http://www.freebsd.org/doc/zh _CN/books/arch-handbook/mac-synopsis.html</p>
 
 <h4>越狱后注意</h4>
 
-<p>总的来说，越狱打破了i OS封闭的生态环境，也打破了它特有的保护壳。手机获得了root权限，恶意代码有了可趁之机。不要轻易的使用来源不明的应用和插件。</p>
+<p>总的来说，越狱打破了iOS封闭的生态环境，也打破了它特有的保护壳。手机获得了root权限，恶意代码有了可趁之机。不要轻易的使用来源不明的应用和插件。</p>
 
 <ul>
 <li>非越狱手机：仅允许用户访问照片、视频数据；通过备份，可在pc端获取所有数据</li>
@@ -1923,21 +1923,21 @@ http://www.freebsd.org/doc/zh _CN/books/arch-handbook/mac-synopsis.html</p>
 
 
 <p>更多细节参见
-* <a href="http://bbs.weiphone.com/read-htm-tid-1750886.html">《浅谈i OS越狱前后的安全问题以及安全风险》</a>
-* <a href="http://www.pcpop.com/doc/0/890/890768_%20all.shtml">《i P ad越狱不安全!安装应用/插件需谨慎》</a>
-* <a href="http://www.cnbeta.com/articles/229192.htm">《i OS完美越狱 - 福利还是阴谋？》</a></p>
+* <a href="http://bbs.weiphone.com/read-htm-tid-1750886.html">《浅谈iOS越狱前后的安全问题以及安全风险》</a>
+* <a href="http://www.pcpop.com/doc/0/890/890768_all.shtml">《iPad越狱不安全!安装应用/插件需谨慎》</a>
+* <a href="http://www.cnbeta.com/articles/229192.htm">《iOS完美越狱 - 福利还是阴谋？》</a></p>
 
 <h4>SHSH</h4>
 
-<p>i P hone 3GS出来时候，苹果为加强对i P hone OS的控制对恢复(R estore)固件(F irmware)采用了验证过程，每次i T unes要恢复固件的时候都要连接苹果的服务器验证。手机的ECID和所刷系统版本号一起签名出一个SHSH文件，发送给服务器，服务器检测SHSH是否为新版本的系统所产生，如果是，则允许继续进行刷机，否则传回组织继续的信号。</p>
+<p>iPhone 3GS出来时候，苹果为加强对iPhone OS的控制对恢复(Restore)固件(Firmware)采用了验证过程，每次iTunes要恢复固件的时候都要连接苹果的服务器验证。手机的ECID和所刷系统版本号一起签名出一个SHSH文件，发送给服务器，服务器检测SHSH是否为新版本的系统所产生，如果是，则允许继续进行刷机，否则传回组织继续的信号。</p>
 
 <p>SHSH是存储在苹果公司的服务器上的，用户需要通过备份原来的SHSH，并伪装一台苹果服务器来协助验证。　　</p>
 
-<p>网络上SHSH备份方法的介绍很多，不了解的朋友自行G oogle吧。</p>
+<p>网络上SHSH备份方法的介绍很多，不了解的朋友自行Google吧。</p>
 
 <h2>附录</h2>
 
-<p>对于想开发i OS应用而又没有开发者账号的朋友，可以参考这篇文章<a href="http://kqwd.blog.163.com/blog/static/4122344820117191351263/">《X code 4.1~4.6 + i OS 5、i OS 6免证书(i DP)开发+真机调试+生成IPA全攻略》</a>，X code 4.6 i OS6.0 亲测有效。  <p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/05/17/jail-break-your-ios/'>http://biaobiaoqi.github.com/blog/2013/05/17/jail-break-your-ios/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p></p>
+<p>对于想开发iOS应用而又没有开发者账号的朋友，可以参考这篇文章<a href="http://kqwd.blog.163.com/blog/static/4122344820117191351263/">《Xcode 4.1~4.6 + iOS 5、iOS 6免证书(iDP)开发+真机调试+生成IPA全攻略》</a>，Xcode4.6 iOS6.0 亲测有效。  <p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/05/17/jail-break-your-ios/'>http://biaobiaoqi.github.com/blog/2013/05/17/jail-break-your-ios/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p></p>
 ]]></content>
   </entry>
   
@@ -1950,7 +1950,7 @@ http://www.freebsd.org/doc/zh _CN/books/arch-handbook/mac-synopsis.html</p>
 
 <p>slides：</p>
 
-<script async class="speakerdeck-embed" data-id="cca 07 ce 09 e 92013076 c 646310 b 996896" data-ratio="1.33333333333333" src="http://biaobiaoqi.github.com//speakerdeck.com/assets/embed.js"></script>
+<script async class="speakerdeck-embed" data-id="cca07ce09e92013076c646310b996896" data-ratio="1.33333333333333" src="http://biaobiaoqi.github.com//speakerdeck.com/assets/embed.js"></script>
 
 
 
@@ -1967,8 +1967,8 @@ http://www.freebsd.org/doc/zh _CN/books/arch-handbook/mac-synopsis.html</p>
 <h2>CAP理论</h2>
 
 <ul>
-<li><p>CAP理论的提出：分布式系统的CAP理论是2000年左右被提出的概念，直到D ynamo的出现，开始在工业界被广泛实践：
-<a href="http://www.julianbrowne.com/article/viewer/brewers-cap-theorem">《B rewer&#8217;s CAP T heorem》</a>/<a href="http://code.alibabatech.com/blog/dev_related%20_728/brewers-cap-theorem.html">中文翻译</a></p></li>
+<li><p>CAP理论的提出：分布式系统的CAP理论是2000年左右被提出的概念，直到Dynamo的出现，开始在工业界被广泛实践：
+<a href="http://www.julianbrowne.com/article/viewer/brewers-cap-theorem">《Brewer&#8217;s CAP Theorem》</a>/<a href="http://code.alibabatech.com/blog/dev_related_728/brewers-cap-theorem.html">中文翻译</a></p></li>
 <li><p>对CAP的理解：<a href="http://www.douban.com/group/topic/11765014/">《谈正确理解CAP理论》</a>\ <a href="http://rdc.taobao.com/blog/cs/?p=631">《CAP理论及分布式系统一致性》</a></p></li>
 </ul>
 
@@ -1983,10 +1983,10 @@ http://www.freebsd.org/doc/zh _CN/books/arch-handbook/mac-synopsis.html</p>
 <h2>最终一致性</h2>
 
 <ul>
-<li><p>amazon的CTO分析最终一致性：<a href="http://www.allthingsdistributed.com/2008/12/eventually_consistent.html">E ventually C onsistent - R evisited</a>/<a href="http://blog.csdn.net/xiaoqiangxx/article/details/7566654">中文翻译</a></p></li>
-<li><p>D ynamo论文：<a href="http://www.read.seas.harvard.edu/~kohler/class/cs%20239-w%2008/decandia%2007%20dynamo.pdf">D ynamo: A mazon’s H ighly A vailable K ey-value S tore</a></p>
+<li><p>amazon的CTO分析最终一致性：<a href="http://www.allthingsdistributed.com/2008/12/eventually_consistent.html">Eventually Consistent - Revisited</a>/<a href="http://blog.csdn.net/xiaoqiangxx/article/details/7566654">中文翻译</a></p></li>
+<li><p>Dynamo论文：<a href="http://www.read.seas.harvard.edu/~kohler/class/cs239-w08/decandia07dynamo.pdf">Dynamo: Amazon’s Highly Available Key-value Store</a></p>
 
-<p>关于D ynamo的一篇中文简述：<a href="http://www.infoq.com/cn/articles/nosql-dynamo">《解读N o SQL技术代表之作D ynamo》</a></p></li>
+<p>关于Dynamo的一篇中文简述：<a href="http://www.infoq.com/cn/articles/nosql-dynamo">《解读NoSQL技术代表之作Dynamo》</a></p></li>
 </ul>
 
 
@@ -2006,9 +2006,9 @@ http://www.freebsd.org/doc/zh _CN/books/arch-handbook/mac-synopsis.html</p>
     <id>http://biaobiaoqi.github.com/blog/2013/05/13/free-the-bit-economics</id>
     <content type="html"><![CDATA[<h2>比特经济的到来</h2>
 
-<p><a href="http://en.wikipedia.org/wiki/C%20hris%20_A%20ndersen">克里斯·安德森</a>人称鸟人安德森，现效力于热火队，一直以来都是值得信赖的角色球员，板凳匪徒，内线尖兵。好了，不扯了……回到另外一个<a href="http://t.cn/ak%20R%20hip">克里斯·安德森</a>的思想世界来。</p>
+<p><a href="http://en.wikipedia.org/wiki/Chris_Andersen">克里斯·安德森</a>人称鸟人安德森，现效力于热火队，一直以来都是值得信赖的角色球员，板凳匪徒，内线尖兵。好了，不扯了……回到另外一个<a href="http://t.cn/akRhip">克里斯·安德森</a>的思想世界来。</p>
 
-<p>长尾理论早就为人熟知了，最早就是由安德森提出的，用于解释A mazon和N etflix的商业和经济模式。虽然没有阅读过原书，只是从网络接收了一些二手甚至三手的相关观点，但也可以从当今互联网的新兴中发现许多端倪。</p>
+<p>长尾理论早就为人熟知了，最早就是由安德森提出的，用于解释Amazon和Netflix的商业和经济模式。虽然没有阅读过原书，只是从网络接收了一些二手甚至三手的相关观点，但也可以从当今互联网的新兴中发现许多端倪。</p>
 
 <p>按作者的话来说，“免费”是<a href="http://book.douban.com/subject/1919072/">《长尾理论》</a>没讨论完的话题，它并非新生事物，但是一直在变化，它的变化促使我们要反思人类行为和经济动因方面最根深蒂固的一些观念。</p>
 
@@ -2074,7 +2074,7 @@ http://www.freebsd.org/doc/zh _CN/books/arch-handbook/mac-synopsis.html</p>
 </ul>
 
 
-<h6>3.免费加收费模式（F reemium）</h6>
+<h6>3.免费加收费模式（Freemium）</h6>
 
 <ul>
 <li>什么免费：和付费版本想匹配的任何商品</li>
@@ -2094,7 +2094,7 @@ http://www.freebsd.org/doc/zh _CN/books/arch-handbook/mac-synopsis.html</p>
 
 <p>盗版或仿制行为刺激的市场需求要比它满足的需求更多。</p>
 
-<p>在非货币市场中，礼品经济比市场资本主义离人性化走的更近一点。一直以来，经济学家做过很多尝试，但由于顿巴数（D unbar number）的作用，超过150这个规模的群体就难以维系。而互联网的到来，给礼品经济带来了新的机会，可能打破顿巴数的局限，让建立在互利基础之上的经济有效运转。</p>
+<p>在非货币市场中，礼品经济比市场资本主义离人性化走的更近一点。一直以来，经济学家做过很多尝试，但由于顿巴数（Dunbar number）的作用，超过150这个规模的群体就难以维系。而互联网的到来，给礼品经济带来了新的机会，可能打破顿巴数的局限，让建立在互利基础之上的经济有效运转。</p>
 
 <h3>免费的特性</h3>
 
@@ -2107,7 +2107,7 @@ http://www.freebsd.org/doc/zh _CN/books/arch-handbook/mac-synopsis.html</p>
 
 <h2>比特经济下的典型市场</h2>
 
-<p>传统媒体上发布的广告全都是销售稀缺资源——空间。而互联网最不缺的就是空间，因此很多互联网广告效果甚至不如平面媒体。但G oogle通过广告的精准匹配，将它转化为稀缺资源。</p>
+<p>传统媒体上发布的广告全都是销售稀缺资源——空间。而互联网最不缺的就是空间，因此很多互联网广告效果甚至不如平面媒体。但Google通过广告的精准匹配，将它转化为稀缺资源。</p>
 
 <p>视频游戏领域对免费的实践很多。</p>
 
@@ -2117,15 +2117,15 @@ http://www.freebsd.org/doc/zh _CN/books/arch-handbook/mac-synopsis.html</p>
 
 <p>“搭便车问题”：wiki毫无利润可言，每个人都会搭便车。但实际上，在大规模的用户下，只要有人参与其中，大部分志愿者社区就能发展和完善。因为大量消极顾客本身正是对少数做出贡献的汇报——他们被成为观众。</p>
 
-<h2>G oogle</h2>
+<h2>Google</h2>
 
 <p>在比特经济的主战场的IT领域，免费方式已经获得了很大的成功。经典的案例包括微软操作系统和inux之争，以及google推出免费邮箱冲击雅虎。</p>
 
-<p>G oogle通过为一小部分核心产品做广告而赚取大部分利润。互联网创业成本低、边际成本低，造就了G oogle的成长和规模化。它拥有很大的数据中心，这种对数据处理、存储和存储的融合，产生了规模经济。</p>
+<p>Google通过为一小部分核心产品做广告而赚取大部分利润。互联网创业成本低、边际成本低，造就了Google的成长和规模化。它拥有很大的数据中心，这种对数据处理、存储和存储的融合，产生了规模经济。</p>
 
-<p>互联网具备极强的网络效应。由于用户之间交流沟通方便，容易导致”羊群效应“。在传统行业，排名前三的竞争对手，他们的市场份额一般是60% 30% 5%，而在网络效应突出的市场中则为：95%，5%，0%。现在的G oogle已经站在了第一的位置。</p>
+<p>互联网具备极强的网络效应。由于用户之间交流沟通方便，容易导致”羊群效应“。在传统行业，排名前三的竞争对手，他们的市场份额一般是60% 30% 5%，而在网络效应突出的市场中则为：95%，5%，0%。现在的Google已经站在了第一的位置。</p>
 
-<p>唯一能限制google增长势头之处在于互联网自身的扩展步伐。因此G oogle设计出众多的产品，以扩展包括免费无线接入和免费存储在内的互联网应用。这是经济学家所说的”互补品“。 当然，前不久G oogle关闭了G oogle R eader的事实证明，一切都是定量的trade-off，或许greader在G oogle的战略中已经变成了投入产出比过低的产品了吧。</p>
+<p>唯一能限制google增长势头之处在于互联网自身的扩展步伐。因此Google设计出众多的产品，以扩展包括免费无线接入和免费存储在内的互联网应用。这是经济学家所说的”互补品“。 当然，前不久Google关闭了GoogleReader的事实证明，一切都是定量的trade-off，或许greader在Google的战略中已经变成了投入产出比过低的产品了吧。</p>
 
 <h2>非货币市场</h2>
 
@@ -2133,7 +2133,7 @@ http://www.freebsd.org/doc/zh _CN/books/arch-handbook/mac-synopsis.html</p>
 
 <p>在互联网上，流量就是注意力，而链接就是声誉。</p>
 
-<p>G oogle的商业模式就是将声誉经济转化为注意力经济进而转化为货币的很好例证。G oogle控制着整个经济体系，并不断改善搜索排名算法，以防止经济体系中的通货膨胀，保持货币的价值。F acebook运营“朋友”，T witter运营“追随者”，用户均可创建声誉资本，并将其转化为注意力。</p>
+<p>Google的商业模式就是将声誉经济转化为注意力经济进而转化为货币的很好例证。Google控制着整个经济体系，并不断改善搜索排名算法，以防止经济体系中的通货膨胀，保持货币的价值。Facebook运营“朋友”，Twitter运营“追随者”，用户均可创建声誉资本，并将其转化为注意力。</p>
 
 <p>付出一定代价才能换来充裕，而代价就是别处的匮乏。</p>
 
@@ -2169,7 +2169,7 @@ http://www.freebsd.org/doc/zh _CN/books/arch-handbook/mac-synopsis.html</p>
 
 <h3>一、你的MBTI图形</h3>
 
-<p><img src="http://dl.dropboxusercontent.com/u/64021093/P%20ics/D567480F-DB00-481E-9AEF-08EBFC61E0B1.png" title="T itle" alt="alt text" /></p>
+<p><img src="http://dl.dropboxusercontent.com/u/64021093/Pics/D567480F-DB00-481E-9AEF-08EBFC61E0B1.png" title="Title" alt="alt text" /></p>
 
 <ul>
 <li> 倾向示意图表示四个维度分别的倾向程度。从中间往两侧看，绿色指示条对应下面坐标的哪个区间。</li>
@@ -2224,7 +2224,7 @@ http://www.freebsd.org/doc/zh _CN/books/arch-handbook/mac-synopsis.html</p>
 
 <h3>三、气质类型</h3>
 
-<p>根据大卫.凯尔西（D avid K eirsey）气质与性情理论，你属于“概念主义者”，下面是对“概念主义者”的描述：</p>
+<p>根据大卫.凯尔西（David Keirsey）气质与性情理论，你属于“概念主义者”，下面是对“概念主义者”的描述：</p>
 
 <p>“概念主义者”型的人自信、有智慧、富有想像力。他们的原则是“所有的事情都要做到最好”。</p>
 
@@ -2298,15 +2298,15 @@ http://www.freebsd.org/doc/zh _CN/books/arch-handbook/mac-synopsis.html</p>
     <id>http://biaobiaoqi.github.com/blog/2013/05/12/touch-hadoop</id>
     <content type="html"><![CDATA[<h2>背景</h2>
 
-<p>之前的时间里对H adoop的使用都是基于学长所搭建起的实验环境的，没有完整的自己部署和维护过，最近抽时间初体验了在集群环境下装机、配置、运行的全过程，梳理总结到本文中。</p>
+<p>之前的时间里对Hadoop的使用都是基于学长所搭建起的实验环境的，没有完整的自己部署和维护过，最近抽时间初体验了在集群环境下装机、配置、运行的全过程，梳理总结到本文中。</p>
 
 <h2>配置</h2>
 
 <ul>
 <li>内存:8G</li>
-<li>CPU：i 5-2400 3.1GH z；</li>
+<li>CPU：i5-2400 3.1GHz；</li>
 <li>硬盘：960G</li>
-<li>系统：windows 7旗舰 64 bits</li>
+<li>系统：windows 7旗舰 64bits</li>
 </ul>
 
 
@@ -2314,22 +2314,22 @@ http://www.freebsd.org/doc/zh _CN/books/arch-handbook/mac-synopsis.html</p>
 
 
 <ul>
-<li>虚拟机：VM ware 7.1.1</li>
+<li>虚拟机：VMware7.1.1</li>
 <li>虚拟集群：</li>
 <li><ul>
-<li>T （master节点）U buntu 11.04 32 bits 内存512MB；硬盘100G；单核；</li>
+<li>T （master节点）Ubuntu11.04 32 bits 内存512MB；硬盘100G；单核；</li>
 </ul>
 </li>
 <li><ul>
-<li>T2（slave节点） U buntu 11.04 32 bits 内存512MB；硬盘100G；单核；</li>
+<li>T2（slave节点） Ubuntu11.04 32 bits 内存512MB；硬盘100G；单核；</li>
 </ul>
 </li>
 <li><ul>
-<li>T3（slave节点） U buntu 11.04 32 bits 内存512MB；硬盘100G；单核；</li>
+<li>T3（slave节点） Ubuntu11.04 32 bits 内存512MB；硬盘100G；单核；</li>
 </ul>
 </li>
 <li><ul>
-<li>T4（slave节点） U buntu 11.04 32 bits 内存512MB；硬盘100G；单核；</li>
+<li>T4（slave节点） Ubuntu11.04 32 bits 内存512MB；硬盘100G；单核；</li>
 </ul>
 </li>
 </ul>
@@ -2355,7 +2355,7 @@ http://www.freebsd.org/doc/zh _CN/books/arch-handbook/mac-synopsis.html</p>
 </span><span class='line'>broadcast 192.168.108.0</span></code></pre></td></tr></table></div></figure>
 
 
-<p>为了便于管理，建议按统一约定修改hostname：修改<code>/etc/hostname</code>；同时，H adoop集群要求每个节点使用同一个账号来管理、运行，所以，也需要设置好公用账号。</p>
+<p>为了便于管理，建议按统一约定修改hostname：修改<code>/etc/hostname</code>；同时，Hadoop集群要求每个节点使用同一个账号来管理、运行，所以，也需要设置好公用账号。</p>
 
 <h5>2.集群ssh配置</h5>
 
@@ -2393,10 +2393,10 @@ http://www.freebsd.org/doc/zh _CN/books/arch-handbook/mac-synopsis.html</p>
 <span class='line-number'>13</span>
 <span class='line-number'>14</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>#!/bin/bash
-</span><span class='line'>#P rogram:
-</span><span class='line'># E xecute instructions in hosts in slaveslist.
-</span><span class='line'>#D escription:
-</span><span class='line'>#2013/5/8 biaobiaoqi F irst R elease
+</span><span class='line'>#Program:
+</span><span class='line'># Execute instructions in hosts in slaveslist.
+</span><span class='line'>#Description:
+</span><span class='line'>#2013/5/8 biaobiaoqi First Release
 </span><span class='line'>if [ $# -lt 1 ]; then
 </span><span class='line'>   echo  "usage: $0 COMMAND"
 </span><span class='line'>   exit 0
@@ -2434,12 +2434,12 @@ http://www.freebsd.org/doc/zh _CN/books/arch-handbook/mac-synopsis.html</p>
 <span class='line-number'>15</span>
 <span class='line-number'>16</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>#!/bin/bash
-</span><span class='line'>#P rogram:
-</span><span class='line'>#    P ut the dirctory into all nodes of the cluster as the same path.
-</span><span class='line'>#D escription:
-</span><span class='line'>#2013/5/10     biaobiaoqi     F irst R elease
+</span><span class='line'>#Program:
+</span><span class='line'>#    Put the dirctory into all nodes of the cluster as the same path.
+</span><span class='line'>#Description:
+</span><span class='line'>#2013/5/10     biaobiaoqi     First Release
 </span><span class='line'>if [ $# -lt 1 ]; then
-</span><span class='line'>   echo "U sage $0 DIR_PATH"
+</span><span class='line'>   echo "Usage $0 DIR_PATH"
 </span><span class='line'>   exit 0
 </span><span class='line'>fi
 </span><span class='line'>
@@ -2477,23 +2477,23 @@ http://www.freebsd.org/doc/zh _CN/books/arch-handbook/mac-synopsis.html</p>
 
 <p>修改<code>/etc/hosts</code>时也要特别注意，如果改成<code>127.0.0.1 localhost HOSTNAME</code> (其中HOSTNAME是主机名)的形式，在开启hadoop集群时，会出现datanode无法正常访问namenode，算是个小bug吧。所以得把hosts文件写成如上的形式。</p>
 
-<h5>5.配置J ava环境</h5>
+<h5>5.配置Java环境</h5>
 
-<p>H adoop需要J ava 1.6或更高版本，记住J ava的安装目录，之后需要在hadoop配置过程中用到。</p>
+<p>Hadoop需要Java1.6或更高版本，记住Java的安装目录，之后需要在hadoop配置过程中用到。</p>
 
-<h2>安装H adoop</h2>
+<h2>安装Hadoop</h2>
 
-<h5>1.下载H adoop</h5>
+<h5>1.下载Hadoop</h5>
 
-<p>从官网下载<a href="http://www.apache.org/dyn/closer.cgi/hadoop/common/">H adoop发布版</a>（博主使用的是较早的稳定版0.20.2）</p>
+<p>从官网下载<a href="http://www.apache.org/dyn/closer.cgi/hadoop/common/">Hadoop发布版</a>（博主使用的是较早的稳定版0.20.2）</p>
 
-<p>关于版本选择，推荐阅读：<a href="http://dongxicheng.org/mapreduce-nextgen/how-to-select-hadoop-versions/">H adoop版本选择探讨</a></p>
+<p>关于版本选择，推荐阅读：<a href="http://dongxicheng.org/mapreduce-nextgen/how-to-select-hadoop-versions/">Hadoop版本选择探讨</a></p>
 
 <h5>2.部署</h5>
 
-<p>解压下载好的H adoop，后放到合适的目录下。这里假定放置在/home/USER/ 的目录下</p>
+<p>解压下载好的Hadoop，后放到合适的目录下。这里假定放置在/home/USER/ 的目录下</p>
 
-<p>在<code>/home/USER/.bashrc</code>(其中USER为集群的用户名)文件中，增加如下语句，设定H adoop相关的路径信息：</p>
+<p>在<code>/home/USER/.bashrc</code>(其中USER为集群的用户名)文件中，增加如下语句，设定Hadoop相关的路径信息：</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -2502,18 +2502,18 @@ http://www.freebsd.org/doc/zh _CN/books/arch-handbook/mac-synopsis.html</p>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>export JAVA_HOME=/usr/lib/jvm/java-6-openjdk
-</span><span class='line'>export HADOOP_HOME=/home/hadoop/H adoop
+</span><span class='line'>export HADOOP_HOME=/home/hadoop/Hadoop
 </span><span class='line'>export HADOOP_CONF=$HADOOP_HOME/conf
 </span><span class='line'>export HADOOP_PATH=$HADOOP_HOME/bin
 </span><span class='line'>export PATH=$HADOOP_PATH:$PATH
 </span><span class='line'>export CLASSPATH=.:$JAVA_HOME/bin:$PATH:$HADOOP_HOME:$HADOOP_HOME/bin</span></code></pre></td></tr></table></div></figure>
 
 
-<h6>H adoop核心配置修改</h6>
+<h6>Hadoop核心配置修改</h6>
 
 <p>配置文件在<code>$HADOOP_HOME/conf</code>目录下，其中基础配置比较重要的有三个：core-site.xml, hdfs-site.xml, mapred-site.xml。（当然，每个配置文件都有其细节作用，不过在初步实践hadoop时，理解这三个配置文件中的几个重要配置项就够了）</p>
 
-<p>一般的，有三种可选模式。即本地模式、伪分布式模式和全分布式模式。前两种只是在单机环境下，后一种才是生产环境下的常用方式。《H adoop权威指南》和《H adoop实战》等书中都有讲到不同方式的配置，这里博主仅描述实验环境下4节点的全分布式配置。</p>
+<p>一般的，有三种可选模式。即本地模式、伪分布式模式和全分布式模式。前两种只是在单机环境下，后一种才是生产环境下的常用方式。《Hadoop权威指南》和《Hadoop实战》等书中都有讲到不同方式的配置，这里博主仅描述实验环境下4节点的全分布式配置。</p>
 
 <p>core-site.xml整个hadoop的顶层配置</p>
 
@@ -2544,7 +2544,7 @@ http://www.freebsd.org/doc/zh _CN/books/arch-handbook/mac-synopsis.html</p>
 </pre></td><td class='code'><pre><code class=''><span class='line'>&lt;?xml version="1.0"?&gt;
 </span><span class='line'>&lt;?xml-stylesheet type="text/xsl" href="configuration.xsl"?&gt;
 </span><span class='line'>
-</span><span class='line'>&lt;!-- P ut site-specific property overrides in this file. --&gt;
+</span><span class='line'>&lt;!-- Put site-specific property overrides in this file. --&gt;
 </span><span class='line'>
 </span><span class='line'>&lt;configuration&gt; 
 </span><span class='line'>    &lt;property&gt;
@@ -2600,7 +2600,7 @@ http://www.freebsd.org/doc/zh _CN/books/arch-handbook/mac-synopsis.html</p>
 </pre></td><td class='code'><pre><code class=''><span class='line'>&lt;?xml version="1.0"?&gt;
 </span><span class='line'>&lt;?xml-stylesheet type="text/xsl" href="configuration.xsl"?&gt;
 </span><span class='line'>
-</span><span class='line'>&lt;!-- P ut site-specific property overrides in this file. --&gt;
+</span><span class='line'>&lt;!-- Put site-specific property overrides in this file. --&gt;
 </span><span class='line'>
 </span><span class='line'>&lt;configuration&gt; 
 </span><span class='line'>    &lt;property&gt;   
@@ -2644,13 +2644,13 @@ http://www.freebsd.org/doc/zh _CN/books/arch-handbook/mac-synopsis.html</p>
 </pre></td><td class='code'><pre><code class=''><span class='line'>&lt;?xml version="1.0"?&gt;
 </span><span class='line'>&lt;?xml-stylesheet type="text/xsl" href="configuration.xsl"?&gt;
 </span><span class='line'>
-</span><span class='line'>&lt;!-- P ut site-specific property overrides in this file. --&gt;
+</span><span class='line'>&lt;!-- Put site-specific property overrides in this file. --&gt;
 </span><span class='line'>
 </span><span class='line'>&lt;configuration&gt; 
 </span><span class='line'>    &lt;property&gt;   
 </span><span class='line'>          &lt;name&gt;mapred.job.tracker&lt;/name&gt;
 </span><span class='line'>          &lt;value&gt;T:9001&lt;/value&gt;   
-</span><span class='line'>          &lt;description&gt; M apreduce 的job tracker所在的节点和端口。&lt;/description&gt; 
+</span><span class='line'>          &lt;description&gt; Mapreduce 的job tracker所在的节点和端口。&lt;/description&gt; 
 </span><span class='line'>     &lt;/property&gt;
 </span><span class='line'>&lt;/configuration&gt;
 </span></code></pre></td></tr></table></div></figure>
@@ -2705,7 +2705,7 @@ http://www.freebsd.org/doc/zh _CN/books/arch-handbook/mac-synopsis.html</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>如果成功，打开 http://T:50070 (T为集群master节点)，可以看到HDFS的运行情况，包括节点数量、空间大小等。这是H adoop自带的HDFS监控页面；同样的，http://T:50030 是M apreduce的监控界面。</p>
+<p>如果成功，打开 http://T:50070 (T为集群master节点)，可以看到HDFS的运行情况，包括节点数量、空间大小等。这是Hadoop自带的HDFS监控页面；同样的，http://T:50030 是Mapreduce的监控界面。</p>
 
 <p>如果没有成功，根据$HADOOP_HOME/logs目录下的日志文件信息debug。</p>
 
@@ -2722,8 +2722,8 @@ http://www.freebsd.org/doc/zh _CN/books/arch-handbook/mac-synopsis.html</p>
 </ul>
 </li>
 <li>namenode启动成功，datanode无法连接：检查hosts文件是否设置正确；检查各个配置文件中地址值是否使用了IP而不是hostname。</li>
-<li>namenode启动成功，datanode无法启动：I ncompatible namespace ID s，由于频繁格式化，造成dfs.name.dir/current/VERSION与dfs.data.dir/current/VERSION数据不一致。</li>
-<li>S afe M ode E xception： 分布式系统启动时，会进入安全模式，安全模式下，hadoop是无法执行的。一般的等待一会儿，就可以正常使用了。如果是由于之前集群崩溃造成的无法自动退出安全模式的情况，则需要如下特殊处理了</li>
+<li>namenode启动成功，datanode无法启动：Incompatible namespaceIDs，由于频繁格式化，造成dfs.name.dir/current/VERSION与dfs.data.dir/current/VERSION数据不一致。</li>
+<li>SafeModeException： 分布式系统启动时，会进入安全模式，安全模式下，hadoop是无法执行的。一般的等待一会儿，就可以正常使用了。如果是由于之前集群崩溃造成的无法自动退出安全模式的情况，则需要如下特殊处理了</li>
 </ul>
 
 
@@ -2733,13 +2733,13 @@ http://www.freebsd.org/doc/zh _CN/books/arch-handbook/mac-synopsis.html</p>
 
 <h2>初体验</h2>
 
-<p>最简单的尝试就是使用H adoop自带的wordcount程序了，参照<a href="http://www.cnblogs.com/xia%20520%20pi/archive/2012/05/16/2504205.html">这篇文章</a>，描述很详细。</p>
+<p>最简单的尝试就是使用Hadoop自带的wordcount程序了，参照<a href="http://www.cnblogs.com/xia520pi/archive/2012/05/16/2504205.html">这篇文章</a>，描述很详细。</p>
 
 <p>其他的一些尝试： <a href="http://www.cnblogs.com/rilley/archive/2012/02/13/2349858.html">动态增删节点</a> 、 <a href="http://www.cnblogs.com/ggjucheng/archive/2012/04/18/2454696.html">修改备份数量</a></p>
 
 <h2>参考</h2>
 
-<p><a href="http://hadoop.apache.org/docs/stable/cluster_setup.html">offical document: C luster S etup</a></p>
+<p><a href="http://hadoop.apache.org/docs/stable/cluster_setup.html">offical document: Cluster Setup</a></p>
 
 <p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/05/12/touch-hadoop/'>http://biaobiaoqi.github.com/blog/2013/05/12/touch-hadoop/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p>
 

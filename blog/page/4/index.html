@@ -9,7 +9,7 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="PAT1007：给定一个整数串，找出连续子串中合最大的子串。 《编程珠玑》中用专门的一章对这个问题进行了讲解。（《编程珠玑（第2版）》P73 第8章 算法设计技术） 第一次在PAT上遇到这个题目时，我的思路如下： 最简单的淡然是一个三层循环咯，O(n 3)，肯定会超时。节省时间的话，用动态规划吧。 &hellip;">
+  <meta name="description" content="儿时没烙印下的痛与快乐 这是一本让我内心平静的书。或许是因为他所讲，都是那十年来有亲身经历到过的。 《痛并快乐着》有二十来篇文章，每篇一个主题。所有的主题都围着个人在中国二十世纪后十年中的发展和社会的变迁中展开。文中，描述了白岩松如何从大学毕业后，几经波折获得了一个并非自己当初所想的工作， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -107,56 +107,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/04/05/maximum-subsequence-sum/">分治、时间空间的权衡:最大合的连续字串问题 (PAT 1007)</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-05T20:16:00+08:00" pubdate data-updated="true">Apr 5<span>th</span>, 2013</time>
-        
-
-
-
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1007">PAT1007</a>：给定一个整数串，找出连续子串中合最大的子串。</p>
-
-<p>《编程珠玑》中用专门的一章对这个问题进行了讲解。（《编程珠玑（第2版）》P73 第8章 算法设计技术）</p>
-
-<p>第一次在PAT上遇到这个题目时，我的思路如下：</p>
-
-<p><del>最简单的淡然是一个三层循环咯，O(n 3)，肯定会超时。节省时间的话，用动态规划吧。但简单的动态规划，显然是会超出内存限制的。有没有更巧妙的子问题划分方法呢？</del>先找到子问题：因为要求的串必须连续，分治的时候需要考虑如何延续这个连续性，那么每个子问题中就得考虑找出三个串：1.即左端连续的最大串，2.右端连续的最大串，3.整个串中的最大串.<del>由于每个问题都有三个量要维护，难道我得造出三个表来？卡主:(</del></p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/04/05/maximum-subsequence-sum/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
       <h1 class="entry-title"><a href="/blog/2013/04/05/tong-bing-kuai-le-zhe/">《痛并快乐着》</a></h1>
     
     
@@ -185,7 +135,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
   <div class="entry-content"><h2>儿时没烙印下的痛与快乐</h2>
 
-<p><img class="left http://img" src="3.douban.com/lpic/s" width="4599357"></p>
+<p><img class="left" src="http://img3.douban.com/lpic/s4599357.jpg" width="150" height="250" title="Place Kitten #2" ></p>
 
 <p>这是一本让我内心平静的书。或许是因为他所讲，都是那十年来有亲身经历到过的。</p>
 
@@ -233,12 +183,12 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   </header>
 
 
-  <div class="entry-content"><p><img class="left" src="http://visualcaffeine.com/ws/wp-content/uploads/2012/04/computer_guy.jpg" title="P lace K itten #2" ></p>
+  <div class="entry-content"><p><img class="left" src="http://visualcaffeine.com/ws/wp-content/uploads/2012/04/computer_guy.jpg" title="Place Kitten #2" ></p>
 
 <p>今天做的这批题目，总的来说几乎不需要数据结构基础。几个小时刷完。</p>
 
 <blockquote><ul>
-<li>1001: 数字的格式转换。第一次做的时候，将正负数分两种情况处理了，其实负数可以拆成正数加上一个负号。太简单的道理，竟然没注意。另外，J ava完全可以使用N umber F ormat实现格式转换。好简单的说。</li>
+<li>1001: 数字的格式转换。第一次做的时候，将正负数分两种情况处理了，其实负数可以拆成正数加上一个负号。太简单的道理，竟然没注意。另外，Java完全可以使用NumberFormat实现格式转换。好简单的说。</li>
 </ul>
 </blockquote>
 
@@ -288,7 +238,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <p>算法开始练手了。从最简单的做起。</p>
 
-<p>由于实验室用的是J ava，为了节省时间，也为了更好的掌握这门语言，我先用J ava来实现了。在并非以比赛为目的的前提下，这并不妨碍什么，唯一的可能就是没有足够的参考代码咯。:(话说，自己也并不是特别喜欢一些“简洁”的代码。我现在的手速是不快，但过于简介的南与维护的代码，也不在我的目标之列。</p>
+<p>由于实验室用的是Java，为了节省时间，也为了更好的掌握这门语言，我先用Java来实现了。在并非以比赛为目的的前提下，这并不妨碍什么，唯一的可能就是没有足够的参考代码咯。:(话说，自己也并不是特别喜欢一些“简洁”的代码。我现在的手速是不快，但过于简介的南与维护的代码，也不在我的目标之列。</p>
 
 </div>
   
@@ -334,7 +284,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
   <div class="entry-content"><p><img src="http://pikipity.github.com/images/post/octopress.jpg"></p>
 
-<p>最早的时候，是看见了<a href="http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/">唐巧大哥的博客</a>，UI上已是觉得耳目一新。后来读到过<a href="http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html">阮一峰的博文</a>，当知道这是搭建在G ithub这个程序员的facebook上时，更是心头一震，什么时候自己也搭这么个博客呢。直接用github托管代码，完全不用自己租服务器，实在方便。自己之前也有在csdn上维护了一个博客，虽然那已经是一年前的事情了。</p>
+<p>最早的时候，是看见了<a href="http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/">唐巧大哥的博客</a>，UI上已是觉得耳目一新。后来读到过<a href="http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html">阮一峰的博文</a>，当知道这是搭建在Github这个程序员的facebook上时，更是心头一震，什么时候自己也搭这么个博客呢。直接用github托管代码，完全不用自己租服务器，实在方便。自己之前也有在csdn上维护了一个博客，虽然那已经是一年前的事情了。</p>
 
 </div>
   
@@ -399,7 +349,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     
     <a href="/blog/archives">biaobiaoqi的博文</a>
     
-    <a class="next" href="/blog/page/3/">N ewer &rarr;</a>
+    <a class="next" href="/blog/page/3/">Newer &rarr;</a>
     
   </div>
 </div>

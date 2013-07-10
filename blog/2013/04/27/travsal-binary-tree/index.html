@@ -134,14 +134,14 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <p>二叉树是一种很基本的数据结构。很多地方能看到它的身影，比如大名鼎鼎的霍夫曼编码（好了，别问我再比如了，见识浅薄，真不知道更多了。。。）它的结构很简洁、巧妙。</p>
 
-<p>本文讨论二叉树的常见遍历方式的代码实现（这里贴出的是J ava），包括前序(preorder)、中序(inorder)、后序(postorder)、层序(level order)，进一步，考虑递归和非递归的实现方式。递归方法的实现相对简单，但递归的执行方式由于每次都会产生一个新的方法调用栈，如果递归层级较深，会消耗较大的内存，转化为非递归则没那么简单了，往往需要实现一个栈来保存状态信息。</p>
+<p>本文讨论二叉树的常见遍历方式的代码实现（这里贴出的是Java），包括前序(preorder)、中序(inorder)、后序(postorder)、层序(level order)，进一步，考虑递归和非递归的实现方式。递归方法的实现相对简单，但递归的执行方式由于每次都会产生一个新的方法调用栈，如果递归层级较深，会消耗较大的内存，转化为非递归则没那么简单了，往往需要实现一个栈来保存状态信息。</p>
 
 <!--more-->
 
 
 <p>在此之前，先简单定义节点的数据结构：</p>
 
-<p>二叉树节点最多只有两个儿子，并保存一个节点的值，为了实验的方便，假定它为int。同时，我们直接使用J ava的S ystem.out.print方法来输出节点值，以显示遍历结果。</p>
+<p>二叉树节点最多只有两个儿子，并保存一个节点的值，为了实验的方便，假定它为int。同时，我们直接使用Java的System.out.print方法来输出节点值，以显示遍历结果。</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -152,18 +152,18 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>public class N ode {
+</pre></td><td class='code'><pre><code class=''><span class='line'>public class Node {
 </span><span class='line'>      public int value;
-</span><span class='line'>      public N ode left N ode;
-</span><span class='line'>      public N ode right N ode;
+</span><span class='line'>      public Node leftNode;
+</span><span class='line'>      public Node rightNode;
 </span><span class='line'>      
-</span><span class='line'>      public N ode(int i) {
+</span><span class='line'>      public Node(int i) {
 </span><span class='line'>          value = i;
 </span><span class='line'>      }
 </span><span class='line'>  }</span></code></pre></td></tr></table></div></figure>
 
 
-<p>详细代码参见链接:<a href="https://github.com/biaobiaoqi/biaobiaoqi%20C%20ode/blob/master/src/biaobiaoqi/algorithm/tree/B%20inary%20S%20earch%20T%20ree.java">BST及其各种便利的详细实现代码</a></p>
+<p>详细代码参见链接:<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/algorithm/tree/BinarySearchTree.java">BST及其各种便利的详细实现代码</a></p>
 
 <h2>前序遍历</h2>
 
@@ -179,11 +179,11 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>public void pre O rder T rav(N ode n) {
+</pre></td><td class='code'><pre><code class=''><span class='line'>public void preOrderTrav(Node n) {
 </span><span class='line'>  if (n != null) {
-</span><span class='line'>      S ystem.out.print(n.value + " ");
-</span><span class='line'>      pre O rder T rav(n.left N ode);
-</span><span class='line'>      pre O rder T rav(n.right N ode);
+</span><span class='line'>      System.out.print(n.value + " ");
+</span><span class='line'>      preOrderTrav(n.leftNode);
+</span><span class='line'>      preOrderTrav(n.rightNode);
 </span><span class='line'>  }
 </span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
@@ -213,16 +213,16 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
 <span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>public void pre O rder T rav N o R ecur(N ode n) {
-</span><span class='line'>  S tack&lt;N ode&gt; stack = new S tack&lt;N ode&gt;();
+</pre></td><td class='code'><pre><code class=''><span class='line'>public void preOrderTravNoRecur(Node n) {
+</span><span class='line'>  Stack&lt;Node&gt; stack = new Stack&lt;Node&gt;();
 </span><span class='line'>  stack.add(root);
 </span><span class='line'>  while (!stack.empty()) {
-</span><span class='line'>      N ode t = stack.pop();
-</span><span class='line'>      S ystem.out.print(t.value + " ");
-</span><span class='line'>      if (t.right N ode != null)
-</span><span class='line'>          stack.add(t.right N ode);
-</span><span class='line'>      if (t.left N ode != null)
-</span><span class='line'>          stack.add(t.left N ode);
+</span><span class='line'>      Node t = stack.pop();
+</span><span class='line'>      System.out.print(t.value + " ");
+</span><span class='line'>      if (t.rightNode != null)
+</span><span class='line'>          stack.add(t.rightNode);
+</span><span class='line'>      if (t.leftNode != null)
+</span><span class='line'>          stack.add(t.leftNode);
 </span><span class='line'>  }
 </span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
@@ -249,19 +249,19 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <span class='line-number'>12</span>
 <span class='line-number'>13</span>
 <span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>public void pre O rder T rav N o R ecur II(N ode n) {
-</span><span class='line'>  S ystem.out.println("N o R ecursive: ");
-</span><span class='line'>  S tack&lt;N ode&gt; s = new S tack&lt;N ode&gt;();
+</pre></td><td class='code'><pre><code class=''><span class='line'>public void preOrderTravNoRecurII(Node n) {
+</span><span class='line'>  System.out.println("No Recursive: ");
+</span><span class='line'>  Stack&lt;Node&gt; s = new Stack&lt;Node&gt;();
 </span><span class='line'>  while (n != null | !s.empty()){
 </span><span class='line'>      while (n!=null ){
-</span><span class='line'>          S ystem.out.print(n.value + " ");
+</span><span class='line'>          System.out.print(n.value + " ");
 </span><span class='line'>          s.add(n);
-</span><span class='line'>          n = n.left N ode;
+</span><span class='line'>          n = n.leftNode;
 </span><span class='line'>      }
 </span><span class='line'>      n = s.pop();
-</span><span class='line'>      n = n.right N ode;
+</span><span class='line'>      n = n.rightNode;
 </span><span class='line'>  }
-</span><span class='line'>  S ystem.out.println();
+</span><span class='line'>  System.out.println();
 </span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
 
@@ -279,11 +279,11 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>public void inorder T rav(N ode n) {
+</pre></td><td class='code'><pre><code class=''><span class='line'>public void inorderTrav(Node n) {
 </span><span class='line'>  if (n != null) {
-</span><span class='line'>      inorder T rav(n.left N ode);
-</span><span class='line'>      S ystem.out.print(n.value + " ");
-</span><span class='line'>      inorder T rav(n.right N ode);
+</span><span class='line'>      inorderTrav(n.leftNode);
+</span><span class='line'>      System.out.print(n.value + " ");
+</span><span class='line'>      inorderTrav(n.rightNode);
 </span><span class='line'>  }
 </span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
@@ -312,17 +312,17 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <span class='line-number'>11</span>
 <span class='line-number'>12</span>
 <span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>public void inorder T rav N o R ecu(N ode n) {
-</span><span class='line'>  S ystem.out.println("N o R ecursive: ");
-</span><span class='line'>  S tack&lt;N ode&gt; s = new S tack&lt;N ode&gt;();
+</pre></td><td class='code'><pre><code class=''><span class='line'>public void inorderTravNoRecu(Node n) {
+</span><span class='line'>  System.out.println("No Recursive: ");
+</span><span class='line'>  Stack&lt;Node&gt; s = new Stack&lt;Node&gt;();
 </span><span class='line'>  while (n != null | !s.empty()){
 </span><span class='line'>      while (n!=null ){
 </span><span class='line'>          s.add(n);
-</span><span class='line'>          n = n.left N ode;
+</span><span class='line'>          n = n.leftNode;
 </span><span class='line'>      }
 </span><span class='line'>      n = s.pop();
-</span><span class='line'>      S ystem.out.print(n.value + " ");
-</span><span class='line'>      n = n.right N ode;
+</span><span class='line'>      System.out.print(n.value + " ");
+</span><span class='line'>      n = n.rightNode;
 </span><span class='line'>  }
 </span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
@@ -349,20 +349,20 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <span class='line-number'>13</span>
 <span class='line-number'>14</span>
 <span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>public void pre O rder T rav N o R ecur II(N ode n) {
-</span><span class='line'>      S ystem.out.println("N o R ecursive: ");
-</span><span class='line'>      S tack&lt;N ode&gt; s = new S tack&lt;N ode&gt;();
+</pre></td><td class='code'><pre><code class=''><span class='line'>public void preOrderTravNoRecurII(Node n) {
+</span><span class='line'>      System.out.println("No Recursive: ");
+</span><span class='line'>      Stack&lt;Node&gt; s = new Stack&lt;Node&gt;();
 </span><span class='line'>      while (n != null | !s.empty()){
 </span><span class='line'>          while (n!=null ){
-</span><span class='line'>              S ystem.out.print(n.value + " ");
+</span><span class='line'>              System.out.print(n.value + " ");
 </span><span class='line'>              s.add(n);
-</span><span class='line'>              n = n.left N ode;
+</span><span class='line'>              n = n.leftNode;
 </span><span class='line'>          }
 </span><span class='line'>          n = s.pop();
 </span><span class='line'>          
-</span><span class='line'>          n = n.right N ode;
+</span><span class='line'>          n = n.rightNode;
 </span><span class='line'>      }
-</span><span class='line'>      S ystem.out.println();
+</span><span class='line'>      System.out.println();
 </span><span class='line'>  }</span></code></pre></td></tr></table></div></figure>
 
 
@@ -404,30 +404,30 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <span class='line-number'>25</span>
 <span class='line-number'>26</span>
 <span class='line-number'>27</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>public void post O rder T rav N o R ecu(N ode n) {       
-</span><span class='line'>      S tack&lt;N ode&gt; stack = new S tack&lt;N ode&gt;();
+</pre></td><td class='code'><pre><code class=''><span class='line'>public void postOrderTravNoRecu(Node n) {        
+</span><span class='line'>      Stack&lt;Node&gt; stack = new Stack&lt;Node&gt;();
 </span><span class='line'>      int[] flag = new int[max];
 </span><span class='line'>      
 </span><span class='line'>      while (n != null) {
 </span><span class='line'>          stack.push(n);
 </span><span class='line'>          flag[stack.size()] = 0;
-</span><span class='line'>          n = n.left N ode;
+</span><span class='line'>          n = n.leftNode;
 </span><span class='line'>      }
 </span><span class='line'>      
 </span><span class='line'>      while (!stack.empty()) {
 </span><span class='line'>          n = stack.peek();
-</span><span class='line'>          while(n.right N ode != null && flag[stack.size()] == 0) {
-</span><span class='line'>              n = n.right N ode;
+</span><span class='line'>          while(n.rightNode != null && flag[stack.size()] == 0) {
+</span><span class='line'>              n = n.rightNode;
 </span><span class='line'>              flag[stack.size()] = 1;
 </span><span class='line'>              while (n != null) {
 </span><span class='line'>                  stack.push(n);
 </span><span class='line'>                  flag[stack.size()] = 0;
-</span><span class='line'>                  n = n.left N ode;
+</span><span class='line'>                  n = n.leftNode;
 </span><span class='line'>              }
 </span><span class='line'>              n = stack.peek();//TODO be careful about this
 </span><span class='line'>          }
 </span><span class='line'>          n = stack.pop();
-</span><span class='line'>          S ystem.out.print(n.value + " ");
+</span><span class='line'>          System.out.print(n.value + " ");
 </span><span class='line'>      }
 </span><span class='line'>      
 </span><span class='line'>  }</span></code></pre></td></tr></table></div></figure>
@@ -466,18 +466,18 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <span class='line-number'>13</span>
 <span class='line-number'>14</span>
 <span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>public void level O rder T rav(N ode n) {
-</span><span class='line'>  S ystem.out.print("L evel O rder T rav: ");
+</pre></td><td class='code'><pre><code class=''><span class='line'>public void levelOrderTrav(Node n) {
+</span><span class='line'>  System.out.print("Level OrderTrav: ");
 </span><span class='line'>  
-</span><span class='line'>  Q ueue&lt;N ode&gt; q = new L inked L ist&lt;N ode&gt;();
+</span><span class='line'>  Queue&lt;Node&gt; q = new LinkedList&lt;Node&gt;();
 </span><span class='line'>  q.add(n);
 </span><span class='line'>  while (q.size() != 0) {
 </span><span class='line'>      n = q.poll();
-</span><span class='line'>      S ystem.out.print(" " + n.value);
-</span><span class='line'>      if (n.left N ode != null) 
-</span><span class='line'>          q.add(n.left N ode);
-</span><span class='line'>      if (n.right N ode != null)
-</span><span class='line'>          q.add(n.right N ode);
+</span><span class='line'>      System.out.print(" " + n.value);
+</span><span class='line'>      if (n.leftNode != null) 
+</span><span class='line'>          q.add(n.leftNode);
+</span><span class='line'>      if (n.rightNode != null)
+</span><span class='line'>          q.add(n.rightNode);
 </span><span class='line'>
 </span><span class='line'>  }
 </span><span class='line'>}</span></code></pre></td></tr></table></div></figure>

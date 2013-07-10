@@ -136,7 +136,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <h2>1.装饰边栏</h2>
 
-<p>以增加豆瓣展示框为例。参加正反反长大哥的博客<a href="http://icodeit.org/2012/10/how-to-embed-douban-show-in-your-octopress-site/">H ow to E mbed D ouban-S how in Y our O ctopress S ite</a></p>
+<p>以增加豆瓣展示框为例。参加正反反长大哥的博客<a href="http://icodeit.org/2012/10/how-to-embed-douban-show-in-your-octopress-site/">How to Embed Douban-Show in Your Octopress Site</a></p>
 
 <h2>2.增加国内的第三方评论</h2>
 
@@ -160,7 +160,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <p>由于markdown不支持这一语法，如果要自己用html标签实现，又有些违背了markdown以内容为重的立意。</p>
 
-<p>参考博文<a href="http://www.blogjava.net/lishunli/archive/2013/01/20/394478.html">《在O ctopress中为markdown的超链接加上target=&#8221;_blank&#8221;》</a>，可以通过将如下代码添加到 {OCTOPRESS_HOME}/source/_includes/custom/head.html文件末尾来实现：</p>
+<p>参考博文<a href="http://www.blogjava.net/lishunli/archive/2013/01/20/394478.html">《在Octopress中为markdown的超链接加上target=&#8221;_blank&#8221;》</a>，可以通过将如下代码添加到 {OCTOPRESS_HOME}/source/_includes/custom/head.html文件末尾来实现：</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -183,7 +183,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <span class='line-number'>19</span>
 </pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;</span>
 </span><span class='line'>
-</span><span class='line'><span class="kd">function</span> <span class="nx">add</span> <span class="nx">B</span> <span class="nx">lank</span> <span class="nx">T</span> <span class="nx">arget</span> <span class="nx">F</span> <span class="nx">or</span> <span class="nx">L</span> <span class="nx">inks</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'><span class="kd">function</span> <span class="nx">addBlankTargetForLinks</span> <span class="p">()</span> <span class="p">{</span>
 </span><span class='line'>
 </span><span class='line'>  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;a[href^=&quot;http&quot;]&#39;</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
 </span><span class='line'>
@@ -193,9 +193,9 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </span><span class='line'>
 </span><span class='line'><span class="p">}</span>
 </span><span class='line'>
-</span><span class='line'><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">bind</span><span class="p">(</span><span class="s1">&#39;DOMN ode I nserted&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">bind</span><span class="p">(</span><span class="s1">&#39;DOMNodeInserted&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
 </span><span class='line'>
-</span><span class='line'>  <span class="nx">add</span> <span class="nx">B</span> <span class="nx">lank</span> <span class="nx">T</span> <span class="nx">arget</span> <span class="nx">F</span> <span class="nx">or</span> <span class="nx">L</span> <span class="nx">inks</span><span class="p">();</span>
+</span><span class='line'>  <span class="nx">addBlankTargetForLinks</span><span class="p">();</span>
 </span><span class='line'>
 </span><span class='line'><span class="p">});</span>
 </span><span class='line'>
@@ -244,7 +244,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </span><span class='line'>
 </span><span class='line'><span class="nx">layout</span><span class="o">:</span> <span class="nx">page</span>
 </span><span class='line'>
-</span><span class='line'><span class="nx">title</span><span class="o">:</span> <span class="s2">&quot;404 E rror&quot;</span>
+</span><span class='line'><span class="nx">title</span><span class="o">:</span> <span class="s2">&quot;404 Error&quot;</span>
 </span><span class='line'>
 </span><span class='line'><span class="nx">date</span><span class="o">:</span> <span class="mi">2013</span><span class="o">-</span><span class="mi">4</span><span class="o">-</span><span class="mi">21</span> <span class="mi">02</span><span class="o">:</span><span class="mi">35</span>
 </span><span class='line'>
@@ -264,7 +264,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <p>octopress默认只有分类，没有标签。这对于博文的组织和管理很不友好。有人开源出了自己定制的tag生成和tag cloud展现的代码，可以引入到自己的博客中来。</p>
 
-<p>详细操作参见博文：<a href="http://codemacro.com/2012/07/18/add-tag-to-octopress/">《为octopress添加tag C loud》</a>。不过博文中没有讲解标签云的UI配置参数的使用，为了让UI适应页面，请参考原作者的官方说明:<a href="https://github.com/robbyedwards/octopress-tag-cloud">octopress-tag-cloud</a>。我所实践出的较合理的参数值如下</p>
+<p>详细操作参见博文：<a href="http://codemacro.com/2012/07/18/add-tag-to-octopress/">《为octopress添加tag Cloud》</a>。不过博文中没有讲解标签云的UI配置参数的使用，为了让UI适应页面，请参考原作者的官方说明:<a href="https://github.com/robbyedwards/octopress-tag-cloud">octopress-tag-cloud</a>。我所实践出的较合理的参数值如下</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -273,7 +273,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>如果想将文章分类（category）也放在侧边栏，可以参考这篇博文：<a href="http://paz.am/blog/blog/2012/06/25/octopress-category-list-plugin/">《O ctopress - C ategory L ist P lug-in》</a></p>
+<p>如果想将文章分类（category）也放在侧边栏，可以参考这篇博文：<a href="http://paz.am/blog/blog/2012/06/25/octopress-category-list-plugin/">《Octopress - Category List Plug-in》</a></p>
 
 <h2>8.在顶栏增加标签云页面tab</h2>
 
@@ -370,7 +370,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <p>编辑<code>sass/custom/_style.scss</code>，在末尾增加如下内容：</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.post-footer</span><span class="p">{</span><span class="k">margin-top</span><span class="o">:</span><span class="m">10</span> <span class="k">px</span><span class="p">;</span><span class="k">padding</span><span class="o">:</span><span class="m">5</span> <span class="k">px</span><span class="p">;</span><span class="k">background</span><span class="o">:</span><span class="k">none</span> <span class="k">repeat</span> <span class="k">scroll</span> <span class="m">0</span> <span class="n">pt</span> <span class="m">0</span> <span class="n">pt</span> <span class="m">#eee</span><span class="p">;</span><span class="k">font-size</span><span class="o">:</span><span class="m">90</span><span class="o">%</span><span class="p">;</span><span class="k">color</span><span class="o">:</span><span class="nb">gray</span><span class="p">}</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.post-footer</span><span class="p">{</span><span class="k">margin-top</span><span class="o">:</span><span class="m">10px</span><span class="p">;</span><span class="k">padding</span><span class="o">:</span><span class="m">5px</span><span class="p">;</span><span class="k">background</span><span class="o">:</span><span class="k">none</span> <span class="k">repeat</span> <span class="k">scroll</span> <span class="m">0pt</span> <span class="m">0pt</span> <span class="m">#eee</span><span class="p">;</span><span class="k">font-size</span><span class="o">:</span><span class="m">90</span><span class="o">%</span><span class="p">;</span><span class="k">color</span><span class="o">:</span><span class="nb">gray</span><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -380,9 +380,9 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <p>参见博文<a href="http://xoyo.name/2012/04/auto-spacing-for-octopress/">《给中英文间加个空格》</a>。</p>
 
-<h2>T ips</h2>
+<h2>Tips</h2>
 
-<p>既然是个博客站点，就算是web产品啦，可以考虑下SEO。推荐博文<a href="http://codemacro.com/2012/09/06/octopress-seo/">《O ctopress中的SEO》</a><p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/07/10/decorate-octopress/'>http://biaobiaoqi.github.com/blog/2013/07/10/decorate-octopress/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p></p>
+<p>既然是个博客站点，就算是web产品啦，可以考虑下SEO。推荐博文<a href="http://codemacro.com/2012/09/06/octopress-seo/">《Octopress中的SEO》</a><p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/07/10/decorate-octopress/'>http://biaobiaoqi.github.com/blog/2013/07/10/decorate-octopress/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p></p>
 </div>
 
 

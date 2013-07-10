@@ -139,7 +139,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <h2>1.装饰边栏</h2>
 
-<p>以增加豆瓣展示框为例。参加正反反长大哥的博客<a href="http://icodeit.org/2012/10/how-to-embed-douban-show-in-your-octopress-site/">H ow to E mbed D ouban-S how in Y our O ctopress S ite</a></p>
+<p>以增加豆瓣展示框为例。参加正反反长大哥的博客<a href="http://icodeit.org/2012/10/how-to-embed-douban-show-in-your-octopress-site/">How to Embed Douban-Show in Your Octopress Site</a></p>
 
 <h2>2.增加国内的第三方评论</h2>
 
@@ -163,7 +163,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <p>由于markdown不支持这一语法，如果要自己用html标签实现，又有些违背了markdown以内容为重的立意。</p>
 
-<p>参考博文<a href="http://www.blogjava.net/lishunli/archive/2013/01/20/394478.html">《在O ctopress中为markdown的超链接加上target=&#8221;_blank&#8221;》</a>，可以通过将如下代码添加到 {OCTOPRESS_HOME}/source/_includes/custom/head.html文件末尾来实现：</p>
+<p>参考博文<a href="http://www.blogjava.net/lishunli/archive/2013/01/20/394478.html">《在Octopress中为markdown的超链接加上target=&#8221;_blank&#8221;》</a>，可以通过将如下代码添加到 {OCTOPRESS_HOME}/source/_includes/custom/head.html文件末尾来实现：</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -186,7 +186,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <span class='line-number'>19</span>
 </pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;</span>
 </span><span class='line'>
-</span><span class='line'><span class="kd">function</span> <span class="nx">add</span> <span class="nx">B</span> <span class="nx">lank</span> <span class="nx">T</span> <span class="nx">arget</span> <span class="nx">F</span> <span class="nx">or</span> <span class="nx">L</span> <span class="nx">inks</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'><span class="kd">function</span> <span class="nx">addBlankTargetForLinks</span> <span class="p">()</span> <span class="p">{</span>
 </span><span class='line'>
 </span><span class='line'>  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;a[href^=&quot;http&quot;]&#39;</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
 </span><span class='line'>
@@ -196,9 +196,9 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </span><span class='line'>
 </span><span class='line'><span class="p">}</span>
 </span><span class='line'>
-</span><span class='line'><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">bind</span><span class="p">(</span><span class="s1">&#39;DOMN ode I nserted&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">bind</span><span class="p">(</span><span class="s1">&#39;DOMNodeInserted&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
 </span><span class='line'>
-</span><span class='line'>  <span class="nx">add</span> <span class="nx">B</span> <span class="nx">lank</span> <span class="nx">T</span> <span class="nx">arget</span> <span class="nx">F</span> <span class="nx">or</span> <span class="nx">L</span> <span class="nx">inks</span><span class="p">();</span>
+</span><span class='line'>  <span class="nx">addBlankTargetForLinks</span><span class="p">();</span>
 </span><span class='line'>
 </span><span class='line'><span class="p">});</span>
 </span><span class='line'>
@@ -263,7 +263,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
   <div class="entry-content"><h2>质朴、诚恳和坚韧</h2>
 
-<p>这本书是某次在A mazon上购书『满100送书一本』时挑的。放在抽屉里有段日子了。</p>
+<p>这本书是某次在Amazon上购书『满100送书一本』时挑的。放在抽屉里有段日子了。</p>
 
 <p>一直挺崇拜俞敏洪老师。初次了解到他是高中的时候看的『赢在中国』，俞敏洪老师是嘉宾点评。而后混在考T的大流中去上了新东方的课程，几个老师讲得不错，比较可惜的是远离了老俞的时代。恰好前两天热映的『中国合伙人』，又把他拉回视野前沿。周日，趁着没心情码代码，忙里偷闲的读完了这本自传体的文字。</p>
 
@@ -339,9 +339,9 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
   <div class="entry-content"><h2>应该叫『清单宣言』</h2>
 
-<p>在A mazon上『满100送一本』的活动中随手挑到了它。鉴于其空洞的标题，被束之高阁半年多，最近关注个人管理方面的知识，才拍拍灰尘读起来。</p>
+<p>在Amazon上『满100送一本』的活动中随手挑到了它。鉴于其空洞的标题，被束之高阁半年多，最近关注个人管理方面的知识，才拍拍灰尘读起来。</p>
 
-<p>书的英文原名是『T he C hecklist M anifesto: H ow to G et T hings R ight』，直译成『清单宣言』在我看来更贴切，而非充满噱头的『清单革命』。正如一个小功能难以做成独立的产品，一个方法改进也难以成就革命。『清单能大大的改善效率，降低失败概率』这一观点，在医生出生的作者手中翻来覆去的被各种事例证明着，案例的行业背景从医学到建筑，到航天，再到投资，实在乏味。当然，这不妨碍『清单』这一工具对生活工作的助力所带给我们的思考。</p>
+<p>书的英文原名是『The Checklist Manifesto: How to Get Things Right』，直译成『清单宣言』在我看来更贴切，而非充满噱头的『清单革命』。正如一个小功能难以做成独立的产品，一个方法改进也难以成就革命。『清单能大大的改善效率，降低失败概率』这一观点，在医生出生的作者手中翻来覆去的被各种事例证明着，案例的行业背景从医学到建筑，到航天，再到投资，实在乏味。当然，这不妨碍『清单』这一工具对生活工作的助力所带给我们的思考。</p>
 
 <h2>三类问题</h2>
 
@@ -436,9 +436,9 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
   <div class="entry-content"><h2>背景</h2>
 
-<p>一个月前发现了<a href="http://v%202%20ex.com">V2EX</a>这个网站，用创始人<a href="http://www.v%202%20ex.com/member/L%20ivid">L ivid</a>的话来说，『这是一个主要关于做事儿的地方』。确实如此，我在这里收获了很多想法和灵感。</p>
+<p>一个月前发现了<a href="http://v2ex.com">V2EX</a>这个网站，用创始人<a href="http://www.v2ex.com/member/Livid">Livid</a>的话来说，『这是一个主要关于做事儿的地方』。确实如此，我在这里收获了很多想法和灵感。</p>
 
-<p>本文所记的，也是得益于某天的对<a href="http://www.v%202%20ex.com/t/69145">某个主题</a>的浏览。帖子中，大家分享了很多给女朋友做的网页，说『技术宅改变世界』太过了，但拥有这样一个礼物，确实是一种属于程序员的快乐和程序员的女友的幸福。</p>
+<p>本文所记的，也是得益于某天的对<a href="http://www.v2ex.com/t/69145">某个主题</a>的浏览。帖子中，大家分享了很多给女朋友做的网页，说『技术宅改变世界』太过了，但拥有这样一个礼物，确实是一种属于程序员的快乐和程序员的女友的幸福。</p>
 
 <p>快到我跟我妹子恋爱四周年的日子了，也正逢她本科毕业，无论如何都是个有趣的时间点。受了那个帖子的刺激，我也筹划着给女朋友做一个小网页，以示纪念。</p>
 
@@ -449,32 +449,32 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <p>通过各方搜寻，我找到了如下几个网页：</p>
 
 <ul>
-<li>1.<a href="http://love.hackerzhou.me/">复旦的学长hackzhou的爱心动画</a>，<a href="https://github.com/hackerzhou/L%20ove">github托管代码</a>。</li>
+<li>1.<a href="http://love.hackerzhou.me/">复旦的学长hackzhou的爱心动画</a>，<a href="https://github.com/hackerzhou/Love">github托管代码</a>。</li>
 </ul>
 
 
-<p>网页用到了html 5的一些特性实现了动态的心形花的绘制和类似程序代码敲击的文字呈现形式。由于内容仅仅是文字的，可定制性强。如下图：
-<img src="https://dl.dropboxusercontent.com/u/64021093/P%20ics/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202013-06-11%20%E4%B8%8B%E5%8D%888.12.01.png" title="hackerzhou's page" alt="hackerzhou's love project" /></p>
+<p>网页用到了html5的一些特性实现了动态的心形花的绘制和类似程序代码敲击的文字呈现形式。由于内容仅仅是文字的，可定制性强。如下图：
+<img src="https://dl.dropboxusercontent.com/u/64021093/Pics/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202013-06-11%20%E4%B8%8B%E5%8D%888.12.01.png" title="hackerzhou's page" alt="hackerzhou's love project" /></p>
 
 <ul>
-<li>2.<a href="http://carfieldloverita.sinaapp.com/">一对异国情侣的G oogle地图应用</a>，<a href="https://github.com/wong%202/lovegift">github托管代码</a>。</li>
+<li>2.<a href="http://carfieldloverita.sinaapp.com/">一对异国情侣的Google地图应用</a>，<a href="https://github.com/wong2/lovegift">github托管代码</a>。</li>
 </ul>
 
 
-<p>网页调用了G oogle地图的API，可以定义聚焦的地理位置和坐标尺，显示照片，像日记一样记录了点点滴滴，有背景音乐。最后还以地点输入框的形式做了表白。很有创意！
-<img src="https://dl.dropboxusercontent.com/u/64021093/P%20ics/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202013-06-11%20%E4%B8%8B%E5%8D%888.12.18.png" title="G ooglemap app" alt="G oogle map app" /></p>
+<p>网页调用了Google地图的API，可以定义聚焦的地理位置和坐标尺，显示照片，像日记一样记录了点点滴滴，有背景音乐。最后还以地点输入框的形式做了表白。很有创意！
+<img src="https://dl.dropboxusercontent.com/u/64021093/Pics/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202013-06-11%20%E4%B8%8B%E5%8D%888.12.18.png" title="Googlemap app" alt="Google map app" /></p>
 
 <ul>
-<li>3.<a href="http://liumeijun.com/">v 2 ex上某童鞋基于百度地图的应用</a>。</li>
+<li>3.<a href="http://liumeijun.com/">v2ex上某童鞋基于百度地图的应用</a>。</li>
 </ul>
 
 
-<p>跟2类似，调用了百度API，配上『L emon tree』的背景音乐，很有调调！
-<img src="https://dl.dropboxusercontent.com/u/64021093/P%20ics/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202013-06-11%20%E4%B8%8B%E5%8D%888.16.00.png" title="baidumap app" alt="baidumap app" /></p>
+<p>跟2类似，调用了百度API，配上『Lemon tree』的背景音乐，很有调调！
+<img src="https://dl.dropboxusercontent.com/u/64021093/Pics/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202013-06-11%20%E4%B8%8B%E5%8D%888.16.00.png" title="baidumap app" alt="baidumap app" /></p>
 
 <h2>定制计划</h2>
 
-<p>限于没有前端的基础，开发效率会很低，只能硬顶着拿着前面的三个项目做混搭了。其中项目1和2都有在github上开源代码，而3则在v 2 ex的帖子里被作者授权直接查源码使用了。</p>
+<p>限于没有前端的基础，开发效率会很低，只能硬顶着拿着前面的三个项目做混搭了。其中项目1和2都有在github上开源代码，而3则在v2ex的帖子里被作者授权直接查源码使用了。</p>
 
 <p>我做了简单的混搭修改计划：</p>
 
@@ -490,7 +490,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <h5>1.项目启动</h5>
 
-<p>我在github上fork了<a href="https://github.com/hackerzhou/L%20ove">hackerzhou的代码</a>。(<a href="https://github.com/biaobiaoqi/L%20ove">我fork的版本</a>)</p>
+<p>我在github上fork了<a href="https://github.com/hackerzhou/Love">hackerzhou的代码</a>。(<a href="https://github.com/biaobiaoqi/Love">我fork的版本</a>)</p>
 
 <p>clone到本地，尝试阅读js代码，尝试做小改动，找到动画开始的调用。</p>
 
@@ -498,37 +498,37 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <p>网上查资料，找到了<code>&lt;embeded&gt;</code>可以用来添加背景音乐，测试成功。但这个音乐播放无法支持同步的加载，不可控，在网络环境差的情况下，如果没有配乐动画过程会缺少表现力。放弃这种方案。</p>
 
-<p>在<a href="http://liumeijun.com/">v 2 ex上某童鞋基于百度地图的应用</a>源码中找到了一个第三方音乐播放库：<a href="http://www.schillmania.com/projects/soundmanager%202/">soundmanager 2</a>。查看官方文档，确认能满足项目需求，于是加入到代码中。</p>
+<p>在<a href="http://liumeijun.com/">v2ex上某童鞋基于百度地图的应用</a>源码中找到了一个第三方音乐播放库：<a href="http://www.schillmania.com/projects/soundmanager2/">soundmanager2</a>。查看官方文档，确认能满足项目需求，于是加入到代码中。</p>
 
-<p>为了让页面展现更加顺畅，需要音乐文件越小越好。我尝试了MIDI格式，但是很多浏览器并不支持，作罢。而soundmanager似乎对wma的支持有问题，于是只剩下mp 3文件。我选择了JJ的『小酒窝』做背景音乐，在mac下使用ocenaudio将原来3MB的mp 3文件截取了前一半，并导出为不同设定采样率的版本，经过测试，发现56 kb采样率下，音质没有受到大的影响，且大小也足够小了，于是确定用这种格式的mp 3。最终MP3文件的大小为500KB！</p>
+<p>为了让页面展现更加顺畅，需要音乐文件越小越好。我尝试了MIDI格式，但是很多浏览器并不支持，作罢。而soundmanager似乎对wma的支持有问题，于是只剩下mp3文件。我选择了JJ的『小酒窝』做背景音乐，在mac下使用ocenaudio将原来3MB的mp3文件截取了前一半，并导出为不同设定采样率的版本，经过测试，发现56kb采样率下，音质没有受到大的影响，且大小也足够小了，于是确定用这种格式的mp3。最终MP3文件的大小为500KB！</p>
 
 <h5>3.加载逻辑和开始按键</h5>
 
 <p>需求：加载过程需要隐藏前景内容，在音乐加载完成后，显示开始按钮，开始按钮能触发动画效果。</p>
 
-<p>通过G oogle找到了使用js隐藏和显示内容的方式</p>
+<p>通过Google找到了使用js隐藏和显示内容的方式</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>document.get E lement B y I d('hint').style.display = "none"; //hide hint
-</span><span class='line'>document.get E lement B y I d('start_btn').style.display = ""; //show start button</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>document.getElementById('hint').style.display = "none"; //hide hint
+</span><span class='line'>document.getElementById('start_btn').style.display = ""; //show start button</span></code></pre></td></tr></table></div></figure>
 
 
 <p>虽然不是特别理解js引擎的单线程运作机制，但经过简单的试错、调试后，就完成了加载等待和开始按钮触发的原型。</p>
 
-<p>之后是对按钮和加载提示配置css。由于懒得理解css的一些细节，直接使用了<a href="https://github.com/wong%202/lovegift">这份项目</a>中的css代码。</p>
+<p>之后是对按钮和加载提示配置css。由于懒得理解css的一些细节，直接使用了<a href="https://github.com/wong2/lovegift">这份项目</a>中的css代码。</p>
 
 <h5>4.部署</h5>
 
-<p>github为每个项目提供了静态网页展示的功能，应付这个项目的网页展示完全够了。具体操作流程参见<a href="http://www.worldhello.net/gotgithub/03-project-hosting/050-homepage.html#project-homepage">《G ot G ithub》3.5.2. 创建项目主页</a>。实际上，链接中介绍的几种创造干净的gh-pages分支的方法，在这个项目的发布里是不必的。因为项目主页的展示代码跟master分支里的代码本身就是一样的，那么需要做的就只是开启gh-pages分支，并提交代码了。</p>
+<p>github为每个项目提供了静态网页展示的功能，应付这个项目的网页展示完全够了。具体操作流程参见<a href="http://www.worldhello.net/gotgithub/03-project-hosting/050-homepage.html#project-homepage">《GotGithub》3.5.2. 创建项目主页</a>。实际上，链接中介绍的几种创造干净的gh-pages分支的方法，在这个项目的发布里是不必的。因为项目主页的展示代码跟master分支里的代码本身就是一样的，那么需要做的就只是开启gh-pages分支，并提交代码了。</p>
 
-<p>项目成果：<a href="http://biaobiaoqi.me/L%20ove">请戳这里</a></p>
+<p>项目成果：<a href="http://biaobiaoqi.me/Love">请戳这里</a></p>
 
 <h2>结语</h2>
 
-<p>感谢v 2 ex，感谢hackerzhou、loo 2 k和wong 2童鞋，我参考了你们很多代码。</p>
+<p>感谢v2ex，感谢hackerzhou、loo2k和wong2童鞋，我参考了你们很多代码。</p>
 
-<p>创造力需要靠技术手段实现。混迹在互联网上，没有自己建站的能力实在是很苦逼的一件事情。之后自己准备花些时间在R o R上。积累技术实力，努力做出好产品;)</p>
+<p>创造力需要靠技术手段实现。混迹在互联网上，没有自己建站的能力实在是很苦逼的一件事情。之后自己准备花些时间在RoR上。积累技术实力，努力做出好产品;)</p>
 
 <p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/06/11/gift-to-girl-friend/'>http://biaobiaoqi.github.com/blog/2013/06/11/gift-to-girl-friend/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p>
 
@@ -570,16 +570,16 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   </header>
 
 
-  <div class="entry-content"><h3>从i OS7的扁平化谈起</h3>
+  <div class="entry-content"><h3>从iOS7的扁平化谈起</h3>
 
-<p>昨晚看了WWDC2013的直播，i OS7以扁平化UI的方式展现在世人面前。于是接下来进入了微博吐槽时间。</p>
+<p>昨晚看了WWDC2013的直播，iOS7以扁平化UI的方式展现在世人面前。于是接下来进入了微博吐槽时间。</p>
 
-<p>大象要跳舞是很难的，这正是苹果面临的情况。现在无论是A ndroid还是W inphone，与i OS系统体验上的差异已经不是难以企及的，甚至有些方面更能为大众接受。于是I ve带领他的团队开始拥抱<strong>F lat D esign</strong>。乔布斯子不知道会怎么想，他可是坚持了一辈子的拟物风格。当然，无论乔老爷子怎么想，时势如此，由不得苹果不变。</p>
+<p>大象要跳舞是很难的，这正是苹果面临的情况。现在无论是Android还是Winphone，与iOS系统体验上的差异已经不是难以企及的，甚至有些方面更能为大众接受。于是Ive带领他的团队开始拥抱<strong>Flat Design</strong>。乔布斯子不知道会怎么想，他可是坚持了一辈子的拟物风格。当然，无论乔老爷子怎么想，时势如此，由不得苹果不变。</p>
 
-<p>从微博疯狂的i OS7刷屏中挑出了些有价值的信息，关于扁平化和拟物化的：</p>
+<p>从微博疯狂的iOS7刷屏中挑出了些有价值的信息，关于扁平化和拟物化的：</p>
 
 <ul>
-<li><a href="http://www.zhihu.com/question/20881633">什么是扁平化设计（F lat D esign）？扁平化设计是未来的趋势吗？</a></li>
+<li><a href="http://www.zhihu.com/question/20881633">什么是扁平化设计（Flat Design）？扁平化设计是未来的趋势吗？</a></li>
 <li><a href="http://www.inside.com.tw/2013/03/25/flat-design">UI 美學趨勢備忘錄─淺析扁平化設計</a></li>
 <li><a href="http://www.oschina.net/translate/flat-design-principles">扁平化设计原则</a></li>
 </ul>
@@ -593,7 +593,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <p>读这本书之前，在不同平台上看见它的好多推荐了。不过鉴于大多数设计类书都是『手把手教你画马』的效果（详情参见下图），一直不太感冒。</p>
 
-<p><img src="https://dl.dropboxusercontent.com/u/64021093/P%20ics/307-12110Q62915932.jpg" title="画马" alt="怎样画马" /></p>
+<p><img src="https://dl.dropboxusercontent.com/u/64021093/Pics/307-12110Q62915932.jpg" title="画马" alt="怎样画马" /></p>
 
 <p>后来码代码太烦躁，抱着试一试的态度在多看上下载了下来，一着眼便被吸引住了。书本本身的排版设计就透露着简洁明了的设计感，配色也恰到好处的清新。</p>
 
@@ -677,7 +677,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <p>相对而言，乔布斯推崇的拟物风格中，所秉承的是让所有用户能快速的学会如何使用它。而随着时代的发展，这种降低学习成本的方式渐渐的不是必须，数码产品充斥着生活，大多数人已经有足够的经验来应对新的操作体验。从这个角度讲，扁平化在现阶段或许是更有好的选择。</p>
 
-<p>不管怎么样，WWDC以后，苹果股价已经持续下跌了，祝福苹果吧，希望I ve不要成为苹果的罪人，据说他是最懂乔布斯的人呢。</p>
+<p>不管怎么样，WWDC以后，苹果股价已经持续下跌了，祝福苹果吧，希望Ive不要成为苹果的罪人，据说他是最懂乔布斯的人呢。</p>
 
 <p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/06/11/the-non-designers-design-book/'>http://biaobiaoqi.github.com/blog/2013/06/11/the-non-designers-design-book/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p>
 
@@ -721,80 +721,80 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
   <div class="entry-content"><h2>GUI哲学</h2>
 
-<p>前些日子，看了T inyfool老师的一篇文章<a href="http://blogread.cn/it/article/1089?f=wb">《开发人员为何应该使用 M ac OS X 兼 OS X 小史》</a>，才恍然M ac系统可不仅仅是UI上与W indows大相径庭，而是自底而上的区别。这种区别渗透到了整个系统框架的设计理念中。</p>
+<p>前些日子，看了Tinyfool老师的一篇文章<a href="http://blogread.cn/it/article/1089?f=wb">《开发人员为何应该使用 Mac OS X 兼 OS X 小史》</a>，才恍然Mac系统可不仅仅是UI上与Windows大相径庭，而是自底而上的区别。这种区别渗透到了整个系统框架的设计理念中。</p>
 
-<p>简单概括下我的认识：相比W indows和L inux两大阵营，M ac OS X除了『品味』上的优势之外，最重要的两点是：1.对GUI应用程序脚本化的有力支持；2.能实现GUI程序之间快捷的进程间通信。</p>
+<p>简单概括下我的认识：相比Windows和Linux两大阵营，Mac OS X除了『品味』上的优势之外，最重要的两点是：1.对GUI应用程序脚本化的有力支持；2.能实现GUI程序之间快捷的进程间通信。</p>
 
 <h4>GUI程序之间的进程间通信</h4>
 
-<p>IPC对于多用户分时系统的重要性不言而喻。其中从用户视角来看，如何让多个程序之间能更友好的交互是非常重要的。C++语言虽然面向对象，但在底层来看，其实依旧是冷冰冰的汇编代码，没有更整体的对象环境支撑，而以此构建的L inux也无法对进程间通信形成强力的支持。相比之下，乔布斯的团队借助于S mall T alk的消息传递机制创造了O bjective-C，并搭建了自己的运行时和类库框架C ocoa，让系统无论从自身的迭代开发还是应用开发，得到了很大提升。值得一提的是，O bjc虽然最近才由于i OS、M ac平台的开发的火热进入热门编程语言的行列，其实它比J ava还早十年出生。像最近由于R ails框架而火爆起来的R uby和持续坚挺的J ava，都从S amll T alk中吸收了很多设计理念，就别提C#了。</p>
+<p>IPC对于多用户分时系统的重要性不言而喻。其中从用户视角来看，如何让多个程序之间能更友好的交互是非常重要的。C++语言虽然面向对象，但在底层来看，其实依旧是冷冰冰的汇编代码，没有更整体的对象环境支撑，而以此构建的Linux也无法对进程间通信形成强力的支持。相比之下，乔布斯的团队借助于SmallTalk的消息传递机制创造了Objective-C，并搭建了自己的运行时和类库框架Cocoa，让系统无论从自身的迭代开发还是应用开发，得到了很大提升。值得一提的是，Objc虽然最近才由于iOS、Mac平台的开发的火热进入热门编程语言的行列，其实它比Java还早十年出生。像最近由于Rails框架而火爆起来的Ruby和持续坚挺的Java，都从SamllTalk中吸收了很多设计理念，就别提C#了。</p>
 
 <h4>GUI应用程序的脚本化</h4>
 
-<p>图形的交互方式确实人性化，但应用程序脚本化控制的方式在一些特定的场景里也可以大大提高生产效率。比如微软O ffice的VBS cript。即使是一般用户，不愿意自己写脚本，脚本化的方式也能让开发人员更方便快捷的开发出新颖的功能和产品。</p>
+<p>图形的交互方式确实人性化，但应用程序脚本化控制的方式在一些特定的场景里也可以大大提高生产效率。比如微软Office的VBScript。即使是一般用户，不愿意自己写脚本，脚本化的方式也能让开发人员更方便快捷的开发出新颖的功能和产品。</p>
 
 <p>让应用全部统一开放脚本很难，特别是从市场的层面而言，如果没有一直贯彻这一战略，造成平台很多应用不支持这一功能，则很难推广。苹果九十年代已经开始积累这方面的基础，有先见之明。</p>
 
 <h2>GUI工具</h2>
 
-<p>下面是我接触过的一些M ac下的GUI工具。它们大都散发着对开发者的自由开放的态度:)</p>
+<p>下面是我接触过的一些Mac下的GUI工具。它们大都散发着对开发者的自由开放的态度:)</p>
 
-<h3>Q uicksilver</h3>
+<h3>Quicksilver</h3>
 
-<p>『为了不把M ac当W indows用』，可以从<a href="http://qsapp.com/">Q uicksilver</a>入手。它能将双手从触摸板中解脱出来，或许这是很多开发者的梦想吧;)。只需用热键激活输入框，输入简单的匹配字符串，就可召唤出某个应用，或者执行某些搜索、查找任务，快哉！</p>
+<p>『为了不把Mac当Windows用』，可以从<a href="http://qsapp.com/">Quicksilver</a>入手。它能将双手从触摸板中解脱出来，或许这是很多开发者的梦想吧;)。只需用热键激活输入框，输入简单的匹配字符串，就可召唤出某个应用，或者执行某些搜索、查找任务，快哉！</p>
 
 <p>简单说说配置和使用方式：</p>
 
 <ul>
-<li>1.安装好后，在preference -> command中可以设置H ot K ey（唤醒的虚拟按键），我的习惯设置是<code>control+enter</code>。preference -> application可以设置是否需要在dock中显示，以及登入时自动启动。</li>
-<li>2.基本功能：快捷打开应用。按下Q uicksliver的H ot K ey（我的是<code>control+enter</code>）,在弹出的输入框中输入所需应用的头几个字母或者缩写，Q uicksliver会自动匹配最可能的应用，并显示出来，如果不是自己想要的，可以移动「上下光标」打开下拉菜单选择。选中后回车即可，如图。</li>
+<li>1.安装好后，在preference -> command中可以设置HotKey（唤醒的虚拟按键），我的习惯设置是<code>control+enter</code>。preference -> application可以设置是否需要在dock中显示，以及登入时自动启动。</li>
+<li>2.基本功能：快捷打开应用。按下Quicksliver的HotKey（我的是<code>control+enter</code>）,在弹出的输入框中输入所需应用的头几个字母或者缩写，Quicksliver会自动匹配最可能的应用，并显示出来，如果不是自己想要的，可以移动「上下光标」打开下拉菜单选择。选中后回车即可，如图。</li>
 </ul>
 
 
-<p><img src="https://dl.dropboxusercontent.com/u/64021093/P%20ics/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202013-06-09%20%E4%B8%8B%E5%8D%881.23.22.png" title="Q uicksilver示例" alt="Q uicksilver" /></p>
+<p><img src="https://dl.dropboxusercontent.com/u/64021093/Pics/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202013-06-09%20%E4%B8%8B%E5%8D%881.23.22.png" title="Quicksilver示例" alt="Quicksilver" /></p>
 
 <ul>
-<li>3.还有很多其他的细节功能，通过Q uicksliver的插件实现，可以根据自己的需求来定制。</li>
+<li>3.还有很多其他的细节功能，通过Quicksliver的插件实现，可以根据自己的需求来定制。</li>
 </ul>
 
 
-<h3>S hortcat</h3>
+<h3>Shortcat</h3>
 
-<p><a href="http://shortcatapp.com/">shortcat</a>是M ac下的快捷操作利器。相比Q uicksilver，S hortcat有不同的定位：通过键盘定位到屏幕上某窗体内的某个位置。其官网的示例就是如何通过S hortcat使用键盘更改DNS设置，注意，是完全不用鼠标噢。有人可能会想那为什么卜直接使用cmd呢？我想答案是S hortcat就是基于GUI的解决方案，是GUI和键盘快捷键的完美组合，与cmd并不冲突。</p>
+<p><a href="http://shortcatapp.com/">shortcat</a>是Mac下的快捷操作利器。相比Quicksilver，Shortcat有不同的定位：通过键盘定位到屏幕上某窗体内的某个位置。其官网的示例就是如何通过Shortcat使用键盘更改DNS设置，注意，是完全不用鼠标噢。有人可能会想那为什么卜直接使用cmd呢？我想答案是Shortcat就是基于GUI的解决方案，是GUI和键盘快捷键的完美组合，与cmd并不冲突。</p>
 
-<p>下面简单的交代下S hortcat的使用方式：</p>
+<p>下面简单的交代下Shortcat的使用方式：</p>
 
 <ul>
-<li>1.快捷键<code>C md+S hift+S pace</code>用来激活输入框。使用关键字的定位方式类似于Q uicksilver。比如：如果目的是『L anguage &amp; T ext』，那么输入『lt』、『lang』；『sa』代表show all，显示所能用于文字定位的区域。『.』能展示出所有可控制区域，包括没有文字定位的区域。</li>
+<li>1.快捷键<code>Cmd+Shift+Space</code>用来激活输入框。使用关键字的定位方式类似于Quicksilver。比如：如果目的是『Language &amp; Text』，那么输入『lt』、『lang』；『sa』代表show all，显示所能用于文字定位的区域。『.』能展示出所有可控制区域，包括没有文字定位的区域。</li>
 <li>2.输入了关键字后，界面中被匹配到的模块会被套上不同颜色的方框。接下来，可以使用<code>control+key</code>重定位到对应位置，其中key为对应的匹配上的模块的字符标识。</li>
 </ul>
 
 
-<p><img src="https://dl.dropboxusercontent.com/u/64021093/P%20ics/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202013-06-09%20%E4%B8%8B%E5%8D%881.42.39.png" title="S hortcat示例" alt="S hortcat" /></p>
+<p><img src="https://dl.dropboxusercontent.com/u/64021093/Pics/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202013-06-09%20%E4%B8%8B%E5%8D%881.42.39.png" title="Shortcat示例" alt="Shortcat" /></p>
 
 <ul>
 <li>3.定位到合适的位置后，按下<code>enter</code>，可执行单击动作；对应的，双击<code>enter</code>为鼠标双击动作；如果需要配合其他按键的点击，比如<code>command+click</code>，执行<code>command+enter</code>即可；鼠标悬浮为<code>control</code>；双击<code>control</code>可实现聚焦。</li>
 </ul>
 
 
-<h3>G eek T ool</h3>
+<h3>GeekTool</h3>
 
-<p><a href="http://projects.tynsoe.org/en/geektool/">G eek T ool</a>类似于W indows下的widget，可以个性化的定制自己的桌面，添加插件，将CPU、HDD信息直接展示在桌面上，正如其名，G eek而又文艺!如下效果图：</p>
+<p><a href="http://projects.tynsoe.org/en/geektool/">GeekTool</a>类似于Windows下的widget，可以个性化的定制自己的桌面，添加插件，将CPU、HDD信息直接展示在桌面上，正如其名，Geek而又文艺!如下效果图：</p>
 
-<p><img src="http://bbs.dgtle.com/data/attachment/album/201111/10/011505943%20pmpmm%2068%20enxwwd.png" title="G eek T ool示例桌面" alt="G eek T ool" /></p>
+<p><img src="http://bbs.dgtle.com/data/attachment/album/201111/10/011505943pmpmm68enxwwd.png" title="GeekTool示例桌面" alt="GeekTool" /></p>
 
-<p>详细配置可参考这篇文章<a href="http://www.dgtle.com/article-797-1.html">《教你装小清新—— G eektool &amp;&amp; R ainmeter 桌面皮肤推荐》</a></p>
+<p>详细配置可参考这篇文章<a href="http://www.dgtle.com/article-797-1.html">《教你装小清新—— Geektool &amp;&amp; Rainmeter 桌面皮肤推荐》</a></p>
 
-<h3>N octurne</h3>
+<h3>Nocturne</h3>
 
-<p><a href="http://code.google.com/p/blacktree-nocturne/downloads/detail?name=N%20octurne.2.0.0.zip">N octurne</a>这是桌面颜色控制的工具，与Q uicksilver同为blacktree公司的产品。</p>
+<p><a href="http://code.google.com/p/blacktree-nocturne/downloads/detail?name=Nocturne.2.0.0.zip">Nocturne</a>这是桌面颜色控制的工具，与Quicksilver同为blacktree公司的产品。</p>
 
-<p>使用方式：下载N octurne 2.0.0，解压后拖入应用程序文件夹，打开。在preference中可很直观的配置各项属性。其中，switch to night功能可以将M ac界面切换到黑夜模式，很好玩;)。</p>
+<p>使用方式：下载Nocturne2.0.0，解压后拖入应用程序文件夹，打开。在preference中可很直观的配置各项属性。其中，switch to night功能可以将Mac界面切换到黑夜模式，很好玩;)。</p>
 
 <h3>参考：</h3>
 
 <ul>
-<li><a href="http://ksmx.me/blog/2012/03/18/customize-mac-desktop/">矮矬穷M ac桌面美化得瑟教程</a></li>
+<li><a href="http://ksmx.me/blog/2012/03/18/customize-mac-desktop/">矮矬穷Mac桌面美化得瑟教程</a></li>
 </ul>
 
 
@@ -838,7 +838,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   </header>
 
 
-  <div class="entry-content"><p>最近高级网络课的小组任务是在老师给定的范围内自选方向主题研究并做展示报告。我们组选了sdn。原以为这东西会是工业界无人问津的概念化产品，G oogle了一下却发现其实sdn挺火的，由于它可能带来的可扩展性，一些大互联网企业也在开始涉足相关的研发，比如G oogle呵F acebook。这里简要的梳理下我对SDN概念性的认识。</p>
+  <div class="entry-content"><p>最近高级网络课的小组任务是在老师给定的范围内自选方向主题研究并做展示报告。我们组选了sdn。原以为这东西会是工业界无人问津的概念化产品，Google了一下却发现其实sdn挺火的，由于它可能带来的可扩展性，一些大互联网企业也在开始涉足相关的研发，比如Google呵Facebook。这里简要的梳理下我对SDN概念性的认识。</p>
 
 <h2>背景</h2>
 
@@ -858,23 +858,23 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <p>如果能剥离开网络的物理拓扑结构，将网络资源虚拟化，隐藏物理结构的复杂性，统一的进行逻辑层的管理控制，就能满足多变的网络需求了。</p>
 
-<p>SDN和O pen F low就是一个这样的解决方案。</p>
+<p>SDN和OpenFlow就是一个这样的解决方案。</p>
 
-<h2>O pen F low和SDN</h2>
+<h2>OpenFlow和SDN</h2>
 
-<p>O pen F low起源于斯坦福的E thane项目。该项目试图通过一个集中式的控制器，让网络管理员可以方便地定义基于网络流的安全控制策略，并将这些安全策略应用到各种网络设备中，从而实现对整个网络通讯的安全控制。受到此项目的启发，斯坦福的老师和学生将E thane的设计更一般化，将传统网络设备的数据转发(data plane)和路由控制(control plane)两个功能模块相分离，通过集中式的控制器(C ontroller)以标准化的接口对各种网络设备进行管理和配置。2008年，他们提出了O pen F low的概念。</p>
+<p>OpenFlow起源于斯坦福的Ethane项目。该项目试图通过一个集中式的控制器，让网络管理员可以方便地定义基于网络流的安全控制策略，并将这些安全策略应用到各种网络设备中，从而实现对整个网络通讯的安全控制。受到此项目的启发，斯坦福的老师和学生将Ethane的设计更一般化，将传统网络设备的数据转发(data plane)和路由控制(control plane)两个功能模块相分离，通过集中式的控制器(Controller)以标准化的接口对各种网络设备进行管理和配置。2008年，他们提出了OpenFlow的概念。</p>
 
-<p>这种分布式的实现方式，让控制平面可以和转发平面物理的分离开，控制平面完全可以运行在运算能力更强的服务器上，而不是路由器。O pen F low协议则是分离的两者之间的通信协议。关于O pen F low的技术细节，<a href="http://network.51%20cto.com/art/201306/397443.htm">《虚拟化的逆袭：O pen F low和SDN》</a>一文中有简明介绍。</p>
+<p>这种分布式的实现方式，让控制平面可以和转发平面物理的分离开，控制平面完全可以运行在运算能力更强的服务器上，而不是路由器。OpenFlow协议则是分离的两者之间的通信协议。关于OpenFlow的技术细节，<a href="http://network.51cto.com/art/201306/397443.htm">《虚拟化的逆袭：OpenFlow和SDN》</a>一文中有简明介绍。</p>
 
-<p>基于O pen F low为网络带来的可编程的特性，有研究人员提出了SDN即S oftware D efined N etwork（2009年）。在这个概念中，网络中所有的网络设备被视为被管理的资源，以此抽象出一个网络操作系统(N etwork OS)的概念，这个网络操作系统一方面抽象了底层网络设备的具体细节，同时还为上层应用提供了统一的管理视图和编程接口。SDN的架构细节，参见<a href="http://network.51%20cto.com/art/201211/366278.htm">《SDN是生意 O pen F low是技术》</a>。</p>
+<p>基于OpenFlow为网络带来的可编程的特性，有研究人员提出了SDN即Software Defined Network（2009年）。在这个概念中，网络中所有的网络设备被视为被管理的资源，以此抽象出一个网络操作系统(Network OS)的概念，这个网络操作系统一方面抽象了底层网络设备的具体细节，同时还为上层应用提供了统一的管理视图和编程接口。SDN的架构细节，参见<a href="http://network.51cto.com/art/201211/366278.htm">《SDN是生意 OpenFlow是技术》</a>。</p>
 
-<p>SDN和O pen F low的关系，就像互联网之于TCP/IP协议栈。O pen F low是SDN的核心协议，用于控制转发面设备的控制转发。而SDN是上层的变成界面。</p>
+<p>SDN和OpenFlow的关系，就像互联网之于TCP/IP协议栈。OpenFlow是SDN的核心协议，用于控制转发面设备的控制转发。而SDN是上层的变成界面。</p>
 
-<p>有观点认为，『O pen F low是技术，SDN是生意』。最近对SDN唱衰的报道也证明了这桩『生意』的前途未仆。</p>
+<p>有观点认为，『OpenFlow是技术，SDN是生意』。最近对SDN唱衰的报道也证明了这桩『生意』的前途未仆。</p>
 
 <h2>SDN的发展</h2>
 
-<p>在云计算飞速发展的同时，SDN也喧嚣尘上。G oogle,F acebook等大公司也结成了产业联盟，来推动其发展。</p>
+<p>在云计算飞速发展的同时，SDN也喧嚣尘上。Google,Facebook等大公司也结成了产业联盟，来推动其发展。</p>
 
 <p>但其现状也并非一片明朗：</p>
 
@@ -887,11 +887,11 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <h3>参考</h3>
 
 <ul>
-<li><a href="http://blog.sina.com.cn/s/blog%20_72628%20e%209%20f%200100%20yg%203%20b.html">什么是SDN(S oftware D efined N etworking)？</a>
+<li><a href="http://blog.sina.com.cn/s/blog_72628e9f0100yg3b.html">什么是SDN(Software Defined Networking)？</a>
 *</li>
-<li><a href="http://blog.sina.com.cn/s/blog%20_5385%20c%200%20b%20901010%20pu%203.html">O pen F low/SDN本质论</a></li>
+<li><a href="http://blog.sina.com.cn/s/blog_5385c0b901010pu3.html">OpenFlow/SDN本质论</a></li>
 <li><a href="http://article.yeeyan.org/view/323168/358956">软件定义网络(SDN)：是什么，如何工作，为什么重要</a></li>
-<li><a href="http://network.51%20cto.com/art/201305/394648.htm">SDN：仍处于起步阶段</a><p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/06/08/software-defined-network/'>http://biaobiaoqi.github.com/blog/2013/06/08/software-defined-network/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p></li>
+<li><a href="http://network.51cto.com/art/201305/394648.htm">SDN：仍处于起步阶段</a><p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/06/08/software-defined-network/'>http://biaobiaoqi.github.com/blog/2013/06/08/software-defined-network/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p></li>
 </ul>
 
 </div>
@@ -932,31 +932,31 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   </header>
 
 
-  <div class="entry-content"><p>本文是《hadoop技术内幕——深入解析H adoop C ommon和HDFS架构设计与实现原理》第4章的1-3节的学习笔记。内容为H adoop IPC部分的基础知识介绍。</p>
+  <div class="entry-content"><p>本文是《hadoop技术内幕——深入解析Hadoop Common和HDFS架构设计与实现原理》第4章的1-3节的学习笔记。内容为Hadoop IPC部分的基础知识介绍。</p>
 
 <h2>知识框架</h2>
 
-<p>由于H adoop分布式环境需要一个更高效和正对性优化的IPC机制，传统的诸如RMI的解决方案无法满足这一要求，H adoop自己实现了一套IPC方法。</p>
+<p>由于Hadoop分布式环境需要一个更高效和正对性优化的IPC机制，传统的诸如RMI的解决方案无法满足这一要求，Hadoop自己实现了一套IPC方法。</p>
 
-<p>第4章第1节讲解了RPC的原理，包括S tub-S keleton的架构等，进而用<code>RMI</code>举例（可以参考的<a href="">演示代码</a>）。RMI的调用实现主要包括了服务器端的registry和客户端的lookup。虽然H adoop不是使用RMI做IPC，但了解一下其调用方式对感性的认识到如何进行分布式环境下的远程调用还是有作用的。</p>
+<p>第4章第1节讲解了RPC的原理，包括Stub-Skeleton的架构等，进而用<code>RMI</code>举例（可以参考的<a href="">演示代码</a>）。RMI的调用实现主要包括了服务器端的registry和客户端的lookup。虽然Hadoop不是使用RMI做IPC，但了解一下其调用方式对感性的认识到如何进行分布式环境下的远程调用还是有作用的。</p>
 
-<p>接下来的2,3小节，简单的介绍了IPC过程所依赖的技术方法：J ava的动态代理方式和NIO的网络传输方式。</p>
+<p>接下来的2,3小节，简单的介绍了IPC过程所依赖的技术方法：Java的动态代理方式和NIO的网络传输方式。</p>
 
 <p>第2节讲<code>动态代理</code>，这里需要理解面向对象的代理模式和<em>动态</em>的原因。代理模式分很多种，这里用到的是简单的对行为的传递。动态代理的动态特性，则是因为框架能提供动态创建某个接口的实现的能力(可以参考的<a href="">演示代码</a>)。</p>
 
 <p>更系统的看动态代理过程，分为两个阶段：</p>
 
 <ul>
-<li>1.代理接口的实现：静态方法P roxy.new I nstance()生成动态对象。</li>
-<li>2.调用转发过程：I nvocation H andler实现</li>
+<li>1.代理接口的实现：静态方法Proxy.newInstance()生成动态对象。</li>
+<li>2.调用转发过程：InvocationHandler实现</li>
 </ul>
 
 
-<p>第3节的<code>NIO</code>，跟传统的套接字(S ocket)通信过程做了对比。需要了解S ocket通信的特点：同步，阻塞，基于字节，理解这种特点带来的服务器端的线程闲置的压力。对应的，NIO则是可异步的，非阻塞的，基于块的。具体的实现上，需要了解缓冲区(B uffer)的原理和使用方式，通道(C hannel)和选择器(S elector)配合的使用方式。</p>
+<p>第3节的<code>NIO</code>，跟传统的套接字(Socket)通信过程做了对比。需要了解Socket通信的特点：同步，阻塞，基于字节，理解这种特点带来的服务器端的线程闲置的压力。对应的，NIO则是可异步的，非阻塞的，基于块的。具体的实现上，需要了解缓冲区(Buffer)的原理和使用方式，通道(Channel)和选择器(Selector)配合的使用方式。</p>
 
 <p>我总结了一份slides，如下：(挂在speackerdeck上，如果加载缓慢，请稍候:))</p>
 
-<script async class="speakerdeck-embed" data-id="fbcb 8590 b 1540130690 c 2 e 6 f 0 be 13 e 84" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+<script async class="speakerdeck-embed" data-id="fbcb8590b1540130690c2e6f0be13e84" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
 
 
 <p>slides下载地址：<a href="https://dl.dropboxusercontent.com/u/64021093/slides/%E8%BF%9C%E7%A8%8B%E8%BF%87%E7%A8%8B%E8%B0%83%E7%94%A8%E5%92%8CNIO.pdf">请戳</a><p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/06/08/ipc-in-hadoop/'>http://biaobiaoqi.github.com/blog/2013/06/08/ipc-in-hadoop/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p></p>
@@ -1055,11 +1055,11 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </ul>
 
 
-<p>由于外网网速的限制，基于校园内网建立的工具就有了天然的优势。但如果使用内网，就不得不抛弃各大公司免费提供的邮箱存储空间、网盘存储空间。而校内的资源是有限的，没有自己的服务器，没有足够的空间存储大家的数据，这也就迫使我们考虑到了p 2 p的系统架构。于是，有了这样的解决方案，设定代号为BBT：</p>
+<p>由于外网网速的限制，基于校园内网建立的工具就有了天然的优势。但如果使用内网，就不得不抛弃各大公司免费提供的邮箱存储空间、网盘存储空间。而校内的资源是有限的，没有自己的服务器，没有足够的空间存储大家的数据，这也就迫使我们考虑到了p2p的系统架构。于是，有了这样的解决方案，设定代号为BBT：</p>
 
 <ul>
 <li>PC机安装BBT工具软件后，可以设定<code>共享目录</code>和对应的<code>分享ID</code></li>
-<li>放入特定<code>共享目录</code>的文件，将使用基于p 2 p同步的方式，在拥有相同的<code>分享ID</code>的<code>共享目录</code>间同步数据，目的是让所有人都获得到每个人的数据</li>
+<li>放入特定<code>共享目录</code>的文件，将使用基于p2p同步的方式，在拥有相同的<code>分享ID</code>的<code>共享目录</code>间同步数据，目的是让所有人都获得到每个人的数据</li>
 </ul>
 
 
@@ -1072,21 +1072,21 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <p>确实够简洁，很赞，实现成本还需要调研。</p>
 
-<h6>B it T orrent S ync</h6>
+<h6>BitTorrent Sync</h6>
 
-<p>在构思的过程中，突然想起前几天在start up news上看到了一个基于BT协议的同步软件<a href="http://labs.bittorrent.com/experiments/sync.html">B it T orrent S ync</a>。</p>
+<p>在构思的过程中，突然想起前几天在start up news上看到了一个基于BT协议的同步软件<a href="http://labs.bittorrent.com/experiments/sync.html">BitTorrent Sync</a>。</p>
 
-<p><img src="http://labs.bittorrent.com/img/wide/sync.png" title="B it T orrent S ync" alt="B it T orrent S ync" /></p>
+<p><img src="http://labs.bittorrent.com/img/wide/sync.png" title="BitTorrent Sync" alt="BitTorrent Sync" /></p>
 
 <p>它的实现方式大概是我们所需要的。可惜的是，由于它的功能全面，界面略显复杂。而同时，它并没有开放二次开发接口。</p>
 
-<p>或许我需要自己搭建一个p 2 p的系统？</p>
+<p>或许我需要自己搭建一个p2p的系统？</p>
 
 <h6>PS:</h6>
 
 <p>BT的优势，在于利用了所有节点的存储和传输能力，节点数量越多，下载越快</p>
 
-<p>B it T orrent  S ync的优势，则在于能动态的集合分散在不同节点中的数据</p>
+<p>BitTorrent  Sync的优势，则在于能动态的集合分散在不同节点中的数据</p>
 
 <p>感觉这种去中心化的分布式系统，前景大大的有啊;)<p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/05/25/some-ideas-about-using-bt-protocol-to-sync/'>http://biaobiaoqi.github.com/blog/2013/05/25/some-ideas-about-using-bt-protocol-to-sync/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p></p>
 </div>
@@ -1131,7 +1131,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <h2>字符串匹配算法</h2>
 
-<p>字符串匹配(S tring M atchiing)也称字符串搜索(S tring S earching)是字符串算法中重要的一种，是指从一个大字符串或文本中找到模式串出现的位置。一个基本的字符串匹配算法分类如下：</p>
+<p>字符串匹配(String Matchiing)也称字符串搜索(String Searching)是字符串算法中重要的一种，是指从一个大字符串或文本中找到模式串出现的位置。一个基本的字符串匹配算法分类如下：</p>
 
 <ul>
 <li>单模式匹配：即每次算法执行只需匹配出一个模式串。</li>
@@ -1140,7 +1140,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </ul>
 
 
-<p>单模式匹配最容易理解，构造也非常简单。一个最朴素的思路就是从文本的第一个字符顺次比较模式串，不匹配则重新从下一个字符开始匹配，直到文本末尾。J ava实现代码如下：</p>
+<p>单模式匹配最容易理解，构造也非常简单。一个最朴素的思路就是从文本的第一个字符顺次比较模式串，不匹配则重新从下一个字符开始匹配，直到文本末尾。Java实现代码如下：</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -1155,12 +1155,12 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <span class='line-number'>11</span>
 <span class='line-number'>12</span>
 <span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'> <span class="kd">public</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">bruteforce</span><span class="o">(</span><span class="n">S</span> <span class="n">tring</span> <span class="n">str</span> <span class="mi">1</span><span class="o">,</span> <span class="n">S</span> <span class="n">tring</span> <span class="n">str</span> <span class="mi">2</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>         <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">!=</span> <span class="n">str</span> <span class="mi">1</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>               <span class="k">if</span> <span class="o">(</span><span class="n">str</span> <span class="mi">1</span><span class="o">.</span><span class="na">char</span> <span class="n">A</span> <span class="n">t</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">==</span> <span class="n">str</span> <span class="mi">2</span><span class="o">.</span><span class="na">char</span> <span class="n">A</span> <span class="n">t</span><span class="o">(</span><span class="n">j</span><span class="o">))</span> <span class="o">{</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'> <span class="kd">public</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">bruteforce</span><span class="o">(</span><span class="n">String</span> <span class="n">str1</span><span class="o">,</span> <span class="n">String</span> <span class="n">str2</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>         <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">!=</span> <span class="n">str1</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>               <span class="k">if</span> <span class="o">(</span><span class="n">str1</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">==</span> <span class="n">str2</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">j</span><span class="o">))</span> <span class="o">{</span>
 </span><span class='line'>                    <span class="n">j</span> <span class="o">++;</span>
 </span><span class='line'>                    <span class="n">i</span> <span class="o">++;</span>
-</span><span class='line'>                    <span class="k">if</span> <span class="o">(</span><span class="n">j</span> <span class="o">==</span> <span class="n">str</span> <span class="mi">2</span><span class="o">.</span><span class="na">length</span><span class="o">())</span> <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+</span><span class='line'>                    <span class="k">if</span> <span class="o">(</span><span class="n">j</span> <span class="o">==</span> <span class="n">str2</span><span class="o">.</span><span class="na">length</span><span class="o">())</span> <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
 </span><span class='line'>               <span class="o">}</span><span class="k">else</span> <span class="o">{</span>
 </span><span class='line'>                    <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
 </span><span class='line'>                    <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
@@ -1177,11 +1177,11 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <h2>KMP算法</h2>
 
-<p>网络上关于KMP算法的描述很多，其中个人觉得阮一峰老师的<a href="http://www.ruanyifeng.com/blog/2013/05/K%20nuth%E2%80%93M%20orris%E2%80%93P%20ratt_algorithm.html">《字符串匹配的KMP算法》</a>对KMP的描述最为简明和清晰。图例展示的算法流程更容易让人接受和理解。这里仅记录我所认为重点的知识点。</p>
+<p>网络上关于KMP算法的描述很多，其中个人觉得阮一峰老师的<a href="http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html">《字符串匹配的KMP算法》</a>对KMP的描述最为简明和清晰。图例展示的算法流程更容易让人接受和理解。这里仅记录我所认为重点的知识点。</p>
 
 <h5>算法的思想</h5>
 
-<p>相比蛮力算法，KMP算法预先计算出了一个哈希表，用来指导在匹配过程中匹配失败后尝试下次匹配的起始位置，以此避免重复的读入和匹配过程。这个哈希表被叫做“部分匹配值表(<strong>P articial match table</strong>)”，它的设计是算法精妙之处。</p>
+<p>相比蛮力算法，KMP算法预先计算出了一个哈希表，用来指导在匹配过程中匹配失败后尝试下次匹配的起始位置，以此避免重复的读入和匹配过程。这个哈希表被叫做“部分匹配值表(<strong>Particial match table</strong>)”，它的设计是算法精妙之处。</p>
 
 <h5>部分匹配值表</h5>
 
@@ -1266,19 +1266,19 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <span class='line-number'>46</span>
 </pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">next</span><span class="o">;</span>
 </span><span class='line'>
-</span><span class='line'><span class="kd">public</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">kmp</span><span class="o">(</span><span class="n">S</span> <span class="n">tring</span> <span class="n">str</span><span class="o">,</span> <span class="n">S</span> <span class="n">tring</span> <span class="n">dest</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'><span class="kd">public</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">kmp</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span><span class="o">,</span> <span class="n">String</span> <span class="n">dest</span><span class="o">)</span> <span class="o">{</span>
 </span><span class='line'>  <span class="c1">// i stands for index of str string, j stands for index in dest string.</span>
-</span><span class='line'>  <span class="c1">// A t the beginning of each loop process, j is the new position of dest</span>
+</span><span class='line'>  <span class="c1">// At the beginning of each loop process, j is the new position of dest</span>
 </span><span class='line'>  <span class="c1">// taht should be compared.</span>
 </span><span class='line'>  <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">str</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-</span><span class='line'>      <span class="k">while</span> <span class="o">(</span><span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">str</span><span class="o">.</span><span class="na">char</span> <span class="n">A</span> <span class="n">t</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">!=</span> <span class="n">dest</span><span class="o">.</span><span class="na">char</span> <span class="n">A</span> <span class="n">t</span><span class="o">(</span><span class="n">j</span><span class="o">))</span>
-</span><span class='line'>          <span class="c1">// T his loop is to get a matching character recursively. A nother</span>
+</span><span class='line'>      <span class="k">while</span> <span class="o">(</span><span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">!=</span> <span class="n">dest</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">j</span><span class="o">))</span>
+</span><span class='line'>          <span class="c1">// This loop is to get a matching character recursively. Another</span>
 </span><span class='line'>          <span class="c1">// stop condition is when particial match value meets end.</span>
-</span><span class='line'>          <span class="n">j</span> <span class="o">=</span> <span class="n">next</span><span class="o">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="o">];</span><span class="c1">// A s i in str and j in dest is comparing,</span>
+</span><span class='line'>          <span class="n">j</span> <span class="o">=</span> <span class="n">next</span><span class="o">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="o">];</span><span class="c1">// As i in str and j in dest is comparing,</span>
 </span><span class='line'>                          <span class="c1">// recomputing of j should be in the former</span>
 </span><span class='line'>                          <span class="c1">// character substring, which is next[j-1]</span>
 </span><span class='line'>
-</span><span class='line'>      <span class="k">if</span> <span class="o">(</span><span class="n">str</span><span class="o">.</span><span class="na">char</span> <span class="n">A</span> <span class="n">t</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">==</span> <span class="n">dest</span><span class="o">.</span><span class="na">char</span> <span class="n">A</span> <span class="n">t</span><span class="o">(</span><span class="n">j</span><span class="o">))</span>
+</span><span class='line'>      <span class="k">if</span> <span class="o">(</span><span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">==</span> <span class="n">dest</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">j</span><span class="o">))</span>
 </span><span class='line'>          <span class="n">j</span><span class="o">++;</span>
 </span><span class='line'>
 </span><span class='line'>      <span class="k">if</span> <span class="o">(</span><span class="n">j</span> <span class="o">==</span> <span class="n">dest</span><span class="o">.</span><span class="na">length</span><span class="o">())</span>
@@ -1288,21 +1288,21 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </span><span class='line'>  <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
 </span><span class='line'><span class="o">}</span>
 </span><span class='line'>
-</span><span class='line'><span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">kmp</span> <span class="n">N</span> <span class="nf">ext</span><span class="o">(</span><span class="n">S</span> <span class="n">tring</span> <span class="n">str</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'><span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">kmpNext</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span><span class="o">)</span> <span class="o">{</span>
 </span><span class='line'>  <span class="kt">int</span><span class="o">[]</span> <span class="n">next</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">str</span><span class="o">.</span><span class="na">length</span><span class="o">()];</span>
-</span><span class='line'>  <span class="n">next</span> <span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span><span class='line'>  <span class="n">next</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
 </span><span class='line'>  <span class="c1">// i stands for index of string, j is temporary for particail match</span>
 </span><span class='line'>  <span class="c1">// values computing, at the beginning of each loop process, j is the</span>
 </span><span class='line'>  <span class="c1">// particial match value of former character .</span>
 </span><span class='line'>  <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">str</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="o">++</span><span class="n">i</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>      <span class="k">while</span> <span class="o">(</span><span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">str</span><span class="o">.</span><span class="na">char</span> <span class="n">A</span> <span class="n">t</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">!=</span> <span class="n">str</span><span class="o">.</span><span class="na">char</span> <span class="n">A</span> <span class="n">t</span><span class="o">(</span><span class="n">j</span><span class="o">))</span>
-</span><span class='line'>          <span class="c1">// T his loop is to get a matching character recursively. A nother</span>
+</span><span class='line'>      <span class="k">while</span> <span class="o">(</span><span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">!=</span> <span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">j</span><span class="o">))</span>
+</span><span class='line'>          <span class="c1">// This loop is to get a matching character recursively. Another</span>
 </span><span class='line'>          <span class="c1">// stop condition is when particial match value meets end.</span>
-</span><span class='line'>          <span class="n">j</span> <span class="o">=</span> <span class="n">next</span><span class="o">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="o">];</span><span class="c1">// j will be recomputed in the recursion. T ake</span>
+</span><span class='line'>          <span class="n">j</span> <span class="o">=</span> <span class="n">next</span><span class="o">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="o">];</span><span class="c1">// j will be recomputed in the recursion. Take</span>
 </span><span class='line'>                          <span class="c1">// care that next[j-1] is the particial match</span>
 </span><span class='line'>                          <span class="c1">// value of the first j characters substirng.</span>
 </span><span class='line'>
-</span><span class='line'>      <span class="k">if</span> <span class="o">(</span><span class="n">str</span><span class="o">.</span><span class="na">char</span> <span class="n">A</span> <span class="n">t</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">==</span> <span class="n">str</span><span class="o">.</span><span class="na">char</span> <span class="n">A</span> <span class="n">t</span><span class="o">(</span><span class="n">j</span><span class="o">))</span> <span class="c1">// I f not in this case, j must</span>
+</span><span class='line'>      <span class="k">if</span> <span class="o">(</span><span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">==</span> <span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">j</span><span class="o">))</span> <span class="c1">// If not in this case, j must</span>
 </span><span class='line'>                                          <span class="c1">// meets end, equals to zero.</span>
 </span><span class='line'>          <span class="o">++</span><span class="n">j</span><span class="o">;</span>
 </span><span class='line'>
@@ -1316,10 +1316,10 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <p>理解算法实现时，有几点特别需要注意：</p>
 
 <ul>
-<li>在生成部分匹配值数组的kmp N ext()方法中，第一层循环内，<code>i</code>是字符串的索引，而<code>j</code>则在每次循环开始时代表了<code>i</code>所指定字符之前的子串的部分匹配值。</li>
-<li>kmp N ext()方法的内层while()循环，是为了迭代得到让<code>i</code>指定字符匹配到的情况。有另外一种实现方案：不有用这一层循环，而是直接使用一层循环，在大循环内部做j值变更的判定即可。</li>
-<li>kmp N ext()方法的while()循环中，需要特别注意是<code>next[j -1]</code>，部分匹配值j对应到的是字符串中的第<code>j-1</code>个字符。</li>
-<li>kmp()的循环代码和kmp N ext()部分匹配值表生成的循环代码很类似。两者使用了相同方式，在字符匹配失败后迭代获取新的可匹配情况，且都是利用了next数组。</li>
+<li>在生成部分匹配值数组的kmpNext()方法中，第一层循环内，<code>i</code>是字符串的索引，而<code>j</code>则在每次循环开始时代表了<code>i</code>所指定字符之前的子串的部分匹配值。</li>
+<li>kmpNext()方法的内层while()循环，是为了迭代得到让<code>i</code>指定字符匹配到的情况。有另外一种实现方案：不有用这一层循环，而是直接使用一层循环，在大循环内部做j值变更的判定即可。</li>
+<li>kmpNext()方法的while()循环中，需要特别注意是<code>next[j -1]</code>，部分匹配值j对应到的是字符串中的第<code>j-1</code>个字符。</li>
+<li>kmp()的循环代码和kmpNext()部分匹配值表生成的循环代码很类似。两者使用了相同方式，在字符匹配失败后迭代获取新的可匹配情况，且都是利用了next数组。</li>
 </ul>
 
 
@@ -1331,21 +1331,21 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <h4>基础模板题</h4>
 
-<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=2203">HDOJ的2203题</a>是一个能检验算法正确性的模板题。J ava实现的答案代码<a href="https://github.com/biaobiaoqi/biaobiaoqi%20C%20ode/blob/master/src/biaobiaoqi/practice/hdoj/HDOJ2203.java">请戳这里</a>。</p>
+<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=2203">HDOJ的2203题</a>是一个能检验算法正确性的模板题。Java实现的答案代码<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/practice/hdoj/HDOJ2203.java">请戳这里</a>。</p>
 
 <h4>延伸模板题</h4>
 
-<p><a href="http://poj.org/problem?id=2406">POJ的2406题</a>，对考察点做了巧妙的变形，对更深入的理解KMP中的部分匹配表（即next数组）很有帮助。J ava实现的答案代码<a href="https://github.com/biaobiaoqi/biaobiaoqi%20C%20ode/blob/master/src/biaobiaoqi/practice/poj/POJ2406.java">请戳这里</a>。</p>
+<p><a href="http://poj.org/problem?id=2406">POJ的2406题</a>，对考察点做了巧妙的变形，对更深入的理解KMP中的部分匹配表（即next数组）很有帮助。Java实现的答案代码<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/practice/poj/POJ2406.java">请戳这里</a>。</p>
 
-<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1867">HDOJ的1867题</a>也属于kmp的变形。要求对kmp利用next数组进行比较的过程有清晰的认识。J ava实现的答案代码<a href="https://github.com/biaobiaoqi/biaobiaoqi%20C%20ode/blob/master/src/biaobiaoqi/practice/hdoj/HDOJ1867.java">请戳这里</a>。</p>
+<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1867">HDOJ的1867题</a>也属于kmp的变形。要求对kmp利用next数组进行比较的过程有清晰的认识。Java实现的答案代码<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/practice/hdoj/HDOJ1867.java">请戳这里</a>。</p>
 
 <h3>其他参考资料：</h3>
 
 <ul>
-<li><p><a href="http://en.wikipedia.org/wiki/K%20nuth%E2%80%93M%20orris%E2%80%93P%20ratt_algorithm">wiki:K nuth–M orris–P ratt A lgorithm</a></p></li>
-<li><p><a href="http://en.wikipedia.org/wiki/S%20tring_searching_algorithm">wiki:S tring S earching A lgorithm</a></p></li>
+<li><p><a href="http://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm">wiki:Knuth–Morris–Pratt Algorithm</a></p></li>
+<li><p><a href="http://en.wikipedia.org/wiki/String_searching_algorithm">wiki:String Searching Algorithm</a></p></li>
 <li><p><a href="http://www.cppblog.com/converse/archive/2006/07/05/9447.html">《KMP算法的实现》</a></p></li>
-<li><p><a href="http://wangcong.org/blog/archives/2090">《L inux 内核中的 KMP 实现》</a><p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/05/25/kmp-algorithm/'>http://biaobiaoqi.github.com/blog/2013/05/25/kmp-algorithm/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p></p></li>
+<li><p><a href="http://wangcong.org/blog/archives/2090">《Linux 内核中的 KMP 实现》</a><p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/05/25/kmp-algorithm/'>http://biaobiaoqi.github.com/blog/2013/05/25/kmp-algorithm/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p></p></li>
 </ul>
 
 </div>
@@ -1357,7 +1357,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
   <div class="pagination">
     
-      <a class="prev" href="/blog/page/2/">&larr; O lder</a>
+      <a class="prev" href="/blog/page/2/">&larr; Older</a>
     
     <a href="/blog/archives">biaobiaoqi的博文</a>
     
