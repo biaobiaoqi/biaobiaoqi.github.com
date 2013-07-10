@@ -132,7 +132,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <div class="entry-content"><h2>背景</h2>
 
-<p>之前的时间里对Hadoop的使用都是基于学长所搭建起的实验环境的，没有完整的自己部署和维护过，最近抽时间初体验了在集群环境下装机、配置、运行的全过程，梳理总结到本文中。</p>
+<p>之前的时间里对 Hadoop 的使用都是基于学长所搭建起的实验环境的，没有完整的自己部署和维护过，最近抽时间初体验了在集群环境下装机、配置、运行的全过程，梳理总结到本文中。</p>
 
 <h2>配置</h2>
 
@@ -140,7 +140,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <li>内存:8G</li>
 <li>CPU：i5-2400 3.1GHz；</li>
 <li>硬盘：960G</li>
-<li>系统：windows 7旗舰 64bits</li>
+<li>系统：windows 7 旗舰 64bits</li>
 </ul>
 
 
@@ -151,19 +151,19 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <li>虚拟机：VMware7.1.1</li>
 <li>虚拟集群：</li>
 <li><ul>
-<li>T （master节点）Ubuntu11.04 32 bits 内存512MB；硬盘100G；单核；</li>
+<li>T （master 节点）Ubuntu11.04 32 bits 内存 512MB；硬盘 100G；单核；</li>
 </ul>
 </li>
 <li><ul>
-<li>T2（slave节点） Ubuntu11.04 32 bits 内存512MB；硬盘100G；单核；</li>
+<li>T2（slave 节点） Ubuntu11.04 32 bits 内存 512MB；硬盘 100G；单核；</li>
 </ul>
 </li>
 <li><ul>
-<li>T3（slave节点） Ubuntu11.04 32 bits 内存512MB；硬盘100G；单核；</li>
+<li>T3（slave 节点） Ubuntu11.04 32 bits 内存 512MB；硬盘 100G；单核；</li>
 </ul>
 </li>
 <li><ul>
-<li>T4（slave节点） Ubuntu11.04 32 bits 内存512MB；硬盘100G；单核；</li>
+<li>T4（slave 节点） Ubuntu11.04 32 bits 内存 512MB；硬盘 100G；单核；</li>
 </ul>
 </li>
 </ul>
@@ -173,7 +173,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <h5>1.节点机器的配置</h5>
 
-<p>配置固定IP:修改<code>/etc/nerwork/interfaces</code></p>
+<p>配置固定 IP:修改<code>/etc/nerwork/interfaces</code></p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -189,16 +189,16 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </span><span class='line'>broadcast 192.168.108.0</span></code></pre></td></tr></table></div></figure>
 
 
-<p>为了便于管理，建议按统一约定修改hostname：修改<code>/etc/hostname</code>；同时，Hadoop集群要求每个节点使用同一个账号来管理、运行，所以，也需要设置好公用账号。</p>
+<p>为了便于管理，建议按统一约定修改 hostname：修改<code>/etc/hostname</code>；同时，Hadoop 集群要求每个节点使用同一个账号来管理、运行，所以，也需要设置好公用账号。</p>
 
-<h5>2.集群ssh配置</h5>
+<h5>2.集群 ssh 配置</h5>
 
-<p>ssh相关原理和操作，参见博文<a href="http://biaobiaoqi.me/blog/2013/04/19/use-ssh/">《SSH原理和使用》</a>。</p>
+<p>ssh 相关原理和操作，参见博文<a href="http://biaobiaoqi.me/blog/2013/04/19/use-ssh/">《SSH 原理和使用》</a>。</p>
 
-<p>在每台机器上生成密钥对，并将所有机器的公钥集成到master的<code>~/.ssh/authorized_keys</code>中,之后将这个文件分发到集群所有机器上。
-这样，所有机器之间都可以实现免密码的ssh访问了。</p>
+<p>在每台机器上生成密钥对，并将所有机器的公钥集成到 master 的<code>~/.ssh/authorized_keys</code>中,之后将这个文件分发到集群所有机器上。
+这样，所有机器之间都可以实现免密码的 ssh 访问了。</p>
 
-<p>使用如下指令，可以将本机的公钥添加到master的authorized_keys文件末尾。当所有节点都执行一遍以后，再将master的authorized_keys发布到各个节点上。</p>
+<p>使用如下指令，可以将本机的公钥添加到 master 的 authorized_keys 文件末尾。当所有节点都执行一遍以后，再将 master 的 authorized_keys 发布到各个节点上。</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>#cat .ssh/id_rsa.pub | ssh T 'cat &gt;&gt; ~/.ssh/authorized_keys'</span></code></pre></td></tr></table></div></figure>
@@ -206,11 +206,11 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <h5>3.工具脚本</h5>
 
-<p>在分布式的环境里，运维工作的自动化很有必要。为了方便集群的运维，我写了两个简单的batch脚本。</p>
+<p>在分布式的环境里，运维工作的自动化很有必要。为了方便集群的运维，我写了两个简单的 batch 脚本。</p>
 
 <h6>统一执行脚本</h6>
 
-<p>在所有节点上执行同样的动作。使用时，在master节点上调用batch脚本，参数为对应的batch执行语句。</p>
+<p>在所有节点上执行同样的动作。使用时，在 master 节点上调用 batch 脚本，参数为对应的 batch 执行语句。</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -243,13 +243,13 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>脚本中使用的slaveslist文件保存着所有slave节点的hostname，需要与脚本放在同一个工作目录下。</p>
+<p>脚本中使用的 slaveslist 文件保存着所有 slave 节点的 hostname，需要与脚本放在同一个工作目录下。</p>
 
 <h6>统一替部署脚本</h6>
 
 <p>将主节点的某文件或目录统一的更新部署替换到所有节点上（注意，所有节点拥有相同的目录结构，即替换的文件路径相同）。</p>
 
-<p>遇到hadoop集群中节点的增删改动需要修改配置文件的，都可以通过这个脚本便捷的部署。</p>
+<p>遇到 hadoop 集群中节点的增删改动需要修改配置文件的，都可以通过这个脚本便捷的部署。</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -286,9 +286,9 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h5>4.配置hosts文件</h5>
+<h5>4.配置 hosts 文件</h5>
 
-<p>由于hadoop体系在处理节点时，是使用的hostname，而非IP，所以必须先配置好hostname和IP的关系。
+<p>由于 hadoop 体系在处理节点时，是使用的 hostname，而非 IP，所以必须先配置好 hostname 和 IP 的关系。
 在一台机器上修改<code>/etc/hosts</code></p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -307,27 +307,27 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <p>然后使用统一执行脚本，将它发布到所有节点上。</p>
 
-<p>值得注意的是，在<code>/etc/hostsname</code>中修改了host name之后，如果不同步的修改<code>/etc/hosts</code>中的相关信息，则在sudo操作时出现 <code>sudo: unable to resolve host</code>  的提示。原因是机器无法解析主机名。</p>
+<p>值得注意的是，在<code>/etc/hostsname</code>中修改了 host name 之后，如果不同步的修改<code>/etc/hosts</code>中的相关信息，则在 sudo 操作时出现 <code>sudo: unable to resolve host</code>  的提示。原因是机器无法解析主机名。</p>
 
-<p>修改<code>/etc/hosts</code>时也要特别注意，如果改成<code>127.0.0.1 localhost HOSTNAME</code> (其中HOSTNAME是主机名)的形式，在开启hadoop集群时，会出现datanode无法正常访问namenode，算是个小bug吧。所以得把hosts文件写成如上的形式。</p>
+<p>修改<code>/etc/hosts</code>时也要特别注意，如果改成<code>127.0.0.1 localhost HOSTNAME</code> (其中 HOSTNAME 是主机名)的形式，在开启 hadoop 集群时，会出现 datanode 无法正常访问 namenode，算是个小 bug 吧。所以得把 hosts 文件写成如上的形式。</p>
 
-<h5>5.配置Java环境</h5>
+<h5>5.配置 Java 环境</h5>
 
-<p>Hadoop需要Java1.6或更高版本，记住Java的安装目录，之后需要在hadoop配置过程中用到。</p>
+<p>Hadoop 需要 Java1.6 或更高版本，记住 Java 的安装目录，之后需要在 hadoop 配置过程中用到。</p>
 
-<h2>安装Hadoop</h2>
+<h2>安装 Hadoop</h2>
 
-<h5>1.下载Hadoop</h5>
+<h5>1.下载 Hadoop</h5>
 
-<p>从官网下载<a href="http://www.apache.org/dyn/closer.cgi/hadoop/common/">Hadoop发布版</a>（博主使用的是较早的稳定版0.20.2）</p>
+<p>从官网下载 <a href="http://www.apache.org/dyn/closer.cgi/hadoop/common/">Hadoop 发布版</a>（博主使用的是较早的稳定版 0.20.2）</p>
 
-<p>关于版本选择，推荐阅读：<a href="http://dongxicheng.org/mapreduce-nextgen/how-to-select-hadoop-versions/">Hadoop版本选择探讨</a></p>
+<p>关于版本选择，推荐阅读：<a href="http://dongxicheng.org/mapreduce-nextgen/how-to-select-hadoop-versions/">Hadoop 版本选择探讨</a></p>
 
 <h5>2.部署</h5>
 
-<p>解压下载好的Hadoop，后放到合适的目录下。这里假定放置在/home/USER/ 的目录下</p>
+<p>解压下载好的 Hadoop，后放到合适的目录下。这里假定放置在/home/USER/ 的目录下</p>
 
-<p>在<code>/home/USER/.bashrc</code>(其中USER为集群的用户名)文件中，增加如下语句，设定Hadoop相关的路径信息：</p>
+<p>在<code>/home/USER/.bashrc</code>(其中 USER 为集群的用户名)文件中，增加如下语句，设定 Hadoop 相关的路径信息：</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -343,13 +343,13 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </span><span class='line'>export CLASSPATH=.:$JAVA_HOME/bin:$PATH:$HADOOP_HOME:$HADOOP_HOME/bin</span></code></pre></td></tr></table></div></figure>
 
 
-<h6>Hadoop核心配置修改</h6>
+<h6>Hadoop 核心配置修改</h6>
 
-<p>配置文件在<code>$HADOOP_HOME/conf</code>目录下，其中基础配置比较重要的有三个：core-site.xml, hdfs-site.xml, mapred-site.xml。（当然，每个配置文件都有其细节作用，不过在初步实践hadoop时，理解这三个配置文件中的几个重要配置项就够了）</p>
+<p>配置文件在<code>$HADOOP_HOME/conf</code>目录下，其中基础配置比较重要的有三个：core-site.xml, hdfs-site.xml, mapred-site.xml。（当然，每个配置文件都有其细节作用，不过在初步实践 hadoop 时，理解这三个配置文件中的几个重要配置项就够了）</p>
 
-<p>一般的，有三种可选模式。即本地模式、伪分布式模式和全分布式模式。前两种只是在单机环境下，后一种才是生产环境下的常用方式。《Hadoop权威指南》和《Hadoop实战》等书中都有讲到不同方式的配置，这里博主仅描述实验环境下4节点的全分布式配置。</p>
+<p>一般的，有三种可选模式。即本地模式、伪分布式模式和全分布式模式。前两种只是在单机环境下，后一种才是生产环境下的常用方式。《Hadoop 权威指南》和《Hadoop 实战》等书中都有讲到不同方式的配置，这里博主仅描述实验环境下 4 节点的全分布式配置。</p>
 
-<p>core-site.xml整个hadoop的顶层配置</p>
+<p>core-site.xml 整个 hadoop 的顶层配置</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -385,7 +385,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </span><span class='line'>         &lt;name&gt;hadoop.tmp.dir&lt;/name&gt;
 </span><span class='line'>         &lt;value&gt;/home/biaobiaoqi/UDMS/hadoop-data/tmp-base&lt;/value&gt;
 </span><span class='line'>         &lt;description&gt;
-</span><span class='line'>        存放临时目录的路径，默认也被用来存储hdfs的元数据和文件数据，值得注意的是，hadoop账户对所设定的本地路径是否有足够的操作权限。之后再hdfs-site.xml中设定的dfs.data.dir和dfs.name.dir也要注意同样的问题
+</span><span class='line'>        存放临时目录的路径，默认也被用来存储 hdfs 的元数据和文件数据，值得注意的是，hadoop 账户对所设定的本地路径是否有足够的操作权限。之后再 hdfs-site.xml 中设定的 dfs.data.dir 和 dfs.name.dir 也要注意同样的问题
 </span><span class='line'>        &lt;/description&gt; 
 </span><span class='line'>    &lt;/property&gt; 
 </span><span class='line'>
@@ -393,7 +393,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </span><span class='line'>          &lt;name&gt;fs.default.name&lt;/name&gt; 
 </span><span class='line'>          &lt;value&gt;hdfs://T:9000/&lt;/value&gt;
 </span><span class='line'>          &lt;description&gt;
-</span><span class='line'>        默认文件系统的标记。这个URI标记了文件系统的实现方式。UIR的协议决定了文件系统的实现类，而后面的值决定了文件系统的地址、端口等信息。
+</span><span class='line'>        默认文件系统的标记。这个 URI 标记了文件系统的实现方式。UIR 的协议决定了文件系统的实现类，而后面的值决定了文件系统的地址、端口等信息。
 </span><span class='line'>        &lt;/description&gt;
 </span><span class='line'>     &lt;/property&gt; 
 </span><span class='line'>
@@ -402,7 +402,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>hdfs-site.xml存储HDFS相关的信息</p>
+<p>hdfs-site.xml 存储 HDFS 相关的信息</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -446,14 +446,14 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </span><span class='line'>         &lt;name&gt;dfs.name.dir&lt;/name&gt;
 </span><span class='line'>          &lt;value&gt;/home/hadoop/hadoop-data/meta-data&lt;/value&gt;
 </span><span class='line'>        &lt;description&gt;
-</span><span class='line'>        设定hdfs的元数据信息存储地址。在namenode上。
+</span><span class='line'>        设定 hdfs 的元数据信息存储地址。在 namenode 上。
 </span><span class='line'>        &lt;/description&gt;
 </span><span class='line'>     &lt;/property&gt;
 </span><span class='line'>     &lt;property&gt;
 </span><span class='line'>          &lt;name&gt;dfs.data.dir&lt;/name&gt;
 </span><span class='line'>          &lt;value&gt;/home/hadoop/hadoop-data/data&lt;/value&gt;
 </span><span class='line'>        &lt;description&gt;
-</span><span class='line'>        设定hdfs的数据存储地址。在datanode上。
+</span><span class='line'>        设定 hdfs 的数据存储地址。在 datanode 上。
 </span><span class='line'>        &lt;/description&gt;
 </span><span class='line'>     &lt;/property&gt;
 </span><span class='line'>
@@ -461,7 +461,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>mapred-site.xml存储mapreduce作业相关配置</p>
+<p>mapred-site.xml 存储 mapreduce 作业相关配置</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -484,19 +484,19 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </span><span class='line'>    &lt;property&gt;   
 </span><span class='line'>          &lt;name&gt;mapred.job.tracker&lt;/name&gt;
 </span><span class='line'>          &lt;value&gt;T:9001&lt;/value&gt;   
-</span><span class='line'>          &lt;description&gt; Mapreduce 的job tracker所在的节点和端口。&lt;/description&gt; 
+</span><span class='line'>          &lt;description&gt; Mapreduce 的 job tracker 所在的节点和端口。&lt;/description&gt; 
 </span><span class='line'>     &lt;/property&gt;
 </span><span class='line'>&lt;/configuration&gt;
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>hosts文件存储了master节点</p>
+<p>hosts 文件存储了 master 节点</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>T</span></code></pre></td></tr></table></div></figure>
 
 
-<p>slaves文件存储着所有的slaves节点</p>
+<p>slaves 文件存储着所有的 slaves 节点</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -508,11 +508,11 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <h2>启动集群</h2>
 
-<h5>1.格式化namenode</h5>
+<h5>1.格式化 namenode</h5>
 
-<p>如果是第一次起动集群，需要先格式化HDFS。</p>
+<p>如果是第一次起动集群，需要先格式化 HDFS。</p>
 
-<p>namenode存放了HDFS的元数据，故可以看成是对HDFS的格式化。</p>
+<p>namenode 存放了 HDFS 的元数据，故可以看成是对 HDFS 的格式化。</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>$HADOOP_HOME/bin/hadoop namenode -format</span></code></pre></td></tr></table></div></figure>
@@ -539,25 +539,25 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>如果成功，打开 http://T:50070 (T为集群master节点)，可以看到HDFS的运行情况，包括节点数量、空间大小等。这是Hadoop自带的HDFS监控页面；同样的，http://T:50030 是Mapreduce的监控界面。</p>
+<p>如果成功，打开 http://T:50070 (T 为集群 master 节点)，可以看到 HDFS 的运行情况，包括节点数量、空间大小等。这是 Hadoop 自带的 HDFS 监控页面；同样的，http://T:50030 是 Mapreduce 的监控界面。</p>
 
-<p>如果没有成功，根据$HADOOP_HOME/logs目录下的日志文件信息debug。</p>
+<p>如果没有成功，根据$HADOOP_HOME/logs 目录下的日志文件信息 debug。</p>
 
 <h5>3.常见问题</h5>
 
 <ul>
-<li>namenode无法启动：</li>
+<li>namenode 无法启动：</li>
 <li><ul>
-<li>删除掉本地文件系统中HDFS的目录文件，重新格式化HDFS。</li>
+<li>删除掉本地文件系统中 HDFS 的目录文件，重新格式化 HDFS。</li>
 </ul>
 </li>
 <li><ul>
-<li>HDFS目录的权限不够，更改权限设置等。</li>
+<li>HDFS 目录的权限不够，更改权限设置等。</li>
 </ul>
 </li>
-<li>namenode启动成功，datanode无法连接：检查hosts文件是否设置正确；检查各个配置文件中地址值是否使用了IP而不是hostname。</li>
-<li>namenode启动成功，datanode无法启动：Incompatible namespaceIDs，由于频繁格式化，造成dfs.name.dir/current/VERSION与dfs.data.dir/current/VERSION数据不一致。</li>
-<li>SafeModeException： 分布式系统启动时，会进入安全模式，安全模式下，hadoop是无法执行的。一般的等待一会儿，就可以正常使用了。如果是由于之前集群崩溃造成的无法自动退出安全模式的情况，则需要如下特殊处理了</li>
+<li>namenode 启动成功，datanode 无法连接：检查 hosts 文件是否设置正确；检查各个配置文件中地址值是否使用了 IP 而不是 hostname。</li>
+<li>namenode 启动成功，datanode 无法启动：Incompatible namespaceIDs，由于频繁格式化，造成 dfs.name.dir/current/VERSION 与 dfs.data.dir/current/VERSION 数据不一致。</li>
+<li>SafeModeException： 分布式系统启动时，会进入安全模式，安全模式下，hadoop 是无法执行的。一般的等待一会儿，就可以正常使用了。如果是由于之前集群崩溃造成的无法自动退出安全模式的情况，则需要如下特殊处理了</li>
 </ul>
 
 
@@ -567,7 +567,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <h2>初体验</h2>
 
-<p>最简单的尝试就是使用Hadoop自带的wordcount程序了，参照<a href="http://www.cnblogs.com/xia520pi/archive/2012/05/16/2504205.html">这篇文章</a>，描述很详细。</p>
+<p>最简单的尝试就是使用 Hadoop 自带的 wordcount 程序了，参照<a href="http://www.cnblogs.com/xia520pi/archive/2012/05/16/2504205.html">这篇文章</a>，描述很详细。</p>
 
 <p>其他的一些尝试： <a href="http://www.cnblogs.com/rilley/archive/2012/02/13/2349858.html">动态增删节点</a> 、 <a href="http://www.cnblogs.com/ggjucheng/archive/2012/04/18/2454696.html">修改备份数量</a></p>
 

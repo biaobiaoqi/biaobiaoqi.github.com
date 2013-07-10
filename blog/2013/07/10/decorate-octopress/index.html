@@ -130,37 +130,37 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   </header>
 
 
-<div class="entry-content"><p>在github pages上搭建好octopress博客之后，博客的基本功能就能使用了。如果想自己定制也是没问题的，octopress有较详尽的官方文档，原则上有问题求助官方即可：<a href="http://octopress.org/help/">octopress-help</a>。官方没有包纳的也可以去询问<a href="http://stackoverflow.com/questions/tagged/octopress">stackoverflow</a>。 当然，中文的看起来总会省事儿点。我做了如下一些总结;)</p>
+<div class="entry-content"><p>在 github pages 上搭建好 octopress 博客之后，博客的基本功能就能使用了。如果想自己定制也是没问题的，octopress 有较详尽的官方文档，原则上有问题求助官方即可：<a href="http://octopress.org/help/">octopress-help</a>。官方没有包纳的也可以去询问 <a href="http://stackoverflow.com/questions/tagged/octopress">stackoverflow</a>。 当然，中文的看起来总会省事儿点。我做了如下一些总结;)</p>
 
-<p>不会ruby的童鞋特别注意：配置_config.yml的过程中特别注意，配置项『:』后要留空格，否则会报错。</p>
+<p>不会 ruby 的童鞋特别注意：配置_ config.yml 的过程中特别注意，配置项『:』后要留空格，否则会报错。</p>
 
 <h2>1.装饰边栏</h2>
 
-<p>以增加豆瓣展示框为例。参加正反反长大哥的博客<a href="http://icodeit.org/2012/10/how-to-embed-douban-show-in-your-octopress-site/">How to Embed Douban-Show in Your Octopress Site</a></p>
+<p>以增加豆瓣展示框为例。参加正反反长大哥的博客 <a href="http://icodeit.org/2012/10/how-to-embed-douban-show-in-your-octopress-site/">How to Embed Douban-Show in Your Octopress Site</a></p>
 
 <h2>2.增加国内的第三方评论</h2>
 
-<p>虽然octopress内置的评论系统也很不错，但国内的第三方评论更接地气，将微博、人人等各方SNS都纳入旗下。比较出名的有友言、多说。</p>
+<p>虽然 octopress 内置的评论系统也很不错，但国内的第三方评论更接地气，将微博、人人等各方 SNS 都纳入旗下。比较出名的有友言、多说。</p>
 
-<p>这里以唐巧大哥的博文<a href="http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/">《象写程序一样写博客：搭建基于github的博客》</a>为例，他使用的是友言。</p>
+<p>这里以唐巧大哥的博文<a href="http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/">《象写程序一样写博客：搭建基于 github 的博客》</a>为例，他使用的是友言。</p>
 
 <h2>3.定制域名</h2>
 
-<p>如果你拥有自己的域名，可以CNAME到github pages上。以我的配置为例（我的域名为<code>biaobiaoqi.me</code>）。</p>
+<p>如果你拥有自己的域名，可以 CNAME 到 github pages 上。以我的配置为例（我的域名为<code>biaobiaoqi.me</code>）。</p>
 
-<p>1.在octopress的source目录下创建CNAME文件，并输入新域名：biaobiaoqi.com</p>
+<p>1.在 octopress 的 source 目录下创建 CNAME 文件，并输入新域名：biaobiaoqi.com</p>
 
-<p>2.在域名管理中，创建或修改A记录，指向207.97.227.245这个地址。</p>
+<p>2.在域名管理中，创建或修改 A 记录，指向 207.97.227.245 这个地址。</p>
 
-<p>3.创建CNAME记录，www.biaobiaoqi.com -> biaobiaoqi.github.com</p>
+<p>3.创建 CNAME 记录，www.biaobiaoqi.com -> biaobiaoqi.github.com</p>
 
 <p>这一过程可能需要好几天才能生效，请耐心等待:)</p>
 
 <h2>4.让博客中连接在新窗口打开</h2>
 
-<p>由于markdown不支持这一语法，如果要自己用html标签实现，又有些违背了markdown以内容为重的立意。</p>
+<p>由于 markdown 不支持这一语法，如果要自己用 html 标签实现，又有些违背了 markdown 以内容为重的立意。</p>
 
-<p>参考博文<a href="http://www.blogjava.net/lishunli/archive/2013/01/20/394478.html">《在Octopress中为markdown的超链接加上target=&#8221;_blank&#8221;》</a>，可以通过将如下代码添加到 {OCTOPRESS_HOME}/source/_includes/custom/head.html文件末尾来实现：</p>
+<p>参考博文<a href="http://www.blogjava.net/lishunli/archive/2013/01/20/394478.html">《在 Octopress 中为 markdown 的超链接加上 target=&#8221;_blank&#8221;》</a>，可以通过将如下代码添加到 {OCTOPRESS_HOME}/source/_includes/custom/head.html 文件末尾来实现：</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -207,7 +207,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <p>默认情况，所有文字的排头会对齐，但如果有列表项的情况下也如此，列表头就会冲出文章的主体区块了。</p>
 
-<p>在octopress/sass/custom/_layout.scss文件中找到#$indented-lists: true行，去掉#注释即可。</p>
+<p>在 octopress/sass/custom/_layout.scss 文件中找到#$indented-lists: true 行，去掉#注释即可。</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$indented</span><span class="o">-</span><span class="nx">lists</span><span class="o">:</span> <span class="kc">true</span>
@@ -219,9 +219,9 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <!--more-->
 
 
-<h2>6.404ERROR页面</h2>
+<h2>6.404ERROR 页面</h2>
 
-<p>在ocotopress/source目录下，增加404.markdown，并做出自定义的呃编辑。本博客使用了腾讯公益404，推荐大家使用，为社会贡献一分正能量。<a href="http://www.qq.com/404/">公益404</a></p>
+<p>在 ocotopress/source 目录下，增加 404.markdown，并做出自定义的呃编辑。本博客使用了腾讯公益 404，推荐大家使用，为社会贡献一分正能量。<a href="http://www.qq.com/404/">公益 404</a></p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -262,25 +262,25 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <h2>7.在侧边栏增加标签云(tag cloud)</h2>
 
-<p>octopress默认只有分类，没有标签。这对于博文的组织和管理很不友好。有人开源出了自己定制的tag生成和tag cloud展现的代码，可以引入到自己的博客中来。</p>
+<p>octopress 默认只有分类，没有标签。这对于博文的组织和管理很不友好。有人开源出了自己定制的 tag 生成和 tag cloud 展现的代码，可以引入到自己的博客中来。</p>
 
-<p>详细操作参见博文：<a href="http://codemacro.com/2012/07/18/add-tag-to-octopress/">《为octopress添加tag Cloud》</a>。不过博文中没有讲解标签云的UI配置参数的使用，为了让UI适应页面，请参考原作者的官方说明:<a href="https://github.com/robbyedwards/octopress-tag-cloud">octopress-tag-cloud</a>。我所实践出的较合理的参数值如下</p>
+<p>详细操作参见博文：<a href="http://codemacro.com/2012/07/18/add-tag-to-octopress/">《为 octopress 添加 tag Cloud》</a>。不过博文中没有讲解标签云的 UI 配置参数的使用，为了让 UI 适应页面，请参考原作者的官方说明:<a href="https://github.com/robbyedwards/octopress-tag-cloud">octopress-tag-cloud</a>。我所实践出的较合理的参数值如下</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#注意，下面一行的escape反斜杠在正常使用时需要去掉</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#注意，下面一行的 escape 反斜杠在正常使用时需要去掉</span>
 </span><span class='line'><span class="p">\{\</span><span class="o">%</span> <span class="n">tag_cloud</span> <span class="n">font</span><span class="o">-</span><span class="ss">size</span><span class="p">:</span> <span class="mi">70</span><span class="o">-</span><span class="mi">180</span><span class="sx">%, limit: 15,</span> <span class="ss">order</span><span class="p">:</span> <span class="nb">rand</span><span class="p">,</span> <span class="ss">style</span><span class="p">:</span> <span class="n">para</span>  <span class="p">{</span> <span class="o">&amp;</span><span class="n">nbsp</span> <span class="p">}\</span><span class="o">%</span><span class="p">\}</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 <p>如果想将文章分类（category）也放在侧边栏，可以参考这篇博文：<a href="http://paz.am/blog/blog/2012/06/25/octopress-category-list-plugin/">《Octopress - Category List Plug-in》</a></p>
 
-<h2>8.在顶栏增加标签云页面tab</h2>
+<h2>8.在顶栏增加标签云页面 tab</h2>
 
 <p>1.生成新网页</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rake</span> <span class="n">new_page</span><span class="o">[</span><span class="s2">&quot;tag-cloud&quot;</span><span class="o">]</span> <span class="c1">#在octopress/source/中将生成tag-cloud/文件夹</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rake</span> <span class="n">new_page</span><span class="o">[</span><span class="s2">&quot;tag-cloud&quot;</span><span class="o">]</span> <span class="c1">#在 octopress/source/中将生成 tag-cloud/文件夹</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -335,7 +335,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </span><span class='line'><span class="ss">footer</span><span class="p">:</span> <span class="kp">true</span>
 </span><span class='line'><span class="o">---</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">#注意，代码中的escape反斜杠在正常使用时需要去掉</span>
+</span><span class='line'><span class="c1">#注意，代码中的 escape 反斜杠在正常使用时需要去掉</span>
 </span><span class='line'><span class="c1">#另外，这几个语句不能使用换行。在我的测试环境下，使用换行后，最终的页面上对换行进行了错误的解码，给增加了一个&lt;code&gt;标签，造成了错误的显示。</span>
 </span><span class='line'>
 </span><span class='line'><span class="o">&lt;</span><span class="n">ul</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;tag-cloud&quot;</span><span class="o">&gt;</span><span class="p">\{\</span><span class="o">%</span> <span class="n">tag_cloud</span> <span class="n">font</span><span class="o">-</span><span class="ss">size</span><span class="p">:</span> <span class="mi">90</span><span class="o">-</span><span class="mi">210</span><span class="sx">%, limit: 1000,</span> <span class="ss">style</span><span class="p">:</span> <span class="n">para</span> <span class="p">\</span><span class="o">%</span><span class="p">\}</span><span class="o">&lt;</span><span class="sr">/ul&gt;</span>
@@ -344,11 +344,11 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <h2>9.博客末尾增加原文链接、版权等</h2>
 
-<p>最近发现有其他小网站未经授权直接copy我的博客内容，在违章的末尾加上版权、原文链接变得很有必要了。</p>
+<p>最近发现有其他小网站未经授权直接 copy 我的博客内容，在违章的末尾加上版权、原文链接变得很有必要了。</p>
 
-<p>详情参见博客<a href="http://codemacro.com/2012/07/26/post-footer-plugin-for-octopress/">《为octopress每篇文章添加一个文章信息》</a>。</p>
+<p>详情参见博客<a href="http://codemacro.com/2012/07/26/post-footer-plugin-for-octopress/">《为 octopress 每篇文章添加一个文章信息》</a>。</p>
 
-<p>值得注意的是，插件代码中如下几行需要去掉缩进和换行符。原因跟第8节所讲一样，换行符引起了错误的解码，造成了错误的显示。</p>
+<p>值得注意的是，插件代码中如下几行需要去掉缩进和换行符。原因跟第 8 节所讲一样，换行符引起了错误的解码，造成了错误的显示。</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -365,7 +365,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>最后，kevin没有提及的是，为了做好美化，还需要增加一段针这块区域的css：</p>
+<p>最后，kevin 没有提及的是，为了做好美化，还需要增加一段针这块区域的 css：</p>
 
 <p>编辑<code>sass/custom/_style.scss</code>，在末尾增加如下内容：</p>
 
@@ -380,9 +380,11 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <p>参见博文<a href="http://xoyo.name/2012/04/auto-spacing-for-octopress/">《给中英文间加个空格》</a>。</p>
 
+<p>特别注意 ruby 文件的编码：复制博文中的代码时，需要去掉前几行的描述性注释，让<code>#encoding:UTF-8</code>语句暴露在.rb 文件的第一句。否则，<code>rake generate</code>时，会报错无法识别<code>\p{Han}</code>。</p>
+
 <h2>Tips</h2>
 
-<p>既然是个博客站点，就算是web产品啦，可以考虑下SEO。推荐博文<a href="http://codemacro.com/2012/09/06/octopress-seo/">《Octopress中的SEO》</a><p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/07/10/decorate-octopress/'>http://biaobiaoqi.github.com/blog/2013/07/10/decorate-octopress/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p></p>
+<p>既然是个博客站点，就算是 web 产品啦，可以考虑下 SEO。推荐博文<a href="http://codemacro.com/2012/09/06/octopress-seo/">《Octopress 中的 SEO》</a><p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/07/10/decorate-octopress/'>http://biaobiaoqi.github.com/blog/2013/07/10/decorate-octopress/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p></p>
 </div>
 
 

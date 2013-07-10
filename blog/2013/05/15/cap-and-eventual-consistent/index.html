@@ -130,7 +130,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   </header>
 
 
-<div class="entry-content"><p>查阅资料整理了最终一致性、CAP相关的内容。由于图省事儿，没有做文字的整理记载，只有slides和一些查阅过的链接，大家将就着看。欢迎指正。</p>
+<div class="entry-content"><p>查阅资料整理了最终一致性、CAP 相关的内容。由于图省事儿，没有做文字的整理记载，只有 slides 和一些查阅过的链接，大家将就着看。欢迎指正。</p>
 
 <p>slides：</p>
 
@@ -142,42 +142,42 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <!--more-->
 
 
-<p>slides链接：<a href="https://speakerdeck.com/biaobiaoqi/cap-and-eventually-consistent">请戳这里</a></p>
+<p>slides 链接：<a href="https://speakerdeck.com/biaobiaoqi/cap-and-eventually-consistent">请戳这里</a></p>
 
 <h2>背景</h2>
 
 <p>为什么系统要扩张？历史的发展路径是怎么样的？请看<a href="http://rdc.taobao.com/blog/cs/?p=614">《系统可扩展性演化》</a></p>
 
-<h2>CAP理论</h2>
+<h2>CAP 理论</h2>
 
 <ul>
-<li><p>CAP理论的提出：分布式系统的CAP理论是2000年左右被提出的概念，直到Dynamo的出现，开始在工业界被广泛实践：
+<li><p>CAP 理论的提出：分布式系统的 CAP 理论是 2000 年左右被提出的概念，直到 Dynamo 的出现，开始在工业界被广泛实践：
 <a href="http://www.julianbrowne.com/article/viewer/brewers-cap-theorem">《Brewer&#8217;s CAP Theorem》</a>/<a href="http://code.alibabatech.com/blog/dev_related_728/brewers-cap-theorem.html">中文翻译</a></p></li>
-<li><p>对CAP的理解：<a href="http://www.douban.com/group/topic/11765014/">《谈正确理解CAP理论》</a>\ <a href="http://rdc.taobao.com/blog/cs/?p=631">《CAP理论及分布式系统一致性》</a></p></li>
+<li><p>对 CAP 的理解：<a href="http://www.douban.com/group/topic/11765014/">《谈正确理解 CAP 理论》</a>\ <a href="http://rdc.taobao.com/blog/cs/?p=631">《CAP 理论及分布式系统一致性》</a></p></li>
 </ul>
 
 
-<h2>BASE理论</h2>
+<h2>BASE 理论</h2>
 
 <ul>
-<li>BASE的理论解释：<a href="http://rdc.taobao.com/blog/cs/?p=637">《分布式事务工程实现》</a></li>
+<li>BASE 的理论解释：<a href="http://rdc.taobao.com/blog/cs/?p=637">《分布式事务工程实现》</a></li>
 </ul>
 
 
 <h2>最终一致性</h2>
 
 <ul>
-<li><p>amazon的CTO分析最终一致性：<a href="http://www.allthingsdistributed.com/2008/12/eventually_consistent.html">Eventually Consistent - Revisited</a>/<a href="http://blog.csdn.net/xiaoqiangxx/article/details/7566654">中文翻译</a></p></li>
-<li><p>Dynamo论文：<a href="http://www.read.seas.harvard.edu/~kohler/class/cs239-w08/decandia07dynamo.pdf">Dynamo: Amazon’s Highly Available Key-value Store</a></p>
+<li><p>amazon 的 CTO 分析最终一致性：<a href="http://www.allthingsdistributed.com/2008/12/eventually_consistent.html">Eventually Consistent - Revisited</a>/<a href="http://blog.csdn.net/xiaoqiangxx/article/details/7566654">中文翻译</a></p></li>
+<li><p>Dynamo 论文：<a href="http://www.read.seas.harvard.edu/~kohler/class/cs239-w08/decandia07dynamo.pdf">Dynamo: Amazon’s Highly Available Key-value Store</a></p>
 
-<p>关于Dynamo的一篇中文简述：<a href="http://www.infoq.com/cn/articles/nosql-dynamo">《解读NoSQL技术代表之作Dynamo》</a></p></li>
+<p>关于 Dynamo 的一篇中文简述：<a href="http://www.infoq.com/cn/articles/nosql-dynamo">《解读 NoSQL 技术代表之作 Dynamo》</a></p></li>
 </ul>
 
 
 <h2>引申</h2>
 
 <ul>
-<li>CAP原作者对CAP的反思和澄清：<a href="http://www.infoq.com/cn/articles/cap-twelve-years-later-how-the-rules-have-changed">《CAP十二年回顾：规则变了》</a><p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/05/15/cap-and-eventual-consistent/'>http://biaobiaoqi.github.com/blog/2013/05/15/cap-and-eventual-consistent/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p></li>
+<li>CAP 原作者对 CAP 的反思和澄清：<a href="http://www.infoq.com/cn/articles/cap-twelve-years-later-how-the-rules-have-changed">《CAP 十二年回顾：规则变了》</a><p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/05/15/cap-and-eventual-consistent/'>http://biaobiaoqi.github.com/blog/2013/05/15/cap-and-eventual-consistent/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p></li>
 </ul>
 
 </div>

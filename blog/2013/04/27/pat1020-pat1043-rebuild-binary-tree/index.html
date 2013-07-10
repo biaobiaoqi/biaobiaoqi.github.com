@@ -134,7 +134,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <p><a href="/blog/2013/04/27/travsal-binary-tree/">《二叉树的遍历（递归、非递归）分析》</a>总结了二叉树不同遍历方式的递归和非递归实现，本文则讨论如何针对不同遍历方式的组合重建二叉树。为了简化问题的考虑，假定二叉树中不会出现重复值。列入考虑范围的有前序、中序、后序、层序遍历这四种的组合。前中后序比较常见，而层序则相对特殊一点了。</p>
 
-<p><a href="http://pat.zju.edu.cn/contests/pat-a-practise">PAT</a>的1043和1020题是遍历相关的模板题，正好派上用场。</p>
+<p><a href="http://pat.zju.edu.cn/contests/pat-a-practise">PAT</a> 的 1043 和 1020 题是遍历相关的模板题，正好派上用场。</p>
 
 <!--more-->
 
@@ -153,18 +153,18 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <h5>题意：</h5>
 
-<p>输入一个树的前序遍历序列，判定这个树是否是二叉搜索树或者BST的镜像树，如果是，则用后序序列输出。</p>
+<p>输入一个树的前序遍历序列，判定这个树是否是二叉搜索树或者 BST 的镜像树，如果是，则用后序序列输出。</p>
 
 <h5>解题思路：</h5>
 
 <ul>
-<li><p>1.BST很特殊，实质上BST的所有节点的顺序排列就是中序遍历了。</p></li>
-<li><p>2.要检查树是否是BST或者镜像BST，只需按照重建树的思路，在每次重建的过程中做适当检查即可。检查思路是：检查前序遍历序列中，根节点之后的节点排序是否符合BST的二分规则（即前一段都是小于根节点的，后一段都是大于根节点的）。</p></li>
+<li><p>1.BST 很特殊，实质上 BST 的所有节点的顺序排列就是中序遍历了。</p></li>
+<li><p>2.要检查树是否是 BST 或者镜像 BST，只需按照重建树的思路，在每次重建的过程中做适当检查即可。检查思路是：检查前序遍历序列中，根节点之后的节点排序是否符合 BST 的二分规则（即前一段都是小于根节点的，后一段都是大于根节点的）。</p></li>
 <li><p>3.最后的输出是后序遍历。过程中其实并不用构建整个树，直接在处理过程中，按后序的方式存储节点到队列中即可。</p></li>
 </ul>
 
 
-<p>有了这些考虑，就可以写出代码啦。详细解题代码见链接<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/pat/advancedlevel/APAT1043.java">PAT1043</a></p>
+<p>有了这些考虑，就可以写出代码啦。详细解题代码见链接 <a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/pat/advancedlevel/APAT1043.java">PAT1043</a></p>
 
 <h2>中序+后序</h2>
 
@@ -190,7 +190,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </ul>
 
 
-<p>详细解题代码见链接<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/pat/advancedlevel/APAT1020.java">PAT1020</a></p>
+<p>详细解题代码见链接 <a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/pat/advancedlevel/APAT1020.java">PAT1020</a></p>
 
 <h2>中序+层序</h2>
 
@@ -198,8 +198,8 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <ul>
 <li><p>初始：用层序遍历确定顶节点，在中序遍历中，利用顶节点划分出左右子树。</p></li>
-<li><p>迭代：对各个子树分别执行三步操作，1.在层序序列中，找出子树节点集合中，最靠前的节点，这个节点即为子树的顶节点；2.在中序序列中找1中得到的顶节点，并划分开顶节点的左右子树；</p></li>
-<li><p>跟（中序+前序）和（中序+后序）不同之处在于没有迭代的第3步，层序是无法直接划分得到左右子树的节点集合的。但这并不妨碍正常的处理。层序是用来找到子树的顶节点的，而顶节点即是所有子树的节点中，在层序遍历中最靠前的节点。</p></li>
+<li><p>迭代：对各个子树分别执行三步操作，1.在层序序列中，找出子树节点集合中，最靠前的节点，这个节点即为子树的顶节点；2.在中序序列中找 1 中得到的顶节点，并划分开顶节点的左右子树；</p></li>
+<li><p>跟（中序+前序）和（中序+后序）不同之处在于没有迭代的第 3 步，层序是无法直接划分得到左右子树的节点集合的。但这并不妨碍正常的处理。层序是用来找到子树的顶节点的，而顶节点即是所有子树的节点中，在层序遍历中最靠前的节点。</p></li>
 </ul>
 
 
@@ -218,7 +218,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 preorder: A, B;
 postorder: B, A</p>
 
-<p>能构建的二叉树有两种可能，1.A是根节点，B是A左儿子； 2.A是根节点， B是A的右儿子。无法得到一个唯一的结果。</p></blockquote>
+<p>能构建的二叉树有两种可能，1.A 是根节点，B 是 A 左儿子； 2.A 是根节点， B 是 A 的右儿子。无法得到一个唯一的结果。</p></blockquote>
 
 <h2><del>前序+层序</del></h2>
 

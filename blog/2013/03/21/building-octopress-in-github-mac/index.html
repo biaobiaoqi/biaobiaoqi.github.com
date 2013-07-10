@@ -132,26 +132,26 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <div class="entry-content"><p><img src="http://pikipity.github.com/images/post/octopress.jpg"></p>
 
-<p>最早的时候，是看见了<a href="http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/">唐巧大哥的博客</a>，UI上已是觉得耳目一新。后来读到过<a href="http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html">阮一峰的博文</a>，当知道这是搭建在Github这个程序员的facebook上时，更是心头一震，什么时候自己也搭这么个博客呢。直接用github托管代码，完全不用自己租服务器，实在方便。自己之前也有在csdn上维护了一个博客，虽然那已经是一年前的事情了。</p>
+<p>最早的时候，是看见了<a href="http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/">唐巧大哥的博客</a>，UI 上已是觉得耳目一新。后来读到过<a href="http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html">阮一峰的博文</a>，当知道这是搭建在 Github 这个程序员的 facebook 上时，更是心头一震，什么时候自己也搭这么个博客呢。直接用 github 托管代码，完全不用自己租服务器，实在方便。自己之前也有在 csdn 上维护了一个博客，虽然那已经是一年前的事情了。</p>
 
 <!--more-->
 
 
-<p>深刻的记得，当时想将自己的weibo账户贴到博客页面上，却发现它不支持一般用户嵌入javascript代码:(。这更让我对octopress的感情与日俱增。</p>
+<p>深刻的记得，当时想将自己的 weibo 账户贴到博客页面上，却发现它不支持一般用户嵌入 javascript 代码:(。这更让我对 octopress 的感情与日俱增。</p>
 
-<p>今天终于动手啦。自己从网上搜到了很多中文的博客描述如何安装配置octopress，有些博客讲得算是清晰，但终归每台电脑有不同的环境，每个人的叙述也或多或少的主观。最要命的是，我发现好几篇博文所讲述的命令都不太一样，走了不少弯路之后，倒腾了一下午，最终还是官网救了我。这也让我进一步认识到，信息的流通中的失真在所难免，最好的方法还是直接探寻最权威的内容。</p>
+<p>今天终于动手啦。自己从网上搜到了很多中文的博客描述如何安装配置 octopress，有些博客讲得算是清晰，但终归每台电脑有不同的环境，每个人的叙述也或多或少的主观。最要命的是，我发现好几篇博文所讲述的命令都不太一样，走了不少弯路之后，倒腾了一下午，最终还是官网救了我。这也让我进一步认识到，信息的流通中的失真在所难免，最好的方法还是直接探寻最权威的内容。</p>
 
-<p>如果对octopress不太了解，不用急着动手，首先看看几个概念。（当然，lz现在也并非精通这几点，初来乍到的，先做出来再说，以后不断学习&#8230;）</p>
+<p>如果对 octopress 不太了解，不用急着动手，首先看看几个概念。（当然，lz 现在也并非精通这几点，初来乍到的，先做出来再说，以后不断学习&#8230;）</p>
 
 <blockquote><ul>
-<li> Ruby：octopress框架的实现语言。rvm（ruby version manager）是用于管理ruby版本的，rake是ruby中类似于make工具。</li>
-<li> 静态站点生成工具：简单地说，不用数据库，直接生成网页文件。Jekyll就是这样的工具，而octopress是构建于它的上层的框架。</li>
-<li> Git：我主观的认为完虐svn的分布式版本控制工具。git官网貌似被gfw墙了=.=</li>
-<li> <a href="https://github.com/">Github</a>：程序员的Facebook,为程序员托管了很多代码的站点。</li>
-<li> <a href="https://help.github.com/categories/20/articles">Github pages</a>:github推出的，给与程序员自由创造静态网页的功能。支持Jekyll，因此也支持octopress。</li>
-<li> <a href="http://mxcl.github.com/homebrew/">homebrew</a>：mac os下的软件包管理工具，类似于linux下的dpkg。它使用ruby脚本，mac os下自带了ruby。</li>
-<li> <a href="http://octopress.org/">octopress</a> 其官网的help中有搭建octopress的足够的权威指导</li>
-<li><a href="http://www.ibm.com/developerworks/cn/xml/x-cn-yamlintro/">YAML</a>: YAML 试图用一种比 XML 更敏捷的方式，来完成 XML 所完成的任务。在octopress中，是使用yaml做配置文件的书写的。</li>
+<li> Ruby：octopress 框架的实现语言。rvm（ruby version manager）是用于管理 ruby 版本的，rake 是 ruby 中类似于 make 工具。</li>
+<li> 静态站点生成工具：简单地说，不用数据库，直接生成网页文件。Jekyll 就是这样的工具，而 octopress 是构建于它的上层的框架。</li>
+<li> Git：我主观的认为完虐 svn 的分布式版本控制工具。git 官网貌似被 gfw 墙了=.=</li>
+<li> <a href="https://github.com/">Github</a>：程序员的 Facebook,为程序员托管了很多代码的站点。</li>
+<li> <a href="https://help.github.com/categories/20/articles">Github pages</a>:github 推出的，给与程序员自由创造静态网页的功能。支持 Jekyll，因此也支持 octopress。</li>
+<li> <a href="http://mxcl.github.com/homebrew/">homebrew</a>：mac os 下的软件包管理工具，类似于 linux 下的 dpkg。它使用 ruby 脚本，mac os 下自带了 ruby。</li>
+<li> <a href="http://octopress.org/">octopress</a> 其官网的 help 中有搭建 octopress 的足够的权威指导</li>
+<li><a href="http://www.ibm.com/developerworks/cn/xml/x-cn-yamlintro/">YAML</a>: YAML 试图用一种比 XML 更敏捷的方式，来完成 XML 所完成的任务。在 octopress 中，是使用 yaml 做配置文件的书写的。</li>
 </ul>
 </blockquote>
 
@@ -161,7 +161,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <h3>1.0 homebrew</h3>
 
-<p>万事开头难，第一步还是配环境。为了软件包安装的方便，可以先安装好homebrew.</p>
+<p>万事开头难，第一步还是配环境。为了软件包安装的方便，可以先安装好 homebrew.</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>$ ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"</span></code></pre></td></tr></table></div></figure>
@@ -171,7 +171,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <h3>1.1 ruby</h3>
 
-<p>mac os x 10.8.1 的系统自带了Ruby，但是版本是1.8.3，而octopress官网所支持的最新版是1.9.3（2013.3），兼容起见，先对版本进行升级。</p>
+<p>mac os x 10.8.1 的系统自带了 Ruby，但是版本是 1.8.3，而 octopress 官网所支持的最新版是 1.9.3（2013.3），兼容起见，先对版本进行升级。</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -179,19 +179,19 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </span><span class='line'>$ rvm ruby gems latest</span></code></pre></td></tr></table></div></figure>
 
 
-<p>lz在升级过程中遇到了奇怪的错误，于是又参考<a href="http://www.iteye.com/blog/1118672">另一篇博文</a>，重新安装了rvm，再升级ruby到1.9.3版本。</p>
+<p>lz 在升级过程中遇到了奇怪的错误，于是又参考<a href="http://www.iteye.com/blog/1118672">另一篇博文</a>，重新安装了 rvm，再升级 ruby 到 1.9.3 版本。</p>
 
 <h3>1.2 git</h3>
 
-<p>使用homebrew安装git。</p>
+<p>使用 homebrew 安装 git。</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>$ brew install git</span></code></pre></td></tr></table></div></figure>
 
 
-<h1>2. 搭建octopress</h1>
+<h1>2. 搭建 octopress</h1>
 
-<p>环境配置完成后，就可以开始参照<a href="http://octopress.org/help/">官网</a>的指导搭建octopress，并在github建代码仓库，同步管理啦。</p>
+<p>环境配置完成后，就可以开始参照<a href="http://octopress.org/help/">官网</a>的指导搭建 octopress，并在 github 建代码仓库，同步管理啦。</p>
 
 <h1>3. 发博文和在线部署</h1>
 
@@ -215,15 +215,15 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <span class='line-number'>15</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>
 </span><span class='line'>#创建一篇博文
-</span><span class='line'>rake new_post["post title"] #octopress将在工作目录的source/_post/目录下生成相应的markdown文件。然后可以使用mou工具去修改编辑内容。
+</span><span class='line'>rake new_post["post title"] #octopress 将在工作目录的 source/_post/目录下生成相应的 markdown 文件。然后可以使用 mou 工具去修改编辑内容。
 </span><span class='line'>
 </span><span class='line'>#生成预览
-</span><span class='line'>rake preview #可以通过localhost:4000在本机实时观察最新的编辑效果。
+</span><span class='line'>rake preview #可以通过 localhost:4000 在本机实时观察最新的编辑效果。
 </span><span class='line'>
 </span><span class='line'>#在线发布
-</span><span class='line'>rake deploy #完成编辑后，可以将最新的内容部署到github上去。成功后，即可在线访问。
+</span><span class='line'>rake deploy #完成编辑后，可以将最新的内容部署到 github 上去。成功后，即可在线访问。
 </span><span class='line'>
-</span><span class='line'>#向github提交源文件更新
+</span><span class='line'>#向 github 提交源文件更新
 </span><span class='line'>git add -A
 </span><span class='line'>git commit -m "提交内容"
 </span><span class='line'>git push
@@ -231,11 +231,11 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>其中推荐到的<a href="http://mouapp.com/">mou</a>，是一个mac下的markdown编辑器。试用后发现有些格式兼容问题，但似乎mac下也只有他这个可视化工具了=。=</p>
+<p>其中推荐到的 <a href="http://mouapp.com/">mou</a>，是一个 mac 下的 markdown 编辑器。试用后发现有些格式兼容问题，但似乎 mac 下也只有他这个可视化工具了=。=</p>
 
-<p>另附<a href="http://wowubuntu.com/markdown/index.html">markdown语法</a></p>
+<p>另附 <a href="http://wowubuntu.com/markdown/index.html">markdown 语法</a></p>
 
-<p>进一步的octopress博客定制，参见博客<a href="/blog/2013/07/10/decorate-octopress/">《定制自己的octopress》</a></p>
+<p>进一步的 octopress 博客定制，参见博客<a href="/blog/2013/07/10/decorate-octopress/">《定制自己的 octopress》</a></p>
 
 <p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/03/21/building-octopress-in-github-mac/'>http://biaobiaoqi.github.com/blog/2013/03/21/building-octopress-in-github-mac/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p>
 

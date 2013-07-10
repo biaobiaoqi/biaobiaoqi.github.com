@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: octopress | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/tags/octopress/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-07-10T11:46:53+08:00</updated>
+  <updated>2013-07-10T22:24:49+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -210,6 +210,8 @@ post.content + %Q[<p class='post-footer'></p>
 <h2>10.给中英文之间加空格</h2>
 
 <p>参见博文<a href="http://xoyo.name/2012/04/auto-spacing-for-octopress/">《给中英文间加个空格》</a>。</p>
+
+<p>特别注意ruby文件的编码：复制博文中的代码时，需要去掉前几行的描述性注释，让<code>#encoding:UTF-8</code>语句暴露在.rb文件的第一句。否则，<code>rake generate</code>时，会报错无法识别<code>\p{Han}</code>。</p>
 
 <h2>Tips</h2>
 

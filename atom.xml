@@ -4,7 +4,7 @@
   <title><![CDATA[Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-07-10T11:46:53+08:00</updated>
+  <updated>2013-07-10T22:24:49+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -18,37 +18,37 @@
     <link href="http://biaobiaoqi.github.com/blog/2013/07/10/decorate-octopress/"/>
     <updated>2013-07-10T01:53:00+08:00</updated>
     <id>http://biaobiaoqi.github.com/blog/2013/07/10/decorate-octopress</id>
-    <content type="html"><![CDATA[<p>在github pages上搭建好octopress博客之后，博客的基本功能就能使用了。如果想自己定制也是没问题的，octopress有较详尽的官方文档，原则上有问题求助官方即可：<a href="http://octopress.org/help/">octopress-help</a>。官方没有包纳的也可以去询问<a href="http://stackoverflow.com/questions/tagged/octopress">stackoverflow</a>。 当然，中文的看起来总会省事儿点。我做了如下一些总结;)</p>
+    <content type="html"><![CDATA[<p>在 github pages 上搭建好 octopress 博客之后，博客的基本功能就能使用了。如果想自己定制也是没问题的，octopress 有较详尽的官方文档，原则上有问题求助官方即可：<a href="http://octopress.org/help/">octopress-help</a>。官方没有包纳的也可以去询问 <a href="http://stackoverflow.com/questions/tagged/octopress">stackoverflow</a>。 当然，中文的看起来总会省事儿点。我做了如下一些总结;)</p>
 
-<p>不会ruby的童鞋特别注意：配置_config.yml的过程中特别注意，配置项『:』后要留空格，否则会报错。</p>
+<p>不会 ruby 的童鞋特别注意：配置_ config.yml 的过程中特别注意，配置项『:』后要留空格，否则会报错。</p>
 
 <h2>1.装饰边栏</h2>
 
-<p>以增加豆瓣展示框为例。参加正反反长大哥的博客<a href="http://icodeit.org/2012/10/how-to-embed-douban-show-in-your-octopress-site/">How to Embed Douban-Show in Your Octopress Site</a></p>
+<p>以增加豆瓣展示框为例。参加正反反长大哥的博客 <a href="http://icodeit.org/2012/10/how-to-embed-douban-show-in-your-octopress-site/">How to Embed Douban-Show in Your Octopress Site</a></p>
 
 <h2>2.增加国内的第三方评论</h2>
 
-<p>虽然octopress内置的评论系统也很不错，但国内的第三方评论更接地气，将微博、人人等各方SNS都纳入旗下。比较出名的有友言、多说。</p>
+<p>虽然 octopress 内置的评论系统也很不错，但国内的第三方评论更接地气，将微博、人人等各方 SNS 都纳入旗下。比较出名的有友言、多说。</p>
 
-<p>这里以唐巧大哥的博文<a href="http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/">《象写程序一样写博客：搭建基于github的博客》</a>为例，他使用的是友言。</p>
+<p>这里以唐巧大哥的博文<a href="http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/">《象写程序一样写博客：搭建基于 github 的博客》</a>为例，他使用的是友言。</p>
 
 <h2>3.定制域名</h2>
 
-<p>如果你拥有自己的域名，可以CNAME到github pages上。以我的配置为例（我的域名为<code>biaobiaoqi.me</code>）。</p>
+<p>如果你拥有自己的域名，可以 CNAME 到 github pages 上。以我的配置为例（我的域名为<code>biaobiaoqi.me</code>）。</p>
 
-<p>1.在octopress的source目录下创建CNAME文件，并输入新域名：biaobiaoqi.com</p>
+<p>1.在 octopress 的 source 目录下创建 CNAME 文件，并输入新域名：biaobiaoqi.com</p>
 
-<p>2.在域名管理中，创建或修改A记录，指向207.97.227.245这个地址。</p>
+<p>2.在域名管理中，创建或修改 A 记录，指向 207.97.227.245 这个地址。</p>
 
-<p>3.创建CNAME记录，www.biaobiaoqi.com -> biaobiaoqi.github.com</p>
+<p>3.创建 CNAME 记录，www.biaobiaoqi.com -> biaobiaoqi.github.com</p>
 
 <p>这一过程可能需要好几天才能生效，请耐心等待:)</p>
 
 <h2>4.让博客中连接在新窗口打开</h2>
 
-<p>由于markdown不支持这一语法，如果要自己用html标签实现，又有些违背了markdown以内容为重的立意。</p>
+<p>由于 markdown 不支持这一语法，如果要自己用 html 标签实现，又有些违背了 markdown 以内容为重的立意。</p>
 
-<p>参考博文<a href="http://www.blogjava.net/lishunli/archive/2013/01/20/394478.html">《在Octopress中为markdown的超链接加上target=&#8221;_blank&#8221;》</a>，可以通过将如下代码添加到 {OCTOPRESS_HOME}/source/_includes/custom/head.html文件末尾来实现：</p>
+<p>参考博文<a href="http://www.blogjava.net/lishunli/archive/2013/01/20/394478.html">《在 Octopress 中为 markdown 的超链接加上 target=&#8221;_blank&#8221;》</a>，可以通过将如下代码添加到 {OCTOPRESS_HOME}/source/_includes/custom/head.html 文件末尾来实现：</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -95,7 +95,7 @@
 
 <p>默认情况，所有文字的排头会对齐，但如果有列表项的情况下也如此，列表头就会冲出文章的主体区块了。</p>
 
-<p>在octopress/sass/custom/_layout.scss文件中找到#$indented-lists: true行，去掉#注释即可。</p>
+<p>在 octopress/sass/custom/_layout.scss 文件中找到#$indented-lists: true 行，去掉#注释即可。</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$indented</span><span class="o">-</span><span class="nx">lists</span><span class="o">:</span> <span class="kc">true</span>
@@ -107,9 +107,9 @@
 <!--more-->
 
 
-<h2>6.404ERROR页面</h2>
+<h2>6.404ERROR 页面</h2>
 
-<p>在ocotopress/source目录下，增加404.markdown，并做出自定义的呃编辑。本博客使用了腾讯公益404，推荐大家使用，为社会贡献一分正能量。<a href="http://www.qq.com/404/">公益404</a></p>
+<p>在 ocotopress/source 目录下，增加 404.markdown，并做出自定义的呃编辑。本博客使用了腾讯公益 404，推荐大家使用，为社会贡献一分正能量。<a href="http://www.qq.com/404/">公益 404</a></p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -150,25 +150,25 @@
 
 <h2>7.在侧边栏增加标签云(tag cloud)</h2>
 
-<p>octopress默认只有分类，没有标签。这对于博文的组织和管理很不友好。有人开源出了自己定制的tag生成和tag cloud展现的代码，可以引入到自己的博客中来。</p>
+<p>octopress 默认只有分类，没有标签。这对于博文的组织和管理很不友好。有人开源出了自己定制的 tag 生成和 tag cloud 展现的代码，可以引入到自己的博客中来。</p>
 
-<p>详细操作参见博文：<a href="http://codemacro.com/2012/07/18/add-tag-to-octopress/">《为octopress添加tag Cloud》</a>。不过博文中没有讲解标签云的UI配置参数的使用，为了让UI适应页面，请参考原作者的官方说明:<a href="https://github.com/robbyedwards/octopress-tag-cloud">octopress-tag-cloud</a>。我所实践出的较合理的参数值如下</p>
+<p>详细操作参见博文：<a href="http://codemacro.com/2012/07/18/add-tag-to-octopress/">《为 octopress 添加 tag Cloud》</a>。不过博文中没有讲解标签云的 UI 配置参数的使用，为了让 UI 适应页面，请参考原作者的官方说明:<a href="https://github.com/robbyedwards/octopress-tag-cloud">octopress-tag-cloud</a>。我所实践出的较合理的参数值如下</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#注意，下面一行的escape反斜杠在正常使用时需要去掉</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#注意，下面一行的 escape 反斜杠在正常使用时需要去掉</span>
 </span><span class='line'><span class="p">\{\</span><span class="o">%</span> <span class="n">tag_cloud</span> <span class="n">font</span><span class="o">-</span><span class="ss">size</span><span class="p">:</span> <span class="mi">70</span><span class="o">-</span><span class="mi">180</span><span class="sx">%, limit: 15,</span> <span class="ss">order</span><span class="p">:</span> <span class="nb">rand</span><span class="p">,</span> <span class="ss">style</span><span class="p">:</span> <span class="n">para</span>  <span class="p">{</span> <span class="o">&amp;</span><span class="n">nbsp</span> <span class="p">}\</span><span class="o">%</span><span class="p">\}</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 <p>如果想将文章分类（category）也放在侧边栏，可以参考这篇博文：<a href="http://paz.am/blog/blog/2012/06/25/octopress-category-list-plugin/">《Octopress - Category List Plug-in》</a></p>
 
-<h2>8.在顶栏增加标签云页面tab</h2>
+<h2>8.在顶栏增加标签云页面 tab</h2>
 
 <p>1.生成新网页</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rake</span> <span class="n">new_page</span><span class="o">[</span><span class="s2">&quot;tag-cloud&quot;</span><span class="o">]</span> <span class="c1">#在octopress/source/中将生成tag-cloud/文件夹</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rake</span> <span class="n">new_page</span><span class="o">[</span><span class="s2">&quot;tag-cloud&quot;</span><span class="o">]</span> <span class="c1">#在 octopress/source/中将生成 tag-cloud/文件夹</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -223,7 +223,7 @@
 </span><span class='line'><span class="ss">footer</span><span class="p">:</span> <span class="kp">true</span>
 </span><span class='line'><span class="o">---</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">#注意，代码中的escape反斜杠在正常使用时需要去掉</span>
+</span><span class='line'><span class="c1">#注意，代码中的 escape 反斜杠在正常使用时需要去掉</span>
 </span><span class='line'><span class="c1">#另外，这几个语句不能使用换行。在我的测试环境下，使用换行后，最终的页面上对换行进行了错误的解码，给增加了一个&lt;code&gt;标签，造成了错误的显示。</span>
 </span><span class='line'>
 </span><span class='line'><span class="o">&lt;</span><span class="n">ul</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;tag-cloud&quot;</span><span class="o">&gt;</span><span class="p">\{\</span><span class="o">%</span> <span class="n">tag_cloud</span> <span class="n">font</span><span class="o">-</span><span class="ss">size</span><span class="p">:</span> <span class="mi">90</span><span class="o">-</span><span class="mi">210</span><span class="sx">%, limit: 1000,</span> <span class="ss">style</span><span class="p">:</span> <span class="n">para</span> <span class="p">\</span><span class="o">%</span><span class="p">\}</span><span class="o">&lt;</span><span class="sr">/ul&gt;</span>
@@ -232,11 +232,11 @@
 
 <h2>9.博客末尾增加原文链接、版权等</h2>
 
-<p>最近发现有其他小网站未经授权直接copy我的博客内容，在违章的末尾加上版权、原文链接变得很有必要了。</p>
+<p>最近发现有其他小网站未经授权直接 copy 我的博客内容，在违章的末尾加上版权、原文链接变得很有必要了。</p>
 
-<p>详情参见博客<a href="http://codemacro.com/2012/07/26/post-footer-plugin-for-octopress/">《为octopress每篇文章添加一个文章信息》</a>。</p>
+<p>详情参见博客<a href="http://codemacro.com/2012/07/26/post-footer-plugin-for-octopress/">《为 octopress 每篇文章添加一个文章信息》</a>。</p>
 
-<p>值得注意的是，插件代码中如下几行需要去掉缩进和换行符。原因跟第8节所讲一样，换行符引起了错误的解码，造成了错误的显示。</p>
+<p>值得注意的是，插件代码中如下几行需要去掉缩进和换行符。原因跟第 8 节所讲一样，换行符引起了错误的解码，造成了错误的显示。</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -253,7 +253,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>最后，kevin没有提及的是，为了做好美化，还需要增加一段针这块区域的css：</p>
+<p>最后，kevin 没有提及的是，为了做好美化，还需要增加一段针这块区域的 css：</p>
 
 <p>编辑<code>sass/custom/_style.scss</code>，在末尾增加如下内容：</p>
 
@@ -268,9 +268,11 @@
 
 <p>参见博文<a href="http://xoyo.name/2012/04/auto-spacing-for-octopress/">《给中英文间加个空格》</a>。</p>
 
+<p>特别注意 ruby 文件的编码：复制博文中的代码时，需要去掉前几行的描述性注释，让<code>#encoding:UTF-8</code>语句暴露在.rb 文件的第一句。否则，<code>rake generate</code>时，会报错无法识别<code>\p{Han}</code>。</p>
+
 <h2>Tips</h2>
 
-<p>既然是个博客站点，就算是web产品啦，可以考虑下SEO。推荐博文<a href="http://codemacro.com/2012/09/06/octopress-seo/">《Octopress中的SEO》</a><p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/07/10/decorate-octopress/'>http://biaobiaoqi.github.com/blog/2013/07/10/decorate-octopress/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p></p>
+<p>既然是个博客站点，就算是 web 产品啦，可以考虑下 SEO。推荐博文<a href="http://codemacro.com/2012/09/06/octopress-seo/">《Octopress 中的 SEO》</a><p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/07/10/decorate-octopress/'>http://biaobiaoqi.github.com/blog/2013/07/10/decorate-octopress/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p></p>
 ]]></content>
   </entry>
   
@@ -281,9 +283,9 @@
     <id>http://biaobiaoqi.github.com/blog/2013/07/07/yuminhong</id>
     <content type="html"><![CDATA[<h2>质朴、诚恳和坚韧</h2>
 
-<p>这本书是某次在Amazon上购书『满100送书一本』时挑的。放在抽屉里有段日子了。</p>
+<p>这本书是某次在 Amazon 上购书『满 100 送书一本』时挑的。放在抽屉里有段日子了。</p>
 
-<p>一直挺崇拜俞敏洪老师。初次了解到他是高中的时候看的『赢在中国』，俞敏洪老师是嘉宾点评。而后混在考T的大流中去上了新东方的课程，几个老师讲得不错，比较可惜的是远离了老俞的时代。恰好前两天热映的『中国合伙人』，又把他拉回视野前沿。周日，趁着没心情码代码，忙里偷闲的读完了这本自传体的文字。</p>
+<p>一直挺崇拜俞敏洪老师。初次了解到他是高中的时候看的『赢在中国』，俞敏洪老师是嘉宾点评。而后混在考 T 的大流中去上了新东方的课程，几个老师讲得不错，比较可惜的是远离了老俞的时代。恰好前两天热映的『中国合伙人』，又把他拉回视野前沿。周日，趁着没心情码代码，忙里偷闲的读完了这本自传体的文字。</p>
 
 <p>我不太喜欢读『活人』的传记。没有盖棺定论的事儿，或多或少掺杂些美华。但读这本书，却丝毫没有表现出浮夸，就像他的性格一般质朴、诚恳和坚韧。</p>
 
@@ -307,7 +309,7 @@
 
 <p>时常的，我被不好的状态左右。那是种很奇怪的感觉，是面对压力的逃避、拖延，独自缩在没有人看得见的角落，在电脑屏幕前刷着网页，时间慢慢流走。然后心情越来越差，因为一事无成的颓废感。我是闲不下来的人。是的，『什么也不做的痛苦，比任何其他痛苦更加深刻』！</p>
 
-<p>曾经在ASES的分享会上，听dd讲起过<a href="http://cuitianyi.com/blog/authentic-happiness-%E8%AF%BB%E4%B9%A6%E6%80%BB%E7%BB%93/">『积极心理学』</a>。其中有个观点是：『享乐是心灵资本的消费，而心流中的满足则是心灵资本的投资』。简单的讲，创造价值的事情会让我得到心流的满足，而简单的娱乐则会消费这种满足感。或许当两者之差为负的时候，我就感受到了那种空虚和煎熬，不止什么都不做，还消费了更多。</p>
+<p>曾经在 ASES 的分享会上，听 dd 讲起过<a href="http://cuitianyi.com/blog/authentic-happiness-%E8%AF%BB%E4%B9%A6%E6%80%BB%E7%BB%93/">『积极心理学』</a>。其中有个观点是：『享乐是心灵资本的消费，而心流中的满足则是心灵资本的投资』。简单的讲，创造价值的事情会让我得到心流的满足，而简单的娱乐则会消费这种满足感。或许当两者之差为负的时候，我就感受到了那种空虚和煎熬，不止什么都不做，还消费了更多。</p>
 
 <p>正是对社会责任的追求，老俞没有沉浸再新东方的飞速发展中。对他而言，现在的新东方的经营一切都要权衡公司的利益和教育理念。虽然他的新东方充满了实用主义和人文情怀，虽然他能让新东方尽到企业的社会责任，但这依然不是他想要的。他正在筹划办私立高校，用他的教育理念，给中国的教育发展贡献力量。这是中国的希望。</p>
 
@@ -327,7 +329,7 @@
     <id>http://biaobiaoqi.github.com/blog/2013/07/05/checklist-manifesto</id>
     <content type="html"><![CDATA[<h2>应该叫『清单宣言』</h2>
 
-<p>在Amazon上『满100送一本』的活动中随手挑到了它。鉴于其空洞的标题，被束之高阁半年多，最近关注个人管理方面的知识，才拍拍灰尘读起来。</p>
+<p>在 Amazon 上『满 100 送一本』的活动中随手挑到了它。鉴于其空洞的标题，被束之高阁半年多，最近关注个人管理方面的知识，才拍拍灰尘读起来。</p>
 
 <p>书的英文原名是『The Checklist Manifesto: How to Get Things Right』，直译成『清单宣言』在我看来更贴切，而非充满噱头的『清单革命』。正如一个小功能难以做成独立的产品，一个方法改进也难以成就革命。『清单能大大的改善效率，降低失败概率』这一观点，在医生出生的作者手中翻来覆去的被各种事例证明着，案例的行业背景从医学到建筑，到航天，再到投资，实在乏味。当然，这不妨碍『清单』这一工具对生活工作的助力所带给我们的思考。</p>
 
@@ -394,50 +396,50 @@
     <id>http://biaobiaoqi.github.com/blog/2013/06/11/gift-to-girl-friend</id>
     <content type="html"><![CDATA[<h2>背景</h2>
 
-<p>一个月前发现了<a href="http://v2ex.com">V2EX</a>这个网站，用创始人<a href="http://www.v2ex.com/member/Livid">Livid</a>的话来说，『这是一个主要关于做事儿的地方』。确实如此，我在这里收获了很多想法和灵感。</p>
+<p>一个月前发现了 <a href="http://v2ex.com">V2EX</a> 这个网站，用创始人 <a href="http://www.v2ex.com/member/Livid">Livid</a> 的话来说，『这是一个主要关于做事儿的地方』。确实如此，我在这里收获了很多想法和灵感。</p>
 
 <p>本文所记的，也是得益于某天的对<a href="http://www.v2ex.com/t/69145">某个主题</a>的浏览。帖子中，大家分享了很多给女朋友做的网页，说『技术宅改变世界』太过了，但拥有这样一个礼物，确实是一种属于程序员的快乐和程序员的女友的幸福。</p>
 
 <p>快到我跟我妹子恋爱四周年的日子了，也正逢她本科毕业，无论如何都是个有趣的时间点。受了那个帖子的刺激，我也筹划着给女朋友做一个小网页，以示纪念。</p>
 
-<p>遗憾的是，我自己从来没有写过网页，javascript和css只知道概念，html也只是知道一些简单的标签，这些可是完成一个小网页所必备的技能呢。技术能力直接阻碍了创造性成果出现的可能:(。于是，解决方案只能是搜集开源代码，然后自己做定制了。实际上，最后的产出，也就是三份代码的拼接。</p>
+<p>遗憾的是，我自己从来没有写过网页，javascript 和 css 只知道概念，html 也只是知道一些简单的标签，这些可是完成一个小网页所必备的技能呢。技术能力直接阻碍了创造性成果出现的可能:(。于是，解决方案只能是搜集开源代码，然后自己做定制了。实际上，最后的产出，也就是三份代码的拼接。</p>
 
 <h2>资料搜集</h2>
 
 <p>通过各方搜寻，我找到了如下几个网页：</p>
 
 <ul>
-<li>1.<a href="http://love.hackerzhou.me/">复旦的学长hackzhou的爱心动画</a>，<a href="https://github.com/hackerzhou/Love">github托管代码</a>。</li>
+<li>1.<a href="http://love.hackerzhou.me/">复旦的学长 hackzhou 的爱心动画</a>，<a href="https://github.com/hackerzhou/Love">github 托管代码</a>。</li>
 </ul>
 
 
-<p>网页用到了html5的一些特性实现了动态的心形花的绘制和类似程序代码敲击的文字呈现形式。由于内容仅仅是文字的，可定制性强。如下图：
+<p>网页用到了 html5 的一些特性实现了动态的心形花的绘制和类似程序代码敲击的文字呈现形式。由于内容仅仅是文字的，可定制性强。如下图：
 <img src="https://dl.dropboxusercontent.com/u/64021093/Pics/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202013-06-11%20%E4%B8%8B%E5%8D%888.12.01.png" title="hackerzhou's page" alt="hackerzhou's love project" /></p>
 
 <ul>
-<li>2.<a href="http://carfieldloverita.sinaapp.com/">一对异国情侣的Google地图应用</a>，<a href="https://github.com/wong2/lovegift">github托管代码</a>。</li>
+<li>2.<a href="http://carfieldloverita.sinaapp.com/">一对异国情侣的 Google 地图应用</a>，<a href="https://github.com/wong2/lovegift">github 托管代码</a>。</li>
 </ul>
 
 
-<p>网页调用了Google地图的API，可以定义聚焦的地理位置和坐标尺，显示照片，像日记一样记录了点点滴滴，有背景音乐。最后还以地点输入框的形式做了表白。很有创意！
+<p>网页调用了 Google 地图的 API，可以定义聚焦的地理位置和坐标尺，显示照片，像日记一样记录了点点滴滴，有背景音乐。最后还以地点输入框的形式做了表白。很有创意！
 <img src="https://dl.dropboxusercontent.com/u/64021093/Pics/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202013-06-11%20%E4%B8%8B%E5%8D%888.12.18.png" title="Googlemap app" alt="Google map app" /></p>
 
 <ul>
-<li>3.<a href="http://liumeijun.com/">v2ex上某童鞋基于百度地图的应用</a>。</li>
+<li>3.<a href="http://liumeijun.com/">v2ex 上某童鞋基于百度地图的应用</a>。</li>
 </ul>
 
 
-<p>跟2类似，调用了百度API，配上『Lemon tree』的背景音乐，很有调调！
+<p>跟 2 类似，调用了百度 API，配上『Lemon tree』的背景音乐，很有调调！
 <img src="https://dl.dropboxusercontent.com/u/64021093/Pics/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202013-06-11%20%E4%B8%8B%E5%8D%888.16.00.png" title="baidumap app" alt="baidumap app" /></p>
 
 <h2>定制计划</h2>
 
-<p>限于没有前端的基础，开发效率会很低，只能硬顶着拿着前面的三个项目做混搭了。其中项目1和2都有在github上开源代码，而3则在v2ex的帖子里被作者授权直接查源码使用了。</p>
+<p>限于没有前端的基础，开发效率会很低，只能硬顶着拿着前面的三个项目做混搭了。其中项目 1 和 2 都有在 github 上开源代码，而 3 则在 v2ex 的帖子里被作者授权直接查源码使用了。</p>
 
 <p>我做了简单的混搭修改计划：</p>
 
 <ul>
-<li>1.以hackzhou的项目为基础，修改文字内容和基本布局。</li>
+<li>1.以 hackzhou 的项目为基础，修改文字内容和基本布局。</li>
 <li>2.添加加载等待过程，加载背景音乐。</li>
 <li>3.加载完成后，出现开始按钮，按开始按钮播放背景音乐，进入动画效果。</li>
 <li>4.增加全屏效果。</li>
@@ -448,23 +450,23 @@
 
 <h5>1.项目启动</h5>
 
-<p>我在github上fork了<a href="https://github.com/hackerzhou/Love">hackerzhou的代码</a>。(<a href="https://github.com/biaobiaoqi/Love">我fork的版本</a>)</p>
+<p>我在 github 上 fork 了 <a href="https://github.com/hackerzhou/Love">hackerzhou 的代码</a>。(<a href="https://github.com/biaobiaoqi/Love">我 fork 的版本</a>)</p>
 
-<p>clone到本地，尝试阅读js代码，尝试做小改动，找到动画开始的调用。</p>
+<p>clone 到本地，尝试阅读 js 代码，尝试做小改动，找到动画开始的调用。</p>
 
 <h5>2.尝试添加背景音乐</h5>
 
 <p>网上查资料，找到了<code>&lt;embeded&gt;</code>可以用来添加背景音乐，测试成功。但这个音乐播放无法支持同步的加载，不可控，在网络环境差的情况下，如果没有配乐动画过程会缺少表现力。放弃这种方案。</p>
 
-<p>在<a href="http://liumeijun.com/">v2ex上某童鞋基于百度地图的应用</a>源码中找到了一个第三方音乐播放库：<a href="http://www.schillmania.com/projects/soundmanager2/">soundmanager2</a>。查看官方文档，确认能满足项目需求，于是加入到代码中。</p>
+<p>在 <a href="http://liumeijun.com/">v2ex 上某童鞋基于百度地图的应用</a>源码中找到了一个第三方音乐播放库：<a href="http://www.schillmania.com/projects/soundmanager2/">soundmanager2</a>。查看官方文档，确认能满足项目需求，于是加入到代码中。</p>
 
-<p>为了让页面展现更加顺畅，需要音乐文件越小越好。我尝试了MIDI格式，但是很多浏览器并不支持，作罢。而soundmanager似乎对wma的支持有问题，于是只剩下mp3文件。我选择了JJ的『小酒窝』做背景音乐，在mac下使用ocenaudio将原来3MB的mp3文件截取了前一半，并导出为不同设定采样率的版本，经过测试，发现56kb采样率下，音质没有受到大的影响，且大小也足够小了，于是确定用这种格式的mp3。最终MP3文件的大小为500KB！</p>
+<p>为了让页面展现更加顺畅，需要音乐文件越小越好。我尝试了 MIDI 格式，但是很多浏览器并不支持，作罢。而 soundmanager 似乎对 wma 的支持有问题，于是只剩下 mp3 文件。我选择了 JJ 的『小酒窝』做背景音乐，在 mac 下使用 ocenaudio 将原来 3MB 的 mp3 文件截取了前一半，并导出为不同设定采样率的版本，经过测试，发现 56kb 采样率下，音质没有受到大的影响，且大小也足够小了，于是确定用这种格式的 mp3。最终 MP3 文件的大小为 500KB！</p>
 
 <h5>3.加载逻辑和开始按键</h5>
 
 <p>需求：加载过程需要隐藏前景内容，在音乐加载完成后，显示开始按钮，开始按钮能触发动画效果。</p>
 
-<p>通过Google找到了使用js隐藏和显示内容的方式</p>
+<p>通过 Google 找到了使用 js 隐藏和显示内容的方式</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -472,21 +474,21 @@
 </span><span class='line'>document.getElementById('start_btn').style.display = ""; //show start button</span></code></pre></td></tr></table></div></figure>
 
 
-<p>虽然不是特别理解js引擎的单线程运作机制，但经过简单的试错、调试后，就完成了加载等待和开始按钮触发的原型。</p>
+<p>虽然不是特别理解 js 引擎的单线程运作机制，但经过简单的试错、调试后，就完成了加载等待和开始按钮触发的原型。</p>
 
-<p>之后是对按钮和加载提示配置css。由于懒得理解css的一些细节，直接使用了<a href="https://github.com/wong2/lovegift">这份项目</a>中的css代码。</p>
+<p>之后是对按钮和加载提示配置 css。由于懒得理解 css 的一些细节，直接使用了<a href="https://github.com/wong2/lovegift">这份项目</a>中的 css 代码。</p>
 
 <h5>4.部署</h5>
 
-<p>github为每个项目提供了静态网页展示的功能，应付这个项目的网页展示完全够了。具体操作流程参见<a href="http://www.worldhello.net/gotgithub/03-project-hosting/050-homepage.html#project-homepage">《GotGithub》3.5.2. 创建项目主页</a>。实际上，链接中介绍的几种创造干净的gh-pages分支的方法，在这个项目的发布里是不必的。因为项目主页的展示代码跟master分支里的代码本身就是一样的，那么需要做的就只是开启gh-pages分支，并提交代码了。</p>
+<p>github 为每个项目提供了静态网页展示的功能，应付这个项目的网页展示完全够了。具体操作流程参见<a href="http://www.worldhello.net/gotgithub/03-project-hosting/050-homepage.html#project-homepage">《GotGithub》3.5.2. 创建项目主页</a>。实际上，链接中介绍的几种创造干净的 gh-pages 分支的方法，在这个项目的发布里是不必的。因为项目主页的展示代码跟 master 分支里的代码本身就是一样的，那么需要做的就只是开启 gh-pages 分支，并提交代码了。</p>
 
 <p>项目成果：<a href="http://biaobiaoqi.me/Love">请戳这里</a></p>
 
 <h2>结语</h2>
 
-<p>感谢v2ex，感谢hackerzhou、loo2k和wong2童鞋，我参考了你们很多代码。</p>
+<p>感谢 v2ex，感谢 hackerzhou、loo2k 和 wong2 童鞋，我参考了你们很多代码。</p>
 
-<p>创造力需要靠技术手段实现。混迹在互联网上，没有自己建站的能力实在是很苦逼的一件事情。之后自己准备花些时间在RoR上。积累技术实力，努力做出好产品;)</p>
+<p>创造力需要靠技术手段实现。混迹在互联网上，没有自己建站的能力实在是很苦逼的一件事情。之后自己准备花些时间在 RoR 上。积累技术实力，努力做出好产品;)</p>
 
 <p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/06/11/gift-to-girl-friend/'>http://biaobiaoqi.github.com/blog/2013/06/11/gift-to-girl-friend/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p>
 
@@ -498,13 +500,13 @@
     <link href="http://biaobiaoqi.github.com/blog/2013/06/11/the-non-designers-design-book/"/>
     <updated>2013-06-11T13:58:00+08:00</updated>
     <id>http://biaobiaoqi.github.com/blog/2013/06/11/the-non-designers-design-book</id>
-    <content type="html"><![CDATA[<h3>从iOS7的扁平化谈起</h3>
+    <content type="html"><![CDATA[<h3>从 iOS7 的扁平化谈起</h3>
 
-<p>昨晚看了WWDC2013的直播，iOS7以扁平化UI的方式展现在世人面前。于是接下来进入了微博吐槽时间。</p>
+<p>昨晚看了 WWDC2013 的直播，iOS7 以扁平化 UI 的方式展现在世人面前。于是接下来进入了微博吐槽时间。</p>
 
-<p>大象要跳舞是很难的，这正是苹果面临的情况。现在无论是Android还是Winphone，与iOS系统体验上的差异已经不是难以企及的，甚至有些方面更能为大众接受。于是Ive带领他的团队开始拥抱<strong>Flat Design</strong>。乔布斯子不知道会怎么想，他可是坚持了一辈子的拟物风格。当然，无论乔老爷子怎么想，时势如此，由不得苹果不变。</p>
+<p>大象要跳舞是很难的，这正是苹果面临的情况。现在无论是 Android 还是 Winphone，与 iOS 系统体验上的差异已经不是难以企及的，甚至有些方面更能为大众接受。于是 Ive 带领他的团队开始拥抱<strong> Flat Design</strong>。乔布斯子不知道会怎么想，他可是坚持了一辈子的拟物风格。当然，无论乔老爷子怎么想，时势如此，由不得苹果不变。</p>
 
-<p>从微博疯狂的iOS7刷屏中挑出了些有价值的信息，关于扁平化和拟物化的：</p>
+<p>从微博疯狂的 iOS7 刷屏中挑出了些有价值的信息，关于扁平化和拟物化的：</p>
 
 <ul>
 <li><a href="http://www.zhihu.com/question/20881633">什么是扁平化设计（Flat Design）？扁平化设计是未来的趋势吗？</a></li>
@@ -579,7 +581,7 @@
 <p>优秀的设计就这么容易：</p>
 
 <ul>
-<li>1.学习4大基本原则;</li>
+<li>1.学习 4 大基本原则;</li>
 <li>2.认识到自己没有运用这些原则；</li>
 <li>3.应用基本原则。</li>
 </ul>
@@ -589,7 +591,7 @@
 
 <p>一方面，可以观察四项原则在现有设计中的应用：比如当前所打开的网页，是否足够清晰、明确的展示了它所要表达的意图；手头的书本，排版是否跟内容在情感上吻合。</p>
 
-<p>另一方面，时常会有些文档、写报告、为展示写slides的需求，自己在创作的过程中，也可以应用起这四条原则，慢慢体会，慢慢修炼。</p>
+<p>另一方面，时常会有些文档、写报告、为展示写 slides 的需求，自己在创作的过程中，也可以应用起这四条原则，慢慢体会，慢慢修炼。</p>
 
 <h2>体会</h2>
 
@@ -601,11 +603,11 @@
 
 <p>现在是信息的时代，信息量的暴增让信息的简洁展示和选择变得越发关键。前文提到的扁平化的设计风格的崛起，就是一个例证:</p>
 
-<p>『扁平化设计具有一种给你让人心醉的美丽，没有大量的修饰，它能以一个简单直白的方式传达一个信息或者帮助一个产品以及思想变得更加深入人心……扁平化设计正是通过放弃任何附加效果的方式，创建一个「零」3D属性的设计方案。在这里，没有阴影效果、斜角、浮雕、渐变等其他方法来帮助元素产生相对于屏幕的凹凸效果。不带有羽化边缘以及阴影效果的图标和UI元素也都看起来非常鲜明。』</p>
+<p>『扁平化设计具有一种给你让人心醉的美丽，没有大量的修饰，它能以一个简单直白的方式传达一个信息或者帮助一个产品以及思想变得更加深入人心……扁平化设计正是通过放弃任何附加效果的方式，创建一个「零」3D 属性的设计方案。在这里，没有阴影效果、斜角、浮雕、渐变等其他方法来帮助元素产生相对于屏幕的凹凸效果。不带有羽化边缘以及阴影效果的图标和 UI 元素也都看起来非常鲜明。』</p>
 
 <p>相对而言，乔布斯推崇的拟物风格中，所秉承的是让所有用户能快速的学会如何使用它。而随着时代的发展，这种降低学习成本的方式渐渐的不是必须，数码产品充斥着生活，大多数人已经有足够的经验来应对新的操作体验。从这个角度讲，扁平化在现阶段或许是更有好的选择。</p>
 
-<p>不管怎么样，WWDC以后，苹果股价已经持续下跌了，祝福苹果吧，希望Ive不要成为苹果的罪人，据说他是最懂乔布斯的人呢。</p>
+<p>不管怎么样，WWDC 以后，苹果股价已经持续下跌了，祝福苹果吧，希望 Ive 不要成为苹果的罪人，据说他是最懂乔布斯的人呢。</p>
 
 <p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/06/11/the-non-designers-design-book/'>http://biaobiaoqi.github.com/blog/2013/06/11/the-non-designers-design-book/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p>
 
@@ -617,58 +619,58 @@
     <link href="http://biaobiaoqi.github.com/blog/2013/06/09/something-about-mac-gui/"/>
     <updated>2013-06-09T01:00:00+08:00</updated>
     <id>http://biaobiaoqi.github.com/blog/2013/06/09/something-about-mac-gui</id>
-    <content type="html"><![CDATA[<h2>GUI哲学</h2>
+    <content type="html"><![CDATA[<h2>GUI 哲学</h2>
 
-<p>前些日子，看了Tinyfool老师的一篇文章<a href="http://blogread.cn/it/article/1089?f=wb">《开发人员为何应该使用 Mac OS X 兼 OS X 小史》</a>，才恍然Mac系统可不仅仅是UI上与Windows大相径庭，而是自底而上的区别。这种区别渗透到了整个系统框架的设计理念中。</p>
+<p>前些日子，看了 Tinyfool 老师的一篇文章<a href="http://blogread.cn/it/article/1089?f=wb">《开发人员为何应该使用 Mac OS X 兼 OS X 小史》</a>，才恍然 Mac 系统可不仅仅是 UI 上与 Windows 大相径庭，而是自底而上的区别。这种区别渗透到了整个系统框架的设计理念中。</p>
 
-<p>简单概括下我的认识：相比Windows和Linux两大阵营，Mac OS X除了『品味』上的优势之外，最重要的两点是：1.对GUI应用程序脚本化的有力支持；2.能实现GUI程序之间快捷的进程间通信。</p>
+<p>简单概括下我的认识：相比 Windows 和 Linux 两大阵营，Mac OS X 除了『品味』上的优势之外，最重要的两点是：1.对 GUI 应用程序脚本化的有力支持；2.能实现 GUI 程序之间快捷的进程间通信。</p>
 
-<h4>GUI程序之间的进程间通信</h4>
+<h4>GUI 程序之间的进程间通信</h4>
 
-<p>IPC对于多用户分时系统的重要性不言而喻。其中从用户视角来看，如何让多个程序之间能更友好的交互是非常重要的。C++语言虽然面向对象，但在底层来看，其实依旧是冷冰冰的汇编代码，没有更整体的对象环境支撑，而以此构建的Linux也无法对进程间通信形成强力的支持。相比之下，乔布斯的团队借助于SmallTalk的消息传递机制创造了Objective-C，并搭建了自己的运行时和类库框架Cocoa，让系统无论从自身的迭代开发还是应用开发，得到了很大提升。值得一提的是，Objc虽然最近才由于iOS、Mac平台的开发的火热进入热门编程语言的行列，其实它比Java还早十年出生。像最近由于Rails框架而火爆起来的Ruby和持续坚挺的Java，都从SamllTalk中吸收了很多设计理念，就别提C#了。</p>
+<p>IPC 对于多用户分时系统的重要性不言而喻。其中从用户视角来看，如何让多个程序之间能更友好的交互是非常重要的。C++语言虽然面向对象，但在底层来看，其实依旧是冷冰冰的汇编代码，没有更整体的对象环境支撑，而以此构建的 Linux 也无法对进程间通信形成强力的支持。相比之下，乔布斯的团队借助于 SmallTalk 的消息传递机制创造了 Objective-C，并搭建了自己的运行时和类库框架 Cocoa，让系统无论从自身的迭代开发还是应用开发，得到了很大提升。值得一提的是，Objc 虽然最近才由于 iOS、Mac 平台的开发的火热进入热门编程语言的行列，其实它比 Java 还早十年出生。像最近由于 Rails 框架而火爆起来的 Ruby 和持续坚挺的 Java，都从 SamllTalk 中吸收了很多设计理念，就别提 C#了。</p>
 
-<h4>GUI应用程序的脚本化</h4>
+<h4>GUI 应用程序的脚本化</h4>
 
-<p>图形的交互方式确实人性化，但应用程序脚本化控制的方式在一些特定的场景里也可以大大提高生产效率。比如微软Office的VBScript。即使是一般用户，不愿意自己写脚本，脚本化的方式也能让开发人员更方便快捷的开发出新颖的功能和产品。</p>
+<p>图形的交互方式确实人性化，但应用程序脚本化控制的方式在一些特定的场景里也可以大大提高生产效率。比如微软 Office 的 VBScript。即使是一般用户，不愿意自己写脚本，脚本化的方式也能让开发人员更方便快捷的开发出新颖的功能和产品。</p>
 
 <p>让应用全部统一开放脚本很难，特别是从市场的层面而言，如果没有一直贯彻这一战略，造成平台很多应用不支持这一功能，则很难推广。苹果九十年代已经开始积累这方面的基础，有先见之明。</p>
 
-<h2>GUI工具</h2>
+<h2>GUI 工具</h2>
 
-<p>下面是我接触过的一些Mac下的GUI工具。它们大都散发着对开发者的自由开放的态度:)</p>
+<p>下面是我接触过的一些 Mac 下的 GUI 工具。它们大都散发着对开发者的自由开放的态度:)</p>
 
 <h3>Quicksilver</h3>
 
-<p>『为了不把Mac当Windows用』，可以从<a href="http://qsapp.com/">Quicksilver</a>入手。它能将双手从触摸板中解脱出来，或许这是很多开发者的梦想吧;)。只需用热键激活输入框，输入简单的匹配字符串，就可召唤出某个应用，或者执行某些搜索、查找任务，快哉！</p>
+<p>『为了不把 Mac 当 Windows 用』，可以从 <a href="http://qsapp.com/">Quicksilver</a> 入手。它能将双手从触摸板中解脱出来，或许这是很多开发者的梦想吧;)。只需用热键激活输入框，输入简单的匹配字符串，就可召唤出某个应用，或者执行某些搜索、查找任务，快哉！</p>
 
 <p>简单说说配置和使用方式：</p>
 
 <ul>
-<li>1.安装好后，在preference -> command中可以设置HotKey（唤醒的虚拟按键），我的习惯设置是<code>control+enter</code>。preference -> application可以设置是否需要在dock中显示，以及登入时自动启动。</li>
-<li>2.基本功能：快捷打开应用。按下Quicksliver的HotKey（我的是<code>control+enter</code>）,在弹出的输入框中输入所需应用的头几个字母或者缩写，Quicksliver会自动匹配最可能的应用，并显示出来，如果不是自己想要的，可以移动「上下光标」打开下拉菜单选择。选中后回车即可，如图。</li>
+<li>1.安装好后，在 preference -> command 中可以设置 HotKey（唤醒的虚拟按键），我的习惯设置是<code>control+enter</code>。preference -> application 可以设置是否需要在 dock 中显示，以及登入时自动启动。</li>
+<li>2.基本功能：快捷打开应用。按下 Quicksliver 的 HotKey（我的是<code>control+enter</code>）,在弹出的输入框中输入所需应用的头几个字母或者缩写，Quicksliver 会自动匹配最可能的应用，并显示出来，如果不是自己想要的，可以移动「上下光标」打开下拉菜单选择。选中后回车即可，如图。</li>
 </ul>
 
 
-<p><img src="https://dl.dropboxusercontent.com/u/64021093/Pics/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202013-06-09%20%E4%B8%8B%E5%8D%881.23.22.png" title="Quicksilver示例" alt="Quicksilver" /></p>
+<p><img src="https://dl.dropboxusercontent.com/u/64021093/Pics/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202013-06-09%20%E4%B8%8B%E5%8D%881.23.22.png" title="Quicksilver 示例" alt="Quicksilver" /></p>
 
 <ul>
-<li>3.还有很多其他的细节功能，通过Quicksliver的插件实现，可以根据自己的需求来定制。</li>
+<li>3.还有很多其他的细节功能，通过 Quicksliver 的插件实现，可以根据自己的需求来定制。</li>
 </ul>
 
 
 <h3>Shortcat</h3>
 
-<p><a href="http://shortcatapp.com/">shortcat</a>是Mac下的快捷操作利器。相比Quicksilver，Shortcat有不同的定位：通过键盘定位到屏幕上某窗体内的某个位置。其官网的示例就是如何通过Shortcat使用键盘更改DNS设置，注意，是完全不用鼠标噢。有人可能会想那为什么卜直接使用cmd呢？我想答案是Shortcat就是基于GUI的解决方案，是GUI和键盘快捷键的完美组合，与cmd并不冲突。</p>
+<p><a href="http://shortcatapp.com/">shortcat</a> 是 Mac 下的快捷操作利器。相比 Quicksilver，Shortcat 有不同的定位：通过键盘定位到屏幕上某窗体内的某个位置。其官网的示例就是如何通过 Shortcat 使用键盘更改 DNS 设置，注意，是完全不用鼠标噢。有人可能会想那为什么卜直接使用 cmd 呢？我想答案是 Shortcat 就是基于 GUI 的解决方案，是 GUI 和键盘快捷键的完美组合，与 cmd 并不冲突。</p>
 
-<p>下面简单的交代下Shortcat的使用方式：</p>
+<p>下面简单的交代下 Shortcat 的使用方式：</p>
 
 <ul>
-<li>1.快捷键<code>Cmd+Shift+Space</code>用来激活输入框。使用关键字的定位方式类似于Quicksilver。比如：如果目的是『Language &amp; Text』，那么输入『lt』、『lang』；『sa』代表show all，显示所能用于文字定位的区域。『.』能展示出所有可控制区域，包括没有文字定位的区域。</li>
-<li>2.输入了关键字后，界面中被匹配到的模块会被套上不同颜色的方框。接下来，可以使用<code>control+key</code>重定位到对应位置，其中key为对应的匹配上的模块的字符标识。</li>
+<li>1.快捷键<code>Cmd+Shift+Space</code>用来激活输入框。使用关键字的定位方式类似于 Quicksilver。比如：如果目的是『Language &amp; Text』，那么输入『lt』、『lang』；『sa』代表 show all，显示所能用于文字定位的区域。『.』能展示出所有可控制区域，包括没有文字定位的区域。</li>
+<li>2.输入了关键字后，界面中被匹配到的模块会被套上不同颜色的方框。接下来，可以使用<code>control+key</code>重定位到对应位置，其中 key 为对应的匹配上的模块的字符标识。</li>
 </ul>
 
 
-<p><img src="https://dl.dropboxusercontent.com/u/64021093/Pics/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202013-06-09%20%E4%B8%8B%E5%8D%881.42.39.png" title="Shortcat示例" alt="Shortcat" /></p>
+<p><img src="https://dl.dropboxusercontent.com/u/64021093/Pics/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202013-06-09%20%E4%B8%8B%E5%8D%881.42.39.png" title="Shortcat 示例" alt="Shortcat" /></p>
 
 <ul>
 <li>3.定位到合适的位置后，按下<code>enter</code>，可执行单击动作；对应的，双击<code>enter</code>为鼠标双击动作；如果需要配合其他按键的点击，比如<code>command+click</code>，执行<code>command+enter</code>即可；鼠标悬浮为<code>control</code>；双击<code>control</code>可实现聚焦。</li>
@@ -677,22 +679,22 @@
 
 <h3>GeekTool</h3>
 
-<p><a href="http://projects.tynsoe.org/en/geektool/">GeekTool</a>类似于Windows下的widget，可以个性化的定制自己的桌面，添加插件，将CPU、HDD信息直接展示在桌面上，正如其名，Geek而又文艺!如下效果图：</p>
+<p><a href="http://projects.tynsoe.org/en/geektool/">GeekTool</a> 类似于 Windows 下的 widget，可以个性化的定制自己的桌面，添加插件，将 CPU、HDD 信息直接展示在桌面上，正如其名，Geek 而又文艺!如下效果图：</p>
 
-<p><img src="http://bbs.dgtle.com/data/attachment/album/201111/10/011505943pmpmm68enxwwd.png" title="GeekTool示例桌面" alt="GeekTool" /></p>
+<p><img src="http://bbs.dgtle.com/data/attachment/album/201111/10/011505943pmpmm68enxwwd.png" title="GeekTool 示例桌面" alt="GeekTool" /></p>
 
 <p>详细配置可参考这篇文章<a href="http://www.dgtle.com/article-797-1.html">《教你装小清新—— Geektool &amp;&amp; Rainmeter 桌面皮肤推荐》</a></p>
 
 <h3>Nocturne</h3>
 
-<p><a href="http://code.google.com/p/blacktree-nocturne/downloads/detail?name=Nocturne.2.0.0.zip">Nocturne</a>这是桌面颜色控制的工具，与Quicksilver同为blacktree公司的产品。</p>
+<p><a href="http://code.google.com/p/blacktree-nocturne/downloads/detail?name=Nocturne.2.0.0.zip">Nocturne</a> 这是桌面颜色控制的工具，与 Quicksilver 同为 blacktree 公司的产品。</p>
 
-<p>使用方式：下载Nocturne2.0.0，解压后拖入应用程序文件夹，打开。在preference中可很直观的配置各项属性。其中，switch to night功能可以将Mac界面切换到黑夜模式，很好玩;)。</p>
+<p>使用方式：下载 Nocturne2.0.0，解压后拖入应用程序文件夹，打开。在 preference 中可很直观的配置各项属性。其中，switch to night 功能可以将 Mac 界面切换到黑夜模式，很好玩;)。</p>
 
 <h3>参考：</h3>
 
 <ul>
-<li><a href="http://ksmx.me/blog/2012/03/18/customize-mac-desktop/">矮矬穷Mac桌面美化得瑟教程</a></li>
+<li><a href="http://ksmx.me/blog/2012/03/18/customize-mac-desktop/">矮矬穷 Mac 桌面美化得瑟教程</a></li>
 </ul>
 
 
@@ -706,7 +708,7 @@
     <link href="http://biaobiaoqi.github.com/blog/2013/06/08/software-defined-network/"/>
     <updated>2013-06-08T00:39:00+08:00</updated>
     <id>http://biaobiaoqi.github.com/blog/2013/06/08/software-defined-network</id>
-    <content type="html"><![CDATA[<p>最近高级网络课的小组任务是在老师给定的范围内自选方向主题研究并做展示报告。我们组选了sdn。原以为这东西会是工业界无人问津的概念化产品，Google了一下却发现其实sdn挺火的，由于它可能带来的可扩展性，一些大互联网企业也在开始涉足相关的研发，比如Google呵Facebook。这里简要的梳理下我对SDN概念性的认识。</p>
+    <content type="html"><![CDATA[<p>最近高级网络课的小组任务是在老师给定的范围内自选方向主题研究并做展示报告。我们组选了 sdn。原以为这东西会是工业界无人问津的概念化产品，Google 了一下却发现其实 sdn 挺火的，由于它可能带来的可扩展性，一些大互联网企业也在开始涉足相关的研发，比如 Google 呵 Facebook。这里简要的梳理下我对 SDN 概念性的认识。</p>
 
 <h2>背景</h2>
 
@@ -722,42 +724,42 @@
 
 <h3>网络虚拟化</h3>
 
-<p>网络经历了<a href="http://article.yeeyan.org/view/100437/70880">数十年的发展</a>，如今在人们的生产、生活中发挥着巨大的作用。全球的网络拓扑结构结构错综复杂，有许多的自制系统组成。数据包从中国的一台PC机发出，访问到美国的主机，需经过一系列的路由、转发，而经由的网络拓扑节点由层层网关、路由器支配，难于控制。一些组织，在架设自身的可扩展、大规模网络环境时，也同样遇到了拓扑结构复杂、难于维护的问题。</p>
+<p>网络经历了<a href="http://article.yeeyan.org/view/100437/70880">数十年的发展</a>，如今在人们的生产、生活中发挥着巨大的作用。全球的网络拓扑结构结构错综复杂，有许多的自制系统组成。数据包从中国的一台 PC 机发出，访问到美国的主机，需经过一系列的路由、转发，而经由的网络拓扑节点由层层网关、路由器支配，难于控制。一些组织，在架设自身的可扩展、大规模网络环境时，也同样遇到了拓扑结构复杂、难于维护的问题。</p>
 
 <p>如果能剥离开网络的物理拓扑结构，将网络资源虚拟化，隐藏物理结构的复杂性，统一的进行逻辑层的管理控制，就能满足多变的网络需求了。</p>
 
-<p>SDN和OpenFlow就是一个这样的解决方案。</p>
+<p>SDN 和 OpenFlow 就是一个这样的解决方案。</p>
 
-<h2>OpenFlow和SDN</h2>
+<h2>OpenFlow 和 SDN</h2>
 
-<p>OpenFlow起源于斯坦福的Ethane项目。该项目试图通过一个集中式的控制器，让网络管理员可以方便地定义基于网络流的安全控制策略，并将这些安全策略应用到各种网络设备中，从而实现对整个网络通讯的安全控制。受到此项目的启发，斯坦福的老师和学生将Ethane的设计更一般化，将传统网络设备的数据转发(data plane)和路由控制(control plane)两个功能模块相分离，通过集中式的控制器(Controller)以标准化的接口对各种网络设备进行管理和配置。2008年，他们提出了OpenFlow的概念。</p>
+<p>OpenFlow 起源于斯坦福的 Ethane 项目。该项目试图通过一个集中式的控制器，让网络管理员可以方便地定义基于网络流的安全控制策略，并将这些安全策略应用到各种网络设备中，从而实现对整个网络通讯的安全控制。受到此项目的启发，斯坦福的老师和学生将 Ethane 的设计更一般化，将传统网络设备的数据转发(data plane)和路由控制(control plane)两个功能模块相分离，通过集中式的控制器(Controller)以标准化的接口对各种网络设备进行管理和配置。2008 年，他们提出了 OpenFlow 的概念。</p>
 
-<p>这种分布式的实现方式，让控制平面可以和转发平面物理的分离开，控制平面完全可以运行在运算能力更强的服务器上，而不是路由器。OpenFlow协议则是分离的两者之间的通信协议。关于OpenFlow的技术细节，<a href="http://network.51cto.com/art/201306/397443.htm">《虚拟化的逆袭：OpenFlow和SDN》</a>一文中有简明介绍。</p>
+<p>这种分布式的实现方式，让控制平面可以和转发平面物理的分离开，控制平面完全可以运行在运算能力更强的服务器上，而不是路由器。OpenFlow 协议则是分离的两者之间的通信协议。关于 OpenFlow 的技术细节，<a href="http://network.51cto.com/art/201306/397443.htm">《虚拟化的逆袭：OpenFlow 和 SDN》</a>一文中有简明介绍。</p>
 
-<p>基于OpenFlow为网络带来的可编程的特性，有研究人员提出了SDN即Software Defined Network（2009年）。在这个概念中，网络中所有的网络设备被视为被管理的资源，以此抽象出一个网络操作系统(Network OS)的概念，这个网络操作系统一方面抽象了底层网络设备的具体细节，同时还为上层应用提供了统一的管理视图和编程接口。SDN的架构细节，参见<a href="http://network.51cto.com/art/201211/366278.htm">《SDN是生意 OpenFlow是技术》</a>。</p>
+<p>基于 OpenFlow 为网络带来的可编程的特性，有研究人员提出了 SDN 即 Software Defined Network（2009 年）。在这个概念中，网络中所有的网络设备被视为被管理的资源，以此抽象出一个网络操作系统(Network OS)的概念，这个网络操作系统一方面抽象了底层网络设备的具体细节，同时还为上层应用提供了统一的管理视图和编程接口。SDN 的架构细节，参见<a href="http://network.51cto.com/art/201211/366278.htm">《SDN 是生意 OpenFlow 是技术》</a>。</p>
 
-<p>SDN和OpenFlow的关系，就像互联网之于TCP/IP协议栈。OpenFlow是SDN的核心协议，用于控制转发面设备的控制转发。而SDN是上层的变成界面。</p>
+<p>SDN 和 OpenFlow 的关系，就像互联网之于 TCP/IP 协议栈。OpenFlow 是 SDN 的核心协议，用于控制转发面设备的控制转发。而 SDN 是上层的变成界面。</p>
 
-<p>有观点认为，『OpenFlow是技术，SDN是生意』。最近对SDN唱衰的报道也证明了这桩『生意』的前途未仆。</p>
+<p>有观点认为，『OpenFlow 是技术，SDN 是生意』。最近对 SDN 唱衰的报道也证明了这桩『生意』的前途未仆。</p>
 
-<h2>SDN的发展</h2>
+<h2>SDN 的发展</h2>
 
-<p>在云计算飞速发展的同时，SDN也喧嚣尘上。Google,Facebook等大公司也结成了产业联盟，来推动其发展。</p>
+<p>在云计算飞速发展的同时，SDN 也喧嚣尘上。Google,Facebook 等大公司也结成了产业联盟，来推动其发展。</p>
 
 <p>但其现状也并非一片明朗：</p>
 
-<blockquote><p>根据IDC的研究结果显示，在2013年，整个企业网络行业的市场价值为420亿美元，其中将近一半来自2-3层网络交换机市场。SDN只能产生约37亿美元的价值(8.8%)，而且要到2016年才能达到这个数字。与早前的预测相比，IDC的预测数字有所增加，但从整个网络行业来看，SDN仍然相去甚远。</p></blockquote>
+<blockquote><p>根据 IDC 的研究结果显示，在 2013 年，整个企业网络行业的市场价值为 420 亿美元，其中将近一半来自 2-3 层网络交换机市场。SDN 只能产生约 37 亿美元的价值(8.8%)，而且要到 2016 年才能达到这个数字。与早前的预测相比，IDC 的预测数字有所增加，但从整个网络行业来看，SDN 仍然相去甚远。</p></blockquote>
 
-<p>一方面，SDN的性能还有待改善，另一方面，由于SDN的统一平台的思想，会带来硬件设备的同质化，威胁到厂商的利益，将会面临来自厂商锁定的阻力。<a href="http://www.csdn.net/article/2013-06-08/2815714">《理性看待SDN》</a>一文中有较详细的解释。</p>
+<p>一方面，SDN 的性能还有待改善，另一方面，由于 SDN 的统一平台的思想，会带来硬件设备的同质化，威胁到厂商的利益，将会面临来自厂商锁定的阻力。<a href="http://www.csdn.net/article/2013-06-08/2815714">《理性看待 SDN》</a>一文中有较详细的解释。</p>
 
 <p>虽然虚拟化能解放生产力，是大势所趋，但就像功耗更大的复杂指令集在市场上战胜了精简指令集一样，市场是残酷的。只能期待开源和开放的脚步不要停下。</p>
 
 <h3>参考</h3>
 
 <ul>
-<li><a href="http://blog.sina.com.cn/s/blog_72628e9f0100yg3b.html">什么是SDN(Software Defined Networking)？</a>
+<li><a href="http://blog.sina.com.cn/s/blog_72628e9f0100yg3b.html">什么是 SDN(Software Defined Networking)？</a>
 *</li>
-<li><a href="http://blog.sina.com.cn/s/blog_5385c0b901010pu3.html">OpenFlow/SDN本质论</a></li>
+<li><a href="http://blog.sina.com.cn/s/blog_5385c0b901010pu3.html">OpenFlow/SDN 本质论</a></li>
 <li><a href="http://article.yeeyan.org/view/323168/358956">软件定义网络(SDN)：是什么，如何工作，为什么重要</a></li>
 <li><a href="http://network.51cto.com/art/201305/394648.htm">SDN：仍处于起步阶段</a><p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/06/08/software-defined-network/'>http://biaobiaoqi.github.com/blog/2013/06/08/software-defined-network/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p></li>
 </ul>
@@ -770,34 +772,34 @@
     <link href="http://biaobiaoqi.github.com/blog/2013/06/08/ipc-in-hadoop/"/>
     <updated>2013-06-08T00:24:00+08:00</updated>
     <id>http://biaobiaoqi.github.com/blog/2013/06/08/ipc-in-hadoop</id>
-    <content type="html"><![CDATA[<p>本文是《hadoop技术内幕——深入解析Hadoop Common和HDFS架构设计与实现原理》第4章的1-3节的学习笔记。内容为Hadoop IPC部分的基础知识介绍。</p>
+    <content type="html"><![CDATA[<p>本文是《hadoop 技术内幕——深入解析 Hadoop Common 和 HDFS 架构设计与实现原理》第 4 章的 1-3 节的学习笔记。内容为 Hadoop IPC 部分的基础知识介绍。</p>
 
 <h2>知识框架</h2>
 
-<p>由于Hadoop分布式环境需要一个更高效和正对性优化的IPC机制，传统的诸如RMI的解决方案无法满足这一要求，Hadoop自己实现了一套IPC方法。</p>
+<p>由于 Hadoop 分布式环境需要一个更高效和正对性优化的 IPC 机制，传统的诸如 RMI 的解决方案无法满足这一要求，Hadoop 自己实现了一套 IPC 方法。</p>
 
-<p>第4章第1节讲解了RPC的原理，包括Stub-Skeleton的架构等，进而用<code>RMI</code>举例（可以参考的<a href="">演示代码</a>）。RMI的调用实现主要包括了服务器端的registry和客户端的lookup。虽然Hadoop不是使用RMI做IPC，但了解一下其调用方式对感性的认识到如何进行分布式环境下的远程调用还是有作用的。</p>
+<p>第 4 章第 1 节讲解了 RPC 的原理，包括 Stub-Skeleton 的架构等，进而用<code>RMI</code>举例（可以参考的<a href="">演示代码</a>）。RMI 的调用实现主要包括了服务器端的 registry 和客户端的 lookup。虽然 Hadoop 不是使用 RMI 做 IPC，但了解一下其调用方式对感性的认识到如何进行分布式环境下的远程调用还是有作用的。</p>
 
-<p>接下来的2,3小节，简单的介绍了IPC过程所依赖的技术方法：Java的动态代理方式和NIO的网络传输方式。</p>
+<p>接下来的 2,3 小节，简单的介绍了 IPC 过程所依赖的技术方法：Java 的动态代理方式和 NIO 的网络传输方式。</p>
 
-<p>第2节讲<code>动态代理</code>，这里需要理解面向对象的代理模式和<em>动态</em>的原因。代理模式分很多种，这里用到的是简单的对行为的传递。动态代理的动态特性，则是因为框架能提供动态创建某个接口的实现的能力(可以参考的<a href="">演示代码</a>)。</p>
+<p>第 2 节讲<code>动态代理</code>，这里需要理解面向对象的代理模式和<em>动态</em>的原因。代理模式分很多种，这里用到的是简单的对行为的传递。动态代理的动态特性，则是因为框架能提供动态创建某个接口的实现的能力(可以参考的<a href="">演示代码</a>)。</p>
 
 <p>更系统的看动态代理过程，分为两个阶段：</p>
 
 <ul>
-<li>1.代理接口的实现：静态方法Proxy.newInstance()生成动态对象。</li>
-<li>2.调用转发过程：InvocationHandler实现</li>
+<li>1.代理接口的实现：静态方法 Proxy.newInstance()生成动态对象。</li>
+<li>2.调用转发过程：InvocationHandler 实现</li>
 </ul>
 
 
-<p>第3节的<code>NIO</code>，跟传统的套接字(Socket)通信过程做了对比。需要了解Socket通信的特点：同步，阻塞，基于字节，理解这种特点带来的服务器端的线程闲置的压力。对应的，NIO则是可异步的，非阻塞的，基于块的。具体的实现上，需要了解缓冲区(Buffer)的原理和使用方式，通道(Channel)和选择器(Selector)配合的使用方式。</p>
+<p>第 3 节的<code>NIO</code>，跟传统的套接字(Socket)通信过程做了对比。需要了解 Socket 通信的特点：同步，阻塞，基于字节，理解这种特点带来的服务器端的线程闲置的压力。对应的，NIO 则是可异步的，非阻塞的，基于块的。具体的实现上，需要了解缓冲区(Buffer)的原理和使用方式，通道(Channel)和选择器(Selector)配合的使用方式。</p>
 
-<p>我总结了一份slides，如下：(挂在speackerdeck上，如果加载缓慢，请稍候:))</p>
+<p>我总结了一份 slides，如下：(挂在 speackerdeck 上，如果加载缓慢，请稍候:))</p>
 
 <script async class="speakerdeck-embed" data-id="fbcb8590b1540130690c2e6f0be13e84" data-ratio="1.33333333333333" src="http://biaobiaoqi.github.com//speakerdeck.com/assets/embed.js"></script>
 
 
-<p>slides下载地址：<a href="https://dl.dropboxusercontent.com/u/64021093/slides/%E8%BF%9C%E7%A8%8B%E8%BF%87%E7%A8%8B%E8%B0%83%E7%94%A8%E5%92%8CNIO.pdf">请戳</a><p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/06/08/ipc-in-hadoop/'>http://biaobiaoqi.github.com/blog/2013/06/08/ipc-in-hadoop/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p></p>
+<p>slides 下载地址：<a href="https://dl.dropboxusercontent.com/u/64021093/slides/%E8%BF%9C%E7%A8%8B%E8%BF%87%E7%A8%8B%E8%B0%83%E7%94%A8%E5%92%8CNIO.pdf">请戳</a><p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/06/08/ipc-in-hadoop/'>http://biaobiaoqi.github.com/blog/2013/06/08/ipc-in-hadoop/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p></p>
 ]]></content>
   </entry>
   
@@ -808,7 +810,7 @@
     <id>http://biaobiaoqi.github.com/blog/2013/05/25/some-ideas-about-using-bt-protocol-to-sync</id>
     <content type="html"><![CDATA[<h2>背景</h2>
 
-<p>毕业季到了，女朋友跟班里同学们一起拍了很多照片。由于照片分散在不同的人的手机、相机里，她也无法立即给我传来她的照片。这个情景一年前我也遇到过，只是当时自己比较忙，加上考虑着还会在本校读研，也没太在意毕业季照片的手机这一需求，以至于到现在我的电脑里甚至没有一张我穿学士服的照片:-=。而现在，当我想看看gf的照片时，这个需求横亘在我面前，让我特别的想解决掉它。</p>
+<p>毕业季到了，女朋友跟班里同学们一起拍了很多照片。由于照片分散在不同的人的手机、相机里，她也无法立即给我传来她的照片。这个情景一年前我也遇到过，只是当时自己比较忙，加上考虑着还会在本校读研，也没太在意毕业季照片的手机这一需求，以至于到现在我的电脑里甚至没有一张我穿学士服的照片:-=。而现在，当我想看看 gf 的照片时，这个需求横亘在我面前，让我特别的想解决掉它。</p>
 
 <p>让我们从事实出发，理清问题的思路。</p>
 
@@ -838,13 +840,13 @@
 <li><p>1.用移动硬盘等设备人力拷贝</p>
 
 <p>  这种方式太过古老和原始，缺点费时费力。</p></li>
-<li><p>2.使用公邮、网盘、QQ群共享等方式统一上传、下载</p>
+<li><p>2.使用公邮、网盘、QQ 群共享等方式统一上传、下载</p>
 
 <p>  主要缺点是外网网速限制；另外，网速的限制让用户上传和下载的门槛变高，影响了上传积极性，如果有人迟迟不上传，最终下载完整数据的时间也会一直拖延，带来消极的体验；如果注册一次性账号，这也不见得是环保的行为（或许这想法有点数据洁癖吧>&lt;），如果使用非一次性账号，那么权限管理将比较头疼。</p></li>
-<li><p>3.使用内网BT资源站分别打包上传、下载</p>
+<li><p>3.使用内网 BT 资源站分别打包上传、下载</p>
 
 <p>  优点是利用了内网网速的优势。缺点是每个人都打包做种，会让资源分散的很厉害，难于汇集。且做种等步骤对于部分用户而言，有操作门槛。</p></li>
-<li><p>4.先使用1中方法，统一手机照片数据，然后按照2或3的方法发布数据</p>
+<li><p>4.先使用 1 中方法，统一手机照片数据，然后按照 2 或 3 的方法发布数据</p>
 
 <p>  这大概是最靠谱的方式了，缺点集中在需要有人费时费力的手机数据上。当然，如果班里有一个任劳任怨的好班长，这个问题就解决了。</p></li>
 </ul>
@@ -859,22 +861,22 @@
 <p>我将问题抽象为：</p>
 
 <ul>
-<li>完整的数据分散在10至20个数据拥有者手中，需要通过一定手段，让每个个体都不重复的拥有完整的数据。</li>
+<li>完整的数据分散在 10 至 20 个数据拥有者手中，需要通过一定手段，让每个个体都不重复的拥有完整的数据。</li>
 </ul>
 
 
-<p>由于外网网速的限制，基于校园内网建立的工具就有了天然的优势。但如果使用内网，就不得不抛弃各大公司免费提供的邮箱存储空间、网盘存储空间。而校内的资源是有限的，没有自己的服务器，没有足够的空间存储大家的数据，这也就迫使我们考虑到了p2p的系统架构。于是，有了这样的解决方案，设定代号为BBT：</p>
+<p>由于外网网速的限制，基于校园内网建立的工具就有了天然的优势。但如果使用内网，就不得不抛弃各大公司免费提供的邮箱存储空间、网盘存储空间。而校内的资源是有限的，没有自己的服务器，没有足够的空间存储大家的数据，这也就迫使我们考虑到了 p2p 的系统架构。于是，有了这样的解决方案，设定代号为 BBT：</p>
 
 <ul>
-<li>PC机安装BBT工具软件后，可以设定<code>共享目录</code>和对应的<code>分享ID</code></li>
-<li>放入特定<code>共享目录</code>的文件，将使用基于p2p同步的方式，在拥有相同的<code>分享ID</code>的<code>共享目录</code>间同步数据，目的是让所有人都获得到每个人的数据</li>
+<li>PC 机安装 BBT 工具软件后，可以设定<code>共享目录</code>和对应的<code>分享 ID</code></li>
+<li>放入特定<code>共享目录</code>的文件，将使用基于 p2p 同步的方式，在拥有相同的<code>分享 ID</code>的<code>共享目录</code>间同步数据，目的是让所有人都获得到每个人的数据</li>
 </ul>
 
 
 <p>在跟阿豪童鞋的交流中，他建议为了进一步简化用户操作，可以尝试这样一种体验方式：</p>
 
 <ul>
-<li>班级内所有人在同一个链接下载工具软件。保证这一链接下载的软件能互相通信，实现数据同步。这杨就节省了用户自己设定相同的<code>分享ID</code>的流程，而将这一过程转移到班长请求下载链接的过程中。</li>
+<li>班级内所有人在同一个链接下载工具软件。保证这一链接下载的软件能互相通信，实现数据同步。这杨就节省了用户自己设定相同的<code>分享 ID</code>的流程，而将这一过程转移到班长请求下载链接的过程中。</li>
 </ul>
 
 
@@ -882,19 +884,19 @@
 
 <h6>BitTorrent Sync</h6>
 
-<p>在构思的过程中，突然想起前几天在start up news上看到了一个基于BT协议的同步软件<a href="http://labs.bittorrent.com/experiments/sync.html">BitTorrent Sync</a>。</p>
+<p>在构思的过程中，突然想起前几天在 start up news 上看到了一个基于 BT 协议的同步软件 <a href="http://labs.bittorrent.com/experiments/sync.html">BitTorrent Sync</a>。</p>
 
 <p><img src="http://labs.bittorrent.com/img/wide/sync.png" title="BitTorrent Sync" alt="BitTorrent Sync" /></p>
 
 <p>它的实现方式大概是我们所需要的。可惜的是，由于它的功能全面，界面略显复杂。而同时，它并没有开放二次开发接口。</p>
 
-<p>或许我需要自己搭建一个p2p的系统？</p>
+<p>或许我需要自己搭建一个 p2p 的系统？</p>
 
 <h6>PS:</h6>
 
-<p>BT的优势，在于利用了所有节点的存储和传输能力，节点数量越多，下载越快</p>
+<p>BT 的优势，在于利用了所有节点的存储和传输能力，节点数量越多，下载越快</p>
 
-<p>BitTorrent  Sync的优势，则在于能动态的集合分散在不同节点中的数据</p>
+<p>BitTorrent  Sync 的优势，则在于能动态的集合分散在不同节点中的数据</p>
 
 <p>感觉这种去中心化的分布式系统，前景大大的有啊;)<p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/05/25/some-ideas-about-using-bt-protocol-to-sync/'>http://biaobiaoqi.github.com/blog/2013/05/25/some-ideas-about-using-bt-protocol-to-sync/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p></p>
 ]]></content>
@@ -905,7 +907,7 @@
     <link href="http://biaobiaoqi.github.com/blog/2013/05/25/kmp-algorithm/"/>
     <updated>2013-05-25T21:22:00+08:00</updated>
     <id>http://biaobiaoqi.github.com/blog/2013/05/25/kmp-algorithm</id>
-    <content type="html"><![CDATA[<p>本文描述了单模式的字符串匹配的经典算法KMP算法的实现。首先对字符串匹配算法做简单的介绍，然后是KMP算法的实现描述，最后推荐两道简单的ACM模板题做练手用。</p>
+    <content type="html"><![CDATA[<p>本文描述了单模式的字符串匹配的经典算法 KMP 算法的实现。首先对字符串匹配算法做简单的介绍，然后是 KMP 算法的实现描述，最后推荐两道简单的 ACM 模板题做练手用。</p>
 
 <h2>字符串匹配算法</h2>
 
@@ -918,7 +920,7 @@
 </ul>
 
 
-<p>单模式匹配最容易理解，构造也非常简单。一个最朴素的思路就是从文本的第一个字符顺次比较模式串，不匹配则重新从下一个字符开始匹配，直到文本末尾。Java实现代码如下：</p>
+<p>单模式匹配最容易理解，构造也非常简单。一个最朴素的思路就是从文本的第一个字符顺次比较模式串，不匹配则重新从下一个字符开始匹配，直到文本末尾。Java 实现代码如下：</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -951,15 +953,15 @@
 
 <p>但是这种算法，有明显的效率黑洞。因为每次匹配失败后，都会回到原来的匹配起点的下一个字符开始匹配，这些步骤很多情况下，并不是必要的。</p>
 
-<p>实际上这些字符很有可能已经被读入了一次。理论上，如果我们能对所有被读入过的字符有足够的了解，那就能判定是否能避免再次读入一遍做匹配运算了。经典的KMP算法正是基于这点思考，对原有的蛮力算法做出了优化。</p>
+<p>实际上这些字符很有可能已经被读入了一次。理论上，如果我们能对所有被读入过的字符有足够的了解，那就能判定是否能避免再次读入一遍做匹配运算了。经典的 KMP 算法正是基于这点思考，对原有的蛮力算法做出了优化。</p>
 
-<h2>KMP算法</h2>
+<h2>KMP 算法</h2>
 
-<p>网络上关于KMP算法的描述很多，其中个人觉得阮一峰老师的<a href="http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html">《字符串匹配的KMP算法》</a>对KMP的描述最为简明和清晰。图例展示的算法流程更容易让人接受和理解。这里仅记录我所认为重点的知识点。</p>
+<p>网络上关于 KMP 算法的描述很多，其中个人觉得阮一峰老师的<a href="http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html">《字符串匹配的 KMP 算法》</a>对 KMP 的描述最为简明和清晰。图例展示的算法流程更容易让人接受和理解。这里仅记录我所认为重点的知识点。</p>
 
 <h5>算法的思想</h5>
 
-<p>相比蛮力算法，KMP算法预先计算出了一个哈希表，用来指导在匹配过程中匹配失败后尝试下次匹配的起始位置，以此避免重复的读入和匹配过程。这个哈希表被叫做“部分匹配值表(<strong>Particial match table</strong>)”，它的设计是算法精妙之处。</p>
+<p>相比蛮力算法，KMP 算法预先计算出了一个哈希表，用来指导在匹配过程中匹配失败后尝试下次匹配的起始位置，以此避免重复的读入和匹配过程。这个哈希表被叫做“部分匹配值表(<strong>Particial match table</strong>)”，它的设计是算法精妙之处。</p>
 
 <h5>部分匹配值表</h5>
 
@@ -992,7 +994,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>这代表着：字符串<code>A B C A B</code> 中，子串<code>A B C</code>的部分匹配值为0，而子串<code>A B C A</code>的部分匹配值为1，诸如此理。</p>
+<p>这代表着：字符串<code>A B C A B</code> 中，子串<code>A B C</code>的部分匹配值为 0，而子串<code>A B C A</code>的部分匹配值为 1，诸如此理。</p>
 
 <h5>算法实现</h5>
 
@@ -1094,35 +1096,35 @@
 <p>理解算法实现时，有几点特别需要注意：</p>
 
 <ul>
-<li>在生成部分匹配值数组的kmpNext()方法中，第一层循环内，<code>i</code>是字符串的索引，而<code>j</code>则在每次循环开始时代表了<code>i</code>所指定字符之前的子串的部分匹配值。</li>
-<li>kmpNext()方法的内层while()循环，是为了迭代得到让<code>i</code>指定字符匹配到的情况。有另外一种实现方案：不有用这一层循环，而是直接使用一层循环，在大循环内部做j值变更的判定即可。</li>
-<li>kmpNext()方法的while()循环中，需要特别注意是<code>next[j -1]</code>，部分匹配值j对应到的是字符串中的第<code>j-1</code>个字符。</li>
-<li>kmp()的循环代码和kmpNext()部分匹配值表生成的循环代码很类似。两者使用了相同方式，在字符匹配失败后迭代获取新的可匹配情况，且都是利用了next数组。</li>
+<li>在生成部分匹配值数组的 kmpNext()方法中，第一层循环内，<code>i</code>是字符串的索引，而<code>j</code>则在每次循环开始时代表了<code>i</code>所指定字符之前的子串的部分匹配值。</li>
+<li>kmpNext()方法的内层 while()循环，是为了迭代得到让<code>i</code>指定字符匹配到的情况。有另外一种实现方案：不有用这一层循环，而是直接使用一层循环，在大循环内部做 j 值变更的判定即可。</li>
+<li>kmpNext()方法的 while()循环中，需要特别注意是<code>next[j -1]</code>，部分匹配值 j 对应到的是字符串中的第<code>j-1</code>个字符。</li>
+<li>kmp()的循环代码和 kmpNext()部分匹配值表生成的循环代码很类似。两者使用了相同方式，在字符匹配失败后迭代获取新的可匹配情况，且都是利用了 next 数组。</li>
 </ul>
 
 
 <h2>其他</h2>
 
-<p>KMP算法虽然能达到O(M+N)的算法复杂度，但在实际使用中，KMP算法的性能并不如<a href="http://www.ruanyifeng.com/blog/2013/05/boyer-moore_string_search_algorithm.html">BM</a>算法强。</p>
+<p>KMP 算法虽然能达到 O(M+N)的算法复杂度，但在实际使用中，KMP 算法的性能并不如 <a href="http://www.ruanyifeng.com/blog/2013/05/boyer-moore_string_search_algorithm.html">BM</a> 算法强。</p>
 
 <h2>模板题</h2>
 
 <h4>基础模板题</h4>
 
-<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=2203">HDOJ的2203题</a>是一个能检验算法正确性的模板题。Java实现的答案代码<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/practice/hdoj/HDOJ2203.java">请戳这里</a>。</p>
+<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=2203">HDOJ 的 2203 题</a>是一个能检验算法正确性的模板题。Java 实现的答案代码<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/practice/hdoj/HDOJ2203.java">请戳这里</a>。</p>
 
 <h4>延伸模板题</h4>
 
-<p><a href="http://poj.org/problem?id=2406">POJ的2406题</a>，对考察点做了巧妙的变形，对更深入的理解KMP中的部分匹配表（即next数组）很有帮助。Java实现的答案代码<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/practice/poj/POJ2406.java">请戳这里</a>。</p>
+<p><a href="http://poj.org/problem?id=2406">POJ 的 2406 题</a>，对考察点做了巧妙的变形，对更深入的理解 KMP 中的部分匹配表（即 next 数组）很有帮助。Java 实现的答案代码<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/practice/poj/POJ2406.java">请戳这里</a>。</p>
 
-<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1867">HDOJ的1867题</a>也属于kmp的变形。要求对kmp利用next数组进行比较的过程有清晰的认识。Java实现的答案代码<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/practice/hdoj/HDOJ1867.java">请戳这里</a>。</p>
+<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1867">HDOJ 的 1867 题</a>也属于 kmp 的变形。要求对 kmp 利用 next 数组进行比较的过程有清晰的认识。Java 实现的答案代码<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/practice/hdoj/HDOJ1867.java">请戳这里</a>。</p>
 
 <h3>其他参考资料：</h3>
 
 <ul>
 <li><p><a href="http://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm">wiki:Knuth–Morris–Pratt Algorithm</a></p></li>
 <li><p><a href="http://en.wikipedia.org/wiki/String_searching_algorithm">wiki:String Searching Algorithm</a></p></li>
-<li><p><a href="http://www.cppblog.com/converse/archive/2006/07/05/9447.html">《KMP算法的实现》</a></p></li>
+<li><p><a href="http://www.cppblog.com/converse/archive/2006/07/05/9447.html">《KMP 算法的实现》</a></p></li>
 <li><p><a href="http://wangcong.org/blog/archives/2090">《Linux 内核中的 KMP 实现》</a><p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/05/25/kmp-algorithm/'>http://biaobiaoqi.github.com/blog/2013/05/25/kmp-algorithm/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p></p></li>
 </ul>
 
@@ -1149,7 +1151,7 @@
 
 <h2>德雷福斯模型（Dreyfus）</h2>
 
-<p>技能获取领域的模型。这个模型针对于某个技能而言，是一个情景模型。他将技能的掌握分为5个阶段：</p>
+<p>技能获取领域的模型。这个模型针对于某个技能而言，是一个情景模型。他将技能的掌握分为 5 个阶段：</p>
 
 <ul>
 <li>新手 -> 高级新手 -> 胜任者 -> 精通者 -> 专家</li>
@@ -1160,15 +1162,15 @@
 
 <h2>认识大脑</h2>
 
-<p>大脑的配置是双CPU，单主机总线的。</p>
+<p>大脑的配置是双 CPU，单主机总线的。</p>
 
 <ul>
-<li>线性模式的L（左脑）：主要负责线性、【逻辑思维】和【语言处理】。它按部就班的处理指令，相对缓慢，使用了大脑中较少的一部分资源。</li>
-<li>富模式的R（右脑）：大脑的Google，负责搜索、模式匹配。它是异步执行的，【非理性】的。可能某个想法几天后才突然跳出来。它不做任何语言处理，这意味着它的结果也不是语言能表达的。它的处理只能邀请，不能强制命令 。我们可以时常记录各种想法，让它运转，以激发它的活跃状态。</li>
+<li>线性模式的 L（左脑）：主要负责线性、【逻辑思维】和【语言处理】。它按部就班的处理指令，相对缓慢，使用了大脑中较少的一部分资源。</li>
+<li>富模式的 R（右脑）：大脑的 Google，负责搜索、模式匹配。它是异步执行的，【非理性】的。可能某个想法几天后才突然跳出来。它不做任何语言处理，这意味着它的结果也不是语言能表达的。它的处理只能邀请，不能强制命令 。我们可以时常记录各种想法，让它运转，以激发它的活跃状态。</li>
 </ul>
 
 
-<p>这两个CPU共享通过内存核心的总线（意识），每次只有一个CPU可以访问内存。</p>
+<p>这两个 CPU 共享通过内存核心的总线（意识），每次只有一个 CPU 可以访问内存。</p>
 
 <p>值得注意的是，积极的情感对学习和创造性思维非常关键。处于“高兴”的状态可以扩展你的思维过程，激活更多的大脑物质。</p>
 
@@ -1176,16 +1178,16 @@
 
 <h2>充分利用右脑</h2>
 
-<p>需要强调R的功能，因为它关系着【直觉】，而这正是成为专家的必经之路。</p>
+<p>需要强调 R 的功能，因为它关系着【直觉】，而这正是成为专家的必经之路。</p>
 
 <ul>
-<li><p>多感官的输入，能获得更高的效率。比如软件工程中使用CRC卡片做设计，或者使用积木、乐高玩具做架构设计。</p></li>
+<li><p>多感官的输入，能获得更高的效率。比如软件工程中使用 CRC 卡片做设计，或者使用积木、乐高玩具做架构设计。</p></li>
 <li><p>大脑善于适应变化的环境。因此，要定期改变环境，满足你的大脑。任何一种感官的参与都可能是有益的。（当年还强迫自己不间断的工作，既累又不讨好>&lt;…）</p></li>
-<li><p>在学习技能时，可以用R型探路，掌握全局，而后用L型紧跟，两者配合好。（举例参见读书的SQ3R方法）</p></li>
-<li><p>隐喻是一种激发创造力的强大技能，它能很好的沟通好L和R型处理能力。幽默感正是这种从不同的想法中创造新奇的联系的方式，幽默感可以建立更强大的隐喻。</p></li>
+<li><p>在学习技能时，可以用 R 型探路，掌握全局，而后用 L 型紧跟，两者配合好。（举例参见读书的 SQ3R 方法）</p></li>
+<li><p>隐喻是一种激发创造力的强大技能，它能很好的沟通好 L 和 R 型处理能力。幽默感正是这种从不同的想法中创造新奇的联系的方式，幽默感可以建立更强大的隐喻。</p></li>
 <li><p>大脑在处理不同的输入时，差别并不大。记忆不是永远不变的，每次提取记忆，也会重构记忆。我们可以通过提供给自己有益的暗示，来促进自身进步。</p></li>
 <li><p>一切输入都会被存储。如果被存储的事物之间有好的区分度， 那就更容易在查询时被检索到。举个编程的例子，源代码的阅读次数远远多于它的编写次数，所以通常应该花更多功夫把代码变得适合阅读，让代码风格和注释更易于阅读，会事半功倍。</p></li>
-<li><p>晨写和无目的的散步这种方式，能活跃右脑，增加R型工作的机会。</p></li>
+<li><p>晨写和无目的的散步这种方式，能活跃右脑，增加 R 型工作的机会。</p></li>
 </ul>
 
 
@@ -1194,7 +1196,7 @@
 <p>大脑有一些固有的偏见，比如自以为是。我们需要对这些点予以关注。</p>
 
 <ul>
-<li><p>每个人个性倾向不同，处理事儿的方式也不相同。（推荐<a href="http://www.apesk.com/mbti/">MBTI测试</a>，这里是我的<a href="http://biaobiaoqi.me/blog/2013/05/12/mbti-test/">测试结果</a>。）</p></li>
+<li><p>每个人个性倾向不同，处理事儿的方式也不相同。（推荐 <a href="http://www.apesk.com/mbti/">MBTI 测试</a>，这里是我的<a href="http://biaobiaoqi.me/blog/2013/05/12/mbti-test/">测试结果</a>。）</p></li>
 <li><p>重要的是要认识到：在某种情况下，别人的反应行为和你所设想的不一样时，他们并不是疯了、懒惰或者非常难以相处。你也不是。</p></li>
 <li><p>遇到问题，深呼吸，包托变味的空气。深深吸气。数到十。记住你是高级动物。让蜥蜴式的相应过去，请新大脑皮层来处理问题。</p></li>
 <li><p>既然性格和技能水平各异，可能奖励措施也应该各式各样才对。否则奖励反而让获奖人感到不自在。</p></li>
@@ -1204,9 +1206,9 @@
 
 <h2>主动学习</h2>
 
-<h5>SMART方法</h5>
+<h5>SMART 方法</h5>
 
-<p>学习过程中，使用目标激励的方式会很有效（早年自己没目标，还老找借口说没目标自己也会不断努力的…汗颜）遵循SMART方法（这么多条，没必要全记住，核心就在用目标激励前进）：</p>
+<p>学习过程中，使用目标激励的方式会很有效（早年自己没目标，还老找借口说没目标自己也会不断努力的…汗颜）遵循 SMART 方法（这么多条，没必要全记住，核心就在用目标激励前进）：</p>
 
 <ul>
 <li>Specific：将目标具体化</li>
@@ -1234,7 +1236,7 @@
 
 <p>书面指令的传递一般是最无效的，大脑处理语言相关部分很小，除此以外，大脑整个剩余部分都不懂语言。常规的阅读方式效率很低，这里推荐一种主动阅读方式，大家可以按需参考。</p>
 
-<p>SQ3R主动看书法：</p>
+<p>SQ3R 主动看书法：</p>
 
 <ul>
 <li><ol>
@@ -1266,7 +1268,7 @@
 
 <ul>
 <li><p>思维导图的颜色信息、形状信息大大增加了表达的丰富性，让人更容易接受，易于理解。</p></li>
-<li><p>多次迭代思维导图图，可以充分利用起R型的思维。</p></li>
+<li><p>多次迭代思维导图图，可以充分利用起 R 型的思维。</p></li>
 <li><p>当陷入没有明确思路的混沌状态时，思维导图有助于理清思路，指引方向。</p></li>
 <li><p>另外，跟思维导图一样，记录文档也是不错的选择。或许文档不会有人看，但记录的过程，能促进思考。</p></li>
 </ul>
@@ -1275,7 +1277,7 @@
 <h2>经验</h2>
 
 <ul>
-<li><p>在最后期限面前，对L型活动可能有激励，但对R型活动是一种灾难。压力扼杀了认知。</p></li>
+<li><p>在最后期限面前，对 L 型活动可能有激励，但对 R 型活动是一种灾难。压力扼杀了认知。</p></li>
 <li><p>我们是天生的模仿者，如果身边的人技能水平高，那么我们一般会潜移默化的向他们学习，继而提高自身水平。</p></li>
 <li><p>语言描述不是一个最好的教学方式。人脑只有很少计算资源在做语言处理。用更多形象的，比如声音、图形、动过可以更好的促进学习。</p></li>
 </ul>
@@ -1286,7 +1288,7 @@
 <p>保持注意力的三点：</p>
 
 <ul>
-<li>1.学会安抚喋喋不休的L型思维。</li>
+<li>1.学会安抚喋喋不休的 L 型思维。</li>
 <li>2.主动在前进中思考和增强思想，即使是不成熟的。</li>
 <li>3.明确情景切换的昂贵代价，尽可能避免。</li>
 </ul>
@@ -1319,7 +1321,7 @@
     <link href="http://biaobiaoqi.github.com/blog/2013/05/21/the-facebook-effect/"/>
     <updated>2013-05-21T00:23:00+08:00</updated>
     <id>http://biaobiaoqi.github.com/blog/2013/05/21/the-facebook-effect</id>
-    <content type="html"><![CDATA[<p>前两年风靡了一阵子的电影《社交网络》毕竟是电影，一种艺术的方式的表达。虽然无法完全的印证《Facebook效应》一书中记载的正确性，但其细节足以给人启示。</p>
+    <content type="html"><![CDATA[<p>前两年风靡了一阵子的电影《社交网络》毕竟是电影，一种艺术的方式的表达。虽然无法完全的印证《Facebook 效应》一书中记载的正确性，但其细节足以给人启示。</p>
 
 <p>电影中，主人公炫酷的人生经历能催生观者产生极强的代入感，不少同学看后可能就会想着自己在寝室特立独行的捣鼓几下，也来做出个震惊世界的产品。且慢。细读本书，就会了解到，成功并非像电影中所描述的那么轻松愉快和力所能及。</p>
 
@@ -1338,11 +1340,11 @@
 
 <p>“扎克伯格不断创造出一些在网上运行的小程序，其中又一个能帮助他快速强记‘高古斯都时代的艺术’的考试内容”</p>
 
-<p>“扎克伯格如今这样说，‘那一年我做了12个项目。当然，那个项目都不是我全权负责的‘，他说，大多数都是关于’发现人们如何通过相互参照建立联系‘’”。</p></blockquote>
+<p>“扎克伯格如今这样说，‘那一年我做了 12 个项目。当然，那个项目都不是我全权负责的‘，他说，大多数都是关于’发现人们如何通过相互参照建立联系‘’”。</p></blockquote>
 
-<p>而之后的TheFacebook，也并非一蹴而就的发展为如今的Facebook，它的想法来自于当时常春藤名校之间关于在线花名册、照片的需求以及对社交、分享的一直以来的思考，而非电影中几杯啤酒、几个小时的facemesh。实际上，扎克伯格也并非孤注一掷。一直到2004年夏天之前，他还只是将飞速发展的Facebook当做自己经手的一个项目，以规避自己所投入中存在的风险，他同时又与另一个天才程序员合作了另外一个项目wirehog，甚至为它成立了公司，直到试运行失败后才收手。</p>
+<p>而之后的 TheFacebook，也并非一蹴而就的发展为如今的 Facebook，它的想法来自于当时常春藤名校之间关于在线花名册、照片的需求以及对社交、分享的一直以来的思考，而非电影中几杯啤酒、几个小时的 facemesh。实际上，扎克伯格也并非孤注一掷。一直到 2004 年夏天之前，他还只是将飞速发展的 Facebook 当做自己经手的一个项目，以规避自己所投入中存在的风险，他同时又与另一个天才程序员合作了另外一个项目 wirehog，甚至为它成立了公司，直到试运行失败后才收手。</p>
 
-<p>另外，扎克伯格的各路圈子的朋友中不乏IT界精英，他们有着高智商，良好的教育背景或者传奇的过往经历和远大理想。他们可能在中学时就已经写出影响行业圈的软件，可能有各行业经营公司的职业背景、经历，可能精通文史、商业哲学。记得以前被老师告知了一句话，“一个人的收入约等于最亲密的六个朋友的收入的平均值”。可能扎克伯格做不到这一点了，他会是最高的吧=。=</p>
+<p>另外，扎克伯格的各路圈子的朋友中不乏 IT 界精英，他们有着高智商，良好的教育背景或者传奇的过往经历和远大理想。他们可能在中学时就已经写出影响行业圈的软件，可能有各行业经营公司的职业背景、经历，可能精通文史、商业哲学。记得以前被老师告知了一句话，“一个人的收入约等于最亲密的六个朋友的收入的平均值”。可能扎克伯格做不到这一点了，他会是最高的吧=。=</p>
 
 <h2>扎克伯格的性格</h2>
 
@@ -1358,14 +1360,14 @@
 </ul>
 
 
-<p>在Facebook发展到06年时，扎克伯格的角色开始发生变化，但他似乎没有控制好这个变化。在前期为他招揽人才的罗宾说“公司高管们的士气正在跌落，流言满天飞，而马克没有对任何人说明真正发生着什么。管理团队几乎准备要把扎克伯格拉下马”。这引起了罗宾的不满。扎克伯格对待罗宾的指责时，并没有抵触，而是欣然接受。这种气魄是他对产品本身追求大过对虚荣的提现。他善于倾听，吸取意见。他顺利的转变了CEO的角色。</p>
+<p>在 Facebook 发展到 06 年时，扎克伯格的角色开始发生变化，但他似乎没有控制好这个变化。在前期为他招揽人才的罗宾说“公司高管们的士气正在跌落，流言满天飞，而马克没有对任何人说明真正发生着什么。管理团队几乎准备要把扎克伯格拉下马”。这引起了罗宾的不满。扎克伯格对待罗宾的指责时，并没有抵触，而是欣然接受。这种气魄是他对产品本身追求大过对虚荣的提现。他善于倾听，吸取意见。他顺利的转变了 CEO 的角色。</p>
 
 <ul>
 <li>理想远大，目标明确</li>
 </ul>
 
 
-<p>他对Facebook的决策，从来都是为了让它在之后成为更伟大的产品，而不是为了一时的利益。因此一直以来都排斥一般形式的广告。他也一直坚持着对公司的控制权，让一切在他的掌握之下。</p>
+<p>他对 Facebook 的决策，从来都是为了让它在之后成为更伟大的产品，而不是为了一时的利益。因此一直以来都排斥一般形式的广告。他也一直坚持着对公司的控制权，让一切在他的掌握之下。</p>
 
 <ul>
 <li>坚韧</li>
@@ -1376,42 +1378,42 @@
 
 <h2>产品的演变</h2>
 
-<p>Facebook的发展过程中，并非是一直特立独行。与此同时的互联网世界，在社交范围内的公司也是层出不穷，不乏竞争对手。但经过不断的产品迭代创新，Facebook达到了目前的高度。</p>
+<p>Facebook 的发展过程中，并非是一直特立独行。与此同时的互联网世界，在社交范围内的公司也是层出不穷，不乏竞争对手。但经过不断的产品迭代创新，Facebook 达到了目前的高度。</p>
 
 <ul>
 <li>1.图片分享</li>
 </ul>
 
 
-<p>曾在Facebook上尝试wirehog，一个多媒体分享工具，没有成功。之后，当发现用户对更换主页图片感兴趣后，Facebook准备开发新的图片分享功能。而为了与挖掘出社交的能力，考虑到了以图片中的人名来设置标签，并相应的给标记的人发送消息通知。这是扎克伯格的理想中重要的一环，他以越来越广泛的理论来阐释了社交的意义。</p>
+<p>曾在 Facebook 上尝试 wirehog，一个多媒体分享工具，没有成功。之后，当发现用户对更换主页图片感兴趣后，Facebook 准备开发新的图片分享功能。而为了与挖掘出社交的能力，考虑到了以图片中的人名来设置标签，并相应的给标记的人发送消息通知。这是扎克伯格的理想中重要的一环，他以越来越广泛的理论来阐释了社交的意义。</p>
 
 <ul>
 <li>2.动态新闻</li>
 </ul>
 
 
-<p> 创造的是一种订阅朋友信息的方式，先例是RSS（简易信息聚合）。</p>
+<p> 创造的是一种订阅朋友信息的方式，先例是 RSS（简易信息聚合）。</p>
 
 <ul>
 <li>3.开发注册到所有用户</li>
 </ul>
 
 
-<p>经过对全社会开发注册和动态新闻的两件事情的领导之后，扎克伯格作为一个领袖的声望在Facebook腾云直上。</p>
+<p>经过对全社会开发注册和动态新闻的两件事情的领导之后，扎克伯格作为一个领袖的声望在 Facebook 腾云直上。</p>
 
 <ul>
 <li>4.应用平台。</li>
 </ul>
 
 
-<p>成为其他应用程序在上面运行的软件平台是软件技术一行最为光荣的终极目标。Facebook有着自传播力，这是平台的优势。</p>
+<p>成为其他应用程序在上面运行的软件平台是软件技术一行最为光荣的终极目标。Facebook 有着自传播力，这是平台的优势。</p>
 
 <ul>
 <li>5.定制式的广告系统</li>
 </ul>
 
 
-<p>精准的广告。相比Google按需求搜索广告，Facebook则是希望利用人际关系网，为用户产生需求，让用户找到自己所想要的东西。桑德伯格的到来，让Facebook建立起了合理的商业模式。</p>
+<p>精准的广告。相比 Google 按需求搜索广告，Facebook 则是希望利用人际关系网，为用户产生需求，让用户找到自己所想要的东西。桑德伯格的到来，让 Facebook 建立起了合理的商业模式。</p>
 
 <ul>
 <li>6.翻译</li>
@@ -1421,59 +1423,59 @@
 <p>利用用户产生翻译内容的自动化翻译工具。在世界扩张。</p>
 
 <ul>
-<li>7.Facebook联谊会</li>
+<li>7.Facebook 联谊会</li>
 </ul>
 
 
-<p>授权其他网站调用Facebook的资料等</p>
+<p>授权其他网站调用 Facebook 的资料等</p>
 
 <ul>
-<li>8.twitter迅速发展</li>
+<li>8.twitter 迅速发展</li>
 </ul>
 
 
-<p>twitter迅速发展对Facebook形成了压力。Facebook为此进行了改版。改版被不少用户反对，扎克伯格提出了公平投票的方式来决定。他把用户视作公民。</p>
+<p>twitter 迅速发展对 Facebook 形成了压力。Facebook 为此进行了改版。改版被不少用户反对，扎克伯格提出了公平投票的方式来决定。他把用户视作公民。</p>
 
 <ul>
-<li>9.开放信息流API。</li>
+<li>9.开放信息流 API。</li>
 </ul>
 
 
-<p>Facebook不怕流量因此被分流，他们希望Facebook成为一个基础架构。</p>
+<p>Facebook 不怕流量因此被分流，他们希望 Facebook 成为一个基础架构。</p>
 
 <h2>初期发展</h2>
 
-<p>初期发展中，Facebook的团队也会犯严重的错误，比如源代码被开放给所有用户，比如广告导引错误。但相信那种自由状态下的发展，是足够<strong>高效</strong>的。</p>
+<p>初期发展中，Facebook 的团队也会犯严重的错误，比如源代码被开放给所有用户，比如广告导引错误。但相信那种自由状态下的发展，是足够<strong>高效</strong>的。</p>
 
 <blockquote><p>马克安德森支持扎克伯格：“一个快速成长的公司，是没有办法可以一直做出正确的决定的。更好的办法是，快速修正不可避免的错误决定。”</p></blockquote>
 
-<p>虽然王淮描述工程师文化时说道，需要重复两遍以上的事儿，Facebook都会开发出工具去自动化的实现。个人推论，这更多的是在公司获得千万投资，开始扩招员工以后的事情。在初期的发展阶段，即使是牛逼如扎克伯格、莫斯科为茨的人，也被快速发展的步伐所牵制。而当员工数量达到一定规模，有了足够多的人才后，才开始逐步形成了现在的Facebook的工程师文化。</p>
+<p>虽然王淮描述工程师文化时说道，需要重复两遍以上的事儿，Facebook 都会开发出工具去自动化的实现。个人推论，这更多的是在公司获得千万投资，开始扩招员工以后的事情。在初期的发展阶段，即使是牛逼如扎克伯格、莫斯科为茨的人，也被快速发展的步伐所牵制。而当员工数量达到一定规模，有了足够多的人才后，才开始逐步形成了现在的 Facebook 的工程师文化。</p>
 
 <h2>市场</h2>
 
 <p>大学生市场是一块宝地。</p>
 
-<p>大学生们不看电视，不看报纸，而他们将迎来第一张信用卡，第一个银行账户等等。名校更是拥有强大的号召力，优越感。早期Facebook发展时，没有对外开放，将各个学校一一增加到可注册用户范围内，用一种自己可以把控的节奏，维持了发展的平衡。避免了飞速发展带来的服务器端的巨大压力。</p>
+<p>大学生们不看电视，不看报纸，而他们将迎来第一张信用卡，第一个银行账户等等。名校更是拥有强大的号召力，优越感。早期 Facebook 发展时，没有对外开放，将各个学校一一增加到可注册用户范围内，用一种自己可以把控的节奏，维持了发展的平衡。避免了飞速发展带来的服务器端的巨大压力。</p>
 
-<h2>Facebook的定位</h2>
+<h2>Facebook 的定位</h2>
 
 <p>社交需求的理论基础是馈赠型经济。更多介绍，参见<a href="http://biaobiaoqi.me/blog/2013/05/13/free-the-bit-economics/">《免费》中关于非货币市场章节描述</a></p>
 
-<p>扎克伯格的梦想是赋予每个人权利，对于他自己来说，Facebook能解决的最重要的问题就是给人们提供工具，让他们更好的交流。</p>
+<p>扎克伯格的梦想是赋予每个人权利，对于他自己来说，Facebook 能解决的最重要的问题就是给人们提供工具，让他们更好的交流。</p>
 
-<p>Facebook建立在一个激进的社会假说下，即认为现代社会在不可避免的逐步超公开透明的方向发展。扎克伯格说“这个世界的透明程度将不会再允许一个人拥有双重身份。换句话说，即使你希望把私生活和职场分开，你也不可能做到，因为关于你的信息正在互联网和其他各个地方传播。”</p>
+<p>Facebook 建立在一个激进的社会假说下，即认为现代社会在不可避免的逐步超公开透明的方向发展。扎克伯格说“这个世界的透明程度将不会再允许一个人拥有双重身份。换句话说，即使你希望把私生活和职场分开，你也不可能做到，因为关于你的信息正在互联网和其他各个地方传播。”</p>
 
-<p>Facebook希望最终成为一个基础架构。Facebook只是其用户集体行动的表征，除此之外，它什么都不是，Facebook上会发生什么完全取决于用户兴趣所在。但扎克伯格对无聊的应用感到失望，那确实很多用户的真实需求。</p>
+<p>Facebook 希望最终成为一个基础架构。Facebook 只是其用户集体行动的表征，除此之外，它什么都不是，Facebook 上会发生什么完全取决于用户兴趣所在。但扎克伯格对无聊的应用感到失望，那确实很多用户的真实需求。</p>
 
-<p>Facebook不是浪费时间，而是帮助人们理解他们身边的世界。扎克伯格不希望人们太粘Facebook，希望他们多花时间去找朋友，与他人交流互动。<em>所以Facebook的界面是中性的，没有表现出态度</em>。</p>
+<p>Facebook 不是浪费时间，而是帮助人们理解他们身边的世界。扎克伯格不希望人们太粘 Facebook，希望他们多花时间去找朋友，与他人交流互动。<em>所以 Facebook 的界面是中性的，没有表现出态度</em>。</p>
 
 <p>有管理学家如是评价“历史上只有两个基本方法去集中和扩散人们的才能，它们就是<em>官阶体制</em>和<em>市场</em>。而在最近十年，增加了第三个——网络，他让我们能够协同工作对付一些棘手的问题，但也削弱了掌权者的力量，通常只有掌权者可以决定谁可以知道什么。”</p>
 
 <h2>Facebook vs  Google：</h2>
 
 <ul>
-<li>Google是针对于数据的，认为整合全世界的数据是最重要的事情，而Facebook是针对于人的。</li>
-<li>Google会收集到所有数据，而Facebook是在用户乐于分享的前提下，自己上传数据</li>
+<li>Google 是针对于数据的，认为整合全世界的数据是最重要的事情，而 Facebook 是针对于人的。</li>
+<li>Google 会收集到所有数据，而 Facebook 是在用户乐于分享的前提下，自己上传数据</li>
 <li>Google：不作恶；Facebook ：别因为赚钱而做差劲的事儿。</li>
 </ul>
 
@@ -1482,10 +1484,10 @@
 
 <ul>
 <li><p>在可靠的控制个人信息的愿望与不经意间的社会沟通之间，很可能存在着不可协调的矛盾。</p></li>
-<li><p>Facebook应该鼓励用户纰漏多少个人信息。有关这个话题的讨论一直贯穿了公司的整个发展历程。</p></li>
+<li><p>Facebook 应该鼓励用户纰漏多少个人信息。有关这个话题的讨论一直贯穿了公司的整个发展历程。</p></li>
 <li><p>身份识别系统可能妨碍公民的自由。</p></li>
-<li><p>Facebook为何有权利拥有大家的真实身份。</p></li>
-<li><p>当Facebook打通了支付渠道，成为一个全球化的经济体，银行不高兴了</p></li>
+<li><p>Facebook 为何有权利拥有大家的真实身份。</p></li>
+<li><p>当 Facebook 打通了支付渠道，成为一个全球化的经济体，银行不高兴了</p></li>
 </ul>
 
 
@@ -1499,9 +1501,9 @@
     <link href="http://biaobiaoqi.github.com/blog/2013/05/20/hybrid-distributed-data-management-system/"/>
     <updated>2013-05-20T14:52:00+08:00</updated>
     <id>http://biaobiaoqi.github.com/blog/2013/05/20/hybrid-distributed-data-management-system</id>
-    <content type="html"><![CDATA[<p>现在大数据概念被时常提起，社会各界对其关注度越来越高。往往越是火热的东西，人们越容易忽略它的本质。在slides中，我首先按照自己的理解，简单的理顺数据处理领域的发展历程。之后，落脚点是两个比较有代表性的混合的分布式系统：<a href="http://biaobiaoqi.me/blog/2013/05/18/a-hybrid-system-hadoopdb/">HadoopDB</a>和微软的<a href="http://biaobiaoqi.me/blog/2013/04/25/split-querying-process-in-polybase/">Polybase</a>。由于缺乏实战经验，很多东西由各方论文和博文中得到，有不恰当的地方，欢迎大家拍砖讨论;)</p>
+    <content type="html"><![CDATA[<p>现在大数据概念被时常提起，社会各界对其关注度越来越高。往往越是火热的东西，人们越容易忽略它的本质。在 slides 中，我首先按照自己的理解，简单的理顺数据处理领域的发展历程。之后，落脚点是两个比较有代表性的混合的分布式系统：<a href="http://biaobiaoqi.me/blog/2013/05/18/a-hybrid-system-hadoopdb/">HadoopDB</a> 和微软的 <a href="http://biaobiaoqi.me/blog/2013/04/25/split-querying-process-in-polybase/">Polybase</a>。由于缺乏实战经验，很多东西由各方论文和博文中得到，有不恰当的地方，欢迎大家拍砖讨论;)</p>
 
-<p>slides的提纲如下：</p>
+<p>slides 的提纲如下：</p>
 
 <!--more-->
 
@@ -1511,9 +1513,9 @@
 <h3>背景</h3>
 
 <ul>
-<li>RDBMS的出现</li>
+<li>RDBMS 的出现</li>
 <li>大数据时代到来</li>
-<li>NoSQL技术</li>
+<li>NoSQL 技术</li>
 <li>新时代的挑战</li>
 </ul>
 
@@ -1521,8 +1523,8 @@
 <h3>HadoopDB</h3>
 
 <ul>
-<li>PB级数据分析</li>
-<li>HadoopDB是什么</li>
+<li>PB 级数据分析</li>
+<li>HadoopDB 是什么</li>
 <li>框架和组件介绍</li>
 <li>示例</li>
 <li>总结</li>
@@ -1532,19 +1534,19 @@
 <h3>Polybase</h3>
 
 <ul>
-<li>Polybase总览</li>
-<li>PDW结构</li>
-<li>Polybase的实现</li>
+<li>Polybase 总览</li>
+<li>PDW 结构</li>
+<li>Polybase 的实现</li>
 <li>性能分析</li>
 </ul>
 
 
-<p>slides在线展示：</p>
+<p>slides 在线展示：</p>
 
 <script async class="speakerdeck-embed" data-id="77bdc950a3460130c98a12e3c5740641" data-ratio="1.33333333333333" src="http://biaobiaoqi.github.com//speakerdeck.com/assets/embed.js"></script>
 
 
-<p>slides下载：
+<p>slides 下载：
 <a href="https://dl.dropboxusercontent.com/u/64021093/slides/Hybrid%20system.pdf">请戳这里</a></p>
 
 <p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/05/20/hybrid-distributed-data-management-system/'>http://biaobiaoqi.github.com/blog/2013/05/20/hybrid-distributed-data-management-system/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p>
@@ -1557,7 +1559,7 @@
     <link href="http://biaobiaoqi.github.com/blog/2013/05/18/distributed-consistency/"/>
     <updated>2013-05-18T18:58:00+08:00</updated>
     <id>http://biaobiaoqi.github.com/blog/2013/05/18/distributed-consistency</id>
-    <content type="html"><![CDATA[<p>本文来自<a href="http://book.douban.com/subject/3108801/">《分布式原理与泛型》</a>的一致性章节笔记。由于缺乏实践经验，这本书对我来说太过理论，难于理解，现在已经暂停该书的阅读，转而加强实践。另有相关博文<a href="http://biaobiaoqi.me/blog/2013/05/15/cap-and-eventual-consistent/">《CAP和最终一致性》</a>，可供参考阅读。</p>
+    <content type="html"><![CDATA[<p>本文来自<a href="http://book.douban.com/subject/3108801/">《分布式原理与泛型》</a>的一致性章节笔记。由于缺乏实践经验，这本书对我来说太过理论，难于理解，现在已经暂停该书的阅读，转而加强实践。另有相关博文<a href="http://biaobiaoqi.me/blog/2013/05/15/cap-and-eventual-consistent/">《CAP 和最终一致性》</a>，可供参考阅读。</p>
 
 <!--more-->
 
@@ -1588,16 +1590,16 @@
 
 <h4>2.2 严格一致性</h4>
 
-<p>任意read(x)操作都要读到最新的write(x)的结果。
+<p>任意 read(x)操作都要读到最新的 write(x)的结果。
 依赖于绝对的全局时钟，实际系统不可能做到。</p>
 
-<h4>2.3顺序一致性</h4>
+<h4>2.3 顺序一致性</h4>
 
 <p>对于一些读写写操作的集合，所有进程看到的都是同样的顺序。也就是将并行的操作序列化，而且每个进程得到的序列都相同。</p>
 
 <p>那么，很自然对于同一个进程执行的操作，必然要按照它们执行的顺序出现。</p>
 
-<h4>2.4因果一致性（Casual Consitency）</h4>
+<h4>2.4 因果一致性（Casual Consitency）</h4>
 
 <p>要求：</p>
 
@@ -1605,16 +1607,16 @@
 
 <p>例如：(其中[&#8230;.]是占位符，表示没有操作)</p>
 
-<blockquote><p>进程1  W(x)a 将x写成a
-进程2  [..]R(x)a W(x)b
-进程3  [&#8230;.]R(x)a R(x)b
-进程4  [&#8230;.]R(x)b R(x)a</p></blockquote>
+<blockquote><p>进程 1  W(x)a 将 x 写成 a
+进程 2  [..]R(x)a W(x)b
+进程 3  [&#8230;.]R(x)a R(x)b
+进程 4  [&#8230;.]R(x)b R(x)a</p></blockquote>
 
-<p>进程3和1、2是满足因果一致性的，加上4就不满足了。因为进程2是由于读到x=a才把x写成b的，所以W(x)a和W(x)b之间有因果关系，必须按照因果的顺序出现。</p>
+<p>进程 3 和 1、2 是满足因果一致性的，加上 4 就不满足了。因为进程 2 是由于读到 x=a 才把 x 写成 b 的，所以 W(x)a 和 W(x)b 之间有因果关系，必须按照因果的顺序出现。</p>
 
 <p>相比顺序一致性，去掉了那些没有联系的操作达成一致顺序观点的要求，只是保留那些必要的顺序（有因果关系的）。</p>
 
-<h4>2.5入口一致性（Entry Consistency）</h4>
+<h4>2.5 入口一致性（Entry Consistency）</h4>
 
 <p>其实也就是对每个共享数据定义一个同步变量（即：锁）。当然，没有进行同步就进行的读操作结果是不保证的。</p>
 
@@ -1622,27 +1624,27 @@
 
 <p>也就是从用户视角来看数据是一致的。只是关心数据最终会一致（eventually consitent）。</p>
 
-<p>只要保证对于同一个用户，他访问到的数据是一致的就可以了。如果用户只是访问一个副本，这个就很好实现，否则就需要一定策略了。当没有更多的更新的时候，要保证当前的更新会最终传播到所有的副本上。著名的例子有：DNS系统，万维网。</p>
+<p>只要保证对于同一个用户，他访问到的数据是一致的就可以了。如果用户只是访问一个副本，这个就很好实现，否则就需要一定策略了。当没有更多的更新的时候，要保证当前的更新会最终传播到所有的副本上。著名的例子有：DNS 系统，万维网。</p>
 
-<p>但最终一致性需要注意一个典型的问题。即当客户访问不同的副本时，问题就出现了。更具体的例子比如，博客作者更改了一篇博文内容，在A地的用户先访问到最新的内容，而B地由于离博客服务器远，看到的还是原先的内容。</p>
+<p>但最终一致性需要注意一个典型的问题。即当客户访问不同的副本时，问题就出现了。更具体的例子比如，博客作者更改了一篇博文内容，在 A 地的用户先访问到最新的内容，而 B 地由于离博客服务器远，看到的还是原先的内容。</p>
 
 <p>对于最终一致性的的数据存储而言，这个示例很有代表性。问题是由用户有时可能对不同的副本进行操作的事实引起的。以客户为中心的一致性分为如下几大类：</p>
 
 <h4>3.1 单调读（Monotonic Reads）</h4>
 
-<p>当进程从一个地方读出数据x，那么这个以后再读到的x应该是和当前x相同或比当前更新的版本。也就是如果进程迁移到了别的位置，那么对x的更新应该比进程先到达。这里的客户就是指这个进程。</p>
+<p>当进程从一个地方读出数据 x，那么这个以后再读到的 x 应该是和当前 x 相同或比当前更新的版本。也就是如果进程迁移到了别的位置，那么对 x 的更新应该比进程先到达。这里的客户就是指这个进程。</p>
 
 <h4>3.2 单调写（Monotonic Writes）</h4>
 
-<p>跟单调读相应，如果一个进程写一个数据x，那么它在本地或者迁移到别的地方再进行写操作的时候，原来的写操作必须要先传播到这个位置。也就是进程要在任何地方至少和上一次写一样新的数据。</p>
+<p>跟单调读相应，如果一个进程写一个数据 x，那么它在本地或者迁移到别的地方再进行写操作的时候，原来的写操作必须要先传播到这个位置。也就是进程要在任何地方至少和上一次写一样新的数据。</p>
 
 <h4>3.3 Read your writes</h4>
 
-<p>一个进程对于数据x的写操作，那么进程无论到任何副本上都应该看到这个写操作的影响，也就是看到和自己写操作的影响或者更新的值。</p>
+<p>一个进程对于数据 x 的写操作，那么进程无论到任何副本上都应该看到这个写操作的影响，也就是看到和自己写操作的影响或者更新的值。</p>
 
 <h4>3.4 Writes follow reads</h4>
 
-<p>顾名思义了，也就是在读操作后面的写操作要是基于至少跟上一次读出来一样新的值。也就是如果进程在地点1读了x，那么在地点2要写x的副本的话，至少写的时候应该是基于至少和地点1读出的一样新的值。</p>
+<p>顾名思义了，也就是在读操作后面的写操作要是基于至少跟上一次读出来一样新的值。也就是如果进程在地点 1 读了 x，那么在地点 2 要写 x 的副本的话，至少写的时候应该是基于至少和地点 1 读出的一样新的值。</p>
 
 <h3>4 副本放置（Replica Placement）</h3>
 
@@ -1650,7 +1652,7 @@
 
 <p>Permanent replica/永久副本: 选几个固定位置放置副本，镜像呈现。</p>
 
-<p>Server-initiated/服务端发起: 服务端动态决定什么时候向什么地方分发副本，又称push cache</p>
+<p>Server-initiated/服务端发起: 服务端动态决定什么时候向什么地方分发副本，又称 push cache</p>
 
 <p>Client-initiated/客户端发起: 客户端缓存,client cache</p>
 
@@ -1668,7 +1670,7 @@
 <h5>4.2.2 谁来传播</h5>
 
 <ul>
-<li>服务器push或客户pull</li>
+<li>服务器 push 或客户 pull</li>
 </ul>
 
 
@@ -1683,7 +1685,7 @@
 
 <h5>4.3.1 远程写（Remote-Write）协议</h5>
 
-<p>对于数据x有一个主副本，当没有x副本的服务器操作x的时候就会得到一个x的副本。而有x副本的服务器响应客户读请求的时候可以立刻返回。而当客户进行写操作的时候，写操作首先在主副本完成，然后再通知其他副本更新。</p>
+<p>对于数据 x 有一个主副本，当没有 x 副本的服务器操作 x 的时候就会得到一个 x 的副本。而有 x 副本的服务器响应客户读请求的时候可以立刻返回。而当客户进行写操作的时候，写操作首先在主副本完成，然后再通知其他副本更新。</p>
 
 <h5>4.3.2 本地写（Local-Write）协议</h5>
 
@@ -1691,19 +1693,19 @@
 
 <h5>4.3.3 主动复制（Active Replication）</h5>
 
-<p>对于副本的操作要设计到另外一个单一对象。比如，n个副本代理对象C的一个接口，如果向所有副本发出请求，每个副本都会发一个请求到C，那么同样的操作就执行了n次。所以需要一个协调者。另外，多副本返回值的时候也会有同样的情况。所以这种只执行一次的动作需要副本种有一个协调者，保证操作只被执行一次或者只返回一次。</p>
+<p>对于副本的操作要设计到另外一个单一对象。比如，n 个副本代理对象 C 的一个接口，如果向所有副本发出请求，每个副本都会发一个请求到 C，那么同样的操作就执行了 n 次。所以需要一个协调者。另外，多副本返回值的时候也会有同样的情况。所以这种只执行一次的动作需要副本种有一个协调者，保证操作只被执行一次或者只返回一次。</p>
 
 <h5>3.3.4 基于候选团（Quorum-Based）协议</h5>
 
-<p>也就是读操作要得到r个服务器的同意，写操作要得到w个进程的同意。总共有n个进程。r和w要满足以下条件：</p>
+<p>也就是读操作要得到 r 个服务器的同意，写操作要得到 w 个进程的同意。总共有 n 个进程。r 和 w 要满足以下条件：</p>
 
 <ul>
-<li>r＋w > n 这样就不可能同时发生读写，并且读到的server肯定有一个以上被更新过的</li>
+<li>r＋w > n 这样就不可能同时发生读写，并且读到的 server 肯定有一个以上被更新过的</li>
 <li>w > n/2   这样就不可能同时发生两个写</li>
 </ul>
 
 
-<p>也就是类似于投票获得读写的锁。在Dynamo系统中可以配置这种wrn参数以自持特定的一致性。</p>
+<p>也就是类似于投票获得读写的锁。在 Dynamo 系统中可以配置这种 wrn 参数以自持特定的一致性。</p>
 
 <p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/05/18/distributed-consistency/'>http://biaobiaoqi.github.com/blog/2013/05/18/distributed-consistency/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p>
 
@@ -1715,37 +1717,37 @@
     <link href="http://biaobiaoqi.github.com/blog/2013/05/18/a-hybrid-system-hadoopdb/"/>
     <updated>2013-05-18T17:58:00+08:00</updated>
     <id>http://biaobiaoqi.github.com/blog/2013/05/18/a-hybrid-system-hadoopdb</id>
-    <content type="html"><![CDATA[<p>HadoopDB是一个Mapreduce和传统关系型数据库的结合方案，以充分利用RDBMS的性能和Hadoop的容错、分布特性。2009年被Yale大学教授Abadi提出，继而商业化为<a href="http://hadapt.com/">Hadapt</a>，据称从VC那儿拉到了10M刀投资。</p>
+    <content type="html"><![CDATA[<p>HadoopDB 是一个 Mapreduce 和传统关系型数据库的结合方案，以充分利用 RDBMS 的性能和 Hadoop 的容错、分布特性。2009 年被 Yale 大学教授 Abadi 提出，继而商业化为 <a href="http://hadapt.com/">Hadapt</a>，据称从 VC 那儿拉到了 10M 刀投资。</p>
 
-<p>本文是对HadoopDB论文的总结。其中不免掺杂些自己的不成熟想法，更详细的内容，还请参见原论文 HadoopDB: An Architectural Hybrid of MapReduce and DBMS Technologies for Analytical Workloads</p>
+<p>本文是对 HadoopDB 论文的总结。其中不免掺杂些自己的不成熟想法，更详细的内容，还请参见原论文 HadoopDB: An Architectural Hybrid of MapReduce and DBMS Technologies for Analytical Workloads</p>
 
 <!--more-->
 
 
 <h2>背景</h2>
 
-<h3>PB级数据分析系统的能力要求</h3>
+<h3>PB 级数据分析系统的能力要求</h3>
 
 <ul>
 <li>1.性能：节省开销（时间、资金）。</li>
 <li>2.容错：数据分析系统（即使有故障节点也能顺利工作） 不同于 事务型的系统的容错（从故障中无损的恢复）。节点故障时，原来的查询操作不需要重启。</li>
 <li>3.在异构型环境中运行的能力。即使所有机器硬件一样，但某些机器在某些时候可能因为软件原因、网络原因也会性能降低。分布式操作时，要防止木桶效应。</li>
-<li>4.活的查询接口：商业化的数据分析一般建立在SQL查询上，UDF等non-SQL也是需要的。</li>
+<li>4.活的查询接口：商业化的数据分析一般建立在 SQL 查询上，UDF 等 non-SQL 也是需要的。</li>
 </ul>
 
 
 <h5>并行数据库</h5>
 
-<p>满足1,4：利用分表的方式，扩散到多个节点。一般情况下节点最多为几十个，原因：1.每增加一个节点，失败率增加；2.并行数据库假设各个机器都是同质化的，但这往往不太可能</p>
+<p>满足 1,4：利用分表的方式，扩散到多个节点。一般情况下节点最多为几十个，原因：1.每增加一个节点，失败率增加；2.并行数据库假设各个机器都是同质化的，但这往往不太可能</p>
 
 <h5>MapReduce</h5>
 
-<p>满足2,3,4：Map - repartition - Reduce原为非结构化数据，但也可以适用结构化数据。</p>
+<p>满足 2,3,4：Map - repartition - Reduce 原为非结构化数据，但也可以适用结构化数据。</p>
 
 <ul>
-<li>2：（错误节点）动态的规划节点执行任务，将错误节点任务发放给新节点。并在本地磁盘做checkpoint存储。</li>
+<li>2：（错误节点）动态的规划节点执行任务，将错误节点任务发放给新节点。并在本地磁盘做 checkpoint 存储。</li>
 <li>3：（拖后腿的节点）节点间冗余的执行。执行慢的节点的任务交付给速度快的节点执行</li>
-<li>4：Hive的HQL</li>
+<li>4：Hive 的 HQL</li>
 </ul>
 
 
@@ -1753,7 +1755,7 @@
 
 <p>融合了之前两者，做出系统层面的改进，而不仅仅是语言和接口层面。</p>
 
-<p>这三个解决方案对4个指标的关系如下图：</p>
+<p>这三个解决方案对 4 个指标的关系如下图：</p>
 
 <p><img src="http://dl.dropboxusercontent.com/u/64021093/hadoopDB/QQ%E6%88%AA%E5%9B%BE20130518135802.png" title="compare" alt="alt compare" /></p>
 
@@ -1769,10 +1771,10 @@
 <ul>
 <li><p>作用</p>
 
-<p>  hadoopTask &lt;-通信-> Database on Node。节点上的DB类似于Hadoop中的数据源HDFS</p></li>
+<p>  hadoopTask &lt;-通信-> Database on Node。节点上的 DB 类似于 Hadoop 中的数据源 HDFS</p></li>
 <li><p>实现</p>
 
-<p>  扩展了Hadoop的InputFormat</p></li>
+<p>  扩展了 Hadoop 的 InputFormat</p></li>
 </ul>
 
 
@@ -1785,7 +1787,7 @@
   2.一些元数据如数据簇中的数据集，副本的位置，数据的划分。</p></li>
 <li><p>实现</p>
 
-<p>  HDFS上的XML。希望做成类似于Hadoop的namenode。</p></li>
+<p>  HDFS 上的 XML。希望做成类似于 Hadoop 的 namenode。</p></li>
 </ul>
 
 
@@ -1794,11 +1796,11 @@
 <ul>
 <li><p>作用</p>
 
-<p>  将数据合理划分，从HDFS转移到节点中的本地文件系统</p></li>
+<p>  将数据合理划分，从 HDFS 转移到节点中的本地文件系统</p></li>
 <li><p>实现</p>
 
 <p>  global hasher：分配到不同节点
-  local hasher：继续划分为不同chunks</p></li>
+  local hasher：继续划分为不同 chunks</p></li>
 </ul>
 
 
@@ -1807,27 +1809,27 @@
 <ul>
 <li><p>作用</p>
 
-<p>  将HiveQL转化为特定执行计划，在hadoopDB中执行。原则是尽可能的讲操作推向节点上的RDBMS上执行，以此提高执行效率。</p></li>
+<p>  将 HiveQL 转化为特定执行计划，在 hadoopDB 中执行。原则是尽可能的讲操作推向节点上的 RDBMS 上执行，以此提高执行效率。</p></li>
 <li><p>实现</p>
 
-<p>  扩展Hive：
-  1.执行查找前，用catolog的信息更新Hive的metastore，定向到节点数据库的表
+<p>  扩展 Hive：
+  1.执行查找前，用 catolog 的信息更新 Hive 的 metastore，定向到节点数据库的表
   2.执行前，决定划分的键；将部分查询语句推到节点的数据库中执行。</p></li>
 </ul>
 
 
 <h2>示例</h2>
 
-<p>示例参见下文的slides</p>
+<p>示例参见下文的 slides</p>
 
 <h2>总结</h2>
 
-<p>对hadoopDB的一些看法：</p>
+<p>对 hadoopDB 的一些看法：</p>
 
 <ul>
 <li>其数据预处理代价过高：数据需要进行两次分解和一次数据库加载操作后才能使用；</li>
-<li>将查询推向数据库层只是少数情况，大多数情况下，查询仍由Ｈive完成．因为数据仓库查询往往涉及多表连接，由于连接的复杂性，难以做到在保持连接数据局部性的前提下将参与连接的多张表按照某种模式划分；</li>
-<li>维护代价过高．不仅要维护Ｈadoop系统，还要维护每个数据库节点；</li>
+<li>将查询推向数据库层只是少数情况，大多数情况下，查询仍由Ｈive 完成．因为数据仓库查询往往涉及多表连接，由于连接的复杂性，难以做到在保持连接数据局部性的前提下将参与连接的多张表按照某种模式划分；</li>
+<li>维护代价过高．不仅要维护Ｈadoop 系统，还要维护每个数据库节点；</li>
 <li>目前尚不支持数据的动态划分，需要手工一次划分好</li>
 </ul>
 
@@ -1837,7 +1839,7 @@
 <script async class="speakerdeck-embed" data-id="48c5e680a1ab0130e1707290244918d4" data-ratio="1.33333333333333" src="http://biaobiaoqi.github.com//speakerdeck.com/assets/embed.js"></script>
 
 
-<p>下载slides，请猛戳<a href="https://dl.dropboxusercontent.com/u/64021093/hadoopDB/%5B2013-05-18%5DHadoopDB.pptx">这里</a></p>
+<p>下载 slides，请猛戳<a href="https://dl.dropboxusercontent.com/u/64021093/hadoopDB/%5B2013-05-18%5DHadoopDB.pptx">这里</a></p>
 
 <h2>参考资料</h2>
 
@@ -1857,87 +1859,87 @@
     <id>http://biaobiaoqi.github.com/blog/2013/05/17/jail-break-your-ios</id>
     <content type="html"><![CDATA[<p><img src="https://dl.dropboxusercontent.com/u/64021093/2013-5-16.jpg" title="Jailbrek" alt="alt jailbreak" /></p>
 
-<p>提到<a href="http://en.wikipedia.org/wiki/IOS_jailbreaking#Security.2C_privacy.2C_and_stability">越狱</a>，很多人第一反应大概是免费的游戏和app。</p>
+<p>提到<a href="http://en.wikipedia.org/wiki/IOS_jailbreaking#Security.2C_privacy.2C_and_stability">越狱</a>，很多人第一反应大概是免费的游戏和 app。</p>
 
 <p>作为软件从业人员，深知中国的大环境的特殊性。内有用户想吃免费午餐的不良付费习惯，外有行业内大头诸如某讯对创新的绞杀。大家对越狱是为了免费、盗版软件的认识，也就不奇怪了。</p>
 
-<p>还有另一派人。越狱对他们来说，意味着开放。个人认为这也是Hack精神的精髓之一。事实上，iOS越狱也有自己的生态圈：Cydia就是越狱设备上App Store。</p>
+<p>还有另一派人。越狱对他们来说，意味着开放。个人认为这也是 Hack 精神的精髓之一。事实上，iOS 越狱也有自己的生态圈：Cydia 就是越狱设备上 App Store。</p>
 
 <!--more-->
 
 
 <h2>越狱的合法性</h2>
 
-<p>数字千年版权法对iphone的越狱进行了特赦，直到2015年，对iPhone、iPod touch的越狱依然有效。但注意，iPad就没这么幸运了。</p>
+<p>数字千年版权法对 iphone 的越狱进行了特赦，直到 2015 年，对 iPhone、iPod touch 的越狱依然有效。但注意，iPad 就没这么幸运了。</p>
 
 <p>详情参见博文<a href="http://www.cultofmac.com/213144/unlocking-a-new-iphone-is-now-illegal-but-jailbreaking-is-still-safe-what-it-all-means-for-you/">《Unlocking A New iPhone Is Now Illegal, But Jailbreaking Is Still Safe — What It All Means For You》</a></p>
 
-<h2>iOS安全性</h2>
+<h2>iOS 安全性</h2>
 
-<p>由于iOS没有开源，学术界和工业界对它的安全机制的论述资料很少。我在网上找到了上交一位学长对ios安全机制的分析文章，是他的硕士学位<a href="http://www.doc88.com/p-405566264292.html">论文</a>。作为参考，我整理了一些关键知识点。</p>
+<p>由于 iOS 没有开源，学术界和工业界对它的安全机制的论述资料很少。我在网上找到了上交一位学长对 ios 安全机制的分析文章，是他的硕士学位<a href="http://www.doc88.com/p-405566264292.html">论文</a>。作为参考，我整理了一些关键知识点。</p>
 
 <h4>基于信任链的启动</h4>
 
-<p>iOS的信任机制从系统启动那一刻起已经开始。
-系统可信启动<a href="http://elinux.org/images/2/28/Trusted_Boot_Loader.pdf">trustedboot</a>：启动每一步都会检测签名，构成整个信任链。</p>
+<p>iOS 的信任机制从系统启动那一刻起已经开始。
+系统可信启动 <a href="http://elinux.org/images/2/28/Trusted_Boot_Loader.pdf">trustedboot</a>：启动每一步都会检测签名，构成整个信任链。</p>
 
 <p>还有另一种启动方式，是设备固件升级方式（DFU，Device Firmware Update），也是由签名构建信任链。</p>
 
 <h4>程序签名</h4>
 
-<p>iOS应用的ipa压缩包中包含可执行文件和数据文件。可执行文件只有在已签名的前提下才能运行。确保应用经过苹果认证。</p>
+<p>iOS 应用的 ipa 压缩包中包含可执行文件和数据文件。可执行文件只有在已签名的前提下才能运行。确保应用经过苹果认证。</p>
 
-<p>越狱提升运行权限到root，修改引用加载策略，接受任意签名的应用。
-“通过软件保证软件安全是不可能的”，iOS使用了硬件来做保护，但硬件部分也遭到了越狱的破解。</p>
+<p>越狱提升运行权限到 root，修改引用加载策略，接受任意签名的应用。
+“通过软件保证软件安全是不可能的”，iOS 使用了硬件来做保护，但硬件部分也遭到了越狱的破解。</p>
 
 <h4>沙盒技术</h4>
 
-<p>iOS用沙盒技术实现访问控制
+<p>iOS 用沙盒技术实现访问控制
 trustedBSD ：http://www.trustedbsd.org/
 http://www.freebsd.org/doc/zh_CN/books/arch-handbook/mac-synopsis.html</p>
 
-<h4>ASLR和PIE</h4>
+<h4>ASLR 和 PIE</h4>
 
 <p>使用地址空间布局随机化（ASLR， address space layout randomization）和位置无关可执行代码（PIE，position independent executable）编译用来防止经典的缓冲区溢出攻击。</p>
 
 <h4>数据保护机制：</h4>
 
 <ul>
-<li>硬件加密：AES协处理器，存储着UID，GID</li>
-<li>软件加密：系统中每个文件、数据都用一个唯一的秘钥来加密。秘钥是有UID、GID一起产生的，存在keybag中，keybag通过用户的4位密码来保护。</li>
+<li>硬件加密：AES 协处理器，存储着 UID，GID</li>
+<li>软件加密：系统中每个文件、数据都用一个唯一的秘钥来加密。秘钥是有 UID、GID 一起产生的，存在 keybag 中，keybag 通过用户的 4 位密码来保护。</li>
 </ul>
 
 
 <h2>越狱</h2>
 
-<p>越狱主要就是在信任链的根bootrom阶段攻击。由于系统不断升级，攻击的方式也在不断演进，这个<a href="http://bbs.gean.cn/archiver/showtopic-213.aspx">链接</a>介绍了其中的一种情况。</p>
+<p>越狱主要就是在信任链的根 bootrom 阶段攻击。由于系统不断升级，攻击的方式也在不断演进，这个<a href="http://bbs.gean.cn/archiver/showtopic-213.aspx">链接</a>介绍了其中的一种情况。</p>
 
 <h4>越狱后注意</h4>
 
-<p>总的来说，越狱打破了iOS封闭的生态环境，也打破了它特有的保护壳。手机获得了root权限，恶意代码有了可趁之机。不要轻易的使用来源不明的应用和插件。</p>
+<p>总的来说，越狱打破了 iOS 封闭的生态环境，也打破了它特有的保护壳。手机获得了 root 权限，恶意代码有了可趁之机。不要轻易的使用来源不明的应用和插件。</p>
 
 <ul>
-<li>非越狱手机：仅允许用户访问照片、视频数据；通过备份，可在pc端获取所有数据</li>
-<li>越狱手机：拥有root权限。可以通过许多渠道如ssh，ftp获取系统数据。</li>
+<li>非越狱手机：仅允许用户访问照片、视频数据；通过备份，可在 pc 端获取所有数据</li>
+<li>越狱手机：拥有 root 权限。可以通过许多渠道如 ssh，ftp 获取系统数据。</li>
 </ul>
 
 
 <p>更多细节参见
-* <a href="http://bbs.weiphone.com/read-htm-tid-1750886.html">《浅谈iOS越狱前后的安全问题以及安全风险》</a>
-* <a href="http://www.pcpop.com/doc/0/890/890768_all.shtml">《iPad越狱不安全!安装应用/插件需谨慎》</a>
-* <a href="http://www.cnbeta.com/articles/229192.htm">《iOS完美越狱 - 福利还是阴谋？》</a></p>
+* <a href="http://bbs.weiphone.com/read-htm-tid-1750886.html">《浅谈 iOS 越狱前后的安全问题以及安全风险》</a>
+* <a href="http://www.pcpop.com/doc/0/890/890768_all.shtml">《iPad 越狱不安全!安装应用/插件需谨慎》</a>
+* <a href="http://www.cnbeta.com/articles/229192.htm">《iOS 完美越狱 - 福利还是阴谋？》</a></p>
 
 <h4>SHSH</h4>
 
-<p>iPhone 3GS出来时候，苹果为加强对iPhone OS的控制对恢复(Restore)固件(Firmware)采用了验证过程，每次iTunes要恢复固件的时候都要连接苹果的服务器验证。手机的ECID和所刷系统版本号一起签名出一个SHSH文件，发送给服务器，服务器检测SHSH是否为新版本的系统所产生，如果是，则允许继续进行刷机，否则传回组织继续的信号。</p>
+<p>iPhone 3GS 出来时候，苹果为加强对 iPhone OS 的控制对恢复(Restore)固件(Firmware)采用了验证过程，每次 iTunes 要恢复固件的时候都要连接苹果的服务器验证。手机的 ECID 和所刷系统版本号一起签名出一个 SHSH 文件，发送给服务器，服务器检测 SHSH 是否为新版本的系统所产生，如果是，则允许继续进行刷机，否则传回组织继续的信号。</p>
 
-<p>SHSH是存储在苹果公司的服务器上的，用户需要通过备份原来的SHSH，并伪装一台苹果服务器来协助验证。　　</p>
+<p>SHSH 是存储在苹果公司的服务器上的，用户需要通过备份原来的 SHSH，并伪装一台苹果服务器来协助验证。　　</p>
 
-<p>网络上SHSH备份方法的介绍很多，不了解的朋友自行Google吧。</p>
+<p>网络上 SHSH 备份方法的介绍很多，不了解的朋友自行 Google 吧。</p>
 
 <h2>附录</h2>
 
-<p>对于想开发iOS应用而又没有开发者账号的朋友，可以参考这篇文章<a href="http://kqwd.blog.163.com/blog/static/4122344820117191351263/">《Xcode 4.1~4.6 + iOS 5、iOS 6免证书(iDP)开发+真机调试+生成IPA全攻略》</a>，Xcode4.6 iOS6.0 亲测有效。  <p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/05/17/jail-break-your-ios/'>http://biaobiaoqi.github.com/blog/2013/05/17/jail-break-your-ios/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p></p>
+<p>对于想开发 iOS 应用而又没有开发者账号的朋友，可以参考这篇文章<a href="http://kqwd.blog.163.com/blog/static/4122344820117191351263/">《Xcode 4.1~4.6 + iOS 5、iOS 6 免证书(iDP)开发+真机调试+生成 IPA 全攻略》</a>，Xcode4.6 iOS6.0 亲测有效。  <p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/05/17/jail-break-your-ios/'>http://biaobiaoqi.github.com/blog/2013/05/17/jail-break-your-ios/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p></p>
 ]]></content>
   </entry>
   
@@ -1946,7 +1948,7 @@ http://www.freebsd.org/doc/zh_CN/books/arch-handbook/mac-synopsis.html</p>
     <link href="http://biaobiaoqi.github.com/blog/2013/05/15/cap-and-eventual-consistent/"/>
     <updated>2013-05-15T00:30:00+08:00</updated>
     <id>http://biaobiaoqi.github.com/blog/2013/05/15/cap-and-eventual-consistent</id>
-    <content type="html"><![CDATA[<p>查阅资料整理了最终一致性、CAP相关的内容。由于图省事儿，没有做文字的整理记载，只有slides和一些查阅过的链接，大家将就着看。欢迎指正。</p>
+    <content type="html"><![CDATA[<p>查阅资料整理了最终一致性、CAP 相关的内容。由于图省事儿，没有做文字的整理记载，只有 slides 和一些查阅过的链接，大家将就着看。欢迎指正。</p>
 
 <p>slides：</p>
 
@@ -1958,42 +1960,42 @@ http://www.freebsd.org/doc/zh_CN/books/arch-handbook/mac-synopsis.html</p>
 <!--more-->
 
 
-<p>slides链接：<a href="https://speakerdeck.com/biaobiaoqi/cap-and-eventually-consistent">请戳这里</a></p>
+<p>slides 链接：<a href="https://speakerdeck.com/biaobiaoqi/cap-and-eventually-consistent">请戳这里</a></p>
 
 <h2>背景</h2>
 
 <p>为什么系统要扩张？历史的发展路径是怎么样的？请看<a href="http://rdc.taobao.com/blog/cs/?p=614">《系统可扩展性演化》</a></p>
 
-<h2>CAP理论</h2>
+<h2>CAP 理论</h2>
 
 <ul>
-<li><p>CAP理论的提出：分布式系统的CAP理论是2000年左右被提出的概念，直到Dynamo的出现，开始在工业界被广泛实践：
+<li><p>CAP 理论的提出：分布式系统的 CAP 理论是 2000 年左右被提出的概念，直到 Dynamo 的出现，开始在工业界被广泛实践：
 <a href="http://www.julianbrowne.com/article/viewer/brewers-cap-theorem">《Brewer&#8217;s CAP Theorem》</a>/<a href="http://code.alibabatech.com/blog/dev_related_728/brewers-cap-theorem.html">中文翻译</a></p></li>
-<li><p>对CAP的理解：<a href="http://www.douban.com/group/topic/11765014/">《谈正确理解CAP理论》</a>\ <a href="http://rdc.taobao.com/blog/cs/?p=631">《CAP理论及分布式系统一致性》</a></p></li>
+<li><p>对 CAP 的理解：<a href="http://www.douban.com/group/topic/11765014/">《谈正确理解 CAP 理论》</a>\ <a href="http://rdc.taobao.com/blog/cs/?p=631">《CAP 理论及分布式系统一致性》</a></p></li>
 </ul>
 
 
-<h2>BASE理论</h2>
+<h2>BASE 理论</h2>
 
 <ul>
-<li>BASE的理论解释：<a href="http://rdc.taobao.com/blog/cs/?p=637">《分布式事务工程实现》</a></li>
+<li>BASE 的理论解释：<a href="http://rdc.taobao.com/blog/cs/?p=637">《分布式事务工程实现》</a></li>
 </ul>
 
 
 <h2>最终一致性</h2>
 
 <ul>
-<li><p>amazon的CTO分析最终一致性：<a href="http://www.allthingsdistributed.com/2008/12/eventually_consistent.html">Eventually Consistent - Revisited</a>/<a href="http://blog.csdn.net/xiaoqiangxx/article/details/7566654">中文翻译</a></p></li>
-<li><p>Dynamo论文：<a href="http://www.read.seas.harvard.edu/~kohler/class/cs239-w08/decandia07dynamo.pdf">Dynamo: Amazon’s Highly Available Key-value Store</a></p>
+<li><p>amazon 的 CTO 分析最终一致性：<a href="http://www.allthingsdistributed.com/2008/12/eventually_consistent.html">Eventually Consistent - Revisited</a>/<a href="http://blog.csdn.net/xiaoqiangxx/article/details/7566654">中文翻译</a></p></li>
+<li><p>Dynamo 论文：<a href="http://www.read.seas.harvard.edu/~kohler/class/cs239-w08/decandia07dynamo.pdf">Dynamo: Amazon’s Highly Available Key-value Store</a></p>
 
-<p>关于Dynamo的一篇中文简述：<a href="http://www.infoq.com/cn/articles/nosql-dynamo">《解读NoSQL技术代表之作Dynamo》</a></p></li>
+<p>关于 Dynamo 的一篇中文简述：<a href="http://www.infoq.com/cn/articles/nosql-dynamo">《解读 NoSQL 技术代表之作 Dynamo》</a></p></li>
 </ul>
 
 
 <h2>引申</h2>
 
 <ul>
-<li>CAP原作者对CAP的反思和澄清：<a href="http://www.infoq.com/cn/articles/cap-twelve-years-later-how-the-rules-have-changed">《CAP十二年回顾：规则变了》</a><p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/05/15/cap-and-eventual-consistent/'>http://biaobiaoqi.github.com/blog/2013/05/15/cap-and-eventual-consistent/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p></li>
+<li>CAP 原作者对 CAP 的反思和澄清：<a href="http://www.infoq.com/cn/articles/cap-twelve-years-later-how-the-rules-have-changed">《CAP 十二年回顾：规则变了》</a><p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/05/15/cap-and-eventual-consistent/'>http://biaobiaoqi.github.com/blog/2013/05/15/cap-and-eventual-consistent/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p></li>
 </ul>
 
 ]]></content>
@@ -2008,14 +2010,14 @@ http://www.freebsd.org/doc/zh_CN/books/arch-handbook/mac-synopsis.html</p>
 
 <p><a href="http://en.wikipedia.org/wiki/Chris_Andersen">克里斯·安德森</a>人称鸟人安德森，现效力于热火队，一直以来都是值得信赖的角色球员，板凳匪徒，内线尖兵。好了，不扯了……回到另外一个<a href="http://t.cn/akRhip">克里斯·安德森</a>的思想世界来。</p>
 
-<p>长尾理论早就为人熟知了，最早就是由安德森提出的，用于解释Amazon和Netflix的商业和经济模式。虽然没有阅读过原书，只是从网络接收了一些二手甚至三手的相关观点，但也可以从当今互联网的新兴中发现许多端倪。</p>
+<p>长尾理论早就为人熟知了，最早就是由安德森提出的，用于解释 Amazon 和 Netflix 的商业和经济模式。虽然没有阅读过原书，只是从网络接收了一些二手甚至三手的相关观点，但也可以从当今互联网的新兴中发现许多端倪。</p>
 
 <p>按作者的话来说，“免费”是<a href="http://book.douban.com/subject/1919072/">《长尾理论》</a>没讨论完的话题，它并非新生事物，但是一直在变化，它的变化促使我们要反思人类行为和经济动因方面最根深蒂固的一些观念。</p>
 
 <!--more-->
 
 
-<p>作为没有系统学习经济理论的工科生，未必深刻的理解了作者观点的精华部分，但至少从作者娓娓道来的文字中获得了商业模式和经济原理的联系的启迪。这是从微博140个文字的刷屏中难以获取的。</p>
+<p>作为没有系统学习经济理论的工科生，未必深刻的理解了作者观点的精华部分，但至少从作者娓娓道来的文字中获得了商业模式和经济原理的联系的启迪。这是从微博 140 个文字的刷屏中难以获取的。</p>
 
 <p>当然，这种了解层面显然是无法发挥<a href="http://book.douban.com/subject/3932520/">《免费》</a>的效力的。正文安德森所言，那些懂得“免费”将会统摄明日市场并摧毁今日市场的人其实已经走在前面了，而《免费》所能带来的思考能点亮的新的商业模式，还得沉淀到对生活、市场的思考中去。</p>
 
@@ -2023,7 +2025,7 @@ http://www.freebsd.org/doc/zh_CN/books/arch-handbook/mac-synopsis.html</p>
 
 <h2>原子经济和比特经济</h2>
 
-<p>20世纪的经济主要是一种原子经济的时代，是基于物质的。而21世纪的经济则是一种比特经济，核心是信息。原子经济的基调是通货膨胀，而比特经济的主旋律是通货紧缩。</p>
+<p>20 世纪的经济主要是一种原子经济的时代，是基于物质的。而 21 世纪的经济则是一种比特经济，核心是信息。原子经济的基调是通货膨胀，而比特经济的主旋律是通货紧缩。</p>
 
 <p>在原子经济中，想要得到任何免费都需要换一种方式把钱付了，而比特经济中，真正的免费是存在的。
 “免费经济学”的兴起正是由数字时代的科技进步来推动的。是比特经济的一大特征。</p>
@@ -2094,20 +2096,20 @@ http://www.freebsd.org/doc/zh_CN/books/arch-handbook/mac-synopsis.html</p>
 
 <p>盗版或仿制行为刺激的市场需求要比它满足的需求更多。</p>
 
-<p>在非货币市场中，礼品经济比市场资本主义离人性化走的更近一点。一直以来，经济学家做过很多尝试，但由于顿巴数（Dunbar number）的作用，超过150这个规模的群体就难以维系。而互联网的到来，给礼品经济带来了新的机会，可能打破顿巴数的局限，让建立在互利基础之上的经济有效运转。</p>
+<p>在非货币市场中，礼品经济比市场资本主义离人性化走的更近一点。一直以来，经济学家做过很多尝试，但由于顿巴数（Dunbar number）的作用，超过 150 这个规模的群体就难以维系。而互联网的到来，给礼品经济带来了新的机会，可能打破顿巴数的局限，让建立在互利基础之上的经济有效运转。</p>
 
 <h3>免费的特性</h3>
 
 <ul>
 <li><p>免费给所有市场带来了更强的流动性，让市场能够运转的更为顺畅。它将上亿美元的产业转变为百万美元的产业，但通常情况下，财富似乎并未蒸发，相反，它只是以难以衡量的方式被重新分布配。它让用户更便捷的交流，降低了开销。</p></li>
-<li><p>免费具有破坏性，却常常能导致更高效市场的出现。比如wiki摧毁了《大英百科全书》的市场，而自身并不怎么赚钱。当然，他提高了人们的获取知识的效率。</p></li>
+<li><p>免费具有破坏性，却常常能导致更高效市场的出现。比如 wiki 摧毁了《大英百科全书》的市场，而自身并不怎么赚钱。当然，他提高了人们的获取知识的效率。</p></li>
 <li><p>免费的坏处：去货币化的长期积极效应显现之前可能出现短期消极后果。在改变的多方关系中，可能存在脆弱的节点。</p></li>
 </ul>
 
 
 <h2>比特经济下的典型市场</h2>
 
-<p>传统媒体上发布的广告全都是销售稀缺资源——空间。而互联网最不缺的就是空间，因此很多互联网广告效果甚至不如平面媒体。但Google通过广告的精准匹配，将它转化为稀缺资源。</p>
+<p>传统媒体上发布的广告全都是销售稀缺资源——空间。而互联网最不缺的就是空间，因此很多互联网广告效果甚至不如平面媒体。但 Google 通过广告的精准匹配，将它转化为稀缺资源。</p>
 
 <p>视频游戏领域对免费的实践很多。</p>
 
@@ -2115,17 +2117,17 @@ http://www.freebsd.org/doc/zh_CN/books/arch-handbook/mac-synopsis.html</p>
 
 <p>在一个竞争性市场中，价格等于边际成本。垄断、专利权、版权和商标权等都能拒竞争对手于千里之外。于是形成了递增收益。而互联网编辑成本很低，很倾向于竞争性市场。</p>
 
-<p>“搭便车问题”：wiki毫无利润可言，每个人都会搭便车。但实际上，在大规模的用户下，只要有人参与其中，大部分志愿者社区就能发展和完善。因为大量消极顾客本身正是对少数做出贡献的汇报——他们被成为观众。</p>
+<p>“搭便车问题”：wiki 毫无利润可言，每个人都会搭便车。但实际上，在大规模的用户下，只要有人参与其中，大部分志愿者社区就能发展和完善。因为大量消极顾客本身正是对少数做出贡献的汇报——他们被成为观众。</p>
 
 <h2>Google</h2>
 
-<p>在比特经济的主战场的IT领域，免费方式已经获得了很大的成功。经典的案例包括微软操作系统和inux之争，以及google推出免费邮箱冲击雅虎。</p>
+<p>在比特经济的主战场的 IT 领域，免费方式已经获得了很大的成功。经典的案例包括微软操作系统和 inux 之争，以及 google 推出免费邮箱冲击雅虎。</p>
 
-<p>Google通过为一小部分核心产品做广告而赚取大部分利润。互联网创业成本低、边际成本低，造就了Google的成长和规模化。它拥有很大的数据中心，这种对数据处理、存储和存储的融合，产生了规模经济。</p>
+<p>Google 通过为一小部分核心产品做广告而赚取大部分利润。互联网创业成本低、边际成本低，造就了 Google 的成长和规模化。它拥有很大的数据中心，这种对数据处理、存储和存储的融合，产生了规模经济。</p>
 
-<p>互联网具备极强的网络效应。由于用户之间交流沟通方便，容易导致”羊群效应“。在传统行业，排名前三的竞争对手，他们的市场份额一般是60% 30% 5%，而在网络效应突出的市场中则为：95%，5%，0%。现在的Google已经站在了第一的位置。</p>
+<p>互联网具备极强的网络效应。由于用户之间交流沟通方便，容易导致”羊群效应“。在传统行业，排名前三的竞争对手，他们的市场份额一般是 60% 30% 5%，而在网络效应突出的市场中则为：95%，5%，0%。现在的 Google 已经站在了第一的位置。</p>
 
-<p>唯一能限制google增长势头之处在于互联网自身的扩展步伐。因此Google设计出众多的产品，以扩展包括免费无线接入和免费存储在内的互联网应用。这是经济学家所说的”互补品“。 当然，前不久Google关闭了GoogleReader的事实证明，一切都是定量的trade-off，或许greader在Google的战略中已经变成了投入产出比过低的产品了吧。</p>
+<p>唯一能限制 google 增长势头之处在于互联网自身的扩展步伐。因此 Google 设计出众多的产品，以扩展包括免费无线接入和免费存储在内的互联网应用。这是经济学家所说的”互补品“。 当然，前不久 Google 关闭了 GoogleReader 的事实证明，一切都是定量的 trade-off，或许 greader 在 Google 的战略中已经变成了投入产出比过低的产品了吧。</p>
 
 <h2>非货币市场</h2>
 
@@ -2133,7 +2135,7 @@ http://www.freebsd.org/doc/zh_CN/books/arch-handbook/mac-synopsis.html</p>
 
 <p>在互联网上，流量就是注意力，而链接就是声誉。</p>
 
-<p>Google的商业模式就是将声誉经济转化为注意力经济进而转化为货币的很好例证。Google控制着整个经济体系，并不断改善搜索排名算法，以防止经济体系中的通货膨胀，保持货币的价值。Facebook运营“朋友”，Twitter运营“追随者”，用户均可创建声誉资本，并将其转化为注意力。</p>
+<p>Google 的商业模式就是将声誉经济转化为注意力经济进而转化为货币的很好例证。Google 控制着整个经济体系，并不断改善搜索排名算法，以防止经济体系中的通货膨胀，保持货币的价值。Facebook 运营“朋友”，Twitter 运营“追随者”，用户均可创建声誉资本，并将其转化为注意力。</p>
 
 <p>付出一定代价才能换来充裕，而代价就是别处的匮乏。</p>
 
@@ -2154,9 +2156,9 @@ http://www.freebsd.org/doc/zh_CN/books/arch-handbook/mac-synopsis.html</p>
     <id>http://biaobiaoqi.github.com/blog/2013/05/12/mbti-test</id>
     <content type="html"><![CDATA[<h2>背景</h2>
 
-<p>最近在看<a href="http://book.douban.com/subject/5372651/">《程序员的思维训练——开发人之前能的九堂课》</a>，其中讲到了<a href="http://wiki.mbalib.com/wiki/MBTI%E4%BA%BA%E6%A0%BC%E7%90%86%E8%AE%BA">MBTI职业性格测试</a>的指导意义。记起来两年多以前在面试ASES的时候有做过这个测试，只可惜当时的测试结果在好几次的更换电脑的过程中不知踪影了。最近自己的思考也集中在认知领域，于是重新找到那个链接，做了一次测试。<a href="http://www.apesk.com/mbti/">点击链接测试</a>，正文是我的测试结果。</p>
+<p>最近在看<a href="http://book.douban.com/subject/5372651/">《程序员的思维训练——开发人之前能的九堂课》</a>，其中讲到了 <a href="http://wiki.mbalib.com/wiki/MBTI%E4%BA%BA%E6%A0%BC%E7%90%86%E8%AE%BA">MBTI 职业性格测试</a>的指导意义。记起来两年多以前在面试 ASES 的时候有做过这个测试，只可惜当时的测试结果在好几次的更换电脑的过程中不知踪影了。最近自己的思考也集中在认知领域，于是重新找到那个链接，做了一次测试。<a href="http://www.apesk.com/mbti/">点击链接测试</a>，正文是我的测试结果。</p>
 
-<p>我也使用了另一个在线MBTI来检验测试结果，相差不大。一个是ENTJ（本文的测试结果），一个是ENFJ（E:8,I:2,S:8,N:12,T:10,F:10,J:11,P:9），差别不大。</p>
+<p>我也使用了另一个在线 MBTI 来检验测试结果，相差不大。一个是 ENTJ（本文的测试结果），一个是 ENFJ（E:8,I:2,S:8,N:12,T:10,F:10,J:11,P:9），差别不大。</p>
 
 <p>总的来说，这是一个带有个人倾向性的测试结果，至于结果对不对，这都不重要。能在对测试结果的分析中，反省自身，那就够了。</p>
 
@@ -2167,7 +2169,7 @@ http://www.freebsd.org/doc/zh_CN/books/arch-handbook/mac-synopsis.html</p>
 
 <h2>ENTJ 统帅型——一切尽在掌握</h2>
 
-<h3>一、你的MBTI图形</h3>
+<h3>一、你的 MBTI 图形</h3>
 
 <p><img src="http://dl.dropboxusercontent.com/u/64021093/Pics/D567480F-DB00-481E-9AEF-08EBFC61E0B1.png" title="Title" alt="alt text" /></p>
 
@@ -2182,7 +2184,7 @@ http://www.freebsd.org/doc/zh_CN/books/arch-handbook/mac-synopsis.html</p>
 
 <p>坦诚、果断，有天生的领导能力。能很快看到公司/组织程序和政策中的不合理性和低效能性，发展并实施有效和全面的系统来解决问题。善于做长期的计划和目标的设定。通常见多识广，博览群书，喜欢拓广自己的知识面 并将此分享给他人。在陈述自己的想法时非常强而有力。</p>
 
-<p>ENTJ型的人是伟大的领导者和决策人。他们能轻易地看出事物具有的可能性，很高兴指导别人，使他们的想象成为现实。他们是头脑灵活的思想家和伟大的长远规划者。因为ENTJ型的人很有条理和分析能力，所以他们通常 对要求推理和才智的任何事情都很擅长。为了在完成工作中称职，他们通常会很自然地看出所处情况中可能存在的缺陷，并且立刻知道如何改进。他们力求精通整个体系，而不是简单地把它们做为现存的接受而已。 ENTJ型 的人乐于完成一些需要解决的复杂问题，他们大胆地力求掌握使他们感兴趣的任何事情。 ENTJ型的人把事实看得高于一切，只有通过逻辑的推理才会确信。 ENTJ型的人渴望不断增加自己的知识基础，他们系统地计划和研 究新情况。他们乐于钻研复杂的理论性问题，力求精通任何他们认为有趣的事物。他们对于行为的未来结果更感兴趣，而不是事物现存的状况。 ENTJ型的人是热心而真诚的天生的领导者，他们往往能够控制他们所处的任何 环境。因为他们具有预见能力，并且向别人传播他们的观点，所以他们是出色的群众组织者。他们往往按照一套相当严格的规律生活，并且希望别人也是如此。因此他们往往具有挑战性，同样艰难地推动自我和他人前进。</p>
+<p>ENTJ 型的人是伟大的领导者和决策人。他们能轻易地看出事物具有的可能性，很高兴指导别人，使他们的想象成为现实。他们是头脑灵活的思想家和伟大的长远规划者。因为 ENTJ 型的人很有条理和分析能力，所以他们通常 对要求推理和才智的任何事情都很擅长。为了在完成工作中称职，他们通常会很自然地看出所处情况中可能存在的缺陷，并且立刻知道如何改进。他们力求精通整个体系，而不是简单地把它们做为现存的接受而已。 ENTJ 型 的人乐于完成一些需要解决的复杂问题，他们大胆地力求掌握使他们感兴趣的任何事情。 ENTJ 型的人把事实看得高于一切，只有通过逻辑的推理才会确信。 ENTJ 型的人渴望不断增加自己的知识基础，他们系统地计划和研 究新情况。他们乐于钻研复杂的理论性问题，力求精通任何他们认为有趣的事物。他们对于行为的未来结果更感兴趣，而不是事物现存的状况。 ENTJ 型的人是热心而真诚的天生的领导者，他们往往能够控制他们所处的任何 环境。因为他们具有预见能力，并且向别人传播他们的观点，所以他们是出色的群众组织者。他们往往按照一套相当严格的规律生活，并且希望别人也是如此。因此他们往往具有挑战性，同样艰难地推动自我和他人前进。</p>
 
 <p>您适合的领域有：工商业、政界、金融和投资领域、管理咨询、培训、专业性领域</p>
 
@@ -2265,7 +2267,7 @@ http://www.freebsd.org/doc/zh_CN/books/arch-handbook/mac-synopsis.html</p>
 
 <h3>四、优势与劣势</h3>
 
-<p>ENTJ的特质： 统帅型——一切尽在掌握</p>
+<p>ENTJ 的特质： 统帅型——一切尽在掌握</p>
 
 <h5>优势：</h5>
 
@@ -2298,7 +2300,7 @@ http://www.freebsd.org/doc/zh_CN/books/arch-handbook/mac-synopsis.html</p>
     <id>http://biaobiaoqi.github.com/blog/2013/05/12/touch-hadoop</id>
     <content type="html"><![CDATA[<h2>背景</h2>
 
-<p>之前的时间里对Hadoop的使用都是基于学长所搭建起的实验环境的，没有完整的自己部署和维护过，最近抽时间初体验了在集群环境下装机、配置、运行的全过程，梳理总结到本文中。</p>
+<p>之前的时间里对 Hadoop 的使用都是基于学长所搭建起的实验环境的，没有完整的自己部署和维护过，最近抽时间初体验了在集群环境下装机、配置、运行的全过程，梳理总结到本文中。</p>
 
 <h2>配置</h2>
 
@@ -2306,7 +2308,7 @@ http://www.freebsd.org/doc/zh_CN/books/arch-handbook/mac-synopsis.html</p>
 <li>内存:8G</li>
 <li>CPU：i5-2400 3.1GHz；</li>
 <li>硬盘：960G</li>
-<li>系统：windows 7旗舰 64bits</li>
+<li>系统：windows 7 旗舰 64bits</li>
 </ul>
 
 
@@ -2317,19 +2319,19 @@ http://www.freebsd.org/doc/zh_CN/books/arch-handbook/mac-synopsis.html</p>
 <li>虚拟机：VMware7.1.1</li>
 <li>虚拟集群：</li>
 <li><ul>
-<li>T （master节点）Ubuntu11.04 32 bits 内存512MB；硬盘100G；单核；</li>
+<li>T （master 节点）Ubuntu11.04 32 bits 内存 512MB；硬盘 100G；单核；</li>
 </ul>
 </li>
 <li><ul>
-<li>T2（slave节点） Ubuntu11.04 32 bits 内存512MB；硬盘100G；单核；</li>
+<li>T2（slave 节点） Ubuntu11.04 32 bits 内存 512MB；硬盘 100G；单核；</li>
 </ul>
 </li>
 <li><ul>
-<li>T3（slave节点） Ubuntu11.04 32 bits 内存512MB；硬盘100G；单核；</li>
+<li>T3（slave 节点） Ubuntu11.04 32 bits 内存 512MB；硬盘 100G；单核；</li>
 </ul>
 </li>
 <li><ul>
-<li>T4（slave节点） Ubuntu11.04 32 bits 内存512MB；硬盘100G；单核；</li>
+<li>T4（slave 节点） Ubuntu11.04 32 bits 内存 512MB；硬盘 100G；单核；</li>
 </ul>
 </li>
 </ul>
@@ -2339,7 +2341,7 @@ http://www.freebsd.org/doc/zh_CN/books/arch-handbook/mac-synopsis.html</p>
 
 <h5>1.节点机器的配置</h5>
 
-<p>配置固定IP:修改<code>/etc/nerwork/interfaces</code></p>
+<p>配置固定 IP:修改<code>/etc/nerwork/interfaces</code></p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -2355,16 +2357,16 @@ http://www.freebsd.org/doc/zh_CN/books/arch-handbook/mac-synopsis.html</p>
 </span><span class='line'>broadcast 192.168.108.0</span></code></pre></td></tr></table></div></figure>
 
 
-<p>为了便于管理，建议按统一约定修改hostname：修改<code>/etc/hostname</code>；同时，Hadoop集群要求每个节点使用同一个账号来管理、运行，所以，也需要设置好公用账号。</p>
+<p>为了便于管理，建议按统一约定修改 hostname：修改<code>/etc/hostname</code>；同时，Hadoop 集群要求每个节点使用同一个账号来管理、运行，所以，也需要设置好公用账号。</p>
 
-<h5>2.集群ssh配置</h5>
+<h5>2.集群 ssh 配置</h5>
 
-<p>ssh相关原理和操作，参见博文<a href="http://biaobiaoqi.me/blog/2013/04/19/use-ssh/">《SSH原理和使用》</a>。</p>
+<p>ssh 相关原理和操作，参见博文<a href="http://biaobiaoqi.me/blog/2013/04/19/use-ssh/">《SSH 原理和使用》</a>。</p>
 
-<p>在每台机器上生成密钥对，并将所有机器的公钥集成到master的<code>~/.ssh/authorized_keys</code>中,之后将这个文件分发到集群所有机器上。
-这样，所有机器之间都可以实现免密码的ssh访问了。</p>
+<p>在每台机器上生成密钥对，并将所有机器的公钥集成到 master 的<code>~/.ssh/authorized_keys</code>中,之后将这个文件分发到集群所有机器上。
+这样，所有机器之间都可以实现免密码的 ssh 访问了。</p>
 
-<p>使用如下指令，可以将本机的公钥添加到master的authorized_keys文件末尾。当所有节点都执行一遍以后，再将master的authorized_keys发布到各个节点上。</p>
+<p>使用如下指令，可以将本机的公钥添加到 master 的 authorized_keys 文件末尾。当所有节点都执行一遍以后，再将 master 的 authorized_keys 发布到各个节点上。</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>#cat .ssh/id_rsa.pub | ssh T 'cat &gt;&gt; ~/.ssh/authorized_keys'</span></code></pre></td></tr></table></div></figure>
@@ -2372,11 +2374,11 @@ http://www.freebsd.org/doc/zh_CN/books/arch-handbook/mac-synopsis.html</p>
 
 <h5>3.工具脚本</h5>
 
-<p>在分布式的环境里，运维工作的自动化很有必要。为了方便集群的运维，我写了两个简单的batch脚本。</p>
+<p>在分布式的环境里，运维工作的自动化很有必要。为了方便集群的运维，我写了两个简单的 batch 脚本。</p>
 
 <h6>统一执行脚本</h6>
 
-<p>在所有节点上执行同样的动作。使用时，在master节点上调用batch脚本，参数为对应的batch执行语句。</p>
+<p>在所有节点上执行同样的动作。使用时，在 master 节点上调用 batch 脚本，参数为对应的 batch 执行语句。</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -2409,13 +2411,13 @@ http://www.freebsd.org/doc/zh_CN/books/arch-handbook/mac-synopsis.html</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>脚本中使用的slaveslist文件保存着所有slave节点的hostname，需要与脚本放在同一个工作目录下。</p>
+<p>脚本中使用的 slaveslist 文件保存着所有 slave 节点的 hostname，需要与脚本放在同一个工作目录下。</p>
 
 <h6>统一替部署脚本</h6>
 
 <p>将主节点的某文件或目录统一的更新部署替换到所有节点上（注意，所有节点拥有相同的目录结构，即替换的文件路径相同）。</p>
 
-<p>遇到hadoop集群中节点的增删改动需要修改配置文件的，都可以通过这个脚本便捷的部署。</p>
+<p>遇到 hadoop 集群中节点的增删改动需要修改配置文件的，都可以通过这个脚本便捷的部署。</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -2452,9 +2454,9 @@ http://www.freebsd.org/doc/zh_CN/books/arch-handbook/mac-synopsis.html</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h5>4.配置hosts文件</h5>
+<h5>4.配置 hosts 文件</h5>
 
-<p>由于hadoop体系在处理节点时，是使用的hostname，而非IP，所以必须先配置好hostname和IP的关系。
+<p>由于 hadoop 体系在处理节点时，是使用的 hostname，而非 IP，所以必须先配置好 hostname 和 IP 的关系。
 在一台机器上修改<code>/etc/hosts</code></p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -2473,27 +2475,27 @@ http://www.freebsd.org/doc/zh_CN/books/arch-handbook/mac-synopsis.html</p>
 
 <p>然后使用统一执行脚本，将它发布到所有节点上。</p>
 
-<p>值得注意的是，在<code>/etc/hostsname</code>中修改了host name之后，如果不同步的修改<code>/etc/hosts</code>中的相关信息，则在sudo操作时出现 <code>sudo: unable to resolve host</code>  的提示。原因是机器无法解析主机名。</p>
+<p>值得注意的是，在<code>/etc/hostsname</code>中修改了 host name 之后，如果不同步的修改<code>/etc/hosts</code>中的相关信息，则在 sudo 操作时出现 <code>sudo: unable to resolve host</code>  的提示。原因是机器无法解析主机名。</p>
 
-<p>修改<code>/etc/hosts</code>时也要特别注意，如果改成<code>127.0.0.1 localhost HOSTNAME</code> (其中HOSTNAME是主机名)的形式，在开启hadoop集群时，会出现datanode无法正常访问namenode，算是个小bug吧。所以得把hosts文件写成如上的形式。</p>
+<p>修改<code>/etc/hosts</code>时也要特别注意，如果改成<code>127.0.0.1 localhost HOSTNAME</code> (其中 HOSTNAME 是主机名)的形式，在开启 hadoop 集群时，会出现 datanode 无法正常访问 namenode，算是个小 bug 吧。所以得把 hosts 文件写成如上的形式。</p>
 
-<h5>5.配置Java环境</h5>
+<h5>5.配置 Java 环境</h5>
 
-<p>Hadoop需要Java1.6或更高版本，记住Java的安装目录，之后需要在hadoop配置过程中用到。</p>
+<p>Hadoop 需要 Java1.6 或更高版本，记住 Java 的安装目录，之后需要在 hadoop 配置过程中用到。</p>
 
-<h2>安装Hadoop</h2>
+<h2>安装 Hadoop</h2>
 
-<h5>1.下载Hadoop</h5>
+<h5>1.下载 Hadoop</h5>
 
-<p>从官网下载<a href="http://www.apache.org/dyn/closer.cgi/hadoop/common/">Hadoop发布版</a>（博主使用的是较早的稳定版0.20.2）</p>
+<p>从官网下载 <a href="http://www.apache.org/dyn/closer.cgi/hadoop/common/">Hadoop 发布版</a>（博主使用的是较早的稳定版 0.20.2）</p>
 
-<p>关于版本选择，推荐阅读：<a href="http://dongxicheng.org/mapreduce-nextgen/how-to-select-hadoop-versions/">Hadoop版本选择探讨</a></p>
+<p>关于版本选择，推荐阅读：<a href="http://dongxicheng.org/mapreduce-nextgen/how-to-select-hadoop-versions/">Hadoop 版本选择探讨</a></p>
 
 <h5>2.部署</h5>
 
-<p>解压下载好的Hadoop，后放到合适的目录下。这里假定放置在/home/USER/ 的目录下</p>
+<p>解压下载好的 Hadoop，后放到合适的目录下。这里假定放置在/home/USER/ 的目录下</p>
 
-<p>在<code>/home/USER/.bashrc</code>(其中USER为集群的用户名)文件中，增加如下语句，设定Hadoop相关的路径信息：</p>
+<p>在<code>/home/USER/.bashrc</code>(其中 USER 为集群的用户名)文件中，增加如下语句，设定 Hadoop 相关的路径信息：</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -2509,13 +2511,13 @@ http://www.freebsd.org/doc/zh_CN/books/arch-handbook/mac-synopsis.html</p>
 </span><span class='line'>export CLASSPATH=.:$JAVA_HOME/bin:$PATH:$HADOOP_HOME:$HADOOP_HOME/bin</span></code></pre></td></tr></table></div></figure>
 
 
-<h6>Hadoop核心配置修改</h6>
+<h6>Hadoop 核心配置修改</h6>
 
-<p>配置文件在<code>$HADOOP_HOME/conf</code>目录下，其中基础配置比较重要的有三个：core-site.xml, hdfs-site.xml, mapred-site.xml。（当然，每个配置文件都有其细节作用，不过在初步实践hadoop时，理解这三个配置文件中的几个重要配置项就够了）</p>
+<p>配置文件在<code>$HADOOP_HOME/conf</code>目录下，其中基础配置比较重要的有三个：core-site.xml, hdfs-site.xml, mapred-site.xml。（当然，每个配置文件都有其细节作用，不过在初步实践 hadoop 时，理解这三个配置文件中的几个重要配置项就够了）</p>
 
-<p>一般的，有三种可选模式。即本地模式、伪分布式模式和全分布式模式。前两种只是在单机环境下，后一种才是生产环境下的常用方式。《Hadoop权威指南》和《Hadoop实战》等书中都有讲到不同方式的配置，这里博主仅描述实验环境下4节点的全分布式配置。</p>
+<p>一般的，有三种可选模式。即本地模式、伪分布式模式和全分布式模式。前两种只是在单机环境下，后一种才是生产环境下的常用方式。《Hadoop 权威指南》和《Hadoop 实战》等书中都有讲到不同方式的配置，这里博主仅描述实验环境下 4 节点的全分布式配置。</p>
 
-<p>core-site.xml整个hadoop的顶层配置</p>
+<p>core-site.xml 整个 hadoop 的顶层配置</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -2551,7 +2553,7 @@ http://www.freebsd.org/doc/zh_CN/books/arch-handbook/mac-synopsis.html</p>
 </span><span class='line'>         &lt;name&gt;hadoop.tmp.dir&lt;/name&gt;
 </span><span class='line'>         &lt;value&gt;/home/biaobiaoqi/UDMS/hadoop-data/tmp-base&lt;/value&gt;
 </span><span class='line'>         &lt;description&gt;
-</span><span class='line'>        存放临时目录的路径，默认也被用来存储hdfs的元数据和文件数据，值得注意的是，hadoop账户对所设定的本地路径是否有足够的操作权限。之后再hdfs-site.xml中设定的dfs.data.dir和dfs.name.dir也要注意同样的问题
+</span><span class='line'>        存放临时目录的路径，默认也被用来存储 hdfs 的元数据和文件数据，值得注意的是，hadoop 账户对所设定的本地路径是否有足够的操作权限。之后再 hdfs-site.xml 中设定的 dfs.data.dir 和 dfs.name.dir 也要注意同样的问题
 </span><span class='line'>        &lt;/description&gt; 
 </span><span class='line'>    &lt;/property&gt; 
 </span><span class='line'>
@@ -2559,7 +2561,7 @@ http://www.freebsd.org/doc/zh_CN/books/arch-handbook/mac-synopsis.html</p>
 </span><span class='line'>          &lt;name&gt;fs.default.name&lt;/name&gt; 
 </span><span class='line'>          &lt;value&gt;hdfs://T:9000/&lt;/value&gt;
 </span><span class='line'>          &lt;description&gt;
-</span><span class='line'>        默认文件系统的标记。这个URI标记了文件系统的实现方式。UIR的协议决定了文件系统的实现类，而后面的值决定了文件系统的地址、端口等信息。
+</span><span class='line'>        默认文件系统的标记。这个 URI 标记了文件系统的实现方式。UIR 的协议决定了文件系统的实现类，而后面的值决定了文件系统的地址、端口等信息。
 </span><span class='line'>        &lt;/description&gt;
 </span><span class='line'>     &lt;/property&gt; 
 </span><span class='line'>
@@ -2568,7 +2570,7 @@ http://www.freebsd.org/doc/zh_CN/books/arch-handbook/mac-synopsis.html</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>hdfs-site.xml存储HDFS相关的信息</p>
+<p>hdfs-site.xml 存储 HDFS 相关的信息</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -2612,14 +2614,14 @@ http://www.freebsd.org/doc/zh_CN/books/arch-handbook/mac-synopsis.html</p>
 </span><span class='line'>         &lt;name&gt;dfs.name.dir&lt;/name&gt;
 </span><span class='line'>          &lt;value&gt;/home/hadoop/hadoop-data/meta-data&lt;/value&gt;
 </span><span class='line'>        &lt;description&gt;
-</span><span class='line'>        设定hdfs的元数据信息存储地址。在namenode上。
+</span><span class='line'>        设定 hdfs 的元数据信息存储地址。在 namenode 上。
 </span><span class='line'>        &lt;/description&gt;
 </span><span class='line'>     &lt;/property&gt;
 </span><span class='line'>     &lt;property&gt;
 </span><span class='line'>          &lt;name&gt;dfs.data.dir&lt;/name&gt;
 </span><span class='line'>          &lt;value&gt;/home/hadoop/hadoop-data/data&lt;/value&gt;
 </span><span class='line'>        &lt;description&gt;
-</span><span class='line'>        设定hdfs的数据存储地址。在datanode上。
+</span><span class='line'>        设定 hdfs 的数据存储地址。在 datanode 上。
 </span><span class='line'>        &lt;/description&gt;
 </span><span class='line'>     &lt;/property&gt;
 </span><span class='line'>
@@ -2627,7 +2629,7 @@ http://www.freebsd.org/doc/zh_CN/books/arch-handbook/mac-synopsis.html</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>mapred-site.xml存储mapreduce作业相关配置</p>
+<p>mapred-site.xml 存储 mapreduce 作业相关配置</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -2650,19 +2652,19 @@ http://www.freebsd.org/doc/zh_CN/books/arch-handbook/mac-synopsis.html</p>
 </span><span class='line'>    &lt;property&gt;   
 </span><span class='line'>          &lt;name&gt;mapred.job.tracker&lt;/name&gt;
 </span><span class='line'>          &lt;value&gt;T:9001&lt;/value&gt;   
-</span><span class='line'>          &lt;description&gt; Mapreduce 的job tracker所在的节点和端口。&lt;/description&gt; 
+</span><span class='line'>          &lt;description&gt; Mapreduce 的 job tracker 所在的节点和端口。&lt;/description&gt; 
 </span><span class='line'>     &lt;/property&gt;
 </span><span class='line'>&lt;/configuration&gt;
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>hosts文件存储了master节点</p>
+<p>hosts 文件存储了 master 节点</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>T</span></code></pre></td></tr></table></div></figure>
 
 
-<p>slaves文件存储着所有的slaves节点</p>
+<p>slaves 文件存储着所有的 slaves 节点</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -2674,11 +2676,11 @@ http://www.freebsd.org/doc/zh_CN/books/arch-handbook/mac-synopsis.html</p>
 
 <h2>启动集群</h2>
 
-<h5>1.格式化namenode</h5>
+<h5>1.格式化 namenode</h5>
 
-<p>如果是第一次起动集群，需要先格式化HDFS。</p>
+<p>如果是第一次起动集群，需要先格式化 HDFS。</p>
 
-<p>namenode存放了HDFS的元数据，故可以看成是对HDFS的格式化。</p>
+<p>namenode 存放了 HDFS 的元数据，故可以看成是对 HDFS 的格式化。</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>$HADOOP_HOME/bin/hadoop namenode -format</span></code></pre></td></tr></table></div></figure>
@@ -2705,25 +2707,25 @@ http://www.freebsd.org/doc/zh_CN/books/arch-handbook/mac-synopsis.html</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>如果成功，打开 http://T:50070 (T为集群master节点)，可以看到HDFS的运行情况，包括节点数量、空间大小等。这是Hadoop自带的HDFS监控页面；同样的，http://T:50030 是Mapreduce的监控界面。</p>
+<p>如果成功，打开 http://T:50070 (T 为集群 master 节点)，可以看到 HDFS 的运行情况，包括节点数量、空间大小等。这是 Hadoop 自带的 HDFS 监控页面；同样的，http://T:50030 是 Mapreduce 的监控界面。</p>
 
-<p>如果没有成功，根据$HADOOP_HOME/logs目录下的日志文件信息debug。</p>
+<p>如果没有成功，根据$HADOOP_HOME/logs 目录下的日志文件信息 debug。</p>
 
 <h5>3.常见问题</h5>
 
 <ul>
-<li>namenode无法启动：</li>
+<li>namenode 无法启动：</li>
 <li><ul>
-<li>删除掉本地文件系统中HDFS的目录文件，重新格式化HDFS。</li>
+<li>删除掉本地文件系统中 HDFS 的目录文件，重新格式化 HDFS。</li>
 </ul>
 </li>
 <li><ul>
-<li>HDFS目录的权限不够，更改权限设置等。</li>
+<li>HDFS 目录的权限不够，更改权限设置等。</li>
 </ul>
 </li>
-<li>namenode启动成功，datanode无法连接：检查hosts文件是否设置正确；检查各个配置文件中地址值是否使用了IP而不是hostname。</li>
-<li>namenode启动成功，datanode无法启动：Incompatible namespaceIDs，由于频繁格式化，造成dfs.name.dir/current/VERSION与dfs.data.dir/current/VERSION数据不一致。</li>
-<li>SafeModeException： 分布式系统启动时，会进入安全模式，安全模式下，hadoop是无法执行的。一般的等待一会儿，就可以正常使用了。如果是由于之前集群崩溃造成的无法自动退出安全模式的情况，则需要如下特殊处理了</li>
+<li>namenode 启动成功，datanode 无法连接：检查 hosts 文件是否设置正确；检查各个配置文件中地址值是否使用了 IP 而不是 hostname。</li>
+<li>namenode 启动成功，datanode 无法启动：Incompatible namespaceIDs，由于频繁格式化，造成 dfs.name.dir/current/VERSION 与 dfs.data.dir/current/VERSION 数据不一致。</li>
+<li>SafeModeException： 分布式系统启动时，会进入安全模式，安全模式下，hadoop 是无法执行的。一般的等待一会儿，就可以正常使用了。如果是由于之前集群崩溃造成的无法自动退出安全模式的情况，则需要如下特殊处理了</li>
 </ul>
 
 
@@ -2733,7 +2735,7 @@ http://www.freebsd.org/doc/zh_CN/books/arch-handbook/mac-synopsis.html</p>
 
 <h2>初体验</h2>
 
-<p>最简单的尝试就是使用Hadoop自带的wordcount程序了，参照<a href="http://www.cnblogs.com/xia520pi/archive/2012/05/16/2504205.html">这篇文章</a>，描述很详细。</p>
+<p>最简单的尝试就是使用 Hadoop 自带的 wordcount 程序了，参照<a href="http://www.cnblogs.com/xia520pi/archive/2012/05/16/2504205.html">这篇文章</a>，描述很详细。</p>
 
 <p>其他的一些尝试： <a href="http://www.cnblogs.com/rilley/archive/2012/02/13/2349858.html">动态增删节点</a> 、 <a href="http://www.cnblogs.com/ggjucheng/archive/2012/04/18/2454696.html">修改备份数量</a></p>
 

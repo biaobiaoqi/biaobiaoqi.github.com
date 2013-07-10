@@ -134,14 +134,14 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <p>二叉树是一种很基本的数据结构。很多地方能看到它的身影，比如大名鼎鼎的霍夫曼编码（好了，别问我再比如了，见识浅薄，真不知道更多了。。。）它的结构很简洁、巧妙。</p>
 
-<p>本文讨论二叉树的常见遍历方式的代码实现（这里贴出的是Java），包括前序(preorder)、中序(inorder)、后序(postorder)、层序(level order)，进一步，考虑递归和非递归的实现方式。递归方法的实现相对简单，但递归的执行方式由于每次都会产生一个新的方法调用栈，如果递归层级较深，会消耗较大的内存，转化为非递归则没那么简单了，往往需要实现一个栈来保存状态信息。</p>
+<p>本文讨论二叉树的常见遍历方式的代码实现（这里贴出的是 Java），包括前序(preorder)、中序(inorder)、后序(postorder)、层序(level order)，进一步，考虑递归和非递归的实现方式。递归方法的实现相对简单，但递归的执行方式由于每次都会产生一个新的方法调用栈，如果递归层级较深，会消耗较大的内存，转化为非递归则没那么简单了，往往需要实现一个栈来保存状态信息。</p>
 
 <!--more-->
 
 
 <p>在此之前，先简单定义节点的数据结构：</p>
 
-<p>二叉树节点最多只有两个儿子，并保存一个节点的值，为了实验的方便，假定它为int。同时，我们直接使用Java的System.out.print方法来输出节点值，以显示遍历结果。</p>
+<p>二叉树节点最多只有两个儿子，并保存一个节点的值，为了实验的方便，假定它为 int。同时，我们直接使用 Java 的 System.out.print 方法来输出节点值，以显示遍历结果。</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -163,7 +163,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </span><span class='line'>  }</span></code></pre></td></tr></table></div></figure>
 
 
-<p>详细代码参见链接:<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/algorithm/tree/BinarySearchTree.java">BST及其各种便利的详细实现代码</a></p>
+<p>详细代码参见链接:<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/algorithm/tree/BinarySearchTree.java">BST 及其各种便利的详细实现代码</a></p>
 
 <h2>前序遍历</h2>
 
@@ -229,11 +229,11 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <p>2.第二种实现方式更普遍（中序遍历的非递归使用了同样的思路）：</p>
 
-<p>初始：维护一个栈S和一个节点变量N。节点变量赋值为根节点。</p>
+<p>初始：维护一个栈 S 和一个节点变量 N。节点变量赋值为根节点。</p>
 
-<p>循环：将节点变量N的左儿子循环的<strong>输出</strong>，并推入栈S中，直到没有左儿子；推出栈S的顶节点，节点变量N赋值为栈S顶节点的右节点。</p>
+<p>循环：将节点变量 N 的左儿子循环的<strong>输出</strong>，并推入栈 S 中，直到没有左儿子；推出栈 S 的顶节点，节点变量 N 赋值为栈 S 顶节点的右节点。</p>
 
-<p>分析：不同于递归调用的思路。栈S用于实现对某节点的左边支递归值的存储，以便回溯；节点变量N则用于遍历某节点的右边枝（这些节点是从栈S顶读出的节点，依次做处理），由于右边枝是最后才会被访问到的，故在处理右边枝的时候，不需要存储右边枝的信息，依次处理即可。</p>
+<p>分析：不同于递归调用的思路。栈 S 用于实现对某节点的左边支递归值的存储，以便回溯；节点变量 N 则用于遍历某节点的右边枝（这些节点是从栈 S 顶读出的节点，依次做处理），由于右边枝是最后才会被访问到的，故在处理右边枝的时候，不需要存储右边枝的信息，依次处理即可。</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -293,9 +293,9 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </ul>
 
 
-<p>初始：维护一个栈S和一个节点变量N。节点变量赋值为根节点。</p>
+<p>初始：维护一个栈 S 和一个节点变量 N。节点变量赋值为根节点。</p>
 
-<p>循环：将节点变量N的左儿子循环的<strong>输出</strong>，并推入栈S中，直到没有左儿子；节点变量N赋值为栈S顶节点的右节点。</p>
+<p>循环：将节点变量 N 的左儿子循环的<strong>输出</strong>，并推入栈 S 中，直到没有左儿子；节点变量 N 赋值为栈 S 顶节点的右节点。</p>
 
 <p>分析：跟前序遍历的非递归实现方法二很类似。唯一的不同是输出的时机不同：前序遍历在入栈时输出，而中序遍历在出栈时输出。可以跟深刻的理解到，栈在这里是为了回溯而存在的。</p>
 
@@ -371,7 +371,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </ul>
 
 
-<p>初始：1.维护一个栈S、一个节点变量N和一个标记数组。节点变量赋值为根节点，栈暂时存储便利到的节点，标记数组用于标记栈中的节点是否已经访问过右边节点。2.将根节点的所有左儿子压入栈中。</p>
+<p>初始：1.维护一个栈 S、一个节点变量 N 和一个标记数组。节点变量赋值为根节点，栈暂时存储便利到的节点，标记数组用于标记栈中的节点是否已经访问过右边节点。2.将根节点的所有左儿子压入栈中。</p>
 
 <p>循环：依次处理栈中节点。如果节点有右儿子，且没有被处理过（通过标记数组判定），则将右子树的根节点及其左儿子全部压入栈中；如果已经处理过或者没有右儿子，则输出并出栈。</p>
 
@@ -442,7 +442,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <p>层序遍历不同于其他的遍历。可以通过反证法证明：</p>
 
-<p>如果能实现对A节点的层序递归，在对A节点处理的过程中，应该递归的对两个儿子B和C分别调用了层序遍历。在这种情况下，我们无法让B和C的同一个层级的儿子在集中的时间中被遍历到，换言之，B的第一层儿子在对B的调用中被遍历，而C的第一层儿子，则在对C的调用中遍历，这是分离开的。不成立，得证。</p>
+<p>如果能实现对 A 节点的层序递归，在对 A 节点处理的过程中，应该递归的对两个儿子 B 和 C 分别调用了层序遍历。在这种情况下，我们无法让 B 和 C 的同一个层级的儿子在集中的时间中被遍历到，换言之，B 的第一层儿子在对 B 的调用中被遍历，而 C 的第一层儿子，则在对 C 的调用中遍历，这是分离开的。不成立，得证。</p>
 
 <ul>
 <li>非递归方法：</li>
