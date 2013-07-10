@@ -9,7 +9,7 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="儿时没烙印下的痛与快乐 这是一本让我内心平静的书。或许是因为他所讲，都是那十年来有亲身经历到过的。 《痛并快乐着》有二十来篇文章，每篇一个主题。所有的主题都围着个人在中国二十世纪后十年中的发展和社会的变迁中展开。文中，描述了白岩松如何从大学毕业后，几经波折获得了一个并非自己当初所想的工作， &hellip;">
+  <meta name="description" content="PAT1007：给定一个整数串，找出连续子串中合最大的子串。 《编程珠玑》中用专门的一章对这个问题进行了讲解。（《编程珠玑（第 2 版）》P73 第 8 章 算法设计技术） 第一次在 PAT 上遇到这个题目时，我的思路如下： 最简单的淡然是一个三层循环咯，O(n3)，肯定会超时。节省时间的话， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -101,6 +101,56 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/05/maximum-subsequence-sum/">分治、时间空间的权衡:最大合的连续字串问题 (PAT 1007)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-05T20:16:00+08:00" pubdate data-updated="true">Apr 5<span>th</span>, 2013</time>
+        
+
+
+
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1007">PAT1007</a>：给定一个整数串，找出连续子串中合最大的子串。</p>
+
+<p>《编程珠玑》中用专门的一章对这个问题进行了讲解。（《编程珠玑（第 2 版）》P73 第 8 章 算法设计技术）</p>
+
+<p>第一次在 PAT 上遇到这个题目时，我的思路如下：</p>
+
+<p><del>最简单的淡然是一个三层循环咯，O(n3)，肯定会超时。节省时间的话，用动态规划吧。但简单的动态规划，显然是会超出内存限制的。有没有更巧妙的子问题划分方法呢？</del>先找到子问题：因为要求的串必须连续，分治的时候需要考虑如何延续这个连续性，那么每个子问题中就得考虑找出三个串：1.即左端连续的最大串，2.右端连续的最大串，3.整个串中的最大串.<del>由于每个问题都有三个量要维护，难道我得造出三个表来？卡主:(</del></p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/04/05/maximum-subsequence-sum/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -336,7 +386,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <p>希望五年、十年、二十年过后，回过头来，依然能在这个博客中找到自己的脚印和梦想。</p>
 
-<p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/03/17/kai-pian/'>http://biaobiaoqi.github.com/blog/2013/03/17/kai-pian/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p>
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/03/17/kai-pian/'>http://biaobiaoqi.github.com/blog/2013/03/17/kai-pian/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
 
 </div>
   
@@ -372,7 +422,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <a style="font-size: 125%" href="/tags/os/">os</a> &nbsp 
 <a style="font-size: 139%" href="/tags/pat/">pat</a> &nbsp 
 <a style="font-size: 105%" href="/tags/security/">security</a> &nbsp 
-<a style="font-size: 174%" href="/tags/think/">think</a> &nbsp 
+<a style="font-size: 180%" href="/tags/think/">think</a> &nbsp 
 <a style="font-size: 105%" href="/tags/web/">web</a>
 
   </ul>
@@ -380,6 +430,10 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <section>
   <h1>最近发表</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/07/10/cc-license/">给博客签上CC协议</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/07/10/decorate-octopress/">定制Octopress</a>
@@ -395,10 +449,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     
       <li class="post">
         <a href="/blog/2013/06/11/gift-to-girl-friend/">给女朋友的礼物</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/06/11/the-non-designers-design-book/">《写给大家看的设计书》</a>
       </li>
     
   </ul>
