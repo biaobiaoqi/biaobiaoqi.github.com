@@ -5,7 +5,7 @@ date: 2013-05-25 21:22
 comments: true
 description: "本文描述了单模式的字符串匹配的经典算法KMP算法的实现。首先对字符串匹配算法做简单的介绍，然后是KMP算法的实现描述，最后推荐三道简单的ACM模板题做kmp练手用，也可以加深对kmp细节过程的理解。"
 categories: [tech] 
-tags: [algorithm, Java]
+tags: [algorithm, java]
 
 ---
 本文描述了单模式的字符串匹配的经典算法KMP算法的实现。首先对字符串匹配算法做简单的介绍，然后是KMP算法的实现描述，最后推荐两道简单的ACM模板题做练手用。

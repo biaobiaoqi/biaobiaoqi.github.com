@@ -62,71 +62,8 @@ $ brew install git
 #2. 搭建octopress
 环境配置完成后，就可以开始参照[官网](http://octopress.org/help/)的指导搭建octopress，并在github建代码仓库，同步管理啦。
 
-#3. 配置
-具体配置同见[官网](http://octopress.org/help/)。
 
-在配置_config.yml的过程中要注意，配置项的:后有空格。否则会报错。
-
-另附个性化配置方案：（这些内容大都能在官网文档中找到）
-
-###3.1 [装饰边栏（加weibo、豆瓣信息)](http://icodeit.org/2012/10/how-to-embed-douban-show-in-your-octopress-site/)
-
-###3.2 增加weibo评论：  [友言版](http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/)
-
-###3.3 CNAME
-如果你有自己的域名，可以CNAME到github pages上。以我的配置为例。
-
-1.在工作目录的source目录下创建CNAME文件，并输入新域名：biaobiaoqi.com
-
-2.在域名管理中，创建或修改A记录，指向204.232.175.78这个地址。
-
-3.创建CNAME记录，www.biaobiaoqi.com -> biaobiaoqi.github.com
-
-网上很多CNAME的操作指南，对于A记录的IP都写着~~207.97.227.245~~，或者其他的IP。实际上，这是github pages更换了地址所致。再一次证明**官方文档才是最可靠的！**
-
-###3.4 让链接在新窗口中打开
-markdown不支持这一语法，如果要自己用html标签实现，也太得不偿失了。参考[这篇博文](http://www.blogjava.net/lishunli/archive/2013/01/20/394478.html)，可以通过将如下代码添加到 {OCTOPRESS_HOME}/source/_includes/custom/head.html文件末尾来实现：
-
-```
-<script type="text/javascript">
-function addBlankTargetForLinks () {
-  $('a[href^="http"]').each(function(){
-      $(this).attr('target', '_blank');
-  });
-}
-
-$(document).bind('DOMNodeInserted', function(event) {
-  addBlankTargetForLinks();
-});
-</script>
-```
-
-###3.5 列表的排版
-
-默认情况，所有文字的排头会对齐，但如果有列表项的情况下也如此，列表头就会冲出文章的主体区块了。
-
-在octopress/sass/custom/_layout.scss文件中找到#$indented-lists: true行，去掉#注释即可。
-```
-$indented-lists: true
-```
-
-###3.6 404ERROR页面
-
-在ocotopress/source目录下，增加404.markdown，并做出自定义的呃编辑。本博客使用了腾讯公益404，推荐大家使用，为社会贡献一分正能量。[公益404](http://www.qq.com/404/)
-```
----
-layout: page
-title: "404 Error"
-date: 2013-4-21 02:35
-comments: false
-sharing: false
-footer: false
----
-<script type="text/javascript" src="http://www.qq.com/404/search_children.js" charset="utf-8"></script>
-```
-
-
-#4. 发博文和在线部署
+#3. 发博文和在线部署
 同样的，参考[官网](http://octopress.org/help/)即可。
 这里大致的列出我所常用到的几条命令：
 
@@ -149,9 +86,12 @@ git push
 
 ```
 
+
 其中推荐到的[mou](http://mouapp.com/)，是一个mac下的markdown编辑器。试用后发现有些格式兼容问题，但似乎mac下也只有他这个可视化工具了=。=
 
 另附[markdown语法](http://wowubuntu.com/markdown/index.html)
+
+进一步的octopress博客定制，参见博客[《定制自己的octopress》](/blog/2013/07/10/decorate-octopress/)
 
 
 

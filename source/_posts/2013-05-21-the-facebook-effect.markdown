@@ -5,7 +5,7 @@ date: 2013-05-21 00:23
 comments: true
 description: "《Facebook效应》一书的总结"
 categories: [book]
-tags: [entrepreneurship, Facebook, product, think]
+tags: [entrepreneurship, product, think, facebook]
 
 ---
 

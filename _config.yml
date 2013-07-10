@@ -101,3 +101,6 @@ weibo_share: true
 #duoshuo_show_comment_count: true
 #duoshuo_comments: true
 #duoshuo_short_name: biaobiaoqi
+
+#bottom of a blog page
+#origional_url_pre "原文地址:" 
