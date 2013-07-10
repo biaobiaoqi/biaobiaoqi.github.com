@@ -49,7 +49,7 @@ $ rvm ruby gems latest
 ```
 
 
-lz在升级过程中遇到了奇怪的错误，于是又参考[另一篇博文](http://wj1s.iteye.com/blog/1118672)，重新安装了rvm，再升级ruby到1.9.3版本。
+lz在升级过程中遇到了奇怪的错误，于是又参考[另一篇博文](http://www.iteye.com/blog/1118672)，重新安装了rvm，再升级ruby到1.9.3版本。
 
  
 ###1.2 git 
