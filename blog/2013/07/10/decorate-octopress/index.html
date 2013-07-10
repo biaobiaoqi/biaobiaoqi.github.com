@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>定制自己的octopress - Biaobiaoqi的博客</title>
+  <title>定制Octopress - Biaobiaoqi的博客</title>
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="">
+  <meta name="description" content="按照个人的习惯定制Octopress博客，有如下内容：增加微博墙，增加第三方评论，让博客支持在新窗口打开链接，404Error界面，在侧边栏增加标签云，在顶栏增加标签云页面tab，博客末尾增加原文链接、版权信息，给中英文之间增加空格">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -104,7 +104,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
   <header>
     
-      <h1 class="entry-title">定制自己的octopress</h1>
+      <h1 class="entry-title">定制Octopress</h1>
     
     
       <p class="meta">
@@ -136,7 +136,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <h2>1.装饰边栏</h2>
 
-<p>以增加豆瓣展示框为例。参加正反反长大哥的博客<a href="http://icodeit.org/2012/10/how-to-embed-douban-show-in-your-octopress-site/">How to Embed Douban-Show in Your Octopress Site</a></p>
+<p>以增加豆瓣展示框为例。参加正反反长大哥的博客<a href="http://icodeit.org/2012/10/how-to-embed-douban-show-in-your-octopress-site/">H ow to E mbed D ouban-S how in Y our O ctopress S ite</a></p>
 
 <h2>2.增加国内的第三方评论</h2>
 
@@ -160,9 +160,9 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <p>由于markdown不支持这一语法，如果要自己用html标签实现，又有些违背了markdown以内容为重的立意。</p>
 
-<p>参考博文<a href="http://www.blogjava.net/lishunli/archive/2013/01/20/394478.html">《在Octopress中为markdown的超链接加上target=&#8221;_blank&#8221;》</a>，可以通过将如下代码添加到 {OCTOPRESS_HOME}/source/_includes/custom/head.html文件末尾来实现：</p>
+<p>参考博文<a href="http://www.blogjava.net/lishunli/archive/2013/01/20/394478.html">《在O ctopress中为markdown的超链接加上target=&#8221;_blank&#8221;》</a>，可以通过将如下代码添加到 {OCTOPRESS_HOME}/source/_includes/custom/head.html文件末尾来实现：</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -181,25 +181,25 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <span class='line-number'>17</span>
 <span class='line-number'>18</span>
 <span class='line-number'>19</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;script type="text/javascript"&gt;
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;</span>
 </span><span class='line'>
-</span><span class='line'>function addBlankTargetForLinks () {
+</span><span class='line'><span class="kd">function</span> <span class="nx">add</span> <span class="nx">B</span> <span class="nx">lank</span> <span class="nx">T</span> <span class="nx">arget</span> <span class="nx">F</span> <span class="nx">or</span> <span class="nx">L</span> <span class="nx">inks</span> <span class="p">()</span> <span class="p">{</span>
 </span><span class='line'>
-</span><span class='line'>  $('a[href^="http"]').each(function(){
+</span><span class='line'>  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;a[href^=&quot;http&quot;]&#39;</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
 </span><span class='line'>
-</span><span class='line'>      $(this).attr('target', '_blank');
+</span><span class='line'>      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;target&#39;</span><span class="p">,</span> <span class="s1">&#39;_blank&#39;</span><span class="p">);</span>
 </span><span class='line'>
-</span><span class='line'>  });
+</span><span class='line'>  <span class="p">});</span>
 </span><span class='line'>
-</span><span class='line'>}
+</span><span class='line'><span class="p">}</span>
 </span><span class='line'>
-</span><span class='line'>$(document).bind('DOMNodeInserted', function(event) {
+</span><span class='line'><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">bind</span><span class="p">(</span><span class="s1">&#39;DOMN ode I nserted&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
 </span><span class='line'>
-</span><span class='line'>  addBlankTargetForLinks();
+</span><span class='line'>  <span class="nx">add</span> <span class="nx">B</span> <span class="nx">lank</span> <span class="nx">T</span> <span class="nx">arget</span> <span class="nx">F</span> <span class="nx">or</span> <span class="nx">L</span> <span class="nx">inks</span><span class="p">();</span>
 </span><span class='line'>
-</span><span class='line'>});
+</span><span class='line'><span class="p">});</span>
 </span><span class='line'>
-</span><span class='line'>&lt;/script&gt;
+</span><span class='line'><span class="o">&lt;</span><span class="err">/script&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -209,8 +209,8 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <p>在octopress/sass/custom/_layout.scss文件中找到#$indented-lists: true行，去掉#注释即可。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$indented-lists: true
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$indented</span><span class="o">-</span><span class="nx">lists</span><span class="o">:</span> <span class="kc">true</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -223,7 +223,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <p>在ocotopress/source目录下，增加404.markdown，并做出自定义的呃编辑。本博客使用了腾讯公益404，推荐大家使用，为社会贡献一分正能量。<a href="http://www.qq.com/404/">公益404</a></p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -240,23 +240,23 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <span class='line-number'>15</span>
 <span class='line-number'>16</span>
 <span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>---
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">---</span>
 </span><span class='line'>
-</span><span class='line'>layout: page
+</span><span class='line'><span class="nx">layout</span><span class="o">:</span> <span class="nx">page</span>
 </span><span class='line'>
-</span><span class='line'>title: "404 Error"
+</span><span class='line'><span class="nx">title</span><span class="o">:</span> <span class="s2">&quot;404 E rror&quot;</span>
 </span><span class='line'>
-</span><span class='line'>date: 2013-4-21 02:35
+</span><span class='line'><span class="nx">date</span><span class="o">:</span> <span class="mi">2013</span><span class="o">-</span><span class="mi">4</span><span class="o">-</span><span class="mi">21</span> <span class="mi">02</span><span class="o">:</span><span class="mi">35</span>
 </span><span class='line'>
-</span><span class='line'>comments: false
+</span><span class='line'><span class="nx">comments</span><span class="o">:</span> <span class="kc">false</span>
 </span><span class='line'>
-</span><span class='line'>sharing: false
+</span><span class='line'><span class="nx">sharing</span><span class="o">:</span> <span class="kc">false</span>
 </span><span class='line'>
-</span><span class='line'>footer: false
+</span><span class='line'><span class="nx">footer</span><span class="o">:</span> <span class="kc">false</span>
 </span><span class='line'>
-</span><span class='line'>---
+</span><span class='line'><span class="o">---</span>
 </span><span class='line'>
-</span><span class='line'>&lt;script type="text/javascript" src="http://www.qq.com/404/search_children.js" charset="utf-8"&gt;&lt;/script&gt;
+</span><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&quot;http://www.qq.com/404/search_children.js&quot;</span> <span class="nx">charset</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -264,29 +264,31 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <p>octopress默认只有分类，没有标签。这对于博文的组织和管理很不友好。有人开源出了自己定制的tag生成和tag cloud展现的代码，可以引入到自己的博客中来。</p>
 
-<p>详细操作参见博文：<a href="http://codemacro.com/2012/07/18/add-tag-to-octopress/">《为octopress添加tag Cloud》</a>。不过博文中没有讲解标签云的UI配置参数的使用，为了让UI适应页面，请参考原作者的官方说明:<a href="https://github.com/robbyedwards/octopress-tag-cloud">octopress-tag-cloud</a>。我所实践出的较合理的参数值如下</p>
+<p>详细操作参见博文：<a href="http://codemacro.com/2012/07/18/add-tag-to-octopress/">《为octopress添加tag C loud》</a>。不过博文中没有讲解标签云的UI配置参数的使用，为了让UI适应页面，请参考原作者的官方说明:<a href="https://github.com/robbyedwards/octopress-tag-cloud">octopress-tag-cloud</a>。我所实践出的较合理的参数值如下</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#注意，下面一行的escape反斜杠在正常使用时需要去掉
-</span><span class='line'>\{\% tag_cloud font-size: 70-180%, limit: 15, order: rand, style: para  { &nbsp }\%\}</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#注意，下面一行的escape反斜杠在正常使用时需要去掉</span>
+</span><span class='line'><span class="p">\{\</span><span class="o">%</span> <span class="n">tag_cloud</span> <span class="n">font</span><span class="o">-</span><span class="ss">size</span><span class="p">:</span> <span class="mi">70</span><span class="o">-</span><span class="mi">180</span><span class="sx">%, limit: 15,</span> <span class="ss">order</span><span class="p">:</span> <span class="nb">rand</span><span class="p">,</span> <span class="ss">style</span><span class="p">:</span> <span class="n">para</span>  <span class="p">{</span> <span class="o">&amp;</span><span class="n">nbsp</span> <span class="p">}\</span><span class="o">%</span><span class="p">\}</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-<p>如果想将文章分类（category）也放在侧边栏，可以参考这篇博文：<a href="http://paz.am/blog/blog/2012/06/25/octopress-category-list-plugin/">《Octopress - Category List Plug-in》</a></p>
+<p>如果想将文章分类（category）也放在侧边栏，可以参考这篇博文：<a href="http://paz.am/blog/blog/2012/06/25/octopress-category-list-plugin/">《O ctopress - C ategory L ist P lug-in》</a></p>
 
 <h2>8.在顶栏增加标签云页面tab</h2>
 
 <p>1.生成新网页</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rake new_page["tag-cloud"] #在octopress/source/中将生成tag-cloud/文件夹</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rake</span> <span class="n">new_page</span><span class="o">[</span><span class="s2">&quot;tag-cloud&quot;</span><span class="o">]</span> <span class="c1">#在octopress/source/中将生成tag-cloud/文件夹</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>2.在顶栏增加新页面</p>
 
 <p>修改<code>source/_includes/custom/navigation.html</code></p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -294,14 +296,15 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;ul class="main-navigation"&gt;
-</span><span class='line'>  &lt;li&gt;&lt;a href="/"&gt;首页&lt;/a&gt;&lt;/li&gt;
-</span><span class='line'>  &lt;li&gt;&lt;a href="/blog/categories/tech/"&gt;技术&lt;/a&gt;&lt;/li&gt;
-</span><span class='line'>  &lt;li&gt;&lt;a href="/blog/categories/life/"&gt;生活&lt;/a&gt;&lt;/li&gt;
-</span><span class='line'>  &lt;li&gt;&lt;a href="/blog/categories/book/"&gt;读书&lt;/a&gt;&lt;/li&gt;
-</span><span class='line'>  &lt;li&gt;&lt;a href="/tag-cloud/"&gt;标签云&lt;/a&gt;&lt;/li&gt;
-</span><span class='line'>  &lt;li&gt;&lt;a href="/about"&gt;关于&lt;/a&gt;&lt;/li&gt;
-</span><span class='line'>&lt;/ul&gt;</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="n">ul</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;main-navigation&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;/&quot;</span><span class="o">&gt;</span><span class="err">首页</span><span class="o">&lt;</span><span class="sr">/a&gt;&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;/blog/categories/tech/&quot;</span><span class="o">&gt;</span><span class="err">技术</span><span class="o">&lt;</span><span class="sr">/a&gt;&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;/blog/categories/life/&quot;</span><span class="o">&gt;</span><span class="err">生活</span><span class="o">&lt;</span><span class="sr">/a&gt;&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;/blog/categories/book/&quot;</span><span class="o">&gt;</span><span class="err">读书</span><span class="o">&lt;</span><span class="sr">/a&gt;&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;/tag-cloud/&quot;</span><span class="o">&gt;</span><span class="err">标签云</span><span class="o">&lt;</span><span class="sr">/a&gt;&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;/about&quot;</span><span class="o">&gt;</span><span class="err">关于</span><span class="o">&lt;</span><span class="sr">/a&gt;&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="sr">/ul&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>在需要的位置增加<code>&lt;li&gt;&lt;a href="/tag-cloud/"&gt;标签云&lt;/a&gt;&lt;/li&gt;</code>。如此一来，可以在网页顶栏看到『标签云』一栏了。不过此时，点击进入，页面为空。</p>
@@ -310,7 +313,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <p>修改<code>octopress/source/tag-cloud/index.markdown</code>，增加标签云执行脚本。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -323,19 +326,20 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <span class='line-number'>11</span>
 <span class='line-number'>12</span>
 <span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>
-</span><span class='line'>---
-</span><span class='line'>layout: page
-</span><span class='line'>title: "标签云"
-</span><span class='line'>date: 2013-07-10 02:53
-</span><span class='line'>comments: true
-</span><span class='line'>sharing: true
-</span><span class='line'>footer: true
-</span><span class='line'>---
-</span><span class='line'>  &lt;ul class="tag-cloud"&gt;
-</span><span class='line'>  #注意，下面一行的escape反斜杠在正常使用时需要去掉
-</span><span class='line'>    \{\% tag_cloud font-size: 90-210%, limit: 1000, style: para \%\}
-</span><span class='line'>  &lt;/ul&gt;</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">---</span>
+</span><span class='line'><span class="ss">layout</span><span class="p">:</span> <span class="n">page</span>
+</span><span class='line'><span class="ss">title</span><span class="p">:</span> <span class="s2">&quot;标签云&quot;</span>
+</span><span class='line'><span class="ss">date</span><span class="p">:</span> <span class="mi">2013</span><span class="o">-</span><span class="mo">07</span><span class="o">-</span><span class="mi">10</span> <span class="mo">02</span><span class="p">:</span><span class="mi">53</span>
+</span><span class='line'><span class="ss">comments</span><span class="p">:</span> <span class="kp">true</span>
+</span><span class='line'><span class="ss">sharing</span><span class="p">:</span> <span class="kp">true</span>
+</span><span class='line'><span class="ss">footer</span><span class="p">:</span> <span class="kp">true</span>
+</span><span class='line'><span class="o">---</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#注意，代码中的escape反斜杠在正常使用时需要去掉</span>
+</span><span class='line'><span class="c1">#另外，这几个语句不能使用换行。在我的测试环境下，使用换行后，最终的页面上对换行进行了错误的解码，给增加了一个&lt;code&gt;标签，造成了错误的显示。</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">ul</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;tag-cloud&quot;</span><span class="o">&gt;</span><span class="p">\{\</span><span class="o">%</span> <span class="n">tag_cloud</span> <span class="n">font</span><span class="o">-</span><span class="ss">size</span><span class="p">:</span> <span class="mi">90</span><span class="o">-</span><span class="mi">210</span><span class="sx">%, limit: 1000,</span> <span class="ss">style</span><span class="p">:</span> <span class="n">para</span> <span class="p">\</span><span class="o">%</span><span class="p">\}</span><span class="o">&lt;</span><span class="sr">/ul&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>9.博客末尾增加原文链接、版权等</h2>
@@ -344,20 +348,41 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <p>详情参见博客<a href="http://codemacro.com/2012/07/26/post-footer-plugin-for-octopress/">《为octopress每篇文章添加一个文章信息》</a>。</p>
 
+<p>值得注意的是，插件代码中如下几行需要去掉缩进和换行符。原因跟第8节所讲一样，换行符引起了错误的解码，造成了错误的显示。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">post</span><span class="o">.</span><span class="n">content</span> <span class="o">+</span> <span class="sx">%Q[&lt;p class=&#39;post-footer&#39;&gt;</span>
+</span><span class='line'><span class="sx">            </span><span class="si">#{</span><span class="n">pre</span> <span class="ow">or</span> <span class="s2">&quot;original link:&quot;</span><span class="si">}</span><span class="sx"></span>
+</span><span class='line'><span class="sx">            &lt;a href=&#39;</span><span class="si">#{</span><span class="n">post</span><span class="o">.</span><span class="n">full_url</span><span class="si">}</span><span class="sx">&#39;&gt;</span><span class="si">#{</span><span class="n">post</span><span class="o">.</span><span class="n">full_url</span><span class="si">}</span><span class="sx">&lt;/a&gt;&lt;br/&gt;</span>
+</span><span class='line'><span class="sx">            &amp;nbsp;written by &lt;a href=&#39;</span><span class="si">#{</span><span class="n">url</span><span class="si">}</span><span class="sx">&#39;&gt;</span><span class="si">#{</span><span class="n">author</span><span class="si">}</span><span class="sx">&lt;/a&gt;</span>
+</span><span class='line'><span class="sx">            &amp;nbsp;posted at &lt;a href=&#39;</span><span class="si">#{</span><span class="n">url</span><span class="si">}</span><span class="sx">&#39;&gt;</span><span class="si">#{</span><span class="n">url</span><span class="si">}</span><span class="sx">&lt;/a&gt;</span>
+</span><span class='line'><span class="sx">            &lt;/p&gt;]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最后，kevin没有提及的是，为了做好美化，还需要增加一段针这块区域的css：</p>
+
+<p>编辑<code>sass/custom/_style.scss</code>，在末尾增加如下内容：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.post-footer</span><span class="p">{</span><span class="k">margin-top</span><span class="o">:</span><span class="m">10</span> <span class="k">px</span><span class="p">;</span><span class="k">padding</span><span class="o">:</span><span class="m">5</span> <span class="k">px</span><span class="p">;</span><span class="k">background</span><span class="o">:</span><span class="k">none</span> <span class="k">repeat</span> <span class="k">scroll</span> <span class="m">0</span> <span class="n">pt</span> <span class="m">0</span> <span class="n">pt</span> <span class="m">#eee</span><span class="p">;</span><span class="k">font-size</span><span class="o">:</span><span class="m">90</span><span class="o">%</span><span class="p">;</span><span class="k">color</span><span class="o">:</span><span class="nb">gray</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这样，原文链接和版权信息就能很好的和正文内容分离开了。</p>
+
 <h2>10.给中英文之间加空格</h2>
 
 <p>参见博文<a href="http://xoyo.name/2012/04/auto-spacing-for-octopress/">《给中英文间加个空格》</a>。</p>
 
-<h2>Tips</h2>
+<h2>T ips</h2>
 
-<p>既然是个博客站点，就算是web产品啦，可以考虑下SEO。推荐博文<a href="http://codemacro.com/2012/09/06/octopress-seo/">《Octopress中的SEO》</a><p class='post-footer'></p>
-
-<pre><code>        original link:
-        &lt;a href='http://biaobiaoqi.github.com/blog/2013/07/10/decorate-octopress/'&gt;http://biaobiaoqi.github.com/blog/2013/07/10/decorate-octopress/&lt;/a&gt;&lt;br/&gt;
-        &amp;nbsp;written by &lt;a href='http://biaobiaoqi.github.com'&gt;Biaobiaoqi&lt;/a&gt;
-        &amp;nbsp;posted at &lt;a href='http://biaobiaoqi.github.com'&gt;http://biaobiaoqi.github.com&lt;/a&gt;
-        &lt;/p&gt;
-</code></pre>
+<p>既然是个博客站点，就算是web产品啦，可以考虑下SEO。推荐博文<a href="http://codemacro.com/2012/09/06/octopress-seo/">《O ctopress中的SEO》</a><p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/07/10/decorate-octopress/'>http://biaobiaoqi.github.com/blog/2013/07/10/decorate-octopress/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p></p>
 </div>
 
 
@@ -463,7 +488,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2013/07/10/decorate-octopress/">定制自己的octopress</a>
+        <a href="/blog/2013/07/10/decorate-octopress/">定制Octopress</a>
       </li>
     
       <li class="post">

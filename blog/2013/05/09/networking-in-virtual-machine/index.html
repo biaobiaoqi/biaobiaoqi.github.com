@@ -130,13 +130,13 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   </header>
 
 
-<div class="entry-content"><p>本文介绍三种虚拟机中常用的网络配置模式：NAT(网络地址转换模式)、Bridged nerworking（桥接网络模式）和Host-only（主机模式）。</p>
+<div class="entry-content"><p>本文介绍三种虚拟机中常用的网络配置模式：NAT(网络地址转换模式)、B ridged nerworking（桥接网络模式）和H ost-only（主机模式）。</p>
 
-<h3>Network Address Translation (NAT)</h3>
+<h3>N etwork A ddress T ranslation (NAT)</h3>
 
 <p>NAT模式使用了<a href="http://zh.wikipedia.org/wiki/%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2">NAT</a>服务来给虚拟网络提供网络连接。</p>
 
-<p>这种模式下，虚拟机能访问外部网络，外部无法直接连接到内部网络，除非使用端口映射<a href="http://nxlhero.blog.51cto.com/962631/742140">port forwarding</a>。</p>
+<p>这种模式下，虚拟机能访问外部网络，外部无法直接连接到内部网络，除非使用端口映射<a href="http://nxlhero.blog.51%20cto.com/962631/742140">port forwarding</a>。</p>
 
 <!--more-->
 
@@ -155,15 +155,15 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
 <span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># This file describes the network interfaces available on your system
-</span><span class='line'># and how to activate them. For more information, see interfaces(5).
+</pre></td><td class='code'><pre><code class=''><span class='line'># T his file describes the network interfaces available on your system
+</span><span class='line'># and how to activate them. F or more information, see interfaces(5).
 </span><span class='line'>
-</span><span class='line'># The loopback network interface
+</span><span class='line'># T he loopback network interface
 </span><span class='line'>auto lo
 </span><span class='line'>iface lo inet loopback
 </span><span class='line'>
-</span><span class='line'>auto eth0
-</span><span class='line'>iface eth0 inet static
+</span><span class='line'>auto eth 0
+</span><span class='line'>iface eth 0 inet static
 </span><span class='line'>address 172.21.2.43
 </span><span class='line'>netmask 255.255.0.0
 </span><span class='line'>gateway 172.21.1.1
@@ -174,7 +174,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <p><img src="http://dl.dropboxusercontent.com/u/64021093/network/2.jpg"></p>
 
-<h3>Bridged networking(桥接)</h3>
+<h3>B ridged networking(桥接)</h3>
 
 <p>在桥接模式下，本地物理网卡和虚拟网卡通过虚拟交换机进行桥接（无需在host上再开启新的虚拟网卡），物理网卡和虚拟网卡在拓扑图上处于同等地位，虚拟机就像是一台真实主机一样存在于局域网中。</p>
 
@@ -190,7 +190,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>#设置ip、子网掩码
-</span><span class='line'>$ifconfig eth0 172.21.2.43 netmask 255.255.0.0
+</span><span class='line'>$ifconfig eth 0 172.21.2.43 netmask 255.255.0.0
 </span><span class='line'>
 </span><span class='line'>#设置默认网关
 </span><span class='line'>$route add default gw 172.21.1.1
@@ -207,9 +207,9 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <p>相比NAT，桥接模式有一个前提条件，就是要获得另外一个host所在网段的IP。在内网环境中还很容易，如果是ADSL宽带就比较麻烦了，ISP一般是不会大方的多提供一个公网IP的，那种情况下，使用NAT或许是更好的选择。</p>
 
-<p><a href="http://blog.chinaunix.net/uid-26212859-id-3051291.html">VMware的桥接网络配置</a></p>
+<p><a href="http://blog.chinaunix.net/uid-26212859-id-3051291.html">VM ware的桥接网络配置</a></p>
 
-<h3>Host-only networking(主机)</h3>
+<h3>H ost-only networking(主机)</h3>
 
 <p>以host为网关建立了新的虚拟网络，虚拟机无法访问外部网络，因此很安全。</p>
 
@@ -224,19 +224,14 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <h2>参考资料</h2>
 
 <ul>
-<li><p><a href="http://networking.ctocio.com.cn/tips/110/8897610.shtml">解析虚拟VMware三种网络模式根本区别</a></p></li>
-<li><p><a href="http://www.virtualbox.org/manual/ch06.html">virtualbox的网络模式详解</a></p></li>
+<li><p><a href="http://networking.ctocio.com.cn/tips/110/8897610.shtml">解析虚拟VM ware三种网络模式根本区别</a></p></li>
+<li><p><a href="http://www.virtualbox.org/manual/ch%2006.html">virtualbox的网络模式详解</a></p></li>
 </ul>
 
 
-<p>图片引用自 ：<a href="http://networking.ctocio.com.cn/tips/110/8897610.shtml">解析虚拟VMware三种网络模式根本区别</a></p>
+<p>图片引用自 ：<a href="http://networking.ctocio.com.cn/tips/110/8897610.shtml">解析虚拟VM ware三种网络模式根本区别</a></p>
 
-<p class='post-footer'>
-            original link:
-            <a href='http://biaobiaoqi.github.com/blog/2013/05/09/networking-in-virtual-machine/'>http://biaobiaoqi.github.com/blog/2013/05/09/networking-in-virtual-machine/</a><br/>
-            &nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>
-            &nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a>
-            </p>
+<p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/05/09/networking-in-virtual-machine/'>http://biaobiaoqi.github.com/blog/2013/05/09/networking-in-virtual-machine/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p>
 
 </div>
 
@@ -300,7 +295,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/04/27/pat1020-pat1043-rebuild-binary-tree/" title="Previous Post: 根据前中后序和层序重建二叉树(PAT1020、PAT1043)">&laquo; 根据前中后序和层序重建二叉树(PAT1020、PAT1043)</a>
+        <a class="basic-alignment left" href="/blog/2013/05/04/recursive-to-non-recursive/" title="Previous Post: recursive-to-non-recursive">&laquo; recursive-to-non-recursive</a>
       
       
         <a class="basic-alignment right" href="/blog/2013/05/12/touch-hadoop/" title="Next Post: 全分布式的Hadoop初体验">全分布式的Hadoop初体验 &raquo;</a>
@@ -345,7 +340,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2013/07/10/decorate-octopress/">定制自己的octopress</a>
+        <a href="/blog/2013/07/10/decorate-octopress/">定制Octopress</a>
       </li>
     
       <li class="post">

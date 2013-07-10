@@ -4,7 +4,7 @@
   <title><![CDATA[Category: life | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/blog/categories/life/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-07-10T04:01:41+08:00</updated>
+  <updated>2013-07-10T11:12:36+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -322,9 +322,9 @@ document.getElementById('start_btn').style.display = ""; //show start button
     <id>http://biaobiaoqi.github.com/blog/2013/03/17/kai-pian</id>
     <content type="html"><![CDATA[<p>花了一下午时间，终于搭起了这个博客。</p>
 
-<p>我会陆续将原来csdn博客中的内容筛选过来，将这个博客作为技术主博客。</p>
+<p>我会陆续将原来csdn博客中的内容筛选过来，将这个博客作为主博客。</p>
 
-<p>github真是神器啊。感谢github，“感谢”tc最终没有封锁github，让我得以有机会搭建这个独立博客。</p>
+<p>github真是神器啊。感谢github，『感谢』tc最终没有封锁github，让我得以有机会搭建这个独立博客。</p>
 
 <p>希望五年、十年、二十年过后，回过头来，依然能在这个博客中找到自己的脚印和梦想。</p>
 ]]></content>

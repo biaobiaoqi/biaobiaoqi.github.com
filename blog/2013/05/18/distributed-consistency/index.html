@@ -157,7 +157,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <p>数值偏差可以这样理解：已应用于其他的副本，但还没有应用于给定副本的更新数目。</p>
 
-<p>文中使用了<a href="http://en.wikipedia.org/wiki/Vector_clock">向量时钟</a>来举例对一致性单元进行持续抑制性分析，</p>
+<p>文中使用了<a href="http://en.wikipedia.org/wiki/V%20ector_clock">向量时钟</a>来举例对一致性单元进行持续抑制性分析，</p>
 
 <h4>2.2 严格一致性</h4>
 
@@ -170,7 +170,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <p>那么，很自然对于同一个进程执行的操作，必然要按照它们执行的顺序出现。</p>
 
-<h4>2.4因果一致性（Casual Consitency）</h4>
+<h4>2.4因果一致性（C asual C onsitency）</h4>
 
 <p>要求：</p>
 
@@ -187,7 +187,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <p>相比顺序一致性，去掉了那些没有联系的操作达成一致顺序观点的要求，只是保留那些必要的顺序（有因果关系的）。</p>
 
-<h4>2.5入口一致性（Entry Consistency）</h4>
+<h4>2.5入口一致性（E ntry C onsistency）</h4>
 
 <p>其实也就是对每个共享数据定义一个同步变量（即：锁）。当然，没有进行同步就进行的读操作结果是不保证的。</p>
 
@@ -201,31 +201,31 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <p>对于最终一致性的的数据存储而言，这个示例很有代表性。问题是由用户有时可能对不同的副本进行操作的事实引起的。以客户为中心的一致性分为如下几大类：</p>
 
-<h4>3.1 单调读（Monotonic Reads）</h4>
+<h4>3.1 单调读（M onotonic R eads）</h4>
 
 <p>当进程从一个地方读出数据x，那么这个以后再读到的x应该是和当前x相同或比当前更新的版本。也就是如果进程迁移到了别的位置，那么对x的更新应该比进程先到达。这里的客户就是指这个进程。</p>
 
-<h4>3.2 单调写（Monotonic Writes）</h4>
+<h4>3.2 单调写（M onotonic W rites）</h4>
 
 <p>跟单调读相应，如果一个进程写一个数据x，那么它在本地或者迁移到别的地方再进行写操作的时候，原来的写操作必须要先传播到这个位置。也就是进程要在任何地方至少和上一次写一样新的数据。</p>
 
-<h4>3.3 Read your writes</h4>
+<h4>3.3 R ead your writes</h4>
 
 <p>一个进程对于数据x的写操作，那么进程无论到任何副本上都应该看到这个写操作的影响，也就是看到和自己写操作的影响或者更新的值。</p>
 
-<h4>3.4 Writes follow reads</h4>
+<h4>3.4 W rites follow reads</h4>
 
 <p>顾名思义了，也就是在读操作后面的写操作要是基于至少跟上一次读出来一样新的值。也就是如果进程在地点1读了x，那么在地点2要写x的副本的话，至少写的时候应该是基于至少和地点1读出的一样新的值。</p>
 
-<h3>4 副本放置（Replica Placement）</h3>
+<h3>4 副本放置（R eplica P lacement）</h3>
 
 <h4>4.1 放置的三个方法</h4>
 
-<p>Permanent replica/永久副本: 选几个固定位置放置副本，镜像呈现。</p>
+<p>P ermanent replica/永久副本: 选几个固定位置放置副本，镜像呈现。</p>
 
-<p>Server-initiated/服务端发起: 服务端动态决定什么时候向什么地方分发副本，又称push cache</p>
+<p>S erver-initiated/服务端发起: 服务端动态决定什么时候向什么地方分发副本，又称push cache</p>
 
-<p>Client-initiated/客户端发起: 客户端缓存,client cache</p>
+<p>C lient-initiated/客户端发起: 客户端缓存,client cache</p>
 
 <h4>4.2 更新传播</h4>
 
@@ -252,21 +252,21 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </ul>
 
 
-<h4>4.3 复制协议（Replication Protocols）</h4>
+<h4>4.3 复制协议（R eplication P rotocols）</h4>
 
-<h5>4.3.1 远程写（Remote-Write）协议</h5>
+<h5>4.3.1 远程写（R emote-W rite）协议</h5>
 
 <p>对于数据x有一个主副本，当没有x副本的服务器操作x的时候就会得到一个x的副本。而有x副本的服务器响应客户读请求的时候可以立刻返回。而当客户进行写操作的时候，写操作首先在主副本完成，然后再通知其他副本更新。</p>
 
-<h5>4.3.2 本地写（Local-Write）协议</h5>
+<h5>4.3.2 本地写（L ocal-W rite）协议</h5>
 
 <p>和远程写比较类似，不同点是当一个服务器得到了副本以后就成了新的主副本，以后的写操作首先在本地完成，然后再通知其他的副本，本地写的名字由此而来。</p>
 
-<h5>4.3.3 主动复制（Active Replication）</h5>
+<h5>4.3.3 主动复制（A ctive R eplication）</h5>
 
 <p>对于副本的操作要设计到另外一个单一对象。比如，n个副本代理对象C的一个接口，如果向所有副本发出请求，每个副本都会发一个请求到C，那么同样的操作就执行了n次。所以需要一个协调者。另外，多副本返回值的时候也会有同样的情况。所以这种只执行一次的动作需要副本种有一个协调者，保证操作只被执行一次或者只返回一次。</p>
 
-<h5>3.3.4 基于候选团（Quorum-Based）协议</h5>
+<h5>3.3.4 基于候选团（Q uorum-B ased）协议</h5>
 
 <p>也就是读操作要得到r个服务器的同意，写操作要得到w个进程的同意。总共有n个进程。r和w要满足以下条件：</p>
 
@@ -276,14 +276,9 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </ul>
 
 
-<p>也就是类似于投票获得读写的锁。在Dynamo系统中可以配置这种wrn参数以自持特定的一致性。</p>
+<p>也就是类似于投票获得读写的锁。在D ynamo系统中可以配置这种wrn参数以自持特定的一致性。</p>
 
-<p class='post-footer'>
-            original link:
-            <a href='http://biaobiaoqi.github.com/blog/2013/05/18/distributed-consistency/'>http://biaobiaoqi.github.com/blog/2013/05/18/distributed-consistency/</a><br/>
-            &nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>
-            &nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a>
-            </p>
+<p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/05/18/distributed-consistency/'>http://biaobiaoqi.github.com/blog/2013/05/18/distributed-consistency/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p>
 
 </div>
 
@@ -392,7 +387,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2013/07/10/decorate-octopress/">定制自己的octopress</a>
+        <a href="/blog/2013/07/10/decorate-octopress/">定制Octopress</a>
       </li>
     
       <li class="post">

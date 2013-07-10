@@ -134,15 +134,15 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <p>在linux上工作，ssh是必须要了解的技术方法。它可以建立起多台主机之间的安全的加密传输，以进行远程的访问、操控、传输数据。</p>
 
-<p>SSH為Secure Shell的縮寫。為建立在应用层和传输层基础上的安全协议。</p>
+<p>SSH為S ecure S hell的縮寫。為建立在应用层和传输层基础上的安全协议。</p>
 
-<p>传统的网络服务程序，如FTP、POP和Telnet其本质上都是不安全的；因为它们在网络上用明文传送数据、用户帐号和用户口令，很容易受到中间人（man-in-the-middle）攻击方式的攻击。就是存在另一个人或者一台机器冒充真正的服务器接收用户传给服务器的数据，然后再冒充用户把数据传给真正的服务器。
+<p>传统的网络服务程序，如FTP、POP和T elnet其本质上都是不安全的；因为它们在网络上用明文传送数据、用户帐号和用户口令，很容易受到中间人（man-in-the-middle）攻击方式的攻击。就是存在另一个人或者一台机器冒充真正的服务器接收用户传给服务器的数据，然后再冒充用户把数据传给真正的服务器。
 而SSH是目前较可靠，專为远程登录会话和其他网络服务提供安全性的协议。利用SSH协议可以有效防止远程管理过程中的信息泄露问题。透過SSH可以對所有传输的数据进行加密，也能够防止DNS欺骗和IP欺骗。</p>
 
 <!--more-->
 
 
-<p>SSH之另一項優點為其传输的数据是经过压缩的，所以可以加快传输的速度。SSH有很多功能，它既可以代替Telnet，又可以为FTP、POP、甚至为PPP提供一个安全的「通道」。
+<p>SSH之另一項優點為其传输的数据是经过压缩的，所以可以加快传输的速度。SSH有很多功能，它既可以代替T elnet，又可以为FTP、POP、甚至为PPP提供一个安全的「通道」。
 了解这么多就好了，其实ssh连接也就是可以理解成经过加密的远程访问啦。</p>
 
 <p>&#8212;（来自中文维基）</p>
@@ -153,7 +153,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <p>ssh的安全加密方式的理论基础是非对称加密体系。而非对称加密中，常见的一种就是RSA加密算法。在使用ssh，务必先弄清楚非对称加密和rsa的算法流程。详情参见<a href="http://zh.wikipedia.org/wiki/RSA%E5%8A%A0%E5%AF%86%E6%BC%94%E7%AE%97%E6%B3%95">RSA加密算法</a>。</p>
 
-<p>ssh有两种级别的安全验证：账户口令验证、rsa加密验证。详细参数，可以在sshd_config配置文件中设置(Ubuntu是/etc/ssh/sshd_config，mac下是/etc/sshd_config)</p>
+<p>ssh有两种级别的安全验证：账户口令验证、rsa加密验证。详细参数，可以在sshd_config配置文件中设置(U buntu是/etc/ssh/sshd_config，mac下是/etc/sshd_config)</p>
 
 <h3>账号口令验证</h3>
 
@@ -229,15 +229,15 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <span class='line-number'>20</span>
 <span class='line-number'>21</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>$ ssh-keygen   
-</span><span class='line'>Generating public/private rsa key pair.  
-</span><span class='line'>Enter file in which to save the key (/Users/biaobiaoqi/.ssh/id_rsa): /Users/biaobiaoqi/.ssh/id_rsa  
-</span><span class='line'>Enter passphrase (empty for no passphrase):   
-</span><span class='line'>Enter same passphrase again:   
-</span><span class='line'>Your identification has been saved in /Users/biaobiaoqi/.ssh/id_rsa.  
-</span><span class='line'>Your public key has been saved in /Users/biaobiaoqi/.ssh/id_rsa.pub.  
-</span><span class='line'>The key fingerprint is:  
-</span><span class='line'>b7:c2:5c:3f:83:5e:5e:93:a4:42:db:51:d8:ac:07:66 biaobiaoqi@biaobiaoqi.local  
-</span><span class='line'>The key's randomart image is:  
+</span><span class='line'>G enerating public/private rsa key pair.  
+</span><span class='line'>E nter file in which to save the key (/U sers/biaobiaoqi/.ssh/id_rsa): /U sers/biaobiaoqi/.ssh/id_rsa  
+</span><span class='line'>E nter passphrase (empty for no passphrase):   
+</span><span class='line'>E nter same passphrase again:   
+</span><span class='line'>Y our identification has been saved in /U sers/biaobiaoqi/.ssh/id_rsa.  
+</span><span class='line'>Y our public key has been saved in /U sers/biaobiaoqi/.ssh/id_rsa.pub.  
+</span><span class='line'>T he key fingerprint is:  
+</span><span class='line'>b 7:c 2:5 c:3 f:83:5 e:5 e:93:a 4:42:db:51:d 8:ac:07:66 biaobiaoqi@biaobiaoqi.local  
+</span><span class='line'>T he key's randomart image is:  
 </span><span class='line'>+--[ RSA 2048]----+  
 </span><span class='line'>|                 |  
 </span><span class='line'>|             +   |  
@@ -275,9 +275,9 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>$scp ~/.ssh/id_rsa.pub user@host:~/.ssh/tmp_id_rsa.pub
-</span><span class='line'>The authenticity of host XXX can't be established.
+</span><span class='line'>T he authenticity of host XXX can't be established.
 </span><span class='line'>ECDSA key fingerprint is xxxxxxxxxxxxxxxxxxxxxx.
-</span><span class='line'>Are you sure you want to continue connecting (yes/no)?</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>A re you sure you want to continue connecting (yes/no)?</span></code></pre></td></tr></table></div></figure>
 
 
 <p>原因是，客户端不确定所连接的host是否是真正的host。一般情况，直接输入yes，继续就好了。这里有较详细的解释：<a href="http://stackoverflow.com/questions/3663895/ssh-the-authenticity-of-host-hostname-cant-be-established">点击连接</a></p>
@@ -285,10 +285,10 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <p>然后就可以免密码、更安全的登录啦</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'> ssh xxxx@hostAddress</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'> ssh xxxx@host A ddress</span></code></pre></td></tr></table></div></figure>
 
 
-<p>在ssh登录服务器时，如果出现如下问题：<em>Agent admitted failure to sign using the key</em>则需要手工将客户端私钥加入到ssh管理体系中。使用 ssh-add 指令。（具体机理还不太清楚）</p>
+<p>在ssh登录服务器时，如果出现如下问题：<em>A gent admitted failure to sign using the key</em>则需要手工将客户端私钥加入到ssh管理体系中。使用 ssh-add 指令。（具体机理还不太清楚）</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>$ssh-add   ~/.ssh/id_rsa</span></code></pre></td></tr></table></div></figure>
@@ -318,7 +318,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </span><span class='line'>$scp user@rehost:~/tmp ~./tmp
 </span><span class='line'>
 </span><span class='line'>#复制的是目录，需要迭代，添加-r参数
-</span><span class='line'>$scp -r user@rehost:~/tmpDir ~./tmpDir</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>$scp -r user@rehost:~/tmp D ir ~./tmp D ir</span></code></pre></td></tr></table></div></figure>
 
 
 <h4>SSH的配置</h4>
@@ -330,19 +330,12 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <ul>
 <li><a href="http://blog.lizhigang.net/archives/249">《linux ssh 使用深度解析（key登录详解）》</a></li>
-<li><a href="http://wiki.tuna.tsinghua.edu.cn/SshKeyHowto">《使用 RSA 密钥对进行 SSH 登录验证》</a></li>
+<li><a href="http://wiki.tuna.tsinghua.edu.cn/S%20sh%20K%20ey%20H%20owto">《使用 RSA 密钥对进行 SSH 登录验证》</a></li>
 <li><a href="http://www.ruanyifeng.com/blog/2011/12/ssh_remote_login.html">《SSH原理与运用（一）：远程登录》</a></li>
 <li><a href="http://www.ruanyifeng.com/blog/2011/12/ssh_port_forwarding.html">《SSH原理与运用（二）：远程操作与端口转发》</a></li>
 <li><a href="http://reverland.bitbucket.org/ssh_climbe.html">ssh+firefox-autoproxy</a></li>
 <li><a href="http://www.ibm.com/developerworks/cn/aix/library/au-sshsecurity/">SSH 安全性和配置入门</a></li>
-<li><a href="http://blog.licess.org/sshd_config/">sshd_config配置 详解</a><p class='post-footer'>
-
-<pre><code>      original link:
-      &lt;a href='http://biaobiaoqi.github.com/blog/2013/04/19/use-ssh/'&gt;http://biaobiaoqi.github.com/blog/2013/04/19/use-ssh/&lt;/a&gt;&lt;br/&gt;
-      &amp;nbsp;written by &lt;a href='http://biaobiaoqi.github.com'&gt;Biaobiaoqi&lt;/a&gt;
-      &amp;nbsp;posted at &lt;a href='http://biaobiaoqi.github.com'&gt;http://biaobiaoqi.github.com&lt;/a&gt;
-      &lt;/p&gt;
-</code></pre></li>
+<li><a href="http://blog.licess.org/sshd_config/">sshd_config配置 详解</a><p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/04/19/use-ssh/'>http://biaobiaoqi.github.com/blog/2013/04/19/use-ssh/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p></li>
 </ul>
 
 </div>
@@ -452,7 +445,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2013/07/10/decorate-octopress/">定制自己的octopress</a>
+        <a href="/blog/2013/07/10/decorate-octopress/">定制Octopress</a>
       </li>
     
       <li class="post">

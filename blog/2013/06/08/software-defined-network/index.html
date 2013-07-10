@@ -130,7 +130,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   </header>
 
 
-<div class="entry-content"><p>最近高级网络课的小组任务是在老师给定的范围内自选方向主题研究并做展示报告。我们组选了sdn。原以为这东西会是工业界无人问津的概念化产品，Google了一下却发现其实sdn挺火的，由于它可能带来的可扩展性，一些大互联网企业也在开始涉足相关的研发，比如Google呵Facebook。这里简要的梳理下我对SDN概念性的认识。</p>
+<div class="entry-content"><p>最近高级网络课的小组任务是在老师给定的范围内自选方向主题研究并做展示报告。我们组选了sdn。原以为这东西会是工业界无人问津的概念化产品，G oogle了一下却发现其实sdn挺火的，由于它可能带来的可扩展性，一些大互联网企业也在开始涉足相关的研发，比如G oogle呵F acebook。这里简要的梳理下我对SDN概念性的认识。</p>
 
 <h2>背景</h2>
 
@@ -150,23 +150,23 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <p>如果能剥离开网络的物理拓扑结构，将网络资源虚拟化，隐藏物理结构的复杂性，统一的进行逻辑层的管理控制，就能满足多变的网络需求了。</p>
 
-<p>SDN和OpenFlow就是一个这样的解决方案。</p>
+<p>SDN和O pen F low就是一个这样的解决方案。</p>
 
-<h2>OpenFlow和SDN</h2>
+<h2>O pen F low和SDN</h2>
 
-<p>OpenFlow起源于斯坦福的Ethane项目。该项目试图通过一个集中式的控制器，让网络管理员可以方便地定义基于网络流的安全控制策略，并将这些安全策略应用到各种网络设备中，从而实现对整个网络通讯的安全控制。受到此项目的启发，斯坦福的老师和学生将Ethane的设计更一般化，将传统网络设备的数据转发(data plane)和路由控制(control plane)两个功能模块相分离，通过集中式的控制器(Controller)以标准化的接口对各种网络设备进行管理和配置。2008年，他们提出了OpenFlow的概念。</p>
+<p>O pen F low起源于斯坦福的E thane项目。该项目试图通过一个集中式的控制器，让网络管理员可以方便地定义基于网络流的安全控制策略，并将这些安全策略应用到各种网络设备中，从而实现对整个网络通讯的安全控制。受到此项目的启发，斯坦福的老师和学生将E thane的设计更一般化，将传统网络设备的数据转发(data plane)和路由控制(control plane)两个功能模块相分离，通过集中式的控制器(C ontroller)以标准化的接口对各种网络设备进行管理和配置。2008年，他们提出了O pen F low的概念。</p>
 
-<p>这种分布式的实现方式，让控制平面可以和转发平面物理的分离开，控制平面完全可以运行在运算能力更强的服务器上，而不是路由器。OpenFlow协议则是分离的两者之间的通信协议。关于OpenFlow的技术细节，<a href="http://network.51cto.com/art/201306/397443.htm">《虚拟化的逆袭：OpenFlow和SDN》</a>一文中有简明介绍。</p>
+<p>这种分布式的实现方式，让控制平面可以和转发平面物理的分离开，控制平面完全可以运行在运算能力更强的服务器上，而不是路由器。O pen F low协议则是分离的两者之间的通信协议。关于O pen F low的技术细节，<a href="http://network.51%20cto.com/art/201306/397443.htm">《虚拟化的逆袭：O pen F low和SDN》</a>一文中有简明介绍。</p>
 
-<p>基于OpenFlow为网络带来的可编程的特性，有研究人员提出了SDN即Software Defined Network（2009年）。在这个概念中，网络中所有的网络设备被视为被管理的资源，以此抽象出一个网络操作系统(Network OS)的概念，这个网络操作系统一方面抽象了底层网络设备的具体细节，同时还为上层应用提供了统一的管理视图和编程接口。SDN的架构细节，参见<a href="http://network.51cto.com/art/201211/366278.htm">《SDN是生意 OpenFlow是技术》</a>。</p>
+<p>基于O pen F low为网络带来的可编程的特性，有研究人员提出了SDN即S oftware D efined N etwork（2009年）。在这个概念中，网络中所有的网络设备被视为被管理的资源，以此抽象出一个网络操作系统(N etwork OS)的概念，这个网络操作系统一方面抽象了底层网络设备的具体细节，同时还为上层应用提供了统一的管理视图和编程接口。SDN的架构细节，参见<a href="http://network.51%20cto.com/art/201211/366278.htm">《SDN是生意 O pen F low是技术》</a>。</p>
 
-<p>SDN和OpenFlow的关系，就像互联网之于TCP/IP协议栈。OpenFlow是SDN的核心协议，用于控制转发面设备的控制转发。而SDN是上层的变成界面。</p>
+<p>SDN和O pen F low的关系，就像互联网之于TCP/IP协议栈。O pen F low是SDN的核心协议，用于控制转发面设备的控制转发。而SDN是上层的变成界面。</p>
 
-<p>有观点认为，『OpenFlow是技术，SDN是生意』。最近对SDN唱衰的报道也证明了这桩『生意』的前途未仆。</p>
+<p>有观点认为，『O pen F low是技术，SDN是生意』。最近对SDN唱衰的报道也证明了这桩『生意』的前途未仆。</p>
 
 <h2>SDN的发展</h2>
 
-<p>在云计算飞速发展的同时，SDN也喧嚣尘上。Google,Facebook等大公司也结成了产业联盟，来推动其发展。</p>
+<p>在云计算飞速发展的同时，SDN也喧嚣尘上。G oogle,F acebook等大公司也结成了产业联盟，来推动其发展。</p>
 
 <p>但其现状也并非一片明朗：</p>
 
@@ -179,18 +179,11 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <h3>参考</h3>
 
 <ul>
-<li><a href="http://blog.sina.com.cn/s/blog_72628e9f0100yg3b.html">什么是SDN(Software Defined Networking)？</a>
+<li><a href="http://blog.sina.com.cn/s/blog%20_72628%20e%209%20f%200100%20yg%203%20b.html">什么是SDN(S oftware D efined N etworking)？</a>
 *</li>
-<li><a href="http://blog.sina.com.cn/s/blog_5385c0b901010pu3.html">OpenFlow/SDN本质论</a></li>
+<li><a href="http://blog.sina.com.cn/s/blog%20_5385%20c%200%20b%20901010%20pu%203.html">O pen F low/SDN本质论</a></li>
 <li><a href="http://article.yeeyan.org/view/323168/358956">软件定义网络(SDN)：是什么，如何工作，为什么重要</a></li>
-<li><a href="http://network.51cto.com/art/201305/394648.htm">SDN：仍处于起步阶段</a><p class='post-footer'>
-
-<pre><code>      original link:
-      &lt;a href='http://biaobiaoqi.github.com/blog/2013/06/08/software-defined-network/'&gt;http://biaobiaoqi.github.com/blog/2013/06/08/software-defined-network/&lt;/a&gt;&lt;br/&gt;
-      &amp;nbsp;written by &lt;a href='http://biaobiaoqi.github.com'&gt;Biaobiaoqi&lt;/a&gt;
-      &amp;nbsp;posted at &lt;a href='http://biaobiaoqi.github.com'&gt;http://biaobiaoqi.github.com&lt;/a&gt;
-      &lt;/p&gt;
-</code></pre></li>
+<li><a href="http://network.51%20cto.com/art/201305/394648.htm">SDN：仍处于起步阶段</a><p class='post-footer'>original link:<a href='http://biaobiaoqi.github.com/blog/2013/06/08/software-defined-network/'>http://biaobiaoqi.github.com/blog/2013/06/08/software-defined-network/</a><br/>&nbsp;written by <a href='http://biaobiaoqi.github.com'>Biaobiaoqi</a>&nbsp;posted at <a href='http://biaobiaoqi.github.com'>http://biaobiaoqi.github.com</a></p></li>
 </ul>
 
 </div>
@@ -300,7 +293,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2013/07/10/decorate-octopress/">定制自己的octopress</a>
+        <a href="/blog/2013/07/10/decorate-octopress/">定制Octopress</a>
       </li>
     
       <li class="post">

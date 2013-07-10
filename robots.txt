@@ -1,4 +1,4 @@
-User-agent: *
-Disallow: 
+U ser-agent: *
+D isallow: 
 
-Sitemap: http://biaobiaoqi.github.com/sitemap.xml 
+S itemap: http://biaobiaoqi.github.com/sitemap.xml 
