@@ -5,7 +5,7 @@ date: 2013-04-23 22:24
 comments: true
 description: "今天，实验室的一台电脑今天突然出无法上网了，而其他人则在正常上网。症状很奇怪："
 categories: [tech]
-tags: [windows, net]
+tags: [windows, network]
 
 ---
 ###背景

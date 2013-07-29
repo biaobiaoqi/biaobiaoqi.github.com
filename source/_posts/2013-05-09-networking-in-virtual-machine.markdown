@@ -5,7 +5,7 @@ date: 2013-05-09 22:39
 comments: true
 description: "本文介绍三种虚拟机中常用的网络配置模式：NAT(网络地址转换模式)、Bridged nerworking（桥接网络模式）和Host-only（主机模式）。"
 categories: [tech]
-tags: [networks, os]
+tags: [network, os]
 
 ---
 
