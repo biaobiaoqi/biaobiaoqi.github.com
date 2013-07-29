@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>《Hadoop技术内幕》学习笔记——RPC和动态代理 - Biaobiaoqi的博客</title>
+  <title>终于算完了这道『1+1』 - Biaobiaoqi的博客</title>
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="《hadoop技术内幕——深入解析Hadoop Common和HDFS架构设计与实现原理》第4章的1-3节，Hadoop IPC部分的基础知识介绍。">
+  <meta name="description" content="">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://biaobiaoqi.github.com/blog/2013/06/08/ipc-in-hadoop">
+  <link rel="canonical" href="http://biaobiaoqi.github.com/blog/2013/07/29/after-pat-practice">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Biaobiaoqi的博客" type="application/atom+xml">
@@ -104,7 +104,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
   <header>
     
-      <h1 class="entry-title">《Hadoop技术内幕》学习笔记——RPC和动态代理</h1>
+      <h1 class="entry-title">终于算完了这道『1+1』</h1>
     
     
       <p class="meta">
@@ -120,7 +120,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
 
 
-<time datetime="2013-06-08T00:24:00+08:00" pubdate data-updated="true">Jun 8<span>th</span>, 2013</time>
+<time datetime="2013-07-29T22:12:00+08:00" pubdate data-updated="true">Jul 29<span>th</span>, 2013</time>
         
 
 
@@ -130,34 +130,41 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   </header>
 
 
-<div class="entry-content"><p>本文是《hadoop 技术内幕——深入解析 Hadoop Common 和 HDFS 架构设计与实现原理》第 4 章的 1-3 节的学习笔记。内容为 Hadoop IPC 部分的基础知识介绍。</p>
+<div class="entry-content"><p>在<a href="http://weibo.com/redow7">@ReDow</a>、<a href="http://weibo.com/cloudbye">@麦迪的小腿</a>和<a href="http://weibo.com/linest">@lines</a> 等小伙伴的帮助下，终于断断续续的爬完了 <a href="http://pat.zju.edu.cn/">PAT</a> 的 Basic Level 和 Advanced Level，阶段性填补了自己惨白的算法短板。在 cs 的圈子里，说 PAT 是入门的『1 + 1』不为过。刚完成『1 + 1』，作为五年科班的人，确实不够光彩。不过现在能做的也只是尽力弥补本科时间里的虚度。</p>
 
-<h2>知识框架</h2>
+<p>从亲手挖的坑里往外爬，需要付出比其他人更多的努力。没时间享受题目 ac 之后的快感（画外音：这么简单的题会有快感么=.=#），倒会时不时蹦出一股脑的蛋疼：『你当初干 XX 啥去了！』。</p>
 
-<p>由于 Hadoop 分布式环境需要一个更高效和正对性优化的 IPC 机制，传统的诸如 RMI 的解决方案无法满足这一要求，Hadoop 自己实现了一套 IPC 方法。</p>
+<h2>当初&#8230;</h2>
 
-<p>第 4 章第 1 节讲解了 RPC 的原理，包括 Stub-Skeleton 的架构等，进而用<code>RMI</code>举例（可以参考的<a href="">演示代码</a>）。RMI 的调用实现主要包括了服务器端的 registry 和客户端的 lookup。虽然 Hadoop 不是使用 RMI 做 IPC，但了解一下其调用方式对感性的认识到如何进行分布式环境下的远程调用还是有作用的。</p>
+<p>记得大一的时候，每天花好几个小时泡图书馆看各种 IT 杂志和技术书籍。在刚开始学 C 语言编程的时间里，我看着中间件、系统软件、终端融合、东软和用友金蝶之争等一系列摸不着头脑的东西，在对数据还没概念的时候，看着数据库的范式和 E-R 图…总之，就是一直在门外徘徊。</p>
 
-<p>接下来的 2,3 小节，简单的介绍了 IPC 过程所依赖的技术方法：Java 的动态代理方式和 NIO 的网络传输方式。</p>
+<p>之后专业课多了起来，我又兴高采烈的混在工高大神的队伍里，早上集结同学每天早上五点多轮流爬起来去自习室占座，以看似端正实则不专注的令人发指的学习态度在 GPA 榜单上持续退步着。浑浑噩噩的搞过数模，无果。当然，以『学渣』的水平充着『学霸』也是有好处的，就是沾染了大神的精神气，比如记忆犹新的有在 CMU 念书的鑫磊大神的专注、冷静和每天 4 小时的睡眠。同时，我还风风火火的参加了 ASES 和求是强鹰，搀和着所谓的创业。大四在爱尔兰的交流，除了英语和专业课，其他的倒是学的挺多，比如烧饭，单反和旅游……本科唯一做的跟编程有关的说得出口的，也就写了个 Android 程序在比赛里获了个奖，不提也罢的那种。</p>
 
-<p>第 2 节讲<code>动态代理</code>，这里需要理解面向对象的代理模式和<em>动态</em>的原因。代理模式分很多种，这里用到的是简单的对行为的传递。动态代理的动态特性，则是因为框架能提供动态创建某个接口的实现的能力(可以参考的<a href="">演示代码</a>)。</p>
+<h2>变</h2>
 
-<p>更系统的看动态代理过程，分为两个阶段：</p>
+<p>在《<a href="http://book.douban.com/subject/1048007/">高效能认识的七个习惯</a>》里看过一个观点：每个人都有属于自己的『关注圈』和『影响圈』。影响圈是个人对外界产出的途径，关注圈则意味着个人对外界的期许。可以想见，关注圈大于影响圈。正确的成长方式是尽力扩大影响圈，以此催生关注圈的扩大。而我则是走在了相反的方向：一直致力于开发自己的关注圈，后果是影响圈不见长进。一度我开始注意遏制自己这方面的好高骛远，不过事实证明，我还是比较喜欢在学爬得时候看走路的教学视频。</p>
 
-<ul>
-<li>1.代理接口的实现：静态方法 Proxy.newInstance()生成动态对象。</li>
-<li>2.调用转发过程：InvocationHandler 实现</li>
-</ul>
+<!--more-->
 
 
-<p>第 3 节的<code>NIO</code>，跟传统的套接字(Socket)通信过程做了对比。需要了解 Socket 通信的特点：同步，阻塞，基于字节，理解这种特点带来的服务器端的线程闲置的压力。对应的，NIO 则是可异步的，非阻塞的，基于块的。具体的实现上，需要了解缓冲区(Buffer)的原理和使用方式，通道(Channel)和选择器(Selector)配合的使用方式。</p>
+<p>后来听闻了杨绛先生的一则小事。大概是说，一个年轻人写信给杨绛，说自己平时许多问题想不明白，想请教下怎么应对。杨绛回复说『是你看书太少，想的太多』。第一眼看到这个故事，我的想法就是：那不是在说的我么。对我而言，『书』指的更泛一些，理解为阅历或许更恰当。让可能性禁锢了思想，不值得，不如踏出去，自己去找答案。</p>
 
-<p>我总结了一份 slides，如下：(挂在 speackerdeck 上，如果加载缓慢，请稍候:))</p>
+<p>研究生的一年又过去，很难说我这一年达到了自己的预期。不过也没怎样，世界变化这么快，也容不得静态的计划。至少，我渐渐的逼近了自己喜欢的生活节奏。</p>
 
-<script async class="speakerdeck-embed" data-id="fbcb8590b1540130690c2e6f0be13e84" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+<h2>信仰</h2>
 
+<p>都说现在的国人根子里没有信仰，年岁越长也渐渐有些自己的体会。面对远超过 big-data 量级的选择，我时常彷徨，我不敢说自己有信仰。我只是一直在坚持找寻。</p>
 
-<p>slides 下载地址：<a href="https://dl.dropboxusercontent.com/u/64021093/slides/%E8%BF%9C%E7%A8%8B%E8%BF%87%E7%A8%8B%E8%B0%83%E7%94%A8%E5%92%8CNIO.pdf">请戳</a><p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/06/08/ipc-in-hadoop/'>http://biaobiaoqi.github.com/blog/2013/06/08/ipc-in-hadoop/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
+<p>用乔老爷子著名的斯坦福演讲中的一句话结束：</p>
+
+<blockquote><p>You can&#8217;t connect the dots looking forward. You can only connect them looking backwards, so you have to trust that the dots will somehow connect in your future. You have to trust in something&#8211;your gut, destiny, life, karma,whatever&#8211;because believing that the dots will connect down the road will give you the confidence to follow your heart, even when it leads you off the well-worn path, and that will make all the difference.</p></blockquote>
+
+<h3>PS：</h3>
+
+<p>据我所知网上的资料没有对 PAT 题型整体的把握和讲解。接下来的时间，我会整理下自己的代码和解题思路，将整理结果放到博客上来，也算自己的复习。链接都准备好了：<a href="../overcome-pat/">《PAT 综合题解》</a>。如果是 404Error，就请再耐心等待几天吧;)</p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/07/29/after-pat-practice/'>http://biaobiaoqi.github.com/blog/2013/07/29/after-pat-practice/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
 </div>
 
 
@@ -180,12 +187,12 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
 
 
-<time datetime="2013-06-08T00:24:00+08:00" pubdate data-updated="true">Jun 8<span>th</span>, 2013</time>
+<time datetime="2013-07-29T22:12:00+08:00" pubdate data-updated="true">Jul 29<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/tech/'>tech</a>
+    <a class='category' href='/blog/categories/life/'>life</a>
   
 </span>
 
@@ -220,10 +227,8 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/05/25/some-ideas-about-using-bt-protocol-to-sync/" title="Previous Post: 关于毕业季照片分享的思考">&laquo; 关于毕业季照片分享的思考</a>
+        <a class="basic-alignment left" href="/blog/2013/07/19/odps-in-alibaba/" title="Previous Post: 阿里离线数据处理平台2013暑期学校">&laquo; 阿里离线数据处理平台2013暑期学校</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/06/08/software-defined-network/" title="Next Post: SDN：软件定义网络">SDN：软件定义网络 &raquo;</a>
       
     </p>
   </footer>

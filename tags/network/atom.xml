@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: network | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/tags/network/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-07-19T21:46:34+08:00</updated>
+  <updated>2013-07-30T01:54:39+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -173,6 +173,168 @@
 <p>BitTorrent  Sync的优势，则在于能动态的集合分散在不同节点中的数据</p>
 
 <p>感觉这种去中心化的分布式系统，前景大大的有啊;)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[虚拟机中的网络配置]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/05/09/networking-in-virtual-machine/"/>
+    <updated>2013-05-09T22:39:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/05/09/networking-in-virtual-machine</id>
+    <content type="html"><![CDATA[<p>本文介绍三种虚拟机中常用的网络配置模式：NAT(网络地址转换模式)、Bridged nerworking（桥接网络模式）和Host-only（主机模式）。</p>
+
+<h3>Network Address Translation (NAT)</h3>
+
+<p>NAT模式使用了<a href="http://zh.wikipedia.org/wiki/%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2">NAT</a>服务来给虚拟网络提供网络连接。</p>
+
+<p>这种模式下，虚拟机能访问外部网络，外部无法直接连接到内部网络，除非使用端口映射<a href="http://nxlhero.blog.51cto.com/962631/742140">port forwarding</a>。</p>
+
+<!--more-->
+
+
+<p>NAT一般与<a href="http://zh.wikipedia.org/wiki/DHCP">DHCP</a>一起使用，以动态分配虚拟机内网IP，无序手动配置内外部网络环境。当然，为了让虚拟机每次开机时拥有固定的IP，也可以关闭掉DHCP服务，转而自己配置虚拟机的网络。虚拟机是linux的情况下，可以通过修改/etc/network/interfaces实现开机固定IP，示例如下：</p>
+
+<p>```</p>
+
+<h1>This file describes the network interfaces available on your system</h1>
+
+<h1>and how to activate them. For more information, see interfaces(5).</h1>
+
+<h1>The loopback network interface</h1>
+
+<p>auto lo
+iface lo inet loopback</p>
+
+<p>auto eth0
+iface eth0 inet static
+address 172.21.2.43
+netmask 255.255.0.0
+gateway 172.21.1.1</p>
+
+<p>```</p>
+
+<p>实现原理如图：</p>
+
+<p><img src="http://dl.dropboxusercontent.com/u/64021093/network/2.jpg"></p>
+
+<h3>Bridged networking(桥接)</h3>
+
+<p>在桥接模式下，本地物理网卡和虚拟网卡通过虚拟交换机进行桥接（无需在host上再开启新的虚拟网卡），物理网卡和虚拟网卡在拓扑图上处于同等地位，虚拟机就像是一台真实主机一样存在于局域网中。</p>
+
+<p>桥接模式无法与DHCP一起使用，需要手动的配置虚拟机的网络参数，包括IP、网关、子网掩码和dns。其中网关、子网掩码、dns都应该与host设置相同值。在linux虚拟机中的设置示例如下：</p>
+
+<p>```</p>
+
+<h1>设置ip、子网掩码</h1>
+
+<p>$ifconfig eth0 172.21.2.43 netmask 255.255.0.0</p>
+
+<h1>设置默认网关</h1>
+
+<p>$route add default gw 172.21.1.1</p>
+
+<h1>设置dns</h1>
+
+<p>$sudo vim /etc/resolv.conf
+nameserver 172.21.1.1</p>
+
+<p>```</p>
+
+<p>实现原理如图：</p>
+
+<p><img src="http://dl.dropboxusercontent.com/u/64021093/network/1.jpg"></p>
+
+<p>相比NAT，桥接模式有一个前提条件，就是要获得另外一个host所在网段的IP。在内网环境中还很容易，如果是ADSL宽带就比较麻烦了，ISP一般是不会大方的多提供一个公网IP的，那种情况下，使用NAT或许是更好的选择。</p>
+
+<p><a href="http://blog.chinaunix.net/uid-26212859-id-3051291.html">VMware的桥接网络配置</a></p>
+
+<h3>Host-only networking(主机)</h3>
+
+<p>以host为网关建立了新的虚拟网络，虚拟机无法访问外部网络，因此很安全。</p>
+
+<p>和NAT一样，也使用了DHCP服务做虚拟网络内的IP自动分配。</p>
+
+<p>另外，host-only模式下也可以进行扩展配置，让虚拟网络的机器也能访问到外网，比如自定制nat和dhcp的使用等等。</p>
+
+<p>如图：</p>
+
+<p><img src="http://dl.dropboxusercontent.com/u/64021093/network/3.jpg"></p>
+
+<h2>参考资料</h2>
+
+<ul>
+<li><p><a href="http://networking.ctocio.com.cn/tips/110/8897610.shtml">解析虚拟VMware三种网络模式根本区别</a></p></li>
+<li><p><a href="http://www.virtualbox.org/manual/ch06.html">virtualbox的网络模式详解</a></p></li>
+</ul>
+
+
+<p>图片引用自 ：<a href="http://networking.ctocio.com.cn/tips/110/8897610.shtml">解析虚拟VMware三种网络模式根本区别</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[winsock出错引起的断网]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/04/23/winsock-kills-internet/"/>
+    <updated>2013-04-23T22:24:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/04/23/winsock-kills-internet</id>
+    <content type="html"><![CDATA[<h3>背景</h3>
+
+<p>实验室有二十来台PC机，30+的服务器集群，网络拓扑比较复杂。简单地说，有网关连着校网，校网无法直接访问学校外的网络，只能通过拨vpn来实现外网访问。而校网最近也不稳定，时常断网。</p>
+
+<p>今天，实验室的一台电脑今天突然出无法上网了，而其他人则在正常上网。症状很奇怪：</p>
+
+<ul>
+<li>浏览器只能上google，其他任何网站都上不去。</li>
+<li>QQ、ftp等各种需要连网的软件也都无法正常连网。</li>
+<li>一切的发生，只是在PC使用者认为正常的操作中发生：上网，连网下围棋，聊QQ，然后…</li>
+</ul>
+
+
+<!--more-->
+
+
+<p>没有经验的我做出了如下一系列的<em>排查</em>：</p>
+
+<h3>1st：</h3>
+
+<p>为了排除网络环境的因素，我尝试对比了连vpn和不连vpn的情况.</p>
+
+<p>症状没有丝毫改变。</p>
+
+<h3>2nd：</h3>
+
+<p>我尝试着ping了许多网站，检查是否是dns污染。</p>
+
+<p>结果包括学校内部网络和外部网络，都能ping通。</p>
+
+<p>这意味着网络层是没有问题的。那只能是传输层或者更上层的问题了。但奇怪的是，google是能连接上的，大概不会是驱动的问题吧？ =.=，对windows环境的不熟悉，让我无所适从。</p>
+
+<h3>3rd:</h3>
+
+<p>看到了运行着的360安全卫士 =_=!，对它没好感，删单个进程还杀不死，会有其他进程重新将他开启！果断删除。同时，重启，碰碰运气。windows的问题印象里总是各种奇葩。</p>
+
+<p>以失败告终。</p>
+
+<h3>Final:</h3>
+
+<p>最终还是zfz童鞋从网上搜得了解决方法：
+打开cmd，输入如下指令，然后重启即可。
+```</p>
+
+<blockquote><p>netsh winsock reset
+```</p></blockquote>
+
+<p>原来是windows的socket接口出了问题，通过重置来解决。</p>
+
+<p>每每想到windows的不可控性，不禁唏嘘，这次又长见识了。</p>
+
+<h6>参考资料：</h6>
+
+<ul>
+<li><a href="http://www.zoublog.com/technology/can-ping-dns-resolution-can-not-open-page-solution.html">《能Ping通，能DNS解析，不能打开网页(登陆QQ等)的解决办法》</a></li>
+<li><a href="http://en.wikipedia.org/wiki/Winsock">winsock</a></li>
+</ul>
+
 ]]></content>
   </entry>
   
