@@ -4,7 +4,7 @@
   <title><![CDATA[Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-07-30T01:54:39+08:00</updated>
+  <updated>2013-07-31T03:32:30+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -12,6 +12,123 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[PAT 1001-1010 题解]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/07/31/pat-1001-1010-solutions/"/>
+    <updated>2013-07-31T02:03:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/07/31/pat-1001-1010-solutions</id>
+    <content type="html"><![CDATA[<p>全部代码实现：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1001">PAT1001</a></h2>
+
+<p>题意：格式化输出两数之和。</p>
+
+<p>分析：理清输出逻辑即可。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1002">PAT1002</a></h2>
+
+<p>题意：给定两多项式，相加并格式化输出结果。</p>
+
+<p>分析：两种思路</p>
+
+<ul>
+<li>1.采用链表的处理方式；</li>
+<li>2.预设好 int[1005]的数组，用下标表示次方，数组中元素值表示对应系数。</li>
+</ul>
+
+
+<p>第一种方法某种程度上看能节省空间，实现上需要注意操作链表时，循环时的越界问题；
+方法二用空间换取时间，且实现上更不容易出错。同时，由于浮点数本身精确位数不够，在判定两浮点数相加是否为 0 时，
+需要对结果值取绝对值后，与 1e-6 做对比。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1003">PAT1003</a></h2>
+
+<p>题意：求两个城市之间的加权最短路径。在有多个最短路径记录的情况下，选择路径中所有节点的权重值之和最小的。</p>
+
+<p>分析：Dijkstra 算法的变型实现。两种思路：</p>
+
+<ul>
+<li>1.计算最短路时，在每个节点上用链表 preList 记下所有最短路径的前节点。
+完成计算后，对 preList 做 dfs 获得每条最短路径的权重值之和，比较后得到结果；</li>
+<li>2.计算最短路径时，在节点上，除了记录最短路径中前一个节点 preNode 之外，还对应的记录当前的最短路径上所有节点的权重值之和，
+这就不用在 Dij 完成之后再做 dfs 了，过程中已经找到了最优解。</li>
+</ul>
+
+
+<p>相比之下，方法 2 明显更简洁。当然，虽然方法 2 的思路很通用，还需要确定，这一加权的判定条件是能够迭代处理的。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1004">PAT1004</a></h2>
+
+<p>题意：计算给定的树各个层级叶子节点的个数</p>
+
+<p>分析：先构建树，鉴于题目的空间限制不严格，可以使用邻接矩阵的方式定义树结构。然后使用 dfs 遍历树的节点，并记录每层的叶子节点数量。
+可以看到，时间空间的 trade-off 不仅仅是性能上的提升，也会影响带代码实现的复杂程度。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1005">PAT1005</a></h2>
+
+<p>题意：计算一个数（&lt;=10<sup>100）的各个位数之和，并用英语按位输出。比如</sup> 15 输出为 one five.</p>
+
+<p>分析：简单题，输出的实现上实际上就用到了 Hash 思想。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1006">PAT1006</a></h2>
+
+<p>题意：每个人来到实验室和离开实验室的时间都有记录。找到其中最早来实验室和最晚离开实验室的时间。</p>
+
+<p>分析：逻辑上很简单的一个题，遍历所有数据，找到其中最大和最小的值即可。稍微要处理的就是时间。
+由于 input 中给出的是 HH:MM:SS 的格式，在比较时需要将其换算为 int 值。实际上，使用 C 语言读入更方便，<code>scanf("%d:%d:%d", &amp;h, &amp;m, &amp;s);</code>
+然后计算出<code>time = 3600*h + 60*m + s</code>，时间比较就没有问题了。在最终的输出时再做对应的转换即可。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1007">PAT1007</a></h2>
+
+<p>题意：给出一组由正负整数组成的序列，求出拥有最大和的连续子序列。</p>
+
+<p>分析：最暴力的算法是两个循环的 O(n<sup>2)；进一步要使用分治的思想，可以得到</sup> O(n*logn)；更好的方法可以达到 O(n)，也可以将它看做分治思想。关键在于数学归纳的证明，编程实现非常简单：假定 [0, n-1]的最大连续子串已经求出了，要求 [0,n]的最大连续子串。</p>
+
+<ul>
+<li>1.如果 [0, n-1]中最大子串不包含最右的数字，则判定<code>原最大子串的和</code>与<code>包含最右点的最大子串 + a[n]的和</code>的大小。取大的那个作为 [0, n]的最大子串，并保持一个<code>包含最右点的最大子串</code>。</li>
+<li>2.如果 [0, n-1]中最大子串包含最右的数字，则 [0, n]的最大子串为原最大子串+a[n]。</li>
+</ul>
+
+
+<p>实际上，算法的核心是维持了两个量的记录，即当前的<code>最大子串</code>，以及当前<code>包含最右点的最大子串</code>。</p>
+
+<!--more-->
+
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1008">PAT1008</a></h2>
+
+<p>题意：给出电梯的行进路径，上下的速度和每层停留时间，计算总时间。</p>
+
+<p>分析：简单的模拟题。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1009">PAT1009</a></h2>
+
+<p>题意：求两个多项式的乘积。</p>
+
+<p>分析：参见 PAT1002，使用数组存储虽然空间占用稍大，但比链表实现要便捷很多。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1010">PAT1010</a></h2>
+
+<p>题意：给定两个数，其中单个位置上的数值范围可以为 [0-z]。指定其中一个数的进制，试确定是否存在可能的进制让两数的实际值相等。</p>
+
+<p>分析：此题没有交代清楚 input 中 radix 的取值范围以及对一位数有多重可能 radix 的情况如何输出，坑比较大。下面是需要注意的点。</p>
+
+<ul>
+<li>1.input 中两个数字可以是 10 位数，虽然没有告诉 radix 的范围，但在<code>9*10^10 10 1 200</code>这个示例中，可以看到结果的 radix 也可以是很大的。从这个角度看，代码中将 radix 和两个数值都设定为 longlong 是合适的选择。</li>
+<li>2.在计算另一个数的 radix 时，简单的遍历 [2, 10<sup>18]会超时。单调的区间很自然想到使用二分查找。</sup></li>
+<li>3.二分查找的上下界确定能减少耗时：下界选数字的所有位上的最大值+1；上界容易想当然的认为就是题中给定了 radix 的数的值。实际上，示例<code>11 b 1 10</code>就是一个反例，原因在于这个假设忽略了一位数的可能性，解决方案是在取给定 radix 的数值和下界中较大的那个数。</li>
+<li>4.在二分查找时，不可直接计算出某个 radix 下数的值，因为可能会 longlong 溢出。于是需要用特定的 compare 函数，在累加的过程中判定是否大于另一个数。算是一种剪枝。</li>
+<li>5.还有一个条件：当两个数都是 1 时，输出 2.当两个数相等且不为 1 时，输出题中给出的 radix。（这是从其他人的结题报告中看到的，完全不理解=。=）</li>
+</ul>
+
+
+<p>注意好这些方面，应该能 ac 了。保重。</p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/07/31/pat-1001-1010-solutions/'>http://biaobiaoqi.github.com/blog/2013/07/31/pat-1001-1010-solutions/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[终于算完了这道『1+1』]]></title>
@@ -2204,97 +2321,6 @@
 <li>《架构大数据:挑战、现状与展望》 计算机学报 王珊<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/05/18/a-hybrid-system-hadoopdb/'>http://biaobiaoqi.github.com/blog/2013/05/18/a-hybrid-system-hadoopdb/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[iOS的安全性和越狱]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/05/17/jail-break-your-ios/"/>
-    <updated>2013-05-17T00:10:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/05/17/jail-break-your-ios</id>
-    <content type="html"><![CDATA[<p><img src="https://dl.dropboxusercontent.com/u/64021093/2013-5-16.jpg" title="Jailbrek" alt="alt jailbreak" /></p>
-
-<p>提到<a href="http://en.wikipedia.org/wiki/IOS_jailbreaking#Security.2C_privacy.2C_and_stability">越狱</a>，很多人第一反应大概是免费的游戏和 app。</p>
-
-<p>作为软件从业人员，深知中国的大环境的特殊性。内有用户想吃免费午餐的不良付费习惯，外有行业内大头诸如某讯对创新的绞杀。大家对越狱是为了免费、盗版软件的认识，也就不奇怪了。</p>
-
-<p>还有另一派人。越狱对他们来说，意味着开放。个人认为这也是 Hack 精神的精髓之一。事实上，iOS 越狱也有自己的生态圈：Cydia 就是越狱设备上 App Store。</p>
-
-<!--more-->
-
-
-<h2>越狱的合法性</h2>
-
-<p>数字千年版权法对 iphone 的越狱进行了特赦，直到 2015 年，对 iPhone、iPod touch 的越狱依然有效。但注意，iPad 就没这么幸运了。</p>
-
-<p>详情参见博文<a href="http://www.cultofmac.com/213144/unlocking-a-new-iphone-is-now-illegal-but-jailbreaking-is-still-safe-what-it-all-means-for-you/">《Unlocking A New iPhone Is Now Illegal, But Jailbreaking Is Still Safe — What It All Means For You》</a></p>
-
-<h2>iOS 安全性</h2>
-
-<p>由于 iOS 没有开源，学术界和工业界对它的安全机制的论述资料很少。我在网上找到了上交一位学长对 ios 安全机制的分析文章，是他的硕士学位<a href="http://www.doc88.com/p-405566264292.html">论文</a>。作为参考，我整理了一些关键知识点。</p>
-
-<h4>基于信任链的启动</h4>
-
-<p>iOS 的信任机制从系统启动那一刻起已经开始。
-系统可信启动 <a href="http://elinux.org/images/2/28/Trusted_Boot_Loader.pdf">trustedboot</a>：启动每一步都会检测签名，构成整个信任链。</p>
-
-<p>还有另一种启动方式，是设备固件升级方式（DFU，Device Firmware Update），也是由签名构建信任链。</p>
-
-<h4>程序签名</h4>
-
-<p>iOS 应用的 ipa 压缩包中包含可执行文件和数据文件。可执行文件只有在已签名的前提下才能运行。确保应用经过苹果认证。</p>
-
-<p>越狱提升运行权限到 root，修改引用加载策略，接受任意签名的应用。
-“通过软件保证软件安全是不可能的”，iOS 使用了硬件来做保护，但硬件部分也遭到了越狱的破解。</p>
-
-<h4>沙盒技术</h4>
-
-<p>iOS 用沙盒技术实现访问控制
-trustedBSD ：http://www.trustedbsd.org/
-http://www.freebsd.org/doc/zh_CN/books/arch-handbook/mac-synopsis.html</p>
-
-<h4>ASLR 和 PIE</h4>
-
-<p>使用地址空间布局随机化（ASLR， address space layout randomization）和位置无关可执行代码（PIE，position independent executable）编译用来防止经典的缓冲区溢出攻击。</p>
-
-<h4>数据保护机制：</h4>
-
-<ul>
-<li>硬件加密：AES 协处理器，存储着 UID，GID</li>
-<li>软件加密：系统中每个文件、数据都用一个唯一的秘钥来加密。秘钥是有 UID、GID 一起产生的，存在 keybag 中，keybag 通过用户的 4 位密码来保护。</li>
-</ul>
-
-
-<h2>越狱</h2>
-
-<p>越狱主要就是在信任链的根 bootrom 阶段攻击。由于系统不断升级，攻击的方式也在不断演进，这个<a href="http://bbs.gean.cn/archiver/showtopic-213.aspx">链接</a>介绍了其中的一种情况。</p>
-
-<h4>越狱后注意</h4>
-
-<p>总的来说，越狱打破了 iOS 封闭的生态环境，也打破了它特有的保护壳。手机获得了 root 权限，恶意代码有了可趁之机。不要轻易的使用来源不明的应用和插件。</p>
-
-<ul>
-<li>非越狱手机：仅允许用户访问照片、视频数据；通过备份，可在 pc 端获取所有数据</li>
-<li>越狱手机：拥有 root 权限。可以通过许多渠道如 ssh，ftp 获取系统数据。</li>
-</ul>
-
-
-<p>更多细节参见
-* <a href="http://bbs.weiphone.com/read-htm-tid-1750886.html">《浅谈 iOS 越狱前后的安全问题以及安全风险》</a>
-* <a href="http://www.pcpop.com/doc/0/890/890768_all.shtml">《iPad 越狱不安全!安装应用/插件需谨慎》</a>
-* <a href="http://www.cnbeta.com/articles/229192.htm">《iOS 完美越狱 - 福利还是阴谋？》</a></p>
-
-<h4>SHSH</h4>
-
-<p>iPhone 3GS 出来时候，苹果为加强对 iPhone OS 的控制对恢复(Restore)固件(Firmware)采用了验证过程，每次 iTunes 要恢复固件的时候都要连接苹果的服务器验证。手机的 ECID 和所刷系统版本号一起签名出一个 SHSH 文件，发送给服务器，服务器检测 SHSH 是否为新版本的系统所产生，如果是，则允许继续进行刷机，否则传回组织继续的信号。</p>
-
-<p>SHSH 是存储在苹果公司的服务器上的，用户需要通过备份原来的 SHSH，并伪装一台苹果服务器来协助验证。　　</p>
-
-<p>网络上 SHSH 备份方法的介绍很多，不了解的朋友自行 Google 吧。</p>
-
-<h2>附录</h2>
-
-<p>对于想开发 iOS 应用而又没有开发者账号的朋友，可以参考这篇文章<a href="http://kqwd.blog.163.com/blog/static/4122344820117191351263/">《Xcode 4.1~4.6 + iOS 5、iOS 6 免证书(iDP)开发+真机调试+生成 IPA 全攻略》</a>，Xcode4.6 iOS6.0 亲测有效。  <p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/05/17/jail-break-your-ios/'>http://biaobiaoqi.github.com/blog/2013/05/17/jail-break-your-ios/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
 ]]></content>
   </entry>
   

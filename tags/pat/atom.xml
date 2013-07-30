@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: pat | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/tags/pat/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-07-30T01:54:39+08:00</updated>
+  <updated>2013-07-31T03:32:30+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -12,6 +12,120 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[PAT 1001-1010 题解]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/07/31/pat-1001-1010-solutions/"/>
+    <updated>2013-07-31T02:03:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/07/31/pat-1001-1010-solutions</id>
+    <content type="html"><![CDATA[<p>全部代码实现：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1001">PAT1001</a></h2>
+
+<p>题意：格式化输出两数之和。</p>
+
+<p>分析：理清输出逻辑即可。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1002">PAT1002</a></h2>
+
+<p>题意：给定两多项式，相加并格式化输出结果。</p>
+
+<p>分析：两种思路</p>
+
+<ul>
+<li>1.采用链表的处理方式；</li>
+<li>2.预设好int[1005]的数组，用下标表示次方，数组中元素值表示对应系数。</li>
+</ul>
+
+
+<p>第一种方法某种程度上看能节省空间，实现上需要注意操作链表时，循环时的越界问题；
+方法二用空间换取时间，且实现上更不容易出错。同时，由于浮点数本身精确位数不够，在判定两浮点数相加是否为0时，
+需要对结果值取绝对值后，与1e-6做对比。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1003">PAT1003</a></h2>
+
+<p>题意：求两个城市之间的加权最短路径。在有多个最短路径记录的情况下，选择路径中所有节点的权重值之和最小的。</p>
+
+<p>分析：Dijkstra算法的变型实现。两种思路：</p>
+
+<ul>
+<li>1.计算最短路时，在每个节点上用链表preList记下所有最短路径的前节点。
+完成计算后，对preList做dfs获得每条最短路径的权重值之和，比较后得到结果；</li>
+<li>2.计算最短路径时，在节点上，除了记录最短路径中前一个节点preNode之外，还对应的记录当前的最短路径上所有节点的权重值之和，
+这就不用在Dij完成之后再做dfs了，过程中已经找到了最优解。</li>
+</ul>
+
+
+<p>相比之下，方法2明显更简洁。当然，虽然方法2的思路很通用，还需要确定，这一加权的判定条件是能够迭代处理的。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1004">PAT1004</a></h2>
+
+<p>题意：计算给定的树各个层级叶子节点的个数</p>
+
+<p>分析：先构建树，鉴于题目的空间限制不严格，可以使用邻接矩阵的方式定义树结构。然后使用dfs遍历树的节点，并记录每层的叶子节点数量。
+可以看到，时间空间的trade-off不仅仅是性能上的提升，也会影响带代码实现的复杂程度。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1005">PAT1005</a></h2>
+
+<p>题意：计算一个数（&lt;=10<sup>100）的各个位数之和，并用英语按位输出。比如15输出为one</sup> five.</p>
+
+<p>分析：简单题，输出的实现上实际上就用到了Hash思想。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1006">PAT1006</a></h2>
+
+<p>题意：每个人来到实验室和离开实验室的时间都有记录。找到其中最早来实验室和最晚离开实验室的时间。</p>
+
+<p>分析：逻辑上很简单的一个题，遍历所有数据，找到其中最大和最小的值即可。稍微要处理的就是时间。
+由于input中给出的是HH:MM:SS的格式，在比较时需要将其换算为int值。实际上，使用C语言读入更方便，<code>scanf("%d:%d:%d", &amp;h, &amp;m, &amp;s);</code>
+然后计算出<code>time = 3600*h + 60*m + s</code>，时间比较就没有问题了。在最终的输出时再做对应的转换即可。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1007">PAT1007</a></h2>
+
+<p>题意：给出一组由正负整数组成的序列，求出拥有最大和的连续子序列。</p>
+
+<p>分析：最暴力的算法是两个循环的O(n<sup>2)；进一步要使用分治的思想，可以得到O(n*logn)；更好的方法可以达到O(n)，也可以将它看做分治思想。关键在于数学归纳的证明，编程实现非常简单：假定[0,</sup> n-1]的最大连续子串已经求出了，要求[0,n]的最大连续子串。</p>
+
+<ul>
+<li>1.如果[0, n-1]中最大子串不包含最右的数字，则判定<code>原最大子串的和</code>与<code>包含最右点的最大子串 + a[n]的和</code>的大小。取大的那个作为[0, n]的最大子串，并保持一个<code>包含最右点的最大子串</code>。</li>
+<li>2.如果[0, n-1]中最大子串包含最右的数字，则[0, n]的最大子串为原最大子串+a[n]。</li>
+</ul>
+
+
+<p>实际上，算法的核心是维持了两个量的记录，即当前的<code>最大子串</code>，以及当前<code>包含最右点的最大子串</code>。</p>
+
+<!--more-->
+
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1008">PAT1008</a></h2>
+
+<p>题意：给出电梯的行进路径，上下的速度和每层停留时间，计算总时间。</p>
+
+<p>分析：简单的模拟题。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1009">PAT1009</a></h2>
+
+<p>题意：求两个多项式的乘积。</p>
+
+<p>分析：参见PAT1002，使用数组存储虽然空间占用稍大，但比链表实现要便捷很多。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1010">PAT1010</a></h2>
+
+<p>题意：给定两个数，其中单个位置上的数值范围可以为[0-z]。指定其中一个数的进制，试确定是否存在可能的进制让两数的实际值相等。</p>
+
+<p>分析：此题没有交代清楚input中radix的取值范围以及对一位数有多重可能radix的情况如何输出，坑比较大。下面是需要注意的点。</p>
+
+<ul>
+<li>1.input中两个数字可以是10位数，虽然没有告诉radix的范围，但在<code>9*10^10 10 1 200</code>这个示例中，可以看到结果的radix也可以是很大的。从这个角度看，代码中将radix和两个数值都设定为longlong是合适的选择。</li>
+<li>2.在计算另一个数的radix时，简单的遍历[2, 10<sup>18]会超时。单调的区间很自然想到使用二分查找。</sup></li>
+<li>3.二分查找的上下界确定能减少耗时：下界选数字的所有位上的最大值+1；上界容易想当然的认为就是题中给定了radix的数的值。实际上，示例<code>11 b 1 10</code>就是一个反例，原因在于这个假设忽略了一位数的可能性，解决方案是在取给定radix的数值和下界中较大的那个数。</li>
+<li>4.在二分查找时，不可直接计算出某个radix下数的值，因为可能会longlong溢出。于是需要用特定的compare函数，在累加的过程中判定是否大于另一个数。算是一种剪枝。</li>
+<li>5.还有一个条件：当两个数都是1时，输出2.当两个数相等且不为1时，输出题中给出的radix。（这是从其他人的结题报告中看到的，完全不理解=。=）</li>
+</ul>
+
+
+<p>注意好这些方面，应该能ac了。保重。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[终于算完了这道『1+1』]]></title>
@@ -434,50 +548,6 @@ maxsofar = max(maxsofar, maxendingright)
 <li>数学归纳证明，对算法的设计和正确性佐证很有帮助。话说它也类似于分治的思想呢。</li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[PAT Advanced Level (1) easy problems]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/04/04/pat-advanced-level-1-easy-problems/"/>
-    <updated>2013-04-04T20:58:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/04/04/pat-advanced-level-1-easy-problems</id>
-    <content type="html"><![CDATA[<p><img class="left" src="http://visualcaffeine.com/ws/wp-content/uploads/2012/04/computer_guy.jpg" title="Place Kitten #2" ></p>
-
-<p>今天做的这批题目，总的来说几乎不需要数据结构基础。几个小时刷完。</p>
-
-<blockquote><ul>
-<li>1001: 数字的格式转换。第一次做的时候，将正负数分两种情况处理了，其实负数可以拆成正数加上一个负号。太简单的道理，竟然没注意。另外，Java完全可以使用NumberFormat实现格式转换。好简单的说。</li>
-</ul>
-</blockquote>
-
-<!-- more -->
-
-
-<blockquote><ul>
-<li><p>1002：一元多项式求导问题。有三点需要注意：1.输出中的小数精确的位数；2.浮点数操作过程中需要使用到eps做判定；<em>3.在我的实现中，主循环逻辑中，将判定游标越界的逻辑统一的提出到最外层，让代码更加简洁，利于维护。</em></p></li>
-<li><p>1005: 简单的hash。注意Java可以直接实现int转string，string转int。</p></li>
-<li><p>1006: 简单的找最大最小。用到了Java中String的split方法划分子串和Integer.parseInt()转String为int。</p></li>
-<li><p>1008: 纯水题。</p></li>
-<li><p>1009: 一元多项式相乘。基于桶排序的思想，将子项相乘的结果加到数组中去实现。第一次提交时，算错了“桶”的大小。。</p></li>
-<li><p>1011: 水题，求组最大值的问题。</p></li>
-<li><p>1027: 水题，hash求解。</p></li>
-</ul>
-</blockquote>
-
-<h2>资料</h2>
-
-<p><a href="http://pat.zju.edu.cn/contests/pat-a-practise">题目列表</a></p>
-
-<p><a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/pat/advancedlevel">我的代码</a></p>
-
-<h2>PS</h2>
-
-<p>除了这几道题，其他的题目似乎都需要树、图、DP的思想。明天开干！</p>
-
-<p>用了那么久eclipse，其实对eclipse的掌握并不好。比如他对（）和“”等的支持方式：</p>
-
-<blockquote><p><strong>只需要输入左单边括号，即可获得一个完整的括号，并定位到括号内输入内容。完成内容输入后，回车即可跳到反括号外，继续输入。同理于调用方法时参数的输入等。</strong></p></blockquote>
 ]]></content>
   </entry>
   

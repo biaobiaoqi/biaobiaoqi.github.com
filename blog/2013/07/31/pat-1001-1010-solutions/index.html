@@ -1,0 +1,422 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>PAT 1001-1010 题解 - Biaobiaoqi的博客</title>
+  <meta name="author" content="Biaobiaoqi">
+
+  
+  <meta name="description" content="PAT 1001, PAT1001,PAT 1002, PAT1002,PAT 1003, PAT1003,PAT 1004, PAT1004,PAT 1005, PAT1005,PAT 1006, PAT1006,PAT 1007, PAT1007,PAT 1008, PAT1008,PAT &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://biaobiaoqi.github.com/blog/2013/07/31/pat-1001-1010-solutions">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Biaobiaoqi的博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+	<script type="text/javascript" >
+function addBlankTargetForLinks () {
+  $('a[href^="http"]').each(function(){
+      $(this).attr('target', '_blank');
+  });
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+  addBlankTargetForLinks();
+});
+
+</script>
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F49481ec3305db999013860b0ccb3b16d' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39900036-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Biaobiaoqi的博客</a></h1>
+  
+    <h2>共享、和平、自由</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:biaobiaoqi.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="搜索"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+<!--
+  <li><a href="/blog/archives/">技术</a></li>
+-->
+  <li><a href="/blog/categories/tech/">技术</a></li>
+  <li><a href="/blog/categories/life/">生活</a></li>
+  <li><a href="/blog/categories/book/">读书</a></li>
+  <li><a href="/tag-cloud/">标签云</a></li>
+  <li><a href="/about">关于</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">PAT 1001-1010 题解</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-31T02:03:00+08:00" pubdate data-updated="true">Jul 31<span>st</span>, 2013</time>
+        
+
+
+
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>全部代码实现：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1001">PAT1001</a></h2>
+
+<p>题意：格式化输出两数之和。</p>
+
+<p>分析：理清输出逻辑即可。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1002">PAT1002</a></h2>
+
+<p>题意：给定两多项式，相加并格式化输出结果。</p>
+
+<p>分析：两种思路</p>
+
+<ul>
+<li>1.采用链表的处理方式；</li>
+<li>2.预设好 int[1005]的数组，用下标表示次方，数组中元素值表示对应系数。</li>
+</ul>
+
+
+<p>第一种方法某种程度上看能节省空间，实现上需要注意操作链表时，循环时的越界问题；
+方法二用空间换取时间，且实现上更不容易出错。同时，由于浮点数本身精确位数不够，在判定两浮点数相加是否为 0 时，
+需要对结果值取绝对值后，与 1e-6 做对比。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1003">PAT1003</a></h2>
+
+<p>题意：求两个城市之间的加权最短路径。在有多个最短路径记录的情况下，选择路径中所有节点的权重值之和最小的。</p>
+
+<p>分析：Dijkstra 算法的变型实现。两种思路：</p>
+
+<ul>
+<li>1.计算最短路时，在每个节点上用链表 preList 记下所有最短路径的前节点。
+完成计算后，对 preList 做 dfs 获得每条最短路径的权重值之和，比较后得到结果；</li>
+<li>2.计算最短路径时，在节点上，除了记录最短路径中前一个节点 preNode 之外，还对应的记录当前的最短路径上所有节点的权重值之和，
+这就不用在 Dij 完成之后再做 dfs 了，过程中已经找到了最优解。</li>
+</ul>
+
+
+<p>相比之下，方法 2 明显更简洁。当然，虽然方法 2 的思路很通用，还需要确定，这一加权的判定条件是能够迭代处理的。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1004">PAT1004</a></h2>
+
+<p>题意：计算给定的树各个层级叶子节点的个数</p>
+
+<p>分析：先构建树，鉴于题目的空间限制不严格，可以使用邻接矩阵的方式定义树结构。然后使用 dfs 遍历树的节点，并记录每层的叶子节点数量。
+可以看到，时间空间的 trade-off 不仅仅是性能上的提升，也会影响带代码实现的复杂程度。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1005">PAT1005</a></h2>
+
+<p>题意：计算一个数（&lt;=10<sup>100）的各个位数之和，并用英语按位输出。比如</sup> 15 输出为 one five.</p>
+
+<p>分析：简单题，输出的实现上实际上就用到了 Hash 思想。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1006">PAT1006</a></h2>
+
+<p>题意：每个人来到实验室和离开实验室的时间都有记录。找到其中最早来实验室和最晚离开实验室的时间。</p>
+
+<p>分析：逻辑上很简单的一个题，遍历所有数据，找到其中最大和最小的值即可。稍微要处理的就是时间。
+由于 input 中给出的是 HH:MM:SS 的格式，在比较时需要将其换算为 int 值。实际上，使用 C 语言读入更方便，<code>scanf("%d:%d:%d", &amp;h, &amp;m, &amp;s);</code>
+然后计算出<code>time = 3600*h + 60*m + s</code>，时间比较就没有问题了。在最终的输出时再做对应的转换即可。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1007">PAT1007</a></h2>
+
+<p>题意：给出一组由正负整数组成的序列，求出拥有最大和的连续子序列。</p>
+
+<p>分析：最暴力的算法是两个循环的 O(n<sup>2)；进一步要使用分治的思想，可以得到</sup> O(n*logn)；更好的方法可以达到 O(n)，也可以将它看做分治思想。关键在于数学归纳的证明，编程实现非常简单：假定 [0, n-1]的最大连续子串已经求出了，要求 [0,n]的最大连续子串。</p>
+
+<ul>
+<li>1.如果 [0, n-1]中最大子串不包含最右的数字，则判定<code>原最大子串的和</code>与<code>包含最右点的最大子串 + a[n]的和</code>的大小。取大的那个作为 [0, n]的最大子串，并保持一个<code>包含最右点的最大子串</code>。</li>
+<li>2.如果 [0, n-1]中最大子串包含最右的数字，则 [0, n]的最大子串为原最大子串+a[n]。</li>
+</ul>
+
+
+<p>实际上，算法的核心是维持了两个量的记录，即当前的<code>最大子串</code>，以及当前<code>包含最右点的最大子串</code>。</p>
+
+<!--more-->
+
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1008">PAT1008</a></h2>
+
+<p>题意：给出电梯的行进路径，上下的速度和每层停留时间，计算总时间。</p>
+
+<p>分析：简单的模拟题。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1009">PAT1009</a></h2>
+
+<p>题意：求两个多项式的乘积。</p>
+
+<p>分析：参见 PAT1002，使用数组存储虽然空间占用稍大，但比链表实现要便捷很多。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1010">PAT1010</a></h2>
+
+<p>题意：给定两个数，其中单个位置上的数值范围可以为 [0-z]。指定其中一个数的进制，试确定是否存在可能的进制让两数的实际值相等。</p>
+
+<p>分析：此题没有交代清楚 input 中 radix 的取值范围以及对一位数有多重可能 radix 的情况如何输出，坑比较大。下面是需要注意的点。</p>
+
+<ul>
+<li>1.input 中两个数字可以是 10 位数，虽然没有告诉 radix 的范围，但在<code>9*10^10 10 1 200</code>这个示例中，可以看到结果的 radix 也可以是很大的。从这个角度看，代码中将 radix 和两个数值都设定为 longlong 是合适的选择。</li>
+<li>2.在计算另一个数的 radix 时，简单的遍历 [2, 10<sup>18]会超时。单调的区间很自然想到使用二分查找。</sup></li>
+<li>3.二分查找的上下界确定能减少耗时：下界选数字的所有位上的最大值+1；上界容易想当然的认为就是题中给定了 radix 的数的值。实际上，示例<code>11 b 1 10</code>就是一个反例，原因在于这个假设忽略了一位数的可能性，解决方案是在取给定 radix 的数值和下界中较大的那个数。</li>
+<li>4.在二分查找时，不可直接计算出某个 radix 下数的值，因为可能会 longlong 溢出。于是需要用特定的 compare 函数，在累加的过程中判定是否大于另一个数。算是一种剪枝。</li>
+<li>5.还有一个条件：当两个数都是 1 时，输出 2.当两个数相等且不为 1 时，输出题中给出的 radix。（这是从其他人的结题报告中看到的，完全不理解=。=）</li>
+</ul>
+
+
+<p>注意好这些方面，应该能 ac 了。保重。</p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/07/31/pat-1001-1010-solutions/'>http://biaobiaoqi.github.com/blog/2013/07/31/pat-1001-1010-solutions/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Biaobiaoqi</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-31T02:03:00+08:00" pubdate data-updated="true">Jul 31<span>st</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+      <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+	<span class="jiathis_txt">分享到：</span>
+	<a class="jiathis_button_tsina">新浪微博</a>
+	<a class="jiathis_button_tqq">腾讯微博</a>
+	<a class="jiathis_button_renren">人人网</a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1354814218267188" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1755742" async=""></script>
+<!-- UY END -->
+
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/07/29/after-pat-practice/" title="Previous Post: 终于算完了这道『1+1』">&laquo; 终于算完了这道『1+1』</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+
+
+
+
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>标签云</h1>
+ <br /> 
+  <ul class="tag-cloud">
+    <a style="font-size: 175%" href="/tags/algorithm/">algorithm</a> &nbsp 
+<a style="font-size: 180%" href="/tags/distributed/">distributed</a> &nbsp 
+<a style="font-size: 103%" href="/tags/entrepreneurship/">entrepreneurship</a> &nbsp 
+<a style="font-size: 103%" href="/tags/gui/">gui</a> &nbsp 
+<a style="font-size: 147%" href="/tags/hadoop/">hadoop</a> &nbsp 
+<a style="font-size: 103%" href="/tags/idea/">idea</a> &nbsp 
+<a style="font-size: 136%" href="/tags/java/">java</a> &nbsp 
+<a style="font-size: 103%" href="/tags/linux/">linux</a> &nbsp 
+<a style="font-size: 147%" href="/tags/methodology/">methodology</a> &nbsp 
+<a style="font-size: 136%" href="/tags/network/">network</a> &nbsp 
+<a style="font-size: 122%" href="/tags/os/">os</a> &nbsp 
+<a style="font-size: 163%" href="/tags/pat/">pat</a> &nbsp 
+<a style="font-size: 103%" href="/tags/security/">security</a> &nbsp 
+<a style="font-size: 180%" href="/tags/think/">think</a> &nbsp 
+<a style="font-size: 103%" href="/tags/web/">web</a>
+
+  </ul>
+</section>
+<section>
+  <h1>最近发表</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/07/31/pat-1001-1010-solutions/">PAT 1001-1010 题解</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/29/after-pat-practice/">终于算完了这道『1+1』</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/19/odps-in-alibaba/">阿里离线数据处理平台2013暑期学校</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/16/verify-pop-sequence-for-stack/">出栈序列的可能性判定（PAT1051）</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/10/cc-license/">给博客签上CC协议</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>友情链接</h1>
+  <ul id="friendly_links">
+      <li class="post">
+         <a href="http://redow.cloudapp.net/">ReDow</a></ br>
+      </li>
+      <li class="post">
+         <a href="http://rickytan.me/">I'm Ricky</a></ br>
+      </li>
+      <li class="post">
+         <a href="http://nius.me/">Nius' Avalon</a></ br>
+      </li>
+      <li class="post">
+         <a href="http://linest.github.io/">Linest</a></ br>
+      </li>
+  </ul>
+</section>
+<section>
+<h2>我的社区</h2>
+<div>
+<script type="text/javascript" src="http://www.douban.com/service/badge/42071652/?show=dolist&amp;select=random&amp;n=6&amp;columns=3&amp;cat=book" ></script>
+</div>
+</section>
+
+
+
+
+  
+</aside>
+
+
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Biaobiaoqi -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

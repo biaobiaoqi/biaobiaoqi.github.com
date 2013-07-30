@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tech | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-07-30T01:54:39+08:00</updated>
+  <updated>2013-07-31T03:32:30+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -12,6 +12,120 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[PAT 1001-1010 题解]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/07/31/pat-1001-1010-solutions/"/>
+    <updated>2013-07-31T02:03:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/07/31/pat-1001-1010-solutions</id>
+    <content type="html"><![CDATA[<p>全部代码实现：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1001">PAT1001</a></h2>
+
+<p>题意：格式化输出两数之和。</p>
+
+<p>分析：理清输出逻辑即可。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1002">PAT1002</a></h2>
+
+<p>题意：给定两多项式，相加并格式化输出结果。</p>
+
+<p>分析：两种思路</p>
+
+<ul>
+<li>1.采用链表的处理方式；</li>
+<li>2.预设好int[1005]的数组，用下标表示次方，数组中元素值表示对应系数。</li>
+</ul>
+
+
+<p>第一种方法某种程度上看能节省空间，实现上需要注意操作链表时，循环时的越界问题；
+方法二用空间换取时间，且实现上更不容易出错。同时，由于浮点数本身精确位数不够，在判定两浮点数相加是否为0时，
+需要对结果值取绝对值后，与1e-6做对比。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1003">PAT1003</a></h2>
+
+<p>题意：求两个城市之间的加权最短路径。在有多个最短路径记录的情况下，选择路径中所有节点的权重值之和最小的。</p>
+
+<p>分析：Dijkstra算法的变型实现。两种思路：</p>
+
+<ul>
+<li>1.计算最短路时，在每个节点上用链表preList记下所有最短路径的前节点。
+完成计算后，对preList做dfs获得每条最短路径的权重值之和，比较后得到结果；</li>
+<li>2.计算最短路径时，在节点上，除了记录最短路径中前一个节点preNode之外，还对应的记录当前的最短路径上所有节点的权重值之和，
+这就不用在Dij完成之后再做dfs了，过程中已经找到了最优解。</li>
+</ul>
+
+
+<p>相比之下，方法2明显更简洁。当然，虽然方法2的思路很通用，还需要确定，这一加权的判定条件是能够迭代处理的。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1004">PAT1004</a></h2>
+
+<p>题意：计算给定的树各个层级叶子节点的个数</p>
+
+<p>分析：先构建树，鉴于题目的空间限制不严格，可以使用邻接矩阵的方式定义树结构。然后使用dfs遍历树的节点，并记录每层的叶子节点数量。
+可以看到，时间空间的trade-off不仅仅是性能上的提升，也会影响带代码实现的复杂程度。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1005">PAT1005</a></h2>
+
+<p>题意：计算一个数（&lt;=10<sup>100）的各个位数之和，并用英语按位输出。比如15输出为one</sup> five.</p>
+
+<p>分析：简单题，输出的实现上实际上就用到了Hash思想。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1006">PAT1006</a></h2>
+
+<p>题意：每个人来到实验室和离开实验室的时间都有记录。找到其中最早来实验室和最晚离开实验室的时间。</p>
+
+<p>分析：逻辑上很简单的一个题，遍历所有数据，找到其中最大和最小的值即可。稍微要处理的就是时间。
+由于input中给出的是HH:MM:SS的格式，在比较时需要将其换算为int值。实际上，使用C语言读入更方便，<code>scanf("%d:%d:%d", &amp;h, &amp;m, &amp;s);</code>
+然后计算出<code>time = 3600*h + 60*m + s</code>，时间比较就没有问题了。在最终的输出时再做对应的转换即可。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1007">PAT1007</a></h2>
+
+<p>题意：给出一组由正负整数组成的序列，求出拥有最大和的连续子序列。</p>
+
+<p>分析：最暴力的算法是两个循环的O(n<sup>2)；进一步要使用分治的思想，可以得到O(n*logn)；更好的方法可以达到O(n)，也可以将它看做分治思想。关键在于数学归纳的证明，编程实现非常简单：假定[0,</sup> n-1]的最大连续子串已经求出了，要求[0,n]的最大连续子串。</p>
+
+<ul>
+<li>1.如果[0, n-1]中最大子串不包含最右的数字，则判定<code>原最大子串的和</code>与<code>包含最右点的最大子串 + a[n]的和</code>的大小。取大的那个作为[0, n]的最大子串，并保持一个<code>包含最右点的最大子串</code>。</li>
+<li>2.如果[0, n-1]中最大子串包含最右的数字，则[0, n]的最大子串为原最大子串+a[n]。</li>
+</ul>
+
+
+<p>实际上，算法的核心是维持了两个量的记录，即当前的<code>最大子串</code>，以及当前<code>包含最右点的最大子串</code>。</p>
+
+<!--more-->
+
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1008">PAT1008</a></h2>
+
+<p>题意：给出电梯的行进路径，上下的速度和每层停留时间，计算总时间。</p>
+
+<p>分析：简单的模拟题。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1009">PAT1009</a></h2>
+
+<p>题意：求两个多项式的乘积。</p>
+
+<p>分析：参见PAT1002，使用数组存储虽然空间占用稍大，但比链表实现要便捷很多。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1010">PAT1010</a></h2>
+
+<p>题意：给定两个数，其中单个位置上的数值范围可以为[0-z]。指定其中一个数的进制，试确定是否存在可能的进制让两数的实际值相等。</p>
+
+<p>分析：此题没有交代清楚input中radix的取值范围以及对一位数有多重可能radix的情况如何输出，坑比较大。下面是需要注意的点。</p>
+
+<ul>
+<li>1.input中两个数字可以是10位数，虽然没有告诉radix的范围，但在<code>9*10^10 10 1 200</code>这个示例中，可以看到结果的radix也可以是很大的。从这个角度看，代码中将radix和两个数值都设定为longlong是合适的选择。</li>
+<li>2.在计算另一个数的radix时，简单的遍历[2, 10<sup>18]会超时。单调的区间很自然想到使用二分查找。</sup></li>
+<li>3.二分查找的上下界确定能减少耗时：下界选数字的所有位上的最大值+1；上界容易想当然的认为就是题中给定了radix的数的值。实际上，示例<code>11 b 1 10</code>就是一个反例，原因在于这个假设忽略了一位数的可能性，解决方案是在取给定radix的数值和下界中较大的那个数。</li>
+<li>4.在二分查找时，不可直接计算出某个radix下数的值，因为可能会longlong溢出。于是需要用特定的compare函数，在累加的过程中判定是否大于另一个数。算是一种剪枝。</li>
+<li>5.还有一个条件：当两个数都是1时，输出2.当两个数相等且不为1时，输出题中给出的radix。（这是从其他人的结题报告中看到的，完全不理解=。=）</li>
+</ul>
+
+
+<p>注意好这些方面，应该能ac了。保重。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[阿里离线数据处理平台2013暑期学校]]></title>
@@ -475,111 +589,6 @@ post.content + %Q[<p class='post-footer'></p>
 <h2>Tips</h2>
 
 <p>既然是个博客站点，就算是web产品啦，可以考虑下SEO。推荐博文<a href="http://codemacro.com/2012/09/06/octopress-seo/">《Octopress中的SEO》</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[给女朋友的礼物]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/06/11/gift-to-girl-friend/"/>
-    <updated>2013-06-11T17:12:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/06/11/gift-to-girl-friend</id>
-    <content type="html"><![CDATA[<h2>背景</h2>
-
-<p>一个月前发现了<a href="http://v2ex.com">V2EX</a>这个网站，用创始人<a href="http://www.v2ex.com/member/Livid">Livid</a>的话来说，『这是一个主要关于做事儿的地方』。确实如此，我在这里收获了很多想法和灵感。</p>
-
-<p>本文所记的，也是得益于某天的对<a href="http://www.v2ex.com/t/69145">某个主题</a>的浏览。帖子中，大家分享了很多给女朋友做的网页，说『技术宅改变世界』太过了，但拥有这样一个礼物，确实是一种属于程序员的快乐和程序员的女友的幸福。</p>
-
-<p>快到我跟我妹子恋爱四周年的日子了，也正逢她本科毕业，无论如何都是个有趣的时间点。受了那个帖子的刺激，我也筹划着给女朋友做一个小网页，以示纪念。</p>
-
-<p>遗憾的是，我自己从来没有写过网页，javascript和css只知道概念，html也只是知道一些简单的标签，这些可是完成一个小网页所必备的技能呢。技术能力直接阻碍了创造性成果出现的可能:(。于是，解决方案只能是搜集开源代码，然后自己做定制了。实际上，最后的产出，也就是三份代码的拼接。</p>
-
-<h2>资料搜集</h2>
-
-<p>通过各方搜寻，我找到了如下几个网页：</p>
-
-<ul>
-<li>1.<a href="http://love.hackerzhou.me/">复旦的学长hackzhou的爱心动画</a>，<a href="https://github.com/hackerzhou/Love">github托管代码</a>。</li>
-</ul>
-
-
-<p>网页用到了html5的一些特性实现了动态的心形花的绘制和类似程序代码敲击的文字呈现形式。由于内容仅仅是文字的，可定制性强。如下图：
-<img src="https://dl.dropboxusercontent.com/u/64021093/Pics/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202013-06-11%20%E4%B8%8B%E5%8D%888.12.01.png" title="hackerzhou's page" alt="hackerzhou's love project" /></p>
-
-<ul>
-<li>2.<a href="http://carfieldloverita.sinaapp.com/">一对异国情侣的Google地图应用</a>，<a href="https://github.com/wong2/lovegift">github托管代码</a>。</li>
-</ul>
-
-
-<p>网页调用了Google地图的API，可以定义聚焦的地理位置和坐标尺，显示照片，像日记一样记录了点点滴滴，有背景音乐。最后还以地点输入框的形式做了表白。很有创意！
-<img src="https://dl.dropboxusercontent.com/u/64021093/Pics/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202013-06-11%20%E4%B8%8B%E5%8D%888.12.18.png" title="Googlemap app" alt="Google map app" /></p>
-
-<ul>
-<li>3.<a href="http://liumeijun.com/">v2ex上某童鞋基于百度地图的应用</a>。</li>
-</ul>
-
-
-<p>跟2类似，调用了百度API，配上『Lemon tree』的背景音乐，很有调调！
-<img src="https://dl.dropboxusercontent.com/u/64021093/Pics/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202013-06-11%20%E4%B8%8B%E5%8D%888.16.00.png" title="baidumap app" alt="baidumap app" /></p>
-
-<h2>定制计划</h2>
-
-<p>限于没有前端的基础，开发效率会很低，只能硬顶着拿着前面的三个项目做混搭了。其中项目1和2都有在github上开源代码，而3则在v2ex的帖子里被作者授权直接查源码使用了。</p>
-
-<p>我做了简单的混搭修改计划：</p>
-
-<ul>
-<li>1.以hackzhou的项目为基础，修改文字内容和基本布局。</li>
-<li>2.添加加载等待过程，加载背景音乐。</li>
-<li>3.加载完成后，出现开始按钮，按开始按钮播放背景音乐，进入动画效果。</li>
-<li>4.增加全屏效果。</li>
-</ul>
-
-
-<h2>实施</h2>
-
-<h5>1.项目启动</h5>
-
-<p>我在github上fork了<a href="https://github.com/hackerzhou/Love">hackerzhou的代码</a>。(<a href="https://github.com/biaobiaoqi/Love">我fork的版本</a>)</p>
-
-<p>clone到本地，尝试阅读js代码，尝试做小改动，找到动画开始的调用。</p>
-
-<h5>2.尝试添加背景音乐</h5>
-
-<p>网上查资料，找到了<code>&lt;embeded&gt;</code>可以用来添加背景音乐，测试成功。但这个音乐播放无法支持同步的加载，不可控，在网络环境差的情况下，如果没有配乐动画过程会缺少表现力。放弃这种方案。</p>
-
-<p>在<a href="http://liumeijun.com/">v2ex上某童鞋基于百度地图的应用</a>源码中找到了一个第三方音乐播放库：<a href="http://www.schillmania.com/projects/soundmanager2/">soundmanager2</a>。查看官方文档，确认能满足项目需求，于是加入到代码中。</p>
-
-<p>为了让页面展现更加顺畅，需要音乐文件越小越好。我尝试了MIDI格式，但是很多浏览器并不支持，作罢。而soundmanager似乎对wma的支持有问题，于是只剩下mp3文件。我选择了JJ的『小酒窝』做背景音乐，在mac下使用ocenaudio将原来3MB的mp3文件截取了前一半，并导出为不同设定采样率的版本，经过测试，发现56kb采样率下，音质没有受到大的影响，且大小也足够小了，于是确定用这种格式的mp3。最终MP3文件的大小为500KB！</p>
-
-<h5>3.加载逻辑和开始按键</h5>
-
-<p>需求：加载过程需要隐藏前景内容，在音乐加载完成后，显示开始按钮，开始按钮能触发动画效果。</p>
-
-<p>通过Google找到了使用js隐藏和显示内容的方式</p>
-
-<p>```</p>
-
-<pre><code>document.getElementById('hint').style.display = "none"; //hide hint
-document.getElementById('start_btn').style.display = ""; //show start button
-</code></pre>
-
-<p>```</p>
-
-<p>虽然不是特别理解js引擎的单线程运作机制，但经过简单的试错、调试后，就完成了加载等待和开始按钮触发的原型。</p>
-
-<p>之后是对按钮和加载提示配置css。由于懒得理解css的一些细节，直接使用了<a href="https://github.com/wong2/lovegift">这份项目</a>中的css代码。</p>
-
-<h5>4.部署</h5>
-
-<p>github为每个项目提供了静态网页展示的功能，应付这个项目的网页展示完全够了。具体操作流程参见<a href="http://www.worldhello.net/gotgithub/03-project-hosting/050-homepage.html#project-homepage">《GotGithub》3.5.2. 创建项目主页</a>。实际上，链接中介绍的几种创造干净的gh-pages分支的方法，在这个项目的发布里是不必的。因为项目主页的展示代码跟master分支里的代码本身就是一样的，那么需要做的就只是开启gh-pages分支，并提交代码了。</p>
-
-<p>项目成果：<a href="http://biaobiaoqi.me/Love">请戳这里</a></p>
-
-<h2>结语</h2>
-
-<p>感谢v2ex，感谢hackerzhou、loo2k和wong2童鞋，我参考了你们很多代码。</p>
-
-<p>创造力需要靠技术手段实现。混迹在互联网上，没有自己建站的能力实在是很苦逼的一件事情。之后自己准备花些时间在RoR上。积累技术实力，努力做出好产品;)</p>
 ]]></content>
   </entry>
   
