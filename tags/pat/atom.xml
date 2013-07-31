@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: pat | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/tags/pat/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-07-31T03:32:30+08:00</updated>
+  <updated>2013-08-01T01:21:23+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -14,23 +14,208 @@
 
   
   <entry>
+    <title type="html"><![CDATA[PAT 1011-1020 题解]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/07/31/pat-1011-1020-solutions/"/>
+    <updated>2013-07-31T23:41:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/07/31/pat-1011-1020-solutions</id>
+    <content type="html"><![CDATA[<p>早期部分代码用Java实现。由于PAT虽然支持各种语言，但只有C/C++标程来限定时间，许多题目用Java读入数据就已经超时，后来转投C/C++。浏览全部代码：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
+
+<p>本文谨代表个人思路，欢迎讨论;)</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/10111">PAT1011</a></h2>
+
+<h5>题意</h5>
+
+<p>给定一个3*3的矩阵，找到每行的最大值，格式化输出一个运算结果。</p>
+
+<h5>分析</h5>
+
+<p>非常简单的模拟题。</p>
+
+<!--more-->
+
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/10012">PAT1012</a></h2>
+
+<h5>题意</h5>
+
+<p>给定学生的学号和三个科目的分数，查询输出对应学生单门科目排名和总分排名中最高的那个排名。</p>
+
+<h5>分析</h5>
+
+<p>C里stdlib.h中的qsort()和C++里algorithm中的sort()函数都能实现快排，应对编程题中的排序一般比自己手写的要快。
+分别为三个单科和总分做排序，并将rank值记录到map结构中去，便于之后的查找。</p>
+
+<p>需要注意并列排名的情况。比如<code>1 2 2 4</code>，由于并列第2的都两人，那之后的那个人就是第4而不是第3了。</p>
+
+<p>另外，由于有多个需要分别排序、排名的项，抽象出公共逻辑到一个函数里比较必要，否则代码分散难于debug和维护。
+这里稍微特殊点的用法是使用了<a href="http://blog.csdn.net/dyx1024/article/details/7562786">函数指针</a>做参数。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1013">PAT1013</a></h2>
+
+<h5>题意</h5>
+
+<p>给定一张图和指定几个点。针对给出的每个点，要求计算在图中除掉连接该点的路径的情况下，保证整个图连通需要添加几条边。</p>
+
+<h5>分析</h5>
+
+<p>计算保证整个图连通需要几个点，亦即求出图中有几个连通分量。两种思路：</p>
+
+<ul>
+<li>1.并查集</li>
+<li>2.DFS</li>
+</ul>
+
+
+<p>针对每个点，执行算法的过程中，需要注意去除掉改点对应的所有通路。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1014">PAT1014</a></h2>
+
+<h5>题意</h5>
+
+<p>这道题是排队模拟题。银行有N个窗口，每个窗口允许排队M个人，如果N个窗口占满了排队的人，更多的人需要在黄线外等待。
+每个人都会选择尽可能人少的窗口排队，如果有多个窗口等待队列一样长，则选择编号小的窗口。
+前N个用户设定在8:00开始接受服务。给定了K个用户所需要接受服务的时间长度，要求在这个排队模型下，每个人的完成处理的时间点。</p>
+
+<h5>分析</h5>
+
+<p>相对另外几个队列模拟题，这个题是很简单的。没有达到时间的差异，只需要不断的从等待队列中取出人员即可。
+当然，由于黄线内等待的每个窗口都有M人，所以必须单独的模拟每个窗口。
+可以使用queue模拟每个窗口，循环遍历下次离开窗口的人，继而从等待队列中补上。
+需要注意结束条件，如果17:00以后还没有开始接受服务，则不用再等待。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1015">PAT1015</a></h2>
+
+<h5>题意</h5>
+
+<p>Reversible Primes是指在某个进制下，一个数本身和它翻转过来形成的新数都是素数。
+题中给出多组数据，以负数结尾程序。每组数据包含一个数以及一个进制数。判定该数是否是Reversible Primes.</p>
+
+<h5>分析</h5>
+
+<p>两个功能点实现：判定素数和特定进制下的数据倒转。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1016">PAT1016</a></h2>
+
+<h5>题意</h5>
+
+<p>给出一天中每个不同的小时内的电话付费标准，给出一份分为打出和挂断两种记录的通话记录，包括记录发生的时刻和用户名字，
+要求整理出当月有效用户的账单，输出格式中需要输出所有的通话记录，包括开始时刻和结束时刻，每次通话的话费以及总计的话费。</p>
+
+<h5>分析</h5>
+
+<p>模拟题。首先对输入的通话记录按照先姓名后时间做qsort()排序，然后遍历排序后的记录，找到合适的匹配对，计算每次通话的时间，并进行统计和输出。</p>
+
+<p>实现的难点主要有两个：</p>
+
+<ul>
+<li>1.在排序后的记录中，找到合适的配对。如果某人的通话记录为<code>1.on;2.on;3.off;</code>，则其中<code>1.on</code>将被抛弃，匹配到<code>2.on;3.off;</code>。
+题中仅仅保证了所有记录中至少有一对有效记录，但并没有保证每个人都有有效通话记录，所以还需要做好过滤，
+如果某人没有有效通话记录，则不输出。整体的控制流程需要谨慎。</li>
+<li>2.由于不同时刻的话费不一样，计算一次有效通话的话费比较复杂。可以采用的方式是用起始时刻分阶段追赶结束时刻。追赶的过程分阶段，也就能计算好不同阶段的开销，
+先将起始时间调整到跟结束时间为同一天，细节是先让分钟达到0，再让小时迭代到0，天进位，一直迭代到跟结束时间同天；再让起始时刻的小时数追平
+结束时刻；最后让分钟追平。以此计算出最终话费。</li>
+</ul>
+
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1017">PAT1017</a></h2>
+
+<h5>题意</h5>
+
+<p>银行有K个窗口，所有到达银行的人都应该在黄线外等待，直到有窗口空余。
+每个窗口对单个客人最多服务时间为1小时。N个用户的到达时间和需要处理的时间给出。
+8:00到17:00接受服务，逾期不服务，也不计入统计数据。要求格式化输出用户的平均等待时间。</p>
+
+<h5>分析</h5>
+
+<p>又一道排队模拟题。相比PAT1014，此题更复杂在于用户的到达时间是不确定的。
+首先使用qsort()按照到达时间对所有人排序。由于每个窗口同时只有一个人在处理，所以窗口之间没有差异，可以用priority_queue建立一个队列，
+模拟所有K个窗口。
+优先队列将结束时间最早的人放到队列的顶端，每次循环处理一个人的结束。然后步入一个黄线外等待的人。如果那个时刻，下一个人还没有达到，则可以将该人开始执行的时间记录为他的到达时间，并加入队列中。
+还有一点需要注意的：HH:MM:SS的时间格式，可以转换为累积秒数的时间，方便计算比较。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1018">PAT10108</a></h2>
+
+<h5>题意</h5>
+
+<p>以杭州的公用自行车站点管理为背景。每个站点是一个节点，每个节点上最多停放Cmax辆自行车，Cmax/2为节点的最佳状态。不同节点间距离不同，整个构成了一张带权无向图。要求从起始点（公用自行车管理中心）出发，去目的地维护目的地节点的车辆状态，如果车辆低于Cmax/2，则给它添加车辆到Cmax/2辆，如果多于Cmax/2，则去除掉几辆车。同时，在去往目的地的过程中，也需要调整所有沿途站点的车辆（这里题目没有交代清楚，实际测试是只能在去往目的地的途中调整，回来的途上不可调整）。求到给定目的地的最短路径，如果有多条最短路径，则按照1.从管理中心送出的车辆越少越好；2.拿回到管理中心的车越少越好的优先级找到结果。</p>
+
+<h5>分析</h5>
+
+<p>题目的大体框架是有权最短路径问题。步骤如下：</p>
+
+<ul>
+<li>1.使用Dijkstra找到最短路径，其中注意记录每个节点在最短路径中的【所有】前驱节点；</li>
+<li>2.使用DFS的方法，得到所有的最短路径。</li>
+<li>3.计算每条最短路径的带出和带回的车辆数量。</li>
+</ul>
+
+
+<p>其中DFS时，归纳所有答案的过程比较通用，需要掌握。</p>
+
+<p>另外值得注意的是，类比到PAT1003，该题采用了直接对每个节点增加状态记录的方式，直接得到最优解，而不是先找到最短路径，然后计算比较。本题是无法用这种方法实现的，需要送出和带回的自行车数量无法直接在Dij算法中每个节点的计算中体现，并不是前面的节点带回和送出的车辆越少，后面的节点就一定能得到更优解。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1019">PAT1019</a></h2>
+
+<h5>题意</h5>
+
+<p>给定一个十进制数和一个进制，要求计算出在给定进制下的表达并判定是否为回文。</p>
+
+<h5>分析</h5>
+
+<p>简单的数字处理。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1020">PAT1020</a></h2>
+
+<h5>题意</h5>
+
+<p>根据二叉树的后序遍历和中序遍历，求层序遍历。</p>
+
+<h5>分析</h5>
+
+<p>具体实现方式：</p>
+
+<ul>
+<li>初始：用后序遍历序列确定根节点，在中序遍历序列中找到该根节点，则左右子树分别为中序中该节点左右的序列。</li>
+<li>迭代：对各个子树分别执行三步操作，1.在后序序列中找子树的根节点；2。在中序序列中找子树的根节点，并划分开根节点的左右子树；3.根据新生成的左右子树，在后序序列中划分开这些节点，从而得到了两颗子树的后序、中序序列。</li>
+</ul>
+
+
+<p>有一个结论：中序遍历配合另外任何一个遍历，能重建二叉树。其他的任意两个序列的组合都不能唯一的确定重建的二叉树。具体分析参见博文<a href="../../../../2013/04/27/pat1020-pat1043-rebuild-binary-tree/">《根据前中后序和层序重建二叉树(PAT1020、PAT1043)》</a>。</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[PAT 1001-1010 题解]]></title>
     <link href="http://biaobiaoqi.github.com/blog/2013/07/31/pat-1001-1010-solutions/"/>
     <updated>2013-07-31T02:03:00+08:00</updated>
     <id>http://biaobiaoqi.github.com/blog/2013/07/31/pat-1001-1010-solutions</id>
-    <content type="html"><![CDATA[<p>全部代码实现：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
+    <content type="html"><![CDATA[<p>早期部分代码用Java实现。由于PAT虽然支持各种语言，但只有C/C++标程来限定时间，许多题目用Java读入数据就已经超时，后来转投C/C++。浏览全部代码：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
+
+<p>本文谨代表个人思路，欢迎讨论;)</p>
 
 <h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1001">PAT1001</a></h2>
 
-<p>题意：格式化输出两数之和。</p>
+<h5>题意</h5>
 
-<p>分析：理清输出逻辑即可。</p>
+<p>格式化输出两数之和。</p>
+
+<h5>分析</h5>
+
+<p>理清输出逻辑即可。</p>
+
+<!--more-->
+
 
 <h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1002">PAT1002</a></h2>
 
-<p>题意：给定两多项式，相加并格式化输出结果。</p>
+<h5>题意</h5>
 
-<p>分析：两种思路</p>
+<p>给定两多项式，相加并格式化输出结果。</p>
+
+<h5>分析</h5>
+
+<p>两种思路</p>
 
 <ul>
 <li>1.采用链表的处理方式；</li>
@@ -44,9 +229,13 @@
 
 <h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1003">PAT1003</a></h2>
 
-<p>题意：求两个城市之间的加权最短路径。在有多个最短路径记录的情况下，选择路径中所有节点的权重值之和最小的。</p>
+<h5>题意</h5>
 
-<p>分析：Dijkstra算法的变型实现。两种思路：</p>
+<p>求两个城市之间的加权最短路径。在有多个最短路径记录的情况下，选择路径中所有节点的权重值之和最小的。</p>
+
+<h5>分析</h5>
+
+<p>Dijkstra算法的变型实现。两种思路：</p>
 
 <ul>
 <li>1.计算最短路时，在每个节点上用链表preList记下所有最短路径的前节点。
@@ -60,30 +249,47 @@
 
 <h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1004">PAT1004</a></h2>
 
-<p>题意：计算给定的树各个层级叶子节点的个数</p>
+<h5>题意</h5>
 
-<p>分析：先构建树，鉴于题目的空间限制不严格，可以使用邻接矩阵的方式定义树结构。然后使用dfs遍历树的节点，并记录每层的叶子节点数量。
+<p>计算给定的树各个层级叶子节点的个数</p>
+
+<h5>分析</h5>
+
+<p>先构建树，鉴于题目的空间限制不严格，可以使用邻接矩阵的方式定义树结构。然后使用dfs遍历树的节点，并记录每层的叶子节点数量。
 可以看到，时间空间的trade-off不仅仅是性能上的提升，也会影响带代码实现的复杂程度。</p>
 
 <h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1005">PAT1005</a></h2>
 
-<p>题意：计算一个数（&lt;=10<sup>100）的各个位数之和，并用英语按位输出。比如15输出为one</sup> five.</p>
+<h5>题意</h5>
 
-<p>分析：简单题，输出的实现上实际上就用到了Hash思想。</p>
+<p>计算一个数（&lt;=10<sup>100）的各个位数之和，并用英语按位输出。比如15输出为one</sup> five.</p>
+
+<h5>分析</h5>
+
+<p>简单题，输出的实现上实际上就用到了Hash思想。</p>
 
 <h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1006">PAT1006</a></h2>
 
-<p>题意：每个人来到实验室和离开实验室的时间都有记录。找到其中最早来实验室和最晚离开实验室的时间。</p>
+<h5>题意</h5>
 
-<p>分析：逻辑上很简单的一个题，遍历所有数据，找到其中最大和最小的值即可。稍微要处理的就是时间。
+<p>每个人来到实验室和离开实验室的时间都有记录。找到其中最早来实验室和最晚离开实验室的时间。</p>
+
+<h5>分析</h5>
+
+<p>逻辑上很简单的一个题，遍历所有数据，找到其中最大和最小的值即可。稍微要处理的就是时间。
 由于input中给出的是HH:MM:SS的格式，在比较时需要将其换算为int值。实际上，使用C语言读入更方便，<code>scanf("%d:%d:%d", &amp;h, &amp;m, &amp;s);</code>
-然后计算出<code>time = 3600*h + 60*m + s</code>，时间比较就没有问题了。在最终的输出时再做对应的转换即可。</p>
+然后计算出<code>time = 3600*h + 60*m + s</code>，时间比较就没有问题了。在最终的输出时再做对应的转换即可。
+而在Java语言中，使用到了String的split方法划分子串和Integer.parseInt()转String为int。</p>
 
 <h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1007">PAT1007</a></h2>
 
-<p>题意：给出一组由正负整数组成的序列，求出拥有最大和的连续子序列。</p>
+<h5>题意</h5>
 
-<p>分析：最暴力的算法是两个循环的O(n<sup>2)；进一步要使用分治的思想，可以得到O(n*logn)；更好的方法可以达到O(n)，也可以将它看做分治思想。关键在于数学归纳的证明，编程实现非常简单：假定[0,</sup> n-1]的最大连续子串已经求出了，要求[0,n]的最大连续子串。</p>
+<p>给出一组由正负整数组成的序列，求出拥有最大和的连续子序列。</p>
+
+<h5>分析</h5>
+
+<p>最暴力的算法是两个循环的O(n<sup>2)；进一步要使用分治的思想，可以得到O(n*logn)；更好的方法可以达到O(n)，也可以将它看做分治思想。关键在于数学归纳的证明，编程实现非常简单：假定[0,</sup> n-1]的最大连续子串已经求出了，要求[0,n]的最大连续子串。</p>
 
 <ul>
 <li>1.如果[0, n-1]中最大子串不包含最右的数字，则判定<code>原最大子串的和</code>与<code>包含最右点的最大子串 + a[n]的和</code>的大小。取大的那个作为[0, n]的最大子串，并保持一个<code>包含最右点的最大子串</code>。</li>
@@ -93,26 +299,38 @@
 
 <p>实际上，算法的核心是维持了两个量的记录，即当前的<code>最大子串</code>，以及当前<code>包含最右点的最大子串</code>。</p>
 
-<!--more-->
-
+<p>更多讨论参见博文<a href="../../../../2013/04/05/maximum-subsequence-sum/">《分治、时间空间的权衡:最大合的连续字串问题 (PAT 1007)
+》</a></p>
 
 <h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1008">PAT1008</a></h2>
 
-<p>题意：给出电梯的行进路径，上下的速度和每层停留时间，计算总时间。</p>
+<h5>题意</h5>
 
-<p>分析：简单的模拟题。</p>
+<p>给出电梯的行进路径，上下的速度和每层停留时间，计算总时间。</p>
+
+<h5>分析</h5>
+
+<p>简单的模拟题。</p>
 
 <h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1009">PAT1009</a></h2>
 
-<p>题意：求两个多项式的乘积。</p>
+<h5>题意</h5>
 
-<p>分析：参见PAT1002，使用数组存储虽然空间占用稍大，但比链表实现要便捷很多。</p>
+<p>求两个多项式的乘积。</p>
+
+<h5>分析</h5>
+
+<p>参见PAT1002，使用数组存储虽然空间占用稍大，但比链表实现要便捷很多。</p>
 
 <h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1010">PAT1010</a></h2>
 
-<p>题意：给定两个数，其中单个位置上的数值范围可以为[0-z]。指定其中一个数的进制，试确定是否存在可能的进制让两数的实际值相等。</p>
+<h5>题意</h5>
 
-<p>分析：此题没有交代清楚input中radix的取值范围以及对一位数有多重可能radix的情况如何输出，坑比较大。下面是需要注意的点。</p>
+<p>给定两个数，其中单个位置上的数值范围可以为[0-z]。指定其中一个数的进制，试确定是否存在可能的进制让两数的实际值相等。</p>
+
+<h5>分析</h5>
+
+<p>此题没有交代清楚input中radix的取值范围以及对一位数有多重可能radix的情况如何输出，坑比较大。下面是需要注意的点。</p>
 
 <ul>
 <li>1.input中两个数字可以是10位数，虽然没有告诉radix的范围，但在<code>9*10^10 10 1 200</code>这个示例中，可以看到结果的radix也可以是很大的。从这个角度看，代码中将radix和两个数值都设定为longlong是合适的选择。</li>
@@ -370,7 +588,7 @@ while(k --) {
 
 <ul>
 <li><p>1.有了中序和后序，就能重建树。</p></li>
-<li><p>2.最后的输出是前序遍历。过程中其实并不用构建整个树。直接在处理过程中，按前序的方式存储节点到队列中即可。</p></li>
+<li><p>2.最后的输出是层序遍历。过程中其实并不用构建整个树。直接在处理过程中，按层序的方式存储节点到队列中即可。</p></li>
 </ul>
 
 
@@ -414,138 +632,6 @@ postorder: B, A</p>
 
 <ul>
 <li>中序遍历配合另外任何一个遍历，能重建二叉树。其他的任意两个序列的组合都不能唯一的确定重建的二叉树。</li>
-</ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[分治、时间空间的权衡:最大合的连续字串问题 (PAT 1007)]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/04/05/maximum-subsequence-sum/"/>
-    <updated>2013-04-05T20:16:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/04/05/maximum-subsequence-sum</id>
-    <content type="html"><![CDATA[<p><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1007">PAT1007</a>：给定一个整数串，找出连续子串中合最大的子串。</p>
-
-<p>《编程珠玑》中用专门的一章对这个问题进行了讲解。（《编程珠玑（第2版）》P73 第8章 算法设计技术）</p>
-
-<p>第一次在PAT上遇到这个题目时，我的思路如下：</p>
-
-<p><del>最简单的淡然是一个三层循环咯，O(n3)，肯定会超时。节省时间的话，用动态规划吧。但简单的动态规划，显然是会超出内存限制的。有没有更巧妙的子问题划分方法呢？</del>先找到子问题：因为要求的串必须连续，分治的时候需要考虑如何延续这个连续性，那么每个子问题中就得考虑找出三个串：1.即左端连续的最大串，2.右端连续的最大串，3.整个串中的最大串.<del>由于每个问题都有三个量要维护，难道我得造出三个表来？卡主:(</del></p>
-
-<!--more-->
-
-
-<p>《编程珠玑》列出了性能上依次递进的四个算法。这里我结合个人理解和感悟做一些阐释。</p>
-
-<ul>
-<li>1.粗暴的brute forse。三层循环嵌套，据说当n 为100000的时候，就需要运行15天时间=.=</li>
-</ul>
-
-
-<p>```
-maxsofar = 0
-for i = 0 [0, n)</p>
-
-<pre><code>for j = [i, n)
-    sum = 0;
-    for k = [i, j]
-     sum += x[k]
-     /*sum is sum of x[i..j]*/
-     maxsofar = max(maxsofar, sum)
-</code></pre>
-
-<p>```</p>
-
-<ul>
-<li>2.针对第一个算法做出了优化。利用零时变量保存状态，避免了过多的重复操作，即所谓的<strong>memoization思想</strong>。时间复杂度下降到O(n*logn)。不过这份代码在PAT的OJ上仍然会超时。</li>
-</ul>
-
-
-<p>```
-maxsofar = 0;
-for i = [0, n)</p>
-
-<pre><code>sum = 0;
-for j = [i, n)
-    sum += x[j]
-    /* sum is sum of x[i..j]*/
-    max sofar = max(maxsofar, sum)
-</code></pre>
-
-<p>```</p>
-
-<p>相比之下，动态规划的策略也是有memoization的思想在的，不过，在这里用DP将会创建一张很大的表。。。超出内存限定。</p>
-
-<ul>
-<li><p>3.分治算法</p>
-
-<p>  其实之前我自己在思考DP更好的子问题划分时，已经考虑到了这种分治策略。但它的实现，<strong>并非需要DP支持</strong>。</p>
-
-<p>  divide：将串平均分为两段，如下代码第6行。分别处理两个子串，并拼接计算。</p>
-
-<p>  conquer： 计算1.自身包含左端的最大子串；2.包含右端的最大子串；（这两个子串用于与其他子串拼接）；3.自身的最大子串。</p></li>
-</ul>
-
-
-<p>```
-float maxsum3(l, u)</p>
-
-<pre><code>if (l &gt; u) /* zero elements*/
-    return 0
-if (l == u) /* one element*/
-    return max (0, x[l]);
-m = (1 + u) / 2
-
-/* find max crossing to left */
-lmax = sum = 0
-for (i = m; i &gt;= 1; i--)
-    sum += x[i]
-lmax = max(lmax, sum)
-
-/* find max croosing to right */
-rmax = sum = 0;
-for i = (m, u]
-    sum += x[i]
-rmax = max(rmax, sum)
-
-return max(lmax+rmax, maxsum3(l, m), maxsum3(m+1, u))   
-</code></pre>
-
-<p>```</p>
-
-<ul>
-<li><p>4.扫描算法</p>
-
-<p>  类似于<strong>数学归纳法</strong>的思想。从串的最左端开始扫描。对于子串[0, k],其最大子串要么存在于[0, k-1]中而不包含[k]，称其为maxsofar，要么包含[k]，称其maxendingright。</p>
-
-<p>  maxsofar和maxendingright是可能重合的。maxendingright的作用在于对[0,k+1]的子串而言，新的元素[k+1]可以与之结合，从而产生可能的新的子串。</p>
-
-<p>  如果[k+1]本身就是负数呢？不要紧，将[k+1]加入到maxendingright的过程本身就是试错以产生可能的过程。当maxendingright降到0以下时，放弃掉这一子串就好了，因为无论如何扩张，它都是会拖后退的。别忘了，我们还维护着maxsofar，它记录最大的子串。有点绕，但是可以严格的证明算法的正确性。</p>
-
-<p>  伪代码如下：</p></li>
-</ul>
-
-
-<p>```
-maxsofa = 0
-maxendingright = 0
-for i = [0, n)</p>
-
-<pre><code>/* invariant: maxendingright and maxsofar are accurate for x[0..i-1]*/
-maxendingright = max(maxendingright + x[i], 0)
-maxsofar = max(maxsofar, maxendingright)
-</code></pre>
-
-<p>```</p>
-
-<p>根据这个思路，写出<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/pat/advancedlevel/APAT1007.java">代码</a>，一遍AC:)</p>
-
-<h2>总结：</h2>
-
-<ul>
-<li>保存状态，避免重复计算：在算法整体框架没有大的优化的情况下，时间和空间的trade-off或许会有奇效。memoization本身就是一种用空间换时间的思想，而DP中用一种方式实现了这种思想。不过不要被DP算法所禁锢。因为，这个trade-off的实现是很多变的，就像这题的第2种算法。</li>
-<li>分治：它的重要性不必多说了。同样的，DP中有分治的思想，但分治本身也是非常灵活的。</li>
-<li>数学归纳证明，对算法的设计和正确性佐证很有帮助。话说它也类似于分治的思想呢。</li>
 </ul>
 
 ]]></content>

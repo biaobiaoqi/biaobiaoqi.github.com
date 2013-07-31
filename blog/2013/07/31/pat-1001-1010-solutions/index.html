@@ -130,19 +130,32 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   </header>
 
 
-<div class="entry-content"><p>全部代码实现：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
+<div class="entry-content"><p>早期部分代码用 Java 实现。由于 PAT 虽然支持各种语言，但只有 C/C++标程来限定时间，许多题目用 Java 读入数据就已经超时，后来转投 C/C++。浏览全部代码：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
+
+<p>本文谨代表个人思路，欢迎讨论;)</p>
 
 <h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1001">PAT1001</a></h2>
 
-<p>题意：格式化输出两数之和。</p>
+<h5>题意</h5>
 
-<p>分析：理清输出逻辑即可。</p>
+<p>格式化输出两数之和。</p>
+
+<h5>分析</h5>
+
+<p>理清输出逻辑即可。</p>
+
+<!--more-->
+
 
 <h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1002">PAT1002</a></h2>
 
-<p>题意：给定两多项式，相加并格式化输出结果。</p>
+<h5>题意</h5>
 
-<p>分析：两种思路</p>
+<p>给定两多项式，相加并格式化输出结果。</p>
+
+<h5>分析</h5>
+
+<p>两种思路</p>
 
 <ul>
 <li>1.采用链表的处理方式；</li>
@@ -156,9 +169,13 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1003">PAT1003</a></h2>
 
-<p>题意：求两个城市之间的加权最短路径。在有多个最短路径记录的情况下，选择路径中所有节点的权重值之和最小的。</p>
+<h5>题意</h5>
 
-<p>分析：Dijkstra 算法的变型实现。两种思路：</p>
+<p>求两个城市之间的加权最短路径。在有多个最短路径记录的情况下，选择路径中所有节点的权重值之和最小的。</p>
+
+<h5>分析</h5>
+
+<p>Dijkstra 算法的变型实现。两种思路：</p>
 
 <ul>
 <li>1.计算最短路时，在每个节点上用链表 preList 记下所有最短路径的前节点。
@@ -172,30 +189,47 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1004">PAT1004</a></h2>
 
-<p>题意：计算给定的树各个层级叶子节点的个数</p>
+<h5>题意</h5>
 
-<p>分析：先构建树，鉴于题目的空间限制不严格，可以使用邻接矩阵的方式定义树结构。然后使用 dfs 遍历树的节点，并记录每层的叶子节点数量。
+<p>计算给定的树各个层级叶子节点的个数</p>
+
+<h5>分析</h5>
+
+<p>先构建树，鉴于题目的空间限制不严格，可以使用邻接矩阵的方式定义树结构。然后使用 dfs 遍历树的节点，并记录每层的叶子节点数量。
 可以看到，时间空间的 trade-off 不仅仅是性能上的提升，也会影响带代码实现的复杂程度。</p>
 
 <h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1005">PAT1005</a></h2>
 
-<p>题意：计算一个数（&lt;=10<sup>100）的各个位数之和，并用英语按位输出。比如</sup> 15 输出为 one five.</p>
+<h5>题意</h5>
 
-<p>分析：简单题，输出的实现上实际上就用到了 Hash 思想。</p>
+<p>计算一个数（&lt;=10<sup>100）的各个位数之和，并用英语按位输出。比如</sup> 15 输出为 one five.</p>
+
+<h5>分析</h5>
+
+<p>简单题，输出的实现上实际上就用到了 Hash 思想。</p>
 
 <h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1006">PAT1006</a></h2>
 
-<p>题意：每个人来到实验室和离开实验室的时间都有记录。找到其中最早来实验室和最晚离开实验室的时间。</p>
+<h5>题意</h5>
 
-<p>分析：逻辑上很简单的一个题，遍历所有数据，找到其中最大和最小的值即可。稍微要处理的就是时间。
+<p>每个人来到实验室和离开实验室的时间都有记录。找到其中最早来实验室和最晚离开实验室的时间。</p>
+
+<h5>分析</h5>
+
+<p>逻辑上很简单的一个题，遍历所有数据，找到其中最大和最小的值即可。稍微要处理的就是时间。
 由于 input 中给出的是 HH:MM:SS 的格式，在比较时需要将其换算为 int 值。实际上，使用 C 语言读入更方便，<code>scanf("%d:%d:%d", &amp;h, &amp;m, &amp;s);</code>
-然后计算出<code>time = 3600*h + 60*m + s</code>，时间比较就没有问题了。在最终的输出时再做对应的转换即可。</p>
+然后计算出<code>time = 3600*h + 60*m + s</code>，时间比较就没有问题了。在最终的输出时再做对应的转换即可。
+而在 Java 语言中，使用到了 String 的 split 方法划分子串和 Integer.parseInt()转 String 为 int。</p>
 
 <h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1007">PAT1007</a></h2>
 
-<p>题意：给出一组由正负整数组成的序列，求出拥有最大和的连续子序列。</p>
+<h5>题意</h5>
 
-<p>分析：最暴力的算法是两个循环的 O(n<sup>2)；进一步要使用分治的思想，可以得到</sup> O(n*logn)；更好的方法可以达到 O(n)，也可以将它看做分治思想。关键在于数学归纳的证明，编程实现非常简单：假定 [0, n-1]的最大连续子串已经求出了，要求 [0,n]的最大连续子串。</p>
+<p>给出一组由正负整数组成的序列，求出拥有最大和的连续子序列。</p>
+
+<h5>分析</h5>
+
+<p>最暴力的算法是两个循环的 O(n<sup>2)；进一步要使用分治的思想，可以得到</sup> O(n*logn)；更好的方法可以达到 O(n)，也可以将它看做分治思想。关键在于数学归纳的证明，编程实现非常简单：假定 [0, n-1]的最大连续子串已经求出了，要求 [0,n]的最大连续子串。</p>
 
 <ul>
 <li>1.如果 [0, n-1]中最大子串不包含最右的数字，则判定<code>原最大子串的和</code>与<code>包含最右点的最大子串 + a[n]的和</code>的大小。取大的那个作为 [0, n]的最大子串，并保持一个<code>包含最右点的最大子串</code>。</li>
@@ -205,26 +239,38 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <p>实际上，算法的核心是维持了两个量的记录，即当前的<code>最大子串</code>，以及当前<code>包含最右点的最大子串</code>。</p>
 
-<!--more-->
-
+<p>更多讨论参见博文<a href="../../../../2013/04/05/maximum-subsequence-sum/">《分治、时间空间的权衡:最大合的连续字串问题 (PAT 1007)
+》</a></p>
 
 <h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1008">PAT1008</a></h2>
 
-<p>题意：给出电梯的行进路径，上下的速度和每层停留时间，计算总时间。</p>
+<h5>题意</h5>
 
-<p>分析：简单的模拟题。</p>
+<p>给出电梯的行进路径，上下的速度和每层停留时间，计算总时间。</p>
+
+<h5>分析</h5>
+
+<p>简单的模拟题。</p>
 
 <h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1009">PAT1009</a></h2>
 
-<p>题意：求两个多项式的乘积。</p>
+<h5>题意</h5>
 
-<p>分析：参见 PAT1002，使用数组存储虽然空间占用稍大，但比链表实现要便捷很多。</p>
+<p>求两个多项式的乘积。</p>
+
+<h5>分析</h5>
+
+<p>参见 PAT1002，使用数组存储虽然空间占用稍大，但比链表实现要便捷很多。</p>
 
 <h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1010">PAT1010</a></h2>
 
-<p>题意：给定两个数，其中单个位置上的数值范围可以为 [0-z]。指定其中一个数的进制，试确定是否存在可能的进制让两数的实际值相等。</p>
+<h5>题意</h5>
 
-<p>分析：此题没有交代清楚 input 中 radix 的取值范围以及对一位数有多重可能 radix 的情况如何输出，坑比较大。下面是需要注意的点。</p>
+<p>给定两个数，其中单个位置上的数值范围可以为 [0-z]。指定其中一个数的进制，试确定是否存在可能的进制让两数的实际值相等。</p>
+
+<h5>分析</h5>
+
+<p>此题没有交代清楚 input 中 radix 的取值范围以及对一位数有多重可能 radix 的情况如何输出，坑比较大。下面是需要注意的点。</p>
 
 <ul>
 <li>1.input 中两个数字可以是 10 位数，虽然没有告诉 radix 的范围，但在<code>9*10^10 10 1 200</code>这个示例中，可以看到结果的 radix 也可以是很大的。从这个角度看，代码中将 radix 和两个数值都设定为 longlong 是合适的选择。</li>
@@ -304,6 +350,8 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
         <a class="basic-alignment left" href="/blog/2013/07/29/after-pat-practice/" title="Previous Post: 终于算完了这道『1+1』">&laquo; 终于算完了这道『1+1』</a>
       
       
+        <a class="basic-alignment right" href="/blog/2013/07/31/pat-1011-1020-solutions/" title="Next Post: PAT 1011-1020 题解">PAT 1011-1020 题解 &raquo;</a>
+      
     </p>
   </footer>
 </article>
@@ -327,7 +375,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <a style="font-size: 103%" href="/tags/gui/">gui</a> &nbsp 
 <a style="font-size: 147%" href="/tags/hadoop/">hadoop</a> &nbsp 
 <a style="font-size: 103%" href="/tags/idea/">idea</a> &nbsp 
-<a style="font-size: 136%" href="/tags/java/">java</a> &nbsp 
+<a style="font-size: 122%" href="/tags/java/">java</a> &nbsp 
 <a style="font-size: 103%" href="/tags/linux/">linux</a> &nbsp 
 <a style="font-size: 147%" href="/tags/methodology/">methodology</a> &nbsp 
 <a style="font-size: 136%" href="/tags/network/">network</a> &nbsp 
@@ -344,6 +392,10 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/07/31/pat-1011-1020-solutions/">PAT 1011-1020 题解</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/07/31/pat-1001-1010-solutions/">PAT 1001-1010 题解</a>
       </li>
     
@@ -357,10 +409,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     
       <li class="post">
         <a href="/blog/2013/07/16/verify-pop-sequence-for-stack/">出栈序列的可能性判定（PAT1051）</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/07/10/cc-license/">给博客签上CC协议</a>
       </li>
     
   </ul>

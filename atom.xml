@@ -4,7 +4,7 @@
   <title><![CDATA[Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-07-31T03:32:30+08:00</updated>
+  <updated>2013-08-01T01:21:23+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -14,23 +14,211 @@
 
   
   <entry>
+    <title type="html"><![CDATA[PAT 1011-1020 题解]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/07/31/pat-1011-1020-solutions/"/>
+    <updated>2013-07-31T23:41:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/07/31/pat-1011-1020-solutions</id>
+    <content type="html"><![CDATA[<p>早期部分代码用 Java 实现。由于 PAT 虽然支持各种语言，但只有 C/C++标程来限定时间，许多题目用 Java 读入数据就已经超时，后来转投 C/C++。浏览全部代码：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
+
+<p>本文谨代表个人思路，欢迎讨论;)</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/10111">PAT1011</a></h2>
+
+<h5>题意</h5>
+
+<p>给定一个 3*3 的矩阵，找到每行的最大值，格式化输出一个运算结果。</p>
+
+<h5>分析</h5>
+
+<p>非常简单的模拟题。</p>
+
+<!--more-->
+
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/10012">PAT1012</a></h2>
+
+<h5>题意</h5>
+
+<p>给定学生的学号和三个科目的分数，查询输出对应学生单门科目排名和总分排名中最高的那个排名。</p>
+
+<h5>分析</h5>
+
+<p>C 里 stdlib.h 中的 qsort()和 C++里 algorithm 中的 sort()函数都能实现快排，应对编程题中的排序一般比自己手写的要快。
+分别为三个单科和总分做排序，并将 rank 值记录到 map 结构中去，便于之后的查找。</p>
+
+<p>需要注意并列排名的情况。比如<code>1 2 2 4</code>，由于并列第 2 的都两人，那之后的那个人就是第 4 而不是第 3 了。</p>
+
+<p>另外，由于有多个需要分别排序、排名的项，抽象出公共逻辑到一个函数里比较必要，否则代码分散难于 debug 和维护。
+这里稍微特殊点的用法是使用了<a href="http://blog.csdn.net/dyx1024/article/details/7562786">函数指针</a>做参数。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1013">PAT1013</a></h2>
+
+<h5>题意</h5>
+
+<p>给定一张图和指定几个点。针对给出的每个点，要求计算在图中除掉连接该点的路径的情况下，保证整个图连通需要添加几条边。</p>
+
+<h5>分析</h5>
+
+<p>计算保证整个图连通需要几个点，亦即求出图中有几个连通分量。两种思路：</p>
+
+<ul>
+<li>1.并查集</li>
+<li>2.DFS</li>
+</ul>
+
+
+<p>针对每个点，执行算法的过程中，需要注意去除掉改点对应的所有通路。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1014">PAT1014</a></h2>
+
+<h5>题意</h5>
+
+<p>这道题是排队模拟题。银行有 N 个窗口，每个窗口允许排队 M 个人，如果 N 个窗口占满了排队的人，更多的人需要在黄线外等待。
+每个人都会选择尽可能人少的窗口排队，如果有多个窗口等待队列一样长，则选择编号小的窗口。
+前 N 个用户设定在 8:00 开始接受服务。给定了 K 个用户所需要接受服务的时间长度，要求在这个排队模型下，每个人的完成处理的时间点。</p>
+
+<h5>分析</h5>
+
+<p>相对另外几个队列模拟题，这个题是很简单的。没有达到时间的差异，只需要不断的从等待队列中取出人员即可。
+当然，由于黄线内等待的每个窗口都有 M 人，所以必须单独的模拟每个窗口。
+可以使用 queue 模拟每个窗口，循环遍历下次离开窗口的人，继而从等待队列中补上。
+需要注意结束条件，如果 17:00 以后还没有开始接受服务，则不用再等待。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1015">PAT1015</a></h2>
+
+<h5>题意</h5>
+
+<p>Reversible Primes 是指在某个进制下，一个数本身和它翻转过来形成的新数都是素数。
+题中给出多组数据，以负数结尾程序。每组数据包含一个数以及一个进制数。判定该数是否是 Reversible Primes.</p>
+
+<h5>分析</h5>
+
+<p>两个功能点实现：判定素数和特定进制下的数据倒转。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1016">PAT1016</a></h2>
+
+<h5>题意</h5>
+
+<p>给出一天中每个不同的小时内的电话付费标准，给出一份分为打出和挂断两种记录的通话记录，包括记录发生的时刻和用户名字，
+要求整理出当月有效用户的账单，输出格式中需要输出所有的通话记录，包括开始时刻和结束时刻，每次通话的话费以及总计的话费。</p>
+
+<h5>分析</h5>
+
+<p>模拟题。首先对输入的通话记录按照先姓名后时间做 qsort()排序，然后遍历排序后的记录，找到合适的匹配对，计算每次通话的时间，并进行统计和输出。</p>
+
+<p>实现的难点主要有两个：</p>
+
+<ul>
+<li>1.在排序后的记录中，找到合适的配对。如果某人的通话记录为<code>1.on;2.on;3.off;</code>，则其中<code>1.on</code>将被抛弃，匹配到<code>2.on;3.off;</code>。
+题中仅仅保证了所有记录中至少有一对有效记录，但并没有保证每个人都有有效通话记录，所以还需要做好过滤，
+如果某人没有有效通话记录，则不输出。整体的控制流程需要谨慎。</li>
+<li>2.由于不同时刻的话费不一样，计算一次有效通话的话费比较复杂。可以采用的方式是用起始时刻分阶段追赶结束时刻。追赶的过程分阶段，也就能计算好不同阶段的开销，
+先将起始时间调整到跟结束时间为同一天，细节是先让分钟达到 0，再让小时迭代到 0，天进位，一直迭代到跟结束时间同天；再让起始时刻的小时数追平
+结束时刻；最后让分钟追平。以此计算出最终话费。</li>
+</ul>
+
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1017">PAT1017</a></h2>
+
+<h5>题意</h5>
+
+<p>银行有 K 个窗口，所有到达银行的人都应该在黄线外等待，直到有窗口空余。
+每个窗口对单个客人最多服务时间为 1 小时。N 个用户的到达时间和需要处理的时间给出。
+8:00 到 17:00 接受服务，逾期不服务，也不计入统计数据。要求格式化输出用户的平均等待时间。</p>
+
+<h5>分析</h5>
+
+<p>又一道排队模拟题。相比 PAT1014，此题更复杂在于用户的到达时间是不确定的。
+首先使用 qsort()按照到达时间对所有人排序。由于每个窗口同时只有一个人在处理，所以窗口之间没有差异，可以用 priority_queue 建立一个队列，
+模拟所有 K 个窗口。
+优先队列将结束时间最早的人放到队列的顶端，每次循环处理一个人的结束。然后步入一个黄线外等待的人。如果那个时刻，下一个人还没有达到，则可以将该人开始执行的时间记录为他的到达时间，并加入队列中。
+还有一点需要注意的：HH:MM:SS 的时间格式，可以转换为累积秒数的时间，方便计算比较。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1018">PAT10108</a></h2>
+
+<h5>题意</h5>
+
+<p>以杭州的公用自行车站点管理为背景。每个站点是一个节点，每个节点上最多停放 Cmax 辆自行车，Cmax/2 为节点的最佳状态。不同节点间距离不同，整个构成了一张带权无向图。要求从起始点（公用自行车管理中心）出发，去目的地维护目的地节点的车辆状态，如果车辆低于 Cmax/2，则给它添加车辆到 Cmax/2 辆，如果多于 Cmax/2，则去除掉几辆车。同时，在去往目的地的过程中，也需要调整所有沿途站点的车辆（这里题目没有交代清楚，实际测试是只能在去往目的地的途中调整，回来的途上不可调整）。求到给定目的地的最短路径，如果有多条最短路径，则按照 1.从管理中心送出的车辆越少越好；2.拿回到管理中心的车越少越好的优先级找到结果。</p>
+
+<h5>分析</h5>
+
+<p>题目的大体框架是有权最短路径问题。步骤如下：</p>
+
+<ul>
+<li>1.使用 Dijkstra 找到最短路径，其中注意记录每个节点在最短路径中的【所有】前驱节点；</li>
+<li>2.使用 DFS 的方法，得到所有的最短路径。</li>
+<li>3.计算每条最短路径的带出和带回的车辆数量。</li>
+</ul>
+
+
+<p>其中 DFS 时，归纳所有答案的过程比较通用，需要掌握。</p>
+
+<p>另外值得注意的是，类比到 PAT1003，该题采用了直接对每个节点增加状态记录的方式，直接得到最优解，而不是先找到最短路径，然后计算比较。本题是无法用这种方法实现的，需要送出和带回的自行车数量无法直接在 Dij 算法中每个节点的计算中体现，并不是前面的节点带回和送出的车辆越少，后面的节点就一定能得到更优解。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1019">PAT1019</a></h2>
+
+<h5>题意</h5>
+
+<p>给定一个十进制数和一个进制，要求计算出在给定进制下的表达并判定是否为回文。</p>
+
+<h5>分析</h5>
+
+<p>简单的数字处理。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1020">PAT1020</a></h2>
+
+<h5>题意</h5>
+
+<p>根据二叉树的后序遍历和中序遍历，求层序遍历。</p>
+
+<h5>分析</h5>
+
+<p>具体实现方式：</p>
+
+<ul>
+<li>初始：用后序遍历序列确定根节点，在中序遍历序列中找到该根节点，则左右子树分别为中序中该节点左右的序列。</li>
+<li>迭代：对各个子树分别执行三步操作，1.在后序序列中找子树的根节点；2。在中序序列中找子树的根节点，并划分开根节点的左右子树；3.根据新生成的左右子树，在后序序列中划分开这些节点，从而得到了两颗子树的后序、中序序列。</li>
+</ul>
+
+
+<p>有一个结论：中序遍历配合另外任何一个遍历，能重建二叉树。其他的任意两个序列的组合都不能唯一的确定重建的二叉树。具体分析参见博文<a href="../../../../2013/04/27/pat1020-pat1043-rebuild-binary-tree/">《根据前中后序和层序重建二叉树(PAT1020、PAT1043)》</a>。</p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/07/31/pat-1011-1020-solutions/'>http://biaobiaoqi.github.com/blog/2013/07/31/pat-1011-1020-solutions/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[PAT 1001-1010 题解]]></title>
     <link href="http://biaobiaoqi.github.com/blog/2013/07/31/pat-1001-1010-solutions/"/>
     <updated>2013-07-31T02:03:00+08:00</updated>
     <id>http://biaobiaoqi.github.com/blog/2013/07/31/pat-1001-1010-solutions</id>
-    <content type="html"><![CDATA[<p>全部代码实现：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
+    <content type="html"><![CDATA[<p>早期部分代码用 Java 实现。由于 PAT 虽然支持各种语言，但只有 C/C++标程来限定时间，许多题目用 Java 读入数据就已经超时，后来转投 C/C++。浏览全部代码：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
+
+<p>本文谨代表个人思路，欢迎讨论;)</p>
 
 <h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1001">PAT1001</a></h2>
 
-<p>题意：格式化输出两数之和。</p>
+<h5>题意</h5>
 
-<p>分析：理清输出逻辑即可。</p>
+<p>格式化输出两数之和。</p>
+
+<h5>分析</h5>
+
+<p>理清输出逻辑即可。</p>
+
+<!--more-->
+
 
 <h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1002">PAT1002</a></h2>
 
-<p>题意：给定两多项式，相加并格式化输出结果。</p>
+<h5>题意</h5>
 
-<p>分析：两种思路</p>
+<p>给定两多项式，相加并格式化输出结果。</p>
+
+<h5>分析</h5>
+
+<p>两种思路</p>
 
 <ul>
 <li>1.采用链表的处理方式；</li>
@@ -44,9 +232,13 @@
 
 <h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1003">PAT1003</a></h2>
 
-<p>题意：求两个城市之间的加权最短路径。在有多个最短路径记录的情况下，选择路径中所有节点的权重值之和最小的。</p>
+<h5>题意</h5>
 
-<p>分析：Dijkstra 算法的变型实现。两种思路：</p>
+<p>求两个城市之间的加权最短路径。在有多个最短路径记录的情况下，选择路径中所有节点的权重值之和最小的。</p>
+
+<h5>分析</h5>
+
+<p>Dijkstra 算法的变型实现。两种思路：</p>
 
 <ul>
 <li>1.计算最短路时，在每个节点上用链表 preList 记下所有最短路径的前节点。
@@ -60,30 +252,47 @@
 
 <h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1004">PAT1004</a></h2>
 
-<p>题意：计算给定的树各个层级叶子节点的个数</p>
+<h5>题意</h5>
 
-<p>分析：先构建树，鉴于题目的空间限制不严格，可以使用邻接矩阵的方式定义树结构。然后使用 dfs 遍历树的节点，并记录每层的叶子节点数量。
+<p>计算给定的树各个层级叶子节点的个数</p>
+
+<h5>分析</h5>
+
+<p>先构建树，鉴于题目的空间限制不严格，可以使用邻接矩阵的方式定义树结构。然后使用 dfs 遍历树的节点，并记录每层的叶子节点数量。
 可以看到，时间空间的 trade-off 不仅仅是性能上的提升，也会影响带代码实现的复杂程度。</p>
 
 <h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1005">PAT1005</a></h2>
 
-<p>题意：计算一个数（&lt;=10<sup>100）的各个位数之和，并用英语按位输出。比如</sup> 15 输出为 one five.</p>
+<h5>题意</h5>
 
-<p>分析：简单题，输出的实现上实际上就用到了 Hash 思想。</p>
+<p>计算一个数（&lt;=10<sup>100）的各个位数之和，并用英语按位输出。比如</sup> 15 输出为 one five.</p>
+
+<h5>分析</h5>
+
+<p>简单题，输出的实现上实际上就用到了 Hash 思想。</p>
 
 <h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1006">PAT1006</a></h2>
 
-<p>题意：每个人来到实验室和离开实验室的时间都有记录。找到其中最早来实验室和最晚离开实验室的时间。</p>
+<h5>题意</h5>
 
-<p>分析：逻辑上很简单的一个题，遍历所有数据，找到其中最大和最小的值即可。稍微要处理的就是时间。
+<p>每个人来到实验室和离开实验室的时间都有记录。找到其中最早来实验室和最晚离开实验室的时间。</p>
+
+<h5>分析</h5>
+
+<p>逻辑上很简单的一个题，遍历所有数据，找到其中最大和最小的值即可。稍微要处理的就是时间。
 由于 input 中给出的是 HH:MM:SS 的格式，在比较时需要将其换算为 int 值。实际上，使用 C 语言读入更方便，<code>scanf("%d:%d:%d", &amp;h, &amp;m, &amp;s);</code>
-然后计算出<code>time = 3600*h + 60*m + s</code>，时间比较就没有问题了。在最终的输出时再做对应的转换即可。</p>
+然后计算出<code>time = 3600*h + 60*m + s</code>，时间比较就没有问题了。在最终的输出时再做对应的转换即可。
+而在 Java 语言中，使用到了 String 的 split 方法划分子串和 Integer.parseInt()转 String 为 int。</p>
 
 <h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1007">PAT1007</a></h2>
 
-<p>题意：给出一组由正负整数组成的序列，求出拥有最大和的连续子序列。</p>
+<h5>题意</h5>
 
-<p>分析：最暴力的算法是两个循环的 O(n<sup>2)；进一步要使用分治的思想，可以得到</sup> O(n*logn)；更好的方法可以达到 O(n)，也可以将它看做分治思想。关键在于数学归纳的证明，编程实现非常简单：假定 [0, n-1]的最大连续子串已经求出了，要求 [0,n]的最大连续子串。</p>
+<p>给出一组由正负整数组成的序列，求出拥有最大和的连续子序列。</p>
+
+<h5>分析</h5>
+
+<p>最暴力的算法是两个循环的 O(n<sup>2)；进一步要使用分治的思想，可以得到</sup> O(n*logn)；更好的方法可以达到 O(n)，也可以将它看做分治思想。关键在于数学归纳的证明，编程实现非常简单：假定 [0, n-1]的最大连续子串已经求出了，要求 [0,n]的最大连续子串。</p>
 
 <ul>
 <li>1.如果 [0, n-1]中最大子串不包含最右的数字，则判定<code>原最大子串的和</code>与<code>包含最右点的最大子串 + a[n]的和</code>的大小。取大的那个作为 [0, n]的最大子串，并保持一个<code>包含最右点的最大子串</code>。</li>
@@ -93,26 +302,38 @@
 
 <p>实际上，算法的核心是维持了两个量的记录，即当前的<code>最大子串</code>，以及当前<code>包含最右点的最大子串</code>。</p>
 
-<!--more-->
-
+<p>更多讨论参见博文<a href="../../../../2013/04/05/maximum-subsequence-sum/">《分治、时间空间的权衡:最大合的连续字串问题 (PAT 1007)
+》</a></p>
 
 <h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1008">PAT1008</a></h2>
 
-<p>题意：给出电梯的行进路径，上下的速度和每层停留时间，计算总时间。</p>
+<h5>题意</h5>
 
-<p>分析：简单的模拟题。</p>
+<p>给出电梯的行进路径，上下的速度和每层停留时间，计算总时间。</p>
+
+<h5>分析</h5>
+
+<p>简单的模拟题。</p>
 
 <h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1009">PAT1009</a></h2>
 
-<p>题意：求两个多项式的乘积。</p>
+<h5>题意</h5>
 
-<p>分析：参见 PAT1002，使用数组存储虽然空间占用稍大，但比链表实现要便捷很多。</p>
+<p>求两个多项式的乘积。</p>
+
+<h5>分析</h5>
+
+<p>参见 PAT1002，使用数组存储虽然空间占用稍大，但比链表实现要便捷很多。</p>
 
 <h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1010">PAT1010</a></h2>
 
-<p>题意：给定两个数，其中单个位置上的数值范围可以为 [0-z]。指定其中一个数的进制，试确定是否存在可能的进制让两数的实际值相等。</p>
+<h5>题意</h5>
 
-<p>分析：此题没有交代清楚 input 中 radix 的取值范围以及对一位数有多重可能 radix 的情况如何输出，坑比较大。下面是需要注意的点。</p>
+<p>给定两个数，其中单个位置上的数值范围可以为 [0-z]。指定其中一个数的进制，试确定是否存在可能的进制让两数的实际值相等。</p>
+
+<h5>分析</h5>
+
+<p>此题没有交代清楚 input 中 radix 的取值范围以及对一位数有多重可能 radix 的情况如何输出，坑比较大。下面是需要注意的点。</p>
 
 <ul>
 <li>1.input 中两个数字可以是 10 位数，虽然没有告诉 radix 的范围，但在<code>9*10^10 10 1 200</code>这个示例中，可以看到结果的 radix 也可以是很大的。从这个角度看，代码中将 radix 和两个数值都设定为 longlong 是合适的选择。</li>
@@ -2180,146 +2401,6 @@
 <p>也就是类似于投票获得读写的锁。在 Dynamo 系统中可以配置这种 wrn 参数以自持特定的一致性。</p>
 
 <p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/05/18/distributed-consistency/'>http://biaobiaoqi.github.com/blog/2013/05/18/distributed-consistency/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[HadoopDB：混合分布式系统]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/05/18/a-hybrid-system-hadoopdb/"/>
-    <updated>2013-05-18T17:58:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/05/18/a-hybrid-system-hadoopdb</id>
-    <content type="html"><![CDATA[<p>HadoopDB 是一个 Mapreduce 和传统关系型数据库的结合方案，以充分利用 RDBMS 的性能和 Hadoop 的容错、分布特性。2009 年被 Yale 大学教授 Abadi 提出，继而商业化为 <a href="http://hadapt.com/">Hadapt</a>，据称从 VC 那儿拉到了 10M 刀投资。</p>
-
-<p>本文是对 HadoopDB 论文的总结。其中不免掺杂些自己的不成熟想法，更详细的内容，还请参见原论文 HadoopDB: An Architectural Hybrid of MapReduce and DBMS Technologies for Analytical Workloads</p>
-
-<!--more-->
-
-
-<h2>背景</h2>
-
-<h3>PB 级数据分析系统的能力要求</h3>
-
-<ul>
-<li>1.性能：节省开销（时间、资金）。</li>
-<li>2.容错：数据分析系统（即使有故障节点也能顺利工作） 不同于 事务型的系统的容错（从故障中无损的恢复）。节点故障时，原来的查询操作不需要重启。</li>
-<li>3.在异构型环境中运行的能力。即使所有机器硬件一样，但某些机器在某些时候可能因为软件原因、网络原因也会性能降低。分布式操作时，要防止木桶效应。</li>
-<li>4.活的查询接口：商业化的数据分析一般建立在 SQL 查询上，UDF 等 non-SQL 也是需要的。</li>
-</ul>
-
-
-<h5>并行数据库</h5>
-
-<p>满足 1,4：利用分表的方式，扩散到多个节点。一般情况下节点最多为几十个，原因：1.每增加一个节点，失败率增加；2.并行数据库假设各个机器都是同质化的，但这往往不太可能</p>
-
-<h5>MapReduce</h5>
-
-<p>满足 2,3,4：Map - repartition - Reduce 原为非结构化数据，但也可以适用结构化数据。</p>
-
-<ul>
-<li>2：（错误节点）动态的规划节点执行任务，将错误节点任务发放给新节点。并在本地磁盘做 checkpoint 存储。</li>
-<li>3：（拖后腿的节点）节点间冗余的执行。执行慢的节点的任务交付给速度快的节点执行</li>
-<li>4：Hive 的 HQL</li>
-</ul>
-
-
-<h5>HadoopDB</h5>
-
-<p>融合了之前两者，做出系统层面的改进，而不仅仅是语言和接口层面。</p>
-
-<p>这三个解决方案对 4 个指标的关系如下图：</p>
-
-<p><img src="http://dl.dropboxusercontent.com/u/64021093/hadoopDB/QQ%E6%88%AA%E5%9B%BE20130518135802.png" title="compare" alt="alt compare" /></p>
-
-<h2>架构</h2>
-
-<p>如图
-<img src="https://dl.dropboxusercontent.com/u/64021093/hadoopDB/QQ%E6%88%AA%E5%9B%BE20130518135814.png" title="framework" alt="alt framework" /></p>
-
-<h2>组件介绍</h2>
-
-<h5>Databse Connector:</h5>
-
-<ul>
-<li><p>作用</p>
-
-<p>  hadoopTask &lt;-通信-> Database on Node。节点上的 DB 类似于 Hadoop 中的数据源 HDFS</p></li>
-<li><p>实现</p>
-
-<p>  扩展了 Hadoop 的 InputFormat</p></li>
-</ul>
-
-
-<h5>Catalog：</h5>
-
-<ul>
-<li><p>作用</p>
-
-<p>  1.链接参数如数据库位置，驱动类和证书；
-  2.一些元数据如数据簇中的数据集，副本的位置，数据的划分。</p></li>
-<li><p>实现</p>
-
-<p>  HDFS 上的 XML。希望做成类似于 Hadoop 的 namenode。</p></li>
-</ul>
-
-
-<h5>Data Loader</h5>
-
-<ul>
-<li><p>作用</p>
-
-<p>  将数据合理划分，从 HDFS 转移到节点中的本地文件系统</p></li>
-<li><p>实现</p>
-
-<p>  global hasher：分配到不同节点
-  local hasher：继续划分为不同 chunks</p></li>
-</ul>
-
-
-<h5>SQL to MapReduce to SQL (SMS) Planner</h5>
-
-<ul>
-<li><p>作用</p>
-
-<p>  将 HiveQL 转化为特定执行计划，在 hadoopDB 中执行。原则是尽可能的讲操作推向节点上的 RDBMS 上执行，以此提高执行效率。</p></li>
-<li><p>实现</p>
-
-<p>  扩展 Hive：
-  1.执行查找前，用 catolog 的信息更新 Hive 的 metastore，定向到节点数据库的表
-  2.执行前，决定划分的键；将部分查询语句推到节点的数据库中执行。</p></li>
-</ul>
-
-
-<h2>示例</h2>
-
-<p>示例参见下文的 slides</p>
-
-<h2>总结</h2>
-
-<p>对 hadoopDB 的一些看法：</p>
-
-<ul>
-<li>其数据预处理代价过高：数据需要进行两次分解和一次数据库加载操作后才能使用；</li>
-<li>将查询推向数据库层只是少数情况，大多数情况下，查询仍由Ｈive 完成．因为数据仓库查询往往涉及多表连接，由于连接的复杂性，难以做到在保持连接数据局部性的前提下将参与连接的多张表按照某种模式划分；</li>
-<li>维护代价过高．不仅要维护Ｈadoop 系统，还要维护每个数据库节点；</li>
-<li>目前尚不支持数据的动态划分，需要手工一次划分好</li>
-</ul>
-
-
-<p>slides：</p>
-
-<script async class="speakerdeck-embed" data-id="48c5e680a1ab0130e1707290244918d4" data-ratio="1.33333333333333" src="http://biaobiaoqi.github.com//speakerdeck.com/assets/embed.js"></script>
-
-
-<p>下载 slides，请猛戳<a href="https://dl.dropboxusercontent.com/u/64021093/hadoopDB/%5B2013-05-18%5DHadoopDB.pptx">这里</a></p>
-
-<h2>参考资料</h2>
-
-<ul>
-<li>HadoopDB: An Architectural Hybrid of MapReduce and DBMS Technologies for Analytical Workloads</li>
-<li><a href="http://dbanotes.net/database/hadoopdb.html">《HadoopDB》 —— Fenng</a></li>
-<li>《架构大数据:挑战、现状与展望》 计算机学报 王珊<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/05/18/a-hybrid-system-hadoopdb/'>http://biaobiaoqi.github.com/blog/2013/05/18/a-hybrid-system-hadoopdb/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></li>
-</ul>
 
 ]]></content>
   </entry>

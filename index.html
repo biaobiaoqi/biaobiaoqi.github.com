@@ -9,8 +9,7 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="全部代码实现：请戳 PAT1001 题意：格式化输出两数之和。 分析：理清输出逻辑即可。 PAT1002 题意：给定两多项式，相加并格式化输出结果。 分析：两种思路 1.采用链表的处理方式；
-2.预设好 int[1005]的数组，用下标表示次方，数组中元素值表示对应系数。 &hellip;">
+  <meta name="description" content="早期部分代码用 Java 实现。由于 PAT 虽然支持各种语言，但只有 C/C++标程来限定时间，许多题目用 Java 读入数据就已经超时，后来转投 C/C++。浏览全部代码：请戳 本文谨代表个人思路，欢迎讨论;) PAT1011 题意 给定一个 3*3 的矩阵，找到每行的最大值， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -108,6 +107,62 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2013/07/31/pat-1011-1020-solutions/">PAT 1011-1020 题解</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-31T23:41:00+08:00" pubdate data-updated="true">Jul 31<span>st</span>, 2013</time>
+        
+
+
+
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>早期部分代码用 Java 实现。由于 PAT 虽然支持各种语言，但只有 C/C++标程来限定时间，许多题目用 Java 读入数据就已经超时，后来转投 C/C++。浏览全部代码：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
+
+<p>本文谨代表个人思路，欢迎讨论;)</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/10111">PAT1011</a></h2>
+
+<h5>题意</h5>
+
+<p>给定一个 3*3 的矩阵，找到每行的最大值，格式化输出一个运算结果。</p>
+
+<h5>分析</h5>
+
+<p>非常简单的模拟题。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/07/31/pat-1011-1020-solutions/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2013/07/31/pat-1001-1010-solutions/">PAT 1001-1010 题解</a></h1>
     
     
@@ -134,80 +189,19 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   </header>
 
 
-  <div class="entry-content"><p>全部代码实现：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
+  <div class="entry-content"><p>早期部分代码用 Java 实现。由于 PAT 虽然支持各种语言，但只有 C/C++标程来限定时间，许多题目用 Java 读入数据就已经超时，后来转投 C/C++。浏览全部代码：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
+
+<p>本文谨代表个人思路，欢迎讨论;)</p>
 
 <h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1001">PAT1001</a></h2>
 
-<p>题意：格式化输出两数之和。</p>
+<h5>题意</h5>
 
-<p>分析：理清输出逻辑即可。</p>
+<p>格式化输出两数之和。</p>
 
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1002">PAT1002</a></h2>
+<h5>分析</h5>
 
-<p>题意：给定两多项式，相加并格式化输出结果。</p>
-
-<p>分析：两种思路</p>
-
-<ul>
-<li>1.采用链表的处理方式；</li>
-<li>2.预设好 int[1005]的数组，用下标表示次方，数组中元素值表示对应系数。</li>
-</ul>
-
-
-<p>第一种方法某种程度上看能节省空间，实现上需要注意操作链表时，循环时的越界问题；
-方法二用空间换取时间，且实现上更不容易出错。同时，由于浮点数本身精确位数不够，在判定两浮点数相加是否为 0 时，
-需要对结果值取绝对值后，与 1e-6 做对比。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1003">PAT1003</a></h2>
-
-<p>题意：求两个城市之间的加权最短路径。在有多个最短路径记录的情况下，选择路径中所有节点的权重值之和最小的。</p>
-
-<p>分析：Dijkstra 算法的变型实现。两种思路：</p>
-
-<ul>
-<li>1.计算最短路时，在每个节点上用链表 preList 记下所有最短路径的前节点。
-完成计算后，对 preList 做 dfs 获得每条最短路径的权重值之和，比较后得到结果；</li>
-<li>2.计算最短路径时，在节点上，除了记录最短路径中前一个节点 preNode 之外，还对应的记录当前的最短路径上所有节点的权重值之和，
-这就不用在 Dij 完成之后再做 dfs 了，过程中已经找到了最优解。</li>
-</ul>
-
-
-<p>相比之下，方法 2 明显更简洁。当然，虽然方法 2 的思路很通用，还需要确定，这一加权的判定条件是能够迭代处理的。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1004">PAT1004</a></h2>
-
-<p>题意：计算给定的树各个层级叶子节点的个数</p>
-
-<p>分析：先构建树，鉴于题目的空间限制不严格，可以使用邻接矩阵的方式定义树结构。然后使用 dfs 遍历树的节点，并记录每层的叶子节点数量。
-可以看到，时间空间的 trade-off 不仅仅是性能上的提升，也会影响带代码实现的复杂程度。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1005">PAT1005</a></h2>
-
-<p>题意：计算一个数（&lt;=10<sup>100）的各个位数之和，并用英语按位输出。比如</sup> 15 输出为 one five.</p>
-
-<p>分析：简单题，输出的实现上实际上就用到了 Hash 思想。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1006">PAT1006</a></h2>
-
-<p>题意：每个人来到实验室和离开实验室的时间都有记录。找到其中最早来实验室和最晚离开实验室的时间。</p>
-
-<p>分析：逻辑上很简单的一个题，遍历所有数据，找到其中最大和最小的值即可。稍微要处理的就是时间。
-由于 input 中给出的是 HH:MM:SS 的格式，在比较时需要将其换算为 int 值。实际上，使用 C 语言读入更方便，<code>scanf("%d:%d:%d", &amp;h, &amp;m, &amp;s);</code>
-然后计算出<code>time = 3600*h + 60*m + s</code>，时间比较就没有问题了。在最终的输出时再做对应的转换即可。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1007">PAT1007</a></h2>
-
-<p>题意：给出一组由正负整数组成的序列，求出拥有最大和的连续子序列。</p>
-
-<p>分析：最暴力的算法是两个循环的 O(n<sup>2)；进一步要使用分治的思想，可以得到</sup> O(n*logn)；更好的方法可以达到 O(n)，也可以将它看做分治思想。关键在于数学归纳的证明，编程实现非常简单：假定 [0, n-1]的最大连续子串已经求出了，要求 [0,n]的最大连续子串。</p>
-
-<ul>
-<li>1.如果 [0, n-1]中最大子串不包含最右的数字，则判定<code>原最大子串的和</code>与<code>包含最右点的最大子串 + a[n]的和</code>的大小。取大的那个作为 [0, n]的最大子串，并保持一个<code>包含最右点的最大子串</code>。</li>
-<li>2.如果 [0, n-1]中最大子串包含最右的数字，则 [0, n]的最大子串为原最大子串+a[n]。</li>
-</ul>
-
-
-<p>实际上，算法的核心是维持了两个量的记录，即当前的<code>最大子串</code>，以及当前<code>包含最右点的最大子串</code>。</p>
+<p>理清输出逻辑即可。</p>
 
 </div>
   
@@ -1007,155 +1001,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/06/11/the-non-designers-design-book/">《写给大家看的设计书》</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-11T13:58:00+08:00" pubdate data-updated="true">Jun 11<span>th</span>, 2013</time>
-        
-
-
-
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>从 iOS7 的扁平化谈起</h3>
-
-<p>昨晚看了 WWDC2013 的直播，iOS7 以扁平化 UI 的方式展现在世人面前。于是接下来进入了微博吐槽时间。</p>
-
-<p>大象要跳舞是很难的，这正是苹果面临的情况。现在无论是 Android 还是 Winphone，与 iOS 系统体验上的差异已经不是难以企及的，甚至有些方面更能为大众接受。于是 Ive 带领他的团队开始拥抱<strong> Flat Design</strong>。乔布斯子不知道会怎么想，他可是坚持了一辈子的拟物风格。当然，无论乔老爷子怎么想，时势如此，由不得苹果不变。</p>
-
-<p>从微博疯狂的 iOS7 刷屏中挑出了些有价值的信息，关于扁平化和拟物化的：</p>
-
-<ul>
-<li><a href="http://www.zhihu.com/question/20881633">什么是扁平化设计（Flat Design）？扁平化设计是未来的趋势吗？</a></li>
-<li><a href="http://www.inside.com.tw/2013/03/25/flat-design">UI 美學趨勢備忘錄─淺析扁平化設計</a></li>
-<li><a href="http://www.oschina.net/translate/flat-design-principles">扁平化设计原则</a></li>
-</ul>
-
-
-<p>看完这些已经晕头了。人的思维总是有惰性的，倾向于接受自己头脑中已经有条理的思维结果。不情愿的说，这些略显专业的介绍已经超出了我对设计的思考范畴了，我看到的只是零散的观点，而找不到源头。</p>
-
-<p>于是想起了《写给大家看的设计书》。作为非设计人员，这本书够接地气。一个多月前看完，让自己对设计的认识从一个完全的小白提升为一个略有喜好和观点的小白了。还是先聊这本书吧。</p>
-
-<h2>设计的基本原则</h2>
-
-<p>读这本书之前，在不同平台上看见它的好多推荐了。不过鉴于大多数设计类书都是『手把手教你画马』的效果（详情参见下图），一直不太感冒。</p>
-
-<p><img src="https://dl.dropboxusercontent.com/u/64021093/Pics/307-12110Q62915932.jpg" title="画马" alt="怎样画马" /></p>
-
-<p>后来码代码太烦躁，抱着试一试的态度在多看上下载了下来，一着眼便被吸引住了。书本本身的排版设计就透露着简洁明了的设计感，配色也恰到好处的清新。</p>
-
-<p>全书循序渐进的从设计的四大基本原则讲起，结合丰富的案例分析，延伸到具体的主题设计技巧中。这部分是最让我觉得受益的部分。当然，不仅仅只是这些，还有涉及到颜色的运用、字体的设计等内容，本着『不要在意这些细节』的原则，它们被我匆匆略过。</p>
-
-<p>可以这么夸张的说，设计的『四项基本原则』是我有自主意识以来觉得最受用的『条条框框』：</p>
-
-<h3>原则一：亲密性</h3>
-
-<p>亲密性的根本目的是组织性。还有个副产品，利用亲密性可以使空白更美观。</p>
-
-<ul>
-<li>将相关的项组织在一起。</li>
-<li>物理位置的接近就意味着存在关联。</li>
-</ul>
-
-
-<h3>原则二：对齐</h3>
-
-<p>对齐的根本目的是使页面统一而有条理。不论创建精美的、正式的、有趣的还是严肃的外观，通常都可以利用一种明确的对齐来达到目的。</p>
-
-<ul>
-<li>任何元素都不能在页面上随意安放。每一项都应当与页面上的某个内容存在某种视觉联系。</li>
-<li>对齐的项会形成一个内聚的单元。</li>
-<li>居中对齐显得正式、稳重，但一般不要用居中对齐。</li>
-<li>一定要坚持页面上只使用一种文本对齐，避免混合使用多种文本对齐。</li>
-<li>可以适时的打破规则，但在此之前得清楚什么是规则。</li>
-</ul>
-
-
-<h3>原则三：重复</h3>
-
-<p>重复的根本目的是统一，并增强视觉效果。</p>
-
-<ul>
-<li>设计的某些方面需要在整个作品中重复</li>
-<li>重复是一种全局的一致性，比如杂志每页的标题都使用同样的字体大小。这有利于信息的组织。</li>
-<li>重复也一定程度给作品带来专业性和权威性。</li>
-<li>要避免太多的重复，重复太多会让人厌烦。注意对比的价值</li>
-</ul>
-
-
-<h3>原则四：对比</h3>
-
-<p>根本目的有两方面。一个目的是增强页面效果，如果一个页面看起来很有意思，往往更有可读性；另一个目的是有助于信息的组织。</p>
-
-<ul>
-<li>如果两项不完全相同，就应当使之不同，而且应当是截然不同。</li>
-<li>对比一定要强烈。</li>
-</ul>
-
-
-<h3>应用设计原则</h3>
-
-<p>优秀的设计就这么容易：</p>
-
-<ul>
-<li>1.学习 4 大基本原则;</li>
-<li>2.认识到自己没有运用这些原则；</li>
-<li>3.应用基本原则。</li>
-</ul>
-
-
-<p>这四个基本设计原则是相互关联的，只应用某一个原则的情况很少。当对应着一个个的举例体验过四条基本原则的威力后，接下来就是在自己身边实践这些原则了。</p>
-
-<p>一方面，可以观察四项原则在现有设计中的应用：比如当前所打开的网页，是否足够清晰、明确的展示了它所要表达的意图；手头的书本，排版是否跟内容在情感上吻合。</p>
-
-<p>另一方面，时常会有些文档、写报告、为展示写 slides 的需求，自己在创作的过程中，也可以应用起这四条原则，慢慢体会，慢慢修炼。</p>
-
-<h2>体会</h2>
-
-<p>歌德在《浮士德》中提到过这么一句话：『理论是灰色的，生活之树常青』。在我看来，所有的事物都是如此，人性使然。抛开这四条原则本身，它们归结起来都是要实现意图的传递：</p>
-
-<blockquote><p>将信息从设计者准确无误的传递给目标用户</p></blockquote>
-
-<p>设计作为一种原始信息的载体，本身的形式上会带来附加的信息量，如何让这些设计自身的附加量不混淆了核心的原始信息，是设计好坏的根本。更进一步，设计的更高层次应该是让设计的附加量起到正相关的增益效果。《写给大家看的设计书》中的四个原则正是最基础的实践。</p>
-
-<p>现在是信息的时代，信息量的暴增让信息的简洁展示和选择变得越发关键。前文提到的扁平化的设计风格的崛起，就是一个例证:</p>
-
-<p>『扁平化设计具有一种给你让人心醉的美丽，没有大量的修饰，它能以一个简单直白的方式传达一个信息或者帮助一个产品以及思想变得更加深入人心……扁平化设计正是通过放弃任何附加效果的方式，创建一个「零」3D 属性的设计方案。在这里，没有阴影效果、斜角、浮雕、渐变等其他方法来帮助元素产生相对于屏幕的凹凸效果。不带有羽化边缘以及阴影效果的图标和 UI 元素也都看起来非常鲜明。』</p>
-
-<p>相对而言，乔布斯推崇的拟物风格中，所秉承的是让所有用户能快速的学会如何使用它。而随着时代的发展，这种降低学习成本的方式渐渐的不是必须，数码产品充斥着生活，大多数人已经有足够的经验来应对新的操作体验。从这个角度讲，扁平化在现阶段或许是更有好的选择。</p>
-
-<p>不管怎么样，WWDC 以后，苹果股价已经持续下跌了，祝福苹果吧，希望 Ive 不要成为苹果的罪人，据说他是最懂乔布斯的人呢。</p>
-
-<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/06/11/the-non-designers-design-book/'>http://biaobiaoqi.github.com/blog/2013/06/11/the-non-designers-design-book/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1176,7 +1021,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <a style="font-size: 103%" href="/tags/gui/">gui</a> &nbsp 
 <a style="font-size: 147%" href="/tags/hadoop/">hadoop</a> &nbsp 
 <a style="font-size: 103%" href="/tags/idea/">idea</a> &nbsp 
-<a style="font-size: 136%" href="/tags/java/">java</a> &nbsp 
+<a style="font-size: 122%" href="/tags/java/">java</a> &nbsp 
 <a style="font-size: 103%" href="/tags/linux/">linux</a> &nbsp 
 <a style="font-size: 147%" href="/tags/methodology/">methodology</a> &nbsp 
 <a style="font-size: 136%" href="/tags/network/">network</a> &nbsp 
@@ -1193,6 +1038,10 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/07/31/pat-1011-1020-solutions/">PAT 1011-1020 题解</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/07/31/pat-1001-1010-solutions/">PAT 1001-1010 题解</a>
       </li>
     
@@ -1206,10 +1055,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     
       <li class="post">
         <a href="/blog/2013/07/16/verify-pop-sequence-for-stack/">出栈序列的可能性判定（PAT1051）</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/07/10/cc-license/">给博客签上CC协议</a>
       </li>
     
   </ul>
