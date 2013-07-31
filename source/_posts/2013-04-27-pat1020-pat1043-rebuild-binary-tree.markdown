@@ -54,7 +54,7 @@ tags: [algorithm, pat]
 
 * 1.有了中序和后序，就能重建树。
 
-* 2.最后的输出是前序遍历。过程中其实并不用构建整个树。直接在处理过程中，按前序的方式存储节点到队列中即可。
+* 2.最后的输出是层序遍历。过程中其实并不用构建整个树。直接在处理过程中，按层序的方式存储节点到队列中即可。
 
 详细解题代码见链接[PAT1020](https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/pat/advancedlevel/APAT1020.java)
 
