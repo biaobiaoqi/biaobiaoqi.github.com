@@ -12,7 +12,7 @@ description: "PAT 1011, PAT1011,PAT 1012, PAT1012,PAT 1013, PAT1013,PAT 1014, PA
 
 本文谨代表个人思路，欢迎讨论;)
 
-[1011. World Cup Betting (20)](http://pat.zju.edu.cn/contests/pat-a-practise/10111)
+[1011. World Cup Betting (20)](http://pat.zju.edu.cn/contests/pat-a-practise/1011)
 ---
 
 #####题意
@@ -25,7 +25,7 @@ description: "PAT 1011, PAT1011,PAT 1012, PAT1012,PAT 1013, PAT1013,PAT 1014, PA
 
 <!--more-->
 
-[1012. The Best Rank (25)](http://pat.zju.edu.cn/contests/pat-a-practise/10012)
+[1012. The Best Rank (25)](http://pat.zju.edu.cn/contests/pat-a-practise/1012)
 ---
 #####题意
 给定学生的学号和三个科目的分数，查询输出对应学生单门科目排名和总分排名中最高的那个排名。
