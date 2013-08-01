@@ -12,7 +12,7 @@ description: "PAT 1011, PAT1011,PAT 1012, PAT1012,PAT 1013, PAT1013,PAT 1014, PA
 
 本文谨代表个人思路，欢迎讨论;)
 
-[PAT1011](http://pat.zju.edu.cn/contests/pat-a-practise/10111)
+[1011. World Cup Betting (20)](http://pat.zju.edu.cn/contests/pat-a-practise/10111)
 ---
 
 #####题意
@@ -25,7 +25,7 @@ description: "PAT 1011, PAT1011,PAT 1012, PAT1012,PAT 1013, PAT1013,PAT 1014, PA
 
 <!--more-->
 
-[PAT1012](http://pat.zju.edu.cn/contests/pat-a-practise/10012)
+[1012. The Best Rank (25)](http://pat.zju.edu.cn/contests/pat-a-practise/10012)
 ---
 #####题意
 给定学生的学号和三个科目的分数，查询输出对应学生单门科目排名和总分排名中最高的那个排名。
@@ -40,7 +40,7 @@ C里stdlib.h中的qsort()和C++里algorithm中的sort()函数都能实现快排�
 这里稍微特殊点的用法是使用了[函数指针](http://blog.csdn.net/dyx1024/article/details/7562786)做参数。
 
 
-[PAT1013](http://pat.zju.edu.cn/contests/pat-a-practise/1013)
+[1013. Battle Over Cities (25)](http://pat.zju.edu.cn/contests/pat-a-practise/1013)
 ---
 
 #####题意
@@ -56,7 +56,7 @@ C里stdlib.h中的qsort()和C++里algorithm中的sort()函数都能实现快排�
 针对每个点，执行算法的过程中，需要注意去除掉改点对应的所有通路。
 
 
-[PAT1014](http://pat.zju.edu.cn/contests/pat-a-practise/1014)
+[1014. Waiting in Line (30)](http://pat.zju.edu.cn/contests/pat-a-practise/1014)
 ---
 
 #####题意
@@ -72,7 +72,7 @@ C里stdlib.h中的qsort()和C++里algorithm中的sort()函数都能实现快排�
 可以使用queue模拟每个窗口，循环遍历下次离开窗口的人，继而从等待队列中补上。
 需要注意结束条件，如果17:00以后还没有开始接受服务，则不用再等待。
 
-[PAT1015](http://pat.zju.edu.cn/contests/pat-a-practise/1015)
+[1015. Reversible Primes (20)](http://pat.zju.edu.cn/contests/pat-a-practise/1015)
 ---
 
 #####题意
@@ -85,7 +85,7 @@ Reversible Primes是指在某个进制下，一个数本身和它翻转过来形
 两个功能点实现：判定素数和特定进制下的数据倒转。
 
 
-[PAT1016](http://pat.zju.edu.cn/contests/pat-a-practise/1016)
+[1016. Phone Bills (25)](http://pat.zju.edu.cn/contests/pat-a-practise/1016)
 ---
 
 #####题意
@@ -106,7 +106,7 @@ Reversible Primes是指在某个进制下，一个数本身和它翻转过来形
 结束时刻；最后让分钟追平。以此计算出最终话费。
 
 
-[PAT1017](http://pat.zju.edu.cn/contests/pat-a-practise/1017)
+[1017. Queueing at Bank (25)](http://pat.zju.edu.cn/contests/pat-a-practise/1017)
 ---
 
 #####题意
@@ -122,7 +122,7 @@ Reversible Primes是指在某个进制下，一个数本身和它翻转过来形
 还有一点需要注意的：HH:MM:SS的时间格式，可以转换为累积秒数的时间，方便计算比较。
 
 
-[PAT10108](http://pat.zju.edu.cn/contests/pat-a-practise/1018)
+[1018. Public Bike Management (30)](http://pat.zju.edu.cn/contests/pat-a-practise/1018)
 ---
 
 #####题意
@@ -139,7 +139,7 @@ Reversible Primes是指在某个进制下，一个数本身和它翻转过来形
 
 另外值得注意的是，类比到PAT1003，该题采用了直接对每个节点增加状态记录的方式，直接得到最优解，而不是先找到最短路径，然后计算比较。本题是无法用这种方法实现的，需要送出和带回的自行车数量无法直接在Dij算法中每个节点的计算中体现，并不是前面的节点带回和送出的车辆越少，后面的节点就一定能得到更优解。
 
-[PAT1019](http://pat.zju.edu.cn/contests/pat-a-practise/1019)
+[1019. General Palindromic Number (20)](http://pat.zju.edu.cn/contests/pat-a-practise/1019)
 ---
 
 #####题意
@@ -148,7 +148,7 @@ Reversible Primes是指在某个进制下，一个数本身和它翻转过来形
 #####分析
 简单的数字处理。
 
-[PAT1020](http://pat.zju.edu.cn/contests/pat-a-practise/1020)
+[1020. Tree Traversals (25)](http://pat.zju.edu.cn/contests/pat-a-practise/1020)
 ---
 
 #####题意

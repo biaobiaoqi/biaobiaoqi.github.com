@@ -1,0 +1,96 @@
+---
+layout: post
+title: "PAT 1051-1060 题解"
+date: 2013-08-01 01:43
+comments: true
+categories: [tech]
+tags: [algorithm, pat]
+description: "PAT 1051, PAT1051,PAT 1052, PAT1052,PAT 1053, PAT1053,PAT 1054, PAT1054,PAT 1055, PAT1055,PAT 1056, PAT1056,PAT 1057, PAT1057,PAT 1058, PAT1058,PAT 1059, PAT1059,PAT 1060, PAT1060, 题解， 解题报告"
+published: false
+---
+
+早期部分代码用Java实现。由于PAT虽然支持各种语言，但只有C/C++标程来限定时间，许多题目用Java读入数据就已经超时，后来转投C/C++。浏览全部代码：[请戳](https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel)
+
+本文谨代表个人思路，欢迎讨论;)
+
+
+[PAT1051](http://pat.zju.edu.cn/contests/pat-a-practise/1051)
+---
+
+#####题意
+
+
+
+#####分析
+
+
+<!--more-->
+
+[PAT1052](http://pat.zju.edu.cn/contests/pat-a-practise/1052)
+---
+#####题意
+
+
+#####分析
+
+
+[PAT1053](http://pat.zju.edu.cn/contests/pat-a-practise/1053)
+---
+#####题意
+
+
+#####分析
+
+[PAT1054](http://pat.zju.edu.cn/contests/pat-a-practise/1054)
+---
+#####题意
+
+
+#####分析
+
+[PAT1055](http://pat.zju.edu.cn/contests/pat-a-practise/1055)
+---
+#####题意
+
+
+#####分析
+
+
+[PAT1056](http://pat.zju.edu.cn/contests/pat-a-practise/1056)
+---
+#####题意
+
+
+#####分析
+
+
+[PAT1057](http://pat.zju.edu.cn/contests/pat-a-practise/1057)
+---
+#####题意
+
+
+#####分析
+
+[PAT1058](http://pat.zju.edu.cn/contests/pat-a-practise/1058)
+---
+#####题意
+
+
+#####分析
+
+
+
+[PAT1059](http://pat.zju.edu.cn/contests/pat-a-practise/1059)
+---
+#####题意
+
+
+#####分析
+
+
+
+[PAT1060](http://pat.zju.edu.cn/contests/pat-a-practise/1060)
+---
+#####题意
+
+#####分析
