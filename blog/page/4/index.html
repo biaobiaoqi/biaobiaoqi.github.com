@@ -9,7 +9,7 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="背景 实验室有二十来台 PC 机，30+的服务器集群，网络拓扑比较复杂。简单地说，有网关连着校网，校网无法直接访问学校外的网络，只能通过拨 vpn 来实现外网访问。而校网最近也不稳定，时常断网。 今天，实验室的一台电脑今天突然出无法上网了，而其他人则在正常上网。症状很奇怪： 浏览器只能上 &hellip;">
+  <meta name="description" content="最近看了关于 SQL Server 的分布式处理方面的论文，觉得它提出的 Polybase 跟之前看过的 HadoopDB 有些神似，这里做个小总结（抽空再把 HadoopDB 的总结贴出来）。 不算翻译，只是挑出自己认为是重点的部分。详细情况，还请论文查阅原文，引用中有写明出处。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -101,6 +101,56 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/25/split-querying-process-in-polybase/">PDW中的Split Querying Process</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-25T22:59:00+08:00" pubdate data-updated="true">Apr 25<span>th</span>, 2013</time>
+        
+
+
+
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>最近看了关于 SQL Server 的分布式处理方面的论文，觉得它提出的 Polybase 跟之前看过的 HadoopDB 有些神似，这里做个小总结（抽空再把 HadoopDB 的总结贴出来）。</p>
+
+<p>不算翻译，只是挑出自己认为是重点的部分。详细情况，还请论文查阅原文，引用中有写明出处。文章末尾有我总结的 slides，可以辅助查阅。</p>
+
+<p>由于缺乏实践经验，很多东西未必能理解其本质。如有其他观点，还请多指教。</p>
+
+<p>当下的计划就是开始自己搭环境，实践起来!~</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/04/25/split-querying-process-in-polybase/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -545,55 +595,9 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/03/17/kai-pian/">开篇</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-17T10:18:00+08:00" pubdate data-updated="true">Mar 17<span>th</span>, 2013</time>
-        
-
-
-
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>花了一下午时间，终于搭起了这个博客。</p>
-
-<p>我会陆续将原来 csdn 博客中的内容筛选过来，将这个博客作为主博客。</p>
-
-<p>github 真是神器啊。感谢 github，『感谢』tc 最终没有封锁 github，让我得以有机会搭建这个独立博客。</p>
-
-<p>希望五年、十年、二十年过后，回过头来，依然能在这个博客中找到自己的脚印和梦想。</p>
-
-<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/03/17/kai-pian/'>http://biaobiaoqi.github.com/blog/2013/03/17/kai-pian/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
+    
+      <a class="prev" href="/blog/page/5/">&larr; Older</a>
     
     <a href="/blog/archives">biaobiaoqi 的博文</a>
     
@@ -607,18 +611,18 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   <h1>标签云</h1>
  <br /> 
   <ul class="tag-cloud">
-    <a style="font-size: 175%" href="/tags/algorithm/">algorithm</a> &nbsp 
+    <a style="font-size: 180%" href="/tags/algorithm/">algorithm</a> &nbsp 
 <a style="font-size: 180%" href="/tags/distributed/">distributed</a> &nbsp 
 <a style="font-size: 103%" href="/tags/entrepreneurship/">entrepreneurship</a> &nbsp 
-<a style="font-size: 103%" href="/tags/gui/">gui</a> &nbsp 
 <a style="font-size: 147%" href="/tags/hadoop/">hadoop</a> &nbsp 
 <a style="font-size: 103%" href="/tags/idea/">idea</a> &nbsp 
 <a style="font-size: 122%" href="/tags/java/">java</a> &nbsp 
 <a style="font-size: 103%" href="/tags/linux/">linux</a> &nbsp 
 <a style="font-size: 147%" href="/tags/methodology/">methodology</a> &nbsp 
 <a style="font-size: 136%" href="/tags/network/">network</a> &nbsp 
+<a style="font-size: 103%" href="/tags/octopress/">octopress</a> &nbsp 
 <a style="font-size: 122%" href="/tags/os/">os</a> &nbsp 
-<a style="font-size: 163%" href="/tags/pat/">pat</a> &nbsp 
+<a style="font-size: 169%" href="/tags/pat/">pat</a> &nbsp 
 <a style="font-size: 103%" href="/tags/security/">security</a> &nbsp 
 <a style="font-size: 180%" href="/tags/think/">think</a> &nbsp 
 <a style="font-size: 103%" href="/tags/web/">web</a>
@@ -628,6 +632,10 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <section>
   <h1>最近发表</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/08/01/pat-1021-1030-solutions/">PAT 1021-1030 题解</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/07/31/pat-1011-1020-solutions/">PAT 1011-1020 题解</a>
@@ -643,10 +651,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     
       <li class="post">
         <a href="/blog/2013/07/19/odps-in-alibaba/">阿里离线数据处理平台2013暑期学校</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/07/16/verify-pop-sequence-for-stack/">出栈序列的可能性判定（PAT1051）</a>
       </li>
     
   </ul>

@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: algorithm | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/tags/algorithm/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-08-01T01:35:25+08:00</updated>
+  <updated>2013-08-01T22:21:13+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -12,6 +12,193 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[PAT 1021-1030 题解]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/08/01/pat-1021-1030-solutions/"/>
+    <updated>2013-08-01T01:43:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/08/01/pat-1021-1030-solutions</id>
+    <content type="html"><![CDATA[<p>早期部分代码用Java实现。由于PAT虽然支持各种语言，但只有C/C++标程来限定时间，许多题目用Java读入数据就已经超时，后来转投C/C++。浏览全部代码：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
+
+<p>本文谨代表个人思路，欢迎讨论;)</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1021">1021. Deepest Root (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>无环连通图也可以视为一棵树，选定图中任意一点作为根，如果这时候整个树的深度最大，则称其为deepest root。
+给定一个图，按升序输出所有deepest root。如果给定的图有多个连通分量，则输出连通分量的数量。</p>
+
+<h5>分析</h5>
+
+<p>算法实现的步骤如下：</p>
+
+<ul>
+<li>1.使用并查集判断图是否为连通的。</li>
+<li>2.任意选取一点，做dfs搜索，选取其中一个最远距离的点A，再做一次dfs，找到的所有距离最远的点以及点A都是deepest root。</li>
+</ul>
+
+
+<p>判定图是否连通使用union-find set即可。更关键的点在于找到deepest root。实际上，使用两次dfs就可以实现。
+证明之前，先介绍两个概念，一个是直径，树的deepest root到最远叶子的路径我们暂称直径，而deepest root和最远叶子节点则成为端点。
+注明关键在于以下两点：</p>
+
+<ul>
+<li><p>从任意一个点dfs得到的最远点都是直径的端点。证明如下：</p>
+
+<p>  任意选一点A，做dfs查找距离A最远的点，因为是dfs，所以肯定会经过某直径上的点B，从B出发最远的点是直径上的端点C。
+  那么，这个端点C为何一定是A的最远居里点呢？可以反证证明，如果有一个点D，A->D不经过直径，且length(A->D) > length(A->C)，
+  那么，从C所在直径上构造出经过D的比原直径更长的直径，得证。</p></li>
+<li><p>所有的树的直径都交于一点（或者公用段路径上的几点）。
+于是，从B点dfs出发的所有最长距离的点即为deepest root。证明如下：</p>
+
+<p>  如果两条直径不相交，而树上任意两点肯定连通，则从两直径上，可以选取两点连通以组成更长的直径；如果三条直径相较于不同的两点，也可以根据相交截断的长度组合出更长的直径。</p></li>
+</ul>
+
+
+<!--more-->
+
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1022">1022. Digital Library (30)</a></h2>
+
+<h5>题意</h5>
+
+<p>给定N (&lt;=10000) 本书的信息，包括7位ID，最多80字符的书名，最多80字符的作者名，
+多个最多10字符的关键词，最多80字符的出版商和属于[1000, 3000]的出版时间。
+另给出M (&lt;=1000) 的查询请求，按照查询格式分为：</p>
+
+<ul>
+<li>1: 书名</li>
+<li>2: 作者</li>
+<li>3: 关键词</li>
+<li>4: 出版商</li>
+<li>5: 年份</li>
+</ul>
+
+
+<p>输出查询结果。如果有多个结果，按照书的ID的升序排列。</p>
+
+<h5>分析</h5>
+
+<p>简单模拟题。在使用Map结构来构建倒排索引的过程中，可以讨巧的避免根据不同查询类型使用两层map，
+直接通过在key中增加查询标记来实现。另外C++的priority_queue支持对常规数据类型的最小堆实现：<code>priority_queue&lt;string, vector&lt;string&gt;, greater&lt;string&gt;&gt;</code>，方便了结果输出。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1023">1023. Have Fun with Numbers (20)</a></h2>
+
+<h5>题意</h5>
+
+<p>给出一个20位的正整数，要求计算其乘以2的值，并判定结果的数值是否是原数字所有位数打乱的结果。结果输出Yes或No，以及乘以2以后的数字。</p>
+
+<h5>分析</h5>
+
+<p>判重使用Hash思想。过程如下：</p>
+
+<ul>
+<li>1.原数字按字符串读入，并在一个int hash[10]的hash数组中标记每个数值出现的次数，比如如果出现了四次1，则hash[1]=4。</li>
+<li>2.模拟实现乘以2的简单乘法过程，没计算出一位的值，在hash[]中对应位置上减一。</li>
+<li>3.最后通过判定hash是否全为1和最后结果是否有进位来做判定。</li>
+</ul>
+
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1024">1024. Palindromic Number (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>非回文数可以通过将它与它的倒转数相加，并不断迭代这一过程获得回文数的结果。比如67经过两次处理就得到了484：
+<code>67 + 76 = 143, and 143 + 341 = 484.</code></p>
+
+<p>给定一个数和迭代的次数，判断能否在迭代次数内获得回文结果。</p>
+
+<h5>分析</h5>
+
+<p>简单模拟题，处理数字，做逻辑判断。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1025">1025. PAT Ranking (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>以PAT考试为背景，给所有人做排名。给定的数据包括N(&lt;=100)为赛区的数目，每个赛区的人数以及每个人的分数。
+按照总排名、分区号、注册号的优先级排名。</p>
+
+<h5>分析</h5>
+
+<p>简单模拟题，使用qsort()排序，注意相同分数的人应该拥有相同的排名。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1026">1026. Table Tennis (30)</a></h2>
+
+<h5>题意</h5>
+
+<p>乒乓球俱乐部有K张乒乓球桌，其中有M张是VIP桌。有很多人到俱乐部打球，如果桌子都满了，多余的人只能排队等待。</p>
+
+<p>有一个特殊的VIP制度：如果有空的VIP桌，那么等待队列中的第一对VIP会员可以使用这张卓，
+如果等待队列中没有VIP会员，那么一般会员也可以使用VIP桌。当轮到VIP上的时候，没有VIP桌子，那么VIP用户也可以使用一般的桌子。</p>
+
+<p>另外，每张桌服务一对会员的时间最大限制在两个小时。</p>
+
+<p>给定了乒乓球桌的数量M(编号为1-M)，其中VIP卓的数量K，并指定是那几张桌子。给出来乒乓球俱乐部的N对会员的信息，每对会员有一个达到时间，
+是否是VIP的标记以及打球的时间。要求计算出每对会员的等待时间，以及每张桌服务过的次数。</p>
+
+<h5>分析</h5>
+
+<p>排队模拟题。有两种思路：</p>
+
+<ul>
+<li>1.主体循环处理人。将乒乓球桌和人都当做资源，乒乓球桌对应记录了available的时间，每次取出available最早的时间，从等待队列中选
+则最早的会员使用乒乓球桌。其中vip处理逻辑为：如果available并列最早的桌子中有vip桌，则看等待队列中有没有vip会员，
+如果有则直接处理他，否则按照正常逻辑处理。每次将某会员安置到一个乒乓球桌上，则可以输出该会员的等待时间的结果信息，并将该乒乓球桌的
+服务人数增加一。</li>
+<li>2.主体循环是时间。这样需要模拟同一时刻所有的乒乓球桌以及等待队列，相对比较复杂。</li>
+</ul>
+
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1027">1027. Colors in Mars (20)</a></h2>
+
+<h5>题意</h5>
+
+<p>给定三个十进制数，要求格式化输出其13进制表达。</p>
+
+<h5>分析</h5>
+
+<p>简单的数字处理和hash实现。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1028">1028. List Sorting (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>模拟Excel中按列排序。N (&lt;=100000) 为数据条数，每条数据由三列组成：ID，姓名，成绩。C可以等于1,2,3，分别对应到按三列中的哪一列排序。
+输出排序结果。</p>
+
+<h5>分析</h5>
+
+<p>简单排序题。两种思路：</p>
+
+<ul>
+<li>1.简单的直接使用qsort()实现。</li>
+<li>2.自己手写排序算法，比如二叉搜索树实现。</li>
+</ul>
+
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1029">1029. Median (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>给定两个已排序的整数序列，求出两组数的集合里中间大小的数。</p>
+
+<h5>分析</h5>
+
+<p>使用归并排序思路实现。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1030">1030. Travel Plan (30)</a></h2>
+
+<h5>题意</h5>
+
+<p>给定加权图，每条边有两种权值：一是路径长度，二是开销。要求求出给点两点间的最短路径，如果路径长度一样，则要求比较选择开销最小的路径。</p>
+
+<h5>分析</h5>
+
+<p>使用Dijkstra算法的变形，增加一个权重的判定，可以轻松解决。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[PAT 1011-1020 题解]]></title>
@@ -22,7 +209,7 @@
 
 <p>本文谨代表个人思路，欢迎讨论;)</p>
 
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/10111">PAT1011</a></h2>
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/10111">1011. World Cup Betting (20)</a></h2>
 
 <h5>题意</h5>
 
@@ -35,7 +222,7 @@
 <!--more-->
 
 
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/10012">PAT1012</a></h2>
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/10012">1012. The Best Rank (25)</a></h2>
 
 <h5>题意</h5>
 
@@ -51,7 +238,7 @@
 <p>另外，由于有多个需要分别排序、排名的项，抽象出公共逻辑到一个函数里比较必要，否则代码分散难于debug和维护。
 这里稍微特殊点的用法是使用了<a href="http://blog.csdn.net/dyx1024/article/details/7562786">函数指针</a>做参数。</p>
 
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1013">PAT1013</a></h2>
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1013">1013. Battle Over Cities (25)</a></h2>
 
 <h5>题意</h5>
 
@@ -69,7 +256,7 @@
 
 <p>针对每个点，执行算法的过程中，需要注意去除掉改点对应的所有通路。</p>
 
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1014">PAT1014</a></h2>
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1014">1014. Waiting in Line (30)</a></h2>
 
 <h5>题意</h5>
 
@@ -84,7 +271,7 @@
 可以使用queue模拟每个窗口，循环遍历下次离开窗口的人，继而从等待队列中补上。
 需要注意结束条件，如果17:00以后还没有开始接受服务，则不用再等待。</p>
 
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1015">PAT1015</a></h2>
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1015">1015. Reversible Primes (20)</a></h2>
 
 <h5>题意</h5>
 
@@ -95,7 +282,7 @@
 
 <p>两个功能点实现：判定素数和特定进制下的数据倒转。</p>
 
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1016">PAT1016</a></h2>
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1016">1016. Phone Bills (25)</a></h2>
 
 <h5>题意</h5>
 
@@ -118,7 +305,7 @@
 </ul>
 
 
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1017">PAT1017</a></h2>
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1017">1017. Queueing at Bank (25)</a></h2>
 
 <h5>题意</h5>
 
@@ -134,7 +321,7 @@
 优先队列将结束时间最早的人放到队列的顶端，每次循环处理一个人的结束。然后步入一个黄线外等待的人。如果那个时刻，下一个人还没有达到，则可以将该人开始执行的时间记录为他的到达时间，并加入队列中。
 还有一点需要注意的：HH:MM:SS的时间格式，可以转换为累积秒数的时间，方便计算比较。</p>
 
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1018">PAT10108</a></h2>
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1018">1018. Public Bike Management (30)</a></h2>
 
 <h5>题意</h5>
 
@@ -155,7 +342,7 @@
 
 <p>另外值得注意的是，类比到PAT1003，该题采用了直接对每个节点增加状态记录的方式，直接得到最优解，而不是先找到最短路径，然后计算比较。本题是无法用这种方法实现的，需要送出和带回的自行车数量无法直接在Dij算法中每个节点的计算中体现，并不是前面的节点带回和送出的车辆越少，后面的节点就一定能得到更优解。</p>
 
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1019">PAT1019</a></h2>
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1019">1019. General Palindromic Number (20)</a></h2>
 
 <h5>题意</h5>
 
@@ -165,7 +352,7 @@
 
 <p>简单的数字处理。</p>
 
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1020">PAT1020</a></h2>
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1020">1020. Tree Traversals (25)</a></h2>
 
 <h5>题意</h5>
 
@@ -194,7 +381,7 @@
 
 <p>本文谨代表个人思路，欢迎讨论;)</p>
 
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1001">PAT1001</a></h2>
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1001">1001. A+B Format (20)</a></h2>
 
 <h5>题意</h5>
 
@@ -207,7 +394,7 @@
 <!--more-->
 
 
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1002">PAT1002</a></h2>
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1002">1002. A+B for Polynomials (25)</a></h2>
 
 <h5>题意</h5>
 
@@ -227,7 +414,7 @@
 方法二用空间换取时间，且实现上更不容易出错。同时，由于浮点数本身精确位数不够，在判定两浮点数相加是否为0时，
 需要对结果值取绝对值后，与1e-6做对比。</p>
 
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1003">PAT1003</a></h2>
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1003">1003. Emergency (25)</a></h2>
 
 <h5>题意</h5>
 
@@ -247,7 +434,7 @@
 
 <p>相比之下，方法2明显更简洁。当然，虽然方法2的思路很通用，还需要确定，这一加权的判定条件是能够迭代处理的。</p>
 
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1004">PAT1004</a></h2>
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1004">1004. Counting Leaves (30)</a></h2>
 
 <h5>题意</h5>
 
@@ -258,7 +445,7 @@
 <p>先构建树，鉴于题目的空间限制不严格，可以使用邻接矩阵的方式定义树结构。然后使用dfs遍历树的节点，并记录每层的叶子节点数量。
 可以看到，时间空间的trade-off不仅仅是性能上的提升，也会影响带代码实现的复杂程度。</p>
 
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1005">PAT1005</a></h2>
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1005">1005. Spell It Right (20)</a></h2>
 
 <h5>题意</h5>
 
@@ -268,7 +455,7 @@
 
 <p>简单题，输出的实现上实际上就用到了Hash思想。</p>
 
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1006">PAT1006</a></h2>
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1006">1006. Sign In and Sign Out (25)</a></h2>
 
 <h5>题意</h5>
 
@@ -281,7 +468,7 @@
 然后计算出<code>time = 3600*h + 60*m + s</code>，时间比较就没有问题了。在最终的输出时再做对应的转换即可。
 而在Java语言中，使用到了String的split方法划分子串和Integer.parseInt()转String为int。</p>
 
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1007">PAT1007</a></h2>
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1007">1007. Maximum Subsequence Sum (25)</a></h2>
 
 <h5>题意</h5>
 
@@ -302,7 +489,7 @@
 <p>更多讨论参见博文<a href="../../../../2013/04/05/maximum-subsequence-sum/">《分治、时间空间的权衡:最大合的连续字串问题 (PAT 1007)
 》</a></p>
 
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1008">PAT1008</a></h2>
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1008">1008. Elevator (20)</a></h2>
 
 <h5>题意</h5>
 
@@ -312,7 +499,7 @@
 
 <p>简单的模拟题。</p>
 
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1009">PAT1009</a></h2>
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1009">1009. Product of Polynomials (25)</a></h2>
 
 <h5>题意</h5>
 
@@ -322,7 +509,7 @@
 
 <p>参见PAT1002，使用数组存储虽然空间占用稍大，但比链表实现要便捷很多。</p>
 
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1010">PAT1010</a></h2>
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1010">1010. Radix (25)</a></h2>
 
 <h5>题意</h5>
 
@@ -656,116 +843,6 @@ public static int[] kmpNext(String str) {
 <li><p><a href="http://en.wikipedia.org/wiki/String_searching_algorithm">wiki:String Searching Algorithm</a></p></li>
 <li><p><a href="http://www.cppblog.com/converse/archive/2006/07/05/9447.html">《KMP算法的实现》</a></p></li>
 <li><p><a href="http://wangcong.org/blog/archives/2090">《Linux 内核中的 KMP 实现》</a></p></li>
-</ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[根据前中后序和层序重建二叉树(PAT1020、PAT1043)]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/04/27/pat1020-pat1043-rebuild-binary-tree/"/>
-    <updated>2013-04-27T22:33:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/04/27/pat1020-pat1043-rebuild-binary-tree</id>
-    <content type="html"><![CDATA[<h2>背景</h2>
-
-<p><a href="/blog/2013/04/27/travsal-binary-tree/">《二叉树的遍历（递归、非递归）分析》</a>总结了二叉树不同遍历方式的递归和非递归实现，本文则讨论如何针对不同遍历方式的组合重建二叉树。为了简化问题的考虑，假定二叉树中不会出现重复值。列入考虑范围的有前序、中序、后序、层序遍历这四种的组合。前中后序比较常见，而层序则相对特殊一点了。</p>
-
-<p><a href="http://pat.zju.edu.cn/contests/pat-a-practise">PAT</a>的1043和1020题是遍历相关的模板题，正好派上用场。</p>
-
-<!--more-->
-
-
-<h2>中序+前序</h2>
-
-<h5>算法描述：</h5>
-
-<ul>
-<li><p>初始：用前序遍历序列确定根节点，在中序遍历序列中找到该根节点，则左右子树分别为中序中该节点左右的序列。</p></li>
-<li><p>迭代：对各个子树分别执行三步操作，1.在前序序列中找子树的根节点；2。在中序序列中找子树的根节点，并划分开根节点的左右子树；3.根据新生成的左右子树，在前序序列中划分开这些节点，从而得到了两颗子树的前序、中序序列。</p></li>
-</ul>
-
-
-<h5>练习：<a href="http://pat.zju.edu.cn/contests/pat-a-practise/1043">PAT1043:Is It a Binary Search Tree</a></h5>
-
-<h5>题意：</h5>
-
-<p>输入一个树的前序遍历序列，判定这个树是否是二叉搜索树或者BST的镜像树，如果是，则用后序序列输出。</p>
-
-<h5>解题思路：</h5>
-
-<ul>
-<li><p>1.BST很特殊，实质上BST的所有节点的顺序排列就是中序遍历了。</p></li>
-<li><p>2.要检查树是否是BST或者镜像BST，只需按照重建树的思路，在每次重建的过程中做适当检查即可。检查思路是：检查前序遍历序列中，根节点之后的节点排序是否符合BST的二分规则（即前一段都是小于根节点的，后一段都是大于根节点的）。</p></li>
-<li><p>3.最后的输出是后序遍历。过程中其实并不用构建整个树，直接在处理过程中，按后序的方式存储节点到队列中即可。</p></li>
-</ul>
-
-
-<p>有了这些考虑，就可以写出代码啦。详细解题代码见链接<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/pat/advancedlevel/APAT1043.java">PAT1043</a></p>
-
-<h2>中序+后序</h2>
-
-<h5>算法描述：</h5>
-
-<ul>
-<li><p>初始：用后序遍历序列确定根节点，在中序遍历序列中找到该根节点，则左右子树分别为中序中该节点左右的序列。</p></li>
-<li><p>迭代：对各个子树分别执行三步操作，1.在后序序列中找子树的根节点；2。在中序序列中找子树的根节点，并划分开根节点的左右子树；3.根据新生成的左右子树，在后序序列中划分开这些节点，从而得到了两颗子树的后序、中序序列。</p></li>
-</ul>
-
-
-<h5>练习：<a href="http://pat.zju.edu.cn/contests/pat-a-practise/1020">PAT1020:Tree Traversals</a></h5>
-
-<h5>题意：</h5>
-
-<p>输入为一棵二叉树的后序遍历序列和中序遍历序列。求树的前序遍历序列。</p>
-
-<h5>解题思路：</h5>
-
-<ul>
-<li><p>1.有了中序和后序，就能重建树。</p></li>
-<li><p>2.最后的输出是层序遍历。过程中其实并不用构建整个树。直接在处理过程中，按层序的方式存储节点到队列中即可。</p></li>
-</ul>
-
-
-<p>详细解题代码见链接<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/pat/advancedlevel/APAT1020.java">PAT1020</a></p>
-
-<h2>中序+层序</h2>
-
-<h5>算法描述：</h5>
-
-<ul>
-<li><p>初始：用层序遍历确定顶节点，在中序遍历中，利用顶节点划分出左右子树。</p></li>
-<li><p>迭代：对各个子树分别执行三步操作，1.在层序序列中，找出子树节点集合中，最靠前的节点，这个节点即为子树的顶节点；2.在中序序列中找1中得到的顶节点，并划分开顶节点的左右子树；</p></li>
-<li><p>跟（中序+前序）和（中序+后序）不同之处在于没有迭代的第3步，层序是无法直接划分得到左右子树的节点集合的。但这并不妨碍正常的处理。层序是用来找到子树的顶节点的，而顶节点即是所有子树的节点中，在层序遍历中最靠前的节点。</p></li>
-</ul>
-
-
-<h2><del>前序+后序</del></h2>
-
-<p>这个组合是<strong>无法</strong>重建确定的二叉树的。</p>
-
-<p>对于满二叉树，利用子树节点的排列顺序能区分开左右子树节点集合，构建是没有问题的。但一旦有单个叶子的节点存在，则无法确定叶子是左儿子还是右儿子。因为无论是前序还是后序序列，都无法体现单个儿子情况下，儿子的位置。前序会将左右子树的点置于节点之后，后序则是将左右子树的点置于节点之前。</p>
-
-<ul>
-<li>举个简单的反例：</li>
-</ul>
-
-
-<blockquote><p>给出如下的前序序列和后序序列：
-preorder: A, B;
-postorder: B, A</p>
-
-<p>能构建的二叉树有两种可能，1.A是根节点，B是A左儿子； 2.A是根节点， B是A的右儿子。无法得到一个唯一的结果。</p></blockquote>
-
-<h2><del>前序+层序</del></h2>
-
-<p>这个组合也是无法重建确定的二叉树的。同样于后序+层序的情况。</p>
-
-<p>道理跟（前序+后序）的道理一样，无论是前序、后序，还是层序，都是无法确定单个儿子节点情况下儿子节点的顺序。</p>
-
-<h2>总结</h2>
-
-<ul>
-<li>中序遍历配合另外任何一个遍历，能重建二叉树。其他的任意两个序列的组合都不能唯一的确定重建的二叉树。</li>
 </ul>
 
 ]]></content>
