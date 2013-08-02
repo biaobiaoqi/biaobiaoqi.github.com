@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "出栈序列的可能性判定（PAT1051）"
+title: "出栈序列的可能性判定"
 date: 2013-07-16 01:32
 comments: true
 categories: [tech]
