@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: algorithm | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/tags/algorithm/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-08-02T20:29:10+08:00</updated>
+  <updated>2013-08-03T02:53:01+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -12,6 +12,201 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[PAT 1051-1060 题解]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/08/01/pat-1051-1060-solutions/"/>
+    <updated>2013-08-01T01:43:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/08/01/pat-1051-1060-solutions</id>
+    <content type="html"><![CDATA[<p>浏览全部代码：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
+
+<p>本文谨代表个人思路，欢迎讨论;)</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1051">1051. Pop Sequence (25)</a></h2>
+
+<h4>题意</h4>
+
+<p>给定 stack 的容量，给定数据的入栈顺序：从 1 开始的正整数序列，在允许随机的出栈操作的情况下，要求判断某出栈序列是否可能。</p>
+
+<p>比如，告知 stack 容量为 5，入栈序列的最大值为 7。有两个序列需要判断合理性：</p>
+
+<ul>
+<li>{1 2 3 4 5 6 7}： 这个序列是可能的，只需每次入栈时都做出栈操作。</li>
+<li>{3 2 1 7 5 6 4}： 这个序列是不可能的，其中前半部分3 2 1是合法的，先将1 2 3顺序入栈，然后三次执行出栈操作。而之后的7 5 6则是不可能的。</li>
+</ul>
+
+
+<h4>分析</h4>
+
+<p>两种思路：</p>
+
+<h5>第1种思路：</h5>
+
+<p>使用stl中的stack模拟。判定条件有两条：1.栈中数据量不超过栈的容量；2.出栈只能从栈顶取，不应该出现从固定的堆栈中取出其他数据的情况。</p>
+
+<h5>第2种思路：</h5>
+
+<p>由于入栈序列数据由小到大排列非常特殊，要通过出栈序列判定可能性是存在简便思路的。
+对比分析题中 Sample 给出的序列，结合上面提到的两条冲突条件入手分析：</p>
+
+<ul>
+<li><p>1.栈中数据量不超过栈的容量：</p>
+
+<p>  只有在入栈时，才会需要考虑栈中数据是否超量。出栈序列中的每个数，都以为着在出栈操作之前，它刚入栈，
+  那么当它入栈的时候能否判定是否超过栈容量呢？可以的，（当前的出栈数值 - 已经执行过的出栈操作数量）就是当前栈中元素的数量。</p></li>
+<li><p>2.出栈只能从栈顶取，不应该出现从固定的堆栈中取出其他数据的情况。</p>
+
+<p>  根据观察分析发现，当某数据 m 出栈之后，比 m 小的数据如果在 m 之后出栈的，它们所组成的序列本身需要保持从大到小的顺序排列。
+  距离如3 2 1 7 5 6 4这个序列，在7之后有5 6 4这个子序列，它们都大于7，但却没有保持一个递减的顺序，不合法。</p></li>
+</ul>
+
+
+<p>更多分析参见博文<a href="../../../../2013/07/16/verify-pop-sequence-for-stack/">《出栈序列的可能性判定》</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1052">1052. Linked List Sorting (25)</a></h2>
+
+<h4>题意</h4>
+
+<p>链表的节点被表示为{地址， 值， 下一个指针地址}，其中如果NULL的地址表示为-1，
+地址为5正数，值的范围为[-10<sup>5,</sup> 10<sup>5]。</sup></p>
+
+<p>给定N(&lt; 10<sup>5)个节点以及其头指针，要求按照每个节点上值的大小重新排序，并按照链表顺序输出每个节点。</sup></p>
+
+<h4>分析</h4>
+
+<p>将链表中的节点按值做qsort()排序，然后调整每个值的next指针即可。需要注意的有：</p>
+
+<ul>
+<li>1.INPUT中的节点并不保证全是链表中的，先需要过滤掉悬空的节点。</li>
+<li>2.head直接指向-1(NULL)的情况需要特殊处理。</li>
+</ul>
+
+
+<!--more-->
+
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1053">1053. Path of Equal Weight (30)</a></h2>
+
+<h4>题意</h4>
+
+<p>给定一棵树，有N( &lt;= 100) 个节点，每个节点有一个权重，另给定一个权重值S(&lt; 230)。要求找到从根节点出发到叶节点的路径上，所有点权重值和等于S的所有情况，并按照逆字典序输出。</p>
+
+<h4>分析</h4>
+
+<p>使用邻接表的方式构建树，dfs搜索，由于需要逆字典序输出，处理前需要对每个节点的儿子节点邻接表进行排序，合理剪枝即可。</p>
+
+<p>需要注意的是：结果路径要求以叶子节点结束。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1054">1054. The Dominant Color (20)</a></h2>
+
+<h4>题意</h4>
+
+<p>给定一个M(&lt;= 800)*N(&lt;=600)个像素点，每个像素点的范围为[0, 2<sup>24]，要求找出其中出现次数超过总数量的一半左右的点，称作restrict</sup> dominant color.</p>
+
+<h4>分析</h4>
+
+<p>由于条件比较特殊，使用一个计数器<code>count</code>，一个寄存器<code>color</code>就可以实现对超过一半数目的选项的挑选。过程如下：</p>
+
+<ul>
+<li>1.<code>count</code>初始化为0，<code>color</code>初始化为-1</li>
+<li>2.读入新的颜色值<code>newColor</code>，如果<code>newColor</code>跟寄存器的<code>color</code>一样，则计数器<code>count</code>加一。如果不一样，且<code>count</code>不为0，则<code>count</code>减一；如果不一样，且<code>coun</code>t为0，则寄存器中的<code>color</code>被置为<code>newColor</code>。</li>
+<li>3.不断循环2，直到读入所有颜色值。这时候，寄存器<code>color</code>中存储的就是结果。</li>
+</ul>
+
+
+<p>这个方法的巧妙之处，在于寄存器和计数器保存了状态，用抵消的思想，最终得到了较多数量的状态。思考时，不妨假设所有颜色值只有两个，一个是超过一半数量的restrict dominant color，另一个则是少于一半数量的颜色，经过累加和寄存的操作，少于一半的颜色肯定会被多余一般的颜色抵消掉，最后剩下多于一半的颜色。另外，大家不妨想一下，本题的最后，计数器中的值就是restrict dominant color超过其他颜色的数量么？</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1055">1055. The World's Richest (25)</a></h2>
+
+<h4>题意</h4>
+
+<p>福布斯排行榜上，给出了N(&lt;=10<sup>5)个人的名单，每个名单包含了不超过8个字符的姓名，(0,200]的年龄以及[-10<sup>6,10<sup>6]的财富值。</sup></sup></sup></p>
+
+<p>另外，给出了K(&lt;=10<sup>3)次查询，以及每次查询要求的结果条数M(&lt;=100)。每次查询给定一个年龄区间，要求查询出这个区间范围内财富排名前M的人的名单。如果财富值相同，按姓名字典序排列。</sup></p>
+
+<h4>分析</h4>
+
+<p>这道题时间限制比较严格。有两种思路：</p>
+
+<h5>第1种思路：</h5>
+
+<ul>
+<li>1.所有年龄做qsort()排序；</li>
+<li>2.分离到不同年轻的人的数组中，此时每个年龄中，都是排序好的。</li>
+<li>3.对于每个查询，从2中所得数组里进行归并排序，归并的每次比较过程，使用最大堆实现。</li>
+</ul>
+
+
+<h5>第2种思路：</h5>
+
+<ul>
+<li>1.所有年龄做排序</li>
+<li>2.对排序好的年龄，每个年龄计数减掉100名之后的人。</li>
+<li>3.然后对待查询轮训过滤即可。</li>
+</ul>
+
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1056">1056. Mice and Rice (25)</a></h2>
+
+<h4>题意</h4>
+
+<p>分组淘汰赛背景。给出Np(&lt;=1000)个参赛者，限定每场比赛最多有Ng(&lt;=1000)个参赛者参加，如果一轮比赛中，组队的过程单出几个人，也将他们组成一次比赛。每场比赛决出一名胜者，参加到下一轮的淘汰赛中，而同一轮的负者都拥有相同的排名，如此循环往复，直到决出第一。</p>
+
+<p>输入数据中还规定了必须依据顺序分组，而初始顺序体重已经给出。</p>
+
+<h4>分析</h4>
+
+<p>模拟题。用队列存储剩下的参赛队员，每轮比赛做一次循环，直到队列为空。处理一轮比赛时，负者的rank等于该轮比赛场次+1.换分组别的时候，需要仔细。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1057">1057. Stack (30)</a></h2>
+
+<h4>题意</h4>
+
+<p>在stack的基础上，增加了一个PeekMedian操作定义，要求输出stack中所有数据的中间大小的数。</p>
+
+<p>题目给出N(&lt;=10<sup>5)个对stack的顺序操作，要求输出操作结果。其中保证每次操作的值不大于10<sup>5。</sup></sup></p>
+
+<h4>分析</h4>
+
+<p>使用stl中的stack模拟常规栈操作，关键问题在于中位数的读取。由于时间限制比较严格，使用诸如优先队列等方式会超时。考虑到每次的操作数都不超过10<sup>5，想到诸如使用hash的方式用空间换时间。但即使是开一个`int</sup> hash[100001]`的hash表，也只能记录读入的所有数据的次数，无法提供高效的查询操作。实际上，在hash方式的前提下，使用<a href="http://dongxicheng.org/structure/binary_indexed_tree/">树状数组</a>能很好的解决这个问题。 （另有一篇详细介绍树状数组的译文:<a href="http://hawstein.com/posts/binary-indexed-trees.html">请戳</a>）</p>
+
+<p>对<code>int hash[100001]</code>建立树状数组，然后通过二分的方式，就可方便的查询到hash数组中那个坐标下的统计值处于中间位置，这个坐标的值也就是中位数了。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1058">1058. A+B in Hogwarts (20)</a></h2>
+
+<h4>题意</h4>
+
+<p>给定的数的结构如下：a.b.c，其中a的范围是[0, 10<sup>7]，b的范围是[0,17)，c的范围是[0,29)。给定两个数，要求计算他们的和。</sup></p>
+
+<h4>分析</h4>
+
+<p>简单模拟题，有一个坑：题目交代最高位的区间为[0, 100000000]，但是没说如果两数相加超过这个值怎么办。需要将最高位的结果区间设定为20000000以上才AC。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1059">1059. Prime Factors (25)</a></h2>
+
+<h4>题意</h4>
+
+<p>给定一个正整数，要求格式化输出它的素因数相乘的形式。</p>
+
+<h4>分析</h4>
+
+<p>由于时间限制，不可以简单的重复判定素数。可以使用DP的思想做素数的判定。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1060">1060. Are They Equal (25)</a></h2>
+
+<h4>题意</h4>
+
+<p>科学计数法相关背景。假设机器只能存储3个有效数字，那么<code>12300</code>和<code>12358.9</code>在机器侠都表达都为<code>0.123*10^5</code>，他们相等。其中有效数字使用简单截尾方式，不进位。</p>
+
+<p>给定两个不大于10<sup>100的非负整数，以及有效位数N(&lt;=100)，要求计算在对应的精确位数下，两数的表达是否相等。</sup></p>
+
+<h4>分析</h4>
+
+<p>由于非负整数非常大，不可使用longlong甚至精确度不高的double，当做字符串来处理。</p>
+
+<p>需要注意的一点是对值为0的情况的处理。比如0在有效位数为3下的表达为:<code>0.00*10^0</code></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[PAT 1041-1050 题解]]></title>
@@ -26,7 +221,7 @@
 
 <h5>题意</h5>
 
-<p>给出N (&lt;=105)个数（数值范围为 [1, 10<sup>4]），找到其中不重复的第一个数字。比如给出`5</sup> 31 5 88 67 88 17<code>，答案是</code>31`。</p>
+<p>给出N (&lt;=105)个数（数值范围为 [1, 10<sup>4]），找到其中不重复的第一个数字。比如给出</sup> <code>5 31 5 88 67 88 17</code> ， 答案是 <code>31</code> 。</p>
 
 <h5>分析</h5>
 
@@ -723,166 +918,6 @@ word1 : -> [l] -> [o] -> [a] -> [d]</p>
 
 
 <p>有一个结论：中序遍历配合另外任何一个遍历，能重建二叉树。其他的任意两个序列的组合都不能唯一的确定重建的二叉树。具体分析参见博文<a href="../../../../2013/04/27/pat1020-pat1043-rebuild-binary-tree/">《根据前中后序和层序重建二叉树(PAT1020、PAT1043)》</a>。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[PAT 1001-1010 题解]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/07/31/pat-1001-1010-solutions/"/>
-    <updated>2013-07-31T02:03:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/07/31/pat-1001-1010-solutions</id>
-    <content type="html"><![CDATA[<p>早期部分代码用Java实现。由于PAT虽然支持各种语言，但只有C/C++标程来限定时间，许多题目用Java读入数据就已经超时，后来转投C/C++。浏览全部代码：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
-
-<p>本文谨代表个人思路，欢迎讨论;)</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1001">1001. A+B Format (20)</a></h2>
-
-<h5>题意</h5>
-
-<p>格式化输出两数之和。</p>
-
-<h5>分析</h5>
-
-<p>理清输出逻辑即可。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1002">1002. A+B for Polynomials (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>给定两多项式，相加并格式化输出结果。</p>
-
-<h5>分析</h5>
-
-<p>两种思路</p>
-
-<ul>
-<li>1.采用链表的处理方式；</li>
-<li>2.预设好int[1005]的数组，用下标表示次方，数组中元素值表示对应系数。</li>
-</ul>
-
-
-<p>第一种方法某种程度上看能节省空间，实现上需要注意操作链表时，循环时的越界问题；
-方法二用空间换取时间，且实现上更不容易出错。同时，由于浮点数本身精确位数不够，在判定两浮点数相加是否为0时，
-需要对结果值取绝对值后，与1e-6做对比。</p>
-
-<!--more-->
-
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1003">1003. Emergency (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>求两个城市之间的加权最短路径。在有多个最短路径记录的情况下，选择路径中所有节点的权重值之和最小的。</p>
-
-<h5>分析</h5>
-
-<p>Dijkstra算法的变型实现。两种思路：</p>
-
-<ul>
-<li>1.计算最短路时，在每个节点上用链表preList记下所有最短路径的前节点。
-完成计算后，对preList做dfs获得每条最短路径的权重值之和，比较后得到结果；</li>
-<li>2.计算最短路径时，在节点上，除了记录最短路径中前一个节点preNode之外，还对应的记录当前的最短路径上所有节点的权重值之和，
-这就不用在Dij完成之后再做dfs了，过程中已经找到了最优解。</li>
-</ul>
-
-
-<p>相比之下，方法2明显更简洁。当然，虽然方法2的思路很通用，还需要确定，这一加权的判定条件是能够迭代处理的。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1004">1004. Counting Leaves (30)</a></h2>
-
-<h5>题意</h5>
-
-<p>计算给定的树各个层级叶子节点的个数</p>
-
-<h5>分析</h5>
-
-<p>先构建树，鉴于题目的空间限制不严格，可以使用邻接矩阵的方式定义树结构。然后使用dfs遍历树的节点，并记录每层的叶子节点数量。
-可以看到，时间空间的trade-off不仅仅是性能上的提升，也会影响带代码实现的复杂程度。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1005">1005. Spell It Right (20)</a></h2>
-
-<h5>题意</h5>
-
-<p>计算一个数（&lt;=10<sup>100）的各个位数之和，并用英语按位输出。比如15输出为one</sup> five.</p>
-
-<h5>分析</h5>
-
-<p>简单题，输出的实现上实际上就用到了Hash思想。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1006">1006. Sign In and Sign Out (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>每个人来到实验室和离开实验室的时间都有记录。找到其中最早来实验室和最晚离开实验室的时间。</p>
-
-<h5>分析</h5>
-
-<p>逻辑上很简单的一个题，遍历所有数据，找到其中最大和最小的值即可。稍微要处理的就是时间。
-由于input中给出的是HH:MM:SS的格式，在比较时需要将其换算为int值。实际上，使用C语言读入更方便，<code>scanf("%d:%d:%d", &amp;h, &amp;m, &amp;s);</code>
-然后计算出<code>time = 3600*h + 60*m + s</code>，时间比较就没有问题了。在最终的输出时再做对应的转换即可。
-而在Java语言中，使用到了String的split方法划分子串和Integer.parseInt()转String为int。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1007">1007. Maximum Subsequence Sum (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>给出一组由正负整数组成的序列，求出拥有最大和的连续子序列。</p>
-
-<h5>分析</h5>
-
-<p>最暴力的算法是两个循环的O(n<sup>2)；进一步要使用分治的思想，可以得到O(n*logn)；更好的方法可以达到O(n)，也可以将它看做分治思想。关键在于数学归纳的证明，编程实现非常简单：假定[0,</sup> n-1]的最大连续子串已经求出了，要求[0,n]的最大连续子串。</p>
-
-<ul>
-<li>1.如果[0, n-1]中最大子串不包含最右的数字，则判定<code>原最大子串的和</code>与<code>包含最右点的最大子串 + a[n]的和</code>的大小。取大的那个作为[0, n]的最大子串，并保持一个<code>包含最右点的最大子串</code>。</li>
-<li>2.如果[0, n-1]中最大子串包含最右的数字，则[0, n]的最大子串为原最大子串+a[n]。</li>
-</ul>
-
-
-<p>实际上，算法的核心是维持了两个量的记录，即当前的<code>最大子串</code>，以及当前<code>包含最右点的最大子串</code>。</p>
-
-<p>更多讨论参见博文<a href="../../../../2013/04/05/maximum-subsequence-sum/">《分治、时间空间的权衡:最大合的连续字串问题 (PAT 1007)
-》</a></p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1008">1008. Elevator (20)</a></h2>
-
-<h5>题意</h5>
-
-<p>给出电梯的行进路径，上下的速度和每层停留时间，计算总时间。</p>
-
-<h5>分析</h5>
-
-<p>简单的模拟题。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1009">1009. Product of Polynomials (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>求两个多项式的乘积。</p>
-
-<h5>分析</h5>
-
-<p>参见PAT1002，使用数组存储虽然空间占用稍大，但比链表实现要便捷很多。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1010">1010. Radix (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>给定两个数，其中单个位置上的数值范围可以为[0-z]。指定其中一个数的进制，试确定是否存在可能的进制让两数的实际值相等。</p>
-
-<h5>分析</h5>
-
-<p>此题没有交代清楚input中radix的取值范围以及对一位数有多重可能radix的情况如何输出，坑比较大。下面是需要注意的点。</p>
-
-<ul>
-<li>1.input中两个数字可以是10位数，虽然没有告诉radix的范围，但在<code>9*10^10 10 1 200</code>这个示例中，可以看到结果的radix也可以是很大的。从这个角度看，代码中将radix和两个数值都设定为longlong是合适的选择。</li>
-<li>2.在计算另一个数的radix时，简单的遍历[2, 10<sup>18]会超时。单调的区间很自然想到使用二分查找。</sup></li>
-<li>3.二分查找的上下界确定能减少耗时：下界选数字的所有位上的最大值+1；上界容易想当然的认为就是题中给定了radix的数的值。实际上，示例<code>11 b 1 10</code>就是一个反例，原因在于这个假设忽略了一位数的可能性，解决方案是在取给定radix的数值和下界中较大的那个数。</li>
-<li>4.在二分查找时，不可直接计算出某个radix下数的值，因为可能会longlong溢出。于是需要用特定的compare函数，在累加的过程中判定是否大于另一个数。算是一种剪枝。</li>
-<li>5.还有一个条件：当两个数都是1时，输出2.当两个数相等且不为1时，输出题中给出的radix。（这是从其他人的结题报告中看到的，完全不理解=。=）</li>
-</ul>
-
-
-<p>注意好这些方面，应该能ac了。保重。</p>
 ]]></content>
   </entry>
   

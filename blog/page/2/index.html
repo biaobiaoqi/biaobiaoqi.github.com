@@ -9,7 +9,7 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="质朴、诚恳和坚韧 这本书是某次在 Amazon 上购书『满 100 送书一本』时挑的。放在抽屉里有段日子了。 一直挺崇拜俞敏洪老师。初次了解到他是高中的时候看的『赢在中国』，俞敏洪老师是嘉宾点评。而后混在考 T 的大流中去上了新东方的课程，几个老师讲得不错，比较可惜的是远离了老俞的时代。 &hellip;">
+  <meta name="description" content="在 github pages 上搭建好 octopress 博客之后，博客的基本功能就能使用了。如果想自己定制也是没问题的，octopress 有较详尽的官方文档，原则上有问题求助官方即可：octopress-help。官方没有包纳的也可以去询问 stackoverflow。 当然， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -101,6 +101,134 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/10/decorate-octopress/">定制Octopress</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-10T01:53:00+08:00" pubdate data-updated="true">Jul 10<span>th</span>, 2013</time>
+        
+
+
+
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>在 github pages 上搭建好 octopress 博客之后，博客的基本功能就能使用了。如果想自己定制也是没问题的，octopress 有较详尽的官方文档，原则上有问题求助官方即可：<a href="http://octopress.org/help/">octopress-help</a>。官方没有包纳的也可以去询问 <a href="http://stackoverflow.com/questions/tagged/octopress">stackoverflow</a>。 当然，中文的看起来总会省事儿点。我做了如下一些总结;)</p>
+
+<p>不会 ruby 的童鞋特别注意：配置_ config.yml 的过程中特别注意，配置项『:』后要留空格，否则会报错。</p>
+
+<h2>1.装饰边栏</h2>
+
+<p>以增加豆瓣展示框为例。参加正反反长大哥的博客 <a href="http://icodeit.org/2012/10/how-to-embed-douban-show-in-your-octopress-site/">How to Embed Douban-Show in Your Octopress Site</a></p>
+
+<h2>2.增加国内的第三方评论</h2>
+
+<p>虽然 octopress 内置的评论系统也很不错，但国内的第三方评论更接地气，将微博、人人等各方 SNS 都纳入旗下。比较出名的有友言、多说。</p>
+
+<p>这里以唐巧大哥的博文<a href="http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/">《象写程序一样写博客：搭建基于 github 的博客》</a>为例，他使用的是友言。</p>
+
+<h2>3.定制域名</h2>
+
+<p>如果你拥有自己的域名，可以 CNAME 到 github pages 上。以我的配置为例（我的域名为<code>biaobiaoqi.me</code>）。</p>
+
+<p>1.在 octopress 的 source 目录下创建 CNAME 文件，并输入新域名：biaobiaoqi.com</p>
+
+<p>2.在域名管理中，创建或修改 A 记录，指向 207.97.227.245 这个地址。</p>
+
+<p>3.创建 CNAME 记录，www.biaobiaoqi.com -> biaobiaoqi.github.com</p>
+
+<p>这一过程可能需要好几天才能生效，请耐心等待:)</p>
+
+<h2>4.让博客中连接在新窗口打开</h2>
+
+<p>由于 markdown 不支持这一语法，如果要自己用 html 标签实现，又有些违背了 markdown 以内容为重的立意。</p>
+
+<p>参考博文<a href="http://www.blogjava.net/lishunli/archive/2013/01/20/394478.html">《在 Octopress 中为 markdown 的超链接加上 target=&#8221;_blank&#8221;》</a>，可以通过将如下代码添加到 {OCTOPRESS_HOME}/source/_includes/custom/head.html 文件末尾来实现：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">function</span> <span class="nx">addBlankTargetForLinks</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;a[href^=&quot;http&quot;]&#39;</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;target&#39;</span><span class="p">,</span> <span class="s1">&#39;_blank&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">bind</span><span class="p">(</span><span class="s1">&#39;DOMNodeInserted&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">addBlankTargetForLinks</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>5.列表的排版</h2>
+
+<p>默认情况，所有文字的排头会对齐，但如果有列表项的情况下也如此，列表头就会冲出文章的主体区块了。</p>
+
+<p>在 octopress/sass/custom/_layout.scss 文件中找到#$indented-lists: true 行，去掉#注释即可。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$indented</span><span class="o">-</span><span class="nx">lists</span><span class="o">:</span> <span class="kc">true</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/07/10/decorate-octopress/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -1227,56 +1355,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/05/22/pragmatic-thinking-and-learning-refactor-your-wetware/">《程序员的思维修炼》</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-22T01:14:00+08:00" pubdate data-updated="true">May 22<span>nd</span>, 2013</time>
-        
-
-
-
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>别鄙视方法论</h3>
-
-<p>曾经很长时间里，我这么认为：方法论的东西没什么实际的用处，不过是其他人按照自己的喜好来处理事物的途径而已，何必照着他人的思路。比如，作为一只不靠谱的程序猴子，在一些偏颇的思维习惯的影响下，我甚至对许多图形化的东西比较反感，自以为文本信息已经足以表达清楚事实且更有效率，从而本能的回避能造成视觉冲击的事物。直到后来，发现自己每每定下的计划都无法完整实施，自然也是没有收到预期的效果。我开始关注到方法本身是否合理，寻找那把平衡效率和体验的钥匙。</p>
-
-<p>这本书给出了一个很好的答案。</p>
-
-<p>虽然标题上赫然是“程序员”几个大字，但其实并没有这么局限。这是一本谈论思维习惯的书，对所有想了解大脑认知过程以更好的发觉其潜能的读者而言，都是可以参考的。虽然自己只是看完了这本书，而没有长期实践的效果证明，但从以往的经验来看，它的观点总能让我信服。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/05/22/pragmatic-thinking-and-learning-refactor-your-wetware/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -1294,26 +1372,30 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
  <br /> 
   <ul class="tag-cloud">
     <a style="font-size: 180%" href="/tags/algorithm/">algorithm</a> &nbsp 
-<a style="font-size: 172%" href="/tags/distributed/">distributed</a> &nbsp 
-<a style="font-size: 101%" href="/tags/entrepreneurship/">entrepreneurship</a> &nbsp 
-<a style="font-size: 101%" href="/tags/gui/">gui</a> &nbsp 
-<a style="font-size: 141%" href="/tags/hadoop/">hadoop</a> &nbsp 
-<a style="font-size: 101%" href="/tags/idea/">idea</a> &nbsp 
-<a style="font-size: 119%" href="/tags/java/">java</a> &nbsp 
-<a style="font-size: 101%" href="/tags/linux/">linux</a> &nbsp 
-<a style="font-size: 141%" href="/tags/methodology/">methodology</a> &nbsp 
-<a style="font-size: 131%" href="/tags/network/">network</a> &nbsp 
-<a style="font-size: 119%" href="/tags/os/">os</a> &nbsp 
-<a style="font-size: 172%" href="/tags/pat/">pat</a> &nbsp 
-<a style="font-size: 101%" href="/tags/security/">security</a> &nbsp 
-<a style="font-size: 172%" href="/tags/think/">think</a> &nbsp 
-<a style="font-size: 101%" href="/tags/web/">web</a>
+<a style="font-size: 169%" href="/tags/distributed/">distributed</a> &nbsp 
+<a style="font-size: 100%" href="/tags/entrepreneurship/">entrepreneurship</a> &nbsp 
+<a style="font-size: 100%" href="/tags/gui/">gui</a> &nbsp 
+<a style="font-size: 139%" href="/tags/hadoop/">hadoop</a> &nbsp 
+<a style="font-size: 100%" href="/tags/idea/">idea</a> &nbsp 
+<a style="font-size: 117%" href="/tags/java/">java</a> &nbsp 
+<a style="font-size: 100%" href="/tags/linux/">linux</a> &nbsp 
+<a style="font-size: 139%" href="/tags/methodology/">methodology</a> &nbsp 
+<a style="font-size: 129%" href="/tags/network/">network</a> &nbsp 
+<a style="font-size: 117%" href="/tags/os/">os</a> &nbsp 
+<a style="font-size: 173%" href="/tags/pat/">pat</a> &nbsp 
+<a style="font-size: 100%" href="/tags/security/">security</a> &nbsp 
+<a style="font-size: 169%" href="/tags/think/">think</a> &nbsp 
+<a style="font-size: 100%" href="/tags/web/">web</a>
 
   </ul>
 </section>
 <section>
   <h1>最近发表</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/08/01/pat-1051-1060-solutions/">PAT 1051-1060 题解</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/08/01/pat-1041-1050-solutions/">PAT 1041-1050 题解</a>
@@ -1329,10 +1411,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     
       <li class="post">
         <a href="/blog/2013/07/31/pat-1011-1020-solutions/">PAT 1011-1020 题解</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/07/31/pat-1001-1010-solutions/">PAT 1001-1010 题解</a>
       </li>
     
   </ul>
