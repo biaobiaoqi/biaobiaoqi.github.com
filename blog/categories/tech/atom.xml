@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tech | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-08-02T02:26:37+08:00</updated>
+  <updated>2013-08-02T16:40:56+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -45,9 +45,6 @@ lowo</p>
 
 <p>简单模拟题。</p>
 
-<!--more-->
-
-
 <h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1032">1032. Sharing (25)</a></h2>
 
 <h5>题意</h5>
@@ -73,6 +70,9 @@ word1 : -> [l] -> [o] -> [a] -> [d]</p>
 <p>既然是单词，它的长度应该是有限的，也就是链表不会出现环这种情况（实际上这里的处理方式对于有环无环都适用）。对第一个单词链表做遍历，对爬过的节点做好标记。第二个单词链表也同样做标记，一旦遇到已经标记过的节点，则该节点就是结果。</p>
 
 <p>需要注意一点：直接使用map做节点的存储最后一个case会超时。而鉴于5位正整数的数据量，可以直接使用数组，用空间换时间。</p>
+
+<!--more-->
+
 
 <h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1033">1033. To Fill or Not to Fill (25)</a></h2>
 
@@ -245,9 +245,6 @@ word1 : -> [l] -> [o] -> [a] -> [d]</p>
 </ul>
 
 
-<!--more-->
-
-
 <h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1022">1022. Digital Library (30)</a></h2>
 
 <h5>题意</h5>
@@ -271,6 +268,9 @@ word1 : -> [l] -> [o] -> [a] -> [d]</p>
 
 <p>简单模拟题。在使用Map结构来构建倒排索引的过程中，可以讨巧的避免根据不同查询类型使用两层map，
 直接通过在key中增加查询标记来实现。另外C++的priority_queue支持对常规数据类型的最小堆实现：<code>priority_queue&lt;string, vector&lt;string&gt;, greater&lt;string&gt;&gt;</code>，方便了结果输出。</p>
+
+<!--more-->
+
 
 <h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1023">1023. Have Fun with Numbers (20)</a></h2>
 
@@ -408,9 +408,6 @@ word1 : -> [l] -> [o] -> [a] -> [d]</p>
 
 <p>非常简单的模拟题。</p>
 
-<!--more-->
-
-
 <h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1012">1012. The Best Rank (25)</a></h2>
 
 <h5>题意</h5>
@@ -426,6 +423,9 @@ word1 : -> [l] -> [o] -> [a] -> [d]</p>
 
 <p>另外，由于有多个需要分别排序、排名的项，抽象出公共逻辑到一个函数里比较必要，否则代码分散难于debug和维护。
 这里稍微特殊点的用法是使用了<a href="http://blog.csdn.net/dyx1024/article/details/7562786">函数指针</a>做参数。</p>
+
+<!--more-->
+
 
 <h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1013">1013. Battle Over Cities (25)</a></h2>
 
@@ -580,9 +580,6 @@ word1 : -> [l] -> [o] -> [a] -> [d]</p>
 
 <p>理清输出逻辑即可。</p>
 
-<!--more-->
-
-
 <h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1002">1002. A+B for Polynomials (25)</a></h2>
 
 <h5>题意</h5>
@@ -602,6 +599,9 @@ word1 : -> [l] -> [o] -> [a] -> [d]</p>
 <p>第一种方法某种程度上看能节省空间，实现上需要注意操作链表时，循环时的越界问题；
 方法二用空间换取时间，且实现上更不容易出错。同时，由于浮点数本身精确位数不够，在判定两浮点数相加是否为0时，
 需要对结果值取绝对值后，与1e-6做对比。</p>
+
+<!--more-->
+
 
 <h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1003">1003. Emergency (25)</a></h2>
 

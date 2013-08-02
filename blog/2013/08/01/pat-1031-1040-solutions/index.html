@@ -162,9 +162,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <p>简单模拟题。</p>
 
-<!--more-->
-
-
 <h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1032">1032. Sharing (25)</a></h2>
 
 <h5>题意</h5>
@@ -192,6 +189,9 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <p>既然是单词，它的长度应该是有限的，也就是链表不会出现环这种情况（实际上这里的处理方式对于有环无环都适用）。对第一个单词链表做遍历，对爬过的节点做好标记。第二个单词链表也同样做标记，一旦遇到已经标记过的节点，则该节点就是结果。</p>
 
 <p>需要注意一点：直接使用 map 做节点的存储最后一个 case 会超时。而鉴于 5 位正整数的数据量，可以直接使用数组，用空间换时间。</p>
+
+<!--more-->
+
 
 <h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1033">1033. To Fill or Not to Fill (25)</a></h2>
 
