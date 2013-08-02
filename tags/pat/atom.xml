@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: pat | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/tags/pat/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-08-02T16:40:56+08:00</updated>
+  <updated>2013-08-02T16:41:34+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -12,6 +12,171 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[PAT 1041-1050 题解]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/08/01/pat-1041-1050-solutions/"/>
+    <updated>2013-08-01T01:43:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/08/01/pat-1041-1050-solutions</id>
+    <content type="html"><![CDATA[<p>浏览全部代码：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
+
+<p>本文谨代表个人思路，欢迎讨论;)</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1041">1041. Be Unique (20)</a></h2>
+
+<h5>题意</h5>
+
+<p>给出N (&lt;=105)个数（数值范围为 [1, 10<sup>4]），找到其中不重复的第一个数字。比如给出`5</sup> 31 5 88 67 88 17<code>，答案是</code>31`。</p>
+
+<h5>分析</h5>
+
+<p>简单模拟题，开一个大数组<code>int a[10001];</code>，以读入的数为下标，记录count:<code>a[index] ++;</code>。结果输出第一个存储为1的下标:<code>if (a[index] == 1)</code>。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1042">1042. Shuffling Machine (20)</a></h2>
+
+<h5>题意</h5>
+
+<p>背景是洗牌机的洗牌过程。过程是给定洗牌的每张牌的位置替换序列，由原来的次序算出最后的牌的平排列。</p>
+
+<p>比如原有的次序为<code>S3, H5, C1, D13, J2</code>，
+给定的洗牌顺序为<code>4, 2, 5 ,3 ,1</code>，那么一次洗牌的结果为：<code>J2, H5, D13, S3, C1</code>。
+如果需要两次洗牌，则结果为<code>C1, H5, S3, J2, D13</code>。</p>
+
+<p>输入为对一整副牌（54张）的洗牌策略，以及洗牌次数N，要求计算出最后的洗牌结果。</p>
+
+<h5>分析</h5>
+
+<p>简单hash题。</p>
+
+<!--more-->
+
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1043">1043. Is It a Binary Search Tree (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>二叉搜索树的定义就不重复了，题目新定义了一个镜像二叉搜索树，就是将一颗二叉搜索树所有节点的左右子树交换后的二叉树。</p>
+
+<p>输入是一个二叉树的前序排列，要求判定是否是一个二叉搜索树或者镜像二叉搜索树。如果是，输出该树后序遍历的序列。</p>
+
+<h5>分析</h5>
+
+<p>解题思路：</p>
+
+<ul>
+<li>1.BST 很特殊，实质上 BST 的所有节点的顺序排列就是中序遍历了。</li>
+<li>2.要检查树是否是 BST 或者镜像 BST，只需按照重建树的思路，在每次重建的过程中做适当检查即可。检查思路是：检查前序遍历序列中，根节点之后的节点排序是否符合 BST 的二分规则（即前一段都是小于根节点的，后一段都是大于根节点的）。</li>
+<li>3.最后的输出是后序遍历。过程中其实并不用构建整个树，直接在处理过程中，按后序的方式存储节点到队列中即可。</li>
+</ul>
+
+
+<p>更多相关分析，参见博文<a href="../../../../2013/04/27/pat1020-pat1043-rebuild-binary-tree/">《根据前中后序和层序重建二叉树》</a>。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1044">1044. Shopping in Mars (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>火星人购物使用钻石链，每颗钻石都有一定的价值。付款是，要求从钻石链上找到所有刚好能匹配到商品价值的连续的钻石子链，如果没有，
+则找到超过商品价值的最小的钻石子链。</p>
+
+<p>比如钻石链为<code>3 2 1 5 4 6 8 7</code>，商品价值为<code>15</code>，则候选的方案有：第4到第6颗的子链<code>5 4 6</code>，第7到第8颗：<code>8 7</code>。</p>
+
+<p>输入为一个钻石链以及商品的价值，要求找到所有满足条件的分割方案，按起始点从小到大排序输出。</p>
+
+<h5>分析</h5>
+
+<p>由于时间限制有些严格，需要做足够的优化：</p>
+
+<ul>
+<li>1.为了便于计算某个区间的累加值，在存储钻石串时，可以在<code>index</code>位置存储包括当前钻石在内的之前所有钻石价值的累加和。</li>
+<li>2.使用两层循环遍历所有可能，在遍历以位置i为其实坐标的子串时，不应该将结束位置初始化为i，而是应该是以<code>i-1</code>为起始位置的搜索过程中的break时的
+结束位置的下标减1.</li>
+</ul>
+
+
+<p>其中第2条的证明如下：</p>
+
+<p>算法中首先计算以<code>i</code>为起始位置的子串的累加值。假定计算到<code>j</code>满足累加值等于或者刚好大于商品价值<code>m</code>。之后，结束以<code>i</code>位置开始的子串的探寻，进入下一阶段以i+1为起始位置的搜索。
+由于<code>[i, j]</code>的累加和刚好等于<code>m</code>，则<code>[i, j - 1]</code>的累加和肯定小于<code>m</code>，那么<code>[i + 1, j - 1]</code>的累加和也肯定小于<code>m</code>。</p>
+
+<p>综上述，在以<code>i+1</code>为起始位置的搜索中，可以初始化结束位置为上一次搜索结束的位置减一，即<code>j - 1</code>.</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1045">1045. Favorite Color Stripe (30)</a></h2>
+
+<h5>题意</h5>
+
+<p>Eva对彩色条有特殊的癖好，对于一条五颜六色的彩带，她会减掉其中一些颜色块，让整个彩带的颜色顺序匹配到自己的一个颜色喜好顺序上。</p>
+
+<p>举例来说，她喜欢的颜色顺序为{2 3 1 5 6}，给定的彩带的颜色顺序为{2 2 4 1 5 5 6 3 1 1 5 6}，那么经过她的剪辑，留下的彩带的可能选项有：{2 2 1 1 1 5 6}
+{2 2 1 5 5 5 6}，{2 2 1 5 5 6 6}和{2 2 3 1 1 5 6}。</p>
+
+<p>我们的任务是找到其中最长的剪辑可能。</p>
+
+<h5>分析</h5>
+
+<p>这是经典的最长递增子序列问题(LIS)，递增在这里体现为子序列的颜色顺序要遵照Eva的对颜色的喜好顺序。使用动态规划解决。</p>
+
+<ul>
+<li>1.剔除不在Eva喜欢颜色列表中的颜色。</li>
+<li>2.DP的状态： 用<code>length[max]</code>数组存储状态，<code>length[i]</code>表示到彩带的第i个位置为止，包含该颜色的符合Eva喜好顺序的子串长度的最长值。记得在每次</li>
+<li>3.DP的子问题：<code>length[i]</code>等于在其之前的所有<code>lengths[j]</code>跟<code>i</code>位置颜色组合后的最长子串值。</li>
+</ul>
+
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1046">1046. Shortest Distance (20)</a></h2>
+
+<h5>题意</h5>
+
+<p>给定在圆环上的几个点的相对位置，要求计算不同点之间的距离。</p>
+
+<h5>分析</h5>
+
+<p>简单模拟。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1047">1047. Student List for Course (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>根据每名学生填报的课程，按顺序输出每门课程的学生名单。其中学生总量为N(&lt;=40000)，课程总量为K(&lt;=2500)。学生姓名为3个大写英文字符加一个数字。</p>
+
+<h5>分析</h5>
+
+<p>倒排索引的模拟。可以针对学生姓名做hash方式的优化。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1048">1048. Find Coins (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>给定一系列硬币，以及一个商品的价格。要求从硬币中找到两个硬币让他们的组合等于商品的价格。如果有多个，输出有用最小单个值的硬币组合。</p>
+
+<h5>分析</h5>
+
+<p>首先，硬币中币值不小于商品价格的可以过滤掉。遍历过程中，使用hash标记的方法，设定一个<code>coins[MAXVALUE]</code>（其中MAXVALUE为商品价格的最大值）记录已有的币值种类，
+在遍历的过程中，一边将读入的硬币增加到<code>coins[]</code>中，一边计算满足条件的最小币值。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1049">1049. Counting Ones (30)</a></h2>
+
+<h5>题意</h5>
+
+<p>给定一个正整数N(&lt;=2<sup>30)，要求计算所有小于N的正整数的各个位置上，1出现的次数之和。</sup></p>
+
+<h5>分析</h5>
+
+<p>比较有思维难度的一题，核心在于找规律。10ms的时间限制表明了不能用常规的循环遍历来解决。需要从简单的case找规律，逐步扩大到常规的情况。</p>
+
+<p>详情参见《编程之美》P132页《1的数目》。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1050">1050. String Subtraction (20)</a></h2>
+
+<h5>题意</h5>
+
+<p>给定两个字符串，S1和S2,要求将S2中的字符从S1串中剔除。</p>
+
+<h5>分析</h5>
+
+<p>用Hash的方式标记需要剔除的字符。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[PAT 1031-1040 题解]]></title>
@@ -718,46 +883,6 @@ word1 : -> [l] -> [o] -> [a] -> [d]</p>
 
 
 <p>注意好这些方面，应该能ac了。保重。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[终于算完了这道『1+1』]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/07/29/after-pat-practice/"/>
-    <updated>2013-07-29T22:12:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/07/29/after-pat-practice</id>
-    <content type="html"><![CDATA[<p>在<a href="http://weibo.com/redow7">@ReDow</a>、<a href="http://weibo.com/cloudbye">@麦迪的小腿</a>和<a href="http://weibo.com/linest">@lines</a>等小伙伴的帮助下，终于断断续续的爬完了<a href="http://pat.zju.edu.cn/">PAT</a>的Basic Level和Advanced Level，阶段性填补了自己惨白的算法短板。在cs的圈子里，说PAT是入门的『1 + 1』不为过。刚完成『1 + 1』，作为五年科班的人，确实不够光彩。不过现在能做的也只是尽力弥补本科时间里的虚度。</p>
-
-<p>从亲手挖的坑里往外爬，需要付出比其他人更多的努力。没时间享受题目ac之后的快感（画外音：这么简单的题会有快感么=.=#），倒会时不时蹦出一股脑的蛋疼：『你当初干XX啥去了！』。</p>
-
-<h2>当初...</h2>
-
-<p>记得大一的时候，每天花好几个小时泡图书馆看各种IT杂志和技术书籍。在刚开始学C语言编程的时间里，我看着中间件、系统软件、终端融合、东软和用友金蝶之争等一系列摸不着头脑的东西，在对数据还没概念的时候，看着数据库的范式和E-R图…总之，就是一直在门外徘徊。</p>
-
-<p>之后专业课多了起来，我又兴高采烈的混在工高大神的队伍里，早上集结同学每天早上五点多轮流爬起来去自习室占座，以看似端正实则不专注的令人发指的学习态度在GPA榜单上持续退步着。浑浑噩噩的搞过数模，无果。当然，以『学渣』的水平充着『学霸』也是有好处的，就是沾染了大神的精神气，比如记忆犹新的有在CMU念书的鑫磊大神的专注、冷静和每天4小时的睡眠。同时，我还风风火火的参加了ASES和求是强鹰，搀和着所谓的创业。大四在爱尔兰的交流，除了英语和专业课，其他的倒是学的挺多，比如烧饭，单反和旅游……本科唯一做的跟编程有关的说得出口的，也就写了个Android程序在比赛里获了个奖，不提也罢的那种。</p>
-
-<h2>变</h2>
-
-<p>在《<a href="http://book.douban.com/subject/1048007/">高效能认识的七个习惯</a>》里看过一个观点：每个人都有属于自己的『关注圈』和『影响圈』。影响圈是个人对外界产出的途径，关注圈则意味着个人对外界的期许。可以想见，关注圈大于影响圈。正确的成长方式是尽力扩大影响圈，以此催生关注圈的扩大。而我则是走在了相反的方向：一直致力于开发自己的关注圈，后果是影响圈不见长进。一度我开始注意遏制自己这方面的好高骛远，不过事实证明，我还是比较喜欢在学爬得时候看走路的教学视频。</p>
-
-<!--more-->
-
-
-<p>后来听闻了杨绛先生的一则小事。大概是说，一个年轻人写信给杨绛，说自己平时许多问题想不明白，想请教下怎么应对。杨绛回复说『是你看书太少，想的太多』。第一眼看到这个故事，我的想法就是：那不是在说的我么。对我而言，『书』指的更泛一些，理解为阅历或许更恰当。让可能性禁锢了思想，不值得，不如踏出去，自己去找答案。</p>
-
-<p>研究生的一年又过去，很难说我这一年达到了自己的预期。不过也没怎样，世界变化这么快，也容不得静态的计划。至少，我渐渐的逼近了自己喜欢的生活节奏。</p>
-
-<h2>信仰</h2>
-
-<p>都说现在的国人根子里没有信仰，年岁越长也渐渐有些自己的体会。面对远超过big-data量级的选择，我时常彷徨，我不敢说自己有信仰。我只是一直在坚持找寻。</p>
-
-<p>用乔老爷子著名的斯坦福演讲中的一句话结束：</p>
-
-<blockquote><p>You can't connect the dots looking forward. You can only connect them looking backwards, so you have to trust that the dots will somehow connect in your future. You have to trust in something--your gut, destiny, life, karma,whatever--because believing that the dots will connect down the road will give you the confidence to follow your heart, even when it leads you off the well-worn path, and that will make all the difference.</p></blockquote>
-
-<h3>PS：</h3>
-
-<p>据我所知网上的资料没有对PAT题型整体的把握和讲解。接下来的时间，我会整理下自己的代码和解题思路，将整理结果放到博客上来，也算自己的复习。链接都准备好了：<a href="../overcome-pat/">《PAT综合题解》</a>。如果是404Error，就请再耐心等待几天吧;)</p>
 ]]></content>
   </entry>
   

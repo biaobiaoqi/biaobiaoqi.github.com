@@ -9,7 +9,7 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="早期部分代码用 Java 实现。由于 PAT 虽然支持各种语言，但只有 C/C++标程来限定时间，许多题目用 Java 读入数据就已经超时，后来转投 C/C++。浏览全部代码：请戳 本文谨代表个人思路，欢迎讨论;) 1031. Hello World for U (20) 题意 &hellip;">
+  <meta name="description" content="浏览全部代码：请戳 本文谨代表个人思路，欢迎讨论;) 1041. Be Unique (20) 题意 给出 N (&lt;=105)个数（数值范围为 [1, 104]），找到其中不重复的第一个数字。比如给出`5 31 5 88 67 88 17，答案是31`。 分析 简单模拟题，开一个大数组int &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -101,6 +101,78 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/08/01/pat-1041-1050-solutions/">PAT 1041-1050 题解</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-01T01:43:00+08:00" pubdate data-updated="true">Aug 1<span>st</span>, 2013</time>
+        
+
+
+
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>浏览全部代码：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
+
+<p>本文谨代表个人思路，欢迎讨论;)</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1041">1041. Be Unique (20)</a></h2>
+
+<h5>题意</h5>
+
+<p>给出 N (&lt;=105)个数（数值范围为 [1, 10<sup>4]），找到其中不重复的第一个数字。比如给出`5</sup> 31 5 88 67 88 17<code>，答案是</code>31`。</p>
+
+<h5>分析</h5>
+
+<p>简单模拟题，开一个大数组<code>int a[10001];</code>，以读入的数为下标，记录 count:<code>a[index] ++;</code>。结果输出第一个存储为 1 的下标:<code>if (a[index] == 1)</code>。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1042">1042. Shuffling Machine (20)</a></h2>
+
+<h5>题意</h5>
+
+<p>背景是洗牌机的洗牌过程。过程是给定洗牌的每张牌的位置替换序列，由原来的次序算出最后的牌的平排列。</p>
+
+<p>比如原有的次序为<code>S3, H5, C1, D13, J2</code>，
+给定的洗牌顺序为<code>4, 2, 5 ,3 ,1</code>，那么一次洗牌的结果为：<code>J2, H5, D13, S3, C1</code>。
+如果需要两次洗牌，则结果为<code>C1, H5, S3, J2, D13</code>。</p>
+
+<p>输入为对一整副牌（54 张）的洗牌策略，以及洗牌次数 N，要求计算出最后的洗牌结果。</p>
+
+<h5>分析</h5>
+
+<p>简单 hash 题。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/08/01/pat-1041-1050-solutions/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -934,82 +1006,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/07/yuminhong/">《俞敏洪口述》</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-07T23:53:00+08:00" pubdate data-updated="true">Jul 7<span>th</span>, 2013</time>
-        
-
-
-
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>质朴、诚恳和坚韧</h2>
-
-<p>这本书是某次在 Amazon 上购书『满 100 送书一本』时挑的。放在抽屉里有段日子了。</p>
-
-<p>一直挺崇拜俞敏洪老师。初次了解到他是高中的时候看的『赢在中国』，俞敏洪老师是嘉宾点评。而后混在考 T 的大流中去上了新东方的课程，几个老师讲得不错，比较可惜的是远离了老俞的时代。恰好前两天热映的『中国合伙人』，又把他拉回视野前沿。周日，趁着没心情码代码，忙里偷闲的读完了这本自传体的文字。</p>
-
-<p>我不太喜欢读『活人』的传记。没有盖棺定论的事儿，或多或少掺杂些美华。但读这本书，却丝毫没有表现出浮夸，就像他的性格一般质朴、诚恳和坚韧。</p>
-
-<p>或许在某些名人的传记里，永远不会看到他通过喝酒打通关系搞定了某个问题，而老俞有。书里多次的描述了他是怎样融入了这个『人情社会』。不可否认，他的本分和待人诚恳让他有人缘，这是他的优势。</p>
-
-<p>他能在面对东方学校过河拆桥的举动下，沉住气，以和为贵，用合理的手段占据主动。</p>
-
-<p>他能在北大读本科的阶段受众人嘲讽的环境下成长，不断学习，在毕业时，喊出『你们干十年成的我干二十年，你们二十年成的我干四十年。如果实在不行，我会保持心情愉快、身体健康，到八十岁以后把你们送走了我再走』。</p>
-
-<p>凡此种种……</p>
-
-<h2>世界观</h2>
-
-<p>从每个成功的人的经历中，都能总结出数不清的箴言。成功的理由永远说不完。而这本书里，对我而言感触最深的无非是下面这些话：</p>
-
-<blockquote><p>人生就是这样，你不受这个苦就会受那个苦。一个人如果从苦中能找到乐和幸福，那他就是幸运的。……我深刻的意识到什么也不做的痛苦比任何其他痛苦更加深刻，所以我一定要做事，做事的标准就是必须做对社会有好处的事情，以最大的努力在痛苦的世界中尽力而为。</p></blockquote>
-
-<p>对我而言，这句话实在受用。我无法证明这些字在未来的时间里能对我造成的影响，却打在我最近几年来受困扰最多的点上。</p>
-
-<p>乐观让人笑着面对生活。生活总归是有各种委屈、各种阻力，笑脸的背后，时常是受伤的心，区别在于受伤的心能埋得多深。我宁愿相信，乐观是因为能接受苦，能从苦中找到快乐，而不是没有苦。</p>
-
-<p>时常的，我被不好的状态左右。那是种很奇怪的感觉，是面对压力的逃避、拖延，独自缩在没有人看得见的角落，在电脑屏幕前刷着网页，时间慢慢流走。然后心情越来越差，因为一事无成的颓废感。我是闲不下来的人。是的，『什么也不做的痛苦，比任何其他痛苦更加深刻』！</p>
-
-<p>曾经在 ASES 的分享会上，听 dd 讲起过<a href="http://cuitianyi.com/blog/authentic-happiness-%E8%AF%BB%E4%B9%A6%E6%80%BB%E7%BB%93/">『积极心理学』</a>。其中有个观点是：『享乐是心灵资本的消费，而心流中的满足则是心灵资本的投资』。简单的讲，创造价值的事情会让我得到心流的满足，而简单的娱乐则会消费这种满足感。或许当两者之差为负的时候，我就感受到了那种空虚和煎熬，不止什么都不做，还消费了更多。</p>
-
-<p>正是对社会责任的追求，老俞没有沉浸再新东方的飞速发展中。对他而言，现在的新东方的经营一切都要权衡公司的利益和教育理念。虽然他的新东方充满了实用主义和人文情怀，虽然他能让新东方尽到企业的社会责任，但这依然不是他想要的。他正在筹划办私立高校，用他的教育理念，给中国的教育发展贡献力量。这是中国的希望。</p>
-
-<p>最后，以老俞的一句话结尾：</p>
-
-<blockquote><p>人生的苦难肯定是没有尽头的，人要做的是在苦难中奋发起来，做自己能够做的和应该做的事儿，这就是我的世界观。</p></blockquote>
-
-<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/07/07/yuminhong/'>http://biaobiaoqi.github.com/blog/2013/07/07/yuminhong/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1025,26 +1021,30 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
  <br /> 
   <ul class="tag-cloud">
     <a style="font-size: 180%" href="/tags/algorithm/">algorithm</a> &nbsp 
-<a style="font-size: 176%" href="/tags/distributed/">distributed</a> &nbsp 
-<a style="font-size: 102%" href="/tags/entrepreneurship/">entrepreneurship</a> &nbsp 
-<a style="font-size: 144%" href="/tags/hadoop/">hadoop</a> &nbsp 
-<a style="font-size: 102%" href="/tags/idea/">idea</a> &nbsp 
-<a style="font-size: 120%" href="/tags/java/">java</a> &nbsp 
-<a style="font-size: 102%" href="/tags/linux/">linux</a> &nbsp 
-<a style="font-size: 144%" href="/tags/methodology/">methodology</a> &nbsp 
-<a style="font-size: 134%" href="/tags/network/">network</a> &nbsp 
-<a style="font-size: 102%" href="/tags/octopress/">octopress</a> &nbsp 
-<a style="font-size: 120%" href="/tags/os/">os</a> &nbsp 
-<a style="font-size: 171%" href="/tags/pat/">pat</a> &nbsp 
-<a style="font-size: 102%" href="/tags/security/">security</a> &nbsp 
-<a style="font-size: 176%" href="/tags/think/">think</a> &nbsp 
-<a style="font-size: 102%" href="/tags/web/">web</a>
+<a style="font-size: 172%" href="/tags/distributed/">distributed</a> &nbsp 
+<a style="font-size: 101%" href="/tags/entrepreneurship/">entrepreneurship</a> &nbsp 
+<a style="font-size: 101%" href="/tags/gui/">gui</a> &nbsp 
+<a style="font-size: 141%" href="/tags/hadoop/">hadoop</a> &nbsp 
+<a style="font-size: 101%" href="/tags/idea/">idea</a> &nbsp 
+<a style="font-size: 119%" href="/tags/java/">java</a> &nbsp 
+<a style="font-size: 101%" href="/tags/linux/">linux</a> &nbsp 
+<a style="font-size: 141%" href="/tags/methodology/">methodology</a> &nbsp 
+<a style="font-size: 131%" href="/tags/network/">network</a> &nbsp 
+<a style="font-size: 119%" href="/tags/os/">os</a> &nbsp 
+<a style="font-size: 172%" href="/tags/pat/">pat</a> &nbsp 
+<a style="font-size: 101%" href="/tags/security/">security</a> &nbsp 
+<a style="font-size: 172%" href="/tags/think/">think</a> &nbsp 
+<a style="font-size: 101%" href="/tags/web/">web</a>
 
   </ul>
 </section>
 <section>
   <h1>最近发表</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/08/01/pat-1041-1050-solutions/">PAT 1041-1050 题解</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/08/01/pat-1031-1040-solutions/">PAT 1031-1040 题解</a>
@@ -1060,10 +1060,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     
       <li class="post">
         <a href="/blog/2013/07/31/pat-1001-1010-solutions/">PAT 1001-1010 题解</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/07/29/after-pat-practice/">终于算完了这道『1+1』</a>
       </li>
     
   </ul>
