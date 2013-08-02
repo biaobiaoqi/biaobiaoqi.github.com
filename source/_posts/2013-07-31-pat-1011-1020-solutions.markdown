@@ -23,7 +23,6 @@ description: "PAT 1011, PAT1011,PAT 1012, PAT1012,PAT 1013, PAT1013,PAT 1014, PA
 
 非常简单的模拟题。
 
-<!--more-->
 
 [1012. The Best Rank (25)](http://pat.zju.edu.cn/contests/pat-a-practise/1012)
 ---
@@ -39,6 +38,7 @@ C里stdlib.h中的qsort()和C++里algorithm中的sort()函数都能实现快排�
 另外，由于有多个需要分别排序、排名的项，抽象出公共逻辑到一个函数里比较必要，否则代码分散难于debug和维护。
 这里稍微特殊点的用法是使用了[函数指针](http://blog.csdn.net/dyx1024/article/details/7562786)做参数。
 
+<!--more-->
 
 [1013. Battle Over Cities (25)](http://pat.zju.edu.cn/contests/pat-a-practise/1013)
 ---

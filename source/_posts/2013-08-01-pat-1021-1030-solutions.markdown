@@ -45,7 +45,7 @@ description: "PAT 1021, PAT1021,PAT 1022, PAT1022,PAT 1023, PAT1023,PAT 1024, PA
     如果两条直径不相交，而树上任意两点肯定连通，则从两直径上，可以选取两点连通以组成更长的直径；如果三条直径相较于不同的两点，也可以根据相交截断的长度组合出更长的直径。
 
 
-<!--more-->
+
 
 
 [1022. Digital Library (30)](http://pat.zju.edu.cn/contests/pat-a-practise/1022)
@@ -68,6 +68,7 @@ description: "PAT 1021, PAT1021,PAT 1022, PAT1022,PAT 1023, PAT1023,PAT 1024, PA
 简单模拟题。在使用Map结构来构建倒排索引的过程中，可以讨巧的避免根据不同查询类型使用两层map，
 直接通过在key中增加查询标记来实现。另外C++的priority_queue支持对常规数据类型的最小堆实现：`priority_queue<string, vector<string>, greater<string>>`，方便了结果输出。
 
+<!--more-->
 
 [1023. Have Fun with Numbers (20)](http://pat.zju.edu.cn/contests/pat-a-practise/1023)
 ---

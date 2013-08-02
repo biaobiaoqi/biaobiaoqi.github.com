@@ -24,7 +24,6 @@ description: "PAT 1001, PAT1001,PAT 1002, PAT1002,PAT 1003, PAT1003,PAT 1004, PA
 #####分析
 理清输出逻辑即可。
 
-<!--more-->
 
 [1002. A+B for Polynomials (25)](http://pat.zju.edu.cn/contests/pat-a-practise/1002)
 ---
@@ -41,7 +40,7 @@ description: "PAT 1001, PAT1001,PAT 1002, PAT1002,PAT 1003, PAT1003,PAT 1004, PA
 方法二用空间换取时间，且实现上更不容易出错。同时，由于浮点数本身精确位数不够，在判定两浮点数相加是否为0时，
 需要对结果值取绝对值后，与1e-6做对比。
 
-
+<!--more-->
 [1003. Emergency (25)](http://pat.zju.edu.cn/contests/pat-a-practise/1003)
 ---
 #####题意
