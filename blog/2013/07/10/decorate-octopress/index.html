@@ -142,6 +142,89 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <p>虽然 octopress 内置的 disqus 评论系统很不错，但在国内的使用并不普及。相比之下，友言、多说等第三方评论则更接地气，可以利用到微博、人人等 SNS 账号。</p>
 
+<h3>2.1 友言</h3>
+
+<p>本博客采用了友言。首先注册<a href="http://www.uyan.cc/">友言</a>的账号，如果不注册，虽然也能实现评论功能，但没有后台管理整个站点的评论会十分纠结。注册完成之后，选择获取代码，将这串代码贴入相应的位置，即可实现第三方评论。</p>
+
+<p>在路径<code>$OCTOPRESS/source/_includes/post/</code>上创建文件<code>youyanandjiathis.html</code>，功能代码放入其中。</p>
+
+<h3>2.2 加网</h3>
+
+<p>分享方面，本博客使用了<a href="http://www.jiathis.com/getcode/icon">加网</a>。注册后，在更多高级自定义功能中，可能自定义不同的分享按钮，生成代码后，也将生成的代码贴入<code>$OCTOPRESS/source/_includes/post/youyanandjiathis.html</code>中。</p>
+
+<p>现在，youyanandjiathis.html 的样子如下(需要注意，自己使用时，uid 显然是不一样的啦)</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="c">&lt;!-- JiaThis Button BEGIN --&gt;</span>
+</span><span class='line'><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;jiathis_style_32x32&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&quot;jiathis_button_qzone&quot;</span><span class="nt">&gt;&lt;/a&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&quot;jiathis_button_tsina&quot;</span><span class="nt">&gt;&lt;/a&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&quot;jiathis_button_tqq&quot;</span><span class="nt">&gt;&lt;/a&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&quot;jiathis_button_weixin&quot;</span><span class="nt">&gt;&lt;/a&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&quot;jiathis_button_renren&quot;</span><span class="nt">&gt;&lt;/a&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://www.jiathis.com/share?uid=1814751&quot;</span> <span class="na">class=</span><span class="s">&quot;jiathis jiathis_txt jtico jtico_jiathis&quot;</span> <span class="na">target=</span><span class="s">&quot;_blank&quot;</span><span class="nt">&gt;&lt;/a&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&quot;jiathis_counter_style&quot;</span><span class="nt">&gt;&lt;/a&gt;</span>
+</span><span class='line'><span class="nt">&lt;/div&gt;</span>
+</span><span class='line'><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">jiathis_config</span> <span class="o">=</span> <span class="p">{</span><span class="nx">data_track_clickback</span><span class="o">:</span><span class="s1">&#39;true&#39;</span><span class="p">};</span>
+</span><span class='line'><span class="nt">&lt;/script&gt;</span>
+</span><span class='line'><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;http://v3.jiathis.com/code/jia.js?uid=xxxxxx&quot;</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'><span class="c">&lt;!-- JiaThis Button END --&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">&lt;!-- UY BEGIN --&gt;</span>
+</span><span class='line'><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;uyan_frame&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+</span><span class='line'><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;http://v2.uyan.cc/code/uyan.js?uid=xxxxxxxx&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'><span class="c">&lt;!-- UY END --&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>2.3 将功能增加到博客中</h3>
+
+<p>功能代码已经都在 youyanandjiathis.html 中了，接下来是让 blog 使用到这些功能代码。</p>
+
+<p>首先在_ config.yml 中增加开关：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#comment and share                                                                                    </span>
+</span><span class='line'><span class="n">comment_and_share</span><span class="p">:</span> <span class="kp">true</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>然后在<code>$OCTOPRESS/source/_includes/post/sharing.html</code>中的，根据开关<code>comment_and_share</code> 引入对应的功能代码<code>post/youyanandjiathis.html</code>，类比于默认实现中的<code>&lt;facebook_like&gt;</code>部分。代码如下（使用时，先去掉反斜杠）：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>  \{\% if site.comment_and_share \%\}
+</span><span class='line'>      \{\% include post/]youyanandjiathis.html \%\}
+</span><span class='line'>  \{\% endif \%\}
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>2.4 友言验证</h3>
+
+<p>另外，需要在友言的后台处理评论，甚至做很多定制化处理，需要通过验证。详情在友言的管理员后台可见。</p>
+
 <h2>3.定制域名</h2>
 
 <p>如果你拥有自己的域名，可以 CNAME 到 github pages 上。以我的配置为例（我的域名为<code>biaobiaoqi.me</code>）。</p>
