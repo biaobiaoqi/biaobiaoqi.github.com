@@ -4,7 +4,7 @@
 
 url: http://biaobiaoqi.github.com
 title: Biaobiaoqi的博客 
-subtitle: 共享、和平、自由 
+subtitle: 自由、共享、和平
 author: Biaobiaoqi 
 simple_search: http://google.com/search
 description:
@@ -95,7 +95,7 @@ google_analytics_tracking_id: UA-39900036-1
 #facebook_like: false
 
 #Weibo share
-weibo_share: true
+comment_and_share: true
 
 #duoshuo
 #duoshuo_show_comment_count: true

@@ -19,11 +19,72 @@ description: "按照个人的习惯定制Octopress博客，有如下内容：增
 以增加豆瓣展示框为例。参加正反反长大哥的博客[How to Embed Douban-Show in Your Octopress Site](http://icodeit.org/2012/10/how-to-embed-douban-show-in-your-octopress-site/)
 
 
-##2.增加国内的第三方评论
+##2.增加评论和分享功能
 
-虽然octopress内置的评论系统也很不错，但国内的第三方评论更接地气，将微博、人人等各方SNS都纳入旗下。比较出名的有友言、多说。
+虽然octopress内置的disqus评论系统很不错，但在国内的使用并不普及。相比之下，友言、多说等第三方评论则更接地气，可以利用到微博、人人等SNS账号。
 
-这里以唐巧大哥的博文[《象写程序一样写博客：搭建基于github的博客》](http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/)为例，他使用的是友言。
+###2.1友言
+
+本博客采用了友言。首先注册[友言](http://www.uyan.cc/)的账号，如果不注册，虽然也能实现评论功能，但没有后台管理整个站点的评论会十分纠结。注册完成之后，选择获取代码，将这串代码贴入相应的位置，即可实现第三方评论。
+
+在路径`$OCTOPRESS/source/_includes/post/`上创建文件`youyanandjiathis.html`，功能代码放入其中。
+
+###2.2加网
+分享方面，本博客使用了[加网](http://www.jiathis.com/getcode/icon)。注册后，在更多高级自定义功能中，可能自定义不同的分享按钮，生成代码后，也将生成的代码贴入`$OCTOPRESS/source/_includes/post/youyanandjiathis.html`中。
+
+现在，youyanandjiathis.html的样子如下(需要注意，自己使用时，uid显然是不一样的啦)
+
+``` html
+
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share?uid=1814751" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=xxxxxx" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=xxxxxxxx"></script>
+<!-- UY END -->
+
+```
+
+###2.3将功能增加到博客中
+
+功能代码已经都在youyanandjiathis.html中了，接下来是让blog使用到这些功能代码。
+
+首先在_config.yml中增加开关：
+``` ruby
+#comment and share                                                                                    
+comment_and_share: true
+```
+
+然后在`$OCTOPRESS/source/_includes/post/sharing.html`中的，根据开关`comment_and_share` 引入对应的功能代码`post/youyanandjiathis.html`，类比于默认实现中的`<facebook_like>`部分。代码如下（使用时，先去掉反斜杠）：
+
+
+``` html    
+
+  \{\% if site.comment_and_share \%\}
+      \{\% include post/]youyanandjiathis.html \%\}
+  \{\% endif \%\}
+
+```
+
+
+###2.4友言验证
+另外，需要在友言的后台处理评论，甚至做很多定制化处理，需要通过验证。详情在友言的管理员后台可见。
+
+
 
 ##3.定制域名
 

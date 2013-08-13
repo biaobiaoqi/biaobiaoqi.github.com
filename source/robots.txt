@@ -2,6 +2,6 @@
 layout: nil
 ---
 User-agent: *
-Disallow: 
+Disallow: {{site.url }}/Resume.html 
 
 Sitemap: {{ site.url }}/sitemap.xml 
