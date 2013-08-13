@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: octopress | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/tags/octopress/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-08-03T19:17:10+08:00</updated>
+  <updated>2013-08-13T21:21:04+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -26,11 +26,9 @@
 
 <p>以增加豆瓣展示框为例。参加正反反长大哥的博客<a href="http://icodeit.org/2012/10/how-to-embed-douban-show-in-your-octopress-site/">How to Embed Douban-Show in Your Octopress Site</a></p>
 
-<h2>2.增加国内的第三方评论</h2>
+<h2>2.增加评论和分享功能</h2>
 
-<p>虽然octopress内置的评论系统也很不错，但国内的第三方评论更接地气，将微博、人人等各方SNS都纳入旗下。比较出名的有友言、多说。</p>
-
-<p>这里以唐巧大哥的博文<a href="http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/">《象写程序一样写博客：搭建基于github的博客》</a>为例，他使用的是友言。</p>
+<p>虽然octopress内置的disqus评论系统很不错，但在国内的使用并不普及。相比之下，友言、多说等第三方评论则更接地气，可以利用到微博、人人等SNS账号。</p>
 
 <h2>3.定制域名</h2>
 
