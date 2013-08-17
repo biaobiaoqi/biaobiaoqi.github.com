@@ -1,0 +1,935 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: algorithm | Biaobiaoqi的博客]]></title>
+  <link href="http://biaobiaoqi.github.com/tags/algorithm/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.github.com/"/>
+  <updated>2013-08-17T14:08:27+08:00</updated>
+  <id>http://biaobiaoqi.github.com/</id>
+  <author>
+    <name><![CDATA[Biaobiaoqi]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[PAT练习题概览]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/08/03/overcome-pat/"/>
+    <updated>2013-08-03T22:20:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/08/03/overcome-pat</id>
+    <content type="html"><![CDATA[<p>PAT(<a href="http://pat.zju.edu.cn">pat.zju.edu.cn</a>)是一个面向C/C++程序的Online Judge系统。相比ZOJ，HDOJ，POJ等ACM题库，PAT的题目非常基础，对于数据结构、算法的入门是比较有助益的。</p>
+
+<p>本文按照自己的认识，给PAT advanced level做出了分类。由于很多题目实际上兼顾有多种解法和思路，我给每道题打上了tag，来应对分类的独占性局限，供大家参考。</p>
+
+<h2>简单题</h2>
+
+<p>这类题几乎不需要数据结构、算法基础，主要通过简单的逻辑流程和判断实现。</p>
+
+<ul>
+<li>1001 A+B</li>
+<li>1002 多项式相加</li>
+<li>1005 简单hash</li>
+<li>1006 选极值</li>
+<li>1008 模拟电梯</li>
+<li>1009 多项式乘法</li>
+<li>1011 选极值</li>
+<li>1019 数字/字符处理</li>
+<li>1024 数字/字符处理</li>
+<li>1027 数字/字符处理，简单hash</li>
+<li>1031 数字/字符处理</li>
+<li>1035 简单hash<!--more --></li>
+<li>1036 选极值</li>
+<li>1037 简单模拟</li>
+<li>1040 数字/字符处理</li>
+<li>1046 数字/字符处理</li>
+<li>1050 数字/字符处理</li>
+<li>1058 数字/字符处理</li>
+<li>1060 数字/字符处理</li>
+</ul>
+
+
+<h2>模拟题</h2>
+
+<p>这类题也相对简单，需要使用到一些简单的数据结构或者相对复杂的逻辑流程实现。</p>
+
+<ul>
+<li>1022 倒排索引</li>
+<li>1023 数字/字符处理</li>
+<li>1032 链表</li>
+<li>1049 计算数字中的1</li>
+<li>1051 模拟栈</li>
+<li>1052 链表</li>
+<li>1054 dominant color</li>
+<li>1056 模拟分组淘汰赛</li>
+</ul>
+
+
+<h4>排队模拟</h4>
+
+<p>下面三道模拟题是针对排队模型处理的：</p>
+
+<ul>
+<li>1014 排队问题</li>
+<li>1017 排队问题</li>
+<li>1026 排队问题</li>
+</ul>
+
+
+<h4>排序模拟</h4>
+
+<p>这几道模拟题侧重在使用排序方法：</p>
+
+<ul>
+<li>1012 排序</li>
+<li>1016 排序，模拟电话账单计算</li>
+<li>1025 排序</li>
+<li>1028 排序</li>
+<li>1029 归并排序</li>
+<li>1038 递归，排序</li>
+</ul>
+
+
+<h4>时间优化</h4>
+
+<p>这几道题需要做好时间优化才能ac。</p>
+
+<ul>
+<li>1044 搜索，时间优化</li>
+<li>1039 倒排索引，hash，时间优化</li>
+<li>1047 倒排索引，hash，时间优化</li>
+<li>1055 排序，时间优化</li>
+</ul>
+
+
+<h4>素数判定</h4>
+
+<ul>
+<li>1015 素数</li>
+<li>1059 素数</li>
+</ul>
+
+
+<h2>图</h2>
+
+<ul>
+<li>1003 最短路径</li>
+<li>1018 最短路径</li>
+<li>1030 最短路径</li>
+<li>1034 dfs</li>
+</ul>
+
+
+<h2>搜索</h2>
+
+<ul>
+<li>1010 二分搜索，优化剪枝</li>
+<li>1013 并查集/dfs</li>
+<li>1021 并查集，dfs，图的直径</li>
+<li>1054 dfs，优化剪枝</li>
+</ul>
+
+
+<h2>树</h2>
+
+<ul>
+<li>1004 dfs，树遍历</li>
+<li>1020 二叉树遍历</li>
+<li>1043 二叉树遍历</li>
+</ul>
+
+
+<h2>Hash</h2>
+
+<ul>
+<li>1041 hash</li>
+<li>1042 hash</li>
+<li>1048 hash</li>
+</ul>
+
+
+<h2>分治</h2>
+
+<ul>
+<li>1007 最大子连续序列</li>
+</ul>
+
+
+<h2>贪心</h2>
+
+<ul>
+<li>1033 贪心</li>
+</ul>
+
+
+<h2>动态规划</h2>
+
+<ul>
+<li>1045 DP，最长递增子序列</li>
+</ul>
+
+
+<h2>树状数组</h2>
+
+<p>树状数组是一种神奇的数据结构，在1057题中其神奇的效果得到了很好的体现。</p>
+
+<ul>
+<li>1057 树状数组，模拟栈，二分搜索</li>
+</ul>
+
+
+<h2>题解</h2>
+
+<p>截止2013-08-03，PAT advanced level的60道题全部题解和代码已经发布在本博客中，链接如下：欢迎讨论大家;)</p>
+
+<ul>
+<li><a href="../../../../2013/07/31/pat-1001-1010-solutions/">《PAT 1001-1010 题解》</a></li>
+<li><a href="../../../../2013/07/31/pat-1011-1020-solutions/">《PAT 1011-1020 题解》</a></li>
+<li><a href="../../../../2013/08/01/pat-1021-1030-solutions/">《PAT 1021-1030 题解》</a></li>
+<li><a href="../../../../2013/08/01/pat-1031-1040-solutions/">《PAT 1031-1040 题解》</a></li>
+<li><a href="../../../../2013/08/01/pat-1041-1050-solutions/">《PAT 1041-1050 题解》</a></li>
+<li><a href="../../../../2013/08/01/pat-1051-1060-solutions/">《PAT 1051-1060 题解》</a></li>
+</ul>
+
+
+<p>附博客的PAT专题区链接：<a href="../../../../../tags/pat/">请戳</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[PAT 1051-1060 题解]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/08/01/pat-1051-1060-solutions/"/>
+    <updated>2013-08-01T01:43:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/08/01/pat-1051-1060-solutions</id>
+    <content type="html"><![CDATA[<p>浏览全部代码：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
+
+<p>本文谨代表个人思路，欢迎讨论;)</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1051">1051. Pop Sequence (25)</a></h2>
+
+<h4>题意</h4>
+
+<p>给定 stack 的容量，给定数据的入栈顺序：从 1 开始的正整数序列，在允许随机的出栈操作的情况下，要求判断某出栈序列是否可能。</p>
+
+<p>比如，告知 stack 容量为 5，入栈序列的最大值为 7。有两个序列需要判断合理性：</p>
+
+<ul>
+<li>{1 2 3 4 5 6 7}： 这个序列是可能的，只需每次入栈时都做出栈操作。</li>
+<li>{3 2 1 7 5 6 4}： 这个序列是不可能的，其中前半部分3 2 1是合法的，先将1 2 3顺序入栈，然后三次执行出栈操作。而之后的7 5 6则是不可能的。</li>
+</ul>
+
+
+<h4>分析</h4>
+
+<p>两种思路：</p>
+
+<h5>第1种思路：</h5>
+
+<p>使用stl中的stack模拟。判定条件有两条：1.栈中数据量不超过栈的容量；2.出栈只能从栈顶取，不应该出现从固定的堆栈中取出其他数据的情况。</p>
+
+<h5>第2种思路：</h5>
+
+<p>由于入栈序列数据由小到大排列非常特殊，要通过出栈序列判定可能性是存在简便思路的。
+对比分析题中 Sample 给出的序列，结合上面提到的两条冲突条件入手分析：</p>
+
+<ul>
+<li><p>1.栈中数据量不超过栈的容量：</p>
+
+<p>  只有在入栈时，才会需要考虑栈中数据是否超量。出栈序列中的每个数，都以为着在出栈操作之前，它刚入栈，
+  那么当它入栈的时候能否判定是否超过栈容量呢？可以的，（当前的出栈数值 - 已经执行过的出栈操作数量）就是当前栈中元素的数量。</p></li>
+<li><p>2.出栈只能从栈顶取，不应该出现从固定的堆栈中取出其他数据的情况。</p>
+
+<p>  根据观察分析发现，当某数据 m 出栈之后，比 m 小的数据如果在 m 之后出栈的，它们所组成的序列本身需要保持从大到小的顺序排列。
+  距离如3 2 1 7 5 6 4这个序列，在7之后有5 6 4这个子序列，它们都大于7，但却没有保持一个递减的顺序，不合法。</p></li>
+</ul>
+
+
+<p>更多分析参见博文<a href="../../../../2013/07/16/verify-pop-sequence-for-stack/">《出栈序列的可能性判定》</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1052">1052. Linked List Sorting (25)</a></h2>
+
+<h4>题意</h4>
+
+<p>链表的节点被表示为{地址， 值， 下一个指针地址}，其中如果NULL的地址表示为-1，
+地址为5正数，值的范围为[-10<sup>5,</sup> 10<sup>5]。</sup></p>
+
+<p>给定N(&lt; 10<sup>5)个节点以及其头指针，要求按照每个节点上值的大小重新排序，并按照链表顺序输出每个节点。</sup></p>
+
+<h4>分析</h4>
+
+<p>将链表中的节点按值做qsort()排序，然后调整每个值的next指针即可。需要注意的有：</p>
+
+<ul>
+<li>1.INPUT中的节点并不保证全是链表中的，先需要过滤掉悬空的节点。</li>
+<li>2.head直接指向-1(NULL)的情况需要特殊处理。</li>
+</ul>
+
+
+<!--more-->
+
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1053">1053. Path of Equal Weight (30)</a></h2>
+
+<h4>题意</h4>
+
+<p>给定一棵树，有N( &lt;= 100) 个节点，每个节点有一个权重，另给定一个权重值S(&lt; 230)。要求找到从根节点出发到叶节点的路径上，所有点权重值和等于S的所有情况，并按照逆字典序输出。</p>
+
+<h4>分析</h4>
+
+<p>使用邻接表的方式构建树，dfs搜索，由于需要逆字典序输出，处理前需要对每个节点的儿子节点邻接表进行排序，合理剪枝即可。</p>
+
+<p>需要注意的是：结果路径要求以叶子节点结束。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1054">1054. The Dominant Color (20)</a></h2>
+
+<h4>题意</h4>
+
+<p>给定一个M(&lt;= 800)*N(&lt;=600)个像素点，每个像素点的范围为[0, 2<sup>24]，要求找出其中出现次数超过总数量的一半左右的点，称作restrict</sup> dominant color.</p>
+
+<h4>分析</h4>
+
+<p>由于条件比较特殊，使用一个计数器<code>count</code>，一个寄存器<code>color</code>就可以实现对超过一半数目的选项的挑选。过程如下：</p>
+
+<ul>
+<li>1.<code>count</code>初始化为0，<code>color</code>初始化为-1</li>
+<li>2.读入新的颜色值<code>newColor</code>，如果<code>newColor</code>跟寄存器的<code>color</code>一样，则计数器<code>count</code>加一。如果不一样，且<code>count</code>不为0，则<code>count</code>减一；如果不一样，且<code>coun</code>t为0，则寄存器中的<code>color</code>被置为<code>newColor</code>。</li>
+<li>3.不断循环2，直到读入所有颜色值。这时候，寄存器<code>color</code>中存储的就是结果。</li>
+</ul>
+
+
+<p>这个方法的巧妙之处，在于寄存器和计数器保存了状态，用抵消的思想，最终得到了较多数量的状态。思考时，不妨假设所有颜色值只有两个，一个是超过一半数量的restrict dominant color，另一个则是少于一半数量的颜色，经过累加和寄存的操作，少于一半的颜色肯定会被多余一般的颜色抵消掉，最后剩下多于一半的颜色。另外，大家不妨想一下，本题的最后，计数器中的值就是restrict dominant color超过其他颜色的数量么？</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1055">1055. The World's Richest (25)</a></h2>
+
+<h4>题意</h4>
+
+<p>福布斯排行榜上，给出了N(&lt;=10<sup>5)个人的名单，每个名单包含了不超过8个字符的姓名，(0,200]的年龄以及[-10<sup>6,10<sup>6]的财富值。</sup></sup></sup></p>
+
+<p>另外，给出了K(&lt;=10<sup>3)次查询，以及每次查询要求的结果条数M(&lt;=100)。每次查询给定一个年龄区间，要求查询出这个区间范围内财富排名前M的人的名单。如果财富值相同，按姓名字典序排列。</sup></p>
+
+<h4>分析</h4>
+
+<p>这道题时间限制比较严格。有两种思路：</p>
+
+<h5>第1种思路：</h5>
+
+<ul>
+<li>1.所有年龄做qsort()排序；</li>
+<li>2.分离到不同年轻的人的数组中，此时每个年龄中，都是排序好的。</li>
+<li>3.对于每个查询，从2中所得数组里进行归并排序，归并的每次比较过程，使用最大堆实现。</li>
+</ul>
+
+
+<h5>第2种思路：</h5>
+
+<ul>
+<li>1.所有年龄做排序</li>
+<li>2.对排序好的年龄，每个年龄计数减掉100名之后的人。</li>
+<li>3.然后对待查询轮训过滤即可。</li>
+</ul>
+
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1056">1056. Mice and Rice (25)</a></h2>
+
+<h4>题意</h4>
+
+<p>分组淘汰赛背景。给出Np(&lt;=1000)个参赛者，限定每场比赛最多有Ng(&lt;=1000)个参赛者参加，如果一轮比赛中，组队的过程单出几个人，也将他们组成一次比赛。每场比赛决出一名胜者，参加到下一轮的淘汰赛中，而同一轮的负者都拥有相同的排名，如此循环往复，直到决出第一。</p>
+
+<p>输入数据中还规定了必须依据顺序分组，而初始顺序体重已经给出。</p>
+
+<h4>分析</h4>
+
+<p>模拟题。用队列存储剩下的参赛队员，每轮比赛做一次循环，直到队列为空。处理一轮比赛时，负者的rank等于该轮比赛场次+1.换分组别的时候，需要仔细。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1057">1057. Stack (30)</a></h2>
+
+<h4>题意</h4>
+
+<p>在stack的基础上，增加了一个PeekMedian操作定义，要求输出stack中所有数据的中间大小的数。</p>
+
+<p>题目给出N(&lt;=10<sup>5)个对stack的顺序操作，要求输出操作结果。其中保证每次操作的值不大于10<sup>5。</sup></sup></p>
+
+<h4>分析</h4>
+
+<p>使用stl中的stack模拟常规栈操作，关键问题在于中位数的读取。由于时间限制比较严格，使用诸如优先队列等方式会超时。考虑到每次的操作数都不超过10<sup>5，想到诸如使用hash的方式用空间换时间。但即使是开一个`int</sup> hash[100001]`的hash表，也只能记录读入的所有数据的次数，无法提供高效的查询操作。实际上，在hash方式的前提下，使用<a href="http://dongxicheng.org/structure/binary_indexed_tree/">树状数组</a>能很好的解决这个问题。 （另有一篇详细介绍树状数组的译文:<a href="http://hawstein.com/posts/binary-indexed-trees.html">请戳</a>）</p>
+
+<p>对<code>int hash[100001]</code>建立树状数组，然后通过二分的方式，就可方便的查询到hash数组中那个坐标下的统计值处于中间位置，这个坐标的值也就是中位数了。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1058">1058. A+B in Hogwarts (20)</a></h2>
+
+<h4>题意</h4>
+
+<p>给定的数的结构如下：a.b.c，其中a的范围是[0, 10<sup>7]，b的范围是[0,17)，c的范围是[0,29)。给定两个数，要求计算他们的和。</sup></p>
+
+<h4>分析</h4>
+
+<p>简单模拟题，有一个坑：题目交代最高位的区间为[0, 100000000]，但是没说如果两数相加超过这个值怎么办。需要将最高位的结果区间设定为20000000以上才AC。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1059">1059. Prime Factors (25)</a></h2>
+
+<h4>题意</h4>
+
+<p>给定一个正整数，要求格式化输出它的素因数相乘的形式。</p>
+
+<h4>分析</h4>
+
+<p>由于时间限制，不可以简单的重复判定素数。可以使用DP的思想做素数的判定。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1060">1060. Are They Equal (25)</a></h2>
+
+<h4>题意</h4>
+
+<p>科学计数法相关背景。假设机器只能存储3个有效数字，那么<code>12300</code>和<code>12358.9</code>在机器侠都表达都为<code>0.123*10^5</code>，他们相等。其中有效数字使用简单截尾方式，不进位。</p>
+
+<p>给定两个不大于10<sup>100的非负整数，以及有效位数N(&lt;=100)，要求计算在对应的精确位数下，两数的表达是否相等。</sup></p>
+
+<h4>分析</h4>
+
+<p>由于非负整数非常大，不可使用longlong甚至精确度不高的double，当做字符串来处理。</p>
+
+<p>需要注意的一点是对值为0的情况的处理。比如0在有效位数为3下的表达为:<code>0.00*10^0</code></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[PAT 1041-1050 题解]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/08/01/pat-1041-1050-solutions/"/>
+    <updated>2013-08-01T01:43:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/08/01/pat-1041-1050-solutions</id>
+    <content type="html"><![CDATA[<p>浏览全部代码：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
+
+<p>本文谨代表个人思路，欢迎讨论;)</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1041">1041. Be Unique (20)</a></h2>
+
+<h5>题意</h5>
+
+<p>给出N (&lt;=105)个数（数值范围为 [1, 10<sup>4]），找到其中不重复的第一个数字。比如给出</sup> <code>5 31 5 88 67 88 17</code> ， 答案是 <code>31</code> 。</p>
+
+<h5>分析</h5>
+
+<p>简单模拟题，开一个大数组<code>int a[10001];</code>，以读入的数为下标，记录count:<code>a[index] ++;</code>。结果输出第一个存储为1的下标:<code>if (a[index] == 1)</code>。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1042">1042. Shuffling Machine (20)</a></h2>
+
+<h5>题意</h5>
+
+<p>背景是洗牌机的洗牌过程。过程是给定洗牌的每张牌的位置替换序列，由原来的次序算出最后的牌的平排列。</p>
+
+<p>比如原有的次序为<code>S3, H5, C1, D13, J2</code>，
+给定的洗牌顺序为<code>4, 2, 5 ,3 ,1</code>，那么一次洗牌的结果为：<code>J2, H5, D13, S3, C1</code>。
+如果需要两次洗牌，则结果为<code>C1, H5, S3, J2, D13</code>。</p>
+
+<p>输入为对一整副牌（54张）的洗牌策略，以及洗牌次数N，要求计算出最后的洗牌结果。</p>
+
+<h5>分析</h5>
+
+<p>简单hash题。</p>
+
+<!--more-->
+
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1043">1043. Is It a Binary Search Tree (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>二叉搜索树的定义就不重复了，题目新定义了一个镜像二叉搜索树，就是将一颗二叉搜索树所有节点的左右子树交换后的二叉树。</p>
+
+<p>输入是一个二叉树的前序排列，要求判定是否是一个二叉搜索树或者镜像二叉搜索树。如果是，输出该树后序遍历的序列。</p>
+
+<h5>分析</h5>
+
+<p>解题思路：</p>
+
+<ul>
+<li>1.BST 很特殊，实质上 BST 的所有节点的顺序排列就是中序遍历了。</li>
+<li>2.要检查树是否是 BST 或者镜像 BST，只需按照重建树的思路，在每次重建的过程中做适当检查即可。检查思路是：检查前序遍历序列中，根节点之后的节点排序是否符合 BST 的二分规则（即前一段都是小于根节点的，后一段都是大于根节点的）。</li>
+<li>3.最后的输出是后序遍历。过程中其实并不用构建整个树，直接在处理过程中，按后序的方式存储节点到队列中即可。</li>
+</ul>
+
+
+<p>更多相关分析，参见博文<a href="../../../../2013/04/27/pat1020-pat1043-rebuild-binary-tree/">《根据前中后序和层序重建二叉树》</a>。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1044">1044. Shopping in Mars (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>火星人购物使用钻石链，每颗钻石都有一定的价值。付款是，要求从钻石链上找到所有刚好能匹配到商品价值的连续的钻石子链，如果没有，
+则找到超过商品价值的最小的钻石子链。</p>
+
+<p>比如钻石链为<code>3 2 1 5 4 6 8 7</code>，商品价值为<code>15</code>，则候选的方案有：第4到第6颗的子链<code>5 4 6</code>，第7到第8颗：<code>8 7</code>。</p>
+
+<p>输入为一个钻石链以及商品的价值，要求找到所有满足条件的分割方案，按起始点从小到大排序输出。</p>
+
+<h5>分析</h5>
+
+<p>由于时间限制有些严格，需要做足够的优化：</p>
+
+<ul>
+<li>1.为了便于计算某个区间的累加值，在存储钻石串时，可以在<code>index</code>位置存储包括当前钻石在内的之前所有钻石价值的累加和。</li>
+<li>2.使用两层循环遍历所有可能，在遍历以位置i为其实坐标的子串时，不应该将结束位置初始化为i，而是应该是以<code>i-1</code>为起始位置的搜索过程中的break时的
+结束位置的下标减1.</li>
+</ul>
+
+
+<p>其中第2条的证明如下：</p>
+
+<p>算法中首先计算以<code>i</code>为起始位置的子串的累加值。假定计算到<code>j</code>满足累加值等于或者刚好大于商品价值<code>m</code>。之后，结束以<code>i</code>位置开始的子串的探寻，进入下一阶段以i+1为起始位置的搜索。
+由于<code>[i, j]</code>的累加和刚好等于<code>m</code>，则<code>[i, j - 1]</code>的累加和肯定小于<code>m</code>，那么<code>[i + 1, j - 1]</code>的累加和也肯定小于<code>m</code>。</p>
+
+<p>综上述，在以<code>i+1</code>为起始位置的搜索中，可以初始化结束位置为上一次搜索结束的位置减一，即<code>j - 1</code>.</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1045">1045. Favorite Color Stripe (30)</a></h2>
+
+<h5>题意</h5>
+
+<p>Eva对彩色条有特殊的癖好，对于一条五颜六色的彩带，她会减掉其中一些颜色块，让整个彩带的颜色顺序匹配到自己的一个颜色喜好顺序上。</p>
+
+<p>举例来说，她喜欢的颜色顺序为{2 3 1 5 6}，给定的彩带的颜色顺序为{2 2 4 1 5 5 6 3 1 1 5 6}，那么经过她的剪辑，留下的彩带的可能选项有：{2 2 1 1 1 5 6}
+{2 2 1 5 5 5 6}，{2 2 1 5 5 6 6}和{2 2 3 1 1 5 6}。</p>
+
+<p>我们的任务是找到其中最长的剪辑可能。</p>
+
+<h5>分析</h5>
+
+<p>这是经典的最长递增子序列问题(LIS)，递增在这里体现为子序列的颜色顺序要遵照Eva的对颜色的喜好顺序。使用动态规划解决。</p>
+
+<ul>
+<li>1.剔除不在Eva喜欢颜色列表中的颜色。</li>
+<li>2.DP的状态： 用<code>length[max]</code>数组存储状态，<code>length[i]</code>表示到彩带的第i个位置为止，包含该颜色的符合Eva喜好顺序的子串长度的最长值。记得在每次</li>
+<li>3.DP的子问题：<code>length[i]</code>等于在其之前的所有<code>lengths[j]</code>跟<code>i</code>位置颜色组合后的最长子串值。</li>
+</ul>
+
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1046">1046. Shortest Distance (20)</a></h2>
+
+<h5>题意</h5>
+
+<p>给定在圆环上的几个点的相对位置，要求计算不同点之间的距离。</p>
+
+<h5>分析</h5>
+
+<p>简单模拟。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1047">1047. Student List for Course (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>根据每名学生填报的课程，按顺序输出每门课程的学生名单。其中学生总量为N(&lt;=40000)，课程总量为K(&lt;=2500)。学生姓名为3个大写英文字符加一个数字。</p>
+
+<h5>分析</h5>
+
+<p>倒排索引的模拟。可以针对学生姓名做hash方式的优化。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1048">1048. Find Coins (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>给定一系列硬币，以及一个商品的价格。要求从硬币中找到两个硬币让他们的组合等于商品的价格。如果有多个，输出有用最小单个值的硬币组合。</p>
+
+<h5>分析</h5>
+
+<p>首先，硬币中币值不小于商品价格的可以过滤掉。遍历过程中，使用hash标记的方法，设定一个<code>coins[MAXVALUE]</code>（其中MAXVALUE为商品价格的最大值）记录已有的币值种类，
+在遍历的过程中，一边将读入的硬币增加到<code>coins[]</code>中，一边计算满足条件的最小币值。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1049">1049. Counting Ones (30)</a></h2>
+
+<h5>题意</h5>
+
+<p>给定一个正整数N(&lt;=2<sup>30)，要求计算所有小于N的正整数的各个位置上，1出现的次数之和。</sup></p>
+
+<h5>分析</h5>
+
+<p>比较有思维难度的一题，核心在于找规律。10ms的时间限制表明了不能用常规的循环遍历来解决。需要从简单的case找规律，逐步扩大到常规的情况。</p>
+
+<p>详情参见《编程之美》P132页《1的数目》。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1050">1050. String Subtraction (20)</a></h2>
+
+<h5>题意</h5>
+
+<p>给定两个字符串，S1和S2,要求将S2中的字符从S1串中剔除。</p>
+
+<h5>分析</h5>
+
+<p>用Hash的方式标记需要剔除的字符。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[PAT 1031-1040 题解]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/08/01/pat-1031-1040-solutions/"/>
+    <updated>2013-08-01T01:43:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/08/01/pat-1031-1040-solutions</id>
+    <content type="html"><![CDATA[<p>早期部分代码用Java实现。由于PAT虽然支持各种语言，但只有C/C++标程来限定时间，许多题目用Java读入数据就已经超时，后来转投C/C++。浏览全部代码：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
+
+<p>本文谨代表个人思路，欢迎讨论;)</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1031">1031. Hello World for U (20)</a></h2>
+
+<h5>题意</h5>
+
+<p>将给定的字符串打印出U型。</p>
+
+<p>比如给定<code>helloworld</code>，打印出</p>
+
+<p>```</p>
+
+<p>h  d
+e  l
+l  r
+lowo</p>
+
+<p>```
+设定左边的字符个数为n1,底边字符个数为n2,右边字符个数为n3。需要满足 n1 = n3 = max
+{k|k &lt;= n2 for all 3 &lt;= n2 &lt;= N} with n1 + n2 + n3 -3 = N.</p>
+
+<h5>分析</h5>
+
+<p>简单模拟题。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1032">1032. Sharing (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>为了节省存储空间，单词使用链表实现。比如对于<code>loading</code>和<code>being</code>两个单词，有如下存储结构：</p>
+
+<p>```
+word1 : -> [l] -> [o] -> [a] -> [d]</p>
+
+<pre><code>                                \
+                                  [i] -&gt; [n] -&gt; [g] -&gt; null
+                                /
+</code></pre>
+
+<p>word2 : -> [b] -> [e] -------------</p>
+
+<p>```
+输入中，指定了两个单词的首字符的地址，并给出了N (&lt;= 10<sup>5)个节点，每个节点包含：物理地址（5位的正整数），实际存储的字符以及指向的下一个节点的地址。NULL的地址是-1.</sup>
+要求找到两单词的的公共后缀开始的地址，如果没有，则输出-1.</p>
+
+<h5>分析</h5>
+
+<p>既然是单词，它的长度应该是有限的，也就是链表不会出现环这种情况（实际上这里的处理方式对于有环无环都适用）。对第一个单词链表做遍历，对爬过的节点做好标记。第二个单词链表也同样做标记，一旦遇到已经标记过的节点，则该节点就是结果。</p>
+
+<p>需要注意一点：直接使用map做节点的存储最后一个case会超时。而鉴于5位正整数的数据量，可以直接使用数组，用空间换时间。</p>
+
+<!--more-->
+
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1033">1033. To Fill or Not to Fill (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>高速路从A地到B地，路途有许多加油站，每个加油站的油价不一样，要求计算一个最优方案，使得以最便宜的开销跑完全程。</p>
+
+<h5>分析</h5>
+
+<p>用贪心算法，理清贪心算法的策略：</p>
+
+<ul>
+<li>1.从A加油站出发，在能行走的最大范围内，如果有比A站汽油更便宜的B站，则保证在A站点的加油量刚好满足能到达B站点；如果没有比A站汽油更便宜的站，则在A加满车油行走到【从A能走出的范围内】油价【最便宜】的站上，再行计算。</li>
+<li>2.从A加油站出发，在能行走的最大范围内，如果没有其他站点，则A.dist + 一次最大的行走距离 为impossible情况下的最大站点。</li>
+</ul>
+
+
+<p> 注意有个陷阱：如果没有距离为0的加油站，则无法行驶。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1034">1034. Head of a Gang (30)</a></h2>
+
+<h5>题意</h5>
+
+<p>『gang』翻译过来是『一伙人』。gang的定义是一群人，至少有3个人，这群人中每个人之间都通过通话相连，且整个群体的通话时长超过一个阈值。整个gang的团体中，拥有的电话时长最长的人就是头目了。</p>
+
+<p>题目给定了gang的阈值K，以及N个通话记录，每条记录包括主叫人、被叫人以及通话时间。要求计算出有几个gang，并按照gang的头目的字母顺序排序输出头目和其中成员数量。</p>
+
+<h5>分析</h5>
+
+<p>本题使用dfs求解比较方便。dfs能简单的实现状态值的记录，比如当前的gang的成员数量和权重，如果使用并查集，则相对复杂。</p>
+
+<p>需要注意的坑点：如果建立邻接表时，每个通话记录都在两人头上计算了时间积累的，那么在判定gang的权重值是否低于阈值的时候，需要对阈值乘以2。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1035">1035. Password (20)</a></h2>
+
+<h5>题意</h5>
+
+<p>给定多个字符串，按要求替换其中的某些特殊字符，并按原顺序输出。如果字符串中没有需要修改的字符，则不舒服该字符串。</p>
+
+<h5>分析</h5>
+
+<p>简单的hash实现。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1036">1036. Boys vs Girls (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>输入是一批学生的成绩，要求找出其中男生最低的成绩和女生最高的成绩，求其间的差值。如果无法计算，则输出NA.</p>
+
+<h5>分析</h5>
+
+<p>简单模拟题。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1037">1037. Magic Coupon (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>背景是火星上的神奇的购物券购物策略：每张购物券上有一个整数，可正可负，商店里商品的标价也是一个整数，可正可负的。如果用正值购物券购买正值商品，则可获利两者之积；如果以负值购物券购买负值商品，也可获利两者之积；但其他情况，则会亏损。比如用面值为<code>2</code>的购物券购买面值为<code>3</code>的商品，获利<code>6</code>，用面值为<code>-5</code>的购物券购买面值为<code>-9</code>的商品，获利<code>45</code>，但如果用面值为<code>2</code>的购物券购买面值为<code>-3</code>的商品，则亏损<code>6</code>，</p>
+
+<p>给定一组数量为NC购物券面值和一组数量为NP的商品面值，1&lt;= NC , NP &lt;= 10<sup>5，要求计算能获利的最大值。</sup></p>
+
+<h5>分析</h5>
+
+<p>同号相乘可获利，异号相乘会亏损。要使获利最大，使用贪心思想计算。实际上，不需要用完购物券或者买完商品，所以只需要将同号的数值乘积算出即可，没有更复杂的情况。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1038">1038. Recover the Smallest Number (30)</a></h2>
+
+<h5>题意</h5>
+
+<p>给定N(&lt;= 10000)个不超过8位的非负整数，要求将其按某个顺序拼接为一个数，使其值最小。</p>
+
+<h5>分析</h5>
+
+<p>容易简单的以为使用字典序排列拼接，实际上有一个特殊的拼接情况需要考虑。</p>
+
+<p>比如数据<code>32 321 3214</code>，这是按字典序排列的，但实际上这并不是最小的拼接方式，最小的拼接方式是：<code>321 3214 32</code>。</p>
+
+<p>比较这个实例，不难找到最小拼接的排序规律：</p>
+
+<ul>
+<li>1.两个字符串做比较时，如果其中一个字符串(a)是另一个字符串(ab)的前缀串，则需要将较长字符串(ab)除去前缀串的部分(b)与较短字符串(a)继续递归比较。比如，321和32，需要拿1和32做比较。又比如323和32比较，第一次拿3和32比较，第二次拿3和2按字典序比较。</li>
+<li>2.其他情况按字典序比较。</li>
+</ul>
+
+
+<p>另外需要注意的一个坑是：如果没有数据，则输出0。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1039">1039. Course List for Student (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>给出K(&lt;=2500)门课程，每门课程有Ni(&lt;=200)名学生，学生编号为四位字符串，前三位为小写英文字母，后一位是数字。另给出N个需要查询的学生编号。</p>
+
+<p>要求列出对应查询编号学生的课程。如果有多个课程，需要按升序输出。</p>
+
+<h5>分析</h5>
+
+<p>这个题是个倒排索引的实现。不过在时间上卡的比较严。</p>
+
+<p>使用最简单的思路：map&lt;string, vector<int> students倒排索引，在没有输出排序的课程列表时最后一个case已经超时；优化：将学生姓名的hash为int，减免了string的匹配过程，还是超时（map本身用红黑树实现，效率并不是特别高，还需要对每组数据进行排序），只能改变使用map的方式。</p>
+
+<p>最终AC的解法是：</p>
+
+<ul>
+<li>构建一个从学生编号字符串到int值的hash函数，在读入学生编号后，hash到int值做处理。</li>
+<li>不适用map结构，根据学生姓名的限制，设定一个<code>vector&lt;int&gt; st[26*26*26*10]</code>的数据结构，读入时直接倒排索引插入。</li>
+</ul>
+
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1040">1040. Longest Symmetric String (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>给定一个字符串，要求输出最长的连续对称子串的长度。比如给定字符串为<code>Is PAT&amp;TAP symmetric?</code>，其中最长对称子串为<code>s PAT&amp;TAP s</code>，所以输出结果11.</p>
+
+<h5>分析</h5>
+
+<p>这个题就是典型的Java实现timeout，而Cpp实现轻松过的类型。需要注意两点：</p>
+
+<ul>
+<li>1.有两种对称情况，一种形如<code>aba</code>，一种形如<code>abba</code>。</li>
+<li>2.循环遍历的过程，以index为对称中心向两边扩散比较编码实现简单也更高效。</li>
+</ul>
+
+
+<p>另外，C读入一整行数据到char数组的方法可以用<code>gets(s);</code>。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[PAT 1021-1030 题解]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/08/01/pat-1021-1030-solutions/"/>
+    <updated>2013-08-01T01:43:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/08/01/pat-1021-1030-solutions</id>
+    <content type="html"><![CDATA[<p>早期部分代码用Java实现。由于PAT虽然支持各种语言，但只有C/C++标程来限定时间，许多题目用Java读入数据就已经超时，后来转投C/C++。浏览全部代码：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
+
+<p>本文谨代表个人思路，欢迎讨论;)</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1021">1021. Deepest Root (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>无环连通图也可以视为一棵树，选定图中任意一点作为根，如果这时候整个树的深度最大，则称其为deepest root。
+给定一个图，按升序输出所有deepest root。如果给定的图有多个连通分量，则输出连通分量的数量。</p>
+
+<h5>分析</h5>
+
+<p>算法实现的步骤如下：</p>
+
+<ul>
+<li>1.使用并查集判断图是否为连通的。</li>
+<li>2.任意选取一点，做dfs搜索，选取其中一个最远距离的点A，再做一次dfs，找到的所有距离最远的点以及点A都是deepest root。</li>
+</ul>
+
+
+<p>判定图是否连通使用union-find set即可。更关键的点在于找到deepest root。实际上，使用两次dfs就可以实现。
+证明之前，先介绍两个概念，一个是直径，树的deepest root到最远叶子的路径我们暂称直径，而deepest root和最远叶子节点则成为端点。
+注明关键在于以下两点：</p>
+
+<ul>
+<li><p>从任意一个点dfs得到的最远点都是直径的端点。证明如下：</p>
+
+<p>  任意选一点A，做dfs查找距离A最远的点，因为是dfs，所以肯定会经过某直径上的点B，从B出发最远的点是直径上的端点C。
+  那么，这个端点C为何一定是A的最远居里点呢？可以反证证明，如果有一个点D，A->D不经过直径，且length(A->D) > length(A->C)，
+  那么，从C所在直径上构造出经过D的比原直径更长的直径，得证。</p></li>
+<li><p>所有的树的直径都交于一点（或者公用段路径上的几点）。
+于是，从B点dfs出发的所有最长距离的点即为deepest root。证明如下：</p>
+
+<p>  如果两条直径不相交，而树上任意两点肯定连通，则从两直径上，可以选取两点连通以组成更长的直径；如果三条直径相较于不同的两点，也可以根据相交截断的长度组合出更长的直径。</p></li>
+</ul>
+
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1022">1022. Digital Library (30)</a></h2>
+
+<h5>题意</h5>
+
+<p>给定N (&lt;=10000) 本书的信息，包括7位ID，最多80字符的书名，最多80字符的作者名，
+多个最多10字符的关键词，最多80字符的出版商和属于[1000, 3000]的出版时间。
+另给出M (&lt;=1000) 的查询请求，按照查询格式分为：</p>
+
+<ul>
+<li>1: 书名</li>
+<li>2: 作者</li>
+<li>3: 关键词</li>
+<li>4: 出版商</li>
+<li>5: 年份</li>
+</ul>
+
+
+<p>输出查询结果。如果有多个结果，按照书的ID的升序排列。</p>
+
+<h5>分析</h5>
+
+<p>简单模拟题。在使用Map结构来构建倒排索引的过程中，可以讨巧的避免根据不同查询类型使用两层map，
+直接通过在key中增加查询标记来实现。另外C++的priority_queue支持对常规数据类型的最小堆实现：<code>priority_queue&lt;string, vector&lt;string&gt;, greater&lt;string&gt;&gt;</code>，方便了结果输出。</p>
+
+<!--more-->
+
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1023">1023. Have Fun with Numbers (20)</a></h2>
+
+<h5>题意</h5>
+
+<p>给出一个20位的正整数，要求计算其乘以2的值，并判定结果的数值是否是原数字所有位数打乱的结果。结果输出Yes或No，以及乘以2以后的数字。</p>
+
+<h5>分析</h5>
+
+<p>判重使用Hash思想。过程如下：</p>
+
+<ul>
+<li>1.原数字按字符串读入，并在一个int hash[10]的hash数组中标记每个数值出现的次数，比如如果出现了四次1，则hash[1]=4。</li>
+<li>2.模拟实现乘以2的简单乘法过程，没计算出一位的值，在hash[]中对应位置上减一。</li>
+<li>3.最后通过判定hash是否全为1和最后结果是否有进位来做判定。</li>
+</ul>
+
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1024">1024. Palindromic Number (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>非回文数可以通过将它与它的倒转数相加，并不断迭代这一过程获得回文数的结果。比如67经过两次处理就得到了484：
+<code>67 + 76 = 143, and 143 + 341 = 484.</code></p>
+
+<p>给定一个数和迭代的次数，判断能否在迭代次数内获得回文结果。</p>
+
+<h5>分析</h5>
+
+<p>简单模拟题，处理数字，做逻辑判断。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1025">1025. PAT Ranking (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>以PAT考试为背景，给所有人做排名。给定的数据包括N(&lt;=100)为赛区的数目，每个赛区的人数以及每个人的分数。
+按照总排名、分区号、注册号的优先级排名。</p>
+
+<h5>分析</h5>
+
+<p>简单模拟题，使用qsort()排序，注意相同分数的人应该拥有相同的排名。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1026">1026. Table Tennis (30)</a></h2>
+
+<h5>题意</h5>
+
+<p>乒乓球俱乐部有K张乒乓球桌，其中有M张是VIP桌。有很多人到俱乐部打球，如果桌子都满了，多余的人只能排队等待。</p>
+
+<p>有一个特殊的VIP制度：如果有空的VIP桌，那么等待队列中的第一对VIP会员可以使用这张卓，
+如果等待队列中没有VIP会员，那么一般会员也可以使用VIP桌。当轮到VIP上的时候，没有VIP桌子，那么VIP用户也可以使用一般的桌子。</p>
+
+<p>另外，每张桌服务一对会员的时间最大限制在两个小时。</p>
+
+<p>给定了乒乓球桌的数量M(编号为1-M)，其中VIP卓的数量K，并指定是那几张桌子。给出来乒乓球俱乐部的N对会员的信息，每对会员有一个达到时间，
+是否是VIP的标记以及打球的时间。要求计算出每对会员的等待时间，以及每张桌服务过的次数。</p>
+
+<h5>分析</h5>
+
+<p>排队模拟题。有两种思路：</p>
+
+<ul>
+<li>1.主体循环处理人。将乒乓球桌和人都当做资源，乒乓球桌对应记录了available的时间，每次取出available最早的时间，从等待队列中选
+则最早的会员使用乒乓球桌。其中vip处理逻辑为：如果available并列最早的桌子中有vip桌，则看等待队列中有没有vip会员，
+如果有则直接处理他，否则按照正常逻辑处理。每次将某会员安置到一个乒乓球桌上，则可以输出该会员的等待时间的结果信息，并将该乒乓球桌的
+服务人数增加一。</li>
+<li>2.主体循环是时间。这样需要模拟同一时刻所有的乒乓球桌以及等待队列，相对比较复杂。</li>
+</ul>
+
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1027">1027. Colors in Mars (20)</a></h2>
+
+<h5>题意</h5>
+
+<p>给定三个十进制数，要求格式化输出其13进制表达。</p>
+
+<h5>分析</h5>
+
+<p>简单的数字处理和hash实现。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1028">1028. List Sorting (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>模拟Excel中按列排序。N (&lt;=100000) 为数据条数，每条数据由三列组成：ID，姓名，成绩。C可以等于1,2,3，分别对应到按三列中的哪一列排序。
+输出排序结果。</p>
+
+<h5>分析</h5>
+
+<p>简单排序题。两种思路：</p>
+
+<ul>
+<li>1.简单的直接使用qsort()实现。</li>
+<li>2.自己手写排序算法，比如二叉搜索树实现。</li>
+</ul>
+
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1029">1029. Median (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>给定两个已排序的整数序列，求出两组数的集合里中间大小的数。</p>
+
+<h5>分析</h5>
+
+<p>使用归并排序思路实现。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1030">1030. Travel Plan (30)</a></h2>
+
+<h5>题意</h5>
+
+<p>给定加权图，每条边有两种权值：一是路径长度，二是开销。要求求出给点两点间的最短路径，如果路径长度一样，则要求比较选择开销最小的路径。</p>
+
+<h5>分析</h5>
+
+<p>使用Dijkstra算法的变形，增加一个权重的判定，可以轻松解决。</p>
+]]></content>
+  </entry>
+  
+</feed>

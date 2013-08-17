@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: sharing | Biaobiaoqi的博客]]></title>
+  <link href="http://biaobiaoqi.github.com/tags/sharing/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.github.com/"/>
+  <updated>2013-08-17T14:08:27+08:00</updated>
+  <id>http://biaobiaoqi.github.com/</id>
+  <author>
+    <name><![CDATA[Biaobiaoqi]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[给博客签上CC协议]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/07/10/cc-license/"/>
+    <updated>2013-07-10T22:37:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/07/10/cc-license</id>
+    <content type="html"><![CDATA[<p>大家都知道开源软件。通过开放源代码的方式，允许用户学习、修改、增进提高这些软件质量。软件界的开源协议很多，比如常见的Apache，BSD，GPL等等。这是一种充分利用网络的便利性，鼓励分享和创新的协议潮流。从这个层面上来说，Creative Commons也是如此。</p>
+
+<p>这是一个非营利性组织，也是一种创作的授权方式。简称CC协议，中国大陆正式名称为知识共享。次组织的主要宗旨是增加创意作品的流通可及性，作为其他人据以创作及共享的基础，并寻找适当的法律以确保上述理念。</p>
+
+<h2>CC协议的起源</h2>
+
+<p>Creative Commons最先是2002年的12月16号在美国首次发布的。这个协议最初是根据美国版权法设计出来的。技术的发展，网络的发展，出现了开放共享的需求，而传统的作品保护的模式，对作品的使用和内容的开放带来一些限制。怎么样满足这种需求，同时又尊重权利人的著作权？传统的保护模式不能实现这样的作用，它可能关注于保护的时候可能忽略了对公众的，尤其网络环境下对知识文化这样分享的需求。CC协议的设计实际上是基于这样一种大的背景，在这样一个大的网络环境下应运而生，它是来倡导一种合法的分享。</p>
+
+<h2>CC协议内容</h2>
+
+<p>CC协议可以分为四个部分。每个部分对使用者有不同程度的限定。</p>
+
+<ul>
+<li><p>1.署名（BY）：作品上必须附有作品的归属。如此之后，作品可以被修改，分发，复制和其它用途。</p></li>
+<li><p>2.非商业性使用（NC）：作品可以被修改、分发等等，但不能用于商业目的。</p></li>
+<li><p>3.禁止演绎（ND）：这意味着你可以复制和分发它们，但你不能以任何方式修改它们，或基于它们进行二次创作。</p></li>
+<li><p>4.相同方式共享（SA）：作品可以被修改、分发或其它操作，但所有的衍生品都要置于CC许可协议下。</p></li>
+</ul>
+
+
+<p>实际使用时，需要对这四种条件分别作出约束。不同的条件共有16种组合方式，其中有的组合方式互斥，简化后剩下了6种常用协议：</p>
+
+<h5>署名（BY）</h5>
+
+<p>此协议最为宽松，只需署名，其他无约束。</p>
+
+<h5>署名（BY）-禁止演绎（ND）</h5>
+
+<p>署名的同时，不得对作品进行改动。但可以用于商业或非商业用途。</p>
+
+<h5>署名（BY）-非商业性使用（NC）</h5>
+
+<p>署名的同时，可以修改作品，但不能用于商业用途。</p>
+
+<h5>署名（BY）-非商业性使用（NC）-禁止演绎（ND）</h5>
+
+<p>署名，且不得用于商业用途和修改。</p>
+
+<h5>署名（BY）-非商业性使用（NC）-相同方式共享（SA）</h5>
+
+<p>署名，不能商用，但可以演绎，且演绎后的内容必须是同样的共享方式。</p>
+
+<h5>署名（BY）-相同方式共享（SA）</h5>
+
+<p>署名，可以商用，可以演绎，但演绎后的作品必须是同样的共享方式。</p>
+
+<!--more-->
+
+
+<h2>国内的现状</h2>
+
+<p>昨天，为了防止其他网站的不经允许无署名的转载行为，我刚给所有的文章末尾添加了原文链接信息。</p>
+
+<p>实际上，在中国，这种侵犯著作权的行为非常泛滥。有的网站，甚至就致力于爬其他社区产生的优质数据，并直接复制到自己的网页上，以图在网络世界中获得更高的收益。在大数据的时代，越来越多的数据会在网络上产生，会很容易的在网络间流动。这种侵犯著作权的行为将破坏整个互联网信息流动的环境，阻碍社会进步。原有的著作权管理法定条纹相对守旧，面对互联网环境，本身也是水土不服的。CC协议的重要性不言而喻。</p>
+
+<h2>博客的实践</h2>
+
+<p>我想在我的博客中采纳BY-NC-ND协议。其对应的许可协议网络版链接如下：<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh</a></p>
+
+<p>只需要在在<a href="/blog/2013/07/10/decorate-octopress/">昨天的修改</a>基础上，替换html内容，即可得到一个签署了BY-NC-ND协议的展示结果。具体需修改<code>octopress/plugins/post_footer_filter.rb</code>文件：</p>
+
+<p>1.在文件头加上utf-8编码标记，以支持中文。</p>
+
+<p>2.搜索定位到<code>post.content + %Q</code>一行，将内容修改为：
+```ruby
+post.content + %Q[<p class='post-footer'>&nbsp;#{pre or "原文地址："}<a href='#{post.full_url}'>#{post.full_url}</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>]</p>
+
+<p>```</p>
+
+<h3>参考</h3>
+
+<ul>
+<li><a href="http://zh.wikipedia.org/zh-cn/%E5%BC%80%E6%BA%90%E8%BD%AF%E4%BB%B6">开源软件wiki</a></li>
+<li><a href="http://www.awflasher.com/blog/archives/939">五种开源协议的比较(BSD,Apache,GPL,LGPL,MIT) – 整理</a></li>
+<li><a href="http://www.baike.com/wiki/CC%E5%8D%8F%E8%AE%AE">CC协议互动百科</a></li>
+<li><a href="http://creativecommons.net.cn/2009/11/30/prof-wang-interview-at-hudong/">王春燕教授做客互动百科谈CC</a></li>
+<li><a href="http://www.aqee.net/a-short-guide-to-open-source-and-similar-licenses/">开源软件许可协议简介</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

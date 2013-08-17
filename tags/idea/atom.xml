@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: idea | Biaobiaoqi的博客]]></title>
+  <link href="http://biaobiaoqi.github.com/tags/idea/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.github.com/"/>
+  <updated>2013-08-17T14:08:27+08:00</updated>
+  <id>http://biaobiaoqi.github.com/</id>
+  <author>
+    <name><![CDATA[Biaobiaoqi]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[给女朋友的礼物]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/06/11/gift-to-girl-friend/"/>
+    <updated>2013-06-11T17:12:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/06/11/gift-to-girl-friend</id>
+    <content type="html"><![CDATA[<h2>背景</h2>
+
+<p>一个月前发现了<a href="http://v2ex.com">V2EX</a>这个网站，用创始人<a href="http://www.v2ex.com/member/Livid">Livid</a>的话来说，『这是一个主要关于做事儿的地方』。确实如此，我在这里收获了很多想法和灵感。</p>
+
+<p>本文所记的，也是得益于某天的对<a href="http://www.v2ex.com/t/69145">某个主题</a>的浏览。帖子中，大家分享了很多给女朋友做的网页，说『技术宅改变世界』太过了，但拥有这样一个礼物，确实是一种属于程序员的快乐和程序员的女友的幸福。</p>
+
+<p>快到我跟我妹子恋爱四周年的日子了，也正逢她本科毕业，无论如何都是个有趣的时间点。受了那个帖子的刺激，我也筹划着给女朋友做一个小网页，以示纪念。</p>
+
+<p>遗憾的是，我自己从来没有写过网页，javascript和css只知道概念，html也只是知道一些简单的标签，这些可是完成一个小网页所必备的技能呢。技术能力直接阻碍了创造性成果出现的可能:(。于是，解决方案只能是搜集开源代码，然后自己做定制了。实际上，最后的产出，也就是三份代码的拼接。</p>
+
+<h2>资料搜集</h2>
+
+<p>通过各方搜寻，我找到了如下几个网页：</p>
+
+<ul>
+<li>1.<a href="http://love.hackerzhou.me/">复旦的学长hackzhou的爱心动画</a>，<a href="https://github.com/hackerzhou/Love">github托管代码</a>。</li>
+</ul>
+
+
+<p>网页用到了html5的一些特性实现了动态的心形花的绘制和类似程序代码敲击的文字呈现形式。由于内容仅仅是文字的，可定制性强。如下图：
+<img src="https://dl.dropboxusercontent.com/u/64021093/Pics/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202013-06-11%20%E4%B8%8B%E5%8D%888.12.01.png" title="hackerzhou's page" alt="hackerzhou's love project" /></p>
+
+<ul>
+<li>2.<a href="http://carfieldloverita.sinaapp.com/">一对异国情侣的Google地图应用</a>，<a href="https://github.com/wong2/lovegift">github托管代码</a>。</li>
+</ul>
+
+
+<p>网页调用了Google地图的API，可以定义聚焦的地理位置和坐标尺，显示照片，像日记一样记录了点点滴滴，有背景音乐。最后还以地点输入框的形式做了表白。很有创意！
+<img src="https://dl.dropboxusercontent.com/u/64021093/Pics/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202013-06-11%20%E4%B8%8B%E5%8D%888.12.18.png" title="Googlemap app" alt="Google map app" /></p>
+
+<ul>
+<li>3.<a href="http://liumeijun.com/">v2ex上某童鞋基于百度地图的应用</a>。</li>
+</ul>
+
+
+<p>跟2类似，调用了百度API，配上『Lemon tree』的背景音乐，很有调调！
+<img src="https://dl.dropboxusercontent.com/u/64021093/Pics/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202013-06-11%20%E4%B8%8B%E5%8D%888.16.00.png" title="baidumap app" alt="baidumap app" /></p>
+
+<h2>定制计划</h2>
+
+<p>限于没有前端的基础，开发效率会很低，只能硬顶着拿着前面的三个项目做混搭了。其中项目1和2都有在github上开源代码，而3则在v2ex的帖子里被作者授权直接查源码使用了。</p>
+
+<p>我做了简单的混搭修改计划：</p>
+
+<ul>
+<li>1.以hackzhou的项目为基础，修改文字内容和基本布局。</li>
+<li>2.添加加载等待过程，加载背景音乐。</li>
+<li>3.加载完成后，出现开始按钮，按开始按钮播放背景音乐，进入动画效果。</li>
+<li>4.增加全屏效果。</li>
+</ul>
+
+
+<h2>实施</h2>
+
+<h5>1.项目启动</h5>
+
+<p>我在github上fork了<a href="https://github.com/hackerzhou/Love">hackerzhou的代码</a>。(<a href="https://github.com/biaobiaoqi/Love">我fork的版本</a>)</p>
+
+<p>clone到本地，尝试阅读js代码，尝试做小改动，找到动画开始的调用。</p>
+
+<h5>2.尝试添加背景音乐</h5>
+
+<p>网上查资料，找到了<code>&lt;embeded&gt;</code>可以用来添加背景音乐，测试成功。但这个音乐播放无法支持同步的加载，不可控，在网络环境差的情况下，如果没有配乐动画过程会缺少表现力。放弃这种方案。</p>
+
+<p>在<a href="http://liumeijun.com/">v2ex上某童鞋基于百度地图的应用</a>源码中找到了一个第三方音乐播放库：<a href="http://www.schillmania.com/projects/soundmanager2/">soundmanager2</a>。查看官方文档，确认能满足项目需求，于是加入到代码中。</p>
+
+<p>为了让页面展现更加顺畅，需要音乐文件越小越好。我尝试了MIDI格式，但是很多浏览器并不支持，作罢。而soundmanager似乎对wma的支持有问题，于是只剩下mp3文件。我选择了JJ的『小酒窝』做背景音乐，在mac下使用ocenaudio将原来3MB的mp3文件截取了前一半，并导出为不同设定采样率的版本，经过测试，发现56kb采样率下，音质没有受到大的影响，且大小也足够小了，于是确定用这种格式的mp3。最终MP3文件的大小为500KB！</p>
+
+<h5>3.加载逻辑和开始按键</h5>
+
+<p>需求：加载过程需要隐藏前景内容，在音乐加载完成后，显示开始按钮，开始按钮能触发动画效果。</p>
+
+<p>通过Google找到了使用js隐藏和显示内容的方式</p>
+
+<p>```</p>
+
+<pre><code>document.getElementById('hint').style.display = "none"; //hide hint
+document.getElementById('start_btn').style.display = ""; //show start button
+</code></pre>
+
+<p>```</p>
+
+<p>虽然不是特别理解js引擎的单线程运作机制，但经过简单的试错、调试后，就完成了加载等待和开始按钮触发的原型。</p>
+
+<p>之后是对按钮和加载提示配置css。由于懒得理解css的一些细节，直接使用了<a href="https://github.com/wong2/lovegift">这份项目</a>中的css代码。</p>
+
+<h5>4.部署</h5>
+
+<p>github为每个项目提供了静态网页展示的功能，应付这个项目的网页展示完全够了。具体操作流程参见<a href="http://www.worldhello.net/gotgithub/03-project-hosting/050-homepage.html#project-homepage">《GotGithub》3.5.2. 创建项目主页</a>。实际上，链接中介绍的几种创造干净的gh-pages分支的方法，在这个项目的发布里是不必的。因为项目主页的展示代码跟master分支里的代码本身就是一样的，那么需要做的就只是开启gh-pages分支，并提交代码了。</p>
+
+<p>项目成果：<a href="http://biaobiaoqi.me/Love">请戳这里</a></p>
+
+<h2>结语</h2>
+
+<p>感谢v2ex，感谢hackerzhou、loo2k和wong2童鞋，我参考了你们很多代码。</p>
+
+<p>创造力需要靠技术手段实现。混迹在互联网上，没有自己建站的能力实在是很苦逼的一件事情。之后自己准备花些时间在RoR上。积累技术实力，努力做出好产品;)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[关于毕业季照片分享的思考]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/05/25/some-ideas-about-using-bt-protocol-to-sync/"/>
+    <updated>2013-05-25T22:47:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/05/25/some-ideas-about-using-bt-protocol-to-sync</id>
+    <content type="html"><![CDATA[<h2>背景</h2>
+
+<p>毕业季到了，女朋友跟班里同学们一起拍了很多照片。由于照片分散在不同的人的手机、相机里，她也无法立即给我传来她的照片。这个情景一年前我也遇到过，只是当时自己比较忙，加上考虑着还会在本校读研，也没太在意毕业季照片的手机这一需求，以至于到现在我的电脑里甚至没有一张我穿学士服的照片:-=。而现在，当我想看看gf的照片时，这个需求横亘在我面前，让我特别的想解决掉它。</p>
+
+<p>让我们从事实出发，理清问题的思路。</p>
+
+<h2>需求的产生</h2>
+
+<p>大学生拍毕业季照的现状：</p>
+
+<ul>
+<li>1.大学生在毕业季拍照留念是刚需，几乎平日爱拍照、不爱拍照的所有人都会参与其中。</li>
+<li>2.拍照一般以小团体为基本单元进行。多是班级、社团这种常见的凝聚力较强的团体。</li>
+<li>3.随着科技的发展和生活水平的提高，越来越多的人具备了拍出高质量照片的设备和实力。</li>
+</ul>
+
+
+<p>由于这种以小团体为单位的照片的大量产生，每个团体中的照片会交叉散落在较多人手中。在这种分散的格局面前，单独挑选出自己的照片并保存的成本巨大，直接导致了大家最终需求的统一：</p>
+
+<ul>
+<li>将所有的照片分发到所有人手中。</li>
+</ul>
+
+
+<h2>原有解决方案</h2>
+
+<p>现有的解决方案主要方案归纳为如下四种：</p>
+
+<ul>
+<li><p>1.用移动硬盘等设备人力拷贝</p>
+
+<p>  这种方式太过古老和原始，缺点费时费力。</p></li>
+<li><p>2.使用公邮、网盘、QQ群共享等方式统一上传、下载</p>
+
+<p>  主要缺点是外网网速限制；另外，网速的限制让用户上传和下载的门槛变高，影响了上传积极性，如果有人迟迟不上传，最终下载完整数据的时间也会一直拖延，带来消极的体验；如果注册一次性账号，这也不见得是环保的行为（或许这想法有点数据洁癖吧>&lt;），如果使用非一次性账号，那么权限管理将比较头疼。</p></li>
+<li><p>3.使用内网BT资源站分别打包上传、下载</p>
+
+<p>  优点是利用了内网网速的优势。缺点是每个人都打包做种，会让资源分散的很厉害，难于汇集。且做种等步骤对于部分用户而言，有操作门槛。</p></li>
+<li><p>4.先使用1中方法，统一手机照片数据，然后按照2或3的方法发布数据</p>
+
+<p>  这大概是最靠谱的方式了，缺点集中在需要有人费时费力的手机数据上。当然，如果班里有一个任劳任怨的好班长，这个问题就解决了。</p></li>
+</ul>
+
+
+<h4>总结：</h4>
+
+<p>对于一个懒人而言，现有的解决方案都是蹩脚的。这些解决方案都不约而同的希望首先将数据聚合到一个外部空间中，然后再统一的分发给大家。这个步骤必要吗？实际上，我们只是需要每个人都方便、快捷的获得所有照片。</p>
+
+<h2>一个简单的设计</h2>
+
+<p>我将问题抽象为：</p>
+
+<ul>
+<li>完整的数据分散在10至20个数据拥有者手中，需要通过一定手段，让每个个体都不重复的拥有完整的数据。</li>
+</ul>
+
+
+<p>由于外网网速的限制，基于校园内网建立的工具就有了天然的优势。但如果使用内网，就不得不抛弃各大公司免费提供的邮箱存储空间、网盘存储空间。而校内的资源是有限的，没有自己的服务器，没有足够的空间存储大家的数据，这也就迫使我们考虑到了p2p的系统架构。于是，有了这样的解决方案，设定代号为BBT：</p>
+
+<ul>
+<li>PC机安装BBT工具软件后，可以设定<code>共享目录</code>和对应的<code>分享ID</code></li>
+<li>放入特定<code>共享目录</code>的文件，将使用基于p2p同步的方式，在拥有相同的<code>分享ID</code>的<code>共享目录</code>间同步数据，目的是让所有人都获得到每个人的数据</li>
+</ul>
+
+
+<p>在跟阿豪童鞋的交流中，他建议为了进一步简化用户操作，可以尝试这样一种体验方式：</p>
+
+<ul>
+<li>班级内所有人在同一个链接下载工具软件。保证这一链接下载的软件能互相通信，实现数据同步。这杨就节省了用户自己设定相同的<code>分享ID</code>的流程，而将这一过程转移到班长请求下载链接的过程中。</li>
+</ul>
+
+
+<p>确实够简洁，很赞，实现成本还需要调研。</p>
+
+<h6>BitTorrent Sync</h6>
+
+<p>在构思的过程中，突然想起前几天在start up news上看到了一个基于BT协议的同步软件<a href="http://labs.bittorrent.com/experiments/sync.html">BitTorrent Sync</a>。</p>
+
+<p><img src="http://labs.bittorrent.com/img/wide/sync.png" title="BitTorrent Sync" alt="BitTorrent Sync" /></p>
+
+<p>它的实现方式大概是我们所需要的。可惜的是，由于它的功能全面，界面略显复杂。而同时，它并没有开放二次开发接口。</p>
+
+<p>或许我需要自己搭建一个p2p的系统？</p>
+
+<h6>PS:</h6>
+
+<p>BT的优势，在于利用了所有节点的存储和传输能力，节点数量越多，下载越快</p>
+
+<p>BitTorrent  Sync的优势，则在于能动态的集合分散在不同节点中的数据</p>
+
+<p>感觉这种去中心化的分布式系统，前景大大的有啊;)</p>
+]]></content>
+  </entry>
+  
+</feed>
