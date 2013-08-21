@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: web | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/tags/web/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-08-17T15:54:28+08:00</updated>
+  <updated>2013-08-22T01:35:24+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -112,7 +112,7 @@ var jiathis_config = {data_track_clickback:'true'};
 
 <h3>2.4友言验证</h3>
 
-<p>另外，需要在友言的后台处理评论，甚至做很多定制化处理，需要通过验证。详情在友言的管理员后台可见。</p>
+<p>另外，需要在友言的后台处理评论，甚至做一些定制化处理，需要通过友言的验证。详情在友言的管理员后台可见。</p>
 
 <h2>3.定制域名</h2>
 
