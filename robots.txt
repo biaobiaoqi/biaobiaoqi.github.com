@@ -1,4 +1,4 @@
 User-agent: *
-Disallow: http://biaobiaoqi.github.com/Resume.html 
+Disallow: 
 
 Sitemap: http://biaobiaoqi.github.com/sitemap.xml 
