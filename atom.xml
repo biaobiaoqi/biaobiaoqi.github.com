@@ -4,7 +4,7 @@
   <title><![CDATA[Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-08-25T22:35:14+08:00</updated>
+  <updated>2013-08-25T23:47:10+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -1285,7 +1285,7 @@
     <link href="http://biaobiaoqi.github.com/blog/2013/07/29/after-pat-practice/"/>
     <updated>2013-07-29T22:12:00+08:00</updated>
     <id>http://biaobiaoqi.github.com/blog/2013/07/29/after-pat-practice</id>
-    <content type="html"><![CDATA[<p>在<a href="http://weibo.com/redow7">@ReDow</a>、<a href="http://weibo.com/cloudbye">@麦迪的小腿</a>和<a href="http://weibo.com/linest">@lines</a> 等小伙伴的帮助下，终于断断续续的爬完了 <a href="http://pat.zju.edu.cn/">PAT</a> 的 Basic Level 和 Advanced Level，阶段性填补了自己惨白的算法短板。在 cs 的圈子里，说 PAT 是入门的『1 + 1』不为过。刚完成『1 + 1』，作为五年科班的人，确实不够光彩。不过现在能做的也只是尽力弥补本科时间里的虚度。</p>
+    <content type="html"><![CDATA[<p>在<a href="http://weibo.com/redow7">@ReDow</a>、<a href="http://weibo.com/cloudbye">@麦迪的小腿</a>和<a href="http://weibo.com/linest">@linest</a> 等小伙伴的帮助下，终于断断续续的爬完了 <a href="http://pat.zju.edu.cn/">PAT</a> 的 Basic Level 和 Advanced Level，阶段性填补了自己惨白的算法短板。在 cs 的圈子里，说 PAT 是入门的『1 + 1』不为过。刚完成『1 + 1』，作为五年科班的人，确实不够光彩。不过现在能做的也只是尽力弥补本科时间里的虚度。</p>
 
 <p>从亲手挖的坑里往外爬，需要付出比其他人更多的努力。没时间享受题目 ac 之后的快感（画外音：这么简单的题会有快感么=.=#），倒会时不时蹦出一股脑的蛋疼：『你当初干 XX 啥去了！』。</p>
 
@@ -1316,7 +1316,7 @@
 
 <h3>PS：</h3>
 
-<p>据我所知网上的资料没有对 PAT 题型整体的把握和讲解。接下来的时间，我会整理下自己的代码和解题思路，将整理结果放到博客上来，也算自己的复习。链接都准备好了：<a href="../overcome-pat/">《PAT 综合题解》</a>。如果是 404Error，就请再耐心等待几天吧;)</p>
+<p>据我所知网上的资料没有对 PAT 题型整体的把握和讲解。接下来的时间，我会整理下自己的代码和解题思路，将整理结果放到博客上来，也算自己的复习。链接都准备好了：<a href="http://biaobiaoqi.me/blog/2013/08/03/overcome-pat/">《PAT 练习题概览》</a>。如果是 404Error，就请再耐心等待几天吧;)</p>
 
 <p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/07/29/after-pat-practice/'>http://biaobiaoqi.github.com/blog/2013/07/29/after-pat-practice/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
 
