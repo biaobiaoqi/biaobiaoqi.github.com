@@ -205,7 +205,7 @@ public void postOrderTravNoRecu(Node n) {
 
 * 非递归方法：
 
-分析：此方法类似于前序遍历的非递归方法的第一种。用一个栈维护信息。
+分析：此方法类似于前序遍历的非递归方法的第一种。用一个队列维护信息。
 
 ```
 	public void levelOrderTrav(Node n) {
