@@ -9,7 +9,7 @@ description: ""
 
 ---
 
-在[@ReDow](http://weibo.com/redow7)、[@麦迪的小腿](http://weibo.com/cloudbye)和[@lines](http://weibo.com/linest)等小伙伴的帮助下，终于断断续续的爬完了[PAT](http://pat.zju.edu.cn/)的Basic Level和Advanced Level，阶段性填补了自己惨白的算法短板。在cs的圈子里，说PAT是入门的『1 + 1』不为过。刚完成『1 + 1』，作为五年科班的人，确实不够光彩。不过现在能做的也只是尽力弥补本科时间里的虚度。
+在[@ReDow](http://weibo.com/redow7)、[@麦迪的小腿](http://weibo.com/cloudbye)和[@linest](http://weibo.com/linest)等小伙伴的帮助下，终于断断续续的爬完了[PAT](http://pat.zju.edu.cn/)的Basic Level和Advanced Level，阶段性填补了自己惨白的算法短板。在cs的圈子里，说PAT是入门的『1 + 1』不为过。刚完成『1 + 1』，作为五年科班的人，确实不够光彩。不过现在能做的也只是尽力弥补本科时间里的虚度。
 
 从亲手挖的坑里往外爬，需要付出比其他人更多的努力。没时间享受题目ac之后的快感（画外音：这么简单的题会有快感么=.=#），倒会时不时蹦出一股脑的蛋疼：『你当初干XX啥去了！』。
 
@@ -45,4 +45,4 @@ description: ""
 
 ###PS：
 
-据我所知网上的资料没有对PAT题型整体的把握和讲解。接下来的时间，我会整理下自己的代码和解题思路，将整理结果放到博客上来，也算自己的复习。链接都准备好了：[《PAT综合题解》](../overcome-pat/)。如果是404Error，就请再耐心等待几天吧;)
+据我所知网上的资料没有对PAT题型整体的把握和讲解。接下来的时间，我会整理下自己的代码和解题思路，将整理结果放到博客上来，也算自己的复习。链接都准备好了：[《PAT练习题概览》](http://biaobiaoqi.me/blog/2013/08/03/overcome-pat/)。如果是404Error，就请再耐心等待几天吧;)
