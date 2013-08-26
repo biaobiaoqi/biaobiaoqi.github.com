@@ -5,7 +5,7 @@ date: 2013-07-10 01:53
 comments: true
 categories: [tech]
 tags: [octopress, web, ui]
-description: "按照个人的习惯定制Octopress博客，有如下内容：增加微博墙，增加第三方评论，让博客支持在新窗口打开链接，404Error界面，在侧边栏增加标签云，在顶栏增加标签云页面tab，博客末尾增加原文链接、版权信息，给中英文之间增加空格"
+description: "按照个人的习惯定制Octopress博客，有如下内容：安装第三方主题，增加微博墙，增加第三方评论，让博客支持在新窗口打开链接，404Error界面，在侧边栏增加标签云，在顶栏增加标签云页面tab，博客末尾增加原文链接、版权信息，给中英文之间增加空格"
 
 ---
 
@@ -13,6 +13,29 @@ description: "按照个人的习惯定制Octopress博客，有如下内容：增
 
 不会ruby的童鞋特别注意：配置_config.yml的过程中特别注意，配置项『:』后要留空格，否则会报错。
 
+另外，一些『土方法』可能并不利于程序的维护可扩展，有空再仔细研究，大家将就着用吧;).
+
+##0.安装第三方主题
+
+之所以把这一点标记为0，是因为在博主刚刚经历了博客主题的更新后，惨烈的发现需要重新配置包括评论、百度统计在内的不少东西。
+
+应该是自己在做定制化的过程中乱修改源码（这是一种很不可取维护方式，使软件难以持续扩展）造成的，又或者octopress框架本身对定制化扩展的支持比较弱（对ruby不熟，对octopress也一知半解，我不确定是不是这个原因）。
+
+简而言之，初接触octopress的朋友们，建议先安装第三方主题，再参考以下定制方法。
+
+我使用的第三方主题是[『whitelake』](https://github.com/gehaxelt/CSS-WhiteLake)。
+
+安装过程很简单:
+
+```
+$ cd octopress
+$ git clone https://github.com/gehaxelt/CSS-WhiteLake.git .themes/whitelake
+$ rake install['whitelake']
+$ rake generate
+```
+注意，执行`rake install['whitelake']`之后，直接使用`rake preview`浏览网页会遇到很多瑕疵，`rake generate`之后再`rake preview`就没问题了。
+
+更多第三方插件和主题资源，参见[官方repo的wiki](https://github.com/imathis/octopress/wiki).
 
 ##1.装饰边栏
 
