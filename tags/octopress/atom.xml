@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: octopress | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/tags/octopress/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-08-26T21:44:51+08:00</updated>
+  <updated>2013-08-27T01:47:42+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -21,6 +21,30 @@
     <content type="html"><![CDATA[<p>在github pages上搭建好octopress博客之后，博客的基本功能就能使用了。如果想自己定制也是没问题的，octopress有较详尽的官方文档，原则上有问题求助官方即可：<a href="http://octopress.org/help/">octopress-help</a>。官方没有包纳的也可以去询问<a href="http://stackoverflow.com/questions/tagged/octopress">stackoverflow</a>。 当然，中文的看起来总会省事儿点。我做了如下一些总结;)</p>
 
 <p>不会ruby的童鞋特别注意：配置_config.yml的过程中特别注意，配置项『:』后要留空格，否则会报错。</p>
+
+<p>另外，一些『土方法』可能并不利于程序的维护可扩展，有空再仔细研究，大家将就着用吧;).</p>
+
+<h2>0.安装第三方主题</h2>
+
+<p>之所以把这一点标记为0，是因为在博主刚刚经历了博客主题的更新后，惨烈的发现需要重新配置包括评论、百度统计在内的不少东西。</p>
+
+<p>应该是自己在做定制化的过程中乱修改源码（这是一种很不可取维护方式，使软件难以持续扩展）造成的，又或者octopress框架本身对定制化扩展的支持比较弱（对ruby不熟，对octopress也一知半解，我不确定是不是这个原因）。</p>
+
+<p>简而言之，初接触octopress的朋友们，建议先安装第三方主题，再参考以下定制方法。</p>
+
+<p>我使用的第三方主题是<a href="https://github.com/gehaxelt/CSS-WhiteLake">『whitelake』</a>。</p>
+
+<p>安装过程很简单:</p>
+
+<p><code>
+$ cd octopress
+$ git clone https://github.com/gehaxelt/CSS-WhiteLake.git .themes/whitelake
+$ rake install['whitelake']
+$ rake generate
+</code>
+注意，执行<code>rake install['whitelake']</code>之后，直接使用<code>rake preview</code>浏览网页会遇到很多瑕疵，<code>rake generate</code>之后再<code>rake preview</code>就没问题了。</p>
+
+<p>更多第三方插件和主题资源，参见<a href="https://github.com/imathis/octopress/wiki">官方repo的wiki</a>.</p>
 
 <h2>1.装饰边栏</h2>
 

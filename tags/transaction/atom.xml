@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: transaction | Biaobiaoqi的博客]]></title>
+  <link href="http://biaobiaoqi.github.com/tags/transaction/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.github.com/"/>
+  <updated>2013-08-27T01:47:42+08:00</updated>
+  <id>http://biaobiaoqi.github.com/</id>
+  <author>
+    <name><![CDATA[Biaobiaoqi]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[分布式事务slides]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/08/26/distributed-transaction/"/>
+    <updated>2013-08-26T23:49:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/08/26/distributed-transaction</id>
+    <content type="html"><![CDATA[<p>最近看了<a href="http://book.douban.com/subject/21624776/">《分布式系统概念与设计 第5版》</a>的分布式事务章节，整理了一份ppt。还有恢复部分没有收录进来，有空再整理啦。</p>
+
+<p>下面是传到deckspeaker上的slides展示:</p>
+
+<script async class="speakerdeck-embed" data-id="aa521420f0a101303be246475d95d052" data-ratio="1.33333333333333" src="http://biaobiaoqi.github.com//speakerdeck.com/assets/embed.js"></script>
+
+
+<p>下载链接：<a href="https://dl.dropboxusercontent.com/u/64021093/slides/distributed%20transcation.pptx">请戳</a></p>
+]]></content>
+  </entry>
+  
+</feed>
