@@ -384,3 +384,10 @@ task :list do
   puts "Tasks: #{(Rake::Task.tasks - [Rake::Task[:list]]).join(', ')}"
   puts "(type rake -T for more detail)\n\n"
 end
+
+desc "sync post to MetaWeblog site"
+task :sync_post do
+  puts "Sync the latest post to MetaWeblog site"
+  system "ruby _custom/sync_post.rb"
+end
+
