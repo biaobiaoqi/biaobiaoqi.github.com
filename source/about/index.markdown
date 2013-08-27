@@ -9,15 +9,15 @@ footer: true
 
 您好，欢迎来到我的个人博客:-)。
 
-我是biaobiaoqi，ZJU的CS小硕一枚。从大三开始喜欢上了互联网,从此踏上了程序猿的征程。
+我是biaobiaoqi，ZJU的CS小硕一枚。从大三开始喜欢上了互联网,从此踏上了攻城狮的征途。
 
-程序世界里，一门编程语言代表着一个国度，它们有着各自的哲学和道德标准。我的程序护照上敲章的签证包括了：`C`，`C++`，`Java`，`Objective-C`，`bash`。其中在`Java`的驻留时间最长。未来期待去`Ruby`旅行。
+写过`Java`，`objective-C`，能用点`C`、`bash`，对`Ruby`和`javascript`也很感兴趣。
 
-`Talk is cheap, show me the code.` 说来惭愧，距今为止，我的作品乏善可陈：
+`Talk is cheap, show me the code.` 说来惭愧，距今为止，我的作品还乏善可陈：
 
 * Android应用[『功夫蛇』](http://www.google.cn/university/androidchallenge/2011/gallery.html#tab=d1-13)
 * iOS应用[『查好友』的1.2及之前版本](http://chahaoyou.com/)。
-* AOP编程实践：Java字节码的WP关系分析研究（我会抽空将代码整理后开源）。
+* AOP编程实践：逆向工程，从字节码中获取Java类的WP关系（我会抽空将代码整理后开源）。
 
 我的理想是做一个互联网时代的`匠人`，给世界留下一些脚印。于是，有了这个博客。将来，还会有更多的有趣的products, let's c ;)
 
@@ -29,4 +29,4 @@ E-mail：(Mac OS X) `echo 'c2hlbnlhcGVuZ0BnbWFpbC5jb20K' | base64 -D`
 
 你也可以在以下社区找到我：
 
-* [微博](http://weibo.com/biaobiaoqi)，[V2EX](http://www.v2ex.com/member/biaobiaoqi)，[豆瓣](http://www.douban.com/people/biaobiaoqi/)，[Github](https://github.com/biaobiaoqi)，[StackOverFlow](http://stackoverflow.com/users/1019336/biaobiaoqi)。
+* [V2EX](http://www.v2ex.com/member/biaobiaoqi)，[豆瓣](http://www.douban.com/people/biaobiaoqi/)，[Github](https://github.com/biaobiaoqi)，[StackOverFlow](http://stackoverflow.com/users/1019336/biaobiaoqi)，[Twitter](https://twitter.com/YapengShen)，[微博](http://weibo.com/biaobiaoqi)。
