@@ -36,7 +36,7 @@ module MetaWeblogSync
         puts 'posting new blog:' + post[:title] + 'to ' + site
         puts 'url:' + paras['MetaWeblog_url']
         puts 'username:' + paras['MetaWeblog_username']
-        puts 'pwd: ' + @passwd
+        puts 'pwd: ' + @passwd.to_s
         blogClient = MetaWeblog::Client.new paras['MetaWeblog_url'], paras['MetaWeblog_blogid'].to_s, paras['MetaWeblog_username'], @passwd, nil
         response = blogClient.post(post)
         puts 'post successfully. new blog id: ' + response
