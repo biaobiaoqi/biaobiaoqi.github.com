@@ -102,4 +102,10 @@ comment_and_share: true
 #duoshuo_comments: true
 #duoshuo_short_name: biaobiaoqi
 
+#MetaWeblog
+MetaWeblog:
+   Cnblogs:
+      MetaWeblog_username: biaobiaoqi
+      MetaWeblog_url: http://www.cnblogs.com/biaobiaoqi/services/metaweblog.aspx
+      MetaWeblog_blogid: 600520
 

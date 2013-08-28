@@ -5,32 +5,56 @@ require 'yaml'
 
 module MetaWeblogSync
 
-
   class SyncPost
 
-    def initialize
-      @config = YAML.load_file(File.expand_path(File.dirname(__FILE__) + '/../metaweblog.yml'))
+    def initialize passwd
+     # @config = YAML.load_file(File.expand_path(File.dirname(__FILE__) + '/../metaweblog.yml'))
       @globalConfig = YAML.load_file(File.expand_path(File.dirname(__FILE__) + '/../_config.yml'))
-
+      @passwd = passwd
     end
 
-    def postBlog
+    def postAllBlogs 
+      #find all blogs paths
+      postsPaths = getAllBlogsPaths
+      postsPaths.each do | path|
+        postBlog path
+        sleep(2) #As time limit in blog wite, there should be a time gap in every loop
+      end
+    end
 
-      blogPath = getLatestBlogPath
+    def postLatestBlog 
+      postPath = getLatestBlogPath
+      puts postPath
+      postBlog postPath 
+    end
+
+    def postBlog blogPath
       blogHtml = getBlogHtml blogPath
       post = getPost blogHtml
 
-
-      @config.each do |site, paras|
+      @globalConfig["MetaWeblog"].each do |site, paras|
         puts 'posting new blog:' + post[:title] + 'to ' + site
-
-blogClient = MetaWeblog::Client.new 'http://www.cnblogs.com/biaobiaoqi/services/metaweblog.aspx', '600520', 'biaobiaoqi', '123456', nil
-        #blogClient = MetaWeblog::Client.new paras['MetaWeblog_url'], paras['MetaWeblog_blogid'].to_s, paras['MetaWeblog_username'], paras['MetaWeblog_password'].to_s, nil
+        puts 'url:' + paras['MetaWeblog_url']
+        puts 'username:' + paras['MetaWeblog_username']
+        puts 'pwd: ' + @passwd
+        blogClient = MetaWeblog::Client.new paras['MetaWeblog_url'], paras['MetaWeblog_blogid'].to_s, paras['MetaWeblog_username'], @passwd, nil
         response = blogClient.post(post)
         puts 'post successfully. new blog id: ' + response
-
       end
+    end
 
+    def getAllBlogsPaths
+      indexFile = File.open(File.expand_path(File.dirname(__FILE__) + '/../public/blog/archives/index.html'), 'r')
+      contents = indexFile.read
+      html = Nokogiri::HTML(contents)
+
+      # get latest post path
+      paths = html.css('//h1/a')
+      paths.shift
+      
+      paths.map {|path| 
+        path = File.expand_path(File.dirname(__FILE__) + '/../public' + path['href']) + '/index.html'
+      }
     end
 
     def getLatestBlogPath
@@ -58,10 +82,8 @@ blogClient = MetaWeblog::Client.new 'http://www.cnblogs.com/biaobiaoqi/services/
 
       entryContent = replaceImgUrl(html)
 
-
       # keep same structure with a article
       article = '<div id="main"><article class="hentry" role="article">' + entryContent + '</article></div>'
-
 
       MetaWeblog::Post.new(title, '', article)
     end
@@ -87,5 +109,3 @@ blogClient = MetaWeblog::Client.new 'http://www.cnblogs.com/biaobiaoqi/services/
 
 end
 
-syncPost = MetaWeblogSync::SyncPost.new
-syncPost.postBlog
