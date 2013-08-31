@@ -38,6 +38,8 @@ PAT([pat.zju.edu.cn](http://pat.zju.edu.cn))是一个面向C/C++程序的Online 
 * 1050 数字/字符处理
 * 1058 数字/字符处理
 * 1060 数字/字符处理
+* 1061 数字/字符处理，坑题
+* 1063 数字/字符处理，游标
 
 
 模拟题
@@ -72,6 +74,7 @@ PAT([pat.zju.edu.cn](http://pat.zju.edu.cn))是一个面向C/C++程序的Online 
 * 1028 排序
 * 1029 归并排序
 * 1038 递归，排序
+* 1062 排序
 
 
 ####时间优化
@@ -117,6 +120,7 @@ PAT([pat.zju.edu.cn](http://pat.zju.edu.cn))是一个面向C/C++程序的Online 
 * 1004 dfs，树遍历
 * 1020 二叉树遍历 
 * 1043 二叉树遍历
+* 1064 重建完全二叉搜索树
 
 
 Hash
@@ -156,11 +160,12 @@ Hash
 
 截止2013-08-03，PAT advanced level的60道题全部题解和代码已经发布在本博客中，链接如下：欢迎讨论大家;)
 
-* [《PAT 1001-1010 题解》](../../../../2013/07/31/pat-1001-1010-solutions/)
-* [《PAT 1011-1020 题解》](../../../../2013/07/31/pat-1011-1020-solutions/)
-* [《PAT 1021-1030 题解》](../../../../2013/08/01/pat-1021-1030-solutions/)
-* [《PAT 1031-1040 题解》](../../../../2013/08/01/pat-1031-1040-solutions/)
-* [《PAT 1041-1050 题解》](../../../../2013/08/01/pat-1041-1050-solutions/)
-* [《PAT 1051-1060 题解》](../../../../2013/08/01/pat-1051-1060-solutions/)
+* [《PAT 1001-1010 题解》](http://biaobiaoqi.me/blog/2013/07/31/pat-1001-1010-solutions/)
+* [《PAT 1011-1020 题解》](http://biaobiaoqi.me/blog/2013/07/31/pat-1011-1020-solutions/)
+* [《PAT 1021-1030 题解》](http://biaobiaoqi.me/blog/2013/08/01/pat-1021-1030-solutions/)
+* [《PAT 1031-1040 题解》](http://biaobiaoqi.me/blog/2013/08/01/pat-1031-1040-solutions/)
+* [《PAT 1041-1050 题解》](http://biaobiaoqi.me/blog/2013/08/01/pat-1041-1050-solutions/)
+* [《PAT 1051-1060 题解》](http://biaobiaoqi.me/blog/2013/08/01/pat-1051-1060-solutions/)
+* [《PAT 1061-1064 题解》](http://biaobiaoqi.me/blog/2013/08/31/pat-1061-pat-1064/)
 
-附博客的PAT专题区链接：[请戳](../../../../../tags/pat/)
+附博客的PAT专题区链接：[请戳](http://biaobiaoqi.me/tags/pat/)
