@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tech | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-08-31T15:21:27+08:00</updated>
+  <updated>2013-08-31T20:44:48+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -12,6 +12,66 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[octopress第三方插件：博文同步工具syncPost]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/08/31/octopress-3rd-party-plugin-syncpost/"/>
+    <updated>2013-08-31T19:30:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/08/31/octopress-3rd-party-plugin-syncpost</id>
+    <content type="html"><![CDATA[<p>为了增加外链等考虑，独立博客往往有将博文同步到其他博客社区的需求。自己人肉黏贴的方式笨拙、重复，对于程序猿而言，着实不可取。</p>
+
+<p>我在github上找到了<a href="https://github.com/huangbowen521/octopress-syncPost">syncPost</a>这个针对octopress的第三方工具，能够通过一些论坛提供的<a href="http://en.wikipedia.org/wiki/MetaWeblog">metaWeblog</a>服务实现octopress最新一篇博文的同步提交。</p>
+
+<p>这大概就是我要找的东西吧。不过，其中有些细节并不是我想要的：</p>
+
+<ul>
+<li>1.在本地配置文件存储论坛账户的密码。虽然可以设置为ignore不提交到git代码库中，但这也并不安全。</li>
+<li>2.只能同步最新的一篇博客，没有整体的博文搬家功能。</li>
+<li>3.先比其他的octopress插件，原来版本的代码结构难于维护，比如有自己单独的配置文件，而不是使用全局的<code>_config.yml</code>(在那个版本中大概是为了不把明文密码提交到版本库中)，比如ruby文件单独在一个<code>_custom</code>文件夹下等</li>
+</ul>
+
+
+<p>基于这些点，我fork了作者的代码，定制成了它<a href="https://github.com/biaobiaoqi/octopress-syncPost">现在的样子</a>。</p>
+
+<!--more-->
+
+
+<h2>功能</h2>
+
+<p>通过rake的方式实现同步功能：</p>
+
+<ul>
+<li>1.同步所有octopress的博文到目标博客。 (<code>rake sync_all_posts</code>)</li>
+<li>2.同步最新一篇博文到目标博客。(<code>rake sync_lates_post</code>)</li>
+</ul>
+
+
+<h2>开发</h2>
+
+<p>这个octopress插件的结构很简单：</p>
+
+<ul>
+<li>安装<code>nokogiri</code>和 <code>metaweblog</code>两个gem。前者实现对octopress生成的html页面的解析，找到对应的博文。提供了客户端发起MetaWeblog请求的功能。</li>
+<li>在全局配置文件<code>_config.yml</code>中配置了目标博客MetaWeblog的服务地址、用户的账号信息。</li>
+<li>octopress/plugins/sync_*.rb三个文件则是代码实现。其中sync_post.rb中包含了post类，是主要的逻辑代码所在，sync_all_posts.rb和sync_latest_post.rb则是对前者的调用。</li>
+<li>修改了octopress的Rakefile，通过rake的方式实现功能。</li>
+</ul>
+
+
+<h2>下一步</h2>
+
+<p>希望能进一步完善这个插件，现在考虑到的有：</p>
+
+<ul>
+<li>增加同步所有博文功能中，对目标博客中已有博文的查重功能。即对于已经同步过去的博客，不再发送请求，或者实现编辑功能的同步功能。由于站点的MetaWeblog服务大多对请求有时限控制，同步过程中可能出现中断，此时部分博文已经同步过去，而部分没有，这种情况下，暂时没有好的解决方式。</li>
+<li>测试其他有MetaWeblog服务的博客站点（现在仅测试了cnblog）。</li>
+<li>cnblog的博文显示中，似乎不支持octopress的代码块样式。</li>
+</ul>
+
+
+<p>欢迎感兴趣的朋友参与到这个repo中来:)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[PAT 1061 - 1064 题解]]></title>
@@ -521,171 +581,6 @@ d&amp;Hyscvnm</p>
 <p>由于非负整数非常大，不可使用longlong甚至精确度不高的double，当做字符串来处理。</p>
 
 <p>需要注意的一点是对值为0的情况的处理。比如0在有效位数为3下的表达为:<code>0.00*10^0</code></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[PAT 1041-1050 题解]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/08/01/pat-1041-1050-solutions/"/>
-    <updated>2013-08-01T01:43:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/08/01/pat-1041-1050-solutions</id>
-    <content type="html"><![CDATA[<p>浏览全部代码：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
-
-<p>本文谨代表个人思路，欢迎讨论;)</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1041">1041. Be Unique (20)</a></h2>
-
-<h5>题意</h5>
-
-<p>给出N (&lt;=105)个数（数值范围为 [1, 10<sup>4]），找到其中不重复的第一个数字。比如给出</sup> <code>5 31 5 88 67 88 17</code> ， 答案是 <code>31</code> 。</p>
-
-<h5>分析</h5>
-
-<p>简单模拟题，开一个大数组<code>int a[10001];</code>，以读入的数为下标，记录count:<code>a[index] ++;</code>。结果输出第一个存储为1的下标:<code>if (a[index] == 1)</code>。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1042">1042. Shuffling Machine (20)</a></h2>
-
-<h5>题意</h5>
-
-<p>背景是洗牌机的洗牌过程。过程是给定洗牌的每张牌的位置替换序列，由原来的次序算出最后的牌的平排列。</p>
-
-<p>比如原有的次序为<code>S3, H5, C1, D13, J2</code>，
-给定的洗牌顺序为<code>4, 2, 5 ,3 ,1</code>，那么一次洗牌的结果为：<code>J2, H5, D13, S3, C1</code>。
-如果需要两次洗牌，则结果为<code>C1, H5, S3, J2, D13</code>。</p>
-
-<p>输入为对一整副牌（54张）的洗牌策略，以及洗牌次数N，要求计算出最后的洗牌结果。</p>
-
-<h5>分析</h5>
-
-<p>简单hash题。</p>
-
-<!--more-->
-
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1043">1043. Is It a Binary Search Tree (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>二叉搜索树的定义就不重复了，题目新定义了一个镜像二叉搜索树，就是将一颗二叉搜索树所有节点的左右子树交换后的二叉树。</p>
-
-<p>输入是一个二叉树的前序排列，要求判定是否是一个二叉搜索树或者镜像二叉搜索树。如果是，输出该树后序遍历的序列。</p>
-
-<h5>分析</h5>
-
-<p>解题思路：</p>
-
-<ul>
-<li>1.BST 很特殊，实质上 BST 的所有节点的顺序排列就是中序遍历了。</li>
-<li>2.要检查树是否是 BST 或者镜像 BST，只需按照重建树的思路，在每次重建的过程中做适当检查即可。检查思路是：检查前序遍历序列中，根节点之后的节点排序是否符合 BST 的二分规则（即前一段都是小于根节点的，后一段都是大于根节点的）。</li>
-<li>3.最后的输出是后序遍历。过程中其实并不用构建整个树，直接在处理过程中，按后序的方式存储节点到队列中即可。</li>
-</ul>
-
-
-<p>更多相关分析，参见博文<a href="../../../../2013/04/27/pat1020-pat1043-rebuild-binary-tree/">《根据前中后序和层序重建二叉树》</a>。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1044">1044. Shopping in Mars (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>火星人购物使用钻石链，每颗钻石都有一定的价值。付款是，要求从钻石链上找到所有刚好能匹配到商品价值的连续的钻石子链，如果没有，
-则找到超过商品价值的最小的钻石子链。</p>
-
-<p>比如钻石链为<code>3 2 1 5 4 6 8 7</code>，商品价值为<code>15</code>，则候选的方案有：第4到第6颗的子链<code>5 4 6</code>，第7到第8颗：<code>8 7</code>。</p>
-
-<p>输入为一个钻石链以及商品的价值，要求找到所有满足条件的分割方案，按起始点从小到大排序输出。</p>
-
-<h5>分析</h5>
-
-<p>由于时间限制有些严格，需要做足够的优化：</p>
-
-<ul>
-<li>1.为了便于计算某个区间的累加值，在存储钻石串时，可以在<code>index</code>位置存储包括当前钻石在内的之前所有钻石价值的累加和。</li>
-<li>2.使用两层循环遍历所有可能，在遍历以位置i为其实坐标的子串时，不应该将结束位置初始化为i，而是应该是以<code>i-1</code>为起始位置的搜索过程中的break时的
-结束位置的下标减1.</li>
-</ul>
-
-
-<p>其中第2条的证明如下：</p>
-
-<p>算法中首先计算以<code>i</code>为起始位置的子串的累加值。假定计算到<code>j</code>满足累加值等于或者刚好大于商品价值<code>m</code>。之后，结束以<code>i</code>位置开始的子串的探寻，进入下一阶段以i+1为起始位置的搜索。
-由于<code>[i, j]</code>的累加和刚好等于<code>m</code>，则<code>[i, j - 1]</code>的累加和肯定小于<code>m</code>，那么<code>[i + 1, j - 1]</code>的累加和也肯定小于<code>m</code>。</p>
-
-<p>综上述，在以<code>i+1</code>为起始位置的搜索中，可以初始化结束位置为上一次搜索结束的位置减一，即<code>j - 1</code>.</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1045">1045. Favorite Color Stripe (30)</a></h2>
-
-<h5>题意</h5>
-
-<p>Eva对彩色条有特殊的癖好，对于一条五颜六色的彩带，她会减掉其中一些颜色块，让整个彩带的颜色顺序匹配到自己的一个颜色喜好顺序上。</p>
-
-<p>举例来说，她喜欢的颜色顺序为{2 3 1 5 6}，给定的彩带的颜色顺序为{2 2 4 1 5 5 6 3 1 1 5 6}，那么经过她的剪辑，留下的彩带的可能选项有：{2 2 1 1 1 5 6}
-{2 2 1 5 5 5 6}，{2 2 1 5 5 6 6}和{2 2 3 1 1 5 6}。</p>
-
-<p>我们的任务是找到其中最长的剪辑可能。</p>
-
-<h5>分析</h5>
-
-<p>这是经典的最长递增子序列问题(LIS)，递增在这里体现为子序列的颜色顺序要遵照Eva的对颜色的喜好顺序。使用动态规划解决。</p>
-
-<ul>
-<li>1.剔除不在Eva喜欢颜色列表中的颜色。</li>
-<li>2.DP的状态： 用<code>length[max]</code>数组存储状态，<code>length[i]</code>表示到彩带的第i个位置为止，包含该颜色的符合Eva喜好顺序的子串长度的最长值。记得在每次</li>
-<li>3.DP的子问题：<code>length[i]</code>等于在其之前的所有<code>lengths[j]</code>跟<code>i</code>位置颜色组合后的最长子串值。</li>
-</ul>
-
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1046">1046. Shortest Distance (20)</a></h2>
-
-<h5>题意</h5>
-
-<p>给定在圆环上的几个点的相对位置，要求计算不同点之间的距离。</p>
-
-<h5>分析</h5>
-
-<p>简单模拟。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1047">1047. Student List for Course (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>根据每名学生填报的课程，按顺序输出每门课程的学生名单。其中学生总量为N(&lt;=40000)，课程总量为K(&lt;=2500)。学生姓名为3个大写英文字符加一个数字。</p>
-
-<h5>分析</h5>
-
-<p>倒排索引的模拟。可以针对学生姓名做hash方式的优化。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1048">1048. Find Coins (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>给定一系列硬币，以及一个商品的价格。要求从硬币中找到两个硬币让他们的组合等于商品的价格。如果有多个，输出有用最小单个值的硬币组合。</p>
-
-<h5>分析</h5>
-
-<p>首先，硬币中币值不小于商品价格的可以过滤掉。遍历过程中，使用hash标记的方法，设定一个<code>coins[MAXVALUE]</code>（其中MAXVALUE为商品价格的最大值）记录已有的币值种类，
-在遍历的过程中，一边将读入的硬币增加到<code>coins[]</code>中，一边计算满足条件的最小币值。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1049">1049. Counting Ones (30)</a></h2>
-
-<h5>题意</h5>
-
-<p>给定一个正整数N(&lt;=2<sup>30)，要求计算所有小于N的正整数的各个位置上，1出现的次数之和。</sup></p>
-
-<h5>分析</h5>
-
-<p>比较有思维难度的一题，核心在于找规律。10ms的时间限制表明了不能用常规的循环遍历来解决。需要从简单的case找规律，逐步扩大到常规的情况。</p>
-
-<p>详情参见《编程之美》P132页《1的数目》。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1050">1050. String Subtraction (20)</a></h2>
-
-<h5>题意</h5>
-
-<p>给定两个字符串，S1和S2,要求将S2中的字符从S1串中剔除。</p>
-
-<h5>分析</h5>
-
-<p>用Hash的方式标记需要剔除的字符。</p>
 ]]></content>
   </entry>
   
