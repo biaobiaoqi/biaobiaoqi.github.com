@@ -9,7 +9,8 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="问题说明 PAT1051：给定 stack 的容量，给定数据的入栈顺序：从 1 开始的正整数序列，在允许随机的出栈操作的情况下，要求判断某出栈序列是否可能。 比如，告知 stack 容量为 5，入栈序列的最大值为 7。有两个序列需要判断合理性： 1 2 3 4 5 6 7： 这个序列是可能的， &hellip;">
+  <meta name="description" content="本周有幸参加了为期两天的阿里离线数据处理平台 2013 暑期学校的学习。 阿里的前辈们分不同的专题给大家介绍了飞天平台上的离线数据处理服务 ODPS（Open Data Processing Service）。
+内容上主要分为两部分，一部分是平台架构，一部分是数据分析。来听课的同学也就分为了两部分 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -106,6 +107,59 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/19/odps-in-alibaba/">阿里离线数据处理平台2013暑期学校</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-19T21:31:00+08:00" pubdate data-updated="true">Jul 19<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>本周有幸参加了为期两天的<a href="http://102.alibaba.com/competition/dataSummer.htm">阿里离线数据处理平台 2013 暑期学校</a>的学习。</p>
+
+<p>阿里的前辈们分不同的专题给大家介绍了飞天平台上的离线数据处理服务 ODPS（Open Data Processing Service）。
+内容上主要分为两部分，一部分是平台架构，一部分是数据分析。来听课的同学也就分为了两部分，而像我一样关注系统层面的人是少数。</p>
+
+<p>这也正常，用赵本山在『一代宗师』里的话来说，一个是面子，一个是里子。数据分析能直接产生表现层的数据，而系统平台则只是提供支持。
+成功了，大家看得到的是分析出的数据，而一旦失败了，那么系统平台的责任就大了。
+再者越贴近硬件层次的工作也注定越辛苦，深夜被吵醒也不是没有的事儿。好了，吐槽到此结束，下面是总结笔记整理出几页 slides：</p>
+
+<script async class="speakerdeck-embed" data-id="e0022eb0d24d013089506e9621fcaf9a" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+
+
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/07/19/odps-in-alibaba/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -1226,69 +1280,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/06/08/ipc-in-hadoop/">《Hadoop技术内幕》学习笔记——RPC和动态代理</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-08T00:24:00+08:00" pubdate data-updated="true">Jun 8<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>本文是《hadoop 技术内幕——深入解析 Hadoop Common 和 HDFS 架构设计与实现原理》第 4 章的 1-3 节的学习笔记。内容为 Hadoop IPC 部分的基础知识介绍。</p>
-
-<h2>知识框架</h2>
-
-<p>由于 Hadoop 分布式环境需要一个更高效和正对性优化的 IPC 机制，传统的诸如 RMI 的解决方案无法满足这一要求，Hadoop 自己实现了一套 IPC 方法。</p>
-
-<p>第 4 章第 1 节讲解了 RPC 的原理，包括 Stub-Skeleton 的架构等，进而用<code>RMI</code>举例（可以参考的<a href="">演示代码</a>）。RMI 的调用实现主要包括了服务器端的 registry 和客户端的 lookup。虽然 Hadoop 不是使用 RMI 做 IPC，但了解一下其调用方式对感性的认识到如何进行分布式环境下的远程调用还是有作用的。</p>
-
-<p>接下来的 2,3 小节，简单的介绍了 IPC 过程所依赖的技术方法：Java 的动态代理方式和 NIO 的网络传输方式。</p>
-
-<p>第 2 节讲<code>动态代理</code>，这里需要理解面向对象的代理模式和<em>动态</em>的原因。代理模式分很多种，这里用到的是简单的对行为的传递。动态代理的动态特性，则是因为框架能提供动态创建某个接口的实现的能力(可以参考的<a href="">演示代码</a>)。</p>
-
-<p>更系统的看动态代理过程，分为两个阶段：</p>
-
-<ul>
-<li>1.代理接口的实现：静态方法 Proxy.newInstance()生成动态对象。</li>
-<li>2.调用转发过程：InvocationHandler 实现</li>
-</ul>
-
-
-<p>第 3 节的<code>NIO</code>，跟传统的套接字(Socket)通信过程做了对比。需要了解 Socket 通信的特点：同步，阻塞，基于字节，理解这种特点带来的服务器端的线程闲置的压力。对应的，NIO 则是可异步的，非阻塞的，基于块的。具体的实现上，需要了解缓冲区(Buffer)的原理和使用方式，通道(Channel)和选择器(Selector)配合的使用方式。</p>
-
-<p>我总结了一份 slides，如下：(挂在 speackerdeck 上，如果加载缓慢，请稍候:))</p>
-
-<script async class="speakerdeck-embed" data-id="fbcb8590b1540130690c2e6f0be13e84" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
-
-
-<p>slides 下载地址：<a href="https://dl.dropboxusercontent.com/u/64021093/slides/%E8%BF%9C%E7%A8%8B%E8%BF%87%E7%A8%8B%E8%B0%83%E7%94%A8%E5%92%8CNIO.pdf">请戳</a><p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/06/08/ipc-in-hadoop/'>http://biaobiaoqi.github.com/blog/2013/06/08/ipc-in-hadoop/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -1306,26 +1297,30 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
  <br /> 
   <ul class="tag-cloud">
     <a style="font-size: 180%" href="/tags/algorithm/">algorithm</a> &nbsp 
-<a style="font-size: 170%" href="/tags/distributed/">distributed</a> &nbsp 
-<a style="font-size: 99%" href="/tags/entrepreneurship/">entrepreneurship</a> &nbsp 
-<a style="font-size: 99%" href="/tags/gui/">gui</a> &nbsp 
-<a style="font-size: 137%" href="/tags/hadoop/">hadoop</a> &nbsp 
-<a style="font-size: 99%" href="/tags/idea/">idea</a> &nbsp 
-<a style="font-size: 116%" href="/tags/java/">java</a> &nbsp 
-<a style="font-size: 99%" href="/tags/linux/">linux</a> &nbsp 
-<a style="font-size: 137%" href="/tags/methodology/">methodology</a> &nbsp 
-<a style="font-size: 128%" href="/tags/network/">network</a> &nbsp 
-<a style="font-size: 116%" href="/tags/os/">os</a> &nbsp 
+<a style="font-size: 167%" href="/tags/distributed/">distributed</a> &nbsp 
+<a style="font-size: 98%" href="/tags/entrepreneurship/">entrepreneurship</a> &nbsp 
+<a style="font-size: 98%" href="/tags/gui/">gui</a> &nbsp 
+<a style="font-size: 135%" href="/tags/hadoop/">hadoop</a> &nbsp 
+<a style="font-size: 98%" href="/tags/idea/">idea</a> &nbsp 
+<a style="font-size: 115%" href="/tags/java/">java</a> &nbsp 
+<a style="font-size: 98%" href="/tags/linux/">linux</a> &nbsp 
+<a style="font-size: 135%" href="/tags/methodology/">methodology</a> &nbsp 
+<a style="font-size: 126%" href="/tags/network/">network</a> &nbsp 
+<a style="font-size: 115%" href="/tags/os/">os</a> &nbsp 
 <a style="font-size: 174%" href="/tags/pat/">pat</a> &nbsp 
-<a style="font-size: 99%" href="/tags/security/">security</a> &nbsp 
-<a style="font-size: 166%" href="/tags/think/">think</a> &nbsp 
-<a style="font-size: 99%" href="/tags/web/">web</a>
+<a style="font-size: 98%" href="/tags/security/">security</a> &nbsp 
+<a style="font-size: 164%" href="/tags/think/">think</a> &nbsp 
+<a style="font-size: 98%" href="/tags/web/">web</a>
 
   </ul>
 </section>
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/08/31/pat-1061-pat-1064/">PAT 1061 - 1064 题解</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/08/26/distributed-transaction/">分布式事务slides</a>
@@ -1341,10 +1336,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     
       <li class="post">
         <a href="/blog/2013/08/01/pat-1041-1050-solutions/">PAT 1041-1050 题解</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/08/01/pat-1031-1040-solutions/">PAT 1031-1040 题解</a>
       </li>
     
   </ul>

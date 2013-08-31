@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>winsock出错引起的断网 - Biaobiaoqi的博客</title>
+  <title>PAT 1061 - 1064 题解 - Biaobiaoqi的博客</title>
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="今天，实验室的一台电脑今天突然出无法上网了，而其他人则在正常上网。症状很奇怪：">
+  <meta name="description" content="pat1061题解, pat1062题解, pat1063题解, pat1064题解，pat 1061题解, pat 1062题解, pat 1063题解, pat 1064题解">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://biaobiaoqi.github.com/blog/2013/04/23/winsock-kills-internet/">
+  <link rel="canonical" href="http://biaobiaoqi.github.com/blog/2013/08/31/pat-1061-pat-1064/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -109,7 +109,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
   <header>
     
-      <h1 class="entry-title">Winsock出错引起的断网</h1>
+      <h1 class="entry-title">PAT 1061 - 1064 题解</h1>
     
     
       <p class="meta">
@@ -125,74 +125,126 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
 
 
-<time datetime="2013-04-23T22:24:00+08:00" pubdate data-updated="true">Apr 23<span>rd</span>, 2013</time>
+<time datetime="2013-08-31T13:32:00+08:00" pubdate data-updated="true">Aug 31<span>st</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h3>背景</h3>
+<div class="entry-content"><p>这四道题来自 13 年 08 月 30 的 PAT 测试。</p>
 
-<p>实验室有二十来台 PC 机，30+的服务器集群，网络拓扑比较复杂。简单地说，有网关连着校网，校网无法直接访问学校外的网络，只能通过拨 vpn 来实现外网访问。而校网最近也不稳定，时常断网。</p>
+<p>代码量不大，思路也比较直接。不过第一题的处理逻辑不太清晰，需要好好把握。稍有不慎就掉进坑里了（很多人被这道 20‘的题坑了一个多小时心慌意乱我会乱说-，-？）。</p>
 
-<p>今天，实验室的一台电脑今天突然出无法上网了，而其他人则在正常上网。症状很奇怪：</p>
+<p>PAT advanced level 全部源码：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1061">1061. Dating (20)</a></h2>
+
+<h5>题意</h5>
+
+<p>题意比较模糊，需要仔细对照 Sample 的数据理清思路。给定四个字符串，每个不超过 60 个字符，不含空格。要求从中找到符合如下规定的三个字符（或者它们的位置），并转化成一个时间的表达：</p>
 
 <ul>
-<li>浏览器只能上 google，其他任何网站都上不去。</li>
-<li>QQ、ftp 等各种需要连网的软件也都无法正常连网。</li>
-<li>一切的发生，只是在 PC 使用者认为正常的操作中发生：上网，连网下围棋，聊 QQ，然后…</li>
+<li>1.依次比较前两个字符串中每个位置的元素，找到第一个相等的字符，且该字符属于[&#8216;A&#8217;, &#8216;G&#8217;]的字母，注意大小写敏感。转换成一周七天输出。</li>
+<li>2.在 1 中的字符出现之后，继续比较前两个串，找到一个相等的字符，使它属于[&#8216;0&#8217;, &#8216;9&#8217;] || [&#8216;A&#8217;, &#8216;N&#8217;]，同样，大小写敏感。转换成一天 24 小时的小时数输出。</li>
+<li>3.比较后两个字符串，找到第一个相等的字母（isalpha()），将它在数组中的位置值转换分钟数输出。</li>
 </ul>
 
+
+<p>为了便于理解，给出 Sample 数据:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Sample Input:
+</span><span class='line'>
+</span><span class='line'>3485djDkxh4hhGE 
+</span><span class='line'>2984akDfkkkkggEdsb 
+</span><span class='line'>s&hgsfdk 
+</span><span class='line'>d&Hyscvnm
+</span><span class='line'>
+</span><span class='line'>Sample Output:
+</span><span class='line'>
+</span><span class='line'>THU 14:04
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h5>分析</h5>
+
+<p>理清题目的逻辑以后，实现起来是很简单的。</p>
+
+<p>pat1061 源码:<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel/APAT1061.cpp">请戳</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1062">1062. Talent and Virtue (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>给定一堆人，每个人有三条记录：id，道德值(v)，才能值(t)。给出两个值 L 和 H，用作对这堆人的分类。按照如下规则输出排序结果：</p>
 
 <!--more-->
 
 
-<p>没有经验的我做出了如下一系列的<em>排查</em>：</p>
-
-<h3>1st：</h3>
-
-<p>为了排除网络环境的因素，我尝试对比了连 vpn 和不连 vpn 的情况.</p>
-
-<p>症状没有丝毫改变。</p>
-
-<h3>2nd：</h3>
-
-<p>我尝试着 ping 了许多网站，检查是否是 dns 污染。</p>
-
-<p>结果包括学校内部网络和外部网络，都能 ping 通。</p>
-
-<p>这意味着网络层是没有问题的。那只能是传输层或者更上层的问题了。但奇怪的是，google 是能连接上的，大概不会是驱动的问题吧？ =.=，对 windows 环境的不熟悉，让我无所适从。</p>
-
-<h3>3rd:</h3>
-
-<p>看到了运行着的 360 安全卫士 =_=!，对它没好感，删单个进程还杀不死，会有其他进程重新将他开启！果断删除。同时，重启，碰碰运气。windows 的问题印象里总是各种奇葩。</p>
-
-<p>以失败告终。</p>
-
-<h3>Final:</h3>
-
-<p>最终还是 zfz 童鞋从网上搜得了解决方法：
-打开 cmd，输入如下指令，然后重启即可。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; netsh winsock reset</span></code></pre></td></tr></table></div></figure>
-
-
-<p>原来是 windows 的 socket 接口出了问题，通过重置来解决。</p>
-
-<p>每每想到 windows 的不可控性，不禁唏嘘，这次又长见识了。</p>
-
-<h6>参考资料：</h6>
-
 <ul>
-<li><a href="http://www.zoublog.com/technology/can-ping-dns-resolution-can-not-open-page-solution.html">《能 Ping 通，能 DNS 解析，不能打开网页(登陆 QQ 等)的解决办法》</a></li>
-<li><a href="http://en.wikipedia.org/wiki/Winsock">winsock</a></li>
+<li>0.过滤掉 v 和 t 都小于 L 的人</li>
+<li>1.v 和 t 都不小于 H 的人是圣人，属于最高的层级，排序在其他层级之前。</li>
+<li>2.v 不小于 H，而 t 小于 H 的人是君子，这个层级排在圣人之后。</li>
+<li>3.剩下的人中，v 不小于 t 的人是愚人，层级关系里排第三，排在所有圣人和君子之后。</li>
+<li>4.最后剩下的人是小人，是最低的层级。</li>
+<li>5.排名时，相同层级的人的排序关系是 1.按照 v+t 的总分 non-increasing 排序；2.按照 v 的分值按 non-increasing 排序；3.找到 id 按 increasing 排序。</li>
 </ul>
 
 
-<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/04/23/winsock-kills-internet/'>http://biaobiaoqi.github.com/blog/2013/04/23/winsock-kills-internet/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+<h5>分析</h5>
 
+<p>题意梳理清楚以后，定制比较函数用 qsort()能很快的实现。</p>
+
+<p>经测试，使用<code>cout</code>，<code>cin</code>会超时，改用&#8217;printf() scanf()&#8217;轻松过。</p>
+
+<p>pat1062 源码:<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel/APAT1062.cpp">请戳</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1063">1063. Set Similarity (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>题目给出了 N(&lt;=50)个正整数集合（实际上不是真正意义上的 set，有重复数值），每个集合最多存 M(&lt;10<sup>4)个元素，其中数值范围是</sup> [0, 10<sup>9]。给出</sup> K 次查询，每次查询条件为两个集合，要求求出两集合的相似度。</p>
+
+<p>这里集合相似度的定义是 Nc/Nt*100%，其中 Nc 为两集合的交集元素数量，Nt 为两集合的并集的元素数量。</p>
+
+<h5>分析</h5>
+
+<p>使用<code>set</code>给集合去重会超时。利用<code>sort()</code>对数组做排序，然后自行遍历去重是一个不错的方式。计算交集、并集的时候，直接用两个游标对数组遍历进行比较操作，复杂度为 O(M*K)。这种游标遍历的思想，还是很 common sense 的处理流程。</p>
+
+<p>pat1063 源码:<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel/APAT1063.cpp">请戳</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1064">1064. Complete Binary Search Tree (30)</a></h2>
+
+<h5>题意</h5>
+
+<p>给定一串数据，要求构建完全二叉搜索树。</p>
+
+<h5>分析</h5>
+
+<p>常规思路是对数据排序，然后递归的构建二叉搜索树（且构建的递归过程要满足完全二叉的树形结构），实现起来稍微有些代码量。</p>
+
+<p>后来<a href="http://weibo.com/redow7">@Redow7</a> 给介绍了一种更有趣的方法：</p>
+
+<ul>
+<li>0.对数据排序，等待操作。</li>
+<li>1.首先构建好完成二叉树。</li>
+<li>2.利用二叉搜索树的中序遍历的有序性，在中序遍历的过程中，将排序好的数据插入其中。</li>
+</ul>
+
+
+<p>那么难点就降低到了构建完全二叉树。这又让人联想到了最大堆的数组实现：左儿子<code>2*n</code>，右儿子&#8217;2*n+1&#8217;。对的，数组实现的二叉树就是满足完全二叉树的特点的。于是，使用数组实现的二叉树做迭代的思路就出来了。</p>
+
+<p>pat1064 源码:<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel/APAT1064.cpp">请戳</a><p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/08/31/pat-1061-pat-1064/'>http://biaobiaoqi.github.com/blog/2013/08/31/pat-1061-pat-1064/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
 </div>
 
 
@@ -215,7 +267,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
 
 
-<time datetime="2013-04-23T22:24:00+08:00" pubdate data-updated="true">Apr 23<span>rd</span>, 2013</time>
+<time datetime="2013-08-31T13:32:00+08:00" pubdate data-updated="true">Aug 31<span>st</span>, 2013</time>
       
 
 <span class="categories">
@@ -265,10 +317,8 @@ var jiathis_config={
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/04/20/are-you-smart-enough-to-work-at-google/" title="Previous Post: 《谁是谷歌想要的人才？》">&laquo; 《谁是谷歌想要的人才？》</a>
+        <a class="basic-alignment left" href="/blog/2013/08/26/distributed-transaction/" title="Previous Post: 分布式事务slides">&laquo; 分布式事务slides</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/04/25/split-querying-process-in-polybase/" title="Next Post: PDW中的Split Querying Process">PDW中的Split Querying Process &raquo;</a>
       
     </p>
   </footer>

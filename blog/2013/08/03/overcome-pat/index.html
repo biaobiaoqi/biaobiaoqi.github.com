@@ -160,6 +160,8 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <li>1050 数字/字符处理</li>
 <li>1058 数字/字符处理</li>
 <li>1060 数字/字符处理</li>
+<li>1061 数字/字符处理，坑题</li>
+<li>1063 数字/字符处理，游标</li>
 </ul>
 
 
@@ -201,6 +203,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <li>1028 排序</li>
 <li>1029 归并排序</li>
 <li>1038 递归，排序</li>
+<li>1062 排序</li>
 </ul>
 
 
@@ -250,6 +253,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <li>1004 dfs，树遍历</li>
 <li>1020 二叉树遍历</li>
 <li>1043 二叉树遍历</li>
+<li>1064 重建完全二叉搜索树</li>
 </ul>
 
 
@@ -297,16 +301,17 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <p>截止 2013-08-03，PAT advanced level 的 60 道题全部题解和代码已经发布在本博客中，链接如下：欢迎讨论大家;)</p>
 
 <ul>
-<li><a href="../../../../2013/07/31/pat-1001-1010-solutions/">《PAT 1001-1010 题解》</a></li>
-<li><a href="../../../../2013/07/31/pat-1011-1020-solutions/">《PAT 1011-1020 题解》</a></li>
-<li><a href="../../../../2013/08/01/pat-1021-1030-solutions/">《PAT 1021-1030 题解》</a></li>
-<li><a href="../../../../2013/08/01/pat-1031-1040-solutions/">《PAT 1031-1040 题解》</a></li>
-<li><a href="../../../../2013/08/01/pat-1041-1050-solutions/">《PAT 1041-1050 题解》</a></li>
-<li><a href="../../../../2013/08/01/pat-1051-1060-solutions/">《PAT 1051-1060 题解》</a></li>
+<li><a href="http://biaobiaoqi.me/blog/2013/07/31/pat-1001-1010-solutions/">《PAT 1001-1010 题解》</a></li>
+<li><a href="http://biaobiaoqi.me/blog/2013/07/31/pat-1011-1020-solutions/">《PAT 1011-1020 题解》</a></li>
+<li><a href="http://biaobiaoqi.me/blog/2013/08/01/pat-1021-1030-solutions/">《PAT 1021-1030 题解》</a></li>
+<li><a href="http://biaobiaoqi.me/blog/2013/08/01/pat-1031-1040-solutions/">《PAT 1031-1040 题解》</a></li>
+<li><a href="http://biaobiaoqi.me/blog/2013/08/01/pat-1041-1050-solutions/">《PAT 1041-1050 题解》</a></li>
+<li><a href="http://biaobiaoqi.me/blog/2013/08/01/pat-1051-1060-solutions/">《PAT 1051-1060 题解》</a></li>
+<li><a href="http://biaobiaoqi.me/blog/2013/08/31/pat-1061-pat-1064/">《PAT 1061-1064 题解》</a></li>
 </ul>
 
 
-<p>附博客的 PAT 专题区链接：<a href="../../../../../tags/pat/">请戳</a><p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/08/03/overcome-pat/'>http://biaobiaoqi.github.com/blog/2013/08/03/overcome-pat/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
+<p>附博客的 PAT 专题区链接：<a href="http://biaobiaoqi.me/tags/pat/">请戳</a><p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/08/03/overcome-pat/'>http://biaobiaoqi.github.com/blog/2013/08/03/overcome-pat/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
 </div>
 
 
@@ -397,26 +402,30 @@ var jiathis_config={
  <br /> 
   <ul class="tag-cloud">
     <a style="font-size: 180%" href="/tags/algorithm/">algorithm</a> &nbsp 
-<a style="font-size: 170%" href="/tags/distributed/">distributed</a> &nbsp 
-<a style="font-size: 99%" href="/tags/entrepreneurship/">entrepreneurship</a> &nbsp 
-<a style="font-size: 99%" href="/tags/gui/">gui</a> &nbsp 
-<a style="font-size: 137%" href="/tags/hadoop/">hadoop</a> &nbsp 
-<a style="font-size: 99%" href="/tags/idea/">idea</a> &nbsp 
-<a style="font-size: 116%" href="/tags/java/">java</a> &nbsp 
-<a style="font-size: 99%" href="/tags/linux/">linux</a> &nbsp 
-<a style="font-size: 137%" href="/tags/methodology/">methodology</a> &nbsp 
-<a style="font-size: 128%" href="/tags/network/">network</a> &nbsp 
-<a style="font-size: 116%" href="/tags/os/">os</a> &nbsp 
+<a style="font-size: 167%" href="/tags/distributed/">distributed</a> &nbsp 
+<a style="font-size: 98%" href="/tags/entrepreneurship/">entrepreneurship</a> &nbsp 
+<a style="font-size: 98%" href="/tags/gui/">gui</a> &nbsp 
+<a style="font-size: 135%" href="/tags/hadoop/">hadoop</a> &nbsp 
+<a style="font-size: 98%" href="/tags/idea/">idea</a> &nbsp 
+<a style="font-size: 115%" href="/tags/java/">java</a> &nbsp 
+<a style="font-size: 98%" href="/tags/linux/">linux</a> &nbsp 
+<a style="font-size: 135%" href="/tags/methodology/">methodology</a> &nbsp 
+<a style="font-size: 126%" href="/tags/network/">network</a> &nbsp 
+<a style="font-size: 115%" href="/tags/os/">os</a> &nbsp 
 <a style="font-size: 174%" href="/tags/pat/">pat</a> &nbsp 
-<a style="font-size: 99%" href="/tags/security/">security</a> &nbsp 
-<a style="font-size: 166%" href="/tags/think/">think</a> &nbsp 
-<a style="font-size: 99%" href="/tags/web/">web</a>
+<a style="font-size: 98%" href="/tags/security/">security</a> &nbsp 
+<a style="font-size: 164%" href="/tags/think/">think</a> &nbsp 
+<a style="font-size: 98%" href="/tags/web/">web</a>
 
   </ul>
 </section>
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/08/31/pat-1061-pat-1064/">PAT 1061 - 1064 题解</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/08/26/distributed-transaction/">分布式事务slides</a>
@@ -432,10 +441,6 @@ var jiathis_config={
     
       <li class="post">
         <a href="/blog/2013/08/01/pat-1041-1050-solutions/">PAT 1041-1050 题解</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/08/01/pat-1031-1040-solutions/">PAT 1031-1040 题解</a>
       </li>
     
   </ul>

@@ -4,7 +4,7 @@
   <title><![CDATA[Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-08-28T01:19:23+08:00</updated>
+  <updated>2013-08-31T15:21:27+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -12,6 +12,127 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[PAT 1061 - 1064 题解]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/08/31/pat-1061-pat-1064/"/>
+    <updated>2013-08-31T13:32:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/08/31/pat-1061-pat-1064</id>
+    <content type="html"><![CDATA[<p>这四道题来自 13 年 08 月 30 的 PAT 测试。</p>
+
+<p>代码量不大，思路也比较直接。不过第一题的处理逻辑不太清晰，需要好好把握。稍有不慎就掉进坑里了（很多人被这道 20‘的题坑了一个多小时心慌意乱我会乱说-，-？）。</p>
+
+<p>PAT advanced level 全部源码：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1061">1061. Dating (20)</a></h2>
+
+<h5>题意</h5>
+
+<p>题意比较模糊，需要仔细对照 Sample 的数据理清思路。给定四个字符串，每个不超过 60 个字符，不含空格。要求从中找到符合如下规定的三个字符（或者它们的位置），并转化成一个时间的表达：</p>
+
+<ul>
+<li>1.依次比较前两个字符串中每个位置的元素，找到第一个相等的字符，且该字符属于[&#8216;A&#8217;, &#8216;G&#8217;]的字母，注意大小写敏感。转换成一周七天输出。</li>
+<li>2.在 1 中的字符出现之后，继续比较前两个串，找到一个相等的字符，使它属于[&#8216;0&#8217;, &#8216;9&#8217;] || [&#8216;A&#8217;, &#8216;N&#8217;]，同样，大小写敏感。转换成一天 24 小时的小时数输出。</li>
+<li>3.比较后两个字符串，找到第一个相等的字母（isalpha()），将它在数组中的位置值转换分钟数输出。</li>
+</ul>
+
+
+<p>为了便于理解，给出 Sample 数据:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Sample Input:
+</span><span class='line'>
+</span><span class='line'>3485djDkxh4hhGE 
+</span><span class='line'>2984akDfkkkkggEdsb 
+</span><span class='line'>s&hgsfdk 
+</span><span class='line'>d&Hyscvnm
+</span><span class='line'>
+</span><span class='line'>Sample Output:
+</span><span class='line'>
+</span><span class='line'>THU 14:04
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h5>分析</h5>
+
+<p>理清题目的逻辑以后，实现起来是很简单的。</p>
+
+<p>pat1061 源码:<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel/APAT1061.cpp">请戳</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1062">1062. Talent and Virtue (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>给定一堆人，每个人有三条记录：id，道德值(v)，才能值(t)。给出两个值 L 和 H，用作对这堆人的分类。按照如下规则输出排序结果：</p>
+
+<!--more-->
+
+
+<ul>
+<li>0.过滤掉 v 和 t 都小于 L 的人</li>
+<li>1.v 和 t 都不小于 H 的人是圣人，属于最高的层级，排序在其他层级之前。</li>
+<li>2.v 不小于 H，而 t 小于 H 的人是君子，这个层级排在圣人之后。</li>
+<li>3.剩下的人中，v 不小于 t 的人是愚人，层级关系里排第三，排在所有圣人和君子之后。</li>
+<li>4.最后剩下的人是小人，是最低的层级。</li>
+<li>5.排名时，相同层级的人的排序关系是 1.按照 v+t 的总分 non-increasing 排序；2.按照 v 的分值按 non-increasing 排序；3.找到 id 按 increasing 排序。</li>
+</ul>
+
+
+<h5>分析</h5>
+
+<p>题意梳理清楚以后，定制比较函数用 qsort()能很快的实现。</p>
+
+<p>经测试，使用<code>cout</code>，<code>cin</code>会超时，改用&#8217;printf() scanf()&#8217;轻松过。</p>
+
+<p>pat1062 源码:<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel/APAT1062.cpp">请戳</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1063">1063. Set Similarity (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>题目给出了 N(&lt;=50)个正整数集合（实际上不是真正意义上的 set，有重复数值），每个集合最多存 M(&lt;10<sup>4)个元素，其中数值范围是</sup> [0, 10<sup>9]。给出</sup> K 次查询，每次查询条件为两个集合，要求求出两集合的相似度。</p>
+
+<p>这里集合相似度的定义是 Nc/Nt*100%，其中 Nc 为两集合的交集元素数量，Nt 为两集合的并集的元素数量。</p>
+
+<h5>分析</h5>
+
+<p>使用<code>set</code>给集合去重会超时。利用<code>sort()</code>对数组做排序，然后自行遍历去重是一个不错的方式。计算交集、并集的时候，直接用两个游标对数组遍历进行比较操作，复杂度为 O(M*K)。这种游标遍历的思想，还是很 common sense 的处理流程。</p>
+
+<p>pat1063 源码:<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel/APAT1063.cpp">请戳</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1064">1064. Complete Binary Search Tree (30)</a></h2>
+
+<h5>题意</h5>
+
+<p>给定一串数据，要求构建完全二叉搜索树。</p>
+
+<h5>分析</h5>
+
+<p>常规思路是对数据排序，然后递归的构建二叉搜索树（且构建的递归过程要满足完全二叉的树形结构），实现起来稍微有些代码量。</p>
+
+<p>后来<a href="http://weibo.com/redow7">@Redow7</a> 给介绍了一种更有趣的方法：</p>
+
+<ul>
+<li>0.对数据排序，等待操作。</li>
+<li>1.首先构建好完成二叉树。</li>
+<li>2.利用二叉搜索树的中序遍历的有序性，在中序遍历的过程中，将排序好的数据插入其中。</li>
+</ul>
+
+
+<p>那么难点就降低到了构建完全二叉树。这又让人联想到了最大堆的数组实现：左儿子<code>2*n</code>，右儿子&#8217;2*n+1&#8217;。对的，数组实现的二叉树就是满足完全二叉树的特点的。于是，使用数组实现的二叉树做迭代的思路就出来了。</p>
+
+<p>pat1064 源码:<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel/APAT1064.cpp">请戳</a><p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/08/31/pat-1061-pat-1064/'>http://biaobiaoqi.github.com/blog/2013/08/31/pat-1061-pat-1064/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[分布式事务slides]]></title>
@@ -62,6 +183,8 @@
 <li>1050 数字/字符处理</li>
 <li>1058 数字/字符处理</li>
 <li>1060 数字/字符处理</li>
+<li>1061 数字/字符处理，坑题</li>
+<li>1063 数字/字符处理，游标</li>
 </ul>
 
 
@@ -103,6 +226,7 @@
 <li>1028 排序</li>
 <li>1029 归并排序</li>
 <li>1038 递归，排序</li>
+<li>1062 排序</li>
 </ul>
 
 
@@ -152,6 +276,7 @@
 <li>1004 dfs，树遍历</li>
 <li>1020 二叉树遍历</li>
 <li>1043 二叉树遍历</li>
+<li>1064 重建完全二叉搜索树</li>
 </ul>
 
 
@@ -199,16 +324,17 @@
 <p>截止 2013-08-03，PAT advanced level 的 60 道题全部题解和代码已经发布在本博客中，链接如下：欢迎讨论大家;)</p>
 
 <ul>
-<li><a href="../../../../2013/07/31/pat-1001-1010-solutions/">《PAT 1001-1010 题解》</a></li>
-<li><a href="../../../../2013/07/31/pat-1011-1020-solutions/">《PAT 1011-1020 题解》</a></li>
-<li><a href="../../../../2013/08/01/pat-1021-1030-solutions/">《PAT 1021-1030 题解》</a></li>
-<li><a href="../../../../2013/08/01/pat-1031-1040-solutions/">《PAT 1031-1040 题解》</a></li>
-<li><a href="../../../../2013/08/01/pat-1041-1050-solutions/">《PAT 1041-1050 题解》</a></li>
-<li><a href="../../../../2013/08/01/pat-1051-1060-solutions/">《PAT 1051-1060 题解》</a></li>
+<li><a href="http://biaobiaoqi.me/blog/2013/07/31/pat-1001-1010-solutions/">《PAT 1001-1010 题解》</a></li>
+<li><a href="http://biaobiaoqi.me/blog/2013/07/31/pat-1011-1020-solutions/">《PAT 1011-1020 题解》</a></li>
+<li><a href="http://biaobiaoqi.me/blog/2013/08/01/pat-1021-1030-solutions/">《PAT 1021-1030 题解》</a></li>
+<li><a href="http://biaobiaoqi.me/blog/2013/08/01/pat-1031-1040-solutions/">《PAT 1031-1040 题解》</a></li>
+<li><a href="http://biaobiaoqi.me/blog/2013/08/01/pat-1041-1050-solutions/">《PAT 1041-1050 题解》</a></li>
+<li><a href="http://biaobiaoqi.me/blog/2013/08/01/pat-1051-1060-solutions/">《PAT 1051-1060 题解》</a></li>
+<li><a href="http://biaobiaoqi.me/blog/2013/08/31/pat-1061-pat-1064/">《PAT 1061-1064 题解》</a></li>
 </ul>
 
 
-<p>附博客的 PAT 专题区链接：<a href="../../../../../tags/pat/">请戳</a><p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/08/03/overcome-pat/'>http://biaobiaoqi.github.com/blog/2013/08/03/overcome-pat/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
+<p>附博客的 PAT 专题区链接：<a href="http://biaobiaoqi.me/tags/pat/">请戳</a><p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/08/03/overcome-pat/'>http://biaobiaoqi.github.com/blog/2013/08/03/overcome-pat/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
 ]]></content>
   </entry>
   
@@ -2511,42 +2637,6 @@
 <li><a href="http://network.51cto.com/art/201305/394648.htm">SDN：仍处于起步阶段</a><p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/06/08/software-defined-network/'>http://biaobiaoqi.github.com/blog/2013/06/08/software-defined-network/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[《Hadoop技术内幕》学习笔记——RPC和动态代理]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/06/08/ipc-in-hadoop/"/>
-    <updated>2013-06-08T00:24:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/06/08/ipc-in-hadoop</id>
-    <content type="html"><![CDATA[<p>本文是《hadoop 技术内幕——深入解析 Hadoop Common 和 HDFS 架构设计与实现原理》第 4 章的 1-3 节的学习笔记。内容为 Hadoop IPC 部分的基础知识介绍。</p>
-
-<h2>知识框架</h2>
-
-<p>由于 Hadoop 分布式环境需要一个更高效和正对性优化的 IPC 机制，传统的诸如 RMI 的解决方案无法满足这一要求，Hadoop 自己实现了一套 IPC 方法。</p>
-
-<p>第 4 章第 1 节讲解了 RPC 的原理，包括 Stub-Skeleton 的架构等，进而用<code>RMI</code>举例（可以参考的<a href="">演示代码</a>）。RMI 的调用实现主要包括了服务器端的 registry 和客户端的 lookup。虽然 Hadoop 不是使用 RMI 做 IPC，但了解一下其调用方式对感性的认识到如何进行分布式环境下的远程调用还是有作用的。</p>
-
-<p>接下来的 2,3 小节，简单的介绍了 IPC 过程所依赖的技术方法：Java 的动态代理方式和 NIO 的网络传输方式。</p>
-
-<p>第 2 节讲<code>动态代理</code>，这里需要理解面向对象的代理模式和<em>动态</em>的原因。代理模式分很多种，这里用到的是简单的对行为的传递。动态代理的动态特性，则是因为框架能提供动态创建某个接口的实现的能力(可以参考的<a href="">演示代码</a>)。</p>
-
-<p>更系统的看动态代理过程，分为两个阶段：</p>
-
-<ul>
-<li>1.代理接口的实现：静态方法 Proxy.newInstance()生成动态对象。</li>
-<li>2.调用转发过程：InvocationHandler 实现</li>
-</ul>
-
-
-<p>第 3 节的<code>NIO</code>，跟传统的套接字(Socket)通信过程做了对比。需要了解 Socket 通信的特点：同步，阻塞，基于字节，理解这种特点带来的服务器端的线程闲置的压力。对应的，NIO 则是可异步的，非阻塞的，基于块的。具体的实现上，需要了解缓冲区(Buffer)的原理和使用方式，通道(Channel)和选择器(Selector)配合的使用方式。</p>
-
-<p>我总结了一份 slides，如下：(挂在 speackerdeck 上，如果加载缓慢，请稍候:))</p>
-
-<script async class="speakerdeck-embed" data-id="fbcb8590b1540130690c2e6f0be13e84" data-ratio="1.33333333333333" src="http://biaobiaoqi.github.com//speakerdeck.com/assets/embed.js"></script>
-
-
-<p>slides 下载地址：<a href="https://dl.dropboxusercontent.com/u/64021093/slides/%E8%BF%9C%E7%A8%8B%E8%BF%87%E7%A8%8B%E8%B0%83%E7%94%A8%E5%92%8CNIO.pdf">请戳</a><p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/06/08/ipc-in-hadoop/'>http://biaobiaoqi.github.com/blog/2013/06/08/ipc-in-hadoop/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: algorithm | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/tags/algorithm/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-08-28T01:19:23+08:00</updated>
+  <updated>2013-08-31T15:21:27+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -12,6 +12,118 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[PAT 1061 - 1064 题解]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/08/31/pat-1061-pat-1064/"/>
+    <updated>2013-08-31T13:32:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/08/31/pat-1061-pat-1064</id>
+    <content type="html"><![CDATA[<p>这四道题来自13年08月30的PAT测试。</p>
+
+<p>代码量不大，思路也比较直接。不过第一题的处理逻辑不太清晰，需要好好把握。稍有不慎就掉进坑里了（很多人被这道20‘的题坑了一个多小时心慌意乱我会乱说-，-？）。</p>
+
+<p>PAT advanced level 全部源码：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1061">1061. Dating (20)</a></h2>
+
+<h5>题意</h5>
+
+<p>题意比较模糊，需要仔细对照Sample的数据理清思路。给定四个字符串，每个不超过60个字符，不含空格。要求从中找到符合如下规定的三个字符（或者它们的位置），并转化成一个时间的表达：</p>
+
+<ul>
+<li>1.依次比较前两个字符串中每个位置的元素，找到第一个相等的字符，且该字符属于['A', 'G']的字母，注意大小写敏感。转换成一周七天输出。</li>
+<li>2.在1中的字符出现之后，继续比较前两个串，找到一个相等的字符，使它属于['0', '9'] || ['A', 'N']，同样，大小写敏感。转换成一天24小时的小时数输出。</li>
+<li>3.比较后两个字符串，找到第一个相等的字母（isalpha()），将它在数组中的位置值转换分钟数输出。</li>
+</ul>
+
+
+<p>为了便于理解，给出Sample数据:</p>
+
+<p>```
+Sample Input:</p>
+
+<p>3485djDkxh4hhGE
+2984akDfkkkkggEdsb
+s&amp;hgsfdk
+d&amp;Hyscvnm</p>
+
+<p>Sample Output:</p>
+
+<p>THU 14:04</p>
+
+<p>```</p>
+
+<h5>分析</h5>
+
+<p>理清题目的逻辑以后，实现起来是很简单的。</p>
+
+<p>pat1061源码:<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel/APAT1061.cpp">请戳</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1062">1062. Talent and Virtue (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>给定一堆人，每个人有三条记录：id，道德值(v)，才能值(t)。给出两个值L和H，用作对这堆人的分类。按照如下规则输出排序结果：</p>
+
+<!--more-->
+
+
+<ul>
+<li>0.过滤掉v和t都小于L的人</li>
+<li>1.v和t都不小于H的人是圣人，属于最高的层级，排序在其他层级之前。</li>
+<li>2.v不小于H，而t小于H的人是君子，这个层级排在圣人之后。</li>
+<li>3.剩下的人中，v不小于t的人是愚人，层级关系里排第三，排在所有圣人和君子之后。</li>
+<li>4.最后剩下的人是小人，是最低的层级。</li>
+<li>5.排名时，相同层级的人的排序关系是 1.按照v+t的总分non-increasing排序；2.按照v的分值按non-increasing排序；3.找到id按increasing排序。</li>
+</ul>
+
+
+<h5>分析</h5>
+
+<p>题意梳理清楚以后，定制比较函数用qsort()能很快的实现。</p>
+
+<p>经测试，使用<code>cout</code>，<code>cin</code>会超时，改用'printf() scanf()'轻松过。</p>
+
+<p>pat1062源码:<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel/APAT1062.cpp">请戳</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1063">1063. Set Similarity (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>题目给出了N(&lt;=50)个正整数集合（实际上不是真正意义上的set，有重复数值），每个集合最多存M(&lt;10<sup>4)个元素，其中数值范围是[0,</sup> 10<sup>9]。给出K次查询，每次查询条件为两个集合，要求求出两集合的相似度。</sup></p>
+
+<p>这里集合相似度的定义是 Nc/Nt*100%，其中Nc为两集合的交集元素数量，Nt为两集合的并集的元素数量。</p>
+
+<h5>分析</h5>
+
+<p>使用<code>set</code>给集合去重会超时。利用<code>sort()</code>对数组做排序，然后自行遍历去重是一个不错的方式。计算交集、并集的时候，直接用两个游标对数组遍历进行比较操作，复杂度为O(M*K)。这种游标遍历的思想，还是很common sense的处理流程。</p>
+
+<p>pat1063源码:<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel/APAT1063.cpp">请戳</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1064">1064. Complete Binary Search Tree (30)</a></h2>
+
+<h5>题意</h5>
+
+<p>给定一串数据，要求构建完全二叉搜索树。</p>
+
+<h5>分析</h5>
+
+<p>常规思路是对数据排序，然后递归的构建二叉搜索树（且构建的递归过程要满足完全二叉的树形结构），实现起来稍微有些代码量。</p>
+
+<p>后来<a href="http://weibo.com/redow7">@Redow7</a>给介绍了一种更有趣的方法：</p>
+
+<ul>
+<li>0.对数据排序，等待操作。</li>
+<li>1.首先构建好完成二叉树。</li>
+<li>2.利用二叉搜索树的中序遍历的有序性，在中序遍历的过程中，将排序好的数据插入其中。</li>
+</ul>
+
+
+<p>那么难点就降低到了构建完全二叉树。这又让人联想到了最大堆的数组实现：左儿子<code>2*n</code>，右儿子'2*n+1'。对的，数组实现的二叉树就是满足完全二叉树的特点的。于是，使用数组实现的二叉树做迭代的思路就出来了。</p>
+
+<p>pat1064源码:<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel/APAT1064.cpp">请戳</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[PAT练习题概览]]></title>
@@ -46,6 +158,8 @@
 <li>1050 数字/字符处理</li>
 <li>1058 数字/字符处理</li>
 <li>1060 数字/字符处理</li>
+<li>1061 数字/字符处理，坑题</li>
+<li>1063 数字/字符处理，游标</li>
 </ul>
 
 
@@ -87,6 +201,7 @@
 <li>1028 排序</li>
 <li>1029 归并排序</li>
 <li>1038 递归，排序</li>
+<li>1062 排序</li>
 </ul>
 
 
@@ -136,6 +251,7 @@
 <li>1004 dfs，树遍历</li>
 <li>1020 二叉树遍历</li>
 <li>1043 二叉树遍历</li>
+<li>1064 重建完全二叉搜索树</li>
 </ul>
 
 
@@ -183,16 +299,17 @@
 <p>截止2013-08-03，PAT advanced level的60道题全部题解和代码已经发布在本博客中，链接如下：欢迎讨论大家;)</p>
 
 <ul>
-<li><a href="../../../../2013/07/31/pat-1001-1010-solutions/">《PAT 1001-1010 题解》</a></li>
-<li><a href="../../../../2013/07/31/pat-1011-1020-solutions/">《PAT 1011-1020 题解》</a></li>
-<li><a href="../../../../2013/08/01/pat-1021-1030-solutions/">《PAT 1021-1030 题解》</a></li>
-<li><a href="../../../../2013/08/01/pat-1031-1040-solutions/">《PAT 1031-1040 题解》</a></li>
-<li><a href="../../../../2013/08/01/pat-1041-1050-solutions/">《PAT 1041-1050 题解》</a></li>
-<li><a href="../../../../2013/08/01/pat-1051-1060-solutions/">《PAT 1051-1060 题解》</a></li>
+<li><a href="http://biaobiaoqi.me/blog/2013/07/31/pat-1001-1010-solutions/">《PAT 1001-1010 题解》</a></li>
+<li><a href="http://biaobiaoqi.me/blog/2013/07/31/pat-1011-1020-solutions/">《PAT 1011-1020 题解》</a></li>
+<li><a href="http://biaobiaoqi.me/blog/2013/08/01/pat-1021-1030-solutions/">《PAT 1021-1030 题解》</a></li>
+<li><a href="http://biaobiaoqi.me/blog/2013/08/01/pat-1031-1040-solutions/">《PAT 1031-1040 题解》</a></li>
+<li><a href="http://biaobiaoqi.me/blog/2013/08/01/pat-1041-1050-solutions/">《PAT 1041-1050 题解》</a></li>
+<li><a href="http://biaobiaoqi.me/blog/2013/08/01/pat-1051-1060-solutions/">《PAT 1051-1060 题解》</a></li>
+<li><a href="http://biaobiaoqi.me/blog/2013/08/31/pat-1061-pat-1064/">《PAT 1061-1064 题解》</a></li>
 </ul>
 
 
-<p>附博客的PAT专题区链接：<a href="../../../../../tags/pat/">请戳</a></p>
+<p>附博客的PAT专题区链接：<a href="http://biaobiaoqi.me/tags/pat/">请戳</a></p>
 ]]></content>
   </entry>
   
@@ -742,193 +859,6 @@ word1 : -> [l] -> [o] -> [a] -> [d]</p>
 
 
 <p>另外，C读入一整行数据到char数组的方法可以用<code>gets(s);</code>。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[PAT 1021-1030 题解]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/08/01/pat-1021-1030-solutions/"/>
-    <updated>2013-08-01T01:43:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/08/01/pat-1021-1030-solutions</id>
-    <content type="html"><![CDATA[<p>早期部分代码用Java实现。由于PAT虽然支持各种语言，但只有C/C++标程来限定时间，许多题目用Java读入数据就已经超时，后来转投C/C++。浏览全部代码：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
-
-<p>本文谨代表个人思路，欢迎讨论;)</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1021">1021. Deepest Root (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>无环连通图也可以视为一棵树，选定图中任意一点作为根，如果这时候整个树的深度最大，则称其为deepest root。
-给定一个图，按升序输出所有deepest root。如果给定的图有多个连通分量，则输出连通分量的数量。</p>
-
-<h5>分析</h5>
-
-<p>算法实现的步骤如下：</p>
-
-<ul>
-<li>1.使用并查集判断图是否为连通的。</li>
-<li>2.任意选取一点，做dfs搜索，选取其中一个最远距离的点A，再做一次dfs，找到的所有距离最远的点以及点A都是deepest root。</li>
-</ul>
-
-
-<p>判定图是否连通使用union-find set即可。更关键的点在于找到deepest root。实际上，使用两次dfs就可以实现。
-证明之前，先介绍两个概念，一个是直径，树的deepest root到最远叶子的路径我们暂称直径，而deepest root和最远叶子节点则成为端点。
-注明关键在于以下两点：</p>
-
-<ul>
-<li><p>从任意一个点dfs得到的最远点都是直径的端点。证明如下：</p>
-
-<p>  任意选一点A，做dfs查找距离A最远的点，因为是dfs，所以肯定会经过某直径上的点B，从B出发最远的点是直径上的端点C。
-  那么，这个端点C为何一定是A的最远居里点呢？可以反证证明，如果有一个点D，A->D不经过直径，且length(A->D) > length(A->C)，
-  那么，从C所在直径上构造出经过D的比原直径更长的直径，得证。</p></li>
-<li><p>所有的树的直径都交于一点（或者公用段路径上的几点）。
-于是，从B点dfs出发的所有最长距离的点即为deepest root。证明如下：</p>
-
-<p>  如果两条直径不相交，而树上任意两点肯定连通，则从两直径上，可以选取两点连通以组成更长的直径；如果三条直径相较于不同的两点，也可以根据相交截断的长度组合出更长的直径。</p></li>
-</ul>
-
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1022">1022. Digital Library (30)</a></h2>
-
-<h5>题意</h5>
-
-<p>给定N (&lt;=10000) 本书的信息，包括7位ID，最多80字符的书名，最多80字符的作者名，
-多个最多10字符的关键词，最多80字符的出版商和属于[1000, 3000]的出版时间。
-另给出M (&lt;=1000) 的查询请求，按照查询格式分为：</p>
-
-<ul>
-<li>1: 书名</li>
-<li>2: 作者</li>
-<li>3: 关键词</li>
-<li>4: 出版商</li>
-<li>5: 年份</li>
-</ul>
-
-
-<p>输出查询结果。如果有多个结果，按照书的ID的升序排列。</p>
-
-<h5>分析</h5>
-
-<p>简单模拟题。在使用Map结构来构建倒排索引的过程中，可以讨巧的避免根据不同查询类型使用两层map，
-直接通过在key中增加查询标记来实现。另外C++的priority_queue支持对常规数据类型的最小堆实现：<code>priority_queue&lt;string, vector&lt;string&gt;, greater&lt;string&gt;&gt;</code>，方便了结果输出。</p>
-
-<!--more-->
-
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1023">1023. Have Fun with Numbers (20)</a></h2>
-
-<h5>题意</h5>
-
-<p>给出一个20位的正整数，要求计算其乘以2的值，并判定结果的数值是否是原数字所有位数打乱的结果。结果输出Yes或No，以及乘以2以后的数字。</p>
-
-<h5>分析</h5>
-
-<p>判重使用Hash思想。过程如下：</p>
-
-<ul>
-<li>1.原数字按字符串读入，并在一个int hash[10]的hash数组中标记每个数值出现的次数，比如如果出现了四次1，则hash[1]=4。</li>
-<li>2.模拟实现乘以2的简单乘法过程，没计算出一位的值，在hash[]中对应位置上减一。</li>
-<li>3.最后通过判定hash是否全为1和最后结果是否有进位来做判定。</li>
-</ul>
-
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1024">1024. Palindromic Number (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>非回文数可以通过将它与它的倒转数相加，并不断迭代这一过程获得回文数的结果。比如67经过两次处理就得到了484：
-<code>67 + 76 = 143, and 143 + 341 = 484.</code></p>
-
-<p>给定一个数和迭代的次数，判断能否在迭代次数内获得回文结果。</p>
-
-<h5>分析</h5>
-
-<p>简单模拟题，处理数字，做逻辑判断。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1025">1025. PAT Ranking (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>以PAT考试为背景，给所有人做排名。给定的数据包括N(&lt;=100)为赛区的数目，每个赛区的人数以及每个人的分数。
-按照总排名、分区号、注册号的优先级排名。</p>
-
-<h5>分析</h5>
-
-<p>简单模拟题，使用qsort()排序，注意相同分数的人应该拥有相同的排名。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1026">1026. Table Tennis (30)</a></h2>
-
-<h5>题意</h5>
-
-<p>乒乓球俱乐部有K张乒乓球桌，其中有M张是VIP桌。有很多人到俱乐部打球，如果桌子都满了，多余的人只能排队等待。</p>
-
-<p>有一个特殊的VIP制度：如果有空的VIP桌，那么等待队列中的第一对VIP会员可以使用这张卓，
-如果等待队列中没有VIP会员，那么一般会员也可以使用VIP桌。当轮到VIP上的时候，没有VIP桌子，那么VIP用户也可以使用一般的桌子。</p>
-
-<p>另外，每张桌服务一对会员的时间最大限制在两个小时。</p>
-
-<p>给定了乒乓球桌的数量M(编号为1-M)，其中VIP卓的数量K，并指定是那几张桌子。给出来乒乓球俱乐部的N对会员的信息，每对会员有一个达到时间，
-是否是VIP的标记以及打球的时间。要求计算出每对会员的等待时间，以及每张桌服务过的次数。</p>
-
-<h5>分析</h5>
-
-<p>排队模拟题。有两种思路：</p>
-
-<ul>
-<li>1.主体循环处理人。将乒乓球桌和人都当做资源，乒乓球桌对应记录了available的时间，每次取出available最早的时间，从等待队列中选
-则最早的会员使用乒乓球桌。其中vip处理逻辑为：如果available并列最早的桌子中有vip桌，则看等待队列中有没有vip会员，
-如果有则直接处理他，否则按照正常逻辑处理。每次将某会员安置到一个乒乓球桌上，则可以输出该会员的等待时间的结果信息，并将该乒乓球桌的
-服务人数增加一。</li>
-<li>2.主体循环是时间。这样需要模拟同一时刻所有的乒乓球桌以及等待队列，相对比较复杂。</li>
-</ul>
-
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1027">1027. Colors in Mars (20)</a></h2>
-
-<h5>题意</h5>
-
-<p>给定三个十进制数，要求格式化输出其13进制表达。</p>
-
-<h5>分析</h5>
-
-<p>简单的数字处理和hash实现。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1028">1028. List Sorting (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>模拟Excel中按列排序。N (&lt;=100000) 为数据条数，每条数据由三列组成：ID，姓名，成绩。C可以等于1,2,3，分别对应到按三列中的哪一列排序。
-输出排序结果。</p>
-
-<h5>分析</h5>
-
-<p>简单排序题。两种思路：</p>
-
-<ul>
-<li>1.简单的直接使用qsort()实现。</li>
-<li>2.自己手写排序算法，比如二叉搜索树实现。</li>
-</ul>
-
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1029">1029. Median (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>给定两个已排序的整数序列，求出两组数的集合里中间大小的数。</p>
-
-<h5>分析</h5>
-
-<p>使用归并排序思路实现。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1030">1030. Travel Plan (30)</a></h2>
-
-<h5>题意</h5>
-
-<p>给定加权图，每条边有两种权值：一是路径长度，二是开销。要求求出给点两点间的最短路径，如果路径长度一样，则要求比较选择开销最小的路径。</p>
-
-<h5>分析</h5>
-
-<p>使用Dijkstra算法的变形，增加一个权重的判定，可以轻松解决。</p>
 ]]></content>
   </entry>
   
