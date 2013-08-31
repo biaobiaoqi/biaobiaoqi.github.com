@@ -85,8 +85,8 @@ delicious_user:
 delicious_count: 3
 
 # Disqus Comments
-disqus_short_name:
-disqus_show_comment_count: false
+disqus_short_name: biaobiaoqisblog
+disqus_show_comment_count: true
 
 # Google Analytics
 google_analytics_tracking_id: UA-39900036-1
@@ -95,12 +95,8 @@ google_analytics_tracking_id: UA-39900036-1
 #facebook_like: false
 
 #Weibo share
-comment_and_share: true
+jiathis_share: true
 
-#duoshuo
-#duoshuo_show_comment_count: true
-#duoshuo_comments: true
-#duoshuo_short_name: biaobiaoqi
 
 #MetaWeblog
 MetaWeblog:
