@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: pat | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/tags/pat/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-08-31T20:44:48+08:00</updated>
+  <updated>2013-09-01T01:38:36+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -96,7 +96,13 @@ d&amp;Hyscvnm</p>
 
 <h5>分析</h5>
 
-<p>使用<code>set</code>给集合去重会超时。利用<code>sort()</code>对数组做排序，然后自行遍历去重是一个不错的方式。计算交集、并集的时候，直接用两个游标对数组遍历进行比较操作，复杂度为O(M*K)。这种游标遍历的思想，还是很common sense的处理流程。</p>
+<p>思路一：</p>
+
+<p>利用<code>sort()</code>对数组做排序，然后自行遍历去重是一个不错的方式。计算交集、并集的时候，直接用两个游标对数组遍历进行比较操作，复杂度为O(M*K)。这种游标遍历的思想，还是很common sense的处理流程。</p>
+
+<p>思路二：</p>
+
+<p>有不愿意透露姓名的<a href="http://weibo.com/cloudbye">@草原</a>同学提出，使用set做去重是没问题的。</p>
 
 <p>pat1063源码:<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel/APAT1063.cpp">请戳</a></p>
 
@@ -114,12 +120,16 @@ d&amp;Hyscvnm</p>
 
 <ul>
 <li>0.对数据排序，等待操作。</li>
-<li>1.首先构建好完成二叉树。</li>
+<li>1.首先构建好完全二叉树。</li>
 <li>2.利用二叉搜索树的中序遍历的有序性，在中序遍历的过程中，将排序好的数据插入其中。</li>
 </ul>
 
 
-<p>那么难点就降低到了构建完全二叉树。这又让人联想到了最大堆的数组实现：左儿子<code>2*n</code>，右儿子'2*n+1'。对的，数组实现的二叉树就是满足完全二叉树的特点的。于是，使用数组实现的二叉树做迭代的思路就出来了。</p>
+<p>如此一来，难点就转移到了构建完全二叉树上。</p>
+
+<p>联想到最大堆的数组实现：父节点坐标为n时，左儿子为2<em>n，右儿子为2</em>n+1。对的，数组实现的二叉树就是满足完全二叉树的特点的。构建完全二叉树的步骤直接缩减为定义一个一定长度的数组。</p>
+
+<p>于是，使用数组实现的二叉树做迭代的思路就出来了，30行代码搞定。</p>
 
 <p>pat1064源码:<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel/APAT1064.cpp">请戳</a></p>
 ]]></content>
