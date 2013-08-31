@@ -9,7 +9,7 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="最近高级网络课的小组任务是在老师给定的范围内自选方向主题研究并做展示报告。我们组选了 sdn。原以为这东西会是工业界无人问津的概念化产品，Google 了一下却发现其实 sdn 挺火的，由于它可能带来的可扩展性，一些大互联网企业也在开始涉足相关的研发，比如 Google 呵 Facebook。 &hellip;">
+  <meta name="description" content="GUI 哲学 前些日子，看了 Tinyfool 老师的一篇文章《开发人员为何应该使用 Mac OS X 兼 OS X 小史》，才恍然 Mac 系统可不仅仅是 UI 上与 Windows 大相径庭，而是自底而上的区别。这种区别渗透到了整个系统框架的设计理念中。 简单概括下我的认识：相比 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -106,6 +106,124 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/09/something-about-mac-gui/">Mac的GUI哲学</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-09T01:00:00+08:00" pubdate data-updated="true">Jun 9<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/06/09/something-about-mac-gui/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>GUI 哲学</h2>
+
+<p>前些日子，看了 Tinyfool 老师的一篇文章<a href="http://blogread.cn/it/article/1089?f=wb">《开发人员为何应该使用 Mac OS X 兼 OS X 小史》</a>，才恍然 Mac 系统可不仅仅是 UI 上与 Windows 大相径庭，而是自底而上的区别。这种区别渗透到了整个系统框架的设计理念中。</p>
+
+<p>简单概括下我的认识：相比 Windows 和 Linux 两大阵营，Mac OS X 除了『品味』上的优势之外，最重要的两点是：1.对 GUI 应用程序脚本化的有力支持；2.能实现 GUI 程序之间快捷的进程间通信。</p>
+
+<h4>GUI 程序之间的进程间通信</h4>
+
+<p>IPC 对于多用户分时系统的重要性不言而喻。其中从用户视角来看，如何让多个程序之间能更友好的交互是非常重要的。C++语言虽然面向对象，但在底层来看，其实依旧是冷冰冰的汇编代码，没有更整体的对象环境支撑，而以此构建的 Linux 也无法对进程间通信形成强力的支持。相比之下，乔布斯的团队借助于 SmallTalk 的消息传递机制创造了 Objective-C，并搭建了自己的运行时和类库框架 Cocoa，让系统无论从自身的迭代开发还是应用开发，得到了很大提升。值得一提的是，Objc 虽然最近才由于 iOS、Mac 平台的开发的火热进入热门编程语言的行列，其实它比 Java 还早十年出生。像最近由于 Rails 框架而火爆起来的 Ruby 和持续坚挺的 Java，都从 SamllTalk 中吸收了很多设计理念，就别提 C#了。</p>
+
+<h4>GUI 应用程序的脚本化</h4>
+
+<p>图形的交互方式确实人性化，但应用程序脚本化控制的方式在一些特定的场景里也可以大大提高生产效率。比如微软 Office 的 VBScript。即使是一般用户，不愿意自己写脚本，脚本化的方式也能让开发人员更方便快捷的开发出新颖的功能和产品。</p>
+
+<p>让应用全部统一开放脚本很难，特别是从市场的层面而言，如果没有一直贯彻这一战略，造成平台很多应用不支持这一功能，则很难推广。苹果九十年代已经开始积累这方面的基础，有先见之明。</p>
+
+<h2>GUI 工具</h2>
+
+<p>下面是我接触过的一些 Mac 下的 GUI 工具。它们大都散发着对开发者的自由开放的态度:)</p>
+
+<h3>Quicksilver</h3>
+
+<p>『为了不把 Mac 当 Windows 用』，可以从 <a href="http://qsapp.com/">Quicksilver</a> 入手。它能将双手从触摸板中解脱出来，或许这是很多开发者的梦想吧;)。只需用热键激活输入框，输入简单的匹配字符串，就可召唤出某个应用，或者执行某些搜索、查找任务，快哉！</p>
+
+<p>简单说说配置和使用方式：</p>
+
+<ul>
+<li>1.安装好后，在 preference -> command 中可以设置 HotKey（唤醒的虚拟按键），我的习惯设置是<code>control+enter</code>。preference -> application 可以设置是否需要在 dock 中显示，以及登入时自动启动。</li>
+<li>2.基本功能：快捷打开应用。按下 Quicksliver 的 HotKey（我的是<code>control+enter</code>）,在弹出的输入框中输入所需应用的头几个字母或者缩写，Quicksliver 会自动匹配最可能的应用，并显示出来，如果不是自己想要的，可以移动「上下光标」打开下拉菜单选择。选中后回车即可，如图。</li>
+</ul>
+
+
+<p><img src="https://dl.dropboxusercontent.com/u/64021093/Pics/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202013-06-09%20%E4%B8%8B%E5%8D%881.23.22.png" title="Quicksilver 示例" alt="Quicksilver" /></p>
+
+<ul>
+<li>3.还有很多其他的细节功能，通过 Quicksliver 的插件实现，可以根据自己的需求来定制。</li>
+</ul>
+
+
+<h3>Shortcat</h3>
+
+<p><a href="http://shortcatapp.com/">shortcat</a> 是 Mac 下的快捷操作利器。相比 Quicksilver，Shortcat 有不同的定位：通过键盘定位到屏幕上某窗体内的某个位置。其官网的示例就是如何通过 Shortcat 使用键盘更改 DNS 设置，注意，是完全不用鼠标噢。有人可能会想那为什么卜直接使用 cmd 呢？我想答案是 Shortcat 就是基于 GUI 的解决方案，是 GUI 和键盘快捷键的完美组合，与 cmd 并不冲突。</p>
+
+<p>下面简单的交代下 Shortcat 的使用方式：</p>
+
+<ul>
+<li>1.快捷键<code>Cmd+Shift+Space</code>用来激活输入框。使用关键字的定位方式类似于 Quicksilver。比如：如果目的是『Language &amp; Text』，那么输入『lt』、『lang』；『sa』代表 show all，显示所能用于文字定位的区域。『.』能展示出所有可控制区域，包括没有文字定位的区域。</li>
+<li>2.输入了关键字后，界面中被匹配到的模块会被套上不同颜色的方框。接下来，可以使用<code>control+key</code>重定位到对应位置，其中 key 为对应的匹配上的模块的字符标识。</li>
+</ul>
+
+
+<p><img src="https://dl.dropboxusercontent.com/u/64021093/Pics/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202013-06-09%20%E4%B8%8B%E5%8D%881.42.39.png" title="Shortcat 示例" alt="Shortcat" /></p>
+
+<ul>
+<li>3.定位到合适的位置后，按下<code>enter</code>，可执行单击动作；对应的，双击<code>enter</code>为鼠标双击动作；如果需要配合其他按键的点击，比如<code>command+click</code>，执行<code>command+enter</code>即可；鼠标悬浮为<code>control</code>；双击<code>control</code>可实现聚焦。</li>
+</ul>
+
+
+<h3>GeekTool</h3>
+
+<p><a href="http://projects.tynsoe.org/en/geektool/">GeekTool</a> 类似于 Windows 下的 widget，可以个性化的定制自己的桌面，添加插件，将 CPU、HDD 信息直接展示在桌面上，正如其名，Geek 而又文艺!如下效果图：</p>
+
+<p><img src="http://bbs.dgtle.com/data/attachment/album/201111/10/011505943pmpmm68enxwwd.png" title="GeekTool 示例桌面" alt="GeekTool" /></p>
+
+<p>详细配置可参考这篇文章<a href="http://www.dgtle.com/article-797-1.html">《教你装小清新—— Geektool &amp;&amp; Rainmeter 桌面皮肤推荐》</a></p>
+
+<h3>Nocturne</h3>
+
+<p><a href="http://code.google.com/p/blacktree-nocturne/downloads/detail?name=Nocturne.2.0.0.zip">Nocturne</a> 这是桌面颜色控制的工具，与 Quicksilver 同为 blacktree 公司的产品。</p>
+
+<p>使用方式：下载 Nocturne2.0.0，解压后拖入应用程序文件夹，打开。在 preference 中可很直观的配置各项属性。其中，switch to night 功能可以将 Mac 界面切换到黑夜模式，很好玩;)。</p>
+
+<h3>参考：</h3>
+
+<ul>
+<li><a href="http://ksmx.me/blog/2012/03/18/customize-mac-desktop/">矮矬穷 Mac 桌面美化得瑟教程</a></li>
+</ul>
+
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/06/09/something-about-mac-gui/'>http://biaobiaoqi.github.com/blog/2013/06/09/something-about-mac-gui/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -880,55 +998,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/05/17/jail-break-your-ios/">iOS的安全性和越狱</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-17T00:10:00+08:00" pubdate data-updated="true">May 17<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/05/17/jail-break-your-ios/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="https://dl.dropboxusercontent.com/u/64021093/2013-5-16.jpg" title="Jailbrek" alt="alt jailbreak" /></p>
-
-<p>提到<a href="http://en.wikipedia.org/wiki/IOS_jailbreaking#Security.2C_privacy.2C_and_stability">越狱</a>，很多人第一反应大概是免费的游戏和 app。</p>
-
-<p>作为软件从业人员，深知中国的大环境的特殊性。内有用户想吃免费午餐的不良付费习惯，外有行业内大头诸如某讯对创新的绞杀。大家对越狱是为了免费、盗版软件的认识，也就不奇怪了。</p>
-
-<p>还有另一派人。越狱对他们来说，意味着开放。个人认为这也是 Hack 精神的精髓之一。事实上，iOS 越狱也有自己的生态圈：Cydia 就是越狱设备上 App Store。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/05/17/jail-break-your-ios/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -950,12 +1019,12 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <a style="font-size: 167%" href="/tags/distributed/">distributed</a> &nbsp 
 <a style="font-size: 98%" href="/tags/entrepreneurship/">entrepreneurship</a> &nbsp 
 <a style="font-size: 135%" href="/tags/hadoop/">hadoop</a> &nbsp 
-<a style="font-size: 98%" href="/tags/idea/">idea</a> &nbsp 
 <a style="font-size: 115%" href="/tags/java/">java</a> &nbsp 
+<a style="font-size: 115%" href="/tags/life/">life</a> &nbsp 
 <a style="font-size: 98%" href="/tags/linux/">linux</a> &nbsp 
 <a style="font-size: 135%" href="/tags/methodology/">methodology</a> &nbsp 
 <a style="font-size: 126%" href="/tags/network/">network</a> &nbsp 
-<a style="font-size: 115%" href="/tags/octopress/">octopress</a> &nbsp 
+<a style="font-size: 126%" href="/tags/octopress/">octopress</a> &nbsp 
 <a style="font-size: 115%" href="/tags/os/">os</a> &nbsp 
 <a style="font-size: 174%" href="/tags/pat/">pat</a> &nbsp 
 <a style="font-size: 98%" href="/tags/security/">security</a> &nbsp 
@@ -966,6 +1035,10 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/09/01/blog-log/">biaobiaoqi的博客日志</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/08/31/octopress-3rd-party-plugin-syncpost/">octopress第三方插件：博文同步工具syncPost</a>
@@ -981,10 +1054,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     
       <li class="post">
         <a href="/blog/2013/08/03/overcome-pat/">PAT练习题概览</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/08/01/pat-1051-1060-solutions/">PAT 1051-1060 题解</a>
       </li>
     
   </ul>
