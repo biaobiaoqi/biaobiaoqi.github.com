@@ -19,7 +19,7 @@ description: "octopress第三方插件，基于metaWeblog的博文同步工具sy
 * 2.只能同步最新的一篇博客，没有整体的博文搬家功能。
 * 3.先比其他的octopress插件，原来版本的代码结构难于维护，比如有自己单独的配置文件，而不是使用全局的`_config.yml`(在那个版本中大概是为了不把明文密码提交到版本库中)，比如ruby文件单独在一个`_custom`文件夹下等
 
-基于这些点，我fork了作者的代码，定制成了它[现在的样子](https://github.com/biaobiaoqi/octopress-syncPost)。
+基于这些点，我fork了[huangbowen](http://huangbowen.net/)大哥的代码，定制成了它[现在的样子](https://github.com/biaobiaoqi/octopress-syncPost)。
 
 <!--more-->
 
@@ -45,7 +45,7 @@ description: "octopress第三方插件，基于metaWeblog的博文同步工具sy
 
 * 增加同步所有博文功能中，对目标博客中已有博文的查重功能。即对于已经同步过去的博客，不再发送请求，或者实现编辑功能的同步功能。由于站点的MetaWeblog服务大多对请求有时限控制，同步过程中可能出现中断，此时部分博文已经同步过去，而部分没有，这种情况下，暂时没有好的解决方式。
 * 测试其他有MetaWeblog服务的博客站点（现在仅测试了cnblog）。
-* cnblog的博文显示中，似乎不支持octopress的代码块样式。
+* ~~~cnblog的博文显示中，似乎不支持octopress的代码块样式。~~~ (注：原作者huangbowen大哥已经解释了是css样式的问题)
 
 欢迎感兴趣的朋友参与到这个repo中来:)
 
