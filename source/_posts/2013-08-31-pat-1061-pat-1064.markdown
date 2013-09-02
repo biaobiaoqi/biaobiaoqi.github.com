@@ -77,7 +77,6 @@ pat1062源码:[请戳](https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/
 
 #####题意
 
-
 题目给出了N(<=50)个正整数集合（实际上不是真正意义上的set，有重复数值），每个集合最多存M(<10^4)个元素，其中数值范围是[0, 10^9]。给出K次查询，每次查询条件为两个集合，要求求出两集合的相似度。
 
 这里集合相似度的定义是 Nc/Nt*100%，其中Nc为两集合的交集元素数量，Nt为两集合的并集的元素数量。
@@ -102,9 +101,13 @@ pat1063源码:[请戳](https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/
 
 #####分析
 
-常规思路是对数据排序，然后递归的构建二叉搜索树（且构建的递归过程要满足完全二叉的树形结构），实现起来稍微有些代码量。
+常规思路：
 
-后来[@Redow7](http://weibo.com/redow7)给介绍了一种更有趣的方法：
+* 对数据排序
+* 递归的构建二叉搜索树，递归条件为根据有序数组找到子树顶点，顶点位置需要满足完全二叉树的结构。
+* 最后用queue输出层序遍历。
+
+实现起来需要注意各种边界条件的判定，坑比较多，且代码量比较大（我的参考代码里写了70行）。后来[@Redow7](http://weibo.com/redow7)给介绍了一种更有趣的方法：
 
 * 0.对数据排序，等待操作。
 * 1.首先构建好完全二叉树。
@@ -114,6 +117,6 @@ pat1063源码:[请戳](https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/
 
 联想到最大堆的数组实现：父节点坐标为n时，左儿子为2*n，右儿子为2*n+1。对的，数组实现的二叉树就是满足完全二叉树的特点的。构建完全二叉树的步骤直接缩减为定义一个一定长度的数组。
 
-于是，使用数组实现的二叉树做迭代的思路就出来了，30行代码搞定。
+于是，使用数组实现的二叉树做迭代的思路就出来了，30行搞定。
 
 pat1064源码:[请戳](https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel/APAT1064.cpp)
