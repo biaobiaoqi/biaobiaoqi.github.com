@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: ruby | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/tags/ruby/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-09-02T21:07:42+08:00</updated>
+  <updated>2013-09-02T22:39:40+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -31,7 +31,7 @@
 </ul>
 
 
-<p>基于这些点，我fork了作者的代码，定制成了它<a href="https://github.com/biaobiaoqi/octopress-syncPost">现在的样子</a>。</p>
+<p>基于这些点，我fork了<a href="http://huangbowen.net/">huangbowen</a>大哥的代码，定制成了它<a href="https://github.com/biaobiaoqi/octopress-syncPost">现在的样子</a>。</p>
 
 <!--more-->
 
@@ -65,7 +65,7 @@
 <ul>
 <li>增加同步所有博文功能中，对目标博客中已有博文的查重功能。即对于已经同步过去的博客，不再发送请求，或者实现编辑功能的同步功能。由于站点的MetaWeblog服务大多对请求有时限控制，同步过程中可能出现中断，此时部分博文已经同步过去，而部分没有，这种情况下，暂时没有好的解决方式。</li>
 <li>测试其他有MetaWeblog服务的博客站点（现在仅测试了cnblog）。</li>
-<li>cnblog的博文显示中，似乎不支持octopress的代码块样式。</li>
+<li><del>cnblog的博文显示中，似乎不支持octopress的代码块样式。</del> (注：原作者huangbowen大哥已经解释了是css样式的问题)</li>
 </ul>
 
 
