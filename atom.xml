@@ -4,7 +4,7 @@
   <title><![CDATA[Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-09-02T20:33:28+08:00</updated>
+  <updated>2013-09-02T21:07:42+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -206,7 +206,7 @@
 
 <p>思路一：</p>
 
-<p>利用<code>sort()</code>对数组做排序，然后自行遍历去重是一个不错的方式。计算交集、并集的时候，直接用两个游标对数组遍历进行比较操作，复杂度为 O(M*K)。这种游标遍历的思想，还是很 common sense 的处理流程。</p>
+<p>利用<code>sort()</code>对数组做排序，然后遍历去重。计算交集时，直接用两个游标对数组遍历进行比较操作，并集等于两者的大小之和减去交集的大小。复杂度为 O(M<em>K + N</em>M*logM)。这种游标遍历的思想，还是很 common sense 的处理方式，精妙之处在于循环判断和内部的判断逻辑的分离，让代码清晰明了。</p>
 
 <p>思路二：</p>
 
