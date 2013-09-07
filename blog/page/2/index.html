@@ -9,7 +9,7 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="早期部分代码用 Java 实现。由于 PAT 虽然支持各种语言，但只有 C/C++标程来限定时间，许多题目用 Java 读入数据就已经超时，后来转投 C/C++。浏览全部代码：请戳 本文谨代表个人思路，欢迎讨论;) 1021. Deepest Root (25) 题意 无环连通图也可以视为一棵树， &hellip;">
+  <meta name="description" content="PAT(pat.zju.edu.cn)是一个面向 C/C++程序的 Online Judge 系统。相比 ZOJ，HDOJ，POJ 等 ACM 题库，PAT 的题目非常基础，对于数据结构、算法的入门是比较有助益的。 本文按照自己的认识，给 PAT advanced level 做出了分类。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -106,6 +106,344 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/08/03/overcome-pat/">PAT练习题概览</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-03T22:20:00+08:00" pubdate data-updated="true">Aug 3<span>rd</span>, 2013</time>
+        
+         | <a href="/blog/2013/08/03/overcome-pat/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>PAT(<a href="http://pat.zju.edu.cn">pat.zju.edu.cn</a>)是一个面向 C/C++程序的 Online Judge 系统。相比 ZOJ，HDOJ，POJ 等 ACM 题库，PAT 的题目非常基础，对于数据结构、算法的入门是比较有助益的。</p>
+
+<p>本文按照自己的认识，给 PAT advanced level 做出了分类。由于很多题目实际上兼顾有多种解法和思路，我给每道题打上了 tag，来应对分类的独占性局限，供大家参考。</p>
+
+<h2>简单题</h2>
+
+<p>这类题几乎不需要数据结构、算法基础，主要通过简单的逻辑流程和判断实现。</p>
+
+<ul>
+<li>1001 A+B</li>
+<li>1002 多项式相加</li>
+<li>1005 简单 hash</li>
+<li>1006 选极值</li>
+<li>1008 模拟电梯</li>
+<li>1009 多项式乘法</li>
+<li>1011 选极值</li>
+<li>1019 数字/字符处理</li>
+<li>1024 数字/字符处理</li>
+<li>1027 数字/字符处理，简单 hash</li>
+<li>1031 数字/字符处理</li>
+<li>1035 简单 hash</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/08/03/overcome-pat/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/08/01/pat-1051-1060-solutions/">PAT 1051-1060 题解</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-01T01:43:00+08:00" pubdate data-updated="true">Aug 1<span>st</span>, 2013</time>
+        
+         | <a href="/blog/2013/08/01/pat-1051-1060-solutions/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>浏览全部代码：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
+
+<p>本文谨代表个人思路，欢迎讨论;)</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1051">1051. Pop Sequence (25)</a></h2>
+
+<h4>题意</h4>
+
+<p>给定 stack 的容量，给定数据的入栈顺序：从 1 开始的正整数序列，在允许随机的出栈操作的情况下，要求判断某出栈序列是否可能。</p>
+
+<p>比如，告知 stack 容量为 5，入栈序列的最大值为 7。有两个序列需要判断合理性：</p>
+
+<ul>
+<li>{1 2 3 4 5 6 7}： 这个序列是可能的，只需每次入栈时都做出栈操作。</li>
+<li>{3 2 1 7 5 6 4}： 这个序列是不可能的，其中前半部分 3 2 1 是合法的，先将 1 2 3 顺序入栈，然后三次执行出栈操作。而之后的 7 5 6 则是不可能的。</li>
+</ul>
+
+
+<h4>分析</h4>
+
+<p>两种思路：</p>
+
+<h5>第 1 种思路：</h5>
+
+<p>使用 stl 中的 stack 模拟。判定条件有两条：1.栈中数据量不超过栈的容量；2.出栈只能从栈顶取，不应该出现从固定的堆栈中取出其他数据的情况。</p>
+
+<h5>第 2 种思路：</h5>
+
+<p>由于入栈序列数据由小到大排列非常特殊，要通过出栈序列判定可能性是存在简便思路的。
+对比分析题中 Sample 给出的序列，结合上面提到的两条冲突条件入手分析：</p>
+
+<ul>
+<li><p>1.栈中数据量不超过栈的容量：</p>
+
+<p>  只有在入栈时，才会需要考虑栈中数据是否超量。出栈序列中的每个数，都以为着在出栈操作之前，它刚入栈，
+  那么当它入栈的时候能否判定是否超过栈容量呢？可以的，（当前的出栈数值 - 已经执行过的出栈操作数量）就是当前栈中元素的数量。</p></li>
+<li><p>2.出栈只能从栈顶取，不应该出现从固定的堆栈中取出其他数据的情况。</p>
+
+<p>  根据观察分析发现，当某数据 m 出栈之后，比 m 小的数据如果在 m 之后出栈的，它们所组成的序列本身需要保持从大到小的顺序排列。
+  距离如 3 2 1 7 5 6 4 这个序列，在 7 之后有 5 6 4 这个子序列，它们都大于 7，但却没有保持一个递减的顺序，不合法。</p></li>
+</ul>
+
+
+<p>更多分析参见博文<a href="../../../../2013/07/16/verify-pop-sequence-for-stack/">《出栈序列的可能性判定》</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1052">1052. Linked List Sorting (25)</a></h2>
+
+<h4>题意</h4>
+
+<p>链表的节点被表示为{地址， 值， 下一个指针地址}，其中如果 NULL 的地址表示为-1，
+地址为 5 正数，值的范围为[-10<sup>5,</sup> 10<sup>5]。</sup></p>
+
+<p>给定 N(&lt; 10<sup>5)个节点以及其头指针，要求按照每个节点上值的大小重新排序，并按照链表顺序输出每个节点。</sup></p>
+
+<h4>分析</h4>
+
+<p>将链表中的节点按值做 qsort()排序，然后调整每个值的 next 指针即可。需要注意的有：</p>
+
+<ul>
+<li>1.INPUT 中的节点并不保证全是链表中的，先需要过滤掉悬空的节点。</li>
+<li>2.head 直接指向-1(NULL)的情况需要特殊处理。</li>
+</ul>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/08/01/pat-1051-1060-solutions/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/08/01/pat-1041-1050-solutions/">PAT 1041-1050 题解</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-01T01:43:00+08:00" pubdate data-updated="true">Aug 1<span>st</span>, 2013</time>
+        
+         | <a href="/blog/2013/08/01/pat-1041-1050-solutions/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>浏览全部代码：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
+
+<p>本文谨代表个人思路，欢迎讨论;)</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1041">1041. Be Unique (20)</a></h2>
+
+<h5>题意</h5>
+
+<p>给出 N (&lt;=105)个数（数值范围为 [1, 10<sup>4]），找到其中不重复的第一个数字。比如给出</sup> <code>5 31 5 88 67 88 17</code> ， 答案是 <code>31</code> 。</p>
+
+<h5>分析</h5>
+
+<p>简单模拟题，开一个大数组<code>int a[10001];</code>，以读入的数为下标，记录 count:<code>a[index] ++;</code>。结果输出第一个存储为 1 的下标:<code>if (a[index] == 1)</code>。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1042">1042. Shuffling Machine (20)</a></h2>
+
+<h5>题意</h5>
+
+<p>背景是洗牌机的洗牌过程。过程是给定洗牌的每张牌的位置替换序列，由原来的次序算出最后的牌的平排列。</p>
+
+<p>比如原有的次序为<code>S3, H5, C1, D13, J2</code>，
+给定的洗牌顺序为<code>4, 2, 5 ,3 ,1</code>，那么一次洗牌的结果为：<code>J2, H5, D13, S3, C1</code>。
+如果需要两次洗牌，则结果为<code>C1, H5, S3, J2, D13</code>。</p>
+
+<p>输入为对一整副牌（54 张）的洗牌策略，以及洗牌次数 N，要求计算出最后的洗牌结果。</p>
+
+<h5>分析</h5>
+
+<p>简单 hash 题。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/08/01/pat-1041-1050-solutions/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/08/01/pat-1031-1040-solutions/">PAT 1031-1040 题解</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-01T01:43:00+08:00" pubdate data-updated="true">Aug 1<span>st</span>, 2013</time>
+        
+         | <a href="/blog/2013/08/01/pat-1031-1040-solutions/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>早期部分代码用 Java 实现。由于 PAT 虽然支持各种语言，但只有 C/C++标程来限定时间，许多题目用 Java 读入数据就已经超时，后来转投 C/C++。浏览全部代码：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
+
+<p>本文谨代表个人思路，欢迎讨论;)</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1031">1031. Hello World for U (20)</a></h2>
+
+<h5>题意</h5>
+
+<p>将给定的字符串打印出 U 型。</p>
+
+<p>比如给定<code>helloworld</code>，打印出</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>h  d
+</span><span class='line'>e  l
+</span><span class='line'>l  r
+</span><span class='line'>lowo
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>设定左边的字符个数为 n1,底边字符个数为 n2,右边字符个数为 n3。需要满足 n1 = n3 = max
+{k|k &lt;= n2 for all 3 &lt;= n2 &lt;= N} with n1 + n2 + n3 -3 = N.</p>
+
+<h5>分析</h5>
+
+<p>简单模拟题。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1032">1032. Sharing (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>为了节省存储空间，单词使用链表实现。比如对于<code>loading</code>和<code>being</code>两个单词，有如下存储结构：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>word1 : -&gt; [l] -&gt; [o] -&gt; [a] -&gt; [d]  
+</span><span class='line'>                                  \
+</span><span class='line'>                                    [i] -&gt; [n] -&gt; [g] -&gt; null
+</span><span class='line'>                                  /
+</span><span class='line'>word2 : -&gt; [b] -&gt; [e] -------------
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>输入中，指定了两个单词的首字符的地址，并给出了 N (&lt;= 10<sup>5)个节点，每个节点包含：物理地址（5</sup> 位的正整数），实际存储的字符以及指向的下一个节点的地址。NULL 的地址是-1.
+要求找到两单词的的公共后缀开始的地址，如果没有，则输出-1.</p>
+
+<h5>分析</h5>
+
+<p>既然是单词，它的长度应该是有限的，也就是链表不会出现环这种情况（实际上这里的处理方式对于有环无环都适用）。对第一个单词链表做遍历，对爬过的节点做好标记。第二个单词链表也同样做标记，一旦遇到已经标记过的节点，则该节点就是结果。</p>
+
+<p>需要注意一点：直接使用 map 做节点的存储最后一个 case 会超时。而鉴于 5 位正整数的数据量，可以直接使用数组，用空间换时间。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/08/01/pat-1031-1040-solutions/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -615,500 +953,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/10/cc-license/">给博客签上CC协议</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-10T22:37:00+08:00" pubdate data-updated="true">Jul 10<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/10/cc-license/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>大家都知道开源软件。通过开放源代码的方式，允许用户学习、修改、增进提高这些软件质量。软件界的开源协议很多，比如常见的 Apache，BSD，GPL 等等。这是一种充分利用网络的便利性，鼓励分享和创新的协议潮流。从这个层面上来说，Creative Commons 也是如此。</p>
-
-<p>这是一个非营利性组织，也是一种创作的授权方式。简称 CC 协议，中国大陆正式名称为知识共享。次组织的主要宗旨是增加创意作品的流通可及性，作为其他人据以创作及共享的基础，并寻找适当的法律以确保上述理念。</p>
-
-<h2>CC 协议的起源</h2>
-
-<p>Creative Commons 最先是 2002 年的 12 月 16 号在美国首次发布的。这个协议最初是根据美国版权法设计出来的。技术的发展，网络的发展，出现了开放共享的需求，而传统的作品保护的模式，对作品的使用和内容的开放带来一些限制。怎么样满足这种需求，同时又尊重权利人的著作权？传统的保护模式不能实现这样的作用，它可能关注于保护的时候可能忽略了对公众的，尤其网络环境下对知识文化这样分享的需求。CC 协议的设计实际上是基于这样一种大的背景，在这样一个大的网络环境下应运而生，它是来倡导一种合法的分享。</p>
-
-<h2>CC 协议内容</h2>
-
-<p>CC 协议可以分为四个部分。每个部分对使用者有不同程度的限定。</p>
-
-<ul>
-<li><p>1.署名（BY）：作品上必须附有作品的归属。如此之后，作品可以被修改，分发，复制和其它用途。</p></li>
-<li><p>2.非商业性使用（NC）：作品可以被修改、分发等等，但不能用于商业目的。</p></li>
-<li><p>3.禁止演绎（ND）：这意味着你可以复制和分发它们，但你不能以任何方式修改它们，或基于它们进行二次创作。</p></li>
-<li><p>4.相同方式共享（SA）：作品可以被修改、分发或其它操作，但所有的衍生品都要置于 CC 许可协议下。</p></li>
-</ul>
-
-
-<p>实际使用时，需要对这四种条件分别作出约束。不同的条件共有 16 种组合方式，其中有的组合方式互斥，简化后剩下了 6 种常用协议：</p>
-
-<h5>署名（BY）</h5>
-
-<p>此协议最为宽松，只需署名，其他无约束。</p>
-
-<h5>署名（BY）-禁止演绎（ND）</h5>
-
-<p>署名的同时，不得对作品进行改动。但可以用于商业或非商业用途。</p>
-
-<h5>署名（BY）-非商业性使用（NC）</h5>
-
-<p>署名的同时，可以修改作品，但不能用于商业用途。</p>
-
-<h5>署名（BY）-非商业性使用（NC）-禁止演绎（ND）</h5>
-
-<p>署名，且不得用于商业用途和修改。</p>
-
-<h5>署名（BY）-非商业性使用（NC）-相同方式共享（SA）</h5>
-
-<p>署名，不能商用，但可以演绎，且演绎后的内容必须是同样的共享方式。</p>
-
-<h5>署名（BY）-相同方式共享（SA）</h5>
-
-<p>署名，可以商用，可以演绎，但演绎后的作品必须是同样的共享方式。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/07/10/cc-license/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/10/decorate-octopress/">定制Octopress</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-10T01:53:00+08:00" pubdate data-updated="true">Jul 10<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/10/decorate-octopress/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>在 github pages 上搭建好 octopress 博客之后，博客的基本功能就能使用了。如果想自己定制也是没问题的，octopress 有较详尽的官方文档，原则上有问题求助官方即可：<a href="http://octopress.org/help/">octopress-help</a>。官方没有包纳的也可以去询问 <a href="http://stackoverflow.com/questions/tagged/octopress">stackoverflow</a>。 当然，中文的看起来总会省事儿点。我做了如下一些总结;)</p>
-
-<p>不会 ruby 的童鞋特别注意：配置_ config.yml 的过程中特别注意，配置项『:』后要留空格，否则会报错。</p>
-
-<p>另外，一些『土方法』可能并不利于程序的维护可扩展，有空再仔细研究，大家将就着用吧;).</p>
-
-<h2>0.安装第三方主题</h2>
-
-<p>之所以把这一点标记为 0，是因为在博主刚刚经历了博客主题的更新后，惨烈的发现需要重新配置包括评论、百度统计在内的不少东西。</p>
-
-<p>应该是自己在做定制化的过程中乱修改源码（这是一种很不可取维护方式，使软件难以持续扩展）造成的，又或者 octopress 框架本身对定制化扩展的支持比较弱（对 ruby 不熟，对 octopress 也一知半解，我不确定是不是这个原因）。</p>
-
-<p>简而言之，初接触 octopress 的朋友们，建议先安装第三方主题，再参考以下定制方法。</p>
-
-<p>我使用的第三方主题是<a href="https://github.com/gehaxelt/CSS-WhiteLake">『whitelake』</a>。</p>
-
-<p>安装过程很简单:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ cd octopress
-</span><span class='line'>$ git clone https://github.com/gehaxelt/CSS-WhiteLake.git .themes/whitelake
-</span><span class='line'>$ rake install['whitelake']
-</span><span class='line'>$ rake generate</span></code></pre></td></tr></table></div></figure>
-
-
-<p>注意，执行<code>rake install['whitelake']</code>之后，直接使用<code>rake preview</code>浏览网页会遇到很多瑕疵，<code>rake generate</code>之后再<code>rake preview</code>就没问题了。</p>
-
-<p>更多第三方插件和主题资源，参见<a href="https://github.com/imathis/octopress/wiki">官方 repo 的 wiki</a>.</p>
-
-<h2>1.装饰边栏</h2>
-
-<p>以增加豆瓣展示框为例。参加正反反长大哥的博客 <a href="http://icodeit.org/2012/10/how-to-embed-douban-show-in-your-octopress-site/">How to Embed Douban-Show in Your Octopress Site</a></p>
-
-<h2>2.增加评论和分享功能</h2>
-
-<p>虽然 octopress 内置的 disqus 评论系统很不错，但在国内的使用并不普及。相比之下，友言、多说等第三方评论则更接地气，可以利用到微博、人人等 SNS 账号。</p>
-
-<h3>2.1 友言</h3>
-
-<p>本博客采用了友言。首先注册<a href="http://www.uyan.cc/">友言</a>的账号，如果不注册，虽然也能实现评论功能，但没有后台管理整个站点的评论会十分纠结。注册完成之后，选择获取代码，将这串代码贴入相应的位置，即可实现第三方评论。</p>
-
-<p>在路径<code>$OCTOPRESS/source/_includes/post/</code>上创建文件<code>youyanandjiathis.html</code>，功能代码放入其中。</p>
-
-<h3>2.2 加网</h3>
-
-<p>分享方面，本博客使用了<a href="http://www.jiathis.com/getcode/icon">加网</a>。注册后，在更多高级自定义功能中，可能自定义不同的分享按钮，生成代码后，也将生成的代码贴入<code>$OCTOPRESS/source/_includes/post/youyanandjiathis.html</code>中。</p>
-
-<p>现在，youyanandjiathis.html 的样子如下(需要注意，自己使用时，uid 显然是不一样的啦)</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="c">&lt;!-- JiaThis Button BEGIN --&gt;</span>
-</span><span class='line'><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;jiathis_style_32x32&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&quot;jiathis_button_qzone&quot;</span><span class="nt">&gt;&lt;/a&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&quot;jiathis_button_tsina&quot;</span><span class="nt">&gt;&lt;/a&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&quot;jiathis_button_tqq&quot;</span><span class="nt">&gt;&lt;/a&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&quot;jiathis_button_weixin&quot;</span><span class="nt">&gt;&lt;/a&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&quot;jiathis_button_renren&quot;</span><span class="nt">&gt;&lt;/a&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://www.jiathis.com/share?uid=1814751&quot;</span> <span class="na">class=</span><span class="s">&quot;jiathis jiathis_txt jtico jtico_jiathis&quot;</span> <span class="na">target=</span><span class="s">&quot;_blank&quot;</span><span class="nt">&gt;&lt;/a&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&quot;jiathis_counter_style&quot;</span><span class="nt">&gt;&lt;/a&gt;</span>
-</span><span class='line'><span class="nt">&lt;/div&gt;</span>
-</span><span class='line'><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'><span class="kd">var</span> <span class="nx">jiathis_config</span> <span class="o">=</span> <span class="p">{</span><span class="nx">data_track_clickback</span><span class="o">:</span><span class="s1">&#39;true&#39;</span><span class="p">};</span>
-</span><span class='line'><span class="nt">&lt;/script&gt;</span>
-</span><span class='line'><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;http://v3.jiathis.com/code/jia.js?uid=xxxxxx&quot;</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span><span class='line'><span class="c">&lt;!-- JiaThis Button END --&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">&lt;!-- UY BEGIN --&gt;</span>
-</span><span class='line'><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;uyan_frame&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
-</span><span class='line'><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;http://v2.uyan.cc/code/uyan.js?uid=xxxxxxxx&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span><span class='line'><span class="c">&lt;!-- UY END --&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>2.3 将功能增加到博客中</h3>
-
-<p>功能代码已经都在 youyanandjiathis.html 中了，接下来是让 blog 使用到这些功能代码。</p>
-
-<p>首先在_ config.yml 中增加开关：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#comment and share                                                                                    </span>
-</span><span class='line'><span class="n">comment_and_share</span><span class="p">:</span> <span class="kp">true</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>然后在<code>$OCTOPRESS/source/_includes/post/sharing.html</code>中的，根据开关<code>comment_and_share</code> 引入对应的功能代码<code>post/youyanandjiathis.html</code>，类比于默认实现中的<code>&lt;facebook_like&gt;</code>部分。代码如下（使用时，先去掉反斜杠）：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'>  \{\% if site.comment_and_share \%\}
-</span><span class='line'>      \{\% include post/]youyanandjiathis.html \%\}
-</span><span class='line'>  \{\% endif \%\}
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>2.4 友言验证</h3>
-
-<p>另外，需要在友言的后台处理评论，甚至做一些定制化处理，需要通过友言的验证。详情在友言的管理员后台可见。</p>
-
-<h2>3.定制域名</h2>
-
-<p>如果你拥有自己的域名，可以 CNAME 到 github pages 上。以我的配置为例（我的域名为<code>biaobiaoqi.me</code>）。</p>
-
-<p>1.在 octopress 的 source 目录下创建 CNAME 文件，并输入新域名：biaobiaoqi.com</p>
-
-<p>2.在域名管理中，创建或修改 A 记录，指向 207.97.227.245 这个地址。</p>
-
-<p>3.创建 CNAME 记录，www.biaobiaoqi.com -> biaobiaoqi.github.com</p>
-
-<p>这一过程可能需要好几天才能生效，请耐心等待:)</p>
-
-<h2>4.让博客中连接在新窗口打开</h2>
-
-<p>由于 markdown 不支持这一语法，如果要自己用 html 标签实现，又有些违背了 markdown 以内容为重的立意。</p>
-
-<p>参考博文<a href="http://www.blogjava.net/lishunli/archive/2013/01/20/394478.html">《在 Octopress 中为 markdown 的超链接加上 target=&#8221;_blank&#8221;》</a>，可以通过将如下代码添加到 {OCTOPRESS_HOME}/source/_includes/custom/head.html 文件末尾来实现：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kd">function</span> <span class="nx">addBlankTargetForLinks</span> <span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;a[href^=&quot;http&quot;]&#39;</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;target&#39;</span><span class="p">,</span> <span class="s1">&#39;_blank&#39;</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="p">});</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">bind</span><span class="p">(</span><span class="s1">&#39;DOMNodeInserted&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="nx">addBlankTargetForLinks</span><span class="p">();</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">});</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="err">/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>5.列表的排版</h2>
-
-<p>默认情况，所有文字的排头会对齐，但如果有列表项的情况下也如此，列表头就会冲出文章的主体区块了。</p>
-
-<p>在 octopress/sass/custom/_layout.scss 文件中找到#$indented-lists: true 行，去掉#注释即可。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$indented</span><span class="o">-</span><span class="nx">lists</span><span class="o">:</span> <span class="kc">true</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/07/10/decorate-octopress/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/07/yuminhong/">《俞敏洪口述》</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-07T23:53:00+08:00" pubdate data-updated="true">Jul 7<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/07/yuminhong/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>质朴、诚恳和坚韧</h2>
-
-<p>这本书是某次在 Amazon 上购书『满 100 送书一本』时挑的。放在抽屉里有段日子了。</p>
-
-<p>一直挺崇拜俞敏洪老师。初次了解到他是高中的时候看的『赢在中国』，俞敏洪老师是嘉宾点评。而后混在考 T 的大流中去上了新东方的课程，几个老师讲得不错，比较可惜的是远离了老俞的时代。恰好前两天热映的『中国合伙人』，又把他拉回视野前沿。周日，趁着没心情码代码，忙里偷闲的读完了这本自传体的文字。</p>
-
-<p>我不太喜欢读『活人』的传记。没有盖棺定论的事儿，或多或少掺杂些美华。但读这本书，却丝毫没有表现出浮夸，就像他的性格一般质朴、诚恳和坚韧。</p>
-
-<p>或许在某些名人的传记里，永远不会看到他通过喝酒打通关系搞定了某个问题，而老俞有。书里多次的描述了他是怎样融入了这个『人情社会』。不可否认，他的本分和待人诚恳让他有人缘，这是他的优势。</p>
-
-<p>他能在面对东方学校过河拆桥的举动下，沉住气，以和为贵，用合理的手段占据主动。</p>
-
-<p>他能在北大读本科的阶段受众人嘲讽的环境下成长，不断学习，在毕业时，喊出『你们干十年成的我干二十年，你们二十年成的我干四十年。如果实在不行，我会保持心情愉快、身体健康，到八十岁以后把你们送走了我再走』。</p>
-
-<p>凡此种种……</p>
-
-<h2>世界观</h2>
-
-<p>从每个成功的人的经历中，都能总结出数不清的箴言。成功的理由永远说不完。而这本书里，对我而言感触最深的无非是下面这些话：</p>
-
-<blockquote><p>人生就是这样，你不受这个苦就会受那个苦。一个人如果从苦中能找到乐和幸福，那他就是幸运的。……我深刻的意识到什么也不做的痛苦比任何其他痛苦更加深刻，所以我一定要做事，做事的标准就是必须做对社会有好处的事情，以最大的努力在痛苦的世界中尽力而为。</p></blockquote>
-
-<p>对我而言，这句话实在受用。我无法证明这些字在未来的时间里能对我造成的影响，却打在我最近几年来受困扰最多的点上。</p>
-
-<p>乐观让人笑着面对生活。生活总归是有各种委屈、各种阻力，笑脸的背后，时常是受伤的心，区别在于受伤的心能埋得多深。我宁愿相信，乐观是因为能接受苦，能从苦中找到快乐，而不是没有苦。</p>
-
-<p>时常的，我被不好的状态左右。那是种很奇怪的感觉，是面对压力的逃避、拖延，独自缩在没有人看得见的角落，在电脑屏幕前刷着网页，时间慢慢流走。然后心情越来越差，因为一事无成的颓废感。我是闲不下来的人。是的，『什么也不做的痛苦，比任何其他痛苦更加深刻』！</p>
-
-<p>曾经在 ASES 的分享会上，听 dd 讲起过<a href="http://cuitianyi.com/blog/authentic-happiness-%E8%AF%BB%E4%B9%A6%E6%80%BB%E7%BB%93/">『积极心理学』</a>。其中有个观点是：『享乐是心灵资本的消费，而心流中的满足则是心灵资本的投资』。简单的讲，创造价值的事情会让我得到心流的满足，而简单的娱乐则会消费这种满足感。或许当两者之差为负的时候，我就感受到了那种空虚和煎熬，不止什么都不做，还消费了更多。</p>
-
-<p>正是对社会责任的追求，老俞没有沉浸再新东方的飞速发展中。对他而言，现在的新东方的经营一切都要权衡公司的利益和教育理念。虽然他的新东方充满了实用主义和人文情怀，虽然他能让新东方尽到企业的社会责任，但这依然不是他想要的。他正在筹划办私立高校，用他的教育理念，给中国的教育发展贡献力量。这是中国的希望。</p>
-
-<p>最后，以老俞的一句话结尾：</p>
-
-<blockquote><p>人生的苦难肯定是没有尽头的，人要做的是在苦难中奋发起来，做自己能够做的和应该做的事儿，这就是我的世界观。</p></blockquote>
-
-<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/07/07/yuminhong/'>http://biaobiaoqi.github.com/blog/2013/07/07/yuminhong/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/05/checklist-manifesto/">《清单革命》</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-05T00:54:00+08:00" pubdate data-updated="true">Jul 5<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/05/checklist-manifesto/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>应该叫『清单宣言』</h2>
-
-<p>在 Amazon 上『满 100 送一本』的活动中随手挑到了它。鉴于其空洞的标题，被束之高阁半年多，最近关注个人管理方面的知识，才拍拍灰尘读起来。</p>
-
-<p>书的英文原名是『The Checklist Manifesto: How to Get Things Right』，直译成『清单宣言』在我看来更贴切，而非充满噱头的『清单革命』。正如一个小功能难以做成独立的产品，一个方法改进也难以成就革命。『清单能大大的改善效率，降低失败概率』这一观点，在医生出生的作者手中翻来覆去的被各种事例证明着，案例的行业背景从医学到建筑，到航天，再到投资，实在乏味。当然，这不妨碍『清单』这一工具对生活工作的助力所带给我们的思考。</p>
-
-<h2>三类问题</h2>
-
-<p>清单作为处理问题的工具，需要从问题的分类谈起。问题大致可分为三类：简单问题、复杂问题和极端复杂的问题。</p>
-
-<ul>
-<li>简单问题，诸如洪培蛋糕，只需要知道流程，就可以独立完成，没有复杂的过程和细节。</li>
-<li>复杂问题，比如火箭发射升空。通过耐心分解，复杂问题能划分成很多的简单问题，进而得到解决。这时候，需要借助集体的力量。</li>
-<li>极端复杂的问题，比如子女的抚养。问题的领域极其宽广和复杂，充满了不确定性，理性的分析难以完全掌控。</li>
-</ul>
-
-
-<p>这三种类型的问题由简单到复杂的梯度递增。</p>
-
-<h2>实践经验：清单</h2>
-
-<p>实践领域的失败分为两种，一种是无知之错，俗话说得好，『不知者无罪』；另一种是无能之错，即按照知识储备，完全能成功解决问题，最终却因为各种原因失败了。随着社会的发展，后者的出现频率越来越高。造成这一现象的原因容易理解，社会复杂度越来越高，各种问题的实施难度加大，远超过个人能力的范围了。这个时候『清单』的重要性凸显了出来。</p>
-
-<p>人脑有一个认知防护网，体现在如下认知缺陷上：</p>
-
-<ul>
-<li>记忆不完整</li>
-<li>注意力不集中</li>
-<li>惰性思维</li>
-</ul>
-
-
-<p>清单能帮助人处理问题：</p>
-
-<ul>
-<li>重压之下，人脑容易忽视某些细节。</li>
-<li>人脑对于熟知的事实，思考时容易跳过一些事项。</li>
-</ul>
-
-
-<p>使用清单时，特别注意需要保证清单的简单、可测、高效。清单是给人用的，基于人脑局限性，复杂和模糊的认知难以帮助事情的发展。</p>
-
-<blockquote><p>清单需要简单、可测、高效</p></blockquote>
-
-<p>当然，清单也有显而易见的缺点：死板。它是一张纸条上的几行文字，不会知道水的冷暖。那么，当意外发生，需要应变的就是执行者本人。生活中，事物总是充满着变化，清单的控制也需要注意及时的应变。</p>
-
-<blockquote><p>制定清单、执行清单的过程，也需要灵活应变。</p></blockquote>
-
-<h2>用清单处理问题</h2>
-
-<ul>
-<li>简单问题： 简单的问题可以通过清单提高效率和成功率。</li>
-<li>复杂问题： 可以拆分为许多的简单问题，分由多人管理和复杂，再辅以清单解决。另外，需要注意人与人之间沟通，这能降低出错的可能性，提高个人效率。</li>
-<li>极端复杂的问题：更多的需要不断的试错、调整。</li>
-</ul>
-
-
-<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/07/05/checklist-manifesto/'>http://biaobiaoqi.github.com/blog/2013/07/05/checklist-manifesto/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -1126,12 +970,12 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
  <br /> 
   <ul class="tag-cloud">
     <a style="font-size: 180%" href="/tags/algorithm/">algorithm</a> &nbsp 
+<a style="font-size: 126%" href="/tags/bytecode/">bytecode</a> &nbsp 
 <a style="font-size: 115%" href="/tags/diary/">diary</a> &nbsp 
 <a style="font-size: 167%" href="/tags/distributed/">distributed</a> &nbsp 
-<a style="font-size: 98%" href="/tags/gui/">gui</a> &nbsp 
 <a style="font-size: 135%" href="/tags/hadoop/">hadoop</a> &nbsp 
-<a style="font-size: 98%" href="/tags/idea/">idea</a> &nbsp 
-<a style="font-size: 115%" href="/tags/java/">java</a> &nbsp 
+<a style="font-size: 149%" href="/tags/java/">java</a> &nbsp 
+<a style="font-size: 126%" href="/tags/jvm/">jvm</a> &nbsp 
 <a style="font-size: 115%" href="/tags/life/">life</a> &nbsp 
 <a style="font-size: 143%" href="/tags/methodology/">methodology</a> &nbsp 
 <a style="font-size: 126%" href="/tags/network/">network</a> &nbsp 
@@ -1148,23 +992,23 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/09/08/three-principles-of-classloader-operation/">类加载器操作三原则[译]</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/09/08/java-class-loading-linking-and-initialising/">Java类的装载、链接和初始化</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/09/08/java-class-loader-in-practice/">Java类加载器编程实践</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/09/07/java-classloader/">Java 类加载器</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/09/06/kongfu-snake-project-summary/">Android小游戏：功夫蛇 团队开发经验总结</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/09/05/google-android-challenge-2011/">Google Android应用开发大赛参赛记</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/09/01/blog-log/">biaobiaoqi的博客日志</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/08/31/octopress-3rd-party-plugin-syncpost/">octopress第三方插件：博文同步工具syncPost</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/08/31/pat-1061-pat-1064/">PAT 1061 - 1064 题解</a>
       </li>
     
   </ul>

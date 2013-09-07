@@ -1,0 +1,765 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: jvm | Biaobiaoqi的博客]]></title>
+  <link href="http://biaobiaoqi.github.com/tags/jvm/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.github.com/"/>
+  <updated>2013-09-08T04:19:37+08:00</updated>
+  <id>http://biaobiaoqi.github.com/</id>
+  <author>
+    <name><![CDATA[Biaobiaoqi]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[类加载器操作三原则[译]]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/09/08/three-principles-of-classloader-operation/"/>
+    <updated>2013-09-08T00:42:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/09/08/three-principles-of-classloader-operation</id>
+    <content type="html"><![CDATA[<p>（出自一本J2EE的教材中关于类加载器的介绍，原文已不知所踪。）</p>
+
+<p>类加载的bug，一旦在编程中遇到很难调试。好消息是，理解类加载的过程中，我们只需要牢记住三条基本原则。如果你能清晰的理解这三条基本原则，所有问题都迎刃而解。下面，我们开始介绍。</p>
+
+<h2>委托原则(Delegation Principle)</h2>
+
+<blockquote><p>如果一个类还没有被加载，类加载器会委托它的父亲加载器去加载它。</p></blockquote>
+
+<p>这种委托会一直延续，直到到达委托层次的最顶层，由原始的类加载器加载完成该类。下图展示了这种情况。</p>
+
+<p><img src="https://dl.dropboxusercontent.com/u/64021093/Java%20Classloader/classloader1.gif" alt="" /></p>
+
+<p>Systm-ClassPath classloader加载了MyApp.MyApp，而这个类创造了一个java.util.Vector。假设现在java.util.Vector还没又被加载。因为System-Classpath classloader加载了MyApp类，它首先请求它的父亲extension classloader来加载这个类（java.util.Vector）。而extension classloader又请求Bootstrap classloader尝试加载。因为java.util.Vector是J2SE类，bootstrap classloader成功加载了它。</p>
+
+<!--more-->
+
+
+<p>考虑一个当略微不同的情况，如下图。</p>
+
+<p><img src="https://dl.dropboxusercontent.com/u/64021093/Java%20Classloader/classloader2.gif" alt="" /></p>
+
+<p>在这种情况中，MyApp创造了一个新的用户自定义类的实例，MyClass。假设MyClass还没有被加载。像以往一样，当System-Classpath classloader接收到这个加载请求，它委托了它的父亲。最终这个委托传递到了Bootstrap classloader。但是在java 核心API里，找不到这个类。所以它的孩子加载器Extensions classloader尝试加载它。同样的，Extensions classloader也没有找到它。最终，委托请求回到了System-Classpath classloader这里。它找到了这个类并加载成功。</p>
+
+<h2>可见性原则（Visibility principle）</h2>
+
+<blockquote><p>被父亲类加载器加载的类对于孩子加载器是可见的，但关系相反相反则不可见。</p></blockquote>
+
+<p>这说明，一个类只能看见它自己的加载器或者这个加载器的父类加载器加载的类，反过来是不可以的。比如，被ClassX的父亲加载器加载的类是不能看见ClassX的。为了更清楚的理解，让我们来看一个例子，如下图。</p>
+
+<p><img src="https://dl.dropboxusercontent.com/u/64021093/Java%20Classloader/classloader3.gif" alt="" /></p>
+
+<p>图中展示了四个类加载器。类加载器A是最顶层的加载器，B是它的孩子。类加载器X和Y是B的孩子。他们各自都加载了与自己同名的类。类加载器A能看见A类，类加载器B能看见A，B类。类似的，X能看见A，B，X，Y能看见A，B，Y。但兄弟、Y之间的类是不可见的。</p>
+
+<h2>独特性原则（Uniqueness Principle）</h2>
+
+<blockquote><p>当一个类加载器加载一个类时，它的孩子加载器绝不会重新加载这个类。</p></blockquote>
+
+<p>这是因为委托原则中，一个加载器总是会委托自己的父亲加载器加载类。当层次中的父亲加载器无法加载类的时候，孩子类加载器就会（或者尝试去）加载这个类。这样，类加载的独特性就得到了保障。当父亲和孩子加载器加载了同一个类，一个有趣的情况就出现了。你可能会想这怎么可能出现？这不是违反了独特性原则？</p>
+
+<p>我们用可见性原则中的示例图来解释这个问题。我们假设没有任何类被加载到这些类加载器的层次结构中。假设X类被类加载器X加载，它强制性的用类加载器X加载B类。这可以通过像Class.Name()这样的API来实现，代码如下：</p>
+
+<p>```java
+ public class X {</p>
+
+<p>   public X() {</p>
+
+<pre><code>  ClassLoader cl = this.getClass().getClassLoader();
+  Class B = Class.forName(“B”, true, cl);
+</code></pre>
+
+<p>   }
+}</p>
+
+<p>```</p>
+
+<p>在X的构造函数中，B被显示的使用类加载器X加载。如果另一个被类加载器B加载的类需要访问B类，则无法实现，因为委托原则只能向父亲方向查询。如果类加载器B也加载了B类，当比较两个B类的实例时，如果一个实例来自于类加载器X，一个来自于类加载器B，则会抛出ClassCastException异常。</p>
+
+<h2>总结</h2>
+
+<p>这三个原则 是解决程序中遇到的类加载问题的关键所在。在实际的编程中，并不需要显示的调用到类加载器，它主要出现在一些框架的代码中。但对于每一个开发者、架构师而言，都必须理解类加载的层次结构，这样才能写出优雅的代码。</p>
+
+<h3>PS</h3>
+
+<p>注意，虽然java的加载实现中，对于bootstrap classloader 、extensions classloader 和 system classloader来说，他们的关系是parent-first，也就是像原则一中所说的那样，需要向上委托，但用户自定义的classloader完全可以跳出这个圈子，自己实现parent-lastclassloader。比如Websphere中就有相关配置。</p>
+
+<p>更具体的类加载器编程实例，请见另外一篇博文：<a href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loader-in-practice/">《Java类加载器编程实践》</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Java类的装载、链接和初始化]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/09/08/java-class-loading-linking-and-initialising/"/>
+    <updated>2013-09-08T00:33:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/09/08/java-class-loading-linking-and-initialising</id>
+    <content type="html"><![CDATA[<h2>加载(Loading)</h2>
+
+<p>按如下三步执行</p>
+
+<ul>
+<li>1.通过类的全名产生对应类的二进制数据流。（注意，如果没找到对应类文件，只有在类实际使用时才抛出错误。）</li>
+<li>2.分析并将这些二进制数据流转换为方法区(JVM的架构：方法区、堆，栈，本地方法栈，pc寄存器)特定的数据结构（这些数据结构是实现有关的，不同JVM有不同实现）。这里处理了部分检验，比如类文件的魔数的验证，检查文件是否过长或者过短，确定是否有父类（除了Obecjt类）。</li>
+<li>3.创建对应类的 java.lang.Class 实例（注意，有了对应的Class实例，并不意味着这个类已经完成了加载链链接！）。</li>
+</ul>
+
+
+<h2>链接(Linking)</h2>
+
+<p>链接的过程比加载过成复杂不少，这是实现Java的动态性的重要一步。分为三部分：验证，准备和解析。</p>
+
+<ul>
+<li><p>1.验证（verification）</p>
+
+<p>  链接的第三部解析会把类中成员方法、成员变量、类和接口的符号引用替换为直接引用，而在这之前，需要检测被引用的类型正确性和接入属性是否正确（就是public ,private的的问题），诸如检查final class 又没有被继承，检查静态变量的正确性等等。（注意到实际上有一部分验证过程已经在加载的过程中执行了。）</p></li>
+</ul>
+
+
+<!--more-->
+
+
+<ul>
+<li><p>2.准备(preparation)</p>
+
+<p>  对类的成员变量分配空间。虽然有初始值，但这个时候不会对他们进行初始化（因为这里不会执行任何Java代码）。具体如下：</p>
+
+<p>  所有原始类型的值都为0。如float: 0f, int: 0, boolean: 0(注意boolean底层实现大多使用int)，引用类型则为 null。值得注意的是，JVM可能会在这个时期给一些有助于程序运行效率提高的数据结构分配空间。比如方发表（类似与C++中的虚函数表，参见另一篇博文<a href="http://biaobiaoqi.me/blog/2013/09/08/virtual-dispatch-and-method-table-in-java/">《Java：方法的虚分派和方法表》</a>）。</p></li>
+<li><p>3.解析(Resolution)</p>
+
+<p>  为类、接口、方法、成员变量的符号引用定位直接引用（如果符号引用先到常量池中寻找符号，再找先应的类型，无疑会耗费更多时间），完成内存结构的布局。</p>
+
+<p>  这一步是可选的。可以在符号引用第一次被使用时完成，即所谓的延迟解析(late resolution)。但对用户而言，这一步永远是延迟解析的，即使运行时会执行early resolution，但程序不会显示的在第一次判断出错误时抛出错误，而会在对应的类第一次主动使用的时候抛出错误！</p>
+
+<p>  另外，这一步与之后的类初始化是不冲突的，并非一定要所有的解析结束以后才执行类的初始化。不同的JVM实现不同。详情见另一篇博文<a href="http://localhost:4000/blog/2013/09/08/late-initialising-in-java/">《Java类加载的延迟初始化》</a>。</p></li>
+</ul>
+
+
+<h2>初始化类(Initialization)</h2>
+
+<p>开发Java时，接触最多的是对象的初始化。实际上类也是有初始化的。相比对象初始化（参见博文<a href="http://localhost:4000/blog/2013/09/08/initliate-objects-in-java/">Java类的实例化</a>），类的初始化机制要简单不少。</p>
+
+<p>类的初始化也是延迟的，直到类第一次被主动使用(active use)，JVM才会初始化类。（参见博文<a href="http://localhost:4000/blog/2013/09/08/late-initialising-in-java/">《Java类加载的延迟初始化》</a>）</p>
+
+<p>类的初始化分两步：</p>
+
+<ul>
+<li>1.如果基类没有被初始化，初始化基类。</li>
+<li><p>2.有类构造函数，则执行类构造函数。</p>
+
+<p>  类构造函数是由Java编译器完成的。它把类成员变量的初始化和static区间的代码提取出，放到一个<clinit>的方法中。这个方法不能被一般的方法访问（注意，static final 成员变量不会在此执行初始化，它一般被编译器生成constant值）。同时，<clinit>中是不会显示的调用基类的<clinit>的，因为1中已经执行了基类的初始化。类的初始化还必须注意线程安全的问题。</p></li>
+</ul>
+
+
+<h3>PS：</h3>
+
+<p>为什么接口不能定义成员变量，而只能定义final static 变量。</p>
+
+<ul>
+<li>1.接口是不可实例化，它的所有元素都不必是实例（对象）层面的。static满足了这一点。</li>
+<li>2.如果接口的变量能被修改，那么一旦一个子类实现了这个接口，并修改了接口中的非final变量，而该子类的子类再次修改这个非final的变量后，造成的结果就是虽然实现了相同的接口，但接口中的变量值是不一样的。</li>
+</ul>
+
+
+<p>综上述，static final更适合于接口。</p>
+
+<p>参考：<a href="http://blog.csdn.net/a352193394/article/details/6844941">《通过类字面常量解释接口常量为什么只能定义为static final,类加载过程---Thinking in java》</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Java类加载器编程实践]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/09/08/java-class-loader-in-practice/"/>
+    <updated>2013-09-08T00:33:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/09/08/java-class-loader-in-practice</id>
+    <content type="html"><![CDATA[<p>文本通过实现自定义类加载器，实践Java类加载的流程。</p>
+
+<p>阅读此文前，需要了解Java类加载的基本原理，参见如下两篇博文：</p>
+
+<ul>
+<li><a href="http://biaobiaoqi.me/blog/2013/09/07/java-classloader/">《Java类加载器浅析》</a></li>
+<li><a href="http://biaobiaoqi.me/blog/2013/09/08/three-principles-of-classloader-operation/">《Java类加载器三原则》</a></li>
+</ul>
+
+
+<p>以上博文中所提及的Java类加载机制，都是Java1.2及以后的版本，而在最早的Java1.1中类加载器是没有父子关系的模式的。这里将分别对Java1.1和Java1.2及以后的类加载版本进行展示。</p>
+
+<h2>Java1.1中的实现</h2>
+
+<h3>原理介绍</h3>
+
+<p>Java1.1的类加载机制相对单一，用户自定义加载器的重写比较复杂。</p>
+
+<p>主要需要重写加载器中的Class loadClass(String name)方法。</p>
+
+<p>Class loadClass(String name)或loadClass(String name , boolean resolve)方法是加载的核心。它根据类的全名（比如String类的全名是java.lang.String）获得对应类的二进制数据，然后通过Class defineClass(byte[] b) 将二进制数据加载到JVM的方法区，并返回对应类的Class实例，然后根据可选的参数resolve决定是否需要现在解析这个类。最后将这个Class实例作为loadClass方法的返回值。</p>
+
+<p>如果无法加载和defineClass，即无法通过本加载器直接加载类的情况，则使用Class findSystemClass(String name) 将类加载任务委派给系统类加载器查找。如果能找到则加载，否则抛出ClassNotFoundException异常。</p>
+
+<h3>编程实例</h3>
+
+<p>以下用实例来展示这一过程：</p>
+
+<!--more-->
+
+
+<p>类CompilingClassLoader是一个自定义加载器，它能直接读取Java源文件实现类加载。CLL类的main方法为程序入口，通过ComplilingClassLoader加载一个Foo类，使用反射机制调用Foo类的main方法。</p>
+
+<p>CompilingClassLoader.java</p>
+
+<p>```java</p>
+
+<p>import java.io.*;</p>
+
+<p>/*</p>
+
+<p>A CompilingClassLoader compiles your Java source on-the-fly.  It
+checks for nonexistent .class files, or .class files that are older
+than their corresponding source code.</p>
+
+<p>*/</p>
+
+<p>public class CompilingClassLoader extends ClassLoader<br/>
+{<br/>
+  // Given a filename, read the entirety of that file from disk<br/>
+  // and return it as a byte array.<br/>
+  private byte[] getBytes( String filename ) throws IOException {</p>
+
+<pre><code>// Find out the length of the file  
+File file = new File( filename );  
+long len = file.length();  
+
+// Create an array that's just the right size for the file's  
+// contents  
+byte raw[] = new byte[(int)len];  
+
+// Open the file  
+FileInputStream fin = new FileInputStream( file );  
+
+// Read all of it into the array; if we don't get all,  
+// then it's an error.  
+int r = fin.read( raw );  
+if (r != len)  
+  throw new IOException( "Can't read all, "+r+" != "+len );  
+
+// Don't forget to close the file!  
+fin.close();  
+
+// And finally return the file contents as an array  
+return raw;  
+</code></pre>
+
+<p>  }</p>
+
+<p>  // Spawn a process to compile the java source code file<br/>
+  // specified in the 'javaFile' parameter.  Return a true if<br/>
+  // the compilation worked, false otherwise.<br/>
+  private boolean compile( String javaFile ) throws IOException {</p>
+
+<pre><code>// Let the user know what's going on  
+System.out.println( "CCL: Compiling "+javaFile+"..." );  
+
+// Start up the compiler  
+Process p = Runtime.getRuntime().exec( "javac "+javaFile );  
+
+// Wait for it to finish running  
+try {  
+  p.waitFor();  
+} catch( InterruptedException ie ) { System.out.println( ie ); }  
+
+// Check the return code, in case of a compilation error  
+int ret = p.exitValue();  
+
+// Tell whether the compilation worked  
+return ret==0;  
+</code></pre>
+
+<p>  }</p>
+
+<p>  // The heart of the ClassLoader -- automatically compile<br/>
+  // source as necessary when looking for class files<br/>
+  public Class loadClass( String name, boolean resolve )</p>
+
+<pre><code>  throws ClassNotFoundException {  
+
+// Our goal is to get a Class object  
+Class clas = null;  
+
+// First, see if we've already dealt with this one  
+clas = findLoadedClass( name );  
+
+//System.out.println( "findLoadedClass: "+clas );  
+
+// Create a pathname from the class name  
+// E.g. java.lang.Object =&gt; java/lang/Object  
+String fileStub = name.replace( '.', '/' );  
+
+// Build objects pointing to the source code (.java) and object  
+// code (.class)  
+String javaFilename = fileStub+".java";  
+String classFilename = fileStub+".class";  
+
+File javaFile = new File( javaFilename );  
+File classFile = new File( classFilename );  
+
+//System.out.println( "j "+javaFile.lastModified()+" c "+  
+//  classFile.lastModified() );  
+
+// First, see if we want to try compiling.  We do if (a) there  
+// is source code, and either (b0) there is no object code,  
+// or (b1) there is object code, but it's older than the source  
+if (javaFile.exists() &amp;&amp;  
+     (!classFile.exists() ||  
+      javaFile.lastModified() &gt; classFile.lastModified())) {  
+
+  try {  
+    // Try to compile it.  If this doesn't work, then  
+    // we must declare failure.  (It's not good enough to use  
+    // and already-existing, but out-of-date, classfile)  
+    if (!compile( javaFilename ) || !classFile.exists()) {  
+      throw new ClassNotFoundException( "Compile failed: "+javaFilename );  
+    }  
+  } catch( IOException ie ) {  
+
+    // Another place where we might come to if we fail  
+    // to compile  
+    throw new ClassNotFoundException( ie.toString() );  
+  }  
+}  
+
+// Let's try to load up the raw bytes, assuming they were  
+// properly compiled, or didn't need to be compiled  
+try {  
+
+  // read the bytes  
+  byte raw[] = getBytes( classFilename );  
+
+  // try to turn them into a class  
+  clas = defineClass( name, raw, 0, raw.length );  
+} catch( IOException ie ) {  
+  // This is not a failure!  If we reach here, it might  
+  // mean that we are dealing with a class in a library,  
+  // such as java.lang.Object  
+}  
+
+//System.out.println( "defineClass: "+clas );  
+
+// Maybe the class is in a library -- try loading  
+// the normal way  
+if (clas==null) {  
+  clas = findSystemClass( name );  
+}  
+
+//System.out.println( "findSystemClass: "+clas );  
+
+// Resolve the class, if any, but only if the "resolve"  
+// flag is set to true  
+if (resolve &amp;&amp; clas != null)  
+  resolveClass( clas );  
+
+// If we still don't have a class, it's an error  
+if (clas == null)  
+  throw new ClassNotFoundException( name );  
+
+// Otherwise, return the class  
+return clas;  
+</code></pre>
+
+<p>  }<br/>
+}
+```</p>
+
+<p>CCLRun.java</p>
+
+<p>```java<br/>
+/*</p>
+
+<p>CCLRun executes a Java program by loading it through a
+CompilingClassLoader.</p>
+
+<p>*/</p>
+
+<p>public class CCLRun<br/>
+{<br/>
+  static public void main( String args[] ) throws Exception {</p>
+
+<pre><code>// The first argument is the Java program (class) the user  
+// wants to run  
+String progClass = args[0];  
+
+// And the arguments to that program are just  
+// arguments 1..n, so separate those out into  
+// their own array  
+String progArgs[] = new String[args.length-1];  
+System.arraycopy( args, 1, progArgs, 0, progArgs.length );  
+
+// Create a CompilingClassLoader  
+CompilingClassLoader ccl = new CompilingClassLoader();  
+
+// Load the main class through our CCL  
+Class clas = ccl.loadClass( progClass );  
+
+// Use reflection to call its main() method, and to  
+// pass the arguments in.  
+
+// Get a class representing the type of the main method's argument  
+Class mainArgType[] = { (new String[0]).getClass() };  
+
+// Find the standard main method in the class  
+Method main = clas.getMethod( "main", mainArgType );  
+
+// Create a list containing the arguments -- in this case,  
+// an array of strings  
+Object argsArray[] = { progArgs };  
+
+// Call the method  
+main.invoke( null, argsArray );  
+</code></pre>
+
+<p>  }<br/>
+}</p>
+
+<p>```</p>
+
+<p>Foo.java
+```java
+public class Foo<br/>
+{<br/>
+  static public void main( String args[] ) throws Exception {</p>
+
+<pre><code>System.out.println( "foo! "+args[0]+" "+args[1] );  
+</code></pre>
+
+<p>  }<br/>
+}<br/>
+```</p>
+
+<p>执行CLL类，命令行传入Foo的类名。执行结果如下：
+<code>
+CCL: Compiling Foo.java...  
+foo! arg1 arg2  
+</code></p>
+
+<p>具体参见资料：<a href="http://www.ibm.com/developerworks/java/tutorials/j-classloader/index.html">IBM DeveloperWorks ： Understanding the Java ClassLoader</a>， 这是一篇2001年的文章，是早年Java1.1的实现方式。如今的Java已经变得更加人性化，多功能化，鲁棒性也更强了。</p>
+
+<h2>Java1.2以后的实现</h2>
+
+<h3>原理介绍</h3>
+
+<p>Java1.2以后，类加载器实现了parent-child模型，能更好的控制安全性方面的问题。</p>
+
+<p>由于loadClass()方法中包含了parent-child的责任链模式逻辑，自定义类加载的自定义部分用策略模式从loadClass()方法中剥离到了findClass()中。对应的有一个findLoadedClass()，这个方法用来实现查找当前加载器是否有加载该某类。</p>
+
+<p>loadClass()：加载一个类时，先调findLoadedClass()，如果没有找到，则调用父亲加载器的加载方法。如果父亲找到了该类，就返回Class实例，没有找到，则父亲加载器会抛出一个异常，捕捉到这个异常后，儿子加载器会自己调用findClass()尝试实现对类的加载。如果依然没有成功加载，则再向外抛出一个异常。通过向父亲加载器迭代实现了parent-first的委托关系。</p>
+
+<p>类加载的流程如图：这里显示了一个类未能成功加载所要经历的流程。（来自<a href="http://stackoverflow.com/questions/3544614/how-is-the-control-flow-to-findclass-of">stackoverflow:how-is-the-control-flow-to-findclass-of</a>）</p>
+
+<p>```</p>
+
+<pre><code>  A.loadClass()  
+       |  
+   (not-found?) (by findLoadedClass)  
+       |  
+  B.loadClass()  
+       |  
+   (not found?) (by findLoadedClass)  
+       |  
+</code></pre>
+
+<p>systemclassloader.loadClass  (Bs parent, also can be</p>
+
+<pre><code>       |                  called classpath classloader)  
+       |  
+   (not found?) (by findLoadedClass)  
+       |  
+</code></pre>
+
+<p>bootstrap classloader.loadClass (the bootstrap classloader,</p>
+
+<pre><code>       |                   (this has no parent)  
+       |  
+   (not found?)  
+       |  
+</code></pre>
+
+<p>systemclassloader.findClass  (on system classloader,</p>
+
+<pre><code>       |                   will try to "find" class in "classpath")  
+       |  
+   (not found?) ClassNotFoundException  
+       |  
+   B.findClass  
+       |  
+   (not found?) ClassNotFoundException  
+       |  
+   A.findClass  
+       |  
+    (not found?)  
+       |  
+</code></pre>
+
+<p>   ClassNotFoundException<br/>
+```</p>
+
+<p>注意，对于扩展类加载器，通过getParent()方法返回的父亲加载器是null，因为引导类加载器是本地实现的，并非Java实现。那么如何从扩展类加载器向上回溯呢？答案如下：</p>
+
+<p>```java
+try {</p>
+
+<pre><code>if (parent != null) {  
+   c = parent.loadClass(name, false);  
+} else {  
+   c = findBootstrapClassOrNull(name);  
+}  
+</code></pre>
+
+<p>} catch (ClassNotFoundException e) {<br/>
+   // ClassNotFoundException thrown if class not found</p>
+
+<pre><code> // from the non-null parent class loader  
+</code></pre>
+
+<p>}
+```
+这是类加载器的源代码，对于父加载器为null的情况，会直接调用findBootstrapClassOrNull()方法尝试用引导类加载器加载。通过源代码，能够很好的理解这里的parent-child模型了。</p>
+
+<p>另注意，对于基于parent-child模型的类加载器实现，都需要定义一个以parent类加载器作为参数的构造函数，以指定父加载器。如果直接调用没有参数的构造函数，则默认制定的是systemclassloader作为parent。</p>
+
+<h3>编程实例</h3>
+
+<p>下面的例子是我用来实现动态分析Java类关系的加载器代码。</p>
+
+<p>具体逻辑是：调用ASM开源库的API，在加载器加载类时，修改类文件中的字节码，插入相应的字节码语句，让对象在创建或执行相应指令时，在log文件中记录自己的行为。</p>
+
+<p>在编码的过程中，我遇到的一个错误：将需要使用自定义加载器加载的类文件直接放在了eclipse工程中的bin目录下。而这个目录是可以通过系统类加载器找到路径并加载的。根据parent-first的实现，这些类直接被系统类加载器加载了，也就绕过了自定义加载器的处理机制。修改过路径以后没有出现相应问题了。</p>
+
+<p>ASMClassLoader.java
+```java
+package biaobiaoqi.classLoader;<br/>
+import java.io.*;</p>
+
+<p>import org.objectweb.asm.ClassReader;<br/>
+import org.objectweb.asm.ClassWriter;</p>
+
+<p>import biaobiaoqi.asm.*;</p>
+
+<p>public class ASMClassLoader extends ClassLoader<br/>
+{</p>
+
+<pre><code>String basePath ;  
+
+/**reference to System Classloader as the parent class loader 
+ * @param path &lt;br&gt; the path of .class files will be loaded 
+ */  
+public ASMClassLoader(String path){  
+    basePath = path ;  
+}  
+
+/** 
+ * reference to parent as it's parent classloader 
+ * @param path 
+ * @param parent 
+ */  
+public ASMClassLoader(String path , ClassLoader parent){  
+    super(parent);  
+    basePath = path ;  
+}  
+
+@Override  
+public Class findClass(String name) throws ClassNotFoundException{  
+    System.out.println("findClass");  
+    byte[] raw;  
+    try {  
+        raw = getBytesFromBasePath( name );  
+    } catch (IOException e) {  
+        e.printStackTrace();  
+        throw new ClassNotFoundException();  
+    }  
+
+    byte[] transformed = instrumentBtyeCode(raw);  
+    /* 
+    try{ 
+        FileOutputStream file = new FileOutputStream( "/home/biaobiaoqi/" +name.replace( '.', '/' )+".class"); 
+        file.write( transformed); 
+        file.close(); 
+    } 
+    catch (IOException e) { 
+        e.printStackTrace(); 
+    } 
+    */  
+    if (transformed == null){  
+        throw new ClassNotFoundException();  
+    }  
+
+
+    return defineClass(name, transformed, 0, transformed.length );  
+}  
+
+private byte[] getBytesFromBasePath( String className ) throws IOException ,ClassNotFoundException{  
+    String fileStub = className.replace( '.', '/' );  
+    String classFileName = basePath +fileStub+".class";  
+    File file = new File( classFileName );  
+
+    long len = file.length();  
+    byte raw[] = new byte[(int)len];  
+    FileInputStream fin = new FileInputStream( file );  
+
+    int r = fin.read( raw );  
+    if (r != len)  
+        throw new IOException( "Can't read all, "+r+" != "+len );  
+
+    fin.close();  
+    return raw;  
+}  
+
+private byte[] instrumentBtyeCode(byte[] raw){  
+    ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);  
+    ASMClassAdapter mca = new ASMClassAdapter(cw);   
+    ClassReader cr = new ClassReader(raw);  
+    cr.accept(mca, 0);  
+    return cw.toByteArray();  
+}     
+
+@Override  
+public Class loadClass( String name, boolean resolve )  
+    throws ClassNotFoundException {  
+    System.out.println("loadClass_resolve");  
+      return super.loadClass(name ,resolve);  
+}  
+
+
+@Override  
+public Class loadClass( String name )  
+    throws ClassNotFoundException {  
+    System.out.println("loadClass");  
+      return super.loadClass(name );  
+}  
+</code></pre>
+
+<p>}
+```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Java 类加载器]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/09/07/java-classloader/"/>
+    <updated>2013-09-07T23:15:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/09/07/java-classloader</id>
+    <content type="html"><![CDATA[<h2>背景知识</h2>
+
+<p>Java平台无关的特性是由JVM(Java 虚拟机)支撑的。不同平台有不同的JVM支持。</p>
+
+<p>计算机领域有这么一句话：</p>
+
+<blockquote><p>计算机科学领域的任何问题都可以通过增加一个间接的中间层来解决。</p></blockquote>
+
+<p>JVM其实也可以看做是运行的Java程序和实际的硬件架构之间的一个新抽象层。</p>
+
+<p>一个Java程序从编写到执行的流程一句话概括如下：首先将Java源代码（*.java文件）编译成字节码（*.class文件，字节码之于Java源码，类比于汇编代码之于C源码），然后由JVM运行那些字节码文件。</p>
+
+<p>JVM工作原理如下图</p>
+
+<p><img src="https://dl.dropboxusercontent.com/u/64021093/Java%20Classloader/JVM%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86.gif" alt="JVM framework" /></p>
+
+<p>Java中所有的类文件都需要由类加载器（Class Loader）装载到JVM中。可以简单的将JVM理解为一个工厂，类文件就是等待加工的原料，加载器则是装载货物的工人。Java类被装载之后，才能进入到JVM的运行时机制中，开始运行。</p>
+
+<h2>类加载器的作用</h2>
+
+<p>顾名思义，Java类加载器的作用是向JVM中装载类。</p>
+
+<p>这种动态装载的技术是Java的一种创新，让类能够动态加载到JVM中执行（更详细的介绍参见 <a href="http://www.ibm.com/developerworks/java/library/j-dyn0429/">Java programming dynamics, Part 1: Java classes and class loading</a>）。</p>
+
+<!--more-->
+
+
+<p>而它的意义远非仅仅是加载类这么简单。实际上，类加载器对Java的沙箱模型具有重大意义。他和安全管理模块（负责对类文件中的字节码进行校验，防止恶意代码的攻击）一起保证了JVM运行的安全性。</p>
+
+<h2>类加载机制</h2>
+
+<p>大体上，每个Java应用使用了如下几种类型的类加载器:</p>
+
+<ul>
+<li><p>1.引导类加载器（bootstrap class loader）</p>
+
+<p>  它由C++编写（注意，它非常特殊，并非Java中的ClassLoader类的子类）。当JVM启动时，引导类加载器也随之启动，它负责加载Java 核心类，如JRE的rt.jar、charsets.jar等。从Java1.2开始，它只加载Java核心API部分。</p>
+
+<p>  因为这些类是系统信任的类，所以这里的装载，跳过了很多对字节码的验证过程。</p></li>
+<li><p>2.扩展类加载器（extension class loader）</p>
+
+<p> 它负责加载/lib/ext中的java扩展类。</p></li>
+<li><p>3.系统类加载器（System Class Loader）</p>
+
+<p>这是很重要的一个加载器，加载Java的路径classpath下的类。应用程序的装载默认由它负责。</p></li>
+<li><p>4.自定义类加载器</p>
+
+<p> 由系统类加载器继承得到。它的存在让我们能定制出各种不同功能的加载器，增加了Java的可扩展性。自定义的类加载器如果没有显示的继承关系，则其父类默认为系统类加载器。</p></li>
+</ul>
+
+
+<p>一个JVM，只拥有一个引导类加载器，同时可以拥有多个自定义类加载器，方便不同应用环境的用户定制。比如，自定义类加载器能够动态的修改字节码，让它能接收并加载从网上传来的类文件或Jar包，甚至是任何编码方式的压缩包。只要自定义类加载器能够正确识别并调用相应方法来实现类的加载和解析，一切都有可能。</p>
+
+<p>四种加载器不是四个独立的部分，他们之间具有一种特殊的父子关系，每个类加载器都保持着他们的父加载器的应用，共同组成了一条父子关系链，被称作 parent-delegation模式。如下图</p>
+
+<p><img src="https://dl.dropboxusercontent.com/u/64021093/Java%20Classloader/java%20classloader%20hierachy.gif" alt="class loader hirerachy" /></p>
+
+<p>类加载器按照如此树形排列。类加载的查找顺序是：</p>
+
+<p>cache --> parent --> self</p>
+
+<p>子类加载器需要加载某个类时，并不是直接加载，而是首先查看cache（cache可以理解为加载器已经加载过的类的记录）。如果没有，则向父加载器提出请求，查看是否存在于父加载器的cache中。如此往上，直到根部的引导类加载器。如果引导类加载器的cache也没有这个类，则它尝试直接加载这个类，如果无法成功，则请求儿子加载器加载，依次往下。</p>
+
+<p>直接接受程序请求加载某类的加载器被称作初始类加载器（Initiating class loader），而最终加载了该类的加载器则成为定义类加载器（defining class loader）。</p>
+
+<p>类加载器的<code>getParent()</code>方法可以获得加载器的父亲。下面的代码用于输出各个层级的类加载器。</p>
+
+<p>```java</p>
+
+<p>public class ClassLoaderTest {</p>
+
+<pre><code>public static void main(String[] args) {    
+    ClassLoader loader = Thread.currentThread().getContextClassLoader();    
+    System.out.println("current loader:"+loader);    
+    System.out.println("parent loader:"+loader.getParent());    
+    System.out.println("grandparent loader:"+loader.getParent().getParent());    
+}    
+</code></pre>
+
+<p>}</p>
+
+<p>```</p>
+
+<p>显示的结果是</p>
+
+<p>```
+current loader:sun.misc.Launcher$AppClassLoader@1c78e57
+parent loader:sun.misc.Launcher$ExtClassLoader@5224ee
+grandparent loader:null</p>
+
+<p>```</p>
+
+<p>grandparent显示的值是null，并不意味着他没有parent，而是因为它是由C++编写的引导类加载器。他并不是ClassLoader类的子类，也就无法使用getParent()方法获得返回了。</p>
+
+<p>如此，parent class loader总是拥有更高的加载优先级，这让想利用自定义加载器伪装加载某些重要类的恶意代码无法得逞。如果好奇，你可以尝试自己写package java.lang里的String类，加载执行试试～
+另外，当类A调用另类B时，B会由加载A的class loader加载，从而实现。</p>
+
+<h2>加载类的流程</h2>
+
+<p>类的装载大致可以分为三个步骤（如下图）：</p>
+
+<ul>
+<li>1.装载(loading)</li>
+<li>2.链接(linking)</li>
+<li>3.初始化(initialising)</li>
+</ul>
+
+
+<p><img src="https://dl.dropboxusercontent.com/u/64021093/Java%20Classloader/ClassLoaderProcess.gif" alt="class loader process" /></p>
+
+<p>跟C++或者C程序有很大的不同，编译过后的类文件中的字节码并没有设计好内存布局，这些需要等到加载之后的链接阶段，才会完成。这也是java可移植性中精彩的一笔！</p>
+
+<p>关于类的加载、链接和初始化，请参见另一篇博文：<a href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loading-linking-and-initialising/">《Java类的装载、链接和初始化》</a></p>
+
+<p>关于类加载器的编程实践，请参见另一篇博文：<a href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loader-in-practice/">《Java类加载器编程实践》</a></p>
+]]></content>
+  </entry>
+  
+</feed>

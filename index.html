@@ -9,8 +9,7 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="前言 曾经没有代码管理的习惯，不用回版本控制工具。这种陋习虽然让原来千穿百孔的代码远离了实现，但这种逃避未必就是一件好事吧;)。
-于是从博客中挖出了原来的文章，并千辛万苦找到了最早的代码贴出来。 这篇文章是参加 Google 的 Android 应用开发大赛时，写的总结帖。 &hellip;">
+  <meta name="description" content="（出自一本 J2EE 的教材中关于类加载器的介绍，原文已不知所踪。） 类加载的 bug，一旦在编程中遇到很难调试。好消息是，理解类加载的过程中，我们只需要牢记住三条基本原则。如果你能清晰的理解这三条基本原则，所有问题都迎刃而解。下面，我们开始介绍。 委托原则(Delegation &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -107,6 +106,258 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/09/08/three-principles-of-classloader-operation/">类加载器操作三原则[译]</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-08T00:42:00+08:00" pubdate data-updated="true">Sep 8<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/09/08/three-principles-of-classloader-operation/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>（出自一本 J2EE 的教材中关于类加载器的介绍，原文已不知所踪。）</p>
+
+<p>类加载的 bug，一旦在编程中遇到很难调试。好消息是，理解类加载的过程中，我们只需要牢记住三条基本原则。如果你能清晰的理解这三条基本原则，所有问题都迎刃而解。下面，我们开始介绍。</p>
+
+<h2>委托原则(Delegation Principle)</h2>
+
+<blockquote><p>如果一个类还没有被加载，类加载器会委托它的父亲加载器去加载它。</p></blockquote>
+
+<p>这种委托会一直延续，直到到达委托层次的最顶层，由原始的类加载器加载完成该类。下图展示了这种情况。</p>
+
+<p><img src="https://dl.dropboxusercontent.com/u/64021093/Java%20Classloader/classloader1.gif" alt="" /></p>
+
+<p>Systm-ClassPath classloader 加载了 MyApp.MyApp，而这个类创造了一个 java.util.Vector。假设现在 java.util.Vector 还没又被加载。因为 System-Classpath classloader 加载了 MyApp 类，它首先请求它的父亲 extension classloader 来加载这个类（java.util.Vector）。而 extension classloader 又请求 Bootstrap classloader 尝试加载。因为 java.util.Vector 是 J2SE 类，bootstrap classloader 成功加载了它。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/09/08/three-principles-of-classloader-operation/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/09/08/java-class-loading-linking-and-initialising/">Java类的装载、链接和初始化</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-08T00:33:00+08:00" pubdate data-updated="true">Sep 8<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/09/08/java-class-loading-linking-and-initialising/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>加载(Loading)</h2>
+
+<p>按如下三步执行</p>
+
+<ul>
+<li>1.通过类的全名产生对应类的二进制数据流。（注意，如果没找到对应类文件，只有在类实际使用时才抛出错误。）</li>
+<li>2.分析并将这些二进制数据流转换为方法区(JVM 的架构：方法区、堆，栈，本地方法栈，pc 寄存器)特定的数据结构（这些数据结构是实现有关的，不同 JVM 有不同实现）。这里处理了部分检验，比如类文件的魔数的验证，检查文件是否过长或者过短，确定是否有父类（除了 Obecjt 类）。</li>
+<li>3.创建对应类的 java.lang.Class 实例（注意，有了对应的 Class 实例，并不意味着这个类已经完成了加载链链接！）。</li>
+</ul>
+
+
+<h2>链接(Linking)</h2>
+
+<p>链接的过程比加载过成复杂不少，这是实现 Java 的动态性的重要一步。分为三部分：验证，准备和解析。</p>
+
+<ul>
+<li><p>1.验证（verification）</p>
+
+<p>  链接的第三部解析会把类中成员方法、成员变量、类和接口的符号引用替换为直接引用，而在这之前，需要检测被引用的类型正确性和接入属性是否正确（就是 public ,private 的的问题），诸如检查 final class 又没有被继承，检查静态变量的正确性等等。（注意到实际上有一部分验证过程已经在加载的过程中执行了。）</p></li>
+</ul>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/09/08/java-class-loading-linking-and-initialising/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/09/08/java-class-loader-in-practice/">Java类加载器编程实践</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-08T00:33:00+08:00" pubdate data-updated="true">Sep 8<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/09/08/java-class-loader-in-practice/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>文本通过实现自定义类加载器，实践 Java 类加载的流程。</p>
+
+<p>阅读此文前，需要了解 Java 类加载的基本原理，参见如下两篇博文：</p>
+
+<ul>
+<li><a href="http://biaobiaoqi.me/blog/2013/09/07/java-classloader/">《Java 类加载器浅析》</a></li>
+<li><a href="http://biaobiaoqi.me/blog/2013/09/08/three-principles-of-classloader-operation/">《Java 类加载器三原则》</a></li>
+</ul>
+
+
+<p>以上博文中所提及的 Java 类加载机制，都是 Java1.2 及以后的版本，而在最早的 Java1.1 中类加载器是没有父子关系的模式的。这里将分别对 Java1.1 和 Java1.2 及以后的类加载版本进行展示。</p>
+
+<h2>Java1.1 中的实现</h2>
+
+<h3>原理介绍</h3>
+
+<p>Java1.1 的类加载机制相对单一，用户自定义加载器的重写比较复杂。</p>
+
+<p>主要需要重写加载器中的 Class loadClass(String name)方法。</p>
+
+<p>Class loadClass(String name)或 loadClass(String name , boolean resolve)方法是加载的核心。它根据类的全名（比如 String 类的全名是 java.lang.String）获得对应类的二进制数据，然后通过 Class defineClass(byte[] b) 将二进制数据加载到 JVM 的方法区，并返回对应类的 Class 实例，然后根据可选的参数 resolve 决定是否需要现在解析这个类。最后将这个 Class 实例作为 loadClass 方法的返回值。</p>
+
+<p>如果无法加载和 defineClass，即无法通过本加载器直接加载类的情况，则使用 Class findSystemClass(String name) 将类加载任务委派给系统类加载器查找。如果能找到则加载，否则抛出 ClassNotFoundException 异常。</p>
+
+<h3>编程实例</h3>
+
+<p>以下用实例来展示这一过程：</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/09/08/java-class-loader-in-practice/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/09/07/java-classloader/">Java 类加载器</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-07T23:15:00+08:00" pubdate data-updated="true">Sep 7<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/09/07/java-classloader/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>背景知识</h2>
+
+<p>Java 平台无关的特性是由 JVM(Java 虚拟机)支撑的。不同平台有不同的 JVM 支持。</p>
+
+<p>计算机领域有这么一句话：</p>
+
+<blockquote><p>计算机科学领域的任何问题都可以通过增加一个间接的中间层来解决。</p></blockquote>
+
+<p>JVM 其实也可以看做是运行的 Java 程序和实际的硬件架构之间的一个新抽象层。</p>
+
+<p>一个 Java 程序从编写到执行的流程一句话概括如下：首先将 Java 源代码（*.java 文件）编译成字节码（*.class 文件，字节码之于 Java 源码，类比于汇编代码之于 C 源码），然后由 JVM 运行那些字节码文件。</p>
+
+<p>JVM 工作原理如下图</p>
+
+<p><img src="https://dl.dropboxusercontent.com/u/64021093/Java%20Classloader/JVM%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86.gif" alt="JVM framework" /></p>
+
+<p>Java 中所有的类文件都需要由类加载器（Class Loader）装载到 JVM 中。可以简单的将 JVM 理解为一个工厂，类文件就是等待加工的原料，加载器则是装载货物的工人。Java 类被装载之后，才能进入到 JVM 的运行时机制中，开始运行。</p>
+
+<h2>类加载器的作用</h2>
+
+<p>顾名思义，Java 类加载器的作用是向 JVM 中装载类。</p>
+
+<p>这种动态装载的技术是 Java 的一种创新，让类能够动态加载到 JVM 中执行（更详细的介绍参见 <a href="http://www.ibm.com/developerworks/java/library/j-dyn0429/">Java programming dynamics, Part 1: Java classes and class loading</a>）。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/09/07/java-classloader/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -476,344 +727,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/08/03/overcome-pat/">PAT练习题概览</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-08-03T22:20:00+08:00" pubdate data-updated="true">Aug 3<span>rd</span>, 2013</time>
-        
-         | <a href="/blog/2013/08/03/overcome-pat/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>PAT(<a href="http://pat.zju.edu.cn">pat.zju.edu.cn</a>)是一个面向 C/C++程序的 Online Judge 系统。相比 ZOJ，HDOJ，POJ 等 ACM 题库，PAT 的题目非常基础，对于数据结构、算法的入门是比较有助益的。</p>
-
-<p>本文按照自己的认识，给 PAT advanced level 做出了分类。由于很多题目实际上兼顾有多种解法和思路，我给每道题打上了 tag，来应对分类的独占性局限，供大家参考。</p>
-
-<h2>简单题</h2>
-
-<p>这类题几乎不需要数据结构、算法基础，主要通过简单的逻辑流程和判断实现。</p>
-
-<ul>
-<li>1001 A+B</li>
-<li>1002 多项式相加</li>
-<li>1005 简单 hash</li>
-<li>1006 选极值</li>
-<li>1008 模拟电梯</li>
-<li>1009 多项式乘法</li>
-<li>1011 选极值</li>
-<li>1019 数字/字符处理</li>
-<li>1024 数字/字符处理</li>
-<li>1027 数字/字符处理，简单 hash</li>
-<li>1031 数字/字符处理</li>
-<li>1035 简单 hash</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/08/03/overcome-pat/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/08/01/pat-1051-1060-solutions/">PAT 1051-1060 题解</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-08-01T01:43:00+08:00" pubdate data-updated="true">Aug 1<span>st</span>, 2013</time>
-        
-         | <a href="/blog/2013/08/01/pat-1051-1060-solutions/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>浏览全部代码：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
-
-<p>本文谨代表个人思路，欢迎讨论;)</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1051">1051. Pop Sequence (25)</a></h2>
-
-<h4>题意</h4>
-
-<p>给定 stack 的容量，给定数据的入栈顺序：从 1 开始的正整数序列，在允许随机的出栈操作的情况下，要求判断某出栈序列是否可能。</p>
-
-<p>比如，告知 stack 容量为 5，入栈序列的最大值为 7。有两个序列需要判断合理性：</p>
-
-<ul>
-<li>{1 2 3 4 5 6 7}： 这个序列是可能的，只需每次入栈时都做出栈操作。</li>
-<li>{3 2 1 7 5 6 4}： 这个序列是不可能的，其中前半部分 3 2 1 是合法的，先将 1 2 3 顺序入栈，然后三次执行出栈操作。而之后的 7 5 6 则是不可能的。</li>
-</ul>
-
-
-<h4>分析</h4>
-
-<p>两种思路：</p>
-
-<h5>第 1 种思路：</h5>
-
-<p>使用 stl 中的 stack 模拟。判定条件有两条：1.栈中数据量不超过栈的容量；2.出栈只能从栈顶取，不应该出现从固定的堆栈中取出其他数据的情况。</p>
-
-<h5>第 2 种思路：</h5>
-
-<p>由于入栈序列数据由小到大排列非常特殊，要通过出栈序列判定可能性是存在简便思路的。
-对比分析题中 Sample 给出的序列，结合上面提到的两条冲突条件入手分析：</p>
-
-<ul>
-<li><p>1.栈中数据量不超过栈的容量：</p>
-
-<p>  只有在入栈时，才会需要考虑栈中数据是否超量。出栈序列中的每个数，都以为着在出栈操作之前，它刚入栈，
-  那么当它入栈的时候能否判定是否超过栈容量呢？可以的，（当前的出栈数值 - 已经执行过的出栈操作数量）就是当前栈中元素的数量。</p></li>
-<li><p>2.出栈只能从栈顶取，不应该出现从固定的堆栈中取出其他数据的情况。</p>
-
-<p>  根据观察分析发现，当某数据 m 出栈之后，比 m 小的数据如果在 m 之后出栈的，它们所组成的序列本身需要保持从大到小的顺序排列。
-  距离如 3 2 1 7 5 6 4 这个序列，在 7 之后有 5 6 4 这个子序列，它们都大于 7，但却没有保持一个递减的顺序，不合法。</p></li>
-</ul>
-
-
-<p>更多分析参见博文<a href="../../../../2013/07/16/verify-pop-sequence-for-stack/">《出栈序列的可能性判定》</a></p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1052">1052. Linked List Sorting (25)</a></h2>
-
-<h4>题意</h4>
-
-<p>链表的节点被表示为{地址， 值， 下一个指针地址}，其中如果 NULL 的地址表示为-1，
-地址为 5 正数，值的范围为[-10<sup>5,</sup> 10<sup>5]。</sup></p>
-
-<p>给定 N(&lt; 10<sup>5)个节点以及其头指针，要求按照每个节点上值的大小重新排序，并按照链表顺序输出每个节点。</sup></p>
-
-<h4>分析</h4>
-
-<p>将链表中的节点按值做 qsort()排序，然后调整每个值的 next 指针即可。需要注意的有：</p>
-
-<ul>
-<li>1.INPUT 中的节点并不保证全是链表中的，先需要过滤掉悬空的节点。</li>
-<li>2.head 直接指向-1(NULL)的情况需要特殊处理。</li>
-</ul>
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/08/01/pat-1051-1060-solutions/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/08/01/pat-1041-1050-solutions/">PAT 1041-1050 题解</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-08-01T01:43:00+08:00" pubdate data-updated="true">Aug 1<span>st</span>, 2013</time>
-        
-         | <a href="/blog/2013/08/01/pat-1041-1050-solutions/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>浏览全部代码：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
-
-<p>本文谨代表个人思路，欢迎讨论;)</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1041">1041. Be Unique (20)</a></h2>
-
-<h5>题意</h5>
-
-<p>给出 N (&lt;=105)个数（数值范围为 [1, 10<sup>4]），找到其中不重复的第一个数字。比如给出</sup> <code>5 31 5 88 67 88 17</code> ， 答案是 <code>31</code> 。</p>
-
-<h5>分析</h5>
-
-<p>简单模拟题，开一个大数组<code>int a[10001];</code>，以读入的数为下标，记录 count:<code>a[index] ++;</code>。结果输出第一个存储为 1 的下标:<code>if (a[index] == 1)</code>。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1042">1042. Shuffling Machine (20)</a></h2>
-
-<h5>题意</h5>
-
-<p>背景是洗牌机的洗牌过程。过程是给定洗牌的每张牌的位置替换序列，由原来的次序算出最后的牌的平排列。</p>
-
-<p>比如原有的次序为<code>S3, H5, C1, D13, J2</code>，
-给定的洗牌顺序为<code>4, 2, 5 ,3 ,1</code>，那么一次洗牌的结果为：<code>J2, H5, D13, S3, C1</code>。
-如果需要两次洗牌，则结果为<code>C1, H5, S3, J2, D13</code>。</p>
-
-<p>输入为对一整副牌（54 张）的洗牌策略，以及洗牌次数 N，要求计算出最后的洗牌结果。</p>
-
-<h5>分析</h5>
-
-<p>简单 hash 题。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/08/01/pat-1041-1050-solutions/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/08/01/pat-1031-1040-solutions/">PAT 1031-1040 题解</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-08-01T01:43:00+08:00" pubdate data-updated="true">Aug 1<span>st</span>, 2013</time>
-        
-         | <a href="/blog/2013/08/01/pat-1031-1040-solutions/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>早期部分代码用 Java 实现。由于 PAT 虽然支持各种语言，但只有 C/C++标程来限定时间，许多题目用 Java 读入数据就已经超时，后来转投 C/C++。浏览全部代码：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
-
-<p>本文谨代表个人思路，欢迎讨论;)</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1031">1031. Hello World for U (20)</a></h2>
-
-<h5>题意</h5>
-
-<p>将给定的字符串打印出 U 型。</p>
-
-<p>比如给定<code>helloworld</code>，打印出</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>
-</span><span class='line'>h  d
-</span><span class='line'>e  l
-</span><span class='line'>l  r
-</span><span class='line'>lowo
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>设定左边的字符个数为 n1,底边字符个数为 n2,右边字符个数为 n3。需要满足 n1 = n3 = max
-{k|k &lt;= n2 for all 3 &lt;= n2 &lt;= N} with n1 + n2 + n3 -3 = N.</p>
-
-<h5>分析</h5>
-
-<p>简单模拟题。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1032">1032. Sharing (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>为了节省存储空间，单词使用链表实现。比如对于<code>loading</code>和<code>being</code>两个单词，有如下存储结构：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>word1 : -&gt; [l] -&gt; [o] -&gt; [a] -&gt; [d]  
-</span><span class='line'>                                  \
-</span><span class='line'>                                    [i] -&gt; [n] -&gt; [g] -&gt; null
-</span><span class='line'>                                  /
-</span><span class='line'>word2 : -&gt; [b] -&gt; [e] -------------
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>输入中，指定了两个单词的首字符的地址，并给出了 N (&lt;= 10<sup>5)个节点，每个节点包含：物理地址（5</sup> 位的正整数），实际存储的字符以及指向的下一个节点的地址。NULL 的地址是-1.
-要求找到两单词的的公共后缀开始的地址，如果没有，则输出-1.</p>
-
-<h5>分析</h5>
-
-<p>既然是单词，它的长度应该是有限的，也就是链表不会出现环这种情况（实际上这里的处理方式对于有环无环都适用）。对第一个单词链表做遍历，对爬过的节点做好标记。第二个单词链表也同样做标记，一旦遇到已经标记过的节点，则该节点就是结果。</p>
-
-<p>需要注意一点：直接使用 map 做节点的存储最后一个 case 会超时。而鉴于 5 位正整数的数据量，可以直接使用数组，用空间换时间。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/08/01/pat-1031-1040-solutions/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -829,12 +742,12 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
  <br /> 
   <ul class="tag-cloud">
     <a style="font-size: 180%" href="/tags/algorithm/">algorithm</a> &nbsp 
+<a style="font-size: 126%" href="/tags/bytecode/">bytecode</a> &nbsp 
 <a style="font-size: 115%" href="/tags/diary/">diary</a> &nbsp 
 <a style="font-size: 167%" href="/tags/distributed/">distributed</a> &nbsp 
-<a style="font-size: 98%" href="/tags/gui/">gui</a> &nbsp 
 <a style="font-size: 135%" href="/tags/hadoop/">hadoop</a> &nbsp 
-<a style="font-size: 98%" href="/tags/idea/">idea</a> &nbsp 
-<a style="font-size: 115%" href="/tags/java/">java</a> &nbsp 
+<a style="font-size: 149%" href="/tags/java/">java</a> &nbsp 
+<a style="font-size: 126%" href="/tags/jvm/">jvm</a> &nbsp 
 <a style="font-size: 115%" href="/tags/life/">life</a> &nbsp 
 <a style="font-size: 143%" href="/tags/methodology/">methodology</a> &nbsp 
 <a style="font-size: 126%" href="/tags/network/">network</a> &nbsp 
@@ -851,23 +764,23 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/09/08/three-principles-of-classloader-operation/">类加载器操作三原则[译]</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/09/08/java-class-loading-linking-and-initialising/">Java类的装载、链接和初始化</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/09/08/java-class-loader-in-practice/">Java类加载器编程实践</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/09/07/java-classloader/">Java 类加载器</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/09/06/kongfu-snake-project-summary/">Android小游戏：功夫蛇 团队开发经验总结</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/09/05/google-android-challenge-2011/">Google Android应用开发大赛参赛记</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/09/01/blog-log/">biaobiaoqi的博客日志</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/08/31/octopress-3rd-party-plugin-syncpost/">octopress第三方插件：博文同步工具syncPost</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/08/31/pat-1061-pat-1064/">PAT 1061 - 1064 题解</a>
       </li>
     
   </ul>
