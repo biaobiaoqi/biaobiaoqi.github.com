@@ -15,9 +15,9 @@ footer: true
 
 `Talk is cheap, show me the code.` 说来惭愧，距今为止，我的作品还乏善可陈：
 
-* Android应用[『功夫蛇』](http://www.google.cn/university/androidchallenge/2011/gallery.html#tab=d1-13)
 * iOS应用[『查好友』的1.2及之前版本](http://chahaoyou.com/)。
 * AOP编程实践：逆向工程，从字节码中获取Java类的WP关系（我会抽空将代码整理后开源）。
+* Android应用[『功夫蛇』](https://github.com/biaobiaoqi/kongfusnake)
 
 我的理想是做一个互联网时代的`匠人`，给世界留下一些脚印。于是，有了这个博客。将来，还会有更多的有趣的products, let's c ;)
 
