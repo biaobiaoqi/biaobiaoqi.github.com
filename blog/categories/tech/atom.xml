@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tech | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-09-08T15:52:46+08:00</updated>
+  <updated>2013-09-08T16:12:14+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[对Java字符的探究]]></title>
+    <title type="html"><![CDATA[对Java字符串的探究]]></title>
     <link href="http://biaobiaoqi.github.com/blog/2013/09/08/string-interning/"/>
     <updated>2013-09-08T13:01:00+08:00</updated>
     <id>http://biaobiaoqi.github.com/blog/2013/09/08/string-interning</id>
@@ -245,6 +245,153 @@ RETURN
   </entry>
   
   <entry>
+    <title type="html"><![CDATA[Java类的实例化总结]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/09/08/initliate-objects-in-java/"/>
+    <updated>2013-09-08T02:03:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/09/08/initliate-objects-in-java</id>
+    <content type="html"><![CDATA[<p>java类的实例化(instantiation)具有显性的和隐性的区别。</p>
+
+<p>写Java代码时，我们所使用new的方法实例化最简单直接的显性实例化。而隐性的实例化则出现在java程序的整个生命周期中，包括String、Class，StringBuffer 或者StringBuilder 的实例化等等。</p>
+
+<h2>显性的实例化</h2>
+
+<h3>new关键字实例化对象</h3>
+
+<p>调用相应的构造函数完成实例化。（类中的非静态成员变量如果有初始化语句，都会被隐式的加入到构造函数中）代码如下：
+```java</p>
+
+<p>public class Test  {</p>
+
+<pre><code>String strA = "xyz";  
+String strB ;  
+
+public Test(String str){  
+    strB = str ;  
+}  
+public static void main(String[] args){  
+        Test t = new Test("abc");  
+}  
+</code></pre>
+
+<p>}<br/>
+```</p>
+
+<p>在eclipse中装了<a href="http://asm.ow2.org/">ASM bytecode</a>插件后，观察.class文件中的构造函数对应的字节码如下：</p>
+
+<!--more-->
+
+
+<p><code>
+INVOKESPECIAL Object.&lt;init&gt;() : void  
+   ALOAD 0: this  
+   LDC "xyz"  
+   PUTFIELD Test.strA : String  
+   ALOAD 0: this  
+   ALOAD 1: str  
+   PUTFIELD Test.strB : String  
+   RETURN  
+</code></p>
+
+<p>关键在于<code>LDC"xyz"</code>这条指令，明显可以看出，这是用于strA初始化的字符串。</p>
+
+<p>由此我们可以归纳出，在没有调用本类中其他的构造函数的情况下，每次类的构造函数中都会按如下顺序进行：</p>
+
+<ul>
+<li>a)隐式（或显性）的调用父类的构造函数</li>
+<li>b)然后执行写在构造函数外的成员变量的初始化赋值</li>
+<li>c)最后再执行构造函数中的命令。</li>
+</ul>
+
+
+<p>如果是有显性的调用本类其他构造函数（必须是放在构造函数第一步执行），那么对于这个构造函数，处理过程就简单些了：</p>
+
+<ul>
+<li>a)调用那个构造函数。</li>
+<li>b)执行之后的代码。</li>
+</ul>
+
+
+<h3>利用java反射机制</h3>
+
+<p>反射机制是是java动态性中的关键之一，调用java.lang.reflect.Constructor的newInstance()方法能创建对象。</p>
+
+<p>```java
+public class Test  {</p>
+
+<pre><code>public Test(){  
+    System.out.println("Created by invoking newInstance()");  
+}  
+
+public Test(String str){  
+    System.out.println(str);  
+}  
+
+public static void main(String[] args)  
+                throws ClassNotFoundException , InstantiationException ,  
+                IllegalAccessException  {  
+        Test t1 = new Test("Created with new"); //常规的方法  
+        Class myClass = Class.forName("Test");  //获得了对应于Test类的Class对象，如果没有加载，会先加载这个类，再返回。  
+        Test t2 = (Test)myClass.newInstance(); //调用newInstance()创建对象。  
+}  
+</code></pre>
+
+<p>}<br/>
+```</p>
+
+<h3>其他</h3>
+
+<p>其他还有对象的clone()方法，以及串行化后的解串行化过程。</p>
+
+<h2>隐性的实例化</h2>
+
+<p>隐性的实例化主要有如下几类：</p>
+
+<ul>
+<li>1.String和String数组。main(String[] args)中拥有的args参数为String数组类型，这些command line参数将会首先被实例化。</li>
+<li>2.Class的实例化。由于类的加载过程中，会生成相应类的Class对象，这些也会被隐性的实例化。</li>
+<li>3.JVM在执行类加载的过程中，对常量池中的CONSTANT_String_info项会实例化出对应的String对象。这里涉及到常量池解析的知识。</li>
+<li>4.在String的操作中，可能存在隐性的StringBuffer 或者StringBuilder的实例化。</li>
+<li>5.int和Integer这些类型转化过程中的装箱、拆箱。</li>
+</ul>
+
+
+<p>比如如下代码：
+``` java
+public class Test  {</p>
+
+<pre><code>public static void main(String[] args){  
+        String str1 = "abc";  
+        String str2 = "def";  
+        String str = str1 + str2 ;  
+}  
+</code></pre>
+
+<p>}<br/>
+```</p>
+
+<p>在eclipse中装了ASM bytecode插件后，直接观察.class文件对应的字节码：
+```
+NEW StringBuilder</p>
+
+<pre><code>DUP  
+ALOAD 1: str1  
+INVOKESTATIC String.valueOf(Object) : String  
+INVOKESPECIAL StringBuilder.&lt;init&gt;(String) : void  
+ALOAD 2: str2  
+INVOKEVIRTUAL StringBuilder.append(String) : StringBuilder  
+INVOKEVIRTUAL StringBuilder.toString() : String  
+ASTORE 3  
+</code></pre>
+
+<p>```</p>
+
+<p>实际上，这里str1 和 str2合并的过程，是使用了StringBuilder来间接完成的，首先以str1的值构造一个StringBuilder，然后调用其中的append()方法，将str2串联上来。</p>
+
+<p>值得注意的是：老版本的java使用StringBuffer完成这一步，但StringBuffer是线程安全的，效率略低，于是在新版本java中出现了非线程安全的StringBuilder，这类似于Hashtable 和 hashset的关系。</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[类加载器操作三原则[译]]]></title>
     <link href="http://biaobiaoqi.github.com/blog/2013/09/08/three-principles-of-classloader-operation/"/>
     <updated>2013-09-08T00:42:00+08:00</updated>
@@ -393,480 +540,6 @@ RETURN
 <p>综上述，static final更适合于接口。</p>
 
 <p>参考：<a href="http://blog.csdn.net/a352193394/article/details/6844941">《通过类字面常量解释接口常量为什么只能定义为static final,类加载过程---Thinking in java》</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Java类加载器编程实践]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/09/08/java-class-loader-in-practice/"/>
-    <updated>2013-09-08T00:33:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/09/08/java-class-loader-in-practice</id>
-    <content type="html"><![CDATA[<p>文本通过实现自定义类加载器，实践Java类加载的流程。</p>
-
-<p>阅读此文前，需要了解Java类加载的基本原理，参见如下两篇博文：</p>
-
-<ul>
-<li><a href="http://biaobiaoqi.me/blog/2013/09/07/java-classloader/">《Java类加载器浅析》</a></li>
-<li><a href="http://biaobiaoqi.me/blog/2013/09/08/three-principles-of-classloader-operation/">《Java类加载器三原则》</a></li>
-</ul>
-
-
-<p>以上博文中所提及的Java类加载机制，都是Java1.2及以后的版本，而在最早的Java1.1中类加载器是没有父子关系的模式的。这里将分别对Java1.1和Java1.2及以后的类加载版本进行展示。</p>
-
-<h2>Java1.1中的实现</h2>
-
-<h3>原理介绍</h3>
-
-<p>Java1.1的类加载机制相对单一，用户自定义加载器的重写比较复杂。</p>
-
-<p>主要需要重写加载器中的Class loadClass(String name)方法。</p>
-
-<p>Class loadClass(String name)或loadClass(String name , boolean resolve)方法是加载的核心。它根据类的全名（比如String类的全名是java.lang.String）获得对应类的二进制数据，然后通过Class defineClass(byte[] b) 将二进制数据加载到JVM的方法区，并返回对应类的Class实例，然后根据可选的参数resolve决定是否需要现在解析这个类。最后将这个Class实例作为loadClass方法的返回值。</p>
-
-<p>如果无法加载和defineClass，即无法通过本加载器直接加载类的情况，则使用Class findSystemClass(String name) 将类加载任务委派给系统类加载器查找。如果能找到则加载，否则抛出ClassNotFoundException异常。</p>
-
-<h3>编程实例</h3>
-
-<p>以下用实例来展示这一过程：</p>
-
-<!--more-->
-
-
-<p>类CompilingClassLoader是一个自定义加载器，它能直接读取Java源文件实现类加载。CLL类的main方法为程序入口，通过ComplilingClassLoader加载一个Foo类，使用反射机制调用Foo类的main方法。</p>
-
-<p>CompilingClassLoader.java</p>
-
-<p>```java</p>
-
-<p>import java.io.*;</p>
-
-<p>/*</p>
-
-<p>A CompilingClassLoader compiles your Java source on-the-fly.  It
-checks for nonexistent .class files, or .class files that are older
-than their corresponding source code.</p>
-
-<p>*/</p>
-
-<p>public class CompilingClassLoader extends ClassLoader<br/>
-{<br/>
-  // Given a filename, read the entirety of that file from disk<br/>
-  // and return it as a byte array.<br/>
-  private byte[] getBytes( String filename ) throws IOException {</p>
-
-<pre><code>// Find out the length of the file  
-File file = new File( filename );  
-long len = file.length();  
-
-// Create an array that's just the right size for the file's  
-// contents  
-byte raw[] = new byte[(int)len];  
-
-// Open the file  
-FileInputStream fin = new FileInputStream( file );  
-
-// Read all of it into the array; if we don't get all,  
-// then it's an error.  
-int r = fin.read( raw );  
-if (r != len)  
-  throw new IOException( "Can't read all, "+r+" != "+len );  
-
-// Don't forget to close the file!  
-fin.close();  
-
-// And finally return the file contents as an array  
-return raw;  
-</code></pre>
-
-<p>  }</p>
-
-<p>  // Spawn a process to compile the java source code file<br/>
-  // specified in the 'javaFile' parameter.  Return a true if<br/>
-  // the compilation worked, false otherwise.<br/>
-  private boolean compile( String javaFile ) throws IOException {</p>
-
-<pre><code>// Let the user know what's going on  
-System.out.println( "CCL: Compiling "+javaFile+"..." );  
-
-// Start up the compiler  
-Process p = Runtime.getRuntime().exec( "javac "+javaFile );  
-
-// Wait for it to finish running  
-try {  
-  p.waitFor();  
-} catch( InterruptedException ie ) { System.out.println( ie ); }  
-
-// Check the return code, in case of a compilation error  
-int ret = p.exitValue();  
-
-// Tell whether the compilation worked  
-return ret==0;  
-</code></pre>
-
-<p>  }</p>
-
-<p>  // The heart of the ClassLoader -- automatically compile<br/>
-  // source as necessary when looking for class files<br/>
-  public Class loadClass( String name, boolean resolve )</p>
-
-<pre><code>  throws ClassNotFoundException {  
-
-// Our goal is to get a Class object  
-Class clas = null;  
-
-// First, see if we've already dealt with this one  
-clas = findLoadedClass( name );  
-
-//System.out.println( "findLoadedClass: "+clas );  
-
-// Create a pathname from the class name  
-// E.g. java.lang.Object =&gt; java/lang/Object  
-String fileStub = name.replace( '.', '/' );  
-
-// Build objects pointing to the source code (.java) and object  
-// code (.class)  
-String javaFilename = fileStub+".java";  
-String classFilename = fileStub+".class";  
-
-File javaFile = new File( javaFilename );  
-File classFile = new File( classFilename );  
-
-//System.out.println( "j "+javaFile.lastModified()+" c "+  
-//  classFile.lastModified() );  
-
-// First, see if we want to try compiling.  We do if (a) there  
-// is source code, and either (b0) there is no object code,  
-// or (b1) there is object code, but it's older than the source  
-if (javaFile.exists() &amp;&amp;  
-     (!classFile.exists() ||  
-      javaFile.lastModified() &gt; classFile.lastModified())) {  
-
-  try {  
-    // Try to compile it.  If this doesn't work, then  
-    // we must declare failure.  (It's not good enough to use  
-    // and already-existing, but out-of-date, classfile)  
-    if (!compile( javaFilename ) || !classFile.exists()) {  
-      throw new ClassNotFoundException( "Compile failed: "+javaFilename );  
-    }  
-  } catch( IOException ie ) {  
-
-    // Another place where we might come to if we fail  
-    // to compile  
-    throw new ClassNotFoundException( ie.toString() );  
-  }  
-}  
-
-// Let's try to load up the raw bytes, assuming they were  
-// properly compiled, or didn't need to be compiled  
-try {  
-
-  // read the bytes  
-  byte raw[] = getBytes( classFilename );  
-
-  // try to turn them into a class  
-  clas = defineClass( name, raw, 0, raw.length );  
-} catch( IOException ie ) {  
-  // This is not a failure!  If we reach here, it might  
-  // mean that we are dealing with a class in a library,  
-  // such as java.lang.Object  
-}  
-
-//System.out.println( "defineClass: "+clas );  
-
-// Maybe the class is in a library -- try loading  
-// the normal way  
-if (clas==null) {  
-  clas = findSystemClass( name );  
-}  
-
-//System.out.println( "findSystemClass: "+clas );  
-
-// Resolve the class, if any, but only if the "resolve"  
-// flag is set to true  
-if (resolve &amp;&amp; clas != null)  
-  resolveClass( clas );  
-
-// If we still don't have a class, it's an error  
-if (clas == null)  
-  throw new ClassNotFoundException( name );  
-
-// Otherwise, return the class  
-return clas;  
-</code></pre>
-
-<p>  }<br/>
-}
-```</p>
-
-<p>CCLRun.java</p>
-
-<p>```java<br/>
-/*</p>
-
-<p>CCLRun executes a Java program by loading it through a
-CompilingClassLoader.</p>
-
-<p>*/</p>
-
-<p>public class CCLRun<br/>
-{<br/>
-  static public void main( String args[] ) throws Exception {</p>
-
-<pre><code>// The first argument is the Java program (class) the user  
-// wants to run  
-String progClass = args[0];  
-
-// And the arguments to that program are just  
-// arguments 1..n, so separate those out into  
-// their own array  
-String progArgs[] = new String[args.length-1];  
-System.arraycopy( args, 1, progArgs, 0, progArgs.length );  
-
-// Create a CompilingClassLoader  
-CompilingClassLoader ccl = new CompilingClassLoader();  
-
-// Load the main class through our CCL  
-Class clas = ccl.loadClass( progClass );  
-
-// Use reflection to call its main() method, and to  
-// pass the arguments in.  
-
-// Get a class representing the type of the main method's argument  
-Class mainArgType[] = { (new String[0]).getClass() };  
-
-// Find the standard main method in the class  
-Method main = clas.getMethod( "main", mainArgType );  
-
-// Create a list containing the arguments -- in this case,  
-// an array of strings  
-Object argsArray[] = { progArgs };  
-
-// Call the method  
-main.invoke( null, argsArray );  
-</code></pre>
-
-<p>  }<br/>
-}</p>
-
-<p>```</p>
-
-<p>Foo.java
-```java
-public class Foo<br/>
-{<br/>
-  static public void main( String args[] ) throws Exception {</p>
-
-<pre><code>System.out.println( "foo! "+args[0]+" "+args[1] );  
-</code></pre>
-
-<p>  }<br/>
-}<br/>
-```</p>
-
-<p>执行CLL类，命令行传入Foo的类名。执行结果如下：
-<code>
-CCL: Compiling Foo.java...  
-foo! arg1 arg2  
-</code></p>
-
-<p>具体参见资料：<a href="http://www.ibm.com/developerworks/java/tutorials/j-classloader/index.html">IBM DeveloperWorks ： Understanding the Java ClassLoader</a>， 这是一篇2001年的文章，是早年Java1.1的实现方式。如今的Java已经变得更加人性化，多功能化，鲁棒性也更强了。</p>
-
-<h2>Java1.2以后的实现</h2>
-
-<h3>原理介绍</h3>
-
-<p>Java1.2以后，类加载器实现了parent-child模型，能更好的控制安全性方面的问题。</p>
-
-<p>由于loadClass()方法中包含了parent-child的责任链模式逻辑，自定义类加载的自定义部分用策略模式从loadClass()方法中剥离到了findClass()中。对应的有一个findLoadedClass()，这个方法用来实现查找当前加载器是否有加载该某类。</p>
-
-<p>loadClass()：加载一个类时，先调findLoadedClass()，如果没有找到，则调用父亲加载器的加载方法。如果父亲找到了该类，就返回Class实例，没有找到，则父亲加载器会抛出一个异常，捕捉到这个异常后，儿子加载器会自己调用findClass()尝试实现对类的加载。如果依然没有成功加载，则再向外抛出一个异常。通过向父亲加载器迭代实现了parent-first的委托关系。</p>
-
-<p>类加载的流程如图：这里显示了一个类未能成功加载所要经历的流程。（来自<a href="http://stackoverflow.com/questions/3544614/how-is-the-control-flow-to-findclass-of">stackoverflow:how-is-the-control-flow-to-findclass-of</a>）</p>
-
-<p>```</p>
-
-<pre><code>  A.loadClass()  
-       |  
-   (not-found?) (by findLoadedClass)  
-       |  
-  B.loadClass()  
-       |  
-   (not found?) (by findLoadedClass)  
-       |  
-</code></pre>
-
-<p>systemclassloader.loadClass  (Bs parent, also can be</p>
-
-<pre><code>       |                  called classpath classloader)  
-       |  
-   (not found?) (by findLoadedClass)  
-       |  
-</code></pre>
-
-<p>bootstrap classloader.loadClass (the bootstrap classloader,</p>
-
-<pre><code>       |                   (this has no parent)  
-       |  
-   (not found?)  
-       |  
-</code></pre>
-
-<p>systemclassloader.findClass  (on system classloader,</p>
-
-<pre><code>       |                   will try to "find" class in "classpath")  
-       |  
-   (not found?) ClassNotFoundException  
-       |  
-   B.findClass  
-       |  
-   (not found?) ClassNotFoundException  
-       |  
-   A.findClass  
-       |  
-    (not found?)  
-       |  
-</code></pre>
-
-<p>   ClassNotFoundException<br/>
-```</p>
-
-<p>注意，对于扩展类加载器，通过getParent()方法返回的父亲加载器是null，因为引导类加载器是本地实现的，并非Java实现。那么如何从扩展类加载器向上回溯呢？答案如下：</p>
-
-<p>```java
-try {</p>
-
-<pre><code>if (parent != null) {  
-   c = parent.loadClass(name, false);  
-} else {  
-   c = findBootstrapClassOrNull(name);  
-}  
-</code></pre>
-
-<p>} catch (ClassNotFoundException e) {<br/>
-   // ClassNotFoundException thrown if class not found</p>
-
-<pre><code> // from the non-null parent class loader  
-</code></pre>
-
-<p>}
-```
-这是类加载器的源代码，对于父加载器为null的情况，会直接调用findBootstrapClassOrNull()方法尝试用引导类加载器加载。通过源代码，能够很好的理解这里的parent-child模型了。</p>
-
-<p>另注意，对于基于parent-child模型的类加载器实现，都需要定义一个以parent类加载器作为参数的构造函数，以指定父加载器。如果直接调用没有参数的构造函数，则默认制定的是systemclassloader作为parent。</p>
-
-<h3>编程实例</h3>
-
-<p>下面的例子是我用来实现动态分析Java类关系的加载器代码。</p>
-
-<p>具体逻辑是：调用ASM开源库的API，在加载器加载类时，修改类文件中的字节码，插入相应的字节码语句，让对象在创建或执行相应指令时，在log文件中记录自己的行为。</p>
-
-<p>在编码的过程中，我遇到的一个错误：将需要使用自定义加载器加载的类文件直接放在了eclipse工程中的bin目录下。而这个目录是可以通过系统类加载器找到路径并加载的。根据parent-first的实现，这些类直接被系统类加载器加载了，也就绕过了自定义加载器的处理机制。修改过路径以后没有出现相应问题了。</p>
-
-<p>ASMClassLoader.java
-```java
-package biaobiaoqi.classLoader;<br/>
-import java.io.*;</p>
-
-<p>import org.objectweb.asm.ClassReader;<br/>
-import org.objectweb.asm.ClassWriter;</p>
-
-<p>import biaobiaoqi.asm.*;</p>
-
-<p>public class ASMClassLoader extends ClassLoader<br/>
-{</p>
-
-<pre><code>String basePath ;  
-
-/**reference to System Classloader as the parent class loader 
- * @param path &lt;br&gt; the path of .class files will be loaded 
- */  
-public ASMClassLoader(String path){  
-    basePath = path ;  
-}  
-
-/** 
- * reference to parent as it's parent classloader 
- * @param path 
- * @param parent 
- */  
-public ASMClassLoader(String path , ClassLoader parent){  
-    super(parent);  
-    basePath = path ;  
-}  
-
-@Override  
-public Class findClass(String name) throws ClassNotFoundException{  
-    System.out.println("findClass");  
-    byte[] raw;  
-    try {  
-        raw = getBytesFromBasePath( name );  
-    } catch (IOException e) {  
-        e.printStackTrace();  
-        throw new ClassNotFoundException();  
-    }  
-
-    byte[] transformed = instrumentBtyeCode(raw);  
-    /* 
-    try{ 
-        FileOutputStream file = new FileOutputStream( "/home/biaobiaoqi/" +name.replace( '.', '/' )+".class"); 
-        file.write( transformed); 
-        file.close(); 
-    } 
-    catch (IOException e) { 
-        e.printStackTrace(); 
-    } 
-    */  
-    if (transformed == null){  
-        throw new ClassNotFoundException();  
-    }  
-
-
-    return defineClass(name, transformed, 0, transformed.length );  
-}  
-
-private byte[] getBytesFromBasePath( String className ) throws IOException ,ClassNotFoundException{  
-    String fileStub = className.replace( '.', '/' );  
-    String classFileName = basePath +fileStub+".class";  
-    File file = new File( classFileName );  
-
-    long len = file.length();  
-    byte raw[] = new byte[(int)len];  
-    FileInputStream fin = new FileInputStream( file );  
-
-    int r = fin.read( raw );  
-    if (r != len)  
-        throw new IOException( "Can't read all, "+r+" != "+len );  
-
-    fin.close();  
-    return raw;  
-}  
-
-private byte[] instrumentBtyeCode(byte[] raw){  
-    ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);  
-    ASMClassAdapter mca = new ASMClassAdapter(cw);   
-    ClassReader cr = new ClassReader(raw);  
-    cr.accept(mca, 0);  
-    return cw.toByteArray();  
-}     
-
-@Override  
-public Class loadClass( String name, boolean resolve )  
-    throws ClassNotFoundException {  
-    System.out.println("loadClass_resolve");  
-      return super.loadClass(name ,resolve);  
-}  
-
-
-@Override  
-public Class loadClass( String name )  
-    throws ClassNotFoundException {  
-    System.out.println("loadClass");  
-      return super.loadClass(name );  
-}  
-</code></pre>
-
-<p>}
-```</p>
 ]]></content>
   </entry>
   

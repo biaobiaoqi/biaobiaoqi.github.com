@@ -113,7 +113,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/09/08/string-interning/">对Java字符的探究</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/09/08/string-interning/">对Java字符串的探究</a></h1>
     
     
       <p class="meta">
@@ -453,6 +453,88 @@ java -javaagent:ASMInstrument.jar   -cp ./  XXXX xxx
   
     <footer>
       <a rel="full-article" href="/blog/2013/09/08/strange-behavior-using-braces-in-java/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/09/08/initliate-objects-in-java/">Java类的实例化总结</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-08T02:03:00+08:00" pubdate data-updated="true">Sep 8<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/09/08/initliate-objects-in-java/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>java 类的实例化(instantiation)具有显性的和隐性的区别。</p>
+
+<p>写 Java 代码时，我们所使用 new 的方法实例化最简单直接的显性实例化。而隐性的实例化则出现在 java 程序的整个生命周期中，包括 String、Class，StringBuffer 或者 StringBuilder 的实例化等等。</p>
+
+<h2>显性的实例化</h2>
+
+<h3>new 关键字实例化对象</h3>
+
+<p>调用相应的构造函数完成实例化。（类中的非静态成员变量如果有初始化语句，都会被隐式的加入到构造函数中）代码如下：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span>  <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">String</span> <span class="n">strA</span> <span class="o">=</span> <span class="s">&quot;xyz&quot;</span><span class="o">;</span>
+</span><span class='line'>    <span class="n">String</span> <span class="n">strB</span> <span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="nf">Test</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span><span class="o">){</span>
+</span><span class='line'>        <span class="n">strB</span> <span class="o">=</span> <span class="n">str</span> <span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+</span><span class='line'>            <span class="n">Test</span> <span class="n">t</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Test</span><span class="o">(</span><span class="s">&quot;abc&quot;</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在 eclipse 中装了 <a href="http://asm.ow2.org/">ASM bytecode</a> 插件后，观察.class 文件中的构造函数对应的字节码如下：</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/09/08/initliate-objects-in-java/">Read on &rarr;</a>
     </footer>
   
 
@@ -822,65 +904,6 @@ java -javaagent:ASMInstrument.jar   -cp ./  XXXX xxx
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/09/01/blog-log/">Biaobiaoqi的博客日志</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-01T01:40:00+08:00" pubdate data-updated="true">Sep 1<span>st</span>, 2013</time>
-        
-         | <a href="/blog/2013/09/01/blog-log/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>鉴于友言的客服不搭理的态度和时而无法正常显示以及管理界面的难以使用，决定将评论系统切换到 disqus 上。</p>
-
-<p>最近一直在更改博客的定制。就像一个人一样，产品也是由生命的，她的脚印就是她价值的体现。于是我萌生了将她的改变全部记录下来的想法，只恨没有在四个月前刚建起博客时就意识到这一点。</p>
-
-<p>这就是本文的初衷了。</p>
-
-<p>&#8211; 2013/9/1</p>
-
-<h2>历史</h2>
-
-<ul>
-<li><p>2013/4 octopress 博客在 github 上成功搭建</p></li>
-<li><p>2013/5 拟定了“首页”、“技术”、“生活”、“关于”的顶栏 tag 结构，增加了友言评论功能，jiathis 分享功能，侧边栏的微博秀和豆瓣秀。</p></li>
-<li><p>2013/7 侧边栏增加标签云，并增加了“标签云”顶栏 tag。取消侧边栏微博秀。</p></li>
-<li><p>2013/8 更换博客主题为 whitelake。</p></li>
-</ul>
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/09/01/blog-log/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -896,12 +919,12 @@ java -javaagent:ASMInstrument.jar   -cp ./  XXXX xxx
  <br /> 
   <ul class="tag-cloud">
     <a style="font-size: 180%" href="/tags/algorithm/">algorithm</a> &nbsp 
-<a style="font-size: 143%" href="/tags/bytecode/">bytecode</a> &nbsp 
+<a style="font-size: 149%" href="/tags/bytecode/">bytecode</a> &nbsp 
 <a style="font-size: 115%" href="/tags/diary/">diary</a> &nbsp 
 <a style="font-size: 167%" href="/tags/distributed/">distributed</a> &nbsp 
 <a style="font-size: 135%" href="/tags/hadoop/">hadoop</a> &nbsp 
-<a style="font-size: 159%" href="/tags/java/">java</a> &nbsp 
-<a style="font-size: 143%" href="/tags/jvm/">jvm</a> &nbsp 
+<a style="font-size: 164%" href="/tags/java/">java</a> &nbsp 
+<a style="font-size: 149%" href="/tags/jvm/">jvm</a> &nbsp 
 <a style="font-size: 115%" href="/tags/life/">life</a> &nbsp 
 <a style="font-size: 143%" href="/tags/methodology/">methodology</a> &nbsp 
 <a style="font-size: 126%" href="/tags/network/">network</a> &nbsp 
@@ -918,7 +941,7 @@ java -javaagent:ASMInstrument.jar   -cp ./  XXXX xxx
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2013/09/08/string-interning/">对Java字符的探究</a>
+        <a href="/blog/2013/09/08/string-interning/">对Java字符串的探究</a>
       </li>
     
       <li class="post">
@@ -930,11 +953,11 @@ java -javaagent:ASMInstrument.jar   -cp ./  XXXX xxx
       </li>
     
       <li class="post">
-        <a href="/blog/2013/09/08/three-principles-of-classloader-operation/">类加载器操作三原则[译]</a>
+        <a href="/blog/2013/09/08/initliate-objects-in-java/">Java类的实例化总结</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2013/09/08/java-class-loading-linking-and-initialising/">Java类的装载、链接和初始化</a>
+        <a href="/blog/2013/09/08/three-principles-of-classloader-operation/">类加载器操作三原则[译]</a>
       </li>
     
   </ul>
