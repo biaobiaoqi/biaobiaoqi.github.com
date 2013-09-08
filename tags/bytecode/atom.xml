@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: bytecode | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/tags/bytecode/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-09-08T04:19:37+08:00</updated>
+  <updated>2013-09-08T15:52:46+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -12,6 +12,237 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[对Java字符的探究]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/09/08/string-interning/"/>
+    <updated>2013-09-08T13:01:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/09/08/string-interning</id>
+    <content type="html"><![CDATA[<h2>问题的出发点</h2>
+
+<p>在网上看到一道题：</p>
+
+<p><code>java
+String str = new String("abc");  
+</code></p>
+
+<p>以上代码执行过程中生成了多少个String对象？</p>
+
+<p>答案写的是两个。"abc"本身是一个，而new又生成了一个。</p>
+
+<h2>"abc"是什么</h2>
+
+<p>查看这句程序的字节码，如下：
+```
+NEW String</p>
+
+<pre><code>DUP  
+LDC "abc"  
+INVOKESPECIAL String.&lt;init&gt;(String) : void  
+ASTORE 1   
+</code></pre>
+
+<p><code>``
+指令</code>ldc indexbyte`的含义：将两字节的值从indexbyte索引的常量池中的项中推到方法栈上。</p>
+
+<p>指令<code>LDC "abc"</code>说明了"abc"并不是直接以对象存在的，而是存在于常量池的索引中。String的构造函数调用命令实际使用的就是String类型作为参数，那么，栈上应该有一个String类型的索引。</p>
+
+<p>由此我们得出，在字节码中，ldc命令在常量池中找到了能索引到“abc”那个String对象的索引值。</p>
+
+<h2>常量池</h2>
+
+<p>常量池是类文件（.class）文件中的一部分，记录了许多常量信息，索引的字符串信息。</p>
+
+<p>由于Java是动态加载的，类文件并没有包含程序运行时的内存布局，方法调用等无法直接记录出方法的物理位置，常量池通过索引的方法解决了这个问题。</p>
+
+<!--more-->
+
+
+<p>常量池中存着许多表，其中Constant_Utf8_info表中，记录着会被初始化为String对象的字符串的字面值（iteral）。
+而在String 的java doc中，有对String字面值的说明：</p>
+
+<blockquote><p>All string literals in Java programs, such as "abc", are implemented as instances of this class.</p></blockquote>
+
+<p>在Java编译的过程中，确定下来的String字面值都先被优化记录在常量池中（那些双引号字符串，都是以CONSTANT_utf8_info的形式存储在常量池中的）。也就是说，Java源代码文件中出现的那些诸如"abc"字符串，都已经被提前放在了常量池中。</p>
+
+<p>可以使用如下代码验证这一点：</p>
+
+<p>```java
+public class Program<br/>
+{</p>
+
+<pre><code>public static void main(String[] args)  
+{  
+   String str1 = "Hello";    
+   String str2 = "Hello";   
+   System.out.print(str1 == str2);  
+}  
+</code></pre>
+
+<p>}<br/>
+```</p>
+
+<p>输出结果是true.说明"Hello"作为对象是被程序从同一个内存空间读取出来的。</p>
+
+<p>常量池是编译时产生的，存在于类文件中（*.class文件）。运行时，JVM中每个对象都拥有自己的运行时常量池（run time constant pool）。</p>
+
+<h2>字符串池</h2>
+
+<p>我在String 的java doc中又发现了一个有趣的method：intern() ,我翻译如下：</p>
+
+<blockquote><p>当intern方法被调用，如果池中已经拥有一个与该String的字符串值相等（即equals()调用后为true）的String对象时，那么池中的那个String对象会被返回。否则，池中会增加这个对象，并返回当前这个String对象。</p></blockquote>
+
+<p>其中有介绍一个字符串池的东西：字符串池（String pool），初始是空的，由类私有的控制。</p>
+
+<p>查看java.lang.String的源代码，发现Intern()方法是一个native方法，即本地实现的方法，而不是一个java方法，这让我们不能直观的看到字符串池的实现细节。不过能够理解字符串池其实是类似于线程池的缓冲器，可以起到节约内存的作用。如下代码可以验证</p>
+
+<p>```java
+package biaobiaoqi.thinkingInJava;</p>
+
+<p>public class Test {</p>
+
+<pre><code>public static void main(String[] args){  
+
+    String strA1 = "ab";  
+    String strA2 = "c";  
+    String strB1 = "a";  
+    String strB2 = "bc" ;  
+    System.out.println((strA1+strA2).intern() == (strB1 + strB2).intern());  
+
+}  
+</code></pre>
+
+<p>}
+```
+输出结果为true。</p>
+
+<p>现代的JVM实现里，考虑到垃圾回收（Garbage Collection）的方便，将<a href="http://en.wikipedia.org/wiki/Java_Virtual_Machine#Heap">heap</a>划分为三部分： young generation 、 tenured generation（old generation）和 permanent generation( permgen )</p>
+
+<p>字符串池是为了解决字符串重复的问题，生命周期长，它存在于permgen中。</p>
+
+<h2>总结</h2>
+
+<p>编译Java源代码时，源文件中出现的双引号内的字符串都被收纳到常量池中，用CONSTANT_utf8_info项存储着。</p>
+
+<p>JVM中，相应的类被加载运行后，常量池对应的映射到JVM的运行时常量池中。其中每项CONSTANT_utf8_info（也就试记录那些字符串的）都会在常量引用解析时，自动生成相应的internal String，记录在字符串池中。</p>
+
+<p>回过头来看看文章刚开始的那个问题。</p>
+
+<p><code>java
+String str = new String("abc");
+</code>
+这里确实是有两个String对象生成了。</p>
+
+<p><code>new String("xxx")</code> 创建的String 对象会在heap 中重新生成新的String 对象，绕过字符串池的管辖。而如果使用<code>String str = "xxx"</code>则先查看字符串池 是否已经存在，存在则直接返回PermGen中的该String 对象，否则生成新的String 对象，并将它加入字符串池中。</p>
+
+<blockquote><p>尽量使用<code>String str = "abc";</code>，而不是<code>String str = new String("abc")；</code>用new的方法肯定会开辟新的heap空间，而前者的方法，则会通过string interning优化。</p></blockquote>
+
+<h3>参考资料</h3>
+
+<ul>
+<li><a href="http://www.codeinstructions.com/2009/01/busting-javalangstringintern-myths.html">Busting java.lang.String.intern() Myths</a></li>
+<li><a href="http://book.douban.com/subject/1788390/">Inside the JAVA2 virtual machine</a></li>
+<li><a href="http://book.douban.com/subject/1610251/">Programming for the java virtual machine</a></li>
+<li><a href="http://www.xyzws.com/Javafaq/what-is-string-literal-pool/3">What is String literal pool? How to create a String</a></li>
+<li><a href="http://stackoverflow.com/questions/4918399/what-type-of-memory-heap-or-stack-string-constant-pool-in-java-gets-stored">What type of memory (Heap or Stack) String constant pool in Java gets stored?</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Java构造方法中的执行顺序]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/09/08/strange-behavior-using-braces-in-java/"/>
+    <updated>2013-09-08T12:58:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/09/08/strange-behavior-using-braces-in-java</id>
+    <content type="html"><![CDATA[<p>这道题来自<a href="http://stackoverflow.com/questions/8185780/strange-behavior-using-braces-in-java/8186881#8186881">stackoverflow</a>。</p>
+
+<h2>问题描述：</h2>
+
+<p>有如下代码，求其输出内容。</p>
+
+<p>```java
+public class Test<br/>
+{</p>
+
+<pre><code>public int a = 10;  
+Test(){System.out.println("1");}  
+
+{System.out.println("2");}  
+
+static{System.out.println("3");}  
+
+public static void main(String args[])  
+{  
+    new Test();  
+}  
+</code></pre>
+
+<p>}
+```</p>
+
+<h2>分析</h2>
+
+<p>作为静态区段的语句，容易知道，3是会最先出现的。容易弄错的一点是 到底是1和2的出现顺序。</p>
+
+<p>我们可以参考字节码来分析。在eclipse中使用ASM bytecode 插件，得到相应的字节码：</p>
+
+<p>```java
+// class version 50.0 (50)<br/>
+// access flags 0x21<br/>
+public class Test {<br/>
+  // compiled from: Test.java<br/>
+  static <clinit>() : void</p>
+
+<pre><code>GETSTATIC System.out : PrintStream  
+LDC "3"  
+INVOKEVIRTUAL PrintStream.println(String) : void  
+RETURN  
+</code></pre>
+
+<p>  <init>() : void</p>
+
+<pre><code>ALOAD 0: this  
+INVOKESPECIAL Object.&lt;init&gt;() : void  
+ALOAD 0: this  
+BIPUSH 10  
+PUTFIELD Test.a : int  
+GETSTATIC System.out : PrintStream  
+LDC "2"  
+INVOKEVIRTUAL PrintStream.println(String) : void  
+GETSTATIC System.out : PrintStream  
+LDC "1"  
+INVOKEVIRTUAL PrintStream.println(String) : void  
+RETURN  
+</code></pre>
+
+<p>  public static main(String[]) : void</p>
+
+<pre><code>NEW Test  
+INVOKESPECIAL Test.&lt;init&gt;() : void  
+RETURN  
+</code></pre>
+
+<p>}
+```</p>
+
+<p>正如我们所想，3是被放在类构造方法中，这是类的初始化函数，固然在类的初始化时出现。</p>
+
+<!--more-->
+
+
+<p>而在构造方法中先出现2，之后才是1。问题的核心集中到对象构造方法的指令顺序问题。实际上，在对象构造方法中，会先执行一些隐性的指令，比如父类的构造方法、{}区段的内容等，然后在执行显性的构造方法中的指令：</p>
+
+<ul>
+<li><ol>
+<li>Java编译时，对象构造方法里先嵌入隐式的指令，完毕之后，再执行Java源代码中显示的代码。</li>
+</ol>
+</li>
+<li>2.那些隐式的指令，包括父类的构造方法、变量的初始化、{}区段里的内容，并严格按照这个顺序嵌入到对象的构造方法中。</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[类加载器操作三原则[译]]]></title>
@@ -636,129 +867,6 @@ public Class loadClass( String name )
 
 <p>}
 ```</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Java 类加载器]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/09/07/java-classloader/"/>
-    <updated>2013-09-07T23:15:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/09/07/java-classloader</id>
-    <content type="html"><![CDATA[<h2>背景知识</h2>
-
-<p>Java平台无关的特性是由JVM(Java 虚拟机)支撑的。不同平台有不同的JVM支持。</p>
-
-<p>计算机领域有这么一句话：</p>
-
-<blockquote><p>计算机科学领域的任何问题都可以通过增加一个间接的中间层来解决。</p></blockquote>
-
-<p>JVM其实也可以看做是运行的Java程序和实际的硬件架构之间的一个新抽象层。</p>
-
-<p>一个Java程序从编写到执行的流程一句话概括如下：首先将Java源代码（*.java文件）编译成字节码（*.class文件，字节码之于Java源码，类比于汇编代码之于C源码），然后由JVM运行那些字节码文件。</p>
-
-<p>JVM工作原理如下图</p>
-
-<p><img src="https://dl.dropboxusercontent.com/u/64021093/Java%20Classloader/JVM%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86.gif" alt="JVM framework" /></p>
-
-<p>Java中所有的类文件都需要由类加载器（Class Loader）装载到JVM中。可以简单的将JVM理解为一个工厂，类文件就是等待加工的原料，加载器则是装载货物的工人。Java类被装载之后，才能进入到JVM的运行时机制中，开始运行。</p>
-
-<h2>类加载器的作用</h2>
-
-<p>顾名思义，Java类加载器的作用是向JVM中装载类。</p>
-
-<p>这种动态装载的技术是Java的一种创新，让类能够动态加载到JVM中执行（更详细的介绍参见 <a href="http://www.ibm.com/developerworks/java/library/j-dyn0429/">Java programming dynamics, Part 1: Java classes and class loading</a>）。</p>
-
-<!--more-->
-
-
-<p>而它的意义远非仅仅是加载类这么简单。实际上，类加载器对Java的沙箱模型具有重大意义。他和安全管理模块（负责对类文件中的字节码进行校验，防止恶意代码的攻击）一起保证了JVM运行的安全性。</p>
-
-<h2>类加载机制</h2>
-
-<p>大体上，每个Java应用使用了如下几种类型的类加载器:</p>
-
-<ul>
-<li><p>1.引导类加载器（bootstrap class loader）</p>
-
-<p>  它由C++编写（注意，它非常特殊，并非Java中的ClassLoader类的子类）。当JVM启动时，引导类加载器也随之启动，它负责加载Java 核心类，如JRE的rt.jar、charsets.jar等。从Java1.2开始，它只加载Java核心API部分。</p>
-
-<p>  因为这些类是系统信任的类，所以这里的装载，跳过了很多对字节码的验证过程。</p></li>
-<li><p>2.扩展类加载器（extension class loader）</p>
-
-<p> 它负责加载/lib/ext中的java扩展类。</p></li>
-<li><p>3.系统类加载器（System Class Loader）</p>
-
-<p>这是很重要的一个加载器，加载Java的路径classpath下的类。应用程序的装载默认由它负责。</p></li>
-<li><p>4.自定义类加载器</p>
-
-<p> 由系统类加载器继承得到。它的存在让我们能定制出各种不同功能的加载器，增加了Java的可扩展性。自定义的类加载器如果没有显示的继承关系，则其父类默认为系统类加载器。</p></li>
-</ul>
-
-
-<p>一个JVM，只拥有一个引导类加载器，同时可以拥有多个自定义类加载器，方便不同应用环境的用户定制。比如，自定义类加载器能够动态的修改字节码，让它能接收并加载从网上传来的类文件或Jar包，甚至是任何编码方式的压缩包。只要自定义类加载器能够正确识别并调用相应方法来实现类的加载和解析，一切都有可能。</p>
-
-<p>四种加载器不是四个独立的部分，他们之间具有一种特殊的父子关系，每个类加载器都保持着他们的父加载器的应用，共同组成了一条父子关系链，被称作 parent-delegation模式。如下图</p>
-
-<p><img src="https://dl.dropboxusercontent.com/u/64021093/Java%20Classloader/java%20classloader%20hierachy.gif" alt="class loader hirerachy" /></p>
-
-<p>类加载器按照如此树形排列。类加载的查找顺序是：</p>
-
-<p>cache --> parent --> self</p>
-
-<p>子类加载器需要加载某个类时，并不是直接加载，而是首先查看cache（cache可以理解为加载器已经加载过的类的记录）。如果没有，则向父加载器提出请求，查看是否存在于父加载器的cache中。如此往上，直到根部的引导类加载器。如果引导类加载器的cache也没有这个类，则它尝试直接加载这个类，如果无法成功，则请求儿子加载器加载，依次往下。</p>
-
-<p>直接接受程序请求加载某类的加载器被称作初始类加载器（Initiating class loader），而最终加载了该类的加载器则成为定义类加载器（defining class loader）。</p>
-
-<p>类加载器的<code>getParent()</code>方法可以获得加载器的父亲。下面的代码用于输出各个层级的类加载器。</p>
-
-<p>```java</p>
-
-<p>public class ClassLoaderTest {</p>
-
-<pre><code>public static void main(String[] args) {    
-    ClassLoader loader = Thread.currentThread().getContextClassLoader();    
-    System.out.println("current loader:"+loader);    
-    System.out.println("parent loader:"+loader.getParent());    
-    System.out.println("grandparent loader:"+loader.getParent().getParent());    
-}    
-</code></pre>
-
-<p>}</p>
-
-<p>```</p>
-
-<p>显示的结果是</p>
-
-<p>```
-current loader:sun.misc.Launcher$AppClassLoader@1c78e57
-parent loader:sun.misc.Launcher$ExtClassLoader@5224ee
-grandparent loader:null</p>
-
-<p>```</p>
-
-<p>grandparent显示的值是null，并不意味着他没有parent，而是因为它是由C++编写的引导类加载器。他并不是ClassLoader类的子类，也就无法使用getParent()方法获得返回了。</p>
-
-<p>如此，parent class loader总是拥有更高的加载优先级，这让想利用自定义加载器伪装加载某些重要类的恶意代码无法得逞。如果好奇，你可以尝试自己写package java.lang里的String类，加载执行试试～
-另外，当类A调用另类B时，B会由加载A的class loader加载，从而实现。</p>
-
-<h2>加载类的流程</h2>
-
-<p>类的装载大致可以分为三个步骤（如下图）：</p>
-
-<ul>
-<li>1.装载(loading)</li>
-<li>2.链接(linking)</li>
-<li>3.初始化(initialising)</li>
-</ul>
-
-
-<p><img src="https://dl.dropboxusercontent.com/u/64021093/Java%20Classloader/ClassLoaderProcess.gif" alt="class loader process" /></p>
-
-<p>跟C++或者C程序有很大的不同，编译过后的类文件中的字节码并没有设计好内存布局，这些需要等到加载之后的链接阶段，才会完成。这也是java可移植性中精彩的一笔！</p>
-
-<p>关于类的加载、链接和初始化，请参见另一篇博文：<a href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loading-linking-and-initialising/">《Java类的装载、链接和初始化》</a></p>
-
-<p>关于类加载器的编程实践，请参见另一篇博文：<a href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loader-in-practice/">《Java类加载器编程实践》</a></p>
 ]]></content>
   </entry>
   

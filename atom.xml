@@ -4,7 +4,7 @@
   <title><![CDATA[Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-09-08T04:19:37+08:00</updated>
+  <updated>2013-09-08T15:52:46+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -12,6 +12,392 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[对Java字符的探究]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/09/08/string-interning/"/>
+    <updated>2013-09-08T13:01:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/09/08/string-interning</id>
+    <content type="html"><![CDATA[<h2>问题的出发点</h2>
+
+<p>在网上看到一道题：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">String</span> <span class="n">str</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="s">&quot;abc&quot;</span><span class="o">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>以上代码执行过程中生成了多少个 String 对象？</p>
+
+<p>答案写的是两个。&#8221;abc&#8221;本身是一个，而 new 又生成了一个。</p>
+
+<h2>&#8220;abc&#8221;是什么</h2>
+
+<p>查看这句程序的字节码，如下：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">NEW</span> <span class="n">String</span>
+</span><span class='line'>    <span class="n">DUP</span>
+</span><span class='line'>    <span class="n">LDC</span> <span class="s">&quot;abc&quot;</span>
+</span><span class='line'>    <span class="n">INVOKESPECIAL</span> <span class="n">String</span><span class="o">.&lt;</span><span class="n">init</span><span class="o">&gt;(</span><span class="n">String</span><span class="o">)</span> <span class="o">:</span> <span class="kt">void</span>
+</span><span class='line'>    <span class="n">ASTORE</span> <span class="mi">1</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>指令<code>ldc indexbyte</code>的含义：将两字节的值从 indexbyte 索引的常量池中的项中推到方法栈上。</p>
+
+<p>指令<code>LDC "abc"</code>说明了&#8221;abc&#8221;并不是直接以对象存在的，而是存在于常量池的索引中。String 的构造函数调用命令实际使用的就是 String 类型作为参数，那么，栈上应该有一个 String 类型的索引。</p>
+
+<p>由此我们得出，在字节码中，ldc 命令在常量池中找到了能索引到“abc”那个 String 对象的索引值。</p>
+
+<h2>常量池</h2>
+
+<p>常量池是类文件（.class）文件中的一部分，记录了许多常量信息，索引的字符串信息。</p>
+
+<p>由于 Java 是动态加载的，类文件并没有包含程序运行时的内存布局，方法调用等无法直接记录出方法的物理位置，常量池通过索引的方法解决了这个问题。</p>
+
+<!--more-->
+
+
+<p>常量池中存着许多表，其中 Constant_Utf8_info 表中，记录着会被初始化为 String 对象的字符串的字面值（iteral）。
+而在 String 的 java doc 中，有对 String 字面值的说明：</p>
+
+<blockquote><p>All string literals in Java programs, such as &#8220;abc&#8221;, are implemented as instances of this class.</p></blockquote>
+
+<p>在 Java 编译的过程中，确定下来的 String 字面值都先被优化记录在常量池中（那些双引号字符串，都是以 CONSTANT_utf8_info 的形式存储在常量池中的）。也就是说，Java 源代码文件中出现的那些诸如&#8221;abc&#8221;字符串，都已经被提前放在了常量池中。</p>
+
+<p>可以使用如下代码验证这一点：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Program</span>
+</span><span class='line'><span class="o">{</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span>
+</span><span class='line'>    <span class="o">{</span>
+</span><span class='line'>       <span class="n">String</span> <span class="n">str1</span> <span class="o">=</span> <span class="s">&quot;Hello&quot;</span><span class="o">;</span>
+</span><span class='line'>       <span class="n">String</span> <span class="n">str2</span> <span class="o">=</span> <span class="s">&quot;Hello&quot;</span><span class="o">;</span>
+</span><span class='line'>       <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">str1</span> <span class="o">==</span> <span class="n">str2</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>输出结果是 true.说明&#8221;Hello&#8221;作为对象是被程序从同一个内存空间读取出来的。</p>
+
+<p>常量池是编译时产生的，存在于类文件中（*.class 文件）。运行时，JVM 中每个对象都拥有自己的运行时常量池（run time constant pool）。</p>
+
+<h2>字符串池</h2>
+
+<p>我在 String 的 java doc 中又发现了一个有趣的 method：intern() ,我翻译如下：</p>
+
+<blockquote><p>当 intern 方法被调用，如果池中已经拥有一个与该 String 的字符串值相等（即 equals()调用后为 true）的 String 对象时，那么池中的那个 String 对象会被返回。否则，池中会增加这个对象，并返回当前这个 String 对象。</p></blockquote>
+
+<p>其中有介绍一个字符串池的东西：字符串池（String pool），初始是空的，由类私有的控制。</p>
+
+<p>查看 java.lang.String 的源代码，发现 Intern()方法是一个 native 方法，即本地实现的方法，而不是一个 java 方法，这让我们不能直观的看到字符串池的实现细节。不过能够理解字符串池其实是类似于线程池的缓冲器，可以起到节约内存的作用。如下代码可以验证</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kn">package</span> <span class="n">biaobiaoqi</span><span class="o">.</span><span class="na">thinkingInJava</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">String</span> <span class="n">strA1</span> <span class="o">=</span> <span class="s">&quot;ab&quot;</span><span class="o">;</span>
+</span><span class='line'>        <span class="n">String</span> <span class="n">strA2</span> <span class="o">=</span> <span class="s">&quot;c&quot;</span><span class="o">;</span>
+</span><span class='line'>        <span class="n">String</span> <span class="n">strB1</span> <span class="o">=</span> <span class="s">&quot;a&quot;</span><span class="o">;</span>
+</span><span class='line'>        <span class="n">String</span> <span class="n">strB2</span> <span class="o">=</span> <span class="s">&quot;bc&quot;</span> <span class="o">;</span>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">((</span><span class="n">strA1</span><span class="o">+</span><span class="n">strA2</span><span class="o">).</span><span class="na">intern</span><span class="o">()</span> <span class="o">==</span> <span class="o">(</span><span class="n">strB1</span> <span class="o">+</span> <span class="n">strB2</span><span class="o">).</span><span class="na">intern</span><span class="o">());</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>输出结果为 true。</p>
+
+<p>现代的 JVM 实现里，考虑到垃圾回收（Garbage Collection）的方便，将 <a href="http://en.wikipedia.org/wiki/Java_Virtual_Machine#Heap">heap</a> 划分为三部分： young generation 、 tenured generation（old generation）和 permanent generation( permgen )</p>
+
+<p>字符串池是为了解决字符串重复的问题，生命周期长，它存在于 permgen 中。</p>
+
+<h2>总结</h2>
+
+<p>编译 Java 源代码时，源文件中出现的双引号内的字符串都被收纳到常量池中，用 CONSTANT_utf8_info 项存储着。</p>
+
+<p>JVM 中，相应的类被加载运行后，常量池对应的映射到 JVM 的运行时常量池中。其中每项 CONSTANT_utf8_info（也就试记录那些字符串的）都会在常量引用解析时，自动生成相应的 internal String，记录在字符串池中。</p>
+
+<p>回过头来看看文章刚开始的那个问题。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">String</span> <span class="n">str</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="s">&quot;abc&quot;</span><span class="o">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这里确实是有两个 String 对象生成了。</p>
+
+<p><code>new String("xxx")</code> 创建的 String 对象会在 heap 中重新生成新的 String 对象，绕过字符串池的管辖。而如果使用<code>String str = "xxx"</code>则先查看字符串池 是否已经存在，存在则直接返回 PermGen 中的该 String 对象，否则生成新的 String 对象，并将它加入字符串池中。</p>
+
+<blockquote><p>尽量使用<code>String str = "abc";</code>，而不是<code>String str = new String("abc")；</code>用 new 的方法肯定会开辟新的 heap 空间，而前者的方法，则会通过 string interning 优化。</p></blockquote>
+
+<h3>参考资料</h3>
+
+<ul>
+<li><a href="http://www.codeinstructions.com/2009/01/busting-javalangstringintern-myths.html">Busting java.lang.String.intern() Myths</a></li>
+<li><a href="http://book.douban.com/subject/1788390/">Inside the JAVA2 virtual machine</a></li>
+<li><a href="http://book.douban.com/subject/1610251/">Programming for the java virtual machine</a></li>
+<li><a href="http://www.xyzws.com/Javafaq/what-is-string-literal-pool/3">What is String literal pool? How to create a String</a></li>
+<li><a href="http://stackoverflow.com/questions/4918399/what-type-of-memory-heap-or-stack-string-constant-pool-in-java-gets-stored">What type of memory (Heap or Stack) String constant pool in Java gets stored?</a></li>
+</ul>
+
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/09/08/string-interning/'>http://biaobiaoqi.github.com/blog/2013/09/08/string-interning/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[custom premain method]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/09/08/custom-premain-method/"/>
+    <updated>2013-09-08T13:01:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/09/08/custom-premain-method</id>
+    <content type="html"><![CDATA[<p>背景
+想调用 ASM API （用于字节码处理的开源 API）对字节码进行处理，目标是实现对 java 程序运行时各种对象的动态跟踪，并进一步分析各个对象之间的关系（研究前提是目前的 UML 锁阐释的 whole-part relation 是比较混乱的）。由于 ASM 相关内容又可以延伸很远，在此文中略过。
+在完成了能对字节码进行处理的 ASM 调用以后，需要考虑如何将这些功能与正常的 java 程序整合到一起。
+首先，我考虑到了自定义 ClassLoader 的方法（具体内容见另一篇博客《ClassLoader 编程实践》），即在程序的 main 入口处，首先加载自定义的 classloader，然后通过 reflect 技术使用这个 classloader 加载并调用测试程序（就是被跟踪的程序，姑且称之为测试程序）的入口类。
+这个方法一个很大的限制，在于每次都必须先找到测试程序的入口类，而对于有的封装成 jar 的程序集合，这一点相对比较难控制。</p>
+
+<p>于是，有了这里介绍的方法：通过 java.lang.instrument 实现的 java agent 对象操作字节码，也就试所谓的 AOP（面向方面编程）
+中文介绍参加 IBM developworks 上的文档：《Java SE 6 新特性: Instrumentation 新功能》。内有详细解释。其中提到的 BCEL 即 Byte Code Engineering Library，是 apache 的开源项目，挺复杂，而 ASM 库有相对详尽的说明文档。这也是我选择了 ASM 实现的原因。
+博主的程序里，其实很多上文提到的 java6 新特性都没有使用到：虚拟机启动后的动态 instrument ，本地方法的 instrument 都没有使用到。这里仅就源代码中的程序简单介绍 instrument 的基本功能和用法。
+程序中，除了 ASMAgent 以外的所有类都是调用 ASM API 实现对 测试程序中 各个对象的 construct 、 方法调用 ， field 赋值等操作行为的记录（其中对 Collection 子类的处理着实费了一番心血= =，字节码操作很细节，容易出错。以后再写 ASM 方面的博文叙述）。
+在此，我们将 ASM API 调用部分抽象成一个整体的接口好了，就是如下几句代码（在 ASMAgent.java 中）：
+[java] view plaincopy
+ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);<br/>
+ASMClassAdapter mca = new ASMClassAdapter(cw); <br/>
+ClassReader cr = new ClassReader(classfileBuffer);<br/>
+cr.accept(mca, 0);<br/>
+retVal = cw.toByteArray();<br/>
+其中 classfileBuffer 是类文件加载时的原始的字节码，retVal 则是经过处理后的字节码。</p>
+
+<p>============================正文分割===========================
+原理
+JVMTI（Java Virtual Machine Tool Interface）是一套本地编程接口集合，它提供了一套”代理”程序机制，可以支持第三方工具程序以代理的方式连接和访问 JVM，并利用 JVMTI 提供的丰富的编程接口，完成很多跟 JVM 相关的功能。关于 JVMTI 的详细信息，请参考 Java SE 6 文档（请参见 参考资源）当中的介绍。
+java.lang.instrument 包的实现，也就是基于这种机制的：在 Instrumentation 的实现当中，存在一个 JVMTI 的代理程序，通过调用 JVMTI 当中 Java 类相关的函数来完成 Java 类的动态操作。
+Instrumentation 的最大作用，就是类定义动态改变和操作。在 Java SE 5 及其后续版本当中，开发者可以在一个普通 Java 程序（带有 main 函数的 Java 类）运行时，通过 – javaagent 参数指定一个特定的 jar 文件（包含 Instrumentation 代理）来启动 Instrumentation 的代理程序。
+步骤
+1.编写 java 代理类。
+这个类中，premain 方法是关键，对比于一般的入口 main 一样，这里的 premain 是在 main 之前执行的。它会告诉 JVM 如何处理加载上来的 java 字节码。如下例：
+[java] view plaincopy
+public static void premain(String agentArgs, Instrumentation inst) {</p>
+
+<pre><code>                Trace.BeginTrace(); // it's important for trace files  
+        inst.addTransformer(new ASMAgent());  
+    }  
+</code></pre>
+
+<p>值得注意的是，addTransformer 实现了对字节码处理的方法的回调。
+[java] view plaincopy
+inst.addTransformer(new ASMAgent());<br/>
+类 ASMAgent 包含着实现对 java 字节码处理的方法：transform()。它来自于 ClassFileTransformer 接口。为了方便，博主这里将对 ClassFileTransformer 接口的实现跟 ASMAgent 类放在了一起。
+[java] view plaincopy
+public byte[] transform(ClassLoader loader, String className,Class&lt;?> classBeingRedefined,</p>
+
+<pre><code>                                    ProtectionDomain protectionDomain,byte[] classfileBuffer)  
+        throws IllegalClassFormatException {  
+        byte[] retVal = null;  
+
+        if(isInstrumentable(className)){  
+
+                ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);  
+            ASMClassAdapter mca = new ASMClassAdapter(cw);   
+            ClassReader cr = new ClassReader(classfileBuffer);  
+            cr.accept(mca, 0);  
+            retVal = cw.toByteArray();  
+        }else{  
+                retVal = classfileBuffer ;  
+            }  
+
+        return retVal;  
+}  
+</code></pre>
+
+<p>2.打包代理类。
+只有合理打包并在 manifest 文件中记录下相应的键值对之后，才能正常执行 premain 的内容。
+manifest 文件中需要添加的键值对是：
+[plain] view plaincopy
+Premain-Class : biaobiaoqi.asm.ASMAgent<br/>
+jar 打包和 manifest 的修改方法见另一篇博文《JAR 文件操作基础（Using JAR Files: The Basics）》
+另外，如果对字节码的处理有应用到了其他的类，需要在 manifest 中增加路径。键值对为：
+[plain] view plaincopy
+Class-Path: asm-3.0.jar</p>
+
+<p>3.执行
+执行测试程序时，添加“-javaagent:代理类的 jar[=传入 premain 的参数]”选项。
+比如，对于博主的程序，就是
+java -javaagent:ASMInstrument.jar   -jar XXXX.jar  xxxx
+其中 ASMInstrument.jar 是第二步中打包的程序，  XXX.jar 是需要测试的程序， xxx 是 XXX.jar 执行时可能的命令行参数。
+如果只是执行某.class 文件中的类，我们假设是在当前目录下的一个 XXXX 类，则是：
+java -javaagent:ASMInstrument.jar   -cp ./  XXXX xxx
+其中 xxx 是可能的命令行参数。</p>
+
+<p>源码下载
+编码期间遇到很多问题，比如在 instrument 方法中的 classlodaer 的一些判定操作。希望跟大家多交流～求勿喷。<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/09/08/custom-premain-method/'>http://biaobiaoqi.github.com/blog/2013/09/08/custom-premain-method/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Java构造方法中的执行顺序]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/09/08/strange-behavior-using-braces-in-java/"/>
+    <updated>2013-09-08T12:58:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/09/08/strange-behavior-using-braces-in-java</id>
+    <content type="html"><![CDATA[<p>这道题来自 <a href="http://stackoverflow.com/questions/8185780/strange-behavior-using-braces-in-java/8186881#8186881">stackoverflow</a>。</p>
+
+<h2>问题描述：</h2>
+
+<p>有如下代码，求其输出内容。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span>
+</span><span class='line'><span class="o">{</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span>
+</span><span class='line'>    <span class="n">Test</span><span class="o">(){</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;1&quot;</span><span class="o">);}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="o">{</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;2&quot;</span><span class="o">);}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">static</span><span class="o">{</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;3&quot;</span><span class="o">);}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span> <span class="n">args</span><span class="o">[])</span>
+</span><span class='line'>    <span class="o">{</span>
+</span><span class='line'>        <span class="k">new</span> <span class="nf">Test</span><span class="o">();</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>分析</h2>
+
+<p>作为静态区段的语句，容易知道，3 是会最先出现的。容易弄错的一点是 到底是 1 和 2 的出现顺序。</p>
+
+<p>我们可以参考字节码来分析。在 eclipse 中使用 ASM bytecode 插件，得到相应的字节码：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="c1">// class version 50.0 (50)  </span>
+</span><span class='line'><span class="c1">// access flags 0x21  </span>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
+</span><span class='line'>  <span class="c1">// compiled from: Test.java  </span>
+</span><span class='line'>  <span class="kd">static</span> <span class="o">&lt;</span><span class="n">clinit</span><span class="o">&gt;()</span> <span class="o">:</span> <span class="kt">void</span>
+</span><span class='line'>    <span class="n">GETSTATIC</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span> <span class="o">:</span> <span class="n">PrintStream</span>
+</span><span class='line'>    <span class="n">LDC</span> <span class="s">&quot;3&quot;</span>
+</span><span class='line'>    <span class="n">INVOKEVIRTUAL</span> <span class="n">PrintStream</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">String</span><span class="o">)</span> <span class="o">:</span> <span class="kt">void</span>
+</span><span class='line'>    <span class="n">RETURN</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="o">&lt;</span><span class="n">init</span><span class="o">&gt;()</span> <span class="o">:</span> <span class="kt">void</span>
+</span><span class='line'>    <span class="n">ALOAD</span> <span class="mi">0</span><span class="o">:</span> <span class="k">this</span>
+</span><span class='line'>    <span class="n">INVOKESPECIAL</span> <span class="n">Object</span><span class="o">.&lt;</span><span class="n">init</span><span class="o">&gt;()</span> <span class="o">:</span> <span class="kt">void</span>
+</span><span class='line'>    <span class="n">ALOAD</span> <span class="mi">0</span><span class="o">:</span> <span class="k">this</span>
+</span><span class='line'>    <span class="n">BIPUSH</span> <span class="mi">10</span>
+</span><span class='line'>    <span class="n">PUTFIELD</span> <span class="n">Test</span><span class="o">.</span><span class="na">a</span> <span class="o">:</span> <span class="kt">int</span>
+</span><span class='line'>    <span class="n">GETSTATIC</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span> <span class="o">:</span> <span class="n">PrintStream</span>
+</span><span class='line'>    <span class="n">LDC</span> <span class="s">&quot;2&quot;</span>
+</span><span class='line'>    <span class="n">INVOKEVIRTUAL</span> <span class="n">PrintStream</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">String</span><span class="o">)</span> <span class="o">:</span> <span class="kt">void</span>
+</span><span class='line'>    <span class="n">GETSTATIC</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span> <span class="o">:</span> <span class="n">PrintStream</span>
+</span><span class='line'>    <span class="n">LDC</span> <span class="s">&quot;1&quot;</span>
+</span><span class='line'>    <span class="n">INVOKEVIRTUAL</span> <span class="n">PrintStream</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">String</span><span class="o">)</span> <span class="o">:</span> <span class="kt">void</span>
+</span><span class='line'>    <span class="n">RETURN</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[])</span> <span class="o">:</span> <span class="kt">void</span>
+</span><span class='line'>    <span class="n">NEW</span> <span class="n">Test</span>
+</span><span class='line'>    <span class="n">INVOKESPECIAL</span> <span class="n">Test</span><span class="o">.&lt;</span><span class="n">init</span><span class="o">&gt;()</span> <span class="o">:</span> <span class="kt">void</span>
+</span><span class='line'>    <span class="n">RETURN</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>正如我们所想，3 是被放在类构造方法中，这是类的初始化函数，固然在类的初始化时出现。</p>
+
+<!--more-->
+
+
+<p>而在构造方法中先出现 2，之后才是 1。问题的核心集中到对象构造方法的指令顺序问题。实际上，在对象构造方法中，会先执行一些隐性的指令，比如父类的构造方法、{}区段的内容等，然后在执行显性的构造方法中的指令：</p>
+
+<ul>
+<li><ol>
+<li>Java 编译时，对象构造方法里先嵌入隐式的指令，完毕之后，再执行 Java 源代码中显示的代码。</li>
+</ol>
+</li>
+<li>2.那些隐式的指令，包括父类的构造方法、变量的初始化、{}区段里的内容，并严格按照这个顺序嵌入到对象的构造方法中。</li>
+</ul>
+
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/09/08/strange-behavior-using-braces-in-java/'>http://biaobiaoqi.github.com/blog/2013/09/08/strange-behavior-using-braces-in-java/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[类加载器操作三原则[译]]]></title>
@@ -2873,270 +3259,6 @@ I think we will make it open source and put the game into the market finally, bu
 <p>注意好这些方面，应该能 ac 了。保重。</p>
 
 <p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/07/31/pat-1001-1010-solutions/'>http://biaobiaoqi.github.com/blog/2013/07/31/pat-1001-1010-solutions/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[终于算完了这道『1+1』]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/07/29/after-pat-practice/"/>
-    <updated>2013-07-29T22:12:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/07/29/after-pat-practice</id>
-    <content type="html"><![CDATA[<p>在<a href="http://weibo.com/redow7">@ReDow</a>、<a href="http://weibo.com/cloudbye">@麦迪的小腿</a>和<a href="http://weibo.com/linest">@linest</a> 等小伙伴的帮助下，终于断断续续的爬完了 <a href="http://pat.zju.edu.cn/">PAT</a> 的 Basic Level 和 Advanced Level，阶段性填补了自己惨白的算法短板。在 cs 的圈子里，说 PAT 是入门的『1 + 1』不为过。刚完成『1 + 1』，作为五年科班的人，确实不够光彩。不过现在能做的也只是尽力弥补本科时间里的虚度。</p>
-
-<p>从亲手挖的坑里往外爬，需要付出比其他人更多的努力。没时间享受题目 ac 之后的快感（画外音：这么简单的题会有快感么=.=#），倒会时不时蹦出一股脑的蛋疼：『你当初干 XX 啥去了！』。</p>
-
-<h2>当初&#8230;</h2>
-
-<p>记得大一的时候，每天花好几个小时泡图书馆看各种 IT 杂志和技术书籍。在刚开始学 C 语言编程的时间里，我看着中间件、系统软件、终端融合、东软和用友金蝶之争等一系列摸不着头脑的东西，在对数据还没概念的时候，看着数据库的范式和 E-R 图…总之，就是一直在门外徘徊。</p>
-
-<p>之后专业课多了起来，我又兴高采烈的混在工高大神的队伍里，早上集结同学每天早上五点多轮流爬起来去自习室占座，以看似端正实则不专注的令人发指的学习态度在 GPA 榜单上持续退步着。浑浑噩噩的搞过数模，无果。当然，以『学渣』的水平充着『学霸』也是有好处的，就是沾染了大神的精神气，比如记忆犹新的有在 CMU 念书的鑫磊大神的专注、冷静和每天 4 小时的睡眠。同时，我还风风火火的参加了 ASES 和求是强鹰，搀和着所谓的创业。大四在爱尔兰的交流，除了英语和专业课，其他的倒是学的挺多，比如烧饭，单反和旅游……本科唯一做的跟编程有关的说得出口的，也就写了个 Android 程序在比赛里获了个奖，不提也罢的那种。</p>
-
-<h2>变</h2>
-
-<p>在《<a href="http://book.douban.com/subject/1048007/">高效能认识的七个习惯</a>》里看过一个观点：每个人都有属于自己的『关注圈』和『影响圈』。影响圈是个人对外界产出的途径，关注圈则意味着个人对外界的期许。可以想见，关注圈大于影响圈。正确的成长方式是尽力扩大影响圈，以此催生关注圈的扩大。而我则是走在了相反的方向：一直致力于开发自己的关注圈，后果是影响圈不见长进。一度我开始注意遏制自己这方面的好高骛远，不过事实证明，我还是比较喜欢在学爬得时候看走路的教学视频。</p>
-
-<!--more-->
-
-
-<p>后来听闻了杨绛先生的一则小事。大概是说，一个年轻人写信给杨绛，说自己平时许多问题想不明白，想请教下怎么应对。杨绛回复说『是你看书太少，想的太多』。第一眼看到这个故事，我的想法就是：那不是在说的我么。对我而言，『书』指的更泛一些，理解为阅历或许更恰当。让可能性禁锢了思想，不值得，不如踏出去，自己去找答案。</p>
-
-<p>研究生的一年又过去，很难说我这一年达到了自己的预期。不过也没怎样，世界变化这么快，也容不得静态的计划。至少，我渐渐的逼近了自己喜欢的生活节奏。</p>
-
-<h2>信仰</h2>
-
-<p>都说现在的国人根子里没有信仰，年岁越长也渐渐有些自己的体会。面对远超过 big-data 量级的选择，我时常彷徨，我不敢说自己有信仰。我只是一直在坚持找寻。</p>
-
-<p>用乔老爷子著名的斯坦福演讲中的一句话结束：</p>
-
-<blockquote><p>You can&#8217;t connect the dots looking forward. You can only connect them looking backwards, so you have to trust that the dots will somehow connect in your future. You have to trust in something&#8211;your gut, destiny, life, karma,whatever&#8211;because believing that the dots will connect down the road will give you the confidence to follow your heart, even when it leads you off the well-worn path, and that will make all the difference.</p></blockquote>
-
-<h3>PS：</h3>
-
-<p>据我所知网上的资料没有对 PAT 题型整体的把握和讲解。接下来的时间，我会整理下自己的代码和解题思路，将整理结果放到博客上来，也算自己的复习。链接都准备好了：<a href="http://biaobiaoqi.me/blog/2013/08/03/overcome-pat/">《PAT 练习题概览》</a>。如果是 404Error，就请再耐心等待几天吧;)</p>
-
-<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/07/29/after-pat-practice/'>http://biaobiaoqi.github.com/blog/2013/07/29/after-pat-practice/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[阿里离线数据处理平台2013暑期学校]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/07/19/odps-in-alibaba/"/>
-    <updated>2013-07-19T21:31:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/07/19/odps-in-alibaba</id>
-    <content type="html"><![CDATA[<p>本周有幸参加了为期两天的<a href="http://102.alibaba.com/competition/dataSummer.htm">阿里离线数据处理平台 2013 暑期学校</a>的学习。</p>
-
-<p>阿里的前辈们分不同的专题给大家介绍了飞天平台上的离线数据处理服务 ODPS（Open Data Processing Service）。
-内容上主要分为两部分，一部分是平台架构，一部分是数据分析。来听课的同学也就分为了两部分，而像我一样关注系统层面的人是少数。</p>
-
-<p>这也正常，用赵本山在『一代宗师』里的话来说，一个是面子，一个是里子。数据分析能直接产生表现层的数据，而系统平台则只是提供支持。
-成功了，大家看得到的是分析出的数据，而一旦失败了，那么系统平台的责任就大了。
-再者越贴近硬件层次的工作也注定越辛苦，深夜被吵醒也不是没有的事儿。好了，吐槽到此结束，下面是总结笔记整理出几页 slides：</p>
-
-<script async class="speakerdeck-embed" data-id="e0022eb0d24d013089506e9621fcaf9a" data-ratio="1.33333333333333" src="http://biaobiaoqi.github.com//speakerdeck.com/assets/embed.js"></script>
-
-
-
-
-<!--more-->
-
-
-<p>ppt 下载链接：<a href="https://speakerdeck.com/biaobiaoqi/odps-learning-summary">请戳我</a></p>
-
-<p>三巨头 BAT 都自主研发过大数据平台，另外两家在投入大量资金后面对困难最终关闭了项目，而阿里坚持了下来。通过了解 ODPS 的系统架构，可以看但工业界的系统和学术圈中提出的概念的差异。这也让我更清晰了之后自己的学习路线。</p>
-
-<p>非常感谢阿里暑期学校给予的这次机会来接触飞天系统，非常感谢各位讲师的介绍，特别是杨少华大哥对我的疑惑的耐心解答。<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/07/19/odps-in-alibaba/'>http://biaobiaoqi.github.com/blog/2013/07/19/odps-in-alibaba/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[出栈序列的可能性判定]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/07/16/verify-pop-sequence-for-stack/"/>
-    <updated>2013-07-16T01:32:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/07/16/verify-pop-sequence-for-stack</id>
-    <content type="html"><![CDATA[<h2>问题说明</h2>
-
-<p><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1051">PAT1051</a>：给定 stack 的容量，给定数据的入栈顺序：从 1 开始的正整数序列，在允许随机的出栈操作的情况下，要求判断某出栈序列是否可能。</p>
-
-<p>比如，告知 stack 容量为 5，入栈序列的最大值为 7。有两个序列需要判断合理性：</p>
-
-<ul>
-<li><code>1 2 3 4 5 6 7</code>： 这个序列是可能的，只需每次入栈时都做出栈操作。</li>
-<li><code>3 2 1 7 5 6 4</code>： 这个序列是不可能的，其中前半部分<code>3 2 1</code>是合法的，先将<code>1 2 3</code>顺序入栈，然后三次执行出栈操作。而之后的<code>7 5 6</code>则是不可能的。</li>
-</ul>
-
-
-<p>要完成判定过程，常规思路是直接使用的 stack 数据结构模拟出栈序列做操作，然后判定是否会触犯条件。但考虑到 PAT1051 中时间限制只有 10ms，虽然常规方法是线性的，似乎也无法保障（事实证明是错误的，用常规方法也能在 PAT 上 AC），我想到从序列本身的特性入手，找规律，于是有了一种效率更高的判定逻辑。</p>
-
-<h2>常规思路</h2>
-
-<p>直接使用出栈序列指导 stack 模拟操作。判定条件有两条：</p>
-
-<ul>
-<li>1.栈中数据量不超过栈的容量。</li>
-<li>2.出栈只能从栈顶取，不应该出现从固定的堆栈中取出其他数据的情况。</li>
-</ul>
-
-
-<p>算法描述如下：</p>
-
-<p>用游标记录当前已知压栈的最大数据 cur。如果新的读入数据 tmp（即出栈序列中的某数据）大于 cur，则将 cur 到 tmp 之间的数据顺序压入栈中，更新 cur 并执行检查 1；如果新的读入数据 tmp 小于 cur，则一定是直接出栈获得的，执行检查 2。</p>
-
-<p>如果能顺利完成就是合理的，如果操作过程违背了一些规则，则判定为不合理。C++实现代码如下：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cp">#include&lt;stdio.h&gt;</span>
-</span><span class='line'><span class="cp">#include&lt;stack&gt;</span>
-</span><span class='line'><span class="k">using</span> <span class="k">namespace</span><span class="o">::</span><span class="n">std</span><span class="p">;</span>
-</span><span class='line'><span class="kt">int</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">tmp</span><span class="p">,</span> <span class="n">cur</span><span class="p">;</span>
-</span><span class='line'><span class="kt">bool</span> <span class="n">flag</span><span class="p">;</span>
-</span><span class='line'><span class="n">stack</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">s</span><span class="p">;</span>
-</span><span class='line'><span class="kt">int</span> <span class="n">main</span><span class="p">()</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%d %d %d&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">m</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">n</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">k</span><span class="p">);</span>
-</span><span class='line'>    <span class="k">while</span><span class="p">(</span><span class="n">k</span> <span class="o">--</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">flag</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-</span><span class='line'>        <span class="n">cur</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-</span><span class='line'>        <span class="n">s</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-</span><span class='line'>        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">n</span><span class="p">;</span> <span class="o">++</span> <span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%d&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">tmp</span><span class="p">);</span>
-</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="n">tmp</span> <span class="o">&gt;</span> <span class="n">cur</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>                <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">cur</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">tmp</span><span class="p">;</span> <span class="o">++</span> <span class="n">j</span><span class="p">)</span>
-</span><span class='line'>                    <span class="n">s</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">j</span><span class="p">);</span>
-</span><span class='line'>                <span class="k">if</span> <span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">m</span><span class="p">)</span> <span class="n">flag</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-</span><span class='line'>                <span class="n">cur</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
-</span><span class='line'>            <span class="p">}</span><span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>                <span class="k">if</span> <span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">top</span><span class="p">()</span> <span class="o">!=</span> <span class="n">tmp</span><span class="p">)</span>
-</span><span class='line'>                    <span class="n">flag</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-</span><span class='line'>            <span class="p">}</span>
-</span><span class='line'>            <span class="n">s</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="n">flag</span><span class="p">)</span> <span class="n">printf</span><span class="p">(</span><span class="s">&quot;YES</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-</span><span class='line'>        <span class="k">else</span> <span class="n">printf</span><span class="p">(</span><span class="s">&quot;NO</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>更高效的判定逻辑</h2>
-
-<p>实际上，在 PAT1051 的环境下，由于入栈序列数据由小到大排列非常特殊，要通过出栈序列判定可能性是存在简便思路的。</p>
-
-<p>对比分析题中 Sample 给出的序列，结合上面提到的两条冲突条件入手分析：</p>
-
-<ul>
-<li><p>1.栈中数据量不超过栈的容量：</p>
-
-<p>  只有在入栈时，才会需要考虑栈中数据是否超量。出栈序列中的每个数，都以为着在出栈操作之前，它刚入栈，那么当它入栈的时候能否判定是否超过栈容量呢？可以的，（当前的出栈数值 - 已经执行过的出栈操作数量）就是当前栈中元素的数量。</p></li>
-</ul>
-
-
-<!--more-->
-
-
-<ul>
-<li><p>2.出栈只能从栈顶取，不应该出现从固定的堆栈中取出其他数据的情况。</p>
-
-<p>  根据观察分析发现，当某数据 m 出栈之后，比 m 小的数据如果在 m 之后出栈的，它们所组成的序列本身需要保持从大到小的顺序排列。距离如<code>3 2 1 7 5 6 4</code>这个序列，在<code>7</code>之后有<code>5 6 4</code>这个子序列，它们都大于<code>7</code>，但却没有保持一个递减的顺序，不合法。</p></li>
-</ul>
-
-
-<p>C++实现代码如下：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cp">#include&lt;stdio.h&gt;</span>
-</span><span class='line'><span class="kt">int</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">;</span>
-</span><span class='line'><span class="kt">int</span> <span class="n">max</span><span class="p">,</span> <span class="n">min</span><span class="p">,</span> <span class="n">tmp</span><span class="p">;</span>
-</span><span class='line'><span class="kt">bool</span> <span class="n">flag</span><span class="p">;</span>
-</span><span class='line'><span class="kt">int</span> <span class="n">main</span><span class="p">()</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%d %d %d&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">m</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">n</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">k</span><span class="p">);</span>
-</span><span class='line'>    <span class="k">while</span><span class="p">(</span><span class="n">k</span> <span class="o">--</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">flag</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-</span><span class='line'>        <span class="n">max</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'>        <span class="n">min</span> <span class="o">=</span> <span class="mi">1001</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">n</span><span class="p">;</span> <span class="o">++</span> <span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%d&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">tmp</span><span class="p">);</span>
-</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="n">tmp</span> <span class="o">&gt;</span> <span class="n">max</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>                <span class="k">if</span> <span class="p">(</span><span class="n">tmp</span> <span class="o">-</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="n">m</span><span class="p">)</span> <span class="n">flag</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-</span><span class='line'>                <span class="k">else</span> <span class="n">max</span> <span class="o">=</span> <span class="n">min</span><span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
-</span><span class='line'>            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>                <span class="k">if</span> <span class="p">(</span> <span class="n">tmp</span> <span class="o">&gt;</span> <span class="n">min</span><span class="p">)</span> <span class="n">flag</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-</span><span class='line'>                <span class="k">else</span> <span class="n">min</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
-</span><span class='line'>            <span class="p">}</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="n">flag</span><span class="p">)</span> <span class="n">printf</span><span class="p">(</span><span class="s">&quot;YES</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-</span><span class='line'>        <span class="k">else</span> <span class="n">printf</span><span class="p">(</span><span class="s">&quot;NO</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>总结</h2>
-
-<p>在我的理解之中，经典的算法、数据结构是在面对编程问题的解决过程中所抽象出的通用模型。而生活是多变的，并不像考试卷一样简单的套用数学题所能解决，很多情况下，编程问题也是如此。那么除了这些经典的方法外，认真分析条件，并进行针对性的优化甚至重新设计就非常重要了。这里仅仅是一个小实践。</p>
-
-<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/07/16/verify-pop-sequence-for-stack/'>http://biaobiaoqi.github.com/blog/2013/07/16/verify-pop-sequence-for-stack/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
 
 ]]></content>
   </entry>

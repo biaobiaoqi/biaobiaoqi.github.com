@@ -241,6 +241,20 @@
         <lastmod>2013-09-08T04:16:38+08:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://biaobiaoqi.github.com/blog/2013/09/08/strange-behavior-using-braces-in-java/
+        </loc>
+        <lastmod>2013-09-08T14:30:54+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://biaobiaoqi.github.com/blog/2013/09/08/custom-premain-method/</loc>
+        <lastmod>2013-09-08T13:01:59+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://biaobiaoqi.github.com/blog/2013/09/08/string-interning/</loc>
+        <lastmod>2013-09-08T15:50:23+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://biaobiaoqi.github.com/404.html</loc>
         <lastmod>2013-09-01T02:32:00+08:00</lastmod>
     </url>
@@ -250,11 +264,11 @@
     </url>
     <url>
         <loc>http://biaobiaoqi.github.com/blog/archives/</loc>
-        <lastmod>2013-09-08T04:16:38+08:00</lastmod>
+        <lastmod>2013-09-08T15:50:23+08:00</lastmod>
     </url>
     <url>
         <loc>http://biaobiaoqi.github.com/</loc>
-        <lastmod>2013-09-08T04:16:38+08:00</lastmod>
+        <lastmod>2013-09-08T15:50:23+08:00</lastmod>
     </url>
     <url>
         <loc>http://biaobiaoqi.github.com/robots.txt</loc>

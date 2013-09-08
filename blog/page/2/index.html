@@ -9,7 +9,7 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="PAT(pat.zju.edu.cn)是一个面向 C/C++程序的 Online Judge 系统。相比 ZOJ，HDOJ，POJ 等 ACM 题库，PAT 的题目非常基础，对于数据结构、算法的入门是比较有助益的。 本文按照自己的认识，给 PAT advanced level 做出了分类。 &hellip;">
+  <meta name="description" content="为了增加外链等考虑，独立博客往往有将博文同步到其他博客社区的需求。自己人肉黏贴的方式笨拙、重复，对于程序猿而言，着实不可取。 我在 github 上找到了 syncPost 这个针对 octopress 的第三方工具，能够通过一些论坛提供的 metaWeblog 服务实现 octopress &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -106,6 +106,204 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/08/31/octopress-3rd-party-plugin-syncpost/">octopress第三方插件：博文同步工具syncPost</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-31T19:30:00+08:00" pubdate data-updated="true">Aug 31<span>st</span>, 2013</time>
+        
+         | <a href="/blog/2013/08/31/octopress-3rd-party-plugin-syncpost/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>为了增加外链等考虑，独立博客往往有将博文同步到其他博客社区的需求。自己人肉黏贴的方式笨拙、重复，对于程序猿而言，着实不可取。</p>
+
+<p>我在 github 上找到了 <a href="https://github.com/huangbowen521/octopress-syncPost">syncPost</a> 这个针对 octopress 的第三方工具，能够通过一些论坛提供的 <a href="http://en.wikipedia.org/wiki/MetaWeblog">metaWeblog</a> 服务实现 octopress 最新一篇博文的同步提交。</p>
+
+<p>这大概就是我要找的东西吧。不过，其中有些细节并不是我想要的：</p>
+
+<ul>
+<li>1.在本地配置文件存储论坛账户的密码。虽然可以设置为 ignore 不提交到 git 代码库中，但这也并不安全。</li>
+<li>2.只能同步最新的一篇博客，没有整体的博文搬家功能。</li>
+<li>3.先比其他的 octopress 插件，原来版本的代码结构难于维护，比如有自己单独的配置文件，而不是使用全局的<code>_config.yml</code>(在那个版本中大概是为了不把明文密码提交到版本库中)，比如 ruby 文件单独在一个<code>_custom</code>文件夹下等</li>
+</ul>
+
+
+<p>基于这些点，我 fork 了 <a href="http://huangbowen.net/">huangbowen</a> 大哥的代码，定制成了它<a href="https://github.com/biaobiaoqi/octopress-syncPost">现在的样子</a>。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/08/31/octopress-3rd-party-plugin-syncpost/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/08/31/pat-1061-pat-1064/">PAT 1061 - 1064 题解</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-31T13:32:00+08:00" pubdate data-updated="true">Aug 31<span>st</span>, 2013</time>
+        
+         | <a href="/blog/2013/08/31/pat-1061-pat-1064/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>这四道题来自 13 年 08 月 30 的 PAT 测试。</p>
+
+<p>代码量不大，思路也比较直接。不过第一题的处理逻辑不太清晰，需要好好把握。稍有不慎就掉进坑里了（很多人被这道 20‘的题坑了一个多小时心慌意乱我会乱说-，-？）。</p>
+
+<p>PAT advanced level 全部源码：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1061">1061. Dating (20)</a></h2>
+
+<h5>题意</h5>
+
+<p>题意比较模糊，需要仔细对照 Sample 的数据理清思路。给定四个字符串，每个不超过 60 个字符，不含空格。要求从中找到符合如下规定的三个字符（或者它们的位置），并转化成一个时间的表达：</p>
+
+<ul>
+<li>1.依次比较前两个字符串中每个位置的元素，找到第一个相等的字符，且该字符属于[&#8216;A&#8217;, &#8216;G&#8217;]的字母，注意大小写敏感。转换成一周七天输出。</li>
+<li>2.在 1 中的字符出现之后，继续比较前两个串，找到一个相等的字符，使它属于[&#8216;0&#8217;, &#8216;9&#8217;] || [&#8216;A&#8217;, &#8216;N&#8217;]，同样，大小写敏感。转换成一天 24 小时的小时数输出。</li>
+<li>3.比较后两个字符串，找到第一个相等的字母（isalpha()），将它在数组中的位置值转换分钟数输出。</li>
+</ul>
+
+
+<p>为了便于理解，给出 Sample 数据:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Sample Input:
+</span><span class='line'>
+</span><span class='line'>3485djDkxh4hhGE 
+</span><span class='line'>2984akDfkkkkggEdsb 
+</span><span class='line'>s&hgsfdk 
+</span><span class='line'>d&Hyscvnm
+</span><span class='line'>
+</span><span class='line'>Sample Output:
+</span><span class='line'>
+</span><span class='line'>THU 14:04
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h5>分析</h5>
+
+<p>理清题目的逻辑以后，实现起来是很简单的。</p>
+
+<p>pat1061 源码:<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel/APAT1061.cpp">请戳</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1062">1062. Talent and Virtue (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>给定一堆人，每个人有三条记录：id，道德值(v)，才能值(t)。给出两个值 L 和 H，用作对这堆人的分类。按照如下规则输出排序结果：</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/08/31/pat-1061-pat-1064/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/08/26/distributed-transaction/">分布式事务slides</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-26T23:49:00+08:00" pubdate data-updated="true">Aug 26<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/08/26/distributed-transaction/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>最近看了<a href="http://book.douban.com/subject/21624776/">《分布式系统概念与设计 第 5 版》</a>的分布式事务章节，整理了一份 ppt。还有恢复部分没有收录进来，有空再整理啦。</p>
+
+<p>下面是传到 deckspeaker 上的 slides 展示:</p>
+
+<script async class="speakerdeck-embed" data-id="aa521420f0a101303be246475d95d052" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+
+
+<p>下载链接：<a href="https://dl.dropboxusercontent.com/u/64021093/slides/distributed%20transcation.pptx">请戳</a><p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/08/26/distributed-transaction/'>http://biaobiaoqi.github.com/blog/2013/08/26/distributed-transaction/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -694,265 +892,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/29/after-pat-practice/">终于算完了这道『1+1』</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-29T22:12:00+08:00" pubdate data-updated="true">Jul 29<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/29/after-pat-practice/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>在<a href="http://weibo.com/redow7">@ReDow</a>、<a href="http://weibo.com/cloudbye">@麦迪的小腿</a>和<a href="http://weibo.com/linest">@linest</a> 等小伙伴的帮助下，终于断断续续的爬完了 <a href="http://pat.zju.edu.cn/">PAT</a> 的 Basic Level 和 Advanced Level，阶段性填补了自己惨白的算法短板。在 cs 的圈子里，说 PAT 是入门的『1 + 1』不为过。刚完成『1 + 1』，作为五年科班的人，确实不够光彩。不过现在能做的也只是尽力弥补本科时间里的虚度。</p>
-
-<p>从亲手挖的坑里往外爬，需要付出比其他人更多的努力。没时间享受题目 ac 之后的快感（画外音：这么简单的题会有快感么=.=#），倒会时不时蹦出一股脑的蛋疼：『你当初干 XX 啥去了！』。</p>
-
-<h2>当初&#8230;</h2>
-
-<p>记得大一的时候，每天花好几个小时泡图书馆看各种 IT 杂志和技术书籍。在刚开始学 C 语言编程的时间里，我看着中间件、系统软件、终端融合、东软和用友金蝶之争等一系列摸不着头脑的东西，在对数据还没概念的时候，看着数据库的范式和 E-R 图…总之，就是一直在门外徘徊。</p>
-
-<p>之后专业课多了起来，我又兴高采烈的混在工高大神的队伍里，早上集结同学每天早上五点多轮流爬起来去自习室占座，以看似端正实则不专注的令人发指的学习态度在 GPA 榜单上持续退步着。浑浑噩噩的搞过数模，无果。当然，以『学渣』的水平充着『学霸』也是有好处的，就是沾染了大神的精神气，比如记忆犹新的有在 CMU 念书的鑫磊大神的专注、冷静和每天 4 小时的睡眠。同时，我还风风火火的参加了 ASES 和求是强鹰，搀和着所谓的创业。大四在爱尔兰的交流，除了英语和专业课，其他的倒是学的挺多，比如烧饭，单反和旅游……本科唯一做的跟编程有关的说得出口的，也就写了个 Android 程序在比赛里获了个奖，不提也罢的那种。</p>
-
-<h2>变</h2>
-
-<p>在《<a href="http://book.douban.com/subject/1048007/">高效能认识的七个习惯</a>》里看过一个观点：每个人都有属于自己的『关注圈』和『影响圈』。影响圈是个人对外界产出的途径，关注圈则意味着个人对外界的期许。可以想见，关注圈大于影响圈。正确的成长方式是尽力扩大影响圈，以此催生关注圈的扩大。而我则是走在了相反的方向：一直致力于开发自己的关注圈，后果是影响圈不见长进。一度我开始注意遏制自己这方面的好高骛远，不过事实证明，我还是比较喜欢在学爬得时候看走路的教学视频。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/07/29/after-pat-practice/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/19/odps-in-alibaba/">阿里离线数据处理平台2013暑期学校</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-19T21:31:00+08:00" pubdate data-updated="true">Jul 19<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/19/odps-in-alibaba/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>本周有幸参加了为期两天的<a href="http://102.alibaba.com/competition/dataSummer.htm">阿里离线数据处理平台 2013 暑期学校</a>的学习。</p>
-
-<p>阿里的前辈们分不同的专题给大家介绍了飞天平台上的离线数据处理服务 ODPS（Open Data Processing Service）。
-内容上主要分为两部分，一部分是平台架构，一部分是数据分析。来听课的同学也就分为了两部分，而像我一样关注系统层面的人是少数。</p>
-
-<p>这也正常，用赵本山在『一代宗师』里的话来说，一个是面子，一个是里子。数据分析能直接产生表现层的数据，而系统平台则只是提供支持。
-成功了，大家看得到的是分析出的数据，而一旦失败了，那么系统平台的责任就大了。
-再者越贴近硬件层次的工作也注定越辛苦，深夜被吵醒也不是没有的事儿。好了，吐槽到此结束，下面是总结笔记整理出几页 slides：</p>
-
-<script async class="speakerdeck-embed" data-id="e0022eb0d24d013089506e9621fcaf9a" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
-
-
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/07/19/odps-in-alibaba/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/16/verify-pop-sequence-for-stack/">出栈序列的可能性判定</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-16T01:32:00+08:00" pubdate data-updated="true">Jul 16<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/16/verify-pop-sequence-for-stack/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>问题说明</h2>
-
-<p><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1051">PAT1051</a>：给定 stack 的容量，给定数据的入栈顺序：从 1 开始的正整数序列，在允许随机的出栈操作的情况下，要求判断某出栈序列是否可能。</p>
-
-<p>比如，告知 stack 容量为 5，入栈序列的最大值为 7。有两个序列需要判断合理性：</p>
-
-<ul>
-<li><code>1 2 3 4 5 6 7</code>： 这个序列是可能的，只需每次入栈时都做出栈操作。</li>
-<li><code>3 2 1 7 5 6 4</code>： 这个序列是不可能的，其中前半部分<code>3 2 1</code>是合法的，先将<code>1 2 3</code>顺序入栈，然后三次执行出栈操作。而之后的<code>7 5 6</code>则是不可能的。</li>
-</ul>
-
-
-<p>要完成判定过程，常规思路是直接使用的 stack 数据结构模拟出栈序列做操作，然后判定是否会触犯条件。但考虑到 PAT1051 中时间限制只有 10ms，虽然常规方法是线性的，似乎也无法保障（事实证明是错误的，用常规方法也能在 PAT 上 AC），我想到从序列本身的特性入手，找规律，于是有了一种效率更高的判定逻辑。</p>
-
-<h2>常规思路</h2>
-
-<p>直接使用出栈序列指导 stack 模拟操作。判定条件有两条：</p>
-
-<ul>
-<li>1.栈中数据量不超过栈的容量。</li>
-<li>2.出栈只能从栈顶取，不应该出现从固定的堆栈中取出其他数据的情况。</li>
-</ul>
-
-
-<p>算法描述如下：</p>
-
-<p>用游标记录当前已知压栈的最大数据 cur。如果新的读入数据 tmp（即出栈序列中的某数据）大于 cur，则将 cur 到 tmp 之间的数据顺序压入栈中，更新 cur 并执行检查 1；如果新的读入数据 tmp 小于 cur，则一定是直接出栈获得的，执行检查 2。</p>
-
-<p>如果能顺利完成就是合理的，如果操作过程违背了一些规则，则判定为不合理。C++实现代码如下：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cp">#include&lt;stdio.h&gt;</span>
-</span><span class='line'><span class="cp">#include&lt;stack&gt;</span>
-</span><span class='line'><span class="k">using</span> <span class="k">namespace</span><span class="o">::</span><span class="n">std</span><span class="p">;</span>
-</span><span class='line'><span class="kt">int</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">tmp</span><span class="p">,</span> <span class="n">cur</span><span class="p">;</span>
-</span><span class='line'><span class="kt">bool</span> <span class="n">flag</span><span class="p">;</span>
-</span><span class='line'><span class="n">stack</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">s</span><span class="p">;</span>
-</span><span class='line'><span class="kt">int</span> <span class="n">main</span><span class="p">()</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%d %d %d&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">m</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">n</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">k</span><span class="p">);</span>
-</span><span class='line'>    <span class="k">while</span><span class="p">(</span><span class="n">k</span> <span class="o">--</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">flag</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-</span><span class='line'>        <span class="n">cur</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-</span><span class='line'>        <span class="n">s</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-</span><span class='line'>        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">n</span><span class="p">;</span> <span class="o">++</span> <span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%d&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">tmp</span><span class="p">);</span>
-</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="n">tmp</span> <span class="o">&gt;</span> <span class="n">cur</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>                <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">cur</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">tmp</span><span class="p">;</span> <span class="o">++</span> <span class="n">j</span><span class="p">)</span>
-</span><span class='line'>                    <span class="n">s</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">j</span><span class="p">);</span>
-</span><span class='line'>                <span class="k">if</span> <span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">m</span><span class="p">)</span> <span class="n">flag</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-</span><span class='line'>                <span class="n">cur</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
-</span><span class='line'>            <span class="p">}</span><span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>                <span class="k">if</span> <span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">top</span><span class="p">()</span> <span class="o">!=</span> <span class="n">tmp</span><span class="p">)</span>
-</span><span class='line'>                    <span class="n">flag</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-</span><span class='line'>            <span class="p">}</span>
-</span><span class='line'>            <span class="n">s</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="n">flag</span><span class="p">)</span> <span class="n">printf</span><span class="p">(</span><span class="s">&quot;YES</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-</span><span class='line'>        <span class="k">else</span> <span class="n">printf</span><span class="p">(</span><span class="s">&quot;NO</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>更高效的判定逻辑</h2>
-
-<p>实际上，在 PAT1051 的环境下，由于入栈序列数据由小到大排列非常特殊，要通过出栈序列判定可能性是存在简便思路的。</p>
-
-<p>对比分析题中 Sample 给出的序列，结合上面提到的两条冲突条件入手分析：</p>
-
-<ul>
-<li><p>1.栈中数据量不超过栈的容量：</p>
-
-<p>  只有在入栈时，才会需要考虑栈中数据是否超量。出栈序列中的每个数，都以为着在出栈操作之前，它刚入栈，那么当它入栈的时候能否判定是否超过栈容量呢？可以的，（当前的出栈数值 - 已经执行过的出栈操作数量）就是当前栈中元素的数量。</p></li>
-</ul>
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/07/16/verify-pop-sequence-for-stack/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -970,12 +909,12 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
  <br /> 
   <ul class="tag-cloud">
     <a style="font-size: 180%" href="/tags/algorithm/">algorithm</a> &nbsp 
-<a style="font-size: 126%" href="/tags/bytecode/">bytecode</a> &nbsp 
+<a style="font-size: 143%" href="/tags/bytecode/">bytecode</a> &nbsp 
 <a style="font-size: 115%" href="/tags/diary/">diary</a> &nbsp 
 <a style="font-size: 167%" href="/tags/distributed/">distributed</a> &nbsp 
 <a style="font-size: 135%" href="/tags/hadoop/">hadoop</a> &nbsp 
-<a style="font-size: 149%" href="/tags/java/">java</a> &nbsp 
-<a style="font-size: 126%" href="/tags/jvm/">jvm</a> &nbsp 
+<a style="font-size: 159%" href="/tags/java/">java</a> &nbsp 
+<a style="font-size: 143%" href="/tags/jvm/">jvm</a> &nbsp 
 <a style="font-size: 115%" href="/tags/life/">life</a> &nbsp 
 <a style="font-size: 143%" href="/tags/methodology/">methodology</a> &nbsp 
 <a style="font-size: 126%" href="/tags/network/">network</a> &nbsp 
@@ -992,23 +931,23 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/09/08/string-interning/">对Java字符的探究</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/09/08/custom-premain-method/">custom premain method</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/09/08/strange-behavior-using-braces-in-java/">Java构造方法中的执行顺序</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/09/08/three-principles-of-classloader-operation/">类加载器操作三原则[译]</a>
       </li>
     
       <li class="post">
         <a href="/blog/2013/09/08/java-class-loading-linking-and-initialising/">Java类的装载、链接和初始化</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/09/08/java-class-loader-in-practice/">Java类加载器编程实践</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/09/07/java-classloader/">Java 类加载器</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/09/06/kongfu-snake-project-summary/">Android小游戏：功夫蛇 团队开发经验总结</a>
       </li>
     
   </ul>

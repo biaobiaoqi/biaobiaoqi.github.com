@@ -9,7 +9,8 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="（出自一本 J2EE 的教材中关于类加载器的介绍，原文已不知所踪。） 类加载的 bug，一旦在编程中遇到很难调试。好消息是，理解类加载的过程中，我们只需要牢记住三条基本原则。如果你能清晰的理解这三条基本原则，所有问题都迎刃而解。下面，我们开始介绍。 委托原则(Delegation &hellip;">
+  <meta name="description" content="问题的出发点 在网上看到一道题： 1
+String str = new String(&quot;abc&quot;); 以上代码执行过程中生成了多少个 String 对象？ 答案写的是两个。&#8221;abc&#8221;本身是一个，而 new 又生成了一个。 &#8220;abc&#8221 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -106,6 +107,357 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/09/08/string-interning/">对Java字符的探究</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-08T13:01:00+08:00" pubdate data-updated="true">Sep 8<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/09/08/string-interning/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>问题的出发点</h2>
+
+<p>在网上看到一道题：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">String</span> <span class="n">str</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="s">&quot;abc&quot;</span><span class="o">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>以上代码执行过程中生成了多少个 String 对象？</p>
+
+<p>答案写的是两个。&#8221;abc&#8221;本身是一个，而 new 又生成了一个。</p>
+
+<h2>&#8220;abc&#8221;是什么</h2>
+
+<p>查看这句程序的字节码，如下：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">NEW</span> <span class="n">String</span>
+</span><span class='line'>    <span class="n">DUP</span>
+</span><span class='line'>    <span class="n">LDC</span> <span class="s">&quot;abc&quot;</span>
+</span><span class='line'>    <span class="n">INVOKESPECIAL</span> <span class="n">String</span><span class="o">.&lt;</span><span class="n">init</span><span class="o">&gt;(</span><span class="n">String</span><span class="o">)</span> <span class="o">:</span> <span class="kt">void</span>
+</span><span class='line'>    <span class="n">ASTORE</span> <span class="mi">1</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>指令<code>ldc indexbyte</code>的含义：将两字节的值从 indexbyte 索引的常量池中的项中推到方法栈上。</p>
+
+<p>指令<code>LDC "abc"</code>说明了&#8221;abc&#8221;并不是直接以对象存在的，而是存在于常量池的索引中。String 的构造函数调用命令实际使用的就是 String 类型作为参数，那么，栈上应该有一个 String 类型的索引。</p>
+
+<p>由此我们得出，在字节码中，ldc 命令在常量池中找到了能索引到“abc”那个 String 对象的索引值。</p>
+
+<h2>常量池</h2>
+
+<p>常量池是类文件（.class）文件中的一部分，记录了许多常量信息，索引的字符串信息。</p>
+
+<p>由于 Java 是动态加载的，类文件并没有包含程序运行时的内存布局，方法调用等无法直接记录出方法的物理位置，常量池通过索引的方法解决了这个问题。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/09/08/string-interning/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/09/08/custom-premain-method/">Custom Premain Method</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-08T13:01:00+08:00" pubdate data-updated="true">Sep 8<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/09/08/custom-premain-method/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>背景
+想调用 ASM API （用于字节码处理的开源 API）对字节码进行处理，目标是实现对 java 程序运行时各种对象的动态跟踪，并进一步分析各个对象之间的关系（研究前提是目前的 UML 锁阐释的 whole-part relation 是比较混乱的）。由于 ASM 相关内容又可以延伸很远，在此文中略过。
+在完成了能对字节码进行处理的 ASM 调用以后，需要考虑如何将这些功能与正常的 java 程序整合到一起。
+首先，我考虑到了自定义 ClassLoader 的方法（具体内容见另一篇博客《ClassLoader 编程实践》），即在程序的 main 入口处，首先加载自定义的 classloader，然后通过 reflect 技术使用这个 classloader 加载并调用测试程序（就是被跟踪的程序，姑且称之为测试程序）的入口类。
+这个方法一个很大的限制，在于每次都必须先找到测试程序的入口类，而对于有的封装成 jar 的程序集合，这一点相对比较难控制。</p>
+
+<p>于是，有了这里介绍的方法：通过 java.lang.instrument 实现的 java agent 对象操作字节码，也就试所谓的 AOP（面向方面编程）
+中文介绍参加 IBM developworks 上的文档：《Java SE 6 新特性: Instrumentation 新功能》。内有详细解释。其中提到的 BCEL 即 Byte Code Engineering Library，是 apache 的开源项目，挺复杂，而 ASM 库有相对详尽的说明文档。这也是我选择了 ASM 实现的原因。
+博主的程序里，其实很多上文提到的 java6 新特性都没有使用到：虚拟机启动后的动态 instrument ，本地方法的 instrument 都没有使用到。这里仅就源代码中的程序简单介绍 instrument 的基本功能和用法。
+程序中，除了 ASMAgent 以外的所有类都是调用 ASM API 实现对 测试程序中 各个对象的 construct 、 方法调用 ， field 赋值等操作行为的记录（其中对 Collection 子类的处理着实费了一番心血= =，字节码操作很细节，容易出错。以后再写 ASM 方面的博文叙述）。
+在此，我们将 ASM API 调用部分抽象成一个整体的接口好了，就是如下几句代码（在 ASMAgent.java 中）：
+[java] view plaincopy
+ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);<br/>
+ASMClassAdapter mca = new ASMClassAdapter(cw); <br/>
+ClassReader cr = new ClassReader(classfileBuffer);<br/>
+cr.accept(mca, 0);<br/>
+retVal = cw.toByteArray();<br/>
+其中 classfileBuffer 是类文件加载时的原始的字节码，retVal 则是经过处理后的字节码。</p>
+
+<p>============================正文分割===========================
+原理
+JVMTI（Java Virtual Machine Tool Interface）是一套本地编程接口集合，它提供了一套”代理”程序机制，可以支持第三方工具程序以代理的方式连接和访问 JVM，并利用 JVMTI 提供的丰富的编程接口，完成很多跟 JVM 相关的功能。关于 JVMTI 的详细信息，请参考 Java SE 6 文档（请参见 参考资源）当中的介绍。
+java.lang.instrument 包的实现，也就是基于这种机制的：在 Instrumentation 的实现当中，存在一个 JVMTI 的代理程序，通过调用 JVMTI 当中 Java 类相关的函数来完成 Java 类的动态操作。
+Instrumentation 的最大作用，就是类定义动态改变和操作。在 Java SE 5 及其后续版本当中，开发者可以在一个普通 Java 程序（带有 main 函数的 Java 类）运行时，通过 – javaagent 参数指定一个特定的 jar 文件（包含 Instrumentation 代理）来启动 Instrumentation 的代理程序。
+步骤
+1.编写 java 代理类。
+这个类中，premain 方法是关键，对比于一般的入口 main 一样，这里的 premain 是在 main 之前执行的。它会告诉 JVM 如何处理加载上来的 java 字节码。如下例：
+[java] view plaincopy
+public static void premain(String agentArgs, Instrumentation inst) {</p>
+
+<pre><code>                Trace.BeginTrace(); // it's important for trace files  
+        inst.addTransformer(new ASMAgent());  
+    }  
+</code></pre>
+
+<p>值得注意的是，addTransformer 实现了对字节码处理的方法的回调。
+[java] view plaincopy
+inst.addTransformer(new ASMAgent());<br/>
+类 ASMAgent 包含着实现对 java 字节码处理的方法：transform()。它来自于 ClassFileTransformer 接口。为了方便，博主这里将对 ClassFileTransformer 接口的实现跟 ASMAgent 类放在了一起。
+[java] view plaincopy
+public byte[] transform(ClassLoader loader, String className,Class&lt;?> classBeingRedefined,</p>
+
+<pre><code>                                    ProtectionDomain protectionDomain,byte[] classfileBuffer)  
+        throws IllegalClassFormatException {  
+        byte[] retVal = null;  
+
+        if(isInstrumentable(className)){  
+
+                ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);  
+            ASMClassAdapter mca = new ASMClassAdapter(cw);   
+            ClassReader cr = new ClassReader(classfileBuffer);  
+            cr.accept(mca, 0);  
+            retVal = cw.toByteArray();  
+        }else{  
+                retVal = classfileBuffer ;  
+            }  
+
+        return retVal;  
+}  
+</code></pre>
+
+<p>2.打包代理类。
+只有合理打包并在 manifest 文件中记录下相应的键值对之后，才能正常执行 premain 的内容。
+manifest 文件中需要添加的键值对是：
+[plain] view plaincopy
+Premain-Class : biaobiaoqi.asm.ASMAgent<br/>
+jar 打包和 manifest 的修改方法见另一篇博文《JAR 文件操作基础（Using JAR Files: The Basics）》
+另外，如果对字节码的处理有应用到了其他的类，需要在 manifest 中增加路径。键值对为：
+[plain] view plaincopy
+Class-Path: asm-3.0.jar</p>
+
+<p>3.执行
+执行测试程序时，添加“-javaagent:代理类的 jar[=传入 premain 的参数]”选项。
+比如，对于博主的程序，就是
+java -javaagent:ASMInstrument.jar   -jar XXXX.jar  xxxx
+其中 ASMInstrument.jar 是第二步中打包的程序，  XXX.jar 是需要测试的程序， xxx 是 XXX.jar 执行时可能的命令行参数。
+如果只是执行某.class 文件中的类，我们假设是在当前目录下的一个 XXXX 类，则是：
+java -javaagent:ASMInstrument.jar   -cp ./  XXXX xxx
+其中 xxx 是可能的命令行参数。</p>
+
+<p>源码下载
+编码期间遇到很多问题，比如在 instrument 方法中的 classlodaer 的一些判定操作。希望跟大家多交流～求勿喷。<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/09/08/custom-premain-method/'>http://biaobiaoqi.github.com/blog/2013/09/08/custom-premain-method/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/09/08/strange-behavior-using-braces-in-java/">Java构造方法中的执行顺序</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-08T12:58:00+08:00" pubdate data-updated="true">Sep 8<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/09/08/strange-behavior-using-braces-in-java/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>这道题来自 <a href="http://stackoverflow.com/questions/8185780/strange-behavior-using-braces-in-java/8186881#8186881">stackoverflow</a>。</p>
+
+<h2>问题描述：</h2>
+
+<p>有如下代码，求其输出内容。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span>
+</span><span class='line'><span class="o">{</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span>
+</span><span class='line'>    <span class="n">Test</span><span class="o">(){</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;1&quot;</span><span class="o">);}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="o">{</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;2&quot;</span><span class="o">);}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">static</span><span class="o">{</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;3&quot;</span><span class="o">);}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span> <span class="n">args</span><span class="o">[])</span>
+</span><span class='line'>    <span class="o">{</span>
+</span><span class='line'>        <span class="k">new</span> <span class="nf">Test</span><span class="o">();</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>分析</h2>
+
+<p>作为静态区段的语句，容易知道，3 是会最先出现的。容易弄错的一点是 到底是 1 和 2 的出现顺序。</p>
+
+<p>我们可以参考字节码来分析。在 eclipse 中使用 ASM bytecode 插件，得到相应的字节码：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="c1">// class version 50.0 (50)  </span>
+</span><span class='line'><span class="c1">// access flags 0x21  </span>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
+</span><span class='line'>  <span class="c1">// compiled from: Test.java  </span>
+</span><span class='line'>  <span class="kd">static</span> <span class="o">&lt;</span><span class="n">clinit</span><span class="o">&gt;()</span> <span class="o">:</span> <span class="kt">void</span>
+</span><span class='line'>    <span class="n">GETSTATIC</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span> <span class="o">:</span> <span class="n">PrintStream</span>
+</span><span class='line'>    <span class="n">LDC</span> <span class="s">&quot;3&quot;</span>
+</span><span class='line'>    <span class="n">INVOKEVIRTUAL</span> <span class="n">PrintStream</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">String</span><span class="o">)</span> <span class="o">:</span> <span class="kt">void</span>
+</span><span class='line'>    <span class="n">RETURN</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="o">&lt;</span><span class="n">init</span><span class="o">&gt;()</span> <span class="o">:</span> <span class="kt">void</span>
+</span><span class='line'>    <span class="n">ALOAD</span> <span class="mi">0</span><span class="o">:</span> <span class="k">this</span>
+</span><span class='line'>    <span class="n">INVOKESPECIAL</span> <span class="n">Object</span><span class="o">.&lt;</span><span class="n">init</span><span class="o">&gt;()</span> <span class="o">:</span> <span class="kt">void</span>
+</span><span class='line'>    <span class="n">ALOAD</span> <span class="mi">0</span><span class="o">:</span> <span class="k">this</span>
+</span><span class='line'>    <span class="n">BIPUSH</span> <span class="mi">10</span>
+</span><span class='line'>    <span class="n">PUTFIELD</span> <span class="n">Test</span><span class="o">.</span><span class="na">a</span> <span class="o">:</span> <span class="kt">int</span>
+</span><span class='line'>    <span class="n">GETSTATIC</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span> <span class="o">:</span> <span class="n">PrintStream</span>
+</span><span class='line'>    <span class="n">LDC</span> <span class="s">&quot;2&quot;</span>
+</span><span class='line'>    <span class="n">INVOKEVIRTUAL</span> <span class="n">PrintStream</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">String</span><span class="o">)</span> <span class="o">:</span> <span class="kt">void</span>
+</span><span class='line'>    <span class="n">GETSTATIC</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span> <span class="o">:</span> <span class="n">PrintStream</span>
+</span><span class='line'>    <span class="n">LDC</span> <span class="s">&quot;1&quot;</span>
+</span><span class='line'>    <span class="n">INVOKEVIRTUAL</span> <span class="n">PrintStream</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">String</span><span class="o">)</span> <span class="o">:</span> <span class="kt">void</span>
+</span><span class='line'>    <span class="n">RETURN</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[])</span> <span class="o">:</span> <span class="kt">void</span>
+</span><span class='line'>    <span class="n">NEW</span> <span class="n">Test</span>
+</span><span class='line'>    <span class="n">INVOKESPECIAL</span> <span class="n">Test</span><span class="o">.&lt;</span><span class="n">init</span><span class="o">&gt;()</span> <span class="o">:</span> <span class="kt">void</span>
+</span><span class='line'>    <span class="n">RETURN</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>正如我们所想，3 是被放在类构造方法中，这是类的初始化函数，固然在类的初始化时出现。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/09/08/strange-behavior-using-braces-in-java/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -529,204 +881,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/08/31/octopress-3rd-party-plugin-syncpost/">octopress第三方插件：博文同步工具syncPost</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-08-31T19:30:00+08:00" pubdate data-updated="true">Aug 31<span>st</span>, 2013</time>
-        
-         | <a href="/blog/2013/08/31/octopress-3rd-party-plugin-syncpost/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>为了增加外链等考虑，独立博客往往有将博文同步到其他博客社区的需求。自己人肉黏贴的方式笨拙、重复，对于程序猿而言，着实不可取。</p>
-
-<p>我在 github 上找到了 <a href="https://github.com/huangbowen521/octopress-syncPost">syncPost</a> 这个针对 octopress 的第三方工具，能够通过一些论坛提供的 <a href="http://en.wikipedia.org/wiki/MetaWeblog">metaWeblog</a> 服务实现 octopress 最新一篇博文的同步提交。</p>
-
-<p>这大概就是我要找的东西吧。不过，其中有些细节并不是我想要的：</p>
-
-<ul>
-<li>1.在本地配置文件存储论坛账户的密码。虽然可以设置为 ignore 不提交到 git 代码库中，但这也并不安全。</li>
-<li>2.只能同步最新的一篇博客，没有整体的博文搬家功能。</li>
-<li>3.先比其他的 octopress 插件，原来版本的代码结构难于维护，比如有自己单独的配置文件，而不是使用全局的<code>_config.yml</code>(在那个版本中大概是为了不把明文密码提交到版本库中)，比如 ruby 文件单独在一个<code>_custom</code>文件夹下等</li>
-</ul>
-
-
-<p>基于这些点，我 fork 了 <a href="http://huangbowen.net/">huangbowen</a> 大哥的代码，定制成了它<a href="https://github.com/biaobiaoqi/octopress-syncPost">现在的样子</a>。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/08/31/octopress-3rd-party-plugin-syncpost/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/08/31/pat-1061-pat-1064/">PAT 1061 - 1064 题解</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-08-31T13:32:00+08:00" pubdate data-updated="true">Aug 31<span>st</span>, 2013</time>
-        
-         | <a href="/blog/2013/08/31/pat-1061-pat-1064/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>这四道题来自 13 年 08 月 30 的 PAT 测试。</p>
-
-<p>代码量不大，思路也比较直接。不过第一题的处理逻辑不太清晰，需要好好把握。稍有不慎就掉进坑里了（很多人被这道 20‘的题坑了一个多小时心慌意乱我会乱说-，-？）。</p>
-
-<p>PAT advanced level 全部源码：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1061">1061. Dating (20)</a></h2>
-
-<h5>题意</h5>
-
-<p>题意比较模糊，需要仔细对照 Sample 的数据理清思路。给定四个字符串，每个不超过 60 个字符，不含空格。要求从中找到符合如下规定的三个字符（或者它们的位置），并转化成一个时间的表达：</p>
-
-<ul>
-<li>1.依次比较前两个字符串中每个位置的元素，找到第一个相等的字符，且该字符属于[&#8216;A&#8217;, &#8216;G&#8217;]的字母，注意大小写敏感。转换成一周七天输出。</li>
-<li>2.在 1 中的字符出现之后，继续比较前两个串，找到一个相等的字符，使它属于[&#8216;0&#8217;, &#8216;9&#8217;] || [&#8216;A&#8217;, &#8216;N&#8217;]，同样，大小写敏感。转换成一天 24 小时的小时数输出。</li>
-<li>3.比较后两个字符串，找到第一个相等的字母（isalpha()），将它在数组中的位置值转换分钟数输出。</li>
-</ul>
-
-
-<p>为了便于理解，给出 Sample 数据:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Sample Input:
-</span><span class='line'>
-</span><span class='line'>3485djDkxh4hhGE 
-</span><span class='line'>2984akDfkkkkggEdsb 
-</span><span class='line'>s&hgsfdk 
-</span><span class='line'>d&Hyscvnm
-</span><span class='line'>
-</span><span class='line'>Sample Output:
-</span><span class='line'>
-</span><span class='line'>THU 14:04
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h5>分析</h5>
-
-<p>理清题目的逻辑以后，实现起来是很简单的。</p>
-
-<p>pat1061 源码:<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel/APAT1061.cpp">请戳</a></p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1062">1062. Talent and Virtue (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>给定一堆人，每个人有三条记录：id，道德值(v)，才能值(t)。给出两个值 L 和 H，用作对这堆人的分类。按照如下规则输出排序结果：</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/08/31/pat-1061-pat-1064/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/08/26/distributed-transaction/">分布式事务slides</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-08-26T23:49:00+08:00" pubdate data-updated="true">Aug 26<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/08/26/distributed-transaction/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>最近看了<a href="http://book.douban.com/subject/21624776/">《分布式系统概念与设计 第 5 版》</a>的分布式事务章节，整理了一份 ppt。还有恢复部分没有收录进来，有空再整理啦。</p>
-
-<p>下面是传到 deckspeaker 上的 slides 展示:</p>
-
-<script async class="speakerdeck-embed" data-id="aa521420f0a101303be246475d95d052" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
-
-
-<p>下载链接：<a href="https://dl.dropboxusercontent.com/u/64021093/slides/distributed%20transcation.pptx">请戳</a><p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/08/26/distributed-transaction/'>http://biaobiaoqi.github.com/blog/2013/08/26/distributed-transaction/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -742,12 +896,12 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
  <br /> 
   <ul class="tag-cloud">
     <a style="font-size: 180%" href="/tags/algorithm/">algorithm</a> &nbsp 
-<a style="font-size: 126%" href="/tags/bytecode/">bytecode</a> &nbsp 
+<a style="font-size: 143%" href="/tags/bytecode/">bytecode</a> &nbsp 
 <a style="font-size: 115%" href="/tags/diary/">diary</a> &nbsp 
 <a style="font-size: 167%" href="/tags/distributed/">distributed</a> &nbsp 
 <a style="font-size: 135%" href="/tags/hadoop/">hadoop</a> &nbsp 
-<a style="font-size: 149%" href="/tags/java/">java</a> &nbsp 
-<a style="font-size: 126%" href="/tags/jvm/">jvm</a> &nbsp 
+<a style="font-size: 159%" href="/tags/java/">java</a> &nbsp 
+<a style="font-size: 143%" href="/tags/jvm/">jvm</a> &nbsp 
 <a style="font-size: 115%" href="/tags/life/">life</a> &nbsp 
 <a style="font-size: 143%" href="/tags/methodology/">methodology</a> &nbsp 
 <a style="font-size: 126%" href="/tags/network/">network</a> &nbsp 
@@ -764,23 +918,23 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/09/08/string-interning/">对Java字符的探究</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/09/08/custom-premain-method/">custom premain method</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/09/08/strange-behavior-using-braces-in-java/">Java构造方法中的执行顺序</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/09/08/three-principles-of-classloader-operation/">类加载器操作三原则[译]</a>
       </li>
     
       <li class="post">
         <a href="/blog/2013/09/08/java-class-loading-linking-and-initialising/">Java类的装载、链接和初始化</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/09/08/java-class-loader-in-practice/">Java类加载器编程实践</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/09/07/java-classloader/">Java 类加载器</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/09/06/kongfu-snake-project-summary/">Android小游戏：功夫蛇 团队开发经验总结</a>
       </li>
     
   </ul>
