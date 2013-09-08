@@ -196,7 +196,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/09/08/custom-premain-method/">Custom Premain Method</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/09/08/custom-premain-method/">AOP实践：java.lang.instrument的使用</a></h1>
     
     
       <p class="meta">
@@ -221,92 +221,146 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   </header>
 
 
-  <div class="entry-content"><p>背景</p>
+  <div class="entry-content"><h2>背景</h2>
 
-<p>想调用 ASM API （用于字节码处理的开源 API）对字节码进行处理，目标是实现对 java 程序运行时各种对象的动态跟踪，并进一步分析各个对象之间的关系（研究前提是目前的 UML 锁阐释的 whole-part relation 是比较混乱的）。由于 ASM 相关内容又可以延伸很远，在此文中略过。</p>
+<p>在 <a href="https://github.com/biaobiaoqi/rcjp">rcjp</a> 项目中，需要调用 ASM API（用于字节码处理的开源库）对字节码进行处理，目标是实现对 Java 程序运行时各种对象的动态跟踪，并进一步分析各个对象之间的关系。在此之前，需要考虑如何获取程序运行的入口。</p>
 
-<p>在完成了能对字节码进行处理的 ASM 调用以后，需要考虑如何将这些功能与正常的 java 程序整合到一起。</p>
+<p>首先，我考虑到了自定义类加载器（详情见参考资料），即在程序的 main 入口处，首先加载自定义的类加载器，然后通过反射技术使用这个类加载器加载并调用测试程序。这个方法缺点是：每次都必须先找到测试程序的入口类，而对于有的封装成 jar 的程序集合，这一点相对比较难控制。</p>
 
-<p>首先，我考虑到了自定义 ClassLoader 的方法（具体内容见另一篇博客《ClassLoader 编程实践》），即在程序的 main 入口处，首先加载自定义的 classloader，然后通过 reflect 技术使用这个 classloader 加载并调用测试程序（就是被跟踪的程序，姑且称之为测试程序）的入口类。</p>
+<p>于是，有了这里介绍的方法：通过 <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/instrument/package-summary.html">java.lang.instrument</a> 实现的 java agent 对象操作字节码，是一种 <a href="http://en.wikipedia.org/wiki/Aspect-oriented_programming">AOP</a> 的方法。</p>
 
-<p>这个方法一个很大的限制：每次都必须先找到测试程序的入口类，而对于有的封装成 jar 的程序集合，这一点相对比较难控制。</p>
+<p>程序中，除了 ASMAgent 以外的所有类都是调用 ASM API 实现对测试程序中各个对象的构造、方法调用、属性赋值等操作行为的记录（其中对 Collection 子类的处理着实费了一番心血= =，字节码操作很细节，容易出错）。</p>
 
-<p>于是，有了这里介绍的方法：通过 java.lang.instrument 实现的 java agent 对象操作字节码，也就试所谓的 AOP（面向方面编程）
-中文介绍参加 IBM developworks 上的文档：《Java SE 6 新特性: Instrumentation 新功能》。内有详细解释。其中提到的 BCEL 即 Byte Code Engineering Library，是 apache 的开源项目，挺复杂，而 ASM 库有相对详尽的说明文档。这也是我选择了 ASM 实现的原因。
-博主的程序里，其实很多上文提到的 java6 新特性都没有使用到：虚拟机启动后的动态 instrument ，本地方法的 instrument 都没有使用到。这里仅就源代码中的程序简单介绍 instrument 的基本功能和用法。
-程序中，除了 ASMAgent 以外的所有类都是调用 ASM API 实现对 测试程序中 各个对象的 construct 、 方法调用 ， field 赋值等操作行为的记录（其中对 Collection 子类的处理着实费了一番心血= =，字节码操作很细节，容易出错。以后再写 ASM 方面的博文叙述）。
-在此，我们将 ASM API 调用部分抽象成一个整体的接口好了，就是如下几句代码（在 ASMAgent.java 中）：
-[java] view plaincopy
-ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);<br/>
-ASMClassAdapter mca = new ASMClassAdapter(cw); <br/>
-ClassReader cr = new ClassReader(classfileBuffer);<br/>
-cr.accept(mca, 0);<br/>
-retVal = cw.toByteArray();<br/>
-其中 classfileBuffer 是类文件加载时的原始的字节码，retVal 则是经过处理后的字节码。</p>
+<p>在此，我将 ASM API 调用部分抽象成一个整体的接口好了，就是如下几句代码（在 ASMAgent.java 中）：</p>
 
-<p>============================正文分割===========================
-原理
-JVMTI（Java Virtual Machine Tool Interface）是一套本地编程接口集合，它提供了一套”代理”程序机制，可以支持第三方工具程序以代理的方式连接和访问 JVM，并利用 JVMTI 提供的丰富的编程接口，完成很多跟 JVM 相关的功能。关于 JVMTI 的详细信息，请参考 Java SE 6 文档（请参见 参考资源）当中的介绍。
-java.lang.instrument 包的实现，也就是基于这种机制的：在 Instrumentation 的实现当中，存在一个 JVMTI 的代理程序，通过调用 JVMTI 当中 Java 类相关的函数来完成 Java 类的动态操作。
-Instrumentation 的最大作用，就是类定义动态改变和操作。在 Java SE 5 及其后续版本当中，开发者可以在一个普通 Java 程序（带有 main 函数的 Java 类）运行时，通过 – javaagent 参数指定一个特定的 jar 文件（包含 Instrumentation 代理）来启动 Instrumentation 的代理程序。
-步骤
-1.编写 java 代理类。
-这个类中，premain 方法是关键，对比于一般的入口 main 一样，这里的 premain 是在 main 之前执行的。它会告诉 JVM 如何处理加载上来的 java 字节码。如下例：
-[java] view plaincopy
-public static void premain(String agentArgs, Instrumentation inst) {</p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">ClassWriter</span> <span class="n">cw</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ClassWriter</span><span class="o">(</span><span class="n">ClassWriter</span><span class="o">.</span><span class="na">COMPUTE_FRAMES</span><span class="o">);</span>
+</span><span class='line'><span class="n">ASMClassAdapter</span> <span class="n">mca</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ASMClassAdapter</span><span class="o">(</span><span class="n">cw</span><span class="o">);</span>
+</span><span class='line'><span class="n">ClassReader</span> <span class="n">cr</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ClassReader</span><span class="o">(</span><span class="n">classfileBuffer</span><span class="o">);</span>
+</span><span class='line'><span class="n">cr</span><span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="n">mca</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+</span><span class='line'><span class="n">retVal</span> <span class="o">=</span> <span class="n">cw</span><span class="o">.</span><span class="na">toByteArray</span><span class="o">();</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>                Trace.BeginTrace(); // it's important for trace files  
-        inst.addTransformer(new ASMAgent());  
-    }  
-</code></pre>
 
-<p>值得注意的是，addTransformer 实现了对字节码处理的方法的回调。
-[java] view plaincopy
-inst.addTransformer(new ASMAgent());<br/>
-类 ASMAgent 包含着实现对 java 字节码处理的方法：transform()。它来自于 ClassFileTransformer 接口。为了方便，博主这里将对 ClassFileTransformer 接口的实现跟 ASMAgent 类放在了一起。
-[java] view plaincopy
-public byte[] transform(ClassLoader loader, String className,Class&lt;?> classBeingRedefined,</p>
+<p>其中 classfileBuffer 是类文件加载时的原始的字节码，retVal 则是经过处理后的字节码。</p>
 
-<pre><code>                                    ProtectionDomain protectionDomain,byte[] classfileBuffer)  
-        throws IllegalClassFormatException {  
-        byte[] retVal = null;  
+<h2>原理</h2>
 
-        if(isInstrumentable(className)){  
+<p><a href="http://www.ibm.com/developerworks/cn/java/j-lo-jse61/index.html#N100A7">JVMTI（Java Virtual Machine Tool Interface）</a>是一套本地编程接口集合，它提供了一套『代理』机制，可以支持第三方工具程序以代理的方式连接和访问 JVM，并利用 JVMTI 提供的丰富的编程接口，完成很多跟 JVM 相关的功能。</p>
 
-                ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);  
-            ASMClassAdapter mca = new ASMClassAdapter(cw);   
-            ClassReader cr = new ClassReader(classfileBuffer);  
-            cr.accept(mca, 0);  
-            retVal = cw.toByteArray();  
-        }else{  
-                retVal = classfileBuffer ;  
-            }  
+<p>java.lang.instrument 包的实现，也就是基于这种机制的：在 Instrumentation 的实现当中，存在一个 JVMTI 的代理程序，通过调用 JVMTI 当中 Java 类相关的函数来完成 Java 类的动态操作。</p>
 
-        return retVal;  
-}  
-</code></pre>
+<p>Instrumentation 的最大作用就是类定义的动态改变和操作。在 Java SE 5 及其后续版本当中，开发者可以在一个普通 Java 程序（带有 main 函数的 Java 类）运行时，通过 – javaagent 参数指定一个特定的 jar 文件（包含 Instrumentation 代理）来启动 Instrumentation 的代理程序。</p>
 
-<p>2.打包代理类。
-只有合理打包并在 manifest 文件中记录下相应的键值对之后，才能正常执行 premain 的内容。
-manifest 文件中需要添加的键值对是：
-[plain] view plaincopy
-Premain-Class : biaobiaoqi.asm.ASMAgent<br/>
-jar 打包和 manifest 的修改方法见另一篇博文《JAR 文件操作基础（Using JAR Files: The Basics）》
-另外，如果对字节码的处理有应用到了其他的类，需要在 manifest 中增加路径。键值对为：
-[plain] view plaincopy
-Class-Path: asm-3.0.jar</p>
+<h2>步骤</h2>
 
-<p>3.执行
-执行测试程序时，添加“-javaagent:代理类的 jar[=传入 premain 的参数]”选项。
-比如，对于博主的程序，就是
-java -javaagent:ASMInstrument.jar   -jar XXXX.jar  xxxx
-其中 ASMInstrument.jar 是第二步中打包的程序，  XXX.jar 是需要测试的程序， xxx 是 XXX.jar 执行时可能的命令行参数。
-如果只是执行某.class 文件中的类，我们假设是在当前目录下的一个 XXXX 类，则是：
-java -javaagent:ASMInstrument.jar   -cp ./  XXXX xxx
-其中 xxx 是可能的命令行参数。</p>
+<h3>1.编写 java 代理类</h3>
 
-<p>源码下载
-编码期间遇到很多问题，比如在 instrument 方法中的 classlodaer 的一些判定操作。希望跟大家多交流～求勿喷。<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/09/08/custom-premain-method/'>http://biaobiaoqi.github.com/blog/2013/09/08/custom-premain-method/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
+<p>这个类中，premain 方法是关键，对比于一般的入口 main 一样，这里的 premain 是在 main 之前执行的。它会告诉 JVM 如何处理加载上来的 java 字节码。如下例：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">premain</span><span class="o">(</span><span class="n">String</span> <span class="n">agentArgs</span><span class="o">,</span> <span class="n">Instrumentation</span> <span class="n">inst</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>                    <span class="n">Trace</span><span class="o">.</span><span class="na">BeginTrace</span><span class="o">();</span> <span class="c1">// it&#39;s important for trace files  </span>
+</span><span class='line'>            <span class="n">inst</span><span class="o">.</span><span class="na">addTransformer</span><span class="o">(</span><span class="k">new</span> <span class="n">ASMAgent</span><span class="o">());</span>
+</span><span class='line'>        <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>值得注意的是，addTransformer 实现了对字节码处理的方法的回调。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">inst</span><span class="o">.</span><span class="na">addTransformer</span><span class="o">(</span><span class="k">new</span> <span class="n">ASMAgent</span><span class="o">());</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>类 ASMAgent 包含着实现对 java 字节码处理的方法：transform()。它来自于 ClassFileTransformer 接口。为了方便，博主这里将对 ClassFileTransformer 接口的实现跟 ASMAgent 类放在了一起。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kt">byte</span><span class="o">[]</span> <span class="nf">transform</span><span class="o">(</span><span class="n">ClassLoader</span> <span class="n">loader</span><span class="o">,</span> <span class="n">String</span> <span class="n">className</span><span class="o">,</span><span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">classBeingRedefined</span><span class="o">,</span>
+</span><span class='line'>                                        <span class="n">ProtectionDomain</span> <span class="n">protectionDomain</span><span class="o">,</span><span class="kt">byte</span><span class="o">[]</span> <span class="n">classfileBuffer</span><span class="o">)</span>
+</span><span class='line'>            <span class="kd">throws</span> <span class="n">IllegalClassFormatException</span> <span class="o">{</span>
+</span><span class='line'>            <span class="kt">byte</span><span class="o">[]</span> <span class="n">retVal</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="k">if</span><span class="o">(</span><span class="n">isInstrumentable</span><span class="o">(</span><span class="n">className</span><span class="o">)){</span>
+</span><span class='line'>                <span class="n">ClassWriter</span> <span class="n">cw</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ClassWriter</span><span class="o">(</span><span class="n">ClassWriter</span><span class="o">.</span><span class="na">COMPUTE_FRAMES</span><span class="o">);</span>
+</span><span class='line'>                <span class="n">ASMClassAdapter</span> <span class="n">mca</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ASMClassAdapter</span><span class="o">(</span><span class="n">cw</span><span class="o">);</span>
+</span><span class='line'>                <span class="n">ClassReader</span> <span class="n">cr</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ClassReader</span><span class="o">(</span><span class="n">classfileBuffer</span><span class="o">);</span>
+</span><span class='line'>                <span class="n">cr</span><span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="n">mca</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+</span><span class='line'>                <span class="n">retVal</span> <span class="o">=</span> <span class="n">cw</span><span class="o">.</span><span class="na">toByteArray</span><span class="o">();</span>
+</span><span class='line'>            <span class="o">}</span><span class="k">else</span><span class="o">{</span>
+</span><span class='line'>                    <span class="n">retVal</span> <span class="o">=</span> <span class="n">classfileBuffer</span> <span class="o">;</span>
+</span><span class='line'>                <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="k">return</span> <span class="n">retVal</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>2.打包代理类</h3>
+
+<p>只有合理打包并在 manifest 文件中记录下相应的键值对之后，才能正常执行 premain 的内容。
+manifest 文件中需要添加的键值对是：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">Premain</span><span class="o">-</span><span class="n">Class</span> <span class="o">:</span> <span class="n">biaobiaoqi</span><span class="o">.</span><span class="na">asm</span><span class="o">.</span><span class="na">ASMAgent</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果对字节码的处理有应用到了其他的类，需要在 manifest 中增加路径。比如使用到了 asm-3.0.jar，则增加如下语句：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">Class</span><span class="o">-</span><span class="nl">Path:</span> <span class="n">asm</span><span class="o">-</span><span class="mf">3.0</span><span class="o">.</span><span class="na">jar</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>3.执行</h3>
+
+<p>执行测试程序时，添加“-javaagent:代理类的 jar[=传入 premain 的参数]”选项。</p>
+
+<p>比如，对于博主的程序，就是</p>
+
+<p><code>java -javaagent:ASMInstrument.jar   -jar XXXX.jar  xxxx</code></p>
+
+<p>其中 ASMInstrument.jar 是第二步中打包的程序，  XXX.jar 是需要测试的程序， xxx 是 XXX.jar 执行时可能的命令行参数。</p>
+
+<p>如果只是执行某.class 文件中的类，我们假设是在当前目录下的一个 XXXX 类，则是：
+<code>java -javaagent:ASMInstrument.jar   -cp ./  XXXX xxx</code></p>
+
+<p>其中 xxx 是可能的命令行参数。</p>
+
+<h3>参考资料</h3>
+
+<ul>
+<li><a href="http://www.ibm.com/developerworks/cn/java/j-lo-jse61/index.html">《Java SE 6 新特性: Instrumentation 新功能》</a></li>
+<li><a href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loader-in-practice/">《Java 类加载器编程实践》</a></li>
+</ul>
+
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/09/08/custom-premain-method/'>http://biaobiaoqi.github.com/blog/2013/09/08/custom-premain-method/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
 </div>
   
   
@@ -1047,12 +1101,12 @@ java -javaagent:ASMInstrument.jar   -cp ./  XXXX xxx
  <br /> 
   <ul class="tag-cloud">
     <a style="font-size: 180%" href="/tags/algorithm/">algorithm</a> &nbsp 
-<a style="font-size: 159%" href="/tags/bytecode/">bytecode</a> &nbsp 
+<a style="font-size: 164%" href="/tags/bytecode/">bytecode</a> &nbsp 
 <a style="font-size: 115%" href="/tags/diary/">diary</a> &nbsp 
 <a style="font-size: 167%" href="/tags/distributed/">distributed</a> &nbsp 
 <a style="font-size: 135%" href="/tags/hadoop/">hadoop</a> &nbsp 
 <a style="font-size: 174%" href="/tags/java/">java</a> &nbsp 
-<a style="font-size: 159%" href="/tags/jvm/">jvm</a> &nbsp 
+<a style="font-size: 164%" href="/tags/jvm/">jvm</a> &nbsp 
 <a style="font-size: 115%" href="/tags/life/">life</a> &nbsp 
 <a style="font-size: 143%" href="/tags/methodology/">methodology</a> &nbsp 
 <a style="font-size: 126%" href="/tags/network/">network</a> &nbsp 
@@ -1073,7 +1127,7 @@ java -javaagent:ASMInstrument.jar   -cp ./  XXXX xxx
       </li>
     
       <li class="post">
-        <a href="/blog/2013/09/08/custom-premain-method/">custom premain method</a>
+        <a href="/blog/2013/09/08/custom-premain-method/">AOP实践：java.lang.instrument的使用</a>
       </li>
     
       <li class="post">

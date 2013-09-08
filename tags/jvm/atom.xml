@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: jvm | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/tags/jvm/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-09-08T18:25:52+08:00</updated>
+  <updated>2013-09-08T19:42:04+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -145,6 +145,126 @@ String str = new String("abc");
 <li><a href="http://book.douban.com/subject/1610251/">Programming for the java virtual machine</a></li>
 <li><a href="http://www.xyzws.com/Javafaq/what-is-string-literal-pool/3">What is String literal pool? How to create a String</a></li>
 <li><a href="http://stackoverflow.com/questions/4918399/what-type-of-memory-heap-or-stack-string-constant-pool-in-java-gets-stored">What type of memory (Heap or Stack) String constant pool in Java gets stored?</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[AOP实践：java.lang.instrument的使用]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/09/08/custom-premain-method/"/>
+    <updated>2013-09-08T13:01:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/09/08/custom-premain-method</id>
+    <content type="html"><![CDATA[<h2>背景</h2>
+
+<p>在<a href="https://github.com/biaobiaoqi/rcjp">rcjp</a>项目中，需要调用ASM API（用于字节码处理的开源库）对字节码进行处理，目标是实现对Java程序运行时各种对象的动态跟踪，并进一步分析各个对象之间的关系。在此之前，需要考虑如何获取程序运行的入口。</p>
+
+<p>首先，我考虑到了自定义类加载器（详情见参考资料），即在程序的main入口处，首先加载自定义的类加载器，然后通过反射技术使用这个类加载器加载并调用测试程序。这个方法缺点是：每次都必须先找到测试程序的入口类，而对于有的封装成jar的程序集合，这一点相对比较难控制。</p>
+
+<p>于是，有了这里介绍的方法：通过 <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/instrument/package-summary.html">java.lang.instrument</a> 实现的java agent对象操作字节码，是一种<a href="http://en.wikipedia.org/wiki/Aspect-oriented_programming">AOP</a>的方法。</p>
+
+<p>程序中，除了ASMAgent 以外的所有类都是调用ASM API 实现对测试程序中各个对象的构造、方法调用、属性赋值等操作行为的记录（其中对Collection子类的处理着实费了一番心血= =，字节码操作很细节，容易出错）。</p>
+
+<p>在此，我将ASM API调用部分抽象成一个整体的接口好了，就是如下几句代码（在ASMAgent.java中）：</p>
+
+<p><code>java
+ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);  
+ASMClassAdapter mca = new ASMClassAdapter(cw);   
+ClassReader cr = new ClassReader(classfileBuffer);  
+cr.accept(mca, 0);  
+retVal = cw.toByteArray();  
+</code></p>
+
+<p>其中classfileBuffer是类文件加载时的原始的字节码，retVal则是经过处理后的字节码。</p>
+
+<h2>原理</h2>
+
+<p><a href="http://www.ibm.com/developerworks/cn/java/j-lo-jse61/index.html#N100A7">JVMTI（Java Virtual Machine Tool Interface）</a>是一套本地编程接口集合，它提供了一套『代理』机制，可以支持第三方工具程序以代理的方式连接和访问 JVM，并利用 JVMTI 提供的丰富的编程接口，完成很多跟 JVM 相关的功能。</p>
+
+<p>java.lang.instrument 包的实现，也就是基于这种机制的：在 Instrumentation 的实现当中，存在一个 JVMTI 的代理程序，通过调用 JVMTI 当中 Java 类相关的函数来完成 Java 类的动态操作。</p>
+
+<p>Instrumentation 的最大作用就是类定义的动态改变和操作。在 Java SE 5 及其后续版本当中，开发者可以在一个普通 Java 程序（带有 main 函数的 Java 类）运行时，通过 – javaagent参数指定一个特定的 jar 文件（包含 Instrumentation 代理）来启动 Instrumentation 的代理程序。</p>
+
+<h2>步骤</h2>
+
+<h3>1.编写java代理类</h3>
+
+<p>这个类中，premain方法是关键，对比于一般的入口main一样，这里的premain是在main之前执行的。它会告诉JVM如何处理加载上来的java字节码。如下例：</p>
+
+<p>```java
+public static void premain(String agentArgs, Instrumentation inst) {</p>
+
+<pre><code>                Trace.BeginTrace(); // it's important for trace files  
+        inst.addTransformer(new ASMAgent());  
+    }  
+</code></pre>
+
+<p>```</p>
+
+<p>值得注意的是，addTransformer实现了对字节码处理的方法的回调。</p>
+
+<p><code>java
+inst.addTransformer(new ASMAgent());  
+</code></p>
+
+<p>类ASMAgent包含着实现对java字节码处理的方法：transform()。它来自于ClassFileTransformer接口。为了方便，博主这里将对ClassFileTransformer接口的实现跟ASMAgent类放在了一起。</p>
+
+<p>```java
+public byte[] transform(ClassLoader loader, String className,Class&lt;?> classBeingRedefined,</p>
+
+<pre><code>                                    ProtectionDomain protectionDomain,byte[] classfileBuffer)  
+        throws IllegalClassFormatException {  
+        byte[] retVal = null;  
+
+        if(isInstrumentable(className)){    
+            ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);  
+            ASMClassAdapter mca = new ASMClassAdapter(cw);   
+            ClassReader cr = new ClassReader(classfileBuffer);  
+            cr.accept(mca, 0);  
+            retVal = cw.toByteArray();  
+        }else{  
+                retVal = classfileBuffer ;  
+            }  
+
+        return retVal;  
+}  
+</code></pre>
+
+<p>```</p>
+
+<h3>2.打包代理类</h3>
+
+<p>只有合理打包并在manifest文件中记录下相应的键值对之后，才能正常执行premain的内容。
+manifest文件中需要添加的键值对是：
+<code>
+Premain-Class : biaobiaoqi.asm.ASMAgent  
+</code></p>
+
+<p>如果对字节码的处理有应用到了其他的类，需要在manifest中增加路径。比如使用到了asm-3.0.jar，则增加如下语句：
+<code>
+Class-Path: asm-3.0.jar  
+</code></p>
+
+<h3>3.执行</h3>
+
+<p>执行测试程序时，添加“-javaagent:代理类的jar[=传入premain的参数]”选项。</p>
+
+<p>比如，对于博主的程序，就是</p>
+
+<p><code>java -javaagent:ASMInstrument.jar   -jar XXXX.jar  xxxx</code></p>
+
+<p>其中ASMInstrument.jar 是第二步中打包的程序，  XXX.jar是需要测试的程序， xxx是XXX.jar 执行时可能的命令行参数。</p>
+
+<p>如果只是执行某.class文件中的类，我们假设是在当前目录下的一个XXXX类，则是：
+<code>java -javaagent:ASMInstrument.jar   -cp ./  XXXX xxx</code></p>
+
+<p>其中xxx是可能的命令行参数。</p>
+
+<h3>参考资料</h3>
+
+<ul>
+<li><a href="http://www.ibm.com/developerworks/cn/java/j-lo-jse61/index.html">《Java SE 6 新特性: Instrumentation 新功能》</a></li>
+<li><a href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loader-in-practice/">《Java类加载器编程实践》</a></li>
 </ul>
 
 ]]></content>
@@ -473,147 +593,6 @@ func
 <p>虽然有出现Son，但Son.i访问的是父类的非常量静态变量。于是没有对Son类进行初始化，而只是初始化了明确的声明静态变量的Parent类。</p>
 
 <p>由此可见，一般的，我们在某个类中定义了其他类的成员变量引用，只要该变量没有new 出一个新的对象，则JVM也不会初始化这个类，类此时只是被加载了而已，而没有链接和初始化。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Java方法调用的虚分派]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/09/08/virtual-dispatch-and-method-table-in-java/"/>
-    <updated>2013-09-08T01:51:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/09/08/virtual-dispatch-and-method-table-in-java</id>
-    <content type="html"><![CDATA[<p>本文通过介绍Java方法调用的虚分派，来加深对Java多态实现的理解。需要预先理解Java字节码和JVM的基本框架。</p>
-
-<h2>虚分配（Virtual Dispatch）</h2>
-
-<p>首先从字节码中对方法的调用说起。Java的bytecode中方法的调用实现分为四种指令：</p>
-
-<ul>
-<li>1.invokevirtual 为最常见的情况，包含virtual dispatch机制；</li>
-<li>2.invokespecial是作为对private和构造方法的调用，绕过了virtual dispatch；</li>
-<li>3.invokeinterface的实现跟invokevirtual类似。</li>
-<li>4.invokestatic是对静态方法的调用。</li>
-</ul>
-
-
-<p>其中最复杂的要属 invokevirtual指令，它涉及到了多态的特性，使用virtual dispatch做方法调用。</p>
-
-<p>virtual dispatch机制会首先从 receiver（被调用方法的对象）的类的实现中查找对应的方法，如果没找到，则去父类查找，直到找到函数并实现调用，而不是依赖于引用的类型。</p>
-
-<p>下面是一段有趣的代码。反映了virtual dispatch机制 和 一般的field访问的不同。
-```java
-public class Greeting {</p>
-
-<pre><code>String intro = "Hello";  
-String target(){  
-    return "world";  
-}  
-</code></pre>
-
-<p>}</p>
-
-<p>public class FrenchGreeting extends Greeting {</p>
-
-<pre><code>String intro = "Bonjour";  
-String target(){  
-    return "le monde";  
-}  
-
-
-public static void main(String[] args){  
-    Greeting english = new Greeting();  
-    Greeting french = new FrenchGreeting();  
-
-    System.out.println(english.intro + "," + english.target());  
-    System.out.println(french.intro + "," + french.target());  
-    System.out.println(((FrenchGreeting)french).intro + "," +       ((FrenchGreeting)french).target());  
-}  
-</code></pre>
-
-<p>}<br/>
-<code>
-运行的结果为
-</code>
-Hello,world<br/>
-Hello,le monde<br/>
-Bonjour,le monde<br/>
-```</p>
-
-<p>前两行输出中，对于intro这个属性的访问，直接指向了父类中的变量，因为引用类型为父类。</p>
-
-<p>第二行对于target()的方法调用，则是指向了子类中的方法，虽然引用类型也为父类，但这是虚分派的结果，虚分派不管引用类型的，只查被调用对象的类型。</p>
-
-<p>既然虚分派机制是从被调用对象本身的类开始查找，那么对于一个覆盖了父类中某方法的子类的对象，是无法调用父类中那个被覆盖的方法的吗？</p>
-
-<p>在虚分派机制中这确实是不可以的。但却可以通过invokespecial实现。如下代码</p>
-
-<p>```java
-public class FrenchGreeting extends Greeting {</p>
-
-<pre><code>String intro = "Bonjour";  
-String target(){  
-    return "le monde";  
-}  
-
-public String func(){  
-    return super.target();  
-}  
-
-
-public static void main(String[] args){  
-    Greeting english = new Greeting();  
-    FrenchGreeting french = new FrenchGreeting();  
-
-    System.out.println(french.func());  
-
-}  
-</code></pre>
-
-<p>}<br/>
-```</p>
-
-<!--more-->
-
-
-<p>func()就成功的调用了父类的方法target()，虽然target()已经被子类重写了。具体的调用细节，从字节码中可以看到：</p>
-
-<p><code>
-ALOAD 0: this  
-INVOKESPECIAL Greeting.target() : String  
-ARETURN  
-</code>
-其中使用了invokespecial指令，而不是施行虚分派策略的invokevirtual指令。</p>
-
-<h2>方法表（Method Table）</h2>
-
-<p>介绍了虚分派，接下来介绍是它的一种实现方式 -- 方法表。类似于C++的虚函数表vtbl。</p>
-
-<p>在有的JVM实现中，使用了方法表机制实现虚分派，而有时候，为了节省内存可能不采用方法表的实现。</p>
-
-<p>不要被方法表这个名字迷惑，它并不是记录所有方法的表。它是为虚分派服务，不会记录用invokestatic调用的静态方法和用invokespecial调用的构造函数和私有方法。</p>
-
-<p>JVM会在链接类的过程中，给类分配相应的方法表内存空间。每个类对应一个方法表。这些都是存在于method area区中的。这里与C++略有不同，C++中每个对象的第一个指针就是指向了相应的虚函数表。而Java中每个对象索引到对应的类，在对应的类数据中对应一个方法表。（关于链接的更多信息，参见博文<a href="http://localhost:4000/blog/2013/09/08/java-class-loading-linking-and-initialising/">《Java类的装载、链接和初始化》</a>）</p>
-
-<h3>一种方法表的实现如下：</h3>
-
-<p>父类的方法比子类的方法先得到解析，即父类的方法相比子类的方法位于表的前列。</p>
-
-<p>表中每项对应于一个方法，索引到实际方法的实现代码上。如果子类重写了父类中某个方法的代码，则该方法第一次出现的位置的索引更换到子类的实现代码上，而不会在方法表中出现新的项。</p>
-
-<p>JVM运行时，当代码索引到一个方法时，是根据它在方法表中的偏移量来实现访问的。（第一次执行到调用指令时，会执行解析，将符号索引替换为对应的直接索引）。</p>
-
-<p>由于invokevirtual调用的方法在对应的类的方法表中都有固定的位置，直接索引的值可以用偏移量来表示。（符号索引解析的最终目的是完成直接索引：对象方法和对象变量的调用都是用偏移量来表示直接索引的）</p>
-
-<h3>invokeinterface与invokevirtual的比较</h3>
-
-<p>当使用invokeinterface来调用方法时，由于不同的类可以实现同一interface，我们无法确定在某个类中的inteface中的方法处在哪个位置。于是，也就无法解析 CONSTANT_intefaceMethodref-info为直接索引，而必须每次都执行一次在methodtable中的搜索了。
-所以，在这种实现中，通过 invokeinterface访问方法比通过invokevirtua﻿﻿l访问明显慢很多。</p>
-
-<h3>参考资料</h3>
-
-<ul>
-<li><a href="http://book.douban.com/subject/1788390/">《Inside the Java2 Virtual Machine》</a></li>
-</ul>
-
 ]]></content>
   </entry>
   
