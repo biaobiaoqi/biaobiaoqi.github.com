@@ -221,11 +221,15 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   </header>
 
 
-  <div class="entry-content"><p>背景
-想调用 ASM API （用于字节码处理的开源 API）对字节码进行处理，目标是实现对 java 程序运行时各种对象的动态跟踪，并进一步分析各个对象之间的关系（研究前提是目前的 UML 锁阐释的 whole-part relation 是比较混乱的）。由于 ASM 相关内容又可以延伸很远，在此文中略过。
-在完成了能对字节码进行处理的 ASM 调用以后，需要考虑如何将这些功能与正常的 java 程序整合到一起。
-首先，我考虑到了自定义 ClassLoader 的方法（具体内容见另一篇博客《ClassLoader 编程实践》），即在程序的 main 入口处，首先加载自定义的 classloader，然后通过 reflect 技术使用这个 classloader 加载并调用测试程序（就是被跟踪的程序，姑且称之为测试程序）的入口类。
-这个方法一个很大的限制，在于每次都必须先找到测试程序的入口类，而对于有的封装成 jar 的程序集合，这一点相对比较难控制。</p>
+  <div class="entry-content"><p>背景</p>
+
+<p>想调用 ASM API （用于字节码处理的开源 API）对字节码进行处理，目标是实现对 java 程序运行时各种对象的动态跟踪，并进一步分析各个对象之间的关系（研究前提是目前的 UML 锁阐释的 whole-part relation 是比较混乱的）。由于 ASM 相关内容又可以延伸很远，在此文中略过。</p>
+
+<p>在完成了能对字节码进行处理的 ASM 调用以后，需要考虑如何将这些功能与正常的 java 程序整合到一起。</p>
+
+<p>首先，我考虑到了自定义 ClassLoader 的方法（具体内容见另一篇博客《ClassLoader 编程实践》），即在程序的 main 入口处，首先加载自定义的 classloader，然后通过 reflect 技术使用这个 classloader 加载并调用测试程序（就是被跟踪的程序，姑且称之为测试程序）的入口类。</p>
+
+<p>这个方法一个很大的限制：每次都必须先找到测试程序的入口类，而对于有的封装成 jar 的程序集合，这一点相对比较难控制。</p>
 
 <p>于是，有了这里介绍的方法：通过 java.lang.instrument 实现的 java agent 对象操作字节码，也就试所谓的 AOP（面向方面编程）
 中文介绍参加 IBM developworks 上的文档：《Java SE 6 新特性: Instrumentation 新功能》。内有详细解释。其中提到的 BCEL 即 Byte Code Engineering Library，是 apache 的开源项目，挺复杂，而 ASM 库有相对详尽的说明文档。这也是我选择了 ASM 实现的原因。
@@ -546,6 +550,241 @@ java -javaagent:ASMInstrument.jar   -cp ./  XXXX xxx
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2013/09/08/late-initialising-in-java/">Java类加载的延迟初始化</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-08T02:00:00+08:00" pubdate data-updated="true">Sep 8<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/09/08/late-initialising-in-java/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loading-linking-and-initialising/">《Java 类的装载、链接和初始化》</a>中提到，链接的最后一步是解析，即对符号引用的解析。但这不是必须的，可以等到相应的符号引用第一次使用时再解析。</p>
+
+<p>而类的初始化是在链接之后的（注意了，根据不同 JVM 有不同的实现方式，在类初始化的时候，可能已经完成了所有的符号引用的解析，也可能没有），本文所写的就是类的初始化的时机问题。</p>
+
+<p>Java 类的动态加载机制规定，在类被主动使用(active use)之前，必须已经完成类的初始化。既然有主动调用，那么就有被动调用了。这两者有哪些区别呢？</p>
+
+<p>下面列出所有主动使用的情况，用以区分两者：</p>
+
+<ul>
+<li>1.创造该类的一个新的实例</li>
+<li>2.调用这个类中的静态方法</li>
+<li>3.获取类或者接口中的非常量的静态变量</li>
+<li>4.利用反射调用方法</li>
+<li>5.初始化该类的某子类</li>
+<li>6.被制定为 JVM 开始运行时必须初始化的类</li>
+</ul>
+
+
+<p>注意，3 中为何是“非常量的静态变量”。如果是常量，即声明为 final 的话，并不会出现对类的构造，虽然调用时有类名出现，但实际调用会直接使用常量，绕过了类的限制（详情见相关常量池和运行时常量池的知识）。</p>
+
+<p>只有当一个非常量的静态变量被显示的在类或接口中声明时，它的调用才属于主动调用。对于父类中某非常量静态变量的调用属于被动使用(positive use)。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/09/08/late-initialising-in-java/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/09/08/virtual-dispatch-and-method-table-in-java/">Java方法调用的虚分派</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-08T01:51:00+08:00" pubdate data-updated="true">Sep 8<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/09/08/virtual-dispatch-and-method-table-in-java/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>本文通过介绍 Java 方法调用的虚分派，来加深对 Java 多态实现的理解。需要预先理解 Java 字节码和 JVM 的基本框架。</p>
+
+<h2>虚分配（Virtual Dispatch）</h2>
+
+<p>首先从字节码中对方法的调用说起。Java 的 bytecode 中方法的调用实现分为四种指令：</p>
+
+<ul>
+<li>1.invokevirtual 为最常见的情况，包含 virtual dispatch 机制；</li>
+<li>2.invokespecial 是作为对 private 和构造方法的调用，绕过了 virtual dispatch；</li>
+<li>3.invokeinterface 的实现跟 invokevirtual 类似。</li>
+<li>4.invokestatic 是对静态方法的调用。</li>
+</ul>
+
+
+<p>其中最复杂的要属 invokevirtual 指令，它涉及到了多态的特性，使用 virtual dispatch 做方法调用。</p>
+
+<p>virtual dispatch 机制会首先从 receiver（被调用方法的对象）的类的实现中查找对应的方法，如果没找到，则去父类查找，直到找到函数并实现调用，而不是依赖于引用的类型。</p>
+
+<p>下面是一段有趣的代码。反映了 virtual dispatch 机制 和 一般的 field 访问的不同。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Greeting</span> <span class="o">{</span>
+</span><span class='line'>    <span class="n">String</span> <span class="n">intro</span> <span class="o">=</span> <span class="s">&quot;Hello&quot;</span><span class="o">;</span>
+</span><span class='line'>    <span class="n">String</span> <span class="nf">target</span><span class="o">(){</span>
+</span><span class='line'>        <span class="k">return</span> <span class="s">&quot;world&quot;</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">FrenchGreeting</span> <span class="kd">extends</span> <span class="n">Greeting</span> <span class="o">{</span>
+</span><span class='line'>    <span class="n">String</span> <span class="n">intro</span> <span class="o">=</span> <span class="s">&quot;Bonjour&quot;</span><span class="o">;</span>
+</span><span class='line'>    <span class="n">String</span> <span class="nf">target</span><span class="o">(){</span>
+</span><span class='line'>        <span class="k">return</span> <span class="s">&quot;le monde&quot;</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+</span><span class='line'>        <span class="n">Greeting</span> <span class="n">english</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Greeting</span><span class="o">();</span>
+</span><span class='line'>        <span class="n">Greeting</span> <span class="n">french</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FrenchGreeting</span><span class="o">();</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">english</span><span class="o">.</span><span class="na">intro</span> <span class="o">+</span> <span class="s">&quot;,&quot;</span> <span class="o">+</span> <span class="n">english</span><span class="o">.</span><span class="na">target</span><span class="o">());</span>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">french</span><span class="o">.</span><span class="na">intro</span> <span class="o">+</span> <span class="s">&quot;,&quot;</span> <span class="o">+</span> <span class="n">french</span><span class="o">.</span><span class="na">target</span><span class="o">());</span>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(((</span><span class="n">FrenchGreeting</span><span class="o">)</span><span class="n">french</span><span class="o">).</span><span class="na">intro</span> <span class="o">+</span> <span class="s">&quot;,&quot;</span> <span class="o">+</span>      <span class="o">((</span><span class="n">FrenchGreeting</span><span class="o">)</span><span class="n">french</span><span class="o">).</span><span class="na">target</span><span class="o">());</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>运行的结果为</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">Hello</span><span class="o">,</span><span class="n">world</span>
+</span><span class='line'><span class="n">Hello</span><span class="o">,</span><span class="n">le</span> <span class="n">monde</span>
+</span><span class='line'><span class="n">Bonjour</span><span class="o">,</span><span class="n">le</span> <span class="n">monde</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>前两行输出中，对于 intro 这个属性的访问，直接指向了父类中的变量，因为引用类型为父类。</p>
+
+<p>第二行对于 target()的方法调用，则是指向了子类中的方法，虽然引用类型也为父类，但这是虚分派的结果，虚分派不管引用类型的，只查被调用对象的类型。</p>
+
+<p>既然虚分派机制是从被调用对象本身的类开始查找，那么对于一个覆盖了父类中某方法的子类的对象，是无法调用父类中那个被覆盖的方法的吗？</p>
+
+<p>在虚分派机制中这确实是不可以的。但却可以通过 invokespecial 实现。如下代码</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">FrenchGreeting</span> <span class="kd">extends</span> <span class="n">Greeting</span> <span class="o">{</span>
+</span><span class='line'>    <span class="n">String</span> <span class="n">intro</span> <span class="o">=</span> <span class="s">&quot;Bonjour&quot;</span><span class="o">;</span>
+</span><span class='line'>    <span class="n">String</span> <span class="nf">target</span><span class="o">(){</span>
+</span><span class='line'>        <span class="k">return</span> <span class="s">&quot;le monde&quot;</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="n">String</span> <span class="nf">func</span><span class="o">(){</span>
+</span><span class='line'>        <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">target</span><span class="o">();</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+</span><span class='line'>        <span class="n">Greeting</span> <span class="n">english</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Greeting</span><span class="o">();</span>
+</span><span class='line'>        <span class="n">FrenchGreeting</span> <span class="n">french</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FrenchGreeting</span><span class="o">();</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">french</span><span class="o">.</span><span class="na">func</span><span class="o">());</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/09/08/virtual-dispatch-and-method-table-in-java/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2013/09/08/three-principles-of-classloader-operation/">类加载器操作三原则[译]</a></h1>
     
     
@@ -793,117 +1032,6 @@ java -javaagent:ASMInstrument.jar   -cp ./  XXXX xxx
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/09/06/kongfu-snake-project-summary/">Android小游戏：功夫蛇 团队开发经验总结</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-06T00:00:00+08:00" pubdate data-updated="true">Sep 6<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/09/06/kongfu-snake-project-summary/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>前言</h2>
-
-<p>曾经没有代码管理的习惯，不用回版本控制工具。这种陋习虽然让原来千穿百孔的代码远离了实现，但这种逃避未必就是一件好事吧;)。
-于是从博客中挖出了原来的文章，并千辛万苦找到了最早的代码贴出来。</p>
-
-<p>这篇文章是参加 Google 的 Android 应用开发大赛时，写的总结帖。主要从团队和设计两个方面进行了分析总结。虽然如今看来一些内容显得稚嫩和粗糙，
-但没有功劳还是有苦劳的！还是那句话，我们要不断收集生活中的珠子，等到最后，才能串成一条链。</p>
-
-<p>我同步的将代码贴到了自己的 <a href="https://github.com/biaobiaoqi/kongfusnake">github</a> 里。对于这份代码，或许以后有时间，可以重构下代码？又或者没有时间？
-这都无所谓。能够让原来的脚印在路途中获得一席之地，也才有之后更好的旅程。</p>
-
-<p>内容不做修改，这就是 12 年 1 月时，我的思维层次总结啦。</p>
-
-<h2>原文</h2>
-
-<p>此文从团队和设计两方面，进行了一些经验总结。没有涉及技术实现的讨论。</p>
-
-<p>KongfuSnake，这是一款取材自贪吃蛇的 android 游戏。（弱弱的说，这个取材其实这是我最不敢说出口的，被大多数人评价为老套、
-过时的创意>&lt;&#8230;但需要解释的是，我们确实做了很多“微创新”~）。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/09/06/kongfu-snake-project-summary/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/09/05/google-android-challenge-2011/">Google Android应用开发大赛参赛记</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-05T23:51:00+08:00" pubdate data-updated="true">Sep 5<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/09/05/google-android-challenge-2011/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>前言</h2>
-
-<p>大三结束的暑假，跟另外两个同学一起组队参加了 Google 第二届 Andoid 应用开发中国大学生挑战赛，有幸获得了<a href="http://www.google.cn/university/androidchallenge/2011/gallery.html#tab=d1-13">全国总决赛的前 6 名</a>。
-虽然只是移动客户端的开发实践，但也第一次让我体验到了工程的魅力、团队协作的成就感和编码的快乐。</p>
-
-<p>以下内容实际上是一份属于当时经验匮乏的团队的开发草稿，回头看来，满载的无知和丰腴的老土，姑且把它当做开发日志吧;)</p>
-
-<p>不做内容删改（些许格式调整）,原文如下：</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/09/05/google-android-challenge-2011/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -919,12 +1047,12 @@ java -javaagent:ASMInstrument.jar   -cp ./  XXXX xxx
  <br /> 
   <ul class="tag-cloud">
     <a style="font-size: 180%" href="/tags/algorithm/">algorithm</a> &nbsp 
-<a style="font-size: 149%" href="/tags/bytecode/">bytecode</a> &nbsp 
+<a style="font-size: 159%" href="/tags/bytecode/">bytecode</a> &nbsp 
 <a style="font-size: 115%" href="/tags/diary/">diary</a> &nbsp 
 <a style="font-size: 167%" href="/tags/distributed/">distributed</a> &nbsp 
 <a style="font-size: 135%" href="/tags/hadoop/">hadoop</a> &nbsp 
-<a style="font-size: 164%" href="/tags/java/">java</a> &nbsp 
-<a style="font-size: 149%" href="/tags/jvm/">jvm</a> &nbsp 
+<a style="font-size: 174%" href="/tags/java/">java</a> &nbsp 
+<a style="font-size: 159%" href="/tags/jvm/">jvm</a> &nbsp 
 <a style="font-size: 115%" href="/tags/life/">life</a> &nbsp 
 <a style="font-size: 143%" href="/tags/methodology/">methodology</a> &nbsp 
 <a style="font-size: 126%" href="/tags/network/">network</a> &nbsp 
@@ -957,7 +1085,7 @@ java -javaagent:ASMInstrument.jar   -cp ./  XXXX xxx
       </li>
     
       <li class="post">
-        <a href="/blog/2013/09/08/three-principles-of-classloader-operation/">类加载器操作三原则[译]</a>
+        <a href="/blog/2013/09/08/late-initialising-in-java/">Java类加载的延迟初始化</a>
       </li>
     
   </ul>

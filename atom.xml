@@ -4,7 +4,7 @@
   <title><![CDATA[Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-09-08T16:26:44+08:00</updated>
+  <updated>2013-09-08T18:17:50+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -182,11 +182,15 @@
     <link href="http://biaobiaoqi.github.com/blog/2013/09/08/custom-premain-method/"/>
     <updated>2013-09-08T13:01:00+08:00</updated>
     <id>http://biaobiaoqi.github.com/blog/2013/09/08/custom-premain-method</id>
-    <content type="html"><![CDATA[<p>背景
-想调用 ASM API （用于字节码处理的开源 API）对字节码进行处理，目标是实现对 java 程序运行时各种对象的动态跟踪，并进一步分析各个对象之间的关系（研究前提是目前的 UML 锁阐释的 whole-part relation 是比较混乱的）。由于 ASM 相关内容又可以延伸很远，在此文中略过。
-在完成了能对字节码进行处理的 ASM 调用以后，需要考虑如何将这些功能与正常的 java 程序整合到一起。
-首先，我考虑到了自定义 ClassLoader 的方法（具体内容见另一篇博客《ClassLoader 编程实践》），即在程序的 main 入口处，首先加载自定义的 classloader，然后通过 reflect 技术使用这个 classloader 加载并调用测试程序（就是被跟踪的程序，姑且称之为测试程序）的入口类。
-这个方法一个很大的限制，在于每次都必须先找到测试程序的入口类，而对于有的封装成 jar 的程序集合，这一点相对比较难控制。</p>
+    <content type="html"><![CDATA[<p>背景</p>
+
+<p>想调用 ASM API （用于字节码处理的开源 API）对字节码进行处理，目标是实现对 java 程序运行时各种对象的动态跟踪，并进一步分析各个对象之间的关系（研究前提是目前的 UML 锁阐释的 whole-part relation 是比较混乱的）。由于 ASM 相关内容又可以延伸很远，在此文中略过。</p>
+
+<p>在完成了能对字节码进行处理的 ASM 调用以后，需要考虑如何将这些功能与正常的 java 程序整合到一起。</p>
+
+<p>首先，我考虑到了自定义 ClassLoader 的方法（具体内容见另一篇博客《ClassLoader 编程实践》），即在程序的 main 入口处，首先加载自定义的 classloader，然后通过 reflect 技术使用这个 classloader 加载并调用测试程序（就是被跟踪的程序，姑且称之为测试程序）的入口类。</p>
+
+<p>这个方法一个很大的限制：每次都必须先找到测试程序的入口类，而对于有的封装成 jar 的程序集合，这一点相对比较难控制。</p>
 
 <p>于是，有了这里介绍的方法：通过 java.lang.instrument 实现的 java agent 对象操作字节码，也就试所谓的 AOP（面向方面编程）
 中文介绍参加 IBM developworks 上的文档：《Java SE 6 新特性: Instrumentation 新功能》。内有详细解释。其中提到的 BCEL 即 Byte Code Engineering Library，是 apache 的开源项目，挺复杂，而 ASM 库有相对详尽的说明文档。这也是我选择了 ASM 实现的原因。
@@ -595,6 +599,309 @@ java -javaagent:ASMInstrument.jar   -cp ./  XXXX xxx
 <p>实际上，这里 str1 和 str2 合并的过程，是使用了 StringBuilder 来间接完成的，首先以 str1 的值构造一个 StringBuilder，然后调用其中的 append()方法，将 str2 串联上来。</p>
 
 <p>值得注意的是：老版本的 java 使用 StringBuffer 完成这一步，但 StringBuffer 是线程安全的，效率略低，于是在新版本 java 中出现了非线程安全的 StringBuilder，这类似于 Hashtable 和 hashset 的关系。<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/09/08/initliate-objects-in-java/'>http://biaobiaoqi.github.com/blog/2013/09/08/initliate-objects-in-java/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Java类加载的延迟初始化]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/09/08/late-initialising-in-java/"/>
+    <updated>2013-09-08T02:00:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/09/08/late-initialising-in-java</id>
+    <content type="html"><![CDATA[<p><a href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loading-linking-and-initialising/">《Java 类的装载、链接和初始化》</a>中提到，链接的最后一步是解析，即对符号引用的解析。但这不是必须的，可以等到相应的符号引用第一次使用时再解析。</p>
+
+<p>而类的初始化是在链接之后的（注意了，根据不同 JVM 有不同的实现方式，在类初始化的时候，可能已经完成了所有的符号引用的解析，也可能没有），本文所写的就是类的初始化的时机问题。</p>
+
+<p>Java 类的动态加载机制规定，在类被主动使用(active use)之前，必须已经完成类的初始化。既然有主动调用，那么就有被动调用了。这两者有哪些区别呢？</p>
+
+<p>下面列出所有主动使用的情况，用以区分两者：</p>
+
+<ul>
+<li>1.创造该类的一个新的实例</li>
+<li>2.调用这个类中的静态方法</li>
+<li>3.获取类或者接口中的非常量的静态变量</li>
+<li>4.利用反射调用方法</li>
+<li>5.初始化该类的某子类</li>
+<li>6.被制定为 JVM 开始运行时必须初始化的类</li>
+</ul>
+
+
+<p>注意，3 中为何是“非常量的静态变量”。如果是常量，即声明为 final 的话，并不会出现对类的构造，虽然调用时有类名出现，但实际调用会直接使用常量，绕过了类的限制（详情见相关常量池和运行时常量池的知识）。</p>
+
+<p>只有当一个非常量的静态变量被显示的在类或接口中声明时，它的调用才属于主动调用。对于父类中某非常量静态变量的调用属于被动使用(positive use)。</p>
+
+<!--more-->
+
+
+<p>如下代码</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Parent</span> <span class="o">{</span>
+</span><span class='line'>     <span class="kd">static</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>     <span class="kd">static</span><span class="o">{</span>
+</span><span class='line'>            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Parent initiate&quot;</span><span class="o">);</span>
+</span><span class='line'>     <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">func</span><span class="o">(){</span>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;func&quot;</span><span class="o">);</span>
+</span><span class='line'>     <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Son</span> <span class="kd">extends</span> <span class="n">Parent</span><span class="o">{</span>
+</span><span class='line'>    <span class="kd">static</span><span class="o">{</span>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Son initiate&quot;</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
+</span><span class='line'>    <span class="kd">static</span><span class="o">{</span>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Test initiate&quot;</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">Son</span><span class="o">.</span><span class="na">i</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">Son</span><span class="o">.</span><span class="na">func</span><span class="o">();</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>运行的结果是：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">Test</span> <span class="n">initiate</span>
+</span><span class='line'><span class="n">Parent</span> <span class="n">initiate</span>
+</span><span class='line'><span class="mi">10</span>
+</span><span class='line'><span class="n">func</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>虽然有出现 Son，但 Son.i 访问的是父类的非常量静态变量。于是没有对 Son 类进行初始化，而只是初始化了明确的声明静态变量的 Parent 类。</p>
+
+<p>由此可见，一般的，我们在某个类中定义了其他类的成员变量引用，只要该变量没有 new 出一个新的对象，则 JVM 也不会初始化这个类，类此时只是被加载了而已，而没有链接和初始化。<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/09/08/late-initialising-in-java/'>http://biaobiaoqi.github.com/blog/2013/09/08/late-initialising-in-java/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Java方法调用的虚分派]]></title>
+    <link href="http://biaobiaoqi.github.com/blog/2013/09/08/virtual-dispatch-and-method-table-in-java/"/>
+    <updated>2013-09-08T01:51:00+08:00</updated>
+    <id>http://biaobiaoqi.github.com/blog/2013/09/08/virtual-dispatch-and-method-table-in-java</id>
+    <content type="html"><![CDATA[<p>本文通过介绍 Java 方法调用的虚分派，来加深对 Java 多态实现的理解。需要预先理解 Java 字节码和 JVM 的基本框架。</p>
+
+<h2>虚分配（Virtual Dispatch）</h2>
+
+<p>首先从字节码中对方法的调用说起。Java 的 bytecode 中方法的调用实现分为四种指令：</p>
+
+<ul>
+<li>1.invokevirtual 为最常见的情况，包含 virtual dispatch 机制；</li>
+<li>2.invokespecial 是作为对 private 和构造方法的调用，绕过了 virtual dispatch；</li>
+<li>3.invokeinterface 的实现跟 invokevirtual 类似。</li>
+<li>4.invokestatic 是对静态方法的调用。</li>
+</ul>
+
+
+<p>其中最复杂的要属 invokevirtual 指令，它涉及到了多态的特性，使用 virtual dispatch 做方法调用。</p>
+
+<p>virtual dispatch 机制会首先从 receiver（被调用方法的对象）的类的实现中查找对应的方法，如果没找到，则去父类查找，直到找到函数并实现调用，而不是依赖于引用的类型。</p>
+
+<p>下面是一段有趣的代码。反映了 virtual dispatch 机制 和 一般的 field 访问的不同。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Greeting</span> <span class="o">{</span>
+</span><span class='line'>    <span class="n">String</span> <span class="n">intro</span> <span class="o">=</span> <span class="s">&quot;Hello&quot;</span><span class="o">;</span>
+</span><span class='line'>    <span class="n">String</span> <span class="nf">target</span><span class="o">(){</span>
+</span><span class='line'>        <span class="k">return</span> <span class="s">&quot;world&quot;</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">FrenchGreeting</span> <span class="kd">extends</span> <span class="n">Greeting</span> <span class="o">{</span>
+</span><span class='line'>    <span class="n">String</span> <span class="n">intro</span> <span class="o">=</span> <span class="s">&quot;Bonjour&quot;</span><span class="o">;</span>
+</span><span class='line'>    <span class="n">String</span> <span class="nf">target</span><span class="o">(){</span>
+</span><span class='line'>        <span class="k">return</span> <span class="s">&quot;le monde&quot;</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+</span><span class='line'>        <span class="n">Greeting</span> <span class="n">english</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Greeting</span><span class="o">();</span>
+</span><span class='line'>        <span class="n">Greeting</span> <span class="n">french</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FrenchGreeting</span><span class="o">();</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">english</span><span class="o">.</span><span class="na">intro</span> <span class="o">+</span> <span class="s">&quot;,&quot;</span> <span class="o">+</span> <span class="n">english</span><span class="o">.</span><span class="na">target</span><span class="o">());</span>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">french</span><span class="o">.</span><span class="na">intro</span> <span class="o">+</span> <span class="s">&quot;,&quot;</span> <span class="o">+</span> <span class="n">french</span><span class="o">.</span><span class="na">target</span><span class="o">());</span>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(((</span><span class="n">FrenchGreeting</span><span class="o">)</span><span class="n">french</span><span class="o">).</span><span class="na">intro</span> <span class="o">+</span> <span class="s">&quot;,&quot;</span> <span class="o">+</span>      <span class="o">((</span><span class="n">FrenchGreeting</span><span class="o">)</span><span class="n">french</span><span class="o">).</span><span class="na">target</span><span class="o">());</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>运行的结果为</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">Hello</span><span class="o">,</span><span class="n">world</span>
+</span><span class='line'><span class="n">Hello</span><span class="o">,</span><span class="n">le</span> <span class="n">monde</span>
+</span><span class='line'><span class="n">Bonjour</span><span class="o">,</span><span class="n">le</span> <span class="n">monde</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>前两行输出中，对于 intro 这个属性的访问，直接指向了父类中的变量，因为引用类型为父类。</p>
+
+<p>第二行对于 target()的方法调用，则是指向了子类中的方法，虽然引用类型也为父类，但这是虚分派的结果，虚分派不管引用类型的，只查被调用对象的类型。</p>
+
+<p>既然虚分派机制是从被调用对象本身的类开始查找，那么对于一个覆盖了父类中某方法的子类的对象，是无法调用父类中那个被覆盖的方法的吗？</p>
+
+<p>在虚分派机制中这确实是不可以的。但却可以通过 invokespecial 实现。如下代码</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">FrenchGreeting</span> <span class="kd">extends</span> <span class="n">Greeting</span> <span class="o">{</span>
+</span><span class='line'>    <span class="n">String</span> <span class="n">intro</span> <span class="o">=</span> <span class="s">&quot;Bonjour&quot;</span><span class="o">;</span>
+</span><span class='line'>    <span class="n">String</span> <span class="nf">target</span><span class="o">(){</span>
+</span><span class='line'>        <span class="k">return</span> <span class="s">&quot;le monde&quot;</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="n">String</span> <span class="nf">func</span><span class="o">(){</span>
+</span><span class='line'>        <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">target</span><span class="o">();</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+</span><span class='line'>        <span class="n">Greeting</span> <span class="n">english</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Greeting</span><span class="o">();</span>
+</span><span class='line'>        <span class="n">FrenchGreeting</span> <span class="n">french</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FrenchGreeting</span><span class="o">();</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">french</span><span class="o">.</span><span class="na">func</span><span class="o">());</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<!--more-->
+
+
+<p>func()就成功的调用了父类的方法 target()，虽然 target()已经被子类重写了。具体的调用细节，从字节码中可以看到：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">ALOAD</span> <span class="mi">0</span><span class="o">:</span> <span class="k">this</span>
+</span><span class='line'><span class="n">INVOKESPECIAL</span> <span class="n">Greeting</span><span class="o">.</span><span class="na">target</span><span class="o">()</span> <span class="o">:</span> <span class="n">String</span>
+</span><span class='line'><span class="n">ARETURN</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>其中使用了 invokespecial 指令，而不是施行虚分派策略的 invokevirtual 指令。</p>
+
+<h2>方法表（Method Table）</h2>
+
+<p>介绍了虚分派，接下来介绍是它的一种实现方式 &#8211; 方法表。类似于 C++的虚函数表 vtbl。</p>
+
+<p>在有的 JVM 实现中，使用了方法表机制实现虚分派，而有时候，为了节省内存可能不采用方法表的实现。</p>
+
+<p>不要被方法表这个名字迷惑，它并不是记录所有方法的表。它是为虚分派服务，不会记录用 invokestatic 调用的静态方法和用 invokespecial 调用的构造函数和私有方法。</p>
+
+<p>JVM 会在链接类的过程中，给类分配相应的方法表内存空间。每个类对应一个方法表。这些都是存在于 method area 区中的。这里与 C++略有不同，C++中每个对象的第一个指针就是指向了相应的虚函数表。而 Java 中每个对象索引到对应的类，在对应的类数据中对应一个方法表。（关于链接的更多信息，参见博文<a href="http://localhost:4000/blog/2013/09/08/java-class-loading-linking-and-initialising/">《Java 类的装载、链接和初始化》</a>）</p>
+
+<h3>一种方法表的实现如下：</h3>
+
+<p>父类的方法比子类的方法先得到解析，即父类的方法相比子类的方法位于表的前列。</p>
+
+<p>表中每项对应于一个方法，索引到实际方法的实现代码上。如果子类重写了父类中某个方法的代码，则该方法第一次出现的位置的索引更换到子类的实现代码上，而不会在方法表中出现新的项。</p>
+
+<p>JVM 运行时，当代码索引到一个方法时，是根据它在方法表中的偏移量来实现访问的。（第一次执行到调用指令时，会执行解析，将符号索引替换为对应的直接索引）。</p>
+
+<p>由于 invokevirtual 调用的方法在对应的类的方法表中都有固定的位置，直接索引的值可以用偏移量来表示。（符号索引解析的最终目的是完成直接索引：对象方法和对象变量的调用都是用偏移量来表示直接索引的）</p>
+
+<h3>invokeinterface 与 invokevirtual 的比较</h3>
+
+<p>当使用 invokeinterface 来调用方法时，由于不同的类可以实现同一 interface，我们无法确定在某个类中的 inteface 中的方法处在哪个位置。于是，也就无法解析 CONSTANT_intefaceMethodref-info 为直接索引，而必须每次都执行一次在 methodtable 中的搜索了。
+所以，在这种实现中，通过 invokeinterface 访问方法比通过 invokevirtua﻿﻿l 访问明显慢很多。</p>
+
+<h3>参考资料</h3>
+
+<ul>
+<li><a href="http://book.douban.com/subject/1788390/">《Inside the Java2 Virtual Machine》</a></li>
+</ul>
+
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/09/08/virtual-dispatch-and-method-table-in-java/'>http://biaobiaoqi.github.com/blog/2013/09/08/virtual-dispatch-and-method-table-in-java/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
 ]]></content>
   </entry>
   
@@ -2933,368 +3240,6 @@ I think we will make it open source and put the game into the market finally, bu
 <p>另外，C 读入一整行数据到 char 数组的方法可以用<code>gets(s);</code>。</p>
 
 <p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/08/01/pat-1031-1040-solutions/'>http://biaobiaoqi.github.com/blog/2013/08/01/pat-1031-1040-solutions/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[PAT 1021-1030 题解]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/08/01/pat-1021-1030-solutions/"/>
-    <updated>2013-08-01T01:43:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/08/01/pat-1021-1030-solutions</id>
-    <content type="html"><![CDATA[<p>早期部分代码用 Java 实现。由于 PAT 虽然支持各种语言，但只有 C/C++标程来限定时间，许多题目用 Java 读入数据就已经超时，后来转投 C/C++。浏览全部代码：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
-
-<p>本文谨代表个人思路，欢迎讨论;)</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1021">1021. Deepest Root (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>无环连通图也可以视为一棵树，选定图中任意一点作为根，如果这时候整个树的深度最大，则称其为 deepest root。
-给定一个图，按升序输出所有 deepest root。如果给定的图有多个连通分量，则输出连通分量的数量。</p>
-
-<h5>分析</h5>
-
-<p>算法实现的步骤如下：</p>
-
-<ul>
-<li>1.使用并查集判断图是否为连通的。</li>
-<li>2.任意选取一点，做 dfs 搜索，选取其中一个最远距离的点 A，再做一次 dfs，找到的所有距离最远的点以及点 A 都是 deepest root。</li>
-</ul>
-
-
-<p>判定图是否连通使用 union-find set 即可。更关键的点在于找到 deepest root。实际上，使用两次 dfs 就可以实现。
-证明之前，先介绍两个概念，一个是直径，树的 deepest root 到最远叶子的路径我们暂称直径，而 deepest root 和最远叶子节点则成为端点。
-注明关键在于以下两点：</p>
-
-<ul>
-<li><p>从任意一个点 dfs 得到的最远点都是直径的端点。证明如下：</p>
-
-<p>  任意选一点 A，做 dfs 查找距离 A 最远的点，因为是 dfs，所以肯定会经过某直径上的点 B，从 B 出发最远的点是直径上的端点 C。
-  那么，这个端点 C 为何一定是 A 的最远居里点呢？可以反证证明，如果有一个点 D，A->D 不经过直径，且 length(A->D) > length(A->C)，
-  那么，从 C 所在直径上构造出经过 D 的比原直径更长的直径，得证。</p></li>
-<li><p>所有的树的直径都交于一点（或者公用段路径上的几点）。
-于是，从 B 点 dfs 出发的所有最长距离的点即为 deepest root。证明如下：</p>
-
-<p>  如果两条直径不相交，而树上任意两点肯定连通，则从两直径上，可以选取两点连通以组成更长的直径；如果三条直径相较于不同的两点，也可以根据相交截断的长度组合出更长的直径。</p></li>
-</ul>
-
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1022">1022. Digital Library (30)</a></h2>
-
-<h5>题意</h5>
-
-<p>给定 N (&lt;=10000) 本书的信息，包括 7 位 ID，最多 80 字符的书名，最多 80 字符的作者名，
-多个最多 10 字符的关键词，最多 80 字符的出版商和属于 [1000, 3000]的出版时间。
-另给出 M (&lt;=1000) 的查询请求，按照查询格式分为：</p>
-
-<ul>
-<li>1: 书名</li>
-<li>2: 作者</li>
-<li>3: 关键词</li>
-<li>4: 出版商</li>
-<li>5: 年份</li>
-</ul>
-
-
-<p>输出查询结果。如果有多个结果，按照书的 ID 的升序排列。</p>
-
-<h5>分析</h5>
-
-<p>简单模拟题。在使用 Map 结构来构建倒排索引的过程中，可以讨巧的避免根据不同查询类型使用两层 map，
-直接通过在 key 中增加查询标记来实现。另外 C++的 priority_queue 支持对常规数据类型的最小堆实现：<code>priority_queue&lt;string, vector&lt;string&gt;, greater&lt;string&gt;&gt;</code>，方便了结果输出。</p>
-
-<!--more-->
-
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1023">1023. Have Fun with Numbers (20)</a></h2>
-
-<h5>题意</h5>
-
-<p>给出一个 20 位的正整数，要求计算其乘以 2 的值，并判定结果的数值是否是原数字所有位数打乱的结果。结果输出 Yes 或 No，以及乘以 2 以后的数字。</p>
-
-<h5>分析</h5>
-
-<p>判重使用 Hash 思想。过程如下：</p>
-
-<ul>
-<li>1.原数字按字符串读入，并在一个 int hash[10]的 hash 数组中标记每个数值出现的次数，比如如果出现了四次 1，则 hash[1]=4。</li>
-<li>2.模拟实现乘以 2 的简单乘法过程，没计算出一位的值，在 hash[]中对应位置上减一。</li>
-<li>3.最后通过判定 hash 是否全为 1 和最后结果是否有进位来做判定。</li>
-</ul>
-
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1024">1024. Palindromic Number (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>非回文数可以通过将它与它的倒转数相加，并不断迭代这一过程获得回文数的结果。比如 67 经过两次处理就得到了 484：
-<code>67 + 76 = 143, and 143 + 341 = 484.</code></p>
-
-<p>给定一个数和迭代的次数，判断能否在迭代次数内获得回文结果。</p>
-
-<h5>分析</h5>
-
-<p>简单模拟题，处理数字，做逻辑判断。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1025">1025. PAT Ranking (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>以 PAT 考试为背景，给所有人做排名。给定的数据包括 N(&lt;=100)为赛区的数目，每个赛区的人数以及每个人的分数。
-按照总排名、分区号、注册号的优先级排名。</p>
-
-<h5>分析</h5>
-
-<p>简单模拟题，使用 qsort()排序，注意相同分数的人应该拥有相同的排名。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1026">1026. Table Tennis (30)</a></h2>
-
-<h5>题意</h5>
-
-<p>乒乓球俱乐部有 K 张乒乓球桌，其中有 M 张是 VIP 桌。有很多人到俱乐部打球，如果桌子都满了，多余的人只能排队等待。</p>
-
-<p>有一个特殊的 VIP 制度：如果有空的 VIP 桌，那么等待队列中的第一对 VIP 会员可以使用这张卓，
-如果等待队列中没有 VIP 会员，那么一般会员也可以使用 VIP 桌。当轮到 VIP 上的时候，没有 VIP 桌子，那么 VIP 用户也可以使用一般的桌子。</p>
-
-<p>另外，每张桌服务一对会员的时间最大限制在两个小时。</p>
-
-<p>给定了乒乓球桌的数量 M(编号为 1-M)，其中 VIP 卓的数量 K，并指定是那几张桌子。给出来乒乓球俱乐部的 N 对会员的信息，每对会员有一个达到时间，
-是否是 VIP 的标记以及打球的时间。要求计算出每对会员的等待时间，以及每张桌服务过的次数。</p>
-
-<h5>分析</h5>
-
-<p>排队模拟题。有两种思路：</p>
-
-<ul>
-<li>1.主体循环处理人。将乒乓球桌和人都当做资源，乒乓球桌对应记录了 available 的时间，每次取出 available 最早的时间，从等待队列中选
-则最早的会员使用乒乓球桌。其中 vip 处理逻辑为：如果 available 并列最早的桌子中有 vip 桌，则看等待队列中有没有 vip 会员，
-如果有则直接处理他，否则按照正常逻辑处理。每次将某会员安置到一个乒乓球桌上，则可以输出该会员的等待时间的结果信息，并将该乒乓球桌的
-服务人数增加一。</li>
-<li>2.主体循环是时间。这样需要模拟同一时刻所有的乒乓球桌以及等待队列，相对比较复杂。</li>
-</ul>
-
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1027">1027. Colors in Mars (20)</a></h2>
-
-<h5>题意</h5>
-
-<p>给定三个十进制数，要求格式化输出其 13 进制表达。</p>
-
-<h5>分析</h5>
-
-<p>简单的数字处理和 hash 实现。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1028">1028. List Sorting (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>模拟 Excel 中按列排序。N (&lt;=100000) 为数据条数，每条数据由三列组成：ID，姓名，成绩。C 可以等于 1,2,3，分别对应到按三列中的哪一列排序。
-输出排序结果。</p>
-
-<h5>分析</h5>
-
-<p>简单排序题。两种思路：</p>
-
-<ul>
-<li>1.简单的直接使用 qsort()实现。</li>
-<li>2.自己手写排序算法，比如二叉搜索树实现。</li>
-</ul>
-
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1029">1029. Median (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>给定两个已排序的整数序列，求出两组数的集合里中间大小的数。</p>
-
-<h5>分析</h5>
-
-<p>使用归并排序思路实现。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1030">1030. Travel Plan (30)</a></h2>
-
-<h5>题意</h5>
-
-<p>给定加权图，每条边有两种权值：一是路径长度，二是开销。要求求出给点两点间的最短路径，如果路径长度一样，则要求比较选择开销最小的路径。</p>
-
-<h5>分析</h5>
-
-<p>使用 Dijkstra 算法的变形，增加一个权重的判定，可以轻松解决。<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/08/01/pat-1021-1030-solutions/'>http://biaobiaoqi.github.com/blog/2013/08/01/pat-1021-1030-solutions/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[PAT 1011-1020 题解]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/07/31/pat-1011-1020-solutions/"/>
-    <updated>2013-07-31T23:41:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/07/31/pat-1011-1020-solutions</id>
-    <content type="html"><![CDATA[<p>早期部分代码用 Java 实现。由于 PAT 虽然支持各种语言，但只有 C/C++标程来限定时间，许多题目用 Java 读入数据就已经超时，后来转投 C/C++。浏览全部代码：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
-
-<p>本文谨代表个人思路，欢迎讨论;)</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1011">1011. World Cup Betting (20)</a></h2>
-
-<h5>题意</h5>
-
-<p>给定一个 3*3 的矩阵，找到每行的最大值，格式化输出一个运算结果。</p>
-
-<h5>分析</h5>
-
-<p>非常简单的模拟题。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1012">1012. The Best Rank (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>给定学生的学号和三个科目的分数，查询输出对应学生单门科目排名和总分排名中最高的那个排名。</p>
-
-<h5>分析</h5>
-
-<p>C 里 stdlib.h 中的 qsort()和 C++里 algorithm 中的 sort()函数都能实现快排，应对编程题中的排序一般比自己手写的要快。
-分别为三个单科和总分做排序，并将 rank 值记录到 map 结构中去，便于之后的查找。</p>
-
-<p>需要注意并列排名的情况。比如<code>1 2 2 4</code>，由于并列第 2 的都两人，那之后的那个人就是第 4 而不是第 3 了。</p>
-
-<p>另外，由于有多个需要分别排序、排名的项，抽象出公共逻辑到一个函数里比较必要，否则代码分散难于 debug 和维护。
-这里稍微特殊点的用法是使用了<a href="http://blog.csdn.net/dyx1024/article/details/7562786">函数指针</a>做参数。</p>
-
-<!--more-->
-
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1013">1013. Battle Over Cities (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>给定一张图和指定几个点。针对给出的每个点，要求计算，在除掉连接该点的路径的情况下，保证整个图连通所需要添加的边的数量。</p>
-
-<h5>分析</h5>
-
-<p>计算保证整个图连通需要几个点，亦即求出图中有几个连通分量。两种思路：</p>
-
-<ul>
-<li>1.并查集</li>
-<li>2.DFS</li>
-</ul>
-
-
-<p>针对每个点，执行算法的过程中，需要注意去除掉该点对应的所有通路。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1014">1014. Waiting in Line (30)</a></h2>
-
-<h5>题意</h5>
-
-<p>这道题是排队模拟题。银行有 N 个窗口，每个窗口允许排队 M 个人，如果 N 个窗口占满了排队的人，更多的人需要在黄线外等待。
-每个人都会选择尽可能人少的窗口排队，如果有多个窗口等待队列一样长，则选择编号小的窗口。
-前 N 个用户设定在 8:00 开始接受服务。给定了 K 个用户所需要接受服务的时间长度，要求在这个排队模型下，每个人的完成处理的时间点。</p>
-
-<h5>分析</h5>
-
-<p>相对另外几个队列模拟题，这个题是很简单的。没有达到时间的差异，只需要不断的从等待队列中取出人员即可。
-当然，由于黄线内等待的每个窗口都有 M 人，所以必须单独的模拟每个窗口。
-可以使用 queue 模拟每个窗口，循环遍历下次离开窗口的人，继而从等待队列中补上。
-需要注意结束条件，如果 17:00 以后还没有开始接受服务，则不用再等待。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1015">1015. Reversible Primes (20)</a></h2>
-
-<h5>题意</h5>
-
-<p>Reversible Primes 是指在某个进制下，一个数本身和它翻转过来形成的新数都是素数。
-题中给出多组数据，以负数结尾程序。每组数据包含一个数以及一个进制数。判定该数是否是 Reversible Primes.</p>
-
-<h5>分析</h5>
-
-<p>两个功能点实现：判定素数和特定进制下的数据倒转。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1016">1016. Phone Bills (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>给出一天中每个不同的小时内的电话付费标准，给出一份分为打出和挂断两种记录的通话记录，包括记录发生的时刻和用户名字，
-要求整理出当月有效用户的账单，输出格式中需要输出所有的通话记录，包括开始时刻和结束时刻，每次通话的话费以及总计的话费。</p>
-
-<h5>分析</h5>
-
-<p>模拟题。首先对输入的通话记录按照先姓名后时间做 qsort()排序，然后遍历排序后的记录，找到合适的匹配对，计算每次通话的时间，并进行统计和输出。</p>
-
-<p>实现的难点主要有两个：</p>
-
-<ul>
-<li>1.在排序后的记录中，找到合适的配对。如果某人的通话记录为<code>1.on;2.on;3.off;</code>，则其中<code>1.on</code>将被抛弃，匹配到<code>2.on;3.off;</code>。
-题中仅仅保证了所有记录中至少有一对有效记录，但并没有保证每个人都有有效通话记录，所以还需要做好过滤，
-如果某人没有有效通话记录，则不输出。整体的控制流程需要谨慎。</li>
-<li>2.由于不同时刻的话费不一样，计算一次有效通话的话费比较复杂。可以采用的方式是用起始时刻分阶段追赶结束时刻。追赶的过程分阶段，也就能计算好不同阶段的开销，
-先将起始时间调整到跟结束时间为同一天，细节是先让分钟达到 0，再让小时迭代到 0，天进位，一直迭代到跟结束时间同天；再让起始时刻的小时数追平
-结束时刻；最后让分钟追平。以此计算出最终话费。</li>
-</ul>
-
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1017">1017. Queueing at Bank (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>银行有 K 个窗口，所有到达银行的人都应该在黄线外等待，直到有窗口空余。
-每个窗口对单个客人最多服务时间为 1 小时。N 个用户的到达时间和需要处理的时间给出。
-8:00 到 17:00 接受服务，逾期不服务，也不计入统计数据。要求格式化输出用户的平均等待时间。</p>
-
-<h5>分析</h5>
-
-<p>又一道排队模拟题。相比 PAT1014，此题更复杂在于用户的到达时间是不确定的。
-首先使用 qsort()按照到达时间对所有人排序。由于每个窗口同时只有一个人在处理，所以窗口之间没有差异，可以用 priority_queue 建立一个队列，
-模拟所有 K 个窗口。
-优先队列将结束时间最早的人放到队列的顶端，每次循环处理一个人的结束。然后步入一个黄线外等待的人。如果那个时刻，下一个人还没有达到，则可以将该人开始执行的时间记录为他的到达时间，并加入队列中。
-还有一点需要注意的：HH:MM:SS 的时间格式，可以转换为累积秒数的时间，方便计算比较。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1018">1018. Public Bike Management (30)</a></h2>
-
-<h5>题意</h5>
-
-<p>以杭州的公用自行车站点管理为背景。每个站点是一个节点，每个节点上最多停放 Cmax 辆自行车，Cmax/2 为节点的最佳状态。不同节点间距离不同，整个构成了一张带权无向图。要求从起始点（公用自行车管理中心）出发，去目的地维护目的地节点的车辆状态，如果车辆低于 Cmax/2，则给它添加车辆到 Cmax/2 辆，如果多于 Cmax/2，则去除掉几辆车。同时，在去往目的地的过程中，也需要调整所有沿途站点的车辆（这里题目没有交代清楚，实际测试是只能在去往目的地的途中调整，回来的途上不可调整）。求到给定目的地的最短路径，如果有多条最短路径，则按照 1.从管理中心送出的车辆越少越好；2.拿回到管理中心的车越少越好的优先级找到结果。</p>
-
-<h5>分析</h5>
-
-<p>题目的大体框架是有权最短路径问题。步骤如下：</p>
-
-<ul>
-<li>1.使用 Dijkstra 找到最短路径，其中注意记录每个节点在最短路径中的【所有】前驱节点；</li>
-<li>2.使用 DFS 的方法，得到所有的最短路径。</li>
-<li>3.计算每条最短路径的带出和带回的车辆数量。</li>
-</ul>
-
-
-<p>其中 DFS 时，归纳所有答案的过程比较通用，需要掌握。</p>
-
-<p>另外值得注意的是，类比到 PAT1003，该题采用了直接对每个节点增加状态记录的方式，直接得到最优解，而不是先找到最短路径，然后计算比较。本题是无法用这种方法实现的，需要送出和带回的自行车数量无法直接在 Dij 算法中每个节点的计算中体现，并不是前面的节点带回和送出的车辆越少，后面的节点就一定能得到更优解。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1019">1019. General Palindromic Number (20)</a></h2>
-
-<h5>题意</h5>
-
-<p>给定一个十进制数和一个进制，要求计算出在给定进制下的表达并判定是否为回文。</p>
-
-<h5>分析</h5>
-
-<p>简单的数字处理。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1020">1020. Tree Traversals (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>根据二叉树的后序遍历和中序遍历，求层序遍历。</p>
-
-<h5>分析</h5>
-
-<p>具体实现方式：</p>
-
-<ul>
-<li>初始：用后序遍历序列确定根节点，在中序遍历序列中找到该根节点，则左右子树分别为中序中该节点左右的序列。</li>
-<li>迭代：对各个子树分别执行三步操作，1.在后序序列中找子树的根节点；2。在中序序列中找子树的根节点，并划分开根节点的左右子树；3.根据新生成的左右子树，在后序序列中划分开这些节点，从而得到了两颗子树的后序、中序序列。</li>
-</ul>
-
-
-<p>有一个结论：中序遍历配合另外任何一个遍历，能重建二叉树。其他的任意两个序列的组合都不能唯一的确定重建的二叉树。具体分析参见博文<a href="../../../../2013/04/27/pat1020-pat1043-rebuild-binary-tree/">《根据前中后序和层序重建二叉树(PAT1020、PAT1043)》</a>。</p>
-
-<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/07/31/pat-1011-1020-solutions/'>http://biaobiaoqi.github.com/blog/2013/07/31/pat-1011-1020-solutions/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
 
 ]]></content>
   </entry>

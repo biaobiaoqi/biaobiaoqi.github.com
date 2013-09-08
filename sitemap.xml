@@ -241,6 +241,16 @@
         <lastmod>2013-09-08T04:16:38+08:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://biaobiaoqi.github.com/blog/2013/09/08/virtual-dispatch-and-method-table-in-java/
+        </loc>
+        <lastmod>2013-09-08T16:56:48+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://biaobiaoqi.github.com/blog/2013/09/08/late-initialising-in-java/</loc>
+        <lastmod>2013-09-08T18:15:50+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://biaobiaoqi.github.com/blog/2013/09/08/initliate-objects-in-java/</loc>
         <lastmod>2013-09-08T16:10:31+08:00</lastmod>
     </url>
@@ -252,7 +262,7 @@
     </url>
     <url>
         <loc>http://biaobiaoqi.github.com/blog/2013/09/08/custom-premain-method/</loc>
-        <lastmod>2013-09-08T13:01:59+08:00</lastmod>
+        <lastmod>2013-09-08T18:16:28+08:00</lastmod>
     </url>
     <url>
         <loc>http://biaobiaoqi.github.com/blog/2013/09/08/string-interning/</loc>
@@ -268,11 +278,11 @@
     </url>
     <url>
         <loc>http://biaobiaoqi.github.com/blog/archives/</loc>
-        <lastmod>2013-09-08T16:11:27+08:00</lastmod>
+        <lastmod>2013-09-08T18:16:28+08:00</lastmod>
     </url>
     <url>
         <loc>http://biaobiaoqi.github.com/</loc>
-        <lastmod>2013-09-08T16:11:27+08:00</lastmod>
+        <lastmod>2013-09-08T18:16:28+08:00</lastmod>
     </url>
     <url>
         <loc>http://biaobiaoqi.github.com/robots.txt</loc>

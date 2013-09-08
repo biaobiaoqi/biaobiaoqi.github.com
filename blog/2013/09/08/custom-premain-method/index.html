@@ -134,11 +134,15 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   </header>
 
 
-<div class="entry-content"><p>背景
-想调用 ASM API （用于字节码处理的开源 API）对字节码进行处理，目标是实现对 java 程序运行时各种对象的动态跟踪，并进一步分析各个对象之间的关系（研究前提是目前的 UML 锁阐释的 whole-part relation 是比较混乱的）。由于 ASM 相关内容又可以延伸很远，在此文中略过。
-在完成了能对字节码进行处理的 ASM 调用以后，需要考虑如何将这些功能与正常的 java 程序整合到一起。
-首先，我考虑到了自定义 ClassLoader 的方法（具体内容见另一篇博客《ClassLoader 编程实践》），即在程序的 main 入口处，首先加载自定义的 classloader，然后通过 reflect 技术使用这个 classloader 加载并调用测试程序（就是被跟踪的程序，姑且称之为测试程序）的入口类。
-这个方法一个很大的限制，在于每次都必须先找到测试程序的入口类，而对于有的封装成 jar 的程序集合，这一点相对比较难控制。</p>
+<div class="entry-content"><p>背景</p>
+
+<p>想调用 ASM API （用于字节码处理的开源 API）对字节码进行处理，目标是实现对 java 程序运行时各种对象的动态跟踪，并进一步分析各个对象之间的关系（研究前提是目前的 UML 锁阐释的 whole-part relation 是比较混乱的）。由于 ASM 相关内容又可以延伸很远，在此文中略过。</p>
+
+<p>在完成了能对字节码进行处理的 ASM 调用以后，需要考虑如何将这些功能与正常的 java 程序整合到一起。</p>
+
+<p>首先，我考虑到了自定义 ClassLoader 的方法（具体内容见另一篇博客《ClassLoader 编程实践》），即在程序的 main 入口处，首先加载自定义的 classloader，然后通过 reflect 技术使用这个 classloader 加载并调用测试程序（就是被跟踪的程序，姑且称之为测试程序）的入口类。</p>
+
+<p>这个方法一个很大的限制：每次都必须先找到测试程序的入口类，而对于有的封装成 jar 的程序集合，这一点相对比较难控制。</p>
 
 <p>于是，有了这里介绍的方法：通过 java.lang.instrument 实现的 java agent 对象操作字节码，也就试所谓的 AOP（面向方面编程）
 中文介绍参加 IBM developworks 上的文档：《Java SE 6 新特性: Instrumentation 新功能》。内有详细解释。其中提到的 BCEL 即 Byte Code Engineering Library，是 apache 的开源项目，挺复杂，而 ASM 库有相对详尽的说明文档。这也是我选择了 ASM 实现的原因。
@@ -241,6 +245,12 @@ java -javaagent:ASMInstrument.jar   -cp ./  XXXX xxx
 <time datetime="2013-09-08T13:01:00+08:00" pubdate data-updated="true">Sep 8<span>th</span>, 2013</time>
       
 
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
+
 
     </p>
     
@@ -301,12 +311,12 @@ var jiathis_config={
  <br /> 
   <ul class="tag-cloud">
     <a style="font-size: 180%" href="/tags/algorithm/">algorithm</a> &nbsp 
-<a style="font-size: 149%" href="/tags/bytecode/">bytecode</a> &nbsp 
+<a style="font-size: 159%" href="/tags/bytecode/">bytecode</a> &nbsp 
 <a style="font-size: 115%" href="/tags/diary/">diary</a> &nbsp 
 <a style="font-size: 167%" href="/tags/distributed/">distributed</a> &nbsp 
 <a style="font-size: 135%" href="/tags/hadoop/">hadoop</a> &nbsp 
-<a style="font-size: 164%" href="/tags/java/">java</a> &nbsp 
-<a style="font-size: 149%" href="/tags/jvm/">jvm</a> &nbsp 
+<a style="font-size: 174%" href="/tags/java/">java</a> &nbsp 
+<a style="font-size: 159%" href="/tags/jvm/">jvm</a> &nbsp 
 <a style="font-size: 115%" href="/tags/life/">life</a> &nbsp 
 <a style="font-size: 143%" href="/tags/methodology/">methodology</a> &nbsp 
 <a style="font-size: 126%" href="/tags/network/">network</a> &nbsp 
@@ -339,7 +349,7 @@ var jiathis_config={
       </li>
     
       <li class="post">
-        <a href="/blog/2013/09/08/three-principles-of-classloader-operation/">类加载器操作三原则[译]</a>
+        <a href="/blog/2013/09/08/late-initialising-in-java/">Java类加载的延迟初始化</a>
       </li>
     
   </ul>
