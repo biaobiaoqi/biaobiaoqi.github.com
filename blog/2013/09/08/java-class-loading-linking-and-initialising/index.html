@@ -164,7 +164,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <p>  对类的成员变量分配空间。虽然有初始值，但这个时候不会对他们进行初始化（因为这里不会执行任何 Java 代码）。具体如下：</p>
 
-<p>  所有原始类型的值都为 0。如 float: 0f, int: 0, boolean: 0(注意 boolean 底层实现大多使用 int)，引用类型则为 null。值得注意的是，JVM 可能会在这个时期给一些有助于程序运行效率提高的数据结构分配空间。比如方发表（类似与 C++中的虚函数表，参见另一篇博文<a href="http://biaobiaoqi.me/blog/2013/09/08/virtual-dispatch-and-method-table-in-java/">《Java：方法的虚分派和方法表》</a>）。</p></li>
+<p>  所有原始类型的值都为 0。如 float: 0f, int: 0, boolean: 0(注意 boolean 底层实现大多使用 int)，引用类型则为 null。值得注意的是，JVM 可能会在这个时期给一些有助于程序运行效率提高的数据结构分配空间。比如方发表（类似与 C++中的虚函数表，参见另一篇博文<a href="http://biaobiaoqi.me/blog/2013/06/02/virtual-dispatch-and-method-table-in-java/">《Java：方法的虚分派和方法表》</a>）。</p></li>
 <li><p>3.解析(Resolution)</p>
 
 <p>  为类、接口、方法、成员变量的符号引用定位直接引用（如果符号引用先到常量池中寻找符号，再找先应的类型，无疑会耗费更多时间），完成内存结构的布局。</p>

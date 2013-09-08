@@ -119,6 +119,12 @@
         <lastmod>2013-09-01T02:31:15+08:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://biaobiaoqi.github.com/blog/2013/06/02/virtual-dispatch-and-method-table-in-java/
+        </loc>
+        <lastmod>2013-09-08T19:52:58+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://biaobiaoqi.github.com/blog/2013/06/08/ipc-in-hadoop/</loc>
         <lastmod>2013-09-01T02:31:15+08:00</lastmod>
     </url>
@@ -232,19 +238,13 @@
         <loc>
             http://biaobiaoqi.github.com/blog/2013/09/08/java-class-loading-linking-and-initialising/
         </loc>
-        <lastmod>2013-09-08T18:20:46+08:00</lastmod>
+        <lastmod>2013-09-08T19:55:46+08:00</lastmod>
     </url>
     <url>
         <loc>
             http://biaobiaoqi.github.com/blog/2013/09/08/three-principles-of-classloader-operation/
         </loc>
         <lastmod>2013-09-08T04:16:38+08:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://biaobiaoqi.github.com/blog/2013/09/08/virtual-dispatch-and-method-table-in-java/
-        </loc>
-        <lastmod>2013-09-08T18:25:00+08:00</lastmod>
     </url>
     <url>
         <loc>http://biaobiaoqi.github.com/blog/2013/09/08/late-initialising-in-java/</loc>
@@ -262,7 +262,7 @@
     </url>
     <url>
         <loc>http://biaobiaoqi.github.com/blog/2013/09/08/custom-premain-method/</loc>
-        <lastmod>2013-09-08T19:46:15+08:00</lastmod>
+        <lastmod>2013-09-08T19:48:21+08:00</lastmod>
     </url>
     <url>
         <loc>http://biaobiaoqi.github.com/blog/2013/09/08/string-interning/</loc>
@@ -278,11 +278,11 @@
     </url>
     <url>
         <loc>http://biaobiaoqi.github.com/blog/archives/</loc>
-        <lastmod>2013-09-08T19:46:15+08:00</lastmod>
+        <lastmod>2013-09-08T19:55:46+08:00</lastmod>
     </url>
     <url>
         <loc>http://biaobiaoqi.github.com/</loc>
-        <lastmod>2013-09-08T19:46:15+08:00</lastmod>
+        <lastmod>2013-09-08T19:55:46+08:00</lastmod>
     </url>
     <url>
         <loc>http://biaobiaoqi.github.com/robots.txt</loc>
