@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Java方法调用的虚分派"
-date: 2013-09-08 01:51
+date: 2013-06-02 01:51
 comments: true
 categories: [tech]
 tags: [java, jvm, bytecode]

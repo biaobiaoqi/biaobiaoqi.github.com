@@ -31,7 +31,7 @@ description: ""
 
 	对类的成员变量分配空间。虽然有初始值，但这个时候不会对他们进行初始化（因为这里不会执行任何Java代码）。具体如下：
 	
-	所有原始类型的值都为0。如float: 0f, int: 0, boolean: 0(注意boolean底层实现大多使用int)，引用类型则为 null。值得注意的是，JVM可能会在这个时期给一些有助于程序运行效率提高的数据结构分配空间。比如方发表（类似与C++中的虚函数表，参见另一篇博文[《Java：方法的虚分派和方法表》](http://biaobiaoqi.me/blog/2013/09/08/virtual-dispatch-and-method-table-in-java/)）。
+	所有原始类型的值都为0。如float: 0f, int: 0, boolean: 0(注意boolean底层实现大多使用int)，引用类型则为 null。值得注意的是，JVM可能会在这个时期给一些有助于程序运行效率提高的数据结构分配空间。比如方发表（类似与C++中的虚函数表，参见另一篇博文[《Java：方法的虚分派和方法表》](http://biaobiaoqi.me/blog/2013/06/02/virtual-dispatch-and-method-table-in-java/)）。
 
 * 3.解析(Resolution)
 
