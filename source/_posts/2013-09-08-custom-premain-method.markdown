@@ -18,19 +18,7 @@ description: ""
 于是，有了这里介绍的方法：通过 [java.lang.instrument](http://docs.oracle.com/javase/6/docs/api/java/lang/instrument/package-summary.html) 实现的java agent对象操作字节码，是一种[AOP](http://en.wikipedia.org/wiki/Aspect-oriented_programming)的方法。
 
 程序中，除了ASMAgent 以外的所有类都是调用ASM API 实现对测试程序中各个对象的构造、方法调用、属性赋值等操作行为的记录（其中对Collection子类的处理着实费了一番心血= =，字节码操作很细节，容易出错）。
-
-在此，我将ASM API调用部分抽象成一个整体的接口好了，就是如下几句代码（在ASMAgent.java中）：
-
-```java
-ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);  
-ASMClassAdapter mca = new ASMClassAdapter(cw);   
-ClassReader cr = new ClassReader(classfileBuffer);  
-cr.accept(mca, 0);  
-retVal = cw.toByteArray();  
-```
-
-其中classfileBuffer是类文件加载时的原始的字节码，retVal则是经过处理后的字节码。
-
+<!--more-->
 
 ##原理
 
@@ -59,7 +47,7 @@ public static void premain(String agentArgs, Instrumentation inst) {
 inst.addTransformer(new ASMAgent());  
 ```
 
-类ASMAgent包含着实现对java字节码处理的方法：transform()。它来自于ClassFileTransformer接口。为了方便，博主这里将对ClassFileTransformer接口的实现跟ASMAgent类放在了一起。
+类ASMAgent包含着实现对java字节码处理的方法：transform()。它来自于ClassFileTransformer接口。为了方便，这里将对ClassFileTransformer接口的实现跟ASMAgent类放在了一起。其中classfileBuffer是类文件加载时的原始的字节码，retVal则是经过处理后的字节码。
 
 ```java
 public byte[] transform(ClassLoader loader, String className,Class<?> classBeingRedefined,   
