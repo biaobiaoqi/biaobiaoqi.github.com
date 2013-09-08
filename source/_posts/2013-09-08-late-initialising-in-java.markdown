@@ -5,7 +5,7 @@ date: 2013-09-08 02:00
 comments: true
 categories: [tech]
 tags: [java, jvm, bytecode]
-description: ""
+description: "Java类的动态加载机制规定，在类被主动使用(active use)之前，必须已经完成类的初始化。既然有主动调用，那么就有被动调用了。这两者有哪些区别呢？"
 
 ---
 
