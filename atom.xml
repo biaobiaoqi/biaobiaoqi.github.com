@@ -4,7 +4,7 @@
   <title><![CDATA[Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-09-08T19:42:04+08:00</updated>
+  <updated>2013-09-08T19:47:53+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -192,22 +192,8 @@
 
 <p>程序中，除了 ASMAgent 以外的所有类都是调用 ASM API 实现对测试程序中各个对象的构造、方法调用、属性赋值等操作行为的记录（其中对 Collection 子类的处理着实费了一番心血= =，字节码操作很细节，容易出错）。</p>
 
-<p>在此，我将 ASM API 调用部分抽象成一个整体的接口好了，就是如下几句代码（在 ASMAgent.java 中）：</p>
+<!--more-->
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">ClassWriter</span> <span class="n">cw</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ClassWriter</span><span class="o">(</span><span class="n">ClassWriter</span><span class="o">.</span><span class="na">COMPUTE_FRAMES</span><span class="o">);</span>
-</span><span class='line'><span class="n">ASMClassAdapter</span> <span class="n">mca</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ASMClassAdapter</span><span class="o">(</span><span class="n">cw</span><span class="o">);</span>
-</span><span class='line'><span class="n">ClassReader</span> <span class="n">cr</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ClassReader</span><span class="o">(</span><span class="n">classfileBuffer</span><span class="o">);</span>
-</span><span class='line'><span class="n">cr</span><span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="n">mca</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
-</span><span class='line'><span class="n">retVal</span> <span class="o">=</span> <span class="n">cw</span><span class="o">.</span><span class="na">toByteArray</span><span class="o">();</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>其中 classfileBuffer 是类文件加载时的原始的字节码，retVal 则是经过处理后的字节码。</p>
 
 <h2>原理</h2>
 
@@ -241,7 +227,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>类 ASMAgent 包含着实现对 java 字节码处理的方法：transform()。它来自于 ClassFileTransformer 接口。为了方便，博主这里将对 ClassFileTransformer 接口的实现跟 ASMAgent 类放在了一起。</p>
+<p>类 ASMAgent 包含着实现对 java 字节码处理的方法：transform()。它来自于 ClassFileTransformer 接口。为了方便，这里将对 ClassFileTransformer 接口的实现跟 ASMAgent 类放在了一起。其中 classfileBuffer 是类文件加载时的原始的字节码，retVal 则是经过处理后的字节码。</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>

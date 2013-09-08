@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: bytecode | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/tags/bytecode/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-09-08T19:42:04+08:00</updated>
+  <updated>2013-09-08T19:47:53+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -165,17 +165,8 @@ String str = new String("abc");
 
 <p>程序中，除了ASMAgent 以外的所有类都是调用ASM API 实现对测试程序中各个对象的构造、方法调用、属性赋值等操作行为的记录（其中对Collection子类的处理着实费了一番心血= =，字节码操作很细节，容易出错）。</p>
 
-<p>在此，我将ASM API调用部分抽象成一个整体的接口好了，就是如下几句代码（在ASMAgent.java中）：</p>
+<!--more-->
 
-<p><code>java
-ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);  
-ASMClassAdapter mca = new ASMClassAdapter(cw);   
-ClassReader cr = new ClassReader(classfileBuffer);  
-cr.accept(mca, 0);  
-retVal = cw.toByteArray();  
-</code></p>
-
-<p>其中classfileBuffer是类文件加载时的原始的字节码，retVal则是经过处理后的字节码。</p>
 
 <h2>原理</h2>
 
@@ -207,7 +198,7 @@ public static void premain(String agentArgs, Instrumentation inst) {</p>
 inst.addTransformer(new ASMAgent());  
 </code></p>
 
-<p>类ASMAgent包含着实现对java字节码处理的方法：transform()。它来自于ClassFileTransformer接口。为了方便，博主这里将对ClassFileTransformer接口的实现跟ASMAgent类放在了一起。</p>
+<p>类ASMAgent包含着实现对java字节码处理的方法：transform()。它来自于ClassFileTransformer接口。为了方便，这里将对ClassFileTransformer接口的实现跟ASMAgent类放在了一起。其中classfileBuffer是类文件加载时的原始的字节码，retVal则是经过处理后的字节码。</p>
 
 <p>```java
 public byte[] transform(ClassLoader loader, String className,Class&lt;?> classBeingRedefined,</p>
