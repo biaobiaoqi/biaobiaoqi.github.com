@@ -11,13 +11,13 @@ footer: true
 
 我是biaobiaoqi，ZJU的CS小硕一枚。从大三开始喜欢上了互联网,从此踏上了攻城狮的征途。
 
-写过`Java`，`objective-C`，能用点`C`、`bash`，对`Ruby`和`javascript`也略感兴趣。
+写过`Java`，`objective-C`，能用点`C\C++`、`bash`，对`Ruby`和`javascript`也挺感兴趣。
 
 `Talk is cheap, show me the code.` 说来惭愧，距今为止，我的作品还乏善可陈：
 
-* iOS应用[『查好友』的1.2及之前版本](http://chahaoyou.com/)。
-* AOP编程实践：逆向工程，从字节码中获取Java类的WP关系（我会抽空将代码整理后开源）。
-* Android应用[『功夫蛇』](https://github.com/biaobiaoqi/kongfusnake)
+* iOS应用[查好友的1.2及之前版本](http://chahaoyou.com/)。
+* AOP编程实践项目[rcjp](https://github.com/biaobiaoqi/rcjp)：逆向工程，操纵字节码，跟踪运行时的对象行为。
+* Android应用[功夫蛇](https://github.com/biaobiaoqi/kongfusnake)
 
 我的理想是做一个互联网时代的`匠人`，给世界留下一些脚印。于是，有了这个博客。将来，还会有更多的有趣的products, let's c ;)
 
