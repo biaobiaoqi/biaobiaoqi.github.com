@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: blog | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/tags/blog/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-09-08T20:55:17+08:00</updated>
+  <updated>2013-09-11T13:52:50+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -30,8 +30,8 @@
 
 <ul>
 <li><p>2013/4 octopress博客在github上成功搭建</p></li>
-<li><p>2013/5 拟定了“首页”、“技术”、“生活”、“关于”的顶栏tag结构，增加了友言评论功能，jiathis分享功能，侧边栏的微博秀和豆瓣秀。</p></li>
-<li><p>2013/7 侧边栏增加标签云，并增加了“标签云”顶栏tag。取消侧边栏微博秀。</p></li>
+<li><p>2013/5 拟定了『首页』、『技术』、『生活』、『关于』的顶栏tag结构，增加了友言评论功能，jiathis分享功能，侧边栏的微博秀和豆瓣秀。</p></li>
+<li><p>2013/7 侧边栏增加标签云，并增加了『标签云』顶栏tag。取消侧边栏微博秀。</p></li>
 <li><p>2013/8 更换博客主题为whitelake。</p></li>
 </ul>
 
@@ -40,7 +40,8 @@
 
 
 <ul>
-<li>2013/9/1 取消友言评论功能，采用disqus评论系统。</li>
+<li><p>2013/9/1 取消友言评论功能，采用disqus评论系统。</p></li>
+<li><p>2013/9/10 顶栏增加『推荐』，推荐我所收集的学习资源。</p></li>
 </ul>
 
 ]]></content>

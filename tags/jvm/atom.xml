@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: jvm | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.com/tags/jvm/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-09-08T20:55:17+08:00</updated>
+  <updated>2013-09-11T13:52:50+08:00</updated>
   <id>http://biaobiaoqi.github.com/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -116,7 +116,7 @@ package biaobiaoqi.thinkingInJava;</p>
 ```
 输出结果为true。</p>
 
-<p>现代的JVM实现里，考虑到垃圾回收（Garbage Collection）的方便，将<a href="http://en.wikipedia.org/wiki/Java_Virtual_Machine#Heap">heap</a>划分为三部分： young generation 、 tenured generation（old generation）和 permanent generation( permgen )</p>
+<p>现代的JVM实现里，考虑到垃圾回收（Garbage Collection）的方便，将内存区域<a href="http://en.wikipedia.org/wiki/Java_Virtual_Machine#Heap">heap</a>划分为三部分： young generation 、 tenured generation（old generation）和 permanent generation( permgen )</p>
 
 <p>字符串池是为了解决字符串重复的问题，生命周期长，它存在于permgen中。</p>
 
