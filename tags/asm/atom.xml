@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: asm | Biaobiaoqi的博客]]></title>
-  <link href="http://biaobiaoqi.github.com/tags/asm/atom.xml" rel="self"/>
-  <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-09-11T13:52:50+08:00</updated>
-  <id>http://biaobiaoqi.github.com/</id>
+  <link href="http://biaobiaoqi.me/tags/asm/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.me/"/>
+  <updated>2013-09-12T14:20:57+08:00</updated>
+  <id>http://biaobiaoqi.me/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[AOP实践：java.lang.instrument的使用]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/09/08/custom-premain-method/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/09/08/custom-premain-method/"/>
     <updated>2013-09-08T13:01:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/09/08/custom-premain-method</id>
+    <id>http://biaobiaoqi.me/blog/2013/09/08/custom-premain-method</id>
     <content type="html"><![CDATA[<h2>背景</h2>
 
 <p>在<a href="https://github.com/biaobiaoqi/rcjp">rcjp</a>项目中，需要调用ASM API（用于字节码处理的开源库）对字节码进行处理，目标是实现对Java程序运行时各种对象的动态跟踪，并进一步分析各个对象之间的关系。在此之前，需要考虑如何获取程序运行的入口。</p>

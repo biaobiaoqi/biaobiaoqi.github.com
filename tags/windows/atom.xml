@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: windows | Biaobiaoqi的博客]]></title>
-  <link href="http://biaobiaoqi.github.com/tags/windows/atom.xml" rel="self"/>
-  <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-09-11T13:52:50+08:00</updated>
-  <id>http://biaobiaoqi.github.com/</id>
+  <link href="http://biaobiaoqi.me/tags/windows/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.me/"/>
+  <updated>2013-09-12T14:20:57+08:00</updated>
+  <id>http://biaobiaoqi.me/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[winsock出错引起的断网]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/04/23/winsock-kills-internet/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/04/23/winsock-kills-internet/"/>
     <updated>2013-04-23T22:24:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/04/23/winsock-kills-internet</id>
+    <id>http://biaobiaoqi.me/blog/2013/04/23/winsock-kills-internet</id>
     <content type="html"><![CDATA[<h3>背景</h3>
 
 <p>实验室有二十来台PC机，30+的服务器集群，网络拓扑比较复杂。简单地说，有网关连着校网，校网无法直接访问学校外的网络，只能通过拨vpn来实现外网访问。而校网最近也不稳定，时常断网。</p>

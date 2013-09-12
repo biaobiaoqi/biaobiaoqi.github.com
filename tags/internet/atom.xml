@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: internet | Biaobiaoqi的博客]]></title>
-  <link href="http://biaobiaoqi.github.com/tags/internet/atom.xml" rel="self"/>
-  <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-09-11T13:52:50+08:00</updated>
-  <id>http://biaobiaoqi.github.com/</id>
+  <link href="http://biaobiaoqi.me/tags/internet/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.me/"/>
+  <updated>2013-09-12T14:20:57+08:00</updated>
+  <id>http://biaobiaoqi.me/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
     
@@ -14,10 +14,55 @@
 
   
   <entry>
+    <title type="html"><![CDATA[关于科学上网]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/09/10/scientifically-surfing-the-internet/"/>
+    <updated>2013-09-10T12:11:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/09/10/scientifically-surfing-the-internet</id>
+    <content type="html"><![CDATA[<p>为了防止被某墙fuck，暂且称其为『很棒的防火墙』吧，你懂的-,-.</p>
+
+<p>在teahour上听了 <a href="http://teahour.fm/2013/07/09/gfw-and-vpncloud.html">***技术研究和云梯产品故事</a>，有感于之前几天修改本地hosts的策略再次失效，切换到goagent模式，在此，基于这期teahour对<a href="https://twitter.com/kgen">@Kgen</a>的访谈内容，对很棒的防火墙做份简单的笔记：</p>
+
+<p>很棒的防火墙有用大量的服务器，并由一大只团队维护和升级。它的目的是让大部分的互联网用户无法接触到“有害”的网络资源，“净化”国内的网络环境。同时，它需要尽可能的减少商业上的影响，比如为了不阻碍外企的VPN工作环境，很棒的防火墙并没有直接对VPN进行封堵。在这个前提上，留给我们的可能性也是一直存在的。</p>
+
+<h2>防御策略</h2>
+
+<p>很棒的防火墙一直在茁壮成长着。一个方校长倒下了，千千万万X校长站起来了。他们背负着一辈子的骂名，忍辱负重的为祖国奉献着生命，死而后已。总之，前赴后继的技术人员不断的在补全着很棒的防火墙的防御规则，因此，应对策略也需要不断的调整和改进。整体来看，防御策略主要有如下几种：</p>
+
+<ul>
+<li><h4>1.DNS污染</h4>
+
+<p>  DNS协议本身并没有安全认证功能，很棒的防火墙检测到相应dns请求后，会返回一个错误的IP地址，造成无法正常访问。解决方案有使用第三方DNS服务或者修改本地hosts文件。</p></li>
+<li><h4>2.IP拦截</h4>
+
+<p>  对于特定敏感网站，很棒的防火墙会直接侦察到相应的IP地址施行拦截。简单的DNS修改无法解决IP层的问题，只能通过代理等手段绕过这些IP进行访问。常用的应对方式有：使用VPN、ssh代理和GAE上搭建<a href="http://zhoudemin.com/goagent.html">GoAgent</a>服务等。至于为什么一些国内用户说自己的GoAgent速度很快，而又有很多人在抱怨自己的GAE速度很慢，原因在于GAE应用会不受控制的部署到Google不同的服务器节点上，而国内网络环境复杂，不同地区的网络连入国外不同服务器的线路不尽相同，速度也差异明显。同样的情况也发生在VPS的使用速度差异上。</p></li>
+</ul>
+
+
+<!--more-->
+
+
+<ul>
+<li><h4>3.端口封锁：比如ssh端口</h4>
+
+<p>  <a href="http://biaobiaoqi.me/blog/2013/04/19/use-ssh/">ssh</a>是一种安全的加密的网络通信协议，通过ssh可以施行对远程主机的操控。部分网民通过在很棒的防火墙外的VPS（虚拟主机）做代理，使用ssh服务上网。针对这一情况，最近两年，很棒的防火墙开始实现对ssh端口的封锁。当ssh链接被鉴定为非正常流量，则相应端口会受到封锁。如果频繁切换端口，可能整个IP都将被封锁。</p></li>
+<li><h4>4.http请求明文内容检测和中断</h4>
+
+<p>  使用Google搜索某些敏感内容时，链接会被重置，就是因为很棒的防火墙侦测到了敏感内容，给用户浏览器发送了重置消息，扰乱了链接。</p></li>
+<li><h4>5.https间歇性中断</h4>
+
+<p>  https的链接本身是安全的、加密的。在无法侦测内容的前提下，很棒的防火墙采用了不讲道理的间歇性中断策略。</p></li>
+</ul>
+
+
+<p>更多关于很棒的防火墙的资料，请先翻过墙去查看;)</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[《免费》]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/05/13/free-the-bit-economics/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/05/13/free-the-bit-economics/"/>
     <updated>2013-05-13T00:46:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/05/13/free-the-bit-economics</id>
+    <id>http://biaobiaoqi.me/blog/2013/05/13/free-the-bit-economics</id>
     <content type="html"><![CDATA[<h2>比特经济的到来</h2>
 
 <p><a href="http://en.wikipedia.org/wiki/Chris_Andersen">克里斯·安德森</a>人称鸟人安德森，现效力于热火队，一直以来都是值得信赖的角色球员，板凳匪徒，内线尖兵。好了，不扯了……回到另外一个<a href="http://t.cn/akRhip">克里斯·安德森</a>的思想世界来。</p>

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: book | Biaobiaoqi的博客]]></title>
-  <link href="http://biaobiaoqi.github.com/blog/categories/book/atom.xml" rel="self"/>
-  <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-09-11T13:52:50+08:00</updated>
-  <id>http://biaobiaoqi.github.com/</id>
+  <link href="http://biaobiaoqi.me/blog/categories/book/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.me/"/>
+  <updated>2013-09-12T14:20:57+08:00</updated>
+  <id>http://biaobiaoqi.me/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[《俞敏洪口述》]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/07/07/yuminhong/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/07/07/yuminhong/"/>
     <updated>2013-07-07T23:53:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/07/07/yuminhong</id>
+    <id>http://biaobiaoqi.me/blog/2013/07/07/yuminhong</id>
     <content type="html"><![CDATA[<h2>质朴、诚恳和坚韧</h2>
 
 <p>这本书是某次在Amazon上购书『满100送书一本』时挑的。放在抽屉里有段日子了。</p>
@@ -58,9 +58,9 @@
   
   <entry>
     <title type="html"><![CDATA[《清单革命》]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/07/05/checklist-manifesto/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/07/05/checklist-manifesto/"/>
     <updated>2013-07-05T00:54:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/07/05/checklist-manifesto</id>
+    <id>http://biaobiaoqi.me/blog/2013/07/05/checklist-manifesto</id>
     <content type="html"><![CDATA[<h2>应该叫『清单宣言』</h2>
 
 <p>在Amazon上『满100送一本』的活动中随手挑到了它。鉴于其空洞的标题，被束之高阁半年多，最近关注个人管理方面的知识，才拍拍灰尘读起来。</p>
@@ -122,9 +122,9 @@
   
   <entry>
     <title type="html"><![CDATA[《写给大家看的设计书》]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/06/11/the-non-designers-design-book/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/06/11/the-non-designers-design-book/"/>
     <updated>2013-06-11T13:58:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/06/11/the-non-designers-design-book</id>
+    <id>http://biaobiaoqi.me/blog/2013/06/11/the-non-designers-design-book</id>
     <content type="html"><![CDATA[<h3>从iOS7的扁平化谈起</h3>
 
 <p>昨晚看了WWDC2013的直播，iOS7以扁平化UI的方式展现在世人面前。于是接下来进入了微博吐槽时间。</p>
@@ -238,9 +238,9 @@
   
   <entry>
     <title type="html"><![CDATA[《程序员的思维修炼》]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/05/22/pragmatic-thinking-and-learning-refactor-your-wetware/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/05/22/pragmatic-thinking-and-learning-refactor-your-wetware/"/>
     <updated>2013-05-22T01:14:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/05/22/pragmatic-thinking-and-learning-refactor-your-wetware</id>
+    <id>http://biaobiaoqi.me/blog/2013/05/22/pragmatic-thinking-and-learning-refactor-your-wetware</id>
     <content type="html"><![CDATA[<h3>别鄙视方法论</h3>
 
 <p>曾经很长时间里，我这么认为：方法论的东西没什么实际的用处，不过是其他人按照自己的喜好来处理事物的途径而已，何必照着他人的思路。比如，作为一只不靠谱的程序猴子，在一些偏颇的思维习惯的影响下，我甚至对许多图形化的东西比较反感，自以为文本信息已经足以表达清楚事实且更有效率，从而本能的回避能造成视觉冲击的事物。直到后来，发现自己每每定下的计划都无法完整实施，自然也是没有收到预期的效果。我开始关注到方法本身是否合理，寻找那把平衡效率和体验的钥匙。</p>
@@ -420,9 +420,9 @@
   
   <entry>
     <title type="html"><![CDATA[《Facebook效应》]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/05/21/the-facebook-effect/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/05/21/the-facebook-effect/"/>
     <updated>2013-05-21T00:23:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/05/21/the-facebook-effect</id>
+    <id>http://biaobiaoqi.me/blog/2013/05/21/the-facebook-effect</id>
     <content type="html"><![CDATA[<p>前两年风靡了一阵子的电影《社交网络》毕竟是电影，一种艺术的方式的表达。虽然无法完全的印证《Facebook效应》一书中记载的正确性，但其细节足以给人启示。</p>
 
 <p>电影中，主人公炫酷的人生经历能催生观者产生极强的代入感，不少同学看后可能就会想着自己在寝室特立独行的捣鼓几下，也来做出个震惊世界的产品。且慢。细读本书，就会了解到，成功并非像电影中所描述的那么轻松愉快和力所能及。</p>

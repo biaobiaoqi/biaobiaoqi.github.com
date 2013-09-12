@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: methodology | Biaobiaoqi的博客]]></title>
-  <link href="http://biaobiaoqi.github.com/tags/methodology/atom.xml" rel="self"/>
-  <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-09-11T13:52:50+08:00</updated>
-  <id>http://biaobiaoqi.github.com/</id>
+  <link href="http://biaobiaoqi.me/tags/methodology/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.me/"/>
+  <updated>2013-09-12T14:20:57+08:00</updated>
+  <id>http://biaobiaoqi.me/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Android小游戏：功夫蛇 团队开发经验总结]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/09/06/kongfu-snake-project-summary/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/09/06/kongfu-snake-project-summary/"/>
     <updated>2013-09-06T00:00:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/09/06/kongfu-snake-project-summary</id>
+    <id>http://biaobiaoqi.me/blog/2013/09/06/kongfu-snake-project-summary</id>
     <content type="html"><![CDATA[<h2>前言</h2>
 
 <p>曾经没有代码管理的习惯，不用回版本控制工具。这种陋习虽然让原来千穿百孔的代码远离了实现，但这种逃避未必就是一件好事吧;)。
@@ -127,9 +127,9 @@
   
   <entry>
     <title type="html"><![CDATA[终于算完了这道『1+1』]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/07/29/after-pat-practice/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/07/29/after-pat-practice/"/>
     <updated>2013-07-29T22:12:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/07/29/after-pat-practice</id>
+    <id>http://biaobiaoqi.me/blog/2013/07/29/after-pat-practice</id>
     <content type="html"><![CDATA[<p>在<a href="http://weibo.com/redow7">@ReDow</a>、<a href="http://weibo.com/cloudbye">@麦迪的小腿</a>和<a href="http://weibo.com/linest">@linest</a>等小伙伴的帮助下，终于断断续续的爬完了<a href="http://pat.zju.edu.cn/">PAT</a>的Basic Level和Advanced Level，阶段性填补了自己惨白的算法短板。在cs的圈子里，说PAT是入门的『1 + 1』不为过。刚完成『1 + 1』，作为五年科班的人，确实不够光彩。不过现在能做的也只是尽力弥补本科时间里的虚度。</p>
 
 <p>从亲手挖的坑里往外爬，需要付出比其他人更多的努力。没时间享受题目ac之后的快感（画外音：这么简单的题会有快感么=.=#），倒会时不时蹦出一股脑的蛋疼：『你当初干XX啥去了！』。</p>
@@ -167,9 +167,9 @@
   
   <entry>
     <title type="html"><![CDATA[出栈序列的可能性判定]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/07/16/verify-pop-sequence-for-stack/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/07/16/verify-pop-sequence-for-stack/"/>
     <updated>2013-07-16T01:32:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/07/16/verify-pop-sequence-for-stack</id>
+    <id>http://biaobiaoqi.me/blog/2013/07/16/verify-pop-sequence-for-stack</id>
     <content type="html"><![CDATA[<h2>问题说明</h2>
 
 <p><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1051">PAT1051</a>：给定stack的容量，给定数据的入栈顺序：从1开始的正整数序列，在允许随机的出栈操作的情况下，要求判断某出栈序列是否可能。</p>
@@ -309,9 +309,9 @@ while(k --) {
   
   <entry>
     <title type="html"><![CDATA[《俞敏洪口述》]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/07/07/yuminhong/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/07/07/yuminhong/"/>
     <updated>2013-07-07T23:53:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/07/07/yuminhong</id>
+    <id>http://biaobiaoqi.me/blog/2013/07/07/yuminhong</id>
     <content type="html"><![CDATA[<h2>质朴、诚恳和坚韧</h2>
 
 <p>这本书是某次在Amazon上购书『满100送书一本』时挑的。放在抽屉里有段日子了。</p>
@@ -352,9 +352,9 @@ while(k --) {
   
   <entry>
     <title type="html"><![CDATA[《清单革命》]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/07/05/checklist-manifesto/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/07/05/checklist-manifesto/"/>
     <updated>2013-07-05T00:54:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/07/05/checklist-manifesto</id>
+    <id>http://biaobiaoqi.me/blog/2013/07/05/checklist-manifesto</id>
     <content type="html"><![CDATA[<h2>应该叫『清单宣言』</h2>
 
 <p>在Amazon上『满100送一本』的活动中随手挑到了它。鉴于其空洞的标题，被束之高阁半年多，最近关注个人管理方面的知识，才拍拍灰尘读起来。</p>

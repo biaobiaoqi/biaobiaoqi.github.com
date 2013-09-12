@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: think | Biaobiaoqi的博客]]></title>
-  <link href="http://biaobiaoqi.github.com/tags/think/atom.xml" rel="self"/>
-  <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-09-11T13:52:50+08:00</updated>
-  <id>http://biaobiaoqi.github.com/</id>
+  <link href="http://biaobiaoqi.me/tags/think/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.me/"/>
+  <updated>2013-09-12T14:20:57+08:00</updated>
+  <id>http://biaobiaoqi.me/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Android小游戏：功夫蛇 团队开发经验总结]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/09/06/kongfu-snake-project-summary/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/09/06/kongfu-snake-project-summary/"/>
     <updated>2013-09-06T00:00:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/09/06/kongfu-snake-project-summary</id>
+    <id>http://biaobiaoqi.me/blog/2013/09/06/kongfu-snake-project-summary</id>
     <content type="html"><![CDATA[<h2>前言</h2>
 
 <p>曾经没有代码管理的习惯，不用回版本控制工具。这种陋习虽然让原来千穿百孔的代码远离了实现，但这种逃避未必就是一件好事吧;)。
@@ -127,9 +127,9 @@
   
   <entry>
     <title type="html"><![CDATA[出栈序列的可能性判定]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/07/16/verify-pop-sequence-for-stack/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/07/16/verify-pop-sequence-for-stack/"/>
     <updated>2013-07-16T01:32:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/07/16/verify-pop-sequence-for-stack</id>
+    <id>http://biaobiaoqi.me/blog/2013/07/16/verify-pop-sequence-for-stack</id>
     <content type="html"><![CDATA[<h2>问题说明</h2>
 
 <p><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1051">PAT1051</a>：给定stack的容量，给定数据的入栈顺序：从1开始的正整数序列，在允许随机的出栈操作的情况下，要求判断某出栈序列是否可能。</p>
@@ -269,9 +269,9 @@ while(k --) {
   
   <entry>
     <title type="html"><![CDATA[给博客签上CC协议]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/07/10/cc-license/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/07/10/cc-license/"/>
     <updated>2013-07-10T22:37:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/07/10/cc-license</id>
+    <id>http://biaobiaoqi.me/blog/2013/07/10/cc-license</id>
     <content type="html"><![CDATA[<p>大家都知道开源软件。通过开放源代码的方式，允许用户学习、修改、增进提高这些软件质量。软件界的开源协议很多，比如常见的Apache，BSD，GPL等等。这是一种充分利用网络的便利性，鼓励分享和创新的协议潮流。从这个层面上来说，Creative Commons也是如此。</p>
 
 <p>这是一个非营利性组织，也是一种创作的授权方式。简称CC协议，中国大陆正式名称为知识共享。次组织的主要宗旨是增加创意作品的流通可及性，作为其他人据以创作及共享的基础，并寻找适当的法律以确保上述理念。</p>
@@ -356,9 +356,9 @@ post.content + %Q[<p class='post-footer'>&nbsp;#{pre or "原文地址："}<a hre
   
   <entry>
     <title type="html"><![CDATA[《俞敏洪口述》]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/07/07/yuminhong/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/07/07/yuminhong/"/>
     <updated>2013-07-07T23:53:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/07/07/yuminhong</id>
+    <id>http://biaobiaoqi.me/blog/2013/07/07/yuminhong</id>
     <content type="html"><![CDATA[<h2>质朴、诚恳和坚韧</h2>
 
 <p>这本书是某次在Amazon上购书『满100送书一本』时挑的。放在抽屉里有段日子了。</p>
@@ -399,9 +399,9 @@ post.content + %Q[<p class='post-footer'>&nbsp;#{pre or "原文地址："}<a hre
   
   <entry>
     <title type="html"><![CDATA[关于毕业季照片分享的思考]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/05/25/some-ideas-about-using-bt-protocol-to-sync/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/05/25/some-ideas-about-using-bt-protocol-to-sync/"/>
     <updated>2013-05-25T22:47:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/05/25/some-ideas-about-using-bt-protocol-to-sync</id>
+    <id>http://biaobiaoqi.me/blog/2013/05/25/some-ideas-about-using-bt-protocol-to-sync</id>
     <content type="html"><![CDATA[<h2>背景</h2>
 
 <p>毕业季到了，女朋友跟班里同学们一起拍了很多照片。由于照片分散在不同的人的手机、相机里，她也无法立即给我传来她的照片。这个情景一年前我也遇到过，只是当时自己比较忙，加上考虑着还会在本校读研，也没太在意毕业季照片的手机这一需求，以至于到现在我的电脑里甚至没有一张我穿学士服的照片:-=。而现在，当我想看看gf的照片时，这个需求横亘在我面前，让我特别的想解决掉它。</p>

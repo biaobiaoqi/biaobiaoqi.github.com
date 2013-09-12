@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: webservice | Biaobiaoqi的博客]]></title>
-  <link href="http://biaobiaoqi.github.com/tags/webservice/atom.xml" rel="self"/>
-  <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-09-11T13:52:50+08:00</updated>
-  <id>http://biaobiaoqi.github.com/</id>
+  <link href="http://biaobiaoqi.me/tags/webservice/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.me/"/>
+  <updated>2013-09-12T14:20:57+08:00</updated>
+  <id>http://biaobiaoqi.me/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[octopress第三方插件：博文同步工具syncPost]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/08/31/octopress-3rd-party-plugin-syncpost/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/08/31/octopress-3rd-party-plugin-syncpost/"/>
     <updated>2013-08-31T19:30:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/08/31/octopress-3rd-party-plugin-syncpost</id>
+    <id>http://biaobiaoqi.me/blog/2013/08/31/octopress-3rd-party-plugin-syncpost</id>
     <content type="html"><![CDATA[<p>为了增加外链等考虑，独立博客往往有将博文同步到其他博客社区的需求。自己人肉黏贴的方式笨拙、重复，对于程序猿而言，着实不可取。</p>
 
 <p>我在github上找到了<a href="https://github.com/huangbowen521/octopress-syncPost">syncPost</a>这个针对octopress的第三方工具，能够通过一些论坛提供的<a href="http://en.wikipedia.org/wiki/MetaWeblog">metaWeblog</a>服务实现octopress最新一篇博文的同步提交。</p>

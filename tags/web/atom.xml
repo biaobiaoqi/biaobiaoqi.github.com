@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: web | Biaobiaoqi的博客]]></title>
-  <link href="http://biaobiaoqi.github.com/tags/web/atom.xml" rel="self"/>
-  <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-09-11T13:52:50+08:00</updated>
-  <id>http://biaobiaoqi.github.com/</id>
+  <link href="http://biaobiaoqi.me/tags/web/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.me/"/>
+  <updated>2013-09-12T14:20:57+08:00</updated>
+  <id>http://biaobiaoqi.me/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[定制Octopress]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/07/10/decorate-octopress/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/07/10/decorate-octopress/"/>
     <updated>2013-07-10T01:53:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/07/10/decorate-octopress</id>
+    <id>http://biaobiaoqi.me/blog/2013/07/10/decorate-octopress</id>
     <content type="html"><![CDATA[<p>在github pages上搭建好octopress博客之后，博客的基本功能就能使用了。如果想自己定制也是没问题的，octopress有较详尽的官方文档，原则上有问题求助官方即可：<a href="http://octopress.org/help/">octopress-help</a>。官方没有包纳的也可以去询问<a href="http://stackoverflow.com/questions/tagged/octopress">stackoverflow</a>。 当然，中文的看起来总会省事儿点。我做了如下一些总结;)</p>
 
 <p>不会ruby的童鞋特别注意：配置_config.yml的过程中特别注意，配置项『:』后要留空格，否则会报错。</p>
@@ -327,9 +327,9 @@ post.content + %Q[<p class='post-footer'></p>
   
   <entry>
     <title type="html"><![CDATA[给女朋友的礼物]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/06/11/gift-to-girl-friend/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/06/11/gift-to-girl-friend/"/>
     <updated>2013-06-11T17:12:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/06/11/gift-to-girl-friend</id>
+    <id>http://biaobiaoqi.me/blog/2013/06/11/gift-to-girl-friend</id>
     <content type="html"><![CDATA[<h2>背景</h2>
 
 <p>一个月前发现了<a href="http://v2ex.com">V2EX</a>这个网站，用创始人<a href="http://www.v2ex.com/member/Livid">Livid</a>的话来说，『这是一个主要关于做事儿的地方』。确实如此，我在这里收获了很多想法和灵感。</p>

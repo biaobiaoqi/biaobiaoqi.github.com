@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: license | Biaobiaoqi的博客]]></title>
-  <link href="http://biaobiaoqi.github.com/tags/license/atom.xml" rel="self"/>
-  <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-09-11T13:52:50+08:00</updated>
-  <id>http://biaobiaoqi.github.com/</id>
+  <link href="http://biaobiaoqi.me/tags/license/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.me/"/>
+  <updated>2013-09-12T14:20:57+08:00</updated>
+  <id>http://biaobiaoqi.me/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[给博客签上CC协议]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/07/10/cc-license/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/07/10/cc-license/"/>
     <updated>2013-07-10T22:37:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/07/10/cc-license</id>
+    <id>http://biaobiaoqi.me/blog/2013/07/10/cc-license</id>
     <content type="html"><![CDATA[<p>大家都知道开源软件。通过开放源代码的方式，允许用户学习、修改、增进提高这些软件质量。软件界的开源协议很多，比如常见的Apache，BSD，GPL等等。这是一种充分利用网络的便利性，鼓励分享和创新的协议潮流。从这个层面上来说，Creative Commons也是如此。</p>
 
 <p>这是一个非营利性组织，也是一种创作的授权方式。简称CC协议，中国大陆正式名称为知识共享。次组织的主要宗旨是增加创意作品的流通可及性，作为其他人据以创作及共享的基础，并寻找适当的法律以确保上述理念。</p>

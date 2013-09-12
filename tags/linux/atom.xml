@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: linux | Biaobiaoqi的博客]]></title>
-  <link href="http://biaobiaoqi.github.com/tags/linux/atom.xml" rel="self"/>
-  <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-09-11T13:52:50+08:00</updated>
-  <id>http://biaobiaoqi.github.com/</id>
+  <link href="http://biaobiaoqi.me/tags/linux/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.me/"/>
+  <updated>2013-09-12T14:20:57+08:00</updated>
+  <id>http://biaobiaoqi.me/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[全分布式的Hadoop初体验]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/05/12/touch-hadoop/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/05/12/touch-hadoop/"/>
     <updated>2013-05-12T00:26:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/05/12/touch-hadoop</id>
+    <id>http://biaobiaoqi.me/blog/2013/05/12/touch-hadoop</id>
     <content type="html"><![CDATA[<h2>背景</h2>
 
 <p>之前的时间里对Hadoop的使用都是基于学长所搭建起的实验环境的，没有完整的自己部署和维护过，最近抽时间初体验了在集群环境下装机、配置、运行的全过程，梳理总结到本文中。</p>
@@ -374,9 +374,9 @@ $/$HADOOP_HOME/bin/hadoop dfsadmin -safemode leave
   
   <entry>
     <title type="html"><![CDATA[SSH原理和使用]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/04/19/use-ssh/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/04/19/use-ssh/"/>
     <updated>2013-04-19T21:44:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/04/19/use-ssh</id>
+    <id>http://biaobiaoqi.me/blog/2013/04/19/use-ssh</id>
     <content type="html"><![CDATA[<h2>ssh是什么</h2>
 
 <p>在linux上工作，ssh是必须要了解的技术方法。它可以建立起多台主机之间的安全的加密传输，以进行远程的访问、操控、传输数据。</p>

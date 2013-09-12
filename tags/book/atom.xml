@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: book | Biaobiaoqi的博客]]></title>
-  <link href="http://biaobiaoqi.github.com/tags/book/atom.xml" rel="self"/>
-  <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-09-11T13:52:50+08:00</updated>
-  <id>http://biaobiaoqi.github.com/</id>
+  <link href="http://biaobiaoqi.me/tags/book/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.me/"/>
+  <updated>2013-09-12T14:20:57+08:00</updated>
+  <id>http://biaobiaoqi.me/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[《痛并快乐着》]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/04/05/tong-bing-kuai-le-zhe/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/04/05/tong-bing-kuai-le-zhe/"/>
     <updated>2013-04-05T02:30:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/04/05/tong-bing-kuai-le-zhe</id>
+    <id>http://biaobiaoqi.me/blog/2013/04/05/tong-bing-kuai-le-zhe</id>
     <content type="html"><![CDATA[<h2>儿时没烙印下的痛与快乐</h2>
 
 <p><img class="left" src="http://img3.douban.com/lpic/s4599357.jpg" width="150" height="250" title="Place Kitten #2" ></p>

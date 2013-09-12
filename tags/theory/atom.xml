@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: theory | Biaobiaoqi的博客]]></title>
-  <link href="http://biaobiaoqi.github.com/tags/theory/atom.xml" rel="self"/>
-  <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-09-11T13:52:50+08:00</updated>
-  <id>http://biaobiaoqi.github.com/</id>
+  <link href="http://biaobiaoqi.me/tags/theory/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.me/"/>
+  <updated>2013-09-12T14:20:57+08:00</updated>
+  <id>http://biaobiaoqi.me/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[分布式一致性]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/05/18/distributed-consistency/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/05/18/distributed-consistency/"/>
     <updated>2013-05-18T18:58:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/05/18/distributed-consistency</id>
+    <id>http://biaobiaoqi.me/blog/2013/05/18/distributed-consistency</id>
     <content type="html"><![CDATA[<p>本文来自<a href="http://book.douban.com/subject/3108801/">《分布式原理与泛型》</a>的一致性章节笔记。由于缺乏实践经验，这本书对我来说太过理论，难于理解，现在已经暂停该书的阅读，转而加强实践。另有相关博文<a href="http://biaobiaoqi.me/blog/2013/05/15/cap-and-eventual-consistent/">《CAP和最终一致性》</a>，可供参考阅读。</p>
 
 <!--more-->

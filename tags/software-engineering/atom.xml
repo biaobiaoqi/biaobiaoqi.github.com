@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: software_engineering | Biaobiaoqi的博客]]></title>
-  <link href="http://biaobiaoqi.github.com/tags/software-engineering/atom.xml" rel="self"/>
-  <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-09-11T13:52:50+08:00</updated>
-  <id>http://biaobiaoqi.github.com/</id>
+  <link href="http://biaobiaoqi.me/tags/software-engineering/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.me/"/>
+  <updated>2013-09-12T14:20:57+08:00</updated>
+  <id>http://biaobiaoqi.me/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Android小游戏：功夫蛇 团队开发经验总结]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/09/06/kongfu-snake-project-summary/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/09/06/kongfu-snake-project-summary/"/>
     <updated>2013-09-06T00:00:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/09/06/kongfu-snake-project-summary</id>
+    <id>http://biaobiaoqi.me/blog/2013/09/06/kongfu-snake-project-summary</id>
     <content type="html"><![CDATA[<h2>前言</h2>
 
 <p>曾经没有代码管理的习惯，不用回版本控制工具。这种陋习虽然让原来千穿百孔的代码远离了实现，但这种逃避未必就是一件好事吧;)。
@@ -127,9 +127,9 @@
   
   <entry>
     <title type="html"><![CDATA[Google Android应用开发大赛参赛记]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/09/05/google-android-challenge-2011/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/09/05/google-android-challenge-2011/"/>
     <updated>2013-09-05T23:51:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/09/05/google-android-challenge-2011</id>
+    <id>http://biaobiaoqi.me/blog/2013/09/05/google-android-challenge-2011</id>
     <content type="html"><![CDATA[<h2>前言</h2>
 
 <p>大三结束的暑假，跟另外两个同学一起组队参加了Google第二届Andoid应用开发中国大学生挑战赛，有幸获得了<a href="http://www.google.cn/university/androidchallenge/2011/gallery.html#tab=d1-13">全国总决赛的前6名</a>。
@@ -274,9 +274,9 @@ I think we will make it open source and put the game into the market finally, bu
   
   <entry>
     <title type="html"><![CDATA[关于软件工程的一些看法]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/04/18/some-opinions-about-software-engineering/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/04/18/some-opinions-about-software-engineering/"/>
     <updated>2013-04-18T18:03:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/04/18/some-opinions-about-software-engineering</id>
+    <id>http://biaobiaoqi.me/blog/2013/04/18/some-opinions-about-software-engineering</id>
     <content type="html"><![CDATA[<p>标题党了，其实实际的内容是[自己的项目经验总结和反思]。</p>
 
 <p>今天在高级软件工程课上，做了一次关于项目经验的展示。展示的主题围绕自己参与的移动互联网团队开发经验展开。借此机会，我整理了一下思路，于是有了以下的slides。没时间码字，就先把slides直接贴上来啦:)</p>
@@ -318,7 +318,7 @@ I think we will make it open source and put the game into the market finally, bu
 
 <p>刚发现speakerdeck是个很好的slides分享平台，试着用一下：</p>
 
-<script async class="speakerdeck-embed" data-slide="1" data-id="a4e4c53097650130957c1e87fe6147c9" data-ratio="1.2994923857868" src="http://biaobiaoqi.github.com//speakerdeck.com/assets/embed.js"></script>
+<script async class="speakerdeck-embed" data-slide="1" data-id="a4e4c53097650130957c1e87fe6147c9" data-ratio="1.2994923857868" src="http://biaobiaoqi.me//speakerdeck.com/assets/embed.js"></script>
 
 
 <p>slides下载：</p>

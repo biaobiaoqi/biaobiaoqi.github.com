@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Biaobiaoqi的博客]]></title>
-  <link href="http://biaobiaoqi.github.com/atom.xml" rel="self"/>
-  <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-09-11T13:52:50+08:00</updated>
-  <id>http://biaobiaoqi.github.com/</id>
+  <link href="http://biaobiaoqi.me/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.me/"/>
+  <updated>2013-09-12T14:20:57+08:00</updated>
+  <id>http://biaobiaoqi.me/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
     
@@ -14,10 +14,55 @@
 
   
   <entry>
+    <title type="html"><![CDATA[关于科学上网]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/09/10/scientifically-surfing-the-internet/"/>
+    <updated>2013-09-10T12:11:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/09/10/scientifically-surfing-the-internet</id>
+    <content type="html"><![CDATA[<p>为了防止被某墙 fuck，暂且称其为『很棒的防火墙』吧，你懂的-,-.</p>
+
+<p>在 teahour 上听了 <a href="http://teahour.fm/2013/07/09/gfw-and-vpncloud.html">***技术研究和云梯产品故事</a>，有感于之前几天修改本地 hosts 的策略再次失效，切换到 goagent 模式，在此，基于这期 teahour 对<a href="https://twitter.com/kgen">@Kgen</a> 的访谈内容，对很棒的防火墙做份简单的笔记：</p>
+
+<p>很棒的防火墙有用大量的服务器，并由一大只团队维护和升级。它的目的是让大部分的互联网用户无法接触到“有害”的网络资源，“净化”国内的网络环境。同时，它需要尽可能的减少商业上的影响，比如为了不阻碍外企的 VPN 工作环境，很棒的防火墙并没有直接对 VPN 进行封堵。在这个前提上，留给我们的可能性也是一直存在的。</p>
+
+<h2>防御策略</h2>
+
+<p>很棒的防火墙一直在茁壮成长着。一个方校长倒下了，千千万万 X 校长站起来了。他们背负着一辈子的骂名，忍辱负重的为祖国奉献着生命，死而后已。总之，前赴后继的技术人员不断的在补全着很棒的防火墙的防御规则，因此，应对策略也需要不断的调整和改进。整体来看，防御策略主要有如下几种：</p>
+
+<ul>
+<li><h4>1.DNS 污染</h4>
+
+<p>  DNS 协议本身并没有安全认证功能，很棒的防火墙检测到相应 dns 请求后，会返回一个错误的 IP 地址，造成无法正常访问。解决方案有使用第三方 DNS 服务或者修改本地 hosts 文件。</p></li>
+<li><h4>2.IP 拦截</h4>
+
+<p>  对于特定敏感网站，很棒的防火墙会直接侦察到相应的 IP 地址施行拦截。简单的 DNS 修改无法解决 IP 层的问题，只能通过代理等手段绕过这些 IP 进行访问。常用的应对方式有：使用 VPN、ssh 代理和 GAE 上搭建 <a href="http://zhoudemin.com/goagent.html">GoAgent</a> 服务等。至于为什么一些国内用户说自己的 GoAgent 速度很快，而又有很多人在抱怨自己的 GAE 速度很慢，原因在于 GAE 应用会不受控制的部署到 Google 不同的服务器节点上，而国内网络环境复杂，不同地区的网络连入国外不同服务器的线路不尽相同，速度也差异明显。同样的情况也发生在 VPS 的使用速度差异上。</p></li>
+</ul>
+
+
+<!--more-->
+
+
+<ul>
+<li><h4>3.端口封锁：比如 ssh 端口</h4>
+
+<p>  <a href="http://biaobiaoqi.me/blog/2013/04/19/use-ssh/">ssh</a> 是一种安全的加密的网络通信协议，通过 ssh 可以施行对远程主机的操控。部分网民通过在很棒的防火墙外的 VPS（虚拟主机）做代理，使用 ssh 服务上网。针对这一情况，最近两年，很棒的防火墙开始实现对 ssh 端口的封锁。当 ssh 链接被鉴定为非正常流量，则相应端口会受到封锁。如果频繁切换端口，可能整个 IP 都将被封锁。</p></li>
+<li><h4>4.http 请求明文内容检测和中断</h4>
+
+<p>  使用 Google 搜索某些敏感内容时，链接会被重置，就是因为很棒的防火墙侦测到了敏感内容，给用户浏览器发送了重置消息，扰乱了链接。</p></li>
+<li><h4>5.https 间歇性中断</h4>
+
+<p>  https 的链接本身是安全的、加密的。在无法侦测内容的前提下，很棒的防火墙采用了不讲道理的间歇性中断策略。</p></li>
+</ul>
+
+
+<p>更多关于很棒的防火墙的资料，请先翻过墙去查看;)<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/09/10/scientifically-surfing-the-internet/'>http://biaobiaoqi.me/blog/2013/09/10/scientifically-surfing-the-internet/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[对Java字符串的探究]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/09/08/string-interning/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/09/08/string-interning/"/>
     <updated>2013-09-08T13:01:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/09/08/string-interning</id>
+    <id>http://biaobiaoqi.me/blog/2013/09/08/string-interning</id>
     <content type="html"><![CDATA[<h2>问题的出发点</h2>
 
 <p>在网上看到一道题：</p>
@@ -172,16 +217,16 @@
 </ul>
 
 
-<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/09/08/string-interning/'>http://biaobiaoqi.github.com/blog/2013/09/08/string-interning/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/09/08/string-interning/'>http://biaobiaoqi.me/blog/2013/09/08/string-interning/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
 
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[AOP实践：java.lang.instrument的使用]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/09/08/custom-premain-method/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/09/08/custom-premain-method/"/>
     <updated>2013-09-08T13:01:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/09/08/custom-premain-method</id>
+    <id>http://biaobiaoqi.me/blog/2013/09/08/custom-premain-method</id>
     <content type="html"><![CDATA[<h2>背景</h2>
 
 <p>在 <a href="https://github.com/biaobiaoqi/rcjp">rcjp</a> 项目中，需要调用 ASM API（用于字节码处理的开源库）对字节码进行处理，目标是实现对 Java 程序运行时各种对象的动态跟踪，并进一步分析各个对象之间的关系。在此之前，需要考虑如何获取程序运行的入口。</p>
@@ -306,16 +351,16 @@ manifest 文件中需要添加的键值对是：</p>
 </ul>
 
 
-<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/09/08/custom-premain-method/'>http://biaobiaoqi.github.com/blog/2013/09/08/custom-premain-method/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/09/08/custom-premain-method/'>http://biaobiaoqi.me/blog/2013/09/08/custom-premain-method/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
 
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Java构造方法中的执行顺序]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/09/08/strange-behavior-using-braces-in-java/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/09/08/strange-behavior-using-braces-in-java/"/>
     <updated>2013-09-08T12:58:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/09/08/strange-behavior-using-braces-in-java</id>
+    <id>http://biaobiaoqi.me/blog/2013/09/08/strange-behavior-using-braces-in-java</id>
     <content type="html"><![CDATA[<p>这道题来自 <a href="http://stackoverflow.com/questions/8185780/strange-behavior-using-braces-in-java/8186881#8186881">stackoverflow</a>。</p>
 
 <h2>问题描述：</h2>
@@ -438,16 +483,16 @@ manifest 文件中需要添加的键值对是：</p>
 </ul>
 
 
-<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/09/08/strange-behavior-using-braces-in-java/'>http://biaobiaoqi.github.com/blog/2013/09/08/strange-behavior-using-braces-in-java/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/09/08/strange-behavior-using-braces-in-java/'>http://biaobiaoqi.me/blog/2013/09/08/strange-behavior-using-braces-in-java/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
 
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Java类的实例化总结]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/09/08/initliate-objects-in-java/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/09/08/initliate-objects-in-java/"/>
     <updated>2013-09-08T02:03:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/09/08/initliate-objects-in-java</id>
+    <id>http://biaobiaoqi.me/blog/2013/09/08/initliate-objects-in-java</id>
     <content type="html"><![CDATA[<p>java 类的实例化(instantiation)具有显性的和隐性的区别。</p>
 
 <p>写 Java 代码时，我们所使用 new 的方法实例化最简单直接的显性实例化。而隐性的实例化则出现在 java 程序的整个生命周期中，包括 String、Class，StringBuffer 或者 StringBuilder 的实例化等等。</p>
@@ -638,15 +683,15 @@ manifest 文件中需要添加的键值对是：</p>
 
 <p>实际上，这里 str1 和 str2 合并的过程，是使用了 StringBuilder 来间接完成的，首先以 str1 的值构造一个 StringBuilder，然后调用其中的 append()方法，将 str2 串联上来。</p>
 
-<p>值得注意的是：老版本的 java 使用 StringBuffer 完成这一步，但 StringBuffer 是线程安全的，效率略低，于是在新版本 java 中出现了非线程安全的 StringBuilder，这类似于 Hashtable 和 hashset 的关系。<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/09/08/initliate-objects-in-java/'>http://biaobiaoqi.github.com/blog/2013/09/08/initliate-objects-in-java/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
+<p>值得注意的是：老版本的 java 使用 StringBuffer 完成这一步，但 StringBuffer 是线程安全的，效率略低，于是在新版本 java 中出现了非线程安全的 StringBuilder，这类似于 Hashtable 和 hashset 的关系。<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/09/08/initliate-objects-in-java/'>http://biaobiaoqi.me/blog/2013/09/08/initliate-objects-in-java/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Java类加载的延迟初始化]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/09/08/late-initialising-in-java/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/09/08/late-initialising-in-java/"/>
     <updated>2013-09-08T02:00:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/09/08/late-initialising-in-java</id>
+    <id>http://biaobiaoqi.me/blog/2013/09/08/late-initialising-in-java</id>
     <content type="html"><![CDATA[<p><a href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loading-linking-and-initialising/">《Java 类的装载、链接和初始化》</a>中提到，链接的最后一步是解析，即对符号引用的解析。但这不是必须的，可以等到相应的符号引用第一次使用时再解析。</p>
 
 <p>而类的初始化是在链接之后的（注意了，根据不同 JVM 有不同的实现方式，在类初始化的时候，可能已经完成了所有的符号引用的解析，也可能没有），本文所写的就是类的初始化的时机问题。</p>
@@ -752,15 +797,15 @@ manifest 文件中需要添加的键值对是：</p>
 
 <p>虽然有出现 Son，但 Son.i 访问的是父类的非常量静态变量。于是没有对 Son 类进行初始化，而只是初始化了明确的声明静态变量的 Parent 类。</p>
 
-<p>由此可见，一般的，我们在某个类中定义了其他类的成员变量引用，只要该变量没有 new 出一个新的对象，则 JVM 也不会初始化这个类，类此时只是被加载了而已，而没有链接和初始化。<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/09/08/late-initialising-in-java/'>http://biaobiaoqi.github.com/blog/2013/09/08/late-initialising-in-java/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
+<p>由此可见，一般的，我们在某个类中定义了其他类的成员变量引用，只要该变量没有 new 出一个新的对象，则 JVM 也不会初始化这个类，类此时只是被加载了而已，而没有链接和初始化。<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/09/08/late-initialising-in-java/'>http://biaobiaoqi.me/blog/2013/09/08/late-initialising-in-java/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[类加载器操作三原则[译]]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/09/08/three-principles-of-classloader-operation/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/09/08/three-principles-of-classloader-operation/"/>
     <updated>2013-09-08T00:42:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/09/08/three-principles-of-classloader-operation</id>
+    <id>http://biaobiaoqi.me/blog/2013/09/08/three-principles-of-classloader-operation</id>
     <content type="html"><![CDATA[<p>（出自一本 J2EE 的教材中关于类加载器的介绍，原文已不知所踪。）</p>
 
 <p>类加载的 bug，一旦在编程中遇到很难调试。好消息是，理解类加载的过程中，我们只需要牢记住三条基本原则。如果你能清晰的理解这三条基本原则，所有问题都迎刃而解。下面，我们开始介绍。</p>
@@ -829,15 +874,15 @@ manifest 文件中需要添加的键值对是：</p>
 
 <p>注意，虽然 java 的加载实现中，对于 bootstrap classloader 、extensions classloader 和 system classloader 来说，他们的关系是 parent-first，也就是像原则一中所说的那样，需要向上委托，但用户自定义的 classloader 完全可以跳出这个圈子，自己实现 parent-lastclassloader。比如 Websphere 中就有相关配置。</p>
 
-<p>更具体的类加载器编程实例，请见另外一篇博文：<a href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loader-in-practice/">《Java 类加载器编程实践》</a><p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/09/08/three-principles-of-classloader-operation/'>http://biaobiaoqi.github.com/blog/2013/09/08/three-principles-of-classloader-operation/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
+<p>更具体的类加载器编程实例，请见另外一篇博文：<a href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loader-in-practice/">《Java 类加载器编程实践》</a><p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/09/08/three-principles-of-classloader-operation/'>http://biaobiaoqi.me/blog/2013/09/08/three-principles-of-classloader-operation/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Java类的装载、链接和初始化]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/09/08/java-class-loading-linking-and-initialising/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loading-linking-and-initialising/"/>
     <updated>2013-09-08T00:33:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/09/08/java-class-loading-linking-and-initialising</id>
+    <id>http://biaobiaoqi.me/blog/2013/09/08/java-class-loading-linking-and-initialising</id>
     <content type="html"><![CDATA[<h2>加载(Loading)</h2>
 
 <p>按如下三步执行</p>
@@ -909,16 +954,16 @@ manifest 文件中需要添加的键值对是：</p>
 
 <p>参考：<a href="http://blog.csdn.net/a352193394/article/details/6844941">《通过类字面常量解释接口常量为什么只能定义为 static final,类加载过程&#8212;Thinking in java》</a></p>
 
-<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/09/08/java-class-loading-linking-and-initialising/'>http://biaobiaoqi.github.com/blog/2013/09/08/java-class-loading-linking-and-initialising/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/09/08/java-class-loading-linking-and-initialising/'>http://biaobiaoqi.me/blog/2013/09/08/java-class-loading-linking-and-initialising/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
 
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Java类加载器编程实践]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/09/08/java-class-loader-in-practice/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loader-in-practice/"/>
     <updated>2013-09-08T00:33:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/09/08/java-class-loader-in-practice</id>
+    <id>http://biaobiaoqi.me/blog/2013/09/08/java-class-loader-in-practice</id>
     <content type="html"><![CDATA[<p>文本通过实现自定义类加载器，实践 Java 类加载的流程。</p>
 
 <p>阅读此文前，需要了解 Java 类加载的基本原理，参见如下两篇博文：</p>
@@ -1700,16 +1745,16 @@ manifest 文件中需要添加的键值对是：</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/09/08/java-class-loader-in-practice/'>http://biaobiaoqi.github.com/blog/2013/09/08/java-class-loader-in-practice/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/09/08/java-class-loader-in-practice/'>http://biaobiaoqi.me/blog/2013/09/08/java-class-loader-in-practice/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
 
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Java 类加载器]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/09/07/java-classloader/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/09/07/java-classloader/"/>
     <updated>2013-09-07T23:15:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/09/07/java-classloader</id>
+    <id>http://biaobiaoqi.me/blog/2013/09/07/java-classloader</id>
     <content type="html"><![CDATA[<h2>背景知识</h2>
 
 <p>Java 平台无关的特性是由 JVM(Java 虚拟机)支撑的。不同平台有不同的 JVM 支持。</p>
@@ -1831,16 +1876,16 @@ manifest 文件中需要添加的键值对是：</p>
 
 <p>关于类加载器的编程实践，请参见另一篇博文：<a href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loader-in-practice/">《Java 类加载器编程实践》</a></p>
 
-<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/09/07/java-classloader/'>http://biaobiaoqi.github.com/blog/2013/09/07/java-classloader/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/09/07/java-classloader/'>http://biaobiaoqi.me/blog/2013/09/07/java-classloader/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
 
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Android小游戏：功夫蛇 团队开发经验总结]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/09/06/kongfu-snake-project-summary/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/09/06/kongfu-snake-project-summary/"/>
     <updated>2013-09-06T00:00:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/09/06/kongfu-snake-project-summary</id>
+    <id>http://biaobiaoqi.me/blog/2013/09/06/kongfu-snake-project-summary</id>
     <content type="html"><![CDATA[<h2>前言</h2>
 
 <p>曾经没有代码管理的习惯，不用回版本控制工具。这种陋习虽然让原来千穿百孔的代码远离了实现，但这种逃避未必就是一件好事吧;)。
@@ -1944,15 +1989,15 @@ manifest 文件中需要添加的键值对是：</p>
 
 <h3>另另</h3>
 
-<p>由于代码写的比较搓，也就不公开放出了强奸大家的眼球了>&lt;&#8230;，要学的还有很多。<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/09/06/kongfu-snake-project-summary/'>http://biaobiaoqi.github.com/blog/2013/09/06/kongfu-snake-project-summary/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
+<p>由于代码写的比较搓，也就不公开放出了强奸大家的眼球了>&lt;&#8230;，要学的还有很多。<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/09/06/kongfu-snake-project-summary/'>http://biaobiaoqi.me/blog/2013/09/06/kongfu-snake-project-summary/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Google Android应用开发大赛参赛记]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/09/05/google-android-challenge-2011/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/09/05/google-android-challenge-2011/"/>
     <updated>2013-09-05T23:51:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/09/05/google-android-challenge-2011</id>
+    <id>http://biaobiaoqi.me/blog/2013/09/05/google-android-challenge-2011</id>
     <content type="html"><![CDATA[<h2>前言</h2>
 
 <p>大三结束的暑假，跟另外两个同学一起组队参加了 Google 第二届 Andoid 应用开发中国大学生挑战赛，有幸获得了<a href="http://www.google.cn/university/androidchallenge/2011/gallery.html#tab=d1-13">全国总决赛的前 6 名</a>。
@@ -2091,15 +2136,15 @@ manifest 文件中需要添加的键值对是：</p>
 
 <p>I&#8217;ll turn to some friends who has some experience in user interaction to give some advice  about our android game,
 and then make a plan to do a better work.
-I think we will make it open source and put the game into the market finally, but not now, we should make it better first!<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/09/05/google-android-challenge-2011/'>http://biaobiaoqi.github.com/blog/2013/09/05/google-android-challenge-2011/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
+I think we will make it open source and put the game into the market finally, but not now, we should make it better first!<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/09/05/google-android-challenge-2011/'>http://biaobiaoqi.me/blog/2013/09/05/google-android-challenge-2011/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[biaobiaoqi的博客日志]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/09/01/blog-log/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/09/01/blog-log/"/>
     <updated>2013-09-01T01:40:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/09/01/blog-log</id>
+    <id>http://biaobiaoqi.me/blog/2013/09/01/blog-log</id>
     <content type="html"><![CDATA[<p>鉴于友言的客服不搭理的态度和时而无法正常显示以及管理界面的难以使用，决定将评论系统切换到 disqus 上。</p>
 
 <p>最近一直在更改博客的定制。就像一个人一样，产品也是由生命的，她的脚印就是她价值的体现。于是我萌生了将她的改变全部记录下来的想法，只恨没有在四个月前刚建起博客时就意识到这一点。</p>
@@ -2123,7 +2168,7 @@ I think we will make it open source and put the game into the market finally, bu
 
 <ul>
 <li><p>2013/9/1 取消友言评论功能，采用 disqus 评论系统。</p></li>
-<li><p>2013/9/10 顶栏增加『推荐』，推荐我所收集的学习资源。<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/09/01/blog-log/'>http://biaobiaoqi.github.com/blog/2013/09/01/blog-log/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p></li>
+<li><p>2013/9/10 顶栏增加『推荐』，推荐我所收集的学习资源。<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/09/01/blog-log/'>http://biaobiaoqi.me/blog/2013/09/01/blog-log/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p></li>
 </ul>
 
 ]]></content>
@@ -2131,9 +2176,9 @@ I think we will make it open source and put the game into the market finally, bu
   
   <entry>
     <title type="html"><![CDATA[octopress第三方插件：博文同步工具syncPost]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/08/31/octopress-3rd-party-plugin-syncpost/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/08/31/octopress-3rd-party-plugin-syncpost/"/>
     <updated>2013-08-31T19:30:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/08/31/octopress-3rd-party-plugin-syncpost</id>
+    <id>http://biaobiaoqi.me/blog/2013/08/31/octopress-3rd-party-plugin-syncpost</id>
     <content type="html"><![CDATA[<p>为了增加外链等考虑，独立博客往往有将博文同步到其他博客社区的需求。自己人肉黏贴的方式笨拙、重复，对于程序猿而言，着实不可取。</p>
 
 <p>我在 github 上找到了 <a href="https://github.com/huangbowen521/octopress-syncPost">syncPost</a> 这个针对 octopress 的第三方工具，能够通过一些论坛提供的 <a href="http://en.wikipedia.org/wiki/MetaWeblog">metaWeblog</a> 服务实现 octopress 最新一篇博文的同步提交。</p>
@@ -2187,16 +2232,16 @@ I think we will make it open source and put the game into the market finally, bu
 
 <p>欢迎感兴趣的朋友参与到这个 repo 中来:)</p>
 
-<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/08/31/octopress-3rd-party-plugin-syncpost/'>http://biaobiaoqi.github.com/blog/2013/08/31/octopress-3rd-party-plugin-syncpost/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/08/31/octopress-3rd-party-plugin-syncpost/'>http://biaobiaoqi.me/blog/2013/08/31/octopress-3rd-party-plugin-syncpost/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
 
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[PAT 1061 - 1064 题解]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/08/31/pat-1061-pat-1064/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/08/31/pat-1061-pat-1064/"/>
     <updated>2013-08-31T13:32:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/08/31/pat-1061-pat-1064</id>
+    <id>http://biaobiaoqi.me/blog/2013/08/31/pat-1061-pat-1064</id>
     <content type="html"><![CDATA[<p>这四道题来自 13 年 08 月 30 的 PAT 测试。</p>
 
 <p>代码量不大，思路也比较直接。不过第一题的处理逻辑不太清晰，需要好好把握。稍有不慎就掉进坑里了（很多人被这道 20‘的题坑了一个多小时心慌意乱我会乱说-，-？）。</p>
@@ -2326,31 +2371,31 @@ I think we will make it open source and put the game into the market finally, bu
 
 <p>于是，使用数组实现的二叉树做迭代的思路就出来了，30 行搞定。</p>
 
-<p>pat1064 源码:<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel/APAT1064.cpp">请戳</a><p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/08/31/pat-1061-pat-1064/'>http://biaobiaoqi.github.com/blog/2013/08/31/pat-1061-pat-1064/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
+<p>pat1064 源码:<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel/APAT1064.cpp">请戳</a><p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/08/31/pat-1061-pat-1064/'>http://biaobiaoqi.me/blog/2013/08/31/pat-1061-pat-1064/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[分布式事务slides]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/08/26/distributed-transaction/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/08/26/distributed-transaction/"/>
     <updated>2013-08-26T23:49:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/08/26/distributed-transaction</id>
+    <id>http://biaobiaoqi.me/blog/2013/08/26/distributed-transaction</id>
     <content type="html"><![CDATA[<p>最近看了<a href="http://book.douban.com/subject/21624776/">《分布式系统概念与设计 第 5 版》</a>的分布式事务章节，整理了一份 ppt。还有恢复部分没有收录进来，有空再整理啦。</p>
 
 <p>下面是传到 deckspeaker 上的 slides 展示:</p>
 
-<script async class="speakerdeck-embed" data-id="aa521420f0a101303be246475d95d052" data-ratio="1.33333333333333" src="http://biaobiaoqi.github.com//speakerdeck.com/assets/embed.js"></script>
+<script async class="speakerdeck-embed" data-id="aa521420f0a101303be246475d95d052" data-ratio="1.33333333333333" src="http://biaobiaoqi.me//speakerdeck.com/assets/embed.js"></script>
 
 
-<p>下载链接：<a href="https://dl.dropboxusercontent.com/u/64021093/slides/distributed%20transcation.pptx">请戳</a><p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/08/26/distributed-transaction/'>http://biaobiaoqi.github.com/blog/2013/08/26/distributed-transaction/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
+<p>下载链接：<a href="https://dl.dropboxusercontent.com/u/64021093/slides/distributed%20transcation.pptx">请戳</a><p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/08/26/distributed-transaction/'>http://biaobiaoqi.me/blog/2013/08/26/distributed-transaction/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[PAT练习题概览]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/08/03/overcome-pat/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/08/03/overcome-pat/"/>
     <updated>2013-08-03T22:20:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/08/03/overcome-pat</id>
+    <id>http://biaobiaoqi.me/blog/2013/08/03/overcome-pat</id>
     <content type="html"><![CDATA[<p>PAT(<a href="http://pat.zju.edu.cn">pat.zju.edu.cn</a>)是一个面向 C/C++程序的 Online Judge 系统。相比 ZOJ，HDOJ，POJ 等 ACM 题库，PAT 的题目非常基础，对于数据结构、算法的入门是比较有助益的。</p>
 
 <p>本文按照自己的认识，给 PAT advanced level 做出了分类。由于很多题目实际上兼顾有多种解法和思路，我给每道题打上了 tag，来应对分类的独占性局限，供大家参考。</p>
@@ -2530,15 +2575,15 @@ I think we will make it open source and put the game into the market finally, bu
 </ul>
 
 
-<p>附博客的 PAT 专题区链接：<a href="http://biaobiaoqi.me/tags/pat/">请戳</a><p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/08/03/overcome-pat/'>http://biaobiaoqi.github.com/blog/2013/08/03/overcome-pat/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
+<p>附博客的 PAT 专题区链接：<a href="http://biaobiaoqi.me/tags/pat/">请戳</a><p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/08/03/overcome-pat/'>http://biaobiaoqi.me/blog/2013/08/03/overcome-pat/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[PAT 1051-1060 题解]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/08/01/pat-1051-1060-solutions/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/08/01/pat-1051-1060-solutions/"/>
     <updated>2013-08-01T01:43:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/08/01/pat-1051-1060-solutions</id>
+    <id>http://biaobiaoqi.me/blog/2013/08/01/pat-1051-1060-solutions</id>
     <content type="html"><![CDATA[<p>浏览全部代码：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
 
 <p>本文谨代表个人思路，欢迎讨论;)</p>
@@ -2725,15 +2770,15 @@ I think we will make it open source and put the game into the market finally, bu
 
 <p>由于非负整数非常大，不可使用 longlong 甚至精确度不高的 double，当做字符串来处理。</p>
 
-<p>需要注意的一点是对值为 0 的情况的处理。比如 0 在有效位数为 3 下的表达为:<code>0.00*10^0</code><p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/08/01/pat-1051-1060-solutions/'>http://biaobiaoqi.github.com/blog/2013/08/01/pat-1051-1060-solutions/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
+<p>需要注意的一点是对值为 0 的情况的处理。比如 0 在有效位数为 3 下的表达为:<code>0.00*10^0</code><p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/08/01/pat-1051-1060-solutions/'>http://biaobiaoqi.me/blog/2013/08/01/pat-1051-1060-solutions/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[PAT 1041-1050 题解]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/08/01/pat-1041-1050-solutions/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/08/01/pat-1041-1050-solutions/"/>
     <updated>2013-08-01T01:43:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/08/01/pat-1041-1050-solutions</id>
+    <id>http://biaobiaoqi.me/blog/2013/08/01/pat-1041-1050-solutions</id>
     <content type="html"><![CDATA[<p>浏览全部代码：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
 
 <p>本文谨代表个人思路，欢迎讨论;)</p>
@@ -2890,15 +2935,15 @@ I think we will make it open source and put the game into the market finally, bu
 
 <h5>分析</h5>
 
-<p>用 Hash 的方式标记需要剔除的字符。<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/08/01/pat-1041-1050-solutions/'>http://biaobiaoqi.github.com/blog/2013/08/01/pat-1041-1050-solutions/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
+<p>用 Hash 的方式标记需要剔除的字符。<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/08/01/pat-1041-1050-solutions/'>http://biaobiaoqi.me/blog/2013/08/01/pat-1041-1050-solutions/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[PAT 1031-1040 题解]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/08/01/pat-1031-1040-solutions/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/08/01/pat-1031-1040-solutions/"/>
     <updated>2013-08-01T01:43:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/08/01/pat-1031-1040-solutions</id>
+    <id>http://biaobiaoqi.me/blog/2013/08/01/pat-1031-1040-solutions</id>
     <content type="html"><![CDATA[<p>早期部分代码用 Java 实现。由于 PAT 虽然支持各种语言，但只有 C/C++标程来限定时间，许多题目用 Java 读入数据就已经超时，后来转投 C/C++。浏览全部代码：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
 
 <p>本文谨代表个人思路，欢迎讨论;)</p>
@@ -3088,195 +3133,8 @@ I think we will make it open source and put the game into the market finally, bu
 
 <p>另外，C 读入一整行数据到 char 数组的方法可以用<code>gets(s);</code>。</p>
 
-<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/08/01/pat-1031-1040-solutions/'>http://biaobiaoqi.github.com/blog/2013/08/01/pat-1031-1040-solutions/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/08/01/pat-1031-1040-solutions/'>http://biaobiaoqi.me/blog/2013/08/01/pat-1031-1040-solutions/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[PAT 1021-1030 题解]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/08/01/pat-1021-1030-solutions/"/>
-    <updated>2013-08-01T01:43:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/08/01/pat-1021-1030-solutions</id>
-    <content type="html"><![CDATA[<p>早期部分代码用 Java 实现。由于 PAT 虽然支持各种语言，但只有 C/C++标程来限定时间，许多题目用 Java 读入数据就已经超时，后来转投 C/C++。浏览全部代码：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
-
-<p>本文谨代表个人思路，欢迎讨论;)</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1021">1021. Deepest Root (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>无环连通图也可以视为一棵树，选定图中任意一点作为根，如果这时候整个树的深度最大，则称其为 deepest root。
-给定一个图，按升序输出所有 deepest root。如果给定的图有多个连通分量，则输出连通分量的数量。</p>
-
-<h5>分析</h5>
-
-<p>算法实现的步骤如下：</p>
-
-<ul>
-<li>1.使用并查集判断图是否为连通的。</li>
-<li>2.任意选取一点，做 dfs 搜索，选取其中一个最远距离的点 A，再做一次 dfs，找到的所有距离最远的点以及点 A 都是 deepest root。</li>
-</ul>
-
-
-<p>判定图是否连通使用 union-find set 即可。更关键的点在于找到 deepest root。实际上，使用两次 dfs 就可以实现。
-证明之前，先介绍两个概念，一个是直径，树的 deepest root 到最远叶子的路径我们暂称直径，而 deepest root 和最远叶子节点则成为端点。
-注明关键在于以下两点：</p>
-
-<ul>
-<li><p>从任意一个点 dfs 得到的最远点都是直径的端点。证明如下：</p>
-
-<p>  任意选一点 A，做 dfs 查找距离 A 最远的点，因为是 dfs，所以肯定会经过某直径上的点 B，从 B 出发最远的点是直径上的端点 C。
-  那么，这个端点 C 为何一定是 A 的最远居里点呢？可以反证证明，如果有一个点 D，A->D 不经过直径，且 length(A->D) > length(A->C)，
-  那么，从 C 所在直径上构造出经过 D 的比原直径更长的直径，得证。</p></li>
-<li><p>所有的树的直径都交于一点（或者公用段路径上的几点）。
-于是，从 B 点 dfs 出发的所有最长距离的点即为 deepest root。证明如下：</p>
-
-<p>  如果两条直径不相交，而树上任意两点肯定连通，则从两直径上，可以选取两点连通以组成更长的直径；如果三条直径相较于不同的两点，也可以根据相交截断的长度组合出更长的直径。</p></li>
-</ul>
-
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1022">1022. Digital Library (30)</a></h2>
-
-<h5>题意</h5>
-
-<p>给定 N (&lt;=10000) 本书的信息，包括 7 位 ID，最多 80 字符的书名，最多 80 字符的作者名，
-多个最多 10 字符的关键词，最多 80 字符的出版商和属于 [1000, 3000]的出版时间。
-另给出 M (&lt;=1000) 的查询请求，按照查询格式分为：</p>
-
-<ul>
-<li>1: 书名</li>
-<li>2: 作者</li>
-<li>3: 关键词</li>
-<li>4: 出版商</li>
-<li>5: 年份</li>
-</ul>
-
-
-<p>输出查询结果。如果有多个结果，按照书的 ID 的升序排列。</p>
-
-<h5>分析</h5>
-
-<p>简单模拟题。在使用 Map 结构来构建倒排索引的过程中，可以讨巧的避免根据不同查询类型使用两层 map，
-直接通过在 key 中增加查询标记来实现。另外 C++的 priority_queue 支持对常规数据类型的最小堆实现：<code>priority_queue&lt;string, vector&lt;string&gt;, greater&lt;string&gt;&gt;</code>，方便了结果输出。</p>
-
-<!--more-->
-
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1023">1023. Have Fun with Numbers (20)</a></h2>
-
-<h5>题意</h5>
-
-<p>给出一个 20 位的正整数，要求计算其乘以 2 的值，并判定结果的数值是否是原数字所有位数打乱的结果。结果输出 Yes 或 No，以及乘以 2 以后的数字。</p>
-
-<h5>分析</h5>
-
-<p>判重使用 Hash 思想。过程如下：</p>
-
-<ul>
-<li>1.原数字按字符串读入，并在一个 int hash[10]的 hash 数组中标记每个数值出现的次数，比如如果出现了四次 1，则 hash[1]=4。</li>
-<li>2.模拟实现乘以 2 的简单乘法过程，没计算出一位的值，在 hash[]中对应位置上减一。</li>
-<li>3.最后通过判定 hash 是否全为 1 和最后结果是否有进位来做判定。</li>
-</ul>
-
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1024">1024. Palindromic Number (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>非回文数可以通过将它与它的倒转数相加，并不断迭代这一过程获得回文数的结果。比如 67 经过两次处理就得到了 484：
-<code>67 + 76 = 143, and 143 + 341 = 484.</code></p>
-
-<p>给定一个数和迭代的次数，判断能否在迭代次数内获得回文结果。</p>
-
-<h5>分析</h5>
-
-<p>简单模拟题，处理数字，做逻辑判断。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1025">1025. PAT Ranking (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>以 PAT 考试为背景，给所有人做排名。给定的数据包括 N(&lt;=100)为赛区的数目，每个赛区的人数以及每个人的分数。
-按照总排名、分区号、注册号的优先级排名。</p>
-
-<h5>分析</h5>
-
-<p>简单模拟题，使用 qsort()排序，注意相同分数的人应该拥有相同的排名。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1026">1026. Table Tennis (30)</a></h2>
-
-<h5>题意</h5>
-
-<p>乒乓球俱乐部有 K 张乒乓球桌，其中有 M 张是 VIP 桌。有很多人到俱乐部打球，如果桌子都满了，多余的人只能排队等待。</p>
-
-<p>有一个特殊的 VIP 制度：如果有空的 VIP 桌，那么等待队列中的第一对 VIP 会员可以使用这张卓，
-如果等待队列中没有 VIP 会员，那么一般会员也可以使用 VIP 桌。当轮到 VIP 上的时候，没有 VIP 桌子，那么 VIP 用户也可以使用一般的桌子。</p>
-
-<p>另外，每张桌服务一对会员的时间最大限制在两个小时。</p>
-
-<p>给定了乒乓球桌的数量 M(编号为 1-M)，其中 VIP 卓的数量 K，并指定是那几张桌子。给出来乒乓球俱乐部的 N 对会员的信息，每对会员有一个达到时间，
-是否是 VIP 的标记以及打球的时间。要求计算出每对会员的等待时间，以及每张桌服务过的次数。</p>
-
-<h5>分析</h5>
-
-<p>排队模拟题。有两种思路：</p>
-
-<ul>
-<li>1.主体循环处理人。将乒乓球桌和人都当做资源，乒乓球桌对应记录了 available 的时间，每次取出 available 最早的时间，从等待队列中选
-则最早的会员使用乒乓球桌。其中 vip 处理逻辑为：如果 available 并列最早的桌子中有 vip 桌，则看等待队列中有没有 vip 会员，
-如果有则直接处理他，否则按照正常逻辑处理。每次将某会员安置到一个乒乓球桌上，则可以输出该会员的等待时间的结果信息，并将该乒乓球桌的
-服务人数增加一。</li>
-<li>2.主体循环是时间。这样需要模拟同一时刻所有的乒乓球桌以及等待队列，相对比较复杂。</li>
-</ul>
-
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1027">1027. Colors in Mars (20)</a></h2>
-
-<h5>题意</h5>
-
-<p>给定三个十进制数，要求格式化输出其 13 进制表达。</p>
-
-<h5>分析</h5>
-
-<p>简单的数字处理和 hash 实现。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1028">1028. List Sorting (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>模拟 Excel 中按列排序。N (&lt;=100000) 为数据条数，每条数据由三列组成：ID，姓名，成绩。C 可以等于 1,2,3，分别对应到按三列中的哪一列排序。
-输出排序结果。</p>
-
-<h5>分析</h5>
-
-<p>简单排序题。两种思路：</p>
-
-<ul>
-<li>1.简单的直接使用 qsort()实现。</li>
-<li>2.自己手写排序算法，比如二叉搜索树实现。</li>
-</ul>
-
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1029">1029. Median (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>给定两个已排序的整数序列，求出两组数的集合里中间大小的数。</p>
-
-<h5>分析</h5>
-
-<p>使用归并排序思路实现。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1030">1030. Travel Plan (30)</a></h2>
-
-<h5>题意</h5>
-
-<p>给定加权图，每条边有两种权值：一是路径长度，二是开销。要求求出给点两点间的最短路径，如果路径长度一样，则要求比较选择开销最小的路径。</p>
-
-<h5>分析</h5>
-
-<p>使用 Dijkstra 算法的变形，增加一个权重的判定，可以轻松解决。<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.com/blog/2013/08/01/pat-1021-1030-solutions/'>http://biaobiaoqi.github.com/blog/2013/08/01/pat-1021-1030-solutions/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
 ]]></content>
   </entry>
   

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: pat | Biaobiaoqi的博客]]></title>
-  <link href="http://biaobiaoqi.github.com/tags/pat/atom.xml" rel="self"/>
-  <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-09-11T13:52:50+08:00</updated>
-  <id>http://biaobiaoqi.github.com/</id>
+  <link href="http://biaobiaoqi.me/tags/pat/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.me/"/>
+  <updated>2013-09-12T14:20:57+08:00</updated>
+  <id>http://biaobiaoqi.me/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[PAT 1061 - 1064 题解]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/08/31/pat-1061-pat-1064/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/08/31/pat-1061-pat-1064/"/>
     <updated>2013-08-31T13:32:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/08/31/pat-1061-pat-1064</id>
+    <id>http://biaobiaoqi.me/blog/2013/08/31/pat-1061-pat-1064</id>
     <content type="html"><![CDATA[<p>这四道题来自13年08月30的PAT测试。</p>
 
 <p>代码量不大，思路也比较直接。不过第一题的处理逻辑不太清晰，需要好好把握。稍有不慎就掉进坑里了（很多人被这道20‘的题坑了一个多小时心慌意乱我会乱说-，-？）。</p>
@@ -144,9 +144,9 @@ d&amp;Hyscvnm</p>
   
   <entry>
     <title type="html"><![CDATA[PAT练习题概览]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/08/03/overcome-pat/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/08/03/overcome-pat/"/>
     <updated>2013-08-03T22:20:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/08/03/overcome-pat</id>
+    <id>http://biaobiaoqi.me/blog/2013/08/03/overcome-pat</id>
     <content type="html"><![CDATA[<p>PAT(<a href="http://pat.zju.edu.cn">pat.zju.edu.cn</a>)是一个面向C/C++程序的Online Judge系统。相比ZOJ，HDOJ，POJ等ACM题库，PAT的题目非常基础，对于数据结构、算法的入门是比较有助益的。</p>
 
 <p>本文按照自己的认识，给PAT advanced level做出了分类。由于很多题目实际上兼顾有多种解法和思路，我给每道题打上了tag，来应对分类的独占性局限，供大家参考。</p>
@@ -332,9 +332,9 @@ d&amp;Hyscvnm</p>
   
   <entry>
     <title type="html"><![CDATA[PAT 1051-1060 题解]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/08/01/pat-1051-1060-solutions/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/08/01/pat-1051-1060-solutions/"/>
     <updated>2013-08-01T01:43:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/08/01/pat-1051-1060-solutions</id>
+    <id>http://biaobiaoqi.me/blog/2013/08/01/pat-1051-1060-solutions</id>
     <content type="html"><![CDATA[<p>浏览全部代码：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
 
 <p>本文谨代表个人思路，欢迎讨论;)</p>
@@ -527,9 +527,9 @@ d&amp;Hyscvnm</p>
   
   <entry>
     <title type="html"><![CDATA[PAT 1041-1050 题解]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/08/01/pat-1041-1050-solutions/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/08/01/pat-1041-1050-solutions/"/>
     <updated>2013-08-01T01:43:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/08/01/pat-1041-1050-solutions</id>
+    <id>http://biaobiaoqi.me/blog/2013/08/01/pat-1041-1050-solutions</id>
     <content type="html"><![CDATA[<p>浏览全部代码：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
 
 <p>本文谨代表个人思路，欢迎讨论;)</p>
@@ -692,9 +692,9 @@ d&amp;Hyscvnm</p>
   
   <entry>
     <title type="html"><![CDATA[PAT 1031-1040 题解]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/08/01/pat-1031-1040-solutions/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/08/01/pat-1031-1040-solutions/"/>
     <updated>2013-08-01T01:43:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/08/01/pat-1031-1040-solutions</id>
+    <id>http://biaobiaoqi.me/blog/2013/08/01/pat-1031-1040-solutions</id>
     <content type="html"><![CDATA[<p>早期部分代码用Java实现。由于PAT虽然支持各种语言，但只有C/C++标程来限定时间，许多题目用Java读入数据就已经超时，后来转投C/C++。浏览全部代码：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
 
 <p>本文谨代表个人思路，欢迎讨论;)</p>

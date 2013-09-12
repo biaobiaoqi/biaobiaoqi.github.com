@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: summary | Biaobiaoqi的博客]]></title>
-  <link href="http://biaobiaoqi.github.com/tags/summary/atom.xml" rel="self"/>
-  <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-09-11T13:52:50+08:00</updated>
-  <id>http://biaobiaoqi.github.com/</id>
+  <link href="http://biaobiaoqi.me/tags/summary/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.me/"/>
+  <updated>2013-09-12T14:20:57+08:00</updated>
+  <id>http://biaobiaoqi.me/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Google Android应用开发大赛参赛记]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/09/05/google-android-challenge-2011/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/09/05/google-android-challenge-2011/"/>
     <updated>2013-09-05T23:51:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/09/05/google-android-challenge-2011</id>
+    <id>http://biaobiaoqi.me/blog/2013/09/05/google-android-challenge-2011</id>
     <content type="html"><![CDATA[<h2>前言</h2>
 
 <p>大三结束的暑假，跟另外两个同学一起组队参加了Google第二届Andoid应用开发中国大学生挑战赛，有幸获得了<a href="http://www.google.cn/university/androidchallenge/2011/gallery.html#tab=d1-13">全国总决赛的前6名</a>。
@@ -162,9 +162,9 @@ I think we will make it open source and put the game into the market finally, bu
   
   <entry>
     <title type="html"><![CDATA[再见，Seeme]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/04/07/goodbye-seeme/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/04/07/goodbye-seeme/"/>
     <updated>2013-04-07T23:26:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/04/07/goodbye-seeme</id>
+    <id>http://biaobiaoqi.me/blog/2013/04/07/goodbye-seeme</id>
     <content type="html"><![CDATA[<p>过年算是仪式感最强的节日之一了。不想将过年作为成熟的时间节点，因为生命总是在时间里沉淀。但社会的周期运作确确实实的依着四季来过度，于是总有些决定、变化需要在此执行和接受。真诚的向过去的一切道一声感谢。</p>
 
 <!--more-->

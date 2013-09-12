@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://biaobiaoqi.github.com/sitemap.xml 
+Sitemap: http://biaobiaoqi.me/sitemap.xml 

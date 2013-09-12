@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: ui | Biaobiaoqi的博客]]></title>
-  <link href="http://biaobiaoqi.github.com/tags/ui/atom.xml" rel="self"/>
-  <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-09-11T13:52:50+08:00</updated>
-  <id>http://biaobiaoqi.github.com/</id>
+  <link href="http://biaobiaoqi.me/tags/ui/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.me/"/>
+  <updated>2013-09-12T14:20:57+08:00</updated>
+  <id>http://biaobiaoqi.me/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[定制Octopress]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/07/10/decorate-octopress/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/07/10/decorate-octopress/"/>
     <updated>2013-07-10T01:53:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/07/10/decorate-octopress</id>
+    <id>http://biaobiaoqi.me/blog/2013/07/10/decorate-octopress</id>
     <content type="html"><![CDATA[<p>在github pages上搭建好octopress博客之后，博客的基本功能就能使用了。如果想自己定制也是没问题的，octopress有较详尽的官方文档，原则上有问题求助官方即可：<a href="http://octopress.org/help/">octopress-help</a>。官方没有包纳的也可以去询问<a href="http://stackoverflow.com/questions/tagged/octopress">stackoverflow</a>。 当然，中文的看起来总会省事儿点。我做了如下一些总结;)</p>
 
 <p>不会ruby的童鞋特别注意：配置_config.yml的过程中特别注意，配置项『:』后要留空格，否则会报错。</p>

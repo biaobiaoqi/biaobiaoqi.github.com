@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: security | Biaobiaoqi的博客]]></title>
-  <link href="http://biaobiaoqi.github.com/tags/security/atom.xml" rel="self"/>
-  <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-09-11T13:52:50+08:00</updated>
-  <id>http://biaobiaoqi.github.com/</id>
+  <link href="http://biaobiaoqi.me/tags/security/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.me/"/>
+  <updated>2013-09-12T14:20:57+08:00</updated>
+  <id>http://biaobiaoqi.me/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[iOS的安全性和越狱]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/05/17/jail-break-your-ios/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/05/17/jail-break-your-ios/"/>
     <updated>2013-05-17T00:10:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/05/17/jail-break-your-ios</id>
+    <id>http://biaobiaoqi.me/blog/2013/05/17/jail-break-your-ios</id>
     <content type="html"><![CDATA[<p><img src="https://dl.dropboxusercontent.com/u/64021093/2013-5-16.jpg" title="Jailbrek" alt="alt jailbreak" /></p>
 
 <p>提到<a href="http://en.wikipedia.org/wiki/IOS_jailbreaking#Security.2C_privacy.2C_and_stability">越狱</a>，很多人第一反应大概是免费的游戏和app。</p>
@@ -106,9 +106,9 @@ http://www.freebsd.org/doc/zh_CN/books/arch-handbook/mac-synopsis.html</p>
   
   <entry>
     <title type="html"><![CDATA[SSH原理和使用]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/04/19/use-ssh/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/04/19/use-ssh/"/>
     <updated>2013-04-19T21:44:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/04/19/use-ssh</id>
+    <id>http://biaobiaoqi.me/blog/2013/04/19/use-ssh</id>
     <content type="html"><![CDATA[<h2>ssh是什么</h2>
 
 <p>在linux上工作，ssh是必须要了解的技术方法。它可以建立起多台主机之间的安全的加密传输，以进行远程的访问、操控、传输数据。</p>

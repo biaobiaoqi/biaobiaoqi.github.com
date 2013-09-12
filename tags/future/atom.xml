@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: future | Biaobiaoqi的博客]]></title>
-  <link href="http://biaobiaoqi.github.com/tags/future/atom.xml" rel="self"/>
-  <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-09-11T13:52:50+08:00</updated>
-  <id>http://biaobiaoqi.github.com/</id>
+  <link href="http://biaobiaoqi.me/tags/future/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.me/"/>
+  <updated>2013-09-12T14:20:57+08:00</updated>
+  <id>http://biaobiaoqi.me/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[SDN：软件定义网络]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/06/08/software-defined-network/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/06/08/software-defined-network/"/>
     <updated>2013-06-08T00:39:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/06/08/software-defined-network</id>
+    <id>http://biaobiaoqi.me/blog/2013/06/08/software-defined-network</id>
     <content type="html"><![CDATA[<p>最近高级网络课的小组任务是在老师给定的范围内自选方向主题研究并做展示报告。我们组选了sdn。原以为这东西会是工业界无人问津的概念化产品，Google了一下却发现其实sdn挺火的，由于它可能带来的可扩展性，一些大互联网企业也在开始涉足相关的研发，比如Google呵Facebook。这里简要的梳理下我对SDN概念性的认识。</p>
 
 <h2>背景</h2>

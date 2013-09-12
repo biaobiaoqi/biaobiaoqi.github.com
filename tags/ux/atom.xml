@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: ux | Biaobiaoqi的博客]]></title>
-  <link href="http://biaobiaoqi.github.com/tags/ux/atom.xml" rel="self"/>
-  <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-09-11T13:52:50+08:00</updated>
-  <id>http://biaobiaoqi.github.com/</id>
+  <link href="http://biaobiaoqi.me/tags/ux/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.me/"/>
+  <updated>2013-09-12T14:20:57+08:00</updated>
+  <id>http://biaobiaoqi.me/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[《写给大家看的设计书》]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/06/11/the-non-designers-design-book/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/06/11/the-non-designers-design-book/"/>
     <updated>2013-06-11T13:58:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/06/11/the-non-designers-design-book</id>
+    <id>http://biaobiaoqi.me/blog/2013/06/11/the-non-designers-design-book</id>
     <content type="html"><![CDATA[<h3>从iOS7的扁平化谈起</h3>
 
 <p>昨晚看了WWDC2013的直播，iOS7以扁平化UI的方式展现在世人面前。于是接下来进入了微博吐槽时间。</p>

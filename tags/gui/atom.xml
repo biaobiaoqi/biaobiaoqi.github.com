@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: gui | Biaobiaoqi的博客]]></title>
-  <link href="http://biaobiaoqi.github.com/tags/gui/atom.xml" rel="self"/>
-  <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-09-11T13:52:50+08:00</updated>
-  <id>http://biaobiaoqi.github.com/</id>
+  <link href="http://biaobiaoqi.me/tags/gui/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.me/"/>
+  <updated>2013-09-12T14:20:57+08:00</updated>
+  <id>http://biaobiaoqi.me/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[《写给大家看的设计书》]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/06/11/the-non-designers-design-book/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/06/11/the-non-designers-design-book/"/>
     <updated>2013-06-11T13:58:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/06/11/the-non-designers-design-book</id>
+    <id>http://biaobiaoqi.me/blog/2013/06/11/the-non-designers-design-book</id>
     <content type="html"><![CDATA[<h3>从iOS7的扁平化谈起</h3>
 
 <p>昨晚看了WWDC2013的直播，iOS7以扁平化UI的方式展现在世人面前。于是接下来进入了微博吐槽时间。</p>
@@ -131,9 +131,9 @@
   
   <entry>
     <title type="html"><![CDATA[Mac的GUI哲学]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/06/09/something-about-mac-gui/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/06/09/something-about-mac-gui/"/>
     <updated>2013-06-09T01:00:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/06/09/something-about-mac-gui</id>
+    <id>http://biaobiaoqi.me/blog/2013/06/09/something-about-mac-gui</id>
     <content type="html"><![CDATA[<h2>GUI哲学</h2>
 
 <p>前些日子，看了Tinyfool老师的一篇文章<a href="http://blogread.cn/it/article/1089?f=wb">《开发人员为何应该使用 Mac OS X 兼 OS X 小史》</a>，才恍然Mac系统可不仅仅是UI上与Windows大相径庭，而是自底而上的区别。这种区别渗透到了整个系统框架的设计理念中。</p>

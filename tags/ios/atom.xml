@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: ios | Biaobiaoqi的博客]]></title>
-  <link href="http://biaobiaoqi.github.com/tags/ios/atom.xml" rel="self"/>
-  <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-09-11T13:52:50+08:00</updated>
-  <id>http://biaobiaoqi.github.com/</id>
+  <link href="http://biaobiaoqi.me/tags/ios/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.me/"/>
+  <updated>2013-09-12T14:20:57+08:00</updated>
+  <id>http://biaobiaoqi.me/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[iOS的安全性和越狱]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/05/17/jail-break-your-ios/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/05/17/jail-break-your-ios/"/>
     <updated>2013-05-17T00:10:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/05/17/jail-break-your-ios</id>
+    <id>http://biaobiaoqi.me/blog/2013/05/17/jail-break-your-ios</id>
     <content type="html"><![CDATA[<p><img src="https://dl.dropboxusercontent.com/u/64021093/2013-5-16.jpg" title="Jailbrek" alt="alt jailbreak" /></p>
 
 <p>提到<a href="http://en.wikipedia.org/wiki/IOS_jailbreaking#Security.2C_privacy.2C_and_stability">越狱</a>，很多人第一反应大概是免费的游戏和app。</p>

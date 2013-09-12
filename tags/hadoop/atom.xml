@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: hadoop | Biaobiaoqi的博客]]></title>
-  <link href="http://biaobiaoqi.github.com/tags/hadoop/atom.xml" rel="self"/>
-  <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-09-11T13:52:50+08:00</updated>
-  <id>http://biaobiaoqi.github.com/</id>
+  <link href="http://biaobiaoqi.me/tags/hadoop/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.me/"/>
+  <updated>2013-09-12T14:20:57+08:00</updated>
+  <id>http://biaobiaoqi.me/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[《Hadoop技术内幕》学习笔记——RPC和动态代理]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/06/08/ipc-in-hadoop/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/06/08/ipc-in-hadoop/"/>
     <updated>2013-06-08T00:24:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/06/08/ipc-in-hadoop</id>
+    <id>http://biaobiaoqi.me/blog/2013/06/08/ipc-in-hadoop</id>
     <content type="html"><![CDATA[<p>本文是《hadoop技术内幕——深入解析Hadoop Common和HDFS架构设计与实现原理》第4章的1-3节的学习笔记。内容为Hadoop IPC部分的基础知识介绍。</p>
 
 <h2>知识框架</h2>
@@ -42,7 +42,7 @@
 
 <p>我总结了一份slides，如下：(挂在speackerdeck上，如果加载缓慢，请稍候:))</p>
 
-<script async class="speakerdeck-embed" data-id="fbcb8590b1540130690c2e6f0be13e84" data-ratio="1.33333333333333" src="http://biaobiaoqi.github.com//speakerdeck.com/assets/embed.js"></script>
+<script async class="speakerdeck-embed" data-id="fbcb8590b1540130690c2e6f0be13e84" data-ratio="1.33333333333333" src="http://biaobiaoqi.me//speakerdeck.com/assets/embed.js"></script>
 
 
 <p>slides下载地址：<a href="https://dl.dropboxusercontent.com/u/64021093/slides/%E8%BF%9C%E7%A8%8B%E8%BF%87%E7%A8%8B%E8%B0%83%E7%94%A8%E5%92%8CNIO.pdf">请戳</a></p>
@@ -51,9 +51,9 @@
   
   <entry>
     <title type="html"><![CDATA[Hadoop和RDBMS的混合系统介绍]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/05/20/hybrid-distributed-data-management-system/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/05/20/hybrid-distributed-data-management-system/"/>
     <updated>2013-05-20T14:52:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/05/20/hybrid-distributed-data-management-system</id>
+    <id>http://biaobiaoqi.me/blog/2013/05/20/hybrid-distributed-data-management-system</id>
     <content type="html"><![CDATA[<p>现在大数据概念被时常提起，社会各界对其关注度越来越高。往往越是火热的东西，人们越容易忽略它的本质。在slides中，我首先按照自己的理解，简单的理顺数据处理领域的发展历程。之后，落脚点是两个比较有代表性的混合的分布式系统：<a href="http://biaobiaoqi.me/blog/2013/05/18/a-hybrid-system-hadoopdb/">HadoopDB</a>和微软的<a href="http://biaobiaoqi.me/blog/2013/04/25/split-querying-process-in-polybase/">Polybase</a>。由于缺乏实战经验，很多东西由各方论文和博文中得到，有不恰当的地方，欢迎大家拍砖讨论;)</p>
 
 <p>slides的提纲如下：</p>
@@ -96,7 +96,7 @@
 
 <p>slides在线展示：</p>
 
-<script async class="speakerdeck-embed" data-id="77bdc950a3460130c98a12e3c5740641" data-ratio="1.33333333333333" src="http://biaobiaoqi.github.com//speakerdeck.com/assets/embed.js"></script>
+<script async class="speakerdeck-embed" data-id="77bdc950a3460130c98a12e3c5740641" data-ratio="1.33333333333333" src="http://biaobiaoqi.me//speakerdeck.com/assets/embed.js"></script>
 
 
 <p>slides下载：
@@ -106,9 +106,9 @@
   
   <entry>
     <title type="html"><![CDATA[HadoopDB：混合分布式系统]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/05/18/a-hybrid-system-hadoopdb/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/05/18/a-hybrid-system-hadoopdb/"/>
     <updated>2013-05-18T17:58:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/05/18/a-hybrid-system-hadoopdb</id>
+    <id>http://biaobiaoqi.me/blog/2013/05/18/a-hybrid-system-hadoopdb</id>
     <content type="html"><![CDATA[<p>HadoopDB是一个Mapreduce和传统关系型数据库的结合方案，以充分利用RDBMS的性能和Hadoop的容错、分布特性。2009年被Yale大学教授Abadi提出，继而商业化为<a href="http://hadapt.com/">Hadapt</a>，据称从VC那儿拉到了10M刀投资。</p>
 
 <p>本文是对HadoopDB论文的总结。其中不免掺杂些自己的不成熟想法，更详细的内容，还请参见原论文 HadoopDB: An Architectural Hybrid of MapReduce and DBMS Technologies for Analytical Workloads</p>
@@ -228,7 +228,7 @@
 
 <p>slides：</p>
 
-<script async class="speakerdeck-embed" data-id="48c5e680a1ab0130e1707290244918d4" data-ratio="1.33333333333333" src="http://biaobiaoqi.github.com//speakerdeck.com/assets/embed.js"></script>
+<script async class="speakerdeck-embed" data-id="48c5e680a1ab0130e1707290244918d4" data-ratio="1.33333333333333" src="http://biaobiaoqi.me//speakerdeck.com/assets/embed.js"></script>
 
 
 <p>下载slides，请猛戳<a href="https://dl.dropboxusercontent.com/u/64021093/hadoopDB/%5B2013-05-18%5DHadoopDB.pptx">这里</a></p>
@@ -246,14 +246,14 @@
   
   <entry>
     <title type="html"><![CDATA[CAP和最终一致性]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/05/15/cap-and-eventual-consistent/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/05/15/cap-and-eventual-consistent/"/>
     <updated>2013-05-15T00:30:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/05/15/cap-and-eventual-consistent</id>
+    <id>http://biaobiaoqi.me/blog/2013/05/15/cap-and-eventual-consistent</id>
     <content type="html"><![CDATA[<p>查阅资料整理了最终一致性、CAP相关的内容。由于图省事儿，没有做文字的整理记载，只有slides和一些查阅过的链接，大家将就着看。欢迎指正。</p>
 
 <p>slides：</p>
 
-<script async class="speakerdeck-embed" data-id="cca07ce09e92013076c646310b996896" data-ratio="1.33333333333333" src="http://biaobiaoqi.github.com//speakerdeck.com/assets/embed.js"></script>
+<script async class="speakerdeck-embed" data-id="cca07ce09e92013076c646310b996896" data-ratio="1.33333333333333" src="http://biaobiaoqi.me//speakerdeck.com/assets/embed.js"></script>
 
 
 
@@ -304,9 +304,9 @@
   
   <entry>
     <title type="html"><![CDATA[全分布式的Hadoop初体验]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/05/12/touch-hadoop/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/05/12/touch-hadoop/"/>
     <updated>2013-05-12T00:26:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/05/12/touch-hadoop</id>
+    <id>http://biaobiaoqi.me/blog/2013/05/12/touch-hadoop</id>
     <content type="html"><![CDATA[<h2>背景</h2>
 
 <p>之前的时间里对Hadoop的使用都是基于学长所搭建起的实验环境的，没有完整的自己部署和维护过，最近抽时间初体验了在集群环境下装机、配置、运行的全过程，梳理总结到本文中。</p>

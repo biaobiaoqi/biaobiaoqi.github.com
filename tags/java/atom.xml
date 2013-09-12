@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: java | Biaobiaoqi的博客]]></title>
-  <link href="http://biaobiaoqi.github.com/tags/java/atom.xml" rel="self"/>
-  <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-09-11T13:52:50+08:00</updated>
-  <id>http://biaobiaoqi.github.com/</id>
+  <link href="http://biaobiaoqi.me/tags/java/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.me/"/>
+  <updated>2013-09-12T14:20:57+08:00</updated>
+  <id>http://biaobiaoqi.me/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[对Java字符串的探究]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/09/08/string-interning/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/09/08/string-interning/"/>
     <updated>2013-09-08T13:01:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/09/08/string-interning</id>
+    <id>http://biaobiaoqi.me/blog/2013/09/08/string-interning</id>
     <content type="html"><![CDATA[<h2>问题的出发点</h2>
 
 <p>在网上看到一道题：</p>
@@ -152,9 +152,9 @@ String str = new String("abc");
   
   <entry>
     <title type="html"><![CDATA[AOP实践：java.lang.instrument的使用]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/09/08/custom-premain-method/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/09/08/custom-premain-method/"/>
     <updated>2013-09-08T13:01:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/09/08/custom-premain-method</id>
+    <id>http://biaobiaoqi.me/blog/2013/09/08/custom-premain-method</id>
     <content type="html"><![CDATA[<h2>背景</h2>
 
 <p>在<a href="https://github.com/biaobiaoqi/rcjp">rcjp</a>项目中，需要调用ASM API（用于字节码处理的开源库）对字节码进行处理，目标是实现对Java程序运行时各种对象的动态跟踪，并进一步分析各个对象之间的关系。在此之前，需要考虑如何获取程序运行的入口。</p>
@@ -263,9 +263,9 @@ Class-Path: asm-3.0.jar
   
   <entry>
     <title type="html"><![CDATA[Java构造方法中的执行顺序]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/09/08/strange-behavior-using-braces-in-java/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/09/08/strange-behavior-using-braces-in-java/"/>
     <updated>2013-09-08T12:58:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/09/08/strange-behavior-using-braces-in-java</id>
+    <id>http://biaobiaoqi.me/blog/2013/09/08/strange-behavior-using-braces-in-java</id>
     <content type="html"><![CDATA[<p>这道题来自<a href="http://stackoverflow.com/questions/8185780/strange-behavior-using-braces-in-java/8186881#8186881">stackoverflow</a>。</p>
 
 <h2>问题描述：</h2>
@@ -357,9 +357,9 @@ RETURN
   
   <entry>
     <title type="html"><![CDATA[Java类的实例化总结]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/09/08/initliate-objects-in-java/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/09/08/initliate-objects-in-java/"/>
     <updated>2013-09-08T02:03:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/09/08/initliate-objects-in-java</id>
+    <id>http://biaobiaoqi.me/blog/2013/09/08/initliate-objects-in-java</id>
     <content type="html"><![CDATA[<p>java类的实例化(instantiation)具有显性的和隐性的区别。</p>
 
 <p>写Java代码时，我们所使用new的方法实例化最简单直接的显性实例化。而隐性的实例化则出现在java程序的整个生命周期中，包括String、Class，StringBuffer 或者StringBuilder 的实例化等等。</p>
@@ -504,9 +504,9 @@ ASTORE 3
   
   <entry>
     <title type="html"><![CDATA[Java类加载的延迟初始化]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/09/08/late-initialising-in-java/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/09/08/late-initialising-in-java/"/>
     <updated>2013-09-08T02:00:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/09/08/late-initialising-in-java</id>
+    <id>http://biaobiaoqi.me/blog/2013/09/08/late-initialising-in-java</id>
     <content type="html"><![CDATA[<p><a href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loading-linking-and-initialising/">《Java类的装载、链接和初始化》</a>中提到，链接的最后一步是解析，即对符号引用的解析。但这不是必须的，可以等到相应的符号引用第一次使用时再解析。</p>
 
 <p>而类的初始化是在链接之后的（注意了，根据不同JVM有不同的实现方式，在类初始化的时候，可能已经完成了所有的符号引用的解析，也可能没有），本文所写的就是类的初始化的时机问题。</p>

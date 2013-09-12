@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: Android | Biaobiaoqi的博客]]></title>
-  <link href="http://biaobiaoqi.github.com/tags/android/atom.xml" rel="self"/>
-  <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-09-11T13:52:50+08:00</updated>
-  <id>http://biaobiaoqi.github.com/</id>
+  <link href="http://biaobiaoqi.me/tags/android/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.me/"/>
+  <updated>2013-09-12T14:20:57+08:00</updated>
+  <id>http://biaobiaoqi.me/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Android小游戏：功夫蛇 团队开发经验总结]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/09/06/kongfu-snake-project-summary/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/09/06/kongfu-snake-project-summary/"/>
     <updated>2013-09-06T00:00:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/09/06/kongfu-snake-project-summary</id>
+    <id>http://biaobiaoqi.me/blog/2013/09/06/kongfu-snake-project-summary</id>
     <content type="html"><![CDATA[<h2>前言</h2>
 
 <p>曾经没有代码管理的习惯，不用回版本控制工具。这种陋习虽然让原来千穿百孔的代码远离了实现，但这种逃避未必就是一件好事吧;)。

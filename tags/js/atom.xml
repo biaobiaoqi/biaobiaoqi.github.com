@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: js | Biaobiaoqi的博客]]></title>
-  <link href="http://biaobiaoqi.github.com/tags/js/atom.xml" rel="self"/>
-  <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-09-11T13:52:50+08:00</updated>
-  <id>http://biaobiaoqi.github.com/</id>
+  <link href="http://biaobiaoqi.me/tags/js/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.me/"/>
+  <updated>2013-09-12T14:20:57+08:00</updated>
+  <id>http://biaobiaoqi.me/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[给女朋友的礼物]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/06/11/gift-to-girl-friend/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/06/11/gift-to-girl-friend/"/>
     <updated>2013-06-11T17:12:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/06/11/gift-to-girl-friend</id>
+    <id>http://biaobiaoqi.me/blog/2013/06/11/gift-to-girl-friend</id>
     <content type="html"><![CDATA[<h2>背景</h2>
 
 <p>一个月前发现了<a href="http://v2ex.com">V2EX</a>这个网站，用创始人<a href="http://www.v2ex.com/member/Livid">Livid</a>的话来说，『这是一个主要关于做事儿的地方』。确实如此，我在这里收获了很多想法和灵感。</p>

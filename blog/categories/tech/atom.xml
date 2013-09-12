@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: tech | Biaobiaoqi的博客]]></title>
-  <link href="http://biaobiaoqi.github.com/blog/categories/tech/atom.xml" rel="self"/>
-  <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-09-11T13:52:50+08:00</updated>
-  <id>http://biaobiaoqi.github.com/</id>
+  <link href="http://biaobiaoqi.me/blog/categories/tech/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.me/"/>
+  <updated>2013-09-12T14:20:57+08:00</updated>
+  <id>http://biaobiaoqi.me/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
     
@@ -14,10 +14,55 @@
 
   
   <entry>
+    <title type="html"><![CDATA[关于科学上网]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/09/10/scientifically-surfing-the-internet/"/>
+    <updated>2013-09-10T12:11:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/09/10/scientifically-surfing-the-internet</id>
+    <content type="html"><![CDATA[<p>为了防止被某墙fuck，暂且称其为『很棒的防火墙』吧，你懂的-,-.</p>
+
+<p>在teahour上听了 <a href="http://teahour.fm/2013/07/09/gfw-and-vpncloud.html">***技术研究和云梯产品故事</a>，有感于之前几天修改本地hosts的策略再次失效，切换到goagent模式，在此，基于这期teahour对<a href="https://twitter.com/kgen">@Kgen</a>的访谈内容，对很棒的防火墙做份简单的笔记：</p>
+
+<p>很棒的防火墙有用大量的服务器，并由一大只团队维护和升级。它的目的是让大部分的互联网用户无法接触到“有害”的网络资源，“净化”国内的网络环境。同时，它需要尽可能的减少商业上的影响，比如为了不阻碍外企的VPN工作环境，很棒的防火墙并没有直接对VPN进行封堵。在这个前提上，留给我们的可能性也是一直存在的。</p>
+
+<h2>防御策略</h2>
+
+<p>很棒的防火墙一直在茁壮成长着。一个方校长倒下了，千千万万X校长站起来了。他们背负着一辈子的骂名，忍辱负重的为祖国奉献着生命，死而后已。总之，前赴后继的技术人员不断的在补全着很棒的防火墙的防御规则，因此，应对策略也需要不断的调整和改进。整体来看，防御策略主要有如下几种：</p>
+
+<ul>
+<li><h4>1.DNS污染</h4>
+
+<p>  DNS协议本身并没有安全认证功能，很棒的防火墙检测到相应dns请求后，会返回一个错误的IP地址，造成无法正常访问。解决方案有使用第三方DNS服务或者修改本地hosts文件。</p></li>
+<li><h4>2.IP拦截</h4>
+
+<p>  对于特定敏感网站，很棒的防火墙会直接侦察到相应的IP地址施行拦截。简单的DNS修改无法解决IP层的问题，只能通过代理等手段绕过这些IP进行访问。常用的应对方式有：使用VPN、ssh代理和GAE上搭建<a href="http://zhoudemin.com/goagent.html">GoAgent</a>服务等。至于为什么一些国内用户说自己的GoAgent速度很快，而又有很多人在抱怨自己的GAE速度很慢，原因在于GAE应用会不受控制的部署到Google不同的服务器节点上，而国内网络环境复杂，不同地区的网络连入国外不同服务器的线路不尽相同，速度也差异明显。同样的情况也发生在VPS的使用速度差异上。</p></li>
+</ul>
+
+
+<!--more-->
+
+
+<ul>
+<li><h4>3.端口封锁：比如ssh端口</h4>
+
+<p>  <a href="http://biaobiaoqi.me/blog/2013/04/19/use-ssh/">ssh</a>是一种安全的加密的网络通信协议，通过ssh可以施行对远程主机的操控。部分网民通过在很棒的防火墙外的VPS（虚拟主机）做代理，使用ssh服务上网。针对这一情况，最近两年，很棒的防火墙开始实现对ssh端口的封锁。当ssh链接被鉴定为非正常流量，则相应端口会受到封锁。如果频繁切换端口，可能整个IP都将被封锁。</p></li>
+<li><h4>4.http请求明文内容检测和中断</h4>
+
+<p>  使用Google搜索某些敏感内容时，链接会被重置，就是因为很棒的防火墙侦测到了敏感内容，给用户浏览器发送了重置消息，扰乱了链接。</p></li>
+<li><h4>5.https间歇性中断</h4>
+
+<p>  https的链接本身是安全的、加密的。在无法侦测内容的前提下，很棒的防火墙采用了不讲道理的间歇性中断策略。</p></li>
+</ul>
+
+
+<p>更多关于很棒的防火墙的资料，请先翻过墙去查看;)</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[对Java字符串的探究]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/09/08/string-interning/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/09/08/string-interning/"/>
     <updated>2013-09-08T13:01:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/09/08/string-interning</id>
+    <id>http://biaobiaoqi.me/blog/2013/09/08/string-interning</id>
     <content type="html"><![CDATA[<h2>问题的出发点</h2>
 
 <p>在网上看到一道题：</p>
@@ -152,9 +197,9 @@ String str = new String("abc");
   
   <entry>
     <title type="html"><![CDATA[AOP实践：java.lang.instrument的使用]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/09/08/custom-premain-method/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/09/08/custom-premain-method/"/>
     <updated>2013-09-08T13:01:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/09/08/custom-premain-method</id>
+    <id>http://biaobiaoqi.me/blog/2013/09/08/custom-premain-method</id>
     <content type="html"><![CDATA[<h2>背景</h2>
 
 <p>在<a href="https://github.com/biaobiaoqi/rcjp">rcjp</a>项目中，需要调用ASM API（用于字节码处理的开源库）对字节码进行处理，目标是实现对Java程序运行时各种对象的动态跟踪，并进一步分析各个对象之间的关系。在此之前，需要考虑如何获取程序运行的入口。</p>
@@ -263,9 +308,9 @@ Class-Path: asm-3.0.jar
   
   <entry>
     <title type="html"><![CDATA[Java构造方法中的执行顺序]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/09/08/strange-behavior-using-braces-in-java/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/09/08/strange-behavior-using-braces-in-java/"/>
     <updated>2013-09-08T12:58:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/09/08/strange-behavior-using-braces-in-java</id>
+    <id>http://biaobiaoqi.me/blog/2013/09/08/strange-behavior-using-braces-in-java</id>
     <content type="html"><![CDATA[<p>这道题来自<a href="http://stackoverflow.com/questions/8185780/strange-behavior-using-braces-in-java/8186881#8186881">stackoverflow</a>。</p>
 
 <h2>问题描述：</h2>
@@ -357,9 +402,9 @@ RETURN
   
   <entry>
     <title type="html"><![CDATA[Java类的实例化总结]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/09/08/initliate-objects-in-java/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/09/08/initliate-objects-in-java/"/>
     <updated>2013-09-08T02:03:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/09/08/initliate-objects-in-java</id>
+    <id>http://biaobiaoqi.me/blog/2013/09/08/initliate-objects-in-java</id>
     <content type="html"><![CDATA[<p>java类的实例化(instantiation)具有显性的和隐性的区别。</p>
 
 <p>写Java代码时，我们所使用new的方法实例化最简单直接的显性实例化。而隐性的实例化则出现在java程序的整个生命周期中，包括String、Class，StringBuffer 或者StringBuilder 的实例化等等。</p>
@@ -499,91 +544,6 @@ ASTORE 3
 <p>实际上，这里str1 和 str2合并的过程，是使用了StringBuilder来间接完成的，首先以str1的值构造一个StringBuilder，然后调用其中的append()方法，将str2串联上来。</p>
 
 <p>值得注意的是：老版本的java使用StringBuffer完成这一步，但StringBuffer是线程安全的，效率略低，于是在新版本java中出现了非线程安全的StringBuilder，这类似于Hashtable 和 hashset的关系。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Java类加载的延迟初始化]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/09/08/late-initialising-in-java/"/>
-    <updated>2013-09-08T02:00:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/09/08/late-initialising-in-java</id>
-    <content type="html"><![CDATA[<p><a href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loading-linking-and-initialising/">《Java类的装载、链接和初始化》</a>中提到，链接的最后一步是解析，即对符号引用的解析。但这不是必须的，可以等到相应的符号引用第一次使用时再解析。</p>
-
-<p>而类的初始化是在链接之后的（注意了，根据不同JVM有不同的实现方式，在类初始化的时候，可能已经完成了所有的符号引用的解析，也可能没有），本文所写的就是类的初始化的时机问题。</p>
-
-<p>Java类的动态加载机制规定，在类被主动使用(active use)之前，必须已经完成类的初始化。既然有主动调用，那么就有被动调用了。这两者有哪些区别呢？</p>
-
-<p>下面列出所有主动使用的情况，用以区分两者：</p>
-
-<ul>
-<li>1.创造该类的一个新的实例</li>
-<li>2.调用这个类中的静态方法</li>
-<li>3.获取类或者接口中的非常量的静态变量</li>
-<li>4.利用反射调用方法</li>
-<li>5.初始化该类的某子类</li>
-<li>6.被制定为JVM开始运行时必须初始化的类</li>
-</ul>
-
-
-<p>注意，3中为何是“非常量的静态变量”。如果是常量，即声明为final的话，并不会出现对类的构造，虽然调用时有类名出现，但实际调用会直接使用常量，绕过了类的限制（详情见相关常量池和运行时常量池的知识）。</p>
-
-<p>只有当一个非常量的静态变量被显示的在类或接口中声明时，它的调用才属于主动调用。对于父类中某非常量静态变量的调用属于被动使用(positive use)。</p>
-
-<!--more-->
-
-
-<p>如下代码
-```java
-public class Parent {</p>
-
-<pre><code> static int i = 10 ;  
-
- static{  
-        System.out.println("Parent initiate");  
- }  
-
- public static void func(){  
-    System.out.println("func");  
- }  
-</code></pre>
-
-<p>}</p>
-
-<p>public class Son extends Parent{</p>
-
-<pre><code>static{  
-    System.out.println("Son initiate");  
-}  
-</code></pre>
-
-<p>}</p>
-
-<p>public class Test {</p>
-
-<pre><code>static{  
-    System.out.println("Test initiate");  
-}  
-
-public static void main(String[] args){  
-    System.out.println(Son.i);  
-    Son.func();  
-}  
-</code></pre>
-
-<p>}<br/>
-```</p>
-
-<p>运行的结果是：
-<code>
-Test initiate  
-Parent initiate  
-10  
-func  
-</code></p>
-
-<p>虽然有出现Son，但Son.i访问的是父类的非常量静态变量。于是没有对Son类进行初始化，而只是初始化了明确的声明静态变量的Parent类。</p>
-
-<p>由此可见，一般的，我们在某个类中定义了其他类的成员变量引用，只要该变量没有new 出一个新的对象，则JVM也不会初始化这个类，类此时只是被加载了而已，而没有链接和初始化。</p>
 ]]></content>
   </entry>
   

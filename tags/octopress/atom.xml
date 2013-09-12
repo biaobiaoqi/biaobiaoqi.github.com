@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: octopress | Biaobiaoqi的博客]]></title>
-  <link href="http://biaobiaoqi.github.com/tags/octopress/atom.xml" rel="self"/>
-  <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-09-11T13:52:50+08:00</updated>
-  <id>http://biaobiaoqi.github.com/</id>
+  <link href="http://biaobiaoqi.me/tags/octopress/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.me/"/>
+  <updated>2013-09-12T14:20:57+08:00</updated>
+  <id>http://biaobiaoqi.me/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[biaobiaoqi的博客日志]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/09/01/blog-log/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/09/01/blog-log/"/>
     <updated>2013-09-01T01:40:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/09/01/blog-log</id>
+    <id>http://biaobiaoqi.me/blog/2013/09/01/blog-log</id>
     <content type="html"><![CDATA[<p>鉴于友言的客服不搭理的态度和时而无法正常显示以及管理界面的难以使用，决定将评论系统切换到disqus上。</p>
 
 <p>最近一直在更改博客的定制。就像一个人一样，产品也是由生命的，她的脚印就是她价值的体现。于是我萌生了将她的改变全部记录下来的想法，只恨没有在四个月前刚建起博客时就意识到这一点。</p>
@@ -49,9 +49,9 @@
   
   <entry>
     <title type="html"><![CDATA[octopress第三方插件：博文同步工具syncPost]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/08/31/octopress-3rd-party-plugin-syncpost/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/08/31/octopress-3rd-party-plugin-syncpost/"/>
     <updated>2013-08-31T19:30:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/08/31/octopress-3rd-party-plugin-syncpost</id>
+    <id>http://biaobiaoqi.me/blog/2013/08/31/octopress-3rd-party-plugin-syncpost</id>
     <content type="html"><![CDATA[<p>为了增加外链等考虑，独立博客往往有将博文同步到其他博客社区的需求。自己人肉黏贴的方式笨拙、重复，对于程序猿而言，着实不可取。</p>
 
 <p>我在github上找到了<a href="https://github.com/huangbowen521/octopress-syncPost">syncPost</a>这个针对octopress的第三方工具，能够通过一些论坛提供的<a href="http://en.wikipedia.org/wiki/MetaWeblog">metaWeblog</a>服务实现octopress最新一篇博文的同步提交。</p>
@@ -109,9 +109,9 @@
   
   <entry>
     <title type="html"><![CDATA[定制Octopress]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/07/10/decorate-octopress/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/07/10/decorate-octopress/"/>
     <updated>2013-07-10T01:53:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/07/10/decorate-octopress</id>
+    <id>http://biaobiaoqi.me/blog/2013/07/10/decorate-octopress</id>
     <content type="html"><![CDATA[<p>在github pages上搭建好octopress博客之后，博客的基本功能就能使用了。如果想自己定制也是没问题的，octopress有较详尽的官方文档，原则上有问题求助官方即可：<a href="http://octopress.org/help/">octopress-help</a>。官方没有包纳的也可以去询问<a href="http://stackoverflow.com/questions/tagged/octopress">stackoverflow</a>。 当然，中文的看起来总会省事儿点。我做了如下一些总结;)</p>
 
 <p>不会ruby的童鞋特别注意：配置_config.yml的过程中特别注意，配置项『:』后要留空格，否则会报错。</p>
@@ -421,9 +421,9 @@ post.content + %Q[<p class='post-footer'></p>
   
   <entry>
     <title type="html"><![CDATA[在github上搭建octopress博客 mac]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/03/21/building-octopress-in-github-mac/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/03/21/building-octopress-in-github-mac/"/>
     <updated>2013-03-21T23:43:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/03/21/building-octopress-in-github-mac</id>
+    <id>http://biaobiaoqi.me/blog/2013/03/21/building-octopress-in-github-mac</id>
     <content type="html"><![CDATA[<p><img src="http://pikipity.github.com/images/post/octopress.jpg"></p>
 
 <p>最早的时候，是看见了<a href="http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/">唐巧大哥的博客</a>，UI上已是觉得耳目一新。后来读到过<a href="http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html">阮一峰的博文</a>，当知道这是搭建在Github这个程序员的facebook上时，更是心头一震，什么时候自己也搭这么个博客呢。直接用github托管代码，完全不用自己租服务器，实在方便。自己之前也有在csdn上维护了一个博客，虽然那已经是一年前的事情了。</p>

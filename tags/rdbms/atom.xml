@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: rdbms | Biaobiaoqi的博客]]></title>
-  <link href="http://biaobiaoqi.github.com/tags/rdbms/atom.xml" rel="self"/>
-  <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-09-11T13:52:50+08:00</updated>
-  <id>http://biaobiaoqi.github.com/</id>
+  <link href="http://biaobiaoqi.me/tags/rdbms/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.me/"/>
+  <updated>2013-09-12T14:20:57+08:00</updated>
+  <id>http://biaobiaoqi.me/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Hadoop和RDBMS的混合系统介绍]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/05/20/hybrid-distributed-data-management-system/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/05/20/hybrid-distributed-data-management-system/"/>
     <updated>2013-05-20T14:52:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/05/20/hybrid-distributed-data-management-system</id>
+    <id>http://biaobiaoqi.me/blog/2013/05/20/hybrid-distributed-data-management-system</id>
     <content type="html"><![CDATA[<p>现在大数据概念被时常提起，社会各界对其关注度越来越高。往往越是火热的东西，人们越容易忽略它的本质。在slides中，我首先按照自己的理解，简单的理顺数据处理领域的发展历程。之后，落脚点是两个比较有代表性的混合的分布式系统：<a href="http://biaobiaoqi.me/blog/2013/05/18/a-hybrid-system-hadoopdb/">HadoopDB</a>和微软的<a href="http://biaobiaoqi.me/blog/2013/04/25/split-querying-process-in-polybase/">Polybase</a>。由于缺乏实战经验，很多东西由各方论文和博文中得到，有不恰当的地方，欢迎大家拍砖讨论;)</p>
 
 <p>slides的提纲如下：</p>
@@ -60,7 +60,7 @@
 
 <p>slides在线展示：</p>
 
-<script async class="speakerdeck-embed" data-id="77bdc950a3460130c98a12e3c5740641" data-ratio="1.33333333333333" src="http://biaobiaoqi.github.com//speakerdeck.com/assets/embed.js"></script>
+<script async class="speakerdeck-embed" data-id="77bdc950a3460130c98a12e3c5740641" data-ratio="1.33333333333333" src="http://biaobiaoqi.me//speakerdeck.com/assets/embed.js"></script>
 
 
 <p>slides下载：

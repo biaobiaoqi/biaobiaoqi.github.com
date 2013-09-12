@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: os | Biaobiaoqi的博客]]></title>
-  <link href="http://biaobiaoqi.github.com/tags/os/atom.xml" rel="self"/>
-  <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-09-11T13:52:50+08:00</updated>
-  <id>http://biaobiaoqi.github.com/</id>
+  <link href="http://biaobiaoqi.me/tags/os/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.me/"/>
+  <updated>2013-09-12T14:20:57+08:00</updated>
+  <id>http://biaobiaoqi.me/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Mac的GUI哲学]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/06/09/something-about-mac-gui/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/06/09/something-about-mac-gui/"/>
     <updated>2013-06-09T01:00:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/06/09/something-about-mac-gui</id>
+    <id>http://biaobiaoqi.me/blog/2013/06/09/something-about-mac-gui</id>
     <content type="html"><![CDATA[<h2>GUI哲学</h2>
 
 <p>前些日子，看了Tinyfool老师的一篇文章<a href="http://blogread.cn/it/article/1089?f=wb">《开发人员为何应该使用 Mac OS X 兼 OS X 小史》</a>，才恍然Mac系统可不仅仅是UI上与Windows大相径庭，而是自底而上的区别。这种区别渗透到了整个系统框架的设计理念中。</p>
@@ -101,9 +101,9 @@
   
   <entry>
     <title type="html"><![CDATA[iOS的安全性和越狱]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/05/17/jail-break-your-ios/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/05/17/jail-break-your-ios/"/>
     <updated>2013-05-17T00:10:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/05/17/jail-break-your-ios</id>
+    <id>http://biaobiaoqi.me/blog/2013/05/17/jail-break-your-ios</id>
     <content type="html"><![CDATA[<p><img src="https://dl.dropboxusercontent.com/u/64021093/2013-5-16.jpg" title="Jailbrek" alt="alt jailbreak" /></p>
 
 <p>提到<a href="http://en.wikipedia.org/wiki/IOS_jailbreaking#Security.2C_privacy.2C_and_stability">越狱</a>，很多人第一反应大概是免费的游戏和app。</p>
@@ -192,9 +192,9 @@ http://www.freebsd.org/doc/zh_CN/books/arch-handbook/mac-synopsis.html</p>
   
   <entry>
     <title type="html"><![CDATA[虚拟机中的网络配置]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/05/09/networking-in-virtual-machine/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/05/09/networking-in-virtual-machine/"/>
     <updated>2013-05-09T22:39:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/05/09/networking-in-virtual-machine</id>
+    <id>http://biaobiaoqi.me/blog/2013/05/09/networking-in-virtual-machine</id>
     <content type="html"><![CDATA[<p>本文介绍三种虚拟机中常用的网络配置模式：NAT(网络地址转换模式)、Bridged nerworking（桥接网络模式）和Host-only（主机模式）。</p>
 
 <h3>Network Address Translation (NAT)</h3>

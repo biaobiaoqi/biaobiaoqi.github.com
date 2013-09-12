@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: distributed | Biaobiaoqi的博客]]></title>
-  <link href="http://biaobiaoqi.github.com/tags/distributed/atom.xml" rel="self"/>
-  <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-09-11T13:52:50+08:00</updated>
-  <id>http://biaobiaoqi.github.com/</id>
+  <link href="http://biaobiaoqi.me/tags/distributed/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.me/"/>
+  <updated>2013-09-12T14:20:57+08:00</updated>
+  <id>http://biaobiaoqi.me/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
     
@@ -15,14 +15,14 @@
   
   <entry>
     <title type="html"><![CDATA[分布式事务slides]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/08/26/distributed-transaction/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/08/26/distributed-transaction/"/>
     <updated>2013-08-26T23:49:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/08/26/distributed-transaction</id>
+    <id>http://biaobiaoqi.me/blog/2013/08/26/distributed-transaction</id>
     <content type="html"><![CDATA[<p>最近看了<a href="http://book.douban.com/subject/21624776/">《分布式系统概念与设计 第5版》</a>的分布式事务章节，整理了一份ppt。还有恢复部分没有收录进来，有空再整理啦。</p>
 
 <p>下面是传到deckspeaker上的slides展示:</p>
 
-<script async class="speakerdeck-embed" data-id="aa521420f0a101303be246475d95d052" data-ratio="1.33333333333333" src="http://biaobiaoqi.github.com//speakerdeck.com/assets/embed.js"></script>
+<script async class="speakerdeck-embed" data-id="aa521420f0a101303be246475d95d052" data-ratio="1.33333333333333" src="http://biaobiaoqi.me//speakerdeck.com/assets/embed.js"></script>
 
 
 <p>下载链接：<a href="https://dl.dropboxusercontent.com/u/64021093/slides/distributed%20transcation.pptx">请戳</a></p>
@@ -31,9 +31,9 @@
   
   <entry>
     <title type="html"><![CDATA[阿里离线数据处理平台2013暑期学校]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/07/19/odps-in-alibaba/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/07/19/odps-in-alibaba/"/>
     <updated>2013-07-19T21:31:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/07/19/odps-in-alibaba</id>
+    <id>http://biaobiaoqi.me/blog/2013/07/19/odps-in-alibaba</id>
     <content type="html"><![CDATA[<p>本周有幸参加了为期两天的<a href="http://102.alibaba.com/competition/dataSummer.htm">阿里离线数据处理平台2013暑期学校</a>的学习。</p>
 
 <p>阿里的前辈们分不同的专题给大家介绍了飞天平台上的离线数据处理服务ODPS（Open Data Processing Service）。
@@ -43,7 +43,7 @@
 成功了，大家看得到的是分析出的数据，而一旦失败了，那么系统平台的责任就大了。
 再者越贴近硬件层次的工作也注定越辛苦，深夜被吵醒也不是没有的事儿。好了，吐槽到此结束，下面是总结笔记整理出几页slides：</p>
 
-<script async class="speakerdeck-embed" data-id="e0022eb0d24d013089506e9621fcaf9a" data-ratio="1.33333333333333" src="http://biaobiaoqi.github.com//speakerdeck.com/assets/embed.js"></script>
+<script async class="speakerdeck-embed" data-id="e0022eb0d24d013089506e9621fcaf9a" data-ratio="1.33333333333333" src="http://biaobiaoqi.me//speakerdeck.com/assets/embed.js"></script>
 
 
 
@@ -61,9 +61,9 @@
   
   <entry>
     <title type="html"><![CDATA[SDN：软件定义网络]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/06/08/software-defined-network/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/06/08/software-defined-network/"/>
     <updated>2013-06-08T00:39:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/06/08/software-defined-network</id>
+    <id>http://biaobiaoqi.me/blog/2013/06/08/software-defined-network</id>
     <content type="html"><![CDATA[<p>最近高级网络课的小组任务是在老师给定的范围内自选方向主题研究并做展示报告。我们组选了sdn。原以为这东西会是工业界无人问津的概念化产品，Google了一下却发现其实sdn挺火的，由于它可能带来的可扩展性，一些大互联网企业也在开始涉足相关的研发，比如Google呵Facebook。这里简要的梳理下我对SDN概念性的认识。</p>
 
 <h2>背景</h2>
@@ -125,9 +125,9 @@
   
   <entry>
     <title type="html"><![CDATA[《Hadoop技术内幕》学习笔记——RPC和动态代理]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/06/08/ipc-in-hadoop/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/06/08/ipc-in-hadoop/"/>
     <updated>2013-06-08T00:24:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/06/08/ipc-in-hadoop</id>
+    <id>http://biaobiaoqi.me/blog/2013/06/08/ipc-in-hadoop</id>
     <content type="html"><![CDATA[<p>本文是《hadoop技术内幕——深入解析Hadoop Common和HDFS架构设计与实现原理》第4章的1-3节的学习笔记。内容为Hadoop IPC部分的基础知识介绍。</p>
 
 <h2>知识框架</h2>
@@ -152,7 +152,7 @@
 
 <p>我总结了一份slides，如下：(挂在speackerdeck上，如果加载缓慢，请稍候:))</p>
 
-<script async class="speakerdeck-embed" data-id="fbcb8590b1540130690c2e6f0be13e84" data-ratio="1.33333333333333" src="http://biaobiaoqi.github.com//speakerdeck.com/assets/embed.js"></script>
+<script async class="speakerdeck-embed" data-id="fbcb8590b1540130690c2e6f0be13e84" data-ratio="1.33333333333333" src="http://biaobiaoqi.me//speakerdeck.com/assets/embed.js"></script>
 
 
 <p>slides下载地址：<a href="https://dl.dropboxusercontent.com/u/64021093/slides/%E8%BF%9C%E7%A8%8B%E8%BF%87%E7%A8%8B%E8%B0%83%E7%94%A8%E5%92%8CNIO.pdf">请戳</a></p>
@@ -161,9 +161,9 @@
   
   <entry>
     <title type="html"><![CDATA[关于毕业季照片分享的思考]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/05/25/some-ideas-about-using-bt-protocol-to-sync/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/05/25/some-ideas-about-using-bt-protocol-to-sync/"/>
     <updated>2013-05-25T22:47:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/05/25/some-ideas-about-using-bt-protocol-to-sync</id>
+    <id>http://biaobiaoqi.me/blog/2013/05/25/some-ideas-about-using-bt-protocol-to-sync</id>
     <content type="html"><![CDATA[<h2>背景</h2>
 
 <p>毕业季到了，女朋友跟班里同学们一起拍了很多照片。由于照片分散在不同的人的手机、相机里，她也无法立即给我传来她的照片。这个情景一年前我也遇到过，只是当时自己比较忙，加上考虑着还会在本校读研，也没太在意毕业季照片的手机这一需求，以至于到现在我的电脑里甚至没有一张我穿学士服的照片:-=。而现在，当我想看看gf的照片时，这个需求横亘在我面前，让我特别的想解决掉它。</p>

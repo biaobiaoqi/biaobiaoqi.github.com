@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tag: alibaba | Biaobiaoqi的博客]]></title>
-  <link href="http://biaobiaoqi.github.com/tags/alibaba/atom.xml" rel="self"/>
-  <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-09-11T13:52:50+08:00</updated>
-  <id>http://biaobiaoqi.github.com/</id>
+  <link href="http://biaobiaoqi.me/tags/alibaba/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.me/"/>
+  <updated>2013-09-12T14:20:57+08:00</updated>
+  <id>http://biaobiaoqi.me/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[阿里离线数据处理平台2013暑期学校]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/07/19/odps-in-alibaba/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/07/19/odps-in-alibaba/"/>
     <updated>2013-07-19T21:31:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/07/19/odps-in-alibaba</id>
+    <id>http://biaobiaoqi.me/blog/2013/07/19/odps-in-alibaba</id>
     <content type="html"><![CDATA[<p>本周有幸参加了为期两天的<a href="http://102.alibaba.com/competition/dataSummer.htm">阿里离线数据处理平台2013暑期学校</a>的学习。</p>
 
 <p>阿里的前辈们分不同的专题给大家介绍了飞天平台上的离线数据处理服务ODPS（Open Data Processing Service）。
@@ -27,7 +27,7 @@
 成功了，大家看得到的是分析出的数据，而一旦失败了，那么系统平台的责任就大了。
 再者越贴近硬件层次的工作也注定越辛苦，深夜被吵醒也不是没有的事儿。好了，吐槽到此结束，下面是总结笔记整理出几页slides：</p>
 
-<script async class="speakerdeck-embed" data-id="e0022eb0d24d013089506e9621fcaf9a" data-ratio="1.33333333333333" src="http://biaobiaoqi.github.com//speakerdeck.com/assets/embed.js"></script>
+<script async class="speakerdeck-embed" data-id="e0022eb0d24d013089506e9621fcaf9a" data-ratio="1.33333333333333" src="http://biaobiaoqi.me//speakerdeck.com/assets/embed.js"></script>
 
 
 

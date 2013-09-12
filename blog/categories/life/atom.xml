@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: life | Biaobiaoqi的博客]]></title>
-  <link href="http://biaobiaoqi.github.com/blog/categories/life/atom.xml" rel="self"/>
-  <link href="http://biaobiaoqi.github.com/"/>
-  <updated>2013-09-11T13:52:50+08:00</updated>
-  <id>http://biaobiaoqi.github.com/</id>
+  <link href="http://biaobiaoqi.me/blog/categories/life/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.me/"/>
+  <updated>2013-09-12T14:20:57+08:00</updated>
+  <id>http://biaobiaoqi.me/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[终于算完了这道『1+1』]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/07/29/after-pat-practice/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/07/29/after-pat-practice/"/>
     <updated>2013-07-29T22:12:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/07/29/after-pat-practice</id>
+    <id>http://biaobiaoqi.me/blog/2013/07/29/after-pat-practice</id>
     <content type="html"><![CDATA[<p>在<a href="http://weibo.com/redow7">@ReDow</a>、<a href="http://weibo.com/cloudbye">@麦迪的小腿</a>和<a href="http://weibo.com/linest">@linest</a>等小伙伴的帮助下，终于断断续续的爬完了<a href="http://pat.zju.edu.cn/">PAT</a>的Basic Level和Advanced Level，阶段性填补了自己惨白的算法短板。在cs的圈子里，说PAT是入门的『1 + 1』不为过。刚完成『1 + 1』，作为五年科班的人，确实不够光彩。不过现在能做的也只是尽力弥补本科时间里的虚度。</p>
 
 <p>从亲手挖的坑里往外爬，需要付出比其他人更多的努力。没时间享受题目ac之后的快感（画外音：这么简单的题会有快感么=.=#），倒会时不时蹦出一股脑的蛋疼：『你当初干XX啥去了！』。</p>
@@ -55,9 +55,9 @@
   
   <entry>
     <title type="html"><![CDATA[给女朋友的礼物]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/06/11/gift-to-girl-friend/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/06/11/gift-to-girl-friend/"/>
     <updated>2013-06-11T17:12:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/06/11/gift-to-girl-friend</id>
+    <id>http://biaobiaoqi.me/blog/2013/06/11/gift-to-girl-friend</id>
     <content type="html"><![CDATA[<h2>背景</h2>
 
 <p>一个月前发现了<a href="http://v2ex.com">V2EX</a>这个网站，用创始人<a href="http://www.v2ex.com/member/Livid">Livid</a>的话来说，『这是一个主要关于做事儿的地方』。确实如此，我在这里收获了很多想法和灵感。</p>
@@ -160,9 +160,9 @@ document.getElementById('start_btn').style.display = ""; //show start button
   
   <entry>
     <title type="html"><![CDATA[我的MBTI职业性格测试]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/05/12/mbti-test/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/05/12/mbti-test/"/>
     <updated>2013-05-12T01:04:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/05/12/mbti-test</id>
+    <id>http://biaobiaoqi.me/blog/2013/05/12/mbti-test</id>
     <content type="html"><![CDATA[<h2>背景</h2>
 
 <p>最近在看<a href="http://book.douban.com/subject/5372651/">《程序员的思维训练——开发人之前能的九堂课》</a>，其中讲到了<a href="http://wiki.mbalib.com/wiki/MBTI%E4%BA%BA%E6%A0%BC%E7%90%86%E8%AE%BA">MBTI职业性格测试</a>的指导意义。记起来两年多以前在面试ASES的时候有做过这个测试，只可惜当时的测试结果在好几次的更换电脑的过程中不知踪影了。最近自己的思考也集中在认知领域，于是重新找到那个链接，做了一次测试。<a href="http://www.apesk.com/mbti/">点击链接测试</a>，正文是我的测试结果。</p>
@@ -301,9 +301,9 @@ document.getElementById('start_btn').style.display = ""; //show start button
   
   <entry>
     <title type="html"><![CDATA[再见，Seeme]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/04/07/goodbye-seeme/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/04/07/goodbye-seeme/"/>
     <updated>2013-04-07T23:26:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/04/07/goodbye-seeme</id>
+    <id>http://biaobiaoqi.me/blog/2013/04/07/goodbye-seeme</id>
     <content type="html"><![CDATA[<p>过年算是仪式感最强的节日之一了。不想将过年作为成熟的时间节点，因为生命总是在时间里沉淀。但社会的周期运作确确实实的依着四季来过度，于是总有些决定、变化需要在此执行和接受。真诚的向过去的一切道一声感谢。</p>
 
 <!--more-->
@@ -357,9 +357,9 @@ document.getElementById('start_btn').style.display = ""; //show start button
   
   <entry>
     <title type="html"><![CDATA[开篇]]></title>
-    <link href="http://biaobiaoqi.github.com/blog/2013/03/17/kai-pian/"/>
+    <link href="http://biaobiaoqi.me/blog/2013/03/17/kai-pian/"/>
     <updated>2013-03-17T10:18:00+08:00</updated>
-    <id>http://biaobiaoqi.github.com/blog/2013/03/17/kai-pian</id>
+    <id>http://biaobiaoqi.me/blog/2013/03/17/kai-pian</id>
     <content type="html"><![CDATA[<p>花了一下午时间，终于搭起了这个博客。</p>
 
 <p>我会陆续将原来csdn博客中的内容筛选过来，将这个博客作为主博客。</p>
