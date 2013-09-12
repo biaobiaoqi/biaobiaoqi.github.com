@@ -101,7 +101,7 @@ public class Test {
 输出结果为true。
 
 
-现代的JVM实现里，考虑到垃圾回收（Garbage Collection）的方便，将[heap](http://en.wikipedia.org/wiki/Java_Virtual_Machine#Heap)划分为三部分： young generation 、 tenured generation（old generation）和 permanent generation( permgen )
+现代的JVM实现里，考虑到垃圾回收（Garbage Collection）的方便，将内存区域[heap](http://en.wikipedia.org/wiki/Java_Virtual_Machine#Heap)划分为三部分： young generation 、 tenured generation（old generation）和 permanent generation( permgen )
 
 字符串池是为了解决字符串重复的问题，生命周期长，它存在于permgen中。
 
