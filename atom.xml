@@ -4,7 +4,7 @@
   <title><![CDATA[Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.me/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.me/"/>
-  <updated>2013-09-17T23:53:36+08:00</updated>
+  <updated>2013-09-22T23:12:40+08:00</updated>
   <id>http://biaobiaoqi.me/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -12,6 +12,161 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Java类、实例的初始化顺序]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/09/22/java-initialization/"/>
+    <updated>2013-09-22T21:53:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/09/22/java-initialization</id>
+    <content type="html"><![CDATA[<p>今晚是阿里巴巴 2013 校园招聘的杭州站笔试。下午匆忙看了两张历年试卷，去现场打了瓶酱油。</p>
+
+<p>题目总体考察点偏基础，倒数第二题（Java 附加题）比较有趣，考察了 Java 初始化机制的细节，在此摘录出来。</p>
+
+<h2>题目</h2>
+
+<p>求如下 java 代码的输出：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">class</span> <span class="nc">T</span>  <span class="kd">implements</span> <span class="n">Cloneable</span><span class="o">{</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="n">T</span> <span class="n">t1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">T</span><span class="o">(</span><span class="s">&quot;t1&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="n">T</span> <span class="n">t2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">T</span><span class="o">(</span><span class="s">&quot;t2&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">print</span><span class="o">(</span><span class="s">&quot;i&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">99</span><span class="o">;</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="kd">public</span> <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">print</span><span class="o">(</span><span class="s">&quot;j&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">{</span>
+</span><span class='line'>      <span class="n">print</span><span class="o">(</span><span class="s">&quot;构造快&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="kd">static</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">print</span><span class="o">(</span><span class="s">&quot;静态块&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="kd">public</span> <span class="nf">T</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">((++</span><span class="n">k</span><span class="o">)</span> <span class="o">+</span> <span class="s">&quot;:&quot;</span> <span class="o">+</span> <span class="n">str</span> <span class="o">+</span> <span class="s">&quot;    i=&quot;</span> <span class="o">+</span> <span class="n">i</span> <span class="o">+</span> <span class="s">&quot;  n=&quot;</span> <span class="o">+</span> <span class="n">n</span><span class="o">);</span>
+</span><span class='line'>      <span class="o">++</span><span class="n">n</span><span class="o">;</span> <span class="o">++</span> <span class="n">i</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">print</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span><span class="o">){</span>
+</span><span class='line'>      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">((++</span><span class="n">k</span><span class="o">)</span> <span class="o">+</span><span class="s">&quot;:&quot;</span> <span class="o">+</span> <span class="n">str</span> <span class="o">+</span> <span class="s">&quot;   i=&quot;</span> <span class="o">+</span> <span class="n">i</span> <span class="o">+</span> <span class="s">&quot;   n=&quot;</span> <span class="o">+</span> <span class="n">n</span><span class="o">);</span>
+</span><span class='line'>      <span class="o">++</span><span class="n">n</span><span class="o">;</span>
+</span><span class='line'>      <span class="k">return</span> <span class="o">++</span> <span class="n">i</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+</span><span class='line'>      <span class="n">T</span> <span class="n">t</span> <span class="o">=</span> <span class="k">new</span> <span class="n">T</span><span class="o">(</span><span class="s">&quot;init&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>分析</h2>
+
+<p>代码主要考察的是类、变量初始化的顺序。</p>
+
+<p>一般的，我们很清楚类需要在被实例化之前初始化，而对象的初始化则是运行构造方法中的代码。</p>
+
+<p>本题的代码显然没有这么简单了。本题中涉及到了<code>static {…}</code> 和 <code>{…}</code>这种形式的代码块，以及在类的静态变量中初始化该类的对象这种交错的逻辑，容易让人焦躁（类似于密集恐惧症吧=(）。实际上，按照<a href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loading-linking-and-initialising/">类的装载、链接和初始化逻辑</a>，以及<a href="http://biaobiaoqi.me/blog/2013/09/08/strange-behavior-using-braces-in-java/">对象初始化的顺序</a>来思考，不难得到答案。</p>
+
+<h3>代码组成</h3>
+
+<ul>
+<li><p>成员变量
+  2~6 行的变量是 static 的，为类 T 的静态成员变量，需要在类加载的过程中被执行初始化；第 8 行的<code>int j</code>则为实例成员变量，只再类被实例化的过程中初始化。</p></li>
+<li><p>代码段
+  9~11 行为实例化的代码段，在类被实例化的过程中执行；13~15 行为静态的代码段，在类被加载、初始化的过程中执行。</p></li>
+<li><p>方法
+  方法<code>public static int print(String str)</code> 为静态方法，其实现中牵涉到 k,i,n 三个静态成员变量，实际上，这个方法是专门用来标记执行顺序的方法；T 的构造方法是个实例化方法，在 T 被实例化时调用。</p></li>
+<li><p>main 方法
+  main 方法中实例化了一个 T 的实例。</p></li>
+</ul>
+
+
+<h3>执行顺序分析</h3>
+
+<p>在一个对象被使用之前，需要经历的过程有：类的装载 -> 链接（验证 -> 准备 -> 解析） -> 初始化 -> 对象实例化。（详情参见<a href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loading-linking-and-initialising/">《Java 类的装载、链接和初始化》</a>），这里需要注意的点主要有：</p>
+
+<ul>
+<li><p>在类链接之后，类初始化之前，实际上类已经可以被实例化了。</p>
+
+<p>  就如此题代码中所述，在众多静态成员变量被初始化完成之前，已经有两个实例的初始化了。实际上，此时对类的实例化，除了无法正常使用类的静态承运变量以外（还没有保证完全被初始化），JVM 中已经加载了类的内存结构布局，只是没有执行初始化的过程。比如第 3 行<code>public static T t1 = new T("t1");</code>，在链接过程中，JVM 中已经存在了一个 t1，它的值为 null，还没有执行<code>new T("t1")</code>。又比如第 5 行的<code>public static int i = print("i");</code>，在没有执行初始化时，i 的值为 0，同理 n 在初始化前值也为 0.</p></li>
+<li><p>先执行成员变量自身初始化，后执行<code>static {…}</code>、<code>{…}</code>代码块中的内容。</p>
+
+<p>  如此策略的意义在于让代码块能处理成员变量相关的逻辑。如果不使用这种策略，而是相反先执行代码块，那么在执行代码块的过程中，成员变量并没有意义，代码块的执行也是多余。</p></li>
+<li><p>类实例化的过程中，先执行隐式的构造代码，再执行构造方法中的代码
+  这里隐式的构造代码包括了<code>{}</code>代码块中的代码，以及实例成员变量声明中的初始化代码，以及父类的对应的代码（还好本题中没有考察到父类这一继承关系，否则更复杂;)）。为何不是先执行显示的构造方法中的代码，再执行隐式的代码呢？这也很容易解释：构造方法中可能就需要使用到实例成员变量，而这时候，我们是期待实例变量能正常使用的。</p></li>
+</ul>
+
+
+<p>有了如上的分析，也就能推到出最终的输出结果了。实际上，这几个原则都不需要死记硬背，完全能通过理解整个 JVM 的执行过程来梳理出思路的。</p>
+
+<h2>答案</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="mi">1</span><span class="o">:</span><span class="n">j</span>   <span class="n">i</span><span class="o">=</span><span class="mi">0</span>   <span class="n">n</span><span class="o">=</span><span class="mi">0</span>
+</span><span class='line'><span class="mi">2</span><span class="o">:</span><span class="err">构造快</span>   <span class="n">i</span><span class="o">=</span><span class="mi">1</span>   <span class="n">n</span><span class="o">=</span><span class="mi">1</span>
+</span><span class='line'><span class="mi">3</span><span class="o">:</span><span class="n">t1</span>    <span class="n">i</span><span class="o">=</span><span class="mi">2</span>  <span class="n">n</span><span class="o">=</span><span class="mi">2</span>
+</span><span class='line'><span class="mi">4</span><span class="o">:</span><span class="n">j</span>   <span class="n">i</span><span class="o">=</span><span class="mi">3</span>   <span class="n">n</span><span class="o">=</span><span class="mi">3</span>
+</span><span class='line'><span class="mi">5</span><span class="o">:</span><span class="err">构造快</span>   <span class="n">i</span><span class="o">=</span><span class="mi">4</span>   <span class="n">n</span><span class="o">=</span><span class="mi">4</span>
+</span><span class='line'><span class="mi">6</span><span class="o">:</span><span class="n">t2</span>    <span class="n">i</span><span class="o">=</span><span class="mi">5</span>  <span class="n">n</span><span class="o">=</span><span class="mi">5</span>
+</span><span class='line'><span class="mi">7</span><span class="o">:</span><span class="n">i</span>   <span class="n">i</span><span class="o">=</span><span class="mi">6</span>   <span class="n">n</span><span class="o">=</span><span class="mi">6</span>
+</span><span class='line'><span class="mi">8</span><span class="o">:</span><span class="err">静态块</span>   <span class="n">i</span><span class="o">=</span><span class="mi">7</span>   <span class="n">n</span><span class="o">=</span><span class="mi">99</span>
+</span><span class='line'><span class="mi">9</span><span class="o">:</span><span class="n">j</span>   <span class="n">i</span><span class="o">=</span><span class="mi">8</span>   <span class="n">n</span><span class="o">=</span><span class="mi">100</span>
+</span><span class='line'><span class="mi">10</span><span class="o">:</span><span class="err">构造快</span>   <span class="n">i</span><span class="o">=</span><span class="mi">9</span>   <span class="n">n</span><span class="o">=</span><span class="mi">101</span>
+</span><span class='line'><span class="mi">11</span><span class="o">:</span><span class="n">init</span>    <span class="n">i</span><span class="o">=</span><span class="mi">10</span>  <span class="n">n</span><span class="o">=</span><span class="mi">102</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>参考：</h3>
+
+<ul>
+<li><a href="http://biaobiaoqi.me/blog/2013/09/08/strange-behavior-using-braces-in-java/">《Java 构造方法中的执行顺序》</a></li>
+<li><a href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loading-linking-and-initialising/">《Java 类的装载、链接和初始化》</a><p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/09/22/java-initialization/'>http://biaobiaoqi.me/blog/2013/09/22/java-initialization/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[关于科学上网]]></title>
@@ -2941,205 +3096,6 @@ I think we will make it open source and put the game into the market finally, bu
 <h5>分析</h5>
 
 <p>用 Hash 的方式标记需要剔除的字符。<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/08/01/pat-1041-1050-solutions/'>http://biaobiaoqi.me/blog/2013/08/01/pat-1041-1050-solutions/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[PAT 1031-1040 题解]]></title>
-    <link href="http://biaobiaoqi.me/blog/2013/08/01/pat-1031-1040-solutions/"/>
-    <updated>2013-08-01T01:43:00+08:00</updated>
-    <id>http://biaobiaoqi.me/blog/2013/08/01/pat-1031-1040-solutions</id>
-    <content type="html"><![CDATA[<p>早期部分代码用 Java 实现。由于 PAT 虽然支持各种语言，但只有 C/C++标程来限定时间，许多题目用 Java 读入数据就已经超时，后来转投 C/C++。浏览全部代码：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
-
-<p>本文谨代表个人思路，欢迎讨论;)</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1031">1031. Hello World for U (20)</a></h2>
-
-<h5>题意</h5>
-
-<p>将给定的字符串打印出 U 型。</p>
-
-<p>比如给定<code>helloworld</code>，打印出</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>
-</span><span class='line'>h  d
-</span><span class='line'>e  l
-</span><span class='line'>l  r
-</span><span class='line'>lowo
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>设定左边的字符个数为 n1,底边字符个数为 n2,右边字符个数为 n3。需要满足 n1 = n3 = max
-{k|k &lt;= n2 for all 3 &lt;= n2 &lt;= N} with n1 + n2 + n3 -3 = N.</p>
-
-<h5>分析</h5>
-
-<p>简单模拟题。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1032">1032. Sharing (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>为了节省存储空间，单词使用链表实现。比如对于<code>loading</code>和<code>being</code>两个单词，有如下存储结构：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>word1 : -&gt; [l] -&gt; [o] -&gt; [a] -&gt; [d]  
-</span><span class='line'>                                  \
-</span><span class='line'>                                    [i] -&gt; [n] -&gt; [g] -&gt; null
-</span><span class='line'>                                  /
-</span><span class='line'>word2 : -&gt; [b] -&gt; [e] -------------
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>输入中，指定了两个单词的首字符的地址，并给出了 N (&lt;= 10<sup>5)个节点，每个节点包含：物理地址（5</sup> 位的正整数），实际存储的字符以及指向的下一个节点的地址。NULL 的地址是-1.
-要求找到两单词的的公共后缀开始的地址，如果没有，则输出-1.</p>
-
-<h5>分析</h5>
-
-<p>既然是单词，它的长度应该是有限的，也就是链表不会出现环这种情况（实际上这里的处理方式对于有环无环都适用）。对第一个单词链表做遍历，对爬过的节点做好标记。第二个单词链表也同样做标记，一旦遇到已经标记过的节点，则该节点就是结果。</p>
-
-<p>需要注意一点：直接使用 map 做节点的存储最后一个 case 会超时。而鉴于 5 位正整数的数据量，可以直接使用数组，用空间换时间。</p>
-
-<!--more-->
-
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1033">1033. To Fill or Not to Fill (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>高速路从 A 地到 B 地，路途有许多加油站，每个加油站的油价不一样，要求计算一个最优方案，使得以最便宜的开销跑完全程。</p>
-
-<h5>分析</h5>
-
-<p>用贪心算法，理清贪心算法的策略：</p>
-
-<ul>
-<li>1.从 A 加油站出发，在能行走的最大范围内，如果有比 A 站汽油更便宜的 B 站，则保证在 A 站点的加油量刚好满足能到达 B 站点；如果没有比 A 站汽油更便宜的站，则在 A 加满车油行走到【从 A 能走出的范围内】油价【最便宜】的站上，再行计算。</li>
-<li>2.从 A 加油站出发，在能行走的最大范围内，如果没有其他站点，则 A.dist + 一次最大的行走距离 为 impossible 情况下的最大站点。</li>
-</ul>
-
-
-<p> 注意有个陷阱：如果没有距离为 0 的加油站，则无法行驶。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1034">1034. Head of a Gang (30)</a></h2>
-
-<h5>题意</h5>
-
-<p>『gang』翻译过来是『一伙人』。gang 的定义是一群人，至少有 3 个人，这群人中每个人之间都通过通话相连，且整个群体的通话时长超过一个阈值。整个 gang 的团体中，拥有的电话时长最长的人就是头目了。</p>
-
-<p>题目给定了 gang 的阈值 K，以及 N 个通话记录，每条记录包括主叫人、被叫人以及通话时间。要求计算出有几个 gang，并按照 gang 的头目的字母顺序排序输出头目和其中成员数量。</p>
-
-<h5>分析</h5>
-
-<p>本题使用 dfs 求解比较方便。dfs 能简单的实现状态值的记录，比如当前的 gang 的成员数量和权重，如果使用并查集，则相对复杂。</p>
-
-<p>需要注意的坑点：如果建立邻接表时，每个通话记录都在两人头上计算了时间积累的，那么在判定 gang 的权重值是否低于阈值的时候，需要对阈值乘以 2。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1035">1035. Password (20)</a></h2>
-
-<h5>题意</h5>
-
-<p>给定多个字符串，按要求替换其中的某些特殊字符，并按原顺序输出。如果字符串中没有需要修改的字符，则不舒服该字符串。</p>
-
-<h5>分析</h5>
-
-<p>简单的 hash 实现。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1036">1036. Boys vs Girls (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>输入是一批学生的成绩，要求找出其中男生最低的成绩和女生最高的成绩，求其间的差值。如果无法计算，则输出 NA.</p>
-
-<h5>分析</h5>
-
-<p>简单模拟题。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1037">1037. Magic Coupon (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>背景是火星上的神奇的购物券购物策略：每张购物券上有一个整数，可正可负，商店里商品的标价也是一个整数，可正可负的。如果用正值购物券购买正值商品，则可获利两者之积；如果以负值购物券购买负值商品，也可获利两者之积；但其他情况，则会亏损。比如用面值为<code>2</code>的购物券购买面值为<code>3</code>的商品，获利<code>6</code>，用面值为<code>-5</code>的购物券购买面值为<code>-9</code>的商品，获利<code>45</code>，但如果用面值为<code>2</code>的购物券购买面值为<code>-3</code>的商品，则亏损<code>6</code>，</p>
-
-<p>给定一组数量为 NC 购物券面值和一组数量为 NP 的商品面值，1&lt;= NC , NP &lt;= 10<sup>5，要求计算能获利的最大值。</sup></p>
-
-<h5>分析</h5>
-
-<p>同号相乘可获利，异号相乘会亏损。要使获利最大，使用贪心思想计算。实际上，不需要用完购物券或者买完商品，所以只需要将同号的数值乘积算出即可，没有更复杂的情况。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1038">1038. Recover the Smallest Number (30)</a></h2>
-
-<h5>题意</h5>
-
-<p>给定 N(&lt;= 10000)个不超过 8 位的非负整数，要求将其按某个顺序拼接为一个数，使其值最小。</p>
-
-<h5>分析</h5>
-
-<p>容易简单的以为使用字典序排列拼接，实际上有一个特殊的拼接情况需要考虑。</p>
-
-<p>比如数据<code>32 321 3214</code>，这是按字典序排列的，但实际上这并不是最小的拼接方式，最小的拼接方式是：<code>321 3214 32</code>。</p>
-
-<p>比较这个实例，不难找到最小拼接的排序规律：</p>
-
-<ul>
-<li>1.两个字符串做比较时，如果其中一个字符串(a)是另一个字符串(ab)的前缀串，则需要将较长字符串(ab)除去前缀串的部分(b)与较短字符串(a)继续递归比较。比如，321 和 32，需要拿 1 和 32 做比较。又比如 323 和 32 比较，第一次拿 3 和 32 比较，第二次拿 3 和 2 按字典序比较。</li>
-<li>2.其他情况按字典序比较。</li>
-</ul>
-
-
-<p>另外需要注意的一个坑是：如果没有数据，则输出 0。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1039">1039. Course List for Student (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>给出 K(&lt;=2500)门课程，每门课程有 Ni(&lt;=200)名学生，学生编号为四位字符串，前三位为小写英文字母，后一位是数字。另给出 N 个需要查询的学生编号。</p>
-
-<p>要求列出对应查询编号学生的课程。如果有多个课程，需要按升序输出。</p>
-
-<h5>分析</h5>
-
-<p>这个题是个倒排索引的实现。不过在时间上卡的比较严。</p>
-
-<p>使用最简单的思路：map&lt;string, vector<int> students 倒排索引，在没有输出排序的课程列表时最后一个 case 已经超时；优化：将学生姓名的 hash 为 int，减免了 string 的匹配过程，还是超时（map 本身用红黑树实现，效率并不是特别高，还需要对每组数据进行排序），只能改变使用 map 的方式。</p>
-
-<p>最终 AC 的解法是：</p>
-
-<ul>
-<li>构建一个从学生编号字符串到 int 值的 hash 函数，在读入学生编号后，hash 到 int 值做处理。</li>
-<li>不适用 map 结构，根据学生姓名的限制，设定一个<code>vector&lt;int&gt; st[26*26*26*10]</code>的数据结构，读入时直接倒排索引插入。</li>
-</ul>
-
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1040">1040. Longest Symmetric String (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>给定一个字符串，要求输出最长的连续对称子串的长度。比如给定字符串为<code>Is PAT&amp;TAP symmetric?</code>，其中最长对称子串为<code>s PAT&amp;TAP s</code>，所以输出结果 11.</p>
-
-<h5>分析</h5>
-
-<p>这个题就是典型的 Java 实现 timeout，而 Cpp 实现轻松过的类型。需要注意两点：</p>
-
-<ul>
-<li>1.有两种对称情况，一种形如<code>aba</code>，一种形如<code>abba</code>。</li>
-<li>2.循环遍历的过程，以 index 为对称中心向两边扩散比较编码实现简单也更高效。</li>
-</ul>
-
-
-<p>另外，C 读入一整行数据到 char 数组的方法可以用<code>gets(s);</code>。</p>
-
-<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/08/01/pat-1031-1040-solutions/'>http://biaobiaoqi.me/blog/2013/08/01/pat-1031-1040-solutions/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
-
 ]]></content>
   </entry>
   
