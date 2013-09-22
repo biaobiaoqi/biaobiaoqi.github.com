@@ -229,74 +229,12 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <p>本题的代码显然没有这么简单了。本题中涉及到了<code>static {…}</code> 和 <code>{…}</code>这种形式的代码块，以及在类的静态变量中初始化该类的对象这种交错的逻辑，容易让人焦躁（类似于密集恐惧症吧=(）。实际上，按照<a href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loading-linking-and-initialising/">类的装载、链接和初始化逻辑</a>，以及<a href="http://biaobiaoqi.me/blog/2013/09/08/strange-behavior-using-braces-in-java/">对象初始化的顺序</a>来思考，不难得到答案。</p>
 
-<h3>代码组成</h3>
-
-<ul>
-<li><p>成员变量
-  2~6 行的变量是 static 的，为类 T 的静态成员变量，需要在类加载的过程中被执行初始化；第 8 行的<code>int j</code>则为实例成员变量，只再类被实例化的过程中初始化。</p></li>
-<li><p>代码段
-  9~11 行为实例化的代码段，在类被实例化的过程中执行；13~15 行为静态的代码段，在类被加载、初始化的过程中执行。</p></li>
-<li><p>方法
-  方法<code>public static int print(String str)</code> 为静态方法，其实现中牵涉到 k,i,n 三个静态成员变量，实际上，这个方法是专门用来标记执行顺序的方法；T 的构造方法是个实例化方法，在 T 被实例化时调用。</p></li>
-<li><p>main 方法
-  main 方法中实例化了一个 T 的实例。</p></li>
-</ul>
-
-
-<h3>执行顺序分析</h3>
-
-<p>在一个对象被使用之前，需要经历的过程有：类的装载 -> 链接（验证 -> 准备 -> 解析） -> 初始化 -> 对象实例化。（详情参见<a href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loading-linking-and-initialising/">《Java 类的装载、链接和初始化》</a>），这里需要注意的点主要有：</p>
-
-<ul>
-<li><p>在类链接之后，类初始化之前，实际上类已经可以被实例化了。</p>
-
-<p>  就如此题代码中所述，在众多静态成员变量被初始化完成之前，已经有两个实例的初始化了。实际上，此时对类的实例化，除了无法正常使用类的静态承运变量以外（还没有保证完全被初始化），JVM 中已经加载了类的内存结构布局，只是没有执行初始化的过程。比如第 3 行<code>public static T t1 = new T("t1");</code>，在链接过程中，JVM 中已经存在了一个 t1，它的值为 null，还没有执行<code>new T("t1")</code>。又比如第 5 行的<code>public static int i = print("i");</code>，在没有执行初始化时，i 的值为 0，同理 n 在初始化前值也为 0.</p></li>
-<li><p>先执行成员变量自身初始化，后执行<code>static {…}</code>、<code>{…}</code>代码块中的内容。</p>
-
-<p>  如此策略的意义在于让代码块能处理成员变量相关的逻辑。如果不使用这种策略，而是相反先执行代码块，那么在执行代码块的过程中，成员变量并没有意义，代码块的执行也是多余。</p></li>
-<li><p>类实例化的过程中，先执行隐式的构造代码，再执行构造方法中的代码
-  这里隐式的构造代码包括了<code>{}</code>代码块中的代码，以及实例成员变量声明中的初始化代码，以及父类的对应的代码（还好本题中没有考察到父类这一继承关系，否则更复杂;)）。为何不是先执行显示的构造方法中的代码，再执行隐式的代码呢？这也很容易解释：构造方法中可能就需要使用到实例成员变量，而这时候，我们是期待实例变量能正常使用的。</p></li>
-</ul>
-
-
-<p>有了如上的分析，也就能推到出最终的输出结果了。实际上，这几个原则都不需要死记硬背，完全能通过理解整个 JVM 的执行过程来梳理出思路的。</p>
-
-<h2>答案</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="mi">1</span><span class="o">:</span><span class="n">j</span>   <span class="n">i</span><span class="o">=</span><span class="mi">0</span>   <span class="n">n</span><span class="o">=</span><span class="mi">0</span>
-</span><span class='line'><span class="mi">2</span><span class="o">:</span><span class="err">构造快</span>   <span class="n">i</span><span class="o">=</span><span class="mi">1</span>   <span class="n">n</span><span class="o">=</span><span class="mi">1</span>
-</span><span class='line'><span class="mi">3</span><span class="o">:</span><span class="n">t1</span>    <span class="n">i</span><span class="o">=</span><span class="mi">2</span>  <span class="n">n</span><span class="o">=</span><span class="mi">2</span>
-</span><span class='line'><span class="mi">4</span><span class="o">:</span><span class="n">j</span>   <span class="n">i</span><span class="o">=</span><span class="mi">3</span>   <span class="n">n</span><span class="o">=</span><span class="mi">3</span>
-</span><span class='line'><span class="mi">5</span><span class="o">:</span><span class="err">构造快</span>   <span class="n">i</span><span class="o">=</span><span class="mi">4</span>   <span class="n">n</span><span class="o">=</span><span class="mi">4</span>
-</span><span class='line'><span class="mi">6</span><span class="o">:</span><span class="n">t2</span>    <span class="n">i</span><span class="o">=</span><span class="mi">5</span>  <span class="n">n</span><span class="o">=</span><span class="mi">5</span>
-</span><span class='line'><span class="mi">7</span><span class="o">:</span><span class="n">i</span>   <span class="n">i</span><span class="o">=</span><span class="mi">6</span>   <span class="n">n</span><span class="o">=</span><span class="mi">6</span>
-</span><span class='line'><span class="mi">8</span><span class="o">:</span><span class="err">静态块</span>   <span class="n">i</span><span class="o">=</span><span class="mi">7</span>   <span class="n">n</span><span class="o">=</span><span class="mi">99</span>
-</span><span class='line'><span class="mi">9</span><span class="o">:</span><span class="n">j</span>   <span class="n">i</span><span class="o">=</span><span class="mi">8</span>   <span class="n">n</span><span class="o">=</span><span class="mi">100</span>
-</span><span class='line'><span class="mi">10</span><span class="o">:</span><span class="err">构造快</span>   <span class="n">i</span><span class="o">=</span><span class="mi">9</span>   <span class="n">n</span><span class="o">=</span><span class="mi">101</span>
-</span><span class='line'><span class="mi">11</span><span class="o">:</span><span class="n">init</span>    <span class="n">i</span><span class="o">=</span><span class="mi">10</span>  <span class="n">n</span><span class="o">=</span><span class="mi">102</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>参考：</h3>
-
-<ul>
-<li><a href="http://biaobiaoqi.me/blog/2013/09/08/strange-behavior-using-braces-in-java/">《Java 构造方法中的执行顺序》</a></li>
-<li><a href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loading-linking-and-initialising/">《Java 类的装载、链接和初始化》</a><p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/09/22/java-initialization/'>http://biaobiaoqi.me/blog/2013/09/22/java-initialization/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></li>
-</ul>
-
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/09/22/java-initialization/">Read on &rarr;</a>
+    </footer>
   
 
 

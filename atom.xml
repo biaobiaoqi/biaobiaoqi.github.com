@@ -4,7 +4,7 @@
   <title><![CDATA[Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.me/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.me/"/>
-  <updated>2013-09-22T23:12:40+08:00</updated>
+  <updated>2013-09-22T23:15:13+08:00</updated>
   <id>http://biaobiaoqi.me/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -98,6 +98,9 @@
 <p>一般的，我们很清楚类需要在被实例化之前初始化，而对象的初始化则是运行构造方法中的代码。</p>
 
 <p>本题的代码显然没有这么简单了。本题中涉及到了<code>static {…}</code> 和 <code>{…}</code>这种形式的代码块，以及在类的静态变量中初始化该类的对象这种交错的逻辑，容易让人焦躁（类似于密集恐惧症吧=(）。实际上，按照<a href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loading-linking-and-initialising/">类的装载、链接和初始化逻辑</a>，以及<a href="http://biaobiaoqi.me/blog/2013/09/08/strange-behavior-using-braces-in-java/">对象初始化的顺序</a>来思考，不难得到答案。</p>
+
+<!--more-->
+
 
 <h3>代码组成</h3>
 
