@@ -9,18 +9,7 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="今晚是阿里巴巴 2013 校园招聘的杭州站笔试。下午匆忙看了两张历年试卷，去现场打了瓶酱油。 题目总体考察点偏基础，倒数第二题（Java 附加题）比较有趣，考察了 Java 初始化机制的细节，在此摘录出来。 题目 求如下 java 代码的输出： 1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12 &hellip;">
+  <meta name="description" content="作为一个不太安分的技术男，或多或少会对乔布斯怀有敬意。 我是从《硅谷海盗》这部老片开始了解到乔布斯这个人的，查了下上映日期，竟然是我出生的第二天。那时候觉着演员挺帅啊，后来发现真人更有味道一点。国内的互联网大佬们怎么不见如此气度的-,-。 前天下午，和实验室的基友们一起去看了刚上映的《乔布斯》。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -117,6 +106,57 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/09/30/jobs-and-jobs/">Jobs和jobs</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-30T11:41:00+08:00" pubdate data-updated="true">Sep 30<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/09/30/jobs-and-jobs/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>作为一个不太安分的技术男，或多或少会对乔布斯怀有敬意。</p>
+
+<p>我是从<a href="http://movie.douban.com/subject/1298084/">《硅谷海盗》</a>这部老片开始了解到乔布斯这个人的，查了下上映日期，竟然是我出生的第二天。那时候觉着演员挺帅啊，后来发现真人更有味道一点。<del>国内的互联网大佬们怎么不见如此气度的-,-。</del></p>
+
+<p>前天下午，和实验室的基友们一起去看了刚上映的<a href="http://movie.douban.com/subject/6877703/">《乔布斯》</a>。由于乔布斯的段子、事迹早已充斥到生活的各个角落，两个小时的观影我几乎是以一种期待下个情节的心情在审视电影的脉络：求学时代开始，Apple1 一炮打响，Apple2 大卖，Lisa 折戟，Macintosh 阻力重重，被赶出苹果，重回苹果，END。我试图将乔布斯真人带给社会的感动融入到电影的观影情绪里，但并不太奏效，电影缺了一些代入感。或许是库切的身体太壮脸太宽了的缘故，也或许是因为广电总局减掉了乔布斯和前妻的 1 分钟激情戏。</p>
+
+<p>走出 Jobs，心里没有太多涟漪。世界倒是依旧的躁动——最近又迎来了找工作的季节。于是后面的节奏是，江湖上将流传着师兄师姐们的各种牛 offer 的传说，师弟师妹们各种仰慕，筹划着如何准备明年的面试，憧憬着明年的自己，以及抱怨着帝都魔都恶劣的生存条件和充沛的机遇并存的矛盾……充满着成王败寇的腥味，和纸醉金迷的浮躁。</p>
+
+<p>理想和现实的纠缠从来就不曾停息，欲望的高低贵贱也是如此。</p>
+
+<p>一场 Jobs，告诉我们<code>connecting the dolts</code>的感动。大家所追寻的 jobs，<code>dolts</code>在哪里？</p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/09/30/jobs-and-jobs/'>http://biaobiaoqi.me/blog/2013/09/30/jobs-and-jobs/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -847,75 +887,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/09/08/java-class-loader-in-practice/">Java类加载器编程实践</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-08T00:33:00+08:00" pubdate data-updated="true">Sep 8<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/09/08/java-class-loader-in-practice/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>文本通过实现自定义类加载器，实践 Java 类加载的流程。</p>
-
-<p>阅读此文前，需要了解 Java 类加载的基本原理，参见如下两篇博文：</p>
-
-<ul>
-<li><a href="http://biaobiaoqi.me/blog/2013/09/07/java-classloader/">《Java 类加载器浅析》</a></li>
-<li><a href="http://biaobiaoqi.me/blog/2013/09/08/three-principles-of-classloader-operation/">《Java 类加载器三原则》</a></li>
-</ul>
-
-
-<p>以上博文中所提及的 Java 类加载机制，都是 Java1.2 及以后的版本，而在最早的 Java1.1 中类加载器是没有父子关系的模式的。这里将分别对 Java1.1 和 Java1.2 及以后的类加载版本进行展示。</p>
-
-<h2>Java1.1 中的实现</h2>
-
-<h3>原理介绍</h3>
-
-<p>Java1.1 的类加载机制相对单一，用户自定义加载器的重写比较复杂。</p>
-
-<p>主要需要重写加载器中的 Class loadClass(String name)方法。</p>
-
-<p>Class loadClass(String name)或 loadClass(String name , boolean resolve)方法是加载的核心。它根据类的全名（比如 String 类的全名是 java.lang.String）获得对应类的二进制数据，然后通过 Class defineClass(byte[] b) 将二进制数据加载到 JVM 的方法区，并返回对应类的 Class 实例，然后根据可选的参数 resolve 决定是否需要现在解析这个类。最后将这个 Class 实例作为 loadClass 方法的返回值。</p>
-
-<p>如果无法加载和 defineClass，即无法通过本加载器直接加载类的情况，则使用 Class findSystemClass(String name) 将类加载任务委派给系统类加载器查找。如果能找到则加载，否则抛出 ClassNotFoundException 异常。</p>
-
-<h3>编程实例</h3>
-
-<p>以下用实例来展示这一过程：</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/09/08/java-class-loader-in-practice/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -937,14 +908,14 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <a style="font-size: 135%" href="/tags/hadoop/">hadoop</a> &nbsp 
 <a style="font-size: 177%" href="/tags/java/">java</a> &nbsp 
 <a style="font-size: 167%" href="/tags/jvm/">jvm</a> &nbsp 
-<a style="font-size: 115%" href="/tags/life/">life</a> &nbsp 
+<a style="font-size: 126%" href="/tags/life/">life</a> &nbsp 
 <a style="font-size: 143%" href="/tags/methodology/">methodology</a> &nbsp 
 <a style="font-size: 135%" href="/tags/network/">network</a> &nbsp 
 <a style="font-size: 126%" href="/tags/octopress/">octopress</a> &nbsp 
 <a style="font-size: 115%" href="/tags/os/">os</a> &nbsp 
 <a style="font-size: 174%" href="/tags/pat/">pat</a> &nbsp 
 <a style="font-size: 115%" href="/tags/software-engineering/">software_engineering</a> &nbsp 
-<a style="font-size: 167%" href="/tags/think/">think</a>
+<a style="font-size: 171%" href="/tags/think/">think</a>
 
   </ul>
 </section>

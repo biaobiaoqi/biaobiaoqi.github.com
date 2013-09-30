@@ -4,7 +4,7 @@
   <title><![CDATA[Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.me/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.me/"/>
-  <updated>2013-09-22T23:15:13+08:00</updated>
+  <updated>2013-09-30T12:53:51+08:00</updated>
   <id>http://biaobiaoqi.me/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -12,6 +12,28 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Jobs和jobs]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/09/30/jobs-and-jobs/"/>
+    <updated>2013-09-30T11:41:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/09/30/jobs-and-jobs</id>
+    <content type="html"><![CDATA[<p>作为一个不太安分的技术男，或多或少会对乔布斯怀有敬意。</p>
+
+<p>我是从<a href="http://movie.douban.com/subject/1298084/">《硅谷海盗》</a>这部老片开始了解到乔布斯这个人的，查了下上映日期，竟然是我出生的第二天。那时候觉着演员挺帅啊，后来发现真人更有味道一点。<del>国内的互联网大佬们怎么不见如此气度的-,-。</del></p>
+
+<p>前天下午，和实验室的基友们一起去看了刚上映的<a href="http://movie.douban.com/subject/6877703/">《乔布斯》</a>。由于乔布斯的段子、事迹早已充斥到生活的各个角落，两个小时的观影我几乎是以一种期待下个情节的心情在审视电影的脉络：求学时代开始，Apple1 一炮打响，Apple2 大卖，Lisa 折戟，Macintosh 阻力重重，被赶出苹果，重回苹果，END。我试图将乔布斯真人带给社会的感动融入到电影的观影情绪里，但并不太奏效，电影缺了一些代入感。或许是库切的身体太壮脸太宽了的缘故，也或许是因为广电总局减掉了乔布斯和前妻的 1 分钟激情戏。</p>
+
+<p>走出 Jobs，心里没有太多涟漪。世界倒是依旧的躁动——最近又迎来了找工作的季节。于是后面的节奏是，江湖上将流传着师兄师姐们的各种牛 offer 的传说，师弟师妹们各种仰慕，筹划着如何准备明年的面试，憧憬着明年的自己，以及抱怨着帝都魔都恶劣的生存条件和充沛的机遇并存的矛盾……充满着成王败寇的腥味，和纸醉金迷的浮躁。</p>
+
+<p>理想和现实的纠缠从来就不曾停息，欲望的高低贵贱也是如此。</p>
+
+<p>一场 Jobs，告诉我们<code>connecting the dolts</code>的感动。大家所追寻的 jobs，<code>dolts</code>在哪里？</p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/09/30/jobs-and-jobs/'>http://biaobiaoqi.me/blog/2013/09/30/jobs-and-jobs/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Java类、实例的初始化顺序]]></title>
@@ -2934,171 +2956,6 @@ I think we will make it open source and put the game into the market finally, bu
 <p>由于非负整数非常大，不可使用 longlong 甚至精确度不高的 double，当做字符串来处理。</p>
 
 <p>需要注意的一点是对值为 0 的情况的处理。比如 0 在有效位数为 3 下的表达为:<code>0.00*10^0</code><p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/08/01/pat-1051-1060-solutions/'>http://biaobiaoqi.me/blog/2013/08/01/pat-1051-1060-solutions/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[PAT 1041-1050 题解]]></title>
-    <link href="http://biaobiaoqi.me/blog/2013/08/01/pat-1041-1050-solutions/"/>
-    <updated>2013-08-01T01:43:00+08:00</updated>
-    <id>http://biaobiaoqi.me/blog/2013/08/01/pat-1041-1050-solutions</id>
-    <content type="html"><![CDATA[<p>浏览全部代码：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
-
-<p>本文谨代表个人思路，欢迎讨论;)</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1041">1041. Be Unique (20)</a></h2>
-
-<h5>题意</h5>
-
-<p>给出 N (&lt;=105)个数（数值范围为 [1, 10<sup>4]），找到其中不重复的第一个数字。比如给出</sup> <code>5 31 5 88 67 88 17</code> ， 答案是 <code>31</code> 。</p>
-
-<h5>分析</h5>
-
-<p>简单模拟题，开一个大数组<code>int a[10001];</code>，以读入的数为下标，记录 count:<code>a[index] ++;</code>。结果输出第一个存储为 1 的下标:<code>if (a[index] == 1)</code>。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1042">1042. Shuffling Machine (20)</a></h2>
-
-<h5>题意</h5>
-
-<p>背景是洗牌机的洗牌过程。过程是给定洗牌的每张牌的位置替换序列，由原来的次序算出最后的牌的平排列。</p>
-
-<p>比如原有的次序为<code>S3, H5, C1, D13, J2</code>，
-给定的洗牌顺序为<code>4, 2, 5 ,3 ,1</code>，那么一次洗牌的结果为：<code>J2, H5, D13, S3, C1</code>。
-如果需要两次洗牌，则结果为<code>C1, H5, S3, J2, D13</code>。</p>
-
-<p>输入为对一整副牌（54 张）的洗牌策略，以及洗牌次数 N，要求计算出最后的洗牌结果。</p>
-
-<h5>分析</h5>
-
-<p>简单 hash 题。</p>
-
-<!--more-->
-
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1043">1043. Is It a Binary Search Tree (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>二叉搜索树的定义就不重复了，题目新定义了一个镜像二叉搜索树，就是将一颗二叉搜索树所有节点的左右子树交换后的二叉树。</p>
-
-<p>输入是一个二叉树的前序排列，要求判定是否是一个二叉搜索树或者镜像二叉搜索树。如果是，输出该树后序遍历的序列。</p>
-
-<h5>分析</h5>
-
-<p>解题思路：</p>
-
-<ul>
-<li>1.BST 很特殊，实质上 BST 的所有节点的顺序排列就是中序遍历了。</li>
-<li>2.要检查树是否是 BST 或者镜像 BST，只需按照重建树的思路，在每次重建的过程中做适当检查即可。检查思路是：检查前序遍历序列中，根节点之后的节点排序是否符合 BST 的二分规则（即前一段都是小于根节点的，后一段都是大于根节点的）。</li>
-<li>3.最后的输出是后序遍历。过程中其实并不用构建整个树，直接在处理过程中，按后序的方式存储节点到队列中即可。</li>
-</ul>
-
-
-<p>更多相关分析，参见博文<a href="../../../../2013/04/27/pat1020-pat1043-rebuild-binary-tree/">《根据前中后序和层序重建二叉树》</a>。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1044">1044. Shopping in Mars (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>火星人购物使用钻石链，每颗钻石都有一定的价值。付款是，要求从钻石链上找到所有刚好能匹配到商品价值的连续的钻石子链，如果没有，
-则找到超过商品价值的最小的钻石子链。</p>
-
-<p>比如钻石链为<code>3 2 1 5 4 6 8 7</code>，商品价值为<code>15</code>，则候选的方案有：第 4 到第 6 颗的子链<code>5 4 6</code>，第 7 到第 8 颗：<code>8 7</code>。</p>
-
-<p>输入为一个钻石链以及商品的价值，要求找到所有满足条件的分割方案，按起始点从小到大排序输出。</p>
-
-<h5>分析</h5>
-
-<p>由于时间限制有些严格，需要做足够的优化：</p>
-
-<ul>
-<li>1.为了便于计算某个区间的累加值，在存储钻石串时，可以在<code>index</code>位置存储包括当前钻石在内的之前所有钻石价值的累加和。</li>
-<li>2.使用两层循环遍历所有可能，在遍历以位置 i 为其实坐标的子串时，不应该将结束位置初始化为 i，而是应该是以<code>i-1</code>为起始位置的搜索过程中的 break 时的
-结束位置的下标减 1.</li>
-</ul>
-
-
-<p>其中第 2 条的证明如下：</p>
-
-<p>算法中首先计算以<code>i</code>为起始位置的子串的累加值。假定计算到<code>j</code>满足累加值等于或者刚好大于商品价值<code>m</code>。之后，结束以<code>i</code>位置开始的子串的探寻，进入下一阶段以 i+1 为起始位置的搜索。
-由于<code>[i, j]</code>的累加和刚好等于<code>m</code>，则<code>[i, j - 1]</code>的累加和肯定小于<code>m</code>，那么<code>[i + 1, j - 1]</code>的累加和也肯定小于<code>m</code>。</p>
-
-<p>综上述，在以<code>i+1</code>为起始位置的搜索中，可以初始化结束位置为上一次搜索结束的位置减一，即<code>j - 1</code>.</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1045">1045. Favorite Color Stripe (30)</a></h2>
-
-<h5>题意</h5>
-
-<p>Eva 对彩色条有特殊的癖好，对于一条五颜六色的彩带，她会减掉其中一些颜色块，让整个彩带的颜色顺序匹配到自己的一个颜色喜好顺序上。</p>
-
-<p>举例来说，她喜欢的颜色顺序为{2 3 1 5 6}，给定的彩带的颜色顺序为{2 2 4 1 5 5 6 3 1 1 5 6}，那么经过她的剪辑，留下的彩带的可能选项有：{2 2 1 1 1 5 6}
-{2 2 1 5 5 5 6}，{2 2 1 5 5 6 6}和{2 2 3 1 1 5 6}。</p>
-
-<p>我们的任务是找到其中最长的剪辑可能。</p>
-
-<h5>分析</h5>
-
-<p>这是经典的最长递增子序列问题(LIS)，递增在这里体现为子序列的颜色顺序要遵照 Eva 的对颜色的喜好顺序。使用动态规划解决。</p>
-
-<ul>
-<li>1.剔除不在 Eva 喜欢颜色列表中的颜色。</li>
-<li>2.DP 的状态： 用<code>length[max]</code>数组存储状态，<code>length[i]</code>表示到彩带的第 i 个位置为止，包含该颜色的符合 Eva 喜好顺序的子串长度的最长值。记得在每次</li>
-<li>3.DP 的子问题：<code>length[i]</code>等于在其之前的所有<code>lengths[j]</code>跟<code>i</code>位置颜色组合后的最长子串值。</li>
-</ul>
-
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1046">1046. Shortest Distance (20)</a></h2>
-
-<h5>题意</h5>
-
-<p>给定在圆环上的几个点的相对位置，要求计算不同点之间的距离。</p>
-
-<h5>分析</h5>
-
-<p>简单模拟。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1047">1047. Student List for Course (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>根据每名学生填报的课程，按顺序输出每门课程的学生名单。其中学生总量为 N(&lt;=40000)，课程总量为 K(&lt;=2500)。学生姓名为 3 个大写英文字符加一个数字。</p>
-
-<h5>分析</h5>
-
-<p>倒排索引的模拟。可以针对学生姓名做 hash 方式的优化。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1048">1048. Find Coins (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>给定一系列硬币，以及一个商品的价格。要求从硬币中找到两个硬币让他们的组合等于商品的价格。如果有多个，输出有用最小单个值的硬币组合。</p>
-
-<h5>分析</h5>
-
-<p>首先，硬币中币值不小于商品价格的可以过滤掉。遍历过程中，使用 hash 标记的方法，设定一个<code>coins[MAXVALUE]</code>（其中 MAXVALUE 为商品价格的最大值）记录已有的币值种类，
-在遍历的过程中，一边将读入的硬币增加到<code>coins[]</code>中，一边计算满足条件的最小币值。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1049">1049. Counting Ones (30)</a></h2>
-
-<h5>题意</h5>
-
-<p>给定一个正整数 N(&lt;=2<sup>30)，要求计算所有小于</sup> N 的正整数的各个位置上，1 出现的次数之和。</p>
-
-<h5>分析</h5>
-
-<p>比较有思维难度的一题，核心在于找规律。10ms 的时间限制表明了不能用常规的循环遍历来解决。需要从简单的 case 找规律，逐步扩大到常规的情况。</p>
-
-<p>详情参见《编程之美》P132 页《1 的数目》。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1050">1050. String Subtraction (20)</a></h2>
-
-<h5>题意</h5>
-
-<p>给定两个字符串，S1 和 S2,要求将 S2 中的字符从 S1 串中剔除。</p>
-
-<h5>分析</h5>
-
-<p>用 Hash 的方式标记需要剔除的字符。<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/08/01/pat-1041-1050-solutions/'>http://biaobiaoqi.me/blog/2013/08/01/pat-1041-1050-solutions/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
 ]]></content>
   </entry>
   

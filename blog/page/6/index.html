@@ -9,7 +9,7 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="背景 《二叉树的遍历（递归、非递归）分析》总结了二叉树不同遍历方式的递归和非递归实现，本文则讨论如何针对不同遍历方式的组合重建二叉树。为了简化问题的考虑，假定二叉树中不会出现重复值。列入考虑范围的有前序、中序、后序、层序遍历这四种的组合。前中后序比较常见，而层序则相对特殊一点了。 PAT 的 &hellip;">
+  <meta name="description" content="本文介绍三种虚拟机中常用的网络配置模式：NAT(网络地址转换模式)、Bridged nerworking（桥接网络模式）和 Host-only（主机模式）。 Network Address Translation (NAT) NAT 模式使用了 NAT 服务来给虚拟网络提供网络连接。 这种模式下， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -106,6 +106,55 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/09/networking-in-virtual-machine/">虚拟机中的网络配置</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-09T22:39:00+08:00" pubdate data-updated="true">May 9<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/05/09/networking-in-virtual-machine/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>本文介绍三种虚拟机中常用的网络配置模式：NAT(网络地址转换模式)、Bridged nerworking（桥接网络模式）和 Host-only（主机模式）。</p>
+
+<h3>Network Address Translation (NAT)</h3>
+
+<p>NAT 模式使用了 <a href="http://zh.wikipedia.org/wiki/%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2">NAT</a> 服务来给虚拟网络提供网络连接。</p>
+
+<p>这种模式下，虚拟机能访问外部网络，外部无法直接连接到内部网络，除非使用端口映射 <a href="http://nxlhero.blog.51cto.com/962631/742140">port forwarding</a>。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/05/09/networking-in-virtual-machine/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -542,55 +591,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/04/05/tong-bing-kuai-le-zhe/">《痛并快乐着》</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-05T02:30:00+08:00" pubdate data-updated="true">Apr 5<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/04/05/tong-bing-kuai-le-zhe/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>儿时没烙印下的痛与快乐</h2>
-
-<p><img class="left" src="http://img3.douban.com/lpic/s4599357.jpg" width="150" height="250" title="Place Kitten #2" ></p>
-
-<p>这是一本让我内心平静的书。或许是因为他所讲，都是那十年来有亲身经历到过的。</p>
-
-<p>《痛并快乐着》有二十来篇文章，每篇一个主题。所有的主题都围着个人在中国二十世纪后十年中的发展和社会的变迁中展开。文中，描述了白岩松如何从大学毕业后，几经波折获得了一个并非自己当初所想的工作，又如何在计划之外的点点滴滴中，将人生的珠子穿成了一根线。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/04/05/tong-bing-kuai-le-zhe/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/7/">&larr; Older</a>
@@ -614,14 +614,14 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <a style="font-size: 135%" href="/tags/hadoop/">hadoop</a> &nbsp 
 <a style="font-size: 177%" href="/tags/java/">java</a> &nbsp 
 <a style="font-size: 167%" href="/tags/jvm/">jvm</a> &nbsp 
-<a style="font-size: 115%" href="/tags/life/">life</a> &nbsp 
+<a style="font-size: 126%" href="/tags/life/">life</a> &nbsp 
 <a style="font-size: 143%" href="/tags/methodology/">methodology</a> &nbsp 
 <a style="font-size: 135%" href="/tags/network/">network</a> &nbsp 
 <a style="font-size: 126%" href="/tags/octopress/">octopress</a> &nbsp 
 <a style="font-size: 115%" href="/tags/os/">os</a> &nbsp 
 <a style="font-size: 174%" href="/tags/pat/">pat</a> &nbsp 
 <a style="font-size: 115%" href="/tags/software-engineering/">software_engineering</a> &nbsp 
-<a style="font-size: 167%" href="/tags/think/">think</a>
+<a style="font-size: 171%" href="/tags/think/">think</a>
 
   </ul>
 </section>
