@@ -9,7 +9,10 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="本文介绍三种虚拟机中常用的网络配置模式：NAT(网络地址转换模式)、Bridged nerworking（桥接网络模式）和 Host-only（主机模式）。 Network Address Translation (NAT) NAT 模式使用了 NAT 服务来给虚拟网络提供网络连接。 这种模式下， &hellip;">
+  <meta name="description" content="背景 之前的时间里对 Hadoop 的使用都是基于学长所搭建起的实验环境的，没有完整的自己部署和维护过，最近抽时间初体验了在集群环境下装机、配置、运行的全过程，梳理总结到本文中。 配置 内存:8G
+CPU：i5-2400 3.1GHz；
+硬盘：960G
+系统：windows 7 旗舰 64bits ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -106,6 +109,61 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/12/touch-hadoop/">全分布式的Hadoop初体验</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-12T00:26:00+08:00" pubdate data-updated="true">May 12<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/05/12/touch-hadoop/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>背景</h2>
+
+<p>之前的时间里对 Hadoop 的使用都是基于学长所搭建起的实验环境的，没有完整的自己部署和维护过，最近抽时间初体验了在集群环境下装机、配置、运行的全过程，梳理总结到本文中。</p>
+
+<h2>配置</h2>
+
+<ul>
+<li>内存:8G</li>
+<li>CPU：i5-2400 3.1GHz；</li>
+<li>硬盘：960G</li>
+<li>系统：windows 7 旗舰 64bits</li>
+</ul>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/05/12/touch-hadoop/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -542,55 +600,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/04/05/maximum-subsequence-sum/">分治、时间空间的权衡:最大合的连续字串问题</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-05T20:16:00+08:00" pubdate data-updated="true">Apr 5<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/04/05/maximum-subsequence-sum/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1007">PAT1007</a>：给定一个整数串，找出连续子串中合最大的子串。</p>
-
-<p>《编程珠玑》中用专门的一章对这个问题进行了讲解。（《编程珠玑（第 2 版）》P73 第 8 章 算法设计技术）</p>
-
-<p>第一次在 PAT 上遇到这个题目时，我的思路如下：</p>
-
-<p><del>最简单的淡然是一个三层循环咯，O(n3)，肯定会超时。节省时间的话，用动态规划吧。但简单的动态规划，显然是会超出内存限制的。有没有更巧妙的子问题划分方法呢？</del>先找到子问题：因为要求的串必须连续，分治的时候需要考虑如何延续这个连续性，那么每个子问题中就得考虑找出三个串：1.即左端连续的最大串，2.右端连续的最大串，3.整个串中的最大串.<del>由于每个问题都有三个量要维护，难道我得造出三个表来？卡主:(</del></p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/04/05/maximum-subsequence-sum/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/7/">&larr; Older</a>
@@ -608,20 +617,20 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
  <br /> 
   <ul class="tag-cloud">
     <a style="font-size: 180%" href="/tags/algorithm/">algorithm</a> &nbsp 
-<a style="font-size: 164%" href="/tags/bytecode/">bytecode</a> &nbsp 
-<a style="font-size: 115%" href="/tags/diary/">diary</a> &nbsp 
-<a style="font-size: 167%" href="/tags/distributed/">distributed</a> &nbsp 
-<a style="font-size: 135%" href="/tags/hadoop/">hadoop</a> &nbsp 
-<a style="font-size: 177%" href="/tags/java/">java</a> &nbsp 
-<a style="font-size: 167%" href="/tags/jvm/">jvm</a> &nbsp 
-<a style="font-size: 126%" href="/tags/life/">life</a> &nbsp 
-<a style="font-size: 143%" href="/tags/methodology/">methodology</a> &nbsp 
-<a style="font-size: 135%" href="/tags/network/">network</a> &nbsp 
-<a style="font-size: 126%" href="/tags/octopress/">octopress</a> &nbsp 
-<a style="font-size: 115%" href="/tags/os/">os</a> &nbsp 
-<a style="font-size: 174%" href="/tags/pat/">pat</a> &nbsp 
-<a style="font-size: 115%" href="/tags/software-engineering/">software_engineering</a> &nbsp 
-<a style="font-size: 171%" href="/tags/think/">think</a>
+<a style="font-size: 161%" href="/tags/bytecode/">bytecode</a> &nbsp 
+<a style="font-size: 114%" href="/tags/diary/">diary</a> &nbsp 
+<a style="font-size: 165%" href="/tags/distributed/">distributed</a> &nbsp 
+<a style="font-size: 134%" href="/tags/hadoop/">hadoop</a> &nbsp 
+<a style="font-size: 175%" href="/tags/java/">java</a> &nbsp 
+<a style="font-size: 165%" href="/tags/jvm/">jvm</a> &nbsp 
+<a style="font-size: 125%" href="/tags/life/">life</a> &nbsp 
+<a style="font-size: 147%" href="/tags/methodology/">methodology</a> &nbsp 
+<a style="font-size: 134%" href="/tags/network/">network</a> &nbsp 
+<a style="font-size: 125%" href="/tags/octopress/">octopress</a> &nbsp 
+<a style="font-size: 114%" href="/tags/os/">os</a> &nbsp 
+<a style="font-size: 172%" href="/tags/pat/">pat</a> &nbsp 
+<a style="font-size: 114%" href="/tags/software-engineering/">software_engineering</a> &nbsp 
+<a style="font-size: 169%" href="/tags/think/">think</a>
 
   </ul>
 </section>
