@@ -293,9 +293,36 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
   <div class="entry-content"><h2>背景</h2>
 
-<p>二叉树是一种很基本的数据结构。很多地方能看到它的身影，比如大名鼎鼎的霍夫曼编码（好了，别问我再比如了，见识浅薄，真不知道更多了。。。）它的结构很简洁、巧妙。</p>
+<p>本文讨论二叉树的常见遍历方式的代码(Java)实现，包括前序(preorder)、中序(inorder)、后序(postorder)、层序(level order)，进一步考虑递归和非递归的实现方式。</p>
 
-<p>本文讨论二叉树的常见遍历方式的代码实现（这里贴出的是 Java），包括前序(preorder)、中序(inorder)、后序(postorder)、层序(level order)，进一步，考虑递归和非递归的实现方式。递归方法的实现相对简单，但递归的执行方式由于每次都会产生一个新的方法调用栈，如果递归层级较深，会消耗较大的内存，转化为非递归则没那么简单了，往往需要实现一个栈来保存状态信息。</p>
+<p>递归的实现方法相对简单，但由于递归的执行方式每次都会产生一个新的方法调用栈，如果递归层级较深，会造成较大的内存开销，相比之下，非递归的方式则可以避免这个问题。递归遍历容易实现，非递归则没那么简单，非递归调用本质上是通过维护一个栈，模拟递归调用的方法调用栈的行为。</p>
+
+<p>在此之前，先简单定义节点的数据结构：</p>
+
+<p>二叉树节点最多只有两个儿子，并保存一个节点的值，为了实验的方便，假定它为 int。同时，我们直接使用 Java 的 System.out.print 方法来输出节点值，以显示遍历结果。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Node</span> <span class="o">{</span>
+</span><span class='line'>      <span class="kd">public</span> <span class="kt">int</span> <span class="n">value</span><span class="o">;</span>
+</span><span class='line'>      <span class="kd">public</span> <span class="n">Node</span> <span class="n">leftNode</span><span class="o">;</span>
+</span><span class='line'>      <span class="kd">public</span> <span class="n">Node</span> <span class="n">rightNode</span><span class="o">;</span>
+</span><span class='line'>      
+</span><span class='line'>      <span class="kd">public</span> <span class="nf">Node</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>          <span class="n">value</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>  <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>详细代码参见链接:<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/algorithm/basics/tree/BinarySearchTree.java">BST 及其各种便利的详细实现代码</a></p>
 
 </div>
   

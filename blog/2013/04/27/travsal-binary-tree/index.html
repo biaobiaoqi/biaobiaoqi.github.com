@@ -9,7 +9,7 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="本文讨论二叉树的常见遍历方式的代码实现（这里贴出的是Java），包括前序(preorder)、中序(inorder)、后序(postorder)、层序(level order)，进一步，考虑递归和非递归的实现方式。递归方法的实现相对简单，但递归的执行方式由于每次都会产生一个新的方法调用栈， &hellip;">
+  <meta name="description" content="二叉树，递归，非递归，中序遍历，前序遍历，后序遍历">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -136,18 +136,15 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <div class="entry-content"><h2>背景</h2>
 
-<p>二叉树是一种很基本的数据结构。很多地方能看到它的身影，比如大名鼎鼎的霍夫曼编码（好了，别问我再比如了，见识浅薄，真不知道更多了。。。）它的结构很简洁、巧妙。</p>
+<p>本文讨论二叉树的常见遍历方式的代码(Java)实现，包括前序(preorder)、中序(inorder)、后序(postorder)、层序(level order)，进一步考虑递归和非递归的实现方式。</p>
 
-<p>本文讨论二叉树的常见遍历方式的代码实现（这里贴出的是 Java），包括前序(preorder)、中序(inorder)、后序(postorder)、层序(level order)，进一步，考虑递归和非递归的实现方式。递归方法的实现相对简单，但递归的执行方式由于每次都会产生一个新的方法调用栈，如果递归层级较深，会消耗较大的内存，转化为非递归则没那么简单了，往往需要实现一个栈来保存状态信息。</p>
-
-<!--more-->
-
+<p>递归的实现方法相对简单，但由于递归的执行方式每次都会产生一个新的方法调用栈，如果递归层级较深，会造成较大的内存开销，相比之下，非递归的方式则可以避免这个问题。递归遍历容易实现，非递归则没那么简单，非递归调用本质上是通过维护一个栈，模拟递归调用的方法调用栈的行为。</p>
 
 <p>在此之前，先简单定义节点的数据结构：</p>
 
 <p>二叉树节点最多只有两个儿子，并保存一个节点的值，为了实验的方便，假定它为 int。同时，我们直接使用 Java 的 System.out.print 方法来输出节点值，以显示遍历结果。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -156,56 +153,51 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>public class Node {
-</span><span class='line'>      public int value;
-</span><span class='line'>      public Node leftNode;
-</span><span class='line'>      public Node rightNode;
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Node</span> <span class="o">{</span>
+</span><span class='line'>      <span class="kd">public</span> <span class="kt">int</span> <span class="n">value</span><span class="o">;</span>
+</span><span class='line'>      <span class="kd">public</span> <span class="n">Node</span> <span class="n">leftNode</span><span class="o">;</span>
+</span><span class='line'>      <span class="kd">public</span> <span class="n">Node</span> <span class="n">rightNode</span><span class="o">;</span>
 </span><span class='line'>      
-</span><span class='line'>      public Node(int i) {
-</span><span class='line'>          value = i;
-</span><span class='line'>      }
-</span><span class='line'>  }</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>      <span class="kd">public</span> <span class="nf">Node</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>          <span class="n">value</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>  <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-<p>详细代码参见链接:<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/algorithm/tree/BinarySearchTree.java">BST 及其各种便利的详细实现代码</a></p>
+<p>详细代码参见链接:<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/algorithm/basics/tree/BinarySearchTree.java">BST 及其各种便利的详细实现代码</a></p>
+
+<!--more-->
+
 
 <h2>前序遍历</h2>
 
-<ul>
-<li>递归实现：递归实现很简单，在每次访问到某个节点时，先输出节点值，然后再依次递归的对左儿子、右儿子调用遍历的方法。代码如下</li>
-</ul>
+<h4>递归实现</h4>
 
+<p>递归实现很简单，在每次访问到某个节点时，先输出节点值，然后再依次递归的对左儿子、右儿子调用遍历的方法。代码如下</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>public void preOrderTrav(Node n) {
-</span><span class='line'>  if (n != null) {
-</span><span class='line'>      System.out.print(n.value + " ");
-</span><span class='line'>      preOrderTrav(n.leftNode);
-</span><span class='line'>      preOrderTrav(n.rightNode);
-</span><span class='line'>  }
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">preOrderTrav</span><span class="o">(</span><span class="n">Node</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">value</span> <span class="o">+</span> <span class="s">&quot; &quot;</span><span class="o">);</span>
+</span><span class='line'>      <span class="n">preOrderTrav</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">leftNode</span><span class="o">);</span>
+</span><span class='line'>      <span class="n">preOrderTrav</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">rightNode</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-<ul>
-<li>非递归调实现：</li>
-</ul>
+<h4>非递归调实现</h4>
 
+<h5>方法 1</h5>
 
-<p>1.第一种实现方式相对容易理解：</p>
-
-<p>初始：维护一个栈，将根节点压入栈中。</p>
-
-<p>循环：每次从栈顶读出一个节点信息，直接将节点值<strong>输出</strong>，同时将儿子节点按从左到右的顺序推到栈顶。</p>
-
-<p>分析：跟递归调用的整体思路一样，不同的是，递归调用时是利用运行时系统所维护的程序调用栈来维护顺序，而这个非递归方法是用过自己维护的栈来保存信息。如此节省了调用栈的空间。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -217,128 +209,34 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
 <span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>public void preOrderTravNoRecur(Node n) {
-</span><span class='line'>  Stack&lt;Node&gt; stack = new Stack&lt;Node&gt;();
-</span><span class='line'>  stack.add(root);
-</span><span class='line'>  while (!stack.empty()) {
-</span><span class='line'>      Node t = stack.pop();
-</span><span class='line'>      System.out.print(t.value + " ");
-</span><span class='line'>      if (t.rightNode != null)
-</span><span class='line'>          stack.add(t.rightNode);
-</span><span class='line'>      if (t.leftNode != null)
-</span><span class='line'>          stack.add(t.leftNode);
-</span><span class='line'>  }
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<p>2.第二种实现方式更普遍（中序遍历的非递归使用了同样的思路）：</p>
-
-<p>初始：维护一个栈 S 和一个节点变量 N。节点变量赋值为根节点。</p>
-
-<p>循环：将节点变量 N 的左儿子循环的<strong>输出</strong>，并推入栈 S 中，直到没有左儿子；推出栈 S 的顶节点，节点变量 N 赋值为栈 S 顶节点的右节点。</p>
-
-<p>分析：不同于递归调用的思路。栈 S 用于实现对某节点的左边支递归值的存储，以便回溯；节点变量 N 则用于遍历某节点的右边枝（这些节点是从栈 S 顶读出的节点，依次做处理），由于右边枝是最后才会被访问到的，故在处理右边枝的时候，不需要存储右边枝的信息，依次处理即可。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>public void preOrderTravNoRecurII(Node n) {
-</span><span class='line'>  System.out.println("No Recursive: ");
-</span><span class='line'>  Stack&lt;Node&gt; s = new Stack&lt;Node&gt;();
-</span><span class='line'>  while (n != null | !s.empty()){
-</span><span class='line'>      while (n!=null ){
-</span><span class='line'>          System.out.print(n.value + " ");
-</span><span class='line'>          s.add(n);
-</span><span class='line'>          n = n.leftNode;
-</span><span class='line'>      }
-</span><span class='line'>      n = s.pop();
-</span><span class='line'>      n = n.rightNode;
-</span><span class='line'>  }
-</span><span class='line'>  System.out.println();
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>中序遍历</h3>
-
-<ul>
-<li>递归实现</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>public void inorderTrav(Node n) {
-</span><span class='line'>  if (n != null) {
-</span><span class='line'>      inorderTrav(n.leftNode);
-</span><span class='line'>      System.out.print(n.value + " ");
-</span><span class='line'>      inorderTrav(n.rightNode);
-</span><span class='line'>  }
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">preOrderTravNoRecur</span><span class="o">(</span><span class="n">Node</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;</span> <span class="n">stack</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;();</span>
+</span><span class='line'>  <span class="n">stack</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">root</span><span class="o">);</span>
+</span><span class='line'>  <span class="k">while</span> <span class="o">(!</span><span class="n">stack</span><span class="o">.</span><span class="na">empty</span><span class="o">())</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">Node</span> <span class="n">t</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="na">pop</span><span class="o">();</span>
+</span><span class='line'>      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">t</span><span class="o">.</span><span class="na">value</span> <span class="o">+</span> <span class="s">&quot; &quot;</span><span class="o">);</span>
+</span><span class='line'>      <span class="k">if</span> <span class="o">(</span><span class="n">t</span><span class="o">.</span><span class="na">rightNode</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+</span><span class='line'>          <span class="n">stack</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">t</span><span class="o">.</span><span class="na">rightNode</span><span class="o">);</span>
+</span><span class='line'>      <span class="k">if</span> <span class="o">(</span><span class="n">t</span><span class="o">.</span><span class="na">leftNode</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+</span><span class='line'>          <span class="n">stack</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">t</span><span class="o">.</span><span class="na">leftNode</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <ul>
-<li>非递归实现</li>
+<li><p>描述</p>
+
+<p>  维护一个栈，将根节点压入栈中。此后，每次从栈中读出栈顶的节点，作为对节点的访问，然后将该节点的儿子节点按照先右后左的顺序，压入栈中，实现递归模拟。</p></li>
+<li><p>分析</p>
+
+<p>  这个栈的递归策略不具备很好的扩展性，其他的遍历方式无法使用这种策略。实际上，它并不是对程序调用栈的模拟，而是针对先序遍历的特殊实现：先序遍历先对当前节点做出访问后，然后递归的调用对儿子节点的遍历，不需要在对儿子节点遍历结束后再回过头来处理当前节点。于是模拟的递归中也不需要存储之前的调用栈信息，只需要类似的生成一个未来的儿子节点的访问计划即可。</p></li>
 </ul>
 
 
-<p>初始：维护一个栈 S 和一个节点变量 N。节点变量赋值为根节点。</p>
+<h5>方法 2</h5>
 
-<p>循环：将节点变量 N 的左儿子循环的<strong>输出</strong>，并推入栈 S 中，直到没有左儿子；节点变量 N 赋值为栈 S 顶节点的右节点。</p>
-
-<p>分析：跟前序遍历的非递归实现方法二很类似。唯一的不同是输出的时机不同：前序遍历在入栈时输出，而中序遍历在出栈时输出。可以跟深刻的理解到，栈在这里是为了回溯而存在的。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>public void inorderTravNoRecu(Node n) {
-</span><span class='line'>  System.out.println("No Recursive: ");
-</span><span class='line'>  Stack&lt;Node&gt; s = new Stack&lt;Node&gt;();
-</span><span class='line'>  while (n != null | !s.empty()){
-</span><span class='line'>      while (n!=null ){
-</span><span class='line'>          s.add(n);
-</span><span class='line'>          n = n.leftNode;
-</span><span class='line'>      }
-</span><span class='line'>      n = s.pop();
-</span><span class='line'>      System.out.print(n.value + " ");
-</span><span class='line'>      n = n.rightNode;
-</span><span class='line'>  }
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>后序遍历</h3>
-
-<ul>
-<li>递归实现</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -352,36 +250,131 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <span class='line-number'>12</span>
 <span class='line-number'>13</span>
 <span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>public void preOrderTravNoRecurII(Node n) {
-</span><span class='line'>      System.out.println("No Recursive: ");
-</span><span class='line'>      Stack&lt;Node&gt; s = new Stack&lt;Node&gt;();
-</span><span class='line'>      while (n != null | !s.empty()){
-</span><span class='line'>          while (n!=null ){
-</span><span class='line'>              System.out.print(n.value + " ");
-</span><span class='line'>              s.add(n);
-</span><span class='line'>              n = n.leftNode;
-</span><span class='line'>          }
-</span><span class='line'>          n = s.pop();
-</span><span class='line'>          
-</span><span class='line'>          n = n.rightNode;
-</span><span class='line'>      }
-</span><span class='line'>      System.out.println();
-</span><span class='line'>  }</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">preOrderTravNoRecurII</span><span class="o">(</span><span class="n">Node</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;No Recursive: &quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;();</span>
+</span><span class='line'>  <span class="k">while</span> <span class="o">(</span><span class="n">n</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">|</span> <span class="o">!</span><span class="n">s</span><span class="o">.</span><span class="na">empty</span><span class="o">()){</span>
+</span><span class='line'>      <span class="k">while</span> <span class="o">(</span><span class="n">n</span><span class="o">!=</span><span class="kc">null</span> <span class="o">){</span>
+</span><span class='line'>          <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">value</span> <span class="o">+</span> <span class="s">&quot; &quot;</span><span class="o">);</span>
+</span><span class='line'>          <span class="n">s</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">n</span><span class="o">);</span>
+</span><span class='line'>          <span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="na">leftNode</span><span class="o">;</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>      <span class="n">n</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="na">pop</span><span class="o">();</span>
+</span><span class='line'>      <span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="na">rightNode</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <ul>
-<li>非递归实现</li>
+<li><p>描述</p>
+
+<p>  1.维护一个栈 s 和一个当前节点 n。初始时将 n 赋值为根节点。</p>
+
+<p>  2.逐个访问当前节点 n 的左子链上的节点，并推入栈中，直到没有左儿子。</p>
+
+<p>  3.取出栈顶的节点，将 n 赋值为该节点的右儿子。</p>
+
+<p>  4.不断执行 2，3，直到栈为空且当前节点也为空。</p></li>
+<li><p>分析</p>
+
+<p>  该方法模拟了递归的前序遍历中程序调用栈的行为过程：在调用栈中，会不断的递归进入左儿子链中，直到没有左儿子，再进入对右儿子的处理中。与递归方法的调用栈的不同之处在于，内层 while 循环将递归方法中针对左儿子链上所有节点的递归过程集中到了一起。</p></li>
 </ul>
 
 
-<p>初始：1.维护一个栈 S、一个节点变量 N 和一个标记数组。节点变量赋值为根节点，栈暂时存储便利到的节点，标记数组用于标记栈中的节点是否已经访问过右边节点。2.将根节点的所有左儿子压入栈中。</p>
+<h2>中序遍历</h2>
 
-<p>循环：依次处理栈中节点。如果节点有右儿子，且没有被处理过（通过标记数组判定），则将右子树的根节点及其左儿子全部压入栈中；如果已经处理过或者没有右儿子，则输出并出栈。</p>
+<h4>递归实现</h4>
 
-<p>分析：与前序和中序的一个大的不同在于需要用标记数组标记节点的右子树是否已经访问过。对每个节点进行处理的时候，都保证已经处理完了左右子树（通过先压入左边儿子为主线，处理栈中的每个节点时，再压入右边儿子来实现）。</p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">inorderTrav</span><span class="o">(</span><span class="n">Node</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">inorderTrav</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">leftNode</span><span class="o">);</span>
+</span><span class='line'>      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">value</span> <span class="o">+</span> <span class="s">&quot; &quot;</span><span class="o">);</span>
+</span><span class='line'>      <span class="n">inorderTrav</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">rightNode</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+
+<h4>非递归实现</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">inorderTravNoRecu</span><span class="o">(</span><span class="n">Node</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;No Recursive: &quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;();</span>
+</span><span class='line'>  <span class="k">while</span> <span class="o">(</span><span class="n">n</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">|</span> <span class="o">!</span><span class="n">s</span><span class="o">.</span><span class="na">empty</span><span class="o">()){</span>
+</span><span class='line'>      <span class="k">while</span> <span class="o">(</span><span class="n">n</span><span class="o">!=</span><span class="kc">null</span> <span class="o">){</span>
+</span><span class='line'>          <span class="n">s</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">n</span><span class="o">);</span>
+</span><span class='line'>          <span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="na">leftNode</span><span class="o">;</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>      <span class="n">n</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="na">pop</span><span class="o">();</span>
+</span><span class='line'>      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">value</span> <span class="o">+</span> <span class="s">&quot; &quot;</span><span class="o">);</span>
+</span><span class='line'>      <span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="na">rightNode</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><p>描述</p>
+
+<p>  1.维护一个栈 s 和一个当前节点 n。初始时将 n 赋值为根节点。</p>
+
+<p>  2.将当前节点 n 的左子链上的节点逐个推入栈中，直到没有左儿子。</p>
+
+<p>  3.取出栈顶的节点，访问该节点，将 n 赋值为该节点的右儿子。</p>
+
+<p>  4.不断执行 2，3，直到栈为空且当前节点也为空。</p></li>
+<li><p>分析</p>
+
+<p>  跟前序遍历的非递归实现方法二很类似。唯一的不同是访问当前节点的时机：前序遍历在入栈前访问，而中序遍历在出栈后访问。</p></li>
+</ul>
+
+
+<h2>后序遍历</h2>
+
+<h4>递归实现</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">postOrderTrav</span><span class="o">(</span><span class="n">Node</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>          <span class="n">inorderTrav</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">leftNode</span><span class="o">);</span>
+</span><span class='line'>          <span class="n">inorderTrav</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">rightNode</span><span class="o">);</span>
+</span><span class='line'>          <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">value</span> <span class="o">+</span> <span class="s">&quot; &quot;</span><span class="o">);</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>  <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>非递归实现</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -408,54 +401,68 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <span class='line-number'>25</span>
 <span class='line-number'>26</span>
 <span class='line-number'>27</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>public void postOrderTravNoRecu(Node n) {        
-</span><span class='line'>      Stack&lt;Node&gt; stack = new Stack&lt;Node&gt;();
-</span><span class='line'>      int[] flag = new int[max];
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">postOrderTravNoRecu</span><span class="o">(</span><span class="n">Node</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>     
+</span><span class='line'>      <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;</span> <span class="n">stack</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;();</span>
+</span><span class='line'>      <span class="kt">int</span><span class="o">[]</span> <span class="n">flag</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">max</span><span class="o">];</span>
 </span><span class='line'>      
-</span><span class='line'>      while (n != null) {
-</span><span class='line'>          stack.push(n);
-</span><span class='line'>          flag[stack.size()] = 0;
-</span><span class='line'>          n = n.leftNode;
-</span><span class='line'>      }
+</span><span class='line'>      <span class="k">while</span> <span class="o">(</span><span class="n">n</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>          <span class="n">stack</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">n</span><span class="o">);</span>
+</span><span class='line'>          <span class="n">flag</span><span class="o">[</span><span class="n">stack</span><span class="o">.</span><span class="na">size</span><span class="o">()]</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span><span class='line'>          <span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="na">leftNode</span><span class="o">;</span>
+</span><span class='line'>      <span class="o">}</span>
 </span><span class='line'>      
-</span><span class='line'>      while (!stack.empty()) {
-</span><span class='line'>          n = stack.peek();
-</span><span class='line'>          while(n.rightNode != null && flag[stack.size()] == 0) {
-</span><span class='line'>              n = n.rightNode;
-</span><span class='line'>              flag[stack.size()] = 1;
-</span><span class='line'>              while (n != null) {
-</span><span class='line'>                  stack.push(n);
-</span><span class='line'>                  flag[stack.size()] = 0;
-</span><span class='line'>                  n = n.leftNode;
-</span><span class='line'>              }
-</span><span class='line'>              n = stack.peek();//TODO be careful about this
-</span><span class='line'>          }
-</span><span class='line'>          n = stack.pop();
-</span><span class='line'>          System.out.print(n.value + " ");
-</span><span class='line'>      }
+</span><span class='line'>      <span class="k">while</span> <span class="o">(!</span><span class="n">stack</span><span class="o">.</span><span class="na">empty</span><span class="o">())</span> <span class="o">{</span>
+</span><span class='line'>          <span class="n">n</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="na">peek</span><span class="o">();</span>
+</span><span class='line'>          <span class="k">if</span> <span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">rightNode</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">flag</span><span class="o">[</span><span class="n">stack</span><span class="o">.</span><span class="na">size</span><span class="o">()]</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>              <span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="na">rightNode</span><span class="o">;</span>
+</span><span class='line'>              <span class="n">flag</span><span class="o">[</span><span class="n">stack</span><span class="o">.</span><span class="na">size</span><span class="o">()]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+</span><span class='line'>              <span class="k">while</span> <span class="o">(</span><span class="n">n</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>                  <span class="n">stack</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">n</span><span class="o">);</span>
+</span><span class='line'>                  <span class="n">flag</span><span class="o">[</span><span class="n">stack</span><span class="o">.</span><span class="na">size</span><span class="o">()]</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span><span class='line'>                  <span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="na">leftNode</span><span class="o">;</span>
+</span><span class='line'>              <span class="o">}</span>
+</span><span class='line'>              <span class="n">n</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="na">peek</span><span class="o">();</span>
+</span><span class='line'>          <span class="o">}</span>
+</span><span class='line'>          <span class="n">n</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="na">pop</span><span class="o">();</span>
+</span><span class='line'>          <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">value</span> <span class="o">+</span> <span class="s">&quot; &quot;</span><span class="o">);</span>
+</span><span class='line'>      <span class="o">}</span>
 </span><span class='line'>      
-</span><span class='line'>  }</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>  <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-
-<h3>层序遍历</h3>
 
 <ul>
-<li>无法使用递归方法</li>
+<li><p>描述</p>
+
+<p>  1.维护一个栈 stack、当前节点 n 和一个标记数组 flag。将根节点的左儿子链上的所有节点压入 stack 中，并将标记数组对因为值置为 0.</p>
+
+<p>  2.将当前节点赋值为栈顶的节点。如果节点有右儿子，且没有被处理过（通过标记数组判定），则将右子树的根节点及其左儿子全部压入栈中。</p>
+
+<p>  3.将当前节点付志伟栈顶的节点，访问它，并将该节点从栈中 pop 出。</p>
+
+<p>  4.循环 2，3 两步，直到栈为空。</p></li>
+<li><p>分析</p>
+
+<p>  在非递归方法中用栈模拟程序调用栈，碰到的最大的问题就是模拟递归方法所处的状态。编码维护的栈能记录节点，但无法记录在如何处理该节点。这里使用了一个<code>flag</code>数组来记录节点的右子树是否被访问过，对每个节点进行访问的时候，都保证已经处理完了左右子树（通过先压入左边儿子链为主线，处理栈中的每个节点时，再压入右边儿子来实现）。</p></li>
 </ul>
 
 
-<p>层序遍历不同于其他的遍历。可以通过反证法证明：</p>
+<h2>层序遍历</h2>
 
-<p>如果能实现对 A 节点的层序递归，在对 A 节点处理的过程中，应该递归的对两个儿子 B 和 C 分别调用了层序遍历。在这种情况下，我们无法让 B 和 C 的同一个层级的儿子在集中的时间中被遍历到，换言之，B 的第一层儿子在对 B 的调用中被遍历，而 C 的第一层儿子，则在对 C 的调用中遍历，这是分离开的。不成立，得证。</p>
+<h4>无法使用递归方法</h4>
+
+<p>层序遍历不同于其他的遍历，无法使用递归实现。</p>
 
 <ul>
-<li>非递归方法：</li>
+<li><p>反证法证明</p>
+
+<p>  如果能实现对 A 节点的层序递归，在对 A 节点处理的过程中，应该递归的对两个儿子 B 和 C 分别调用了层序遍历。在这种情况下，我们无法让 B 和 C 的同一个层级的儿子在集中的时间中被遍历到，换言之，B 的第一层儿子在对 B 的调用中被遍历，而 C 的第一层儿子，则在对 C 的调用中遍历，这是分离开的。不成立，得证。</p></li>
 </ul>
 
 
-<p>分析：此方法类似于前序遍历的非递归方法的第一种。用一个队列维护信息。</p>
+<h4>非递归方法</h4>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -470,28 +477,34 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <span class='line-number'>13</span>
 <span class='line-number'>14</span>
 <span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>public void levelOrderTrav(Node n) {
-</span><span class='line'>  System.out.print("Level OrderTrav: ");
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">levelOrderTrav</span><span class="o">(</span><span class="n">Node</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&quot;Level OrderTrav: &quot;</span><span class="o">);</span>
 </span><span class='line'>  
-</span><span class='line'>  Queue&lt;Node&gt; q = new LinkedList&lt;Node&gt;();
-</span><span class='line'>  q.add(n);
-</span><span class='line'>  while (q.size() != 0) {
-</span><span class='line'>      n = q.poll();
-</span><span class='line'>      System.out.print(" " + n.value);
-</span><span class='line'>      if (n.leftNode != null) 
-</span><span class='line'>          q.add(n.leftNode);
-</span><span class='line'>      if (n.rightNode != null)
-</span><span class='line'>          q.add(n.rightNode);
+</span><span class='line'>  <span class="n">Queue</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;</span> <span class="n">q</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedList</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;();</span>
+</span><span class='line'>  <span class="n">q</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">n</span><span class="o">);</span>
+</span><span class='line'>  <span class="k">while</span> <span class="o">(</span><span class="n">q</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">n</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span>
+</span><span class='line'>      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">n</span><span class="o">.</span><span class="na">value</span><span class="o">);</span>
+</span><span class='line'>      <span class="k">if</span> <span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">leftNode</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+</span><span class='line'>          <span class="n">q</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">leftNode</span><span class="o">);</span>
+</span><span class='line'>      <span class="k">if</span> <span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">rightNode</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+</span><span class='line'>          <span class="n">q</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">rightNode</span><span class="o">);</span>
 </span><span class='line'>
-</span><span class='line'>  }
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><p>分析</p>
+
+<p>  用一个队列实现层序遍历，拓扑排序中也有用到这种方式。</p></li>
+</ul>
 
 
 <h2>总结</h2>
 
 <p>非递归实现的代码相对来说没有递归实现的直观。其核心都是维护了一个栈来保存状态，避免了产生过多方法调用栈浪费内存空间。</p>
-
-<p>本文中针对二叉树的几种遍历方式，描述了递归和非递归的解决方案。普遍意义的递归转非递归的方法和思想，将在另外一篇博文中介绍;)。欢迎交流。</p>
 
 <p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/04/27/travsal-binary-tree/'>http://biaobiaoqi.me/blog/2013/04/27/travsal-binary-tree/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
 
