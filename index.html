@@ -9,7 +9,7 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="不要在意那些细节 这是一本关于计算机世界的科普读物。豆瓣链接：请戳。 非常推荐刚接触计算机的朋友花上三五小时将全书通读一遍，没有技术细节，没有公式证明，它会告诉作者挑选出的九大算法出现的缘由和发展的过程。这些不关乎实现细节的思想概括，更能体现算法在整个领域中的存在的原因。它们不再是冷冰冰的算法过程 &hellip;">
+  <meta name="description" content="遇到问题 今天的中国好声音决赛之夜，我的 Mac 突然无法发出声响了=(，在此之前，刚看过一些视频，音频输出正常。 我尝试了使用 MBP 内建的外放和插入 iphone4s 的耳机并将音量调整到最大，没有任何声响。网上查阅了一些相关异常的资料，发现可能是 NVRAM 的问题。官方资料见链接：《关于 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -106,6 +106,71 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/10/07/reset-nvram/">重置MBP的NVRAM</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-07T23:25:00+08:00" pubdate data-updated="true">Oct 7<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/10/07/reset-nvram/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>遇到问题</h3>
+
+<p>今天的中国好声音决赛之夜，我的 Mac 突然无法发出声响了=(，在此之前，刚看过一些视频，音频输出正常。</p>
+
+<p>我尝试了使用 MBP 内建的外放和插入 iphone4s 的耳机并将音量调整到最大，没有任何声响。网上查阅了一些相关异常的资料，发现可能是 NVRAM 的问题。官方资料见链接：<a href="http://support.apple.com/kb/HT1379?viewlocale=zh_CN">《关于 NVRAM 和 PRAM》</a>。</p>
+
+<p>按照重置 NVRAM 的方法操作后，果然 Mac 又拥有了声音，可以看好声音啊=)</p>
+
+<p>这里对 NVRAM 做一些记录：</p>
+
+<h3>NVRAM</h3>
+
+<p>Mac 会将某些设置储存在特殊内存区域中，而且即使关机这些设置也不会丢失。在基于 Intel 的 Mac 上，存储位置是称为 NVRAM 的内存。NVRAM 为 Non-Volatile Random Access Memory 的缩写。</p>
+
+<p>存储在 NVRAM/PRAM 中的信息包括：</p>
+
+<ul>
+<li>扬声器音量</li>
+<li>屏幕分辨率</li>
+<li>启动磁盘选择</li>
+<li>最近的内核崩溃信息（如果有的话）</li>
+</ul>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/10/07/reset-nvram/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -826,61 +891,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
     <footer>
       <a rel="full-article" href="/blog/2013/09/08/late-initialising-in-java/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/09/08/three-principles-of-classloader-operation/">类加载器操作三原则[译]</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-08T00:42:00+08:00" pubdate data-updated="true">Sep 8<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/09/08/three-principles-of-classloader-operation/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>（出自一本 J2EE 的教材中关于类加载器的介绍，原文已不知所踪。）</p>
-
-<p>类加载的 bug，一旦在编程中遇到很难调试。好消息是，理解类加载的过程中，我们只需要牢记住三条基本原则。如果你能清晰的理解这三条基本原则，所有问题都迎刃而解。下面，我们开始介绍。</p>
-
-<h2>委托原则(Delegation Principle)</h2>
-
-<blockquote><p>如果一个类还没有被加载，类加载器会委托它的父亲加载器去加载它。</p></blockquote>
-
-<p>这种委托会一直延续，直到到达委托层次的最顶层，由原始的类加载器加载完成该类。下图展示了这种情况。</p>
-
-<p><img src="https://dl.dropboxusercontent.com/u/64021093/Java%20Classloader/classloader1.gif" alt="" /></p>
-
-<p>Systm-ClassPath classloader 加载了 MyApp.MyApp，而这个类创造了一个 java.util.Vector。假设现在 java.util.Vector 还没又被加载。因为 System-Classpath classloader 加载了 MyApp 类，它首先请求它的父亲 extension classloader 来加载这个类（java.util.Vector）。而 extension classloader 又请求 Bootstrap classloader 尝试加载。因为 java.util.Vector 是 J2SE 类，bootstrap classloader 成功加载了它。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/09/08/three-principles-of-classloader-operation/">Read on &rarr;</a>
     </footer>
   
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tech | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.me/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.me/"/>
-  <updated>2013-10-07T13:59:44+08:00</updated>
+  <updated>2013-10-08T00:01:32+08:00</updated>
   <id>http://biaobiaoqi.me/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -12,6 +12,84 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[重置MBP的NVRAM]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/10/07/reset-nvram/"/>
+    <updated>2013-10-07T23:25:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/10/07/reset-nvram</id>
+    <content type="html"><![CDATA[<h3>遇到问题</h3>
+
+<p>今天的中国好声音决赛之夜，我的Mac突然无法发出声响了=(，在此之前，刚看过一些视频，音频输出正常。</p>
+
+<p>我尝试了使用MBP内建的外放和插入iphone4s的耳机并将音量调整到最大，没有任何声响。网上查阅了一些相关异常的资料，发现可能是NVRAM的问题。官方资料见链接：<a href="http://support.apple.com/kb/HT1379?viewlocale=zh_CN">《关于 NVRAM 和 PRAM》</a>。</p>
+
+<p>按照重置NVRAM的方法操作后，果然Mac又拥有了声音，可以看好声音啊=)</p>
+
+<p>这里对NVRAM做一些记录：</p>
+
+<h3>NVRAM</h3>
+
+<p>Mac 会将某些设置储存在特殊内存区域中，而且即使关机这些设置也不会丢失。在基于 Intel 的 Mac 上，存储位置是称为 NVRAM 的内存。NVRAM为Non-Volatile Random Access Memory的缩写。</p>
+
+<p>存储在 NVRAM/PRAM 中的信息包括：</p>
+
+<ul>
+<li>扬声器音量</li>
+<li>屏幕分辨率</li>
+<li>启动磁盘选择</li>
+<li>最近的内核崩溃信息（如果有的话）</li>
+</ul>
+
+
+<!--MORE-->
+
+
+<p>也就是说，如果机器存在声音、屏幕分辨率、启动速度等方面的异常时，可以尝试使用重置的方式做恢复。同时，官方资料中也提到，『如果您正在故障诊断网络问题，重置不会有任何帮助』。</p>
+
+<h3>配置NVRAM</h3>
+
+<p>实际上，也可以在shell中命令配置nvram。比如，可以通过<code>nvram -xp</code>命令查看到xml格式的配置表示。我的如下：</p>
+
+<p>```
+$ nvram -xp
+&lt;?xml version="1.0" encoding="UTF-8"?>
+&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict></p>
+
+<pre><code>&lt;key&gt;LocationServicesEnabled&lt;/key&gt;
+&lt;data&gt;
+AQ==
+&lt;/data&gt;
+&lt;key&gt;SystemAudioVolume&lt;/key&gt;
+&lt;data&gt;
+Xw==
+&lt;/data&gt;
+&lt;key&gt;backlight-level&lt;/key&gt;
+&lt;data&gt;
+9wA=
+&lt;/data&gt;
+&lt;key&gt;fmm-computer-name&lt;/key&gt;
+&lt;data&gt;
+Ymlhb2JpYW9xaQ==
+&lt;/data&gt;
+</code></pre>
+
+<p></dict>
+</plist>
+```</p>
+
+<h3>其他参考</h3>
+
+<ul>
+<li><a href="http://blog.csdn.net/afatgoat/article/details/3851554">Mac OS X: 系统nvram启动参数</a></li>
+<li><a href="http://support.apple.com/kb/HT1895?viewlocale=zh_CN">何时要重置 NVRAM 或 PRAM</a></li>
+<li><a href="http://en.wikipedia.org/wiki/Non-volatile_random-access_memory">NVRAM wikipedia</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Java类、实例的初始化顺序]]></title>
@@ -424,100 +502,6 @@ Class-Path: asm-3.0.jar
 <ul>
 <li><a href="http://www.ibm.com/developerworks/cn/java/j-lo-jse61/index.html">《Java SE 6 新特性: Instrumentation 新功能》</a></li>
 <li><a href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loader-in-practice/">《Java类加载器编程实践》</a></li>
-</ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Java构造方法中的执行顺序]]></title>
-    <link href="http://biaobiaoqi.me/blog/2013/09/08/strange-behavior-using-braces-in-java/"/>
-    <updated>2013-09-08T12:58:00+08:00</updated>
-    <id>http://biaobiaoqi.me/blog/2013/09/08/strange-behavior-using-braces-in-java</id>
-    <content type="html"><![CDATA[<p>这道题来自<a href="http://stackoverflow.com/questions/8185780/strange-behavior-using-braces-in-java/8186881#8186881">stackoverflow</a>。</p>
-
-<h2>问题描述：</h2>
-
-<p>有如下代码，求其输出内容。</p>
-
-<p>```java
-public class Test<br/>
-{</p>
-
-<pre><code>public int a = 10;  
-Test(){System.out.println("1");}  
-
-{System.out.println("2");}  
-
-static{System.out.println("3");}  
-
-public static void main(String args[])  
-{  
-    new Test();  
-}  
-</code></pre>
-
-<p>}
-```</p>
-
-<h2>分析</h2>
-
-<p>作为静态区段的语句，容易知道，3是会最先出现的。容易弄错的一点是 到底是1和2的出现顺序。</p>
-
-<p>我们可以参考字节码来分析。在eclipse中使用ASM bytecode 插件，得到相应的字节码：</p>
-
-<p>```java
-// class version 50.0 (50)<br/>
-// access flags 0x21<br/>
-public class Test {<br/>
-  // compiled from: Test.java<br/>
-  static <clinit>() : void</p>
-
-<pre><code>GETSTATIC System.out : PrintStream  
-LDC "3"  
-INVOKEVIRTUAL PrintStream.println(String) : void  
-RETURN  
-</code></pre>
-
-<p>  <init>() : void</p>
-
-<pre><code>ALOAD 0: this  
-INVOKESPECIAL Object.&lt;init&gt;() : void  
-ALOAD 0: this  
-BIPUSH 10  
-PUTFIELD Test.a : int  
-GETSTATIC System.out : PrintStream  
-LDC "2"  
-INVOKEVIRTUAL PrintStream.println(String) : void  
-GETSTATIC System.out : PrintStream  
-LDC "1"  
-INVOKEVIRTUAL PrintStream.println(String) : void  
-RETURN  
-</code></pre>
-
-<p>  public static main(String[]) : void</p>
-
-<pre><code>NEW Test  
-INVOKESPECIAL Test.&lt;init&gt;() : void  
-RETURN  
-</code></pre>
-
-<p>}
-```</p>
-
-<p>正如我们所想，3是被放在类构造方法中，这是类的初始化函数，固然在类的初始化时出现。</p>
-
-<!--more-->
-
-
-<p>而在构造方法中先出现2，之后才是1。问题的核心集中到对象构造方法的指令顺序问题。实际上，在对象构造方法中，会先执行一些隐性的指令，比如父类的构造方法、{}区段的内容等，然后在执行显性的构造方法中的指令：</p>
-
-<ul>
-<li><ol>
-<li>Java编译时，对象构造方法里先嵌入隐式的指令，完毕之后，再执行Java源代码中显示的代码。</li>
-</ol>
-</li>
-<li>2.那些隐式的指令，包括父类的构造方法、变量的初始化、{}区段里的内容，并严格按照这个顺序嵌入到对象的构造方法中。</li>
 </ul>
 
 ]]></content>
