@@ -10,10 +10,11 @@ published: true
 
 ---
 
+* 更新至1068 2013-10-8
+
 PAT([pat.zju.edu.cn](http://pat.zju.edu.cn))是一个面向C/C++程序的Online Judge系统。相比ZOJ，HDOJ，POJ等ACM题库，PAT的题目非常基础，对于数据结构、算法的入门是比较有助益的。
 
 本文按照自己的认识，给PAT advanced level做出了分类。由于很多题目实际上兼顾有多种解法和思路，我给每道题打上了tag，来应对分类的独占性局限，供大家参考。
-
 
 简单题
 ---
@@ -40,7 +41,7 @@ PAT([pat.zju.edu.cn](http://pat.zju.edu.cn))是一个面向C/C++程序的Online 
 * 1060 数字/字符处理
 * 1061 数字/字符处理，坑题
 * 1063 数字/字符处理，游标
-
+* 1065 A+B
 
 模拟题
 ---
@@ -56,6 +57,7 @@ PAT([pat.zju.edu.cn](http://pat.zju.edu.cn))是一个面向C/C++程序的Online 
 * 1052 链表
 * 1054 dominant color
 * 1056 模拟分组淘汰赛
+
 
 ####排队模拟
 下面三道模拟题是针对排队模型处理的：
@@ -75,7 +77,7 @@ PAT([pat.zju.edu.cn](http://pat.zju.edu.cn))是一个面向C/C++程序的Online 
 * 1029 归并排序
 * 1038 递归，排序
 * 1062 排序
-
+* 1067 链表，dfs
 
 ####时间优化
 
@@ -112,6 +114,7 @@ PAT([pat.zju.edu.cn](http://pat.zju.edu.cn))是一个面向C/C++程序的Online 
 * 1013 并查集/dfs
 * 1021 并查集，dfs，图的直径
 * 1054 dfs，优化剪枝
+* 1067 链表，dfs
 
 
 树
@@ -121,7 +124,7 @@ PAT([pat.zju.edu.cn](http://pat.zju.edu.cn))是一个面向C/C++程序的Online 
 * 1020 二叉树遍历 
 * 1043 二叉树遍历
 * 1064 重建完全二叉搜索树
-
+* 1066 AVL树
 
 Hash
 ---
@@ -146,6 +149,7 @@ Hash
 动态规划
 ---
 * 1045 DP，最长递增子序列
+* 1068 DP，找零问题
 
 
 树状数组
@@ -167,5 +171,5 @@ Hash
 * [《PAT 1041-1050 题解》](http://biaobiaoqi.me/blog/2013/08/01/pat-1041-1050-solutions/)
 * [《PAT 1051-1060 题解》](http://biaobiaoqi.me/blog/2013/08/01/pat-1051-1060-solutions/)
 * [《PAT 1061-1064 题解》](http://biaobiaoqi.me/blog/2013/08/31/pat-1061-pat-1064/)
-
+* [《PAT 1061-1064 题解》](http://biaobiaoqi.me/blog/2013/10/08/pat-1065-pat-1068/)
 附博客的PAT专题区链接：[请戳](http://biaobiaoqi.me/tags/pat/)
