@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Tag: pat | Biaobiaoqi]]></title>
+  <title><![CDATA[Tag: pat | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.me/tags/pat/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.me/"/>
-  <updated>2013-10-08T23:41:35+08:00</updated>
+  <updated>2013-10-09T00:58:40+08:00</updated>
   <id>http://biaobiaoqi.me/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -167,7 +167,7 @@ d&amp;Hyscvnm</p>
 
 <p>理清题目的逻辑以后，实现起来是很简单的。</p>
 
-<p>pat1061源码:<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel/APAT1061.cpp">请戳</a></p>
+<p>pat1061源码:<a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel/APAT1061.cpp">请戳</a></p>
 
 <h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1062">1062. Talent and Virtue (25)</a></h2>
 
@@ -194,7 +194,7 @@ d&amp;Hyscvnm</p>
 
 <p>经测试，使用<code>cout</code>，<code>cin</code>会超时，改用'printf() scanf()'轻松过。</p>
 
-<p>pat1062源码:<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel/APAT1062.cpp">请戳</a></p>
+<p>pat1062源码:<a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel/APAT1062.cpp">请戳</a></p>
 
 <h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1063">1063. Set Similarity (25)</a></h2>
 
@@ -214,7 +214,7 @@ d&amp;Hyscvnm</p>
 
 <p>有不愿意透露姓名的<a href="http://weibo.com/cloudbye">@草原</a>同学提出，使用set做去重是没问题的。</p>
 
-<p>pat1063源码:<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel/APAT1063.cpp">请戳</a></p>
+<p>pat1063源码:<a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel/APAT1063.cpp">请戳</a></p>
 
 <h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1064">1064. Complete Binary Search Tree (30)</a></h2>
 
@@ -248,7 +248,7 @@ d&amp;Hyscvnm</p>
 
 <p>于是，使用数组实现的二叉树做迭代的思路就出来了，30行搞定。</p>
 
-<p>pat1064源码:<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel/APAT1064.cpp">请戳</a></p>
+<p>pat1064源码:<a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel/APAT1064.cpp">请戳</a></p>
 ]]></content>
   </entry>
   
@@ -443,10 +443,11 @@ d&amp;Hyscvnm</p>
 <li><a href="http://biaobiaoqi.me/blog/2013/08/01/pat-1041-1050-solutions/">《PAT 1041-1050 题解》</a></li>
 <li><a href="http://biaobiaoqi.me/blog/2013/08/01/pat-1051-1060-solutions/">《PAT 1051-1060 题解》</a></li>
 <li><a href="http://biaobiaoqi.me/blog/2013/08/31/pat-1061-pat-1064/">《PAT 1061-1064 题解》</a></li>
-<li><a href="http://biaobiaoqi.me/blog/2013/10/08/pat-1065-pat-1068/">《PAT 1061-1064 题解》</a>
-附博客的PAT专题区链接：<a href="http://biaobiaoqi.me/tags/pat/">请戳</a></li>
+<li><a href="http://biaobiaoqi.me/blog/2013/10/08/pat-1065-pat-1068/">《PAT 1065-1068 题解》</a></li>
 </ul>
 
+
+<p>附博客的PAT专题区链接：<a href="http://biaobiaoqi.me/tags/pat/">请戳</a></p>
 ]]></content>
   </entry>
   
@@ -455,7 +456,7 @@ d&amp;Hyscvnm</p>
     <link href="http://biaobiaoqi.me/blog/2013/08/01/pat-1051-1060-solutions/"/>
     <updated>2013-08-01T01:43:00+08:00</updated>
     <id>http://biaobiaoqi.me/blog/2013/08/01/pat-1051-1060-solutions</id>
-    <content type="html"><![CDATA[<p>浏览全部代码：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
+    <content type="html"><![CDATA[<p>浏览全部代码：<a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel">请戳</a></p>
 
 <p>本文谨代表个人思路，欢迎讨论;)</p>
 
@@ -650,7 +651,7 @@ d&amp;Hyscvnm</p>
     <link href="http://biaobiaoqi.me/blog/2013/08/01/pat-1041-1050-solutions/"/>
     <updated>2013-08-01T01:43:00+08:00</updated>
     <id>http://biaobiaoqi.me/blog/2013/08/01/pat-1041-1050-solutions</id>
-    <content type="html"><![CDATA[<p>浏览全部代码：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
+    <content type="html"><![CDATA[<p>浏览全部代码：<a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel">请戳</a></p>
 
 <p>本文谨代表个人思路，欢迎讨论;)</p>
 

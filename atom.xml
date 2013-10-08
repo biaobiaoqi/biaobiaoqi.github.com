@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Biaobiaoqi]]></title>
+  <title><![CDATA[Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.me/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.me/"/>
-  <updated>2013-10-08T23:41:35+08:00</updated>
+  <updated>2013-10-09T00:58:40+08:00</updated>
   <id>http://biaobiaoqi.me/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -119,7 +119,10 @@
 
 <p>由于最终的输出要求是排序的币值的字典序最小的组合，可以对 c[i]做从大到小的排序，并另开一个数组 has[i][j] 来记录当前状态下，是否有包含 c[i]。同时注意，当<code>f[i - 1][j] == f[i - 1][j - c[i]] + c[i]</code>时，采纳当前的 c[i]，以满足字典序。</p>
 
-<p>pat1068 源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1068.cpp">请戳</a><p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/10/08/pat-1065-pat-1068/'>http://biaobiaoqi.me/blog/2013/10/08/pat-1065-pat-1068/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
+<p>pat1068 源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1068.cpp">请戳</a></p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/10/08/pat-1065-pat-1068/'>http://biaobiaoqi.me/blog/2013/10/08/pat-1065-pat-1068/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
 ]]></content>
   </entry>
   
@@ -261,7 +264,10 @@
 
 <p>《改变未来的九大算法》全书很少涉及到技术的实现细节，这正是它的优势所在。比如数据库的一致性章节，从一个银行转账的实例讲起，通过所面临的一系列问题的解决方案的描述，让人对数据库的整体实现有了全局的把握。在理解的前提下，更深入的学习也变得更有动力和方向。</p>
 
-<p>奈何自己已经过了朦朦胧胧的那几年，在此将本书强烈推荐给初涉计算机领域的朋友们。当然，其他人粗读一遍，也是对自己知识体系的一次小梳理啦;)。<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/10/03/nine-algorithms-that-changed-the-future/'>http://biaobiaoqi.me/blog/2013/10/03/nine-algorithms-that-changed-the-future/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
+<p>奈何自己已经过了朦朦胧胧的那几年，在此将本书强烈推荐给初涉计算机领域的朋友们。当然，其他人粗读一遍，也是对自己知识体系的一次小梳理啦;)。</p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/10/03/nine-algorithms-that-changed-the-future/'>http://biaobiaoqi.me/blog/2013/10/03/nine-algorithms-that-changed-the-future/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
 ]]></content>
   </entry>
   
@@ -439,8 +445,11 @@
 
 <ul>
 <li><a href="http://biaobiaoqi.me/blog/2013/09/08/strange-behavior-using-braces-in-java/">《Java 构造方法中的执行顺序》</a></li>
-<li><a href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loading-linking-and-initialising/">《Java 类的装载、链接和初始化》</a><p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/09/22/java-initialization/'>http://biaobiaoqi.me/blog/2013/09/22/java-initialization/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></li>
+<li><a href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loading-linking-and-initialising/">《Java 类的装载、链接和初始化》</a></li>
 </ul>
+
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/09/22/java-initialization/'>http://biaobiaoqi.me/blog/2013/09/22/java-initialization/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
 
 ]]></content>
   </entry>
@@ -486,7 +495,10 @@
 </ul>
 
 
-<p>更多关于很棒的防火墙的资料，请先翻过墙去查看;)<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/09/10/scientifically-surfing-the-internet/'>http://biaobiaoqi.me/blog/2013/09/10/scientifically-surfing-the-internet/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
+<p>更多关于很棒的防火墙的资料，请先翻过墙去查看;)</p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/09/10/scientifically-surfing-the-internet/'>http://biaobiaoqi.me/blog/2013/09/10/scientifically-surfing-the-internet/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
 ]]></content>
   </entry>
   
@@ -1115,7 +1127,10 @@ manifest 文件中需要添加的键值对是：</p>
 
 <p>实际上，这里 str1 和 str2 合并的过程，是使用了 StringBuilder 来间接完成的，首先以 str1 的值构造一个 StringBuilder，然后调用其中的 append()方法，将 str2 串联上来。</p>
 
-<p>值得注意的是：老版本的 java 使用 StringBuffer 完成这一步，但 StringBuffer 是线程安全的，效率略低，于是在新版本 java 中出现了非线程安全的 StringBuilder，这类似于 Hashtable 和 hashset 的关系。<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/09/08/initliate-objects-in-java/'>http://biaobiaoqi.me/blog/2013/09/08/initliate-objects-in-java/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
+<p>值得注意的是：老版本的 java 使用 StringBuffer 完成这一步，但 StringBuffer 是线程安全的，效率略低，于是在新版本 java 中出现了非线程安全的 StringBuilder，这类似于 Hashtable 和 hashset 的关系。</p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/09/08/initliate-objects-in-java/'>http://biaobiaoqi.me/blog/2013/09/08/initliate-objects-in-java/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
 ]]></content>
   </entry>
   
@@ -1229,7 +1244,10 @@ manifest 文件中需要添加的键值对是：</p>
 
 <p>虽然有出现 Son，但 Son.i 访问的是父类的非常量静态变量。于是没有对 Son 类进行初始化，而只是初始化了明确的声明静态变量的 Parent 类。</p>
 
-<p>由此可见，一般的，我们在某个类中定义了其他类的成员变量引用，只要该变量没有 new 出一个新的对象，则 JVM 也不会初始化这个类，类此时只是被加载了而已，而没有链接和初始化。<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/09/08/late-initialising-in-java/'>http://biaobiaoqi.me/blog/2013/09/08/late-initialising-in-java/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
+<p>由此可见，一般的，我们在某个类中定义了其他类的成员变量引用，只要该变量没有 new 出一个新的对象，则 JVM 也不会初始化这个类，类此时只是被加载了而已，而没有链接和初始化。</p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/09/08/late-initialising-in-java/'>http://biaobiaoqi.me/blog/2013/09/08/late-initialising-in-java/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
 ]]></content>
   </entry>
   
@@ -1306,7 +1324,10 @@ manifest 文件中需要添加的键值对是：</p>
 
 <p>注意，虽然 java 的加载实现中，对于 bootstrap classloader 、extensions classloader 和 system classloader 来说，他们的关系是 parent-first，也就是像原则一中所说的那样，需要向上委托，但用户自定义的 classloader 完全可以跳出这个圈子，自己实现 parent-lastclassloader。比如 Websphere 中就有相关配置。</p>
 
-<p>更具体的类加载器编程实例，请见另外一篇博文：<a href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loader-in-practice/">《Java 类加载器编程实践》</a><p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/09/08/three-principles-of-classloader-operation/'>http://biaobiaoqi.me/blog/2013/09/08/three-principles-of-classloader-operation/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
+<p>更具体的类加载器编程实例，请见另外一篇博文：<a href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loader-in-practice/">《Java 类加载器编程实践》</a></p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/09/08/three-principles-of-classloader-operation/'>http://biaobiaoqi.me/blog/2013/09/08/three-principles-of-classloader-operation/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
 ]]></content>
   </entry>
   
@@ -2421,7 +2442,10 @@ manifest 文件中需要添加的键值对是：</p>
 
 <h3>另另</h3>
 
-<p>由于代码写的比较搓，也就不公开放出了强奸大家的眼球了>&lt;&#8230;，要学的还有很多。<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/09/06/kongfu-snake-project-summary/'>http://biaobiaoqi.me/blog/2013/09/06/kongfu-snake-project-summary/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
+<p>由于代码写的比较搓，也就不公开放出了强奸大家的眼球了>&lt;&#8230;，要学的还有很多。</p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/09/06/kongfu-snake-project-summary/'>http://biaobiaoqi.me/blog/2013/09/06/kongfu-snake-project-summary/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
 ]]></content>
   </entry>
   
@@ -2568,7 +2592,10 @@ manifest 文件中需要添加的键值对是：</p>
 
 <p>I&#8217;ll turn to some friends who has some experience in user interaction to give some advice  about our android game,
 and then make a plan to do a better work.
-I think we will make it open source and put the game into the market finally, but not now, we should make it better first!<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/09/05/google-android-challenge-2011/'>http://biaobiaoqi.me/blog/2013/09/05/google-android-challenge-2011/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
+I think we will make it open source and put the game into the market finally, but not now, we should make it better first!</p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/09/05/google-android-challenge-2011/'>http://biaobiaoqi.me/blog/2013/09/05/google-android-challenge-2011/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
 ]]></content>
   </entry>
   
@@ -2603,7 +2630,7 @@ I think we will make it open source and put the game into the market finally, bu
 <li><p>2013/9/10 顶栏增加『推荐』，推荐我所收集的学习资源。</p></li>
 <li><p>2013/9/12 将侧边栏的友情链接挪到『推荐』中。</p></li>
 <li><p>2013/9/17 取消顶栏的『关于』选项卡；将侧边栏的『最近发表』替换为『关于』，简述自己的身份；替换侧边栏的『我的社区』内容为我的所有社区 ID 的链接。</p></li>
-<li><p>2013/10/8 修改网站 slogan：从『自由、共享、和平』到『一个追随自心的学徒』，这是从空泛的口号主意向更具体的生活层次的一个转变，意再提醒自己不要再纷杂的诱惑中迷失自我。为了让整个博客 title 不那么生涩，同步的将主标题从『Biaobiaoqi 的博客』更改为『biaobiaoqi』。</p></li>
+<li><p>2013/10/8 修改网站 slogan：从『自由、共享、和平』到『学徒·追随自心』，这是从空泛的口号主意向更具体的生活层次的一个转变，意再提醒自己不要再纷杂的诱惑中迷失自我。</p></li>
 <li><p>2013/10/8 顶栏增加『狂想』，位于『读书』之后，『标签云』之前，是跟『技术』、『生活』、『读书』并列的文章主题。回顾之前的时间，脑子里冒出的东西倒不少，一直没有整理和形成输出。希望『狂想』（idea）成为这样一片天地。有感于 category 的纵向切割文章做分类的方法比较死板，准备之后逐步迁移到完全使用 tags 标记文章的方法。</p></li>
 </ul>
 
@@ -2729,7 +2756,7 @@ I think we will make it open source and put the game into the market finally, bu
 
 <p>理清题目的逻辑以后，实现起来是很简单的。</p>
 
-<p>pat1061 源码:<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel/APAT1061.cpp">请戳</a></p>
+<p>pat1061 源码:<a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel/APAT1061.cpp">请戳</a></p>
 
 <h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1062">1062. Talent and Virtue (25)</a></h2>
 
@@ -2756,7 +2783,7 @@ I think we will make it open source and put the game into the market finally, bu
 
 <p>经测试，使用<code>cout</code>，<code>cin</code>会超时，改用&#8217;printf() scanf()&#8217;轻松过。</p>
 
-<p>pat1062 源码:<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel/APAT1062.cpp">请戳</a></p>
+<p>pat1062 源码:<a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel/APAT1062.cpp">请戳</a></p>
 
 <h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1063">1063. Set Similarity (25)</a></h2>
 
@@ -2776,7 +2803,7 @@ I think we will make it open source and put the game into the market finally, bu
 
 <p>有不愿意透露姓名的<a href="http://weibo.com/cloudbye">@草原</a>同学提出，使用 set 做去重是没问题的。</p>
 
-<p>pat1063 源码:<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel/APAT1063.cpp">请戳</a></p>
+<p>pat1063 源码:<a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel/APAT1063.cpp">请戳</a></p>
 
 <h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1064">1064. Complete Binary Search Tree (30)</a></h2>
 
@@ -2810,7 +2837,10 @@ I think we will make it open source and put the game into the market finally, bu
 
 <p>于是，使用数组实现的二叉树做迭代的思路就出来了，30 行搞定。</p>
 
-<p>pat1064 源码:<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel/APAT1064.cpp">请戳</a><p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/08/31/pat-1061-pat-1064/'>http://biaobiaoqi.me/blog/2013/08/31/pat-1061-pat-1064/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
+<p>pat1064 源码:<a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel/APAT1064.cpp">请戳</a></p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/08/31/pat-1061-pat-1064/'>http://biaobiaoqi.me/blog/2013/08/31/pat-1061-pat-1064/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
 ]]></content>
   </entry>
   
