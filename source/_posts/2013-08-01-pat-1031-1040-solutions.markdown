@@ -8,7 +8,7 @@ tags: [algorithm, pat]
 description: "PAT 1031, PAT1031,PAT 1032, PAT1032,PAT 1033, PAT1033,PAT 1034, PAT1034,PAT 1035, PAT1035,PAT 1036, PAT1036,PAT 1037, PAT1037,PAT 1038, PAT1038,PAT 1039, PAT1039,PAT 1040, PAT1040, 题解， 解题报告"
 
 ---
-早期部分代码用Java实现。由于PAT虽然支持各种语言，但只有C/C++标程来限定时间，许多题目用Java读入数据就已经超时，后来转投C/C++。浏览全部代码：[请戳](https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel)
+早期部分代码用Java实现。由于PAT虽然支持各种语言，但只有C/C++标程来限定时间，许多题目用Java读入数据就已经超时，后来转投C/C++。浏览全部代码：[请戳](https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel)
 
 本文谨代表个人思路，欢迎讨论;)
 

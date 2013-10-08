@@ -98,7 +98,7 @@ for i = [0, n)
 	maxsofar = max(maxsofar, maxendingright)
 ```
 
-根据这个思路，写出[代码](https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/pat/advancedlevel/APAT1007.java)，一遍AC:)
+根据这个思路，写出[代码](https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel/APAT1007.java)，一遍AC:)
 	
 
 总结：

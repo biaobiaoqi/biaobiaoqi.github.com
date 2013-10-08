@@ -9,7 +9,7 @@ description: "PAT 1021, PAT1021,PAT 1022, PAT1022,PAT 1023, PAT1023,PAT 1024, PA
 
 ---
 
-早期部分代码用Java实现。由于PAT虽然支持各种语言，但只有C/C++标程来限定时间，许多题目用Java读入数据就已经超时，后来转投C/C++。浏览全部代码：[请戳](https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel)
+早期部分代码用Java实现。由于PAT虽然支持各种语言，但只有C/C++标程来限定时间，许多题目用Java读入数据就已经超时，后来转投C/C++。浏览全部代码：[请戳](https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel)
 
 本文谨代表个人思路，欢迎讨论;)
 

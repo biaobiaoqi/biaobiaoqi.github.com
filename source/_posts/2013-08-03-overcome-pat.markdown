@@ -171,5 +171,6 @@ Hash
 * [《PAT 1041-1050 题解》](http://biaobiaoqi.me/blog/2013/08/01/pat-1041-1050-solutions/)
 * [《PAT 1051-1060 题解》](http://biaobiaoqi.me/blog/2013/08/01/pat-1051-1060-solutions/)
 * [《PAT 1061-1064 题解》](http://biaobiaoqi.me/blog/2013/08/31/pat-1061-pat-1064/)
-* [《PAT 1061-1064 题解》](http://biaobiaoqi.me/blog/2013/10/08/pat-1065-pat-1068/)
+* [《PAT 1065-1068 题解》](http://biaobiaoqi.me/blog/2013/10/08/pat-1065-pat-1068/)
+
 附博客的PAT专题区链接：[请戳](http://biaobiaoqi.me/tags/pat/)

@@ -151,14 +151,14 @@ KMP算法虽然能达到O(M+N)的算法复杂度，但在实际使用中，KMP�
 ---
 
 ####基础模板题
-[HDOJ的2203题](http://acm.hdu.edu.cn/showproblem.php?pid=2203)是一个能检验算法正确性的模板题。Java实现的答案代码[请戳这里](https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/practice/hdoj/HDOJ2203.java)。
+[HDOJ的2203题](http://acm.hdu.edu.cn/showproblem.php?pid=2203)是一个能检验算法正确性的模板题。Java实现的答案代码[请戳这里](https://github.com/biaobiaoqi/CPractice/tree/master/HDOJ/HDOJ2203.java)。
 
 
 ####延伸模板题
 
-[POJ的2406题](http://poj.org/problem?id=2406)，对考察点做了巧妙的变形，对更深入的理解KMP中的部分匹配表（即next数组）很有帮助。Java实现的答案代码[请戳这里](https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/practice/poj/POJ2406.java)。
+[POJ的2406题](http://poj.org/problem?id=2406)，对考察点做了巧妙的变形，对更深入的理解KMP中的部分匹配表（即next数组）很有帮助。Java实现的答案代码[请戳这里](https://github.com/biaobiaoqi/CPractice/tree/master/POJ/POJ2406.java)。
 
-[HDOJ的1867题](http://acm.hdu.edu.cn/showproblem.php?pid=1867)也属于kmp的变形。要求对kmp利用next数组进行比较的过程有清晰的认识。Java实现的答案代码[请戳这里](https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/practice/hdoj/HDOJ1867.java)。
+[HDOJ的1867题](http://acm.hdu.edu.cn/showproblem.php?pid=1867)也属于kmp的变形。要求对kmp利用next数组进行比较的过程有清晰的认识。Java实现的答案代码[请戳这里](https://github.com/biaobiaoqi/CPractice/tree/master/HDOJ/HDOJ1867.java)。
 
 
 

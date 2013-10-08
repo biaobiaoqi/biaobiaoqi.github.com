@@ -14,7 +14,7 @@ tags: [algorithm, java, pat]
 算法开始练手了。从最简单的做起。这部分代码都是由Java实现。
 **[题目看这里](http://pat.zju.edu.cn/contests/pat-b-practise)**
 
-我把所有AC过的**[解题代码都贴到了我的github](https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/practice)**上，就不贴到blog里啦。（确切的说，这个博客本身就是在github里，不是么:)）
+我把所有AC过的**[解题代码都贴到了我的github](https://github.com/biaobiaoqi/CPractice/tree/master/PAT/basiclevel)**上，就不贴到blog里啦。（确切的说，这个博客本身就是在github里，不是么:)）
 
 <!--more-->
 

@@ -36,7 +36,7 @@ tags: [algorithm, pat]
 
 * 3.最后的输出是后序遍历。过程中其实并不用构建整个树，直接在处理过程中，按后序的方式存储节点到队列中即可。
 
-有了这些考虑，就可以写出代码啦。详细解题代码见链接[PAT1043](https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/pat/advancedlevel/APAT1043.java)
+有了这些考虑，就可以写出代码啦。详细解题代码见链接[PAT1043](https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1043.cpp)
 
 ##中序+后序
 #####算法描述：
@@ -56,7 +56,7 @@ tags: [algorithm, pat]
 
 * 2.最后的输出是层序遍历。过程中其实并不用构建整个树。直接在处理过程中，按层序的方式存储节点到队列中即可。
 
-详细解题代码见链接[PAT1020](https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/pat/advancedlevel/APAT1020.java)
+详细解题代码见链接[PAT1020](https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel/APAT1020.java)
 
 
 ##中序+层序

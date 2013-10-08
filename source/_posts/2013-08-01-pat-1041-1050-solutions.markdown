@@ -9,7 +9,7 @@ description: "PAT 1041, PAT1041,PAT 1042, PAT1042,PAT 1043, PAT1043,PAT 1044, PA
 
 ---
 
-浏览全部代码：[请戳](https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel)
+浏览全部代码：[请戳](https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel)
 
 本文谨代表个人思路，欢迎讨论;)
 

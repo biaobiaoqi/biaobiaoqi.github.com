@@ -48,7 +48,7 @@ THU 14:04
 
 理清题目的逻辑以后，实现起来是很简单的。
 
-pat1061源码:[请戳](https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel/APAT1061.cpp)
+pat1061源码:[请戳](https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel/APAT1061.cpp)
 
 
 [1062. Talent and Virtue (25)](http://pat.zju.edu.cn/contests/pat-a-practise/1062)
@@ -78,7 +78,7 @@ pat1061源码:[请戳](https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/
 
 经测试，使用`cout`，`cin`会超时，改用'printf() scanf()'轻松过。
 
-pat1062源码:[请戳](https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel/APAT1062.cpp)
+pat1062源码:[请戳](https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel/APAT1062.cpp)
 
 [1063. Set Similarity (25)](http://pat.zju.edu.cn/contests/pat-a-practise/1063)
 ---
@@ -99,7 +99,7 @@ pat1062源码:[请戳](https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/
 
 有不愿意透露姓名的[@草原](http://weibo.com/cloudbye)同学提出，使用set做去重是没问题的。
 
-pat1063源码:[请戳](https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel/APAT1063.cpp)
+pat1063源码:[请戳](https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel/APAT1063.cpp)
 
 [1064. Complete Binary Search Tree (30)](http://pat.zju.edu.cn/contests/pat-a-practise/1064)
 ---
@@ -127,4 +127,4 @@ pat1063源码:[请戳](https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/
 
 于是，使用数组实现的二叉树做迭代的思路就出来了，30行搞定。
 
-pat1064源码:[请戳](https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel/APAT1064.cpp)
+pat1064源码:[请戳](https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel/APAT1064.cpp)
