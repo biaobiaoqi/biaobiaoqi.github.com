@@ -9,7 +9,7 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="PAT(pat.zju.edu.cn)是一个面向 C/C++程序的 Online Judge 系统。相比 ZOJ，HDOJ，POJ 等 ACM 题库，PAT 的题目非常基础，对于数据结构、算法的入门是比较有助益的。 本文按照自己的认识，给 PAT advanced level 做出了分类。 &hellip;">
+  <meta name="description" content="最近看了《分布式系统概念与设计 第 5 版》的分布式事务章节，整理了一份 ppt。还有恢复部分没有收录进来，有空再整理啦。 下面是传到 deckspeaker 上的 slides 展示: 下载链接：请戳&nbsp;原文地址：http://biaobiaoqi.me/blog/2013/08/26/ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -112,6 +112,51 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2013/08/26/distributed-transaction/">分布式事务slides</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-26T23:49:00+08:00" pubdate data-updated="true">Aug 26<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/08/26/distributed-transaction/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>最近看了<a href="http://book.douban.com/subject/21624776/">《分布式系统概念与设计 第 5 版》</a>的分布式事务章节，整理了一份 ppt。还有恢复部分没有收录进来，有空再整理啦。</p>
+
+<p>下面是传到 deckspeaker 上的 slides 展示:</p>
+
+<script async class="speakerdeck-embed" data-id="aa521420f0a101303be246475d95d052" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+
+
+<p>下载链接：<a href="https://dl.dropboxusercontent.com/u/64021093/slides/distributed%20transcation.pptx">请戳</a><p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/08/26/distributed-transaction/'>http://biaobiaoqi.me/blog/2013/08/26/distributed-transaction/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2013/08/03/overcome-pat/">PAT练习题概览</a></h1>
     
     
@@ -137,7 +182,12 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   </header>
 
 
-  <div class="entry-content"><p>PAT(<a href="http://pat.zju.edu.cn">pat.zju.edu.cn</a>)是一个面向 C/C++程序的 Online Judge 系统。相比 ZOJ，HDOJ，POJ 等 ACM 题库，PAT 的题目非常基础，对于数据结构、算法的入门是比较有助益的。</p>
+  <div class="entry-content"><ul>
+<li>更新至 1068 2013-10-8</li>
+</ul>
+
+
+<p>PAT(<a href="http://pat.zju.edu.cn">pat.zju.edu.cn</a>)是一个面向 C/C++程序的 Online Judge 系统。相比 ZOJ，HDOJ，POJ 等 ACM 题库，PAT 的题目非常基础，对于数据结构、算法的入门是比较有助益的。</p>
 
 <p>本文按照自己的认识，给 PAT advanced level 做出了分类。由于很多题目实际上兼顾有多种解法和思路，我给每道题打上了 tag，来应对分类的独占性局限，供大家参考。</p>
 
@@ -804,155 +854,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/16/verify-pop-sequence-for-stack/">出栈序列的可能性判定</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-16T01:32:00+08:00" pubdate data-updated="true">Jul 16<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/16/verify-pop-sequence-for-stack/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>问题说明</h2>
-
-<p><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1051">PAT1051</a>：给定 stack 的容量，给定数据的入栈顺序：从 1 开始的正整数序列，在允许随机的出栈操作的情况下，要求判断某出栈序列是否可能。</p>
-
-<p>比如，告知 stack 容量为 5，入栈序列的最大值为 7。有两个序列需要判断合理性：</p>
-
-<ul>
-<li><code>1 2 3 4 5 6 7</code>： 这个序列是可能的，只需每次入栈时都做出栈操作。</li>
-<li><code>3 2 1 7 5 6 4</code>： 这个序列是不可能的，其中前半部分<code>3 2 1</code>是合法的，先将<code>1 2 3</code>顺序入栈，然后三次执行出栈操作。而之后的<code>7 5 6</code>则是不可能的。</li>
-</ul>
-
-
-<p>要完成判定过程，常规思路是直接使用的 stack 数据结构模拟出栈序列做操作，然后判定是否会触犯条件。但考虑到 PAT1051 中时间限制只有 10ms，虽然常规方法是线性的，似乎也无法保障（事实证明是错误的，用常规方法也能在 PAT 上 AC），我想到从序列本身的特性入手，找规律，于是有了一种效率更高的判定逻辑。</p>
-
-<h2>常规思路</h2>
-
-<p>直接使用出栈序列指导 stack 模拟操作。判定条件有两条：</p>
-
-<ul>
-<li>1.栈中数据量不超过栈的容量。</li>
-<li>2.出栈只能从栈顶取，不应该出现从固定的堆栈中取出其他数据的情况。</li>
-</ul>
-
-
-<p>算法描述如下：</p>
-
-<p>用游标记录当前已知压栈的最大数据 cur。如果新的读入数据 tmp（即出栈序列中的某数据）大于 cur，则将 cur 到 tmp 之间的数据顺序压入栈中，更新 cur 并执行检查 1；如果新的读入数据 tmp 小于 cur，则一定是直接出栈获得的，执行检查 2。</p>
-
-<p>如果能顺利完成就是合理的，如果操作过程违背了一些规则，则判定为不合理。C++实现代码如下：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cp">#include&lt;stdio.h&gt;</span>
-</span><span class='line'><span class="cp">#include&lt;stack&gt;</span>
-</span><span class='line'><span class="k">using</span> <span class="k">namespace</span><span class="o">::</span><span class="n">std</span><span class="p">;</span>
-</span><span class='line'><span class="kt">int</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">tmp</span><span class="p">,</span> <span class="n">cur</span><span class="p">;</span>
-</span><span class='line'><span class="kt">bool</span> <span class="n">flag</span><span class="p">;</span>
-</span><span class='line'><span class="n">stack</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">s</span><span class="p">;</span>
-</span><span class='line'><span class="kt">int</span> <span class="n">main</span><span class="p">()</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%d %d %d&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">m</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">n</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">k</span><span class="p">);</span>
-</span><span class='line'>    <span class="k">while</span><span class="p">(</span><span class="n">k</span> <span class="o">--</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">flag</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-</span><span class='line'>        <span class="n">cur</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-</span><span class='line'>        <span class="n">s</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-</span><span class='line'>        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">n</span><span class="p">;</span> <span class="o">++</span> <span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%d&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">tmp</span><span class="p">);</span>
-</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="n">tmp</span> <span class="o">&gt;</span> <span class="n">cur</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>                <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">cur</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">tmp</span><span class="p">;</span> <span class="o">++</span> <span class="n">j</span><span class="p">)</span>
-</span><span class='line'>                    <span class="n">s</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">j</span><span class="p">);</span>
-</span><span class='line'>                <span class="k">if</span> <span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">m</span><span class="p">)</span> <span class="n">flag</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-</span><span class='line'>                <span class="n">cur</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
-</span><span class='line'>            <span class="p">}</span><span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>                <span class="k">if</span> <span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">top</span><span class="p">()</span> <span class="o">!=</span> <span class="n">tmp</span><span class="p">)</span>
-</span><span class='line'>                    <span class="n">flag</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-</span><span class='line'>            <span class="p">}</span>
-</span><span class='line'>            <span class="n">s</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="n">flag</span><span class="p">)</span> <span class="n">printf</span><span class="p">(</span><span class="s">&quot;YES</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-</span><span class='line'>        <span class="k">else</span> <span class="n">printf</span><span class="p">(</span><span class="s">&quot;NO</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>更高效的判定逻辑</h2>
-
-<p>实际上，在 PAT1051 的环境下，由于入栈序列数据由小到大排列非常特殊，要通过出栈序列判定可能性是存在简便思路的。</p>
-
-<p>对比分析题中 Sample 给出的序列，结合上面提到的两条冲突条件入手分析：</p>
-
-<ul>
-<li><p>1.栈中数据量不超过栈的容量：</p>
-
-<p>  只有在入栈时，才会需要考虑栈中数据是否超量。出栈序列中的每个数，都以为着在出栈操作之前，它刚入栈，那么当它入栈的时候能否判定是否超过栈容量呢？可以的，（当前的出栈数值 - 已经执行过的出栈操作数量）就是当前栈中元素的数量。</p></li>
-</ul>
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/07/16/verify-pop-sequence-for-stack/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -970,20 +871,20 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
  <br /> 
   <ul class="tag-cloud">
     <a style="font-size: 180%" href="/tags/algorithm/">algorithm</a> &nbsp 
-<a style="font-size: 161%" href="/tags/bytecode/">bytecode</a> &nbsp 
-<a style="font-size: 114%" href="/tags/diary/">diary</a> &nbsp 
-<a style="font-size: 165%" href="/tags/distributed/">distributed</a> &nbsp 
-<a style="font-size: 134%" href="/tags/hadoop/">hadoop</a> &nbsp 
-<a style="font-size: 175%" href="/tags/java/">java</a> &nbsp 
-<a style="font-size: 165%" href="/tags/jvm/">jvm</a> &nbsp 
-<a style="font-size: 125%" href="/tags/life/">life</a> &nbsp 
-<a style="font-size: 147%" href="/tags/methodology/">methodology</a> &nbsp 
-<a style="font-size: 134%" href="/tags/network/">network</a> &nbsp 
-<a style="font-size: 125%" href="/tags/octopress/">octopress</a> &nbsp 
-<a style="font-size: 114%" href="/tags/os/">os</a> &nbsp 
+<a style="font-size: 159%" href="/tags/bytecode/">bytecode</a> &nbsp 
+<a style="font-size: 113%" href="/tags/diary/">diary</a> &nbsp 
+<a style="font-size: 163%" href="/tags/distributed/">distributed</a> &nbsp 
+<a style="font-size: 132%" href="/tags/hadoop/">hadoop</a> &nbsp 
+<a style="font-size: 172%" href="/tags/java/">java</a> &nbsp 
+<a style="font-size: 163%" href="/tags/jvm/">jvm</a> &nbsp 
+<a style="font-size: 124%" href="/tags/life/">life</a> &nbsp 
+<a style="font-size: 146%" href="/tags/methodology/">methodology</a> &nbsp 
+<a style="font-size: 132%" href="/tags/network/">network</a> &nbsp 
+<a style="font-size: 124%" href="/tags/octopress/">octopress</a> &nbsp 
+<a style="font-size: 113%" href="/tags/os/">os</a> &nbsp 
 <a style="font-size: 172%" href="/tags/pat/">pat</a> &nbsp 
-<a style="font-size: 114%" href="/tags/software-engineering/">software_engineering</a> &nbsp 
-<a style="font-size: 169%" href="/tags/think/">think</a>
+<a style="font-size: 113%" href="/tags/software-engineering/">software_engineering</a> &nbsp 
+<a style="font-size: 166%" href="/tags/think/">think</a>
 
   </ul>
 </section>

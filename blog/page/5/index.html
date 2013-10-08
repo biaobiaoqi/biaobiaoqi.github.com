@@ -9,7 +9,7 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="背景 毕业季到了，女朋友跟班里同学们一起拍了很多照片。由于照片分散在不同的人的手机、相机里，她也无法立即给我传来她的照片。这个情景一年前我也遇到过，只是当时自己比较忙，加上考虑着还会在本校读研，也没太在意毕业季照片的手机这一需求，以至于到现在我的电脑里甚至没有一张我穿学士服的照片:-=。而现在， &hellip;">
+  <meta name="description" content="本文通过介绍 Java 方法调用的虚分派，来加深对 Java 多态实现的理解。需要预先理解 Java 字节码和 JVM 的基本框架。 虚分配（Virtual Dispatch） 首先从字节码中对方法的调用说起。Java 的 bytecode 中方法的调用实现分为四种指令： 1. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -106,6 +106,178 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/02/virtual-dispatch-and-method-table-in-java/">Java方法调用的虚分派</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-02T01:51:00+08:00" pubdate data-updated="true">Jun 2<span>nd</span>, 2013</time>
+        
+         | <a href="/blog/2013/06/02/virtual-dispatch-and-method-table-in-java/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>本文通过介绍 Java 方法调用的虚分派，来加深对 Java 多态实现的理解。需要预先理解 Java 字节码和 JVM 的基本框架。</p>
+
+<h2>虚分配（Virtual Dispatch）</h2>
+
+<p>首先从字节码中对方法的调用说起。Java 的 bytecode 中方法的调用实现分为四种指令：</p>
+
+<ul>
+<li>1.invokevirtual 为最常见的情况，包含 virtual dispatch 机制；</li>
+<li>2.invokespecial 是作为对 private 和构造方法的调用，绕过了 virtual dispatch；</li>
+<li>3.invokeinterface 的实现跟 invokevirtual 类似。</li>
+<li>4.invokestatic 是对静态方法的调用。</li>
+</ul>
+
+
+<p>其中最复杂的要属 invokevirtual 指令，它涉及到了多态的特性，使用 virtual dispatch 做方法调用。</p>
+
+<p>virtual dispatch 机制会首先从 receiver（被调用方法的对象）的类的实现中查找对应的方法，如果没找到，则去父类查找，直到找到函数并实现调用，而不是依赖于引用的类型。</p>
+
+<p>下面是一段有趣的代码。反映了 virtual dispatch 机制 和 一般的 field 访问的不同。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Greeting</span> <span class="o">{</span>
+</span><span class='line'>    <span class="n">String</span> <span class="n">intro</span> <span class="o">=</span> <span class="s">&quot;Hello&quot;</span><span class="o">;</span>
+</span><span class='line'>    <span class="n">String</span> <span class="nf">target</span><span class="o">(){</span>
+</span><span class='line'>        <span class="k">return</span> <span class="s">&quot;world&quot;</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">FrenchGreeting</span> <span class="kd">extends</span> <span class="n">Greeting</span> <span class="o">{</span>
+</span><span class='line'>    <span class="n">String</span> <span class="n">intro</span> <span class="o">=</span> <span class="s">&quot;Bonjour&quot;</span><span class="o">;</span>
+</span><span class='line'>    <span class="n">String</span> <span class="nf">target</span><span class="o">(){</span>
+</span><span class='line'>        <span class="k">return</span> <span class="s">&quot;le monde&quot;</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+</span><span class='line'>        <span class="n">Greeting</span> <span class="n">english</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Greeting</span><span class="o">();</span>
+</span><span class='line'>        <span class="n">Greeting</span> <span class="n">french</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FrenchGreeting</span><span class="o">();</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">english</span><span class="o">.</span><span class="na">intro</span> <span class="o">+</span> <span class="s">&quot;,&quot;</span> <span class="o">+</span> <span class="n">english</span><span class="o">.</span><span class="na">target</span><span class="o">());</span>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">french</span><span class="o">.</span><span class="na">intro</span> <span class="o">+</span> <span class="s">&quot;,&quot;</span> <span class="o">+</span> <span class="n">french</span><span class="o">.</span><span class="na">target</span><span class="o">());</span>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(((</span><span class="n">FrenchGreeting</span><span class="o">)</span><span class="n">french</span><span class="o">).</span><span class="na">intro</span> <span class="o">+</span> <span class="s">&quot;,&quot;</span> <span class="o">+</span>      <span class="o">((</span><span class="n">FrenchGreeting</span><span class="o">)</span><span class="n">french</span><span class="o">).</span><span class="na">target</span><span class="o">());</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>运行的结果为</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">Hello</span><span class="o">,</span><span class="n">world</span>
+</span><span class='line'><span class="n">Hello</span><span class="o">,</span><span class="n">le</span> <span class="n">monde</span>
+</span><span class='line'><span class="n">Bonjour</span><span class="o">,</span><span class="n">le</span> <span class="n">monde</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>前两行输出中，对于 intro 这个属性的访问，直接指向了父类中的变量，因为引用类型为父类。</p>
+
+<p>第二行对于 target()的方法调用，则是指向了子类中的方法，虽然引用类型也为父类，但这是虚分派的结果，虚分派不管引用类型的，只查被调用对象的类型。</p>
+
+<p>既然虚分派机制是从被调用对象本身的类开始查找，那么对于一个覆盖了父类中某方法的子类的对象，是无法调用父类中那个被覆盖的方法的吗？</p>
+
+<p>在虚分派机制中这确实是不可以的。但却可以通过 invokespecial 实现。如下代码</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">FrenchGreeting</span> <span class="kd">extends</span> <span class="n">Greeting</span> <span class="o">{</span>
+</span><span class='line'>    <span class="n">String</span> <span class="n">intro</span> <span class="o">=</span> <span class="s">&quot;Bonjour&quot;</span><span class="o">;</span>
+</span><span class='line'>    <span class="n">String</span> <span class="nf">target</span><span class="o">(){</span>
+</span><span class='line'>        <span class="k">return</span> <span class="s">&quot;le monde&quot;</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="n">String</span> <span class="nf">func</span><span class="o">(){</span>
+</span><span class='line'>        <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">target</span><span class="o">();</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+</span><span class='line'>        <span class="n">Greeting</span> <span class="n">english</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Greeting</span><span class="o">();</span>
+</span><span class='line'>        <span class="n">FrenchGreeting</span> <span class="n">french</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FrenchGreeting</span><span class="o">();</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">french</span><span class="o">.</span><span class="na">func</span><span class="o">());</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/06/02/virtual-dispatch-and-method-table-in-java/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -821,55 +993,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/05/13/free-the-bit-economics/">《免费》</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-13T00:46:00+08:00" pubdate data-updated="true">May 13<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/05/13/free-the-bit-economics/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>比特经济的到来</h2>
-
-<p><a href="http://en.wikipedia.org/wiki/Chris_Andersen">克里斯·安德森</a>人称鸟人安德森，现效力于热火队，一直以来都是值得信赖的角色球员，板凳匪徒，内线尖兵。好了，不扯了……回到另外一个<a href="http://t.cn/akRhip">克里斯·安德森</a>的思想世界来。</p>
-
-<p>长尾理论早就为人熟知了，最早就是由安德森提出的，用于解释 Amazon 和 Netflix 的商业和经济模式。虽然没有阅读过原书，只是从网络接收了一些二手甚至三手的相关观点，但也可以从当今互联网的新兴中发现许多端倪。</p>
-
-<p>按作者的话来说，“免费”是<a href="http://book.douban.com/subject/1919072/">《长尾理论》</a>没讨论完的话题，它并非新生事物，但是一直在变化，它的变化促使我们要反思人类行为和经济动因方面最根深蒂固的一些观念。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/05/13/free-the-bit-economics/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/6/">&larr; Older</a>
@@ -887,20 +1010,20 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
  <br /> 
   <ul class="tag-cloud">
     <a style="font-size: 180%" href="/tags/algorithm/">algorithm</a> &nbsp 
-<a style="font-size: 161%" href="/tags/bytecode/">bytecode</a> &nbsp 
-<a style="font-size: 114%" href="/tags/diary/">diary</a> &nbsp 
-<a style="font-size: 165%" href="/tags/distributed/">distributed</a> &nbsp 
-<a style="font-size: 134%" href="/tags/hadoop/">hadoop</a> &nbsp 
-<a style="font-size: 175%" href="/tags/java/">java</a> &nbsp 
-<a style="font-size: 165%" href="/tags/jvm/">jvm</a> &nbsp 
-<a style="font-size: 125%" href="/tags/life/">life</a> &nbsp 
-<a style="font-size: 147%" href="/tags/methodology/">methodology</a> &nbsp 
-<a style="font-size: 134%" href="/tags/network/">network</a> &nbsp 
-<a style="font-size: 125%" href="/tags/octopress/">octopress</a> &nbsp 
-<a style="font-size: 114%" href="/tags/os/">os</a> &nbsp 
+<a style="font-size: 159%" href="/tags/bytecode/">bytecode</a> &nbsp 
+<a style="font-size: 113%" href="/tags/diary/">diary</a> &nbsp 
+<a style="font-size: 163%" href="/tags/distributed/">distributed</a> &nbsp 
+<a style="font-size: 132%" href="/tags/hadoop/">hadoop</a> &nbsp 
+<a style="font-size: 172%" href="/tags/java/">java</a> &nbsp 
+<a style="font-size: 163%" href="/tags/jvm/">jvm</a> &nbsp 
+<a style="font-size: 124%" href="/tags/life/">life</a> &nbsp 
+<a style="font-size: 146%" href="/tags/methodology/">methodology</a> &nbsp 
+<a style="font-size: 132%" href="/tags/network/">network</a> &nbsp 
+<a style="font-size: 124%" href="/tags/octopress/">octopress</a> &nbsp 
+<a style="font-size: 113%" href="/tags/os/">os</a> &nbsp 
 <a style="font-size: 172%" href="/tags/pat/">pat</a> &nbsp 
-<a style="font-size: 114%" href="/tags/software-engineering/">software_engineering</a> &nbsp 
-<a style="font-size: 169%" href="/tags/think/">think</a>
+<a style="font-size: 113%" href="/tags/software-engineering/">software_engineering</a> &nbsp 
+<a style="font-size: 166%" href="/tags/think/">think</a>
 
   </ul>
 </section>

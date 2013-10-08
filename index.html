@@ -9,7 +9,7 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="遇到问题 今天的中国好声音决赛之夜，我的 Mac 突然无法发出声响了=(，在此之前，刚看过一些视频，音频输出正常。 我尝试了使用 MBP 内建的外放和插入 iphone4s 的耳机并将音量调整到最大，没有任何声响。网上查阅了一些相关异常的资料，发现可能是 NVRAM 的问题。官方资料见链接：《关于 &hellip;">
+  <meta name="description" content="这次的题目来源是 2013 年 10 月 7 日下午的浙大计算机研究生招生机试题。 这次题目的难度，按姥姥的说法是：『比普通的 PAT 要难了 0.5 个点。我是把自己的题目从 1.0 到 5.0 以 0.5 的间距分难度级别的，PAT(A)难度一般在 1.5-4.5 之间，保研考试一般在 2.0 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -106,6 +106,99 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/10/08/pat-1065-pat-1068/">PAT 1065 - 1068 题解</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-08T13:46:00+08:00" pubdate data-updated="true">Oct 8<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/10/08/pat-1065-pat-1068/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>这次的题目来源是 2013 年 10 月 7 日下午的浙大计算机研究生招生机试题。</p>
+
+<p>这次题目的难度，按姥姥的说法是：『比普通的 PAT 要难了 0.5 个点。我是把自己的题目从 1.0 到 5.0 以 0.5 的间距分难度级别的，PAT(A)难度一般在 1.5-4.5 之间，保研考试一般在 2.0-5.0 之间。PAT(B)大概是 1.0-2.5 的难度。』。</p>
+
+<p>个人认为，其中 1066 模拟 AVL 插入的实现有些细节容易弄错，而 1068 只要会简单的 DP，也就没有问题了，1065 和 1066 都还是很简单的实现。</p>
+
+<p>下面是各个题的分析（PAT advanced level 本人实现的全部源码：<a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel">请戳</a>）。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1065">1065. A+B and C (64bit) (20)</a></h2>
+
+<h5>题意</h5>
+
+<p>输入三个数 a，b，c，取值范围是 [<code>-2^63</code>, <code>2^63</code>]，要求判断<code>a + b &lt; c</code> 是否为真。</p>
+
+<h5>分析</h5>
+
+<p>很简单的签到题，想到两种方法：一是用 Java 的 Big Decimal 实现（应该不会超时吧-,-），二是对 a+b 造成的 long long 溢出的情况做特殊处理。</p>
+
+<p>对于分情况的实现方式，实际上也就两种特殊情况，即 a，b 同号且两者之和溢出了（绝对值超过了 2<sup>63）。此时两者之和与</sup> c 的值的相对关系也是确定的。</p>
+
+<ul>
+<li><code>a &lt; 0 &amp;&amp; b &lt; 0 &amp;&amp; a + b &gt;= 0</code>: a + b 必小于 c</li>
+<li><code>a &gt; 0 &amp;&amp; b &gt; 0 &amp;&amp; a + b &lt;= 0</code>: a + b 必大于 c</li>
+</ul>
+
+
+<p>另在 98 看见有大神说可以用 long double 水过去-,-.</p>
+
+<p>pat1065 源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1065.cpp">请戳</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1066">1066. Root of AVL Tree (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>实现 <a href="http://en.wikipedia.org/wiki/AVL_tree">AVL 树</a>的插入方法，给定 N(&lt;=20)个数，要求输出依次插入后的 AVL 树的根。</p>
+
+<h5>分析</h5>
+
+<p>由于节点少，可以使用相对简单的递归实现方法：</p>
+
+<ul>
+<li>每个节点维护一个高度值，用在递归插入后检测子树是否平衡</li>
+<li>完成 4 个旋转方法（参见 <a href="http://en.wikipedia.org/wiki/AVL_tree">AVL Tree wikipedia</a> 中的示意图）</li>
+<li>在递归插入方法中，完成对子树的插入后，检测子树高度差，根据子树的结构特点，做出相应的旋转</li>
+<li>旋转后记得更新节点的高度值</li>
+</ul>
+
+
+<p>机试时似乎没有人完全 AC 这道题，看来代码实现和 Debug 能力缺乏还是比较普遍的问题。</p>
+
+<p>pat1066 源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1066.cpp">请戳</a></p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/10/08/pat-1065-pat-1068/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -834,69 +927,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/09/08/late-initialising-in-java/">Java类加载的延迟初始化</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-08T02:00:00+08:00" pubdate data-updated="true">Sep 8<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/09/08/late-initialising-in-java/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loading-linking-and-initialising/">《Java 类的装载、链接和初始化》</a>中提到，链接的最后一步是解析，即对符号引用的解析。但这不是必须的，可以等到相应的符号引用第一次使用时再解析。</p>
-
-<p>而类的初始化是在链接之后的（注意了，根据不同 JVM 有不同的实现方式，在类初始化的时候，可能已经完成了所有的符号引用的解析，也可能没有），本文所写的就是类的初始化的时机问题。</p>
-
-<p>Java 类的动态加载机制规定，在类被主动使用(active use)之前，必须已经完成类的初始化。既然有主动调用，那么就有被动调用了。这两者有哪些区别呢？</p>
-
-<p>下面列出所有主动使用的情况，用以区分两者：</p>
-
-<ul>
-<li>1.创造该类的一个新的实例</li>
-<li>2.调用这个类中的静态方法</li>
-<li>3.获取类或者接口中的非常量的静态变量</li>
-<li>4.利用反射调用方法</li>
-<li>5.初始化该类的某子类</li>
-<li>6.被制定为 JVM 开始运行时必须初始化的类</li>
-</ul>
-
-
-<p>注意，3 中为何是“非常量的静态变量”。如果是常量，即声明为 final 的话，并不会出现对类的构造，虽然调用时有类名出现，但实际调用会直接使用常量，绕过了类的限制（详情见相关常量池和运行时常量池的知识）。</p>
-
-<p>只有当一个非常量的静态变量被显示的在类或接口中声明时，它的调用才属于主动调用。对于父类中某非常量静态变量的调用属于被动使用(positive use)。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/09/08/late-initialising-in-java/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -912,20 +942,20 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
  <br /> 
   <ul class="tag-cloud">
     <a style="font-size: 180%" href="/tags/algorithm/">algorithm</a> &nbsp 
-<a style="font-size: 161%" href="/tags/bytecode/">bytecode</a> &nbsp 
-<a style="font-size: 114%" href="/tags/diary/">diary</a> &nbsp 
-<a style="font-size: 165%" href="/tags/distributed/">distributed</a> &nbsp 
-<a style="font-size: 134%" href="/tags/hadoop/">hadoop</a> &nbsp 
-<a style="font-size: 175%" href="/tags/java/">java</a> &nbsp 
-<a style="font-size: 165%" href="/tags/jvm/">jvm</a> &nbsp 
-<a style="font-size: 125%" href="/tags/life/">life</a> &nbsp 
-<a style="font-size: 147%" href="/tags/methodology/">methodology</a> &nbsp 
-<a style="font-size: 134%" href="/tags/network/">network</a> &nbsp 
-<a style="font-size: 125%" href="/tags/octopress/">octopress</a> &nbsp 
-<a style="font-size: 114%" href="/tags/os/">os</a> &nbsp 
+<a style="font-size: 159%" href="/tags/bytecode/">bytecode</a> &nbsp 
+<a style="font-size: 113%" href="/tags/diary/">diary</a> &nbsp 
+<a style="font-size: 163%" href="/tags/distributed/">distributed</a> &nbsp 
+<a style="font-size: 132%" href="/tags/hadoop/">hadoop</a> &nbsp 
+<a style="font-size: 172%" href="/tags/java/">java</a> &nbsp 
+<a style="font-size: 163%" href="/tags/jvm/">jvm</a> &nbsp 
+<a style="font-size: 124%" href="/tags/life/">life</a> &nbsp 
+<a style="font-size: 146%" href="/tags/methodology/">methodology</a> &nbsp 
+<a style="font-size: 132%" href="/tags/network/">network</a> &nbsp 
+<a style="font-size: 124%" href="/tags/octopress/">octopress</a> &nbsp 
+<a style="font-size: 113%" href="/tags/os/">os</a> &nbsp 
 <a style="font-size: 172%" href="/tags/pat/">pat</a> &nbsp 
-<a style="font-size: 114%" href="/tags/software-engineering/">software_engineering</a> &nbsp 
-<a style="font-size: 169%" href="/tags/think/">think</a>
+<a style="font-size: 113%" href="/tags/software-engineering/">software_engineering</a> &nbsp 
+<a style="font-size: 166%" href="/tags/think/">think</a>
 
   </ul>
 </section>

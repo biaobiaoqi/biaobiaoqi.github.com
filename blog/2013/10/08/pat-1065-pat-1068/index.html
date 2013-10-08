@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>关于毕业季照片分享的思考 - Biaobiaoqi的博客</title>
+  <title>PAT 1065 - 1068 题解 - Biaobiaoqi的博客</title>
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="毕业季到了，女朋友跟班里同学们一起拍了很多照片。由于照片分散在不同的人的手机、相机里，她也无法立即给我传来她的照片。这个情景一年前我也遇到过，只是当时自己比较忙，加上考虑着还会在本校读研，也没太在意毕业季照片的手机这一需求，以至于到现在我的电脑里甚至没有一张我穿学士服的照片:-=。而现在， &hellip;">
+  <meta name="description" content="浙大2013保研上机考试，PAT1065， PAT1066， PAT1067， PAT1086，PAT 1065， PAT 1066， PAT 1067， PAT 1086，比普通的PAT要难了0.5个点">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://biaobiaoqi.me/blog/2013/05/25/some-ideas-about-using-bt-protocol-to-sync/">
+  <link rel="canonical" href="http://biaobiaoqi.me/blog/2013/10/08/pat-1065-pat-1068/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -109,7 +109,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
   <header>
     
-      <h1 class="entry-title">关于毕业季照片分享的思考</h1>
+      <h1 class="entry-title">PAT 1065 - 1068 题解</h1>
     
     
       <p class="meta">
@@ -125,7 +125,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
 
 
-<time datetime="2013-05-25T22:47:00+08:00" pubdate data-updated="true">May 25<span>th</span>, 2013</time>
+<time datetime="2013-10-08T13:46:00+08:00" pubdate data-updated="true">Oct 8<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -134,97 +134,108 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   </header>
 
 
-<div class="entry-content"><h2>背景</h2>
+<div class="entry-content"><p>这次的题目来源是 2013 年 10 月 7 日下午的浙大计算机研究生招生机试题。</p>
 
-<p>毕业季到了，女朋友跟班里同学们一起拍了很多照片。由于照片分散在不同的人的手机、相机里，她也无法立即给我传来她的照片。这个情景一年前我也遇到过，只是当时自己比较忙，加上考虑着还会在本校读研，也没太在意毕业季照片的手机这一需求，以至于到现在我的电脑里甚至没有一张我穿学士服的照片:-=。而现在，当我想看看 gf 的照片时，这个需求横亘在我面前，让我特别的想解决掉它。</p>
+<p>这次题目的难度，按姥姥的说法是：『比普通的 PAT 要难了 0.5 个点。我是把自己的题目从 1.0 到 5.0 以 0.5 的间距分难度级别的，PAT(A)难度一般在 1.5-4.5 之间，保研考试一般在 2.0-5.0 之间。PAT(B)大概是 1.0-2.5 的难度。』。</p>
 
-<p>让我们从事实出发，理清问题的思路。</p>
+<p>个人认为，其中 1066 模拟 AVL 插入的实现有些细节容易弄错，而 1068 只要会简单的 DP，也就没有问题了，1065 和 1066 都还是很简单的实现。</p>
 
-<h2>需求的产生</h2>
+<p>下面是各个题的分析（PAT advanced level 本人实现的全部源码：<a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel">请戳</a>）。</p>
 
-<p>大学生拍毕业季照的现状：</p>
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1065">1065. A+B and C (64bit) (20)</a></h2>
+
+<h5>题意</h5>
+
+<p>输入三个数 a，b，c，取值范围是 [<code>-2^63</code>, <code>2^63</code>]，要求判断<code>a + b &lt; c</code> 是否为真。</p>
+
+<h5>分析</h5>
+
+<p>很简单的签到题，想到两种方法：一是用 Java 的 Big Decimal 实现（应该不会超时吧-,-），二是对 a+b 造成的 long long 溢出的情况做特殊处理。</p>
+
+<p>对于分情况的实现方式，实际上也就两种特殊情况，即 a，b 同号且两者之和溢出了（绝对值超过了 2<sup>63）。此时两者之和与</sup> c 的值的相对关系也是确定的。</p>
 
 <ul>
-<li>1.大学生在毕业季拍照留念是刚需，几乎平日爱拍照、不爱拍照的所有人都会参与其中。</li>
-<li>2.拍照一般以小团体为基本单元进行。多是班级、社团这种常见的凝聚力较强的团体。</li>
-<li>3.随着科技的发展和生活水平的提高，越来越多的人具备了拍出高质量照片的设备和实力。</li>
+<li><code>a &lt; 0 &amp;&amp; b &lt; 0 &amp;&amp; a + b &gt;= 0</code>: a + b 必小于 c</li>
+<li><code>a &gt; 0 &amp;&amp; b &gt; 0 &amp;&amp; a + b &lt;= 0</code>: a + b 必大于 c</li>
 </ul>
 
 
-<p>由于这种以小团体为单位的照片的大量产生，每个团体中的照片会交叉散落在较多人手中。在这种分散的格局面前，单独挑选出自己的照片并保存的成本巨大，直接导致了大家最终需求的统一：</p>
+<p>另在 98 看见有大神说可以用 long double 水过去-,-.</p>
+
+<p>pat1065 源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1065.cpp">请戳</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1066">1066. Root of AVL Tree (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>实现 <a href="http://en.wikipedia.org/wiki/AVL_tree">AVL 树</a>的插入方法，给定 N(&lt;=20)个数，要求输出依次插入后的 AVL 树的根。</p>
+
+<h5>分析</h5>
+
+<p>由于节点少，可以使用相对简单的递归实现方法：</p>
 
 <ul>
-<li>将所有的照片分发到所有人手中。</li>
+<li>每个节点维护一个高度值，用在递归插入后检测子树是否平衡</li>
+<li>完成 4 个旋转方法（参见 <a href="http://en.wikipedia.org/wiki/AVL_tree">AVL Tree wikipedia</a> 中的示意图）</li>
+<li>在递归插入方法中，完成对子树的插入后，检测子树高度差，根据子树的结构特点，做出相应的旋转</li>
+<li>旋转后记得更新节点的高度值</li>
 </ul>
 
 
-<h2>原有解决方案</h2>
+<p>机试时似乎没有人完全 AC 这道题，看来代码实现和 Debug 能力缺乏还是比较普遍的问题。</p>
 
-<p>现有的解决方案主要方案归纳为如下四种：</p>
+<p>pat1066 源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1066.cpp">请戳</a></p>
 
-<ul>
-<li><p>1.用移动硬盘等设备人力拷贝</p>
-
-<p>  这种方式太过古老和原始，缺点费时费力。</p></li>
-<li><p>2.使用公邮、网盘、QQ 群共享等方式统一上传、下载</p>
-
-<p>  主要缺点是外网网速限制；另外，网速的限制让用户上传和下载的门槛变高，影响了上传积极性，如果有人迟迟不上传，最终下载完整数据的时间也会一直拖延，带来消极的体验；如果注册一次性账号，这也不见得是环保的行为（或许这想法有点数据洁癖吧>&lt;），如果使用非一次性账号，那么权限管理将比较头疼。</p></li>
-<li><p>3.使用内网 BT 资源站分别打包上传、下载</p>
-
-<p>  优点是利用了内网网速的优势。缺点是每个人都打包做种，会让资源分散的很厉害，难于汇集。且做种等步骤对于部分用户而言，有操作门槛。</p></li>
-<li><p>4.先使用 1 中方法，统一手机照片数据，然后按照 2 或 3 的方法发布数据</p>
-
-<p>  这大概是最靠谱的方式了，缺点集中在需要有人费时费力的手机数据上。当然，如果班里有一个任劳任怨的好班长，这个问题就解决了。</p></li>
-</ul>
+<!--more-->
 
 
-<h4>总结：</h4>
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1067">1067. Sort with Swap(0,*) (25)</a></h2>
 
-<p>对于一个懒人而言，现有的解决方案都是蹩脚的。这些解决方案都不约而同的希望首先将数据聚合到一个外部空间中，然后再统一的分发给大家。这个步骤必要吗？实际上，我们只是需要每个人都方便、快捷的获得所有照片。</p>
+<h5>题意</h5>
 
-<h2>一个简单的设计</h2>
+<p>给定 N(&lt;=<code>10^5</code>)以及一个{0,1,…,N-1}的打乱的数列。</p>
 
-<p>我将问题抽象为：</p>
+<p>定义了一种交换方式：<code>Swap(0,*)</code>，表示将 0 和任意数进行位置交换。</p>
 
-<ul>
-<li>完整的数据分散在 10 至 20 个数据拥有者手中，需要通过一定手段，让每个个体都不重复的拥有完整的数据。</li>
-</ul>
+<p>限定只能使用<code>Swap(0,*)</code>，要求输出最少需要多少次交换操作，来完成整体的排序。</p>
 
+<h5>分析</h5>
 
-<p>由于外网网速的限制，基于校园内网建立的工具就有了天然的优势。但如果使用内网，就不得不抛弃各大公司免费提供的邮箱存储空间、网盘存储空间。而校内的资源是有限的，没有自己的服务器，没有足够的空间存储大家的数据，这也就迫使我们考虑到了 p2p 的系统架构。于是，有了这样的解决方案，设定代号为 BBT：</p>
+<p>很好玩的模拟题，从题目的两个测试数据入手，找到所需要的交换次数的特点：</p>
 
-<ul>
-<li>PC 机安装 BBT 工具软件后，可以设定<code>共享目录</code>和对应的<code>分享 ID</code></li>
-<li>放入特定<code>共享目录</code>的文件，将使用基于 p2p 同步的方式，在拥有相同的<code>分享 ID</code>的<code>共享目录</code>间同步数据，目的是让所有人都获得到每个人的数据</li>
-</ul>
+<p>假设用数组 a 存储输入的数组，数组的坐标为 [0, N - 1]，而元素的所有值也是 [0, N - 1]。</p>
 
-
-<p>在跟阿豪童鞋的交流中，他建议为了进一步简化用户操作，可以尝试这样一种体验方式：</p>
-
-<ul>
-<li>班级内所有人在同一个链接下载工具软件。保证这一链接下载的软件能互相通信，实现数据同步。这杨就节省了用户自己设定相同的<code>分享 ID</code>的流程，而将这一过程转移到班长请求下载链接的过程中。</li>
-</ul>
+<ol>
+<li><p>输入的序列中本就在自己位置上的数字，是不用被交换的（比如序列<code>{4, 0, 2, 1, 3}</code>中 2 就是不用被交换），0 除外</p></li>
+<li><p>0 最终肯定会被放回到 0 的位置上，但交换过程中，0 也可能被提前交换到了 0 的位置上，此时还有其他数没有处于正确的位置上（参见 Sample Input<code>{10 3 5 7 2 6 4 9 0 8 1}</code>的情况）。此时需要多费一步将 0 和某一个处于不正确位置的数交换位置，来继续排序。</p></li>
+<li><p>每次的交换，0 其实只是一个过渡作用。实际的交换过程遵循的链式关系如下所述：设定 a[x] == b， 而 b != x，则需要将 a[x]的值移动到 a[b]上，此时 a[b] == c, 那么接着又需要将 a[b]的值移动到 a[c]上，以此类推，肯定能获得一个循环，且节点数 M 小于等于 N。如果循环中包含了 0，那么这个循环中的数排序所需要的交换次数为 M - 1, 如果循环中不包含 0，那么首先需要一次交换将 0 移动到循环链中，此时整个循环链节点数增加了 1，于是共需要开销 M + 1 次交换。</p></li>
+<li><p>根据 3 的分析，在 2 的情况下，0 与不同的不在正确位置的数的交换，是不会影响最终的结果的。</p></li>
+</ol>
 
 
-<p>确实够简洁，很赞，实现成本还需要调研。</p>
+<p>综上所述，用类似 dfs 或者并查集的思路找到集合中的所有循环链路，记录下他们的大小，即可计算出所需要的交换次数。</p>
 
-<h6>BitTorrent Sync</h6>
+<p>pat1067 源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1067.cpp">请戳</a></p>
 
-<p>在构思的过程中，突然想起前几天在 start up news 上看到了一个基于 BT 协议的同步软件 <a href="http://labs.bittorrent.com/experiments/sync.html">BitTorrent Sync</a>。</p>
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1068">1068. Find More Coins (30)</a></h2>
 
-<p><img src="http://labs.bittorrent.com/img/wide/sync.png" title="BitTorrent Sync" alt="BitTorrent Sync" /></p>
+<h5>题意</h5>
 
-<p>它的实现方式大概是我们所需要的。可惜的是，由于它的功能全面，界面略显复杂。而同时，它并没有开放二次开发接口。</p>
+<p>给定 N(&lt;=<code>10^4</code>) 枚硬币和一个价格 M(&lt;=100)。</p>
 
-<p>或许我需要自己搭建一个 p2p 的系统？</p>
+<p>要求用这 N 枚硬币组合出价格 M，如果有多种组合，输出排序后硬币面值字典序最小的组合，如果没有组合，则输出 No Solution.</p>
 
-<h6>PS:</h6>
+<h5>分析</h5>
 
-<p>BT 的优势，在于利用了所有节点的存储和传输能力，节点数量越多，下载越快</p>
+<p>裸背包问题，相关资料参见 dd 大神的总结：<a href="http://cuitianyi.com/blog/%E3%80%8A%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E4%B9%9D%E8%AE%B2%E3%80%8B2-0-alpha1/">《背包问题九讲》</a></p>
 
-<p>BitTorrent  Sync 的优势，则在于能动态的集合分散在不同节点中的数据</p>
+<p>按照常规的背包思路，构建 10001 * 101 的二维数组 f[i][j]，状态 f[i][j] 表示前 i 枚硬币能拼凑出的小于等于 j 的最大值（j 这里代表一个价格）。</p>
 
-<p>感觉这种去中心化的分布式系统，前景大大的有啊;)<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/05/25/some-ideas-about-using-bt-protocol-to-sync/'>http://biaobiaoqi.me/blog/2013/05/25/some-ideas-about-using-bt-protocol-to-sync/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
+<p>状态转移方程为：<code>f[i][j] = max(f[i - 1][j], f[i - 1][j - c[i]] + c[i])</code>， 其中 c[i]为第 i 枚硬币的面值，c[i]为排序过的硬币面值数组。</p>
+
+<p>由于最终的输出要求是排序的币值的字典序最小的组合，可以对 c[i]做从大到小的排序，并另开一个数组 has[i][j] 来记录当前状态下，是否有包含 c[i]。同时注意，当<code>f[i - 1][j] == f[i - 1][j - c[i]] + c[i]</code>时，采纳当前的 c[i]，以满足字典序。</p>
+
+<p>pat1068 源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1068.cpp">请戳</a><p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/10/08/pat-1065-pat-1068/'>http://biaobiaoqi.me/blog/2013/10/08/pat-1065-pat-1068/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
 </div>
 
 
@@ -247,7 +258,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
 
 
-<time datetime="2013-05-25T22:47:00+08:00" pubdate data-updated="true">May 25<span>th</span>, 2013</time>
+<time datetime="2013-10-08T13:46:00+08:00" pubdate data-updated="true">Oct 8<span>th</span>, 2013</time>
       
 
 <span class="categories">
@@ -292,10 +303,8 @@ var jiathis_config={
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/05/25/kmp-algorithm/" title="Previous Post: KMP算法实现">&laquo; KMP算法实现</a>
+        <a class="basic-alignment left" href="/blog/2013/10/07/reset-nvram/" title="Previous Post: 重置MBP的NVRAM">&laquo; 重置MBP的NVRAM</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/06/02/virtual-dispatch-and-method-table-in-java/" title="Next Post: Java方法调用的虚分派">Java方法调用的虚分派 &raquo;</a>
       
     </p>
   </footer>
@@ -378,8 +387,8 @@ var jiathis_config={
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://biaobiaoqi.me/blog/2013/05/25/some-ideas-about-using-bt-protocol-to-sync/';
-        var disqus_url = 'http://biaobiaoqi.me/blog/2013/05/25/some-ideas-about-using-bt-protocol-to-sync/';
+        var disqus_identifier = 'http://biaobiaoqi.me/blog/2013/10/08/pat-1065-pat-1068/';
+        var disqus_url = 'http://biaobiaoqi.me/blog/2013/10/08/pat-1065-pat-1068/';
         var disqus_script = 'embed.js';
       
     (function () {

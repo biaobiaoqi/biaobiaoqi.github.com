@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: algorithm | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.me/tags/algorithm/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.me/"/>
-  <updated>2013-10-08T00:01:32+08:00</updated>
+  <updated>2013-10-08T15:48:03+08:00</updated>
   <id>http://biaobiaoqi.me/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -12,6 +12,116 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[PAT 1065 - 1068 题解]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/10/08/pat-1065-pat-1068/"/>
+    <updated>2013-10-08T13:46:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/10/08/pat-1065-pat-1068</id>
+    <content type="html"><![CDATA[<p>这次的题目来源是2013年10月7日下午的浙大计算机研究生招生机试题。</p>
+
+<p>这次题目的难度，按姥姥的说法是：『比普通的PAT要难了0.5个点。我是把自己的题目从1.0到5.0以0.5的间距分难度级别的，PAT(A)难度一般在1.5-4.5之间，保研考试一般在2.0-5.0之间。PAT(B)大概是1.0-2.5的难度。』。</p>
+
+<p>个人认为，其中1066模拟AVL插入的实现有些细节容易弄错，而1068只要会简单的DP，也就没有问题了，1065和1066都还是很简单的实现。</p>
+
+<p>下面是各个题的分析（PAT advanced level本人实现的全部源码：<a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel">请戳</a>）。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1065">1065. A+B and C (64bit) (20)</a></h2>
+
+<h5>题意</h5>
+
+<p>输入三个数a，b，c，取值范围是 [<code>-2^63</code>, <code>2^63</code>]，要求判断<code>a + b &lt; c</code> 是否为真。</p>
+
+<h5>分析</h5>
+
+<p>很简单的签到题，想到两种方法：一是用Java的Big Decimal实现（应该不会超时吧-,-），二是对a+b造成的long long溢出的情况做特殊处理。</p>
+
+<p>对于分情况的实现方式，实际上也就两种特殊情况，即a，b同号且两者之和溢出了（绝对值超过了2<sup>63）。此时两者之和与c的值的相对关系也是确定的。</sup></p>
+
+<ul>
+<li><code>a &lt; 0 &amp;&amp; b &lt; 0 &amp;&amp; a + b &gt;= 0</code>: a + b 必小于c</li>
+<li><code>a &gt; 0 &amp;&amp; b &gt; 0 &amp;&amp; a + b &lt;= 0</code>: a + b 必大于c</li>
+</ul>
+
+
+<p>另在98看见有大神说可以用long double水过去-,-.</p>
+
+<p>pat1065源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1065.cpp">请戳</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1066">1066. Root of AVL Tree (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>实现<a href="http://en.wikipedia.org/wiki/AVL_tree">AVL树</a>的插入方法，给定N(&lt;=20)个数，要求输出依次插入后的AVL树的根。</p>
+
+<h5>分析</h5>
+
+<p>由于节点少，可以使用相对简单的递归实现方法：</p>
+
+<ul>
+<li>每个节点维护一个高度值，用在递归插入后检测子树是否平衡</li>
+<li>完成4个旋转方法（参见<a href="http://en.wikipedia.org/wiki/AVL_tree">AVL Tree wikipedia</a>中的示意图）</li>
+<li>在递归插入方法中，完成对子树的插入后，检测子树高度差，根据子树的结构特点，做出相应的旋转</li>
+<li>旋转后记得更新节点的高度值</li>
+</ul>
+
+
+<p>机试时似乎没有人完全AC这道题，看来代码实现和Debug能力缺乏还是比较普遍的问题。</p>
+
+<p>pat1066源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1066.cpp">请戳</a></p>
+
+<!--more-->
+
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1067">1067. Sort with Swap(0,*) (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>给定N(&lt;=<code>10^5</code>)以及一个{0,1,…,N-1}的打乱的数列。</p>
+
+<p>定义了一种交换方式：<code>Swap(0,*)</code>，表示将0和任意数进行位置交换。</p>
+
+<p>限定只能使用<code>Swap(0,*)</code>，要求输出最少需要多少次交换操作，来完成整体的排序。</p>
+
+<h5>分析</h5>
+
+<p>很好玩的模拟题，从题目的两个测试数据入手，找到所需要的交换次数的特点：</p>
+
+<p>假设用数组a存储输入的数组，数组的坐标为[0, N - 1]，而元素的所有值也是[0, N - 1]。</p>
+
+<ol>
+<li><p>输入的序列中本就在自己位置上的数字，是不用被交换的（比如序列<code>{4, 0, 2, 1, 3}</code>中2就是不用被交换），0除外</p></li>
+<li><p>0最终肯定会被放回到0的位置上，但交换过程中，0也可能被提前交换到了0的位置上，此时还有其他数没有处于正确的位置上（参见Sample Input<code>{10 3 5 7 2 6 4 9 0 8 1}</code>的情况）。此时需要多费一步将0和某一个处于不正确位置的数交换位置，来继续排序。</p></li>
+<li><p>每次的交换，0其实只是一个过渡作用。实际的交换过程遵循的链式关系如下所述：设定a[x] == b， 而 b != x，则需要将a[x]的值移动到a[b]上，此时a[b] == c, 那么接着又需要将 a[b]的值移动到a[c]上，以此类推，肯定能获得一个循环，且节点数 M 小于等于 N。如果循环中包含了0，那么这个循环中的数排序所需要的交换次数为 M - 1, 如果循环中不包含0，那么首先需要一次交换将0移动到循环链中，此时整个循环链节点数增加了1，于是共需要开销 M + 1 次交换。</p></li>
+<li><p>根据3的分析，在2的情况下，0与不同的不在正确位置的数的交换，是不会影响最终的结果的。</p></li>
+</ol>
+
+
+<p>综上所述，用类似dfs或者并查集的思路找到集合中的所有循环链路，记录下他们的大小，即可计算出所需要的交换次数。</p>
+
+<p>pat1067源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1067.cpp">请戳</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1068">1068. Find More Coins (30)</a></h2>
+
+<h5>题意</h5>
+
+<p>给定 N(&lt;=<code>10^4</code>) 枚硬币和一个价格 M(&lt;=100)。</p>
+
+<p>要求用这 N 枚硬币组合出价格 M，如果有多种组合，输出排序后硬币面值字典序最小的组合，如果没有组合，则输出 No Solution.</p>
+
+<h5>分析</h5>
+
+<p>裸背包问题，相关资料参见dd大神的总结：<a href="http://cuitianyi.com/blog/%E3%80%8A%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E4%B9%9D%E8%AE%B2%E3%80%8B2-0-alpha1/">《背包问题九讲》</a></p>
+
+<p>按照常规的背包思路，构建10001 * 101 的二维数组f[i][j]，状态f[i][j]表示前i枚硬币能拼凑出的小于等于j的最大值（j这里代表一个价格）。</p>
+
+<p>状态转移方程为：<code>f[i][j] = max(f[i - 1][j], f[i - 1][j - c[i]] + c[i])</code>， 其中c[i]为第i枚硬币的面值，c[i]为排序过的硬币面值数组。</p>
+
+<p>由于最终的输出要求是排序的币值的字典序最小的组合，可以对c[i]做从大到小的排序，并另开一个数组has[i][j]来记录当前状态下，是否有包含c[i]。同时注意，当<code>f[i - 1][j] == f[i - 1][j - c[i]] + c[i]</code>时，采纳当前的c[i]，以满足字典序。</p>
+
+<p>pat1068源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1068.cpp">请戳</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[《改变未来的九大算法》]]></title>
@@ -64,7 +174,7 @@
 
 <p>代码量不大，思路也比较直接。不过第一题的处理逻辑不太清晰，需要好好把握。稍有不慎就掉进坑里了（很多人被这道20‘的题坑了一个多小时心慌意乱我会乱说-，-？）。</p>
 
-<p>PAT advanced level 全部源码：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
+<p>PAT advanced level 全部源码：<a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel">请戳</a></p>
 
 <h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1061">1061. Dating (20)</a></h2>
 
@@ -72,11 +182,11 @@
 
 <p>题意比较模糊，需要仔细对照Sample的数据理清思路。给定四个字符串，每个不超过60个字符，不含空格。要求从中找到符合如下规定的三个字符（或者它们的位置），并转化成一个时间的表达：</p>
 
-<ul>
-<li>1.依次比较前两个字符串中每个位置的元素，找到第一个相等的字符，且该字符属于['A', 'G']的字母，注意大小写敏感。转换成一周七天输出。</li>
-<li>2.在1中的字符出现之后，继续比较前两个串，找到一个相等的字符，使它属于['0', '9'] || ['A', 'N']，同样，大小写敏感。转换成一天24小时的小时数输出。</li>
-<li>3.比较后两个字符串，找到第一个相等的字母（isalpha()），将它在数组中的位置值转换分钟数输出。</li>
-</ul>
+<ol>
+<li><p>依次比较前两个字符串中每个位置的元素，找到第一个相等的字符，且该字符属于['A', 'G']的字母，注意大小写敏感。转换成一周七天输出。</p></li>
+<li><p>在1中的字符出现之后，继续比较前两个串，找到一个相等的字符，使它属于['0', '9'] || ['A', 'N']，同样，大小写敏感。转换成一天24小时的小时数输出。</p></li>
+<li><p>比较后两个字符串，找到第一个相等的字母（isalpha()），将它在数组中的位置值转换分钟数输出。</p></li>
+</ol>
 
 
 <p>为了便于理解，给出Sample数据:</p>
@@ -110,14 +220,14 @@ d&amp;Hyscvnm</p>
 <!--more-->
 
 
-<ul>
-<li>0.过滤掉v和t都小于L的人</li>
-<li>1.v和t都不小于H的人是圣人，属于最高的层级，排序在其他层级之前。</li>
-<li>2.v不小于H，而t小于H的人是君子，这个层级排在圣人之后。</li>
-<li>3.剩下的人中，v不小于t的人是愚人，层级关系里排第三，排在所有圣人和君子之后。</li>
-<li>4.最后剩下的人是小人，是最低的层级。</li>
-<li>5.排名时，相同层级的人的排序关系是 1.按照v+t的总分non-increasing排序；2.按照v的分值按non-increasing排序；3.找到id按increasing排序。</li>
-</ul>
+<ol>
+<li><p>过滤掉v和t都小于L的人</p></li>
+<li><p>v和t都不小于H的人是圣人，属于最高的层级，排序在其他层级之前。</p></li>
+<li><p>v不小于H，而t小于H的人是君子，这个层级排在圣人之后。</p></li>
+<li><p>剩下的人中，v不小于t的人是愚人，层级关系里排第三，排在所有圣人和君子之后。</p></li>
+<li><p>最后剩下的人是小人，是最低的层级。</p></li>
+<li><p>排名时，相同层级的人的排序关系是 1.按照v+t的总分non-increasing排序；2.按照v的分值按non-increasing排序；3.找到id按increasing排序。</p></li>
+</ol>
 
 
 <h5>分析</h5>
@@ -167,11 +277,11 @@ d&amp;Hyscvnm</p>
 
 <p>实现起来需要注意各种边界条件的判定，坑比较多，且代码量比较大（我的参考代码里写了70行）。后来<a href="http://weibo.com/redow7">@Redow7</a>给介绍了一种更有趣的方法：</p>
 
-<ul>
-<li>0.对数据排序，等待操作。</li>
-<li>1.首先构建好完全二叉树。</li>
-<li>2.利用二叉搜索树的中序遍历的有序性，在中序遍历的过程中，将排序好的数据插入其中。</li>
-</ul>
+<ol>
+<li>对数据排序，等待操作。</li>
+<li>首先构建好完全二叉树。</li>
+<li>利用二叉搜索树的中序遍历的有序性，在中序遍历的过程中，将排序好的数据插入其中。</li>
+</ol>
 
 
 <p>如此一来，难点就转移到了构建完全二叉树上。</p>
@@ -189,7 +299,12 @@ d&amp;Hyscvnm</p>
     <link href="http://biaobiaoqi.me/blog/2013/08/03/overcome-pat/"/>
     <updated>2013-08-03T22:20:00+08:00</updated>
     <id>http://biaobiaoqi.me/blog/2013/08/03/overcome-pat</id>
-    <content type="html"><![CDATA[<p>PAT(<a href="http://pat.zju.edu.cn">pat.zju.edu.cn</a>)是一个面向C/C++程序的Online Judge系统。相比ZOJ，HDOJ，POJ等ACM题库，PAT的题目非常基础，对于数据结构、算法的入门是比较有助益的。</p>
+    <content type="html"><![CDATA[<ul>
+<li>更新至1068 2013-10-8</li>
+</ul>
+
+
+<p>PAT(<a href="http://pat.zju.edu.cn">pat.zju.edu.cn</a>)是一个面向C/C++程序的Online Judge系统。相比ZOJ，HDOJ，POJ等ACM题库，PAT的题目非常基础，对于数据结构、算法的入门是比较有助益的。</p>
 
 <p>本文按照自己的认识，给PAT advanced level做出了分类。由于很多题目实际上兼顾有多种解法和思路，我给每道题打上了tag，来应对分类的独占性局限，供大家参考。</p>
 
@@ -219,6 +334,7 @@ d&amp;Hyscvnm</p>
 <li>1060 数字/字符处理</li>
 <li>1061 数字/字符处理，坑题</li>
 <li>1063 数字/字符处理，游标</li>
+<li>1065 A+B</li>
 </ul>
 
 
@@ -261,6 +377,7 @@ d&amp;Hyscvnm</p>
 <li>1029 归并排序</li>
 <li>1038 递归，排序</li>
 <li>1062 排序</li>
+<li>1067 链表，dfs</li>
 </ul>
 
 
@@ -301,6 +418,7 @@ d&amp;Hyscvnm</p>
 <li>1013 并查集/dfs</li>
 <li>1021 并查集，dfs，图的直径</li>
 <li>1054 dfs，优化剪枝</li>
+<li>1067 链表，dfs</li>
 </ul>
 
 
@@ -311,6 +429,7 @@ d&amp;Hyscvnm</p>
 <li>1020 二叉树遍历</li>
 <li>1043 二叉树遍历</li>
 <li>1064 重建完全二叉搜索树</li>
+<li>1066 AVL树</li>
 </ul>
 
 
@@ -341,6 +460,7 @@ d&amp;Hyscvnm</p>
 
 <ul>
 <li>1045 DP，最长递增子序列</li>
+<li>1068 DP，找零问题</li>
 </ul>
 
 
@@ -365,10 +485,10 @@ d&amp;Hyscvnm</p>
 <li><a href="http://biaobiaoqi.me/blog/2013/08/01/pat-1041-1050-solutions/">《PAT 1041-1050 题解》</a></li>
 <li><a href="http://biaobiaoqi.me/blog/2013/08/01/pat-1051-1060-solutions/">《PAT 1051-1060 题解》</a></li>
 <li><a href="http://biaobiaoqi.me/blog/2013/08/31/pat-1061-pat-1064/">《PAT 1061-1064 题解》</a></li>
+<li><a href="http://biaobiaoqi.me/blog/2013/10/08/pat-1065-pat-1068/">《PAT 1061-1064 题解》</a>
+附博客的PAT专题区链接：<a href="http://biaobiaoqi.me/tags/pat/">请戳</a></li>
 </ul>
 
-
-<p>附博客的PAT专题区链接：<a href="http://biaobiaoqi.me/tags/pat/">请戳</a></p>
 ]]></content>
   </entry>
   
@@ -564,171 +684,6 @@ d&amp;Hyscvnm</p>
 <p>由于非负整数非常大，不可使用longlong甚至精确度不高的double，当做字符串来处理。</p>
 
 <p>需要注意的一点是对值为0的情况的处理。比如0在有效位数为3下的表达为:<code>0.00*10^0</code></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[PAT 1041-1050 题解]]></title>
-    <link href="http://biaobiaoqi.me/blog/2013/08/01/pat-1041-1050-solutions/"/>
-    <updated>2013-08-01T01:43:00+08:00</updated>
-    <id>http://biaobiaoqi.me/blog/2013/08/01/pat-1041-1050-solutions</id>
-    <content type="html"><![CDATA[<p>浏览全部代码：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
-
-<p>本文谨代表个人思路，欢迎讨论;)</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1041">1041. Be Unique (20)</a></h2>
-
-<h5>题意</h5>
-
-<p>给出N (&lt;=105)个数（数值范围为 [1, 10<sup>4]），找到其中不重复的第一个数字。比如给出</sup> <code>5 31 5 88 67 88 17</code> ， 答案是 <code>31</code> 。</p>
-
-<h5>分析</h5>
-
-<p>简单模拟题，开一个大数组<code>int a[10001];</code>，以读入的数为下标，记录count:<code>a[index] ++;</code>。结果输出第一个存储为1的下标:<code>if (a[index] == 1)</code>。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1042">1042. Shuffling Machine (20)</a></h2>
-
-<h5>题意</h5>
-
-<p>背景是洗牌机的洗牌过程。过程是给定洗牌的每张牌的位置替换序列，由原来的次序算出最后的牌的平排列。</p>
-
-<p>比如原有的次序为<code>S3, H5, C1, D13, J2</code>，
-给定的洗牌顺序为<code>4, 2, 5 ,3 ,1</code>，那么一次洗牌的结果为：<code>J2, H5, D13, S3, C1</code>。
-如果需要两次洗牌，则结果为<code>C1, H5, S3, J2, D13</code>。</p>
-
-<p>输入为对一整副牌（54张）的洗牌策略，以及洗牌次数N，要求计算出最后的洗牌结果。</p>
-
-<h5>分析</h5>
-
-<p>简单hash题。</p>
-
-<!--more-->
-
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1043">1043. Is It a Binary Search Tree (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>二叉搜索树的定义就不重复了，题目新定义了一个镜像二叉搜索树，就是将一颗二叉搜索树所有节点的左右子树交换后的二叉树。</p>
-
-<p>输入是一个二叉树的前序排列，要求判定是否是一个二叉搜索树或者镜像二叉搜索树。如果是，输出该树后序遍历的序列。</p>
-
-<h5>分析</h5>
-
-<p>解题思路：</p>
-
-<ul>
-<li>1.BST 很特殊，实质上 BST 的所有节点的顺序排列就是中序遍历了。</li>
-<li>2.要检查树是否是 BST 或者镜像 BST，只需按照重建树的思路，在每次重建的过程中做适当检查即可。检查思路是：检查前序遍历序列中，根节点之后的节点排序是否符合 BST 的二分规则（即前一段都是小于根节点的，后一段都是大于根节点的）。</li>
-<li>3.最后的输出是后序遍历。过程中其实并不用构建整个树，直接在处理过程中，按后序的方式存储节点到队列中即可。</li>
-</ul>
-
-
-<p>更多相关分析，参见博文<a href="../../../../2013/04/27/pat1020-pat1043-rebuild-binary-tree/">《根据前中后序和层序重建二叉树》</a>。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1044">1044. Shopping in Mars (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>火星人购物使用钻石链，每颗钻石都有一定的价值。付款是，要求从钻石链上找到所有刚好能匹配到商品价值的连续的钻石子链，如果没有，
-则找到超过商品价值的最小的钻石子链。</p>
-
-<p>比如钻石链为<code>3 2 1 5 4 6 8 7</code>，商品价值为<code>15</code>，则候选的方案有：第4到第6颗的子链<code>5 4 6</code>，第7到第8颗：<code>8 7</code>。</p>
-
-<p>输入为一个钻石链以及商品的价值，要求找到所有满足条件的分割方案，按起始点从小到大排序输出。</p>
-
-<h5>分析</h5>
-
-<p>由于时间限制有些严格，需要做足够的优化：</p>
-
-<ul>
-<li>1.为了便于计算某个区间的累加值，在存储钻石串时，可以在<code>index</code>位置存储包括当前钻石在内的之前所有钻石价值的累加和。</li>
-<li>2.使用两层循环遍历所有可能，在遍历以位置i为其实坐标的子串时，不应该将结束位置初始化为i，而是应该是以<code>i-1</code>为起始位置的搜索过程中的break时的
-结束位置的下标减1.</li>
-</ul>
-
-
-<p>其中第2条的证明如下：</p>
-
-<p>算法中首先计算以<code>i</code>为起始位置的子串的累加值。假定计算到<code>j</code>满足累加值等于或者刚好大于商品价值<code>m</code>。之后，结束以<code>i</code>位置开始的子串的探寻，进入下一阶段以i+1为起始位置的搜索。
-由于<code>[i, j]</code>的累加和刚好等于<code>m</code>，则<code>[i, j - 1]</code>的累加和肯定小于<code>m</code>，那么<code>[i + 1, j - 1]</code>的累加和也肯定小于<code>m</code>。</p>
-
-<p>综上述，在以<code>i+1</code>为起始位置的搜索中，可以初始化结束位置为上一次搜索结束的位置减一，即<code>j - 1</code>.</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1045">1045. Favorite Color Stripe (30)</a></h2>
-
-<h5>题意</h5>
-
-<p>Eva对彩色条有特殊的癖好，对于一条五颜六色的彩带，她会减掉其中一些颜色块，让整个彩带的颜色顺序匹配到自己的一个颜色喜好顺序上。</p>
-
-<p>举例来说，她喜欢的颜色顺序为{2 3 1 5 6}，给定的彩带的颜色顺序为{2 2 4 1 5 5 6 3 1 1 5 6}，那么经过她的剪辑，留下的彩带的可能选项有：{2 2 1 1 1 5 6}
-{2 2 1 5 5 5 6}，{2 2 1 5 5 6 6}和{2 2 3 1 1 5 6}。</p>
-
-<p>我们的任务是找到其中最长的剪辑可能。</p>
-
-<h5>分析</h5>
-
-<p>这是经典的最长递增子序列问题(LIS)，递增在这里体现为子序列的颜色顺序要遵照Eva的对颜色的喜好顺序。使用动态规划解决。</p>
-
-<ul>
-<li>1.剔除不在Eva喜欢颜色列表中的颜色。</li>
-<li>2.DP的状态： 用<code>length[max]</code>数组存储状态，<code>length[i]</code>表示到彩带的第i个位置为止，包含该颜色的符合Eva喜好顺序的子串长度的最长值。记得在每次</li>
-<li>3.DP的子问题：<code>length[i]</code>等于在其之前的所有<code>lengths[j]</code>跟<code>i</code>位置颜色组合后的最长子串值。</li>
-</ul>
-
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1046">1046. Shortest Distance (20)</a></h2>
-
-<h5>题意</h5>
-
-<p>给定在圆环上的几个点的相对位置，要求计算不同点之间的距离。</p>
-
-<h5>分析</h5>
-
-<p>简单模拟。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1047">1047. Student List for Course (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>根据每名学生填报的课程，按顺序输出每门课程的学生名单。其中学生总量为N(&lt;=40000)，课程总量为K(&lt;=2500)。学生姓名为3个大写英文字符加一个数字。</p>
-
-<h5>分析</h5>
-
-<p>倒排索引的模拟。可以针对学生姓名做hash方式的优化。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1048">1048. Find Coins (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>给定一系列硬币，以及一个商品的价格。要求从硬币中找到两个硬币让他们的组合等于商品的价格。如果有多个，输出有用最小单个值的硬币组合。</p>
-
-<h5>分析</h5>
-
-<p>首先，硬币中币值不小于商品价格的可以过滤掉。遍历过程中，使用hash标记的方法，设定一个<code>coins[MAXVALUE]</code>（其中MAXVALUE为商品价格的最大值）记录已有的币值种类，
-在遍历的过程中，一边将读入的硬币增加到<code>coins[]</code>中，一边计算满足条件的最小币值。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1049">1049. Counting Ones (30)</a></h2>
-
-<h5>题意</h5>
-
-<p>给定一个正整数N(&lt;=2<sup>30)，要求计算所有小于N的正整数的各个位置上，1出现的次数之和。</sup></p>
-
-<h5>分析</h5>
-
-<p>比较有思维难度的一题，核心在于找规律。10ms的时间限制表明了不能用常规的循环遍历来解决。需要从简单的case找规律，逐步扩大到常规的情况。</p>
-
-<p>详情参见《编程之美》P132页《1的数目》。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1050">1050. String Subtraction (20)</a></h2>
-
-<h5>题意</h5>
-
-<p>给定两个字符串，S1和S2,要求将S2中的字符从S1串中剔除。</p>
-
-<h5>分析</h5>
-
-<p>用Hash的方式标记需要剔除的字符。</p>
 ]]></content>
   </entry>
   

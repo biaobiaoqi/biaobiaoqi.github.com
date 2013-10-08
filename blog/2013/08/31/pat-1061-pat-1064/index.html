@@ -138,7 +138,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <p>代码量不大，思路也比较直接。不过第一题的处理逻辑不太清晰，需要好好把握。稍有不慎就掉进坑里了（很多人被这道 20‘的题坑了一个多小时心慌意乱我会乱说-，-？）。</p>
 
-<p>PAT advanced level 全部源码：<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/tree/master/src/biaobiaoqi/algorithm/oj/pat/advancedlevel">请戳</a></p>
+<p>PAT advanced level 全部源码：<a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel">请戳</a></p>
 
 <h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1061">1061. Dating (20)</a></h2>
 
@@ -146,11 +146,11 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <p>题意比较模糊，需要仔细对照 Sample 的数据理清思路。给定四个字符串，每个不超过 60 个字符，不含空格。要求从中找到符合如下规定的三个字符（或者它们的位置），并转化成一个时间的表达：</p>
 
-<ul>
-<li>1.依次比较前两个字符串中每个位置的元素，找到第一个相等的字符，且该字符属于[&#8216;A&#8217;, &#8216;G&#8217;]的字母，注意大小写敏感。转换成一周七天输出。</li>
-<li>2.在 1 中的字符出现之后，继续比较前两个串，找到一个相等的字符，使它属于[&#8216;0&#8217;, &#8216;9&#8217;] || [&#8216;A&#8217;, &#8216;N&#8217;]，同样，大小写敏感。转换成一天 24 小时的小时数输出。</li>
-<li>3.比较后两个字符串，找到第一个相等的字母（isalpha()），将它在数组中的位置值转换分钟数输出。</li>
-</ul>
+<ol>
+<li><p>依次比较前两个字符串中每个位置的元素，找到第一个相等的字符，且该字符属于[&#8216;A&#8217;, &#8216;G&#8217;]的字母，注意大小写敏感。转换成一周七天输出。</p></li>
+<li><p>在 1 中的字符出现之后，继续比较前两个串，找到一个相等的字符，使它属于[&#8216;0&#8217;, &#8216;9&#8217;] || [&#8216;A&#8217;, &#8216;N&#8217;]，同样，大小写敏感。转换成一天 24 小时的小时数输出。</p></li>
+<li><p>比较后两个字符串，找到第一个相等的字母（isalpha()），将它在数组中的位置值转换分钟数输出。</p></li>
+</ol>
 
 
 <p>为了便于理解，给出 Sample 数据:</p>
@@ -193,14 +193,14 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <!--more-->
 
 
-<ul>
-<li>0.过滤掉 v 和 t 都小于 L 的人</li>
-<li>1.v 和 t 都不小于 H 的人是圣人，属于最高的层级，排序在其他层级之前。</li>
-<li>2.v 不小于 H，而 t 小于 H 的人是君子，这个层级排在圣人之后。</li>
-<li>3.剩下的人中，v 不小于 t 的人是愚人，层级关系里排第三，排在所有圣人和君子之后。</li>
-<li>4.最后剩下的人是小人，是最低的层级。</li>
-<li>5.排名时，相同层级的人的排序关系是 1.按照 v+t 的总分 non-increasing 排序；2.按照 v 的分值按 non-increasing 排序；3.找到 id 按 increasing 排序。</li>
-</ul>
+<ol>
+<li><p>过滤掉 v 和 t 都小于 L 的人</p></li>
+<li><p>v 和 t 都不小于 H 的人是圣人，属于最高的层级，排序在其他层级之前。</p></li>
+<li><p>v 不小于 H，而 t 小于 H 的人是君子，这个层级排在圣人之后。</p></li>
+<li><p>剩下的人中，v 不小于 t 的人是愚人，层级关系里排第三，排在所有圣人和君子之后。</p></li>
+<li><p>最后剩下的人是小人，是最低的层级。</p></li>
+<li><p>排名时，相同层级的人的排序关系是 1.按照 v+t 的总分 non-increasing 排序；2.按照 v 的分值按 non-increasing 排序；3.找到 id 按 increasing 排序。</p></li>
+</ol>
 
 
 <h5>分析</h5>
@@ -250,11 +250,11 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <p>实现起来需要注意各种边界条件的判定，坑比较多，且代码量比较大（我的参考代码里写了 70 行）。后来<a href="http://weibo.com/redow7">@Redow7</a> 给介绍了一种更有趣的方法：</p>
 
-<ul>
-<li>0.对数据排序，等待操作。</li>
-<li>1.首先构建好完全二叉树。</li>
-<li>2.利用二叉搜索树的中序遍历的有序性，在中序遍历的过程中，将排序好的数据插入其中。</li>
-</ul>
+<ol>
+<li>对数据排序，等待操作。</li>
+<li>首先构建好完全二叉树。</li>
+<li>利用二叉搜索树的中序遍历的有序性，在中序遍历的过程中，将排序好的数据插入其中。</li>
+</ol>
 
 
 <p>如此一来，难点就转移到了构建完全二叉树上。</p>
@@ -355,20 +355,20 @@ var jiathis_config={
  <br /> 
   <ul class="tag-cloud">
     <a style="font-size: 180%" href="/tags/algorithm/">algorithm</a> &nbsp 
-<a style="font-size: 161%" href="/tags/bytecode/">bytecode</a> &nbsp 
-<a style="font-size: 114%" href="/tags/diary/">diary</a> &nbsp 
-<a style="font-size: 165%" href="/tags/distributed/">distributed</a> &nbsp 
-<a style="font-size: 134%" href="/tags/hadoop/">hadoop</a> &nbsp 
-<a style="font-size: 175%" href="/tags/java/">java</a> &nbsp 
-<a style="font-size: 165%" href="/tags/jvm/">jvm</a> &nbsp 
-<a style="font-size: 125%" href="/tags/life/">life</a> &nbsp 
-<a style="font-size: 147%" href="/tags/methodology/">methodology</a> &nbsp 
-<a style="font-size: 134%" href="/tags/network/">network</a> &nbsp 
-<a style="font-size: 125%" href="/tags/octopress/">octopress</a> &nbsp 
-<a style="font-size: 114%" href="/tags/os/">os</a> &nbsp 
+<a style="font-size: 159%" href="/tags/bytecode/">bytecode</a> &nbsp 
+<a style="font-size: 113%" href="/tags/diary/">diary</a> &nbsp 
+<a style="font-size: 163%" href="/tags/distributed/">distributed</a> &nbsp 
+<a style="font-size: 132%" href="/tags/hadoop/">hadoop</a> &nbsp 
+<a style="font-size: 172%" href="/tags/java/">java</a> &nbsp 
+<a style="font-size: 163%" href="/tags/jvm/">jvm</a> &nbsp 
+<a style="font-size: 124%" href="/tags/life/">life</a> &nbsp 
+<a style="font-size: 146%" href="/tags/methodology/">methodology</a> &nbsp 
+<a style="font-size: 132%" href="/tags/network/">network</a> &nbsp 
+<a style="font-size: 124%" href="/tags/octopress/">octopress</a> &nbsp 
+<a style="font-size: 113%" href="/tags/os/">os</a> &nbsp 
 <a style="font-size: 172%" href="/tags/pat/">pat</a> &nbsp 
-<a style="font-size: 114%" href="/tags/software-engineering/">software_engineering</a> &nbsp 
-<a style="font-size: 169%" href="/tags/think/">think</a>
+<a style="font-size: 113%" href="/tags/software-engineering/">software_engineering</a> &nbsp 
+<a style="font-size: 166%" href="/tags/think/">think</a>
 
   </ul>
 </section>
