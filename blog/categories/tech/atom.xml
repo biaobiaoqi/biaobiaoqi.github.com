@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tech | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.me/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.me/"/>
-  <updated>2013-10-18T00:36:41+08:00</updated>
+  <updated>2013-10-20T14:58:20+08:00</updated>
   <id>http://biaobiaoqi.me/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -12,6 +12,220 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[数据集成工具：Teiid实践]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/10/19/data-integration-tool-teiid/"/>
+    <updated>2013-10-19T23:58:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/10/19/data-integration-tool-teiid</id>
+    <content type="html"><![CDATA[<p>数据集成是把不同来源、格式、特点性质的数据在逻辑上或物理上有机地集中，从而为企业提供全面的数据共享。数据集成的方式多种多样，这里介绍的<a href="http://www.jboss.org/teiid/">Teiid</a>是其中的一种：通过抽象和联邦技术，实现分布式数据源的实时数据访问和集成，无需从记录系统中复制或移动数据。</p>
+
+<p><a href="http://blogs.ejb.cc/archives/3552/teiid-scalable-information-integration-program">链接</a>是一篇关于Teiid的中文介绍，比较详细。</p>
+
+<p>由于适配不同数据源和生成虚拟数据库（VDB）需要维护好几个配置文件，直接手动部署Teiid比较难受。好在Teiid提供了辅助工具<a href="http://www.jboss.org/teiiddesigner">Teiid Designer</a>，这是一个Eclipse插件，能帮助用户可视化的管理数据的集成过程。</p>
+
+<ul>
+<li><p>安装配置</p>
+
+<p>  参见官网的Downloads界面的详细介绍（注意：环境配置中，各组件需严格遵循官网指定版本，实践经验表明，Teiid本身并不够鲁棒，容不得小差错）。</p></li>
+</ul>
+
+
+<p>接下来，我们用一个简单的应用场景实践Teiid的数据集成功能。</p>
+
+<!--more-->
+
+
+<h2>应用场景</h2>
+
+<p>书店主营图书销售，并维护者一个用户对图书评价的数据库。技术上说，书店拥有三个数据模块：</p>
+
+<ul>
+<li><p>MySQL数据库，存储用户信息和用户对某书的评价</p>
+
+<p>  表结构如下：</p></li>
+</ul>
+
+
+<p>```
+create database library;
+use library;
+create table users (</p>
+
+<pre><code> id int primary key,
+ name char(20) not null,
+ passwd char(20)) not null,
+</code></pre>
+
+<p>);
+create table comments(</p>
+
+<pre><code> cid int primary key,
+ uid int ,
+ bookid int not null,
+ content char(255),
+ foreign key (uid) references users(id)
+</code></pre>
+
+<p>);
+```
+* EXCEL表格，店主用于记录销售量、记录销售单价</p>
+
+<p><code>
+book_id,price,sales
+1,89.00,1000
+2,52.00,9999
+3,30.00,10000
+4,9800,5555
+5,69.00,1234
+</code></p>
+
+<ul>
+<li>XML文件记录书籍信息，包括</li>
+</ul>
+
+
+<p>``` xml
+&lt;?xml version= "1.0" encoding ="UTF-8"?>
+<BooksInfo></p>
+
+<pre><code>    &lt;Book id = "1" &gt;
+           &lt;Title&gt; Hadoop: The Definitive Guide &lt;/Title&gt;
+           &lt;Author&gt; Tom White&lt;/Author &gt;
+           &lt;publisher&gt; O'Reilly&lt;/ publisher&gt;
+    &lt;/Book&gt;
+    &lt;Book id = "2" &gt;
+           &lt;Title&gt; Effective Java&lt;/Title &gt;
+           &lt;Autorh&gt; Joshua Bloch&lt;/Autorh&gt;
+           &lt;publisher&gt; HZ Books&lt;/ publisher&gt;
+    &lt;/Book&gt;
+    &lt;Book id = "3" &gt;
+           &lt;Title&gt; C Programming Language&lt;/Title &gt;
+           &lt;Autorh&gt; Kernighan, Ritchie &lt;/Autorh&gt;
+           &lt;publisher&gt; HZ Books&lt;/ publisher&gt;
+    &lt;/Book&gt;
+    &lt;Book id = "4" &gt;
+           &lt;Title&gt; Head First: Design Pattern&lt;/Title &gt;
+           &lt;Autorh&gt; Freeman&lt;/ Autorh&gt;
+           &lt;publisher&gt; Turning Education&lt;/publisher &gt;
+    &lt;/Book&gt;
+    &lt;Book id = "5" &gt;
+           &lt;Title&gt; Refactoring: Improving the Design of Existing Code &lt;/Title&gt;
+           &lt;Autorh&gt; Martin Fowler &lt;/Autorh&gt;
+           &lt;publisher&gt; O'Reilly&lt;/ publisher&gt;
+    &lt;/Book&gt;
+</code></pre>
+
+<p></BooksInfo>
+```</p>
+
+<h2>实践</h2>
+
+<h3>1.创建工程</h3>
+
+<p>打开配置好Teiid Designer插件的Eclipse，在Teiid Designer视图的Guides中，找到Define Teiid Model Project选项，如下图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid1.png" alt="img" /></p>
+
+<p>一路点击next，在如下界面勾选sources和views即可，designer guid会帮助生成这两个目录，其他目录在此项目中不需要。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid2.png" alt="img" /></p>
+
+<h3>2.导入MyQL数据源</h3>
+
+<p>在Guides界面，选择JDBC数据源</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid3.png" alt="img" /></p>
+
+<p>第一个步骤Define Teiid Model Project在上一步中已经完成了，现在需要创建一个JDBC链接，选择Create JDBC connection，在弹出的窗口中，选择Mysql数据库，然后点下一步</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid4.png" alt="img" /></p>
+
+<p>选择mysql驱动，配置好Mysql数据源的的url、用户名、密码，点下一步。（在这里，mysql的端口为默认的3306，library为之前配置好的mysql数据库）。点击test connection测试与mysql的链接能否建立。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid5.png" alt="img" /></p>
+
+<p>接下来需要给数据源创建源模型（source model）了。同样在Guides试图上双击Create source model for JDBC data source，一路下一步，直到选择数据库和表，选择library数据库中的所有表，如下图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid6.png" alt="img" /></p>
+
+<p>创建源模型的最后一步如下图，可以自定义Model Name，为了让之后的sql查询过程更可读，我将以数据源类型命名它（mysql.xmi）。其他无关配置暂时不用理会。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid7.png" alt="img" /></p>
+
+<p>finish后，就生成了一个元模型，如下图。图中可视化的显示了数据库所建的两张表</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid8.png" alt="img" /></p>
+
+<p>接下来可以测试数据是否可读，双击Guides中的Preview Data，在弹框中选择需要preview的表或者precedure（procedure在本工程里这里不会被用到）查询结果显示在了eclipse下方的SQL Result框中，如下图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid9.png" alt="img" /></p>
+
+<p>接下先来不用着急Define VDB，我们先把所有数据源配置完成后再一起来定义虚拟数据库。</p>
+
+<h3>3.导入FlatFile数据源（CSV）</h3>
+
+<p>跟之前一个步骤一样，只需要沿着Guides里的路线一步一步操作。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid10.png" alt="img" /></p>
+
+<p>首先创建连接，配置好后test connection确保链接无误</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid12.png" alt="img" /></p>
+
+<p>链接建立后，需要创建元模型。如下图，提示有错，只需要选定Source Model Definition的文件的存储位置即可。存放在项目的sources目录中</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid13.png" alt="img" /></p>
+
+<p>按照默认配置，不断下一步，在 Flat File Demilited Columns Parser Settings 这一步，可以注意到下方有生成一串SQL语句。这些语句告诉Teiid需要如何将csv文件中的数据映射为关系型数据。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid14.png" alt="img" /></p>
+
+<p>继续下一步，view model definition界面，提示创建的tableview名字包含不合法字符。原来由于将flat file命名为sales.csv,它自动生成了price.csvView作为table name，但名字中是不能出现<code>.</code>的，于是修改为salesview，finish。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid15.png" alt="img" /></p>
+
+<p>之后测试数据能否读取。在选择所要preview的数据时，需要选择相应的table，而不是模型（这里需要选择salesView，而不是上层的price_view.xmi）。如下图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid16.png" alt="img" /></p>
+
+<h3>4.导入xml数据</h3>
+
+<p>大部分步骤跟之前的步骤类似，在设定源模型时，需要注意配置好xml数据到关系型数据的映射关系，如下图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid17.png" alt="img" /></p>
+
+<p>XML File Contents中会根据xml文件中的数据解析出整体的层次结构。我们需要将其中的Book里的信息，添加到右边的Column Info中。虽然有很多Book数据列表显示在左边一栏里，但实际上只需要添加一次相关信息到右边的列信息中。值得注意的是，这里自动生成的Root Path是错误的，需要修改为BooksInfo/Book。其他没有什么特别的，一路下一步。</p>
+
+<p>现在整个项目如下图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid18.png" alt="img" /></p>
+
+<h3>5.生成虚拟数据库</h3>
+
+<p>点击Guides中的Define VDB，将三个数据源的模型加入到VDB中:MySQL的源模型，XML和CSV的视图模型（注意：不可以加入另外两个源模型的xmi文件，博主如此操作后遇到了一些莫名其妙的问题）。</p>
+
+<p>如此就完成了在Teiid Designer中的多数据源集成的配置了。</p>
+
+<h3>6.部署和使用</h3>
+
+<p>通过Teiid Designer，我们能方便的部署VDB到Jboss服务器。</p>
+
+<p>在Guides界面下，有execute vdb选项，双击即可。正式运行之前，需要运行Jboss server，如果没有启动服务器，Teiid Designer会弹框提醒的。</p>
+
+<p>最后，尝试一下通过Teiid集成查询多个数据源。将sql语句输入到执行框中，刷蓝->右键->执行选中的语句。</p>
+
+<p>```</p>
+
+<blockquote><p>select * from "csv"."sales" as A join "xml"."booksinfo" as B on A.book_id = B.id</p></blockquote>
+
+<p>```</p>
+
+<p>结果如图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid19.png" alt="img" /></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[PAT 1065 - 1068 题解]]></title>
@@ -366,143 +580,6 @@ public static void main(String[] args){
 
 
 <p>更多关于很棒的防火墙的资料，请先翻过墙去查看;)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[对Java字符串的探究]]></title>
-    <link href="http://biaobiaoqi.me/blog/2013/09/08/string-interning/"/>
-    <updated>2013-09-08T13:01:00+08:00</updated>
-    <id>http://biaobiaoqi.me/blog/2013/09/08/string-interning</id>
-    <content type="html"><![CDATA[<h2>问题的出发点</h2>
-
-<p>在网上看到一道题：</p>
-
-<p><code>java
-String str = new String("abc");  
-</code></p>
-
-<p>以上代码执行过程中生成了多少个String对象？</p>
-
-<p>答案写的是两个。"abc"本身是一个，而new又生成了一个。</p>
-
-<h2>"abc"是什么</h2>
-
-<p>查看这句程序的字节码，如下：
-```
-NEW String</p>
-
-<pre><code>DUP  
-LDC "abc"  
-INVOKESPECIAL String.&lt;init&gt;(String) : void  
-ASTORE 1   
-</code></pre>
-
-<p><code>``
-指令</code>ldc indexbyte`的含义：将两字节的值从indexbyte索引的常量池中的项中推到方法栈上。</p>
-
-<p>指令<code>LDC "abc"</code>说明了"abc"并不是直接以对象存在的，而是存在于常量池的索引中。String的构造函数调用命令实际使用的就是String类型作为参数，那么，栈上应该有一个String类型的索引。</p>
-
-<p>由此我们得出，在字节码中，ldc命令在常量池中找到了能索引到“abc”那个String对象的索引值。</p>
-
-<h2>常量池</h2>
-
-<p>常量池是类文件（.class）文件中的一部分，记录了许多常量信息，索引的字符串信息。</p>
-
-<p>由于Java是动态加载的，类文件并没有包含程序运行时的内存布局，方法调用等无法直接记录出方法的物理位置，常量池通过索引的方法解决了这个问题。</p>
-
-<!--more-->
-
-
-<p>常量池中存着许多表，其中Constant_Utf8_info表中，记录着会被初始化为String对象的字符串的字面值（iteral）。
-而在String 的java doc中，有对String字面值的说明：</p>
-
-<blockquote><p>All string literals in Java programs, such as "abc", are implemented as instances of this class.</p></blockquote>
-
-<p>在Java编译的过程中，确定下来的String字面值都先被优化记录在常量池中（那些双引号字符串，都是以CONSTANT_utf8_info的形式存储在常量池中的）。也就是说，Java源代码文件中出现的那些诸如"abc"字符串，都已经被提前放在了常量池中。</p>
-
-<p>可以使用如下代码验证这一点：</p>
-
-<p>```java
-public class Program<br/>
-{</p>
-
-<pre><code>public static void main(String[] args)  
-{  
-   String str1 = "Hello";    
-   String str2 = "Hello";   
-   System.out.print(str1 == str2);  
-}  
-</code></pre>
-
-<p>}<br/>
-```</p>
-
-<p>输出结果是true.说明"Hello"作为对象是被程序从同一个内存空间读取出来的。</p>
-
-<p>常量池是编译时产生的，存在于类文件中（*.class文件）。运行时，JVM中每个对象都拥有自己的运行时常量池（run time constant pool）。</p>
-
-<h2>字符串池</h2>
-
-<p>我在String 的java doc中又发现了一个有趣的method：intern() ,我翻译如下：</p>
-
-<blockquote><p>当intern方法被调用，如果池中已经拥有一个与该String的字符串值相等（即equals()调用后为true）的String对象时，那么池中的那个String对象会被返回。否则，池中会增加这个对象，并返回当前这个String对象。</p></blockquote>
-
-<p>其中有介绍一个字符串池的东西：字符串池（String pool），初始是空的，由类私有的控制。</p>
-
-<p>查看java.lang.String的源代码，发现Intern()方法是一个native方法，即本地实现的方法，而不是一个java方法，这让我们不能直观的看到字符串池的实现细节。不过能够理解字符串池其实是类似于线程池的缓冲器，可以起到节约内存的作用。如下代码可以验证</p>
-
-<p>```java
-package biaobiaoqi.thinkingInJava;</p>
-
-<p>public class Test {</p>
-
-<pre><code>public static void main(String[] args){  
-
-    String strA1 = "ab";  
-    String strA2 = "c";  
-    String strB1 = "a";  
-    String strB2 = "bc" ;  
-    System.out.println((strA1+strA2).intern() == (strB1 + strB2).intern());  
-
-}  
-</code></pre>
-
-<p>}
-```
-输出结果为true。</p>
-
-<p>现代的JVM实现里，考虑到垃圾回收（Garbage Collection）的方便，将内存区域<a href="http://en.wikipedia.org/wiki/Java_Virtual_Machine#Heap">heap</a>划分为三部分： young generation 、 tenured generation（old generation）和 permanent generation( permgen )</p>
-
-<p>字符串池是为了解决字符串重复的问题，生命周期长，它存在于permgen中。</p>
-
-<h2>总结</h2>
-
-<p>编译Java源代码时，源文件中出现的双引号内的字符串都被收纳到常量池中，用CONSTANT_utf8_info项存储着。</p>
-
-<p>JVM中，相应的类被加载运行后，常量池对应的映射到JVM的运行时常量池中。其中每项CONSTANT_utf8_info（也就试记录那些字符串的）都会在常量引用解析时，自动生成相应的internal String，记录在字符串池中。</p>
-
-<p>回过头来看看文章刚开始的那个问题。</p>
-
-<p><code>java
-String str = new String("abc");
-</code>
-这里确实是有两个String对象生成了。</p>
-
-<p><code>new String("xxx")</code> 创建的String 对象会在heap 中重新生成新的String 对象，绕过字符串池的管辖。而如果使用<code>String str = "xxx"</code>则先查看字符串池 是否已经存在，存在则直接返回PermGen中的该String 对象，否则生成新的String 对象，并将它加入字符串池中。</p>
-
-<blockquote><p>尽量使用<code>String str = "abc";</code>，而不是<code>String str = new String("abc")；</code>用new的方法肯定会开辟新的heap空间，而前者的方法，则会通过string interning优化。</p></blockquote>
-
-<h3>参考资料</h3>
-
-<ul>
-<li><a href="http://www.codeinstructions.com/2009/01/busting-javalangstringintern-myths.html">Busting java.lang.String.intern() Myths</a></li>
-<li><a href="http://book.douban.com/subject/1788390/">Inside the JAVA2 virtual machine</a></li>
-<li><a href="http://book.douban.com/subject/1610251/">Programming for the java virtual machine</a></li>
-<li><a href="http://www.xyzws.com/Javafaq/what-is-string-literal-pool/3">What is String literal pool? How to create a String</a></li>
-<li><a href="http://stackoverflow.com/questions/4918399/what-type-of-memory-heap-or-stack-string-constant-pool-in-java-gets-stored">What type of memory (Heap or Stack) String constant pool in Java gets stored?</a></li>
-</ul>
-
 ]]></content>
   </entry>
   

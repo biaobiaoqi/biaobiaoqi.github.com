@@ -4,7 +4,7 @@
   <title><![CDATA[Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.me/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.me/"/>
-  <updated>2013-10-18T00:36:41+08:00</updated>
+  <updated>2013-10-20T14:58:20+08:00</updated>
   <id>http://biaobiaoqi.me/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -12,6 +12,263 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[数据集成工具：Teiid实践]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/10/19/data-integration-tool-teiid/"/>
+    <updated>2013-10-19T23:58:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/10/19/data-integration-tool-teiid</id>
+    <content type="html"><![CDATA[<p>数据集成是把不同来源、格式、特点性质的数据在逻辑上或物理上有机地集中，从而为企业提供全面的数据共享。数据集成的方式多种多样，这里介绍的 <a href="http://www.jboss.org/teiid/">Teiid</a> 是其中的一种：通过抽象和联邦技术，实现分布式数据源的实时数据访问和集成，无需从记录系统中复制或移动数据。</p>
+
+<p><a href="http://blogs.ejb.cc/archives/3552/teiid-scalable-information-integration-program">链接</a>是一篇关于 Teiid 的中文介绍，比较详细。</p>
+
+<p>由于适配不同数据源和生成虚拟数据库（VDB）需要维护好几个配置文件，直接手动部署 Teiid 比较难受。好在 Teiid 提供了辅助工具 <a href="http://www.jboss.org/teiiddesigner">Teiid Designer</a>，这是一个 Eclipse 插件，能帮助用户可视化的管理数据的集成过程。</p>
+
+<ul>
+<li><p>安装配置</p>
+
+<p>  参见官网的 Downloads 界面的详细介绍（注意：环境配置中，各组件需严格遵循官网指定版本，实践经验表明，Teiid 本身并不够鲁棒，容不得小差错）。</p></li>
+</ul>
+
+
+<p>接下来，我们用一个简单的应用场景实践 Teiid 的数据集成功能。</p>
+
+<!--more-->
+
+
+<h2>应用场景</h2>
+
+<p>书店主营图书销售，并维护者一个用户对图书评价的数据库。技术上说，书店拥有三个数据模块：</p>
+
+<ul>
+<li><p>MySQL 数据库，存储用户信息和用户对某书的评价</p>
+
+<p>  表结构如下：</p></li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>create database library;
+</span><span class='line'>use library;
+</span><span class='line'>create table users (
+</span><span class='line'>     id int primary key,
+</span><span class='line'>     name char(20) not null,
+</span><span class='line'>     passwd char(20)) not null,
+</span><span class='line'>);
+</span><span class='line'>create table comments(
+</span><span class='line'>     cid int primary key,
+</span><span class='line'>     uid int ,
+</span><span class='line'>     bookid int not null,
+</span><span class='line'>     content char(255),
+</span><span class='line'>     foreign key (uid) references users(id)
+</span><span class='line'>);</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>EXCEL 表格，店主用于记录销售量、记录销售单价</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>book_id,price,sales
+</span><span class='line'>1,89.00,1000
+</span><span class='line'>2,52.00,9999
+</span><span class='line'>3,30.00,10000
+</span><span class='line'>4,9800,5555
+</span><span class='line'>5,69.00,1234</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>XML 文件记录书籍信息，包括</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="cp">&lt;?xml version= &quot;1.0&quot; encoding =&quot;UTF-8&quot;?&gt;</span>
+</span><span class='line'><span class="nt">&lt;BooksInfo&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;Book</span> <span class="na">id =</span> <span class="s">&quot;1&quot;</span> <span class="nt">&gt;</span>
+</span><span class='line'>               <span class="nt">&lt;Title&gt;</span> Hadoop: The Definitive Guide <span class="nt">&lt;/Title&gt;</span>
+</span><span class='line'>               <span class="nt">&lt;Author&gt;</span> Tom White<span class="nt">&lt;/Author &gt;</span>
+</span><span class='line'>               <span class="nt">&lt;publisher&gt;</span> O&#39;Reilly<span class="nt">&lt;/ publisher&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/Book&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;Book</span> <span class="na">id =</span> <span class="s">&quot;2&quot;</span> <span class="nt">&gt;</span>
+</span><span class='line'>               <span class="nt">&lt;Title&gt;</span> Effective Java<span class="nt">&lt;/Title &gt;</span>
+</span><span class='line'>               <span class="nt">&lt;Autorh&gt;</span> Joshua Bloch<span class="nt">&lt;/Autorh&gt;</span>
+</span><span class='line'>               <span class="nt">&lt;publisher&gt;</span> HZ Books<span class="nt">&lt;/ publisher&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/Book&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;Book</span> <span class="na">id =</span> <span class="s">&quot;3&quot;</span> <span class="nt">&gt;</span>
+</span><span class='line'>               <span class="nt">&lt;Title&gt;</span> C Programming Language<span class="nt">&lt;/Title &gt;</span>
+</span><span class='line'>               <span class="nt">&lt;Autorh&gt;</span> Kernighan, Ritchie <span class="nt">&lt;/Autorh&gt;</span>
+</span><span class='line'>               <span class="nt">&lt;publisher&gt;</span> HZ Books<span class="nt">&lt;/ publisher&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/Book&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;Book</span> <span class="na">id =</span> <span class="s">&quot;4&quot;</span> <span class="nt">&gt;</span>
+</span><span class='line'>               <span class="nt">&lt;Title&gt;</span> Head First: Design Pattern<span class="nt">&lt;/Title &gt;</span>
+</span><span class='line'>               <span class="nt">&lt;Autorh&gt;</span> Freeman<span class="nt">&lt;/ Autorh&gt;</span>
+</span><span class='line'>               <span class="nt">&lt;publisher&gt;</span> Turning Education<span class="nt">&lt;/publisher &gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/Book&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;Book</span> <span class="na">id =</span> <span class="s">&quot;5&quot;</span> <span class="nt">&gt;</span>
+</span><span class='line'>               <span class="nt">&lt;Title&gt;</span> Refactoring: Improving the Design of Existing Code <span class="nt">&lt;/Title&gt;</span>
+</span><span class='line'>               <span class="nt">&lt;Autorh&gt;</span> Martin Fowler <span class="nt">&lt;/Autorh&gt;</span>
+</span><span class='line'>               <span class="nt">&lt;publisher&gt;</span> O&#39;Reilly<span class="nt">&lt;/ publisher&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/Book&gt;</span>
+</span><span class='line'><span class="nt">&lt;/BooksInfo&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>实践</h2>
+
+<h3>1.创建工程</h3>
+
+<p>打开配置好 Teiid Designer 插件的 Eclipse，在 Teiid Designer 视图的 Guides 中，找到 Define Teiid Model Project 选项，如下图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid1.png" alt="img" /></p>
+
+<p>一路点击 next，在如下界面勾选 sources 和 views 即可，designer guid 会帮助生成这两个目录，其他目录在此项目中不需要。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid2.png" alt="img" /></p>
+
+<h3>2.导入 MyQL 数据源</h3>
+
+<p>在 Guides 界面，选择 JDBC 数据源</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid3.png" alt="img" /></p>
+
+<p>第一个步骤 Define Teiid Model Project 在上一步中已经完成了，现在需要创建一个 JDBC 链接，选择 Create JDBC connection，在弹出的窗口中，选择 Mysql 数据库，然后点下一步</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid4.png" alt="img" /></p>
+
+<p>选择 mysql 驱动，配置好 Mysql 数据源的的 url、用户名、密码，点下一步。（在这里，mysql 的端口为默认的 3306，library 为之前配置好的 mysql 数据库）。点击 test connection 测试与 mysql 的链接能否建立。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid5.png" alt="img" /></p>
+
+<p>接下来需要给数据源创建源模型（source model）了。同样在 Guides 试图上双击 Create source model for JDBC data source，一路下一步，直到选择数据库和表，选择 library 数据库中的所有表，如下图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid6.png" alt="img" /></p>
+
+<p>创建源模型的最后一步如下图，可以自定义 Model Name，为了让之后的 sql 查询过程更可读，我将以数据源类型命名它（mysql.xmi）。其他无关配置暂时不用理会。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid7.png" alt="img" /></p>
+
+<p>finish 后，就生成了一个元模型，如下图。图中可视化的显示了数据库所建的两张表</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid8.png" alt="img" /></p>
+
+<p>接下来可以测试数据是否可读，双击 Guides 中的 Preview Data，在弹框中选择需要 preview 的表或者 precedure（procedure 在本工程里这里不会被用到）查询结果显示在了 eclipse 下方的 SQL Result 框中，如下图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid9.png" alt="img" /></p>
+
+<p>接下先来不用着急 Define VDB，我们先把所有数据源配置完成后再一起来定义虚拟数据库。</p>
+
+<h3>3.导入 FlatFile 数据源（CSV）</h3>
+
+<p>跟之前一个步骤一样，只需要沿着 Guides 里的路线一步一步操作。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid10.png" alt="img" /></p>
+
+<p>首先创建连接，配置好后 test connection 确保链接无误</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid12.png" alt="img" /></p>
+
+<p>链接建立后，需要创建元模型。如下图，提示有错，只需要选定 Source Model Definition 的文件的存储位置即可。存放在项目的 sources 目录中</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid13.png" alt="img" /></p>
+
+<p>按照默认配置，不断下一步，在 Flat File Demilited Columns Parser Settings 这一步，可以注意到下方有生成一串 SQL 语句。这些语句告诉 Teiid 需要如何将 csv 文件中的数据映射为关系型数据。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid14.png" alt="img" /></p>
+
+<p>继续下一步，view model definition 界面，提示创建的 tableview 名字包含不合法字符。原来由于将 flat file 命名为 sales.csv,它自动生成了 price.csvView 作为 table name，但名字中是不能出现<code>.</code>的，于是修改为 salesview，finish。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid15.png" alt="img" /></p>
+
+<p>之后测试数据能否读取。在选择所要 preview 的数据时，需要选择相应的 table，而不是模型（这里需要选择 salesView，而不是上层的 price_view.xmi）。如下图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid16.png" alt="img" /></p>
+
+<h3>4.导入 xml 数据</h3>
+
+<p>大部分步骤跟之前的步骤类似，在设定源模型时，需要注意配置好 xml 数据到关系型数据的映射关系，如下图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid17.png" alt="img" /></p>
+
+<p>XML File Contents 中会根据 xml 文件中的数据解析出整体的层次结构。我们需要将其中的 Book 里的信息，添加到右边的 Column Info 中。虽然有很多 Book 数据列表显示在左边一栏里，但实际上只需要添加一次相关信息到右边的列信息中。值得注意的是，这里自动生成的 Root Path 是错误的，需要修改为 BooksInfo/Book。其他没有什么特别的，一路下一步。</p>
+
+<p>现在整个项目如下图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid18.png" alt="img" /></p>
+
+<h3>5.生成虚拟数据库</h3>
+
+<p>点击 Guides 中的 Define VDB，将三个数据源的模型加入到 VDB 中:MySQL 的源模型，XML 和 CSV 的视图模型（注意：不可以加入另外两个源模型的 xmi 文件，博主如此操作后遇到了一些莫名其妙的问题）。</p>
+
+<p>如此就完成了在 Teiid Designer 中的多数据源集成的配置了。</p>
+
+<h3>6.部署和使用</h3>
+
+<p>通过 Teiid Designer，我们能方便的部署 VDB 到 Jboss 服务器。</p>
+
+<p>在 Guides 界面下，有 execute vdb 选项，双击即可。正式运行之前，需要运行 Jboss server，如果没有启动服务器，Teiid Designer 会弹框提醒的。</p>
+
+<p>最后，尝试一下通过 Teiid 集成查询多个数据源。将 sql 语句输入到执行框中，刷蓝->右键->执行选中的语句。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'>&gt; select * from &quot;csv&quot;.&quot;sales&quot; as A join &quot;xml&quot;.&quot;booksinfo&quot; as B on A.book_id = B.id
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>结果如图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid19.png" alt="img" /></p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/10/19/data-integration-tool-teiid/'>http://biaobiaoqi.me/blog/2013/10/19/data-integration-tool-teiid/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[PAT 1065 - 1068 题解]]></title>
@@ -2701,147 +2958,6 @@ I think we will make it open source and put the game into the market finally, bu
 <p>欢迎感兴趣的朋友参与到这个 repo 中来:)</p>
 
 <p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/08/31/octopress-3rd-party-plugin-syncpost/'>http://biaobiaoqi.me/blog/2013/08/31/octopress-3rd-party-plugin-syncpost/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[PAT 1061 - 1064 题解]]></title>
-    <link href="http://biaobiaoqi.me/blog/2013/08/31/pat-1061-pat-1064/"/>
-    <updated>2013-08-31T13:32:00+08:00</updated>
-    <id>http://biaobiaoqi.me/blog/2013/08/31/pat-1061-pat-1064</id>
-    <content type="html"><![CDATA[<p>这四道题来自 13 年 08 月 30 的 PAT 测试。</p>
-
-<p>代码量不大，思路也比较直接。不过第一题的处理逻辑不太清晰，需要好好把握。稍有不慎就掉进坑里了（很多人被这道 20‘的题坑了一个多小时心慌意乱我会乱说-，-？）。</p>
-
-<p>PAT advanced level 全部源码：<a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel">请戳</a></p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1061">1061. Dating (20)</a></h2>
-
-<h5>题意</h5>
-
-<p>题意比较模糊，需要仔细对照 Sample 的数据理清思路。给定四个字符串，每个不超过 60 个字符，不含空格。要求从中找到符合如下规定的三个字符（或者它们的位置），并转化成一个时间的表达：</p>
-
-<ol>
-<li><p>依次比较前两个字符串中每个位置的元素，找到第一个相等的字符，且该字符属于[&#8216;A&#8217;, &#8216;G&#8217;]的字母，注意大小写敏感。转换成一周七天输出。</p></li>
-<li><p>在 1 中的字符出现之后，继续比较前两个串，找到一个相等的字符，使它属于[&#8216;0&#8217;, &#8216;9&#8217;] || [&#8216;A&#8217;, &#8216;N&#8217;]，同样，大小写敏感。转换成一天 24 小时的小时数输出。</p></li>
-<li><p>比较后两个字符串，找到第一个相等的字母（isalpha()），将它在数组中的位置值转换分钟数输出。</p></li>
-</ol>
-
-
-<p>为了便于理解，给出 Sample 数据:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Sample Input:
-</span><span class='line'>
-</span><span class='line'>3485djDkxh4hhGE 
-</span><span class='line'>2984akDfkkkkggEdsb 
-</span><span class='line'>s&hgsfdk 
-</span><span class='line'>d&Hyscvnm
-</span><span class='line'>
-</span><span class='line'>Sample Output:
-</span><span class='line'>
-</span><span class='line'>THU 14:04
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h5>分析</h5>
-
-<p>理清题目的逻辑以后，实现起来是很简单的。</p>
-
-<p>pat1061 源码:<a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel/APAT1061.cpp">请戳</a></p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1062">1062. Talent and Virtue (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>给定一堆人，每个人有三条记录：id，道德值(v)，才能值(t)。给出两个值 L 和 H，用作对这堆人的分类。按照如下规则输出排序结果：</p>
-
-<!--more-->
-
-
-<ol>
-<li><p>过滤掉 v 和 t 都小于 L 的人</p></li>
-<li><p>v 和 t 都不小于 H 的人是圣人，属于最高的层级，排序在其他层级之前。</p></li>
-<li><p>v 不小于 H，而 t 小于 H 的人是君子，这个层级排在圣人之后。</p></li>
-<li><p>剩下的人中，v 不小于 t 的人是愚人，层级关系里排第三，排在所有圣人和君子之后。</p></li>
-<li><p>最后剩下的人是小人，是最低的层级。</p></li>
-<li><p>排名时，相同层级的人的排序关系是 1.按照 v+t 的总分 non-increasing 排序；2.按照 v 的分值按 non-increasing 排序；3.找到 id 按 increasing 排序。</p></li>
-</ol>
-
-
-<h5>分析</h5>
-
-<p>题意梳理清楚以后，定制比较函数用 qsort()能很快的实现。</p>
-
-<p>经测试，使用<code>cout</code>，<code>cin</code>会超时，改用&#8217;printf() scanf()&#8217;轻松过。</p>
-
-<p>pat1062 源码:<a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel/APAT1062.cpp">请戳</a></p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1063">1063. Set Similarity (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>题目给出了 N(&lt;=50)个正整数集合（实际上不是真正意义上的 set，有重复数值），每个集合最多存 M(&lt;10<sup>4)个元素，其中数值范围是</sup> [0, 10<sup>9]。给出</sup> K 次查询，每次查询条件为两个集合，要求求出两集合的相似度。</p>
-
-<p>这里集合相似度的定义是 Nc/Nt*100%，其中 Nc 为两集合的交集元素数量，Nt 为两集合的并集的元素数量。</p>
-
-<h5>分析</h5>
-
-<p>思路一：</p>
-
-<p>利用<code>sort()</code>对数组做排序，然后遍历去重。计算交集时，直接用两个游标对数组遍历进行比较操作，并集等于两者的大小之和减去交集的大小。复杂度为 O(M<em>K + N</em>M*logM)。这种游标遍历的思想，还是很 common sense 的处理方式，精妙之处在于循环判断和内部的判断逻辑的分离，让代码清晰明了。</p>
-
-<p>思路二：</p>
-
-<p>有不愿意透露姓名的<a href="http://weibo.com/cloudbye">@草原</a>同学提出，使用 set 做去重是没问题的。</p>
-
-<p>pat1063 源码:<a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel/APAT1063.cpp">请戳</a></p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1064">1064. Complete Binary Search Tree (30)</a></h2>
-
-<h5>题意</h5>
-
-<p>给定一串数据，要求构建完全二叉搜索树。</p>
-
-<h5>分析</h5>
-
-<p>常规思路：</p>
-
-<ul>
-<li>对数据排序</li>
-<li>递归的构建二叉搜索树，递归条件为根据有序数组找到子树顶点，顶点位置需要满足完全二叉树的结构。</li>
-<li>最后用 queue 输出层序遍历。</li>
-</ul>
-
-
-<p>实现起来需要注意各种边界条件的判定，坑比较多，且代码量比较大（我的参考代码里写了 70 行）。后来<a href="http://weibo.com/redow7">@Redow7</a> 给介绍了一种更有趣的方法：</p>
-
-<ol>
-<li>对数据排序，等待操作。</li>
-<li>首先构建好完全二叉树。</li>
-<li>利用二叉搜索树的中序遍历的有序性，在中序遍历的过程中，将排序好的数据插入其中。</li>
-</ol>
-
-
-<p>如此一来，难点就转移到了构建完全二叉树上。</p>
-
-<p>联想到最大堆的数组实现：父节点坐标为 n 时，左儿子为 2<em>n，右儿子为 2</em>n+1。对的，数组实现的二叉树就是满足完全二叉树的特点的。构建完全二叉树的步骤直接缩减为定义一个一定长度的数组。</p>
-
-<p>于是，使用数组实现的二叉树做迭代的思路就出来了，30 行搞定。</p>
-
-<p>pat1064 源码:<a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel/APAT1064.cpp">请戳</a></p>
-
-<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/08/31/pat-1061-pat-1064/'>http://biaobiaoqi.me/blog/2013/08/31/pat-1061-pat-1064/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
 
 ]]></content>
   </entry>

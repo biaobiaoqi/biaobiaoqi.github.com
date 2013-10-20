@@ -9,7 +9,7 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="这次的题目来源是 2013 年 10 月 7 日下午的浙大计算机研究生招生机试题。 这次题目的难度，按姥姥的说法是：『比普通的 PAT 要难了 0.5 个点。我是把自己的题目从 1.0 到 5.0 以 0.5 的间距分难度级别的，PAT(A)难度一般在 1.5-4.5 之间，保研考试一般在 2.0 &hellip;">
+  <meta name="description" content="数据集成是把不同来源、格式、特点性质的数据在逻辑上或物理上有机地集中，从而为企业提供全面的数据共享。数据集成的方式多种多样，这里介绍的 Teiid 是其中的一种：通过抽象和联邦技术，实现分布式数据源的实时数据访问和集成，无需从记录系统中复制或移动数据。 链接是一篇关于 Teiid 的中文介绍， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -107,6 +107,62 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/10/19/data-integration-tool-teiid/">数据集成工具：Teiid实践</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-19T23:58:00+08:00" pubdate data-updated="true">Oct 19<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/10/19/data-integration-tool-teiid/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>数据集成是把不同来源、格式、特点性质的数据在逻辑上或物理上有机地集中，从而为企业提供全面的数据共享。数据集成的方式多种多样，这里介绍的 <a href="http://www.jboss.org/teiid/">Teiid</a> 是其中的一种：通过抽象和联邦技术，实现分布式数据源的实时数据访问和集成，无需从记录系统中复制或移动数据。</p>
+
+<p><a href="http://blogs.ejb.cc/archives/3552/teiid-scalable-information-integration-program">链接</a>是一篇关于 Teiid 的中文介绍，比较详细。</p>
+
+<p>由于适配不同数据源和生成虚拟数据库（VDB）需要维护好几个配置文件，直接手动部署 Teiid 比较难受。好在 Teiid 提供了辅助工具 <a href="http://www.jboss.org/teiiddesigner">Teiid Designer</a>，这是一个 Eclipse 插件，能帮助用户可视化的管理数据的集成过程。</p>
+
+<ul>
+<li><p>安装配置</p>
+
+<p>  参见官网的 Downloads 界面的详细介绍（注意：环境配置中，各组件需严格遵循官网指定版本，实践经验表明，Teiid 本身并不够鲁棒，容不得小差错）。</p></li>
+</ul>
+
+
+<p>接下来，我们用一个简单的应用场景实践 Teiid 的数据集成功能。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/10/19/data-integration-tool-teiid/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -840,88 +896,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
     <footer>
       <a rel="full-article" href="/blog/2013/09/08/strange-behavior-using-braces-in-java/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/09/08/initliate-objects-in-java/">Java类的实例化总结</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-08T02:03:00+08:00" pubdate data-updated="true">Sep 8<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/09/08/initliate-objects-in-java/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>java 类的实例化(instantiation)具有显性的和隐性的区别。</p>
-
-<p>写 Java 代码时，我们所使用 new 的方法实例化最简单直接的显性实例化。而隐性的实例化则出现在 java 程序的整个生命周期中，包括 String、Class，StringBuffer 或者 StringBuilder 的实例化等等。</p>
-
-<h2>显性的实例化</h2>
-
-<h3>new 关键字实例化对象</h3>
-
-<p>调用相应的构造函数完成实例化。（类中的非静态成员变量如果有初始化语句，都会被隐式的加入到构造函数中）代码如下：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span>  <span class="o">{</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">String</span> <span class="n">strA</span> <span class="o">=</span> <span class="s">&quot;xyz&quot;</span><span class="o">;</span>
-</span><span class='line'>    <span class="n">String</span> <span class="n">strB</span> <span class="o">;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="kd">public</span> <span class="nf">Test</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span><span class="o">){</span>
-</span><span class='line'>        <span class="n">strB</span> <span class="o">=</span> <span class="n">str</span> <span class="o">;</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
-</span><span class='line'>            <span class="n">Test</span> <span class="n">t</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Test</span><span class="o">(</span><span class="s">&quot;abc&quot;</span><span class="o">);</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>在 eclipse 中装了 <a href="http://asm.ow2.org/">ASM bytecode</a> 插件后，观察.class 文件中的构造函数对应的字节码如下：</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/09/08/initliate-objects-in-java/">Read on &rarr;</a>
     </footer>
   
 

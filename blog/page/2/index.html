@@ -9,7 +9,7 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="《Java 类的装载、链接和初始化》中提到，链接的最后一步是解析，即对符号引用的解析。但这不是必须的，可以等到相应的符号引用第一次使用时再解析。 而类的初始化是在链接之后的（注意了，根据不同 JVM 有不同的实现方式，在类初始化的时候，可能已经完成了所有的符号引用的解析，也可能没有）， &hellip;">
+  <meta name="description" content="java 类的实例化(instantiation)具有显性的和隐性的区别。 写 Java 代码时，我们所使用 new 的方法实例化最简单直接的显性实例化。而隐性的实例化则出现在 java 程序的整个生命周期中，包括 String、Class，StringBuffer 或者 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -107,6 +107,88 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/09/08/initliate-objects-in-java/">Java类的实例化总结</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-08T02:03:00+08:00" pubdate data-updated="true">Sep 8<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/09/08/initliate-objects-in-java/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>java 类的实例化(instantiation)具有显性的和隐性的区别。</p>
+
+<p>写 Java 代码时，我们所使用 new 的方法实例化最简单直接的显性实例化。而隐性的实例化则出现在 java 程序的整个生命周期中，包括 String、Class，StringBuffer 或者 StringBuilder 的实例化等等。</p>
+
+<h2>显性的实例化</h2>
+
+<h3>new 关键字实例化对象</h3>
+
+<p>调用相应的构造函数完成实例化。（类中的非静态成员变量如果有初始化语句，都会被隐式的加入到构造函数中）代码如下：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span>  <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">String</span> <span class="n">strA</span> <span class="o">=</span> <span class="s">&quot;xyz&quot;</span><span class="o">;</span>
+</span><span class='line'>    <span class="n">String</span> <span class="n">strB</span> <span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="nf">Test</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span><span class="o">){</span>
+</span><span class='line'>        <span class="n">strB</span> <span class="o">=</span> <span class="n">str</span> <span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+</span><span class='line'>            <span class="n">Test</span> <span class="n">t</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Test</span><span class="o">(</span><span class="s">&quot;abc&quot;</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在 eclipse 中装了 <a href="http://asm.ow2.org/">ASM bytecode</a> 插件后，观察.class 文件中的构造函数对应的字节码如下：</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/09/08/initliate-objects-in-java/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -643,103 +725,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
     <footer>
       <a rel="full-article" href="/blog/2013/08/31/octopress-3rd-party-plugin-syncpost/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/08/31/pat-1061-pat-1064/">PAT 1061 - 1064 题解</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-08-31T13:32:00+08:00" pubdate data-updated="true">Aug 31<span>st</span>, 2013</time>
-        
-         | <a href="/blog/2013/08/31/pat-1061-pat-1064/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>这四道题来自 13 年 08 月 30 的 PAT 测试。</p>
-
-<p>代码量不大，思路也比较直接。不过第一题的处理逻辑不太清晰，需要好好把握。稍有不慎就掉进坑里了（很多人被这道 20‘的题坑了一个多小时心慌意乱我会乱说-，-？）。</p>
-
-<p>PAT advanced level 全部源码：<a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel">请戳</a></p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1061">1061. Dating (20)</a></h2>
-
-<h5>题意</h5>
-
-<p>题意比较模糊，需要仔细对照 Sample 的数据理清思路。给定四个字符串，每个不超过 60 个字符，不含空格。要求从中找到符合如下规定的三个字符（或者它们的位置），并转化成一个时间的表达：</p>
-
-<ol>
-<li><p>依次比较前两个字符串中每个位置的元素，找到第一个相等的字符，且该字符属于[&#8216;A&#8217;, &#8216;G&#8217;]的字母，注意大小写敏感。转换成一周七天输出。</p></li>
-<li><p>在 1 中的字符出现之后，继续比较前两个串，找到一个相等的字符，使它属于[&#8216;0&#8217;, &#8216;9&#8217;] || [&#8216;A&#8217;, &#8216;N&#8217;]，同样，大小写敏感。转换成一天 24 小时的小时数输出。</p></li>
-<li><p>比较后两个字符串，找到第一个相等的字母（isalpha()），将它在数组中的位置值转换分钟数输出。</p></li>
-</ol>
-
-
-<p>为了便于理解，给出 Sample 数据:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Sample Input:
-</span><span class='line'>
-</span><span class='line'>3485djDkxh4hhGE 
-</span><span class='line'>2984akDfkkkkggEdsb 
-</span><span class='line'>s&hgsfdk 
-</span><span class='line'>d&Hyscvnm
-</span><span class='line'>
-</span><span class='line'>Sample Output:
-</span><span class='line'>
-</span><span class='line'>THU 14:04
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h5>分析</h5>
-
-<p>理清题目的逻辑以后，实现起来是很简单的。</p>
-
-<p>pat1061 源码:<a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel/APAT1061.cpp">请戳</a></p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1062">1062. Talent and Virtue (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>给定一堆人，每个人有三条记录：id，道德值(v)，才能值(t)。给出两个值 L 和 H，用作对这堆人的分类。按照如下规则输出排序结果：</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/08/31/pat-1061-pat-1064/">Read on &rarr;</a>
     </footer>
   
 
