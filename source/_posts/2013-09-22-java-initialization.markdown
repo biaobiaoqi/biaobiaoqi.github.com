@@ -54,7 +54,7 @@ class T  implements Cloneable{
 
 ```
 
-
+<!--more-->
 
 ##分析
 
@@ -64,7 +64,6 @@ class T  implements Cloneable{
 
 本题的代码显然没有这么简单了。本题中涉及到了`static {…}` 和 `{…}`这种形式的代码块，以及在类的静态变量中初始化该类的对象这种交错的逻辑，容易让人焦躁（类似于密集恐惧症吧=(）。实际上，按照[类的装载、链接和初始化逻辑](http://biaobiaoqi.me/blog/2013/09/08/java-class-loading-linking-and-initialising/)，以及[对象初始化的顺序](http://biaobiaoqi.me/blog/2013/09/08/strange-behavior-using-braces-in-java/)来思考，不难得到答案。
 
-<!--more-->
 
 ###代码组成
 

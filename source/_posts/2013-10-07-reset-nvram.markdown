@@ -18,7 +18,7 @@ description: "Mac 会将某些设置储存在特殊内存区域中，而且即�
 按照重置NVRAM的方法操作后，果然Mac又拥有了声音，可以看好声音啊=)
 
 这里对NVRAM做一些记录：
-
+<!--more-->
 ###NVRAM
 
 Mac 会将某些设置储存在特殊内存区域中，而且即使关机这些设置也不会丢失。在基于 Intel 的 Mac 上，存储位置是称为 NVRAM 的内存。NVRAM为Non-Volatile Random Access Memory的缩写。
