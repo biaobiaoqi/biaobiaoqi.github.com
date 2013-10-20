@@ -202,50 +202,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <p>下面是各个题的分析（PAT advanced level 本人实现的全部源码：<a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel">请戳</a>）。</p>
 
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1065">1065. A+B and C (64bit) (20)</a></h2>
-
-<h5>题意</h5>
-
-<p>输入三个数 a，b，c，取值范围是 [<code>-2^63</code>, <code>2^63</code>]，要求判断<code>a + b &lt; c</code> 是否为真。</p>
-
-<h5>分析</h5>
-
-<p>很简单的签到题，想到两种方法：一是用 Java 的 Big Decimal 实现（应该不会超时吧-,-），二是对 a+b 造成的 long long 溢出的情况做特殊处理。</p>
-
-<p>对于分情况的实现方式，实际上也就两种特殊情况，即 a，b 同号且两者之和溢出了（绝对值超过了 2<sup>63）。此时两者之和与</sup> c 的值的相对关系也是确定的。</p>
-
-<ul>
-<li><code>a &lt; 0 &amp;&amp; b &lt; 0 &amp;&amp; a + b &gt;= 0</code>: a + b 必小于 c</li>
-<li><code>a &gt; 0 &amp;&amp; b &gt; 0 &amp;&amp; a + b &lt;= 0</code>: a + b 必大于 c</li>
-</ul>
-
-
-<p>另在 98 看见有大神说可以用 long double 水过去-,-.</p>
-
-<p>pat1065 源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1065.cpp">请戳</a></p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1066">1066. Root of AVL Tree (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>实现 <a href="http://en.wikipedia.org/wiki/AVL_tree">AVL 树</a>的插入方法，给定 N(&lt;=20)个数，要求输出依次插入后的 AVL 树的根。</p>
-
-<h5>分析</h5>
-
-<p>由于节点少，可以使用相对简单的递归实现方法：</p>
-
-<ul>
-<li>每个节点维护一个高度值，用在递归插入后检测子树是否平衡</li>
-<li>完成 4 个旋转方法（参见 <a href="http://en.wikipedia.org/wiki/AVL_tree">AVL Tree wikipedia</a> 中的示意图）</li>
-<li>在递归插入方法中，完成对子树的插入后，检测子树高度差，根据子树的结构特点，做出相应的旋转</li>
-<li>旋转后记得更新节点的高度值</li>
-</ul>
-
-
-<p>机试时似乎没有人完全 AC 这道题，看来代码实现和 Debug 能力缺乏还是比较普遍的问题。</p>
-
-<p>pat1066 源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1066.cpp">请戳</a></p>
-
 </div>
   
   
@@ -297,20 +253,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <p>这里对 NVRAM 做一些记录：</p>
 
-<h3>NVRAM</h3>
-
-<p>Mac 会将某些设置储存在特殊内存区域中，而且即使关机这些设置也不会丢失。在基于 Intel 的 Mac 上，存储位置是称为 NVRAM 的内存。NVRAM 为 Non-Volatile Random Access Memory 的缩写。</p>
-
-<p>存储在 NVRAM/PRAM 中的信息包括：</p>
-
-<ul>
-<li>扬声器音量</li>
-<li>屏幕分辨率</li>
-<li>启动磁盘选择</li>
-<li>最近的内核崩溃信息（如果有的话）</li>
-</ul>
-
-
 </div>
   
   
@@ -359,20 +301,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <p>非常推荐刚接触计算机的朋友花上三五小时将全书通读一遍，没有技术细节，没有公式证明，它会告诉作者挑选出的九大算法出现的缘由和发展的过程。这些不关乎实现细节的思想概括，更能体现算法在整个领域中的存在的原因。它们不再是冷冰冰的算法过程，这是阅读大多数的书籍、教材所难以获得的。</p>
 
 <p>至于我的推荐原因，如下全文。</p>
-
-<h3>课程学习之弊</h3>
-
-<p>大二大三的那两年，在学校上过了网络、操作系统、数据库、算法设计等诸多计算机领域的基础必修课程。由于生性愚钝加之令人头大的砖头书的体系化、理论化，对于知识的掌握顶多处于知其然却不知其所以然的程度。在这种情况下，学习就退化为了填鸭式的记忆。比如我记得 RSA 的公钥加密流程，却无法理解为何要套用这么一大堆的数学方法来得到如此神奇的效果，比如，我知道数据库有一套日志机制，却不知道它是如何与其他的组件共同构建起一个系统的……没有来龙去脉，就没有对技术发展的感知，没有对技术本质的理解和认识。</p>
-
-<p>经过了四年多的摸爬滚打，到现在对这些基础知识的认识自然远好于当年上课的理解水平，不是因为我在反复的学习课程内容，而是从实践中获得了新的认识。</p>
-
-<h3>从生活出发</h3>
-
-<p>大多数人的思维习惯，倾向于从已知的事物中衍生对新事物的认识，这是一种类推。而高校的大多数教材和教授方式较少考虑到这一点，一种简单粗暴的直入主题的方式被大量的使用，排斥了知识的前因后果，技术的来龙去脉，剩下的只是新体系本身。这增加了学习曲线的入门坡度。</p>
-
-<blockquote><p>理论是灰色的，生活之树常青</p></blockquote>
-
-<p>《改变未来的九大算法》是对歌德这句话的良好实践。</p>
 
 </div>
   
@@ -539,13 +467,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h2>分析</h2>
 
-<p>代码主要考察的是类、变量初始化的顺序。</p>
-
-<p>一般的，我们很清楚类需要在被实例化之前初始化，而对象的初始化则是运行构造方法中的代码。</p>
-
-<p>本题的代码显然没有这么简单了。本题中涉及到了<code>static {…}</code> 和 <code>{…}</code>这种形式的代码块，以及在类的静态变量中初始化该类的对象这种交错的逻辑，容易让人焦躁（类似于密集恐惧症吧=(）。实际上，按照<a href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loading-linking-and-initialising/">类的装载、链接和初始化逻辑</a>，以及<a href="http://biaobiaoqi.me/blog/2013/09/08/strange-behavior-using-braces-in-java/">对象初始化的顺序</a>来思考，不难得到答案。</p>
 
 </div>
   

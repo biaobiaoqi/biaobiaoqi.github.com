@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: pat | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.me/tags/pat/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.me/"/>
-  <updated>2013-10-20T14:58:20+08:00</updated>
+  <updated>2013-10-20T16:34:06+08:00</updated>
   <id>http://biaobiaoqi.me/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -25,6 +25,9 @@
 <p>个人认为，其中1066模拟AVL插入的实现有些细节容易弄错，而1068只要会简单的DP，也就没有问题了，1065和1066都还是很简单的实现。</p>
 
 <p>下面是各个题的分析（PAT advanced level本人实现的全部源码：<a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel">请戳</a>）。</p>
+
+<!--more-->
+
 
 <h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1065">1065. A+B and C (64bit) (20)</a></h2>
 

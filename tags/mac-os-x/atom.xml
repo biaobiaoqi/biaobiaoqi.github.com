@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: mac_os_x | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.me/tags/mac-os-x/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.me/"/>
-  <updated>2013-10-20T14:58:20+08:00</updated>
+  <updated>2013-10-20T16:34:06+08:00</updated>
   <id>http://biaobiaoqi.me/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -27,6 +27,9 @@
 <p>按照重置NVRAM的方法操作后，果然Mac又拥有了声音，可以看好声音啊=)</p>
 
 <p>这里对NVRAM做一些记录：</p>
+
+<!--more-->
+
 
 <h3>NVRAM</h3>
 
