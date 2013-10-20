@@ -9,7 +9,7 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="数据集成是把不同来源、格式、特点性质的数据在逻辑上或物理上有机地集中，从而为企业提供全面的数据共享。数据集成的方式多种多样，这里介绍的 Teiid 是其中的一种：通过抽象和联邦技术，实现分布式数据源的实时数据访问和集成，无需从记录系统中复制或移动数据。 链接是一篇关于 Teiid 的中文介绍， &hellip;">
+  <meta name="description" content="三个多月前，入手了这辆死飞。 倒不是像中学生渴望它可搭配的绚丽色彩和特立独行，而是喜欢自由、简单的理念。以至于我基本全黑的配色被同学形容为『最不骚的死飞』。自己平时骑车并不快，代步而已，也没有花心思学些炫酷的平花动作（虽然很想学），除了能 mid skid 刹车和一直蹬脚踏板累了些， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -107,6 +107,60 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/10/20/repair-my-fixed-gear/">修车记</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-20T21:58:00+08:00" pubdate data-updated="true">Oct 20<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/10/20/repair-my-fixed-gear/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>三个多月前，入手了这辆死飞。</p>
+
+<p>倒不是像中学生渴望它可搭配的绚丽色彩和特立独行，而是喜欢自由、简单的理念。以至于我基本全黑的配色被同学形容为『最不骚的死飞』。自己平时骑车并不快，代步而已，也没有花心思学些炫酷的平花动作（虽然很想学），除了能 mid skid 刹车和一直蹬脚踏板累了些，在操作上也确实没啥不同了。被女朋友形容为骑车一辆『功能退化』
+的自行车-，-</p>
+
+<p>一直还没来得及写篇博文记录下，借这次修车的过程，给它留个影。</p>
+
+<ul>
+<li>起因：后胎漏气，半小时漏光的节奏</li>
+<li>处理：用 DUUTI 补胎套件补胎，顺道紧了一把链条。</li>
+</ul>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/10/20/repair-my-fixed-gear/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -669,155 +723,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
     <footer>
       <a rel="full-article" href="/blog/2013/09/08/custom-premain-method/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/09/08/strange-behavior-using-braces-in-java/">Java构造方法中的执行顺序</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-08T12:58:00+08:00" pubdate data-updated="true">Sep 8<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/09/08/strange-behavior-using-braces-in-java/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>这道题来自 <a href="http://stackoverflow.com/questions/8185780/strange-behavior-using-braces-in-java/8186881#8186881">stackoverflow</a>。</p>
-
-<h2>问题描述：</h2>
-
-<p>有如下代码，求其输出内容。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span>
-</span><span class='line'><span class="o">{</span>
-</span><span class='line'>    <span class="kd">public</span> <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span>
-</span><span class='line'>    <span class="n">Test</span><span class="o">(){</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;1&quot;</span><span class="o">);}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="o">{</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;2&quot;</span><span class="o">);}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="kd">static</span><span class="o">{</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;3&quot;</span><span class="o">);}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span> <span class="n">args</span><span class="o">[])</span>
-</span><span class='line'>    <span class="o">{</span>
-</span><span class='line'>        <span class="k">new</span> <span class="nf">Test</span><span class="o">();</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>分析</h2>
-
-<p>作为静态区段的语句，容易知道，3 是会最先出现的。容易弄错的一点是 到底是 1 和 2 的出现顺序。</p>
-
-<p>我们可以参考字节码来分析。在 eclipse 中使用 ASM bytecode 插件，得到相应的字节码：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="c1">// class version 50.0 (50)  </span>
-</span><span class='line'><span class="c1">// access flags 0x21  </span>
-</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
-</span><span class='line'>  <span class="c1">// compiled from: Test.java  </span>
-</span><span class='line'>  <span class="kd">static</span> <span class="o">&lt;</span><span class="n">clinit</span><span class="o">&gt;()</span> <span class="o">:</span> <span class="kt">void</span>
-</span><span class='line'>    <span class="n">GETSTATIC</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span> <span class="o">:</span> <span class="n">PrintStream</span>
-</span><span class='line'>    <span class="n">LDC</span> <span class="s">&quot;3&quot;</span>
-</span><span class='line'>    <span class="n">INVOKEVIRTUAL</span> <span class="n">PrintStream</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">String</span><span class="o">)</span> <span class="o">:</span> <span class="kt">void</span>
-</span><span class='line'>    <span class="n">RETURN</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="o">&lt;</span><span class="n">init</span><span class="o">&gt;()</span> <span class="o">:</span> <span class="kt">void</span>
-</span><span class='line'>    <span class="n">ALOAD</span> <span class="mi">0</span><span class="o">:</span> <span class="k">this</span>
-</span><span class='line'>    <span class="n">INVOKESPECIAL</span> <span class="n">Object</span><span class="o">.&lt;</span><span class="n">init</span><span class="o">&gt;()</span> <span class="o">:</span> <span class="kt">void</span>
-</span><span class='line'>    <span class="n">ALOAD</span> <span class="mi">0</span><span class="o">:</span> <span class="k">this</span>
-</span><span class='line'>    <span class="n">BIPUSH</span> <span class="mi">10</span>
-</span><span class='line'>    <span class="n">PUTFIELD</span> <span class="n">Test</span><span class="o">.</span><span class="na">a</span> <span class="o">:</span> <span class="kt">int</span>
-</span><span class='line'>    <span class="n">GETSTATIC</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span> <span class="o">:</span> <span class="n">PrintStream</span>
-</span><span class='line'>    <span class="n">LDC</span> <span class="s">&quot;2&quot;</span>
-</span><span class='line'>    <span class="n">INVOKEVIRTUAL</span> <span class="n">PrintStream</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">String</span><span class="o">)</span> <span class="o">:</span> <span class="kt">void</span>
-</span><span class='line'>    <span class="n">GETSTATIC</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span> <span class="o">:</span> <span class="n">PrintStream</span>
-</span><span class='line'>    <span class="n">LDC</span> <span class="s">&quot;1&quot;</span>
-</span><span class='line'>    <span class="n">INVOKEVIRTUAL</span> <span class="n">PrintStream</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">String</span><span class="o">)</span> <span class="o">:</span> <span class="kt">void</span>
-</span><span class='line'>    <span class="n">RETURN</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[])</span> <span class="o">:</span> <span class="kt">void</span>
-</span><span class='line'>    <span class="n">NEW</span> <span class="n">Test</span>
-</span><span class='line'>    <span class="n">INVOKESPECIAL</span> <span class="n">Test</span><span class="o">.&lt;</span><span class="n">init</span><span class="o">&gt;()</span> <span class="o">:</span> <span class="kt">void</span>
-</span><span class='line'>    <span class="n">RETURN</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>正如我们所想，3 是被放在类构造方法中，这是类的初始化函数，固然在类的初始化时出现。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/09/08/strange-behavior-using-braces-in-java/">Read on &rarr;</a>
     </footer>
   
 

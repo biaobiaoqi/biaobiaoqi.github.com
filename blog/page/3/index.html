@@ -9,7 +9,7 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="这四道题来自 13 年 08 月 30 的 PAT 测试。 代码量不大，思路也比较直接。不过第一题的处理逻辑不太清晰，需要好好把握。稍有不慎就掉进坑里了（很多人被这道 20‘的题坑了一个多小时心慌意乱我会乱说-，-？）。 PAT advanced level 全部源码：请戳 1061. &hellip;">
+  <meta name="description" content="为了增加外链等考虑，独立博客往往有将博文同步到其他博客社区的需求。自己人肉黏贴的方式笨拙、重复，对于程序猿而言，着实不可取。 我在 github 上找到了 syncPost 这个针对 octopress 的第三方工具，能够通过一些论坛提供的 metaWeblog 服务实现 octopress &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -107,6 +107,62 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/08/31/octopress-3rd-party-plugin-syncpost/">octopress第三方插件：博文同步工具syncPost</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-31T19:30:00+08:00" pubdate data-updated="true">Aug 31<span>st</span>, 2013</time>
+        
+         | <a href="/blog/2013/08/31/octopress-3rd-party-plugin-syncpost/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>为了增加外链等考虑，独立博客往往有将博文同步到其他博客社区的需求。自己人肉黏贴的方式笨拙、重复，对于程序猿而言，着实不可取。</p>
+
+<p>我在 github 上找到了 <a href="https://github.com/huangbowen521/octopress-syncPost">syncPost</a> 这个针对 octopress 的第三方工具，能够通过一些论坛提供的 <a href="http://en.wikipedia.org/wiki/MetaWeblog">metaWeblog</a> 服务实现 octopress 最新一篇博文的同步提交。</p>
+
+<p>这大概就是我要找的东西吧。不过，其中有些细节并不是我想要的：</p>
+
+<ul>
+<li>1.在本地配置文件存储论坛账户的密码。虽然可以设置为 ignore 不提交到 git 代码库中，但这也并不安全。</li>
+<li>2.只能同步最新的一篇博客，没有整体的博文搬家功能。</li>
+<li>3.先比其他的 octopress 插件，原来版本的代码结构难于维护，比如有自己单独的配置文件，而不是使用全局的<code>_config.yml</code>(在那个版本中大概是为了不把明文密码提交到版本库中)，比如 ruby 文件单独在一个<code>_custom</code>文件夹下等</li>
+</ul>
+
+
+<p>基于这些点，我 fork 了 <a href="http://huangbowen.net/">huangbowen</a> 大哥的代码，定制成了它<a href="https://github.com/biaobiaoqi/octopress-syncPost">现在的样子</a>。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/08/31/octopress-3rd-party-plugin-syncpost/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -839,61 +895,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
     <footer>
       <a rel="full-article" href="/blog/2013/07/31/pat-1001-1010-solutions/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/29/after-pat-practice/">终于算完了这道『1+1』</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-29T22:12:00+08:00" pubdate data-updated="true">Jul 29<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/29/after-pat-practice/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>在<a href="http://weibo.com/redow7">@ReDow</a>、<a href="http://weibo.com/cloudbye">@麦迪的小腿</a>和<a href="http://weibo.com/linest">@linest</a> 等小伙伴的帮助下，终于断断续续的爬完了 <a href="http://pat.zju.edu.cn/">PAT</a> 的 Basic Level 和 Advanced Level，阶段性填补了自己惨白的算法短板。在 cs 的圈子里，说 PAT 是入门的『1 + 1』不为过。刚完成『1 + 1』，作为五年科班的人，确实不够光彩。不过现在能做的也只是尽力弥补本科时间里的虚度。</p>
-
-<p>从亲手挖的坑里往外爬，需要付出比其他人更多的努力。没时间享受题目 ac 之后的快感（画外音：这么简单的题会有快感么=.=#），倒会时不时蹦出一股脑的蛋疼：『你当初干 XX 啥去了！』。</p>
-
-<h2>当初&#8230;</h2>
-
-<p>记得大一的时候，每天花好几个小时泡图书馆看各种 IT 杂志和技术书籍。在刚开始学 C 语言编程的时间里，我看着中间件、系统软件、终端融合、东软和用友金蝶之争等一系列摸不着头脑的东西，在对数据还没概念的时候，看着数据库的范式和 E-R 图…总之，就是一直在门外徘徊。</p>
-
-<p>之后专业课多了起来，我又兴高采烈的混在工高大神的队伍里，早上集结同学每天早上五点多轮流爬起来去自习室占座，以看似端正实则不专注的令人发指的学习态度在 GPA 榜单上持续退步着。浑浑噩噩的搞过数模，无果。当然，以『学渣』的水平充着『学霸』也是有好处的，就是沾染了大神的精神气，比如记忆犹新的有在 CMU 念书的鑫磊大神的专注、冷静和每天 4 小时的睡眠。同时，我还风风火火的参加了 ASES 和求是强鹰，搀和着所谓的创业。大四在爱尔兰的交流，除了英语和专业课，其他的倒是学的挺多，比如烧饭，单反和旅游……本科唯一做的跟编程有关的说得出口的，也就写了个 Android 程序在比赛里获了个奖，不提也罢的那种。</p>
-
-<h2>变</h2>
-
-<p>在《<a href="http://book.douban.com/subject/1048007/">高效能认识的七个习惯</a>》里看过一个观点：每个人都有属于自己的『关注圈』和『影响圈』。影响圈是个人对外界产出的途径，关注圈则意味着个人对外界的期许。可以想见，关注圈大于影响圈。正确的成长方式是尽力扩大影响圈，以此催生关注圈的扩大。而我则是走在了相反的方向：一直致力于开发自己的关注圈，后果是影响圈不见长进。一度我开始注意遏制自己这方面的好高骛远，不过事实证明，我还是比较喜欢在学爬得时候看走路的教学视频。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/07/29/after-pat-practice/">Read on &rarr;</a>
     </footer>
   
 

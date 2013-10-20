@@ -9,7 +9,22 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="java 类的实例化(instantiation)具有显性的和隐性的区别。 写 Java 代码时，我们所使用 new 的方法实例化最简单直接的显性实例化。而隐性的实例化则出现在 java 程序的整个生命周期中，包括 String、Class，StringBuffer 或者 &hellip;">
+  <meta name="description" content="这道题来自 stackoverflow。 问题描述： 有如下代码，求其输出内容。 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+public class Test
+{ public int a = 10; Test(){System.out.println(&quot;1& &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -107,6 +122,155 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/09/08/strange-behavior-using-braces-in-java/">Java构造方法中的执行顺序</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-08T12:58:00+08:00" pubdate data-updated="true">Sep 8<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/09/08/strange-behavior-using-braces-in-java/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>这道题来自 <a href="http://stackoverflow.com/questions/8185780/strange-behavior-using-braces-in-java/8186881#8186881">stackoverflow</a>。</p>
+
+<h2>问题描述：</h2>
+
+<p>有如下代码，求其输出内容。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span>
+</span><span class='line'><span class="o">{</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span>
+</span><span class='line'>    <span class="n">Test</span><span class="o">(){</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;1&quot;</span><span class="o">);}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="o">{</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;2&quot;</span><span class="o">);}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">static</span><span class="o">{</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;3&quot;</span><span class="o">);}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span> <span class="n">args</span><span class="o">[])</span>
+</span><span class='line'>    <span class="o">{</span>
+</span><span class='line'>        <span class="k">new</span> <span class="nf">Test</span><span class="o">();</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>分析</h2>
+
+<p>作为静态区段的语句，容易知道，3 是会最先出现的。容易弄错的一点是 到底是 1 和 2 的出现顺序。</p>
+
+<p>我们可以参考字节码来分析。在 eclipse 中使用 ASM bytecode 插件，得到相应的字节码：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="c1">// class version 50.0 (50)  </span>
+</span><span class='line'><span class="c1">// access flags 0x21  </span>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
+</span><span class='line'>  <span class="c1">// compiled from: Test.java  </span>
+</span><span class='line'>  <span class="kd">static</span> <span class="o">&lt;</span><span class="n">clinit</span><span class="o">&gt;()</span> <span class="o">:</span> <span class="kt">void</span>
+</span><span class='line'>    <span class="n">GETSTATIC</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span> <span class="o">:</span> <span class="n">PrintStream</span>
+</span><span class='line'>    <span class="n">LDC</span> <span class="s">&quot;3&quot;</span>
+</span><span class='line'>    <span class="n">INVOKEVIRTUAL</span> <span class="n">PrintStream</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">String</span><span class="o">)</span> <span class="o">:</span> <span class="kt">void</span>
+</span><span class='line'>    <span class="n">RETURN</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="o">&lt;</span><span class="n">init</span><span class="o">&gt;()</span> <span class="o">:</span> <span class="kt">void</span>
+</span><span class='line'>    <span class="n">ALOAD</span> <span class="mi">0</span><span class="o">:</span> <span class="k">this</span>
+</span><span class='line'>    <span class="n">INVOKESPECIAL</span> <span class="n">Object</span><span class="o">.&lt;</span><span class="n">init</span><span class="o">&gt;()</span> <span class="o">:</span> <span class="kt">void</span>
+</span><span class='line'>    <span class="n">ALOAD</span> <span class="mi">0</span><span class="o">:</span> <span class="k">this</span>
+</span><span class='line'>    <span class="n">BIPUSH</span> <span class="mi">10</span>
+</span><span class='line'>    <span class="n">PUTFIELD</span> <span class="n">Test</span><span class="o">.</span><span class="na">a</span> <span class="o">:</span> <span class="kt">int</span>
+</span><span class='line'>    <span class="n">GETSTATIC</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span> <span class="o">:</span> <span class="n">PrintStream</span>
+</span><span class='line'>    <span class="n">LDC</span> <span class="s">&quot;2&quot;</span>
+</span><span class='line'>    <span class="n">INVOKEVIRTUAL</span> <span class="n">PrintStream</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">String</span><span class="o">)</span> <span class="o">:</span> <span class="kt">void</span>
+</span><span class='line'>    <span class="n">GETSTATIC</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span> <span class="o">:</span> <span class="n">PrintStream</span>
+</span><span class='line'>    <span class="n">LDC</span> <span class="s">&quot;1&quot;</span>
+</span><span class='line'>    <span class="n">INVOKEVIRTUAL</span> <span class="n">PrintStream</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">String</span><span class="o">)</span> <span class="o">:</span> <span class="kt">void</span>
+</span><span class='line'>    <span class="n">RETURN</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[])</span> <span class="o">:</span> <span class="kt">void</span>
+</span><span class='line'>    <span class="n">NEW</span> <span class="n">Test</span>
+</span><span class='line'>    <span class="n">INVOKESPECIAL</span> <span class="n">Test</span><span class="o">.&lt;</span><span class="n">init</span><span class="o">&gt;()</span> <span class="o">:</span> <span class="kt">void</span>
+</span><span class='line'>    <span class="n">RETURN</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>正如我们所想，3 是被放在类构造方法中，这是类的初始化函数，固然在类的初始化时出现。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/09/08/strange-behavior-using-braces-in-java/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -669,62 +833,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
     <footer>
       <a rel="full-article" href="/blog/2013/09/01/blog-log/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/08/31/octopress-3rd-party-plugin-syncpost/">octopress第三方插件：博文同步工具syncPost</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-08-31T19:30:00+08:00" pubdate data-updated="true">Aug 31<span>st</span>, 2013</time>
-        
-         | <a href="/blog/2013/08/31/octopress-3rd-party-plugin-syncpost/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>为了增加外链等考虑，独立博客往往有将博文同步到其他博客社区的需求。自己人肉黏贴的方式笨拙、重复，对于程序猿而言，着实不可取。</p>
-
-<p>我在 github 上找到了 <a href="https://github.com/huangbowen521/octopress-syncPost">syncPost</a> 这个针对 octopress 的第三方工具，能够通过一些论坛提供的 <a href="http://en.wikipedia.org/wiki/MetaWeblog">metaWeblog</a> 服务实现 octopress 最新一篇博文的同步提交。</p>
-
-<p>这大概就是我要找的东西吧。不过，其中有些细节并不是我想要的：</p>
-
-<ul>
-<li>1.在本地配置文件存储论坛账户的密码。虽然可以设置为 ignore 不提交到 git 代码库中，但这也并不安全。</li>
-<li>2.只能同步最新的一篇博客，没有整体的博文搬家功能。</li>
-<li>3.先比其他的 octopress 插件，原来版本的代码结构难于维护，比如有自己单独的配置文件，而不是使用全局的<code>_config.yml</code>(在那个版本中大概是为了不把明文密码提交到版本库中)，比如 ruby 文件单独在一个<code>_custom</code>文件夹下等</li>
-</ul>
-
-
-<p>基于这些点，我 fork 了 <a href="http://huangbowen.net/">huangbowen</a> 大哥的代码，定制成了它<a href="https://github.com/biaobiaoqi/octopress-syncPost">现在的样子</a>。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/08/31/octopress-3rd-party-plugin-syncpost/">Read on &rarr;</a>
     </footer>
   
 
