@@ -9,7 +9,7 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="提到越狱，很多人第一反应大概是免费的游戏和 app。 作为软件从业人员，深知中国的大环境的特殊性。内有用户想吃免费午餐的不良付费习惯，外有行业内大头诸如某讯对创新的绞杀。大家对越狱是为了免费、盗版软件的认识，也就不奇怪了。 还有另一派人。越狱对他们来说，意味着开放。个人认为这也是 Hack &hellip;">
+  <meta name="description" content="HadoopDB 是一个 Mapreduce 和传统关系型数据库的结合方案，以充分利用 RDBMS 的性能和 Hadoop 的容错、分布特性。2009 年被 Yale 大学教授 Abadi 提出，继而商业化为 Hadapt，据称从 VC 那儿拉到了 10M 刀投资。 本文是对 HadoopDB &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -107,6 +107,51 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/18/a-hybrid-system-hadoopdb/">HadoopDB：混合分布式系统</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-18T17:58:00+08:00" pubdate data-updated="true">May 18<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/05/18/a-hybrid-system-hadoopdb/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>HadoopDB 是一个 Mapreduce 和传统关系型数据库的结合方案，以充分利用 RDBMS 的性能和 Hadoop 的容错、分布特性。2009 年被 Yale 大学教授 Abadi 提出，继而商业化为 <a href="http://hadapt.com/">Hadapt</a>，据称从 VC 那儿拉到了 10M 刀投资。</p>
+
+<p>本文是对 HadoopDB 论文的总结。其中不免掺杂些自己的不成熟想法，更详细的内容，还请参见原论文 HadoopDB: An Architectural Hybrid of MapReduce and DBMS Technologies for Analytical Workloads</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/05/18/a-hybrid-system-hadoopdb/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -584,60 +629,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/04/23/winsock-kills-internet/">Winsock出错引起的断网</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-23T22:24:00+08:00" pubdate data-updated="true">Apr 23<span>rd</span>, 2013</time>
-        
-         | <a href="/blog/2013/04/23/winsock-kills-internet/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>背景</h3>
-
-<p>实验室有二十来台 PC 机，30+的服务器集群，网络拓扑比较复杂。简单地说，有网关连着校网，校网无法直接访问学校外的网络，只能通过拨 vpn 来实现外网访问。而校网最近也不稳定，时常断网。</p>
-
-<p>今天，实验室的一台电脑今天突然出无法上网了，而其他人则在正常上网。症状很奇怪：</p>
-
-<ul>
-<li>浏览器只能上 google，其他任何网站都上不去。</li>
-<li>QQ、ftp 等各种需要连网的软件也都无法正常连网。</li>
-<li>一切的发生，只是在 PC 使用者认为正常的操作中发生：上网，连网下围棋，聊 QQ，然后…</li>
-</ul>
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/04/23/winsock-kills-internet/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/7/">&larr; Older</a>
@@ -659,15 +650,15 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <a style="font-size: 113%" href="/tags/diary/">diary</a> &nbsp 
 <a style="font-size: 163%" href="/tags/distributed/">distributed</a> &nbsp 
 <a style="font-size: 132%" href="/tags/hadoop/">hadoop</a> &nbsp 
-<a style="font-size: 172%" href="/tags/java/">java</a> &nbsp 
-<a style="font-size: 163%" href="/tags/jvm/">jvm</a> &nbsp 
+<a style="font-size: 175%" href="/tags/java/">java</a> &nbsp 
+<a style="font-size: 166%" href="/tags/jvm/">jvm</a> &nbsp 
 <a style="font-size: 124%" href="/tags/life/">life</a> &nbsp 
 <a style="font-size: 146%" href="/tags/methodology/">methodology</a> &nbsp 
 <a style="font-size: 132%" href="/tags/network/">network</a> &nbsp 
 <a style="font-size: 124%" href="/tags/octopress/">octopress</a> &nbsp 
 <a style="font-size: 113%" href="/tags/os/">os</a> &nbsp 
 <a style="font-size: 172%" href="/tags/pat/">pat</a> &nbsp 
-<a style="font-size: 113%" href="/tags/software-engineering/">software_engineering</a> &nbsp 
+<a style="font-size: 113%" href="/tags/tech/">tech</a> &nbsp 
 <a style="font-size: 166%" href="/tags/think/">think</a>
 
   </ul>

@@ -9,22 +9,7 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="这道题来自 stackoverflow。 问题描述： 有如下代码，求其输出内容。 1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-public class Test
-{ public int a = 10; Test(){System.out.println(&quot;1& &hellip;">
+  <meta name="description" content="背景 在 rcjp 项目中，需要调用 ASM API（用于字节码处理的开源库）对字节码进行处理，目标是实现对 Java 程序运行时各种对象的动态跟踪，并进一步分析各个对象之间的关系。在此之前，需要考虑如何获取程序运行的入口。 首先，我考虑到了自定义类加载器（详情见参考资料），即在程序的 main &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -122,6 +107,57 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/09/08/custom-premain-method/">AOP实践：java.lang.instrument的使用</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-08T13:01:00+08:00" pubdate data-updated="true">Sep 8<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/09/08/custom-premain-method/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>背景</h2>
+
+<p>在 <a href="https://github.com/biaobiaoqi/rcjp">rcjp</a> 项目中，需要调用 ASM API（用于字节码处理的开源库）对字节码进行处理，目标是实现对 Java 程序运行时各种对象的动态跟踪，并进一步分析各个对象之间的关系。在此之前，需要考虑如何获取程序运行的入口。</p>
+
+<p>首先，我考虑到了自定义类加载器（详情见参考资料），即在程序的 main 入口处，首先加载自定义的类加载器，然后通过反射技术使用这个类加载器加载并调用测试程序。这个方法缺点是：每次都必须先找到测试程序的入口类，而对于有的封装成 jar 的程序集合，这一点相对比较难控制。</p>
+
+<p>于是，有了这里介绍的方法：通过 <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/instrument/package-summary.html">java.lang.instrument</a> 实现的 java agent 对象操作字节码，是一种 <a href="http://en.wikipedia.org/wiki/Aspect-oriented_programming">AOP</a> 的方法。</p>
+
+<p>程序中，除了 ASMAgent 以外的所有类都是调用 ASM API 实现对测试程序中各个对象的构造、方法调用、属性赋值等操作行为的记录（其中对 Collection 子类的处理着实费了一番心血= =，字节码操作很细节，容易出错）。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/09/08/custom-premain-method/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -780,65 +816,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/09/01/blog-log/">Biaobiaoqi的博客日志</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-01T01:40:00+08:00" pubdate data-updated="true">Sep 1<span>st</span>, 2013</time>
-        
-         | <a href="/blog/2013/09/01/blog-log/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>鉴于友言的客服不搭理的态度和时而无法正常显示以及管理界面的难以使用，决定将评论系统切换到 disqus 上。</p>
-
-<p>最近一直在更改博客的定制。就像一个人一样，产品也是由生命的，她的脚印就是她价值的体现。于是我萌生了将她的改变全部记录下来的想法，只恨没有在四个月前刚建起博客时就意识到这一点。</p>
-
-<p>这就是本文的初衷了。</p>
-
-<p>&#8211; 2013/9/1</p>
-
-<h2>历史</h2>
-
-<ul>
-<li><p>2013/4 octopress 博客在 github 上成功搭建</p></li>
-<li><p>2013/5 拟定了『首页』、『技术』、『生活』、『关于』的顶栏 tag 结构，增加了友言评论功能，jiathis 分享功能，侧边栏的微博秀和豆瓣秀。</p></li>
-<li><p>2013/7 侧边栏增加标签云，并增加了『标签云』顶栏 tag。取消侧边栏微博秀。</p></li>
-<li><p>2013/8 更换博客主题为 whitelake。</p></li>
-</ul>
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/09/01/blog-log/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -860,15 +837,15 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <a style="font-size: 113%" href="/tags/diary/">diary</a> &nbsp 
 <a style="font-size: 163%" href="/tags/distributed/">distributed</a> &nbsp 
 <a style="font-size: 132%" href="/tags/hadoop/">hadoop</a> &nbsp 
-<a style="font-size: 172%" href="/tags/java/">java</a> &nbsp 
-<a style="font-size: 163%" href="/tags/jvm/">jvm</a> &nbsp 
+<a style="font-size: 175%" href="/tags/java/">java</a> &nbsp 
+<a style="font-size: 166%" href="/tags/jvm/">jvm</a> &nbsp 
 <a style="font-size: 124%" href="/tags/life/">life</a> &nbsp 
 <a style="font-size: 146%" href="/tags/methodology/">methodology</a> &nbsp 
 <a style="font-size: 132%" href="/tags/network/">network</a> &nbsp 
 <a style="font-size: 124%" href="/tags/octopress/">octopress</a> &nbsp 
 <a style="font-size: 113%" href="/tags/os/">os</a> &nbsp 
 <a style="font-size: 172%" href="/tags/pat/">pat</a> &nbsp 
-<a style="font-size: 113%" href="/tags/software-engineering/">software_engineering</a> &nbsp 
+<a style="font-size: 113%" href="/tags/tech/">tech</a> &nbsp 
 <a style="font-size: 166%" href="/tags/think/">think</a>
 
   </ul>
