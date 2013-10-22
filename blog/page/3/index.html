@@ -9,7 +9,8 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="鉴于友言的客服不搭理的态度和时而无法正常显示以及管理界面的难以使用，决定将评论系统切换到 disqus 上。 最近一直在更改博客的定制。就像一个人一样，产品也是由生命的，她的脚印就是她价值的体现。于是我萌生了将她的改变全部记录下来的想法，只恨没有在四个月前刚建起博客时就意识到这一点。 &hellip;">
+  <meta name="description" content="前言 大三结束的暑假，跟另外两个同学一起组队参加了 Google 第二届 Andoid 应用开发中国大学生挑战赛，有幸获得了全国总决赛的前 6 名。
+虽然只是移动客户端的开发实践，但也第一次让我体验到了工程的魅力、团队协作的成就感和编码的快乐。 以下内容实际上是一份属于当时经验匮乏的团队的开发草稿 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -107,6 +108,56 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/09/05/google-android-challenge-2011/">Google Android应用开发大赛参赛记</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-05T23:51:00+08:00" pubdate data-updated="true">Sep 5<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/09/05/google-android-challenge-2011/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>前言</h2>
+
+<p>大三结束的暑假，跟另外两个同学一起组队参加了 Google 第二届 Andoid 应用开发中国大学生挑战赛，有幸获得了<a href="http://www.google.cn/university/androidchallenge/2011/gallery.html#tab=d1-13">全国总决赛的前 6 名</a>。
+虽然只是移动客户端的开发实践，但也第一次让我体验到了工程的魅力、团队协作的成就感和编码的快乐。</p>
+
+<p>以下内容实际上是一份属于当时经验匮乏的团队的开发草稿，回头看来，满载的无知和丰腴的老土，姑且把它当做开发日志吧;)</p>
+
+<p>不做内容删改（些许格式调整）,原文如下：</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/09/05/google-android-challenge-2011/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -808,77 +859,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
     <footer>
       <a rel="full-article" href="/blog/2013/08/01/pat-1021-1030-solutions/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/31/pat-1011-1020-solutions/">PAT 1011-1020 题解</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-31T23:41:00+08:00" pubdate data-updated="true">Jul 31<span>st</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/31/pat-1011-1020-solutions/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>早期部分代码用 Java 实现。由于 PAT 虽然支持各种语言，但只有 C/C++标程来限定时间，许多题目用 Java 读入数据就已经超时，后来转投 C/C++。浏览全部代码：<a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel">请戳</a></p>
-
-<p>本文谨代表个人思路，欢迎讨论;)</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1011">1011. World Cup Betting (20)</a></h2>
-
-<h5>题意</h5>
-
-<p>给定一个 3*3 的矩阵，找到每行的最大值，格式化输出一个运算结果。</p>
-
-<h5>分析</h5>
-
-<p>非常简单的模拟题。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1012">1012. The Best Rank (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>给定学生的学号和三个科目的分数，查询输出对应学生单门科目排名和总分排名中最高的那个排名。</p>
-
-<h5>分析</h5>
-
-<p>C 里 stdlib.h 中的 qsort()和 C++里 algorithm 中的 sort()函数都能实现快排，应对编程题中的排序一般比自己手写的要快。
-分别为三个单科和总分做排序，并将 rank 值记录到 map 结构中去，便于之后的查找。</p>
-
-<p>需要注意并列排名的情况。比如<code>1 2 2 4</code>，由于并列第 2 的都两人，那之后的那个人就是第 4 而不是第 3 了。</p>
-
-<p>另外，由于有多个需要分别排序、排名的项，抽象出公共逻辑到一个函数里比较必要，否则代码分散难于 debug 和维护。
-这里稍微特殊点的用法是使用了<a href="http://blog.csdn.net/dyx1024/article/details/7562786">函数指针</a>做参数。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/07/31/pat-1011-1020-solutions/">Read on &rarr;</a>
     </footer>
   
 

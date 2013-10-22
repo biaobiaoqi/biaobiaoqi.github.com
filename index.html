@@ -9,7 +9,7 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="Jar 包(Java Archive)是对 Java 程序的打包，它可能包含源码，也可能没有。 对于有包含源码的 Jar 包，在 Eclipse 工程里设定好 source code 路径后能直接查看到远吗，对于理解代码、调试的帮助很大。而如果 Jar 包没有打包源码， &hellip;">
+  <meta name="description" content="《黑客：计算机革命的英雄》不是一本新书，创作于上世纪 80 年代。 这本书我断断续续花了几个月才看完。大量的传奇黑客人物穿插其中，说实话容量略大，到头来也没记住几个名字，不过这不是重点。全书将对整个计算机发展史有深刻影响的黑客文化分三个阶段的娓娓道来，让我重新审视对黑客的看法认识。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -107,6 +107,53 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/10/21/hacker/">《黑客：计算机革命的英雄》</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-21T22:19:00+08:00" pubdate data-updated="true">Oct 21<span>st</span>, 2013</time>
+        
+         | <a href="/blog/2013/10/21/hacker/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="http://img3.douban.com/mpic/s6951030.jpg" alt="img" /></p>
+
+<p>《<a href="http://book.douban.com/subject/6860890/">黑客：计算机革命的英雄</a>》不是一本新书，创作于上世纪 80 年代。</p>
+
+<p>这本书我断断续续花了几个月才看完。大量的传奇黑客人物穿插其中，说实话容量略大，到头来也没记住几个名字，不过这不是重点。全书将对整个计算机发展史有深刻影响的黑客文化分三个阶段的娓娓道来，让我重新审视对黑客的看法认识。下面是我对全书的笔记摘要。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/10/21/hacker/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -638,89 +685,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
     <footer>
       <a rel="full-article" href="/blog/2013/09/10/scientifically-surfing-the-internet/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/09/08/string-interning/">对Java字符串的探究</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-08T13:01:00+08:00" pubdate data-updated="true">Sep 8<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/09/08/string-interning/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>问题的出发点</h2>
-
-<p>在网上看到一道题：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">String</span> <span class="n">str</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="s">&quot;abc&quot;</span><span class="o">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>以上代码执行过程中生成了多少个 String 对象？</p>
-
-<p>答案写的是两个。&#8221;abc&#8221;本身是一个，而 new 又生成了一个。</p>
-
-<h2>&#8220;abc&#8221;是什么</h2>
-
-<p>查看这句程序的字节码，如下：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">NEW</span> <span class="n">String</span>
-</span><span class='line'>    <span class="n">DUP</span>
-</span><span class='line'>    <span class="n">LDC</span> <span class="s">&quot;abc&quot;</span>
-</span><span class='line'>    <span class="n">INVOKESPECIAL</span> <span class="n">String</span><span class="o">.&lt;</span><span class="n">init</span><span class="o">&gt;(</span><span class="n">String</span><span class="o">)</span> <span class="o">:</span> <span class="kt">void</span>
-</span><span class='line'>    <span class="n">ASTORE</span> <span class="mi">1</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>指令<code>ldc indexbyte</code>的含义：将两字节的值从 indexbyte 索引的常量池中的项中推到方法栈上。</p>
-
-<p>指令<code>LDC "abc"</code>说明了&#8221;abc&#8221;并不是直接以对象存在的，而是存在于常量池的索引中。String 的构造函数调用命令实际使用的就是 String 类型作为参数，那么，栈上应该有一个 String 类型的索引。</p>
-
-<p>由此我们得出，在字节码中，ldc 命令在常量池中找到了能索引到“abc”那个 String 对象的索引值。</p>
-
-<h2>常量池</h2>
-
-<p>常量池是类文件（.class）文件中的一部分，记录了许多常量信息，索引的字符串信息。</p>
-
-<p>由于 Java 是动态加载的，类文件并没有包含程序运行时的内存布局，方法调用等无法直接记录出方法的物理位置，常量池通过索引的方法解决了这个问题。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/09/08/string-interning/">Read on &rarr;</a>
     </footer>
   
 

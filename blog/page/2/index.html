@@ -9,7 +9,8 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="背景 在 rcjp 项目中，需要调用 ASM API（用于字节码处理的开源库）对字节码进行处理，目标是实现对 Java 程序运行时各种对象的动态跟踪，并进一步分析各个对象之间的关系。在此之前，需要考虑如何获取程序运行的入口。 首先，我考虑到了自定义类加载器（详情见参考资料），即在程序的 main &hellip;">
+  <meta name="description" content="问题的出发点 在网上看到一道题： 1
+String str = new String(&quot;abc&quot;); 以上代码执行过程中生成了多少个 String 对象？ 答案写的是两个。&#8221;abc&#8221;本身是一个，而 new 又生成了一个。 &#8220;abc&#8221 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -107,6 +108,89 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/09/08/string-interning/">对Java字符串的探究</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-08T13:01:00+08:00" pubdate data-updated="true">Sep 8<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/09/08/string-interning/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>问题的出发点</h2>
+
+<p>在网上看到一道题：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">String</span> <span class="n">str</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="s">&quot;abc&quot;</span><span class="o">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>以上代码执行过程中生成了多少个 String 对象？</p>
+
+<p>答案写的是两个。&#8221;abc&#8221;本身是一个，而 new 又生成了一个。</p>
+
+<h2>&#8220;abc&#8221;是什么</h2>
+
+<p>查看这句程序的字节码，如下：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">NEW</span> <span class="n">String</span>
+</span><span class='line'>    <span class="n">DUP</span>
+</span><span class='line'>    <span class="n">LDC</span> <span class="s">&quot;abc&quot;</span>
+</span><span class='line'>    <span class="n">INVOKESPECIAL</span> <span class="n">String</span><span class="o">.&lt;</span><span class="n">init</span><span class="o">&gt;(</span><span class="n">String</span><span class="o">)</span> <span class="o">:</span> <span class="kt">void</span>
+</span><span class='line'>    <span class="n">ASTORE</span> <span class="mi">1</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>指令<code>ldc indexbyte</code>的含义：将两字节的值从 indexbyte 索引的常量池中的项中推到方法栈上。</p>
+
+<p>指令<code>LDC "abc"</code>说明了&#8221;abc&#8221;并不是直接以对象存在的，而是存在于常量池的索引中。String 的构造函数调用命令实际使用的就是 String 类型作为参数，那么，栈上应该有一个 String 类型的索引。</p>
+
+<p>由此我们得出，在字节码中，ldc 命令在常量池中找到了能索引到“abc”那个 String 对象的索引值。</p>
+
+<h2>常量池</h2>
+
+<p>常量池是类文件（.class）文件中的一部分，记录了许多常量信息，索引的字符串信息。</p>
+
+<p>由于 Java 是动态加载的，类文件并没有包含程序运行时的内存布局，方法调用等无法直接记录出方法的物理位置，常量池通过索引的方法解决了这个问题。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/09/08/string-interning/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -760,56 +844,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
     <footer>
       <a rel="full-article" href="/blog/2013/09/06/kongfu-snake-project-summary/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/09/05/google-android-challenge-2011/">Google Android应用开发大赛参赛记</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-05T23:51:00+08:00" pubdate data-updated="true">Sep 5<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/09/05/google-android-challenge-2011/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>前言</h2>
-
-<p>大三结束的暑假，跟另外两个同学一起组队参加了 Google 第二届 Andoid 应用开发中国大学生挑战赛，有幸获得了<a href="http://www.google.cn/university/androidchallenge/2011/gallery.html#tab=d1-13">全国总决赛的前 6 名</a>。
-虽然只是移动客户端的开发实践，但也第一次让我体验到了工程的魅力、团队协作的成就感和编码的快乐。</p>
-
-<p>以下内容实际上是一份属于当时经验匮乏的团队的开发草稿，回头看来，满载的无知和丰腴的老土，姑且把它当做开发日志吧;)</p>
-
-<p>不做内容删改（些许格式调整）,原文如下：</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/09/05/google-android-challenge-2011/">Read on &rarr;</a>
     </footer>
   
 

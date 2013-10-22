@@ -9,7 +9,7 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="HadoopDB 是一个 Mapreduce 和传统关系型数据库的结合方案，以充分利用 RDBMS 的性能和 Hadoop 的容错、分布特性。2009 年被 Yale 大学教授 Abadi 提出，继而商业化为 Hadapt，据称从 VC 那儿拉到了 10M 刀投资。 本文是对 HadoopDB &hellip;">
+  <meta name="description" content="本文来自《分布式原理与泛型》的一致性章节笔记。由于缺乏实践经验，这本书对我来说太过理论，难于理解，现在已经暂停该书的阅读，转而加强实践。另有相关博文《CAP 和最终一致性》，可供参考阅读。 ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -107,6 +107,49 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/18/distributed-consistency/">分布式一致性</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-18T18:58:00+08:00" pubdate data-updated="true">May 18<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/05/18/distributed-consistency/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>本文来自<a href="http://book.douban.com/subject/3108801/">《分布式原理与泛型》</a>的一致性章节笔记。由于缺乏实践经验，这本书对我来说太过理论，难于理解，现在已经暂停该书的阅读，转而加强实践。另有相关博文<a href="http://biaobiaoqi.me/blog/2013/05/15/cap-and-eventual-consistent/">《CAP 和最终一致性》</a>，可供参考阅读。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/05/18/distributed-consistency/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -574,55 +617,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
     <footer>
       <a rel="full-article" href="/blog/2013/04/27/travsal-binary-tree/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/04/25/split-querying-process-in-polybase/">PDW中的Split Querying Process</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-25T22:59:00+08:00" pubdate data-updated="true">Apr 25<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/04/25/split-querying-process-in-polybase/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>最近看了关于 SQL Server 的分布式处理方面的论文，觉得它提出的 Polybase 跟之前看过的 HadoopDB 有些神似，这里做个小总结（抽空再把 HadoopDB 的总结贴出来）。</p>
-
-<p>不算翻译，只是挑出自己认为是重点的部分。详细情况，还请论文查阅原文，引用中有写明出处。文章末尾有我总结的 slides，可以辅助查阅。</p>
-
-<p>由于缺乏实践经验，很多东西未必能理解其本质。如有其他观点，还请多指教。</p>
-
-<p>当下的计划就是开始自己搭环境，实践起来!~</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/04/25/split-querying-process-in-polybase/">Read on &rarr;</a>
     </footer>
   
 
