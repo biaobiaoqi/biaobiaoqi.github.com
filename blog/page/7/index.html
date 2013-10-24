@@ -9,7 +9,7 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="最近看了关于 SQL Server 的分布式处理方面的论文，觉得它提出的 Polybase 跟之前看过的 HadoopDB 有些神似，这里做个小总结（抽空再把 HadoopDB 的总结贴出来）。 不算翻译，只是挑出自己认为是重点的部分。详细情况，还请论文查阅原文，引用中有写明出处。 &hellip;">
+  <meta name="description" content="背景 2013-10-7 修订部分内容 本文讨论二叉树的常见遍历方式的代码(Java)实现，包括前序(preorder)、中序(inorder)、后序(postorder)、层序(level order)，进一步考虑递归和非递归的实现方式。 递归的实现方法相对简单， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -107,6 +107,85 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/27/travsal-binary-tree/">二叉树的遍历（递归、非递归）分析</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-27T21:03:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/04/27/travsal-binary-tree/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>背景</h2>
+
+<ul>
+<li>2013-10-7 修订部分内容</li>
+</ul>
+
+
+<p>本文讨论二叉树的常见遍历方式的代码(Java)实现，包括前序(preorder)、中序(inorder)、后序(postorder)、层序(level order)，进一步考虑递归和非递归的实现方式。</p>
+
+<p>递归的实现方法相对简单，但由于递归的执行方式每次都会产生一个新的方法调用栈，如果递归层级较深，会造成较大的内存开销，相比之下，非递归的方式则可以避免这个问题。递归遍历容易实现，非递归则没那么简单，非递归调用本质上是通过维护一个栈，模拟递归调用的方法调用栈的行为。</p>
+
+<p>在此之前，先简单定义节点的数据结构：</p>
+
+<p>二叉树节点最多只有两个儿子，并保存一个节点的值，为了实验的方便，假定它为 int。同时，我们直接使用 Java 的 System.out.print 方法来输出节点值，以显示遍历结果。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Node</span> <span class="o">{</span>
+</span><span class='line'>      <span class="kd">public</span> <span class="kt">int</span> <span class="n">value</span><span class="o">;</span>
+</span><span class='line'>      <span class="kd">public</span> <span class="n">Node</span> <span class="n">leftNode</span><span class="o">;</span>
+</span><span class='line'>      <span class="kd">public</span> <span class="n">Node</span> <span class="n">rightNode</span><span class="o">;</span>
+</span><span class='line'>      
+</span><span class='line'>      <span class="kd">public</span> <span class="nf">Node</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>          <span class="n">value</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>  <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>详细代码参见链接:<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/algorithm/basics/tree/BinarySearchTree.java">BST 及其各种便利的详细实现代码</a></p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/04/27/travsal-binary-tree/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -546,51 +625,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/03/21/building-octopress-in-github-mac/">在github上搭建octopress博客 Mac</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-21T23:43:00+08:00" pubdate data-updated="true">Mar 21<span>st</span>, 2013</time>
-        
-         | <a href="/blog/2013/03/21/building-octopress-in-github-mac/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="http://pikipity.github.com/images/post/octopress.jpg"></p>
-
-<p>最早的时候，是看见了<a href="http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/">唐巧大哥的博客</a>，UI 上已是觉得耳目一新。后来读到过<a href="http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html">阮一峰的博文</a>，当知道这是搭建在 Github 这个程序员的 facebook 上时，更是心头一震，什么时候自己也搭这么个博客呢。直接用 github 托管代码，完全不用自己租服务器，实在方便。自己之前也有在 csdn 上维护了一个博客，虽然那已经是一年前的事情了。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/03/21/building-octopress-in-github-mac/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/8/">&larr; Older</a>
@@ -608,12 +642,12 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
  <br /> 
   <ul class="tag-cloud">
     <a style="font-size: 180%" href="/tags/algorithm/">algorithm</a> &nbsp 
-<a style="font-size: 159%" href="/tags/bytecode/">bytecode</a> &nbsp 
+<a style="font-size: 163%" href="/tags/bytecode/">bytecode</a> &nbsp 
 <a style="font-size: 113%" href="/tags/diary/">diary</a> &nbsp 
 <a style="font-size: 163%" href="/tags/distributed/">distributed</a> &nbsp 
 <a style="font-size: 132%" href="/tags/hadoop/">hadoop</a> &nbsp 
-<a style="font-size: 175%" href="/tags/java/">java</a> &nbsp 
-<a style="font-size: 166%" href="/tags/jvm/">jvm</a> &nbsp 
+<a style="font-size: 178%" href="/tags/java/">java</a> &nbsp 
+<a style="font-size: 170%" href="/tags/jvm/">jvm</a> &nbsp 
 <a style="font-size: 124%" href="/tags/life/">life</a> &nbsp 
 <a style="font-size: 146%" href="/tags/methodology/">methodology</a> &nbsp 
 <a style="font-size: 132%" href="/tags/network/">network</a> &nbsp 

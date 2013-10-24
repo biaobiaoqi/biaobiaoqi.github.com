@@ -9,7 +9,7 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="《黑客：计算机革命的英雄》不是一本新书，创作于上世纪 80 年代。 这本书我断断续续花了几个月才看完。大量的传奇黑客人物穿插其中，说实话容量略大，到头来也没记住几个名字，不过这不是重点。全书将对整个计算机发展史有深刻影响的黑客文化分三个阶段的娓娓道来，让我重新审视对黑客的看法认识。 &hellip;">
+  <meta name="description" content="要理解 Java 字节码，比较推荐的方法是自己尝试编写源码对照字节码学习。其中阅读 Java 字节码的工具必不可少。虽然javap可以以可读的形式展示出.class 文件中字节码，但每次改动源码都需调用命令行并不方便。这里介绍一个可以辅助阅读 Java 字节码的 Eclipse 插件： &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -107,6 +107,51 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/10/25/java-bytecode-plugin-for-eclipse/">在Eclipse里查看Java字节码</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-25T04:06:00+08:00" pubdate data-updated="true">Oct 25<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/10/25/java-bytecode-plugin-for-eclipse/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>要理解 Java 字节码，比较推荐的方法是自己尝试编写源码对照字节码学习。其中阅读 Java 字节码的工具必不可少。虽然<code>javap</code>可以以可读的形式展示出.class 文件中字节码，但每次改动源码都需调用命令行并不方便。这里介绍一个可以辅助阅读 Java 字节码的 Eclipse 插件：<a href="http://andrei.gmxhome.de/bytecode/">bytecode outline</a>。</p>
+
+<p>bytecode outline 插件用可读的方式展现了 Eclipse 的 Java 编辑器或类文件的字节码内容。它使用了 <a href="http://asm.ow2.org/">ASM 框 架</a>的部分组建来实现对字节码的展示（ASM 框架在另外一篇操纵 Java 字节码的博文中有提到过：<a href="http://biaobiaoqi.me/blog/2013/09/08/custom-premain-method/">《AOP 实践：java.lang.instrument 的使用》</a>，是一个轻量级的 Java 字节码的操纵框架。）。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/10/25/java-bytecode-plugin-for-eclipse/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -630,67 +675,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/09/10/scientifically-surfing-the-internet/">关于科学上网</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-10T12:11:00+08:00" pubdate data-updated="true">Sep 10<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/09/10/scientifically-surfing-the-internet/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>为了防止被某墙 fuck，暂且称其为『很棒的防火墙』吧，你懂的-,-.</p>
-
-<p>在 teahour 上听了 <a href="http://teahour.fm/2013/07/09/gfw-and-vpncloud.html">***技术研究和云梯产品故事</a>，有感于之前几天修改本地 hosts 的策略再次失效，切换到 goagent 模式，在此，基于这期 teahour 对<a href="https://twitter.com/kgen">@Kgen</a> 的访谈内容，对很棒的防火墙做份简单的笔记：</p>
-
-<p>很棒的防火墙有用大量的服务器，并由一大只团队维护和升级。它的目的是让大部分的互联网用户无法接触到“有害”的网络资源，“净化”国内的网络环境。同时，它需要尽可能的减少商业上的影响，比如为了不阻碍外企的 VPN 工作环境，很棒的防火墙并没有直接对 VPN 进行封堵。在这个前提上，留给我们的可能性也是一直存在的。</p>
-
-<h2>防御策略</h2>
-
-<p>很棒的防火墙一直在茁壮成长着。一个方校长倒下了，千千万万 X 校长站起来了。他们背负着一辈子的骂名，忍辱负重的为祖国奉献着生命，死而后已。总之，前赴后继的技术人员不断的在补全着很棒的防火墙的防御规则，因此，应对策略也需要不断的调整和改进。整体来看，防御策略主要有如下几种：</p>
-
-<ul>
-<li><h4>1.DNS 污染</h4>
-
-<p>  DNS 协议本身并没有安全认证功能，很棒的防火墙检测到相应 dns 请求后，会返回一个错误的 IP 地址，造成无法正常访问。解决方案有使用第三方 DNS 服务或者修改本地 hosts 文件。</p></li>
-<li><h4>2.IP 拦截</h4>
-
-<p>  对于特定敏感网站，很棒的防火墙会直接侦察到相应的 IP 地址施行拦截。简单的 DNS 修改无法解决 IP 层的问题，只能通过代理等手段绕过这些 IP 进行访问。常用的应对方式有：使用 VPN、ssh 代理和 GAE 上搭建 <a href="http://zhoudemin.com/goagent.html">GoAgent</a> 服务等。至于为什么一些国内用户说自己的 GoAgent 速度很快，而又有很多人在抱怨自己的 GAE 速度很慢，原因在于 GAE 应用会不受控制的部署到 Google 不同的服务器节点上，而国内网络环境复杂，不同地区的网络连入国外不同服务器的线路不尽相同，速度也差异明显。同样的情况也发生在 VPS 的使用速度差异上。</p></li>
-</ul>
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/09/10/scientifically-surfing-the-internet/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -706,12 +690,12 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
  <br /> 
   <ul class="tag-cloud">
     <a style="font-size: 180%" href="/tags/algorithm/">algorithm</a> &nbsp 
-<a style="font-size: 159%" href="/tags/bytecode/">bytecode</a> &nbsp 
+<a style="font-size: 163%" href="/tags/bytecode/">bytecode</a> &nbsp 
 <a style="font-size: 113%" href="/tags/diary/">diary</a> &nbsp 
 <a style="font-size: 163%" href="/tags/distributed/">distributed</a> &nbsp 
 <a style="font-size: 132%" href="/tags/hadoop/">hadoop</a> &nbsp 
-<a style="font-size: 175%" href="/tags/java/">java</a> &nbsp 
-<a style="font-size: 166%" href="/tags/jvm/">jvm</a> &nbsp 
+<a style="font-size: 178%" href="/tags/java/">java</a> &nbsp 
+<a style="font-size: 170%" href="/tags/jvm/">jvm</a> &nbsp 
 <a style="font-size: 124%" href="/tags/life/">life</a> &nbsp 
 <a style="font-size: 146%" href="/tags/methodology/">methodology</a> &nbsp 
 <a style="font-size: 132%" href="/tags/network/">network</a> &nbsp 

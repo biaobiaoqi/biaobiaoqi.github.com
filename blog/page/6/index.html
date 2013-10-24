@@ -9,7 +9,7 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="本文来自《分布式原理与泛型》的一致性章节笔记。由于缺乏实践经验，这本书对我来说太过理论，难于理解，现在已经暂停该书的阅读，转而加强实践。另有相关博文《CAP 和最终一致性》，可供参考阅读。 ">
+  <meta name="description" content="现在大数据概念被时常提起，社会各界对其关注度越来越高。往往越是火热的东西，人们越容易忽略它的本质。在 slides 中，我首先按照自己的理解，简单的理顺数据处理领域的发展历程。之后，落脚点是两个比较有代表性的混合的分布式系统：HadoopDB 和微软的 Polybase。由于缺乏实战经验， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -107,6 +107,51 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/20/hybrid-distributed-data-management-system/">Hadoop和RDBMS的混合系统介绍</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-20T14:52:00+08:00" pubdate data-updated="true">May 20<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/05/20/hybrid-distributed-data-management-system/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>现在大数据概念被时常提起，社会各界对其关注度越来越高。往往越是火热的东西，人们越容易忽略它的本质。在 slides 中，我首先按照自己的理解，简单的理顺数据处理领域的发展历程。之后，落脚点是两个比较有代表性的混合的分布式系统：<a href="http://biaobiaoqi.me/blog/2013/05/18/a-hybrid-system-hadoopdb/">HadoopDB</a> 和微软的 <a href="http://biaobiaoqi.me/blog/2013/04/25/split-querying-process-in-polybase/">Polybase</a>。由于缺乏实战经验，很多东西由各方论文和博文中得到，有不恰当的地方，欢迎大家拍砖讨论;)</p>
+
+<p>slides 的提纲如下：</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/05/20/hybrid-distributed-data-management-system/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -544,85 +589,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/04/27/travsal-binary-tree/">二叉树的遍历（递归、非递归）分析</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-27T21:03:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/04/27/travsal-binary-tree/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>背景</h2>
-
-<ul>
-<li>2013-10-7 修订部分内容</li>
-</ul>
-
-
-<p>本文讨论二叉树的常见遍历方式的代码(Java)实现，包括前序(preorder)、中序(inorder)、后序(postorder)、层序(level order)，进一步考虑递归和非递归的实现方式。</p>
-
-<p>递归的实现方法相对简单，但由于递归的执行方式每次都会产生一个新的方法调用栈，如果递归层级较深，会造成较大的内存开销，相比之下，非递归的方式则可以避免这个问题。递归遍历容易实现，非递归则没那么简单，非递归调用本质上是通过维护一个栈，模拟递归调用的方法调用栈的行为。</p>
-
-<p>在此之前，先简单定义节点的数据结构：</p>
-
-<p>二叉树节点最多只有两个儿子，并保存一个节点的值，为了实验的方便，假定它为 int。同时，我们直接使用 Java 的 System.out.print 方法来输出节点值，以显示遍历结果。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Node</span> <span class="o">{</span>
-</span><span class='line'>      <span class="kd">public</span> <span class="kt">int</span> <span class="n">value</span><span class="o">;</span>
-</span><span class='line'>      <span class="kd">public</span> <span class="n">Node</span> <span class="n">leftNode</span><span class="o">;</span>
-</span><span class='line'>      <span class="kd">public</span> <span class="n">Node</span> <span class="n">rightNode</span><span class="o">;</span>
-</span><span class='line'>      
-</span><span class='line'>      <span class="kd">public</span> <span class="nf">Node</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>          <span class="n">value</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
-</span><span class='line'>      <span class="o">}</span>
-</span><span class='line'>  <span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>详细代码参见链接:<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/algorithm/basics/tree/BinarySearchTree.java">BST 及其各种便利的详细实现代码</a></p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/04/27/travsal-binary-tree/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/7/">&larr; Older</a>
@@ -640,12 +606,12 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
  <br /> 
   <ul class="tag-cloud">
     <a style="font-size: 180%" href="/tags/algorithm/">algorithm</a> &nbsp 
-<a style="font-size: 159%" href="/tags/bytecode/">bytecode</a> &nbsp 
+<a style="font-size: 163%" href="/tags/bytecode/">bytecode</a> &nbsp 
 <a style="font-size: 113%" href="/tags/diary/">diary</a> &nbsp 
 <a style="font-size: 163%" href="/tags/distributed/">distributed</a> &nbsp 
 <a style="font-size: 132%" href="/tags/hadoop/">hadoop</a> &nbsp 
-<a style="font-size: 175%" href="/tags/java/">java</a> &nbsp 
-<a style="font-size: 166%" href="/tags/jvm/">jvm</a> &nbsp 
+<a style="font-size: 178%" href="/tags/java/">java</a> &nbsp 
+<a style="font-size: 170%" href="/tags/jvm/">jvm</a> &nbsp 
 <a style="font-size: 124%" href="/tags/life/">life</a> &nbsp 
 <a style="font-size: 146%" href="/tags/methodology/">methodology</a> &nbsp 
 <a style="font-size: 132%" href="/tags/network/">network</a> &nbsp 

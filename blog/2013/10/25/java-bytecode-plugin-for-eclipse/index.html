@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>开篇 - Biaobiaoqi的博客</title>
+  <title>在Eclipse里查看Java字节码 - Biaobiaoqi的博客</title>
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="花了一下午时间，终于搭起了这个博客。 我会陆续将原来 csdn 博客中的内容筛选过来，将这个博客作为主博客。 github 真是神器啊。感谢 github，『感谢』tc 最终没有封锁 github，让我得以有机会搭建这个独立博客。 希望五年、十年、二十年过后，回过头来， &hellip;">
+  <meta name="description" content="Java字节码查看，Eclipse插件，bytecode outline，ASM框架">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://biaobiaoqi.me/blog/2013/03/17/kai-pian/">
+  <link rel="canonical" href="http://biaobiaoqi.me/blog/2013/10/25/java-bytecode-plugin-for-eclipse/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -110,7 +110,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
   <header>
     
-      <h1 class="entry-title">开篇</h1>
+      <h1 class="entry-title">在Eclipse里查看Java字节码</h1>
     
     
       <p class="meta">
@@ -126,7 +126,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
 
 
-<time datetime="2013-03-17T10:18:00+08:00" pubdate data-updated="true">Mar 17<span>th</span>, 2013</time>
+<time datetime="2013-10-25T04:06:00+08:00" pubdate data-updated="true">Oct 25<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -135,16 +135,36 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   </header>
 
 
-<div class="entry-content"><p>花了一下午时间，终于搭起了这个博客。</p>
+<div class="entry-content"><p>要理解 Java 字节码，比较推荐的方法是自己尝试编写源码对照字节码学习。其中阅读 Java 字节码的工具必不可少。虽然<code>javap</code>可以以可读的形式展示出.class 文件中字节码，但每次改动源码都需调用命令行并不方便。这里介绍一个可以辅助阅读 Java 字节码的 Eclipse 插件：<a href="http://andrei.gmxhome.de/bytecode/">bytecode outline</a>。</p>
 
-<p>我会陆续将原来 csdn 博客中的内容筛选过来，将这个博客作为主博客。</p>
+<p>bytecode outline 插件用可读的方式展现了 Eclipse 的 Java 编辑器或类文件的字节码内容。它使用了 <a href="http://asm.ow2.org/">ASM 框 架</a>的部分组建来实现对字节码的展示（ASM 框架在另外一篇操纵 Java 字节码的博文中有提到过：<a href="http://biaobiaoqi.me/blog/2013/09/08/custom-premain-method/">《AOP 实践：java.lang.instrument 的使用》</a>，是一个轻量级的 Java 字节码的操纵框架。）。</p>
 
-<p>github 真是神器啊。感谢 github，『感谢』tc 最终没有封锁 github，让我得以有机会搭建这个独立博客。</p>
+<!--more-->
 
-<p>希望五年、十年、二十年过后，回过头来，依然能在这个博客中找到自己的脚印和梦想。</p>
 
-<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/03/17/kai-pian/'>http://biaobiaoqi.me/blog/2013/03/17/kai-pian/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+<h2>插件安装</h2>
 
+<p>直接使用 Update manager 安装插件，非常简单：</p>
+
+<p><code>Help -&gt; Install new Software... -&gt; Work with:</code></p>
+
+<p>输入 url：http://andrei.gmxhome.de/eclipse/</p>
+
+<p>然后在弹框中选择合适的版本即可。</p>
+
+<h2>使用</h2>
+
+<p>在 Eclipse 中添加相应的查看窗口：</p>
+
+<p><code>Window -&gt; Show View -&gt; Other -&gt; Java -&gt; Bytecode</code></p>
+
+<p>选中某 Java 源文件，效果如图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/javabytecode1.png" alt="img" /></p>
+
+<p>同时，还可以使用同样的方法，添加 Bytecode Reference 窗口，用于查询各个 Java 字节码的文档，示例如下：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/javabytecode2.png" alt="img" /><p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/10/25/java-bytecode-plugin-for-eclipse/'>http://biaobiaoqi.me/blog/2013/10/25/java-bytecode-plugin-for-eclipse/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
 </div>
 
 
@@ -167,12 +187,12 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
 
 
-<time datetime="2013-03-17T10:18:00+08:00" pubdate data-updated="true">Mar 17<span>th</span>, 2013</time>
+<time datetime="2013-10-25T04:06:00+08:00" pubdate data-updated="true">Oct 25<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/life/'>life</a>
+    <a class='category' href='/blog/categories/tech/'>tech</a>
   
 </span>
 
@@ -212,8 +232,8 @@ var jiathis_config={
     
     <p class="meta">
       
+        <a class="basic-alignment left" href="/blog/2013/10/21/hacker/" title="Previous Post: 《黑客：计算机革命的英雄》">&laquo; 《黑客：计算机革命的英雄》</a>
       
-        <a class="basic-alignment right" href="/blog/2013/03/21/building-octopress-in-github-mac/" title="Next Post: 在github上搭建octopress博客 mac">在github上搭建octopress博客 mac &raquo;</a>
       
     </p>
   </footer>
@@ -283,8 +303,8 @@ var jiathis_config={
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://biaobiaoqi.me/blog/2013/03/17/kai-pian/';
-        var disqus_url = 'http://biaobiaoqi.me/blog/2013/03/17/kai-pian/';
+        var disqus_identifier = 'http://biaobiaoqi.me/blog/2013/10/25/java-bytecode-plugin-for-eclipse/';
+        var disqus_url = 'http://biaobiaoqi.me/blog/2013/10/25/java-bytecode-plugin-for-eclipse/';
         var disqus_script = 'embed.js';
       
     (function () {
