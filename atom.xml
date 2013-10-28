@@ -4,7 +4,7 @@
   <title><![CDATA[Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.me/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.me/"/>
-  <updated>2013-10-25T04:45:06+08:00</updated>
+  <updated>2013-10-28T14:35:25+08:00</updated>
   <id>http://biaobiaoqi.me/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -12,6 +12,123 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[用Github账号领Ripple币]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/10/28/get-ripple-from-github-account/"/>
+    <updated>2013-10-28T12:46:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/10/28/get-ripple-from-github-account</id>
+    <content type="html"><![CDATA[<p>最近随着<a href="http://zh.wikipedia.org/wiki/%E6%AF%94%E7%89%B9%E5%B8%81">比特币</a>在互联网上的流行，其他各种电子货币也都增加了曝光率。</p>
+
+<p>昨晚在 v2ex 上看到有人<a href="http://v2ex.com/t/87062">发帖</a>，用 20RMB 换取 2013 年 5 月 1 日前使用过的 github 账号得到的一个验证码。出于好奇，仔细围观了该贴，发现原来 lz 是利用信息不队称在揽入赠送给 github 用户的 ripple 币。而实际上，给一半 github 用户赠送的 2020 的 ripple 币按当时汇率这算人民币大概价值 70 元！这种『天上掉馅饼』的事情确实激发了我对电子货币的好奇，于是查阅了相关资料，也成功提现了自己的那部分 Ripple 币。</p>
+
+<!--more-->
+
+
+<h2>Ripple 介绍</h2>
+
+<p>Ripple 是一种电子的虚拟货币，与人尽皆知的比特币类似，它也立足于创建一种去中心化的的虚拟货币系统。实际上，Ripple 项目的起源时间甚至早于比特币，04 年就有了初版。比较特别的是，Ripple 承诺货币总量为 1000 亿，且永不增发，也就是不能像比特币那样挖矿。Ripple 被缩写为 XRP，有人称之为人品币（RP 币），这也一语双关的表明了它的实现本身所依赖的信任机制。</p>
+
+<p>更多信息，参考如下网页：</p>
+
+<ul>
+<li>基本理解：<a href="http://www.btc38.com/xrp/xrp_learning/46.html">《新手必读：什么是 Ripple》</a></li>
+<li>深度分析：<a href="http://ec.iresearch.cn/e-payment/20131016/215495.shtml">《个人货币“幽灵”Ripple：比比特币更疯狂》</a>，<a href="http://www.huxiu.com/article/13252/1.html">《Ripple，比比特币更激进的虚拟货币幽灵》</a></li>
+</ul>
+
+
+<h2>通过 Github 套现步骤</h2>
+
+<p>Ripple 最近给开发者发福利：</p>
+
+<blockquote><p>Any GitHub account older than May 1, 2013, 00:00:00 UTC that has some public code-writing activity before that date is eligible to receive 2020 XRP.</p>
+
+<p>Additionally, accounts which have watched or starred any of Ripple&#8217;s major repositories (ripple-client, ripple-lib, or rippled) as of October 3, 2013, 21:15:00 UTC are eligible for twice the amount.</p>
+
+<p>(These rules are subject to change without notice.)</p></blockquote>
+
+<p>凡是 2013 年 5 月 1 日前注册且有公开代码读写的 Github 用户将获得 2020XRP，如果在 2013 年 10 月 3 日前 star 或者 watch 了 ripple 在 Github 的官方账号上的任何 repo 的，获得的 XRP 将翻倍！</p>
+
+<p>如果你满足，就可以通过如下流程获得这些 XRP 啦。</p>
+
+<h3>0.注册</h3>
+
+<p>如果你没有 Ripple 的注册账户，请先<a href="https://ripple.com/client/#/register">注册</a>。</p>
+
+<p>注册流程没有什么特别的。最后需要记录下自己的钱包（Wallet）地址，待会儿领取 XRP 要用到。在 Ripple 网页顶栏的 Received 标签下。比如我的是<code>rst5AjSCVJx7VZb6KRNt5Ekdp33KTrEx1G</code></p>
+
+<p>注意，这里注册完毕后不需要激活。之后提取到 XRP 后账号本身自然会被激活的。实际上，只要账号中 Ripple 币的总额大于 100 就 OK，而我们能从这次活动中提取至少 2020XRP 呢。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/ripple1.png" alt="img" /></p>
+
+<h3>1.验证 Github 账号，提取 XRP</h3>
+
+<p>点击链接 <a href="https://giveaway.ripple.com/">https://giveaway.ripple.com/</a>，在这里通过 Github 授权领取 XRP。具体流程流程是：</p>
+
+<h4>1.1 Github 授权</h4>
+
+<p>点击 Log in with Github 按钮，一步步走下去。（前提是确定自己的 Github 账号满足了领取的要求）</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/ripple3.png" alt="img" /></p>
+
+<h4>1.2 生成提取码（giveaway code）</h4>
+
+<p>授权完毕后，来到如下界面：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/ripple2.png" alt="img" /></p>
+
+<p>在第一个输入框中，输入自己的钱包地址（在注册一步中记下的地址），下面两行的 passphrase 大概用于在忘记提取码时找回，一般的，点击 randomize 直接随机生成一个即可。</p>
+
+<p>最后，点击 Get your code，即可获得一长串的提取码。这个编码已经与你的钱包地址绑定，只有你的 ripple 账号能拿到这笔钱了。</p>
+
+<p>我的提取码如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>This is your giveaway code. Don't lose it!
+</span><span class='line'>sYBhVavSjbtp45GLNA8NnxYtK7FEUUEmUFM5g4DS5uTzrucCuV8wv6RnmETCjNmzo1FNXVqrULdZCmnDU5oLGbHwjXNqwmJsd1ZqjCNrqzyBxTp6JaRuc6Kwu33495dSQgaY4B3DzHtsNjL8sTyGgcMhuQcK1mSz4fpQXKpRWjAohYXmB8FP5MhpCymuLhW1jFw77sySh1s3sHRkJ4BBdT9KH2GgNwzWmQi57o5wMEbNWFfJe8ctun3ieD1WLnA6L5L4MmLYhdnirPvKmSxg4sEiw9VAPpz5nSg3RaA1PHTdKCokcvzVbbAnsCYWRKF5ZZo1mx3zzNRuwrQRgU1jPM7KUi7fUNpVz2aRofXmrovn5KQ8EYC1HwqiXB3HnPR7GJ84f9Q4oQ8q1sT</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>1.3 提取 XRP</h4>
+
+<p>之后，依然在原来的链接里，在如下方框里输入之前生成的提取码，点击 Redeem（兑现）。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/ripple3.png" alt="img" /></p>
+
+<p>提取 XRP 过程完毕。</p>
+
+<h3>2.兑换为人民币</h3>
+
+<p>对于急于想看看这个天上掉的馅饼到底长什么样的人来说，是没有耐心把 XRP 放着不提现的;)。如果想提现为人民币，首先得通过交易把 XRP 换成人民币。</p>
+
+<p>XRP 兑换 CNY（人民币）的过程，需要在网关中进行。这里的网关（gateway）跟网络中的网关没关系，是 Ripple 货币体系中重要的一环，可以理解为交易中心。</p>
+
+<p>中国有两个交易中心：RippleChina 和 RippleCN。不同的网关成交价格都可能不相同，建议对比后再做交易。</p>
+
+<p>RippleChina 和 RippleCN 都提供了相应的教程：</p>
+
+<ul>
+<li><a href="https://trade.ripplechina.net/gateway-course">RippleChina 交易</a></li>
+<li><a href="http://ripplecn.com/gateway/">RippleCN 交易</a></li>
+</ul>
+
+
+<p>注意，在使用 XRP 买入 CNY 时，需要设定为<code>XRP/CNY</code>，那个框是可以自己输入的，而不是下拉选择的。</p>
+
+<h3>3.提现到支付宝</h3>
+
+<p>最后一步提现到支付宝，建议使用 RippleCN，RippleChina 竟然对我收费 5 块，而 RippleCN 是承诺免费的。</p>
+
+<p>教程链接：<a href="http://ripplecn.com/tixian/">ripplecn 提现</a></p>
+
+<h2>后记</h2>
+
+<p>在微博上看到 github 精选这个账号发起的一个活动：<a href="http://t.github8.com/">『GitHub 账号免费领 30 元现金活动』</a>。美其名曰转发送 T，还略详实的介绍了 ripple 获取的规则，但却意图明显的隐藏了 XRP 折算人民币的币值。不得不感叹让不明真相的群众有种被人卖了还数钱的感觉。实在不怎么欣赏这种价值观。</p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/10/28/get-ripple-from-github-account/'>http://biaobiaoqi.me/blog/2013/10/28/get-ripple-from-github-account/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[在Eclipse里查看Java字节码]]></title>
@@ -2783,137 +2900,6 @@ manifest 文件中需要添加的键值对是：</p>
 
 
 <p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/09/08/java-class-loader-in-practice/'>http://biaobiaoqi.me/blog/2013/09/08/java-class-loader-in-practice/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Java 类加载器]]></title>
-    <link href="http://biaobiaoqi.me/blog/2013/09/07/java-classloader/"/>
-    <updated>2013-09-07T23:15:00+08:00</updated>
-    <id>http://biaobiaoqi.me/blog/2013/09/07/java-classloader</id>
-    <content type="html"><![CDATA[<h2>背景知识</h2>
-
-<p>Java 平台无关的特性是由 JVM(Java 虚拟机)支撑的。不同平台有不同的 JVM 支持。</p>
-
-<p>计算机领域有这么一句话：</p>
-
-<blockquote><p>计算机科学领域的任何问题都可以通过增加一个间接的中间层来解决。</p></blockquote>
-
-<p>JVM 其实也可以看做是运行的 Java 程序和实际的硬件架构之间的一个新抽象层。</p>
-
-<p>一个 Java 程序从编写到执行的流程一句话概括如下：首先将 Java 源代码（*.java 文件）编译成字节码（*.class 文件，字节码之于 Java 源码，类比于汇编代码之于 C 源码），然后由 JVM 运行那些字节码文件。</p>
-
-<p>JVM 工作原理如下图</p>
-
-<p><img src="https://dl.dropboxusercontent.com/u/64021093/Java%20Classloader/JVM%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86.gif" alt="JVM framework" /></p>
-
-<p>Java 中所有的类文件都需要由类加载器（Class Loader）装载到 JVM 中。可以简单的将 JVM 理解为一个工厂，类文件就是等待加工的原料，加载器则是装载货物的工人。Java 类被装载之后，才能进入到 JVM 的运行时机制中，开始运行。</p>
-
-<h2>类加载器的作用</h2>
-
-<p>顾名思义，Java 类加载器的作用是向 JVM 中装载类。</p>
-
-<p>这种动态装载的技术是 Java 的一种创新，让类能够动态加载到 JVM 中执行（更详细的介绍参见 <a href="http://www.ibm.com/developerworks/java/library/j-dyn0429/">Java programming dynamics, Part 1: Java classes and class loading</a>）。</p>
-
-<!--more-->
-
-
-<p>而它的意义远非仅仅是加载类这么简单。实际上，类加载器对 Java 的沙箱模型具有重大意义。他和安全管理模块（负责对类文件中的字节码进行校验，防止恶意代码的攻击）一起保证了 JVM 运行的安全性。</p>
-
-<h2>类加载机制</h2>
-
-<p>大体上，每个 Java 应用使用了如下几种类型的类加载器:</p>
-
-<ul>
-<li><p>1.引导类加载器（bootstrap class loader）</p>
-
-<p>  它由 C++编写（注意，它非常特殊，并非 Java 中的 ClassLoader 类的子类）。当 JVM 启动时，引导类加载器也随之启动，它负责加载 Java 核心类，如 JRE 的 rt.jar、charsets.jar 等。从 Java1.2 开始，它只加载 Java 核心 API 部分。</p>
-
-<p>  因为这些类是系统信任的类，所以这里的装载，跳过了很多对字节码的验证过程。</p></li>
-<li><p>2.扩展类加载器（extension class loader）</p>
-
-<p> 它负责加载/lib/ext 中的 java 扩展类。</p></li>
-<li><p>3.系统类加载器（System Class Loader）</p>
-
-<p>这是很重要的一个加载器，加载 Java 的路径 classpath 下的类。应用程序的装载默认由它负责。</p></li>
-<li><p>4.自定义类加载器</p>
-
-<p> 由系统类加载器继承得到。它的存在让我们能定制出各种不同功能的加载器，增加了 Java 的可扩展性。自定义的类加载器如果没有显示的继承关系，则其父类默认为系统类加载器。</p></li>
-</ul>
-
-
-<p>一个 JVM，只拥有一个引导类加载器，同时可以拥有多个自定义类加载器，方便不同应用环境的用户定制。比如，自定义类加载器能够动态的修改字节码，让它能接收并加载从网上传来的类文件或 Jar 包，甚至是任何编码方式的压缩包。只要自定义类加载器能够正确识别并调用相应方法来实现类的加载和解析，一切都有可能。</p>
-
-<p>四种加载器不是四个独立的部分，他们之间具有一种特殊的父子关系，每个类加载器都保持着他们的父加载器的应用，共同组成了一条父子关系链，被称作 parent-delegation 模式。如下图</p>
-
-<p><img src="https://dl.dropboxusercontent.com/u/64021093/Java%20Classloader/java%20classloader%20hierachy.gif" alt="class loader hirerachy" /></p>
-
-<p>类加载器按照如此树形排列。类加载的查找顺序是：</p>
-
-<p>cache &#8211;> parent &#8211;> self</p>
-
-<p>子类加载器需要加载某个类时，并不是直接加载，而是首先查看 cache（cache 可以理解为加载器已经加载过的类的记录）。如果没有，则向父加载器提出请求，查看是否存在于父加载器的 cache 中。如此往上，直到根部的引导类加载器。如果引导类加载器的 cache 也没有这个类，则它尝试直接加载这个类，如果无法成功，则请求儿子加载器加载，依次往下。</p>
-
-<p>直接接受程序请求加载某类的加载器被称作初始类加载器（Initiating class loader），而最终加载了该类的加载器则成为定义类加载器（defining class loader）。</p>
-
-<p>类加载器的<code>getParent()</code>方法可以获得加载器的父亲。下面的代码用于输出各个层级的类加载器。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ClassLoaderTest</span> <span class="o">{</span>
-</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>        <span class="n">ClassLoader</span> <span class="n">loader</span> <span class="o">=</span> <span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getContextClassLoader</span><span class="o">();</span>
-</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;current loader:&quot;</span><span class="o">+</span><span class="n">loader</span><span class="o">);</span>
-</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;parent loader:&quot;</span><span class="o">+</span><span class="n">loader</span><span class="o">.</span><span class="na">getParent</span><span class="o">());</span>
-</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;grandparent loader:&quot;</span><span class="o">+</span><span class="n">loader</span><span class="o">.</span><span class="na">getParent</span><span class="o">().</span><span class="na">getParent</span><span class="o">());</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>显示的结果是</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">current</span> <span class="nl">loader:</span><span class="n">sun</span><span class="o">.</span><span class="na">misc</span><span class="o">.</span><span class="na">Launcher</span><span class="n">$AppClassLoader</span><span class="err">@</span><span class="mi">1</span><span class="n">c78e57</span>
-</span><span class='line'><span class="n">parent</span> <span class="nl">loader:</span><span class="n">sun</span><span class="o">.</span><span class="na">misc</span><span class="o">.</span><span class="na">Launcher</span><span class="n">$ExtClassLoader</span><span class="err">@</span><span class="mi">5224</span><span class="n">ee</span>
-</span><span class='line'><span class="n">grandparent</span> <span class="nl">loader:</span><span class="kc">null</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>grandparent 显示的值是 null，并不意味着他没有 parent，而是因为它是由 C++编写的引导类加载器。他并不是 ClassLoader 类的子类，也就无法使用 getParent()方法获得返回了。</p>
-
-<p>如此，parent class loader 总是拥有更高的加载优先级，这让想利用自定义加载器伪装加载某些重要类的恶意代码无法得逞。如果好奇，你可以尝试自己写 package java.lang 里的 String 类，加载执行试试～
-另外，当类 A 调用另类 B 时，B 会由加载 A 的 class loader 加载，从而实现。</p>
-
-<h2>加载类的流程</h2>
-
-<p>类的装载大致可以分为三个步骤（如下图）：</p>
-
-<ul>
-<li>1.装载(loading)</li>
-<li>2.链接(linking)</li>
-<li>3.初始化(initialising)</li>
-</ul>
-
-
-<p><img src="https://dl.dropboxusercontent.com/u/64021093/Java%20Classloader/ClassLoaderProcess.gif" alt="class loader process" /></p>
-
-<p>跟 C++或者 C 程序有很大的不同，编译过后的类文件中的字节码并没有设计好内存布局，这些需要等到加载之后的链接阶段，才会完成。这也是 java 可移植性中精彩的一笔！</p>
-
-<p>关于类的加载、链接和初始化，请参见另一篇博文：<a href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loading-linking-and-initialising/">《Java 类的装载、链接和初始化》</a></p>
-
-<p>关于类加载器的编程实践，请参见另一篇博文：<a href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loader-in-practice/">《Java 类加载器编程实践》</a></p>
-
-<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/09/07/java-classloader/'>http://biaobiaoqi.me/blog/2013/09/07/java-classloader/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
 
 ]]></content>
   </entry>

@@ -9,7 +9,7 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="要理解 Java 字节码，比较推荐的方法是自己尝试编写源码对照字节码学习。其中阅读 Java 字节码的工具必不可少。虽然javap可以以可读的形式展示出.class 文件中字节码，但每次改动源码都需调用命令行并不方便。这里介绍一个可以辅助阅读 Java 字节码的 Eclipse 插件： &hellip;">
+  <meta name="description" content="最近随着比特币在互联网上的流行，其他各种电子货币也都增加了曝光率。 昨晚在 v2ex 上看到有人发帖，用 20RMB 换取 2013 年 5 月 1 日前使用过的 github 账号得到的一个验证码。出于好奇，仔细围观了该贴，发现原来 lz 是利用信息不队称在揽入赠送给 github 用户的 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -107,6 +107,51 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/10/28/get-ripple-from-github-account/">用Github账号领Ripple币</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-28T12:46:00+08:00" pubdate data-updated="true">Oct 28<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/10/28/get-ripple-from-github-account/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>最近随着<a href="http://zh.wikipedia.org/wiki/%E6%AF%94%E7%89%B9%E5%B8%81">比特币</a>在互联网上的流行，其他各种电子货币也都增加了曝光率。</p>
+
+<p>昨晚在 v2ex 上看到有人<a href="http://v2ex.com/t/87062">发帖</a>，用 20RMB 换取 2013 年 5 月 1 日前使用过的 github 账号得到的一个验证码。出于好奇，仔细围观了该贴，发现原来 lz 是利用信息不队称在揽入赠送给 github 用户的 ripple 币。而实际上，给一半 github 用户赠送的 2020 的 ripple 币按当时汇率这算人民币大概价值 70 元！这种『天上掉馅饼』的事情确实激发了我对电子货币的好奇，于是查阅了相关资料，也成功提现了自己的那部分 Ripple 币。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/10/28/get-ripple-from-github-account/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -554,122 +599,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 </div>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/09/22/java-initialization/">Java类、实例的初始化顺序</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-22T21:53:00+08:00" pubdate data-updated="true">Sep 22<span>nd</span>, 2013</time>
-        
-         | <a href="/blog/2013/09/22/java-initialization/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>今晚是阿里巴巴 2013 校园招聘的杭州站笔试。下午匆忙看了两张历年试卷，去现场打了瓶酱油。</p>
-
-<p>题目总体考察点偏基础，倒数第二题（Java 附加题）比较有趣，考察了 Java 初始化机制的细节，在此摘录出来。</p>
-
-<h2>题目</h2>
-
-<p>求如下 java 代码的输出：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">class</span> <span class="nc">T</span>  <span class="kd">implements</span> <span class="n">Cloneable</span><span class="o">{</span>
-</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="n">T</span> <span class="n">t1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">T</span><span class="o">(</span><span class="s">&quot;t1&quot;</span><span class="o">);</span>
-</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="n">T</span> <span class="n">t2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">T</span><span class="o">(</span><span class="s">&quot;t2&quot;</span><span class="o">);</span>
-</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">print</span><span class="o">(</span><span class="s">&quot;i&quot;</span><span class="o">);</span>
-</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">99</span><span class="o">;</span>
-</span><span class='line'>  
-</span><span class='line'>  <span class="kd">public</span> <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">print</span><span class="o">(</span><span class="s">&quot;j&quot;</span><span class="o">);</span>
-</span><span class='line'>  <span class="o">{</span>
-</span><span class='line'>      <span class="n">print</span><span class="o">(</span><span class="s">&quot;构造快&quot;</span><span class="o">);</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'>  
-</span><span class='line'>  <span class="kd">static</span> <span class="o">{</span>
-</span><span class='line'>      <span class="n">print</span><span class="o">(</span><span class="s">&quot;静态块&quot;</span><span class="o">);</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'>  
-</span><span class='line'>  <span class="kd">public</span> <span class="nf">T</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">((++</span><span class="n">k</span><span class="o">)</span> <span class="o">+</span> <span class="s">&quot;:&quot;</span> <span class="o">+</span> <span class="n">str</span> <span class="o">+</span> <span class="s">&quot;    i=&quot;</span> <span class="o">+</span> <span class="n">i</span> <span class="o">+</span> <span class="s">&quot;  n=&quot;</span> <span class="o">+</span> <span class="n">n</span><span class="o">);</span>
-</span><span class='line'>      <span class="o">++</span><span class="n">n</span><span class="o">;</span> <span class="o">++</span> <span class="n">i</span><span class="o">;</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'>  
-</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">print</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span><span class="o">){</span>
-</span><span class='line'>      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">((++</span><span class="n">k</span><span class="o">)</span> <span class="o">+</span><span class="s">&quot;:&quot;</span> <span class="o">+</span> <span class="n">str</span> <span class="o">+</span> <span class="s">&quot;   i=&quot;</span> <span class="o">+</span> <span class="n">i</span> <span class="o">+</span> <span class="s">&quot;   n=&quot;</span> <span class="o">+</span> <span class="n">n</span><span class="o">);</span>
-</span><span class='line'>      <span class="o">++</span><span class="n">n</span><span class="o">;</span>
-</span><span class='line'>      <span class="k">return</span> <span class="o">++</span> <span class="n">i</span><span class="o">;</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'>  
-</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
-</span><span class='line'>      <span class="n">T</span> <span class="n">t</span> <span class="o">=</span> <span class="k">new</span> <span class="n">T</span><span class="o">(</span><span class="s">&quot;init&quot;</span><span class="o">);</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/09/22/java-initialization/">Read on &rarr;</a>
-    </footer>
   
 
 

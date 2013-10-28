@@ -9,7 +9,7 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="背景 2013-10-7 修订部分内容 本文讨论二叉树的常见遍历方式的代码(Java)实现，包括前序(preorder)、中序(inorder)、后序(postorder)、层序(level order)，进一步考虑递归和非递归的实现方式。 递归的实现方法相对简单， &hellip;">
+  <meta name="description" content="背景 《二叉树的遍历（递归、非递归）分析》总结了二叉树不同遍历方式的递归和非递归实现，本文则讨论如何针对不同遍历方式的组合重建二叉树。为了简化问题的考虑，假定二叉树中不会出现重复值。列入考虑范围的有前序、中序、后序、层序遍历这四种的组合。前中后序比较常见，而层序则相对特殊一点了。 PAT 的 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -107,6 +107,53 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/27/pat1020-pat1043-rebuild-binary-tree/">根据前中后序和层序重建二叉树</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-27T22:33:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/04/27/pat1020-pat1043-rebuild-binary-tree/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>背景</h2>
+
+<p><a href="/blog/2013/04/27/travsal-binary-tree/">《二叉树的遍历（递归、非递归）分析》</a>总结了二叉树不同遍历方式的递归和非递归实现，本文则讨论如何针对不同遍历方式的组合重建二叉树。为了简化问题的考虑，假定二叉树中不会出现重复值。列入考虑范围的有前序、中序、后序、层序遍历这四种的组合。前中后序比较常见，而层序则相对特殊一点了。</p>
+
+<p><a href="http://pat.zju.edu.cn/contests/pat-a-practise">PAT</a> 的 1043 和 1020 题是遍历相关的模板题，正好派上用场。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/04/27/pat1020-pat1043-rebuild-binary-tree/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -571,54 +618,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
     <footer>
       <a rel="full-article" href="/blog/2013/04/05/tong-bing-kuai-le-zhe/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/04/04/pat-basic-level-1001-1010/">PAT Basic Level 1001-1010</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-04T01:50:00+08:00" pubdate data-updated="true">Apr 4<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/04/04/pat-basic-level-1001-1010/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>背景</h2>
-
-<p>算法开始练手了。从最简单的做起。这部分代码都是由 Java 实现。
-<strong><a href="http://pat.zju.edu.cn/contests/pat-b-practise">题目看这里</a></strong></p>
-
-<p>我把所有 AC 过的<strong><a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/basiclevel">解题代码都贴到了我的 github</a></strong>上，就不贴到 blog 里啦。（确切的说，这个博客本身就是在 github 里，不是么:)）</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/04/04/pat-basic-level-1001-1010/">Read on &rarr;</a>
     </footer>
   
 

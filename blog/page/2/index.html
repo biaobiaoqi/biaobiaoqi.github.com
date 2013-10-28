@@ -9,7 +9,18 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="为了防止被某墙 fuck，暂且称其为『很棒的防火墙』吧，你懂的-,-. 在 teahour 上听了 ***技术研究和云梯产品故事，有感于之前几天修改本地 hosts 的策略再次失效，切换到 goagent 模式，在此，基于这期 teahour 对@Kgen 的访谈内容，对很棒的防火墙做份简单的笔记 &hellip;">
+  <meta name="description" content="今晚是阿里巴巴 2013 校园招聘的杭州站笔试。下午匆忙看了两张历年试卷，去现场打了瓶酱油。 题目总体考察点偏基础，倒数第二题（Java 附加题）比较有趣，考察了 Java 初始化机制的细节，在此摘录出来。 题目 求如下 java 代码的输出： 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -107,6 +118,122 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/09/22/java-initialization/">Java类、实例的初始化顺序</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-22T21:53:00+08:00" pubdate data-updated="true">Sep 22<span>nd</span>, 2013</time>
+        
+         | <a href="/blog/2013/09/22/java-initialization/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>今晚是阿里巴巴 2013 校园招聘的杭州站笔试。下午匆忙看了两张历年试卷，去现场打了瓶酱油。</p>
+
+<p>题目总体考察点偏基础，倒数第二题（Java 附加题）比较有趣，考察了 Java 初始化机制的细节，在此摘录出来。</p>
+
+<h2>题目</h2>
+
+<p>求如下 java 代码的输出：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">class</span> <span class="nc">T</span>  <span class="kd">implements</span> <span class="n">Cloneable</span><span class="o">{</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="n">T</span> <span class="n">t1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">T</span><span class="o">(</span><span class="s">&quot;t1&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="n">T</span> <span class="n">t2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">T</span><span class="o">(</span><span class="s">&quot;t2&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">print</span><span class="o">(</span><span class="s">&quot;i&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">99</span><span class="o">;</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="kd">public</span> <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">print</span><span class="o">(</span><span class="s">&quot;j&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">{</span>
+</span><span class='line'>      <span class="n">print</span><span class="o">(</span><span class="s">&quot;构造快&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="kd">static</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">print</span><span class="o">(</span><span class="s">&quot;静态块&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="kd">public</span> <span class="nf">T</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">((++</span><span class="n">k</span><span class="o">)</span> <span class="o">+</span> <span class="s">&quot;:&quot;</span> <span class="o">+</span> <span class="n">str</span> <span class="o">+</span> <span class="s">&quot;    i=&quot;</span> <span class="o">+</span> <span class="n">i</span> <span class="o">+</span> <span class="s">&quot;  n=&quot;</span> <span class="o">+</span> <span class="n">n</span><span class="o">);</span>
+</span><span class='line'>      <span class="o">++</span><span class="n">n</span><span class="o">;</span> <span class="o">++</span> <span class="n">i</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">print</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span><span class="o">){</span>
+</span><span class='line'>      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">((++</span><span class="n">k</span><span class="o">)</span> <span class="o">+</span><span class="s">&quot;:&quot;</span> <span class="o">+</span> <span class="n">str</span> <span class="o">+</span> <span class="s">&quot;   i=&quot;</span> <span class="o">+</span> <span class="n">i</span> <span class="o">+</span> <span class="s">&quot;   n=&quot;</span> <span class="o">+</span> <span class="n">n</span><span class="o">);</span>
+</span><span class='line'>      <span class="o">++</span><span class="n">n</span><span class="o">;</span>
+</span><span class='line'>      <span class="k">return</span> <span class="o">++</span> <span class="n">i</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+</span><span class='line'>      <span class="n">T</span> <span class="n">t</span> <span class="o">=</span> <span class="k">new</span> <span class="n">T</span><span class="o">(</span><span class="s">&quot;init&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/09/22/java-initialization/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -778,71 +905,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
     <footer>
       <a rel="full-article" href="/blog/2013/09/08/java-class-loader-in-practice/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/09/07/java-classloader/">Java 类加载器</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-07T23:15:00+08:00" pubdate data-updated="true">Sep 7<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/09/07/java-classloader/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>背景知识</h2>
-
-<p>Java 平台无关的特性是由 JVM(Java 虚拟机)支撑的。不同平台有不同的 JVM 支持。</p>
-
-<p>计算机领域有这么一句话：</p>
-
-<blockquote><p>计算机科学领域的任何问题都可以通过增加一个间接的中间层来解决。</p></blockquote>
-
-<p>JVM 其实也可以看做是运行的 Java 程序和实际的硬件架构之间的一个新抽象层。</p>
-
-<p>一个 Java 程序从编写到执行的流程一句话概括如下：首先将 Java 源代码（*.java 文件）编译成字节码（*.class 文件，字节码之于 Java 源码，类比于汇编代码之于 C 源码），然后由 JVM 运行那些字节码文件。</p>
-
-<p>JVM 工作原理如下图</p>
-
-<p><img src="https://dl.dropboxusercontent.com/u/64021093/Java%20Classloader/JVM%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86.gif" alt="JVM framework" /></p>
-
-<p>Java 中所有的类文件都需要由类加载器（Class Loader）装载到 JVM 中。可以简单的将 JVM 理解为一个工厂，类文件就是等待加工的原料，加载器则是装载货物的工人。Java 类被装载之后，才能进入到 JVM 的运行时机制中，开始运行。</p>
-
-<h2>类加载器的作用</h2>
-
-<p>顾名思义，Java 类加载器的作用是向 JVM 中装载类。</p>
-
-<p>这种动态装载的技术是 Java 的一种创新，让类能够动态加载到 JVM 中执行（更详细的介绍参见 <a href="http://www.ibm.com/developerworks/java/library/j-dyn0429/">Java programming dynamics, Part 1: Java classes and class loading</a>）。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/09/07/java-classloader/">Read on &rarr;</a>
     </footer>
   
 

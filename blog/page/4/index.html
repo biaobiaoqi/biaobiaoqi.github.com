@@ -9,7 +9,7 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="早期部分代码用 Java 实现。由于 PAT 虽然支持各种语言，但只有 C/C++标程来限定时间，许多题目用 Java 读入数据就已经超时，后来转投 C/C++。浏览全部代码：请戳 本文谨代表个人思路，欢迎讨论;) 1021. Deepest Root (25) 题意 无环连通图也可以视为一棵树， &hellip;">
+  <meta name="description" content="早期部分代码用 Java 实现。由于 PAT 虽然支持各种语言，但只有 C/C++标程来限定时间，许多题目用 Java 读入数据就已经超时，后来转投 C/C++。浏览全部代码：请戳 本文谨代表个人思路，欢迎讨论;) 1031. Hello World for U (20) 题意 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -107,6 +107,107 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/08/01/pat-1031-1040-solutions/">PAT 1031-1040 题解</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-01T01:43:00+08:00" pubdate data-updated="true">Aug 1<span>st</span>, 2013</time>
+        
+         | <a href="/blog/2013/08/01/pat-1031-1040-solutions/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>早期部分代码用 Java 实现。由于 PAT 虽然支持各种语言，但只有 C/C++标程来限定时间，许多题目用 Java 读入数据就已经超时，后来转投 C/C++。浏览全部代码：<a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel">请戳</a></p>
+
+<p>本文谨代表个人思路，欢迎讨论;)</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1031">1031. Hello World for U (20)</a></h2>
+
+<h5>题意</h5>
+
+<p>将给定的字符串打印出 U 型。</p>
+
+<p>比如给定<code>helloworld</code>，打印出</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>h  d
+</span><span class='line'>e  l
+</span><span class='line'>l  r
+</span><span class='line'>lowo
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>设定左边的字符个数为 n1,底边字符个数为 n2,右边字符个数为 n3。需要满足 n1 = n3 = max
+{k|k &lt;= n2 for all 3 &lt;= n2 &lt;= N} with n1 + n2 + n3 -3 = N.</p>
+
+<h5>分析</h5>
+
+<p>简单模拟题。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1032">1032. Sharing (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>为了节省存储空间，单词使用链表实现。比如对于<code>loading</code>和<code>being</code>两个单词，有如下存储结构：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>word1 : -&gt; [l] -&gt; [o] -&gt; [a] -&gt; [d]  
+</span><span class='line'>                                  \
+</span><span class='line'>                                    [i] -&gt; [n] -&gt; [g] -&gt; null
+</span><span class='line'>                                  /
+</span><span class='line'>word2 : -&gt; [b] -&gt; [e] -------------
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>输入中，指定了两个单词的首字符的地址，并给出了 N (&lt;= 10<sup>5)个节点，每个节点包含：物理地址（5</sup> 位的正整数），实际存储的字符以及指向的下一个节点的地址。NULL 的地址是-1.
+要求找到两单词的的公共后缀开始的地址，如果没有，则输出-1.</p>
+
+<h5>分析</h5>
+
+<p>既然是单词，它的长度应该是有限的，也就是链表不会出现环这种情况（实际上这里的处理方式对于有环无环都适用）。对第一个单词链表做遍历，对爬过的节点做好标记。第二个单词链表也同样做标记，一旦遇到已经标记过的节点，则该节点就是结果。</p>
+
+<p>需要注意一点：直接使用 map 做节点的存储最后一个 case 会超时。而鉴于 5 位正整数的数据量，可以直接使用数组，用空间换时间。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/08/01/pat-1031-1040-solutions/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -1006,102 +1107,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <blockquote><p>人生的苦难肯定是没有尽头的，人要做的是在苦难中奋发起来，做自己能够做的和应该做的事儿，这就是我的世界观。</p></blockquote>
 
 <p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/07/07/yuminhong/'>http://biaobiaoqi.me/blog/2013/07/07/yuminhong/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/05/checklist-manifesto/">《清单革命》</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-05T00:54:00+08:00" pubdate data-updated="true">Jul 5<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/05/checklist-manifesto/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>应该叫『清单宣言』</h2>
-
-<p>在 Amazon 上『满 100 送一本』的活动中随手挑到了它。鉴于其空洞的标题，被束之高阁半年多，最近关注个人管理方面的知识，才拍拍灰尘读起来。</p>
-
-<p>书的英文原名是『The Checklist Manifesto: How to Get Things Right』，直译成『清单宣言』在我看来更贴切，而非充满噱头的『清单革命』。正如一个小功能难以做成独立的产品，一个方法改进也难以成就革命。『清单能大大的改善效率，降低失败概率』这一观点，在医生出生的作者手中翻来覆去的被各种事例证明着，案例的行业背景从医学到建筑，到航天，再到投资，实在乏味。当然，这不妨碍『清单』这一工具对生活工作的助力所带给我们的思考。</p>
-
-<h2>三类问题</h2>
-
-<p>清单作为处理问题的工具，需要从问题的分类谈起。问题大致可分为三类：简单问题、复杂问题和极端复杂的问题。</p>
-
-<ul>
-<li>简单问题，诸如洪培蛋糕，只需要知道流程，就可以独立完成，没有复杂的过程和细节。</li>
-<li>复杂问题，比如火箭发射升空。通过耐心分解，复杂问题能划分成很多的简单问题，进而得到解决。这时候，需要借助集体的力量。</li>
-<li>极端复杂的问题，比如子女的抚养。问题的领域极其宽广和复杂，充满了不确定性，理性的分析难以完全掌控。</li>
-</ul>
-
-
-<p>这三种类型的问题由简单到复杂的梯度递增。</p>
-
-<h2>实践经验：清单</h2>
-
-<p>实践领域的失败分为两种，一种是无知之错，俗话说得好，『不知者无罪』；另一种是无能之错，即按照知识储备，完全能成功解决问题，最终却因为各种原因失败了。随着社会的发展，后者的出现频率越来越高。造成这一现象的原因容易理解，社会复杂度越来越高，各种问题的实施难度加大，远超过个人能力的范围了。这个时候『清单』的重要性凸显了出来。</p>
-
-<p>人脑有一个认知防护网，体现在如下认知缺陷上：</p>
-
-<ul>
-<li>记忆不完整</li>
-<li>注意力不集中</li>
-<li>惰性思维</li>
-</ul>
-
-
-<p>清单能帮助人处理问题：</p>
-
-<ul>
-<li>重压之下，人脑容易忽视某些细节。</li>
-<li>人脑对于熟知的事实，思考时容易跳过一些事项。</li>
-</ul>
-
-
-<p>使用清单时，特别注意需要保证清单的简单、可测、高效。清单是给人用的，基于人脑局限性，复杂和模糊的认知难以帮助事情的发展。</p>
-
-<blockquote><p>清单需要简单、可测、高效</p></blockquote>
-
-<p>当然，清单也有显而易见的缺点：死板。它是一张纸条上的几行文字，不会知道水的冷暖。那么，当意外发生，需要应变的就是执行者本人。生活中，事物总是充满着变化，清单的控制也需要注意及时的应变。</p>
-
-<blockquote><p>制定清单、执行清单的过程，也需要灵活应变。</p></blockquote>
-
-<h2>用清单处理问题</h2>
-
-<ul>
-<li>简单问题： 简单的问题可以通过清单提高效率和成功率。</li>
-<li>复杂问题： 可以拆分为许多的简单问题，分由多人管理和复杂，再辅以清单解决。另外，需要注意人与人之间沟通，这能降低出错的可能性，提高个人效率。</li>
-<li>极端复杂的问题：更多的需要不断的试错、调整。</li>
-</ul>
-
-
-<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/07/05/checklist-manifesto/'>http://biaobiaoqi.me/blog/2013/07/05/checklist-manifesto/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
 
 </div>
   
