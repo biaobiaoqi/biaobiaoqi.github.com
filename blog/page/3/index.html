@@ -9,7 +9,8 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="背景知识 Java 平台无关的特性是由 JVM(Java 虚拟机)支撑的。不同平台有不同的 JVM 支持。 计算机领域有这么一句话： 计算机科学领域的任何问题都可以通过增加一个间接的中间层来解决。 JVM 其实也可以看做是运行的 Java 程序和实际的硬件架构之间的一个新抽象层。 一个 Java &hellip;">
+  <meta name="description" content="文本通过实现自定义类加载器，实践 Java 类加载的流程。 阅读此文前，需要了解 Java 类加载的基本原理，参见如下两篇博文： 《Java 类加载器浅析》
+《Java 类加载器三原则》 以上博文中所提及的 Java 类加载机制，都是 Java1.2 及以后的版本，而在最早的 Java1.1 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -107,6 +108,75 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/09/08/java-class-loader-in-practice/">Java类加载器编程实践</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-08T00:33:00+08:00" pubdate data-updated="true">Sep 8<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/09/08/java-class-loader-in-practice/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>文本通过实现自定义类加载器，实践 Java 类加载的流程。</p>
+
+<p>阅读此文前，需要了解 Java 类加载的基本原理，参见如下两篇博文：</p>
+
+<ul>
+<li><a href="http://biaobiaoqi.me/blog/2013/09/07/java-classloader/">《Java 类加载器浅析》</a></li>
+<li><a href="http://biaobiaoqi.me/blog/2013/09/08/three-principles-of-classloader-operation/">《Java 类加载器三原则》</a></li>
+</ul>
+
+
+<p>以上博文中所提及的 Java 类加载机制，都是 Java1.2 及以后的版本，而在最早的 Java1.1 中类加载器是没有父子关系的模式的。这里将分别对 Java1.1 和 Java1.2 及以后的类加载版本进行展示。</p>
+
+<h2>Java1.1 中的实现</h2>
+
+<h3>原理介绍</h3>
+
+<p>Java1.1 的类加载机制相对单一，用户自定义加载器的重写比较复杂。</p>
+
+<p>主要需要重写加载器中的 Class loadClass(String name)方法。</p>
+
+<p>Class loadClass(String name)或 loadClass(String name , boolean resolve)方法是加载的核心。它根据类的全名（比如 String 类的全名是 java.lang.String）获得对应类的二进制数据，然后通过 Class defineClass(byte[] b) 将二进制数据加载到 JVM 的方法区，并返回对应类的 Class 实例，然后根据可选的参数 resolve 决定是否需要现在解析这个类。最后将这个 Class 实例作为 loadClass 方法的返回值。</p>
+
+<p>如果无法加载和 defineClass，即无法通过本加载器直接加载类的情况，则使用 Class findSystemClass(String name) 将类加载任务委派给系统类加载器查找。如果能找到则加载，否则抛出 ClassNotFoundException 异常。</p>
+
+<h3>编程实例</h3>
+
+<p>以下用实例来展示这一过程：</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/09/08/java-class-loader-in-practice/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -715,77 +785,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/08/01/pat-1041-1050-solutions/">PAT 1041-1050 题解</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-08-01T01:43:00+08:00" pubdate data-updated="true">Aug 1<span>st</span>, 2013</time>
-        
-         | <a href="/blog/2013/08/01/pat-1041-1050-solutions/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>浏览全部代码：<a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel">请戳</a></p>
-
-<p>本文谨代表个人思路，欢迎讨论;)</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1041">1041. Be Unique (20)</a></h2>
-
-<h5>题意</h5>
-
-<p>给出 N (&lt;=105)个数（数值范围为 [1, 10<sup>4]），找到其中不重复的第一个数字。比如给出</sup> <code>5 31 5 88 67 88 17</code> ， 答案是 <code>31</code> 。</p>
-
-<h5>分析</h5>
-
-<p>简单模拟题，开一个大数组<code>int a[10001];</code>，以读入的数为下标，记录 count:<code>a[index] ++;</code>。结果输出第一个存储为 1 的下标:<code>if (a[index] == 1)</code>。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1042">1042. Shuffling Machine (20)</a></h2>
-
-<h5>题意</h5>
-
-<p>背景是洗牌机的洗牌过程。过程是给定洗牌的每张牌的位置替换序列，由原来的次序算出最后的牌的平排列。</p>
-
-<p>比如原有的次序为<code>S3, H5, C1, D13, J2</code>，
-给定的洗牌顺序为<code>4, 2, 5 ,3 ,1</code>，那么一次洗牌的结果为：<code>J2, H5, D13, S3, C1</code>。
-如果需要两次洗牌，则结果为<code>C1, H5, S3, J2, D13</code>。</p>
-
-<p>输入为对一整副牌（54 张）的洗牌策略，以及洗牌次数 N，要求计算出最后的洗牌结果。</p>
-
-<h5>分析</h5>
-
-<p>简单 hash 题。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/08/01/pat-1041-1050-solutions/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -805,17 +804,17 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     <a style="font-size: 180%" href="/tags/algorithm/">algorithm</a> &nbsp 
 <a style="font-size: 163%" href="/tags/bytecode/">bytecode</a> &nbsp 
 <a style="font-size: 113%" href="/tags/diary/">diary</a> &nbsp 
-<a style="font-size: 163%" href="/tags/distributed/">distributed</a> &nbsp 
+<a style="font-size: 166%" href="/tags/distributed/">distributed</a> &nbsp 
 <a style="font-size: 132%" href="/tags/hadoop/">hadoop</a> &nbsp 
+<a style="font-size: 113%" href="/tags/idea/">idea</a> &nbsp 
 <a style="font-size: 178%" href="/tags/java/">java</a> &nbsp 
 <a style="font-size: 170%" href="/tags/jvm/">jvm</a> &nbsp 
 <a style="font-size: 124%" href="/tags/life/">life</a> &nbsp 
 <a style="font-size: 146%" href="/tags/methodology/">methodology</a> &nbsp 
 <a style="font-size: 132%" href="/tags/network/">network</a> &nbsp 
 <a style="font-size: 124%" href="/tags/octopress/">octopress</a> &nbsp 
-<a style="font-size: 113%" href="/tags/os/">os</a> &nbsp 
 <a style="font-size: 172%" href="/tags/pat/">pat</a> &nbsp 
-<a style="font-size: 113%" href="/tags/tech/">tech</a> &nbsp 
+<a style="font-size: 113%" href="/tags/software-engineering/">software_engineering</a> &nbsp 
 <a style="font-size: 166%" href="/tags/think/">think</a>
 
   </ul>
