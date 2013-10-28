@@ -1,0 +1,672 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: 技术 | Biaobiaoqi的博客]]></title>
+  <link href="http://biaobiaoqi.me/tags/ji-zhu/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.me/"/>
+  <updated>2013-10-29T00:35:33+08:00</updated>
+  <id>http://biaobiaoqi.me/</id>
+  <author>
+    <name><![CDATA[Biaobiaoqi]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[在Eclipse里查看Java字节码]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/10/25/java-bytecode-plugin-for-eclipse/"/>
+    <updated>2013-10-25T04:06:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/10/25/java-bytecode-plugin-for-eclipse</id>
+    <content type="html"><![CDATA[<p>要理解Java字节码，比较推荐的方法是自己尝试编写源码对照字节码学习。其中阅读Java字节码的工具必不可少。虽然<code>javap</code>可以以可读的形式展示出.class文件中字节码，但每次改动源码都需调用命令行并不方便。这里介绍一个可以辅助阅读Java字节码的Eclipse插件：<a href="http://andrei.gmxhome.de/bytecode/">bytecode outline</a>。</p>
+
+<p>bytecode outline插件用可读的方式展现了Eclipse的Java编辑器或类文件的字节码内容。它使用了<a href="http://asm.ow2.org/">ASM框 架</a>的部分组建来实现对字节码的展示（ASM框架在另外一篇操纵Java字节码的博文中有提到过：<a href="http://biaobiaoqi.me/blog/2013/09/08/custom-premain-method/">《AOP实践：java.lang.instrument的使用》</a>，是一个轻量级的Java字节码的操纵框架。）。</p>
+
+<!--more-->
+
+
+<h2>插件安装</h2>
+
+<p>直接使用Update manager安装插件，非常简单：</p>
+
+<p><code>Help -&gt; Install new Software... -&gt; Work with:</code></p>
+
+<p>输入url：http://andrei.gmxhome.de/eclipse/</p>
+
+<p>然后在弹框中选择合适的版本即可。</p>
+
+<h2>使用</h2>
+
+<p>在Eclipse中添加相应的查看窗口：</p>
+
+<p><code>Window -&gt; Show View -&gt; Other -&gt; Java -&gt; Bytecode</code></p>
+
+<p>选中某Java源文件，效果如图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/javabytecode1.png" alt="img" /></p>
+
+<p>同时，还可以使用同样的方法，添加Bytecode Reference窗口，用于查询各个Java字节码的文档，示例如下：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/javabytecode2.png" alt="img" /></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[反编译Jar包]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/10/21/decompiliation-jar/"/>
+    <updated>2013-10-21T12:16:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/10/21/decompiliation-jar</id>
+    <content type="html"><![CDATA[<p>Jar包(Java Archive)是对Java程序的打包，它可能包含源码，也可能没有。</p>
+
+<p>对于有包含源码的Jar包，在Eclipse工程里设定好source code路径后能直接查看到远吗，对于理解代码、调试的帮助很大。而如果Jar包没有打包源码，实际上也可以通过反编译的方法得到源码。道理很简单，Java规范中，生成的.class文件所包含的信息完全能逆向的重构出源码。</p>
+
+<p>当然，一些代码为了防止自身Jar包被人反编译，会做<a href="http://zh.wikipedia.org/wiki/%E4%BB%A3%E7%A0%81%E6%B7%B7%E6%B7%86">代码混淆</a>掩人耳目。其中最简单的一种方法就是是通过修改类名、变量名、方法名等方法让反编译的源码难于阅读理解。不过这个方法在混淆的时候需要特别注意：不能混淆对外提供接口的类。如果混淆了提供给外部的API接口的名字，整个工程就无法被正常使用了。</p>
+
+<p>本文要举例的是对<a href="http://help.aliyun.com/origin?helpId=664">阿里云开放云存储Java SDK</a>的反编译。由于SDK需要暴露接口给其他开发人员调用，本身确实没有做混淆（不理解阿里云为何没有将它开源出来），故可以做简单的反编译来查看源码。</p>
+
+<!--more-->
+
+
+<h2>Jadclipse的安装使用</h2>
+
+<p>Jadclipse插件的反编译功能源于Java反编译工具Jad。但用裸的Jad来命令行执行不太友好，于是就有了Jadclipse。</p>
+
+<h3>1.下载Jad反编译工具</h3>
+
+<p>下载好Jad工具，解压后放在合适的路径下。
+<a href="http://varaneckas.com/jad/">Jad下载链接</a></p>
+
+<h3>2.安装插件</h3>
+
+<p>按照Eclipse版本下载匹配的Jadclipse插件：<a href="http://sourceforge.net/projects/jadclipse/files/?source=navbar">下载链接</a>。（这个插件的最近修改是2007年，只要不是使用的老掉牙的Eclipse，都可以下载最新的插件版本jadclipse3.3）。</p>
+
+<p>解压后，将对应版本的.jar包放入Eclipse的插件目录(eclipse/plugins)下。</p>
+
+<h3>3.配置Jadclipse</h3>
+
+<p>插件中有两个一定要配置好的选项：</p>
+
+<ul>
+<li>Jad执行文件的路径</li>
+<li>.class文件打开时的关联工具</li>
+</ul>
+
+
+<p>以下配置路径的方式可能Windows跟Mac版本的Eclipse各不相同，不过都比较简单，可以自行Google。</p>
+
+<h4>3.1 Jad执行文件路径</h4>
+
+<p>在Eclipse中，依次打开 <code>Preference -&gt; Java -&gt; JadClipse</code>，修改<code>Path to decompiler</code>的值，定位到Jad的执行文件路径。</p>
+
+<h4>3.2 .class关联工具</h4>
+
+<p>由于Eclipse默认.class文件打开使用的是Class File Viewer，如果.class没有关联的源文件，则无法查看源代码。需要将<code>.class without source</code>类型的文件的关联编辑器首选设置为JadClipse Class File Viewer。</p>
+
+<p>打开方式如下： <code>Windows—&gt; Perference—&gt;General-&gt;Editors-&gt;File Associations</code></p>
+
+<h3>4.测试</h3>
+
+<p>配置好后，可能需要重启Eclipse（或许是插件本身不够Robust，博主在没有重启的情况下尝试打开没有附带源代码的.class文件时失败了，重启后一切ok）。</p>
+
+<p>下载阿里云开放云存储SDK：<a href="http://help.aliyun.com/origin?helpId=664">下载链接</a>，解压后，将相应的Jar包加入到工程中。</p>
+
+<p>点击其中的某个.class文件，即可显示出它的源代码。文件的头部会有Jad的相关信息：</p>
+
+<p>```java
+/<em>jadclipse</em>/// Decompiled by Jad v1.5.8g. Copyright 2001 Pavel Kouznetsov.
+// Jad home page: http://www.kpdus.com/jad.html
+// Decompiler options: packimports(3) radix(10) lradix(10)
+// Source File Name:   HmacSHA1Signature.java</p>
+
+<p>…</p>
+
+<p>```</p>
+
+<h3>PS</h3>
+
+<p>后来Google相关内容时，找到了JadClipse在Eclipse Market的版本：<a href="http://marketplace.eclipse.org/content/jadclipse-eclipse-4x">请戳</a>，或许对大家有用=)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[数据集成工具：Teiid实践]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/10/19/data-integration-tool-teiid/"/>
+    <updated>2013-10-19T23:58:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/10/19/data-integration-tool-teiid</id>
+    <content type="html"><![CDATA[<p>数据集成是把不同来源、格式、特点性质的数据在逻辑上或物理上有机地集中，从而为企业提供全面的数据共享。数据集成的方式多种多样，这里介绍的<a href="http://www.jboss.org/teiid/">Teiid</a>是其中的一种：通过抽象和联邦技术，实现分布式数据源的实时数据访问和集成，无需从记录系统中复制或移动数据。</p>
+
+<p><a href="http://blogs.ejb.cc/archives/3552/teiid-scalable-information-integration-program">链接</a>是一篇关于Teiid的中文介绍，比较详细。</p>
+
+<p>由于适配不同数据源和生成虚拟数据库（VDB）需要维护好几个配置文件，直接手动部署Teiid比较难受。好在Teiid提供了辅助工具<a href="http://www.jboss.org/teiiddesigner">Teiid Designer</a>，这是一个Eclipse插件，能帮助用户可视化的管理数据的集成过程。</p>
+
+<ul>
+<li><p>安装配置</p>
+
+<p>  参见官网的Downloads界面的详细介绍（注意：环境配置中，各组件需严格遵循官网指定版本，实践经验表明，Teiid本身并不够鲁棒，容不得小差错）。</p></li>
+</ul>
+
+
+<p>接下来，我们用一个简单的应用场景实践Teiid的数据集成功能。</p>
+
+<!--more-->
+
+
+<h2>应用场景</h2>
+
+<p>书店主营图书销售，并维护者一个用户对图书评价的数据库。技术上说，书店拥有三个数据模块：</p>
+
+<ul>
+<li><p>MySQL数据库，存储用户信息和用户对某书的评价</p>
+
+<p>  表结构如下：</p></li>
+</ul>
+
+
+<p>```
+create database library;
+use library;
+create table users (</p>
+
+<pre><code> id int primary key,
+ name char(20) not null,
+ passwd char(20)) not null,
+</code></pre>
+
+<p>);
+create table comments(</p>
+
+<pre><code> cid int primary key,
+ uid int ,
+ bookid int not null,
+ content char(255),
+ foreign key (uid) references users(id)
+</code></pre>
+
+<p>);
+```
+* EXCEL表格，店主用于记录销售量、记录销售单价</p>
+
+<p><code>
+book_id,price,sales
+1,89.00,1000
+2,52.00,9999
+3,30.00,10000
+4,9800,5555
+5,69.00,1234
+</code></p>
+
+<ul>
+<li>XML文件记录书籍信息，包括</li>
+</ul>
+
+
+<p>``` xml
+&lt;?xml version= "1.0" encoding ="UTF-8"?>
+<BooksInfo></p>
+
+<pre><code>    &lt;Book id = "1" &gt;
+           &lt;Title&gt; Hadoop: The Definitive Guide &lt;/Title&gt;
+           &lt;Author&gt; Tom White&lt;/Author &gt;
+           &lt;publisher&gt; O'Reilly&lt;/ publisher&gt;
+    &lt;/Book&gt;
+    &lt;Book id = "2" &gt;
+           &lt;Title&gt; Effective Java&lt;/Title &gt;
+           &lt;Autorh&gt; Joshua Bloch&lt;/Autorh&gt;
+           &lt;publisher&gt; HZ Books&lt;/ publisher&gt;
+    &lt;/Book&gt;
+    &lt;Book id = "3" &gt;
+           &lt;Title&gt; C Programming Language&lt;/Title &gt;
+           &lt;Autorh&gt; Kernighan, Ritchie &lt;/Autorh&gt;
+           &lt;publisher&gt; HZ Books&lt;/ publisher&gt;
+    &lt;/Book&gt;
+    &lt;Book id = "4" &gt;
+           &lt;Title&gt; Head First: Design Pattern&lt;/Title &gt;
+           &lt;Autorh&gt; Freeman&lt;/ Autorh&gt;
+           &lt;publisher&gt; Turning Education&lt;/publisher &gt;
+    &lt;/Book&gt;
+    &lt;Book id = "5" &gt;
+           &lt;Title&gt; Refactoring: Improving the Design of Existing Code &lt;/Title&gt;
+           &lt;Autorh&gt; Martin Fowler &lt;/Autorh&gt;
+           &lt;publisher&gt; O'Reilly&lt;/ publisher&gt;
+    &lt;/Book&gt;
+</code></pre>
+
+<p></BooksInfo>
+```</p>
+
+<h2>实践</h2>
+
+<h3>1.创建工程</h3>
+
+<p>打开配置好Teiid Designer插件的Eclipse，在Teiid Designer视图的Guides中，找到Define Teiid Model Project选项，如下图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid1.png" alt="img" /></p>
+
+<p>一路点击next，在如下界面勾选sources和views即可，designer guid会帮助生成这两个目录，其他目录在此项目中不需要。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid2.png" alt="img" /></p>
+
+<h3>2.导入MyQL数据源</h3>
+
+<p>在Guides界面，选择JDBC数据源</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid3.png" alt="img" /></p>
+
+<p>第一个步骤Define Teiid Model Project在上一步中已经完成了，现在需要创建一个JDBC链接，选择Create JDBC connection，在弹出的窗口中，选择Mysql数据库，然后点下一步</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid4.png" alt="img" /></p>
+
+<p>选择mysql驱动，配置好Mysql数据源的的url、用户名、密码，点下一步。（在这里，mysql的端口为默认的3306，library为之前配置好的mysql数据库）。点击test connection测试与mysql的链接能否建立。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid5.png" alt="img" /></p>
+
+<p>接下来需要给数据源创建源模型（source model）了。同样在Guides试图上双击Create source model for JDBC data source，一路下一步，直到选择数据库和表，选择library数据库中的所有表，如下图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid6.png" alt="img" /></p>
+
+<p>创建源模型的最后一步如下图，可以自定义Model Name，为了让之后的sql查询过程更可读，我将以数据源类型命名它（mysql.xmi）。其他无关配置暂时不用理会。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid7.png" alt="img" /></p>
+
+<p>finish后，就生成了一个元模型，如下图。图中可视化的显示了数据库所建的两张表</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid8.png" alt="img" /></p>
+
+<p>接下来可以测试数据是否可读，双击Guides中的Preview Data，在弹框中选择需要preview的表或者precedure（procedure在本工程里这里不会被用到）查询结果显示在了eclipse下方的SQL Result框中，如下图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid9.png" alt="img" /></p>
+
+<p>接下先来不用着急Define VDB，我们先把所有数据源配置完成后再一起来定义虚拟数据库。</p>
+
+<h3>3.导入FlatFile数据源（CSV）</h3>
+
+<p>跟之前一个步骤一样，只需要沿着Guides里的路线一步一步操作。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid10.png" alt="img" /></p>
+
+<p>首先创建连接，配置好后test connection确保链接无误</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid12.png" alt="img" /></p>
+
+<p>链接建立后，需要创建元模型。如下图，提示有错，只需要选定Source Model Definition的文件的存储位置即可。存放在项目的sources目录中</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid13.png" alt="img" /></p>
+
+<p>按照默认配置，不断下一步，在 Flat File Demilited Columns Parser Settings 这一步，可以注意到下方有生成一串SQL语句。这些语句告诉Teiid需要如何将csv文件中的数据映射为关系型数据。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid14.png" alt="img" /></p>
+
+<p>继续下一步，view model definition界面，提示创建的tableview名字包含不合法字符。原来由于将flat file命名为sales.csv,它自动生成了price.csvView作为table name，但名字中是不能出现<code>.</code>的，于是修改为salesview，finish。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid15.png" alt="img" /></p>
+
+<p>之后测试数据能否读取。在选择所要preview的数据时，需要选择相应的table，而不是模型（这里需要选择salesView，而不是上层的price_view.xmi）。如下图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid16.png" alt="img" /></p>
+
+<h3>4.导入xml数据</h3>
+
+<p>大部分步骤跟之前的步骤类似，在设定源模型时，需要注意配置好xml数据到关系型数据的映射关系，如下图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid17.png" alt="img" /></p>
+
+<p>XML File Contents中会根据xml文件中的数据解析出整体的层次结构。我们需要将其中的Book里的信息，添加到右边的Column Info中。虽然有很多Book数据列表显示在左边一栏里，但实际上只需要添加一次相关信息到右边的列信息中。值得注意的是，这里自动生成的Root Path是错误的，需要修改为BooksInfo/Book。其他没有什么特别的，一路下一步。</p>
+
+<p>现在整个项目如下图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid18.png" alt="img" /></p>
+
+<h3>5.生成虚拟数据库</h3>
+
+<p>点击Guides中的Define VDB，将三个数据源的模型加入到VDB中:MySQL的源模型，XML和CSV的视图模型（注意：不可以加入另外两个源模型的xmi文件，博主如此操作后遇到了一些莫名其妙的问题）。</p>
+
+<p>如此就完成了在Teiid Designer中的多数据源集成的配置了。</p>
+
+<h3>6.部署和使用</h3>
+
+<p>通过Teiid Designer，我们能方便的部署VDB到Jboss服务器。</p>
+
+<p>在Guides界面下，有execute vdb选项，双击即可。正式运行之前，需要运行Jboss server，如果没有启动服务器，Teiid Designer会弹框提醒的。</p>
+
+<p>最后，尝试一下通过Teiid集成查询多个数据源。将sql语句输入到执行框中，刷蓝->右键->执行选中的语句。</p>
+
+<p>```</p>
+
+<blockquote><p>select * from "csv"."sales" as A join "xml"."booksinfo" as B on A.book_id = B.id</p></blockquote>
+
+<p>```</p>
+
+<p>结果如图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid19.png" alt="img" /></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[数据集成工具：Teiid实践]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/10/19/data-integration-tool-teiid/"/>
+    <updated>2013-10-19T23:58:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/10/19/data-integration-tool-teiid</id>
+    <content type="html"><![CDATA[<p>数据集成是把不同来源、格式、特点性质的数据在逻辑上或物理上有机地集中，从而为企业提供全面的数据共享。数据集成的方式多种多样，这里介绍的<a href="http://www.jboss.org/teiid/">Teiid</a>是其中的一种：通过抽象和联邦技术，实现分布式数据源的实时数据访问和集成，无需从记录系统中复制或移动数据。</p>
+
+<p><a href="http://blogs.ejb.cc/archives/3552/teiid-scalable-information-integration-program">链接</a>是一篇关于Teiid的中文介绍，比较详细。</p>
+
+<p>由于适配不同数据源和生成虚拟数据库（VDB）需要维护好几个配置文件，直接手动部署Teiid比较难受。好在Teiid提供了辅助工具<a href="http://www.jboss.org/teiiddesigner">Teiid Designer</a>，这是一个Eclipse插件，能帮助用户可视化的管理数据的集成过程。</p>
+
+<ul>
+<li><p>安装配置</p>
+
+<p>  参见官网的Downloads界面的详细介绍（注意：环境配置中，各组件需严格遵循官网指定版本，实践经验表明，Teiid本身并不够鲁棒，容不得小差错）。</p></li>
+</ul>
+
+
+<p>接下来，我们用一个简单的应用场景实践Teiid的数据集成功能。</p>
+
+<!--more-->
+
+
+<h2>应用场景</h2>
+
+<p>书店主营图书销售，并维护者一个用户对图书评价的数据库。技术上说，书店拥有三个数据模块：</p>
+
+<ul>
+<li><p>MySQL数据库，存储用户信息和用户对某书的评价</p>
+
+<p>  表结构如下：</p></li>
+</ul>
+
+
+<p>```
+create database library;
+use library;
+create table users (</p>
+
+<pre><code> id int primary key,
+ name char(20) not null,
+ passwd char(20)) not null,
+</code></pre>
+
+<p>);
+create table comments(</p>
+
+<pre><code> cid int primary key,
+ uid int ,
+ bookid int not null,
+ content char(255),
+ foreign key (uid) references users(id)
+</code></pre>
+
+<p>);
+```
+* EXCEL表格，店主用于记录销售量、记录销售单价</p>
+
+<p><code>
+book_id,price,sales
+1,89.00,1000
+2,52.00,9999
+3,30.00,10000
+4,9800,5555
+5,69.00,1234
+</code></p>
+
+<ul>
+<li>XML文件记录书籍信息，包括</li>
+</ul>
+
+
+<p>``` xml
+&lt;?xml version= "1.0" encoding ="UTF-8"?>
+<BooksInfo></p>
+
+<pre><code>    &lt;Book id = "1" &gt;
+           &lt;Title&gt; Hadoop: The Definitive Guide &lt;/Title&gt;
+           &lt;Author&gt; Tom White&lt;/Author &gt;
+           &lt;publisher&gt; O'Reilly&lt;/ publisher&gt;
+    &lt;/Book&gt;
+    &lt;Book id = "2" &gt;
+           &lt;Title&gt; Effective Java&lt;/Title &gt;
+           &lt;Autorh&gt; Joshua Bloch&lt;/Autorh&gt;
+           &lt;publisher&gt; HZ Books&lt;/ publisher&gt;
+    &lt;/Book&gt;
+    &lt;Book id = "3" &gt;
+           &lt;Title&gt; C Programming Language&lt;/Title &gt;
+           &lt;Autorh&gt; Kernighan, Ritchie &lt;/Autorh&gt;
+           &lt;publisher&gt; HZ Books&lt;/ publisher&gt;
+    &lt;/Book&gt;
+    &lt;Book id = "4" &gt;
+           &lt;Title&gt; Head First: Design Pattern&lt;/Title &gt;
+           &lt;Autorh&gt; Freeman&lt;/ Autorh&gt;
+           &lt;publisher&gt; Turning Education&lt;/publisher &gt;
+    &lt;/Book&gt;
+    &lt;Book id = "5" &gt;
+           &lt;Title&gt; Refactoring: Improving the Design of Existing Code &lt;/Title&gt;
+           &lt;Autorh&gt; Martin Fowler &lt;/Autorh&gt;
+           &lt;publisher&gt; O'Reilly&lt;/ publisher&gt;
+    &lt;/Book&gt;
+</code></pre>
+
+<p></BooksInfo>
+```</p>
+
+<h2>实践</h2>
+
+<h3>1.创建工程</h3>
+
+<p>打开配置好Teiid Designer插件的Eclipse，在Teiid Designer视图的Guides中，找到Define Teiid Model Project选项，如下图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid1.png" alt="img" /></p>
+
+<p>一路点击next，在如下界面勾选sources和views即可，designer guid会帮助生成这两个目录，其他目录在此项目中不需要。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid2.png" alt="img" /></p>
+
+<h3>2.导入MyQL数据源</h3>
+
+<p>在Guides界面，选择JDBC数据源</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid3.png" alt="img" /></p>
+
+<p>第一个步骤Define Teiid Model Project在上一步中已经完成了，现在需要创建一个JDBC链接，选择Create JDBC connection，在弹出的窗口中，选择Mysql数据库，然后点下一步</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid4.png" alt="img" /></p>
+
+<p>选择mysql驱动，配置好Mysql数据源的的url、用户名、密码，点下一步。（在这里，mysql的端口为默认的3306，library为之前配置好的mysql数据库）。点击test connection测试与mysql的链接能否建立。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid5.png" alt="img" /></p>
+
+<p>接下来需要给数据源创建源模型（source model）了。同样在Guides试图上双击Create source model for JDBC data source，一路下一步，直到选择数据库和表，选择library数据库中的所有表，如下图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid6.png" alt="img" /></p>
+
+<p>创建源模型的最后一步如下图，可以自定义Model Name，为了让之后的sql查询过程更可读，我将以数据源类型命名它（mysql.xmi）。其他无关配置暂时不用理会。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid7.png" alt="img" /></p>
+
+<p>finish后，就生成了一个元模型，如下图。图中可视化的显示了数据库所建的两张表</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid8.png" alt="img" /></p>
+
+<p>接下来可以测试数据是否可读，双击Guides中的Preview Data，在弹框中选择需要preview的表或者precedure（procedure在本工程里这里不会被用到）查询结果显示在了eclipse下方的SQL Result框中，如下图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid9.png" alt="img" /></p>
+
+<p>接下先来不用着急Define VDB，我们先把所有数据源配置完成后再一起来定义虚拟数据库。</p>
+
+<h3>3.导入FlatFile数据源（CSV）</h3>
+
+<p>跟之前一个步骤一样，只需要沿着Guides里的路线一步一步操作。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid10.png" alt="img" /></p>
+
+<p>首先创建连接，配置好后test connection确保链接无误</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid12.png" alt="img" /></p>
+
+<p>链接建立后，需要创建元模型。如下图，提示有错，只需要选定Source Model Definition的文件的存储位置即可。存放在项目的sources目录中</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid13.png" alt="img" /></p>
+
+<p>按照默认配置，不断下一步，在 Flat File Demilited Columns Parser Settings 这一步，可以注意到下方有生成一串SQL语句。这些语句告诉Teiid需要如何将csv文件中的数据映射为关系型数据。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid14.png" alt="img" /></p>
+
+<p>继续下一步，view model definition界面，提示创建的tableview名字包含不合法字符。原来由于将flat file命名为sales.csv,它自动生成了price.csvView作为table name，但名字中是不能出现<code>.</code>的，于是修改为salesview，finish。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid15.png" alt="img" /></p>
+
+<p>之后测试数据能否读取。在选择所要preview的数据时，需要选择相应的table，而不是模型（这里需要选择salesView，而不是上层的price_view.xmi）。如下图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid16.png" alt="img" /></p>
+
+<h3>4.导入xml数据</h3>
+
+<p>大部分步骤跟之前的步骤类似，在设定源模型时，需要注意配置好xml数据到关系型数据的映射关系，如下图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid17.png" alt="img" /></p>
+
+<p>XML File Contents中会根据xml文件中的数据解析出整体的层次结构。我们需要将其中的Book里的信息，添加到右边的Column Info中。虽然有很多Book数据列表显示在左边一栏里，但实际上只需要添加一次相关信息到右边的列信息中。值得注意的是，这里自动生成的Root Path是错误的，需要修改为BooksInfo/Book。其他没有什么特别的，一路下一步。</p>
+
+<p>现在整个项目如下图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid18.png" alt="img" /></p>
+
+<h3>5.生成虚拟数据库</h3>
+
+<p>点击Guides中的Define VDB，将三个数据源的模型加入到VDB中:MySQL的源模型，XML和CSV的视图模型（注意：不可以加入另外两个源模型的xmi文件，博主如此操作后遇到了一些莫名其妙的问题）。</p>
+
+<p>如此就完成了在Teiid Designer中的多数据源集成的配置了。</p>
+
+<h3>6.部署和使用</h3>
+
+<p>通过Teiid Designer，我们能方便的部署VDB到Jboss服务器。</p>
+
+<p>在Guides界面下，有execute vdb选项，双击即可。正式运行之前，需要运行Jboss server，如果没有启动服务器，Teiid Designer会弹框提醒的。</p>
+
+<p>最后，尝试一下通过Teiid集成查询多个数据源。将sql语句输入到执行框中，刷蓝->右键->执行选中的语句。</p>
+
+<p>```</p>
+
+<blockquote><p>select * from "csv"."sales" as A join "xml"."booksinfo" as B on A.book_id = B.id</p></blockquote>
+
+<p>```</p>
+
+<p>结果如图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid19.png" alt="img" /></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[PAT 1065 - 1068 题解]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/10/08/pat-1065-pat-1068/"/>
+    <updated>2013-10-08T13:46:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/10/08/pat-1065-pat-1068</id>
+    <content type="html"><![CDATA[<p>这次的题目来源是2013年10月7日下午的浙大计算机研究生招生机试题。</p>
+
+<p>这次题目的难度，按姥姥的说法是：『比普通的PAT要难了0.5个点。我是把自己的题目从1.0到5.0以0.5的间距分难度级别的，PAT(A)难度一般在1.5-4.5之间，保研考试一般在2.0-5.0之间。PAT(B)大概是1.0-2.5的难度。』。</p>
+
+<p>个人认为，其中1066模拟AVL插入的实现有些细节容易弄错，而1068只要会简单的DP，也就没有问题了，1065和1066都还是很简单的实现。</p>
+
+<p>下面是各个题的分析（PAT advanced level本人实现的全部源码：<a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel">请戳</a>）。</p>
+
+<!--more-->
+
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1065">1065. A+B and C (64bit) (20)</a></h2>
+
+<h5>题意</h5>
+
+<p>输入三个数a，b，c，取值范围是 [<code>-2^63</code>, <code>2^63</code>]，要求判断<code>a + b &lt; c</code> 是否为真。</p>
+
+<h5>分析</h5>
+
+<p>很简单的签到题，想到两种方法：一是用Java的Big Decimal实现（应该不会超时吧-,-），二是对a+b造成的long long溢出的情况做特殊处理。</p>
+
+<p>对于分情况的实现方式，实际上也就两种特殊情况，即a，b同号且两者之和溢出了（绝对值超过了2<sup>63）。此时两者之和与c的值的相对关系也是确定的。</sup></p>
+
+<ul>
+<li><code>a &lt; 0 &amp;&amp; b &lt; 0 &amp;&amp; a + b &gt;= 0</code>: a + b 必小于c</li>
+<li><code>a &gt; 0 &amp;&amp; b &gt; 0 &amp;&amp; a + b &lt;= 0</code>: a + b 必大于c</li>
+</ul>
+
+
+<p>另在98看见有大神说可以用long double水过去-,-.</p>
+
+<p>pat1065源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1065.cpp">请戳</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1066">1066. Root of AVL Tree (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>实现<a href="http://en.wikipedia.org/wiki/AVL_tree">AVL树</a>的插入方法，给定N(&lt;=20)个数，要求输出依次插入后的AVL树的根。</p>
+
+<h5>分析</h5>
+
+<p>由于节点少，可以使用相对简单的递归实现方法：</p>
+
+<ul>
+<li>每个节点维护一个高度值，用在递归插入后检测子树是否平衡</li>
+<li>完成4个旋转方法（参见<a href="http://en.wikipedia.org/wiki/AVL_tree">AVL Tree wikipedia</a>中的示意图）</li>
+<li>在递归插入方法中，完成对子树的插入后，检测子树高度差，根据子树的结构特点，做出相应的旋转</li>
+<li>旋转后记得更新节点的高度值</li>
+</ul>
+
+
+<p>机试时似乎没有人完全AC这道题，看来代码实现和Debug能力缺乏还是比较普遍的问题。</p>
+
+<p>pat1066源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1066.cpp">请戳</a></p>
+
+<!--more-->
+
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1067">1067. Sort with Swap(0,*) (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>给定N(&lt;=<code>10^5</code>)以及一个{0,1,…,N-1}的打乱的数列。</p>
+
+<p>定义了一种交换方式：<code>Swap(0,*)</code>，表示将0和任意数进行位置交换。</p>
+
+<p>限定只能使用<code>Swap(0,*)</code>，要求输出最少需要多少次交换操作，来完成整体的排序。</p>
+
+<h5>分析</h5>
+
+<p>很好玩的模拟题，从题目的两个测试数据入手，找到所需要的交换次数的特点：</p>
+
+<p>假设用数组a存储输入的数组，数组的坐标为[0, N - 1]，而元素的所有值也是[0, N - 1]。</p>
+
+<ol>
+<li><p>输入的序列中本就在自己位置上的数字，是不用被交换的（比如序列<code>{4, 0, 2, 1, 3}</code>中2就是不用被交换），0除外</p></li>
+<li><p>0最终肯定会被放回到0的位置上，但交换过程中，0也可能被提前交换到了0的位置上，此时还有其他数没有处于正确的位置上（参见Sample Input<code>{10 3 5 7 2 6 4 9 0 8 1}</code>的情况）。此时需要多费一步将0和某一个处于不正确位置的数交换位置，来继续排序。</p></li>
+<li><p>每次的交换，0其实只是一个过渡作用。实际的交换过程遵循的链式关系如下所述：设定a[x] == b， 而 b != x，则需要将a[x]的值移动到a[b]上，此时a[b] == c, 那么接着又需要将 a[b]的值移动到a[c]上，以此类推，肯定能获得一个循环，且节点数 M 小于等于 N。如果循环中包含了0，那么这个循环中的数排序所需要的交换次数为 M - 1, 如果循环中不包含0，那么首先需要一次交换将0移动到循环链中，此时整个循环链节点数增加了1，于是共需要开销 M + 1 次交换。</p></li>
+<li><p>根据3的分析，在2的情况下，0与不同的不在正确位置的数的交换，是不会影响最终的结果的。</p></li>
+</ol>
+
+
+<p>综上所述，用类似dfs或者并查集的思路找到集合中的所有循环链路，记录下他们的大小，即可计算出所需要的交换次数。</p>
+
+<p>pat1067源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1067.cpp">请戳</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1068">1068. Find More Coins (30)</a></h2>
+
+<h5>题意</h5>
+
+<p>给定 N(&lt;=<code>10^4</code>) 枚硬币和一个价格 M(&lt;=100)。</p>
+
+<p>要求用这 N 枚硬币组合出价格 M，如果有多种组合，输出排序后硬币面值字典序最小的组合，如果没有组合，则输出 No Solution.</p>
+
+<h5>分析</h5>
+
+<p>裸背包问题，相关资料参见dd大神的总结：<a href="http://cuitianyi.com/blog/%E3%80%8A%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E4%B9%9D%E8%AE%B2%E3%80%8B2-0-alpha1/">《背包问题九讲》</a></p>
+
+<p>按照常规的背包思路，构建10001 * 101 的二维数组f[i][j]，状态f[i][j]表示前i枚硬币能拼凑出的小于等于j的最大值（j这里代表一个价格）。</p>
+
+<p>状态转移方程为：<code>f[i][j] = max(f[i - 1][j], f[i - 1][j - c[i]] + c[i])</code>， 其中c[i]为第i枚硬币的面值，c[i]为排序过的硬币面值数组。</p>
+
+<p>由于最终的输出要求是排序的币值的字典序最小的组合，可以对c[i]做从大到小的排序，并另开一个数组has[i][j]来记录当前状态下，是否有包含c[i]。同时注意，当<code>f[i - 1][j] == f[i - 1][j - c[i]] + c[i]</code>时，采纳当前的c[i]，以满足字典序。</p>
+
+<p>pat1068源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1068.cpp">请戳</a></p>
+]]></content>
+  </entry>
+  
+</feed>

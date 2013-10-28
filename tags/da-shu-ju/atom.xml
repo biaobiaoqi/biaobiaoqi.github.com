@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: 大数据 | Biaobiaoqi的博客]]></title>
+  <link href="http://biaobiaoqi.me/tags/da-shu-ju/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.me/"/>
+  <updated>2013-10-29T00:35:33+08:00</updated>
+  <id>http://biaobiaoqi.me/</id>
+  <author>
+    <name><![CDATA[Biaobiaoqi]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[阿里离线数据处理平台2013暑期学校]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/07/19/odps-in-alibaba/"/>
+    <updated>2013-07-19T21:31:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/07/19/odps-in-alibaba</id>
+    <content type="html"><![CDATA[<p>本周有幸参加了为期两天的<a href="http://102.alibaba.com/competition/dataSummer.htm">阿里离线数据处理平台2013暑期学校</a>的学习。</p>
+
+<p>阿里的前辈们分不同的专题给大家介绍了飞天平台上的离线数据处理服务ODPS（Open Data Processing Service）。
+内容上主要分为两部分，一部分是平台架构，一部分是数据分析。来听课的同学也就分为了两部分，而像我一样关注系统层面的人是少数。</p>
+
+<p>这也正常，用赵本山在『一代宗师』里的话来说，一个是面子，一个是里子。数据分析能直接产生表现层的数据，而系统平台则只是提供支持。
+成功了，大家看得到的是分析出的数据，而一旦失败了，那么系统平台的责任就大了。
+再者越贴近硬件层次的工作也注定越辛苦，深夜被吵醒也不是没有的事儿。好了，吐槽到此结束，下面是总结笔记整理出几页slides：</p>
+
+<script async class="speakerdeck-embed" data-id="e0022eb0d24d013089506e9621fcaf9a" data-ratio="1.33333333333333" src="http://biaobiaoqi.me//speakerdeck.com/assets/embed.js"></script>
+
+
+
+
+<!--more-->
+
+
+<p>ppt下载链接：<a href="https://speakerdeck.com/biaobiaoqi/odps-learning-summary">请戳我</a></p>
+
+<p>三巨头BAT都自主研发过大数据平台，另外两家在投入大量资金后面对困难最终关闭了项目，而阿里坚持了下来。通过了解ODPS的系统架构，可以看但工业界的系统和学术圈中提出的概念的差异。这也让我更清晰了之后自己的学习路线。</p>
+
+<p>非常感谢阿里暑期学校给予的这次机会来接触飞天系统，非常感谢各位讲师的介绍，特别是杨少华大哥对我的疑惑的耐心解答。</p>
+]]></content>
+  </entry>
+  
+</feed>

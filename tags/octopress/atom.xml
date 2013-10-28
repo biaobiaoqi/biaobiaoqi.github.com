@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: octopress | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.me/tags/octopress/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.me/"/>
-  <updated>2013-10-28T22:09:07+08:00</updated>
+  <updated>2013-10-29T00:35:33+08:00</updated>
   <id>http://biaobiaoqi.me/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -48,6 +48,8 @@
 <li><p>2013/10/8 顶栏增加『狂想』，位于『读书』之后，『标签云』之前，是跟『技术』、『生活』、『读书』并列的文章主题。回顾之前的时间，脑子里冒出的东西倒不少，一直没有整理和形成输出。希望『狂想』（idea）成为这样一片天地。有感于category的纵向切割文章做分类的方法比较死板，准备之后逐步迁移到完全使用tags标记文章的方法。</p></li>
 <li><p>2013/10/14 修改网站slogon，修改关于的内容。</p></li>
 <li><p>2013/10/17 修改侧边栏 『关于』，删除了『我的社区』，化繁为简，将更多信息迁移到about.me上。</p></li>
+<li><p>2013/10/28 将所有tag转换为中文，并决定完全使用tag，放弃使用category（其实这违背了octopress的初衷啦）</p></li>
+<li><p>2013/10/29 重新设置博客顶栏，顶栏tab有：『首页』，『全部文章』，『分类阅读』，『其他推荐』。其中『分类阅读』继承和扩展了『标签云』的内容。</p></li>
 </ul>
 
 ]]></content>
