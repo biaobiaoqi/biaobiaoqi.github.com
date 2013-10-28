@@ -4,7 +4,7 @@ title: "阿里离线数据处理平台2013暑期学校"
 date: 2013-07-19 21:31
 comments: true
 categories: [tech]
-tags: [distributed, alibaba, big_data]
+tags: [分布式, 阿里巴巴, 大数据,技术]
 description: "阿里离线数据处理平台2013暑期学校，描述了阿里云系统：飞天系统中的离线处理部分：ODPS（Open Data Processing Service）。"
 
 ---

@@ -4,7 +4,7 @@ title: "关于科学上网"
 date: 2013-09-10 12:11
 comments: true
 categories: [tech]
-tags: [network, internet]
+tags: [网络, 技术]
 description: ""
 
 ---

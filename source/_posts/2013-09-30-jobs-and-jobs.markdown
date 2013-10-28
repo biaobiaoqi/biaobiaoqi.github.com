@@ -4,7 +4,7 @@ title: "Jobs和jobs"
 date: 2013-09-30 11:41
 comments: true
 categories: [life]
-tags: [think, life]
+tags: [思考, 生活]
 description: "乔布斯和offer季"
 
 ---

@@ -4,8 +4,8 @@ title: "《黑客：计算机革命的英雄》"
 date: 2013-10-21 22:19
 comments: true
 categories: [book]
-tags: [hacker, book]
-description: ""
+tags: [黑客, 读书]
+description: "这本书我断断续续花了几个月才看完。大量的传奇黑客人物穿插其中，说实话容量略大，到头来也没记住几个名字，不过这不是重点。全书将对整个计算机发展史有深刻影响的黑客文化分三个阶段的娓娓道来，让我重新审视对黑客的看法认识。下面是我对全书的笔记摘要。"
 
 ---
 ![img](http://img3.douban.com/mpic/s6951030.jpg)

@@ -4,7 +4,7 @@ title: "octopress第三方插件：博文同步工具syncPost"
 date: 2013-08-31 19:30
 comments: true
 categories: [tech]
-tags: [octopress, ruby, webservice, metaweblog]
+tags: [octopress, ruby, webservice, metaweblog,技术]
 description: "octopress第三方插件，基于metaWeblog的博文同步工具syncPost, 开源托管在github上。正在进一步开发中。"
 
 ---

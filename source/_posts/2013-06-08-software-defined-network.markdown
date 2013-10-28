@@ -5,7 +5,7 @@ date: 2013-06-08 00:39
 comments: true
 description: "最近高级网络课的小组任务是在老师给定的范围内自选方向主题研究并做展示报告。我们组选了sdn。原以为这东西会是工业界无人问津的概念化产品，Google了一下却发现其实sdn挺火的，由于它可能带来的可扩展性，一些大互联网企业也在开始涉足相关的研发，比如Google呵Facebook。这里简要的梳理下我对SDN概念性的认识。"
 categories: [tech]
-tags: [network, future, distributed]
+tags: [网络, 未来, 分布式, 技术]
 
 
 ---

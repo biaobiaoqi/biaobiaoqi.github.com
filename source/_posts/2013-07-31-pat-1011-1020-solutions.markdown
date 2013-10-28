@@ -4,7 +4,7 @@ title: "PAT 1011-1020 题解"
 date: 2013-07-31 23:41
 comments: true
 categories: [tech]
-tags: [algorithm, pat]
+tags: [算法, PAT,技术]
 description: "PAT 1011, PAT1011,PAT 1012, PAT1012,PAT 1013, PAT1013,PAT 1014, PAT1014,PAT 1015, PAT1015,PAT 1016, PAT1016,PAT 1017, PAT1017,PAT 1018, PAT1018,PAT 1019, PAT1019,PAT 1020, PAT1020, 题解， 解题报告"
 
 ---

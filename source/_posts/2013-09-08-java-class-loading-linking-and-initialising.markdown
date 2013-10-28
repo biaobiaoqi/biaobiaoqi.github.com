@@ -4,7 +4,7 @@ title: "Java类的装载、链接和初始化"
 date: 2013-09-08 00:33
 comments: true
 categories: [tech]
-tags: [java, jvm, bytecode]
+tags: [Java, JVM, 字节码, 技术]
 description: ""
 
 ---

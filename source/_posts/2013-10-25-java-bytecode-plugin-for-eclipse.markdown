@@ -4,7 +4,7 @@ title: "在Eclipse里查看Java字节码"
 date: 2013-10-25 04:06
 comments: true
 categories: [tech]
-tags: [java, bytecode, jvm]
+tags: [Java, 字节码, JVM,技术]
 description: "Java字节码查看，Eclipse插件，bytecode outline，ASM框架"
 
 ---

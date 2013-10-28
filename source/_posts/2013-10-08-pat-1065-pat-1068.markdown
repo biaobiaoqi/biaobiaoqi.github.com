@@ -4,7 +4,7 @@ title: "PAT 1065 - 1068 题解"
 date: 2013-10-08 13:46
 comments: true
 categories: [tech]
-tags: [pat, algorithm]
+tags: [PAT, 算法, 技术]
 description: "浙大2013保研上机考试，PAT1065， PAT1066， PAT1067， PAT1086，PAT 1065， PAT 1066， PAT 1067， PAT 1086，比普通的PAT要难了0.5个点"
 
 ---

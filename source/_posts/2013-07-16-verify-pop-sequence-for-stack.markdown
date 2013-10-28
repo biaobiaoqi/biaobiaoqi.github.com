@@ -4,7 +4,7 @@ title: "出栈序列的可能性判定"
 date: 2013-07-16 01:32
 comments: true
 categories: [tech]
-tags: [algorithm, think, methodology, pat]
+tags: [算法, 方法论, PAT,技术]
 description: "1051. Pop Sequence (25)，不同于常规解法，本文使用更高效的解法完成对pop数组的检验。"
 
 ---

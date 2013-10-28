@@ -4,7 +4,7 @@ title: "Android小游戏：功夫蛇 团队开发经验总结"
 date: 2013-09-06 00:00
 comments: true
 categories: [tech]
-tags: [software_engineering, development, teamwork, think, methodology, Android]
+tags: [软件工程, 开发, 团队, 思考, 方法论, Android, 技术]
 description: "团队开发经验总结"
 
 ---

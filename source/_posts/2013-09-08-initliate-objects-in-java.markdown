@@ -4,7 +4,7 @@ title: "Java类的实例化总结"
 date: 2013-09-08 02:03
 comments: true
 categories: [tech]
-tags: [java, jvm, bytecode]
+tags: [Java, JVM, 字节码, 技术]
 description: "Java类实例化的方法：显性实例化，隐性实例化"
 
 ---

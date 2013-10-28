@@ -4,7 +4,7 @@ title: "给博客签上CC协议"
 date: 2013-07-10 22:37
 comments: true
 categories: [tech]
-tags: [tech, copyright, sharing, think, license]
+tags: [技术, 版权, 分享, 思考]
 description: "Creative Commons是一个非营利性组织，也是一种创作的授权方式。简称CC协议，中国大陆正式名称为知识共享。次组织的主要宗旨是增加创意作品的流通可及性，作为其他人据以创作及共享的基础，并寻找适当的法律以确保上述理念。作者在博客中使用了CC协议签名（BY-NC-ND）"
 
 ---

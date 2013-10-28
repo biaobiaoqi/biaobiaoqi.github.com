@@ -4,7 +4,7 @@ title: "终于算完了这道『1+1』"
 date: 2013-07-29 22:12
 comments: true
 categories: [life]
-tags: [pat, methodology, diary]
+tags: [PAT, 方法论, 生活]
 description: ""
 
 ---

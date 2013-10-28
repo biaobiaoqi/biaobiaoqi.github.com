@@ -5,7 +5,7 @@ date: 2013-04-19 21:44
 comments: true
 description: "在linux上工作，ssh是必须要了解的技术方法。它可以建立起多台主机之间的安全的加密传输，以进行远程的访问、操控、传输数据。"
 categories: [tech]
-tags: [bash, linux, security]
+tags: [Bash, Linux, 安全, SSH,技术]
 
 ---
 

@@ -4,7 +4,7 @@ title: "Java方法调用的虚分派"
 date: 2013-06-02 01:51
 comments: true
 categories: [tech]
-tags: [java, jvm, bytecode]
+tags: [Java, JVM, 字节码,  技术]
 
 description: "本文通过介绍Java方法调用的虚分派，来加深对Java多态实现的理解。需要预先理解Java字节码和JVM的基本框架。java virtual dispatch, method table. invokevirtual invokespecial invokeinteface invokestatic"
 

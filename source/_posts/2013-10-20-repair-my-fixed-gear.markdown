@@ -4,8 +4,8 @@ title: "修车记"
 date: 2013-10-20 21:58
 comments: true
 categories: [life]
-tags: [fixed_gear, interest, diy]
-description: "死飞，补胎图解"
+tags: [死飞, 兴趣, 生活]
+description: "死飞补胎图解"
 
 ---
 

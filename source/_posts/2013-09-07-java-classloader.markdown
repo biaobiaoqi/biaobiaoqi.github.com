@@ -4,7 +4,7 @@ title: "Java 类加载器"
 date: 2013-09-07 23:15
 comments: true
 categories: [tech]
-tags: [java, jvm, bytecode]
+tags: [Java, JVM, 字节码, 技术]
 description: "Java Class Loader 原理，浅析。 Java类加载器。bootstrap class loader，extension class loader，System Class Loader"
 
 ---

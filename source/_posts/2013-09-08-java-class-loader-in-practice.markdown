@@ -4,7 +4,7 @@ title: "Java类加载器编程实践"
 date: 2013-09-08 00:33
 comments: true
 categories: [tech]
-tags: [java, jvm, bytecode]
+tags: [Java, JVM, 字节码, 技术]
 description: "Java类加载器，自定义类加载器。ASM，操纵Java字节码， 面向切面编程，AOP"
 
 ---

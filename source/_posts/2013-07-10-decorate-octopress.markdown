@@ -4,7 +4,7 @@ title: "定制Octopress"
 date: 2013-07-10 01:53
 comments: true
 categories: [tech]
-tags: [octopress, web, ui]
+tags: [octopress, Web, UI,技术]
 description: "按照个人的习惯定制Octopress博客，有如下内容：安装第三方主题，增加微博墙，增加第三方评论，让博客支持在新窗口打开链接，404Error界面，在侧边栏增加标签云，在顶栏增加标签云页面tab，博客末尾增加原文链接、版权信息，给中英文之间增加空格"
 
 ---

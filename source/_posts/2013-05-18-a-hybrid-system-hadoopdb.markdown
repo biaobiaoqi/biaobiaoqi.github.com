@@ -5,7 +5,9 @@ date: 2013-05-18 17:58
 comments: true
 description: "HadoopDB是一个Mapreduce和传统关系型数据库的结合方案，以充分利用RDBMS的性能和Hadoop的容错、分布特性。2009年被Yale大学教授Abadi提出，继而商业化为[Hadapt](http://hadapt.com/)，据称从VC那儿拉到了10M刀投资。本文是对HadoopDB论文的总结。其中不免掺杂些自己的不成熟想法，更详细的内容，还请参见原论文 HadoopDB: An Architectural Hybrid of MapReduce and DBMS Technologies for Analytical Workloads"
 categories: [tech]
-tags: [distributed, hadoop]
+
+tags: [分布式, Hadoop, 技术]
+
 ---
 HadoopDB是一个Mapreduce和传统关系型数据库的结合方案，以充分利用RDBMS的性能和Hadoop的容错、分布特性。2009年被Yale大学教授Abadi提出，继而商业化为[Hadapt](http://hadapt.com/)，据称从VC那儿拉到了10M刀投资。
 

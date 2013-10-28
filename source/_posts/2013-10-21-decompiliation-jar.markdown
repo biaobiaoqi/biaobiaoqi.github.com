@@ -4,7 +4,7 @@ title: "反编译Jar包"
 date: 2013-10-21 12:16
 comments: true
 categories: [tech]
-tags: [java, jvm, reverse_engineering]
+tags: [Java, JVM, 逆向工程, 技术]
 description: "jadclipse，Jar包反编译"
 
 ---

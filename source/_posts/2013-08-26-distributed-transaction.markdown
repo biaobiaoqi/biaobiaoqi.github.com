@@ -4,7 +4,7 @@ title: "分布式事务slides"
 date: 2013-08-26 23:49
 comments: true
 categories: [tech]
-tags: [distributed, transaction, consistency]
+tags: [分布式, 事务, 一致性,技术]
 description: "分布式系统概念与设计 第5版， 分布式事务，  ppt"
 
 ---

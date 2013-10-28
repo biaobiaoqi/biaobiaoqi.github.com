@@ -4,7 +4,7 @@ title: "重置MBP的NVRAM"
 date: 2013-10-07 23:25
 comments: true
 categories: [tech]
-tags: [mac_os_x, operating_system]
+tags: [操作系统, 技术, Mac]
 description: "Mac 会将某些设置储存在特殊内存区域中，而且即使关机这些设置也不会丢失。在基于 Intel 的 Mac 上，存储位置是称为 NVRAM 的内存。NVRAM为Non-Volatile Random Access Memory的缩写。扬声器音量，屏幕分辨率，启动磁盘选择，最近的内核崩溃信息（如果有的话）。如果您正在故障诊断网络问题，重置不会有任何帮助"
 
 ---

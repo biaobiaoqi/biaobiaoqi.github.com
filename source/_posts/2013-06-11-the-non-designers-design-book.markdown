@@ -5,7 +5,7 @@ date: 2013-06-11 13:58
 comments: true
 description: "iOS7发布，扁平化设计。《写给大家看的设计书》，基本设计准则：亲密性、对齐、重复、对比"
 categories: [book]
-tags: [design, gui, ux]
+tags: [设计,  UI,读书]
 
 ---
 ###从iOS7的扁平化谈起

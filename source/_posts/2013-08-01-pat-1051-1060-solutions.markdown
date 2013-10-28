@@ -4,7 +4,7 @@ title: "PAT 1051-1060 题解"
 date: 2013-08-01 01:43
 comments: true
 categories: [tech]
-tags: [algorithm, pat]
+tags: [算法, PAT,技术]
 description: "PAT 1051, PAT1051,PAT 1052, PAT1052,PAT 1053, PAT1053,PAT 1054, PAT1054,PAT 1055, PAT1055,PAT 1056, PAT1056,PAT 1057, PAT1057,PAT 1058, PAT1058,PAT 1059, PAT1059,PAT 1060, PAT1060, 题解， 解题报告"
 
 ---

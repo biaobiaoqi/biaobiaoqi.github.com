@@ -5,7 +5,7 @@ date: 2013-06-11 17:12
 comments: true
 description: ""
 categories: [tech, life]
-tags: [web, js, idea]
+tags: [Web, js, 狂想, 技术]
 
 ---
 

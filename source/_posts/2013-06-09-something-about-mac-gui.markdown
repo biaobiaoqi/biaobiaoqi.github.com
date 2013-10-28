@@ -5,7 +5,7 @@ date: 2013-06-09 01:00
 comments: true
 description: "前些日子，看了Tinyfool老师的一篇文章[《开发人员为何应该使用 Mac OS X 兼 OS X 小史》](http://blogread.cn/it/article/1089?f=wb)，才恍然Mac系统可不仅仅是UI上与Windows大相径庭，而是自底而上的区别。这种区别渗透到了整个系统框架的设计理念中。作者在此推荐了一些较高自由度的mac桌面控制程序"
 categories: [tech]
-tags: [mac, os, gui]
+tags: [Mac, 操作系统, UI,技术]
 
 ---
 

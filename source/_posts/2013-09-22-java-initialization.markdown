@@ -4,7 +4,7 @@ title: "Java类、实例的初始化顺序"
 date: 2013-09-22 21:53
 comments: true
 categories: [tech]
-tags: [java, jvm]
+tags: [Java, JVM, 技术]
 description: "阿里巴巴2013校招笔试题，java类的加载、对象的初始化过程、顺序。"
 
 ---

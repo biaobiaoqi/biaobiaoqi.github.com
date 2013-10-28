@@ -4,7 +4,7 @@ title: "Java构造方法中的执行顺序"
 date: 2013-09-08 12:58
 comments: true
 categories: [tech]
-tags: [java, jvm, bytecode]
+tags: [Java, JVM, 字节码, 技术]
 description: "Java对象初始化的执行顺序。类初始化，静态方法"
 
 ---

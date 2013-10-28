@@ -9,7 +9,7 @@ description: "最近看了关于SQL Server的分布式处理方面的论文，�
 
 由于缺乏实践经验，很多东西未必能理解其本质。如有其他观点，还请多指教。"
 categories: [tech]
-tags: [distributed]
+tags: [分布式, 技术]
 
 ---
 最近看了关于SQL Server的分布式处理方面的论文，觉得它提出的Polybase跟之前看过的HadoopDB有些神似，这里做个小总结（抽空再把HadoopDB的总结贴出来）。

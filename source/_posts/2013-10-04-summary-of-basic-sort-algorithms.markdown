@@ -4,7 +4,7 @@ title: "常用排序算法总结"
 date: 2013-10-04 13:57
 comments: true
 categories: [tech]
-tags: [algorithm, sort]
+tags: [算法, 排序, 技术]
 description: "基本排序算法的总结"
 published: false
 

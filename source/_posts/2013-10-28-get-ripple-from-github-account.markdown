@@ -4,7 +4,7 @@ title: "用Github账号领Ripple币"
 date: 2013-10-28 12:46
 comments: true
 categories: [life]
-tags: [idea, bit coin, electronic currency, ripple]
+tags: [狂想, 生活,比特币, 电子货币, ripple]
 description: "Ripple入门简介，使用Ripple做交易，Github送Ripple，XRP"
 
 ---

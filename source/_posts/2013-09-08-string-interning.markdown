@@ -4,7 +4,7 @@ title: "对Java字符串的探究"
 date: 2013-09-08 13:01
 comments: true
 categories: [tech]
-tags: [java, jvm, bytecode]
+tags: [Java, JVM, 字节码, 技术]
 description: "string interning, 常量池 constant pool， 字符串池 string pool"
 
 ---

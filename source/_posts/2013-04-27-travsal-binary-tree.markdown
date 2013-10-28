@@ -5,7 +5,7 @@ date: 2013-04-27 21:03
 comments: true
 description: "二叉树，递归，非递归，中序遍历，前序遍历，后序遍历"
 categories: [tech]
-tags: [algorithm]
+tags: [算法, 技术]
 
 ---
 背景

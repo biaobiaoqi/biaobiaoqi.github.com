@@ -4,7 +4,7 @@ title: "AOP实践：java.lang.instrument的使用"
 date: 2013-09-08 13:01
 comments: true
 categories: [tech]
-tags: [java, aop, asm, bytecode, jvm]
+tags: [Java, AOP, ASM, 字节码, JVM, 技术]
 description: ""
 
 ---

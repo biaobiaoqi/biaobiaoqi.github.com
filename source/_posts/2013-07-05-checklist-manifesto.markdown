@@ -4,7 +4,7 @@ title: "《清单革命》"
 date: 2013-07-05 00:54
 comments: true
 categories: [book]
-tags: [methodology]
+tags: [方法论, 读书]
 description: "书的英文原名是『The Checklist Manifesto: How to Get Things Right』，直译成『清单宣言』在我看来更贴切，而非充满噱头的『清单革命』。正如一个小功能难以做成独立的产品，一个方法改进也难以成就革命。『清单能大大的改善效率，降低失败概率』这一观点，在医生出生的作者手中翻来覆去的被各种事例证明着，案例的行业背景从医学到建筑，到航天，再到投资，实在乏味。当然，这不妨碍『清单』这一工具对生活工作的助力所带给我们的思考。"
 
 ---

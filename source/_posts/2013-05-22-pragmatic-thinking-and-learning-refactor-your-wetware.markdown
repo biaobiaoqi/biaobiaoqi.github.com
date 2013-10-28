@@ -4,7 +4,7 @@ title: "《程序员的思维修炼》"
 date: 2013-05-22 01:14
 comments: true
 categories: [book]
-tags: [think]
+tags: [读书, 思考, 方法论]
 
 ---
 ###别鄙视方法论

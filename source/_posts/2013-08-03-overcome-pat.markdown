@@ -4,7 +4,7 @@ title: "PAT练习题概览"
 date: 2013-08-03 22:20
 comments: true
 categories: [tech]
-tags: [pat, algorithm]
+tags: [PAT, 算法,技术]
 description: "pat 题解，解题方法，问题分类"
 published: true
 

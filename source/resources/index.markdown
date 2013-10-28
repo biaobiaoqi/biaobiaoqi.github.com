@@ -9,7 +9,7 @@ footer: true
 
 『为什么不把自己认为有用的资源分享出来呢？』
 
-于是增加了这个页面，想到什么就添上来，争取10月之前整理完一个初步版本。
+于是增加了这个页面，想到什么就添上来。
 
 ##社区
 
@@ -21,7 +21,6 @@ footer: true
 
 * [teahour](http://teahour.fm/)：程序员圈子的“锵锵三人行”。
 * [Tiny4Voice](https://itunes.apple.com/us/podcast/tiny4voice/id400000696)：TinyFool分享的技术、生活、心路历程、杂侃。
-* [晓说](https://itunes.apple.com/us/podcast/xiao-shuo/id566332809)：一个有趣、犀利的社会视角。
 
 
 ##微信公众账号
@@ -37,4 +36,4 @@ footer: true
 * [Nius](http://nius.me)：想成为优秀的产品工程师的少年。
 * [Ricky Tan](http://rickytan.me)：iOS开发大牛谭总。
 * [cocolighter](http://cocolighter.com/)：喜欢拍照的文艺程序猿。
-* [Linest](http://linest.github.io)：派我巡山的大王。
+* [Linest](http://linest.github.io)：实验室的大王。

@@ -5,7 +5,7 @@ date: 2013-06-08 00:24
 description: "《hadoop技术内幕——深入解析Hadoop Common和HDFS架构设计与实现原理》第4章的1-3节，Hadoop IPC部分的基础知识介绍。"
 comments: true
 categories: [tech]
-tags: [distributed, hadoop, java]
+tags: [分布式, Hadoop, Java, 技术]
 
 ---
 本文是《hadoop技术内幕——深入解析Hadoop Common和HDFS架构设计与实现原理》第4章的1-3节的学习笔记。内容为Hadoop IPC部分的基础知识介绍。

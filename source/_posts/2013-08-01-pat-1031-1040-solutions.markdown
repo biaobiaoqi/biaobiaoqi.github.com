@@ -4,7 +4,7 @@ title: "PAT 1031-1040 题解"
 date: 2013-08-01 01:43
 comments: true
 categories: [tech]
-tags: [algorithm, pat]
+tags: [算法, PAT,技术]
 description: "PAT 1031, PAT1031,PAT 1032, PAT1032,PAT 1033, PAT1033,PAT 1034, PAT1034,PAT 1035, PAT1035,PAT 1036, PAT1036,PAT 1037, PAT1037,PAT 1038, PAT1038,PAT 1039, PAT1039,PAT 1040, PAT1040, 题解， 解题报告"
 
 ---

@@ -4,7 +4,7 @@ title: "类加载器操作三原则[译]"
 date: 2013-09-08 00:42
 comments: true
 categories: [tech]
-tags: [java, jvm, bytecode]
+tags: [Java, JVM, 字节码]
 description: "Java classloader three principles. Java类加载器加载三原则：委托原则；可见性原则；独特性原则"
 
 ---

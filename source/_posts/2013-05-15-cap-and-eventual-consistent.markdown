@@ -5,7 +5,8 @@ date: 2013-05-15 00:30
 comments: true
 description: "查阅资料整理了最终一致性、CAP相关的内容。由于图省事儿，没有做文字的整理记载，只有slides和一些查阅过的链接，大家将就着看。欢迎指正。"
 categories: [tech]
-tags: [distributed, hadoop]
+tags: [分布式, Hadoop, 技术]
+
 ---
 
 查阅资料整理了最终一致性、CAP相关的内容。由于图省事儿，没有做文字的整理记载，只有slides和一些查阅过的链接，大家将就着看。欢迎指正。

@@ -4,7 +4,7 @@ title: "《改变未来的九大算法》"
 date: 2013-10-03 13:19
 comments: true
 categories: [book]
-tags: [algorithm, tech, popular_science, methodology]
+tags: [算法, 技术, 读书, 科普, 方法论]
 description: "《改变未来的九大算法》是一本关于计算机世界的科普读物。"
 
 ---

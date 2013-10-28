@@ -4,7 +4,7 @@ title: "PAT 1041-1050 题解"
 date: 2013-08-01 01:43
 comments: true
 categories: [tech]
-tags: [algorithm, pat]
+tags: [算法, PAT,技术]
 description: "PAT 1041, PAT1041,PAT 1042, PAT1042,PAT 1043, PAT1043,PAT 1044, PAT1044,PAT 1045, PAT1045,PAT 1046, PAT1046,PAT 1047, PAT1047,PAT 1048, PAT1048,PAT 1049, PAT1049,PAT 1050, PAT1050, 题解， 解题报告"
 
 ---

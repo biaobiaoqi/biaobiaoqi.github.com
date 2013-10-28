@@ -5,7 +5,7 @@ date: 2013-04-04 01:50
 comments: true
 description: "算法题，PAT测试，计算机算法"
 categories: [tech]
-tags: [algorithm, java, pat]
+tags: [算法, Java, PAT,技术]
 
 ---
 

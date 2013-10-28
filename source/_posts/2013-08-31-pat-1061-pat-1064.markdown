@@ -4,7 +4,7 @@ title: "PAT 1061 - 1064 题解"
 date: 2013-08-31 13:32
 comments: true
 categories: [tech]
-tags: [pat, algorithm]
+tags: [PAT, 算法,技术]
 description: "pat1061题解, pat1062题解, pat1063题解, pat1064题解，pat 1061题解, pat 1062题解, pat 1063题解, pat 1064题解"
 
 ---

@@ -5,7 +5,7 @@ date: 2013-07-07 23:53
 comments: true
 categories: [book]
 
-tags: [life, entrepreneurship, methodology, think]
+tags: [生活, 企业家精神, 方法论, 思考,读书]
 description: ""
 
 ---

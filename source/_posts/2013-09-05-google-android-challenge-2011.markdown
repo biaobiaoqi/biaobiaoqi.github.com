@@ -4,7 +4,7 @@ title: "Google Android应用开发大赛参赛记"
 date: 2013-09-05 23:51
 comments: true
 categories: [tech]
-tags: [software_engineering, summary, android, diary]
+tags: [软件工程, Android, 技术]
 description: "2011Google Android应用开发中国大学生挑战赛， 全国总决赛 二等奖 功夫蛇  申亚鹏  叶志强  毛愚晰"
 
 ---

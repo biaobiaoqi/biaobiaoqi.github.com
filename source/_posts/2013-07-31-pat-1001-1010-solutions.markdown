@@ -4,7 +4,7 @@ title: "PAT 1001-1010 题解"
 date: 2013-07-31 02:03
 comments: true
 categories: [tech]
-tags: [algorithm, pat]
+tags: [算法, PAT,技术]
 description: "PAT 1001, PAT1001,PAT 1002, PAT1002,PAT 1003, PAT1003,PAT 1004, PAT1004,PAT 1005, PAT1005,PAT 1006, PAT1006,PAT 1007, PAT1007,PAT 1008, PAT1008,PAT 1009, PAT1009,PAT 1010, PAT1010, 题解， 解题报告"
 
 ---

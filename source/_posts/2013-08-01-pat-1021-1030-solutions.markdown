@@ -4,7 +4,7 @@ title: "PAT 1021-1030 题解"
 date: 2013-08-01 01:43
 comments: true
 categories: [tech]
-tags: [algorithm, pat]
+tags: [算法, PAT,技术]
 description: "PAT 1021, PAT1021,PAT 1022, PAT1022,PAT 1023, PAT1023,PAT 1024, PAT1024,PAT 1025, PAT1025,PAT 1026, PAT1026,PAT 1027, PAT1027,PAT 1028, PAT1028,PAT 1029, PAT1029,PAT 1030, PAT1030, 题解， 解题报告"
 
 ---

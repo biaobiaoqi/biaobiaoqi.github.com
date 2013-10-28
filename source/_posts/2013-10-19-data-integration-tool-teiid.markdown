@@ -4,7 +4,7 @@ title: "数据集成工具：Teiid实践"
 date: 2013-10-19 23:58
 comments: true
 categories: [tech]
-tags: [tech, data_integration]
+tags: [技术, 数据集成, 技术, Teiid]
 description: "数据集成，Teiid,通过抽象和联邦技术，实现分布式数据源的实时数据访问和集成，无需从记录系统中复制或移动数据。XML，MySQL，CSV 多数据源"
 
 ---
