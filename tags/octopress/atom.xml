@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: octopress | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.me/tags/octopress/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.me/"/>
-  <updated>2013-10-29T00:35:33+08:00</updated>
+  <updated>2013-10-30T12:39:06+08:00</updated>
   <id>http://biaobiaoqi.me/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -50,6 +50,7 @@
 <li><p>2013/10/17 修改侧边栏 『关于』，删除了『我的社区』，化繁为简，将更多信息迁移到about.me上。</p></li>
 <li><p>2013/10/28 将所有tag转换为中文，并决定完全使用tag，放弃使用category（其实这违背了octopress的初衷啦）</p></li>
 <li><p>2013/10/29 重新设置博客顶栏，顶栏tab有：『首页』，『全部文章』，『分类阅读』，『其他推荐』。其中『分类阅读』继承和扩展了『标签云』的内容。</p></li>
+<li><p>2013/10/30 发现『分类阅读』中部分链接url错误，迅速修改过来-，-。</p></li>
 </ul>
 
 ]]></content>
