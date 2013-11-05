@@ -4,7 +4,7 @@
   <title><![CDATA[Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.me/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.me/"/>
-  <updated>2013-11-04T13:56:34+08:00</updated>
+  <updated>2013-11-05T23:42:14+08:00</updated>
   <id>http://biaobiaoqi.me/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -12,6 +12,93 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[用Ruby实现的论坛灌水工具：CC98 Post Machine]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/11/05/cc98-post-machine/"/>
+    <updated>2013-11-05T15:20:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/11/05/cc98-post-machine</id>
+    <content type="html"><![CDATA[<h2>介绍</h2>
+
+<p>ZJU 的校网论坛 CC98 比较活跃。论坛只对校内网开放，而且账号跟学生绑定，每个学生注册的账号数量有限。『十大』是 CC98 的经典页面：基于关注的人数（回帖的用户数而不是回帖的数量）用算法求出 24 小时内最火爆的十个发帖。很多同学都会浏览十大，关注论坛动态。</p>
+
+<p>故事就是从十大引出的。有的社团在宣传活动时，为了扩大宣传面，会发动成员的小马甲顶贴上十大。这种违背社区自然发展轨迹的手段，强奸了关注十大贴的用户的意愿，阻碍了信息的自由流动。</p>
+
+<p>于是萌生了完成一个批量发帖的机器，以其人之道还治其人之身的想法。在下次十大被宣传贴攻占时，能有反击的工具。</p>
+
+<p>工具的用途很简单：使用不同的用户身份模拟真人论坛回帖，增加帖子关注度，以抵抗宣传贴。流程如下：提前收集各路亲朋好友的用户信息作为『预备水军』，『灌水』时，在评论内容文件中输入自定义的评论内容，在命令行参数中制定目标贴，即可实现随机顺序的用户自动顶贴。鉴于现在的功能是顶贴竞争十大，而十大排名是根据关注人数也就是独立用户评论数量做排序的，这里设计的顶贴策略是一个马甲发一条评论。以后可以考虑增加灵活的配置方案，实现更多功能。</p>
+
+<p>项目 Github 地址：<a href="https://github.com/biaobiaoqi/CC98PostMachine/">https://github.com/biaobiaoqi/CC98PostMachine/</a></p>
+
+<p>介于这个工具本身的罪恶的攻击属性，在此强调，工程仅供学习交流和对抗宣传贴。</p>
+
+<!--more-->
+
+
+<h2>使用说明</h2>
+
+<h3>1.准备顶贴用户</h3>
+
+<p>发帖的 HTTP 请求为 POST 请求。系统验证信息中需要有发帖用户的 username，userid 和 hash 后的 password，这些都能从 cookie 中获得。</p>
+
+<p>有两种方式设置水军的信息：</p>
+
+<h4>(1)浏览器中获取 cookie</h4>
+
+<p>在浏览器中，找到 cookie 的内容。将对应的三项信息抽取出来后，填入<code>water_army.yml</code>文件，由于该文件涉及用户隐私信息，项目中设置了.gitignore，不会上传到 repo 中。可以参照<code>water_army.yml.example</code>的格式自行修改。</p>
+
+<h4>(2)使用<code>RegWaterArmy</code>工具导入</h4>
+
+<p>如果不想手动的查找 cookie 信息，也可以将账号、密码输入到<code>pre_water_army.txt</code>文件中，执行命令来获取相关信息。</p>
+
+<p>在<code>pre_water_army.txt</code>文件中，一行为单位输入用户名和密码，中间用空格隔开。同样由于隐私原因，repo 中没有上传该文件，可以自行将<code>pre_water_army.txt.example</code>改为<code>pre_water_army.txt</code>，然后填入内容。</p>
+
+<p>填入账号、密码后，在 src 目录下运行如下命令：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$CC98POSTMACHINE/src/ruby RegWaterArmy.rb</span></code></pre></td></tr></table></div></figure>
+
+
+<p>即可自动获取用户的 cookie 信息，并导入<code>water_army.yml</code>文件中。注意，安全起见，完成这一步后，尽量删除账号、密码等隐私信息。</p>
+
+<h3>2.准备评论</h3>
+
+<p>在<code>comments.txt</code>文件中，设置用户评论的内容，每行一条。现在的设计是保证回帖的顺序与文件中的内容顺序一致。如果用户数量超过了文件中的评论条数，则回复时循环使用<code>comments.txt</code>中的评论。建议自行设计评论，且评论数大于等于水军数量。同样需要用户自行修改<code>comments.txt.example</code>为<code>commnets.txt</code>后使用。</p>
+
+<h3>3.执行</h3>
+
+<p>来到 CC98PostMachine 的 src 目录，执行：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$CC98POSTMACHINE/src/ruby  PostMachine.rb  BOARDID  POSTID [SPEED]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>其中<code>BOARDID</code>和<code>POSTID</code>可以在浏览器的地址栏的相关帖子的 URL 中找到，<code>SPEED</code>是设定的两个回帖之间的间隔时间，实际回帖时间做了如下的模糊：<code>SPEED + random(SPEED)</code>。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>Usage: $CC98POSTMACHINE/src/ruby  PostMachine.rb  BOARDID  POSTID [SPEED]
+</span><span class='line'>
+</span><span class='line'>BOARDID and POSTID can be find in the url of certain post, and be sure that BOARDID is a number less than 1000
+</span><span class='line'>
+</span><span class='line'>SPEED is the time gap unit between two posts, it may be 1(s), 10(s) or any other number
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>下一步：</h2>
+
+<ul>
+<li><p>修复 bug：第一次执行命令时，都只有一个用户能成功回复。（是服务器端的对 cookie 的记录？）</p></li>
+<li><p>整理代码结构，解耦，增加配置灵活性，写的更 ruby 一点<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/11/05/cc98-post-machine/'>http://biaobiaoqi.me/blog/2013/11/05/cc98-post-machine/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[用Github账号领Ripple币]]></title>
@@ -2063,87 +2150,6 @@ manifest 文件中需要添加的键值对是：</p>
 <p>更具体的类加载器编程实例，请见另外一篇博文：<a href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loader-in-practice/">《Java 类加载器编程实践》</a></p>
 
 <p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/09/08/three-principles-of-classloader-operation/'>http://biaobiaoqi.me/blog/2013/09/08/three-principles-of-classloader-operation/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Java类的装载、链接和初始化]]></title>
-    <link href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loading-linking-and-initialising/"/>
-    <updated>2013-09-08T00:33:00+08:00</updated>
-    <id>http://biaobiaoqi.me/blog/2013/09/08/java-class-loading-linking-and-initialising</id>
-    <content type="html"><![CDATA[<h2>加载(Loading)</h2>
-
-<p>按如下三步执行</p>
-
-<ul>
-<li>1.通过类的全名产生对应类的二进制数据流。（注意，如果没找到对应类文件，只有在类实际使用时才抛出错误。）</li>
-<li>2.分析并将这些二进制数据流转换为方法区(JVM 的架构：方法区、堆，栈，本地方法栈，pc 寄存器)特定的数据结构（这些数据结构是实现有关的，不同 JVM 有不同实现）。这里处理了部分检验，比如类文件的魔数的验证，检查文件是否过长或者过短，确定是否有父类（除了 Obecjt 类）。</li>
-<li>3.创建对应类的 java.lang.Class 实例（注意，有了对应的 Class 实例，并不意味着这个类已经完成了加载链链接！）。</li>
-</ul>
-
-
-<h2>链接(Linking)</h2>
-
-<p>链接的过程比加载过成复杂不少，这是实现 Java 的动态性的重要一步。分为三部分：验证，准备和解析。</p>
-
-<ul>
-<li><p>1.验证（verification）</p>
-
-<p>  链接的第三部解析会把类中成员方法、成员变量、类和接口的符号引用替换为直接引用，而在这之前，需要检测被引用的类型正确性和接入属性是否正确（就是 public ,private 的的问题），诸如检查 final class 又没有被继承，检查静态变量的正确性等等。（注意到实际上有一部分验证过程已经在加载的过程中执行了。）</p></li>
-</ul>
-
-
-<!--more-->
-
-
-<ul>
-<li><p>2.准备(preparation)</p>
-
-<p>  对类的成员变量分配空间。虽然有初始值，但这个时候不会对他们进行初始化（因为这里不会执行任何 Java 代码）。具体如下：</p>
-
-<p>  所有原始类型的值都为 0。如 float: 0f, int: 0, boolean: 0(注意 boolean 底层实现大多使用 int)，引用类型则为 null。值得注意的是，JVM 可能会在这个时期给一些有助于程序运行效率提高的数据结构分配空间。比如方发表（类似与 C++中的虚函数表，参见另一篇博文<a href="http://biaobiaoqi.me/blog/2013/06/02/virtual-dispatch-and-method-table-in-java/">《Java：方法的虚分派和方法表》</a>）。</p></li>
-<li><p>3.解析(Resolution)</p>
-
-<p>  为类、接口、方法、成员变量的符号引用定位直接引用（如果符号引用先到常量池中寻找符号，再找先应的类型，无疑会耗费更多时间），完成内存结构的布局。</p>
-
-<p>  这一步是可选的。可以在符号引用第一次被使用时完成，即所谓的延迟解析(late resolution)。但对用户而言，这一步永远是延迟解析的，即使运行时会执行 early resolution，但程序不会显示的在第一次判断出错误时抛出错误，而会在对应的类第一次主动使用的时候抛出错误！</p>
-
-<p>  另外，这一步与之后的类初始化是不冲突的，并非一定要所有的解析结束以后才执行类的初始化。不同的 JVM 实现不同。详情见另一篇博文<a href="http://localhost:4000/blog/2013/09/08/late-initialising-in-java/">《Java 类加载的延迟初始化》</a>。</p></li>
-</ul>
-
-
-<h2>初始化类(Initialization)</h2>
-
-<p>开发 Java 时，接触最多的是对象的初始化。实际上类也是有初始化的。相比对象初始化（参见博文 <a href="http://localhost:4000/blog/2013/09/08/initliate-objects-in-java/">Java 类的实例化</a>），类的初始化机制要简单不少。</p>
-
-<p>类的初始化也是延迟的，直到类第一次被主动使用(active use)，JVM 才会初始化类。（参见博文<a href="http://localhost:4000/blog/2013/09/08/late-initialising-in-java/">《Java 类加载的延迟初始化》</a>）</p>
-
-<p>类的初始化分两步：</p>
-
-<ul>
-<li>1.如果基类没有被初始化，初始化基类。</li>
-<li><p>2.有类构造函数，则执行类构造函数。</p>
-
-<p>  类构造函数是由 Java 编译器完成的。它把类成员变量的初始化和 static 区间的代码提取出，放到一个<clinit>的方法中。这个方法不能被一般的方法访问（注意，static final 成员变量不会在此执行初始化，它一般被编译器生成 constant 值）。同时，<clinit>中是不会显示的调用基类的<clinit>的，因为 1 中已经执行了基类的初始化。类的初始化还必须注意线程安全的问题。</p></li>
-</ul>
-
-
-<h3>PS：</h3>
-
-<p>为什么接口不能定义成员变量，而只能定义 final static 变量。</p>
-
-<ul>
-<li>1.接口是不可实例化，它的所有元素都不必是实例（对象）层面的。static 满足了这一点。</li>
-<li>2.如果接口的变量能被修改，那么一旦一个子类实现了这个接口，并修改了接口中的非 final 变量，而该子类的子类再次修改这个非 final 的变量后，造成的结果就是虽然实现了相同的接口，但接口中的变量值是不一样的。</li>
-</ul>
-
-
-<p>综上述，static final 更适合于接口。</p>
-
-<p>参考：<a href="http://blog.csdn.net/a352193394/article/details/6844941">《通过类字面常量解释接口常量为什么只能定义为 static final,类加载过程&#8212;Thinking in java》</a></p>
-
-<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/09/08/java-class-loading-linking-and-initialising/'>http://biaobiaoqi.me/blog/2013/09/08/java-class-loading-linking-and-initialising/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
 
 ]]></content>
   </entry>

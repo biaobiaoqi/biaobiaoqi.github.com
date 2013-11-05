@@ -9,7 +9,7 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="儿时没烙印下的痛与快乐 这是一本让我内心平静的书。或许是因为他所讲，都是那十年来有亲身经历到过的。 《痛并快乐着》有二十来篇文章，每篇一个主题。所有的主题都围着个人在中国二十世纪后十年中的发展和社会的变迁中展开。文中，描述了白岩松如何从大学毕业后，几经波折获得了一个并非自己当初所想的工作， &hellip;">
+  <meta name="description" content="PAT1007：给定一个整数串，找出连续子串中合最大的子串。 《编程珠玑》中用专门的一章对这个问题进行了讲解。（《编程珠玑（第 2 版）》P73 第 8 章 算法设计技术） 第一次在 PAT 上遇到这个题目时，我的思路如下： 最简单的淡然是一个三层循环咯，O(n3)，肯定会超时。节省时间的话， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -104,6 +104,55 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/05/maximum-subsequence-sum/">分治、时间空间的权衡:最大合的连续字串问题</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-05T20:16:00+08:00" pubdate data-updated="true">Apr 5<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/04/05/maximum-subsequence-sum/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1007">PAT1007</a>：给定一个整数串，找出连续子串中合最大的子串。</p>
+
+<p>《编程珠玑》中用专门的一章对这个问题进行了讲解。（《编程珠玑（第 2 版）》P73 第 8 章 算法设计技术）</p>
+
+<p>第一次在 PAT 上遇到这个题目时，我的思路如下：</p>
+
+<p><del>最简单的淡然是一个三层循环咯，O(n3)，肯定会超时。节省时间的话，用动态规划吧。但简单的动态规划，显然是会超出内存限制的。有没有更巧妙的子问题划分方法呢？</del>先找到子问题：因为要求的串必须连续，分治的时候需要考虑如何延续这个连续性，那么每个子问题中就得考虑找出三个串：1.即左端连续的最大串，2.右端连续的最大串，3.整个串中的最大串.<del>由于每个问题都有三个量要维护，难道我得造出三个表来？卡主:(</del></p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/04/05/maximum-subsequence-sum/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -309,16 +358,16 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
  <br /> 
   <ul class="tag-cloud">
     <a style="font-size: 114%" href="/tags/hadoop/">Hadoop</a> &nbsp 
-<a style="font-size: 140%" href="/tags/jvm/">JVM</a> &nbsp 
+<a style="font-size: 139%" href="/tags/jvm/">JVM</a> &nbsp 
 <a style="font-size: 145%" href="/tags/java/">Java</a> &nbsp 
-<a style="font-size: 142%" href="/tags/pat/">PAT</a> &nbsp 
+<a style="font-size: 141%" href="/tags/pat/">PAT</a> &nbsp 
 <a style="font-size: 108%" href="/tags/octopress/">octopress</a> &nbsp 
-<a style="font-size: 138%" href="/tags/fen-bu-shi/">分布式</a> &nbsp 
+<a style="font-size: 137%" href="/tags/fen-bu-shi/">分布式</a> &nbsp 
 <a style="font-size: 135%" href="/tags/zi-jie-ma/">字节码</a> &nbsp 
 <a style="font-size: 135%" href="/tags/si-kao/">思考</a> &nbsp 
 <a style="font-size: 180%" href="/tags/ji-zhu/">技术</a> &nbsp 
 <a style="font-size: 108%" href="/tags/cao-zuo-xi-tong/">操作系统</a> &nbsp 
-<a style="font-size: 127%" href="/tags/fang-fa-lun/">方法论</a> &nbsp 
+<a style="font-size: 126%" href="/tags/fang-fa-lun/">方法论</a> &nbsp 
 <a style="font-size: 130%" href="/tags/sheng-huo/">生活</a> &nbsp 
 <a style="font-size: 147%" href="/tags/suan-fa/">算法</a> &nbsp 
 <a style="font-size: 119%" href="/tags/wang-luo/">网络</a> &nbsp 
