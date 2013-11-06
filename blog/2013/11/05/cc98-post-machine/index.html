@@ -184,10 +184,10 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <p>来到 CC98PostMachine 的 src 目录，执行：</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$CC98POSTMACHINE/src/ruby  PostMachine.rb  BOARDID  POSTID [SPEED]</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$CC98POSTMACHINE/src/ruby  PostMachine.rb  POST_URL [SPEED]</span></code></pre></td></tr></table></div></figure>
 
 
-<p>其中<code>BOARDID</code>和<code>POSTID</code>可以在浏览器的地址栏的相关帖子的 URL 中找到，<code>SPEED</code>是设定的两个回帖之间的间隔时间，实际回帖时间做了如下的模糊：<code>SPEED + random(SPEED)</code>。</p>
+<p>其中<code>POST_URL</code>为响应帖子的网址，<code>SPEED</code>是设定的两个回帖之间的间隔时间，实际回帖时间做了如下的模糊：<code>SPEED + random(SPEED)</code>。</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -196,11 +196,11 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>
-</span><span class='line'>Usage: $CC98POSTMACHINE/src/ruby  PostMachine.rb  BOARDID  POSTID [SPEED]
+</span><span class='line'>Usage: $CC98POSTMACHINE/src/ruby  PostMachine.rb  POST_URL [SPEED].
 </span><span class='line'>
-</span><span class='line'>BOARDID and POSTID can be find in the url of certain post, and be sure that BOARDID is a number less than 1000
+</span><span class='line'>    POST_URL is the url address of target post.
 </span><span class='line'>
-</span><span class='line'>SPEED is the time gap unit between two posts, it may be 1(s), 10(s) or any other number
+</span><span class='line'>    SPEED is the time gap unit between two posts, it may be 1(s), 10(s) or any other number
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -235,6 +235,12 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <time datetime="2013-11-05T15:20:00+08:00" pubdate data-updated="true">Nov 5<span>th</span>, 2013</time>
       
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
 
 
     </p>
@@ -275,6 +281,8 @@ var jiathis_config={
         <a class="basic-alignment left" href="/blog/2013/10/28/get-ripple-from-github-account/" title="Previous Post: 用Github账号领Ripple币">&laquo; 用Github账号领Ripple币</a>
       
       
+        <a class="basic-alignment right" href="/blog/2013/11/07/pat-1069-pat-1072/" title="Next Post: PAT 1069 - 1072 题解">PAT 1069 - 1072 题解 &raquo;</a>
+      
     </p>
   </footer>
 </article>
@@ -293,20 +301,20 @@ var jiathis_config={
   <h1>标签云</h1>
  <br /> 
   <ul class="tag-cloud">
-    <a style="font-size: 114%" href="/tags/hadoop/">Hadoop</a> &nbsp 
+    <a style="font-size: 113%" href="/tags/hadoop/">Hadoop</a> &nbsp 
 <a style="font-size: 139%" href="/tags/jvm/">JVM</a> &nbsp 
 <a style="font-size: 145%" href="/tags/java/">Java</a> &nbsp 
-<a style="font-size: 141%" href="/tags/pat/">PAT</a> &nbsp 
-<a style="font-size: 108%" href="/tags/octopress/">octopress</a> &nbsp 
+<a style="font-size: 143%" href="/tags/pat/">PAT</a> &nbsp 
+<a style="font-size: 107%" href="/tags/octopress/">octopress</a> &nbsp 
 <a style="font-size: 137%" href="/tags/fen-bu-shi/">分布式</a> &nbsp 
 <a style="font-size: 135%" href="/tags/zi-jie-ma/">字节码</a> &nbsp 
 <a style="font-size: 135%" href="/tags/si-kao/">思考</a> &nbsp 
 <a style="font-size: 180%" href="/tags/ji-zhu/">技术</a> &nbsp 
-<a style="font-size: 108%" href="/tags/cao-zuo-xi-tong/">操作系统</a> &nbsp 
+<a style="font-size: 107%" href="/tags/cao-zuo-xi-tong/">操作系统</a> &nbsp 
 <a style="font-size: 126%" href="/tags/fang-fa-lun/">方法论</a> &nbsp 
-<a style="font-size: 130%" href="/tags/sheng-huo/">生活</a> &nbsp 
-<a style="font-size: 147%" href="/tags/suan-fa/">算法</a> &nbsp 
-<a style="font-size: 119%" href="/tags/wang-luo/">网络</a> &nbsp 
+<a style="font-size: 129%" href="/tags/sheng-huo/">生活</a> &nbsp 
+<a style="font-size: 148%" href="/tags/suan-fa/">算法</a> &nbsp 
+<a style="font-size: 118%" href="/tags/wang-luo/">网络</a> &nbsp 
 <a style="font-size: 135%" href="/tags/du-shu/">读书</a>
 
   </ul>

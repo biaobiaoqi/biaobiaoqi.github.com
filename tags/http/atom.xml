@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: http | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.me/tags/http/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.me/"/>
-  <updated>2013-11-05T23:42:14+08:00</updated>
+  <updated>2013-11-07T01:26:22+08:00</updated>
   <id>http://biaobiaoqi.me/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -68,18 +68,19 @@ $CC98POSTMACHINE/src/ruby RegWaterArmy.rb
 <p>来到CC98PostMachine的src目录，执行：</p>
 
 <p><code>
-$CC98POSTMACHINE/src/ruby  PostMachine.rb  BOARDID  POSTID [SPEED]
+$CC98POSTMACHINE/src/ruby  PostMachine.rb  POST_URL [SPEED]
 </code></p>
 
-<p>其中<code>BOARDID</code>和<code>POSTID</code>可以在浏览器的地址栏的相关帖子的URL中找到，<code>SPEED</code>是设定的两个回帖之间的间隔时间，实际回帖时间做了如下的模糊：<code>SPEED + random(SPEED)</code>。</p>
+<p>其中<code>POST_URL</code>为响应帖子的网址，<code>SPEED</code>是设定的两个回帖之间的间隔时间，实际回帖时间做了如下的模糊：<code>SPEED + random(SPEED)</code>。</p>
 
 <p>```</p>
 
-<p>Usage: $CC98POSTMACHINE/src/ruby  PostMachine.rb  BOARDID  POSTID [SPEED]</p>
+<p>Usage: $CC98POSTMACHINE/src/ruby  PostMachine.rb  POST_URL [SPEED].</p>
 
-<p>BOARDID and POSTID can be find in the url of certain post, and be sure that BOARDID is a number less than 1000</p>
+<pre><code>POST_URL is the url address of target post.
 
-<p>SPEED is the time gap unit between two posts, it may be 1(s), 10(s) or any other number</p>
+SPEED is the time gap unit between two posts, it may be 1(s), 10(s) or any other number
+</code></pre>
 
 <p>```</p>
 

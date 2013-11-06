@@ -4,7 +4,7 @@
   <title><![CDATA[Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.me/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.me/"/>
-  <updated>2013-11-05T23:42:14+08:00</updated>
+  <updated>2013-11-07T01:26:22+08:00</updated>
   <id>http://biaobiaoqi.me/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -12,6 +12,107 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[PAT 1069 - 1072 题解]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/11/07/pat-1069-pat-1072/"/>
+    <updated>2013-11-07T00:30:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/11/07/pat-1069-pat-1072</id>
+    <content type="html"><![CDATA[<p>来源是 2013 年 11 月 2 日的 PAT 测试。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1069">1069. The Black Hole of Numbers (20)</a></h2>
+
+<h5>题意</h5>
+
+<p>给出一个四位数比如 6767，将它按照每位从小到大(6677)和从大到小(7766)充足，得到两个新四位数，这两者相减将得到一个新的四位数。再按照一样的处理方式处理得出的四位数</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>7766 - 6677 = 1089
+</span><span class='line'>9810 - 0189 = 9621
+</span><span class='line'>9621 - 1269 = 8352
+</span><span class='line'>8532 - 2358 = 6174
+</span><span class='line'>7641 - 1467 = 6174
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最终将得到一个『黑洞数』：6174。</p>
+
+<p>题目给出一个四位数，要求输出它演变出『黑洞数』的过程。</p>
+
+<!--more-->
+
+
+<h5>分析</h5>
+
+<p>简单模拟题，需要留心两个特殊情况的处理：<code>6174</code>，<code>xxxx</code>。</p>
+
+<p>熟练掌握 C 的基本函数也能缩短代码编写，比如<code>atoi()</code> 和 <code>sprintf()</code>， 由于<code>itoa()</code>是依赖于 Windows 的，这里不推荐使用。</p>
+
+<p>pat1069 源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1069.cpp">请戳</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1070">1070. Mooncake (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>给出月饼市场的需求 D&lt;= 500 （按重量计算），给出现有 N &lt;= 1000 种月饼，每种月饼有一定数量的储备（按重量计算）以及这些储备所对应的价格，求一个出售月饼的方式，在容量 D 的市场里，获得最多的销售额。</p>
+
+<h5>分析</h5>
+
+<p>简单的贪心问题。贪心的规则是月饼的单价。注意有一个坑：每种月饼的存货量也需要用<code>double</code>来做存储。</p>
+
+<p>pat1070 源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1070.cpp">请戳</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1071">1071. Speech Patterns (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>给出一个长度不超过 1048576 的字符串。把所有连续的字母或者数字（[0-9 A-Z a-z]）试做单词，且忽略大小写，求其中最高频的单词。</p>
+
+<h5>分析</h5>
+
+<p>使用 map&lt;string, int>做存储，统计出现次数即可。</p>
+
+<p>有些细节需要注意：</p>
+
+<ul>
+<li>使用<code>getline(cin, str)</code>获取正行数据</li>
+<li>使用<code>transform(str.begin(), str.end(), str.begin(), ::tolower);</code>将字符串转换成小写</li>
+<li>遍历字符串获取单词时，注意特殊条件。比如以非字符数字开头的字符串，以字符数字结尾的字符串等。</li>
+</ul>
+
+
+<p>pat1071 源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1071.cpp">请戳</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1072">1072. Gas Station (30)</a></h2>
+
+<h5>题意</h5>
+
+<p>给出一个图，其中有 N &lt;= 10<sup>3</sup> 个节点是居民房，M &lt;= 10 个节点是计划建造加油站的候选点。给出加油站所能服务的最远距离 D。要求计算出合适的位置建造加油站，满足如下优先级条件：</p>
+
+<ol>
+<li>所有居民房必须在加油站的服务距离内。</li>
+<li>所有居民房中距离加油站的最近的居民房与加油站之间的距离是最远的。（大概是安全方面的考虑，加油站要离居民区远一点）</li>
+<li>所有房间距离加油站的最小距离的总和最小。（节约居民加油的总体成本）</li>
+<li>同等条件下，序号越小的加油站优先。</li>
+</ol>
+
+
+<h5>分析</h5>
+
+<p>实际上是求加油站到所有点的最短路径的问题，使用 Dijsktra 可以满足。</p>
+
+<p>另外，需要考虑求最短路径的过程中是否要将其他加油站所构建的路径算入在内。从背景上看，加油站应该在公路边修建，故加油站之间以及居民房和加油站之间都是存在路径的，从给出的数据来看，存在两个加油站之间的路径。所以，计算最短路径时，是需要将所有加油站的节点也计算在内的。</p>
+
+<p>pat1072 源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1072.cpp">请戳</a></p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/11/07/pat-1069-pat-1072/'>http://biaobiaoqi.me/blog/2013/11/07/pat-1069-pat-1072/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[用Ruby实现的论坛灌水工具：CC98 Post Machine]]></title>
@@ -70,10 +171,10 @@
 <p>来到 CC98PostMachine 的 src 目录，执行：</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$CC98POSTMACHINE/src/ruby  PostMachine.rb  BOARDID  POSTID [SPEED]</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$CC98POSTMACHINE/src/ruby  PostMachine.rb  POST_URL [SPEED]</span></code></pre></td></tr></table></div></figure>
 
 
-<p>其中<code>BOARDID</code>和<code>POSTID</code>可以在浏览器的地址栏的相关帖子的 URL 中找到，<code>SPEED</code>是设定的两个回帖之间的间隔时间，实际回帖时间做了如下的模糊：<code>SPEED + random(SPEED)</code>。</p>
+<p>其中<code>POST_URL</code>为响应帖子的网址，<code>SPEED</code>是设定的两个回帖之间的间隔时间，实际回帖时间做了如下的模糊：<code>SPEED + random(SPEED)</code>。</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -82,11 +183,11 @@
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>
-</span><span class='line'>Usage: $CC98POSTMACHINE/src/ruby  PostMachine.rb  BOARDID  POSTID [SPEED]
+</span><span class='line'>Usage: $CC98POSTMACHINE/src/ruby  PostMachine.rb  POST_URL [SPEED].
 </span><span class='line'>
-</span><span class='line'>BOARDID and POSTID can be find in the url of certain post, and be sure that BOARDID is a number less than 1000
+</span><span class='line'>    POST_URL is the url address of target post.
 </span><span class='line'>
-</span><span class='line'>SPEED is the time gap unit between two posts, it may be 1(s), 10(s) or any other number
+</span><span class='line'>    SPEED is the time gap unit between two posts, it may be 1(s), 10(s) or any other number
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -2070,86 +2171,6 @@ manifest 文件中需要添加的键值对是：</p>
 <p>由此可见，一般的，我们在某个类中定义了其他类的成员变量引用，只要该变量没有 new 出一个新的对象，则 JVM 也不会初始化这个类，类此时只是被加载了而已，而没有链接和初始化。</p>
 
 <p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/09/08/late-initialising-in-java/'>http://biaobiaoqi.me/blog/2013/09/08/late-initialising-in-java/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[类加载器操作三原则[译]]]></title>
-    <link href="http://biaobiaoqi.me/blog/2013/09/08/three-principles-of-classloader-operation/"/>
-    <updated>2013-09-08T00:42:00+08:00</updated>
-    <id>http://biaobiaoqi.me/blog/2013/09/08/three-principles-of-classloader-operation</id>
-    <content type="html"><![CDATA[<p>（出自一本 J2EE 的教材中关于类加载器的介绍，原文已不知所踪。）</p>
-
-<p>类加载的 bug，一旦在编程中遇到很难调试。好消息是，理解类加载的过程中，我们只需要牢记住三条基本原则。如果你能清晰的理解这三条基本原则，所有问题都迎刃而解。下面，我们开始介绍。</p>
-
-<h2>委托原则(Delegation Principle)</h2>
-
-<blockquote><p>如果一个类还没有被加载，类加载器会委托它的父亲加载器去加载它。</p></blockquote>
-
-<p>这种委托会一直延续，直到到达委托层次的最顶层，由原始的类加载器加载完成该类。下图展示了这种情况。</p>
-
-<p><img src="https://dl.dropboxusercontent.com/u/64021093/Java%20Classloader/classloader1.gif" alt="" /></p>
-
-<p>Systm-ClassPath classloader 加载了 MyApp.MyApp，而这个类创造了一个 java.util.Vector。假设现在 java.util.Vector 还没又被加载。因为 System-Classpath classloader 加载了 MyApp 类，它首先请求它的父亲 extension classloader 来加载这个类（java.util.Vector）。而 extension classloader 又请求 Bootstrap classloader 尝试加载。因为 java.util.Vector 是 J2SE 类，bootstrap classloader 成功加载了它。</p>
-
-<!--more-->
-
-
-<p>考虑一个当略微不同的情况，如下图。</p>
-
-<p><img src="https://dl.dropboxusercontent.com/u/64021093/Java%20Classloader/classloader2.gif" alt="" /></p>
-
-<p>在这种情况中，MyApp 创造了一个新的用户自定义类的实例，MyClass。假设 MyClass 还没有被加载。像以往一样，当 System-Classpath classloader 接收到这个加载请求，它委托了它的父亲。最终这个委托传递到了 Bootstrap classloader。但是在 java 核心 API 里，找不到这个类。所以它的孩子加载器 Extensions classloader 尝试加载它。同样的，Extensions classloader 也没有找到它。最终，委托请求回到了 System-Classpath classloader 这里。它找到了这个类并加载成功。</p>
-
-<h2>可见性原则（Visibility principle）</h2>
-
-<blockquote><p>被父亲类加载器加载的类对于孩子加载器是可见的，但关系相反相反则不可见。</p></blockquote>
-
-<p>这说明，一个类只能看见它自己的加载器或者这个加载器的父类加载器加载的类，反过来是不可以的。比如，被 ClassX 的父亲加载器加载的类是不能看见 ClassX 的。为了更清楚的理解，让我们来看一个例子，如下图。</p>
-
-<p><img src="https://dl.dropboxusercontent.com/u/64021093/Java%20Classloader/classloader3.gif" alt="" /></p>
-
-<p>图中展示了四个类加载器。类加载器 A 是最顶层的加载器，B 是它的孩子。类加载器 X 和 Y 是 B 的孩子。他们各自都加载了与自己同名的类。类加载器 A 能看见 A 类，类加载器 B 能看见 A，B 类。类似的，X 能看见 A，B，X，Y 能看见 A，B，Y。但兄弟、Y 之间的类是不可见的。</p>
-
-<h2>独特性原则（Uniqueness Principle）</h2>
-
-<blockquote><p>当一个类加载器加载一个类时，它的孩子加载器绝不会重新加载这个类。</p></blockquote>
-
-<p>这是因为委托原则中，一个加载器总是会委托自己的父亲加载器加载类。当层次中的父亲加载器无法加载类的时候，孩子类加载器就会（或者尝试去）加载这个类。这样，类加载的独特性就得到了保障。当父亲和孩子加载器加载了同一个类，一个有趣的情况就出现了。你可能会想这怎么可能出现？这不是违反了独特性原则？</p>
-
-<p>我们用可见性原则中的示例图来解释这个问题。我们假设没有任何类被加载到这些类加载器的层次结构中。假设 X 类被类加载器 X 加载，它强制性的用类加载器 X 加载 B 类。这可以通过像 Class.Name()这样的 API 来实现，代码如下：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'> <span class="kd">public</span> <span class="kd">class</span> <span class="nc">X</span> <span class="o">{</span>
-</span><span class='line'>
-</span><span class='line'>   <span class="kd">public</span> <span class="nf">X</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>      <span class="n">ClassLoader</span> <span class="n">cl</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">getClass</span><span class="o">().</span><span class="na">getClassLoader</span><span class="o">();</span>
-</span><span class='line'>      <span class="n">Class</span> <span class="n">B</span> <span class="o">=</span> <span class="n">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="err">“</span><span class="n">B</span><span class="err">”</span><span class="o">,</span> <span class="kc">true</span><span class="o">,</span> <span class="n">cl</span><span class="o">);</span>
-</span><span class='line'>   <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>在 X 的构造函数中，B 被显示的使用类加载器 X 加载。如果另一个被类加载器 B 加载的类需要访问 B 类，则无法实现，因为委托原则只能向父亲方向查询。如果类加载器 B 也加载了 B 类，当比较两个 B 类的实例时，如果一个实例来自于类加载器 X，一个来自于类加载器 B，则会抛出 ClassCastException 异常。</p>
-
-<h2>总结</h2>
-
-<p>这三个原则 是解决程序中遇到的类加载问题的关键所在。在实际的编程中，并不需要显示的调用到类加载器，它主要出现在一些框架的代码中。但对于每一个开发者、架构师而言，都必须理解类加载的层次结构，这样才能写出优雅的代码。</p>
-
-<h3>PS</h3>
-
-<p>注意，虽然 java 的加载实现中，对于 bootstrap classloader 、extensions classloader 和 system classloader 来说，他们的关系是 parent-first，也就是像原则一中所说的那样，需要向上委托，但用户自定义的 classloader 完全可以跳出这个圈子，自己实现 parent-lastclassloader。比如 Websphere 中就有相关配置。</p>
-
-<p>更具体的类加载器编程实例，请见另外一篇博文：<a href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loader-in-practice/">《Java 类加载器编程实践》</a></p>
-
-<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/09/08/three-principles-of-classloader-operation/'>http://biaobiaoqi.me/blog/2013/09/08/three-principles-of-classloader-operation/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
 
 ]]></content>
   </entry>

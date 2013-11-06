@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: 技术 | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.me/tags/ji-zhu/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.me/"/>
-  <updated>2013-11-05T23:42:14+08:00</updated>
+  <updated>2013-11-07T01:26:22+08:00</updated>
   <id>http://biaobiaoqi.me/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -12,6 +12,100 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[PAT 1069 - 1072 题解]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/11/07/pat-1069-pat-1072/"/>
+    <updated>2013-11-07T00:30:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/11/07/pat-1069-pat-1072</id>
+    <content type="html"><![CDATA[<p>来源是 2013 年 11 月 2 日的PAT测试。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1069">1069. The Black Hole of Numbers (20)</a></h2>
+
+<h5>题意</h5>
+
+<p>给出一个四位数比如6767，将它按照每位从小到大(6677)和从大到小(7766)充足，得到两个新四位数，这两者相减将得到一个新的四位数。再按照一样的处理方式处理得出的四位数</p>
+
+<p>```
+7766 - 6677 = 1089
+9810 - 0189 = 9621
+9621 - 1269 = 8352
+8532 - 2358 = 6174
+7641 - 1467 = 6174</p>
+
+<p>```</p>
+
+<p>最终将得到一个『黑洞数』：6174。</p>
+
+<p>题目给出一个四位数，要求输出它演变出『黑洞数』的过程。</p>
+
+<!--more-->
+
+
+<h5>分析</h5>
+
+<p>简单模拟题，需要留心两个特殊情况的处理：<code>6174</code>，<code>xxxx</code>。</p>
+
+<p>熟练掌握 C 的基本函数也能缩短代码编写，比如<code>atoi()</code> 和 <code>sprintf()</code>， 由于<code>itoa()</code>是依赖于Windows的，这里不推荐使用。</p>
+
+<p>pat1069源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1069.cpp">请戳</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1070">1070. Mooncake (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>给出月饼市场的需求 D&lt;= 500 （按重量计算），给出现有 N &lt;= 1000 种月饼，每种月饼有一定数量的储备（按重量计算）以及这些储备所对应的价格，求一个出售月饼的方式，在容量D的市场里，获得最多的销售额。</p>
+
+<h5>分析</h5>
+
+<p>简单的贪心问题。贪心的规则是月饼的单价。注意有一个坑：每种月饼的存货量也需要用<code>double</code>来做存储。</p>
+
+<p>pat1070源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1070.cpp">请戳</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1071">1071. Speech Patterns (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>给出一个长度不超过 1048576 的字符串。把所有连续的字母或者数字（[0-9 A-Z a-z]）试做单词，且忽略大小写，求其中最高频的单词。</p>
+
+<h5>分析</h5>
+
+<p>使用map&lt;string, int>做存储，统计出现次数即可。</p>
+
+<p>有些细节需要注意：</p>
+
+<ul>
+<li>使用<code>getline(cin, str)</code>获取正行数据</li>
+<li>使用<code>transform(str.begin(), str.end(), str.begin(), ::tolower);</code>将字符串转换成小写</li>
+<li>遍历字符串获取单词时，注意特殊条件。比如以非字符数字开头的字符串，以字符数字结尾的字符串等。</li>
+</ul>
+
+
+<p>pat1071源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1071.cpp">请戳</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1072">1072. Gas Station (30)</a></h2>
+
+<h5>题意</h5>
+
+<p>给出一个图，其中有 N &lt;= 10<sup>3</sup> 个节点是居民房，M &lt;= 10 个节点是计划建造加油站的候选点。给出加油站所能服务的最远距离 D。要求计算出合适的位置建造加油站，满足如下优先级条件：</p>
+
+<ol>
+<li>所有居民房必须在加油站的服务距离内。</li>
+<li>所有居民房中距离加油站的最近的居民房与加油站之间的距离是最远的。（大概是安全方面的考虑，加油站要离居民区远一点）</li>
+<li>所有房间距离加油站的最小距离的总和最小。（节约居民加油的总体成本）</li>
+<li>同等条件下，序号越小的加油站优先。</li>
+</ol>
+
+
+<h5>分析</h5>
+
+<p>实际上是求加油站到所有点的最短路径的问题，使用Dijsktra可以满足。</p>
+
+<p>另外，需要考虑求最短路径的过程中是否要将其他加油站所构建的路径算入在内。从背景上看，加油站应该在公路边修建，故加油站之间以及居民房和加油站之间都是存在路径的，从给出的数据来看，存在两个加油站之间的路径。所以，计算最短路径时，是需要将所有加油站的节点也计算在内的。</p>
+
+<p>pat1072源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1072.cpp">请戳</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[用Ruby实现的论坛灌水工具：CC98 Post Machine]]></title>
@@ -68,18 +162,19 @@ $CC98POSTMACHINE/src/ruby RegWaterArmy.rb
 <p>来到CC98PostMachine的src目录，执行：</p>
 
 <p><code>
-$CC98POSTMACHINE/src/ruby  PostMachine.rb  BOARDID  POSTID [SPEED]
+$CC98POSTMACHINE/src/ruby  PostMachine.rb  POST_URL [SPEED]
 </code></p>
 
-<p>其中<code>BOARDID</code>和<code>POSTID</code>可以在浏览器的地址栏的相关帖子的URL中找到，<code>SPEED</code>是设定的两个回帖之间的间隔时间，实际回帖时间做了如下的模糊：<code>SPEED + random(SPEED)</code>。</p>
+<p>其中<code>POST_URL</code>为响应帖子的网址，<code>SPEED</code>是设定的两个回帖之间的间隔时间，实际回帖时间做了如下的模糊：<code>SPEED + random(SPEED)</code>。</p>
 
 <p>```</p>
 
-<p>Usage: $CC98POSTMACHINE/src/ruby  PostMachine.rb  BOARDID  POSTID [SPEED]</p>
+<p>Usage: $CC98POSTMACHINE/src/ruby  PostMachine.rb  POST_URL [SPEED].</p>
 
-<p>BOARDID and POSTID can be find in the url of certain post, and be sure that BOARDID is a number less than 1000</p>
+<pre><code>POST_URL is the url address of target post.
 
-<p>SPEED is the time gap unit between two posts, it may be 1(s), 10(s) or any other number</p>
+SPEED is the time gap unit between two posts, it may be 1(s), 10(s) or any other number
+</code></pre>
 
 <p>```</p>
 
@@ -205,220 +300,6 @@ $CC98POSTMACHINE/src/ruby  PostMachine.rb  BOARDID  POSTID [SPEED]
 <h3>PS</h3>
 
 <p>后来Google相关内容时，找到了JadClipse在Eclipse Market的版本：<a href="http://marketplace.eclipse.org/content/jadclipse-eclipse-4x">请戳</a>，或许对大家有用=)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[数据集成工具：Teiid实践]]></title>
-    <link href="http://biaobiaoqi.me/blog/2013/10/19/data-integration-tool-teiid/"/>
-    <updated>2013-10-19T23:58:00+08:00</updated>
-    <id>http://biaobiaoqi.me/blog/2013/10/19/data-integration-tool-teiid</id>
-    <content type="html"><![CDATA[<p>数据集成是把不同来源、格式、特点性质的数据在逻辑上或物理上有机地集中，从而为企业提供全面的数据共享。数据集成的方式多种多样，这里介绍的<a href="http://www.jboss.org/teiid/">Teiid</a>是其中的一种：通过抽象和联邦技术，实现分布式数据源的实时数据访问和集成，无需从记录系统中复制或移动数据。</p>
-
-<p><a href="http://blogs.ejb.cc/archives/3552/teiid-scalable-information-integration-program">链接</a>是一篇关于Teiid的中文介绍，比较详细。</p>
-
-<p>由于适配不同数据源和生成虚拟数据库（VDB）需要维护好几个配置文件，直接手动部署Teiid比较难受。好在Teiid提供了辅助工具<a href="http://www.jboss.org/teiiddesigner">Teiid Designer</a>，这是一个Eclipse插件，能帮助用户可视化的管理数据的集成过程。</p>
-
-<ul>
-<li><p>安装配置</p>
-
-<p>  参见官网的Downloads界面的详细介绍（注意：环境配置中，各组件需严格遵循官网指定版本，实践经验表明，Teiid本身并不够鲁棒，容不得小差错）。</p></li>
-</ul>
-
-
-<p>接下来，我们用一个简单的应用场景实践Teiid的数据集成功能。</p>
-
-<!--more-->
-
-
-<h2>应用场景</h2>
-
-<p>书店主营图书销售，并维护者一个用户对图书评价的数据库。技术上说，书店拥有三个数据模块：</p>
-
-<ul>
-<li><p>MySQL数据库，存储用户信息和用户对某书的评价</p>
-
-<p>  表结构如下：</p></li>
-</ul>
-
-
-<p>```
-create database library;
-use library;
-create table users (</p>
-
-<pre><code> id int primary key,
- name char(20) not null,
- passwd char(20)) not null,
-</code></pre>
-
-<p>);
-create table comments(</p>
-
-<pre><code> cid int primary key,
- uid int ,
- bookid int not null,
- content char(255),
- foreign key (uid) references users(id)
-</code></pre>
-
-<p>);
-```
-* EXCEL表格，店主用于记录销售量、记录销售单价</p>
-
-<p><code>
-book_id,price,sales
-1,89.00,1000
-2,52.00,9999
-3,30.00,10000
-4,9800,5555
-5,69.00,1234
-</code></p>
-
-<ul>
-<li>XML文件记录书籍信息，包括</li>
-</ul>
-
-
-<p>``` xml
-&lt;?xml version= "1.0" encoding ="UTF-8"?>
-<BooksInfo></p>
-
-<pre><code>    &lt;Book id = "1" &gt;
-           &lt;Title&gt; Hadoop: The Definitive Guide &lt;/Title&gt;
-           &lt;Author&gt; Tom White&lt;/Author &gt;
-           &lt;publisher&gt; O'Reilly&lt;/ publisher&gt;
-    &lt;/Book&gt;
-    &lt;Book id = "2" &gt;
-           &lt;Title&gt; Effective Java&lt;/Title &gt;
-           &lt;Autorh&gt; Joshua Bloch&lt;/Autorh&gt;
-           &lt;publisher&gt; HZ Books&lt;/ publisher&gt;
-    &lt;/Book&gt;
-    &lt;Book id = "3" &gt;
-           &lt;Title&gt; C Programming Language&lt;/Title &gt;
-           &lt;Autorh&gt; Kernighan, Ritchie &lt;/Autorh&gt;
-           &lt;publisher&gt; HZ Books&lt;/ publisher&gt;
-    &lt;/Book&gt;
-    &lt;Book id = "4" &gt;
-           &lt;Title&gt; Head First: Design Pattern&lt;/Title &gt;
-           &lt;Autorh&gt; Freeman&lt;/ Autorh&gt;
-           &lt;publisher&gt; Turning Education&lt;/publisher &gt;
-    &lt;/Book&gt;
-    &lt;Book id = "5" &gt;
-           &lt;Title&gt; Refactoring: Improving the Design of Existing Code &lt;/Title&gt;
-           &lt;Autorh&gt; Martin Fowler &lt;/Autorh&gt;
-           &lt;publisher&gt; O'Reilly&lt;/ publisher&gt;
-    &lt;/Book&gt;
-</code></pre>
-
-<p></BooksInfo>
-```</p>
-
-<h2>实践</h2>
-
-<h3>1.创建工程</h3>
-
-<p>打开配置好Teiid Designer插件的Eclipse，在Teiid Designer视图的Guides中，找到Define Teiid Model Project选项，如下图：</p>
-
-<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid1.png" alt="img" /></p>
-
-<p>一路点击next，在如下界面勾选sources和views即可，designer guid会帮助生成这两个目录，其他目录在此项目中不需要。</p>
-
-<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid2.png" alt="img" /></p>
-
-<h3>2.导入MyQL数据源</h3>
-
-<p>在Guides界面，选择JDBC数据源</p>
-
-<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid3.png" alt="img" /></p>
-
-<p>第一个步骤Define Teiid Model Project在上一步中已经完成了，现在需要创建一个JDBC链接，选择Create JDBC connection，在弹出的窗口中，选择Mysql数据库，然后点下一步</p>
-
-<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid4.png" alt="img" /></p>
-
-<p>选择mysql驱动，配置好Mysql数据源的的url、用户名、密码，点下一步。（在这里，mysql的端口为默认的3306，library为之前配置好的mysql数据库）。点击test connection测试与mysql的链接能否建立。</p>
-
-<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid5.png" alt="img" /></p>
-
-<p>接下来需要给数据源创建源模型（source model）了。同样在Guides试图上双击Create source model for JDBC data source，一路下一步，直到选择数据库和表，选择library数据库中的所有表，如下图：</p>
-
-<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid6.png" alt="img" /></p>
-
-<p>创建源模型的最后一步如下图，可以自定义Model Name，为了让之后的sql查询过程更可读，我将以数据源类型命名它（mysql.xmi）。其他无关配置暂时不用理会。</p>
-
-<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid7.png" alt="img" /></p>
-
-<p>finish后，就生成了一个元模型，如下图。图中可视化的显示了数据库所建的两张表</p>
-
-<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid8.png" alt="img" /></p>
-
-<p>接下来可以测试数据是否可读，双击Guides中的Preview Data，在弹框中选择需要preview的表或者precedure（procedure在本工程里这里不会被用到）查询结果显示在了eclipse下方的SQL Result框中，如下图：</p>
-
-<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid9.png" alt="img" /></p>
-
-<p>接下先来不用着急Define VDB，我们先把所有数据源配置完成后再一起来定义虚拟数据库。</p>
-
-<h3>3.导入FlatFile数据源（CSV）</h3>
-
-<p>跟之前一个步骤一样，只需要沿着Guides里的路线一步一步操作。</p>
-
-<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid10.png" alt="img" /></p>
-
-<p>首先创建连接，配置好后test connection确保链接无误</p>
-
-<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid12.png" alt="img" /></p>
-
-<p>链接建立后，需要创建元模型。如下图，提示有错，只需要选定Source Model Definition的文件的存储位置即可。存放在项目的sources目录中</p>
-
-<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid13.png" alt="img" /></p>
-
-<p>按照默认配置，不断下一步，在 Flat File Demilited Columns Parser Settings 这一步，可以注意到下方有生成一串SQL语句。这些语句告诉Teiid需要如何将csv文件中的数据映射为关系型数据。</p>
-
-<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid14.png" alt="img" /></p>
-
-<p>继续下一步，view model definition界面，提示创建的tableview名字包含不合法字符。原来由于将flat file命名为sales.csv,它自动生成了price.csvView作为table name，但名字中是不能出现<code>.</code>的，于是修改为salesview，finish。</p>
-
-<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid15.png" alt="img" /></p>
-
-<p>之后测试数据能否读取。在选择所要preview的数据时，需要选择相应的table，而不是模型（这里需要选择salesView，而不是上层的price_view.xmi）。如下图：</p>
-
-<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid16.png" alt="img" /></p>
-
-<h3>4.导入xml数据</h3>
-
-<p>大部分步骤跟之前的步骤类似，在设定源模型时，需要注意配置好xml数据到关系型数据的映射关系，如下图：</p>
-
-<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid17.png" alt="img" /></p>
-
-<p>XML File Contents中会根据xml文件中的数据解析出整体的层次结构。我们需要将其中的Book里的信息，添加到右边的Column Info中。虽然有很多Book数据列表显示在左边一栏里，但实际上只需要添加一次相关信息到右边的列信息中。值得注意的是，这里自动生成的Root Path是错误的，需要修改为BooksInfo/Book。其他没有什么特别的，一路下一步。</p>
-
-<p>现在整个项目如下图：</p>
-
-<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid18.png" alt="img" /></p>
-
-<h3>5.生成虚拟数据库</h3>
-
-<p>点击Guides中的Define VDB，将三个数据源的模型加入到VDB中:MySQL的源模型，XML和CSV的视图模型（注意：不可以加入另外两个源模型的xmi文件，博主如此操作后遇到了一些莫名其妙的问题）。</p>
-
-<p>如此就完成了在Teiid Designer中的多数据源集成的配置了。</p>
-
-<h3>6.部署和使用</h3>
-
-<p>通过Teiid Designer，我们能方便的部署VDB到Jboss服务器。</p>
-
-<p>在Guides界面下，有execute vdb选项，双击即可。正式运行之前，需要运行Jboss server，如果没有启动服务器，Teiid Designer会弹框提醒的。</p>
-
-<p>最后，尝试一下通过Teiid集成查询多个数据源。将sql语句输入到执行框中，刷蓝->右键->执行选中的语句。</p>
-
-<p>```</p>
-
-<blockquote><p>select * from "csv"."sales" as A join "xml"."booksinfo" as B on A.book_id = B.id</p></blockquote>
-
-<p>```</p>
-
-<p>结果如图：</p>
-
-<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid19.png" alt="img" /></p>
 ]]></content>
   </entry>
   

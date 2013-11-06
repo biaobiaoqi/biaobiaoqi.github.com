@@ -9,8 +9,7 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="加载(Loading) 按如下三步执行 1.通过类的全名产生对应类的二进制数据流。（注意，如果没找到对应类文件，只有在类实际使用时才抛出错误。）
-2.分析并将这些二进制数据流转换为方法区(JVM 的架构：方法区、堆，栈，本地方法栈，pc 寄存器)特定的数据结构（这些数据结构是实现有关的，不同 &hellip;">
+  <meta name="description" content="（出自一本 J2EE 的教材中关于类加载器的介绍，原文已不知所踪。） 类加载的 bug，一旦在编程中遇到很难调试。好消息是，理解类加载的过程中，我们只需要牢记住三条基本原则。如果你能清晰的理解这三条基本原则，所有问题都迎刃而解。下面，我们开始介绍。 委托原则(Delegation &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -105,6 +104,61 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/09/08/three-principles-of-classloader-operation/">类加载器操作三原则[译]</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-08T00:42:00+08:00" pubdate data-updated="true">Sep 8<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/09/08/three-principles-of-classloader-operation/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>（出自一本 J2EE 的教材中关于类加载器的介绍，原文已不知所踪。）</p>
+
+<p>类加载的 bug，一旦在编程中遇到很难调试。好消息是，理解类加载的过程中，我们只需要牢记住三条基本原则。如果你能清晰的理解这三条基本原则，所有问题都迎刃而解。下面，我们开始介绍。</p>
+
+<h2>委托原则(Delegation Principle)</h2>
+
+<blockquote><p>如果一个类还没有被加载，类加载器会委托它的父亲加载器去加载它。</p></blockquote>
+
+<p>这种委托会一直延续，直到到达委托层次的最顶层，由原始的类加载器加载完成该类。下图展示了这种情况。</p>
+
+<p><img src="https://dl.dropboxusercontent.com/u/64021093/Java%20Classloader/classloader1.gif" alt="" /></p>
+
+<p>Systm-ClassPath classloader 加载了 MyApp.MyApp，而这个类创造了一个 java.util.Vector。假设现在 java.util.Vector 还没又被加载。因为 System-Classpath classloader 加载了 MyApp 类，它首先请求它的父亲 extension classloader 来加载这个类（java.util.Vector）。而 extension classloader 又请求 Bootstrap classloader 尝试加载。因为 java.util.Vector 是 J2SE 类，bootstrap classloader 成功加载了它。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/09/08/three-principles-of-classloader-operation/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -674,72 +728,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/08/03/overcome-pat/">PAT练习题概览</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-08-03T22:20:00+08:00" pubdate data-updated="true">Aug 3<span>rd</span>, 2013</time>
-        
-         | <a href="/blog/2013/08/03/overcome-pat/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><ul>
-<li>更新至 1068 2013-10-8</li>
-</ul>
-
-
-<p>PAT(<a href="http://pat.zju.edu.cn">pat.zju.edu.cn</a>)是一个面向 C/C++程序的 Online Judge 系统。相比 ZOJ，HDOJ，POJ 等 ACM 题库，PAT 的题目非常基础，对于数据结构、算法的入门是比较有助益的。</p>
-
-<p>本文按照自己的认识，给 PAT advanced level 做出了分类。由于很多题目实际上兼顾有多种解法和思路，我给每道题打上了 tag，来应对分类的独占性局限，供大家参考。</p>
-
-<h2>简单题</h2>
-
-<p>这类题几乎不需要数据结构、算法基础，主要通过简单的逻辑流程和判断实现。</p>
-
-<ul>
-<li>1001 A+B</li>
-<li>1002 多项式相加</li>
-<li>1005 简单 hash</li>
-<li>1006 选极值</li>
-<li>1008 模拟电梯</li>
-<li>1009 多项式乘法</li>
-<li>1011 选极值</li>
-<li>1019 数字/字符处理</li>
-<li>1024 数字/字符处理</li>
-<li>1027 数字/字符处理，简单 hash</li>
-<li>1031 数字/字符处理</li>
-<li>1035 简单 hash</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/08/03/overcome-pat/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -756,20 +744,20 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   <h1>标签云</h1>
  <br /> 
   <ul class="tag-cloud">
-    <a style="font-size: 114%" href="/tags/hadoop/">Hadoop</a> &nbsp 
+    <a style="font-size: 113%" href="/tags/hadoop/">Hadoop</a> &nbsp 
 <a style="font-size: 139%" href="/tags/jvm/">JVM</a> &nbsp 
 <a style="font-size: 145%" href="/tags/java/">Java</a> &nbsp 
-<a style="font-size: 141%" href="/tags/pat/">PAT</a> &nbsp 
-<a style="font-size: 108%" href="/tags/octopress/">octopress</a> &nbsp 
+<a style="font-size: 143%" href="/tags/pat/">PAT</a> &nbsp 
+<a style="font-size: 107%" href="/tags/octopress/">octopress</a> &nbsp 
 <a style="font-size: 137%" href="/tags/fen-bu-shi/">分布式</a> &nbsp 
 <a style="font-size: 135%" href="/tags/zi-jie-ma/">字节码</a> &nbsp 
 <a style="font-size: 135%" href="/tags/si-kao/">思考</a> &nbsp 
 <a style="font-size: 180%" href="/tags/ji-zhu/">技术</a> &nbsp 
-<a style="font-size: 108%" href="/tags/cao-zuo-xi-tong/">操作系统</a> &nbsp 
+<a style="font-size: 107%" href="/tags/cao-zuo-xi-tong/">操作系统</a> &nbsp 
 <a style="font-size: 126%" href="/tags/fang-fa-lun/">方法论</a> &nbsp 
-<a style="font-size: 130%" href="/tags/sheng-huo/">生活</a> &nbsp 
-<a style="font-size: 147%" href="/tags/suan-fa/">算法</a> &nbsp 
-<a style="font-size: 119%" href="/tags/wang-luo/">网络</a> &nbsp 
+<a style="font-size: 129%" href="/tags/sheng-huo/">生活</a> &nbsp 
+<a style="font-size: 148%" href="/tags/suan-fa/">算法</a> &nbsp 
+<a style="font-size: 118%" href="/tags/wang-luo/">网络</a> &nbsp 
 <a style="font-size: 135%" href="/tags/du-shu/">读书</a>
 
   </ul>
