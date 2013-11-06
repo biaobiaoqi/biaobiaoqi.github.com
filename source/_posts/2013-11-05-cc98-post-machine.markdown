@@ -3,6 +3,7 @@ layout: post
 title: "用Ruby实现的论坛灌水工具：CC98 Post Machine"
 date: 2013-11-05 15:20
 comments: true
+categories: [tech]
 tags: [技术, ruby, http, 工具]
 description: "使用HTTP的POST请求，自动对CC98论坛发帖"
 
@@ -56,19 +57,19 @@ $CC98POSTMACHINE/src/ruby RegWaterArmy.rb
 来到CC98PostMachine的src目录，执行：
 
 ```
-$CC98POSTMACHINE/src/ruby  PostMachine.rb  BOARDID  POSTID [SPEED]
+$CC98POSTMACHINE/src/ruby  PostMachine.rb  POST_URL [SPEED]
 ```
 
-其中`BOARDID`和`POSTID`可以在浏览器的地址栏的相关帖子的URL中找到，`SPEED`是设定的两个回帖之间的间隔时间，实际回帖时间做了如下的模糊：`SPEED + random(SPEED)`。
+其中`POST_URL`为响应帖子的网址，`SPEED`是设定的两个回帖之间的间隔时间，实际回帖时间做了如下的模糊：`SPEED + random(SPEED)`。
 
 
 ```
 
-Usage: $CC98POSTMACHINE/src/ruby  PostMachine.rb  BOARDID  POSTID [SPEED]
+Usage: $CC98POSTMACHINE/src/ruby  PostMachine.rb  POST_URL [SPEED].
 
-BOARDID and POSTID can be find in the url of certain post, and be sure that BOARDID is a number less than 1000
+    POST_URL is the url address of target post.
 
-SPEED is the time gap unit between two posts, it may be 1(s), 10(s) or any other number
+    SPEED is the time gap unit between two posts, it may be 1(s), 10(s) or any other number
 
 ```
 

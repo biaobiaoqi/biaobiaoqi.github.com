@@ -10,7 +10,8 @@ published: true
 
 ---
 
-* 更新至1068 2013-10-8
+* 更新至1068 2013-10-08
+* 更新至1072 2013-11-07
 
 PAT([pat.zju.edu.cn](http://pat.zju.edu.cn))是一个面向C/C++程序的Online Judge系统。相比ZOJ，HDOJ，POJ等ACM题库，PAT的题目非常基础，对于数据结构、算法的入门是比较有助益的。
 
@@ -42,6 +43,7 @@ PAT([pat.zju.edu.cn](http://pat.zju.edu.cn))是一个面向C/C++程序的Online 
 * 1061 数字/字符处理，坑题
 * 1063 数字/字符处理，游标
 * 1065 A+B
+* 1069 数字/字符处理
 
 模拟题
 ---
@@ -57,6 +59,7 @@ PAT([pat.zju.edu.cn](http://pat.zju.edu.cn))是一个面向C/C++程序的Online 
 * 1052 链表
 * 1054 dominant color
 * 1056 模拟分组淘汰赛
+* 1072 map
 
 
 ####排队模拟
@@ -105,6 +108,7 @@ PAT([pat.zju.edu.cn](http://pat.zju.edu.cn))是一个面向C/C++程序的Online 
 * 1018 最短路径
 * 1030 最短路径
 * 1034 dfs
+* 1072 最短路径
 
 
 搜索
@@ -144,6 +148,7 @@ Hash
 ---
 
 * 1033 贪心
+* 1070 贪心
 
 
 动态规划
@@ -172,5 +177,6 @@ Hash
 * [《PAT 1051-1060 题解》](http://biaobiaoqi.me/blog/2013/08/01/pat-1051-1060-solutions/)
 * [《PAT 1061-1064 题解》](http://biaobiaoqi.me/blog/2013/08/31/pat-1061-pat-1064/)
 * [《PAT 1065-1068 题解》](http://biaobiaoqi.me/blog/2013/10/08/pat-1065-pat-1068/)
+* [《PAT 1069-1072 题解》](http://biaobiaoqi.me/blog/2013/11/07/pat-1069-pat-1072/)
 
 附博客的PAT专题区链接：[请戳](http://biaobiaoqi.me/tags/pat/)

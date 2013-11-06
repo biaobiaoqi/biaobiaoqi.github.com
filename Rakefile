@@ -396,3 +396,15 @@ task :sync_all_posts, :passwd do |t, args|
   puts "Sync all posts to MetaWeblog site(s)"
   system "ruby plugins/sync_all_posts.rb  " + args[:passwd]
 end
+
+desc "sync posts after date to MetaWeblog site(s)"
+task :sync_posts_after_date, :passwd, :date do |t, args|
+  puts "Sync posts after date to MetaWeblog site(s)"
+  system "ruby plugins/sync_posts_after_date.rb  " + args[:passwd] + " " + args[:date]
+end
+
+desc "sync post by title to MetaWeblog site(s)"
+task :sync_post_by_title, :passwd, :title do |t, args|
+  puts "Sync post by title to MetaWeblog site(s)"
+  system "ruby plugins/sync_post_by_title.rb  " + args[:passwd] + " " + args[:title]
+end
