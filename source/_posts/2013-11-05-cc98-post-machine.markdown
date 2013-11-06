@@ -8,7 +8,6 @@ tags: [技术, ruby, http, 工具]
 description: "使用HTTP的POST请求，自动对CC98论坛发帖"
 
 ---
-##介绍
 
 ZJU的校网论坛CC98比较活跃。论坛只对校内网开放，而且账号跟学生绑定，每个学生注册的账号数量有限。『十大』是CC98的经典页面：基于关注的人数（回帖的用户数而不是回帖的数量）用算法求出24小时内最火爆的十个发帖。很多同学都会浏览十大，关注论坛动态。
 
@@ -21,8 +20,8 @@ ZJU的校网论坛CC98比较活跃。论坛只对校内网开放，而且账号�
 项目Github地址：[https://github.com/biaobiaoqi/CC98PostMachine/](https://github.com/biaobiaoqi/CC98PostMachine/)
 
 介于这个工具本身的罪恶的攻击属性，在此强调，工程仅供学习交流和对抗宣传贴。
-<!--more-->
 
+<!--more-->
 ##使用说明
 
 ###1.准备顶贴用户
