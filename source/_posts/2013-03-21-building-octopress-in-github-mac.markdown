@@ -11,22 +11,22 @@ tags: [Git, octopress,技术]
 
 {% img http://pikipity.github.com/images/post/octopress.jpg %}
 
-大概是从[唐巧大哥的博客](http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/)以及[阮一峰的博文](http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html)了解到了octopress这个静态的博客框架，托在Github上面，不用自己搭服务器，方便易用。自己之前也有在csdn上维护了一个博客，但经过密码泄露事件以及难于自定义配置等问题的考虑，自己在Github上维护一个静态博客是一个更好的选择。
+大概是从[唐巧大哥的博客](http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/)以及[阮一峰的博文](http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html)了解到了octopress这个静态的博客框架，托在Github上面，不用自己搭服务器，方便易用。自己之前也有在csdn上维护了一个博客，但经过密码泄露事件以及难于自定义配置等问题的考虑，在Github上维护一个静态博客是一个更好的选择。
 
-自己搭建博客之初并没有学过Ruby，甚至于对Git的操作指令也不甚熟悉。颇费周章的从网上搜索了很久的教程，但终归每台电脑有不同的初始环境，不能盲目跟从。倒腾了一下午，最终发现还是官网的Guide最有效。这里总结下自己在Mac上的搭建经验。
+搭建博客之初，我并没有学过Ruby，甚至于对Git的操作指令也不甚熟悉。颇费周章的从网上搜索了很久的教程，但终归每台电脑有不同的初始环境，不能盲目跟从。倒腾了一下午，最终发现还是官网的Guide最有效。这里总结下自己在Mac上的搭建经验。
 <!--more-->
 
 如果对octopress、ruby、git不太了解，先不着急动手，以下是一些基本概念：
->*    [Octopress](http://octopress.org/) ：本文所要搭建的博客框架，是一个静态站点生成工具，不需要使用动态的数据库和相关处理。
->*    [Markdown](http://zh.wikipedia.org/wiki/Markdown)：一种轻量级的标记语言，比HTML简单，用于Octopress博客发表时的内容排版。
->*    Git：最早用于管理Linux源码的分布式版本控制工具。
->*    [Github](https://github.com/)：程序员的Facebook,为程序员托管了很多代码的站点。
->*    [Github pages](https://help.github.com/categories/20/articles)：Github推出的，给与程序员自由创造静态网页的功能，支持Jekyll，而Octopress是对Jekyll的封装，于是也被支持。
->*    Ruby：Octopress框架的实现语言（顺道推荐[codecademy](http://www.codecademy.com/tracks/ruby)，可以体验到轻松的交互式的Ruby学习）。Mac OS X下自带了Ruby，不过版本可能与Octopress不匹配，需要使用RVM重新配置。
->*    [RVM](https://rvm.io/)（ruby version manager）：用于管理ruby版本的工具。类似的工具有rbenv，本文使用rvm管理ruby版本。
->*    rake：ruby中类似于make的构建工具，用于从源码生成最终的产品。
->*    [YAML](http://www.ibm.com/developerworks/cn/xml/x-cn-yamlintro/): YAML是一种比 XML更敏捷的半结构化数据格式。Octopress使用yaml做配置文件。
->*    [homebrew](http://mxcl.github.com/homebrew/ )：Mac OS下的软件包管理工具，类似于Linux下的dpkg。
+*    [Octopress](http://octopress.org/) ：本文所要搭建的博客框架，是一个静态站点生成工具，不需要使用动态的数据库和相关处理。
+*    [Markdown](http://zh.wikipedia.org/wiki/Markdown)：一种轻量级的标记语言，比HTML简单，用于Octopress博客发表时的内容排版。
+*    Git：最早用于管理Linux源码的分布式版本控制工具。
+*    [Github](https://github.com/)：程序员的Facebook,为程序员托管了很多代码的站点。
+*    [Github pages](https://help.github.com/categories/20/articles)：Github推出的，给与程序员自由创造静态网页的功能，支持Jekyll，而Octopress是对Jekyll的封装，于是也被支持。
+*    Ruby：Octopress框架的实现语言（顺道推荐[codecademy](http://www.codecademy.com/tracks/ruby)，可以体验到轻松的交互式的Ruby学习）。Mac OS X下自带了Ruby，不过版本可能与Octopress不匹配，需要使用RVM重新配置。
+*    [RVM](https://rvm.io/)（ruby version manager）：用于管理ruby版本的工具。类似的工具有rbenv，本文使用rvm管理ruby版本。
+*    rake：ruby中类似于make的构建工具，用于从源码生成最终的产品。
+*    [YAML](http://www.ibm.com/developerworks/cn/xml/x-cn-yamlintro/): YAML是一种比 XML更敏捷的半结构化数据格式。Octopress使用yaml做配置文件。
+*    [homebrew](http://mxcl.github.com/homebrew/ )：Mac OS下的软件包管理工具，类似于Linux下的dpkg。
 
  
  搭建过程如下：
