@@ -1,38 +1,40 @@
 ---
 layout: post
-title: "在github上搭建octopress博客 mac"
+title: "在github上搭建octopress博客 Mac版"
 date: 2013-03-21 23:43
 comments: true
-description: "在github上搭建octopress博客 mac"
+description: "在github上搭建octopress博客 Mac版"
 categories: [tech]
 tags: [Git, octopress,技术] 
 
 ---
+
 {% img http://pikipity.github.com/images/post/octopress.jpg %}
 
-最早的时候，是看见了[唐巧大哥的博客](http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/)，UI上已是觉得耳目一新。后来读到过[阮一峰的博文](http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html)，当知道这是搭建在Github这个程序员的facebook上时，更是心头一震，什么时候自己也搭这么个博客呢。直接用github托管代码，完全不用自己租服务器，实在方便。自己之前也有在csdn上维护了一个博客，虽然那已经是一年前的事情了。
-<!--more-->深刻的记得，当时想将自己的weibo账户贴到博客页面上，却发现它不支持一般用户嵌入javascript代码:(。这更让我对octopress的感情与日俱增。
+大概是从[唐巧大哥的博客](http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/)以及[阮一峰的博文](http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html)了解到了octopress这个静态的博客框架，托在Github上面，不用自己搭服务器，方便易用。自己之前也有在csdn上维护了一个博客，但经过密码泄露事件以及难于自定义配置等问题的考虑，自己在Github上维护一个静态博客是一个更好的选择。
 
-今天终于动手啦。自己从网上搜到了很多中文的博客描述如何安装配置octopress，有些博客讲得算是清晰，但终归每台电脑有不同的环境，每个人的叙述也或多或少的主观。最要命的是，我发现好几篇博文所讲述的命令都不太一样，走了不少弯路之后，倒腾了一下午，最终还是官网救了我。这也让我进一步认识到，信息的流通中的失真在所难免，最好的方法还是直接探寻最权威的内容。
+自己搭建博客之初并没有学过Ruby，甚至于对Git的操作指令也不甚熟悉。颇费周章的从网上搜索了很久的教程，但终归每台电脑有不同的初始环境，不能盲目跟从。倒腾了一下午，最终发现还是官网的Guide最有效。这里总结下自己在Mac上的搭建经验。
+<!--more-->
 
-如果对octopress不太了解，不用急着动手，首先看看几个概念。（当然，lz现在也并非精通这几点，初来乍到的，先做出来再说，以后不断学习...）
-
->*    Ruby：octopress框架的实现语言。rvm（ruby version manager）是用于管理ruby版本的，rake是ruby中类似于make工具。
->*    静态站点生成工具：简单地说，不用数据库，直接生成网页文件。Jekyll就是这样的工具，而octopress是构建于它的上层的框架。
->*    Git：我主观的认为完虐svn的分布式版本控制工具。git官网貌似被gfw墙了=.=
+如果对octopress、ruby、git不太了解，先不着急动手，以下是一些基本概念：
+>*    [Octopress](http://octopress.org/) ：本文所要搭建的博客框架，是一个静态站点生成工具，不需要使用动态的数据库和相关处理。
+>*    [Markdown](http://zh.wikipedia.org/wiki/Markdown)：一种轻量级的标记语言，比HTML简单，用于Octopress博客发表时的内容排版。
+>*    Git：最早用于管理Linux源码的分布式版本控制工具。
 >*    [Github](https://github.com/)：程序员的Facebook,为程序员托管了很多代码的站点。
->*    [Github pages](https://help.github.com/categories/20/articles):github推出的，给与程序员自由创造静态网页的功能。支持Jekyll，因此也支持octopress。
->*    [homebrew](http://mxcl.github.com/homebrew/ )：mac os下的软件包管理工具，类似于linux下的dpkg。它使用ruby脚本，mac os下自带了ruby。
->*    [octopress](http://octopress.org/) 其官网的help中有搭建octopress的足够的权威指导
->* [YAML](http://www.ibm.com/developerworks/cn/xml/x-cn-yamlintro/): YAML 试图用一种比 XML 更敏捷的方式，来完成 XML 所完成的任务。在octopress中，是使用yaml做配置文件的书写的。
+>*    [Github pages](https://help.github.com/categories/20/articles)：Github推出的，给与程序员自由创造静态网页的功能，支持Jekyll，而Octopress是对Jekyll的封装，于是也被支持。
+>*    Ruby：Octopress框架的实现语言（顺道推荐[codecademy](http://www.codecademy.com/tracks/ruby)，可以体验到轻松的交互式的Ruby学习）。Mac OS X下自带了Ruby，不过版本可能与Octopress不匹配，需要使用RVM重新配置。
+>*    [RVM](https://rvm.io/)（ruby version manager）：用于管理ruby版本的工具。类似的工具有rbenv，本文使用rvm管理ruby版本。
+>*    rake：ruby中类似于make的构建工具，用于从源码生成最终的产品。
+>*    [YAML](http://www.ibm.com/developerworks/cn/xml/x-cn-yamlintro/): YAML是一种比 XML更敏捷的半结构化数据格式。Octopress使用yaml做配置文件。
+>*    [homebrew](http://mxcl.github.com/homebrew/ )：Mac OS下的软件包管理工具，类似于Linux下的dpkg。
 
  
-窃以为，最好的学习方式还是从最源头的资料入手。这里仅针对我的配置过程做简单描述，经验浅薄，有差错的地方还请指教:)
+ 搭建过程如下：
 
 #1. 配环境
 
-###1.0 homebrew
-万事开头难，第一步还是配环境。为了软件包安装的方便，可以先安装好homebrew.
+###1.0 Homebrew
+万事开头难，第一步还是配环境。为了软件包安装的方便，可以先安装好homebrew。
 
 ```
 $ ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
@@ -40,30 +42,31 @@ $ ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
 	
 其使用方法，参见[官网](http://mxcl.github.com/homebrew/)。
 
-###1.1 ruby
-mac os x 10.8.1 的系统自带了Ruby，但是版本是1.8.3，而octopress官网所支持的最新版是1.9.3（2013.3），兼容起见，先对版本进行升级。	
+###1.1 Ruby
+Mac OS X 10.8.1 的系统自带了Ruby，但是版本是1.8.3，Octopress官网所支持的最新版是1.9.3（2013.3），兼容起见，先对版本进行升级。	
 
 ```
 $ rvm install 1.9.3 && rvm use 1.9.3 
 $ rvm ruby gems latest
 ```
 
-
 lz在升级过程中遇到了奇怪的错误，于是又参考[另一篇博文](http://www.iteye.com/blog/1118672)，重新安装了rvm，再升级ruby到1.9.3版本。
-
  
-###1.2 git 
-使用homebrew安装git。
+###1.2 Git 
+
+使用Homebrew安装Git。
 
 ```
 $ brew install git
 ```
 
 #2. 搭建octopress
-环境配置完成后，就可以开始参照[官网](http://octopress.org/help/)的指导搭建octopress，并在github建代码仓库，同步管理啦。
+
+环境配置完成后，就可以开始参照[官网](http://octopress.org/help/)的指导搭建Octopress。这一过程依赖于对Github的账户操作。不再展开。
 
 
 #3. 发博文和在线部署
+
 同样的，参考[官网](http://octopress.org/help/)即可。
 这里大致的列出我所常用到的几条命令：
 
@@ -86,12 +89,11 @@ git push
 
 ```
 
-
-其中推荐到的[mou](http://mouapp.com/)，是一个mac下的markdown编辑器。试用后发现有些格式兼容问题，但似乎mac下也只有他这个可视化工具了=。=
-
-另附[markdown语法](http://wowubuntu.com/markdown/index.html)
+另外，推荐Mac下的Markdown编辑器：[mou](http://mouapp.com/)，另附[markdown语法参考](http://wowubuntu.com/markdown/index.html)。
 
 进一步的octopress博客定制，参见博客[《定制自己的octopress》](/blog/2013/07/10/decorate-octopress/)
 
 
+**LOG：**
 
+* 2013-11-11 修订

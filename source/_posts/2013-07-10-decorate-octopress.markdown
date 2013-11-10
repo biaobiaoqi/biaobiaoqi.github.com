@@ -9,19 +9,18 @@ description: "按照个人的习惯定制Octopress博客，有如下内容：安
 
 ---
 
-在github pages上搭建好octopress博客之后，博客的基本功能就能使用了。如果想自己定制也是没问题的，octopress有较详尽的官方文档，原则上有问题求助官方即可：[octopress-help](http://octopress.org/help/)。官方没有包纳的也可以去询问[stackoverflow](http://stackoverflow.com/questions/tagged/octopress)。 当然，中文的看起来总会省事儿点。我做了如下一些总结;)
+在github pages上搭建好octopress博客之后，博客的基本功能就能使用了。
 
-不会ruby的童鞋特别注意：配置_config.yml的过程中特别注意，配置项『:』后要留空格，否则会报错。
+如果想让自己的博客充满个性，还可以继续探索定制方法。这里对自己的定制过程做一些总结。
 
-另外，一些『土方法』可能并不利于程序的维护可扩展，有空再仔细研究，大家将就着用吧;).
+提前声明：
+
+* 不会Ruby的童鞋特别注意：配置_config.yml的过程中特别注意，配置项『:』后要留空格，否则会报错。
+
+* 由于初期修改时经验不足，这里的一些『土方法』可能并不利于程序的维护可扩展，有空再仔细研究，大家将就着用吧;).
 
 ##0.安装第三方主题
 
-之所以把这一点标记为0，是因为在博主刚刚经历了博客主题的更新后，惨烈的发现需要重新配置包括评论、百度统计在内的不少东西。
-
-应该是自己在做定制化的过程中乱修改源码（这是一种很不可取维护方式，使软件难以持续扩展）造成的，又或者octopress框架本身对定制化扩展的支持比较弱（对ruby不熟，对octopress也一知半解，我不确定是不是这个原因）。
-
-简而言之，初接触octopress的朋友们，建议先安装第三方主题，再参考以下定制方法。
 
 我使用的第三方主题是[『whitelake』](https://github.com/gehaxelt/CSS-WhiteLake)。
 
@@ -44,15 +43,16 @@ $ rake generate
 
 ##2.增加评论和分享功能
 
-虽然octopress内置的disqus评论系统很不错，但在国内的使用并不普及。相比之下，友言、多说等第三方评论则更接地气，可以利用到微博、人人等SNS账号。
+虽然Octopress内置的Disqus评论系统很不错，但在国内的使用并不普及。相比之下，友言、多说等第三方评论则更接地气，可以利用到微博、人人等SNS账号。使用哪个见仁见智，本博客就是从友言切换到Disqus上的。下面介绍下如何使用友言和加网的分享标记。
 
 ###2.1友言
 
-本博客采用了友言。首先注册[友言](http://www.uyan.cc/)的账号，如果不注册，虽然也能实现评论功能，但没有后台管理整个站点的评论会十分纠结。注册完成之后，选择获取代码，将这串代码贴入相应的位置，即可实现第三方评论。
+首先注册[友言](http://www.uyan.cc/)的账号，如果不注册，虽然也能实现评论功能，但没有后台管理整个站点的评论会十分纠结。注册完成之后，选择获取代码，将这串代码贴入相应的位置，即可实现第三方评论。
 
 在路径`$OCTOPRESS/source/_includes/post/`上创建文件`youyanandjiathis.html`，功能代码放入其中。
 
 ###2.2加网
+
 分享方面，本博客使用了[加网](http://www.jiathis.com/getcode/icon)。注册后，在更多高级自定义功能中，可能自定义不同的分享按钮，生成代码后，也将生成的代码贴入`$OCTOPRESS/source/_includes/post/youyanandjiathis.html`中。
 
 现在，youyanandjiathis.html的样子如下(需要注意，自己使用时，uid显然是不一样的啦)
@@ -87,6 +87,7 @@ var jiathis_config = {data_track_clickback:'true'};
 功能代码已经都在youyanandjiathis.html中了，接下来是让blog使用到这些功能代码。
 
 首先在_config.yml中增加开关：
+
 ``` ruby
 #comment and share                                                                                    
 comment_and_share: true
@@ -105,26 +106,25 @@ comment_and_share: true
 
 
 ###2.4友言验证
-另外，需要在友言的后台处理评论，甚至做一些定制化处理，需要通过友言的验证。详情在友言的管理员后台可见。
 
-
+另如果需要在友言的后台处理评论，甚至做一些定制化处理，需要通过友言的验证。详情参见友言的管理员后台界面。大致过程是在自己的master分支的根目录下放置一个友言提供的验证文件，让友言网站来检测。
 
 ##3.定制域名
 
-如果你拥有自己的域名，可以CNAME到github pages上。以我的配置为例（我的域名为`biaobiaoqi.me`）。
+如果你拥有自己的域名，可以CNAME到Github Pages上。以我的配置为例（我的域名为`biaobiaoqi.me`）。
 
-1.在octopress的source目录下创建CNAME文件，并输入新域名：biaobiaoqi.com
+* 1.在$Octopress/source目录下创建CNAME文件，输入新域名：`biaobiaoqi.me`
 
-2.在域名管理中，创建或修改A记录，指向207.97.227.245这个地址。
+* 2.在购买的域名管理中，创建A记录，将顶级域名(`biaobiaoqi.me`)指向207.97.227.245这个地址。（注意不要对顶级域名使用CNAME记录，容易造成不可知的副作用）
 
-3.创建CNAME记录，www.biaobiaoqi.com -> biaobiaoqi.github.com
+* 3.对子域名创建CNAME记录，比如将`www.biaobiaoqi.com`指向`biaobiaoqi.github.com`
 
-这一过程可能需要好几天才能生效，请耐心等待:)
+这一过程可能需要一定的时间缓冲才能生效。（推荐使用国内的DNS服务[DNSPod](http://www.dnspod.cn/)，以得到更快更好的服务）
 
 
 ##4.让博客中连接在新窗口打开
 
-由于markdown不支持这一语法，如果要自己用html标签实现，又有些违背了markdown以内容为重的立意。
+Markdown不支持在新的标签页面打开网页链接这一语法，如果每次都要自己用Html标签实现，又些违背了Markdown以内容为重的立意。
 
 参考博文[《在Octopress中为markdown的超链接加上target="_blank"》](http://www.blogjava.net/lishunli/archive/2013/01/20/394478.html)，可以通过将如下代码添加到 {OCTOPRESS_HOME}/source/_includes/custom/head.html文件末尾来实现：
 
@@ -283,4 +283,7 @@ post.content + %Q[<p class='post-footer'>
 
 ##Tips
 
-既然是个博客站点，就算是web产品啦，可以考虑下SEO。推荐博文[《Octopress中的SEO》](http://codemacro.com/2012/09/06/octopress-seo/)
+* 既然是个博客站点，就算是web产品啦，可以考虑下SEO。推荐博文[《Octopress中的SEO》](http://codemacro.com/2012/09/06/octopress-seo/)
+
+* 原则上有问题求助官方即可：[octopress-help](http://octopress.org/help/)。官方没有包纳的也可以去询问[stackoverflow](http://stackoverflow.com/questions/tagged/octopress)。 
+
