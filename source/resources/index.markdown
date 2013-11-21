@@ -15,7 +15,7 @@ footer: true
 
 * [v2ex](http://www.v2ex.com/)：一个由设计师，程序员及有创意的人构成的社区。
 * [stackoverflow](http://stackoverflow.com)：最好的编程问答社区。
-* [github](http://github.com)：Git代码拖管，程序猿的Facebook。
+* [github](http://github.com)：Git代码托管，程序猿的Facebook。
 
 ##Podcast
 

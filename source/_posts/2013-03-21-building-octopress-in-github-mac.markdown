@@ -17,13 +17,16 @@ tags: [Git, octopress,技术]
 <!--more-->
 
 如果对octopress、ruby、git不太了解，先不着急动手，以下是一些基本概念：
-*    [Octopress](http://octopress.org/) ：本文所要搭建的博客框架，是一个静态站点生成工具，不需要使用动态的数据库和相关处理。
+
+*   [Octopress](http://octopress.org/) ：本文所要搭建的博客框架，是一个静态站点生成工具，不需要使用动态的数据库和相关处理。
 *    [Markdown](http://zh.wikipedia.org/wiki/Markdown)：一种轻量级的标记语言，比HTML简单，用于Octopress博客发表时的内容排版。
 *    Git：最早用于管理Linux源码的分布式版本控制工具。
 *    [Github](https://github.com/)：程序员的Facebook,为程序员托管了很多代码的站点。
 *    [Github pages](https://help.github.com/categories/20/articles)：Github推出的，给与程序员自由创造静态网页的功能，支持Jekyll，而Octopress是对Jekyll的封装，于是也被支持。
 *    Ruby：Octopress框架的实现语言（顺道推荐[codecademy](http://www.codecademy.com/tracks/ruby)，可以体验到轻松的交互式的Ruby学习）。Mac OS X下自带了Ruby，不过版本可能与Octopress不匹配，需要使用RVM重新配置。
-*    [RVM](https://rvm.io/)（ruby version manager）：用于管理ruby版本的工具。类似的工具有rbenv，本文使用rvm管理ruby版本。
+*    [RVM](https://rvm.io/)（ruby version manager）：用于管理Ruby的版本的工具。类似的工具有rbenv，本文使用rvm管理ruby版本。
+*    [RubyGem](http://rubygems.org/)：也简称Gem，用于管理Ruby中的程序组件的工具。个人理解一个gem类似于一个特定功能的代码库。
+*    [Bundler](http://bundler.io/)：通过管理一个Ruby项目中的各个Gem来管理整个项目的工具。
 *    rake：ruby中类似于make的构建工具，用于从源码生成最终的产品。
 *    [YAML](http://www.ibm.com/developerworks/cn/xml/x-cn-yamlintro/): YAML是一种比 XML更敏捷的半结构化数据格式。Octopress使用yaml做配置文件。
 *    [homebrew](http://mxcl.github.com/homebrew/ )：Mac OS下的软件包管理工具，类似于Linux下的dpkg。

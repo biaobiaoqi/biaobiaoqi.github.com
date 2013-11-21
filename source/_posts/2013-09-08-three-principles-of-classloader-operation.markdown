@@ -18,6 +18,8 @@ description: "Java classloader three principles. Java类加载器加载三原则
 
 > 如果一个类还没有被加载，类加载器会委托它的父亲加载器去加载它。
 
+
+
 这种委托会一直延续，直到到达委托层次的最顶层，由原始的类加载器加载完成该类。下图展示了这种情况。
 
 ![](https://dl.dropboxusercontent.com/u/64021093/Java%20Classloader/classloader1.gif)

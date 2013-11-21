@@ -21,9 +21,9 @@ description: "本文通过介绍Java方法调用的虚分派，来加深对Java�
 * 3.invokeinterface的实现跟invokevirtual类似。
 * 4.invokestatic是对静态方法的调用。
 
-其中最复杂的要属 invokevirtual指令，它涉及到了多态的特性，使用virtual dispatch做方法调用。
+其中最复杂的要属`invokevirtual`指令，它涉及到了多态的特性，使用虚分派来实现方法调用。
 
-virtual dispatch机制会首先从 receiver（被调用方法的对象）的类的实现中查找对应的方法，如果没找到，则去父类查找，直到找到函数并实现调用，而不是依赖于引用的类型。
+虚分派机制会首先从 receiver（被调用方法的对象）的类的实现中查找对应的方法，如果没找到，则去父类查找，直到找到函数并实现调用，而不是依赖于引用的类型（相对于实际类型，引用类型又称静态类型）。
 
 下面是一段有趣的代码。反映了virtual dispatch机制 和 一般的field访问的不同。
 ```java
@@ -59,7 +59,7 @@ Hello,le monde
 Bonjour,le monde  
 ```
 
-前两行输出中，对于intro这个属性的访问，直接指向了父类中的变量，因为引用类型为父类。
+前两行输出中，对于intro这个属性的访问，直接指向了父类中的变量，因为静态类型为父类。
 
 第二行对于target()的方法调用，则是指向了子类中的方法，虽然引用类型也为父类，但这是虚分派的结果，虚分派不管引用类型的，只查被调用对象的类型。
 
@@ -101,13 +101,11 @@ ARETURN
 
 ##方法表（Method Table）
 
-介绍了虚分派，接下来介绍是它的一种实现方式 -- 方法表。类似于C++的虚函数表vtbl。
+介绍了虚分派，接下来介绍是它的一种实现方式 -- 虚方法表。类似于C++的虚函数表vtbl。
 
-在有的JVM实现中，使用了方法表机制实现虚分派，而有时候，为了节省内存可能不采用方法表的实现。
+在有的JVM实现中，使用了方法表机制实现虚分派，为invokevirtual指令提供服务。而有时候，为了节省内存可能不采用方法表的实现。
 
-不要被方法表这个名字迷惑，它并不是记录所有方法的表。它是为虚分派服务，不会记录用invokestatic调用的静态方法和用invokespecial调用的构造函数和私有方法。
-
-JVM会在链接类的过程中，给类分配相应的方法表内存空间。每个类对应一个方法表。这些都是存在于method area区中的。这里与C++略有不同，C++中每个对象的第一个指针就是指向了相应的虚函数表。而Java中每个对象索引到对应的类，在对应的类数据中对应一个方法表。（关于链接的更多信息，参见博文[《Java类的装载、链接和初始化》](http://localhost:4000/blog/2013/09/08/java-class-loading-linking-and-initialising/)）
+JVM会在链接类的过程中，给类分配相应的方法表内存空间。每个类对应一个方法表。这些都是存在于方法区中的。与C++略有不同，C++中每个对象的第一个指针就是指向了相应的虚函数表。而Java中每个对象索引到对应的类，在对应的类数据中对应一个方法表。（关于链接的更多信息，参见博文[《Java类的装载、链接和初始化》](http://localhost:4000/blog/2013/09/08/java-class-loading-linking-and-initialising/)）
 
 ### 一种方法表的实现如下：
 
@@ -121,10 +119,19 @@ JVM运行时，当代码索引到一个方法时，是根据它在方法表中�
 
 ###invokeinterface与invokevirtual的比较
 
-当使用invokeinterface来调用方法时，由于不同的类可以实现同一interface，我们无法确定在某个类中的inteface中的方法处在哪个位置。于是，也就无法解析 CONSTANT_intefaceMethodref-info为直接索引，而必须每次都执行一次在methodtable中的搜索了。
-所以，在这种实现中，通过 invokeinterface访问方法比通过invokevirtua﻿﻿l访问明显慢很多。
+~~~当使用invokeinterface来调用方法时，由于不同的类可以实现同一interface，我们无法确定在某个类中的inteface中的方法处在哪个位置。于是，也就无法解析 CONSTANT_intefaceMethodref-info为直接索引，而必须每次都执行一次在methodtable中的搜索了。~~~
 
+~~~所以，在这种实现中，通过 invokeinterface访问方法比通过invokevirtua﻿﻿l访问明显慢很多。~~~
+
+为了优化性能，`invokeinterface`实际上也可以使用一张方发表（itb）做查找。
 
 ###参考资料
 
 * [《Inside the Java2 Virtual Machine》](http://book.douban.com/subject/1788390/)
+* [《深入理解Java虚拟机》](http://book.douban.com/subject/6522893/)
+
+
+Log:
+
+2013-11-20 读《深入理解Java虚拟机》，修正部分内容
+
