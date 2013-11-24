@@ -68,9 +68,13 @@ description: "Mac OS X上装的软件"
 
 [Iterm2](http://www.iterm2.com/#/section/downloads)：一个不错的终端。
 
-[Go2Shell](https://itunes.apple.com/cn/app/go2shell/id445770608?mt=12)：把它拖到Finder 工具栏上，点击后可直接在当前目录下开启终端，可以配合Iterm2使用。
+[Go2Shell](https://itunes.apple.com/cn/app/go2shell/id445770608?mt=12)：把它拖到Finder 工具栏上，点击后可开启终端到当前路径。可以配合Iterm2使用，设置方式如下：
 
-[Sublimetext](http://www.sublimetext.com/2)：强大的编辑器。
+`$open -a Go2Shell --args config`
+
+[Sublimetext](http://www.sublimetext.com/2)：强大的编辑器。创建`subl`命令行指令：
+
+`ln -s "/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl" ~/bin/subl`
 
 [Mou](http://mouapp.com/)：Mac下最好的Markdown编辑器。
 
