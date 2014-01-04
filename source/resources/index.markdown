@@ -17,10 +17,11 @@ footer: true
 * [stackoverflow](http://stackoverflow.com)：最好的编程问答社区。
 * [github](http://github.com)：Git代码托管，程序猿的Facebook。
 
-##Podcast
+##多媒体
 
 * [teahour](http://teahour.fm/)：程序员圈子的“锵锵三人行”。
 * [Tiny4Voice](https://itunes.apple.com/us/podcast/tiny4voice/id400000696)：TinyFool分享的技术、生活、心路历程、杂侃。
+* [晓说](https://itunes.apple.com/cn/app/geng-xin-xiao-shuo+zui-xin/id628307373)：高晓松其人不用多说。去实验室骑车途中喜欢听他乱侃，很有趣，不用眼睛也能开眼界=）。
 
 
 ##微信公众账号
@@ -33,7 +34,7 @@ footer: true
 
 * [ReDow](http://redow.me)：蛰伏的算法大神。
 * [Zaumreit](http://zaumreit.me)：传说中的草原。
-* [Nius](http://nius.me)：想成为优秀的产品工程师的少年。
+* [Nius](http://nius.me)：full stack的工程师。
 * [Ricky Tan](http://rickytan.me)：iOS开发大牛谭总。
 * [cocolighter](http://cocolighter.com/)：喜欢拍照的文艺程序猿。
 * [Linest](http://linest.github.io)：实验室的大王。
