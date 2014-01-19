@@ -1,0 +1,89 @@
+---
+layout: post
+title: "邮件服务（一）：基础知识"
+date: 2014-01-20 00:11
+comments: true
+categories: [技术]
+tags: [email, tech, server]
+description: ""
+
+---
+
+
+##背景
+
+电子邮件出现在1960s晚期，比打开浏览器就要使用的HTTP协议早了20年左右,是二十世纪人类最伟大的发明之一。这个古老、经典的框架在网络中运行了五十多年，现今仍然是网络中主要的流量类型之一。
+
+不得不提的是，[wiki](http://zh.wikipedia.org/wiki/%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6)上关于中国的第一封电子邮件的记载：1987年9月14日[1]中国第一封电子邮件是由“德国互联网之父”维纳·措恩与王运丰在北京的计算机应用技术研究所发往德国卡尔斯鲁厄大学的，其内容为英文，大意如下：
+
+> Across the **Great Wall** we can reach every corner in the world.
+
+真的是很有远见呢-,-
+
+前几天梳理了电子邮箱相关的协议和框架组件，准备整理成文。一共三篇，本文是基本知识总结，第二篇是进阶，第三篇记录了邮件服务器的搭建实践。
+
+<!--more-->
+##邮件传输所需要的组件
+
+在解释邮件的传送过程前，先简单介绍一些术语（可以结合）：
+
+###术语
+
+####Mail Agent
+
+一般我们将邮件传输中的组件称作Mail Agent，根据功能的不同，它们包括了：
+
+* **MUA**（Mail User Agent）：作为客户端程序，负责从服务器接收邮件，向服务器发送邮件。
+* **MTA**（Mail Transfer Agent）：将邮件发送给目的地址的邮件服务器（目的服务器上也有一个MTA来做接收）。一般提到的Mail Server就是MTA。
+* **MDA**（Mail Delivery Agent）：根据MTA收取的邮件，决定邮件的去向（如果本机就是邮件的目的地址，则放入本地用户邮箱，如果不是，则继续转发）。还可以配置过滤垃圾邮件和自动回复等。
+* **Mailbox**：存储邮件数据。MDA会将邮件放到不同用户的邮箱中。一般的，有mbox、Maildir和dbmail等存储格式。mbox将所有邮件存放到一个文件中，弊端较多。Maildir则将邮件存为单独的文件。
+* **MRA**（Mail Retrieval Agent）：负责与MUA沟通。
+
+####协议
+
+不同Agent之间的数据交通都依赖于协议，这些协议包括：
+
+* **SMTP**（Simple Mail Transfer Protocol）：端口25，面向连接的传输协议。用于MUA向MTA发送邮件，以及MTA之间互相发送和接收邮件。严格来说，MTA其实仅是指SMTP。
+* **POP3**（Post Office Protocol3）：离线协议，MUA从MRA获取邮件使用这一协议。首先验证身份，将邮件传输到MUA后，用户Mailbox中的邮件会被删除。
+* **IMAP**（Internet Message Access Protocol）：与POP3类似，用于从MRA收取邮件。不过MUA与MRA之间双向通信，客户端的改动会反映到服务器上。IMAP 整体上为用户带来更为便捷和可靠的体验，POP3 更易丢失邮件或多次下载相同的邮件，但 IMAP 通过邮件客户端与webmail 之间的双向同步功能很好地避免了这些问题。
+
+####其他
+
+* **MX记录**：邮箱服务器DNS的MX记录指向邮箱服务器。MX记录可以设定优先级，数字越小的优先级越高。比如如下两条MX记录：`gmail.com.		1656	IN	MX	5 gmail-smtp-in.l.google.com.`，`gmail.com.		1656	IN	MX	10 alt1.gmail-smtp-in.l.google.com.`	
+	MTA会优先选取优先级为5的地址发送，如果不成功，再转向优先级低的服务器发送。而较低优先级的服务器只是用作暂存，将邮件保存在待发送的队列中，等主服务器恢复后中继转发到主服务器，以此容错。
+
+* **中继转发**（Relay）：邮件从一台MTA转发到下一台MTA，这个操作就成为邮件中继转发。如果所有人都能使用某台MTA做中继转发，则这台MTA成为Open Relay。这是很危险的，容易被互联网的邮件流量拖垮，且可能被记录到邮箱服务器黑名单上，坏处多多。需要仔细配置Relay规则。
+
+
+###邮件传输实例
+
+
+从一个简单的应用场景谈起：Biaobiaoqi（简称B）使用自己的邮箱hello@biaobiaoqi.me登陆了自己的foxmail邮件客户端，撰写邮件，发送给shenyapeng(简称S)，S的邮箱地址是shenyapeng@gmail.com。S打开自己的邮件客户端，查收了邮件。
+
+从用户的角度来看，只是简单的将邮件从B发到了S，而实际上邮件在网络中经过了多个协议的传输。其大致流程如下：
+
+* 1.首先邮件需要从B的邮件客户端传送到对应的biaobiaoqi.me邮箱服务器
+* 2.biaobiaoqi.me的邮箱服务器将邮件发送给gmail.com邮箱服务器。
+* 3.S的邮件客户端从gmail邮件服务器获取到信收到的邮件。
+
+
+而更技术的解释如下：
+
+* 1.B登陆PC上得MUA（比如Foxmail、Thunderbird、Outlook等），撰写邮件。MUA使用SMTP将邮件发送给B的邮箱服务器mail.biaobiaoqi.me。
+* 2.mail.biaobiaoqi.me的MDA检测邮件头信息，发现需要将邮件发送给gmail.com邮箱服务器，于是交予MTA来做传输。
+* 3.MTA通过gmail.com的DNS中MX记录，查找到邮箱服务器的IP地址(`dig mx gmail.com`)，再向目的地中继转发这封邮件。
+* 4.到达目的MTA后，邮件被MDA送到Mailbox中。MRA开始工作，供MUA收取邮件。
+* 5.S登陆MUA，使用POP3或IMAP协议从gmail.com的邮箱服务器MRA收取邮件。
+
+
+无论是邮件客户端跟邮箱服务器之间认证身份，还是邮件数据的传输，都会进行加密。直接暴露在互联网络中是很危险的。安全认证方面的问题会在下一篇讨论，这里先介绍基本的功能协议。要知道最早发明邮件协议时，也并没有将安全问题考虑在内。
+
+
+
+
+##主要参考资料
+
+* [《鸟哥的Linux私房菜——服务器架设篇》](http://vbird.dic.ksu.edu.tw/linux_server/0380mail.php)
+* [MailServerOverview](http://wiki2.dovecot.org/MailServerOverview )
+
+

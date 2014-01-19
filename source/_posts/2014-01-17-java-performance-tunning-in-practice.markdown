@@ -3,9 +3,8 @@ layout: post
 title: "JVM参数调优：Eclipse启动实践"
 date: 2014-01-17 11:16
 comments: true
-categories: [Java, JVM, Eclipse]
-tags: [技术]
-description: ""
+categories: [技术]
+tags: [Java, JVM, Eclipse]
 
 ---
 
