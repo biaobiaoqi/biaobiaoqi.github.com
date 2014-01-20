@@ -39,14 +39,14 @@ description: ""
 	
 	这一步是可选的。可以在符号引用第一次被使用时完成，即所谓的延迟解析(late resolution)。但对用户而言，这一步永远是延迟解析的，即使运行时会执行early resolution，但程序不会显示的在第一次判断出错误时抛出错误，而会在对应的类第一次主动使用的时候抛出错误！
 
-	另外，这一步与之后的类初始化是不冲突的，并非一定要所有的解析结束以后才执行类的初始化。不同的JVM实现不同。详情见另一篇博文[《Java类加载的延迟初始化》](http://localhost:4000/blog/2013/09/08/late-initialising-in-java/)。
+	另外，这一步与之后的类初始化是不冲突的，并非一定要所有的解析结束以后才执行类的初始化。不同的JVM实现不同。详情见另一篇博文[《Java类加载的延迟初始化》](http://biaobiaoqi.me/blog/2013/09/08/late-initialising-in-java/)。
 
 
 ##初始化类(Initialization)
 
-开发Java时，接触最多的是对象的初始化。实际上类也是有初始化的。相比对象初始化（参见博文[Java类的实例化](http://localhost:4000/blog/2013/09/08/initliate-objects-in-java/)），类的初始化机制要简单不少。
+开发Java时，接触最多的是对象的初始化。实际上类也是有初始化的。相比对象初始化（参见博文[Java类的实例化](http://biaobiaoqi.me/blog/2013/09/08/initliate-objects-in-java/)），类的初始化机制要简单不少。
 
-类的初始化也是延迟的，直到类第一次被主动使用(active use)，JVM才会初始化类。（参见博文[《Java类加载的延迟初始化》](http://localhost:4000/blog/2013/09/08/late-initialising-in-java/)）
+类的初始化也是延迟的，直到类第一次被主动使用(active use)，JVM才会初始化类。（参见博文[《Java类加载的延迟初始化》](http://biaobiaoqi.me/blog/2013/09/08/late-initialising-in-java/)）
 
 类的初始化分两步：
 

@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "邮件服务（一）：基础知识"
+title: "邮件服务（一）：基本框架"
 date: 2014-01-20 00:11
 comments: true
-categories: [技术]
-tags: [email, tech, server]
+categories: [tech]
+tags: [邮件服务, 技术, 服务器, 协议]
 description: ""
 
 ---
@@ -20,7 +20,7 @@ description: ""
 
 真的是很有远见呢-,-
 
-前几天梳理了电子邮箱相关的协议和框架组件，准备整理成文。一共三篇，本文是基本知识总结，第二篇是进阶，第三篇记录了邮件服务器的搭建实践。
+前几天梳理了电子邮箱相关的协议和框架组件，准备整理成文。一共三篇，本文是基本知识总结，第二篇介绍安全认证和防垃圾邮件的规范，第三篇记录了邮件服务器的搭建实践。
 
 <!--more-->
 ##邮件传输所需要的组件
@@ -79,11 +79,11 @@ description: ""
 无论是邮件客户端跟邮箱服务器之间认证身份，还是邮件数据的传输，都会进行加密。直接暴露在互联网络中是很危险的。安全认证方面的问题会在下一篇讨论，这里先介绍基本的功能协议。要知道最早发明邮件协议时，也并没有将安全问题考虑在内。
 
 
-
-
 ##主要参考资料
 
 * [《鸟哥的Linux私房菜——服务器架设篇》](http://vbird.dic.ksu.edu.tw/linux_server/0380mail.php)
 * [MailServerOverview](http://wiki2.dovecot.org/MailServerOverview )
 
+
+##邮件服务系列博文：[请戳](http://biaobiaoqi.me/tags/you-jian-fu-wu/)
 

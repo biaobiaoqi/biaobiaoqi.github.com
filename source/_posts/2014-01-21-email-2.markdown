@@ -1,0 +1,126 @@
+---
+layout: post
+title: "邮件服务（二）：安全、认证和垃圾邮件"
+date: 2014-01-21 01:38
+comments: true
+categories: [tech]
+tags: [邮件服务, 技术, 服务器, 协议]
+description: ""
+
+---
+
+##背景
+
+[上一篇博客](http://biaobiaoqi.me/blog/2014/01/20/email-1/)介绍了邮件服务的基本知识，了解了邮件是如何从发件人的邮件客户端经过不同的传输协议传送到收件人的邮件客户端的。这只是邮件的基本功能实现，但如果发生如下情况，整个邮件系统的生态环境将被扰乱：
+
+* 被不法分子利用邮箱服务器发送垃圾邮件
+* 被其他人伪造域名邮箱发送邮件
+* 被中间人窃取账号密码、甚至重要邮件信息（中间人攻击）
+* 即使自己拥有邮箱服务器的权限，无限制的滥用这个权利给其他邮箱发送邮件也是不好的
+
+为了防止以上的种种情况，电子邮箱体系引入了更多的协议和机制。本文对此做浅显的总结，如有出错，还请指出和补充。
+
+<!--more-->
+
+##PTR
+
+[PTR](http://en.wikipedia.org/wiki/List_of_DNS_record_types#PTR)(pointer record)是DNS记录中的一种。与A记录相反，它记录的是由IP到[FQDN](http://en.wikipedia.org/wiki/Fully_qualified_domain_name)（fully qualified domain name）的映射。
+
+PTR并非由DNS服务提供商控制，而是通过IP提供商来设定。比如博主使用linode的VPS，独立IP 由Linode提供，于是PTR也是由Linode给予的权限来做设定。
+
+在DNS中设置PTR能增加邮件的非垃圾邮件权重（不同垃圾邮件黑名单判定机构有不同的判定规则，其中PTR是公认的指标之一）。
+
+更多信息参考：[《Checking FQDN, Reverse-DNS/PTR, MX record》](https://rtcamp.com/tutorials/mail/fqdn-reverse-dns-ptr-mx-record-checks/)
+
+##SPF
+
+[SPF](http://en.wikipedia.org/wiki/Sender_Policy_Framework)(Sender Policy Framework)也是一种DNS记录。通过查询发送邮件者的 IP 地址和发送来的邮件地址做对比，进行简单的邮件验证。域名的管理员通过 SPF 记录或 TXT 记录来规定这个域名下哪些 IP 地址是“允许”发送邮件的，这样如果有人用别的 IP 地址来伪造发送的话，收件方可以根据 SPF 来选择拒收这些邮件。
+
+最初的邮件系统没有考虑到各种安全因素，SPF是在之后的发展过程中提出的。为了兼容不支持SPF记录的DNS服务器（本博客所使用的DNSPod就不支持SPF记录。），允许用TXT记录来表达SPF。[OpenSPF](www.openspf.org) 建议在这段过渡时期同时添加 SPF 记录和 TXT 记录。
+
+SPF记录的语法规则见[链接](http://www.openspf.org/SPF_Record_Syntax)。这里给出一个简单的例子：
+
+`v=spf1 a mx -all`
+
+其中`spf1`是版本号；`a`代表把A记录对应的IP加入信任列表；`mx`说明把这个域名上的 MX 记录所对应的服务器加入信任列表；`-all`代表将不是从信任列表发出的邮件强制拒绝(hard fail)。
+
+
+值得注意的是，经过测试发现Gmail并没有对hard fail的邮件执行拒绝，只是在web界面做出了一些提醒。这里有一篇相关的讨论：[链接](http://www.gossamer-threads.com/lists/spf/discuss/32914)。
+
+
+更多资料参考：[《如何给域名设置 SPF 记录》](http://t.tt/31/)
+
+
+##DKIM
+
+
+[DKIM](http://www.dkim.org/)(DomainKeys Identified Mail)是一种电子邮件的验证技术，使用[非对称加密](http://zh.wikipedia.org/wiki/%E5%85%AC%E5%BC%80%E5%AF%86%E9%92%A5%E5%8A%A0%E5%AF%86)为邮件提供了签名与验证的功能。一般来说，发送方会在电子邮件的标头插入DKIM-Signature及电子签名，它们由私钥加密。而接收方则透过DNS查询得到公开密钥后进行验证。
+
+DKIM是由DomainKeys所改进的协定，大多数的运作方式与DomainKeys相同。在2007年2月时，DKIM被列入互联网工程工作小组（IETF）的标准提案，并于同年5月成为正式标准。
+
+
+##传输协议
+
+通过标准的TCP/IP做SMTP传输，没有任何安全保障，信息容易被截获。为了保证数据的安全，可以使用SSL/TLS提供加密链接。对于IMAP和POP3使用SSL加密尚可接受，而SMTP会遇到兼容性问题：POP3和IMAP至于MRA和MUA有关，而使用SMTP协议的MTA会与其他的MTA沟通，除非全世界所有MTA节点同时升级为SSL/TLS加密的通信协议，否则会出现部分邮件无法中继的状况。
+
+[STARTTLS](http://en.wikipedia.org/wiki/STARTTLS)很好的解决了这一问题。STARTTLS是明文传输协议的扩展，它允许在明文连接的基础上将连接升级为加密连接，而不是使用另外一个加密接口。
+
+一般的，邮箱服务器各协议端口设定如下：
+
+* IMAP：明文端口143，加密端口993
+* POP3：明文端口110，加密端口995
+* SMTP：明文端口 25，SSL加密端口465，STARTTLS加密端口587
+
+
+关于SSL、TLS和STARTTLS的区别，参见[链接](https://www.fastmail.fm/help/technology_ssl_vs_tls_starttls.html)。
+
+
+##查看邮件原始信息
+
+随着邮件在网络中的中转，邮件头会被加入许多必要信息。理解邮件头能帮助理解邮件服务的整个系统，在遇到垃圾邮件时，也可以助于定位问题所在。
+
+GMAIL的Web端可以查看邮件的详细信息。在邮件内容框里，点击右上角的更多选项，选中Show original，如图：
+
+![img](http://biaobiaoqi.u.qiniudn.com/emailori-mail.png?imageView/2/w/800/h/800)
+
+下面展示linode发送给someuser@gmail.com的一封邮件的原始信息：
+
+```                                                                                                                                                                                                                                                       
+Delivered-To: someuser@gmail.com
+Received: by 10.114.246.38 with SMTP id xt6csp139967ldc;
+        Mon, 20 Jan 2014 06:53:17 -0800 (PST)
+X-Received: by 10.182.81.197 with SMTP id c5mr7069251oby.40.1390229596297;
+        Mon, 20 Jan 2014 06:53:16 -0800 (PST)
+Return-Path: <support@linode.com>
+Received: from mail2.linode.com (mail2.linode.com. [173.255.198.11])
+        by mx.google.com with ESMTP id f6si835374obr.111.2014.01.20.06.53.15
+        for <someuser@gmail.com>;
+        Mon, 20 Jan 2014 06:53:16 -0800 (PST)
+Received-SPF: pass (google.com: domain of support@linode.com designates 173.255.198.11 as permitted sender) client-ip=173.255.198.11;
+Authentication-Results: mx.google.com;
+       spf=pass (google.com: domain of support@linode.com designates 173.255.198.11 as permitted sender) smtp.mail=support@linode.com
+Received: from li114-242.members.linode.com (li114-242.members.linode.com [69.164.199.242])
+	by mail2.linode.com (Postfix) with ESMTP id 6AF9E26A96;
+	Mon, 20 Jan 2014 09:53:15 -0500 (EST)
+Date: Mon, 20 Jan 2014 09:53:15 -0500 (EST)
+From: support@linode.com
+To: someuser@gmail.com
+Message-ID: <376750868.26764.1390229595437.JavaMail.cfusion@mail2.linode.com>
+```
+这封邮件里每项的具体含义如下([参考](https://support.google.com/mail/answer/29436?hl=en)以及[RFC0822](http://www.ietf.org/rfc/rfc0822.txt))：
+
+* Delivered-TO： 发送的目的地邮箱地址。
+* Received： 这个字段可以用来追踪邮件的传送路径。字段的基本格式为 from A by B for C。其中A为发送方，B为接收方，C为收件人邮箱地址。由于邮件可能经过多个SMTP服务器中继，故可以有多个Received字段。在邮件头中，以自底向上的顺序阅读它们。对于这封邮件，传送路径为：li114-242.members.linode.com -> mail2.linode.com -> mx.google.com -> 10.182.81.197 -> 10.114.246.38.
+* Received-SPF： 用于记录SPF查询来验证邮件的安全性，参考[《SPF Received Header》](http://www.openspf.org/SPF_Received_Header)
+* Return-Path： 邮件的回复地址，来自于SMTP中得`mail from:`命令。
+* Date： 邮件的发送时间。
+* From： 客户端显示的发件人地址，可以跟Return-Path中得地址不同。
+* To： 客户端显示的收件人地址。
+
+
+实际上，Google估计到IP地址为敏感信息，某些情况下会隐藏发送邮件标头中得发件人IP地址（[资料链接](https://support.google.com/mail/answer/26903?hl=zh-Hans&hlrm=en)）。
+
+不同的客户端对这一功能做了不同的实现。比如QQ邮箱以前是能够查看邮件原始信息的，而现在已经关闭了这一功能。
+
+
+##邮件服务系列博文：[请戳](http://biaobiaoqi.me/tags/you-jian-fu-wu/)
