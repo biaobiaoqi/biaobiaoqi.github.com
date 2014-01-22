@@ -11,12 +11,13 @@ description: "在Linode VPS（Ubuntu12.04TLS）上使用Postfix，dovcot，opend
 
 ##背景
 
-前两篇文章（[请戳](http://biaobiaoqi.me/tags/you-jian-fu-wu/)）介绍了邮件系统的理论知识，本文是搭建邮箱服务器的实践记录。
+[邮件服务系列博文](http://biaobiaoqi.me/tags/you-jian-fu-wu/)中，前两篇介绍了邮件系统的基本功能和安全体系，本文记录了搭建邮箱服务器的实践。
 
 [Sendmail](http://en.wikipedia.org/wiki/Sendmail)是一种多用途、支援多种协定的跨网络电子邮件传送代理软件，于1983年随着BSD 4.1c首次发行，2001年时的调查，互联网上的邮件服务器有42%使用Sendmail，但之后由于多次被发现重大的安全性漏洞，且其设定档过于复杂造成较高的学习门槛等因素，导致市占率下滑。
 
-Postfix被[Wietse Zweitze Venema](http://www.porcupine.org/wietse/)创造出来以取代Sendmail。本次实践即使用Postfix为域名biaobiaoqi.me搭建邮箱服务器，服务器是Linode上的VPS，Ubuntu 12.04LTS，DNS服务器使用[DNSPod](http://dnspod.com/)。
+[Postfix](http://www.postfix.org/)被[Wietse Zweitze Venema](http://www.porcupine.org/wietse/)创造出来以取代Sendmail。本次实践即使用Postfix为域名biaobiaoqi.me搭建邮箱服务器，服务器是Linode上的VPS，Ubuntu 12.04LTS，DNS服务器使用[DNSPod](http://dnspod.com/)。
 
+<!--more-->
 
 ##检查IP信用度
 
@@ -24,10 +25,9 @@ Postfix被[Wietse Zweitze Venema](http://www.porcupine.org/wietse/)创造出来�
 
 可以点下面的链接查看：
 
-* [http://www.spamhaus.org/query/bl?ip=8.8.8.8](http://www.spamhaus.org/query/bl?ip=8.8.8.8) #需要将连接末尾的IP替换为邮箱服务器的IP
 * [http://anti-spam.org.cn/](http://anti-spam.org.cn/)
 * [http://www.justspam.org/check-an-ip](http://www.justspam.org/check-an-ip)
-
+* [http://www.spamhaus.org/query/bl?ip=74.125.129.27](http://www.spamhaus.org/query/bl?ip=74.125.129.27) #需要将连接末尾的IP替换为邮箱服务器的IP
 
 
 ##域名、IP相关配置
@@ -66,7 +66,7 @@ FQDN需要记住，之后配置DNS记录时需要。
 
 ###PTR配置
 
-Linode的域名反向解析设置教程参见：[链接](https://library.linode.com/dns-manager#sph_setting-reverse-dns) 
+Linode的域名反向解析设置教程参见：[Setting Reverse DNS](https://library.linode.com/dns-manager#sph_setting-reverse-dns) 
 
 查看PTR的命令如下：
 
@@ -120,7 +120,7 @@ netstat -nltp | grep 25 #查看SMTP（25）的端口是否运行
 
 ##DKIM配置安装
 
-具体部署过程参照：[链接](https://rtcamp.com/tutorials/mail/dkim-postfix-ubuntu/)
+具体部署过程参照：[dkim-postfix-ubuntu](https://rtcamp.com/tutorials/mail/dkim-postfix-ubuntu/)
 
 其中需要注意，如果使用的Postfix版本不低于2.6，需要将/etc/postfix/main.cf中的milter_protocol赋值为6。
 `postconf mail_version`可以查看postfix的版本。
@@ -167,11 +167,7 @@ opendkim-testkey: key OK
 * [postsuper](http://www.postfix.org/postsuper.1.html)
 
 
-Ubuntu下安装Postfix，配置DKIM，SPR，SMTP服务  http://www.quanlei.com/2012/06/3148.html
-
 ##其他参考资料
 
 * [Emails Tutorials](https://rtcamp.com/tutorials/mail/)
 
-
-##邮件服务系列博文：[请戳](http://biaobiaoqi.me/tags/you-jian-fu-wu/)

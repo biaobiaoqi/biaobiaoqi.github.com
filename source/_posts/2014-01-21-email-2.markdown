@@ -11,7 +11,7 @@ description: "邮件服务器如何保证邮箱的安全？本文总结了尝试
 
 ##背景
 
-[上一篇博客](http://biaobiaoqi.me/blog/2014/01/20/email-1/)介绍了邮件服务的基本知识，了解了邮件是如何从发件人的邮件客户端经过不同的传输协议传送到收件人的邮件客户端的。这只是邮件的基本功能实现，但如果发生如下情况，整个邮件系统的生态环境将被扰乱：
+[邮件服务系列博文](http://biaobiaoqi.me/tags/you-jian-fu-wu/)中[第一篇博客](http://biaobiaoqi.me/blog/2014/01/20/email-1/)介绍了邮件服务的基本知识，了解了邮件是如何从发件人的邮件客户端经过不同的传输协议传送到收件人的邮件客户端的。这只是邮件的基本功能实现，但如果发生如下情况，整个邮件系统的生态环境将被扰乱：
 
 * 被不法分子利用邮箱服务器发送垃圾邮件
 * 被其他人伪造域名邮箱发送邮件
@@ -30,7 +30,7 @@ PTR并非由DNS服务提供商控制，而是通过IP提供商来设定。比如
 
 在DNS中设置PTR能增加邮件的非垃圾邮件权重（不同垃圾邮件黑名单判定机构有不同的判定规则，其中PTR是公认的指标之一）。
 
-更多信息参考：[《Checking FQDN, Reverse-DNS/PTR, MX record》](https://rtcamp.com/tutorials/mail/fqdn-reverse-dns-ptr-mx-record-checks/)
+更多信息参考：[Checking FQDN, Reverse-DNS/PTR, MX record](https://rtcamp.com/tutorials/mail/fqdn-reverse-dns-ptr-mx-record-checks/)
 
 ##SPF
 
@@ -48,7 +48,7 @@ SPF记录的语法规则见[链接](http://www.openspf.org/SPF_Record_Syntax)。
 值得注意的是，经过测试发现Gmail并没有对hard fail的邮件执行拒绝，只是在web界面做出了一些提醒。这里有一篇相关的讨论：[链接](http://www.gossamer-threads.com/lists/spf/discuss/32914)。
 
 
-更多资料参考：[《如何给域名设置 SPF 记录》](http://t.tt/31/)
+更多资料参考：[如何给域名设置 SPF 记录](http://t.tt/31/)
 
 
 ##DKIM
@@ -113,7 +113,7 @@ Message-ID: <376750868.26764.1390229595437.JavaMail.cfusion@mail2.linode.com>
 
 * Delivered-TO： 发送的目的地邮箱地址。
 * Received： 这个字段可以用来追踪邮件的传送路径。字段的基本格式为 from A by B for C。其中A为发送方，B为接收方，C为收件人邮箱地址。由于邮件可能经过多个SMTP服务器中继，故可以有多个Received字段。在邮件头中，以自底向上的顺序阅读它们。对于这封邮件，传送路径为：li114-242.members.linode.com -> mail2.linode.com -> mx.google.com -> 10.182.81.197 -> 10.114.246.38.
-* Received-SPF： 用于记录SPF查询来验证邮件的安全性，参考[《SPF Received Header》](http://www.openspf.org/SPF_Received_Header)
+* Received-SPF： 用于记录SPF查询来验证邮件的安全性，参考[SPF Received Header](http://www.openspf.org/SPF_Received_Header)
 * Return-Path： 邮件的回复地址，来自于SMTP中得`mail from:`命令。
 * Date： 邮件的发送时间。
 * From： 客户端显示的发件人地址，可以跟Return-Path中得地址不同。
@@ -128,8 +128,6 @@ Message-ID: <376750868.26764.1390229595437.JavaMail.cfusion@mail2.linode.com>
 
 邮件服务器的基本功能实现虽然看起来简单，但为了让系统拥有足够的稳定性、邮件送达率，还是得付出不小的努力来与复杂的网络环境做斗争。许多公司为了集中注意力于自己的核心业务，会剥离出邮件发送的业务，使用第三方的邮件服务。国内国外涌现了不少第三方的邮件服务解决方案。自己没有相应的使用经验，谨贴出两个不错的介绍，供大家参考：
 
-* [《邮件发送服务AWS SES，Mailgun以及SendCloud》](http://70.io/develop/aws_ses-mailgun-sendcloud.html)
-* [《知乎的邮件系统为什么不再用 Amazon SES 了？》](http://www.zhihu.com/question/20088568)
- 
+* [邮件发送服务AWS SES，Mailgun以及SendCloud](http://70.io/develop/aws_ses-mailgun-sendcloud.html)
+* [知乎的邮件系统为什么不再用 Amazon SES 了？](http://www.zhihu.com/question/20088568)
 
-##邮件服务系列博文：[请戳](http://biaobiaoqi.me/tags/you-jian-fu-wu/)
