@@ -5,7 +5,7 @@ date: 2014-01-21 01:38
 comments: true
 categories: [tech]
 tags: [邮件服务, 技术, 服务器, 协议]
-description: ""
+description: "邮件服务器如何保证邮箱的安全？本文总结了尝试用的方法策略。"
 
 ---
 
@@ -55,6 +55,8 @@ SPF记录的语法规则见[链接](http://www.openspf.org/SPF_Record_Syntax)。
 
 
 [DKIM](http://www.dkim.org/)(DomainKeys Identified Mail)是一种电子邮件的验证技术，使用[非对称加密](http://zh.wikipedia.org/wiki/%E5%85%AC%E5%BC%80%E5%AF%86%E9%92%A5%E5%8A%A0%E5%AF%86)为邮件提供了签名与验证的功能。一般来说，发送方会在电子邮件的标头插入DKIM-Signature及电子签名，它们由私钥加密。而接收方则透过DNS查询得到公开密钥后进行验证。
+
+
 
 DKIM是由DomainKeys所改进的协定，大多数的运作方式与DomainKeys相同。在2007年2月时，DKIM被列入互联网工程工作小组（IETF）的标准提案，并于同年5月成为正式标准。
 
@@ -122,5 +124,12 @@ Message-ID: <376750868.26764.1390229595437.JavaMail.cfusion@mail2.linode.com>
 
 不同的客户端对这一功能做了不同的实现。比如QQ邮箱以前是能够查看邮件原始信息的，而现在已经关闭了这一功能。
 
+##第三方邮件服务
+
+邮件服务器的基本功能实现虽然看起来简单，但为了让系统拥有足够的稳定性、邮件送达率，还是得付出不小的努力来与复杂的网络环境做斗争。许多公司为了集中注意力于自己的核心业务，会剥离出邮件发送的业务，使用第三方的邮件服务。国内国外涌现了不少第三方的邮件服务解决方案。自己没有相应的使用经验，谨贴出两个不错的介绍，供大家参考：
+
+* [《邮件发送服务AWS SES，Mailgun以及SendCloud》](http://70.io/develop/aws_ses-mailgun-sendcloud.html)
+* [《知乎的邮件系统为什么不再用 Amazon SES 了？》](http://www.zhihu.com/question/20088568)
+ 
 
 ##邮件服务系列博文：[请戳](http://biaobiaoqi.me/tags/you-jian-fu-wu/)

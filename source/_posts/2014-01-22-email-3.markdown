@@ -1,0 +1,177 @@
+---
+layout: post
+title: "邮件服务（三）：实践服务器搭建"
+date: 2014-01-22 01:14
+comments: true
+categories: [tech]
+tags: [邮件服务, 技术, 服务器, 协议]
+description: "在Linode VPS（Ubuntu12.04TLS）上使用Postfix，dovcot，opendkim搭建邮件服务器。DNS服务使用DNSPod。"
+
+---
+
+##背景
+
+前两篇文章（[请戳](http://biaobiaoqi.me/tags/you-jian-fu-wu/)）介绍了邮件系统的理论知识，本文是搭建邮箱服务器的实践记录。
+
+[Sendmail](http://en.wikipedia.org/wiki/Sendmail)是一种多用途、支援多种协定的跨网络电子邮件传送代理软件，于1983年随着BSD 4.1c首次发行，2001年时的调查，互联网上的邮件服务器有42%使用Sendmail，但之后由于多次被发现重大的安全性漏洞，且其设定档过于复杂造成较高的学习门槛等因素，导致市占率下滑。
+
+Postfix被[Wietse Zweitze Venema](http://www.porcupine.org/wietse/)创造出来以取代Sendmail。本次实践即使用Postfix为域名biaobiaoqi.me搭建邮箱服务器，服务器是Linode上的VPS，Ubuntu 12.04LTS，DNS服务器使用[DNSPod](http://dnspod.com/)。
+
+
+##检查IP信用度
+
+在自建邮件服务器之前，先检查所要使用的IP的信用度。如果IP已经在垃圾邮件联盟的黑名单里面，意味着这个IP在此之前或许被用作发送垃圾邮件，不愿意给这个IP擦屁股的话，就换个IP好了。
+
+可以点下面的链接查看：
+
+* [http://www.spamhaus.org/query/bl?ip=8.8.8.8](http://www.spamhaus.org/query/bl?ip=8.8.8.8) #需要将连接末尾的IP替换为邮箱服务器的IP
+* [http://anti-spam.org.cn/](http://anti-spam.org.cn/)
+* [http://www.justspam.org/check-an-ip](http://www.justspam.org/check-an-ip)
+
+
+
+##域名、IP相关配置
+
+
+###FQDN配置
+
+选定的邮箱服务器需要有合适的全名。比如可以设定biaobiaoqi.me的邮箱服务器的FQDN为mail.biaobiaoqi.me。修改FQDN的命令如下：
+
+`hostname mail.biaobiaoqi.me`
+
+查看FQDN的命令为：
+
+`hostname -f`
+
+FQDN需要记住，之后配置DNS记录时需要。
+
+###MX记录和A记录
+
+配置MX记录指向邮箱服务器IP。
+
+`biaobiaoqi.me.		600	IN	MX	10 biaobiaoqi.me.`
+
+使用如下命令查询：
+
+`dig mx biaobiaoqi.me`
+
+
+在DNS服务器里增加针对邮箱服务器的FQDN的A记录。
+
+`mail.biaobiaoqi.me.	10	IN	A	106.186.114.43`
+
+使用如下命令查询：
+
+`dig a mail.biaobiaoqi.me`
+
+###PTR配置
+
+Linode的域名反向解析设置教程参见：[链接](https://library.linode.com/dns-manager#sph_setting-reverse-dns) 
+
+查看PTR的命令如下：
+
+`dig -x 106.186.114.43`
+
+得到的结果中有如下项则为正确：
+
+```
+;; ANSWER SECTION:
+43.114.186.106.in-addr.arpa. 8640 IN	PTR	mail.biaobiaoqi.me.
+```
+
+###SPF配置
+
+在DNSPod上设置SPF记录。由于DNS本身不支持SPF类型，可以使用TXT记录代替：
+
+`biaobiaoqi.me.		600	IN	TXT	"v=spf1 a mx -all"`
+
+可以通过如下命令查询：
+
+`dig txt biaobiaoqi.me`
+
+在线测试SPF是否部署成功：[http://www.openspf.org/Why?show-form=1](http://www.openspf.org/Why?show-form=1)
+
+##Postfix搭建
+
+使用Postfix做SMTP服务器，Dovecot来做IMAP/POP3服务器，并使用Mysql存储加盐密码作认证。具体教程如下：
+
+[**Email with Postfix, Dovecot, and MySQL**](https://library.linode.com/email/postfix/postfix2.9.6-dovecot2.0.19-mysql)
+
+
+启动postfix：
+
+`sudo service postfix start`
+
+启动dovecot：
+
+`sudo dovecot -c /etc/dovecot/dovecot.conf`
+
+
+邮件服务启动后，测试相应的端口是否正常开放：
+
+```
+netstat -nltp | grep dovecot #查看POP3 （993）和IMAP （995）的端口是否运行
+
+netstat -nltp | grep 25 #查看SMTP（25）的端口是否运行
+```
+
+对于没有使用TLS或者STARTTLS的邮件服务器，可以使用[telnet](http://exchange.mvps.org/smtp_frames.htm)测试SMTP是否部署成功。而本次实践中增加了用户认证，telnet这种明文传输的协议无法作为测试工具，只好直接使用邮件客户端做功能测试。
+
+
+##DKIM配置安装
+
+具体部署过程参照：[链接](https://rtcamp.com/tutorials/mail/dkim-postfix-ubuntu/)
+
+其中需要注意，如果使用的Postfix版本不低于2.6，需要将/etc/postfix/main.cf中的milter_protocol赋值为6。
+`postconf mail_version`可以查看postfix的版本。
+
+
+本地测试公钥密钥是否正确：（[opendkim-testkey命令的介绍](http://www.opendkim.org/opendkim-testkey.8.html)）
+
+```
+->#opendkim-testkey -d biaobiaoqi.me -s mail -k /etc/postfix/dkim.key -vvv
+opendkim-testkey: key loaded from /etc/postfix/dkim.key
+opendkim-testkey: checking key 'mail._domainkey.biaobiaoqi.me'
+opendkim-testkey: key not secure #这里大概是用户、权限的问题。不会影响基本功能
+opendkim-testkey: key OK
+```
+
+##邮箱服务器健康度测试
+
+完成上述所有步骤后，一个完整的域名邮箱就可以投入使用了。在此之前，可以做一次全面的体检。
+
+推荐使用在线监测服务：[mail-tester](http://www.mail-tester.com/)。这是一个全面、界面友好的邮件测试网站。按照要求发送邮件到某邮件地址，然后就可以查到邮件服务器的体检报告了。每项都会有详细的说明。
+
+
+##遇到的问题记录
+
+安装部署的过程中，遇到不少问题。简略记录下其中有代表性的一些：
+
+* 能成功发送邮件，但无法接受邮件，在日志中查看，全是status=deferred。解决：FQDN的设定错误。
+
+* 使用`sudo service opendkim start`无法启动OpenDKIM。解决：不要使用service命令，而是用如下命令启动：`/etc/init.d/opendkim start`
+
+* 在使用Maildir格式接收邮件时，无法接受邮件。解决：需要自己在用户目录下构建Maildir/tmp、Maildir/cur、Maildir/new目录。
+
+* 在使用Maildir格式接收邮件时，无法接受邮件。解决：本地Maildir的权限会造成Permission denied。
+
+* 给qq邮箱发送邮件，提示『此地址未验证，请注意识别』。解决：这是qq的bug：[参见解释](http://edm.marketing100.com/service/news_detail.php?ID=126)
+
+
+
+##管理队列中的邮件
+在服务器端管理队列中得邮件使用`postqueue`和`postsuper`命令。使用详情参见：
+
+* [Manage the postfix mailqueue with postsuper, postqueue und mailq](http://www.faqforge.com/linux/server/manage-the-postfix-mailqueue-with-postsuper-postqueue-und-mailq/)
+* [postqueue](http://www.postfix.org/postqueue.1.html)
+* [postsuper](http://www.postfix.org/postsuper.1.html)
+
+
+Ubuntu下安装Postfix，配置DKIM，SPR，SMTP服务  http://www.quanlei.com/2012/06/3148.html
+
+##其他参考资料
+
+* [Emails Tutorials](https://rtcamp.com/tutorials/mail/)
+
+
+##邮件服务系列博文：[请戳](http://biaobiaoqi.me/tags/you-jian-fu-wu/)
