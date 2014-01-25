@@ -4,7 +4,7 @@ title: "邮件服务（三）：实践服务器搭建"
 date: 2014-01-22 01:14
 comments: true
 categories: [tech]
-tags: [邮件服务, 技术, 服务器, 协议]
+tags: [邮件服务, 技术, 服务器, 协议, Linode]
 description: "在Linode VPS（Ubuntu12.04TLS）上使用Postfix，dovcot，opendkim搭建邮件服务器。DNS服务使用DNSPod。"
 
 ---
