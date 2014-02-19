@@ -92,3 +92,6 @@ Jack Stitt
 完成迁移之后，开启VPS，还需要注意修改服务中IP相关的配置。比如shadowsocks里的json.config中的server ip。
 
 一切顺利完成后，别忘了去Support界面回复Ticket =).
+
+如果你考虑租用Linode机器，而又不吝啬使用[我的推荐码](https://www.linode.com/?r=06fc7f86359e92800c41177a80c5678ecfcb2568)，本博客不胜感激=).
+
