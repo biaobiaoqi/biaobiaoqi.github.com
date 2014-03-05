@@ -13,7 +13,7 @@ footer: true
 
 ##工具
 * [MacBook Pro](http://www.apple.com/macbook-pro/)：Mac的操作系统能让人专注于手头的工作。
-* [Dropbox](https://www.dropbox.com/‎)：前两天SSD挂掉，多亏Dropbox让我10G的文档、照片数据幸免于难。邀请其他人使用可以获得更多免费空间。如果还没使用过dropbox而又乐意让我获得更多的空间，请留言联系我，我给你发送邀请邮件=).
+* [Dropbox](http://www.dropbox.com)：前两天SSD挂掉，多亏Dropbox让我10G的文档、照片数据幸免于难。邀请其他人使用可以获得更多免费空间。如果还没使用过dropbox而又乐意让我获得更多的空间，请留言联系我，我给你发送邀请邮件=).
 * [Evernote](http://www.yinxiang.com/)/[印象笔记](http://www.yinxiang.com/)：知识管理、生活记录的好工具。覆盖到各大系统平台，无缝连接非常方便。
 * [Linode](https://www.linode.com/)：本博客就安家在Linode的VPS上。一家小而美、值得信赖的公司。如果你考虑租用Linode机器，而又不吝啬使用[我的推荐码](https://www.linode.com/?r=06fc7f86359e92800c41177a80c5678ecfcb2568)，本博客不胜感激=).
 
