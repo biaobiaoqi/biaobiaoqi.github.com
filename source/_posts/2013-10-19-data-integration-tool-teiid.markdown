@@ -9,17 +9,20 @@ description: "数据集成，Teiid,通过抽象和联邦技术，实现分布式
 
 ---
 
+##背景知识
+
 数据集成是把不同来源、格式、特点性质的数据在逻辑上或物理上有机地集中，从而为企业提供全面的数据共享。数据集成的方式多种多样，这里介绍的[Teiid](http://www.jboss.org/teiid/)是其中的一种：通过抽象和联邦技术，实现分布式数据源的实时数据访问和集成，无需从记录系统中复制或移动数据。
 
-[链接](http://blogs.ejb.cc/archives/3552/teiid-scalable-information-integration-program)是一篇关于Teiid的中文介绍，比较详细。
+[《Teiid 基于数据联邦的集成方案》](http://blogs.ejb.cc/archives/3552/teiid-scalable-information-integration-program)是一篇关于Teiid的中文介绍，比较详细。
 
 由于适配不同数据源和生成虚拟数据库（VDB）需要维护好几个配置文件，直接手动部署Teiid比较难受。好在Teiid提供了辅助工具[Teiid Designer](http://www.jboss.org/teiiddesigner)，这是一个Eclipse插件，能帮助用户可视化的管理数据的集成过程。
 
-* 安装配置
-
-	参见官网的Downloads界面的详细介绍（注意：环境配置中，各组件需严格遵循官网指定版本，实践经验表明，Teiid本身并不够鲁棒，容不得小差错）。
-
 接下来，我们用一个简单的应用场景实践Teiid的数据集成功能。
+
+##环境准备
+
+Teiid和Teiid Designer的环境配置参见另外一篇博文：[《数据集成工具Teiid Designer的环境搭建》](http://biaobiaoqi.me/blog/2014/03/08/teiid-designer/)
+	
 
 <!--more-->
 
@@ -171,7 +174,18 @@ finish后，就生成了一个元模型，如下图。图中可视化的显示�
 
 ![img](http://biaobiaoqi.u.qiniudn.com/teiid17.png)
 
-XML File Contents中会根据xml文件中的数据解析出整体的层次结构。我们需要将其中的Book里的信息，添加到右边的Column Info中。虽然有很多Book数据列表显示在左边一栏里，但实际上只需要添加一次相关信息到右边的列信息中。值得注意的是，这里自动生成的Root Path是错误的，需要修改为BooksInfo/Book。其他没有什么特别的，一路下一步。
+XML File Contents中会根据xml文件中的数据解析出整体的层次结构。我们需要将其中的Book里的信息，添加到右边的Column Info中。虽然有很多Book数据列表显示在左边一栏里，但实际上只需要添加一次相关信息到右边的列信息中。
+
+值得注意的是，这里自动生成procedure执行语句对数据源选取的Root Path是错误的。需要按照如下图指示手动修改（途中实例并非本问情景，步骤是一样的=)）
+
+![img](http://biaobiaoqi.u.qiniudn.com/2E65A678-6256-4F81-88CF-E5A713E9B867.png?imageView/2/w/800/h/800)
+
+修改步骤（按照图中标号）：
+
+* 1.双击需要修改的xml数据源的views model（是一个.xmi文件）
+* 2.双击View视图中表
+* 4.将XMLTABLE开始的语句的第一个地址修改为`BooksInfo/Book`，而其他路径响应的删除`/Book/`。
+
 
 现在整个项目如下图：
 
