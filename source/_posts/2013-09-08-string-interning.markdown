@@ -15,7 +15,7 @@ description: "string interning, 常量池 constant pool， 字符串池 string p
 在网上看到一道题：
 
 ```java
-String str = new String("abc");  
+String str = new String("abc");
 ```
 
 以上代码执行过程中生成了多少个String对象？
@@ -33,7 +33,7 @@ NEW String
     INVOKESPECIAL String.<init>(String) : void  
     ASTORE 1   
 ```
-指令`ldc indexbyte`的含义：将两字节的值从indexbyte索引的常量池中的项中推到方法栈上。
+指令`ldc indexbyte`的含义：将两字节的值从indexbyte索引的常量池中加载到方法栈上。
 
 指令`LDC "abc"`说明了"abc"并不是直接以对象存在的，而是存在于常量池的索引中。String的构造函数调用命令实际使用的就是String类型作为参数，那么，栈上应该有一个String类型的索引。
 
@@ -68,27 +68,26 @@ public class Program
 
 输出结果是true.说明"Hello"作为对象是被程序从同一个内存空间读取出来的。
 
-
 常量池是编译时产生的，存在于类文件中（\*.class文件）。运行时，JVM中每个对象都拥有自己的运行时常量池（run time constant pool）。
 
 
 ##字符串池
 
 
-我在String 的java doc中又发现了一个有趣的method：intern() ,我翻译如下：
+我在JDK 6.0源码的String类中，发现了一个有趣的method：intern() ,我翻译如下：
 
 > 当intern方法被调用，如果池中已经拥有一个与该String的字符串值相等（即equals()调用后为true）的String对象时，那么池中的那个String对象会被返回。否则，池中会增加这个对象，并返回当前这个String对象。
 
 其中有介绍一个字符串池的东西：字符串池（String pool），初始是空的，由类私有的控制。
 
-查看java.lang.String的源代码，发现Intern()方法是一个native方法，即本地实现的方法，而不是一个java方法，这让我们不能直观的看到字符串池的实现细节。不过能够理解字符串池其实是类似于线程池的缓冲器，可以起到节约内存的作用。如下代码可以验证
+查看java.lang.String的源代码，发现Intern()方法是一个native方法，即本地实现的方法，而不是Java方法，这让我们不能直观的看到字符串池的实现细节。不过能够理解字符串池其实是类似于线程池的缓冲器，可以起到节约内存的作用。如下代码可以验证
 
 ```java
 package biaobiaoqi.thinkingInJava;  
-  
+
 public class Test {  
     public static void main(String[] args){  
-          
+
         String strA1 = "ab";  
         String strA2 = "c";  
         String strB1 = "a";  
@@ -101,16 +100,7 @@ public class Test {
 输出结果为true。
 
 
-现代的JVM实现里，考虑到垃圾回收（Garbage Collection）的方便，将内存区域[heap](http://en.wikipedia.org/wiki/Java_Virtual_Machine#Heap)划分为三部分： young generation 、 tenured generation（old generation）和 permanent generation( permgen )
-
-字符串池是为了解决字符串重复的问题，生命周期长，它存在于permgen中。
-
-
-##总结
-编译Java源代码时，源文件中出现的双引号内的字符串都被收纳到常量池中，用CONSTANT_utf8_info项存储着。
-
-JVM中，相应的类被加载运行后，常量池对应的映射到JVM的运行时常量池中。其中每项CONSTANT_utf8_info（也就试记录那些字符串的）都会在常量引用解析时，自动生成相应的internal String，记录在字符串池中。
-
+现代的JVM实现里，考虑到垃圾回收（Garbage Collection）的方便，将内存区域[heap](http://en.wikipedia.org/wiki/Java_Virtual_Machine#Heap)划分为三部分： young generation 、 tenured generation（old generation）和 permanent generation(也就是方法区），方法区存储着类、静态变量、常量等信息。字符串池是为了解决字符串重复的问题，存在于方法区中。
 
 
 回过头来看看文章刚开始的那个问题。
@@ -118,18 +108,37 @@ JVM中，相应的类被加载运行后，常量池对应的映射到JVM的运�
 ```java
 String str = new String("abc");
 ```
-这里确实是有两个String对象生成了。
+这里确实是有两个String对象生成了。`new String("xxx")` 创建的String 对象会在堆中生成对象。而如果使用`String str = "xxx"`则先查看字符串池 是否已经存在，存在则直接返回该String 对象，否则生成新的String 对象，并将它加入字符串池中。
 
-`new String("xxx")` 创建的String 对象会在heap 中重新生成新的String 对象，绕过字符串池的管辖。而如果使用`String str = "xxx"`则先查看字符串池 是否已经存在，存在则直接返回PermGen中的该String 对象，否则生成新的String 对象，并将它加入字符串池中。
+##intern()的应用
 
-> 尽量使用`String str = "abc";`，而不是`String str = new String("abc")；`用new的方法肯定会开辟新的heap空间，而前者的方法，则会通过string interning优化。
+在JDK 源码中查找对String.intern()的调用，发现诸如java.lang.Class中就有方法调用了它：
+```
+ private Field searchFields(Field[] fields, String name) {
+        String internedName = name.intern();
+        for (int i = 0; i < fields.length; i++) {
+            if (fields[i].getName() == internedName) {
+                return getReflectionFactory().copyField(fields[i]);
+            }
+        }
+        return null;
+    }
+```
+这里获得的internedName
 
+
+##总结
+
+* 编译Java源代码时，源文件中出现的双引号内的字符串都被收纳到常量池中，用CONSTANT_utf8_info项存储着。
+
+* JVM中，相应的类被加载运行后，常量池对应的映射到JVM的运行时常量池中。其中每项CONSTANT_utf8_info（也就试记录那些字符串的）都会在常量引用解析时，自动生成相应的internal String，记录在字符串池中。
+
+* 尽量使用`String str = "abc";`，而不是`String str = new String("abc")；`。用new的方法肯定会开辟新的堆空间，而前者的方法，则会通过string interning优化。
+
+* JDK的实现也一直在优化，
 
 ###参考资料
 
-
 * [Busting java.lang.String.intern() Myths](http://www.codeinstructions.com/2009/01/busting-javalangstringintern-myths.html)
-* [Inside the JAVA2 virtual machine](http://book.douban.com/subject/1788390/)
-* [Programming for the java virtual machine](http://book.douban.com/subject/1610251/)
 * [What is String literal pool? How to create a String](http://www.xyzws.com/Javafaq/what-is-string-literal-pool/3)
 * [What type of memory (Heap or Stack) String constant pool in Java gets stored?](http://stackoverflow.com/questions/4918399/what-type-of-memory-heap-or-stack-string-constant-pool-in-java-gets-stored)
