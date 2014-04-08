@@ -59,7 +59,6 @@ KMP算法
 * 后缀：除字符串第一个字符以外的所有尾部串的组合。
 * 部分匹配值：一个字符串的前缀和后缀中最长共有元素的长度。
 
-
 举例说明：字符串`ABCAB`
 
 * 前缀：{A， AB， ABC， ABCA}
@@ -81,61 +80,55 @@ A B C A B
 
 
 ``` java
-	public static int[] next;
 
 	public static boolean kmp(String str, String dest) {
-		// i stands for index of str string, j stands for index in dest string.
-		// At the beginning of each loop process, j is the new position of dest
-		// taht should be compared.
+		int[] next =  generateNext(dest);
+		
+		//i是str的索引，j是dest的索引。
 		for (int i = 0, j = 0; i < str.length(); i++) {
+			//匹配发生错误时，在next数组中向前迭代找到匹配的结果。这是整个算法的核心位置！
 			while (j > 0 && str.charAt(i) != dest.charAt(j))
-				// This loop is to get a matching character recursively. Another
-				// stop condition is when particial match value meets end.
-				j = next[j - 1];// As i in str and j in dest is comparing,
-								// recomputing of j should be in the former
-								// character substring, which is next[j-1]
+				j = next[j - 1];
 
+			//如果相等，dest中的索引往后移动一位
 			if (str.charAt(i) == dest.charAt(j))
 				j++;
-
+			
+			//dest数组所有位置均连续的匹配完成
 			if (j == dest.length())
 				return true;
 		}
 
 		return false;
 	}
-
-	public static int[] kmpNext(String str) {
-		int[] next = new int[str.length()];
-		next[0] = 0;
-		// i stands for index of string, j is temporary for particail match
-		// values computing, at the beginning of each loop process, j is the
-		// particial match value of former character .
-		for (int i = 1, j = 0; i < str.length(); ++i) {
-			while (j > 0 && str.charAt(i) != str.charAt(j))
-				// This loop is to get a matching character recursively. Another
-				// stop condition is when particial match value meets end.
-				j = next[j - 1];// j will be recomputed in the recursion. Take
-								// care that next[j-1] is the particial match
-								// value of the first j characters substirng.
-
-			if (str.charAt(i) == str.charAt(j)) // If not in this case, j must
-												// meets end, equals to zero.
-				++j;
-
-			next[i] = j;
-		}
-		return next;
-	}
+	
+	//生成next数组
+	private void generateNext(String str) {
+		int[] next = new int[dest.length()];
+        next[0] = 0;  //第一个元素的next值为0。
+        
+        //i索引的是需要计算的next值；j记录了上一个元素的next值。
+        for (int i = 1, j = 0; i < str.length(); i ++) {
+        	//当i和j指向的字符不匹配时，在next中往前迭代，直到两字符相等或者j为0.
+            while(j > 0 && str.charAt(i) != str.charAt(j)) 
+                j = next[j - 1];
+            
+            //如果j和i指向的字符相等，则j增加1.
+            if (str.charAt(i) == str.charAt(j))
+                j ++;
+                
+            next[i] = j;
+        }
+    }
 
 ```
 
 理解算法实现时，有几点特别需要注意：
 
-* 在生成部分匹配值数组的kmpNext()方法中，第一层循环内，`i`是字符串的索引，而`j`则在每次循环开始时代表了`i`所指定字符之前的子串的部分匹配值。
-* kmpNext()方法的内层while()循环，是为了迭代得到让`i`指定字符匹配到的情况。有另外一种实现方案：不有用这一层循环，而是直接使用一层循环，在大循环内部做j值变更的判定即可。
-* kmpNext()方法的while()循环中，需要特别注意是`next[j -1]`，部分匹配值j对应到的是字符串中的第`j-1`个字符。
-* kmp()的循环代码和kmpNext()部分匹配值表生成的循环代码很类似。两者使用了相同方式，在字符匹配失败后迭代获取新的可匹配情况，且都是利用了next数组。
+* 在生成部分匹配值数组的generateNext()方法中，第一层循环内，`i`是字符串的索引，而`j`则在每次循环开始时代表了`i`所指定字符之前的子串的部分匹配值。以部分匹配值为下标的字符，其实也就是相同公共的缀串的下一位字符了。
+* generateNext()方法的内层while()循环，是为了迭代得到让`i`指定字符匹配到的情况。
+* generateNext()方法的while()循环中，需要特别注意是`next[j -1]`，这里表达的是：当j指向的字符匹配失败，则继续找到j前一个字符的部分匹配值。
+* kmp()的循环代码和generateNext()部分匹配值表生成的循环代码很类似。两者使用了相同方式，在字符匹配失败后迭代获取新的可匹配情况，且都是利用了next数组。
 
 
 
@@ -145,20 +138,19 @@ A B C A B
 KMP算法虽然能达到O(M+N)的算法复杂度，但在实际使用中，KMP算法的性能并不如[BM](http://www.ruanyifeng.com/blog/2013/05/boyer-moore_string_search_algorithm.html)算法强。
 
 
-
-
 模板题
 ---
 
 ####基础模板题
-[HDOJ的2203题](http://acm.hdu.edu.cn/showproblem.php?pid=2203)是一个能检验算法正确性的模板题。Java实现的答案代码[请戳这里](https://github.com/biaobiaoqi/CPractice/tree/master/HDOJ/HDOJ2203.java)。
+* [HDOJ的2203题](http://acm.hdu.edu.cn/showproblem.php?pid=2203)是一个能检验算法正确性的模板题。Java实现的答案代码[请戳这里](https://github.com/biaobiaoqi/CPractice/tree/master/HDOJ/HDOJ2203.java)。
 
+* [LeetCode: Implement strStr()](http://oj.leetcode.com/problems/implement-strstr/) 是一道裸字符串匹配题，直接使用KMP。Java实现的代码[请戳这里](https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/algorithm/oj/leetcode/Implement%20strStr())。
 
 ####延伸模板题
 
-[POJ的2406题](http://poj.org/problem?id=2406)，对考察点做了巧妙的变形，对更深入的理解KMP中的部分匹配表（即next数组）很有帮助。Java实现的答案代码[请戳这里](https://github.com/biaobiaoqi/CPractice/tree/master/POJ/POJ2406.java)。
+* [POJ的2406题](http://poj.org/problem?id=2406)，对考察点做了巧妙的变形，对更深入的理解KMP中的部分匹配表（即next数组）很有帮助。Java实现的答案代码[请戳这里](https://github.com/biaobiaoqi/CPractice/tree/master/POJ/POJ2406.java)。
 
-[HDOJ的1867题](http://acm.hdu.edu.cn/showproblem.php?pid=1867)也属于kmp的变形。要求对kmp利用next数组进行比较的过程有清晰的认识。Java实现的答案代码[请戳这里](https://github.com/biaobiaoqi/CPractice/tree/master/HDOJ/HDOJ1867.java)。
+* [HDOJ的1867题](http://acm.hdu.edu.cn/showproblem.php?pid=1867)也属于kmp的变形。要求对kmp利用next数组进行比较的过程有清晰的认识。Java实现的答案代码[请戳这里](https://github.com/biaobiaoqi/CPractice/tree/master/HDOJ/HDOJ1867.java)。
 
 
 
@@ -171,3 +163,8 @@ KMP算法虽然能达到O(M+N)的算法复杂度，但在实际使用中，KMP�
 * [《KMP算法的实现》](http://www.cppblog.com/converse/archive/2006/07/05/9447.html)
 
 * [《Linux 内核中的 KMP 实现》](http://wangcong.org/blog/archives/2090)
+
+----------
+###LOG
+
+* 2014-4-9：对代码增加了更多注释，便于理解。
