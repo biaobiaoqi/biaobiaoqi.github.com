@@ -107,7 +107,7 @@ A B C A B
 		int[] next = new int[dest.length()];
         next[0] = 0;  //第一个元素的next值为0。
         
-        //i索引的是需要计算的next值；j记录了上一个元素的next值。
+        //i是需要计算的next值的下标；在for循环的开始，j记录了上一个元素的部分匹配值，即前缀串中公共部分的最后一位字符的下标。
         for (int i = 1, j = 0; i < str.length(); i ++) {
         	//当i和j指向的字符不匹配时，在next中往前迭代，直到两字符相等或者j为0.
             while(j > 0 && str.charAt(i) != str.charAt(j)) 
