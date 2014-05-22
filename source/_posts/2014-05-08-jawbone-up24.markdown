@@ -3,7 +3,7 @@ layout: post
 title: "智能手环体验：UP24"
 date: 2014-05-08 09:44
 comments: true
-categories: [生活]
+categories: [life]
 tags: [生活, 穿戴设备, 健康, 体验, 智能手环, up24]
 
 ---

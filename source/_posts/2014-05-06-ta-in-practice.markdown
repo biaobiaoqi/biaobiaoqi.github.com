@@ -3,7 +3,7 @@ layout: post
 title: "课程助教实战"
 date: 2014-05-06 20:06
 comments: true
-categories: [生活]
+categories: [life]
 tags: [生活, 算法, 经验, 助教]
 
 ---
