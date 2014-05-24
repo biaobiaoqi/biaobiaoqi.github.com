@@ -12,6 +12,7 @@ tags: [算法, 技术]
 ---
 
 * 2013-10-7 修订部分内容
+* 2014-5-24 修改后序非递归部分代码
 
 
 本文讨论二叉树的常见遍历方式的代码(Java)实现，包括前序(preorder)、中序(inorder)、后序(postorder)、层序(level order)，进一步考虑递归和非递归的实现方式。
@@ -192,7 +193,7 @@ public void postOrderTravNoRecu(Node n) {
 		
 		while (!stack.empty()) {
 			n = stack.peek();
-			if (n.rightNode != null && flag[stack.size()] == 0) {
+			while (n.rightNode != null && flag[stack.size()] == 0) {
 				n = n.rightNode;
 				flag[stack.size()] = 1;
 				while (n != null) {
