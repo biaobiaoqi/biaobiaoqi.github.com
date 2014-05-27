@@ -4,7 +4,7 @@ title: "Facebook学长交流分享"
 date: 2014-05-22 22:24
 comments: true
 categories: [tech]
-tags: [facebook, 讲座, career]
+tags: [facebook, 讲座, career, 公司]
 description: ""
 
 ---
