@@ -1,0 +1,1080 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Java类加载器编程实践 - Biaobiaoqi的博客</title>
+  <meta name="author" content="Biaobiaoqi">
+
+  
+  <meta name="description" content="Java类加载器，自定义类加载器。ASM，操纵Java字节码， 面向切面编程，AOP">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loader-in-practice/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Biaobiaoqi的博客" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+
+function addBlankTargetForLinks () {
+
+  $('a[href^="http"]').each(function(){
+
+      $(this).attr('target', '_blank');
+
+  });
+
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+
+  addBlankTargetForLinks();
+
+});
+
+</script>
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F49481ec3305db999013860b0ccb3b16d' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39900036-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Biaobiaoqi的博客</a></h1>
+  
+    <h2>做一个互联网世界的匠人</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:biaobiaoqi.me" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives/">全部文章</a></li>
+  <li><a href="/tag-cloud/">分类阅读</a></li>
+  <li><a href="/resources/">其他推荐</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Java类加载器编程实践</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-08T00:33:00+08:00" pubdate data-updated="true">Sep 8<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>文本通过实现自定义类加载器，实践 Java 类加载的流程。</p>
+
+<p>阅读此文前，需要了解 Java 类加载的基本原理，参见如下两篇博文：</p>
+
+<ul>
+<li><a href="http://biaobiaoqi.me/blog/2013/09/07/java-classloader/">《Java 类加载器浅析》</a></li>
+<li><a href="http://biaobiaoqi.me/blog/2013/09/08/three-principles-of-classloader-operation/">《Java 类加载器三原则》</a></li>
+</ul>
+
+
+<p>以上博文中所提及的 Java 类加载机制，都是 Java1.2 及以后的版本，而在最早的 Java1.1 中类加载器是没有父子关系的模式的。这里将分别对 Java1.1 和 Java1.2 及以后的类加载版本进行展示。</p>
+
+<h2>Java1.1 中的实现</h2>
+
+<h3>原理介绍</h3>
+
+<p>Java1.1 的类加载机制相对单一，用户自定义加载器的重写比较复杂。</p>
+
+<p>主要需要重写加载器中的 Class loadClass(String name)方法。</p>
+
+<p>Class loadClass(String name)或 loadClass(String name , boolean resolve)方法是加载的核心。它根据类的全名（比如 String 类的全名是 java.lang.String）获得对应类的二进制数据，然后通过 Class defineClass(byte[] b) 将二进制数据加载到 JVM 的方法区，并返回对应类的 Class 实例，然后根据可选的参数 resolve 决定是否需要现在解析这个类。最后将这个 Class 实例作为 loadClass 方法的返回值。</p>
+
+<p>如果无法加载和 defineClass，即无法通过本加载器直接加载类的情况，则使用 Class findSystemClass(String name) 将类加载任务委派给系统类加载器查找。如果能找到则加载，否则抛出 ClassNotFoundException 异常。</p>
+
+<h3>编程实例</h3>
+
+<p>以下用实例来展示这一过程：</p>
+
+<!--more-->
+
+
+<p>类 CompilingClassLoader 是一个自定义加载器，它能直接读取 Java 源文件实现类加载。CLL 类的 main 方法为程序入口，通过 ComplilingClassLoader 加载一个 Foo 类，使用反射机制调用 Foo 类的 main 方法。</p>
+
+<p>CompilingClassLoader.java</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+<span class='line-number'>106</span>
+<span class='line-number'>107</span>
+<span class='line-number'>108</span>
+<span class='line-number'>109</span>
+<span class='line-number'>110</span>
+<span class='line-number'>111</span>
+<span class='line-number'>112</span>
+<span class='line-number'>113</span>
+<span class='line-number'>114</span>
+<span class='line-number'>115</span>
+<span class='line-number'>116</span>
+<span class='line-number'>117</span>
+<span class='line-number'>118</span>
+<span class='line-number'>119</span>
+<span class='line-number'>120</span>
+<span class='line-number'>121</span>
+<span class='line-number'>122</span>
+<span class='line-number'>123</span>
+<span class='line-number'>124</span>
+<span class='line-number'>125</span>
+<span class='line-number'>126</span>
+<span class='line-number'>127</span>
+<span class='line-number'>128</span>
+<span class='line-number'>129</span>
+<span class='line-number'>130</span>
+<span class='line-number'>131</span>
+<span class='line-number'>132</span>
+<span class='line-number'>133</span>
+<span class='line-number'>134</span>
+<span class='line-number'>135</span>
+<span class='line-number'>136</span>
+<span class='line-number'>137</span>
+<span class='line-number'>138</span>
+<span class='line-number'>139</span>
+<span class='line-number'>140</span>
+<span class='line-number'>141</span>
+<span class='line-number'>142</span>
+<span class='line-number'>143</span>
+<span class='line-number'>144</span>
+<span class='line-number'>145</span>
+<span class='line-number'>146</span>
+<span class='line-number'>147</span>
+<span class='line-number'>148</span>
+<span class='line-number'>149</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kn">import</span> <span class="nn">java.io.*</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">/* </span>
+</span><span class='line'><span class="cm"> </span>
+</span><span class='line'><span class="cm">A CompilingClassLoader compiles your Java source on-the-fly.  It </span>
+</span><span class='line'><span class="cm">checks for nonexistent .class files, or .class files that are older </span>
+</span><span class='line'><span class="cm">than their corresponding source code. </span>
+</span><span class='line'><span class="cm"> </span>
+</span><span class='line'><span class="cm">*/</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CompilingClassLoader</span> <span class="kd">extends</span> <span class="n">ClassLoader</span>
+</span><span class='line'><span class="o">{</span>
+</span><span class='line'>  <span class="c1">// Given a filename, read the entirety of that file from disk  </span>
+</span><span class='line'>  <span class="c1">// and return it as a byte array.  </span>
+</span><span class='line'>  <span class="kd">private</span> <span class="kt">byte</span><span class="o">[]</span> <span class="nf">getBytes</span><span class="o">(</span> <span class="n">String</span> <span class="n">filename</span> <span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+</span><span class='line'>    <span class="c1">// Find out the length of the file  </span>
+</span><span class='line'>    <span class="n">File</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span> <span class="n">filename</span> <span class="o">);</span>
+</span><span class='line'>    <span class="kt">long</span> <span class="n">len</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="na">length</span><span class="o">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Create an array that&#39;s just the right size for the file&#39;s  </span>
+</span><span class='line'>    <span class="c1">// contents  </span>
+</span><span class='line'>    <span class="kt">byte</span> <span class="n">raw</span><span class="o">[]</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[(</span><span class="kt">int</span><span class="o">)</span><span class="n">len</span><span class="o">];</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Open the file  </span>
+</span><span class='line'>    <span class="n">FileInputStream</span> <span class="n">fin</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span> <span class="n">file</span> <span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Read all of it into the array; if we don&#39;t get all,  </span>
+</span><span class='line'>    <span class="c1">// then it&#39;s an error.  </span>
+</span><span class='line'>    <span class="kt">int</span> <span class="n">r</span> <span class="o">=</span> <span class="n">fin</span><span class="o">.</span><span class="na">read</span><span class="o">(</span> <span class="n">raw</span> <span class="o">);</span>
+</span><span class='line'>    <span class="k">if</span> <span class="o">(</span><span class="n">r</span> <span class="o">!=</span> <span class="n">len</span><span class="o">)</span>
+</span><span class='line'>      <span class="k">throw</span> <span class="k">new</span> <span class="nf">IOException</span><span class="o">(</span> <span class="s">&quot;Can&#39;t read all, &quot;</span><span class="o">+</span><span class="n">r</span><span class="o">+</span><span class="s">&quot; != &quot;</span><span class="o">+</span><span class="n">len</span> <span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Don&#39;t forget to close the file!  </span>
+</span><span class='line'>    <span class="n">fin</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// And finally return the file contents as an array  </span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">raw</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// Spawn a process to compile the java source code file  </span>
+</span><span class='line'>  <span class="c1">// specified in the &#39;javaFile&#39; parameter.  Return a true if  </span>
+</span><span class='line'>  <span class="c1">// the compilation worked, false otherwise.  </span>
+</span><span class='line'>  <span class="kd">private</span> <span class="kt">boolean</span> <span class="nf">compile</span><span class="o">(</span> <span class="n">String</span> <span class="n">javaFile</span> <span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+</span><span class='line'>    <span class="c1">// Let the user know what&#39;s going on  </span>
+</span><span class='line'>    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span> <span class="s">&quot;CCL: Compiling &quot;</span><span class="o">+</span><span class="n">javaFile</span><span class="o">+</span><span class="s">&quot;...&quot;</span> <span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Start up the compiler  </span>
+</span><span class='line'>    <span class="n">Process</span> <span class="n">p</span> <span class="o">=</span> <span class="n">Runtime</span><span class="o">.</span><span class="na">getRuntime</span><span class="o">().</span><span class="na">exec</span><span class="o">(</span> <span class="s">&quot;javac &quot;</span><span class="o">+</span><span class="n">javaFile</span> <span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Wait for it to finish running  </span>
+</span><span class='line'>    <span class="k">try</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">p</span><span class="o">.</span><span class="na">waitFor</span><span class="o">();</span>
+</span><span class='line'>    <span class="o">}</span> <span class="k">catch</span><span class="o">(</span> <span class="n">InterruptedException</span> <span class="n">ie</span> <span class="o">)</span> <span class="o">{</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span> <span class="n">ie</span> <span class="o">);</span> <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Check the return code, in case of a compilation error  </span>
+</span><span class='line'>    <span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="na">exitValue</span><span class="o">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Tell whether the compilation worked  </span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">ret</span><span class="o">==</span><span class="mi">0</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// The heart of the ClassLoader -- automatically compile  </span>
+</span><span class='line'>  <span class="c1">// source as necessary when looking for class files  </span>
+</span><span class='line'>  <span class="kd">public</span> <span class="n">Class</span> <span class="nf">loadClass</span><span class="o">(</span> <span class="n">String</span> <span class="n">name</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">resolve</span> <span class="o">)</span>
+</span><span class='line'>      <span class="kd">throws</span> <span class="n">ClassNotFoundException</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Our goal is to get a Class object  </span>
+</span><span class='line'>    <span class="n">Class</span> <span class="n">clas</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// First, see if we&#39;ve already dealt with this one  </span>
+</span><span class='line'>    <span class="n">clas</span> <span class="o">=</span> <span class="n">findLoadedClass</span><span class="o">(</span> <span class="n">name</span> <span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">//System.out.println( &quot;findLoadedClass: &quot;+clas );  </span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Create a pathname from the class name  </span>
+</span><span class='line'>    <span class="c1">// E.g. java.lang.Object =&gt; java/lang/Object  </span>
+</span><span class='line'>    <span class="n">String</span> <span class="n">fileStub</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span> <span class="sc">&#39;.&#39;</span><span class="o">,</span> <span class="sc">&#39;/&#39;</span> <span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Build objects pointing to the source code (.java) and object  </span>
+</span><span class='line'>    <span class="c1">// code (.class)  </span>
+</span><span class='line'>    <span class="n">String</span> <span class="n">javaFilename</span> <span class="o">=</span> <span class="n">fileStub</span><span class="o">+</span><span class="s">&quot;.java&quot;</span><span class="o">;</span>
+</span><span class='line'>    <span class="n">String</span> <span class="n">classFilename</span> <span class="o">=</span> <span class="n">fileStub</span><span class="o">+</span><span class="s">&quot;.class&quot;</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">File</span> <span class="n">javaFile</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span> <span class="n">javaFilename</span> <span class="o">);</span>
+</span><span class='line'>    <span class="n">File</span> <span class="n">classFile</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span> <span class="n">classFilename</span> <span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">//System.out.println( &quot;j &quot;+javaFile.lastModified()+&quot; c &quot;+  </span>
+</span><span class='line'>    <span class="c1">//  classFile.lastModified() );  </span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// First, see if we want to try compiling.  We do if (a) there  </span>
+</span><span class='line'>    <span class="c1">// is source code, and either (b0) there is no object code,  </span>
+</span><span class='line'>    <span class="c1">// or (b1) there is object code, but it&#39;s older than the source  </span>
+</span><span class='line'>    <span class="k">if</span> <span class="o">(</span><span class="n">javaFile</span><span class="o">.</span><span class="na">exists</span><span class="o">()</span> <span class="o">&amp;&amp;</span>
+</span><span class='line'>         <span class="o">(!</span><span class="n">classFile</span><span class="o">.</span><span class="na">exists</span><span class="o">()</span> <span class="o">||</span>
+</span><span class='line'>          <span class="n">javaFile</span><span class="o">.</span><span class="na">lastModified</span><span class="o">()</span> <span class="o">&gt;</span> <span class="n">classFile</span><span class="o">.</span><span class="na">lastModified</span><span class="o">()))</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">try</span> <span class="o">{</span>
+</span><span class='line'>        <span class="c1">// Try to compile it.  If this doesn&#39;t work, then  </span>
+</span><span class='line'>        <span class="c1">// we must declare failure.  (It&#39;s not good enough to use  </span>
+</span><span class='line'>        <span class="c1">// and already-existing, but out-of-date, classfile)  </span>
+</span><span class='line'>        <span class="k">if</span> <span class="o">(!</span><span class="n">compile</span><span class="o">(</span> <span class="n">javaFilename</span> <span class="o">)</span> <span class="o">||</span> <span class="o">!</span><span class="n">classFile</span><span class="o">.</span><span class="na">exists</span><span class="o">())</span> <span class="o">{</span>
+</span><span class='line'>          <span class="k">throw</span> <span class="k">new</span> <span class="nf">ClassNotFoundException</span><span class="o">(</span> <span class="s">&quot;Compile failed: &quot;</span><span class="o">+</span><span class="n">javaFilename</span> <span class="o">);</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>      <span class="o">}</span> <span class="k">catch</span><span class="o">(</span> <span class="n">IOException</span> <span class="n">ie</span> <span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">// Another place where we might come to if we fail  </span>
+</span><span class='line'>        <span class="c1">// to compile  </span>
+</span><span class='line'>        <span class="k">throw</span> <span class="k">new</span> <span class="nf">ClassNotFoundException</span><span class="o">(</span> <span class="n">ie</span><span class="o">.</span><span class="na">toString</span><span class="o">()</span> <span class="o">);</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Let&#39;s try to load up the raw bytes, assuming they were  </span>
+</span><span class='line'>    <span class="c1">// properly compiled, or didn&#39;t need to be compiled  </span>
+</span><span class='line'>    <span class="k">try</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">// read the bytes  </span>
+</span><span class='line'>      <span class="kt">byte</span> <span class="n">raw</span><span class="o">[]</span> <span class="o">=</span> <span class="n">getBytes</span><span class="o">(</span> <span class="n">classFilename</span> <span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">// try to turn them into a class  </span>
+</span><span class='line'>      <span class="n">clas</span> <span class="o">=</span> <span class="n">defineClass</span><span class="o">(</span> <span class="n">name</span><span class="o">,</span> <span class="n">raw</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">raw</span><span class="o">.</span><span class="na">length</span> <span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span> <span class="k">catch</span><span class="o">(</span> <span class="n">IOException</span> <span class="n">ie</span> <span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="c1">// This is not a failure!  If we reach here, it might  </span>
+</span><span class='line'>      <span class="c1">// mean that we are dealing with a class in a library,  </span>
+</span><span class='line'>      <span class="c1">// such as java.lang.Object  </span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">//System.out.println( &quot;defineClass: &quot;+clas );  </span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Maybe the class is in a library -- try loading  </span>
+</span><span class='line'>    <span class="c1">// the normal way  </span>
+</span><span class='line'>    <span class="k">if</span> <span class="o">(</span><span class="n">clas</span><span class="o">==</span><span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">clas</span> <span class="o">=</span> <span class="n">findSystemClass</span><span class="o">(</span> <span class="n">name</span> <span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">//System.out.println( &quot;findSystemClass: &quot;+clas );  </span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Resolve the class, if any, but only if the &quot;resolve&quot;  </span>
+</span><span class='line'>    <span class="c1">// flag is set to true  </span>
+</span><span class='line'>    <span class="k">if</span> <span class="o">(</span><span class="n">resolve</span> <span class="o">&amp;&amp;</span> <span class="n">clas</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+</span><span class='line'>      <span class="n">resolveClass</span><span class="o">(</span> <span class="n">clas</span> <span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// If we still don&#39;t have a class, it&#39;s an error  </span>
+</span><span class='line'>    <span class="k">if</span> <span class="o">(</span><span class="n">clas</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+</span><span class='line'>      <span class="k">throw</span> <span class="k">new</span> <span class="nf">ClassNotFoundException</span><span class="o">(</span> <span class="n">name</span> <span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Otherwise, return the class  </span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">clas</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>CCLRun.java</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="cm">/* </span>
+</span><span class='line'><span class="cm"> </span>
+</span><span class='line'><span class="cm">CCLRun executes a Java program by loading it through a </span>
+</span><span class='line'><span class="cm">CompilingClassLoader. </span>
+</span><span class='line'><span class="cm"> </span>
+</span><span class='line'><span class="cm">*/</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CCLRun</span>
+</span><span class='line'><span class="o">{</span>
+</span><span class='line'>  <span class="kd">static</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span> <span class="n">String</span> <span class="n">args</span><span class="o">[]</span> <span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// The first argument is the Java program (class) the user  </span>
+</span><span class='line'>    <span class="c1">// wants to run  </span>
+</span><span class='line'>    <span class="n">String</span> <span class="n">progClass</span> <span class="o">=</span> <span class="n">args</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// And the arguments to that program are just  </span>
+</span><span class='line'>    <span class="c1">// arguments 1..n, so separate those out into  </span>
+</span><span class='line'>    <span class="c1">// their own array  </span>
+</span><span class='line'>    <span class="n">String</span> <span class="n">progArgs</span><span class="o">[]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">[</span><span class="n">args</span><span class="o">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">];</span>
+</span><span class='line'>    <span class="n">System</span><span class="o">.</span><span class="na">arraycopy</span><span class="o">(</span> <span class="n">args</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="n">progArgs</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">progArgs</span><span class="o">.</span><span class="na">length</span> <span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Create a CompilingClassLoader  </span>
+</span><span class='line'>    <span class="n">CompilingClassLoader</span> <span class="n">ccl</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CompilingClassLoader</span><span class="o">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Load the main class through our CCL  </span>
+</span><span class='line'>    <span class="n">Class</span> <span class="n">clas</span> <span class="o">=</span> <span class="n">ccl</span><span class="o">.</span><span class="na">loadClass</span><span class="o">(</span> <span class="n">progClass</span> <span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Use reflection to call its main() method, and to  </span>
+</span><span class='line'>    <span class="c1">// pass the arguments in.  </span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Get a class representing the type of the main method&#39;s argument  </span>
+</span><span class='line'>    <span class="n">Class</span> <span class="n">mainArgType</span><span class="o">[]</span> <span class="o">=</span> <span class="o">{</span> <span class="o">(</span><span class="k">new</span> <span class="n">String</span><span class="o">[</span><span class="mi">0</span><span class="o">]).</span><span class="na">getClass</span><span class="o">()</span> <span class="o">};</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Find the standard main method in the class  </span>
+</span><span class='line'>    <span class="n">Method</span> <span class="n">main</span> <span class="o">=</span> <span class="n">clas</span><span class="o">.</span><span class="na">getMethod</span><span class="o">(</span> <span class="s">&quot;main&quot;</span><span class="o">,</span> <span class="n">mainArgType</span> <span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Create a list containing the arguments -- in this case,  </span>
+</span><span class='line'>    <span class="c1">// an array of strings  </span>
+</span><span class='line'>    <span class="n">Object</span> <span class="n">argsArray</span><span class="o">[]</span> <span class="o">=</span> <span class="o">{</span> <span class="n">progArgs</span> <span class="o">};</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Call the method  </span>
+</span><span class='line'>    <span class="n">main</span><span class="o">.</span><span class="na">invoke</span><span class="o">(</span> <span class="kc">null</span><span class="o">,</span> <span class="n">argsArray</span> <span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Foo.java</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Foo</span>
+</span><span class='line'><span class="o">{</span>
+</span><span class='line'>  <span class="kd">static</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span> <span class="n">String</span> <span class="n">args</span><span class="o">[]</span> <span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+</span><span class='line'>    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span> <span class="s">&quot;foo! &quot;</span><span class="o">+</span><span class="n">args</span><span class="o">[</span><span class="mi">0</span><span class="o">]+</span><span class="s">&quot; &quot;</span><span class="o">+</span><span class="n">args</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>执行 CLL 类，命令行传入 Foo 的类名。执行结果如下：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="nl">CCL:</span> <span class="n">Compiling</span> <span class="n">Foo</span><span class="o">.</span><span class="na">java</span><span class="o">...</span>
+</span><span class='line'><span class="n">foo</span><span class="o">!</span> <span class="n">arg1</span> <span class="n">arg2</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>具体参见资料：<a href="http://www.ibm.com/developerworks/java/tutorials/j-classloader/index.html">IBM DeveloperWorks ： Understanding the Java ClassLoader</a>， 这是一篇 2001 年的文章，是早年 Java1.1 的实现方式。如今的 Java 已经变得更加人性化，多功能化，鲁棒性也更强了。</p>
+
+<h2>Java1.2 以后的实现</h2>
+
+<h3>原理介绍</h3>
+
+<p>Java1.2 以后，类加载器实现了 parent-child 模型，能更好的控制安全性方面的问题。</p>
+
+<p>由于 loadClass()方法中包含了 parent-child 的责任链模式逻辑，自定义类加载的自定义部分用策略模式从 loadClass()方法中剥离到了 findClass()中。对应的有一个 findLoadedClass()，这个方法用来实现查找当前加载器是否有加载该某类。</p>
+
+<p>loadClass()：加载一个类时，先调 findLoadedClass()，如果没有找到，则调用父亲加载器的加载方法。如果父亲找到了该类，就返回 Class 实例，没有找到，则父亲加载器会抛出一个异常，捕捉到这个异常后，儿子加载器会自己调用 findClass()尝试实现对类的加载。如果依然没有成功加载，则再向外抛出一个异常。通过向父亲加载器迭代实现了 parent-first 的委托关系。</p>
+
+<p>类加载的流程如图：这里显示了一个类未能成功加载所要经历的流程。（来自 <a href="http://stackoverflow.com/questions/3544614/how-is-the-control-flow-to-findclass-of">stackoverflow:how-is-the-control-flow-to-findclass-of</a>）</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'>  <span class="n">A</span><span class="o">.</span><span class="na">loadClass</span><span class="o">()</span>
+</span><span class='line'>       <span class="o">|</span>
+</span><span class='line'>   <span class="o">(</span><span class="n">not</span><span class="o">-</span><span class="n">found</span><span class="o">?)</span> <span class="o">(</span><span class="n">by</span> <span class="n">findLoadedClass</span><span class="o">)</span>
+</span><span class='line'>       <span class="o">|</span>
+</span><span class='line'>  <span class="n">B</span><span class="o">.</span><span class="na">loadClass</span><span class="o">()</span>
+</span><span class='line'>       <span class="o">|</span>
+</span><span class='line'>   <span class="o">(</span><span class="n">not</span> <span class="n">found</span><span class="o">?)</span> <span class="o">(</span><span class="n">by</span> <span class="n">findLoadedClass</span><span class="o">)</span>
+</span><span class='line'>       <span class="o">|</span>
+</span><span class='line'><span class="n">systemclassloader</span><span class="o">.</span><span class="na">loadClass</span>  <span class="o">(</span><span class="n">Bs</span> <span class="n">parent</span><span class="o">,</span> <span class="n">also</span> <span class="n">can</span> <span class="n">be</span>
+</span><span class='line'>       <span class="o">|</span>                  <span class="n">called</span> <span class="n">classpath</span> <span class="n">classloader</span><span class="o">)</span>
+</span><span class='line'>       <span class="o">|</span>
+</span><span class='line'>   <span class="o">(</span><span class="n">not</span> <span class="n">found</span><span class="o">?)</span> <span class="o">(</span><span class="n">by</span> <span class="n">findLoadedClass</span><span class="o">)</span>
+</span><span class='line'>       <span class="o">|</span>
+</span><span class='line'><span class="n">bootstrap</span> <span class="n">classloader</span><span class="o">.</span><span class="na">loadClass</span> <span class="o">(</span><span class="n">the</span> <span class="n">bootstrap</span> <span class="n">classloader</span><span class="o">,</span>
+</span><span class='line'>       <span class="o">|</span>                   <span class="o">(</span><span class="k">this</span> <span class="n">has</span> <span class="n">no</span> <span class="n">parent</span><span class="o">)</span>
+</span><span class='line'>       <span class="o">|</span>
+</span><span class='line'>   <span class="o">(</span><span class="n">not</span> <span class="n">found</span><span class="o">?)</span>
+</span><span class='line'>       <span class="o">|</span>
+</span><span class='line'><span class="n">systemclassloader</span><span class="o">.</span><span class="na">findClass</span>  <span class="o">(</span><span class="n">on</span> <span class="n">system</span> <span class="n">classloader</span><span class="o">,</span>
+</span><span class='line'>       <span class="o">|</span>                   <span class="n">will</span> <span class="k">try</span> <span class="n">to</span> <span class="s">&quot;find&quot;</span> <span class="kd">class</span> <span class="nc">in</span> <span class="s">&quot;classpath&quot;</span><span class="o">)</span>
+</span><span class='line'>       <span class="o">|</span>
+</span><span class='line'>   <span class="o">(</span><span class="n">not</span> <span class="n">found</span><span class="o">?)</span> <span class="n">ClassNotFoundException</span>
+</span><span class='line'>       <span class="o">|</span>
+</span><span class='line'>   <span class="n">B</span><span class="o">.</span><span class="na">findClass</span>
+</span><span class='line'>       <span class="o">|</span>
+</span><span class='line'>   <span class="o">(</span><span class="n">not</span> <span class="n">found</span><span class="o">?)</span> <span class="n">ClassNotFoundException</span>
+</span><span class='line'>       <span class="o">|</span>
+</span><span class='line'>   <span class="n">A</span><span class="o">.</span><span class="na">findClass</span>
+</span><span class='line'>       <span class="o">|</span>
+</span><span class='line'>    <span class="o">(</span><span class="n">not</span> <span class="n">found</span><span class="o">?)</span>
+</span><span class='line'>       <span class="o">|</span>
+</span><span class='line'>   <span class="n">ClassNotFoundException</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>注意，对于扩展类加载器，通过 getParent()方法返回的父亲加载器是 null，因为引导类加载器是本地实现的，并非 Java 实现。那么如何从扩展类加载器向上回溯呢？答案如下：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="k">try</span> <span class="o">{</span>
+</span><span class='line'>    <span class="k">if</span> <span class="o">(</span><span class="n">parent</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>       <span class="n">c</span> <span class="o">=</span> <span class="n">parent</span><span class="o">.</span><span class="na">loadClass</span><span class="o">(</span><span class="n">name</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span><span class='line'>       <span class="n">c</span> <span class="o">=</span> <span class="n">findBootstrapClassOrNull</span><span class="o">(</span><span class="n">name</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">ClassNotFoundException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>   <span class="c1">// ClassNotFoundException thrown if class not found  </span>
+</span><span class='line'>     <span class="c1">// from the non-null parent class loader  </span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>
+这是类加载器的源代码，对于父加载器为 null 的情况，会直接调用 findBootstrapClassOrNull()方法尝试用引导类加载器加载。通过源代码，能够很好的理解这里的 parent-child 模型了。</p>
+
+<p>另注意，对于基于 parent-child 模型的类加载器实现，都需要定义一个以 parent 类加载器作为参数的构造函数，以指定父加载器。如果直接调用没有参数的构造函数，则默认制定的是 systemclassloader 作为 parent。</p>
+
+<h3>编程实例</h3>
+
+<p>下面的例子是我用来实现动态分析 Java 类关系的加载器代码。</p>
+
+<p>具体逻辑是：调用 ASM 开源库的 API，在加载器加载类时，修改类文件中的字节码，插入相应的字节码语句，让对象在创建或执行相应指令时，在 log 文件中记录自己的行为。</p>
+
+<p>在编码的过程中，我遇到的一个错误：将需要使用自定义加载器加载的类文件直接放在了 eclipse 工程中的 bin 目录下。而这个目录是可以通过系统类加载器找到路径并加载的。根据 parent-first 的实现，这些类直接被系统类加载器加载了，也就绕过了自定义加载器的处理机制。修改过路径以后没有出现相应问题了。</p>
+
+<p>ASMClassLoader.java</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kn">package</span> <span class="n">biaobiaoqi</span><span class="o">.</span><span class="na">classLoader</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">java.io.*</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="nn">org.objectweb.asm.ClassReader</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">org.objectweb.asm.ClassWriter</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="nn">biaobiaoqi.asm.*</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ASMClassLoader</span> <span class="kd">extends</span> <span class="n">ClassLoader</span>
+</span><span class='line'><span class="o">{</span>
+</span><span class='line'>    <span class="n">String</span> <span class="n">basePath</span> <span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="cm">/**reference to System Classloader as the parent class loader </span>
+</span><span class='line'><span class="cm">     * @param path &lt;br&gt; the path of .class files will be loaded </span>
+</span><span class='line'><span class="cm">     */</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="nf">ASMClassLoader</span><span class="o">(</span><span class="n">String</span> <span class="n">path</span><span class="o">){</span>
+</span><span class='line'>        <span class="n">basePath</span> <span class="o">=</span> <span class="n">path</span> <span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="cm">/** </span>
+</span><span class='line'><span class="cm">     * reference to parent as it&#39;s parent classloader </span>
+</span><span class='line'><span class="cm">     * @param path </span>
+</span><span class='line'><span class="cm">     * @param parent </span>
+</span><span class='line'><span class="cm">     */</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="nf">ASMClassLoader</span><span class="o">(</span><span class="n">String</span> <span class="n">path</span> <span class="o">,</span> <span class="n">ClassLoader</span> <span class="n">parent</span><span class="o">){</span>
+</span><span class='line'>        <span class="kd">super</span><span class="o">(</span><span class="n">parent</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">basePath</span> <span class="o">=</span> <span class="n">path</span> <span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nd">@Override</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="n">Class</span> <span class="nf">findClass</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">ClassNotFoundException</span><span class="o">{</span>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;findClass&quot;</span><span class="o">);</span>
+</span><span class='line'>        <span class="kt">byte</span><span class="o">[]</span> <span class="n">raw</span><span class="o">;</span>
+</span><span class='line'>        <span class="k">try</span> <span class="o">{</span>
+</span><span class='line'>            <span class="n">raw</span> <span class="o">=</span> <span class="n">getBytesFromBasePath</span><span class="o">(</span> <span class="n">name</span> <span class="o">);</span>
+</span><span class='line'>        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+</span><span class='line'>            <span class="k">throw</span> <span class="k">new</span> <span class="nf">ClassNotFoundException</span><span class="o">();</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="kt">byte</span><span class="o">[]</span> <span class="n">transformed</span> <span class="o">=</span> <span class="n">instrumentBtyeCode</span><span class="o">(</span><span class="n">raw</span><span class="o">);</span>
+</span><span class='line'>        <span class="cm">/* </span>
+</span><span class='line'><span class="cm">        try{ </span>
+</span><span class='line'><span class="cm">            FileOutputStream file = new FileOutputStream( &quot;/home/biaobiaoqi/&quot; +name.replace( &#39;.&#39;, &#39;/&#39; )+&quot;.class&quot;); </span>
+</span><span class='line'><span class="cm">            file.write( transformed); </span>
+</span><span class='line'><span class="cm">            file.close(); </span>
+</span><span class='line'><span class="cm">        } </span>
+</span><span class='line'><span class="cm">        catch (IOException e) { </span>
+</span><span class='line'><span class="cm">            e.printStackTrace(); </span>
+</span><span class='line'><span class="cm">        } </span>
+</span><span class='line'><span class="cm">        */</span>
+</span><span class='line'>        <span class="k">if</span> <span class="o">(</span><span class="n">transformed</span> <span class="o">==</span> <span class="kc">null</span><span class="o">){</span>
+</span><span class='line'>            <span class="k">throw</span> <span class="k">new</span> <span class="nf">ClassNotFoundException</span><span class="o">();</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">return</span> <span class="nf">defineClass</span><span class="o">(</span><span class="n">name</span><span class="o">,</span> <span class="n">transformed</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">transformed</span><span class="o">.</span><span class="na">length</span> <span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">private</span> <span class="kt">byte</span><span class="o">[]</span> <span class="nf">getBytesFromBasePath</span><span class="o">(</span> <span class="n">String</span> <span class="n">className</span> <span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">,</span><span class="n">ClassNotFoundException</span><span class="o">{</span>
+</span><span class='line'>        <span class="n">String</span> <span class="n">fileStub</span> <span class="o">=</span> <span class="n">className</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span> <span class="sc">&#39;.&#39;</span><span class="o">,</span> <span class="sc">&#39;/&#39;</span> <span class="o">);</span>
+</span><span class='line'>        <span class="n">String</span> <span class="n">classFileName</span> <span class="o">=</span> <span class="n">basePath</span> <span class="o">+</span><span class="n">fileStub</span><span class="o">+</span><span class="s">&quot;.class&quot;</span><span class="o">;</span>
+</span><span class='line'>        <span class="n">File</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span> <span class="n">classFileName</span> <span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="kt">long</span> <span class="n">len</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="na">length</span><span class="o">();</span>
+</span><span class='line'>        <span class="kt">byte</span> <span class="n">raw</span><span class="o">[]</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[(</span><span class="kt">int</span><span class="o">)</span><span class="n">len</span><span class="o">];</span>
+</span><span class='line'>        <span class="n">FileInputStream</span> <span class="n">fin</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span> <span class="n">file</span> <span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="kt">int</span> <span class="n">r</span> <span class="o">=</span> <span class="n">fin</span><span class="o">.</span><span class="na">read</span><span class="o">(</span> <span class="n">raw</span> <span class="o">);</span>
+</span><span class='line'>        <span class="k">if</span> <span class="o">(</span><span class="n">r</span> <span class="o">!=</span> <span class="n">len</span><span class="o">)</span>
+</span><span class='line'>            <span class="k">throw</span> <span class="k">new</span> <span class="nf">IOException</span><span class="o">(</span> <span class="s">&quot;Can&#39;t read all, &quot;</span><span class="o">+</span><span class="n">r</span><span class="o">+</span><span class="s">&quot; != &quot;</span><span class="o">+</span><span class="n">len</span> <span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">fin</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+</span><span class='line'>        <span class="k">return</span> <span class="n">raw</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">private</span> <span class="kt">byte</span><span class="o">[]</span> <span class="nf">instrumentBtyeCode</span><span class="o">(</span><span class="kt">byte</span><span class="o">[]</span> <span class="n">raw</span><span class="o">){</span>
+</span><span class='line'>        <span class="n">ClassWriter</span> <span class="n">cw</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ClassWriter</span><span class="o">(</span><span class="n">ClassWriter</span><span class="o">.</span><span class="na">COMPUTE_FRAMES</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">ASMClassAdapter</span> <span class="n">mca</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ASMClassAdapter</span><span class="o">(</span><span class="n">cw</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">ClassReader</span> <span class="n">cr</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ClassReader</span><span class="o">(</span><span class="n">raw</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">cr</span><span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="n">mca</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+</span><span class='line'>        <span class="k">return</span> <span class="n">cw</span><span class="o">.</span><span class="na">toByteArray</span><span class="o">();</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nd">@Override</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="n">Class</span> <span class="nf">loadClass</span><span class="o">(</span> <span class="n">String</span> <span class="n">name</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">resolve</span> <span class="o">)</span>
+</span><span class='line'>        <span class="kd">throws</span> <span class="n">ClassNotFoundException</span> <span class="o">{</span>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;loadClass_resolve&quot;</span><span class="o">);</span>
+</span><span class='line'>          <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">loadClass</span><span class="o">(</span><span class="n">name</span> <span class="o">,</span><span class="n">resolve</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>    <span class="nd">@Override</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="n">Class</span> <span class="nf">loadClass</span><span class="o">(</span> <span class="n">String</span> <span class="n">name</span> <span class="o">)</span>
+</span><span class='line'>        <span class="kd">throws</span> <span class="n">ClassNotFoundException</span> <span class="o">{</span>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;loadClass&quot;</span><span class="o">);</span>
+</span><span class='line'>          <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">loadClass</span><span class="o">(</span><span class="n">name</span> <span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/09/08/java-class-loader-in-practice/'>http://biaobiaoqi.me/blog/2013/09/08/java-class-loader-in-practice/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Biaobiaoqi</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-08T00:33:00+08:00" pubdate data-updated="true">Sep 8<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+    <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+<a class="jiathis_button_tsina"></a>
+<a class="jiathis_button_weixin"></a>
+<a class="jiathis_button_renren"></a>
+<a class="jiathis_button_douban"></a>
+<a class="jiathis_button_googleplus"></a>
+<a href="http://www.jiathis.com/share?uid=1814751" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+	data_track_clickback:true,
+	summary:"",
+	shortUrl:true,
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1814751" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/09/07/java-classloader/" title="Previous Post: Java 类加载器">&laquo; Java 类加载器</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/09/08/java-class-loading-linking-and-initialising/" title="Next Post: Java类的装载、链接和初始化">Java类的装载、链接和初始化 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <!--h1>Comments</h1-->
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>标签云</h1>
+ <br /> 
+  <ul class="tag-cloud">
+    <a style="font-size: 112%" href="/tags/hadoop/">Hadoop</a> &nbsp 
+<a style="font-size: 139%" href="/tags/jvm/">JVM</a> &nbsp 
+<a style="font-size: 144%" href="/tags/java/">Java</a> &nbsp 
+<a style="font-size: 141%" href="/tags/pat/">PAT</a> &nbsp 
+<a style="font-size: 112%" href="/tags/octopress/">octopress</a> &nbsp 
+<a style="font-size: 135%" href="/tags/fen-bu-shi/">分布式</a> &nbsp 
+<a style="font-size: 133%" href="/tags/zi-jie-ma/">字节码</a> &nbsp 
+<a style="font-size: 135%" href="/tags/si-kao/">思考</a> &nbsp 
+<a style="font-size: 180%" href="/tags/ji-zhu/">技术</a> &nbsp 
+<a style="font-size: 124%" href="/tags/fang-fa-lun/">方法论</a> &nbsp 
+<a style="font-size: 106%" href="/tags/fu-wu-qi/">服务器</a> &nbsp 
+<a style="font-size: 137%" href="/tags/sheng-huo/">生活</a> &nbsp 
+<a style="font-size: 148%" href="/tags/suan-fa/">算法</a> &nbsp 
+<a style="font-size: 117%" href="/tags/wang-luo/">网络</a> &nbsp 
+<a style="font-size: 135%" href="/tags/du-shu/">读书</a>
+
+  </ul>
+</section>
+<section>
+  <h1>关于</h1>
+   <p>biaobiaoqi是我的网络id。<br><br>
+   我的博客日志：<a href="http://biaobiaoqi.me/blog/2013/09/01/blog-log/">请戳</a><br><br>
+   更多信息请戳：<a href="http://about.me/biaobiaoqi">about.me</a><br>
+	</p>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - Biaobiaoqi -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  - <span class="credit">Theme by <a href="http://www.gehaxelt.in">Gehaxelt</a></span>
+  <span class="credit">and <a href="http://www.it-solutions-neef.de">IT Solutions Neef</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'biaobiaoqisblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://biaobiaoqi.me/blog/2013/09/08/java-class-loader-in-practice/';
+        var disqus_url = 'http://biaobiaoqi.me/blog/2013/09/08/java-class-loader-in-practice/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

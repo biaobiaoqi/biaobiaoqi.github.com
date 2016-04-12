@@ -1,0 +1,457 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>PAT 1041-1050 题解 - Biaobiaoqi的博客</title>
+  <meta name="author" content="Biaobiaoqi">
+
+  
+  <meta name="description" content="PAT 1041, PAT1041,PAT 1042, PAT1042,PAT 1043, PAT1043,PAT 1044, PAT1044,PAT 1045, PAT1045,PAT 1046, PAT1046,PAT 1047, PAT1047,PAT 1048, PAT1048,PAT &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://biaobiaoqi.me/blog/2013/08/01/pat-1041-1050-solutions/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Biaobiaoqi的博客" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+
+function addBlankTargetForLinks () {
+
+  $('a[href^="http"]').each(function(){
+
+      $(this).attr('target', '_blank');
+
+  });
+
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+
+  addBlankTargetForLinks();
+
+});
+
+</script>
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F49481ec3305db999013860b0ccb3b16d' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39900036-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Biaobiaoqi的博客</a></h1>
+  
+    <h2>做一个互联网世界的匠人</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:biaobiaoqi.me" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives/">全部文章</a></li>
+  <li><a href="/tag-cloud/">分类阅读</a></li>
+  <li><a href="/resources/">其他推荐</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">PAT 1041-1050 题解</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-01T01:43:00+08:00" pubdate data-updated="true">Aug 1<span>st</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>浏览全部代码：<a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel">请戳</a></p>
+
+<p>本文谨代表个人思路，欢迎讨论;)</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1041">1041. Be Unique (20)</a></h2>
+
+<h5>题意</h5>
+
+<p>给出 N (&lt;=105)个数（数值范围为 [1, 10<sup>4]），找到其中不重复的第一个数字。比如给出</sup> <code>5 31 5 88 67 88 17</code> ， 答案是 <code>31</code> 。</p>
+
+<h5>分析</h5>
+
+<p>简单模拟题，开一个大数组<code>int a[10001];</code>，以读入的数为下标，记录 count:<code>a[index] ++;</code>。结果输出第一个存储为 1 的下标:<code>if (a[index] == 1)</code>。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1042">1042. Shuffling Machine (20)</a></h2>
+
+<h5>题意</h5>
+
+<p>背景是洗牌机的洗牌过程。过程是给定洗牌的每张牌的位置替换序列，由原来的次序算出最后的牌的平排列。</p>
+
+<p>比如原有的次序为<code>S3, H5, C1, D13, J2</code>，
+给定的洗牌顺序为<code>4, 2, 5 ,3 ,1</code>，那么一次洗牌的结果为：<code>J2, H5, D13, S3, C1</code>。
+如果需要两次洗牌，则结果为<code>C1, H5, S3, J2, D13</code>。</p>
+
+<p>输入为对一整副牌（54 张）的洗牌策略，以及洗牌次数 N，要求计算出最后的洗牌结果。</p>
+
+<h5>分析</h5>
+
+<p>简单 hash 题。</p>
+
+<!--more-->
+
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1043">1043. Is It a Binary Search Tree (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>二叉搜索树的定义就不重复了，题目新定义了一个镜像二叉搜索树，就是将一颗二叉搜索树所有节点的左右子树交换后的二叉树。</p>
+
+<p>输入是一个二叉树的前序排列，要求判定是否是一个二叉搜索树或者镜像二叉搜索树。如果是，输出该树后序遍历的序列。</p>
+
+<h5>分析</h5>
+
+<p>解题思路：</p>
+
+<ul>
+<li>1.BST 很特殊，实质上 BST 的所有节点的顺序排列就是中序遍历了。</li>
+<li>2.要检查树是否是 BST 或者镜像 BST，只需按照重建树的思路，在每次重建的过程中做适当检查即可。检查思路是：检查前序遍历序列中，根节点之后的节点排序是否符合 BST 的二分规则（即前一段都是小于根节点的，后一段都是大于根节点的）。</li>
+<li>3.最后的输出是后序遍历。过程中其实并不用构建整个树，直接在处理过程中，按后序的方式存储节点到队列中即可。</li>
+</ul>
+
+
+<p>更多相关分析，参见博文<a href="../../../../2013/04/27/pat1020-pat1043-rebuild-binary-tree/">《根据前中后序和层序重建二叉树》</a>。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1044">1044. Shopping in Mars (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>火星人购物使用钻石链，每颗钻石都有一定的价值。付款是，要求从钻石链上找到所有刚好能匹配到商品价值的连续的钻石子链，如果没有，
+则找到超过商品价值的最小的钻石子链。</p>
+
+<p>比如钻石链为<code>3 2 1 5 4 6 8 7</code>，商品价值为<code>15</code>，则候选的方案有：第 4 到第 6 颗的子链<code>5 4 6</code>，第 7 到第 8 颗：<code>8 7</code>。</p>
+
+<p>输入为一个钻石链以及商品的价值，要求找到所有满足条件的分割方案，按起始点从小到大排序输出。</p>
+
+<h5>分析</h5>
+
+<p>由于时间限制有些严格，需要做足够的优化：</p>
+
+<ul>
+<li>1.为了便于计算某个区间的累加值，在存储钻石串时，可以在<code>index</code>位置存储包括当前钻石在内的之前所有钻石价值的累加和。</li>
+<li>2.使用两层循环遍历所有可能，在遍历以位置 i 为其实坐标的子串时，不应该将结束位置初始化为 i，而是应该是以<code>i-1</code>为起始位置的搜索过程中的 break 时的
+结束位置的下标减 1.</li>
+</ul>
+
+
+<p>其中第 2 条的证明如下：</p>
+
+<p>算法中首先计算以<code>i</code>为起始位置的子串的累加值。假定计算到<code>j</code>满足累加值等于或者刚好大于商品价值<code>m</code>。之后，结束以<code>i</code>位置开始的子串的探寻，进入下一阶段以 i+1 为起始位置的搜索。
+由于<code>[i, j]</code>的累加和刚好等于<code>m</code>，则<code>[i, j - 1]</code>的累加和肯定小于<code>m</code>，那么<code>[i + 1, j - 1]</code>的累加和也肯定小于<code>m</code>。</p>
+
+<p>综上述，在以<code>i+1</code>为起始位置的搜索中，可以初始化结束位置为上一次搜索结束的位置减一，即<code>j - 1</code>.</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1045">1045. Favorite Color Stripe (30)</a></h2>
+
+<h5>题意</h5>
+
+<p>Eva 对彩色条有特殊的癖好，对于一条五颜六色的彩带，她会减掉其中一些颜色块，让整个彩带的颜色顺序匹配到自己的一个颜色喜好顺序上。</p>
+
+<p>举例来说，她喜欢的颜色顺序为{2 3 1 5 6}，给定的彩带的颜色顺序为{2 2 4 1 5 5 6 3 1 1 5 6}，那么经过她的剪辑，留下的彩带的可能选项有：{2 2 1 1 1 5 6}
+{2 2 1 5 5 5 6}，{2 2 1 5 5 6 6}和{2 2 3 1 1 5 6}。</p>
+
+<p>我们的任务是找到其中最长的剪辑可能。</p>
+
+<h5>分析</h5>
+
+<p>这是经典的最长递增子序列问题(LIS)，递增在这里体现为子序列的颜色顺序要遵照 Eva 的对颜色的喜好顺序。使用动态规划解决。</p>
+
+<ul>
+<li>1.剔除不在 Eva 喜欢颜色列表中的颜色。</li>
+<li>2.DP 的状态： 用<code>length[max]</code>数组存储状态，<code>length[i]</code>表示到彩带的第 i 个位置为止，包含该颜色的符合 Eva 喜好顺序的子串长度的最长值。记得在每次</li>
+<li>3.DP 的子问题：<code>length[i]</code>等于在其之前的所有<code>lengths[j]</code>跟<code>i</code>位置颜色组合后的最长子串值。</li>
+</ul>
+
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1046">1046. Shortest Distance (20)</a></h2>
+
+<h5>题意</h5>
+
+<p>给定在圆环上的几个点的相对位置，要求计算不同点之间的距离。</p>
+
+<h5>分析</h5>
+
+<p>简单模拟。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1047">1047. Student List for Course (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>根据每名学生填报的课程，按顺序输出每门课程的学生名单。其中学生总量为 N(&lt;=40000)，课程总量为 K(&lt;=2500)。学生姓名为 3 个大写英文字符加一个数字。</p>
+
+<h5>分析</h5>
+
+<p>倒排索引的模拟。可以针对学生姓名做 hash 方式的优化。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1048">1048. Find Coins (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>给定一系列硬币，以及一个商品的价格。要求从硬币中找到两个硬币让他们的组合等于商品的价格。如果有多个，输出有用最小单个值的硬币组合。</p>
+
+<h5>分析</h5>
+
+<p>首先，硬币中币值不小于商品价格的可以过滤掉。遍历过程中，使用 hash 标记的方法，设定一个<code>coins[MAXVALUE]</code>（其中 MAXVALUE 为商品价格的最大值）记录已有的币值种类，
+在遍历的过程中，一边将读入的硬币增加到<code>coins[]</code>中，一边计算满足条件的最小币值。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1049">1049. Counting Ones (30)</a></h2>
+
+<h5>题意</h5>
+
+<p>给定一个正整数 N(&lt;=2<sup>30)，要求计算所有小于</sup> N 的正整数的各个位置上，1 出现的次数之和。</p>
+
+<h5>分析</h5>
+
+<p>比较有思维难度的一题，核心在于找规律。10ms 的时间限制表明了不能用常规的循环遍历来解决。需要从简单的 case 找规律，逐步扩大到常规的情况。</p>
+
+<p>详情参见《编程之美》P132 页《1 的数目》。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1050">1050. String Subtraction (20)</a></h2>
+
+<h5>题意</h5>
+
+<p>给定两个字符串，S1 和 S2,要求将 S2 中的字符从 S1 串中剔除。</p>
+
+<h5>分析</h5>
+
+<p>用 Hash 的方式标记需要剔除的字符。</p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/08/01/pat-1041-1050-solutions/'>http://biaobiaoqi.me/blog/2013/08/01/pat-1041-1050-solutions/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Biaobiaoqi</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-01T01:43:00+08:00" pubdate data-updated="true">Aug 1<span>st</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+    <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+<a class="jiathis_button_tsina"></a>
+<a class="jiathis_button_weixin"></a>
+<a class="jiathis_button_renren"></a>
+<a class="jiathis_button_douban"></a>
+<a class="jiathis_button_googleplus"></a>
+<a href="http://www.jiathis.com/share?uid=1814751" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+	data_track_clickback:true,
+	summary:"",
+	shortUrl:true,
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1814751" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/08/01/pat-1031-1040-solutions/" title="Previous Post: PAT 1031-1040 题解">&laquo; PAT 1031-1040 题解</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/08/01/pat-1051-1060-solutions/" title="Next Post: PAT 1051-1060 题解">PAT 1051-1060 题解 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <!--h1>Comments</h1-->
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>标签云</h1>
+ <br /> 
+  <ul class="tag-cloud">
+    <a style="font-size: 112%" href="/tags/hadoop/">Hadoop</a> &nbsp 
+<a style="font-size: 139%" href="/tags/jvm/">JVM</a> &nbsp 
+<a style="font-size: 144%" href="/tags/java/">Java</a> &nbsp 
+<a style="font-size: 141%" href="/tags/pat/">PAT</a> &nbsp 
+<a style="font-size: 112%" href="/tags/octopress/">octopress</a> &nbsp 
+<a style="font-size: 135%" href="/tags/fen-bu-shi/">分布式</a> &nbsp 
+<a style="font-size: 133%" href="/tags/zi-jie-ma/">字节码</a> &nbsp 
+<a style="font-size: 135%" href="/tags/si-kao/">思考</a> &nbsp 
+<a style="font-size: 180%" href="/tags/ji-zhu/">技术</a> &nbsp 
+<a style="font-size: 124%" href="/tags/fang-fa-lun/">方法论</a> &nbsp 
+<a style="font-size: 106%" href="/tags/fu-wu-qi/">服务器</a> &nbsp 
+<a style="font-size: 137%" href="/tags/sheng-huo/">生活</a> &nbsp 
+<a style="font-size: 148%" href="/tags/suan-fa/">算法</a> &nbsp 
+<a style="font-size: 117%" href="/tags/wang-luo/">网络</a> &nbsp 
+<a style="font-size: 135%" href="/tags/du-shu/">读书</a>
+
+  </ul>
+</section>
+<section>
+  <h1>关于</h1>
+   <p>biaobiaoqi是我的网络id。<br><br>
+   我的博客日志：<a href="http://biaobiaoqi.me/blog/2013/09/01/blog-log/">请戳</a><br><br>
+   更多信息请戳：<a href="http://about.me/biaobiaoqi">about.me</a><br>
+	</p>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - Biaobiaoqi -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  - <span class="credit">Theme by <a href="http://www.gehaxelt.in">Gehaxelt</a></span>
+  <span class="credit">and <a href="http://www.it-solutions-neef.de">IT Solutions Neef</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'biaobiaoqisblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://biaobiaoqi.me/blog/2013/08/01/pat-1041-1050-solutions/';
+        var disqus_url = 'http://biaobiaoqi.me/blog/2013/08/01/pat-1041-1050-solutions/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

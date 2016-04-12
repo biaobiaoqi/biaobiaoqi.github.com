@@ -1,0 +1,14 @@
+<div class="highlight"><pre><span class="o">---</span>
+<span class="ss">layout</span><span class="p">:</span> <span class="n">page</span>
+<span class="ss">title</span><span class="p">:</span> <span class="s2">&quot;标签云&quot;</span>
+<span class="ss">date</span><span class="p">:</span> <span class="mi">2013</span><span class="o">-</span><span class="mo">07</span><span class="o">-</span><span class="mi">10</span> <span class="mo">02</span><span class="p">:</span><span class="mi">53</span>
+<span class="ss">comments</span><span class="p">:</span> <span class="kp">true</span>
+<span class="ss">sharing</span><span class="p">:</span> <span class="kp">true</span>
+<span class="ss">footer</span><span class="p">:</span> <span class="kp">true</span>
+<span class="o">---</span>
+
+<span class="c1">#注意，代码中的 escape 反斜杠在正常使用时需要去掉</span>
+<span class="c1">#另外，这几个语句不能使用换行。在我的测试环境下，使用换行后，最终的页面上对换行进行了错误的解码，给增加了一个&lt;code&gt;标签，造成了错误的显示。</span>
+
+<span class="o">&lt;</span><span class="n">ul</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;tag-cloud&quot;</span><span class="o">&gt;</span><span class="p">\{\</span><span class="o">%</span> <span class="n">tag_cloud</span> <span class="n">font</span><span class="o">-</span><span class="ss">size</span><span class="p">:</span> <span class="mi">90</span><span class="o">-</span><span class="mi">210</span><span class="sx">%, limit: 1000,</span> <span class="ss">style</span><span class="p">:</span> <span class="n">para</span> <span class="p">\</span><span class="o">%</span><span class="p">\}</span><span class="o">&lt;</span><span class="sr">/ul&gt;</span>
+</pre></div>

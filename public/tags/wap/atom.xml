@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: wap | Biaobiaoqi的博客]]></title>
+  <link href="http://biaobiaoqi.me/tags/wap/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.me/"/>
+  <updated>2016-04-12T23:33:13+08:00</updated>
+  <id>http://biaobiaoqi.me/</id>
+  <author>
+    <name><![CDATA[Biaobiaoqi]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Works Applications宣讲会]]></title>
+    <link href="http://biaobiaoqi.me/blog/2014/05/28/works-applications/"/>
+    <updated>2014-05-28T00:53:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2014/05/28/works-applications</id>
+    <content type="html"><![CDATA[<p>2012年我本科毕业，Works Applications （缩写WAP）在上海设立了办公室，在国内第一次招人。这家日本ERP公司在此之前并没有被大家锁熟知，神秘的开出40万人民币（6m日元）的入职年薪，颇为诱人。他们的面试流程也与大多数IT公司大相径庭。</p>
+
+<p>今晚，WAP公司到浙大做宣讲。提纲如下：</p>
+
+<ul>
+<li>公司介绍</li>
+<li>上海办公室介绍</li>
+<li>学长经验交流</li>
+<li>招聘流程介绍和公布考题</li>
+</ul>
+
+
+<p>本文做了简单的归纳记录。</p>
+
+<!--more-->
+
+
+<h2>公司介绍</h2>
+
+<p>一位中国的美女姐姐介绍了公司的基本情况。</p>
+
+<h4>公司基本情况</h4>
+
+<ul>
+<li>WAP于96年发家，到现在为止全球有3.5k员工。</li>
+<li>总共9家子公司，其中WAP超过3k员工。</li>
+<li>在纽约、新加坡、上海、日本有办公室。员工平均年龄29岁。</li>
+<li>国际化：最近4年，有150＋中国员工，50＋印度员工。希望未来一半员工来自海外。</li>
+<li>ERP，Enterprise Resource Planning</li>
+<li>最初做HR产品，HR产品做的很好。</li>
+<li>用户：1／3的日本大公司。包括Sony，三菱，星巴克等。</li>
+<li>上海的产品线主要包括：HR、 Group ware</li>
+<li>新加坡的产品是：E-Commerce</li>
+<li>目标：世界五强的软件公司</li>
+<li>终极目标：通过他们的软件的高效，让公司员工实现一周三休（3 days off per week）</li>
+<li>竞争对手：SAP， Oracle</li>
+</ul>
+
+
+<h4>对程序员的要求</h4>
+
+<ul>
+<li>软件的创造者（Software Creator）</li>
+<li>文化里允许失败，鼓励创新</li>
+<li>不看重原来的成绩，看中能力： 在日本有出色的中国员工领导着更高年龄的日本员工。</li>
+<li>职业发展：两条路，specialist 和 manager</li>
+</ul>
+
+
+<h4>待遇</h4>
+
+<ul>
+<li>全球统一 6M日元/年</li>
+<li>每年两次考评，有机会提升年薪 #应该只是有机会吧</li>
+<li>终生雇佣制</li>
+<li>come back pass ＃针对足够优秀的人才</li>
+<li>女性员工照顾孩子的时间调整</li>
+</ul>
+
+
+<h4>文化</h4>
+
+<ul>
+<li>接近欧美企业</li>
+<li>结构扁平，</li>
+<li>鼓励对boss说no</li>
+<li>鼓励提建议、互相讨论</li>
+<li>弹性工作制</li>
+</ul>
+
+
+<h2>上海办公室介绍</h2>
+
+<p>作主讲的是一个日本中年人，似乎是上海办公室的主管，介绍了上海办公室的情况。由于不太适应他日本口音的英文，相信漏了不少点>&lt;...</p>
+
+<p>介绍了一个他很喜欢的人才管理系统：CTM（company Talent Management）。</p>
+
+<p>强调了人才的重要性，他相信要成为一个伟大的企业，首先得有足够优秀的员工，得有足够多的国际化的领导着（global leader）。他举了几个中国人在企业中获得成功的例子，并列举了他们的优势，用来展示如何成为一个合格的global leader。</p>
+
+<ul>
+<li>just coding is not enough</li>
+<li>work and think globally</li>
+<li>create something new</li>
+</ul>
+
+
+<h2>程虓学长介绍</h2>
+
+<p>程虓(xiao)学长是12级毕业的浙大学长。在上海办公室表现优异，有出色的交流能力。这一点，从展示中也看得出来。</p>
+
+<p>他先后参与过三个项目，每个项目，他都付出了很多，也从中收获了许多成长。</p>
+
+<ul>
+<li>CLM（Company Learning Management）。6＋1人。</li>
+<li>CJK ：公司的核心产品，人事与给予。 这是针对大企业（员工大于1k）的hr解决方案。</li>
+<li><p>Global Payroll：跨集团公司的工资发放，管理，会计业务。</p></li>
+<li><p>找工作时，药保持快乐的心情</p></li>
+<li><p>software creator：dev具有绝对主动权。前期研究，业务模型建立，系统设计，实现</p></li>
+<li><p>focus：给客户带来收益，ROI</p></li>
+<li><p>Cutting edge and free：给传统软件带来新的元素</p></li>
+<li><p>full stack oriented or specialized sharp shooter</p></li>
+</ul>
+
+
+<h4>他眼中的文化</h4>
+
+<ul>
+<li>鼓励挑战：MBM Most Breakthrough Member，公司内最高个人／团队奖项</li>
+<li>欢迎错误：挑战伴随着错误</li>
+<li>扁平管理：领导是顾问，大家在讨论中角色对等</li>
+</ul>
+
+
+<h2>招聘流程介绍和公布考题</h2>
+
+<p>公司HR公布了招聘流程，并发放了考题。是两道程序题，选一道完成，Java和C++实现均可。要求第一正确，第二程序要精巧和快速。</p>
+
+<ol>
+<li>现场发放考题，5天之内按规定方式提交。</li>
+<li>30－60min 面试</li>
+<li>9天 intership 模拟真实工作环境：如何验证自己的想法。面试官扮演客户的角色。可以培养business sense。@杭州／@北京</li>
+<li>发放offer；优秀的应聘者可以获得机会去东京总部参观</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+</feed>

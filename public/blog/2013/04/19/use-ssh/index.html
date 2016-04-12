@@ -1,0 +1,508 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>SSH原理和使用 - Biaobiaoqi的博客</title>
+  <meta name="author" content="Biaobiaoqi">
+
+  
+  <meta name="description" content="在linux上工作，ssh是必须要了解的技术方法。它可以建立起多台主机之间的安全的加密传输，以进行远程的访问、操控、传输数据。">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://biaobiaoqi.me/blog/2013/04/19/use-ssh/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Biaobiaoqi的博客" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+
+function addBlankTargetForLinks () {
+
+  $('a[href^="http"]').each(function(){
+
+      $(this).attr('target', '_blank');
+
+  });
+
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+
+  addBlankTargetForLinks();
+
+});
+
+</script>
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F49481ec3305db999013860b0ccb3b16d' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39900036-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Biaobiaoqi的博客</a></h1>
+  
+    <h2>做一个互联网世界的匠人</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:biaobiaoqi.me" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives/">全部文章</a></li>
+  <li><a href="/tag-cloud/">分类阅读</a></li>
+  <li><a href="/resources/">其他推荐</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">SSH原理和使用</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-19T21:44:00+08:00" pubdate data-updated="true">Apr 19<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2>ssh 是什么</h2>
+
+<p>在 linux 上工作，ssh 是必须要了解的技术方法。它可以建立起多台主机之间的安全的加密传输，以进行远程的访问、操控、传输数据。</p>
+
+<p>SSH 為 Secure Shell 的縮寫。為建立在应用层和传输层基础上的安全协议。</p>
+
+<p>传统的网络服务程序，如 FTP、POP 和 Telnet 其本质上都是不安全的；因为它们在网络上用明文传送数据、用户帐号和用户口令，很容易受到中间人（man-in-the-middle）攻击方式的攻击。就是存在另一个人或者一台机器冒充真正的服务器接收用户传给服务器的数据，然后再冒充用户把数据传给真正的服务器。
+而 SSH 是目前较可靠，專为远程登录会话和其他网络服务提供安全性的协议。利用 SSH 协议可以有效防止远程管理过程中的信息泄露问题。透過 SSH 可以對所有传输的数据进行加密，也能够防止 DNS 欺骗和 IP 欺骗。</p>
+
+<!--more-->
+
+
+<p>SSH 之另一項優點為其传输的数据是经过压缩的，所以可以加快传输的速度。SSH 有很多功能，它既可以代替 Telnet，又可以为 FTP、POP、甚至为 PPP 提供一个安全的「通道」。
+了解这么多就好了，其实 ssh 连接也就是可以理解成经过加密的远程访问啦。</p>
+
+<p>&#8212;（来自中文维基）</p>
+
+<h2>ssh 连接的验证、加密方式</h2>
+
+<p>ssh 连接是 CS 模型（客户端-服务器），客户端发出连接申请，服务器对客户端进行验证，再考虑是否接受连接申请。</p>
+
+<p>ssh 的安全加密方式的理论基础是非对称加密体系。而非对称加密中，常见的一种就是 RSA 加密算法。在使用 ssh，务必先弄清楚非对称加密和 rsa 的算法流程。详情参见 <a href="http://zh.wikipedia.org/wiki/RSA%E5%8A%A0%E5%AF%86%E6%BC%94%E7%AE%97%E6%B3%95">RSA 加密算法</a>。</p>
+
+<p>ssh 有两种级别的安全验证：账户口令验证、rsa 加密验证。详细参数，可以在 sshd_config 配置文件中设置(Ubuntu 是/etc/ssh/sshd_config，mac 下是/etc/sshd_config)</p>
+
+<h3>账号口令验证</h3>
+
+<p>直接输入所要登陆的用户的口令是默认的方式。不需要修改配置文件。</p>
+
+<p>如果直接从客户端将用户密码传输到服务器，那么密码信息很容易被中间人截获，从而实现重放攻击。ssh 的实现方式是：</p>
+
+<ul>
+<li>1.客户端向 ssh 服务器发出请求，服务器将自己的公钥返回给客户端；</li>
+<li>2.客户端用服务器的公钥加密自己的登录密码，再将信息发送给服务器；</li>
+<li>3.服务器接收到客户端传送的密码，用自己的私钥解码，如果结果正确，则同意登录，建立起连接。</li>
+</ul>
+
+
+<p>这种方式还是有漏洞的，中间人可以假扮成服务器，骗取客户端的密码。</p>
+
+<h3>RSA 加密验证</h3>
+
+<p>rsa 加密验证方式，充分利用了非对称加密体系的优势，不需要在网络传输密码，完全杜绝了中间人攻击的可能。步骤如下：</p>
+
+<h5>准备工作</h5>
+
+<ul>
+<li>-1.客户端先使用 ssh-keygen 命令，生成私钥和公钥。按照默认配置，私钥会被保存在~/.ssh/id_rsa 中，公钥则在~/.ssh/id_rsa.pub 中。(一般别修改这里的文件)</li>
+<li>0.客户端通过安全的方式将公钥发送给服务器。在服务器端，将客户端发的公钥写入到~/.ssh/authorized_keys 文件末尾。</li>
+</ul>
+
+
+<h5>建立连接</h5>
+
+<ul>
+<li>1.客户端发出申请。服务器产生 session 密钥对，返回通过对应客户端的公钥加密后的 session 公钥。</li>
+<li>2.客户端用自己的密钥解密信息，得到 session 公钥。</li>
+<li>3.之后的数据交互，都通过对方方公钥加密，对方收到信息后，用其私钥解密，实现安全加密过程。</li>
+</ul>
+
+
+<h2>免密码的 RSA 加密方式实施过程</h2>
+
+<ul>
+<li>1.安装 ssh</li>
+</ul>
+
+
+<p>mac 下自带的有，ubuntu 下直接 sudo apt-get install ssh。</p>
+
+<ul>
+<li>2.在客户端生成私钥公钥</li>
+</ul>
+
+
+<p>使用 ssh-keygen 命令生成密钥对。遇到提示都直接回车（其中 passphrase 是保护 rsa 密钥的另一套加密方式）。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ssh-keygen   
+</span><span class='line'>Generating public/private rsa key pair.  
+</span><span class='line'>Enter file in which to save the key (/Users/biaobiaoqi/.ssh/id_rsa): /Users/biaobiaoqi/.ssh/id_rsa  
+</span><span class='line'>Enter passphrase (empty for no passphrase):   
+</span><span class='line'>Enter same passphrase again:   
+</span><span class='line'>Your identification has been saved in /Users/biaobiaoqi/.ssh/id_rsa.  
+</span><span class='line'>Your public key has been saved in /Users/biaobiaoqi/.ssh/id_rsa.pub.  
+</span><span class='line'>The key fingerprint is:  
+</span><span class='line'>b7:c2:5c:3f:83:5e:5e:93:a4:42:db:51:d8:ac:07:66 biaobiaoqi@biaobiaoqi.local  
+</span><span class='line'>The key's randomart image is:  
+</span><span class='line'>+--[ RSA 2048]----+  
+</span><span class='line'>|                 |  
+</span><span class='line'>|             +   |  
+</span><span class='line'>|            E +  |  
+</span><span class='line'>|           o +   |  
+</span><span class='line'>|        S + o o  |  
+</span><span class='line'>|       o + * = . |  
+</span><span class='line'>|        + = B +  |  
+</span><span class='line'>|         o + + . |  
+</span><span class='line'>|          . .    |  
+</span><span class='line'>+-----------------+  </span></code></pre></td></tr></table></div></figure>
+
+
+<p>结果是在~/.ssh/下生成了 id_rsa（私钥）和 id_rsa.pub（公钥）</p>
+
+<ul>
+<li>3.将客户端的公钥 id_rsa.pub 传递给服务器</li>
+</ul>
+
+
+<p>传送 id_rsa.pub 到服务器上，并将其内容写入到~/.ssh/authorized_keys 文件尾。</p>
+
+<p>可以物理的用 U 盘转运（似乎更安全），也可以使用 scp 指令（这个时候就需要运用到口令验证的 ssh 方式)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$scp ~/.ssh/id_rsa.pub user@host:~/.ssh/tmp_id_rsa.pub
+</span><span class='line'>$ssh user@host "cat ~./ssh/tmp_id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在执行 scp 传输的过程中，如果是第一次 ssh 连接到服务器，客户端会提示是否信任这个主机，比如：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$scp ~/.ssh/id_rsa.pub user@host:~/.ssh/tmp_id_rsa.pub
+</span><span class='line'>The authenticity of host XXX can't be established.
+</span><span class='line'>ECDSA key fingerprint is xxxxxxxxxxxxxxxxxxxxxx.
+</span><span class='line'>Are you sure you want to continue connecting (yes/no)?</span></code></pre></td></tr></table></div></figure>
+
+
+<p>原因是，客户端不确定所连接的 host 是否是真正的 host。一般情况，直接输入 yes，继续就好了。这里有较详细的解释：<a href="http://stackoverflow.com/questions/3663895/ssh-the-authenticity-of-host-hostname-cant-be-established">点击连接</a></p>
+
+<p>然后就可以免密码、更安全的登录啦</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> ssh xxxx@hostAddress</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在 ssh 登录服务器时，如果出现如下问题：<em>Agent admitted failure to sign using the key </em>则需要手工将客户端私钥加入到 ssh 管理体系中。使用 ssh-add 指令。（具体机理还不太清楚）</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ssh-add   ~/.ssh/id_rsa</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>and one more thing;)</h2>
+
+<h4>ssh+firefox+autoproy</h4>
+
+<p>看看 wall 外面的世界，是多么美好的事情。ssh 能帮我们做到，只要有一台在 wall 外的主机做代理。
+具体方式参见博文：<a href="http://reverland.bitbucket.org/ssh_climbe.html">ssh+firefox-autoproxy</a></p>
+
+<h4>SCP 命令加密赋值数据</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#将本地文件复制到远程主机上
+</span><span class='line'>$scp ~./tmp user@rehost:~/tmp
+</span><span class='line'>
+</span><span class='line'>#见远程主机上的文件复制到本地
+</span><span class='line'>$scp user@rehost:~/tmp ~./tmp
+</span><span class='line'>
+</span><span class='line'>#复制的是目录，需要迭代，添加-r 参数
+</span><span class='line'>$scp -r user@rehost:~/tmpDir ~./tmpDir</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>SSH 的配置</h4>
+
+<p>具体参数细节参见博文：<a href="http://www.ibm.com/developerworks/cn/aix/library/au-sshsecurity/">SSH 安全性和配置入门</a>
+<a href="http://blog.licess.org/sshd_config/">sshd_config 配置 详解</a></p>
+
+<h2>推荐阅读：</h2>
+
+<ul>
+<li><a href="http://blog.lizhigang.net/archives/249">《linux ssh 使用深度解析（key 登录详解）》</a></li>
+<li><a href="http://wiki.tuna.tsinghua.edu.cn/SshKeyHowto">《使用 RSA 密钥对进行 SSH 登录验证》</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2011/12/ssh_remote_login.html">《SSH 原理与运用（一）：远程登录》</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2011/12/ssh_port_forwarding.html">《SSH 原理与运用（二）：远程操作与端口转发》</a></li>
+<li><a href="http://reverland.bitbucket.org/ssh_climbe.html">ssh+firefox-autoproxy</a></li>
+<li><a href="http://www.ibm.com/developerworks/cn/aix/library/au-sshsecurity/">SSH 安全性和配置入门</a></li>
+<li><a href="http://blog.licess.org/sshd_config/">sshd_config 配置 详解</a></li>
+</ul>
+
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/04/19/use-ssh/'>http://biaobiaoqi.me/blog/2013/04/19/use-ssh/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Biaobiaoqi</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-19T21:44:00+08:00" pubdate data-updated="true">Apr 19<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+    <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+<a class="jiathis_button_tsina"></a>
+<a class="jiathis_button_weixin"></a>
+<a class="jiathis_button_renren"></a>
+<a class="jiathis_button_douban"></a>
+<a class="jiathis_button_googleplus"></a>
+<a href="http://www.jiathis.com/share?uid=1814751" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+	data_track_clickback:true,
+	summary:"",
+	shortUrl:true,
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1814751" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/04/18/some-opinions-about-software-engineering/" title="Previous Post: 关于软件工程的一些看法">&laquo; 关于软件工程的一些看法</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/04/20/are-you-smart-enough-to-work-at-google/" title="Next Post: 《谁是谷歌想要的人才？》">《谁是谷歌想要的人才？》 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <!--h1>Comments</h1-->
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>标签云</h1>
+ <br /> 
+  <ul class="tag-cloud">
+    <a style="font-size: 112%" href="/tags/hadoop/">Hadoop</a> &nbsp 
+<a style="font-size: 139%" href="/tags/jvm/">JVM</a> &nbsp 
+<a style="font-size: 144%" href="/tags/java/">Java</a> &nbsp 
+<a style="font-size: 141%" href="/tags/pat/">PAT</a> &nbsp 
+<a style="font-size: 112%" href="/tags/octopress/">octopress</a> &nbsp 
+<a style="font-size: 135%" href="/tags/fen-bu-shi/">分布式</a> &nbsp 
+<a style="font-size: 133%" href="/tags/zi-jie-ma/">字节码</a> &nbsp 
+<a style="font-size: 135%" href="/tags/si-kao/">思考</a> &nbsp 
+<a style="font-size: 180%" href="/tags/ji-zhu/">技术</a> &nbsp 
+<a style="font-size: 124%" href="/tags/fang-fa-lun/">方法论</a> &nbsp 
+<a style="font-size: 106%" href="/tags/fu-wu-qi/">服务器</a> &nbsp 
+<a style="font-size: 137%" href="/tags/sheng-huo/">生活</a> &nbsp 
+<a style="font-size: 148%" href="/tags/suan-fa/">算法</a> &nbsp 
+<a style="font-size: 117%" href="/tags/wang-luo/">网络</a> &nbsp 
+<a style="font-size: 135%" href="/tags/du-shu/">读书</a>
+
+  </ul>
+</section>
+<section>
+  <h1>关于</h1>
+   <p>biaobiaoqi是我的网络id。<br><br>
+   我的博客日志：<a href="http://biaobiaoqi.me/blog/2013/09/01/blog-log/">请戳</a><br><br>
+   更多信息请戳：<a href="http://about.me/biaobiaoqi">about.me</a><br>
+	</p>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - Biaobiaoqi -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  - <span class="credit">Theme by <a href="http://www.gehaxelt.in">Gehaxelt</a></span>
+  <span class="credit">and <a href="http://www.it-solutions-neef.de">IT Solutions Neef</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'biaobiaoqisblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://biaobiaoqi.me/blog/2013/04/19/use-ssh/';
+        var disqus_url = 'http://biaobiaoqi.me/blog/2013/04/19/use-ssh/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

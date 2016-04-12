@@ -1,0 +1,484 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Java方法调用的虚分派 - Biaobiaoqi的博客</title>
+  <meta name="author" content="Biaobiaoqi">
+
+  
+  <meta name="description" content="本文通过介绍Java方法调用的虚分派，来加深对Java多态实现的理解。需要预先理解Java字节码和JVM的基本框架。java virtual dispatch, method table. invokevirtual invokespecial invokeinteface invokestatic">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://biaobiaoqi.me/blog/2013/06/02/virtual-dispatch-and-method-table-in-java/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Biaobiaoqi的博客" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+
+function addBlankTargetForLinks () {
+
+  $('a[href^="http"]').each(function(){
+
+      $(this).attr('target', '_blank');
+
+  });
+
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+
+  addBlankTargetForLinks();
+
+});
+
+</script>
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F49481ec3305db999013860b0ccb3b16d' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39900036-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Biaobiaoqi的博客</a></h1>
+  
+    <h2>做一个互联网世界的匠人</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:biaobiaoqi.me" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives/">全部文章</a></li>
+  <li><a href="/tag-cloud/">分类阅读</a></li>
+  <li><a href="/resources/">其他推荐</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Java方法调用的虚分派</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-02T01:51:00+08:00" pubdate data-updated="true">Jun 2<span>nd</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>本文通过介绍 Java 方法调用的虚分派，来加深对 Java 多态实现的理解。需要预先理解 Java 字节码和 JVM 的基本框架。</p>
+
+<h2>虚分配（Virtual Dispatch）</h2>
+
+<p>首先从字节码中对方法的调用说起。Java 的 bytecode 中方法的调用实现分为四种指令：</p>
+
+<ul>
+<li>1.invokevirtual 为最常见的情况，包含 virtual dispatch 机制；</li>
+<li>2.invokespecial 是作为对 private 和构造方法的调用，绕过了 virtual dispatch；</li>
+<li>3.invokeinterface 的实现跟 invokevirtual 类似。</li>
+<li>4.invokestatic 是对静态方法的调用。</li>
+</ul>
+
+
+<p>其中最复杂的要属<code>invokevirtual</code>指令，它涉及到了多态的特性，使用虚分派来实现方法调用。</p>
+
+<p>虚分派机制会首先从 receiver（被调用方法的对象）的类的实现中查找对应的方法，如果没找到，则去父类查找，直到找到函数并实现调用，而不是依赖于引用的类型（相对于实际类型，引用类型又称静态类型）。</p>
+
+<p>下面是一段有趣的代码。反映了 virtual dispatch 机制 和 一般的 field 访问的不同。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Greeting</span> <span class="o">{</span>
+</span><span class='line'>    <span class="n">String</span> <span class="n">intro</span> <span class="o">=</span> <span class="s">&quot;Hello&quot;</span><span class="o">;</span>
+</span><span class='line'>    <span class="n">String</span> <span class="nf">target</span><span class="o">(){</span>
+</span><span class='line'>        <span class="k">return</span> <span class="s">&quot;world&quot;</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">FrenchGreeting</span> <span class="kd">extends</span> <span class="n">Greeting</span> <span class="o">{</span>
+</span><span class='line'>    <span class="n">String</span> <span class="n">intro</span> <span class="o">=</span> <span class="s">&quot;Bonjour&quot;</span><span class="o">;</span>
+</span><span class='line'>    <span class="n">String</span> <span class="nf">target</span><span class="o">(){</span>
+</span><span class='line'>        <span class="k">return</span> <span class="s">&quot;le monde&quot;</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+</span><span class='line'>        <span class="n">Greeting</span> <span class="n">english</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Greeting</span><span class="o">();</span>
+</span><span class='line'>        <span class="n">Greeting</span> <span class="n">french</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FrenchGreeting</span><span class="o">();</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">english</span><span class="o">.</span><span class="na">intro</span> <span class="o">+</span> <span class="s">&quot;,&quot;</span> <span class="o">+</span> <span class="n">english</span><span class="o">.</span><span class="na">target</span><span class="o">());</span>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">french</span><span class="o">.</span><span class="na">intro</span> <span class="o">+</span> <span class="s">&quot;,&quot;</span> <span class="o">+</span> <span class="n">french</span><span class="o">.</span><span class="na">target</span><span class="o">());</span>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(((</span><span class="n">FrenchGreeting</span><span class="o">)</span><span class="n">french</span><span class="o">).</span><span class="na">intro</span> <span class="o">+</span> <span class="s">&quot;,&quot;</span> <span class="o">+</span>      <span class="o">((</span><span class="n">FrenchGreeting</span><span class="o">)</span><span class="n">french</span><span class="o">).</span><span class="na">target</span><span class="o">());</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>运行的结果为</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">Hello</span><span class="o">,</span><span class="n">world</span>
+</span><span class='line'><span class="n">Hello</span><span class="o">,</span><span class="n">le</span> <span class="n">monde</span>
+</span><span class='line'><span class="n">Bonjour</span><span class="o">,</span><span class="n">le</span> <span class="n">monde</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>前两行输出中，对于 intro 这个属性的访问，直接指向了父类中的变量，因为静态类型为父类。</p>
+
+<p>第二行对于 target()的方法调用，则是指向了子类中的方法，虽然引用类型也为父类，但这是虚分派的结果，虚分派不管引用类型的，只查被调用对象的类型。</p>
+
+<p>既然虚分派机制是从被调用对象本身的类开始查找，那么对于一个覆盖了父类中某方法的子类的对象，是无法调用父类中那个被覆盖的方法的吗？</p>
+
+<p>在虚分派机制中这确实是不可以的。但却可以通过 invokespecial 实现。如下代码</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">FrenchGreeting</span> <span class="kd">extends</span> <span class="n">Greeting</span> <span class="o">{</span>
+</span><span class='line'>    <span class="n">String</span> <span class="n">intro</span> <span class="o">=</span> <span class="s">&quot;Bonjour&quot;</span><span class="o">;</span>
+</span><span class='line'>    <span class="n">String</span> <span class="nf">target</span><span class="o">(){</span>
+</span><span class='line'>        <span class="k">return</span> <span class="s">&quot;le monde&quot;</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="n">String</span> <span class="nf">func</span><span class="o">(){</span>
+</span><span class='line'>        <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">target</span><span class="o">();</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+</span><span class='line'>        <span class="n">Greeting</span> <span class="n">english</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Greeting</span><span class="o">();</span>
+</span><span class='line'>        <span class="n">FrenchGreeting</span> <span class="n">french</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FrenchGreeting</span><span class="o">();</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">french</span><span class="o">.</span><span class="na">func</span><span class="o">());</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<!--more-->
+
+
+<p>func()就成功的调用了父类的方法 target()，虽然 target()已经被子类重写了。具体的调用细节，从字节码中可以看到：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">ALOAD</span> <span class="mi">0</span><span class="o">:</span> <span class="k">this</span>
+</span><span class='line'><span class="n">INVOKESPECIAL</span> <span class="n">Greeting</span><span class="o">.</span><span class="na">target</span><span class="o">()</span> <span class="o">:</span> <span class="n">String</span>
+</span><span class='line'><span class="n">ARETURN</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>其中使用了 invokespecial 指令，而不是施行虚分派策略的 invokevirtual 指令。</p>
+
+<h2>方法表（Method Table）</h2>
+
+<p>介绍了虚分派，接下来介绍是它的一种实现方式 &#8211; 虚方法表。类似于 C++的虚函数表 vtbl。</p>
+
+<p>在有的 JVM 实现中，使用了方法表机制实现虚分派，为 invokevirtual 指令提供服务。而有时候，为了节省内存可能不采用方法表的实现。</p>
+
+<p>JVM 会在链接类的过程中，给类分配相应的方法表内存空间。每个类对应一个方法表。这些都是存在于方法区中的。与 C++略有不同，C++中每个对象的第一个指针就是指向了相应的虚函数表。而 Java 中每个对象索引到对应的类，在对应的类数据中对应一个方法表。（关于链接的更多信息，参见博文<a href="http://localhost:4000/blog/2013/09/08/java-class-loading-linking-and-initialising/">《Java 类的装载、链接和初始化》</a>）</p>
+
+<h3>一种方法表的实现如下：</h3>
+
+<p>父类的方法比子类的方法先得到解析，即父类的方法相比子类的方法位于表的前列。</p>
+
+<p>表中每项对应于一个方法，索引到实际方法的实现代码上。如果子类重写了父类中某个方法的代码，则该方法第一次出现的位置的索引更换到子类的实现代码上，而不会在方法表中出现新的项。</p>
+
+<p>JVM 运行时，当代码索引到一个方法时，是根据它在方法表中的偏移量来实现访问的。（第一次执行到调用指令时，会执行解析，将符号索引替换为对应的直接索引）。</p>
+
+<p>由于 invokevirtual 调用的方法在对应的类的方法表中都有固定的位置，直接索引的值可以用偏移量来表示。（符号索引解析的最终目的是完成直接索引：对象方法和对象变量的调用都是用偏移量来表示直接索引的）</p>
+
+<h3>invokeinterface 与 invokevirtual 的比较</h3>
+
+<p><del>当使用 invokeinterface 来调用方法时，由于不同的类可以实现同一 interface，我们无法确定在某个类中的 inteface 中的方法处在哪个位置。于是，也就无法解析 CONSTANT_intefaceMethodref-info 为直接索引，而必须每次都执行一次在 methodtable 中的搜索了。</del></p>
+
+<p><del>所以，在这种实现中，通过 invokeinterface 访问方法比通过 invokevirtua﻿﻿l 访问明显慢很多。</del></p>
+
+<p>为了优化性能，<code>invokeinterface</code>实际上也可以使用一张方发表（itb）做查找。</p>
+
+<h3>参考资料</h3>
+
+<ul>
+<li><a href="http://book.douban.com/subject/1788390/">《Inside the Java2 Virtual Machine》</a></li>
+<li><a href="http://book.douban.com/subject/6522893/">《深入理解 Java 虚拟机》</a></li>
+</ul>
+
+
+<p>Log:</p>
+
+<p>2013-11-20 读《深入理解 Java 虚拟机》，修正部分内容</p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/06/02/virtual-dispatch-and-method-table-in-java/'>http://biaobiaoqi.me/blog/2013/06/02/virtual-dispatch-and-method-table-in-java/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Biaobiaoqi</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-02T01:51:00+08:00" pubdate data-updated="true">Jun 2<span>nd</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+    <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+<a class="jiathis_button_tsina"></a>
+<a class="jiathis_button_weixin"></a>
+<a class="jiathis_button_renren"></a>
+<a class="jiathis_button_douban"></a>
+<a class="jiathis_button_googleplus"></a>
+<a href="http://www.jiathis.com/share?uid=1814751" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+	data_track_clickback:true,
+	summary:"",
+	shortUrl:true,
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1814751" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/05/25/some-ideas-about-using-bt-protocol-to-sync/" title="Previous Post: 关于毕业季照片分享的思考">&laquo; 关于毕业季照片分享的思考</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/06/08/ipc-in-hadoop/" title="Next Post: 《Hadoop技术内幕》学习笔记——RPC和动态代理">《Hadoop技术内幕》学习笔记——RPC和动态代理 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <!--h1>Comments</h1-->
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>标签云</h1>
+ <br /> 
+  <ul class="tag-cloud">
+    <a style="font-size: 112%" href="/tags/hadoop/">Hadoop</a> &nbsp 
+<a style="font-size: 139%" href="/tags/jvm/">JVM</a> &nbsp 
+<a style="font-size: 144%" href="/tags/java/">Java</a> &nbsp 
+<a style="font-size: 141%" href="/tags/pat/">PAT</a> &nbsp 
+<a style="font-size: 112%" href="/tags/octopress/">octopress</a> &nbsp 
+<a style="font-size: 135%" href="/tags/fen-bu-shi/">分布式</a> &nbsp 
+<a style="font-size: 133%" href="/tags/zi-jie-ma/">字节码</a> &nbsp 
+<a style="font-size: 135%" href="/tags/si-kao/">思考</a> &nbsp 
+<a style="font-size: 180%" href="/tags/ji-zhu/">技术</a> &nbsp 
+<a style="font-size: 124%" href="/tags/fang-fa-lun/">方法论</a> &nbsp 
+<a style="font-size: 106%" href="/tags/fu-wu-qi/">服务器</a> &nbsp 
+<a style="font-size: 137%" href="/tags/sheng-huo/">生活</a> &nbsp 
+<a style="font-size: 148%" href="/tags/suan-fa/">算法</a> &nbsp 
+<a style="font-size: 117%" href="/tags/wang-luo/">网络</a> &nbsp 
+<a style="font-size: 135%" href="/tags/du-shu/">读书</a>
+
+  </ul>
+</section>
+<section>
+  <h1>关于</h1>
+   <p>biaobiaoqi是我的网络id。<br><br>
+   我的博客日志：<a href="http://biaobiaoqi.me/blog/2013/09/01/blog-log/">请戳</a><br><br>
+   更多信息请戳：<a href="http://about.me/biaobiaoqi">about.me</a><br>
+	</p>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - Biaobiaoqi -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  - <span class="credit">Theme by <a href="http://www.gehaxelt.in">Gehaxelt</a></span>
+  <span class="credit">and <a href="http://www.it-solutions-neef.de">IT Solutions Neef</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'biaobiaoqisblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://biaobiaoqi.me/blog/2013/06/02/virtual-dispatch-and-method-table-in-java/';
+        var disqus_url = 'http://biaobiaoqi.me/blog/2013/06/02/virtual-dispatch-and-method-table-in-java/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

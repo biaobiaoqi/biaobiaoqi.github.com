@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: Git | Biaobiaoqi的博客]]></title>
+  <link href="http://biaobiaoqi.me/tags/git/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.me/"/>
+  <updated>2016-04-12T23:33:13+08:00</updated>
+  <id>http://biaobiaoqi.me/</id>
+  <author>
+    <name><![CDATA[Biaobiaoqi]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[在github上搭建octopress博客 Mac版]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/03/21/building-octopress-in-github-mac/"/>
+    <updated>2013-03-21T23:43:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/03/21/building-octopress-in-github-mac</id>
+    <content type="html"><![CDATA[<p><img src="http://pikipity.github.com/images/post/octopress.jpg"></p>
+
+<p>大概是从<a href="http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/">唐巧大哥的博客</a>以及<a href="http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html">阮一峰的博文</a>了解到了octopress这个静态的博客框架，托在Github上面，不用自己搭服务器，方便易用。自己之前也有在csdn上维护了一个博客，但经过密码泄露事件以及难于自定义配置等问题的考虑，在Github上维护一个静态博客是一个更好的选择。</p>
+
+<p>搭建博客之初，我并没有学过Ruby，甚至于对Git的操作指令也不甚熟悉。颇费周章的从网上搜索了很久的教程，但终归每台电脑有不同的初始环境，不能盲目跟从。倒腾了一下午，最终发现还是官网的Guide最有效。这里总结下自己在Mac上的搭建经验。</p>
+
+<!--more-->
+
+
+<p>如果对octopress、ruby、git不太了解，先不着急动手，以下是一些基本概念：</p>
+
+<ul>
+<li><a href="http://octopress.org/">Octopress</a> ：本文所要搭建的博客框架，是一个静态站点生成工具，不需要使用动态的数据库和相关处理。</li>
+<li> <a href="http://zh.wikipedia.org/wiki/Markdown">Markdown</a>：一种轻量级的标记语言，比HTML简单，用于Octopress博客发表时的内容排版。</li>
+<li> Git：最早用于管理Linux源码的分布式版本控制工具。</li>
+<li> <a href="https://github.com/">Github</a>：程序员的Facebook,为程序员托管了很多代码的站点。</li>
+<li> <a href="https://help.github.com/categories/20/articles">Github pages</a>：Github推出的，给与程序员自由创造静态网页的功能，支持Jekyll，而Octopress是对Jekyll的封装，于是也被支持。</li>
+<li> Ruby：Octopress框架的实现语言（顺道推荐<a href="http://www.codecademy.com/tracks/ruby">codecademy</a>，可以体验到轻松的交互式的Ruby学习）。Mac OS X下自带了Ruby，不过版本可能与Octopress不匹配，需要使用RVM重新配置。</li>
+<li> <a href="https://rvm.io/">RVM</a>（ruby version manager）：用于管理Ruby的版本的工具。类似的工具有rbenv，本文使用rvm管理ruby版本。</li>
+<li> <a href="http://rubygems.org/">RubyGem</a>：也简称Gem，用于管理Ruby中的程序组件的工具。个人理解一个gem类似于一个特定功能的代码库。</li>
+<li> <a href="http://bundler.io/">Bundler</a>：通过管理一个Ruby项目中的各个Gem来管理整个项目的工具。</li>
+<li> rake：ruby中类似于make的构建工具，用于从源码生成最终的产品。</li>
+<li> <a href="http://www.ibm.com/developerworks/cn/xml/x-cn-yamlintro/">YAML</a>: YAML是一种比 XML更敏捷的半结构化数据格式。Octopress使用yaml做配置文件。</li>
+<li> <a href="http://mxcl.github.com/homebrew/">homebrew</a>：Mac OS下的软件包管理工具，类似于Linux下的dpkg。</li>
+</ul>
+
+
+<p> 搭建过程如下：</p>
+
+<h1>1. 配环境</h1>
+
+<h3>1.0 Homebrew</h3>
+
+<p>万事开头难，第一步还是配环境。为了软件包安装的方便，可以先安装好homebrew。</p>
+
+<p><code>
+$ ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
+</code></p>
+
+<p>其使用方法，参见<a href="http://mxcl.github.com/homebrew/">官网</a>。</p>
+
+<h3>1.1 Ruby</h3>
+
+<p>Mac OS X 10.8.1 的系统自带了Ruby，但是版本是1.8.3，Octopress官网所支持的最新版是1.9.3（2013.3），兼容起见，先对版本进行升级。</p>
+
+<p><code>
+$ rvm install 1.9.3 &amp;&amp; rvm use 1.9.3
+$ rvm ruby gems latest
+</code></p>
+
+<p>lz在升级过程中遇到了奇怪的错误，于是又参考<a href="http://www.iteye.com/blog/1118672">另一篇博文</a>，重新安装了rvm，再升级ruby到1.9.3版本。</p>
+
+<h3>1.2 Git</h3>
+
+<p>使用Homebrew安装Git。</p>
+
+<p><code>
+$ brew install git
+</code></p>
+
+<h1>2. 搭建octopress</h1>
+
+<p>环境配置完成后，就可以开始参照<a href="http://octopress.org/help/">官网</a>的指导搭建Octopress。这一过程依赖于对Github的账户操作。不再展开。</p>
+
+<h1>3. 发博文和在线部署</h1>
+
+<p>同样的，参考<a href="http://octopress.org/help/">官网</a>即可。
+这里大致的列出我所常用到的几条命令：</p>
+
+<p>```</p>
+
+<h1>创建一篇博文</h1>
+
+<p>rake new_post["post title"] #octopress将在工作目录的source/_post/目录下生成相应的markdown文件。然后可以使用mou工具去修改编辑内容。</p>
+
+<h1>生成预览</h1>
+
+<p>rake preview #可以通过localhost:4000在本机实时观察最新的编辑效果。</p>
+
+<h1>在线发布</h1>
+
+<p>rake deploy #完成编辑后，可以将最新的内容部署到github上去。成功后，即可在线访问。</p>
+
+<h1>向github提交源文件更新</h1>
+
+<p>git add -A
+git commit -m "提交内容"
+git push</p>
+
+<p>```</p>
+
+<p>另外，推荐Mac下的Markdown编辑器：<a href="http://mouapp.com/">mou</a>，另附<a href="http://wowubuntu.com/markdown/index.html">markdown语法参考</a>。</p>
+
+<p>进一步的octopress博客定制，参见博客<a href="/blog/2013/07/10/decorate-octopress/">《定制自己的octopress》</a></p>
+
+<p><strong>LOG：</strong></p>
+
+<ul>
+<li>2013-11-11 修订</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

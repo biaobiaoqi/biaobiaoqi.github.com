@@ -1,0 +1,40 @@
+<div class="highlight"><pre>	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">kmp</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span><span class="o">,</span> <span class="n">String</span> <span class="n">dest</span><span class="o">)</span> <span class="o">{</span>
+		<span class="kt">int</span><span class="o">[]</span> <span class="n">next</span> <span class="o">=</span>  <span class="n">generateNext</span><span class="o">(</span><span class="n">dest</span><span class="o">);</span>
+		
+		<span class="c1">//i 是 str 的索引，j 是 dest 的索引。</span>
+		<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">str</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+			<span class="c1">//匹配发生错误时，在 next 数组中向前迭代找到匹配的结果。这是整个算法的核心位置！</span>
+			<span class="k">while</span> <span class="o">(</span><span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">!=</span> <span class="n">dest</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">j</span><span class="o">))</span>
+				<span class="n">j</span> <span class="o">=</span> <span class="n">next</span><span class="o">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="o">];</span>
+
+			<span class="c1">//如果相等，dest 中的索引往后移动一位</span>
+			<span class="k">if</span> <span class="o">(</span><span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">==</span> <span class="n">dest</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">j</span><span class="o">))</span>
+				<span class="n">j</span><span class="o">++;</span>
+			
+			<span class="c1">//dest 数组所有位置均连续的匹配完成</span>
+			<span class="k">if</span> <span class="o">(</span><span class="n">j</span> <span class="o">==</span> <span class="n">dest</span><span class="o">.</span><span class="na">length</span><span class="o">())</span>
+				<span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+		<span class="o">}</span>
+
+		<span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+	<span class="o">}</span>
+	
+	<span class="c1">//生成 next 数组</span>
+	<span class="kd">private</span> <span class="kt">void</span> <span class="nf">generateNext</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span><span class="o">)</span> <span class="o">{</span>
+		<span class="kt">int</span><span class="o">[]</span> <span class="n">next</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">dest</span><span class="o">.</span><span class="na">length</span><span class="o">()];</span>
+        <span class="n">next</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>  <span class="c1">//第一个元素的 next 值为 0。</span>
+        
+        <span class="c1">//i 是需要计算的 next 值的下标；在 for 循环的开始，j 记录了上一个元素的部分匹配值，即前缀串中公共部分的最后一位字符的下标。</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">str</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="n">i</span> <span class="o">++)</span> <span class="o">{</span>
+        	<span class="c1">//当 i 和 j 指向的字符不匹配时，在 next 中往前迭代，直到两字符相等或者 j 为 0.</span>
+            <span class="k">while</span><span class="o">(</span><span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">!=</span> <span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">j</span><span class="o">))</span> 
+                <span class="n">j</span> <span class="o">=</span> <span class="n">next</span><span class="o">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="o">];</span>
+            
+            <span class="c1">//如果 j 和 i 指向的字符相等，则 j 增加 1.</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">==</span> <span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">j</span><span class="o">))</span>
+                <span class="n">j</span> <span class="o">++;</span>
+                
+            <span class="n">next</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">j</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+</pre></div>

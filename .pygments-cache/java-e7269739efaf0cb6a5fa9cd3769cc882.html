@@ -1,0 +1,150 @@
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">java.io.*</span><span class="o">;</span>  
+  
+<span class="cm">/* </span>
+<span class="cm"> </span>
+<span class="cm">A CompilingClassLoader compiles your Java source on-the-fly.  It </span>
+<span class="cm">checks for nonexistent .class files, or .class files that are older </span>
+<span class="cm">than their corresponding source code. </span>
+<span class="cm"> </span>
+<span class="cm">*/</span>  
+  
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CompilingClassLoader</span> <span class="kd">extends</span> <span class="n">ClassLoader</span>  
+<span class="o">{</span>  
+  <span class="c1">// Given a filename, read the entirety of that file from disk  </span>
+  <span class="c1">// and return it as a byte array.  </span>
+  <span class="kd">private</span> <span class="kt">byte</span><span class="o">[]</span> <span class="nf">getBytes</span><span class="o">(</span> <span class="n">String</span> <span class="n">filename</span> <span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>  
+    <span class="c1">// Find out the length of the file  </span>
+    <span class="n">File</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span> <span class="n">filename</span> <span class="o">);</span>  
+    <span class="kt">long</span> <span class="n">len</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="na">length</span><span class="o">();</span>  
+  
+    <span class="c1">// Create an array that&#39;s just the right size for the file&#39;s  </span>
+    <span class="c1">// contents  </span>
+    <span class="kt">byte</span> <span class="n">raw</span><span class="o">[]</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[(</span><span class="kt">int</span><span class="o">)</span><span class="n">len</span><span class="o">];</span>  
+  
+    <span class="c1">// Open the file  </span>
+    <span class="n">FileInputStream</span> <span class="n">fin</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span> <span class="n">file</span> <span class="o">);</span>  
+  
+    <span class="c1">// Read all of it into the array; if we don&#39;t get all,  </span>
+    <span class="c1">// then it&#39;s an error.  </span>
+    <span class="kt">int</span> <span class="n">r</span> <span class="o">=</span> <span class="n">fin</span><span class="o">.</span><span class="na">read</span><span class="o">(</span> <span class="n">raw</span> <span class="o">);</span>  
+    <span class="k">if</span> <span class="o">(</span><span class="n">r</span> <span class="o">!=</span> <span class="n">len</span><span class="o">)</span>  
+      <span class="k">throw</span> <span class="k">new</span> <span class="nf">IOException</span><span class="o">(</span> <span class="s">&quot;Can&#39;t read all, &quot;</span><span class="o">+</span><span class="n">r</span><span class="o">+</span><span class="s">&quot; != &quot;</span><span class="o">+</span><span class="n">len</span> <span class="o">);</span>  
+  
+    <span class="c1">// Don&#39;t forget to close the file!  </span>
+    <span class="n">fin</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>  
+  
+    <span class="c1">// And finally return the file contents as an array  </span>
+    <span class="k">return</span> <span class="n">raw</span><span class="o">;</span>  
+  <span class="o">}</span>  
+  
+  <span class="c1">// Spawn a process to compile the java source code file  </span>
+  <span class="c1">// specified in the &#39;javaFile&#39; parameter.  Return a true if  </span>
+  <span class="c1">// the compilation worked, false otherwise.  </span>
+  <span class="kd">private</span> <span class="kt">boolean</span> <span class="nf">compile</span><span class="o">(</span> <span class="n">String</span> <span class="n">javaFile</span> <span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>  
+    <span class="c1">// Let the user know what&#39;s going on  </span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span> <span class="s">&quot;CCL: Compiling &quot;</span><span class="o">+</span><span class="n">javaFile</span><span class="o">+</span><span class="s">&quot;...&quot;</span> <span class="o">);</span>  
+  
+    <span class="c1">// Start up the compiler  </span>
+    <span class="n">Process</span> <span class="n">p</span> <span class="o">=</span> <span class="n">Runtime</span><span class="o">.</span><span class="na">getRuntime</span><span class="o">().</span><span class="na">exec</span><span class="o">(</span> <span class="s">&quot;javac &quot;</span><span class="o">+</span><span class="n">javaFile</span> <span class="o">);</span>  
+  
+    <span class="c1">// Wait for it to finish running  </span>
+    <span class="k">try</span> <span class="o">{</span>  
+      <span class="n">p</span><span class="o">.</span><span class="na">waitFor</span><span class="o">();</span>  
+    <span class="o">}</span> <span class="k">catch</span><span class="o">(</span> <span class="n">InterruptedException</span> <span class="n">ie</span> <span class="o">)</span> <span class="o">{</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span> <span class="n">ie</span> <span class="o">);</span> <span class="o">}</span>  
+  
+    <span class="c1">// Check the return code, in case of a compilation error  </span>
+    <span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="na">exitValue</span><span class="o">();</span>  
+  
+    <span class="c1">// Tell whether the compilation worked  </span>
+    <span class="k">return</span> <span class="n">ret</span><span class="o">==</span><span class="mi">0</span><span class="o">;</span>  
+  <span class="o">}</span>  
+  
+  <span class="c1">// The heart of the ClassLoader -- automatically compile  </span>
+  <span class="c1">// source as necessary when looking for class files  </span>
+  <span class="kd">public</span> <span class="n">Class</span> <span class="nf">loadClass</span><span class="o">(</span> <span class="n">String</span> <span class="n">name</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">resolve</span> <span class="o">)</span>  
+      <span class="kd">throws</span> <span class="n">ClassNotFoundException</span> <span class="o">{</span>  
+  
+    <span class="c1">// Our goal is to get a Class object  </span>
+    <span class="n">Class</span> <span class="n">clas</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>  
+  
+    <span class="c1">// First, see if we&#39;ve already dealt with this one  </span>
+    <span class="n">clas</span> <span class="o">=</span> <span class="n">findLoadedClass</span><span class="o">(</span> <span class="n">name</span> <span class="o">);</span>  
+  
+    <span class="c1">//System.out.println( &quot;findLoadedClass: &quot;+clas );  </span>
+  
+    <span class="c1">// Create a pathname from the class name  </span>
+    <span class="c1">// E.g. java.lang.Object =&gt; java/lang/Object  </span>
+    <span class="n">String</span> <span class="n">fileStub</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span> <span class="sc">&#39;.&#39;</span><span class="o">,</span> <span class="sc">&#39;/&#39;</span> <span class="o">);</span>  
+  
+    <span class="c1">// Build objects pointing to the source code (.java) and object  </span>
+    <span class="c1">// code (.class)  </span>
+    <span class="n">String</span> <span class="n">javaFilename</span> <span class="o">=</span> <span class="n">fileStub</span><span class="o">+</span><span class="s">&quot;.java&quot;</span><span class="o">;</span>  
+    <span class="n">String</span> <span class="n">classFilename</span> <span class="o">=</span> <span class="n">fileStub</span><span class="o">+</span><span class="s">&quot;.class&quot;</span><span class="o">;</span>  
+  
+    <span class="n">File</span> <span class="n">javaFile</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span> <span class="n">javaFilename</span> <span class="o">);</span>  
+    <span class="n">File</span> <span class="n">classFile</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span> <span class="n">classFilename</span> <span class="o">);</span>  
+  
+    <span class="c1">//System.out.println( &quot;j &quot;+javaFile.lastModified()+&quot; c &quot;+  </span>
+    <span class="c1">//  classFile.lastModified() );  </span>
+  
+    <span class="c1">// First, see if we want to try compiling.  We do if (a) there  </span>
+    <span class="c1">// is source code, and either (b0) there is no object code,  </span>
+    <span class="c1">// or (b1) there is object code, but it&#39;s older than the source  </span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">javaFile</span><span class="o">.</span><span class="na">exists</span><span class="o">()</span> <span class="o">&amp;&amp;</span>  
+         <span class="o">(!</span><span class="n">classFile</span><span class="o">.</span><span class="na">exists</span><span class="o">()</span> <span class="o">||</span>  
+          <span class="n">javaFile</span><span class="o">.</span><span class="na">lastModified</span><span class="o">()</span> <span class="o">&gt;</span> <span class="n">classFile</span><span class="o">.</span><span class="na">lastModified</span><span class="o">()))</span> <span class="o">{</span>  
+  
+      <span class="k">try</span> <span class="o">{</span>  
+        <span class="c1">// Try to compile it.  If this doesn&#39;t work, then  </span>
+        <span class="c1">// we must declare failure.  (It&#39;s not good enough to use  </span>
+        <span class="c1">// and already-existing, but out-of-date, classfile)  </span>
+        <span class="k">if</span> <span class="o">(!</span><span class="n">compile</span><span class="o">(</span> <span class="n">javaFilename</span> <span class="o">)</span> <span class="o">||</span> <span class="o">!</span><span class="n">classFile</span><span class="o">.</span><span class="na">exists</span><span class="o">())</span> <span class="o">{</span>  
+          <span class="k">throw</span> <span class="k">new</span> <span class="nf">ClassNotFoundException</span><span class="o">(</span> <span class="s">&quot;Compile failed: &quot;</span><span class="o">+</span><span class="n">javaFilename</span> <span class="o">);</span>  
+        <span class="o">}</span>  
+      <span class="o">}</span> <span class="k">catch</span><span class="o">(</span> <span class="n">IOException</span> <span class="n">ie</span> <span class="o">)</span> <span class="o">{</span>  
+  
+        <span class="c1">// Another place where we might come to if we fail  </span>
+        <span class="c1">// to compile  </span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nf">ClassNotFoundException</span><span class="o">(</span> <span class="n">ie</span><span class="o">.</span><span class="na">toString</span><span class="o">()</span> <span class="o">);</span>  
+      <span class="o">}</span>  
+    <span class="o">}</span>  
+  
+    <span class="c1">// Let&#39;s try to load up the raw bytes, assuming they were  </span>
+    <span class="c1">// properly compiled, or didn&#39;t need to be compiled  </span>
+    <span class="k">try</span> <span class="o">{</span>  
+  
+      <span class="c1">// read the bytes  </span>
+      <span class="kt">byte</span> <span class="n">raw</span><span class="o">[]</span> <span class="o">=</span> <span class="n">getBytes</span><span class="o">(</span> <span class="n">classFilename</span> <span class="o">);</span>  
+  
+      <span class="c1">// try to turn them into a class  </span>
+      <span class="n">clas</span> <span class="o">=</span> <span class="n">defineClass</span><span class="o">(</span> <span class="n">name</span><span class="o">,</span> <span class="n">raw</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">raw</span><span class="o">.</span><span class="na">length</span> <span class="o">);</span>  
+    <span class="o">}</span> <span class="k">catch</span><span class="o">(</span> <span class="n">IOException</span> <span class="n">ie</span> <span class="o">)</span> <span class="o">{</span>  
+      <span class="c1">// This is not a failure!  If we reach here, it might  </span>
+      <span class="c1">// mean that we are dealing with a class in a library,  </span>
+      <span class="c1">// such as java.lang.Object  </span>
+    <span class="o">}</span>  
+  
+    <span class="c1">//System.out.println( &quot;defineClass: &quot;+clas );  </span>
+  
+    <span class="c1">// Maybe the class is in a library -- try loading  </span>
+    <span class="c1">// the normal way  </span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">clas</span><span class="o">==</span><span class="kc">null</span><span class="o">)</span> <span class="o">{</span>  
+      <span class="n">clas</span> <span class="o">=</span> <span class="n">findSystemClass</span><span class="o">(</span> <span class="n">name</span> <span class="o">);</span>  
+    <span class="o">}</span>  
+  
+    <span class="c1">//System.out.println( &quot;findSystemClass: &quot;+clas );  </span>
+  
+    <span class="c1">// Resolve the class, if any, but only if the &quot;resolve&quot;  </span>
+    <span class="c1">// flag is set to true  </span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">resolve</span> <span class="o">&amp;&amp;</span> <span class="n">clas</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>  
+      <span class="n">resolveClass</span><span class="o">(</span> <span class="n">clas</span> <span class="o">);</span>  
+  
+    <span class="c1">// If we still don&#39;t have a class, it&#39;s an error  </span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">clas</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>  
+      <span class="k">throw</span> <span class="k">new</span> <span class="nf">ClassNotFoundException</span><span class="o">(</span> <span class="n">name</span> <span class="o">);</span>  
+  
+    <span class="c1">// Otherwise, return the class  </span>
+    <span class="k">return</span> <span class="n">clas</span><span class="o">;</span>  
+  <span class="o">}</span>  
+<span class="o">}</span>
+</pre></div>

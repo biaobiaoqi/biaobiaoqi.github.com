@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: Teiid | Biaobiaoqi的博客]]></title>
+  <link href="http://biaobiaoqi.me/tags/teiid/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.me/"/>
+  <updated>2016-04-12T23:33:13+08:00</updated>
+  <id>http://biaobiaoqi.me/</id>
+  <author>
+    <name><![CDATA[Biaobiaoqi]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[数据集成工具Teiid Designer的环境搭建]]></title>
+    <link href="http://biaobiaoqi.me/blog/2014/03/08/teiid-designer/"/>
+    <updated>2014-03-08T01:07:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2014/03/08/teiid-designer</id>
+    <content type="html"><![CDATA[<p>由于实验室项目要求的关系，看了些数据汇聚工具Teiid的相关知识。这里总结下Teiid的可视化配置工具Teiid Designer的部署过程。</p>
+
+<h2>背景知识</h2>
+
+<p>数据集成是把不同来源、格式、特点性质的数据在逻辑上或物理上有机地集中，从而为企业提供全面的数据共享。数据集成的方式多种多样，这里介绍的<a href="http://www.jboss.org/teiid/">Teiid</a>是其中的一种：通过抽象和联邦技术，实现分布式数据源的实时数据访问和集成，无需从记录系统中复制或移动数据。</p>
+
+<p><a href="http://blogs.ejb.cc/archives/3552/teiid-scalable-information-integration-program">《Teiid 基于数据联邦的集成方案》</a>是一篇关于Teiid的中文介绍，比较详细。</p>
+
+<p>由于适配不同数据源和生成虚拟数据库（VDB）需要维护好几个配置文件，直接手动部署Teiid比较难受。好在Teiid提供了辅助工具<a href="http://www.jboss.org/teiiddesigner">Teiid Designer</a>，这是一个Eclipse插件，能帮助用户可视化的管理数据的集成过程。</p>
+
+<p>接下来记录了Teiid 和 Teiid Designer的环境配置步骤，如有纰漏，多谢指出=)。</p>
+
+<h2>环境准备</h2>
+
+<ul>
+<li>操作系统：OS X 10.9.1</li>
+<li>语言版本：Java6</li>
+<li>下载IDE： <a href="https://www.eclipse.org/downloads/packages/eclipse-standard-431/keplersr1">Eclipse Kepler</a></li>
+<li>下载<a href="http://www.jboss.org/jbossas/downloads.html">Jboss EAP6.1 Alpha</a></li>
+<li>下载<a href="http://sourceforge.net/projects/teiid/files/teiid/8.4/Final/teiid-8.4.0.Final-jboss-dist.zip/download">Teiid Runtime 8.4</a></li>
+<li><a href="http://www.jboss.org/teiiddesigner.html">Teiid Designer</a>：作为Eclipse插件，将使用Eclipse的install new software功能在线安装。</li>
+</ul>
+
+
+<!--more-->
+
+
+<h2>Jboss配置</h2>
+
+<p>配置环境变量 JBOSS_HOME，指向Jboss的根路径。在我的shell配置文件~/.zshrc中增加如下行：</p>
+
+<p><code>JBOSS_HOME=~/Development/jboss #jboss的根路径</code></p>
+
+<p>执行$JBOSS_HOME/bin/add-user.sh，给Jboss添加账号，执行过程如下：
+```
+What type of user do you wish to add?
+ a) Management User (mgmt-users.properties)
+ b) Application User (application-users.properties)
+(a): b</p>
+
+<p>Enter the details of the new user to add.
+Realm (ApplicationRealm) :
+Username : biaobiaoqi
+Password :
+Re-enter Password :
+What roles do you want this user to belong to? (Please enter a comma separated list, or leave blank for none)[  ]:
+About to add user 'biaobiaoqi' for realm 'ApplicationRealm'
+Is this correct yes/no? yes
+Added user 'biaobiaoqi' to file '/Users/shenyapeng/Development/jboss/standalone/configuration/application-users.properties'
+Added user 'biaobiaoqi' to file '/Users/shenyapeng/Development/jboss/domain/configuration/application-users.properties'
+Added user 'biaobiaoqi' with roles  to file '/Users/shenyapeng/Development/jboss/standalone/configuration/application-roles.properties'
+Added user 'biaobiaoqi' with roles  to file '/Users/shenyapeng/Development/jboss/domain/configuration/application-roles.properties'
+Is this new user going to be used for one AS process to connect to another AS process?
+e.g. for a slave host controller connecting to the master or for a Remoting connection for server to server EJB calls.
+yes/no? no</p>
+
+<p>```</p>
+
+<h2>Teiid配置</h2>
+
+<p>解压下载好的Teiid Runtime 8.4 文件，注意到其目录格式跟JBoss很相似。直接将这些文件覆盖到Jboss的根目录下。</p>
+
+<h2>Teiid Designer配置</h2>
+
+<ul>
+<li>1.打开Eclipse，选择Help > Install New Software</li>
+<li>2.在弹出的界面中选择 Add，名称输入Enter JBossASTools（其他的名称也无所谓啦），地址栏输入如下地址，并点击确认。</li>
+</ul>
+
+
+<p><code>http://download.jboss.org/jbosstools/updates/release/kepler/integration-stack/</code></p>
+
+<ul>
+<li>3.接下来展开Data Virtualization，选择4个Teiid Designer的功能。</li>
+<li>4.然后点击下一步，直到安装完毕，重启Eclipse就可以看到Teiid Designer的界面啦。</li>
+</ul>
+
+
+<h2>创建Teiid server</h2>
+
+<p>Teiid 依托于Jboss服务器，在Teiid Designer中可以方便的创建Teiid服务器，如下图
+<img src="http://biaobiaoqi.u.qiniudn.com/0CD17B0C-7A6C-425B-A12C-0FDA82FDE8F5.png?imageView/2/w/800/h/800" alt="img" /></p>
+
+<p>创Teiid Server期间需要的配置有：</p>
+
+<ul>
+<li>Jboss的版本号（不要选错，这里使用Jboss EAP6.1，而不是Jboss AS 6.x）</li>
+<li>Jboss的根路径；</li>
+<li>启动的配置文件是：standalone-teiid.xml（而不是standalone.xml，参见<a href="https://community.jboss.org/message/790461">社区提问</a>）</li>
+<li>在Jboss服务器的配置页面配置Management Login Credentials，使用之前注册的账号和密码。如下图
+<img src="http://biaobiaoqi.u.qiniudn.com/A6E53DAD-703B-4D9A-AAFA-39C2AC19A02F.png?imageView/2/w/800/h/800" alt="img" /></li>
+</ul>
+
+
+<p>配置完成后，即可启动服务器。</p>
+
+<p>现在，可以在Teiid Server的页面（双击创建的server）测试管理账号的连接和JDBC访问方式的连接是否通畅，如下图：（Test Administration Connection &amp; Test JDBC Connection）</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/B13BC18B-AF6C-44DB-96C9-B18D70EDA1AA.png?imageView/2/w/800/h/800" alt="img" /></p>
+
+<p>JDBC的用户名和密码默认是user:user, 在<code>$JBOSS_HOME/standalone/configuration/teiid-security-users.properties</code>中配置。</p>
+
+<p>接下来，就可以配置数据源，享受Teiid的数据虚拟化了 =)。可以参见另一篇博文：<a href="http://biaobiaoqi.me/blog/2013/10/19/data-integration-tool-teiid/">《数据集成工具：Teiid实践》</a></p>
+
+<h2>雷区</h2>
+
+<ul>
+<li>如果是使用Windows安装配置，需要使用32位的JVM运行Eclipse。</li>
+<li>整个体系耦合比较多，而且暂时多版本兼容不够，下载的各个组件版本号一定要对应。</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[数据集成工具：Teiid实践]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/10/19/data-integration-tool-teiid/"/>
+    <updated>2013-10-19T23:58:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/10/19/data-integration-tool-teiid</id>
+    <content type="html"><![CDATA[<h2>背景知识</h2>
+
+<p>数据集成是把不同来源、格式、特点性质的数据在逻辑上或物理上有机地集中，从而为企业提供全面的数据共享。数据集成的方式多种多样，这里介绍的<a href="http://www.jboss.org/teiid/">Teiid</a>是其中的一种：通过抽象和联邦技术，实现分布式数据源的实时数据访问和集成，无需从记录系统中复制或移动数据。</p>
+
+<p><a href="http://blogs.ejb.cc/archives/3552/teiid-scalable-information-integration-program">《Teiid 基于数据联邦的集成方案》</a>是一篇关于Teiid的中文介绍，比较详细。</p>
+
+<p>由于适配不同数据源和生成虚拟数据库（VDB）需要维护好几个配置文件，直接手动部署Teiid比较难受。好在Teiid提供了辅助工具<a href="http://www.jboss.org/teiiddesigner">Teiid Designer</a>，这是一个Eclipse插件，能帮助用户可视化的管理数据的集成过程。</p>
+
+<p>接下来，我们用一个简单的应用场景实践Teiid的数据集成功能。</p>
+
+<h2>环境准备</h2>
+
+<p>Teiid和Teiid Designer的环境配置参见另外一篇博文：<a href="http://biaobiaoqi.me/blog/2014/03/08/teiid-designer/">《数据集成工具Teiid Designer的环境搭建》</a></p>
+
+<!--more-->
+
+
+<h2>应用场景</h2>
+
+<p>书店主营图书销售，并维护者一个用户对图书评价的数据库。技术上说，书店拥有三个数据模块：</p>
+
+<ul>
+<li><p>MySQL数据库，存储用户信息和用户对某书的评价</p>
+
+<p>  表结构如下：</p></li>
+</ul>
+
+
+<p>```
+create database library;
+use library;
+create table users (</p>
+
+<pre><code> id int primary key,
+ name char(20) not null,
+ passwd char(20)) not null,
+</code></pre>
+
+<p>);
+create table comments(</p>
+
+<pre><code> cid int primary key,
+ uid int ,
+ bookid int not null,
+ content char(255),
+ foreign key (uid) references users(id)
+</code></pre>
+
+<p>);
+```
+* EXCEL表格，店主用于记录销售量、记录销售单价</p>
+
+<p><code>
+book_id,price,sales
+1,89.00,1000
+2,52.00,9999
+3,30.00,10000
+4,9800,5555
+5,69.00,1234
+</code></p>
+
+<ul>
+<li>XML文件记录书籍信息，包括</li>
+</ul>
+
+
+<p>``` xml
+&lt;?xml version= "1.0" encoding ="UTF-8"?>
+<BooksInfo></p>
+
+<pre><code>    &lt;Book id = "1" &gt;
+           &lt;Title&gt; Hadoop: The Definitive Guide &lt;/Title&gt;
+           &lt;Author&gt; Tom White&lt;/Author &gt;
+           &lt;publisher&gt; O'Reilly&lt;/ publisher&gt;
+    &lt;/Book&gt;
+    &lt;Book id = "2" &gt;
+           &lt;Title&gt; Effective Java&lt;/Title &gt;
+           &lt;Autorh&gt; Joshua Bloch&lt;/Autorh&gt;
+           &lt;publisher&gt; HZ Books&lt;/ publisher&gt;
+    &lt;/Book&gt;
+    &lt;Book id = "3" &gt;
+           &lt;Title&gt; C Programming Language&lt;/Title &gt;
+           &lt;Autorh&gt; Kernighan, Ritchie &lt;/Autorh&gt;
+           &lt;publisher&gt; HZ Books&lt;/ publisher&gt;
+    &lt;/Book&gt;
+    &lt;Book id = "4" &gt;
+           &lt;Title&gt; Head First: Design Pattern&lt;/Title &gt;
+           &lt;Autorh&gt; Freeman&lt;/ Autorh&gt;
+           &lt;publisher&gt; Turning Education&lt;/publisher &gt;
+    &lt;/Book&gt;
+    &lt;Book id = "5" &gt;
+           &lt;Title&gt; Refactoring: Improving the Design of Existing Code &lt;/Title&gt;
+           &lt;Autorh&gt; Martin Fowler &lt;/Autorh&gt;
+           &lt;publisher&gt; O'Reilly&lt;/ publisher&gt;
+    &lt;/Book&gt;
+</code></pre>
+
+<p></BooksInfo>
+```</p>
+
+<h2>实践</h2>
+
+<h3>1.创建工程</h3>
+
+<p>打开配置好Teiid Designer插件的Eclipse，在Teiid Designer视图的Guides中，找到Define Teiid Model Project选项，如下图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid1.png" alt="img" /></p>
+
+<p>一路点击next，在如下界面勾选sources和views即可，designer guid会帮助生成这两个目录，其他目录在此项目中不需要。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid2.png" alt="img" /></p>
+
+<h3>2.导入MyQL数据源</h3>
+
+<p>在Guides界面，选择JDBC数据源</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid3.png" alt="img" /></p>
+
+<p>第一个步骤Define Teiid Model Project在上一步中已经完成了，现在需要创建一个JDBC链接，选择Create JDBC connection，在弹出的窗口中，选择Mysql数据库，然后点下一步</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid4.png" alt="img" /></p>
+
+<p>选择mysql驱动，配置好Mysql数据源的的url、用户名、密码，点下一步。（在这里，mysql的端口为默认的3306，library为之前配置好的mysql数据库）。点击test connection测试与mysql的链接能否建立。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid5.png" alt="img" /></p>
+
+<p>接下来需要给数据源创建源模型（source model）了。同样在Guides试图上双击Create source model for JDBC data source，一路下一步，直到选择数据库和表，选择library数据库中的所有表，如下图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid6.png" alt="img" /></p>
+
+<p>创建源模型的最后一步如下图，可以自定义Model Name，为了让之后的sql查询过程更可读，我将以数据源类型命名它（mysql.xmi）。其他无关配置暂时不用理会。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid7.png" alt="img" /></p>
+
+<p>finish后，就生成了一个元模型，如下图。图中可视化的显示了数据库所建的两张表</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid8.png" alt="img" /></p>
+
+<p>接下来可以测试数据是否可读，双击Guides中的Preview Data，在弹框中选择需要preview的表或者precedure（procedure在本工程里这里不会被用到）查询结果显示在了eclipse下方的SQL Result框中，如下图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid9.png" alt="img" /></p>
+
+<p>接下先来不用着急Define VDB，我们先把所有数据源配置完成后再一起来定义虚拟数据库。</p>
+
+<h3>3.导入FlatFile数据源（CSV）</h3>
+
+<p>跟之前一个步骤一样，只需要沿着Guides里的路线一步一步操作。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid10.png" alt="img" /></p>
+
+<p>首先创建连接，配置好后test connection确保链接无误</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid12.png" alt="img" /></p>
+
+<p>链接建立后，需要创建元模型。如下图，提示有错，只需要选定Source Model Definition的文件的存储位置即可。存放在项目的sources目录中</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid13.png" alt="img" /></p>
+
+<p>按照默认配置，不断下一步，在 Flat File Demilited Columns Parser Settings 这一步，可以注意到下方有生成一串SQL语句。这些语句告诉Teiid需要如何将csv文件中的数据映射为关系型数据。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid14.png" alt="img" /></p>
+
+<p>继续下一步，view model definition界面，提示创建的tableview名字包含不合法字符。原来由于将flat file命名为sales.csv,它自动生成了price.csvView作为table name，但名字中是不能出现<code>.</code>的，于是修改为salesview，finish。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid15.png" alt="img" /></p>
+
+<p>之后测试数据能否读取。在选择所要preview的数据时，需要选择相应的table，而不是模型（这里需要选择salesView，而不是上层的price_view.xmi）。如下图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid16.png" alt="img" /></p>
+
+<h3>4.导入xml数据</h3>
+
+<p>大部分步骤跟之前的步骤类似，在设定源模型时，需要注意配置好xml数据到关系型数据的映射关系，如下图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid17.png" alt="img" /></p>
+
+<p>XML File Contents中会根据xml文件中的数据解析出整体的层次结构。我们需要将其中的Book里的信息，添加到右边的Column Info中。虽然有很多Book数据列表显示在左边一栏里，但实际上只需要添加一次相关信息到右边的列信息中。</p>
+
+<p>值得注意的是，这里自动生成procedure执行语句对数据源选取的Root Path是错误的。需要按照如下图指示手动修改（途中实例并非本问情景，步骤是一样的=)）</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/2E65A678-6256-4F81-88CF-E5A713E9B867.png?imageView/2/w/800/h/800" alt="img" /></p>
+
+<p>修改步骤（按照图中标号）：</p>
+
+<ul>
+<li>1.双击需要修改的xml数据源的views model（是一个.xmi文件）</li>
+<li>2.双击View视图中表</li>
+<li>4.将XMLTABLE开始的语句的第一个地址修改为<code>BooksInfo/Book</code>，而其他路径响应的删除<code>/Book/</code>。</li>
+</ul>
+
+
+<p>现在整个项目如下图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid18.png" alt="img" /></p>
+
+<h3>5.生成虚拟数据库</h3>
+
+<p>点击Guides中的Define VDB，将三个数据源的模型加入到VDB中:MySQL的源模型，XML和CSV的视图模型（注意：不可以加入另外两个源模型的xmi文件，博主如此操作后遇到了一些莫名其妙的问题）。</p>
+
+<p>如此就完成了在Teiid Designer中的多数据源集成的配置了。</p>
+
+<h3>6.部署和使用</h3>
+
+<p>通过Teiid Designer，我们能方便的部署VDB到Jboss服务器。</p>
+
+<p>在Guides界面下，有execute vdb选项，双击即可。正式运行之前，需要运行Jboss server，如果没有启动服务器，Teiid Designer会弹框提醒的。</p>
+
+<p>最后，尝试一下通过Teiid集成查询多个数据源。将sql语句输入到执行框中，刷蓝->右键->执行选中的语句。</p>
+
+<p>```</p>
+
+<blockquote><p>select * from "csv"."sales" as A join "xml"."booksinfo" as B on A.book_id = B.id</p></blockquote>
+
+<p>```</p>
+
+<p>结果如图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid19.png" alt="img" /></p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,32 @@
+<div class="highlight"><pre><span class="kd">class</span> <span class="nc">T</span>  <span class="kd">implements</span> <span class="n">Cloneable</span><span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="n">T</span> <span class="n">t1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">T</span><span class="o">(</span><span class="s">&quot;t1&quot;</span><span class="o">);</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="n">T</span> <span class="n">t2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">T</span><span class="o">(</span><span class="s">&quot;t2&quot;</span><span class="o">);</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">print</span><span class="o">(</span><span class="s">&quot;i&quot;</span><span class="o">);</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">99</span><span class="o">;</span>
+	
+	<span class="kd">public</span> <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">print</span><span class="o">(</span><span class="s">&quot;j&quot;</span><span class="o">);</span>
+	<span class="o">{</span>
+		<span class="n">print</span><span class="o">(</span><span class="s">&quot;构造快&quot;</span><span class="o">);</span>
+	<span class="o">}</span>
+	
+	<span class="kd">static</span> <span class="o">{</span>
+		<span class="n">print</span><span class="o">(</span><span class="s">&quot;静态块&quot;</span><span class="o">);</span>
+	<span class="o">}</span>
+	
+	<span class="kd">public</span> <span class="nf">T</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span><span class="o">)</span> <span class="o">{</span>
+		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">((++</span><span class="n">k</span><span class="o">)</span> <span class="o">+</span> <span class="s">&quot;:&quot;</span> <span class="o">+</span> <span class="n">str</span> <span class="o">+</span> <span class="s">&quot;    i=&quot;</span> <span class="o">+</span> <span class="n">i</span> <span class="o">+</span> <span class="s">&quot;  n=&quot;</span> <span class="o">+</span> <span class="n">n</span><span class="o">);</span>
+		<span class="o">++</span><span class="n">n</span><span class="o">;</span> <span class="o">++</span> <span class="n">i</span><span class="o">;</span>
+	<span class="o">}</span>
+	
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">print</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span><span class="o">){</span>
+		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">((++</span><span class="n">k</span><span class="o">)</span> <span class="o">+</span><span class="s">&quot;:&quot;</span> <span class="o">+</span> <span class="n">str</span> <span class="o">+</span> <span class="s">&quot;   i=&quot;</span> <span class="o">+</span> <span class="n">i</span> <span class="o">+</span> <span class="s">&quot;   n=&quot;</span> <span class="o">+</span> <span class="n">n</span><span class="o">);</span>
+		<span class="o">++</span><span class="n">n</span><span class="o">;</span>
+		<span class="k">return</span> <span class="o">++</span> <span class="n">i</span><span class="o">;</span>
+	<span class="o">}</span>
+	
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+		<span class="n">T</span> <span class="n">t</span> <span class="o">=</span> <span class="k">new</span> <span class="n">T</span><span class="o">(</span><span class="s">&quot;init&quot;</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</pre></div>

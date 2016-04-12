@@ -1,0 +1,8 @@
+<div class="highlight"><pre> <span class="kd">public</span> <span class="kd">class</span> <span class="nc">X</span> <span class="o">{</span>
+
+   <span class="kd">public</span> <span class="nf">X</span><span class="o">()</span> <span class="o">{</span>
+      <span class="n">ClassLoader</span> <span class="n">cl</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">getClass</span><span class="o">().</span><span class="na">getClassLoader</span><span class="o">();</span>
+      <span class="n">Class</span> <span class="n">B</span> <span class="o">=</span> <span class="n">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="err">“</span><span class="n">B</span><span class="err">”</span><span class="o">,</span> <span class="kc">true</span><span class="o">,</span> <span class="n">cl</span><span class="o">);</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>

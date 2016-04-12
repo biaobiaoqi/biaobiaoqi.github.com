@@ -1,0 +1,431 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>数据集成工具Teiid Designer的环境搭建 - Biaobiaoqi的博客</title>
+  <meta name="author" content="Biaobiaoqi">
+
+  
+  <meta name="description" content="数据集成工具Teiid Designer 的环境搭建。Teiid，通过抽象和联邦技术，实现分布式数据源的实时数据访问和集成，无需从记录系统中复制或移动数据。XML，MySQL，CSV 多数据源">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://biaobiaoqi.me/blog/2014/03/08/teiid-designer/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Biaobiaoqi的博客" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+
+function addBlankTargetForLinks () {
+
+  $('a[href^="http"]').each(function(){
+
+      $(this).attr('target', '_blank');
+
+  });
+
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+
+  addBlankTargetForLinks();
+
+});
+
+</script>
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F49481ec3305db999013860b0ccb3b16d' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39900036-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Biaobiaoqi的博客</a></h1>
+  
+    <h2>做一个互联网世界的匠人</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:biaobiaoqi.me" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives/">全部文章</a></li>
+  <li><a href="/tag-cloud/">分类阅读</a></li>
+  <li><a href="/resources/">其他推荐</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">数据集成工具Teiid Designer的环境搭建</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-08T01:07:00+08:00" pubdate data-updated="true">Mar 8<span>th</span>, 2014</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>由于实验室项目要求的关系，看了些数据汇聚工具 Teiid 的相关知识。这里总结下 Teiid 的可视化配置工具 Teiid Designer 的部署过程。</p>
+
+<h2>背景知识</h2>
+
+<p>数据集成是把不同来源、格式、特点性质的数据在逻辑上或物理上有机地集中，从而为企业提供全面的数据共享。数据集成的方式多种多样，这里介绍的 <a href="http://www.jboss.org/teiid/">Teiid</a> 是其中的一种：通过抽象和联邦技术，实现分布式数据源的实时数据访问和集成，无需从记录系统中复制或移动数据。</p>
+
+<p><a href="http://blogs.ejb.cc/archives/3552/teiid-scalable-information-integration-program">《Teiid 基于数据联邦的集成方案》</a>是一篇关于 Teiid 的中文介绍，比较详细。</p>
+
+<p>由于适配不同数据源和生成虚拟数据库（VDB）需要维护好几个配置文件，直接手动部署 Teiid 比较难受。好在 Teiid 提供了辅助工具 <a href="http://www.jboss.org/teiiddesigner">Teiid Designer</a>，这是一个 Eclipse 插件，能帮助用户可视化的管理数据的集成过程。</p>
+
+<p>接下来记录了 Teiid 和 Teiid Designer 的环境配置步骤，如有纰漏，多谢指出=)。</p>
+
+<h2>环境准备</h2>
+
+<ul>
+<li>操作系统：OS X 10.9.1</li>
+<li>语言版本：Java6</li>
+<li>下载 IDE： <a href="https://www.eclipse.org/downloads/packages/eclipse-standard-431/keplersr1">Eclipse Kepler</a></li>
+<li>下载 <a href="http://www.jboss.org/jbossas/downloads.html">Jboss EAP6.1 Alpha</a></li>
+<li>下载 <a href="http://sourceforge.net/projects/teiid/files/teiid/8.4/Final/teiid-8.4.0.Final-jboss-dist.zip/download">Teiid Runtime 8.4</a></li>
+<li><a href="http://www.jboss.org/teiiddesigner.html">Teiid Designer</a>：作为 Eclipse 插件，将使用 Eclipse 的 install new software 功能在线安装。</li>
+</ul>
+
+
+<!--more-->
+
+
+<h2>Jboss 配置</h2>
+
+<p>配置环境变量 JBOSS_HOME，指向 Jboss 的根路径。在我的 shell 配置文件~/.zshrc 中增加如下行：</p>
+
+<p><code>JBOSS_HOME=~/Development/jboss #jboss 的根路径</code></p>
+
+<p>执行$JBOSS_HOME/bin/add-user.sh，给 Jboss 添加账号，执行过程如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>What type of user do you wish to add?
+</span><span class='line'> a) Management User (mgmt-users.properties)
+</span><span class='line'> b) Application User (application-users.properties)
+</span><span class='line'>(a): b
+</span><span class='line'>
+</span><span class='line'>Enter the details of the new user to add.
+</span><span class='line'>Realm (ApplicationRealm) :
+</span><span class='line'>Username : biaobiaoqi
+</span><span class='line'>Password :
+</span><span class='line'>Re-enter Password :
+</span><span class='line'>What roles do you want this user to belong to? (Please enter a comma separated list, or leave blank for none)[  ]:
+</span><span class='line'>About to add user 'biaobiaoqi' for realm 'ApplicationRealm'
+</span><span class='line'>Is this correct yes/no? yes
+</span><span class='line'>Added user 'biaobiaoqi' to file '/Users/shenyapeng/Development/jboss/standalone/configuration/application-users.properties'
+</span><span class='line'>Added user 'biaobiaoqi' to file '/Users/shenyapeng/Development/jboss/domain/configuration/application-users.properties'
+</span><span class='line'>Added user 'biaobiaoqi' with roles  to file '/Users/shenyapeng/Development/jboss/standalone/configuration/application-roles.properties'
+</span><span class='line'>Added user 'biaobiaoqi' with roles  to file '/Users/shenyapeng/Development/jboss/domain/configuration/application-roles.properties'
+</span><span class='line'>Is this new user going to be used for one AS process to connect to another AS process?
+</span><span class='line'>e.g. for a slave host controller connecting to the master or for a Remoting connection for server to server EJB calls.
+</span><span class='line'>yes/no? no
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Teiid 配置</h2>
+
+<p>解压下载好的 Teiid Runtime 8.4 文件，注意到其目录格式跟 JBoss 很相似。直接将这些文件覆盖到 Jboss 的根目录下。</p>
+
+<h2>Teiid Designer 配置</h2>
+
+<ul>
+<li>1.打开 Eclipse，选择 Help > Install New Software</li>
+<li>2.在弹出的界面中选择 Add，名称输入 Enter JBossASTools（其他的名称也无所谓啦），地址栏输入如下地址，并点击确认。</li>
+</ul>
+
+
+<p><code>http://download.jboss.org/jbosstools/updates/release/kepler/integration-stack/</code></p>
+
+<ul>
+<li>3.接下来展开 Data Virtualization，选择 4 个 Teiid Designer 的功能。</li>
+<li>4.然后点击下一步，直到安装完毕，重启 Eclipse 就可以看到 Teiid Designer 的界面啦。</li>
+</ul>
+
+
+<h2>创建 Teiid server</h2>
+
+<p>Teiid 依托于 Jboss 服务器，在 Teiid Designer 中可以方便的创建 Teiid 服务器，如下图
+<img src="http://biaobiaoqi.u.qiniudn.com/0CD17B0C-7A6C-425B-A12C-0FDA82FDE8F5.png?imageView/2/w/800/h/800" alt="img" /></p>
+
+<p>创 Teiid Server 期间需要的配置有：</p>
+
+<ul>
+<li>Jboss 的版本号（不要选错，这里使用 Jboss EAP6.1，而不是 Jboss AS 6.x）</li>
+<li>Jboss 的根路径；</li>
+<li>启动的配置文件是：standalone-teiid.xml（而不是 standalone.xml，参见<a href="https://community.jboss.org/message/790461">社区提问</a>）</li>
+<li>在 Jboss 服务器的配置页面配置 Management Login Credentials，使用之前注册的账号和密码。如下图
+<img src="http://biaobiaoqi.u.qiniudn.com/A6E53DAD-703B-4D9A-AAFA-39C2AC19A02F.png?imageView/2/w/800/h/800" alt="img" /></li>
+</ul>
+
+
+<p>配置完成后，即可启动服务器。</p>
+
+<p>现在，可以在 Teiid Server 的页面（双击创建的 server）测试管理账号的连接和 JDBC 访问方式的连接是否通畅，如下图：（Test Administration Connection &amp; Test JDBC Connection）</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/B13BC18B-AF6C-44DB-96C9-B18D70EDA1AA.png?imageView/2/w/800/h/800" alt="img" /></p>
+
+<p>JDBC 的用户名和密码默认是 user:user, 在<code>$JBOSS_HOME/standalone/configuration/teiid-security-users.properties</code>中配置。</p>
+
+<p>接下来，就可以配置数据源，享受 Teiid 的数据虚拟化了 =)。可以参见另一篇博文：<a href="http://biaobiaoqi.me/blog/2013/10/19/data-integration-tool-teiid/">《数据集成工具：Teiid 实践》</a></p>
+
+<h2>雷区</h2>
+
+<ul>
+<li>如果是使用 Windows 安装配置，需要使用 32 位的 JVM 运行 Eclipse。</li>
+<li>整个体系耦合比较多，而且暂时多版本兼容不够，下载的各个组件版本号一定要对应。</li>
+</ul>
+
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2014/03/08/teiid-designer/'>http://biaobiaoqi.me/blog/2014/03/08/teiid-designer/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Biaobiaoqi</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-08T01:07:00+08:00" pubdate data-updated="true">Mar 8<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+    <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+<a class="jiathis_button_tsina"></a>
+<a class="jiathis_button_weixin"></a>
+<a class="jiathis_button_renren"></a>
+<a class="jiathis_button_douban"></a>
+<a class="jiathis_button_googleplus"></a>
+<a href="http://www.jiathis.com/share?uid=1814751" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+	data_track_clickback:true,
+	summary:"",
+	shortUrl:true,
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1814751" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/03/06/troubleshoot-encoding-bugs-in-octopress/" title="Previous Post: 记排查octopress生成时的编码错误">&laquo; 记排查octopress生成时的编码错误</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/05/06/ta-in-practice/" title="Next Post: 课程助教实战">课程助教实战 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <!--h1>Comments</h1-->
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>标签云</h1>
+ <br /> 
+  <ul class="tag-cloud">
+    <a style="font-size: 112%" href="/tags/hadoop/">Hadoop</a> &nbsp 
+<a style="font-size: 139%" href="/tags/jvm/">JVM</a> &nbsp 
+<a style="font-size: 144%" href="/tags/java/">Java</a> &nbsp 
+<a style="font-size: 141%" href="/tags/pat/">PAT</a> &nbsp 
+<a style="font-size: 112%" href="/tags/octopress/">octopress</a> &nbsp 
+<a style="font-size: 135%" href="/tags/fen-bu-shi/">分布式</a> &nbsp 
+<a style="font-size: 133%" href="/tags/zi-jie-ma/">字节码</a> &nbsp 
+<a style="font-size: 135%" href="/tags/si-kao/">思考</a> &nbsp 
+<a style="font-size: 180%" href="/tags/ji-zhu/">技术</a> &nbsp 
+<a style="font-size: 124%" href="/tags/fang-fa-lun/">方法论</a> &nbsp 
+<a style="font-size: 106%" href="/tags/fu-wu-qi/">服务器</a> &nbsp 
+<a style="font-size: 137%" href="/tags/sheng-huo/">生活</a> &nbsp 
+<a style="font-size: 148%" href="/tags/suan-fa/">算法</a> &nbsp 
+<a style="font-size: 117%" href="/tags/wang-luo/">网络</a> &nbsp 
+<a style="font-size: 135%" href="/tags/du-shu/">读书</a>
+
+  </ul>
+</section>
+<section>
+  <h1>关于</h1>
+   <p>biaobiaoqi是我的网络id。<br><br>
+   我的博客日志：<a href="http://biaobiaoqi.me/blog/2013/09/01/blog-log/">请戳</a><br><br>
+   更多信息请戳：<a href="http://about.me/biaobiaoqi">about.me</a><br>
+	</p>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - Biaobiaoqi -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  - <span class="credit">Theme by <a href="http://www.gehaxelt.in">Gehaxelt</a></span>
+  <span class="credit">and <a href="http://www.it-solutions-neef.de">IT Solutions Neef</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'biaobiaoqisblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://biaobiaoqi.me/blog/2014/03/08/teiid-designer/';
+        var disqus_url = 'http://biaobiaoqi.me/blog/2014/03/08/teiid-designer/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

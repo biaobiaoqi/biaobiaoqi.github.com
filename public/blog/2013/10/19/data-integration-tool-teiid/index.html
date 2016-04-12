@@ -1,0 +1,558 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>数据集成工具：Teiid实践 - Biaobiaoqi的博客</title>
+  <meta name="author" content="Biaobiaoqi">
+
+  
+  <meta name="description" content="数据集成，Teiid,通过抽象和联邦技术，实现分布式数据源的实时数据访问和集成，无需从记录系统中复制或移动数据。XML，MySQL，CSV 多数据源">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://biaobiaoqi.me/blog/2013/10/19/data-integration-tool-teiid/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Biaobiaoqi的博客" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+
+function addBlankTargetForLinks () {
+
+  $('a[href^="http"]').each(function(){
+
+      $(this).attr('target', '_blank');
+
+  });
+
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+
+  addBlankTargetForLinks();
+
+});
+
+</script>
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F49481ec3305db999013860b0ccb3b16d' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39900036-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Biaobiaoqi的博客</a></h1>
+  
+    <h2>做一个互联网世界的匠人</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:biaobiaoqi.me" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives/">全部文章</a></li>
+  <li><a href="/tag-cloud/">分类阅读</a></li>
+  <li><a href="/resources/">其他推荐</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">数据集成工具：Teiid实践</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-19T23:58:00+08:00" pubdate data-updated="true">Oct 19<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2>背景知识</h2>
+
+<p>数据集成是把不同来源、格式、特点性质的数据在逻辑上或物理上有机地集中，从而为企业提供全面的数据共享。数据集成的方式多种多样，这里介绍的 <a href="http://www.jboss.org/teiid/">Teiid</a> 是其中的一种：通过抽象和联邦技术，实现分布式数据源的实时数据访问和集成，无需从记录系统中复制或移动数据。</p>
+
+<p><a href="http://blogs.ejb.cc/archives/3552/teiid-scalable-information-integration-program">《Teiid 基于数据联邦的集成方案》</a>是一篇关于 Teiid 的中文介绍，比较详细。</p>
+
+<p>由于适配不同数据源和生成虚拟数据库（VDB）需要维护好几个配置文件，直接手动部署 Teiid 比较难受。好在 Teiid 提供了辅助工具 <a href="http://www.jboss.org/teiiddesigner">Teiid Designer</a>，这是一个 Eclipse 插件，能帮助用户可视化的管理数据的集成过程。</p>
+
+<p>接下来，我们用一个简单的应用场景实践 Teiid 的数据集成功能。</p>
+
+<h2>环境准备</h2>
+
+<p>Teiid 和 Teiid Designer 的环境配置参见另外一篇博文：<a href="http://biaobiaoqi.me/blog/2014/03/08/teiid-designer/">《数据集成工具 Teiid Designer 的环境搭建》</a></p>
+
+<!--more-->
+
+
+<h2>应用场景</h2>
+
+<p>书店主营图书销售，并维护者一个用户对图书评价的数据库。技术上说，书店拥有三个数据模块：</p>
+
+<ul>
+<li><p>MySQL 数据库，存储用户信息和用户对某书的评价</p>
+
+<p>  表结构如下：</p></li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>create database library;
+</span><span class='line'>use library;
+</span><span class='line'>create table users (
+</span><span class='line'>     id int primary key,
+</span><span class='line'>     name char(20) not null,
+</span><span class='line'>     passwd char(20)) not null,
+</span><span class='line'>);
+</span><span class='line'>create table comments(
+</span><span class='line'>     cid int primary key,
+</span><span class='line'>     uid int ,
+</span><span class='line'>     bookid int not null,
+</span><span class='line'>     content char(255),
+</span><span class='line'>     foreign key (uid) references users(id)
+</span><span class='line'>);</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>EXCEL 表格，店主用于记录销售量、记录销售单价</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>book_id,price,sales
+</span><span class='line'>1,89.00,1000
+</span><span class='line'>2,52.00,9999
+</span><span class='line'>3,30.00,10000
+</span><span class='line'>4,9800,5555
+</span><span class='line'>5,69.00,1234</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>XML 文件记录书籍信息，包括</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="cp">&lt;?xml version= &quot;1.0&quot; encoding =&quot;UTF-8&quot;?&gt;</span>
+</span><span class='line'><span class="nt">&lt;BooksInfo&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;Book</span> <span class="na">id =</span> <span class="s">&quot;1&quot;</span> <span class="nt">&gt;</span>
+</span><span class='line'>               <span class="nt">&lt;Title&gt;</span> Hadoop: The Definitive Guide <span class="nt">&lt;/Title&gt;</span>
+</span><span class='line'>               <span class="nt">&lt;Author&gt;</span> Tom White<span class="nt">&lt;/Author &gt;</span>
+</span><span class='line'>               <span class="nt">&lt;publisher&gt;</span> O&#39;Reilly<span class="nt">&lt;/ publisher&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/Book&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;Book</span> <span class="na">id =</span> <span class="s">&quot;2&quot;</span> <span class="nt">&gt;</span>
+</span><span class='line'>               <span class="nt">&lt;Title&gt;</span> Effective Java<span class="nt">&lt;/Title &gt;</span>
+</span><span class='line'>               <span class="nt">&lt;Autorh&gt;</span> Joshua Bloch<span class="nt">&lt;/Autorh&gt;</span>
+</span><span class='line'>               <span class="nt">&lt;publisher&gt;</span> HZ Books<span class="nt">&lt;/ publisher&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/Book&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;Book</span> <span class="na">id =</span> <span class="s">&quot;3&quot;</span> <span class="nt">&gt;</span>
+</span><span class='line'>               <span class="nt">&lt;Title&gt;</span> C Programming Language<span class="nt">&lt;/Title &gt;</span>
+</span><span class='line'>               <span class="nt">&lt;Autorh&gt;</span> Kernighan, Ritchie <span class="nt">&lt;/Autorh&gt;</span>
+</span><span class='line'>               <span class="nt">&lt;publisher&gt;</span> HZ Books<span class="nt">&lt;/ publisher&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/Book&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;Book</span> <span class="na">id =</span> <span class="s">&quot;4&quot;</span> <span class="nt">&gt;</span>
+</span><span class='line'>               <span class="nt">&lt;Title&gt;</span> Head First: Design Pattern<span class="nt">&lt;/Title &gt;</span>
+</span><span class='line'>               <span class="nt">&lt;Autorh&gt;</span> Freeman<span class="nt">&lt;/ Autorh&gt;</span>
+</span><span class='line'>               <span class="nt">&lt;publisher&gt;</span> Turning Education<span class="nt">&lt;/publisher &gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/Book&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;Book</span> <span class="na">id =</span> <span class="s">&quot;5&quot;</span> <span class="nt">&gt;</span>
+</span><span class='line'>               <span class="nt">&lt;Title&gt;</span> Refactoring: Improving the Design of Existing Code <span class="nt">&lt;/Title&gt;</span>
+</span><span class='line'>               <span class="nt">&lt;Autorh&gt;</span> Martin Fowler <span class="nt">&lt;/Autorh&gt;</span>
+</span><span class='line'>               <span class="nt">&lt;publisher&gt;</span> O&#39;Reilly<span class="nt">&lt;/ publisher&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/Book&gt;</span>
+</span><span class='line'><span class="nt">&lt;/BooksInfo&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>实践</h2>
+
+<h3>1.创建工程</h3>
+
+<p>打开配置好 Teiid Designer 插件的 Eclipse，在 Teiid Designer 视图的 Guides 中，找到 Define Teiid Model Project 选项，如下图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid1.png" alt="img" /></p>
+
+<p>一路点击 next，在如下界面勾选 sources 和 views 即可，designer guid 会帮助生成这两个目录，其他目录在此项目中不需要。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid2.png" alt="img" /></p>
+
+<h3>2.导入 MyQL 数据源</h3>
+
+<p>在 Guides 界面，选择 JDBC 数据源</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid3.png" alt="img" /></p>
+
+<p>第一个步骤 Define Teiid Model Project 在上一步中已经完成了，现在需要创建一个 JDBC 链接，选择 Create JDBC connection，在弹出的窗口中，选择 Mysql 数据库，然后点下一步</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid4.png" alt="img" /></p>
+
+<p>选择 mysql 驱动，配置好 Mysql 数据源的的 url、用户名、密码，点下一步。（在这里，mysql 的端口为默认的 3306，library 为之前配置好的 mysql 数据库）。点击 test connection 测试与 mysql 的链接能否建立。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid5.png" alt="img" /></p>
+
+<p>接下来需要给数据源创建源模型（source model）了。同样在 Guides 试图上双击 Create source model for JDBC data source，一路下一步，直到选择数据库和表，选择 library 数据库中的所有表，如下图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid6.png" alt="img" /></p>
+
+<p>创建源模型的最后一步如下图，可以自定义 Model Name，为了让之后的 sql 查询过程更可读，我将以数据源类型命名它（mysql.xmi）。其他无关配置暂时不用理会。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid7.png" alt="img" /></p>
+
+<p>finish 后，就生成了一个元模型，如下图。图中可视化的显示了数据库所建的两张表</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid8.png" alt="img" /></p>
+
+<p>接下来可以测试数据是否可读，双击 Guides 中的 Preview Data，在弹框中选择需要 preview 的表或者 precedure（procedure 在本工程里这里不会被用到）查询结果显示在了 eclipse 下方的 SQL Result 框中，如下图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid9.png" alt="img" /></p>
+
+<p>接下先来不用着急 Define VDB，我们先把所有数据源配置完成后再一起来定义虚拟数据库。</p>
+
+<h3>3.导入 FlatFile 数据源（CSV）</h3>
+
+<p>跟之前一个步骤一样，只需要沿着 Guides 里的路线一步一步操作。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid10.png" alt="img" /></p>
+
+<p>首先创建连接，配置好后 test connection 确保链接无误</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid12.png" alt="img" /></p>
+
+<p>链接建立后，需要创建元模型。如下图，提示有错，只需要选定 Source Model Definition 的文件的存储位置即可。存放在项目的 sources 目录中</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid13.png" alt="img" /></p>
+
+<p>按照默认配置，不断下一步，在 Flat File Demilited Columns Parser Settings 这一步，可以注意到下方有生成一串 SQL 语句。这些语句告诉 Teiid 需要如何将 csv 文件中的数据映射为关系型数据。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid14.png" alt="img" /></p>
+
+<p>继续下一步，view model definition 界面，提示创建的 tableview 名字包含不合法字符。原来由于将 flat file 命名为 sales.csv,它自动生成了 price.csvView 作为 table name，但名字中是不能出现<code>.</code>的，于是修改为 salesview，finish。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid15.png" alt="img" /></p>
+
+<p>之后测试数据能否读取。在选择所要 preview 的数据时，需要选择相应的 table，而不是模型（这里需要选择 salesView，而不是上层的 price_view.xmi）。如下图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid16.png" alt="img" /></p>
+
+<h3>4.导入 xml 数据</h3>
+
+<p>大部分步骤跟之前的步骤类似，在设定源模型时，需要注意配置好 xml 数据到关系型数据的映射关系，如下图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid17.png" alt="img" /></p>
+
+<p>XML File Contents 中会根据 xml 文件中的数据解析出整体的层次结构。我们需要将其中的 Book 里的信息，添加到右边的 Column Info 中。虽然有很多 Book 数据列表显示在左边一栏里，但实际上只需要添加一次相关信息到右边的列信息中。</p>
+
+<p>值得注意的是，这里自动生成 procedure 执行语句对数据源选取的 Root Path 是错误的。需要按照如下图指示手动修改（途中实例并非本问情景，步骤是一样的=)）</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/2E65A678-6256-4F81-88CF-E5A713E9B867.png?imageView/2/w/800/h/800" alt="img" /></p>
+
+<p>修改步骤（按照图中标号）：</p>
+
+<ul>
+<li>1.双击需要修改的 xml 数据源的 views model（是一个.xmi 文件）</li>
+<li>2.双击 View 视图中表</li>
+<li>4.将 XMLTABLE 开始的语句的第一个地址修改为<code>BooksInfo/Book</code>，而其他路径响应的删除<code>/Book/</code>。</li>
+</ul>
+
+
+<p>现在整个项目如下图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid18.png" alt="img" /></p>
+
+<h3>5.生成虚拟数据库</h3>
+
+<p>点击 Guides 中的 Define VDB，将三个数据源的模型加入到 VDB 中:MySQL 的源模型，XML 和 CSV 的视图模型（注意：不可以加入另外两个源模型的 xmi 文件，博主如此操作后遇到了一些莫名其妙的问题）。</p>
+
+<p>如此就完成了在 Teiid Designer 中的多数据源集成的配置了。</p>
+
+<h3>6.部署和使用</h3>
+
+<p>通过 Teiid Designer，我们能方便的部署 VDB 到 Jboss 服务器。</p>
+
+<p>在 Guides 界面下，有 execute vdb 选项，双击即可。正式运行之前，需要运行 Jboss server，如果没有启动服务器，Teiid Designer 会弹框提醒的。</p>
+
+<p>最后，尝试一下通过 Teiid 集成查询多个数据源。将 sql 语句输入到执行框中，刷蓝->右键->执行选中的语句。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'>&gt; select * from &quot;csv&quot;.&quot;sales&quot; as A join &quot;xml&quot;.&quot;booksinfo&quot; as B on A.book_id = B.id
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>结果如图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid19.png" alt="img" /></p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/10/19/data-integration-tool-teiid/'>http://biaobiaoqi.me/blog/2013/10/19/data-integration-tool-teiid/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Biaobiaoqi</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-19T23:58:00+08:00" pubdate data-updated="true">Oct 19<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+    <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+<a class="jiathis_button_tsina"></a>
+<a class="jiathis_button_weixin"></a>
+<a class="jiathis_button_renren"></a>
+<a class="jiathis_button_douban"></a>
+<a class="jiathis_button_googleplus"></a>
+<a href="http://www.jiathis.com/share?uid=1814751" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+	data_track_clickback:true,
+	summary:"",
+	shortUrl:true,
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1814751" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/10/08/pat-1065-pat-1068/" title="Previous Post: PAT 1065 - 1068 题解">&laquo; PAT 1065 - 1068 题解</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/10/20/repair-my-fixed-gear/" title="Next Post: 修车记">修车记 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <!--h1>Comments</h1-->
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>标签云</h1>
+ <br /> 
+  <ul class="tag-cloud">
+    <a style="font-size: 112%" href="/tags/hadoop/">Hadoop</a> &nbsp 
+<a style="font-size: 139%" href="/tags/jvm/">JVM</a> &nbsp 
+<a style="font-size: 144%" href="/tags/java/">Java</a> &nbsp 
+<a style="font-size: 141%" href="/tags/pat/">PAT</a> &nbsp 
+<a style="font-size: 112%" href="/tags/octopress/">octopress</a> &nbsp 
+<a style="font-size: 135%" href="/tags/fen-bu-shi/">分布式</a> &nbsp 
+<a style="font-size: 133%" href="/tags/zi-jie-ma/">字节码</a> &nbsp 
+<a style="font-size: 135%" href="/tags/si-kao/">思考</a> &nbsp 
+<a style="font-size: 180%" href="/tags/ji-zhu/">技术</a> &nbsp 
+<a style="font-size: 124%" href="/tags/fang-fa-lun/">方法论</a> &nbsp 
+<a style="font-size: 106%" href="/tags/fu-wu-qi/">服务器</a> &nbsp 
+<a style="font-size: 137%" href="/tags/sheng-huo/">生活</a> &nbsp 
+<a style="font-size: 148%" href="/tags/suan-fa/">算法</a> &nbsp 
+<a style="font-size: 117%" href="/tags/wang-luo/">网络</a> &nbsp 
+<a style="font-size: 135%" href="/tags/du-shu/">读书</a>
+
+  </ul>
+</section>
+<section>
+  <h1>关于</h1>
+   <p>biaobiaoqi是我的网络id。<br><br>
+   我的博客日志：<a href="http://biaobiaoqi.me/blog/2013/09/01/blog-log/">请戳</a><br><br>
+   更多信息请戳：<a href="http://about.me/biaobiaoqi">about.me</a><br>
+	</p>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - Biaobiaoqi -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  - <span class="credit">Theme by <a href="http://www.gehaxelt.in">Gehaxelt</a></span>
+  <span class="credit">and <a href="http://www.it-solutions-neef.de">IT Solutions Neef</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'biaobiaoqisblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://biaobiaoqi.me/blog/2013/10/19/data-integration-tool-teiid/';
+        var disqus_url = 'http://biaobiaoqi.me/blog/2013/10/19/data-integration-tool-teiid/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

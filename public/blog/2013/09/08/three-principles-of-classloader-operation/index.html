@@ -1,0 +1,369 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>类加载器操作三原则[译] - Biaobiaoqi的博客</title>
+  <meta name="author" content="Biaobiaoqi">
+
+  
+  <meta name="description" content="Java classloader three principles. Java类加载器加载三原则：委托原则；可见性原则；独特性原则">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://biaobiaoqi.me/blog/2013/09/08/three-principles-of-classloader-operation/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Biaobiaoqi的博客" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+
+function addBlankTargetForLinks () {
+
+  $('a[href^="http"]').each(function(){
+
+      $(this).attr('target', '_blank');
+
+  });
+
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+
+  addBlankTargetForLinks();
+
+});
+
+</script>
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F49481ec3305db999013860b0ccb3b16d' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39900036-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Biaobiaoqi的博客</a></h1>
+  
+    <h2>做一个互联网世界的匠人</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:biaobiaoqi.me" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives/">全部文章</a></li>
+  <li><a href="/tag-cloud/">分类阅读</a></li>
+  <li><a href="/resources/">其他推荐</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">类加载器操作三原则[译]</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-08T00:42:00+08:00" pubdate data-updated="true">Sep 8<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>（出自一本 J2EE 的教材中关于类加载器的介绍，原文已不知所踪。）</p>
+
+<p>类加载的 bug，一旦在编程中遇到很难调试。好消息是，理解类加载的过程中，我们只需要牢记住三条基本原则。如果你能清晰的理解这三条基本原则，所有问题都迎刃而解。下面，我们开始介绍。</p>
+
+<h2>委托原则(Delegation Principle)</h2>
+
+<blockquote><p>如果一个类还没有被加载，类加载器会委托它的父亲加载器去加载它。</p></blockquote>
+
+<p>这种委托会一直延续，直到到达委托层次的最顶层，由原始的类加载器加载完成该类。下图展示了这种情况。</p>
+
+<p><img src="https://dl.dropboxusercontent.com/u/64021093/Java%20Classloader/classloader1.gif" alt="" /></p>
+
+<p>Systm-ClassPath classloader 加载了 MyApp.MyApp，而这个类创造了一个 java.util.Vector。假设现在 java.util.Vector 还没又被加载。因为 System-Classpath classloader 加载了 MyApp 类，它首先请求它的父亲 extension classloader 来加载这个类（java.util.Vector）。而 extension classloader 又请求 Bootstrap classloader 尝试加载。因为 java.util.Vector 是 J2SE 类，bootstrap classloader 成功加载了它。</p>
+
+<!--more-->
+
+
+<p>考虑一个当略微不同的情况，如下图。</p>
+
+<p><img src="https://dl.dropboxusercontent.com/u/64021093/Java%20Classloader/classloader2.gif" alt="" /></p>
+
+<p>在这种情况中，MyApp 创造了一个新的用户自定义类的实例，MyClass。假设 MyClass 还没有被加载。像以往一样，当 System-Classpath classloader 接收到这个加载请求，它委托了它的父亲。最终这个委托传递到了 Bootstrap classloader。但是在 java 核心 API 里，找不到这个类。所以它的孩子加载器 Extensions classloader 尝试加载它。同样的，Extensions classloader 也没有找到它。最终，委托请求回到了 System-Classpath classloader 这里。它找到了这个类并加载成功。</p>
+
+<h2>可见性原则（Visibility principle）</h2>
+
+<blockquote><p>被父亲类加载器加载的类对于孩子加载器是可见的，但关系相反相反则不可见。</p></blockquote>
+
+<p>这说明，一个类只能看见它自己的加载器或者这个加载器的父类加载器加载的类，反过来是不可以的。比如，被 ClassX 的父亲加载器加载的类是不能看见 ClassX 的。为了更清楚的理解，让我们来看一个例子，如下图。</p>
+
+<p><img src="https://dl.dropboxusercontent.com/u/64021093/Java%20Classloader/classloader3.gif" alt="" /></p>
+
+<p>图中展示了四个类加载器。类加载器 A 是最顶层的加载器，B 是它的孩子。类加载器 X 和 Y 是 B 的孩子。他们各自都加载了与自己同名的类。类加载器 A 能看见 A 类，类加载器 B 能看见 A，B 类。类似的，X 能看见 A，B，X，Y 能看见 A，B，Y。但兄弟、Y 之间的类是不可见的。</p>
+
+<h2>独特性原则（Uniqueness Principle）</h2>
+
+<blockquote><p>当一个类加载器加载一个类时，它的孩子加载器绝不会重新加载这个类。</p></blockquote>
+
+<p>这是因为委托原则中，一个加载器总是会委托自己的父亲加载器加载类。当层次中的父亲加载器无法加载类的时候，孩子类加载器就会（或者尝试去）加载这个类。这样，类加载的独特性就得到了保障。当父亲和孩子加载器加载了同一个类，一个有趣的情况就出现了。你可能会想这怎么可能出现？这不是违反了独特性原则？</p>
+
+<p>我们用可见性原则中的示例图来解释这个问题。我们假设没有任何类被加载到这些类加载器的层次结构中。假设 X 类被类加载器 X 加载，它强制性的用类加载器 X 加载 B 类。这可以通过像 Class.Name()这样的 API 来实现，代码如下：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'> <span class="kd">public</span> <span class="kd">class</span> <span class="nc">X</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>   <span class="kd">public</span> <span class="nf">X</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">ClassLoader</span> <span class="n">cl</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">getClass</span><span class="o">().</span><span class="na">getClassLoader</span><span class="o">();</span>
+</span><span class='line'>      <span class="n">Class</span> <span class="n">B</span> <span class="o">=</span> <span class="n">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="err">“</span><span class="n">B</span><span class="err">”</span><span class="o">,</span> <span class="kc">true</span><span class="o">,</span> <span class="n">cl</span><span class="o">);</span>
+</span><span class='line'>   <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在 X 的构造函数中，B 被显示的使用类加载器 X 加载。如果另一个被类加载器 B 加载的类需要访问 B 类，则无法实现，因为委托原则只能向父亲方向查询。如果类加载器 B 也加载了 B 类，当比较两个 B 类的实例时，如果一个实例来自于类加载器 X，一个来自于类加载器 B，则会抛出 ClassCastException 异常。</p>
+
+<h2>总结</h2>
+
+<p>这三个原则 是解决程序中遇到的类加载问题的关键所在。在实际的编程中，并不需要显示的调用到类加载器，它主要出现在一些框架的代码中。但对于每一个开发者、架构师而言，都必须理解类加载的层次结构，这样才能写出优雅的代码。</p>
+
+<h3>PS</h3>
+
+<p>注意，虽然 java 的加载实现中，对于 bootstrap classloader 、extensions classloader 和 system classloader 来说，他们的关系是 parent-first，也就是像原则一中所说的那样，需要向上委托，但用户自定义的 classloader 完全可以跳出这个圈子，自己实现 parent-lastclassloader。比如 Websphere 中就有相关配置。</p>
+
+<p>更具体的类加载器编程实例，请见另外一篇博文：<a href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loader-in-practice/">《Java 类加载器编程实践》</a></p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/09/08/three-principles-of-classloader-operation/'>http://biaobiaoqi.me/blog/2013/09/08/three-principles-of-classloader-operation/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Biaobiaoqi</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-08T00:42:00+08:00" pubdate data-updated="true">Sep 8<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+    <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+<a class="jiathis_button_tsina"></a>
+<a class="jiathis_button_weixin"></a>
+<a class="jiathis_button_renren"></a>
+<a class="jiathis_button_douban"></a>
+<a class="jiathis_button_googleplus"></a>
+<a href="http://www.jiathis.com/share?uid=1814751" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+	data_track_clickback:true,
+	summary:"",
+	shortUrl:true,
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1814751" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/09/08/java-class-loading-linking-and-initialising/" title="Previous Post: Java类的装载、链接和初始化">&laquo; Java类的装载、链接和初始化</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/09/08/late-initialising-in-java/" title="Next Post: Java类加载的延迟初始化">Java类加载的延迟初始化 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <!--h1>Comments</h1-->
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>标签云</h1>
+ <br /> 
+  <ul class="tag-cloud">
+    <a style="font-size: 112%" href="/tags/hadoop/">Hadoop</a> &nbsp 
+<a style="font-size: 139%" href="/tags/jvm/">JVM</a> &nbsp 
+<a style="font-size: 144%" href="/tags/java/">Java</a> &nbsp 
+<a style="font-size: 141%" href="/tags/pat/">PAT</a> &nbsp 
+<a style="font-size: 112%" href="/tags/octopress/">octopress</a> &nbsp 
+<a style="font-size: 135%" href="/tags/fen-bu-shi/">分布式</a> &nbsp 
+<a style="font-size: 133%" href="/tags/zi-jie-ma/">字节码</a> &nbsp 
+<a style="font-size: 135%" href="/tags/si-kao/">思考</a> &nbsp 
+<a style="font-size: 180%" href="/tags/ji-zhu/">技术</a> &nbsp 
+<a style="font-size: 124%" href="/tags/fang-fa-lun/">方法论</a> &nbsp 
+<a style="font-size: 106%" href="/tags/fu-wu-qi/">服务器</a> &nbsp 
+<a style="font-size: 137%" href="/tags/sheng-huo/">生活</a> &nbsp 
+<a style="font-size: 148%" href="/tags/suan-fa/">算法</a> &nbsp 
+<a style="font-size: 117%" href="/tags/wang-luo/">网络</a> &nbsp 
+<a style="font-size: 135%" href="/tags/du-shu/">读书</a>
+
+  </ul>
+</section>
+<section>
+  <h1>关于</h1>
+   <p>biaobiaoqi是我的网络id。<br><br>
+   我的博客日志：<a href="http://biaobiaoqi.me/blog/2013/09/01/blog-log/">请戳</a><br><br>
+   更多信息请戳：<a href="http://about.me/biaobiaoqi">about.me</a><br>
+	</p>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - Biaobiaoqi -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  - <span class="credit">Theme by <a href="http://www.gehaxelt.in">Gehaxelt</a></span>
+  <span class="credit">and <a href="http://www.it-solutions-neef.de">IT Solutions Neef</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'biaobiaoqisblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://biaobiaoqi.me/blog/2013/09/08/three-principles-of-classloader-operation/';
+        var disqus_url = 'http://biaobiaoqi.me/blog/2013/09/08/three-principles-of-classloader-operation/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
