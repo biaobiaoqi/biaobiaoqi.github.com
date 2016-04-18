@@ -1,0 +1,437 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Google Android应用开发大赛参赛记 - Biaobiaoqi的博客</title>
+  <meta name="author" content="Biaobiaoqi">
+
+  
+  <meta name="description" content="2011Google Android应用开发中国大学生挑战赛， 全国总决赛 二等奖 功夫蛇 申亚鹏 叶志强 毛愚晰">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://biaobiaoqi.github.io/blog/2013/09/05/google-android-challenge-2011/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Biaobiaoqi的博客" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+
+function addBlankTargetForLinks () {
+
+  $('a[href^="http"]').each(function(){
+
+      $(this).attr('target', '_blank');
+
+  });
+
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+
+  addBlankTargetForLinks();
+
+});
+
+</script>
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F49481ec3305db999013860b0ccb3b16d' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39900036-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Biaobiaoqi的博客</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:biaobiaoqi.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives/">全部文章</a></li>
+  <li><a href="/tag-cloud/">分类阅读</a></li>
+  <li><a href="/resources/">其他推荐</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Google Android应用开发大赛参赛记</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-05T23:51:00+08:00" pubdate data-updated="true">Sep 5<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2>前言</h2>
+
+<p>大三结束的暑假，跟另外两个同学一起组队参加了 Google 第二届 Andoid 应用开发中国大学生挑战赛，有幸获得了<a href="http://www.google.cn/university/androidchallenge/2011/gallery.html#tab=d1-13">全国总决赛的前 6 名</a>。
+虽然只是移动客户端的开发实践，但也第一次让我体验到了工程的魅力、团队协作的成就感和编码的快乐。</p>
+
+<p>以下内容实际上是一份属于当时经验匮乏的团队的开发草稿，回头看来，满载的无知和丰腴的老土，姑且把它当做开发日志吧;)</p>
+
+<p>不做内容删改（些许格式调整）,原文如下：</p>
+
+<!--more-->
+
+
+<h2>功夫蛇开发日志</h2>
+
+<h3>2011-06-24</h3>
+
+<p>转眼到大三了都。</p>
+
+<p>说来惭愧，什么项目都没做过，课程的大作业都美认真完成的人，谈何项目呢- -#</p>
+
+<p>技术是王道，其他的，GPA、社团都是浮云。</p>
+
+<p>于是，想着，从现在开始，要做点什么了。觉得，这才是我的兴趣所在。</p>
+
+<p>于是，看到了这个契机。Google Android 应用开发大赛~</p>
+
+<p>于是找到了 yzq 童鞋作搭档。</p>
+
+<p>现在是 6.24。比赛截止日期位 10 月 10。</p>
+
+<p>计划执行的时间是 7 到 9 月两个月。</p>
+
+<p>6.24 - 7.10 技术准备、定题设计。查阅技术资料（读源代码，向老师请教定题方向）</p>
+
+<p>7.10 - 9 月 coding</p>
+
+<p>9 月以后 精化。</p>
+
+<p>于是，开始啦～～</p>
+
+<h3>2011-07-01</h3>
+
+<p>期末考试完毕，我们计划用两周的时间预热，查阅 android 开发知识，想参赛的 idea。</p>
+
+<h3>2011-07-10</h3>
+
+<p>在与 hhl 老师的讨论中，突然想到了一个不错的点子。一个以贪吃蛇为背景，以水果忍者为游戏模式，以重力感应球为操控的 android 游戏：</p>
+
+<p>重力感应操控蛇前进的方向，蛇不会撞墙死、撞自己死。只是不停的吃果子得分，游戏定时计分，不同的果子得分不同。</p>
+
+<p>具体细节待定。游戏拥有自然的物理模型，游戏时，蛇就像在自己的手机上移动。</p>
+
+<p>这个 idea 被 hhl 老师无情的鄙视了，说很早在电视上就有如此实现的游戏。当然，他也安慰我说，没事，在游戏逻辑中做些微创新也是不错的。</p>
+
+<p>犹豫了几天，没有更好的点子，于是决定就是它了。</p>
+
+<p>分工：我负责游戏逻辑、游戏动画的开发（我的手机重力感应功能比较好，I9000 啊~非广告哈~）。yzq 负责游戏整体框架开发。</p>
+
+<h3>2011-07-18</h3>
+
+<p>从 APIDemo 中得 Snake 游戏入手，了解了 android 游戏的框架。</p>
+
+<p>并改良实现了能用重力感应控制方向的经典贪吃蛇（游戏逻辑混乱，且蛇的移动不是连续动画的）。</p>
+
+<h3>2011-07-23</h3>
+
+<p>搭建完成了初步的游戏逻辑（增加了自创的 Round 机制增加游戏的多样性），实现了基本构想，但动画效果很一般。</p>
+
+<p>在暑假短学期的最后的展示课上，向全班同学展示了我们现阶段的成果。在跟大家的交流过程中，萌生了增加 移动的果子 的想法。</p>
+
+<p>在动画实现方面，自己觉得要是做成不连续动画的话，只要控制好游戏风格，倒无所谓。但 hhl 老师坚持实现流畅的动画效果。</p>
+
+<h3>2011-07-29</h3>
+
+<p>重新构建了游戏框架，用 surfaceview 取缔原先的 view，独创的用特殊 patheffect 的 path 实现了蛇体的形状。动画和交互的流畅性。</p>
+
+<h3>2011-08-07</h3>
+
+<p>由于下学期要去爱尔兰交流半年，暑假回家两周。开发暂停。</p>
+
+<h3>2011-08-22</h3>
+
+<p>回到学校，开始与 yzq 的模块拼接工作。</p>
+
+<h3>2011-08-25</h3>
+
+<p>完成拼接工作，开始详细讨论游戏的精华改进。（此时还没有像样的 UI）</p>
+
+<p>定游戏主题为 Kongfu Snake &#8211; 功夫蛇。</p>
+
+<h3>2011-08-27</h3>
+
+<p>在学校的 CC98 论坛上，征到工业设计的 mdd 童鞋，为我们设计 UI。三人团队组建完成。</p>
+
+<h3>2011-09-08</h3>
+
+<p>经过不断的改进、测试，攻克了一些第一次开发中遗留的问题（特别是游戏状态保存的问题），经过几个几近通宵夜晚共同讨论，我们的 Kongfu Snake 终于拥有了自己主题的  UI 和相对完整的功能。</p>
+
+<p>第二天我将踏上去爱尔兰的旅程。但开发并未终止。还有部分需要改进和善后的工作。</p>
+
+<h3>2011-09-23</h3>
+
+<p>由于 25 日有保研的远程电话面试，我和 yzq 最近搁置了手头的开发。祝我们好运。完事后继续最后的攻坚。</p>
+
+<h3>2011-10-26</h3>
+
+<p>已经提交了两周了，结果应该已经出了吧。下周二就有结果了。</p>
+
+<p>bless 啊。</p>
+
+<p>不过我自己感觉希望不大了。</p>
+
+<p>华东赛区前 6 才能进全国决赛。而我们浙大华东赛区是评审单位，我已经看到一个工业设计的同学，做的一个 3D 的游戏，可玩读很不错，虽然细节方面有些 bug。自认为要是评选，他们会排在前面，而 android 应用，学校应该还潜伏着很多高手吧，毕竟，这个入手比较简单。估算从中再产生一个前 6，我想浙江大学作为主评的单位，从避嫌的角度也不会推上去太多明额，两个合适，三个最多了。唉，真担心我们的作品>&lt;&#8230;</p>
+
+<p>只能期待奇迹发生了。</p>
+
+<p>评委老师们要给力啊！</p>
+
+<h3>2011-10-31</h3>
+
+<p>最后一天了，突然觉得好紧张啊。明天就公布区域塞的结果了。</p>
+
+<p>如果。。如果。。。</p>
+
+<p>求 RP 啊。。。。。</p>
+
+<p>唉，虽然说眼光放长远，学习知识最重要，但是还是想获得一些奖励作为 mark 啊～～</p>
+
+<p>看明天吧</p>
+
+<h3>2011-11-1</h3>
+
+<p>i&#8217;m so glad that we&#8217;ve got the second prize in eastern China competition!!</p>
+
+<p>And let&#8217;s moving on to the national competition!!!</p>
+
+<p>I&#8217;ll turn to some friends who has some experience in user interaction to give some advice  about our android game,
+and then make a plan to do a better work.
+I think we will make it open source and put the game into the market finally, but not now, we should make it better first!</p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.io/blog/2013/09/05/google-android-challenge-2011/'>http://biaobiaoqi.github.io/blog/2013/09/05/google-android-challenge-2011/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Biaobiaoqi</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-05T23:51:00+08:00" pubdate data-updated="true">Sep 5<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+    <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+<a class="jiathis_button_tsina"></a>
+<a class="jiathis_button_weixin"></a>
+<a class="jiathis_button_renren"></a>
+<a class="jiathis_button_douban"></a>
+<a class="jiathis_button_googleplus"></a>
+<a href="http://www.jiathis.com/share?uid=1814751" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+	data_track_clickback:true,
+	summary:"",
+	shortUrl:true,
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1814751" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/09/01/blog-log/" title="Previous Post: biaobiaoqi的博客日志">&laquo; biaobiaoqi的博客日志</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/09/06/kongfu-snake-project-summary/" title="Next Post: Android小游戏：功夫蛇 团队开发经验总结">Android小游戏：功夫蛇 团队开发经验总结 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <!--h1>Comments</h1-->
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>标签云</h1>
+ <br /> 
+  <ul class="tag-cloud">
+    <a style="font-size: 112%" href="/tags/hadoop/">Hadoop</a> &nbsp 
+<a style="font-size: 139%" href="/tags/jvm/">JVM</a> &nbsp 
+<a style="font-size: 144%" href="/tags/java/">Java</a> &nbsp 
+<a style="font-size: 141%" href="/tags/pat/">PAT</a> &nbsp 
+<a style="font-size: 112%" href="/tags/octopress/">octopress</a> &nbsp 
+<a style="font-size: 135%" href="/tags/fen-bu-shi/">分布式</a> &nbsp 
+<a style="font-size: 133%" href="/tags/zi-jie-ma/">字节码</a> &nbsp 
+<a style="font-size: 135%" href="/tags/si-kao/">思考</a> &nbsp 
+<a style="font-size: 180%" href="/tags/ji-zhu/">技术</a> &nbsp 
+<a style="font-size: 124%" href="/tags/fang-fa-lun/">方法论</a> &nbsp 
+<a style="font-size: 106%" href="/tags/fu-wu-qi/">服务器</a> &nbsp 
+<a style="font-size: 137%" href="/tags/sheng-huo/">生活</a> &nbsp 
+<a style="font-size: 148%" href="/tags/suan-fa/">算法</a> &nbsp 
+<a style="font-size: 117%" href="/tags/wang-luo/">网络</a> &nbsp 
+<a style="font-size: 135%" href="/tags/du-shu/">读书</a>
+
+  </ul>
+</section>
+<section>
+  <h1>关于</h1>
+   <p>biaobiaoqi是我的网络id。<br><br>
+   我的博客日志：<a href="http://biaobiaoqi.me/blog/2013/09/01/blog-log/">请戳</a><br><br>
+   更多信息请戳：<a href="http://about.me/biaobiaoqi">about.me</a><br>
+	</p>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - Biaobiaoqi -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  - <span class="credit">Theme by <a href="http://www.gehaxelt.in">Gehaxelt</a></span>
+  <span class="credit">and <a href="http://www.it-solutions-neef.de">IT Solutions Neef</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'biaobiaoqisblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://biaobiaoqi.github.io/blog/2013/09/05/google-android-challenge-2011/';
+        var disqus_url = 'http://biaobiaoqi.github.io/blog/2013/09/05/google-android-challenge-2011/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

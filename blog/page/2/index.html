@@ -1,0 +1,714 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Biaobiaoqi的博客</title>
+  <meta name="author" content="Biaobiaoqi">
+
+  
+  <meta name="description" content="背景 邮件服务系列博文中第一篇博客介绍了邮件服务的基本知识，了解了邮件是如何从发件人的邮件客户端经过不同的传输协议传送到收件人的邮件客户端的。这只是邮件的基本功能实现，但如果发生如下情况，整个邮件系统的生态环境将被扰乱： 被不法分子利用邮箱服务器发送垃圾邮件
+被其他人伪造域名邮箱发送邮件 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://biaobiaoqi.github.io/blog/page/2/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Biaobiaoqi的博客" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+
+function addBlankTargetForLinks () {
+
+  $('a[href^="http"]').each(function(){
+
+      $(this).attr('target', '_blank');
+
+  });
+
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+
+  addBlankTargetForLinks();
+
+});
+
+</script>
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F49481ec3305db999013860b0ccb3b16d' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39900036-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Biaobiaoqi的博客</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:biaobiaoqi.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives/">全部文章</a></li>
+  <li><a href="/tag-cloud/">分类阅读</a></li>
+  <li><a href="/resources/">其他推荐</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/01/21/email-2/">邮件服务（二）：安全、认证和垃圾邮件</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-21T01:38:00+08:00" pubdate data-updated="true">Jan 21<span>st</span>, 2014</time>
+        
+         | <a href="/blog/2014/01/21/email-2/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>背景</h2>
+
+<p><a href="http://biaobiaoqi.me/tags/you-jian-fu-wu/">邮件服务系列博文</a>中<a href="http://biaobiaoqi.me/blog/2014/01/20/email-1/">第一篇博客</a>介绍了邮件服务的基本知识，了解了邮件是如何从发件人的邮件客户端经过不同的传输协议传送到收件人的邮件客户端的。这只是邮件的基本功能实现，但如果发生如下情况，整个邮件系统的生态环境将被扰乱：</p>
+
+<ul>
+<li>被不法分子利用邮箱服务器发送垃圾邮件</li>
+<li>被其他人伪造域名邮箱发送邮件</li>
+<li>被中间人窃取账号密码、甚至重要邮件信息（中间人攻击）</li>
+<li>即使自己拥有邮箱服务器的权限，无限制的滥用这个权利给其他邮箱发送邮件也是不好的</li>
+</ul>
+
+
+<p>为了防止以上的种种情况，电子邮箱体系引入了更多的协议和机制。本文对此做浅显的总结，如有出错，还请指出和补充。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/01/21/email-2/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/01/20/email-1/">邮件服务（一）：基本框架</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-20T00:11:00+08:00" pubdate data-updated="true">Jan 20<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/01/20/email-1/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>背景</h2>
+
+<p>电子邮件出现在 1960s 晚期，比打开浏览器就要使用的 HTTP 协议早了 20 年左右,是二十世纪人类最伟大的发明之一。这个古老、经典的框架在网络中运行了五十多年，现今仍然是网络中主要的流量类型之一。</p>
+
+<p>不得不提的是，<a href="http://zh.wikipedia.org/wiki/%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6">wiki</a> 上关于中国的第一封电子邮件的记载：1987 年 9 月 14 日 [1]中国第一封电子邮件是由“德国互联网之父”维纳·措恩与王运丰在北京的计算机应用技术研究所发往德国卡尔斯鲁厄大学的，其内容为英文，大意如下：</p>
+
+<blockquote><p>Across the <strong>Great Wall</strong> we can reach every corner in the world.</p></blockquote>
+
+<p>真的是很有远见呢-,-</p>
+
+<p>前几天梳理了电子邮箱相关的协议和框架组件，准备整理成文。一共<a href="http://biaobiaoqi.me/tags/you-jian-fu-wu/">三篇</a>，本文是基本知识总结，第二篇介绍安全认证和防垃圾邮件的规范，第三篇记录了邮件服务器的搭建实践。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/01/20/email-1/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/01/17/java-performance-tunning-in-practice/">JVM参数调优：Eclipse启动实践</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-17T11:16:00+08:00" pubdate data-updated="true">Jan 17<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/01/17/java-performance-tunning-in-practice/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>本文主要参考自<a href="http://book.douban.com/subject/6522893/">《深入理解 Java 虚拟机》</a>。这本书是国人写的难得的不是照搬代码注释的且不是废话连篇的技术书，内容涵盖了 Java 从源码到字节码到执行的整个过程，包括了 JVM（Java Virtual Machine）的架构，垃圾收集的介绍等。这里摘录出关于配置 JVM 基本参数来调优 Eclipse 启动的过程，比较初级，供初学者参考。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/01/17/java-performance-tunning-in-practice/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/01/04/happy-new-year/">我的2013</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-04T14:47:00+08:00" pubdate data-updated="true">Jan 4<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/01/04/happy-new-year/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>早上十一点，在周六的惬意中起床。窗外的杭州雾霾再次光临，想想几年前还是一种只会在清晨遇到的亲切的朦胧美，到如今已经沦为对环境和未来的担忧，原来已经 2014。</p>
+
+<p>在编程语言界，有个著名的<a href="http://en.wikipedia.org/wiki/Duck_test">鸭子测试</a>，用来明确部分动态语言的多态特性，可以用下面这句话来表达：</p>
+
+<blockquote><p>If it looks like a duck, swims like a duck, and quacks like a duck, then it probably is a duck.</p></blockquote>
+
+<p>实际上，这就是我现在认识的世界。以此开篇，用几个标签介绍 2013 的我。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/01/04/happy-new-year/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/12/15/zombie-tsunami/">从《僵尸海啸》感受创新</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-15T21:10:00+08:00" pubdate data-updated="true">Dec 15<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/12/15/zombie-tsunami/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>本文博主自费五毛推荐一款冒险类手游——《僵尸海啸》(Zombie Tsunami)。</p>
+
+<p>游戏玩家控制自己的僵尸军团不断前进。前进路上有障碍物和人。人被僵尸吃掉后会转变为新的僵尸，壮大玩家的僵尸军团，而障碍物则会毁灭掉僵尸。最终游戏以僵尸军团的被全歼结束。行进的路上，还有各种道具和金币。通过收集金币，可以在商店购买技能特效，丰富了游戏的可玩性。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/zombie2013-12-15%2023.44.48.png?imageView/2/w/800/h/800" alt="img" /></p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/12/15/zombie-tsunami/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/24/install-software-in-os-x/">我的OS X软件安装索引</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-24T03:28:00+08:00" pubdate data-updated="true">Nov 24<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/11/24/install-software-in-os-x/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>更换硬盘重装系统时，由于备份数据失败，不得不重新配置系统环境（参见<a href="http://biaobiaoqi.me/blog/2013/11/24/failed-in-replacing-hdd/">《记对 MBP 一次失败的备份和重装》</a>）。在此记录下自己所要在 OS X 上安装的软件的索引。整体分为三类：系统工具、个人和开发。</p>
+
+<p>部分第三方下载的软件在安装时提示“无法打开，来自不受信任的开发者”。解决办法是：</p>
+
+<p>系统偏好设置 －> 安全与隐私 －> 点左下角的小锁头图标然后输入自己的密码 －> 在“通用”标签下点选“任何来源”。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/11/24/install-software-in-os-x/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/24/failed-in-replacing-hdd/">记对MBP一次失败的备份和重装</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-24T02:08:00+08:00" pubdate data-updated="true">Nov 24<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/11/24/failed-in-replacing-hdd/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>背景</h2>
+
+<p>大概一年前，给我 11 年底款的 13 寸 MBP 的光驱位替换上了一块 M4 128G 的 SSD，用做系统盘，而机器原本的 HDD 则退化为数据存储盘。</p>
+
+<p>前两天发现 MBP 间歇性的变得很慢，查看 CPU 和内存都没有异常，使用 <a href="http://www.volitans-software.com/smart_utility.php">SMART Utility</a> 检查发现有坏道出现，如下图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/ssdhdd%20bad%20sector.png?imageView/2/w/800/h/800" alt="bad sector" /></p>
+
+<p>硬盘出现坏道后，会给坏道的数据重新分配备用 sector，而这种 sector 是有限的，再者坏道可能会扩散蔓延，这基本意味着 HDD 生命的结束了。只能换硬盘了。</p>
+
+<p>这才意识到自己的使用习惯的不当：平时没有关机的习惯，一般合上盖子就将笔记本放到书包里走人了，而运行状态的 HDD 在颠簸的环境里是很容易出现机械损伤的（相比之下 SSD 则不会）。</p>
+
+<p>考虑到自己没有太大存数据的需求（以前 700G+的 HDD 只存了 200G 不到，其中很多数据还是存了之后几乎没有使用的），决定再入一块 M4 128G 的 SSD，两块 SSD 组 <a href="http://zh.wikipedia.org/zh-cn/RAID#RAID_0">RAID0</a>。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/11/24/failed-in-replacing-hdd/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/13/blog-migration/">半年博客小结</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-13T23:38:00+08:00" pubdate data-updated="true">Nov 13<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/11/13/blog-migration/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>上周跟实验室的基友<a href="http://redow.me">@ReDow</a> 和<a href="http://zaumreit.me">@zaumreit</a> 合租了一台最低配置的 <a href="https://www.linode.com/">Linode</a> 的 VPS。把自己的博客搬到了 VPS 上，算是为之前半年的 github pages 博客写作画上个句号。正好半年时间，写点文字记录下心情。</p>
+
+<p>半年下来，博客里粗粗糙糙的攒下了 70 来篇博文。内容泛善可陈，但也赚得了 2 万的浏览量。实际上刚开始的时候，自己定下的目标是在年底达到 1 万 PV，比预想的要好不少=）。当然，最让人兴奋的不是这些冷冰冰的数字，而是博客的内容真真切切的能对一些素未谋面的访客有所帮助的时候。网站只是载体，数字只是表象，我更愿意看到的是本质上的信息的自由流动。这些，我正在用博客来实践。</p>
+
+<p>其实更早的时候曾有在 <a href="http://blog.csdn.net/biaobiaoqi">csdn</a> 上写博客，后来由于密码泄露问题和感受到社区整体氛围的不适放弃了。回过头来看以前的文字，跟昨天的自己一样幼稚和无聊。</p>
+
+<p>觉得幼稚，是因为处在技能和知识积累的上升期。想想也是，贫瘠如我的情况，这一点是很容易实现的。我也乐意看到过去的幼稚，这代表着成长，离目标又近了一步。</p>
+
+<p>觉得无聊，大概是因为在如今的探索和彷徨中，渐渐找到了自心所喜欢的事物，以及自己的力所能的领域。不断的在未知的空间迈出第一步，用实际的感受指导自己的方向。我想只有这种实践，才能在不迷失自我的前提下，扩展自己的可能性。</p>
+
+<p>半年里，我努力去接触和了解了黑客文化，被它开放、自由、探索的精神所吸引。虽然难以成为一个纯粹的黑客，但我非常愿意用自己的方式来践行其中的一些理念。为了提高效率，我看了一些方法论、认知方面的书籍，发现似乎自己对它的好奇心并不止于对它的使用。科技哲学也是一个有意思的方向，KK 思想的奥妙能激发自己的思考。世界从来都不是二元的，我希望找到一个属于自己的着力点。</p>
+
+<p>博客里的每个字，都是我的脚印。想在世界留下痕迹，至少得先让其他人能看到自己的脚印，即使这些印记暂时很浅。而脚印的指向，就是未来的路。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/11/13/blog-migration/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/07/pat-1069-pat-1072/">PAT 1069 - 1072 题解</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-07T00:30:00+08:00" pubdate data-updated="true">Nov 7<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/11/07/pat-1069-pat-1072/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>来源是 2013 年 11 月 2 日的 PAT 测试。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1069">1069. The Black Hole of Numbers (20)</a></h2>
+
+<h5>题意</h5>
+
+<p>给出一个四位数比如 6767，将它按照每位从小到大(6677)和从大到小(7766)充足，得到两个新四位数，这两者相减将得到一个新的四位数。再按照一样的处理方式处理得出的四位数</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>7766 - 6677 = 1089
+</span><span class='line'>9810 - 0189 = 9621
+</span><span class='line'>9621 - 1269 = 8352
+</span><span class='line'>8532 - 2358 = 6174
+</span><span class='line'>7641 - 1467 = 6174
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最终将得到一个『黑洞数』：6174。</p>
+
+<p>题目给出一个四位数，要求输出它演变出『黑洞数』的过程。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/11/07/pat-1069-pat-1072/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/05/cc98-post-machine/">用Ruby实现的论坛灌水工具：CC98 Post Machine</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-05T15:20:00+08:00" pubdate data-updated="true">Nov 5<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/11/05/cc98-post-machine/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>ZJU 的校网论坛 CC98 比较活跃。论坛只对校内网开放，而且账号跟学生绑定，每个学生注册的账号数量有限。『十大』是 CC98 的经典页面：基于关注的人数（回帖的用户数而不是回帖的数量）用算法求出 24 小时内最火爆的十个发帖。很多同学都会浏览十大，关注论坛动态。</p>
+
+<p>故事就是从十大引出的。有的社团在宣传活动时，为了扩大宣传面，会发动成员的小马甲顶贴上十大。这种违背社区自然发展轨迹的手段，强奸了关注十大贴的用户的意愿，阻碍了信息的自由流动。</p>
+
+<p>于是萌生了完成一个批量发帖的机器，以其人之道还治其人之身的想法。在下次十大被宣传贴攻占时，能有反击的工具。</p>
+
+<p>工具的用途很简单：使用不同的用户身份模拟真人论坛回帖，增加帖子关注度，以抵抗宣传贴。流程如下：提前收集各路亲朋好友的用户信息作为『预备水军』，『灌水』时，在评论内容文件中输入自定义的评论内容，在命令行参数中制定目标贴，即可实现随机顺序的用户自动顶贴。鉴于现在的功能是顶贴竞争十大，而十大排名是根据关注人数也就是独立用户评论数量做排序的，这里设计的顶贴策略是一个马甲发一条评论。以后可以考虑增加灵活的配置方案，实现更多功能。</p>
+
+<p>项目 Github 地址：<a href="https://github.com/biaobiaoqi/CC98PostMachine/">https://github.com/biaobiaoqi/CC98PostMachine/</a></p>
+
+<p>介于这个工具本身的罪恶的攻击属性，在此强调，工程仅供学习交流和对抗宣传贴。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/11/05/cc98-post-machine/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/3/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>标签云</h1>
+ <br /> 
+  <ul class="tag-cloud">
+    <a style="font-size: 112%" href="/tags/hadoop/">Hadoop</a> &nbsp 
+<a style="font-size: 139%" href="/tags/jvm/">JVM</a> &nbsp 
+<a style="font-size: 144%" href="/tags/java/">Java</a> &nbsp 
+<a style="font-size: 141%" href="/tags/pat/">PAT</a> &nbsp 
+<a style="font-size: 112%" href="/tags/octopress/">octopress</a> &nbsp 
+<a style="font-size: 135%" href="/tags/fen-bu-shi/">分布式</a> &nbsp 
+<a style="font-size: 133%" href="/tags/zi-jie-ma/">字节码</a> &nbsp 
+<a style="font-size: 135%" href="/tags/si-kao/">思考</a> &nbsp 
+<a style="font-size: 180%" href="/tags/ji-zhu/">技术</a> &nbsp 
+<a style="font-size: 124%" href="/tags/fang-fa-lun/">方法论</a> &nbsp 
+<a style="font-size: 106%" href="/tags/fu-wu-qi/">服务器</a> &nbsp 
+<a style="font-size: 137%" href="/tags/sheng-huo/">生活</a> &nbsp 
+<a style="font-size: 148%" href="/tags/suan-fa/">算法</a> &nbsp 
+<a style="font-size: 117%" href="/tags/wang-luo/">网络</a> &nbsp 
+<a style="font-size: 135%" href="/tags/du-shu/">读书</a>
+
+  </ul>
+</section>
+<section>
+  <h1>关于</h1>
+   <p>biaobiaoqi是我的网络id。<br><br>
+   我的博客日志：<a href="http://biaobiaoqi.me/blog/2013/09/01/blog-log/">请戳</a><br><br>
+   更多信息请戳：<a href="http://about.me/biaobiaoqi">about.me</a><br>
+	</p>
+</section>
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - Biaobiaoqi -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  - <span class="credit">Theme by <a href="http://www.gehaxelt.in">Gehaxelt</a></span>
+  <span class="credit">and <a href="http://www.it-solutions-neef.de">IT Solutions Neef</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'biaobiaoqisblog';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

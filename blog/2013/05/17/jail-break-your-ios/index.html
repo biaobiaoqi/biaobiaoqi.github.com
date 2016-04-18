@@ -1,0 +1,381 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>iOS的安全性和越狱 - Biaobiaoqi的博客</title>
+  <meta name="author" content="Biaobiaoqi">
+
+  
+  <meta name="description" content="本文讲解了iOS平台的安全性，越狱的注意事项等">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://biaobiaoqi.github.io/blog/2013/05/17/jail-break-your-ios/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Biaobiaoqi的博客" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+
+function addBlankTargetForLinks () {
+
+  $('a[href^="http"]').each(function(){
+
+      $(this).attr('target', '_blank');
+
+  });
+
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+
+  addBlankTargetForLinks();
+
+});
+
+</script>
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F49481ec3305db999013860b0ccb3b16d' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39900036-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Biaobiaoqi的博客</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:biaobiaoqi.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives/">全部文章</a></li>
+  <li><a href="/tag-cloud/">分类阅读</a></li>
+  <li><a href="/resources/">其他推荐</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">iOS的安全性和越狱</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-17T00:10:00+08:00" pubdate data-updated="true">May 17<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><img src="https://dl.dropboxusercontent.com/u/64021093/2013-5-16.jpg" title="Jailbrek" alt="alt jailbreak" /></p>
+
+<p>提到<a href="http://en.wikipedia.org/wiki/IOS_jailbreaking#Security.2C_privacy.2C_and_stability">越狱</a>，很多人第一反应大概是免费的游戏和 app。</p>
+
+<p>作为软件从业人员，深知中国的大环境的特殊性。内有用户想吃免费午餐的不良付费习惯，外有行业内大头诸如某讯对创新的绞杀。大家对越狱是为了免费、盗版软件的认识，也就不奇怪了。</p>
+
+<p>还有另一派人。越狱对他们来说，意味着开放。个人认为这也是 Hack 精神的精髓之一。事实上，iOS 越狱也有自己的生态圈：Cydia 就是越狱设备上 App Store。</p>
+
+<!--more-->
+
+
+<h2>越狱的合法性</h2>
+
+<p>数字千年版权法对 iphone 的越狱进行了特赦，直到 2015 年，对 iPhone、iPod touch 的越狱依然有效。但注意，iPad 就没这么幸运了。</p>
+
+<p>详情参见博文<a href="http://www.cultofmac.com/213144/unlocking-a-new-iphone-is-now-illegal-but-jailbreaking-is-still-safe-what-it-all-means-for-you/">《Unlocking A New iPhone Is Now Illegal, But Jailbreaking Is Still Safe — What It All Means For You》</a></p>
+
+<h2>iOS 安全性</h2>
+
+<p>由于 iOS 没有开源，学术界和工业界对它的安全机制的论述资料很少。我在网上找到了上交一位学长对 ios 安全机制的分析文章，是他的硕士学位<a href="http://www.doc88.com/p-405566264292.html">论文</a>。作为参考，我整理了一些关键知识点。</p>
+
+<h4>基于信任链的启动</h4>
+
+<p>iOS 的信任机制从系统启动那一刻起已经开始。
+系统可信启动 <a href="http://elinux.org/images/2/28/Trusted_Boot_Loader.pdf">trustedboot</a>：启动每一步都会检测签名，构成整个信任链。</p>
+
+<p>还有另一种启动方式，是设备固件升级方式（DFU，Device Firmware Update），也是由签名构建信任链。</p>
+
+<h4>程序签名</h4>
+
+<p>iOS 应用的 ipa 压缩包中包含可执行文件和数据文件。可执行文件只有在已签名的前提下才能运行。确保应用经过苹果认证。</p>
+
+<p>越狱提升运行权限到 root，修改引用加载策略，接受任意签名的应用。
+“通过软件保证软件安全是不可能的”，iOS 使用了硬件来做保护，但硬件部分也遭到了越狱的破解。</p>
+
+<h4>沙盒技术</h4>
+
+<p>iOS 用沙盒技术实现访问控制
+trustedBSD ：http://www.trustedbsd.org/
+http://www.freebsd.org/doc/zh_CN/books/arch-handbook/mac-synopsis.html</p>
+
+<h4>ASLR 和 PIE</h4>
+
+<p>使用地址空间布局随机化（ASLR， address space layout randomization）和位置无关可执行代码（PIE，position independent executable）编译用来防止经典的缓冲区溢出攻击。</p>
+
+<h4>数据保护机制：</h4>
+
+<ul>
+<li>硬件加密：AES 协处理器，存储着 UID，GID</li>
+<li>软件加密：系统中每个文件、数据都用一个唯一的秘钥来加密。秘钥是有 UID、GID 一起产生的，存在 keybag 中，keybag 通过用户的 4 位密码来保护。</li>
+</ul>
+
+
+<h2>越狱</h2>
+
+<p>越狱主要就是在信任链的根 bootrom 阶段攻击。由于系统不断升级，攻击的方式也在不断演进，这个<a href="http://bbs.gean.cn/archiver/showtopic-213.aspx">链接</a>介绍了其中的一种情况。</p>
+
+<h4>越狱后注意</h4>
+
+<p>总的来说，越狱打破了 iOS 封闭的生态环境，也打破了它特有的保护壳。手机获得了 root 权限，恶意代码有了可趁之机。不要轻易的使用来源不明的应用和插件。</p>
+
+<ul>
+<li>非越狱手机：仅允许用户访问照片、视频数据；通过备份，可在 pc 端获取所有数据</li>
+<li>越狱手机：拥有 root 权限。可以通过许多渠道如 ssh，ftp 获取系统数据。</li>
+</ul>
+
+
+<p>更多细节参见
+* <a href="http://bbs.weiphone.com/read-htm-tid-1750886.html">《浅谈 iOS 越狱前后的安全问题以及安全风险》</a>
+* <a href="http://www.pcpop.com/doc/0/890/890768_all.shtml">《iPad 越狱不安全!安装应用/插件需谨慎》</a>
+* <a href="http://www.cnbeta.com/articles/229192.htm">《iOS 完美越狱 - 福利还是阴谋？》</a></p>
+
+<h4>SHSH</h4>
+
+<p>iPhone 3GS 出来时候，苹果为加强对 iPhone OS 的控制对恢复(Restore)固件(Firmware)采用了验证过程，每次 iTunes 要恢复固件的时候都要连接苹果的服务器验证。手机的 ECID 和所刷系统版本号一起签名出一个 SHSH 文件，发送给服务器，服务器检测 SHSH 是否为新版本的系统所产生，如果是，则允许继续进行刷机，否则传回组织继续的信号。</p>
+
+<p>SHSH 是存储在苹果公司的服务器上的，用户需要通过备份原来的 SHSH，并伪装一台苹果服务器来协助验证。　　</p>
+
+<p>网络上 SHSH 备份方法的介绍很多，不了解的朋友自行 Google 吧。</p>
+
+<h2>附录</h2>
+
+<p>对于想开发 iOS 应用而又没有开发者账号的朋友，可以参考这篇文章<a href="http://kqwd.blog.163.com/blog/static/4122344820117191351263/">《Xcode 4.1~4.6 + iOS 5、iOS 6 免证书(iDP)开发+真机调试+生成 IPA 全攻略》</a>，Xcode4.6 iOS6.0 亲测有效。</p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.io/blog/2013/05/17/jail-break-your-ios/'>http://biaobiaoqi.github.io/blog/2013/05/17/jail-break-your-ios/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Biaobiaoqi</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-17T00:10:00+08:00" pubdate data-updated="true">May 17<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+    <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+<a class="jiathis_button_tsina"></a>
+<a class="jiathis_button_weixin"></a>
+<a class="jiathis_button_renren"></a>
+<a class="jiathis_button_douban"></a>
+<a class="jiathis_button_googleplus"></a>
+<a href="http://www.jiathis.com/share?uid=1814751" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+	data_track_clickback:true,
+	summary:"",
+	shortUrl:true,
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1814751" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/05/15/cap-and-eventual-consistent/" title="Previous Post: CAP和最终一致性">&laquo; CAP和最终一致性</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/05/18/a-hybrid-system-hadoopdb/" title="Next Post: HadoopDB：混合分布式系统">HadoopDB：混合分布式系统 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <!--h1>Comments</h1-->
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>标签云</h1>
+ <br /> 
+  <ul class="tag-cloud">
+    <a style="font-size: 112%" href="/tags/hadoop/">Hadoop</a> &nbsp 
+<a style="font-size: 139%" href="/tags/jvm/">JVM</a> &nbsp 
+<a style="font-size: 144%" href="/tags/java/">Java</a> &nbsp 
+<a style="font-size: 141%" href="/tags/pat/">PAT</a> &nbsp 
+<a style="font-size: 112%" href="/tags/octopress/">octopress</a> &nbsp 
+<a style="font-size: 135%" href="/tags/fen-bu-shi/">分布式</a> &nbsp 
+<a style="font-size: 133%" href="/tags/zi-jie-ma/">字节码</a> &nbsp 
+<a style="font-size: 135%" href="/tags/si-kao/">思考</a> &nbsp 
+<a style="font-size: 180%" href="/tags/ji-zhu/">技术</a> &nbsp 
+<a style="font-size: 124%" href="/tags/fang-fa-lun/">方法论</a> &nbsp 
+<a style="font-size: 106%" href="/tags/fu-wu-qi/">服务器</a> &nbsp 
+<a style="font-size: 137%" href="/tags/sheng-huo/">生活</a> &nbsp 
+<a style="font-size: 148%" href="/tags/suan-fa/">算法</a> &nbsp 
+<a style="font-size: 117%" href="/tags/wang-luo/">网络</a> &nbsp 
+<a style="font-size: 135%" href="/tags/du-shu/">读书</a>
+
+  </ul>
+</section>
+<section>
+  <h1>关于</h1>
+   <p>biaobiaoqi是我的网络id。<br><br>
+   我的博客日志：<a href="http://biaobiaoqi.me/blog/2013/09/01/blog-log/">请戳</a><br><br>
+   更多信息请戳：<a href="http://about.me/biaobiaoqi">about.me</a><br>
+	</p>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - Biaobiaoqi -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  - <span class="credit">Theme by <a href="http://www.gehaxelt.in">Gehaxelt</a></span>
+  <span class="credit">and <a href="http://www.it-solutions-neef.de">IT Solutions Neef</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'biaobiaoqisblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://biaobiaoqi.github.io/blog/2013/05/17/jail-break-your-ios/';
+        var disqus_url = 'http://biaobiaoqi.github.io/blog/2013/05/17/jail-break-your-ios/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

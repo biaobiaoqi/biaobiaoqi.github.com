@@ -1,0 +1,917 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: tech | Biaobiaoqi的博客]]></title>
+  <link href="http://biaobiaoqi.github.io/blog/categories/tech/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.github.io/"/>
+  <updated>2016-04-18T10:59:58+08:00</updated>
+  <id>http://biaobiaoqi.github.io/</id>
+  <author>
+    <name><![CDATA[Biaobiaoqi]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Works Applications宣讲会]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2014/05/28/works-applications/"/>
+    <updated>2014-05-28T00:53:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2014/05/28/works-applications</id>
+    <content type="html"><![CDATA[<p>2012年我本科毕业，Works Applications （缩写WAP）在上海设立了办公室，在国内第一次招人。这家日本ERP公司在此之前并没有被大家锁熟知，神秘的开出40万人民币（6m日元）的入职年薪，颇为诱人。他们的面试流程也与大多数IT公司大相径庭。</p>
+
+<p>今晚，WAP公司到浙大做宣讲。提纲如下：</p>
+
+<ul>
+<li>公司介绍</li>
+<li>上海办公室介绍</li>
+<li>学长经验交流</li>
+<li>招聘流程介绍和公布考题</li>
+</ul>
+
+
+<p>本文做了简单的归纳记录。</p>
+
+<!--more-->
+
+
+<h2>公司介绍</h2>
+
+<p>一位中国的美女姐姐介绍了公司的基本情况。</p>
+
+<h4>公司基本情况</h4>
+
+<ul>
+<li>WAP于96年发家，到现在为止全球有3.5k员工。</li>
+<li>总共9家子公司，其中WAP超过3k员工。</li>
+<li>在纽约、新加坡、上海、日本有办公室。员工平均年龄29岁。</li>
+<li>国际化：最近4年，有150＋中国员工，50＋印度员工。希望未来一半员工来自海外。</li>
+<li>ERP，Enterprise Resource Planning</li>
+<li>最初做HR产品，HR产品做的很好。</li>
+<li>用户：1／3的日本大公司。包括Sony，三菱，星巴克等。</li>
+<li>上海的产品线主要包括：HR、 Group ware</li>
+<li>新加坡的产品是：E-Commerce</li>
+<li>目标：世界五强的软件公司</li>
+<li>终极目标：通过他们的软件的高效，让公司员工实现一周三休（3 days off per week）</li>
+<li>竞争对手：SAP， Oracle</li>
+</ul>
+
+
+<h4>对程序员的要求</h4>
+
+<ul>
+<li>软件的创造者（Software Creator）</li>
+<li>文化里允许失败，鼓励创新</li>
+<li>不看重原来的成绩，看中能力： 在日本有出色的中国员工领导着更高年龄的日本员工。</li>
+<li>职业发展：两条路，specialist 和 manager</li>
+</ul>
+
+
+<h4>待遇</h4>
+
+<ul>
+<li>全球统一 6M日元/年</li>
+<li>每年两次考评，有机会提升年薪 #应该只是有机会吧</li>
+<li>终生雇佣制</li>
+<li>come back pass ＃针对足够优秀的人才</li>
+<li>女性员工照顾孩子的时间调整</li>
+</ul>
+
+
+<h4>文化</h4>
+
+<ul>
+<li>接近欧美企业</li>
+<li>结构扁平，</li>
+<li>鼓励对boss说no</li>
+<li>鼓励提建议、互相讨论</li>
+<li>弹性工作制</li>
+</ul>
+
+
+<h2>上海办公室介绍</h2>
+
+<p>作主讲的是一个日本中年人，似乎是上海办公室的主管，介绍了上海办公室的情况。由于不太适应他日本口音的英文，相信漏了不少点>&lt;...</p>
+
+<p>介绍了一个他很喜欢的人才管理系统：CTM（company Talent Management）。</p>
+
+<p>强调了人才的重要性，他相信要成为一个伟大的企业，首先得有足够优秀的员工，得有足够多的国际化的领导着（global leader）。他举了几个中国人在企业中获得成功的例子，并列举了他们的优势，用来展示如何成为一个合格的global leader。</p>
+
+<ul>
+<li>just coding is not enough</li>
+<li>work and think globally</li>
+<li>create something new</li>
+</ul>
+
+
+<h2>程虓学长介绍</h2>
+
+<p>程虓(xiao)学长是12级毕业的浙大学长。在上海办公室表现优异，有出色的交流能力。这一点，从展示中也看得出来。</p>
+
+<p>他先后参与过三个项目，每个项目，他都付出了很多，也从中收获了许多成长。</p>
+
+<ul>
+<li>CLM（Company Learning Management）。6＋1人。</li>
+<li>CJK ：公司的核心产品，人事与给予。 这是针对大企业（员工大于1k）的hr解决方案。</li>
+<li><p>Global Payroll：跨集团公司的工资发放，管理，会计业务。</p></li>
+<li><p>找工作时，药保持快乐的心情</p></li>
+<li><p>software creator：dev具有绝对主动权。前期研究，业务模型建立，系统设计，实现</p></li>
+<li><p>focus：给客户带来收益，ROI</p></li>
+<li><p>Cutting edge and free：给传统软件带来新的元素</p></li>
+<li><p>full stack oriented or specialized sharp shooter</p></li>
+</ul>
+
+
+<h4>他眼中的文化</h4>
+
+<ul>
+<li>鼓励挑战：MBM Most Breakthrough Member，公司内最高个人／团队奖项</li>
+<li>欢迎错误：挑战伴随着错误</li>
+<li>扁平管理：领导是顾问，大家在讨论中角色对等</li>
+</ul>
+
+
+<h2>招聘流程介绍和公布考题</h2>
+
+<p>公司HR公布了招聘流程，并发放了考题。是两道程序题，选一道完成，Java和C++实现均可。要求第一正确，第二程序要精巧和快速。</p>
+
+<ol>
+<li>现场发放考题，5天之内按规定方式提交。</li>
+<li>30－60min 面试</li>
+<li>9天 intership 模拟真实工作环境：如何验证自己的想法。面试官扮演客户的角色。可以培养business sense。@杭州／@北京</li>
+<li>发放offer；优秀的应聘者可以获得机会去东京总部参观</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Facebook学长交流分享]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2014/05/22/facebook-tech-talk-and-workshop/"/>
+    <updated>2014-05-22T22:24:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2014/05/22/facebook-tech-talk-and-workshop</id>
+    <content type="html"><![CDATA[<p>印象中这似乎是Facebook第一次来浙大校园做交流。</p>
+
+<p>前不久，也参加了Google的校园宣讲，G的两大宣讲主题是Google介绍和模拟面试。印象最深的是无敌的一家三口每年100w封顶的豪华医保（配偶不限男女LOL）。这次Facebook的结构类似：</p>
+
+<blockquote><p>Tech Talk: Ranking News Feed for 1.2 Billon People</p>
+
+<p>Workshop: Crush Your Coding Interview</p></blockquote>
+
+<p>两位主讲人都很棒，下面是自己的简要记录。</p>
+
+<!--more-->
+
+
+<h2>Crush Your Coding Interview</h2>
+
+<p>主讲人： Frank Qixing Du。本科复旦，研究生清华、在fb做mobile开发。</p>
+
+<p>Frank主要介绍了如何针对性准备Facebook的面试，从中可以看得出F的企业文化。</p>
+
+<p>面试准备：流程，资料，沟通。主要分四块：</p>
+
+<ol>
+<li>简历</li>
+<li>获得面试</li>
+<li>coding，过去的项目</li>
+<li>面试之后</li>
+</ol>
+
+
+<h4>简历</h4>
+
+<ul>
+<li><p>基础信息：blabla，填写GPA最好附上满绩比重（据说有的学校满分是4，而ZJU就是5），毕业时间（便于hr筛选简历）……</p></li>
+<li><p>个人的故事：展现经验、个人影响和对事物的激情。</p>
+
+<p>  经验方面：包括工业界经验，兴趣经验项目，github等等。侧重三点：</p>
+
+<ol>
+<li>做了什么；</li>
+<li>做的东西的影响；</li>
+<li>具体，简短，一页之内</li>
+</ol>
+
+
+<p>  一些常用表达词汇：build，optimize，improve等。</p></li>
+<li><p>诚恳的highlight自己的成就~</p></li>
+</ul>
+
+
+<h4>获得面试</h4>
+
+<ol>
+<li>chat with recruiter</li>
+<li>一到两轮</li>
+<li>on site ／ 电面 （2015年会有一批facebook员工到中国来现场面试）</li>
+</ol>
+
+
+<h4>面试：stay clam and think out loud</h4>
+
+<ul>
+<li>tackle hard problem的能力</li>
+<li>trade-offs的权衡能力</li>
+<li>沟通能力，表达代码的思路</li>
+<li>检测limits：知识的深度、广度。要坦诚的说自己不知道</li>
+</ul>
+
+
+<p>不会考脑经急转弯，着重在 数据结构、算法实现上。</p>
+
+<ol>
+<li>学会提问题：明确题目的条件限制等</li>
+<li>写出能运行的代码</li>
+<li>不断优化</li>
+</ol>
+
+
+<p>现场出题感受下处理过程： 数组的size是N，存1－N之间的数，判断是否有重复。</p>
+
+<ul>
+<li>不要立即写代码，先明确思路，再写代码。</li>
+<li>Done is better than perfect</li>
+</ul>
+
+
+<p>关于项目：</p>
+
+<ul>
+<li>要准备的常见问题：最近做的项目，最有挑战的项目，最喜欢的项目</li>
+<li>context：一两句话交代背景，action：做了什么，result：项目带来的影响</li>
+</ul>
+
+
+<h4>面试之后</h4>
+
+<p>准备一到两个问题：</p>
+
+<ul>
+<li>you are interviewing the company as well</li>
+<li>Focus on what you concerned most</li>
+</ul>
+
+
+<h4>总结</h4>
+
+<ul>
+<li>think out loud</li>
+<li>问许多问题</li>
+<li>检测代码能否运行！corner case等，debug。清晰，健壮。</li>
+<li>be yourself</li>
+</ul>
+
+
+<h2>Ranking News Feed for 1.2 Billon People</h2>
+
+<p>主讲人：Meihong Wang。本科浙大，现在是Engineering Manager，团队在做New Feed。</p>
+
+<p>Meihong学长从项目组的动机、News Feed架构以及企业文化三个角度做了介绍。</p>
+
+<h4>MOTIVATION</h4>
+
+<p>一些数据：</p>
+
+<ul>
+<li>550M daily user</li>
+<li>5B page loads／day</li>
+<li>publish &lt;1s</li>
+<li>Fetch Rank time &lt; 200ms</li>
+<li>2000 candidate stories per day per user -> rank them</li>
+</ul>
+
+
+<h4>ARCHITECTURE</h4>
+
+<p>Actor －logging －> user action storage &lt;－ query －> viewer</p>
+
+<p>Pull model：push 耗资源太多</p>
+
+<p>Feed Evaluation：机器学习，概率模型，预测</p>
+
+<h4>Culture</h4>
+
+<ul>
+<li>Make the world more open and connected</li>
+<li>6k员工，3k工程师。世界四个工程办公室：Menlo Park，Seattle，New York， London</li>
+<li>THE HACKER WAY：在一个产品上，不断的改进迭代。</li>
+<li>We move fast</li>
+<li>Hackthons：一两个月有一场</li>
+<li>工作一年以上，可以跳到另一个team做一个月。鼓励去不同组，了解整个公司。</li>
+<li>公司的架构是扁平、网状的，工程师的title一样，就是Software Engineer</li>
+<li>职业发展：为期8周的Bootcamp；English 1v1辅导；各种camp，方便了解公司技术；免费洗衣服，免费食物等……</li>
+</ul>
+
+
+<h2>问题环节</h2>
+
+<p>只摘录了一些来得及和自己感兴趣的问题：</p>
+
+<ul>
+<li>我问道Facebook怎么看待“全栈工程师”，Frank透露了他对业界流行full-stack的看法：“full stack is bull shit”，是一个噱头，startup公司更需要。fb对此没有特别的倾向性。当然，他们也有厉害的同事确实是full-stack的。</li>
+<li>工作强度，比国内大多数公司要清闲，币硅谷大多数公司要强。</li>
+<li>一周一次组会，一周一次manger半小时约谈</li>
+<li>2015年，只要合格就招，没有人数限制。中国学生在F的口碑很好。</li>
+<li>工程师级别：3－8。研究生是3，博士4， 5开始是senior级别，但是大家title都一样。</li>
+<li>工程师文化</li>
+<li>21天年假</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[数据集成工具Teiid Designer的环境搭建]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2014/03/08/teiid-designer/"/>
+    <updated>2014-03-08T01:07:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2014/03/08/teiid-designer</id>
+    <content type="html"><![CDATA[<p>由于实验室项目要求的关系，看了些数据汇聚工具Teiid的相关知识。这里总结下Teiid的可视化配置工具Teiid Designer的部署过程。</p>
+
+<h2>背景知识</h2>
+
+<p>数据集成是把不同来源、格式、特点性质的数据在逻辑上或物理上有机地集中，从而为企业提供全面的数据共享。数据集成的方式多种多样，这里介绍的<a href="http://www.jboss.org/teiid/">Teiid</a>是其中的一种：通过抽象和联邦技术，实现分布式数据源的实时数据访问和集成，无需从记录系统中复制或移动数据。</p>
+
+<p><a href="http://blogs.ejb.cc/archives/3552/teiid-scalable-information-integration-program">《Teiid 基于数据联邦的集成方案》</a>是一篇关于Teiid的中文介绍，比较详细。</p>
+
+<p>由于适配不同数据源和生成虚拟数据库（VDB）需要维护好几个配置文件，直接手动部署Teiid比较难受。好在Teiid提供了辅助工具<a href="http://www.jboss.org/teiiddesigner">Teiid Designer</a>，这是一个Eclipse插件，能帮助用户可视化的管理数据的集成过程。</p>
+
+<p>接下来记录了Teiid 和 Teiid Designer的环境配置步骤，如有纰漏，多谢指出=)。</p>
+
+<h2>环境准备</h2>
+
+<ul>
+<li>操作系统：OS X 10.9.1</li>
+<li>语言版本：Java6</li>
+<li>下载IDE： <a href="https://www.eclipse.org/downloads/packages/eclipse-standard-431/keplersr1">Eclipse Kepler</a></li>
+<li>下载<a href="http://www.jboss.org/jbossas/downloads.html">Jboss EAP6.1 Alpha</a></li>
+<li>下载<a href="http://sourceforge.net/projects/teiid/files/teiid/8.4/Final/teiid-8.4.0.Final-jboss-dist.zip/download">Teiid Runtime 8.4</a></li>
+<li><a href="http://www.jboss.org/teiiddesigner.html">Teiid Designer</a>：作为Eclipse插件，将使用Eclipse的install new software功能在线安装。</li>
+</ul>
+
+
+<!--more-->
+
+
+<h2>Jboss配置</h2>
+
+<p>配置环境变量 JBOSS_HOME，指向Jboss的根路径。在我的shell配置文件~/.zshrc中增加如下行：</p>
+
+<p><code>JBOSS_HOME=~/Development/jboss #jboss的根路径</code></p>
+
+<p>执行$JBOSS_HOME/bin/add-user.sh，给Jboss添加账号，执行过程如下：
+```
+What type of user do you wish to add?
+ a) Management User (mgmt-users.properties)
+ b) Application User (application-users.properties)
+(a): b</p>
+
+<p>Enter the details of the new user to add.
+Realm (ApplicationRealm) :
+Username : biaobiaoqi
+Password :
+Re-enter Password :
+What roles do you want this user to belong to? (Please enter a comma separated list, or leave blank for none)[  ]:
+About to add user 'biaobiaoqi' for realm 'ApplicationRealm'
+Is this correct yes/no? yes
+Added user 'biaobiaoqi' to file '/Users/shenyapeng/Development/jboss/standalone/configuration/application-users.properties'
+Added user 'biaobiaoqi' to file '/Users/shenyapeng/Development/jboss/domain/configuration/application-users.properties'
+Added user 'biaobiaoqi' with roles  to file '/Users/shenyapeng/Development/jboss/standalone/configuration/application-roles.properties'
+Added user 'biaobiaoqi' with roles  to file '/Users/shenyapeng/Development/jboss/domain/configuration/application-roles.properties'
+Is this new user going to be used for one AS process to connect to another AS process?
+e.g. for a slave host controller connecting to the master or for a Remoting connection for server to server EJB calls.
+yes/no? no</p>
+
+<p>```</p>
+
+<h2>Teiid配置</h2>
+
+<p>解压下载好的Teiid Runtime 8.4 文件，注意到其目录格式跟JBoss很相似。直接将这些文件覆盖到Jboss的根目录下。</p>
+
+<h2>Teiid Designer配置</h2>
+
+<ul>
+<li>1.打开Eclipse，选择Help > Install New Software</li>
+<li>2.在弹出的界面中选择 Add，名称输入Enter JBossASTools（其他的名称也无所谓啦），地址栏输入如下地址，并点击确认。</li>
+</ul>
+
+
+<p><code>http://download.jboss.org/jbosstools/updates/release/kepler/integration-stack/</code></p>
+
+<ul>
+<li>3.接下来展开Data Virtualization，选择4个Teiid Designer的功能。</li>
+<li>4.然后点击下一步，直到安装完毕，重启Eclipse就可以看到Teiid Designer的界面啦。</li>
+</ul>
+
+
+<h2>创建Teiid server</h2>
+
+<p>Teiid 依托于Jboss服务器，在Teiid Designer中可以方便的创建Teiid服务器，如下图
+<img src="http://biaobiaoqi.u.qiniudn.com/0CD17B0C-7A6C-425B-A12C-0FDA82FDE8F5.png?imageView/2/w/800/h/800" alt="img" /></p>
+
+<p>创Teiid Server期间需要的配置有：</p>
+
+<ul>
+<li>Jboss的版本号（不要选错，这里使用Jboss EAP6.1，而不是Jboss AS 6.x）</li>
+<li>Jboss的根路径；</li>
+<li>启动的配置文件是：standalone-teiid.xml（而不是standalone.xml，参见<a href="https://community.jboss.org/message/790461">社区提问</a>）</li>
+<li>在Jboss服务器的配置页面配置Management Login Credentials，使用之前注册的账号和密码。如下图
+<img src="http://biaobiaoqi.u.qiniudn.com/A6E53DAD-703B-4D9A-AAFA-39C2AC19A02F.png?imageView/2/w/800/h/800" alt="img" /></li>
+</ul>
+
+
+<p>配置完成后，即可启动服务器。</p>
+
+<p>现在，可以在Teiid Server的页面（双击创建的server）测试管理账号的连接和JDBC访问方式的连接是否通畅，如下图：（Test Administration Connection &amp; Test JDBC Connection）</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/B13BC18B-AF6C-44DB-96C9-B18D70EDA1AA.png?imageView/2/w/800/h/800" alt="img" /></p>
+
+<p>JDBC的用户名和密码默认是user:user, 在<code>$JBOSS_HOME/standalone/configuration/teiid-security-users.properties</code>中配置。</p>
+
+<p>接下来，就可以配置数据源，享受Teiid的数据虚拟化了 =)。可以参见另一篇博文：<a href="http://biaobiaoqi.me/blog/2013/10/19/data-integration-tool-teiid/">《数据集成工具：Teiid实践》</a></p>
+
+<h2>雷区</h2>
+
+<ul>
+<li>如果是使用Windows安装配置，需要使用32位的JVM运行Eclipse。</li>
+<li>整个体系耦合比较多，而且暂时多版本兼容不够，下载的各个组件版本号一定要对应。</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[记排查octopress生成时的编码错误]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2014/03/06/troubleshoot-encoding-bugs-in-octopress/"/>
+    <updated>2014-03-06T21:48:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2014/03/06/troubleshoot-encoding-bugs-in-octopress</id>
+    <content type="html"><![CDATA[<p>前些日子经若亮童鞋提醒，我在<a href="http://biaobiaoqi.me/resources/">其他推荐</a>的页面中增加了对Dropbox和Linode等工具的推荐，一来分享这些好用的产品，二来期望刚接触这些工具的好心的朋友可以不吝啬时间用我的推荐码注册，让我获得一些分享的回报。</p>
+
+<p>改过页面内容后，照常的使用<code>rake preview</code>命令生成预览页面，打开浏览器，得到的却是一行孤零零的</p>
+
+<blockquote><p>Sorry, I can not find /</p></blockquote>
+
+<p><code>rake generate</code>后的结果更悲惨：</p>
+
+<!--more-->
+
+
+<p>```<br/>
+biaobiaoqi.github.com git:(source) ✗ rake generate</p>
+
+<h2>Generating Site with Jekyll</h2>
+
+<p>unchanged sass/screen.scss
+Configuration from /Users/shenyapeng/Development/biaobiaoqi.github.com/_config.yml
+Building site: source -> public
+/Users/shenyapeng/Development/biaobiaoqi.github.com/plugins/raw.rb:11:in `gsub': invalid byte sequence in UTF-8 (ArgumentError)</p>
+
+<pre><code> from /Users/shenyapeng/Development/biaobiaoqi.github.com/plugins/raw.rb:11:in `unwrap'
+ from /Users/shenyapeng/Development/biaobiaoqi.github.com/plugins/octopress_filters.rb:18:in `post_filter'
+ from /Users/shenyapeng/Development/biaobiaoqi.github.com/plugins/octopress_filters.rb:33:in `post_render'
+ from /Users/shenyapeng/Development/biaobiaoqi.github.com/plugins/post_filters.rb:124:in `block in post_render'
+ from /Users/shenyapeng/Development/biaobiaoqi.github.com/plugins/post_filters.rb:123:in `each'
+ from /Users/shenyapeng/Development/biaobiaoqi.github.com/plugins/post_filters.rb:123:in `post_render'
+ from /Users/shenyapeng/Development/biaobiaoqi.github.com/plugins/post_filters.rb:151:in `transform'
+ from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/gems/jekyll-0.12.1/lib/jekyll/convertible.rb:88:in `do_layout'
+ from /Users/shenyapeng/Development/biaobiaoqi.github.com/plugins/post_filters.rb:167:in `do_layout'
+ from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/gems/jekyll-0.12.1/lib/jekyll/page.rb:100:in `render'
+ from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/gems/jekyll-0.12.1/lib/jekyll/site.rb:204:in `block in render'
+ from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/gems/jekyll-0.12.1/lib/jekyll/site.rb:203:in `each'
+ from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/gems/jekyll-0.12.1/lib/jekyll/site.rb:203:in `render'
+ from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/gems/jekyll-0.12.1/lib/jekyll/site.rb:41:in `process'
+ from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/gems/jekyll-0.12.1/bin/jekyll:264:in `&lt;top (required)&gt;'
+ from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/bin/jekyll:23:in `load'
+ from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/bin/jekyll:23:in `&lt;main&gt;'
+ from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/bin/ruby_executable_hooks:15:in `eval'
+ from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/bin/ruby_executable_hooks:15:in `&lt;main&gt;’
+</code></pre>
+
+<p><code>``
+似乎是编码的问题：</code>invalid byte sequence in UTF-8`，但是我只是修改了普普通通的几行文字而已，怎么会有编码问题呢。</p>
+
+<p>恰逢自己刚因为SSD损坏重装了系统，编程环境也是刚刚配好，而且使用rvm安装ruby1.9.3的时候，提示文字中也有一些warning。我开始怀疑是不是ruby1.9.3没编译好的原因。</p>
+
+<p>设立对照实验，我在另外一台Ubuntu机器上clone下一个博客的repo，<code>rake generate</code>，结果竟然一切顺利。一切似乎都在说明就是开发环境的问题。</p>
+
+<p>我删除了之前的ruby1.9.3，甚至是rvm，重装后结果依旧。</p>
+
+<p>不能在一棵树上吊死，我不科学的将目标重新定位到markdown页面中的编码错误上（没想到后来事实证明奏效了……）。</p>
+
+<p>在git中新开启测试分支，在上面做回滚，测试修改页面内容前源码能否generate</p>
+
+<p>```</p>
+
+<h1>>git branch checkError</h1>
+
+<h1>>git checkout checkError</h1>
+
+<h1>>git log #找到修改前的提交码</h1>
+
+<h1>>git reset --hard xxx #xxx为相应的提交码</h1>
+
+<p>```</p>
+
+<p>然后<code>rake generate</code>竟然能成功= =#!，看来真的是修改的页面掺入了错误的编码。</p>
+
+<p>接下来是回到原来的分支上，通过diff命令定位错误代码：</p>
+
+<p>```</p>
+
+<h1>>git checkout source</h1>
+
+<h1>>git branch -d checkError  #删除测试分支</h1>
+
+<h1>>git diff  xxx #xxx为相应的提交码</h1>
+
+<p>```</p>
+
+<p>比较结果如下图，果然是有一个奇怪的字符。
+<img src="http://biaobiaoqi.u.qiniudn.com/8BB0BA73-9736-435D-9111-5E3BF8516299.png?imageView/2/w/800/h/800" alt="img" /></p>
+
+<p>查了下，这是<a href="http://zh.wikipedia.org/wiki/%E5%B7%A6%E8%87%B3%E5%8F%B3%E7%AC%A6%E8%99%9F">左至右符号</a>。莫非是从chrome浏览器复制地址时，不小心复制了它？</p>
+
+<p>进一步尝试发现，这个字符如果不与)相邻，是不会造成编码问题的。与)相邻时，一旦他们被markdown解析后，就出现了这个bug。</p>
+
+<p>有意思的是，另一台Ubuntu服务器上这个有编码隐患的repo时能够正常<code>rake generate</code>的。如下图，左边是mac上用vim打开包含隐患字符的文件截图，右边是Ubuntu上的截图。
+<img src="http://biaobiaoqi.u.qiniudn.com/371c00e86e5de776d262fedbce334f7a.jpeg?imageView/2/w/800/h/800" alt="img" /></p>
+
+<p>谁能告诉我理解这一现象的思路呢 >&lt;...</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[基本排序总结]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2014/02/24/sort-intro/"/>
+    <updated>2014-02-24T23:58:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2014/02/24/sort-intro</id>
+    <content type="html"><![CDATA[<p>最近准备面试，正好把刚接触数据结构时学习的排序整理了一下。算法的实现在wiki上都有详细的介绍，这里主要做归纳和总结。</p>
+
+<p>注意对排序算法的稳定性的理解：保证2个相等的数在序列的前后位置顺序和排序后它们两个的前后位置顺序相同。换句话说，相等的数值在排序时不断交换位置是不稳定的。</p>
+
+<!--more-->
+
+
+<h2>冒泡排序</h2>
+
+<p>使用冒泡排序为一列数字进行排序的过程如下图：</p>
+
+<p><img src="http://upload.wikimedia.org/wikipedia/commons/3/37/Bubble_sort_animation.gif" alt="冒泡排序" /></p>
+
+<p>Java实现：</p>
+
+<p>```</p>
+
+<pre><code>int temp = 0;
+for (int i = a.length - 1; i &gt; 0; --i) {
+  for (int j = 0; j &lt; i; ++j) {
+    if (a[j + 1] &lt; a[j]) {
+      temp = a[j];
+      a[j] = a[j + 1];
+      a[j + 1] = temp;
+    }
+  }
+}
+</code></pre>
+
+<p>```</p>
+
+<ul>
+<li>最差时间复杂度：O(n<sup>2)</sup></li>
+<li>最优时间复杂度：O(n)：在遍历时，如果有设定标记，对于已排序的数组，可以实现O(n)</li>
+<li>平均时间复杂度：O(n<sup>2)</sup></li>
+<li>最差空间复杂度：总共O(n)，需要辅助空间O(1)</li>
+<li>稳定性：稳定</li>
+</ul>
+
+
+<h2>插入排序</h2>
+
+<p>使用插入排序为一列数字进行排序的过程如下图：</p>
+
+<p><img src="http://upload.wikimedia.org/wikipedia/commons/2/25/Insertion_sort_animation.gif" alt="" /></p>
+
+<p>Java实现</p>
+
+<p>```
+for(int index=1;index&lt;data.length;index++){</p>
+
+<pre><code>Comparable key = data[index];  
+int position = index;  
+//shift larger values to the right  
+while(position&gt;0&amp;&amp;data[position-1].compareTo(key)&gt;0){  
+    data[position] = data[position-1];  
+    position--;
+}  
+data[position]=key;  
+</code></pre>
+
+<p>}   <br/>
+```</p>
+
+<ul>
+<li>最差时间复杂度：O(n<sup>2)</sup></li>
+<li>最优时间复杂度：O(n)：顺序的情况。</li>
+<li>平均时间复杂度：O(n<sup>2)</sup></li>
+<li>最差空间复杂度：总共O(n) ，需要辅助空间O(1)</li>
+<li>稳定性：稳定</li>
+</ul>
+
+
+<h2>选择排序</h2>
+
+<p>使用选择排序为一列数字进行排序的过程如下图：</p>
+
+<p><img src="http://upload.wikimedia.org/wikipedia/commons/b/b0/Selection_sort_animation.gif" alt="" /></p>
+
+<p>Java实现</p>
+
+<p>```
+for (int index = 0; index &lt; array.length - 1; index++) {</p>
+
+<pre><code>min = index;
+for (int time = index + 1; time &lt; array.length; time++) {
+    if (array[time].compareTo(array[min]) &lt; 0) {
+        min = time;
+    }
+}
+temp = array[index];
+array[index] = array[min];
+array[min] = temp;
+</code></pre>
+
+<p>}</p>
+
+<p>```</p>
+
+<ul>
+<li>最差时间复杂度：О(n<sup>2)</sup></li>
+<li>最优时间复杂度：О(n<sup>2):比插入、冒泡都还要弱。</sup></li>
+<li>平均时间复杂度：О(n<sup>2)</sup></li>
+<li>最差空间复杂度：总共O(n) ，需要辅助空间O(1)</li>
+<li>稳定性：不稳定。比如对于数组{3,2,3,1}, 第一次交换发生在[0]和[3]之间，[0]的3被交换到[2]的3之后了。</li>
+</ul>
+
+
+<h2>快速排序</h2>
+
+<p>使用快速排序为一列数字进行排序的过程如下图：（图中取最后一个元素为pivot，代码实现中取第一个元素为pivot）</p>
+
+<p><img src="http://upload.wikimedia.org/wikipedia/commons/6/6a/Sorting_quicksort_anim.gif" alt="" /></p>
+
+<p>Java实现</p>
+
+<p>```
+public void sort (int[] input){</p>
+
+<pre><code>  sort (input, 0, input.length-1);
+</code></pre>
+
+<p>}</p>
+
+<p>private void sort(int[] input, int lowIndex, int highIndex) {</p>
+
+<pre><code>if (highIndex&lt;=lowIndex){
+    return;
+}
+
+int partIndex=partition (input, lowIndex, highIndex);
+
+sort (input, lowIndex, partIndex-1);
+sort (input, partIndex+1, highIndex);
+</code></pre>
+
+<p>}</p>
+
+<p>private int partition(int[] input, int lowIndex, int highIndex) {</p>
+
+<pre><code>int i=lowIndex;
+int pivotIndex=lowIndex;
+int j=highIndex+1;
+
+while (true){
+    while (less(input[++i], input[pivotIndex])){
+        if (i==highIndex) break;
+    }
+
+    while (less (input[pivotIndex], input[--j])){
+        if (j==lowIndex) break;
+    }
+
+    if (i&gt;=j) break;
+
+    exchange(input, i, j);
+}
+
+exchange(input, pivotIndex, j);
+
+return j;
+</code></pre>
+
+<p>}</p>
+
+<p>```</p>
+
+<ul>
+<li>最差时间复杂度：Theta(n<sup>2)：如果选取pivot不够科学，在有序或者逆序的情况下会产生n<sup>2的时间开销。</sup></sup></li>
+<li>最优时间复杂度：Theta(n*logn)</li>
+<li>平均时间复杂度：Theta(n*logn)</li>
+<li>最差空间复杂度：根据实现的方式不同而不，基本快排中总共O(n) ，需要辅助空间O(1)</li>
+<li>稳定性：不稳定。比如：{5, 10, 11, 3, 3, 3}，后面相等的3会被交换到10和11的位置，而且两者相对位置会变化。</li>
+</ul>
+
+
+<p>快速排序的分治(divide and conquer)思想非常经典。算法实现上，对pivot的选取也有不同的策略来做优化。比如可以选取数组的第一个元素、最后一个元素和中间元素中排中间大小的那一个。这里介绍的是快排的基础算法，也叫单基算法，还有<a href="http://www.importnew.com/8445.html">双基、三基快速排序</a>。java.util.Arrays中对基本类型的排序就使用了双基快排（一般对象类型使用的归并排序）。</p>
+
+<p>虽然快速排序最差时间复杂度有n<sup>2，不过这种情况很少见，像它的名字那样，是内部排序中最快的。</sup></p>
+
+<p>适用场景：topK：寻找最大的K个数</p>
+
+<h2>归并排序</h2>
+
+<p><img src="http://upload.wikimedia.org/wikipedia/commons/c/c5/Merge_sort_animation2.gif" alt="" /></p>
+
+<p>Java实现</p>
+
+<p>```
+public void sort(Integer[] list) {</p>
+
+<pre><code>if (list.length == 0) {
+    System.out.println("");
+} else {
+    Integer[] tmpList = new Integer[list.length];
+    mergeSort(list, 0, list.length - 1, tmpList);
+}
+</code></pre>
+
+<p>}</p>
+
+<p>public void mergeSort(Integer[] list, int leftPos, int rightPos,</p>
+
+<pre><code>    Integer[] tmpList) {
+if (leftPos &gt;= rightPos)
+    return;
+
+int center = (leftPos + rightPos) / 2;
+mergeSort(list, leftPos, center, tmpList);
+mergeSort(list, center + 1, rightPos, tmpList);
+merge(list, leftPos, center, rightPos, tmpList);
+</code></pre>
+
+<p>}</p>
+
+<p>public void merge(Integer[] list, int leftPos, int leftEnd, int rightEnd,</p>
+
+<pre><code>    Integer[] tmpList) {
+int leftIndex  = leftPos;
+int rightIndex = leftEnd + 1;
+int index = leftIndex;
+
+while (leftIndex &lt;= leftEnd &amp;&amp; rightIndex &lt;= rightEnd) {
+    if (list[leftIndex] &lt;= list[rightIndex]) {
+        tmpList[index++] = list[leftIndex++];
+    } else {
+        tmpList[index++] = list[rightIndex++];
+    }
+}
+
+while (leftIndex &lt;= leftEnd) {
+    tmpList[index++] = list[leftIndex++];
+}
+while (rightIndex &lt;= rightEnd) {
+    tmpList[index++] = list[rightIndex++];
+}
+
+for (int i = leftPos; i &lt;= rightEnd; i ++) {
+    list[i] = tmpList[i];
+}
+</code></pre>
+
+<p>}</p>
+
+<p>```</p>
+
+<ul>
+<li>最差时间复杂度：Theta(n*logn)</li>
+<li>最优时间复杂度：Theta(n)</li>
+<li>平均时间复杂度：Theta(n*logn)</li>
+<li>最差空间复杂度：总共O(n)，需要辅助空间O(1)</li>
+<li>稳定性：稳定</li>
+</ul>
+
+
+<p>Java的java.util.Arrays中对一般对象的排序使用了改良的归并算法：待排序的数组元素少于<code>INSERTIONSORT_THRESHOLD</code>时，执行插入排序。</p>
+
+<p>归并排序比堆稍快，但需要一倍的额外存储空间。经常使用的场景：两个已排序数组合并;单向链表排序。</p>
+
+<h2>堆排序</h2>
+
+<p>Java实现</p>
+
+<p>```
+public int leftChild(int n) {</p>
+
+<pre><code>return 2*n + 1;
+</code></pre>
+
+<p>}</p>
+
+<p>public void percolateDown(int[] list, int n, int length) {</p>
+
+<pre><code>int tmp;
+int child;
+
+for (tmp = list[n]; leftChild(n) &lt; length; n = child) {
+    child = leftChild(n);
+
+    if (child + 1 &lt; length &amp;&amp; list[child] &lt; list[child + 1]) {
+        child ++;
+    }
+
+    if (tmp &lt; list[child]) {
+        list[n] = list[child];
+    }else {
+        break;
+    }
+}
+
+list[n] = tmp;
+</code></pre>
+
+<p>}</p>
+
+<p>public void sort(int[] list) {</p>
+
+<pre><code>for (int i = list.length/2; i &gt;= 0; i --) {
+    percolateDown(list, i, list.length);
+}
+
+for (int i = list.length - 1; i &gt; 0; i --) {
+    int tmp = list[i];
+    list[i] = list[0];
+    list[0] = tmp;
+
+    percolateDown(list, 0, i);
+}
+</code></pre>
+
+<p>}</p>
+
+<p>```</p>
+
+<ul>
+<li>最差时间复杂度：O(n*logn)</li>
+<li>最优时间复杂度：O(n*logn)</li>
+<li>平均时间复杂度：Theta(n*logn)</li>
+<li>最差空间复杂度：总共O(n)，需要辅助空间O(1)</li>
+<li>稳定性：不稳定。从堆顶摘掉放入堆尾，如果有跟它相等的值，一定会改变相对位置。比如{3, 27, 36, 27}，对大堆摘掉第一个27后，原来在后面的27被放到了堆顶。</li>
+</ul>
+
+
+<p>不需要递归、额外空间，适用于数据量特别大的场景，比如海量数据求topK。除了这里的堆排序外，还需要掌握向堆中插入数据。</p>
+
+<h2>外排序</h2>
+
+<p>通常来说，外排序处理的数据不能一次装入内存，只能放在读写较慢的外存储器（通常是硬盘）上。外排序通常采用的是一种“排序-归并”的策略。在排序阶段，先读入能放在内存中的数据量，将其排序输出到一个临时文件，依此进行，将待排序数据组织为多个有序的临时文件。然后在归并阶段将这些临时文件组合为一个大的有序文件，也即排序结果。</p>
+
+<p>常用思路：</p>
+
+<ol>
+<li>使用快速排序、归并排序、堆排序等算法完成少量数据的排序，生成临时数据文件。</li>
+<li>使用败者树或最小堆，用归并的思路合并1中生成的临时文件，并输出为最后的排序结果。</li>
+</ol>
+
+
+<h2>快排为什么那样快</h2>
+
+<p>刘未鹏在<a href="http://mindhacks.cn/2008/06/13/why-is-quicksort-so-quick/">《数学之美番外篇：快排为什么那样快》</a>中从问题域向答案域演进的角度解释了基于比较的排序的时间复杂度极限。</p>
+
+<p>核心思想是：N个数组的排序，有N!种可能结果，我们需要在N!中搜索出唯一正确的结果。基于比较的排序每次能输出的结果只有两种：是或否，一个只有两种输出的问题，最多能将可能性空间切分为两半，要让结果稳定可靠，最好的办法就是平均的切分为1/2和1/2，也就一次比较中a&lt;b的概率和a>b的概率一样，如果能保证一这一点，就能保证最优下界，也就是log2(N!)，这个值近似于NlogN。</p>
+
+<ul>
+<li><p>堆排序比快排慢：堆建立好之后，每次取堆顶，将堆尾的数据放到堆顶向下过滤，实际上，堆顶部的元素几乎肯定较大，而堆尾的数据都比较小，在向下过滤的过程中，浪费了很多次比较，让堆排序的速度变慢了。</p></li>
+<li><p>基数排序比快排快：基数排序不是比较排序，将基数相同的元素放到一个桶里的操作，除了一次与技术本身的比较以外，不同的基数桶自然的形成了排序。这里基数桶用空间换取了时间。</p></li>
+</ul>
+
+
+<h2>参考资料</h2>
+
+<ul>
+<li><a href="http://zh.wikipedia.org/zh-cn/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F">冒泡排序wiki</a></li>
+<li><a href="http://zh.wikipedia.org/wiki/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F">插入排序</a></li>
+<li><a href="http://zh.wikipedia.org/wiki/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F">选择排序</a></li>
+<li><a href="http://zh.wikipedia.org/wiki/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F">快速排序</a></li>
+<li><a href="http://www.importnew.com/8445.html">本周算法：快速排序—三路快排 vs 双基准</a></li>
+<li><a href="http://zh.wikipedia.org/wiki/%E5%A0%86%E6%8E%92%E5%BA%8F">堆排序</a></li>
+<li><a href="http://zh.wikipedia.org/wiki/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F">希尔排序</a></li>
+<li><a href="http://zh.wikipedia.org/zh-cn/%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F">基数排序</a></li>
+<li><a href="http://zh.wikipedia.org/wiki/%E5%A4%96%E6%8E%92%E5%BA%8F">外部排序</a></li>
+<li><a href="http://zh.wikipedia.org/wiki/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F">归并排序</a></li>
+<li><a href="http://cuijing.org/study/summary-of-sort-in-leetcode.html">leetcode总结无止境系列之排序</a></li>
+<li><a href="http://mindhacks.cn/2008/06/13/why-is-quicksort-so-quick/">数学之美番外篇：快排为什么那样快</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

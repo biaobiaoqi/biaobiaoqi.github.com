@@ -1,0 +1,416 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Java构造方法中的执行顺序 - Biaobiaoqi的博客</title>
+  <meta name="author" content="Biaobiaoqi">
+
+  
+  <meta name="description" content="Java对象初始化的执行顺序。类初始化，静态方法">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://biaobiaoqi.github.io/blog/2013/09/08/strange-behavior-using-braces-in-java/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Biaobiaoqi的博客" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+
+function addBlankTargetForLinks () {
+
+  $('a[href^="http"]').each(function(){
+
+      $(this).attr('target', '_blank');
+
+  });
+
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+
+  addBlankTargetForLinks();
+
+});
+
+</script>
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F49481ec3305db999013860b0ccb3b16d' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39900036-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Biaobiaoqi的博客</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:biaobiaoqi.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives/">全部文章</a></li>
+  <li><a href="/tag-cloud/">分类阅读</a></li>
+  <li><a href="/resources/">其他推荐</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Java构造方法中的执行顺序</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-08T12:58:00+08:00" pubdate data-updated="true">Sep 8<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>这道题来自 <a href="http://stackoverflow.com/questions/8185780/strange-behavior-using-braces-in-java/8186881#8186881">stackoverflow</a>。</p>
+
+<h2>问题描述：</h2>
+
+<p>有如下代码，求其输出内容。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span>
+</span><span class='line'><span class="o">{</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span>
+</span><span class='line'>    <span class="n">Test</span><span class="o">(){</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;1&quot;</span><span class="o">);}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="o">{</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;2&quot;</span><span class="o">);}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">static</span><span class="o">{</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;3&quot;</span><span class="o">);}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span> <span class="n">args</span><span class="o">[])</span>
+</span><span class='line'>    <span class="o">{</span>
+</span><span class='line'>        <span class="k">new</span> <span class="nf">Test</span><span class="o">();</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>分析</h2>
+
+<p>作为静态区段的语句，容易知道，3 是会最先出现的。容易弄错的一点是 1 和 2 的出现顺序。</p>
+
+<p>我们可以参考字节码来分析。在 eclipse 中使用 ASM bytecode 插件，得到相应的字节码：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="c1">// class version 50.0 (50)  </span>
+</span><span class='line'><span class="c1">// access flags 0x21  </span>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
+</span><span class='line'>  <span class="c1">// compiled from: Test.java  </span>
+</span><span class='line'>  <span class="kd">static</span> <span class="o">&lt;</span><span class="n">clinit</span><span class="o">&gt;()</span> <span class="o">:</span> <span class="kt">void</span>
+</span><span class='line'>    <span class="n">GETSTATIC</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span> <span class="o">:</span> <span class="n">PrintStream</span>
+</span><span class='line'>    <span class="n">LDC</span> <span class="s">&quot;3&quot;</span>
+</span><span class='line'>    <span class="n">INVOKEVIRTUAL</span> <span class="n">PrintStream</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">String</span><span class="o">)</span> <span class="o">:</span> <span class="kt">void</span>
+</span><span class='line'>    <span class="n">RETURN</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="o">&lt;</span><span class="n">init</span><span class="o">&gt;()</span> <span class="o">:</span> <span class="kt">void</span>
+</span><span class='line'>    <span class="n">ALOAD</span> <span class="mi">0</span><span class="o">:</span> <span class="k">this</span>
+</span><span class='line'>    <span class="n">INVOKESPECIAL</span> <span class="n">Object</span><span class="o">.&lt;</span><span class="n">init</span><span class="o">&gt;()</span> <span class="o">:</span> <span class="kt">void</span>
+</span><span class='line'>    <span class="n">ALOAD</span> <span class="mi">0</span><span class="o">:</span> <span class="k">this</span>
+</span><span class='line'>    <span class="n">BIPUSH</span> <span class="mi">10</span>
+</span><span class='line'>    <span class="n">PUTFIELD</span> <span class="n">Test</span><span class="o">.</span><span class="na">a</span> <span class="o">:</span> <span class="kt">int</span>
+</span><span class='line'>    <span class="n">GETSTATIC</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span> <span class="o">:</span> <span class="n">PrintStream</span>
+</span><span class='line'>    <span class="n">LDC</span> <span class="s">&quot;2&quot;</span>
+</span><span class='line'>    <span class="n">INVOKEVIRTUAL</span> <span class="n">PrintStream</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">String</span><span class="o">)</span> <span class="o">:</span> <span class="kt">void</span>
+</span><span class='line'>    <span class="n">GETSTATIC</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span> <span class="o">:</span> <span class="n">PrintStream</span>
+</span><span class='line'>    <span class="n">LDC</span> <span class="s">&quot;1&quot;</span>
+</span><span class='line'>    <span class="n">INVOKEVIRTUAL</span> <span class="n">PrintStream</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">String</span><span class="o">)</span> <span class="o">:</span> <span class="kt">void</span>
+</span><span class='line'>    <span class="n">RETURN</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[])</span> <span class="o">:</span> <span class="kt">void</span>
+</span><span class='line'>    <span class="n">NEW</span> <span class="n">Test</span>
+</span><span class='line'>    <span class="n">INVOKESPECIAL</span> <span class="n">Test</span><span class="o">.&lt;</span><span class="n">init</span><span class="o">&gt;()</span> <span class="o">:</span> <span class="kt">void</span>
+</span><span class='line'>    <span class="n">RETURN</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>正如我们所想，3 是被放在类构造方法中，这是类的初始化函数，固然在类的初始化时出现。</p>
+
+<!--more-->
+
+
+<p>而在构造方法中先出现 2，之后才是 1。问题的核心集中到对象构造方法的指令顺序问题。实际上，在对象构造方法中，会先执行一些隐性的指令，比如父类的构造方法、{}区段的内容等，然后再执行显性的构造方法中的指令：</p>
+
+<ol>
+<li>Java 编译时，对象构造方法里先嵌入隐式的指令，完毕之后，再执行 Java 源代码中显示的代码。</li>
+<li>那些隐式的指令，包括父类的构造方法、变量的初始化、{}区段里的内容，并严格按照这个顺序嵌入到对象的构造方法中。</li>
+<li>{}区段里的内容和变量的初始化语句的执行顺序，依据源代码中本身的顺序执行。</li>
+</ol>
+
+
+<p>相关文章参见：<a href="http://biaobiaoqi.me/blog/2013/09/22/java-initialization/">《Java 类、实例的初始化顺序》</a><p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.io/blog/2013/09/08/strange-behavior-using-braces-in-java/'>http://biaobiaoqi.github.io/blog/2013/09/08/strange-behavior-using-braces-in-java/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Biaobiaoqi</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-08T12:58:00+08:00" pubdate data-updated="true">Sep 8<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+    <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+<a class="jiathis_button_tsina"></a>
+<a class="jiathis_button_weixin"></a>
+<a class="jiathis_button_renren"></a>
+<a class="jiathis_button_douban"></a>
+<a class="jiathis_button_googleplus"></a>
+<a href="http://www.jiathis.com/share?uid=1814751" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+	data_track_clickback:true,
+	summary:"",
+	shortUrl:true,
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1814751" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/09/08/initliate-objects-in-java/" title="Previous Post: Java类的实例化总结">&laquo; Java类的实例化总结</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/09/08/custom-premain-method/" title="Next Post: AOP实践：java.lang.instrument的使用">AOP实践：java.lang.instrument的使用 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <!--h1>Comments</h1-->
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>标签云</h1>
+ <br /> 
+  <ul class="tag-cloud">
+    <a style="font-size: 112%" href="/tags/hadoop/">Hadoop</a> &nbsp 
+<a style="font-size: 139%" href="/tags/jvm/">JVM</a> &nbsp 
+<a style="font-size: 144%" href="/tags/java/">Java</a> &nbsp 
+<a style="font-size: 141%" href="/tags/pat/">PAT</a> &nbsp 
+<a style="font-size: 112%" href="/tags/octopress/">octopress</a> &nbsp 
+<a style="font-size: 135%" href="/tags/fen-bu-shi/">分布式</a> &nbsp 
+<a style="font-size: 133%" href="/tags/zi-jie-ma/">字节码</a> &nbsp 
+<a style="font-size: 135%" href="/tags/si-kao/">思考</a> &nbsp 
+<a style="font-size: 180%" href="/tags/ji-zhu/">技术</a> &nbsp 
+<a style="font-size: 124%" href="/tags/fang-fa-lun/">方法论</a> &nbsp 
+<a style="font-size: 106%" href="/tags/fu-wu-qi/">服务器</a> &nbsp 
+<a style="font-size: 137%" href="/tags/sheng-huo/">生活</a> &nbsp 
+<a style="font-size: 148%" href="/tags/suan-fa/">算法</a> &nbsp 
+<a style="font-size: 117%" href="/tags/wang-luo/">网络</a> &nbsp 
+<a style="font-size: 135%" href="/tags/du-shu/">读书</a>
+
+  </ul>
+</section>
+<section>
+  <h1>关于</h1>
+   <p>biaobiaoqi是我的网络id。<br><br>
+   我的博客日志：<a href="http://biaobiaoqi.me/blog/2013/09/01/blog-log/">请戳</a><br><br>
+   更多信息请戳：<a href="http://about.me/biaobiaoqi">about.me</a><br>
+	</p>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - Biaobiaoqi -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  - <span class="credit">Theme by <a href="http://www.gehaxelt.in">Gehaxelt</a></span>
+  <span class="credit">and <a href="http://www.it-solutions-neef.de">IT Solutions Neef</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'biaobiaoqisblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://biaobiaoqi.github.io/blog/2013/09/08/strange-behavior-using-braces-in-java/';
+        var disqus_url = 'http://biaobiaoqi.github.io/blog/2013/09/08/strange-behavior-using-braces-in-java/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

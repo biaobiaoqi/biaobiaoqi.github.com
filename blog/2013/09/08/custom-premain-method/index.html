@@ -1,0 +1,421 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>AOP实践：java.lang.instrument的使用 - Biaobiaoqi的博客</title>
+  <meta name="author" content="Biaobiaoqi">
+
+  
+  <meta name="description" content="">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://biaobiaoqi.github.io/blog/2013/09/08/custom-premain-method/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Biaobiaoqi的博客" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+
+function addBlankTargetForLinks () {
+
+  $('a[href^="http"]').each(function(){
+
+      $(this).attr('target', '_blank');
+
+  });
+
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+
+  addBlankTargetForLinks();
+
+});
+
+</script>
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F49481ec3305db999013860b0ccb3b16d' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39900036-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Biaobiaoqi的博客</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:biaobiaoqi.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives/">全部文章</a></li>
+  <li><a href="/tag-cloud/">分类阅读</a></li>
+  <li><a href="/resources/">其他推荐</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">AOP实践：java.lang.instrument的使用</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-08T13:01:00+08:00" pubdate data-updated="true">Sep 8<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2>背景</h2>
+
+<p>在 <a href="https://github.com/biaobiaoqi/rcjp">rcjp</a> 项目中，需要调用 ASM API（用于字节码处理的开源库）对字节码进行处理，目标是实现对 Java 程序运行时各种对象的动态跟踪，并进一步分析各个对象之间的关系。在此之前，需要考虑如何获取程序运行的入口。</p>
+
+<p>首先，我考虑到了自定义类加载器（详情见参考资料），即在程序的 main 入口处，首先加载自定义的类加载器，然后通过反射技术使用这个类加载器加载并调用测试程序。这个方法缺点是：每次都必须先找到测试程序的入口类，而对于有的封装成 jar 的程序集合，这一点相对比较难控制。</p>
+
+<p>于是，有了这里介绍的方法：通过 <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/instrument/package-summary.html">java.lang.instrument</a> 实现的 java agent 对象操作字节码，是一种 <a href="http://en.wikipedia.org/wiki/Aspect-oriented_programming">AOP</a> 的方法。</p>
+
+<p>程序中，除了 ASMAgent 以外的所有类都是调用 ASM API 实现对测试程序中各个对象的构造、方法调用、属性赋值等操作行为的记录（其中对 Collection 子类的处理着实费了一番心血= =，字节码操作很细节，容易出错）。</p>
+
+<!--more-->
+
+
+<h2>原理</h2>
+
+<p><a href="http://www.ibm.com/developerworks/cn/java/j-lo-jse61/index.html#N100A7">JVMTI（Java Virtual Machine Tool Interface）</a>是一套本地编程接口集合，它提供了一套『代理』机制，可以支持第三方工具程序以代理的方式连接和访问 JVM，并利用 JVMTI 提供的丰富的编程接口，完成很多跟 JVM 相关的功能。</p>
+
+<p>java.lang.instrument 包的实现，也就是基于这种机制的：在 Instrumentation 的实现当中，存在一个 JVMTI 的代理程序，通过调用 JVMTI 当中 Java 类相关的函数来完成 Java 类的动态操作。</p>
+
+<p>Instrumentation 的最大作用就是类定义的动态改变和操作。在 Java SE 5 及其后续版本当中，开发者可以在一个普通 Java 程序（带有 main 函数的 Java 类）运行时，通过 – javaagent 参数指定一个特定的 jar 文件（包含 Instrumentation 代理）来启动 Instrumentation 的代理程序。</p>
+
+<h2>步骤</h2>
+
+<h3>1.编写 java 代理类</h3>
+
+<p>这个类中，premain 方法是关键，对比于一般的入口 main 一样，这里的 premain 是在 main 之前执行的。它会告诉 JVM 如何处理加载上来的 java 字节码。如下例：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">premain</span><span class="o">(</span><span class="n">String</span> <span class="n">agentArgs</span><span class="o">,</span> <span class="n">Instrumentation</span> <span class="n">inst</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>                    <span class="n">Trace</span><span class="o">.</span><span class="na">BeginTrace</span><span class="o">();</span> <span class="c1">// it&#39;s important for trace files  </span>
+</span><span class='line'>            <span class="n">inst</span><span class="o">.</span><span class="na">addTransformer</span><span class="o">(</span><span class="k">new</span> <span class="n">ASMAgent</span><span class="o">());</span>
+</span><span class='line'>        <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>值得注意的是，addTransformer 实现了对字节码处理的方法的回调。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">inst</span><span class="o">.</span><span class="na">addTransformer</span><span class="o">(</span><span class="k">new</span> <span class="n">ASMAgent</span><span class="o">());</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>类 ASMAgent 包含着实现对 java 字节码处理的方法：transform()。它来自于 ClassFileTransformer 接口。为了方便，这里将对 ClassFileTransformer 接口的实现跟 ASMAgent 类放在了一起。其中 classfileBuffer 是类文件加载时的原始的字节码，retVal 则是经过处理后的字节码。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kt">byte</span><span class="o">[]</span> <span class="nf">transform</span><span class="o">(</span><span class="n">ClassLoader</span> <span class="n">loader</span><span class="o">,</span> <span class="n">String</span> <span class="n">className</span><span class="o">,</span><span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">classBeingRedefined</span><span class="o">,</span>
+</span><span class='line'>                                        <span class="n">ProtectionDomain</span> <span class="n">protectionDomain</span><span class="o">,</span><span class="kt">byte</span><span class="o">[]</span> <span class="n">classfileBuffer</span><span class="o">)</span>
+</span><span class='line'>            <span class="kd">throws</span> <span class="n">IllegalClassFormatException</span> <span class="o">{</span>
+</span><span class='line'>            <span class="kt">byte</span><span class="o">[]</span> <span class="n">retVal</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="k">if</span><span class="o">(</span><span class="n">isInstrumentable</span><span class="o">(</span><span class="n">className</span><span class="o">)){</span>
+</span><span class='line'>                <span class="n">ClassWriter</span> <span class="n">cw</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ClassWriter</span><span class="o">(</span><span class="n">ClassWriter</span><span class="o">.</span><span class="na">COMPUTE_FRAMES</span><span class="o">);</span>
+</span><span class='line'>                <span class="n">ASMClassAdapter</span> <span class="n">mca</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ASMClassAdapter</span><span class="o">(</span><span class="n">cw</span><span class="o">);</span>
+</span><span class='line'>                <span class="n">ClassReader</span> <span class="n">cr</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ClassReader</span><span class="o">(</span><span class="n">classfileBuffer</span><span class="o">);</span>
+</span><span class='line'>                <span class="n">cr</span><span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="n">mca</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+</span><span class='line'>                <span class="n">retVal</span> <span class="o">=</span> <span class="n">cw</span><span class="o">.</span><span class="na">toByteArray</span><span class="o">();</span>
+</span><span class='line'>            <span class="o">}</span><span class="k">else</span><span class="o">{</span>
+</span><span class='line'>                    <span class="n">retVal</span> <span class="o">=</span> <span class="n">classfileBuffer</span> <span class="o">;</span>
+</span><span class='line'>                <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="k">return</span> <span class="n">retVal</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>2.打包代理类</h3>
+
+<p>只有合理打包并在 manifest 文件中记录下相应的键值对之后，才能正常执行 premain 的内容。
+manifest 文件中需要添加的键值对是：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">Premain</span><span class="o">-</span><span class="n">Class</span> <span class="o">:</span> <span class="n">biaobiaoqi</span><span class="o">.</span><span class="na">asm</span><span class="o">.</span><span class="na">ASMAgent</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果对字节码的处理有应用到了其他的类，需要在 manifest 中增加路径。比如使用到了 asm-3.0.jar，则增加如下语句：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">Class</span><span class="o">-</span><span class="nl">Path:</span> <span class="n">asm</span><span class="o">-</span><span class="mf">3.0</span><span class="o">.</span><span class="na">jar</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>3.执行</h3>
+
+<p>执行测试程序时，添加“-javaagent:代理类的 jar[=传入 premain 的参数]”选项。</p>
+
+<p>比如，对于博主的程序，就是</p>
+
+<p><code>java -javaagent:ASMInstrument.jar   -jar XXXX.jar  xxxx</code></p>
+
+<p>其中 ASMInstrument.jar 是第二步中打包的程序，  XXX.jar 是需要测试的程序， xxx 是 XXX.jar 执行时可能的命令行参数。</p>
+
+<p>如果只是执行某.class 文件中的类，我们假设是在当前目录下的一个 XXXX 类，则是：
+<code>java -javaagent:ASMInstrument.jar   -cp ./  XXXX xxx</code></p>
+
+<p>其中 xxx 是可能的命令行参数。</p>
+
+<h3>参考资料</h3>
+
+<ul>
+<li><a href="http://www.ibm.com/developerworks/cn/java/j-lo-jse61/index.html">《Java SE 6 新特性: Instrumentation 新功能》</a></li>
+<li><a href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loader-in-practice/">《Java 类加载器编程实践》</a></li>
+</ul>
+
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.io/blog/2013/09/08/custom-premain-method/'>http://biaobiaoqi.github.io/blog/2013/09/08/custom-premain-method/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Biaobiaoqi</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-08T13:01:00+08:00" pubdate data-updated="true">Sep 8<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+    <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+<a class="jiathis_button_tsina"></a>
+<a class="jiathis_button_weixin"></a>
+<a class="jiathis_button_renren"></a>
+<a class="jiathis_button_douban"></a>
+<a class="jiathis_button_googleplus"></a>
+<a href="http://www.jiathis.com/share?uid=1814751" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+	data_track_clickback:true,
+	summary:"",
+	shortUrl:true,
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1814751" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/09/08/strange-behavior-using-braces-in-java/" title="Previous Post: Java构造方法中的执行顺序">&laquo; Java构造方法中的执行顺序</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/09/08/string-interning/" title="Next Post: 对Java字符串的探究">对Java字符串的探究 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <!--h1>Comments</h1-->
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>标签云</h1>
+ <br /> 
+  <ul class="tag-cloud">
+    <a style="font-size: 112%" href="/tags/hadoop/">Hadoop</a> &nbsp 
+<a style="font-size: 139%" href="/tags/jvm/">JVM</a> &nbsp 
+<a style="font-size: 144%" href="/tags/java/">Java</a> &nbsp 
+<a style="font-size: 141%" href="/tags/pat/">PAT</a> &nbsp 
+<a style="font-size: 112%" href="/tags/octopress/">octopress</a> &nbsp 
+<a style="font-size: 135%" href="/tags/fen-bu-shi/">分布式</a> &nbsp 
+<a style="font-size: 133%" href="/tags/zi-jie-ma/">字节码</a> &nbsp 
+<a style="font-size: 135%" href="/tags/si-kao/">思考</a> &nbsp 
+<a style="font-size: 180%" href="/tags/ji-zhu/">技术</a> &nbsp 
+<a style="font-size: 124%" href="/tags/fang-fa-lun/">方法论</a> &nbsp 
+<a style="font-size: 106%" href="/tags/fu-wu-qi/">服务器</a> &nbsp 
+<a style="font-size: 137%" href="/tags/sheng-huo/">生活</a> &nbsp 
+<a style="font-size: 148%" href="/tags/suan-fa/">算法</a> &nbsp 
+<a style="font-size: 117%" href="/tags/wang-luo/">网络</a> &nbsp 
+<a style="font-size: 135%" href="/tags/du-shu/">读书</a>
+
+  </ul>
+</section>
+<section>
+  <h1>关于</h1>
+   <p>biaobiaoqi是我的网络id。<br><br>
+   我的博客日志：<a href="http://biaobiaoqi.me/blog/2013/09/01/blog-log/">请戳</a><br><br>
+   更多信息请戳：<a href="http://about.me/biaobiaoqi">about.me</a><br>
+	</p>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - Biaobiaoqi -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  - <span class="credit">Theme by <a href="http://www.gehaxelt.in">Gehaxelt</a></span>
+  <span class="credit">and <a href="http://www.it-solutions-neef.de">IT Solutions Neef</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'biaobiaoqisblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://biaobiaoqi.github.io/blog/2013/09/08/custom-premain-method/';
+        var disqus_url = 'http://biaobiaoqi.github.io/blog/2013/09/08/custom-premain-method/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

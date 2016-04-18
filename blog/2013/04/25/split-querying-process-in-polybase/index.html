@@ -1,0 +1,579 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>PDW中的Split Querying Process - Biaobiaoqi的博客</title>
+  <meta name="author" content="Biaobiaoqi">
+
+  
+  <meta name="description" content="最近看了关于SQL Server的分布式处理方面的论文，觉得它提出的Polybase跟之前看过的HadoopDB有些神似，这里做个小总结（抽空再把HadoopDB的总结贴出来）。
+不算翻译，只是挑出自己认为是重点的部分。详细情况，还请论文查阅原文，引用中有写明出处。文章末尾有我总结的slides， &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://biaobiaoqi.github.io/blog/2013/04/25/split-querying-process-in-polybase/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Biaobiaoqi的博客" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+
+function addBlankTargetForLinks () {
+
+  $('a[href^="http"]').each(function(){
+
+      $(this).attr('target', '_blank');
+
+  });
+
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+
+  addBlankTargetForLinks();
+
+});
+
+</script>
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F49481ec3305db999013860b0ccb3b16d' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39900036-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Biaobiaoqi的博客</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:biaobiaoqi.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives/">全部文章</a></li>
+  <li><a href="/tag-cloud/">分类阅读</a></li>
+  <li><a href="/resources/">其他推荐</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">PDW中的Split Querying Process</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-25T22:59:00+08:00" pubdate data-updated="true">Apr 25<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>最近看了关于 SQL Server 的分布式处理方面的论文，觉得它提出的 Polybase 跟之前看过的 HadoopDB 有些神似，这里做个小总结（抽空再把 HadoopDB 的总结贴出来）。</p>
+
+<p>不算翻译，只是挑出自己认为是重点的部分。详细情况，还请论文查阅原文，引用中有写明出处。文章末尾有我总结的 slides，可以辅助查阅。</p>
+
+<p>由于缺乏实践经验，很多东西未必能理解其本质。如有其他观点，还请多指教。</p>
+
+<p>当下的计划就是开始自己搭环境，实践起来!~</p>
+
+<!--more-->
+
+
+<h2>背景</h2>
+
+<p>商业应用中，越来越多的需要将结构化数据和非结构化数据存储、处理混合起来。
+目前，已经有很多公司、产品致力于这部分的研究，微软发的这篇论文，也正是基于 PDW V2 的这一新功能提出的新的解决方案。</p>
+
+<h3>Polybase 简介：</h3>
+
+<p>是 SQL Server PDW V2 的一个新功能：通过使用 SQL 来管理和查询 hadoop 集群中的数据。
+它同时能处理结构化和非结构化的数据，特点是结合了 HDFS 的外部表，使用基于开销的查询优化器来做分裂查询处理。</p>
+
+<h2>相关研究</h2>
+
+<ul>
+<li><p>sqoop：用于在 hadoop 和结构化数据 9 比如关系型数据库之间传输数据。</p></li>
+<li><p>teradata&amp; Asterdata&amp; Greenplum&amp; Vertica：通过外部表（external table）实现基于 SQL 的对 hadoop 中所存数据的操作。</p></li>
+<li><p>Orable：基本机制也是建立外部表；另外还开发了用于加载 hadoop 的大数据到 Oracle 自家数据库的工具 OLH(Oracle loader for Hadoop)。</p></li>
+<li><p>IBM、Netezza:使用 mapreduce 方法获取分布式环境下各个节点的数据执行处理。</p></li>
+<li><p>Hadapt: (HadoopDB)：HadoopDB 是来自耶鲁大学的创意，并商业化为 Hadapt 项目。这是首个提出使用类 SQL 语言、集合 Hadoop 系统实现对 RDBMS 的操作的想法。实现相对简单，源代码 3 千多行，在 Hadoop 中对其中的几个模块做了二次开发。</p></li>
+</ul>
+
+
+<h2>PDW</h2>
+
+<p>Polybase 是 PDW V2 的一个新 feature，那么，首先，让我们来看一下所谓的 PDW 是什么。</p>
+
+<p>PDW 是一个基于 SQL Server 的 shared-nothing 的并行数据库系统。</p>
+
+<p>PDW（Parallel Data Warehouse）架构图：</p>
+
+<p><img src="http://dl.dropboxusercontent.com/u/64021093/pdw/Image0.png"></p>
+
+<h3>PDW 系统中的组件：</h3>
+
+<h5>节点</h5>
+
+<ul>
+<li>control node：</li>
+</ul>
+
+
+<p>类似于 Hadoop 中的 master 节点。运行着 PDW Engine，负责：查询语法分析，优化，生成分布式执行计划 DSQL，控制计划实施</p>
+
+<ul>
+<li>compute node：</li>
+</ul>
+
+
+<p>类似于 Hadoop 中的 slave 节点。数据存储和查询执行</p>
+
+<h4>DMS</h4>
+
+<p>Data Moving Service，起功能有：</p>
+
+<ul>
+<li><p>1.repartition rows of a table among SQL Server instances on PDW compute nodes</p></li>
+<li><p>2.针对 ODBC 的类型转换。</p></li>
+</ul>
+
+
+<h2>Polybase</h2>
+
+<h3>Polybase 使用场景</h3>
+
+<p>如图</p>
+
+<p><img src="http://dl.dropboxusercontent.com/u/64021093/pdw/Image1.png"></p>
+
+<p>（a）中 PDW 与 Hadoop 一起完成了数据处理任务，并输出结果；</p>
+
+<p>（b）中处理数据后，结果直接存储到 HDFS 中</p>
+
+<p>充分利用 SQL Server PDW 的性能优势，特别是它的基于开销的并行查询优化器和执行引擎。</p>
+
+<h3>Polybase 的环境需求</h3>
+
+<ul>
+<li>1.PDW 与 Hadoop 集群可以重叠，也可以分离。</li>
+<li>2.windows 和 linux 部署的 hadoop 集群都支持。</li>
+<li>3.支持所有标准的 HDFS 文件格式，包括文本、序列化文件、RCFiles。只要定义好对应的 Inputformat 和 outputFormat，所有定制文件格式也支持。</li>
+</ul>
+
+
+<h3>核心组件</h3>
+
+<ul>
+<li>1.外部表：用于在 PDW 中实现对数据的操作语义。</li>
+<li>2.HDFS Bridge：DMS 中的组件，用于实现 PDW 节点域 Hadoop 的通信。</li>
+<li>3.基于开销的查询优化器：将常规 SQL 查询语句转化为 DSQL（分布式 SQL 查询语句），并结合集群状况（比如 Hadoop 和 PDW 集群规模，运行状况等），合理选择优化方式。</li>
+</ul>
+
+
+<h3>1.外部表</h3>
+
+<p>PDW 需要了解到 Hadoop 集群中数据的模型。于是就有了这个外部表。
+实例如下：</p>
+
+<p>创建集群：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>CREATE HADOOP_CLUSTER GSL_CLUSTER
+</span><span class='line'>
+</span><span class='line'>      WITH (namenode=‘hadoop-head’,namenode_port=9000,
+</span><span class='line'>
+</span><span class='line'>      jobtracker=‘hadoop-head’,jobtracker_port=9010);</span></code></pre></td></tr></table></div></figure>
+
+
+<p>创建文件格式：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>CREATE HADOOP_FILEFORMAT TEXT_FORMAT
+</span><span class='line'>
+</span><span class='line'>  WITH (INPUT_FORMAT=‘polybase.TextInputFormat’,
+</span><span class='line'>
+</span><span class='line'>  OUTPUT_FORMAT = ‘polybase.TextOutputFormat’,
+</span><span class='line'>
+</span><span class='line'>  ROW_DELIMITER = '\n', COLUMN_DELIMITER = ‘|’);
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>根据集群和文件信息，创建外部表</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>CREATE EXTERNAL TABLE hdfsCustomer
+</span><span class='line'>
+</span><span class='line'>  ( c_custkey       bigint not null,   
+</span><span class='line'>
+</span><span class='line'>    c_name          varchar(25) not null,
+</span><span class='line'>
+</span><span class='line'>     .......
+</span><span class='line'>    )
+</span><span class='line'>
+</span><span class='line'>WITH (LOCATION='/tpch1gb/customer.tbl',
+</span><span class='line'>
+</span><span class='line'>FORMAT_OPTIONS (EXTERNAL_CLUSTER = GSL_CLUSTER,
+</span><span class='line'>
+</span><span class='line'>EXTERNAL_FILEFORMAT = TEXT_FORMAT));</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>2.HDFS Bridge</h3>
+
+<p>结构如图：
+<img src="http://dl.dropboxusercontent.com/u/64021093/pdw/Image2.png"></p>
+
+<p>HDFS shuffle 阶段：通过 DMS 从 hadoop 读取数据的阶段。
+涉及到 hdfs 中的数据处理时，处理过程如下：</p>
+
+<ul>
+<li><p>1.跟 namenode 通信，获得 hdfs 中文件的信息</p></li>
+<li><p>2.hdfs 中文件信息 +  DMS 实例个数 -> 每个 DMS 的输入文件（offset、长度） #力求负载均衡</p></li>
+<li><p>3.将 DMS 的输入文件信息传递给各个 DMS，DMS 通过 openRecordReader（）方法构建 RecordReader 实例，直接与对应的 datanode 通信，获取数据，并转换为 ODBC 格式（有时候类型转换提前到 mapreduce 中以利用 hadoop 集群的计算能力）。读取过程中，使用了 buffer 机制提高效率。有时候数据会被提前到从 HDFS 中读出时执行，而不是到 DMS 中执行。这是为了充分利用 hadoop 集群的计算能力，节约 CPU 秘籍的 DMS shuffle 的计算。</p></li>
+</ul>
+
+
+<p>写入 hadoop 的过程与此类似。</p>
+
+<h3>3.查询优化</h3>
+
+<ul>
+<li><p>1.PDW Parser(在 PDW Engine 的进程中完成)。</p></li>
+<li><p>2.SQL Server Query Optimizer(在 control node 的 SQL Server 的进程中完成)：使用 bottom-up 的方式进行查询优化，并在合理的位置插入数据迁移的操作符（用于分布式环境的数据迁移指令），:生成查询计划，存储在 Memo 数据结构（http://www.benjaminnevarez.com/2012/04/inside-the-query-optimizer-memo-structure/）中 。</p></li>
+<li><p>3.XML geneator(在 control node 的 SQL Server 的进程中完成)。接收 Memo，并转换格式，往下传递。</p></li>
+<li><p>4.Query Optimizer(在 PDW Engine 的进程中完成)：根据 Memo 生成 DSQL。</p></li>
+<li><p>5.基于开销的查询优化：判定是否将 SQL 语句推送到 Hadoop 中执行。</p>
+
+<p>  考虑外部表的样本数据的直方图、集群的规模等因素&#8230;选择最优优化方案。</p></li>
+</ul>
+
+
+<h5>样本数据处理:</h5>
+
+<p>定义对应外部表列的详细样本数据：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>CREATE STATISTICS hdfsCustomerStats ON
+</span><span class='line'>hdfsCustomer (c_custkey);</span></code></pre></td></tr></table></div></figure>
+
+
+<p>对样本数据的处理的方式如下：</p>
+
+<ul>
+<li>1.通过 DMS 或者 map job 读取 sample 数据，</li>
+<li>2.分发到不同的 comute 节点的暂存表。</li>
+<li>3.每个节点分别计算直方图。</li>
+<li>4.汇总直方图，存储到 control node 数据库的 catalog 中</li>
+</ul>
+
+
+<p>缺点是在此过程中没有利用好 hadoop 集群的计算能力。</p>
+
+<h3>语义兼容</h3>
+
+<p>涉及到 Java 和 SQL 以及之间的转换。包括这三个方面：</p>
+
+<ul>
+<li>数据类型的语义.</li>
+<li>表达式的语义</li>
+<li>异常处理机制</li>
+</ul>
+
+
+<p>例如：&#8221;a+b&#8221;，其中 a，b 都为 null，SQL 结果为 NULL，而 Java 则会抛出 NullException。</p>
+
+<p>处理原则是：能转化的类型则做好转化包装；不能转换的则标记为无法实现，仅限 PDW 实现。</p>
+
+<h3>举例：</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>   SELECT count (*) from Customer
+</span><span class='line'>  WHERE acctbal &lt; 0
+</span><span class='line'>  GROUP BY nationkey</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如图所示为处理过程</p>
+
+<p><img src="http://dl.dropboxusercontent.com/u/64021093/pdw/Image4.png"></p>
+
+<p><img src="http://dl.dropboxusercontent.com/u/64021093/pdw/Image5.png"></p>
+
+<p><img src="http://dl.dropboxusercontent.com/u/64021093/pdw/Image6.png"></p>
+
+<h3>Polybase 的 MapReduce Join 实现</h3>
+
+<p>使用 distributed hash join 实现（只有 equi-join 能被在 mapreduce 中完成）</p>
+
+<p>小表作为 build side ，并被物化（materialized）到 HDFS，大表作为 probe side。</p>
+
+<p>在 Hadoop 的 Map 任务中：读取物化好的 build side 到内存，构成 hash table。</p>
+
+<p>probe side 经过 hash 后对比 hash 表，做正确的链接。</p>
+
+<p>为了让 build side 置于内存中，需要计算 build side 的大小、每个 task 拥有的内存大小，task 中执行其他操作需要的内存空间。
+当然，build side 也可能被复制多分，以提高效率。</p>
+
+<p><a href="https://dl.dropboxusercontent.com/u/64021093/pdw/Split%20Query%20Processing%20in%20Polybase%20%5Brevised%20on%202013-05-18%5D.pptx">本文演示 slides 下载链接，点击获取</a></p>
+
+<h2>引用</h2>
+
+<ul>
+<li>Split Query Processing in Polybase(SIGMOD’13， June 22-27,2013,New York,USA.) Microsoft Corporation</li>
+<li>Polybase:  What, Why, How(ppt) Microsoft Corporation</li>
+<li>Query Optimization in Microsoft SQL Server PDW(SIGMOD&#8217;12, May 20-24,2012,Scottsdale,Arizona,USA) Microsoft Corporation</li>
+</ul>
+
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.io/blog/2013/04/25/split-querying-process-in-polybase/'>http://biaobiaoqi.github.io/blog/2013/04/25/split-querying-process-in-polybase/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Biaobiaoqi</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-25T22:59:00+08:00" pubdate data-updated="true">Apr 25<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+    <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+<a class="jiathis_button_tsina"></a>
+<a class="jiathis_button_weixin"></a>
+<a class="jiathis_button_renren"></a>
+<a class="jiathis_button_douban"></a>
+<a class="jiathis_button_googleplus"></a>
+<a href="http://www.jiathis.com/share?uid=1814751" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+	data_track_clickback:true,
+	summary:"",
+	shortUrl:true,
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1814751" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/04/23/winsock-kills-internet/" title="Previous Post: winsock出错引起的断网">&laquo; winsock出错引起的断网</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/04/27/travsal-binary-tree/" title="Next Post: 二叉树的遍历（递归、非递归）分析">二叉树的遍历（递归、非递归）分析 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <!--h1>Comments</h1-->
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>标签云</h1>
+ <br /> 
+  <ul class="tag-cloud">
+    <a style="font-size: 112%" href="/tags/hadoop/">Hadoop</a> &nbsp 
+<a style="font-size: 139%" href="/tags/jvm/">JVM</a> &nbsp 
+<a style="font-size: 144%" href="/tags/java/">Java</a> &nbsp 
+<a style="font-size: 141%" href="/tags/pat/">PAT</a> &nbsp 
+<a style="font-size: 112%" href="/tags/octopress/">octopress</a> &nbsp 
+<a style="font-size: 135%" href="/tags/fen-bu-shi/">分布式</a> &nbsp 
+<a style="font-size: 133%" href="/tags/zi-jie-ma/">字节码</a> &nbsp 
+<a style="font-size: 135%" href="/tags/si-kao/">思考</a> &nbsp 
+<a style="font-size: 180%" href="/tags/ji-zhu/">技术</a> &nbsp 
+<a style="font-size: 124%" href="/tags/fang-fa-lun/">方法论</a> &nbsp 
+<a style="font-size: 106%" href="/tags/fu-wu-qi/">服务器</a> &nbsp 
+<a style="font-size: 137%" href="/tags/sheng-huo/">生活</a> &nbsp 
+<a style="font-size: 148%" href="/tags/suan-fa/">算法</a> &nbsp 
+<a style="font-size: 117%" href="/tags/wang-luo/">网络</a> &nbsp 
+<a style="font-size: 135%" href="/tags/du-shu/">读书</a>
+
+  </ul>
+</section>
+<section>
+  <h1>关于</h1>
+   <p>biaobiaoqi是我的网络id。<br><br>
+   我的博客日志：<a href="http://biaobiaoqi.me/blog/2013/09/01/blog-log/">请戳</a><br><br>
+   更多信息请戳：<a href="http://about.me/biaobiaoqi">about.me</a><br>
+	</p>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - Biaobiaoqi -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  - <span class="credit">Theme by <a href="http://www.gehaxelt.in">Gehaxelt</a></span>
+  <span class="credit">and <a href="http://www.it-solutions-neef.de">IT Solutions Neef</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'biaobiaoqisblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://biaobiaoqi.github.io/blog/2013/04/25/split-querying-process-in-polybase/';
+        var disqus_url = 'http://biaobiaoqi.github.io/blog/2013/04/25/split-querying-process-in-polybase/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

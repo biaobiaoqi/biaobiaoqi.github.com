@@ -1,0 +1,606 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: JVM | Biaobiaoqi的博客]]></title>
+  <link href="http://biaobiaoqi.github.io/tags/jvm/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.github.io/"/>
+  <updated>2016-04-18T10:59:58+08:00</updated>
+  <id>http://biaobiaoqi.github.io/</id>
+  <author>
+    <name><![CDATA[Biaobiaoqi]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[JVM参数调优：Eclipse启动实践]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2014/01/17/java-performance-tunning-in-practice/"/>
+    <updated>2014-01-17T11:16:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2014/01/17/java-performance-tunning-in-practice</id>
+    <content type="html"><![CDATA[<p>本文主要参考自<a href="http://book.douban.com/subject/6522893/">《深入理解Java虚拟机》</a>。这本书是国人写的难得的不是照搬代码注释的且不是废话连篇的技术书，内容涵盖了Java从源码到字节码到执行的整个过程，包括了JVM（Java Virtual Machine）的架构，垃圾收集的介绍等。这里摘录出关于配置JVM基本参数来调优Eclipse启动的过程，比较初级，供初学者参考。</p>
+
+<!--more-->
+
+
+<h2>基础知识</h2>
+
+<p>针对JVM的参数调优主要集中在数据区大小的控制和垃圾回收策略的选择。关于JVM运行机制等更多内容可参考<a href="http://biaobiaoqi.me/tags/jvm/">其他博文</a></p>
+
+<h3>JVM的运行时数据区</h3>
+
+<p>运行时JVM的数据区主要包括各线程私有的栈和程序计数器，线程共享的方法区，以及管理对象的堆（又称回收堆）等。程序运行时，类信息、常量、静态变量等会被加载到方法区。运行过程中几乎所有对象都在堆里，内存占用的空间最大，这也是最值得优化得部分。</p>
+
+<h3>JVM的垃圾回收策略</h3>
+
+<p>Java程序中，除了基本类型（primitive types），其他的数据都是以对象的形式存在。对象生命周期有长有短，如果无区别的保留在内存中，会造成内存超载。内存垃圾回收(Garbage Collection, 缩写GC)就是解决这一问题的策略。</p>
+
+<p><em>注意：JVM不仅仅只对对象进行垃圾回收，实际上也会对废弃常量和无用的类做回收。</em></p>
+
+<p>垃圾回收首先得找到需要被回收的对象，一般采用根搜索算法来标记处这些过时的对象（另外有一种简单的实现：<a href="http://zh.wikipedia.org/wiki/%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0">引用计数</a>，但存在明显的弊端，即循环引用）。</p>
+
+<p>回收垃圾的过程会消耗计算资源和时间。根据不同的处理方式，垃圾回收有不同的策略，现在常用的是分代收集算法：根据对象的存活周期将堆划分为几代：新生代（Young Generation或New Generation）和老生代（Tenured Generation），<a href="http://en.wikipedia.org/wiki/HotSpot">HotSpot虚拟机</a>里还分出了永生代（基本等同于方法区）。不同代采用不同的垃圾回收策略。</p>
+
+<h4>HotSpot虚拟机</h4>
+
+<p>HotSpot虚拟机中，Perm代指永生代，Old代指老年代，而新生代使用复制算法，将区域划分为三块：Eden，S0和S1（S是Survivor的缩写）。</p>
+
+<p>IBM研究表明，新生代中的对象98%是朝生夕死的，三者的比例划分是8：1：1。对象先分配到Eden，如果Eden中内存占用量达到一定得比例，触发Minor GC，JVM会将Eden和S0(或S1)中存活的对象复制到S1（或S0），并清空Eden和S0(或S1)。如果同时老年代的内存占用量打达到一定比例，会触发Major GC（也称Full GC）。通常Major GC比Minor GC慢10倍以上。</p>
+
+<h3>编译过程</h3>
+
+<p>Java一直号称“Write once, run anywhere”，这个特性正是由JVM这一虚拟层来支撑的。</p>
+
+<p>Java源代码首先编译为Java字节码，字节码再被JVM加载运行。运行的过程可以是直接针对字节码的解释执行，也可以是经过了<a href="http://zh.wikipedia.org/wiki/%E5%8D%B3%E6%99%82%E7%B7%A8%E8%AD%AF">JIT</a>（Just in time）编译为机器码后的执行。另外，还有<a href="(http://en.wikipedia.org/wiki/AOT_compiler">静态提前编译器</a>(Ahead Of Time，也缩写为AOT)，能将源码直接编译为机器码。</p>
+
+<p><a href="http://en.wikipedia.org/wiki/HotSpot">HotSpot虚拟机</a>的JIT编译器有：Client Complier（简称C1）、Server Complier（简称C2）以及在Java7中堆出的<a href="http://docs.oracle.com/javase/7/docs/technotes/guides/vm/performance-enhancements-7.html">分层编译器</a>。C1编译器做一些快速的优化，C2做一些更耗时的优化但是产生更高效的代码，而分层编译器则结合了两者的优点：快速的启动和逐步的优化（brings client startup speeds to the server VM）。</p>
+
+<h3>性能监控和故障处理工具</h3>
+
+<p>对于系统调优和问题定位，周志明在《深入Java虚拟机》中总结到</p>
+
+<blockquote><p>给一个系统定位问题的时候，知识、经验是关键基础，数据是依据，工具是运用知识处理数据的手段。这里说的数据包括：运行日志、异常堆栈、GC日志、线程快照、堆转储快照等……应当意识到工具永远都是知识技能的一层包装，没有什么工具是“秘密武器”。</p></blockquote>
+
+<p>Java提供了很多工具给开发者来监控和处理运行中的问题。包括命令行工具以及可视化工具</p>
+
+<h4>命令行工具</h4>
+
+<p>比如jps, jstat, jinfo等。举例如下：</p>
+
+<p><code>
+jstat -gcutil xxx #xxx是jps查出的LVMID，查看gc相关数据
+jstat -gccause xxx#查看gc的原因
+jinfo  -flag XXX xxx#XXX是参数名，xxx是VMID，查看虚拟机的参数值
+</code></p>
+
+<h4>可视化工具</h4>
+
+<ul>
+<li>JConsole：比较老得分析软件，Java自带。Windows下搜jconsole.exe，Mac下启动命令为jconsole</li>
+<li><a href="http://www.eclipse.org/mat/">Eclipse Memory Analyzer Tool</a>：用于分析dump下的堆数据</li>
+<li><a href="http://visualvm.java.net/">VisualVM</a>:推荐，很全能的分析工具</li>
+</ul>
+
+
+<h3>JVM参数</h3>
+
+<p>这里零散的罗列了一些我用到的简单的JVM配置参数：</p>
+
+<p>内存大小控制：</p>
+
+<ul>
+<li>-Xmx20M: 堆的最大值</li>
+<li>-Xms10M: 堆的初始分配内存</li>
+<li>-Xmn: 新生代堆的分配内存</li>
+<li>-Xss128k: 线程的栈空间大小</li>
+<li>-XX:PermSize=10M | 方法区初始大小</li>
+<li>-XX:MaxPermSize=10M |方法区最大值</li>
+</ul>
+
+
+<p>编译相关：</p>
+
+<ul>
+<li>-Xint: 关闭JIT，完全使用解释执行，实践中没什么作用，解释执行很慢。</li>
+<li>-client: 启动C1编译器</li>
+<li>-server: 启动C2编译器</li>
+<li>-XX:+TieredCompilation: 启动分层编译器</li>
+</ul>
+
+
+<p>其他：</p>
+
+<ul>
+<li>-XX:+DisableExplicitGC: 屏蔽System.gc()调用</li>
+<li>-PrintGCDetails: 让jvm在每次发生gc的时候打印日志，利于分析gc的原因和状况</li>
+<li>-XX:+HeapDumpOnOutOfMemoryError: 内存溢出时dump下heap，可以通过Eclipse Memory Analyzer Tool打开查看。</li>
+<li>-XX:HeapDumpPath=/: dump下的heap文件快照的路径。Eclipse中默认放到项目的根目录中</li>
+<li>-XVerify:none: 禁止字节码验证</li>
+</ul>
+
+
+<h2>调优Eclipse启动的实践</h2>
+
+<h3>实践环境</h3>
+
+<ul>
+<li>CPU： 2.8 GHz Intel Core i7</li>
+<li>内存： 8 GB 1333 MHz DDR3</li>
+<li>操作系统： OS X 10.9.1(64bits)</li>
+<li>Eclipse：Version: Kepler Service Release 1， Build id: 20130919-0819</li>
+<li>Java：java version "1.7.0_45"</li>
+</ul>
+
+
+<h3>调优实践</h3>
+
+<p>调优Eclipse启动实际上就是调优Eclipse在JVM中的加载和程序启动阶段的运行。由于默认的Ecpise启动配置无法适应所有不同的硬件、软件环境，做针对性的调优是必要的。</p>
+
+<p>Eclipse的启动配置文件是eclipse.ini，对JVM的参数调优直接在该文件中修改。OS X下，其文件路径为 $ECLIPSE/Eclipse.app/Contents/MacOS/eclipse.ini（<em>注意不是Eclipse文件包根目录下得eclipse.ini</em>）。</p>
+
+<h4>测Eclipse启动时间</h4>
+
+<p>要优化Eclipse的启动时间，先要能确定Eclipse的启动时间。这里推荐网友实现的一个Eclipse插件：<a href="http://empirel.iteye.com/blog/1404226">计算启动时间的Eclipse插件</a>。下载后放到Eclipse的插件包中，启动Eclipse即可看到弹窗显示的启动时间。为了得到一个尽可能公平的测试结果，需要在测试过程中关闭其他程序，避免CPU负载带来的误差，并多次测试取平均值。</p>
+
+<h4>调优策略</h4>
+
+<p>使用VisualVM查看程序的运行状况来定位瓶颈，尝试调优解决。下图是VisualVM的示例图，右边图示展示了GC的状态以及编译时间、类加载时间和垃圾回收时间等指标。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/visualvmscreen.png?imageView/2/w/800/h/800" alt="img" /></p>
+
+<p>也可以通过命令行工具查看GC的状态，比如：<code>jstat -gc XXX #其中XXX是jps查出的进程的LVMID</code>.</p>
+
+<p>我的实践总结如下：</p>
+
+<ul>
+<li>类加载时间过长：禁止加载类时的字节码验证。我们认为Eclipse的字节码是可靠的。<code>-XVerify:none</code></li>
+<li>编译时间：<code>-client</code>缩短了编译时间，但长期运行的性能可能受影响，<code>-server</code>编译时间长，而编译优化做得更多，后期使用汇报大，<code>-XX:+TieredCompilation</code>分层编译则集合了前两者的优势。没有特殊需求，可选用这一编译选项。</li>
+<li>Minor GC次数太多：新生代空间太小，加大新生代的内存大小。<code>-Xmn800m</code>，同时，增大回收堆的总大小上限（<code>-Xmx1024m</code>）。</li>
+<li>Full GC次数太多：为了避免回收堆由小到大的动态增长增加时间开销，可将其初始大小跟最大上限设定为同一值<code>-Xms1024m</code>，并增加老年代的大小(<code>-XX:PermSize=256m</code>，<code>-XX:MaxPermSize=256m</code>)。</li>
+<li>代码中的GC调用：Eclipse代码中有System.GC()的调用可能促使JVM执行垃圾回收，可以通过<code>-XX:+DisableExplicitGC</code>来防止。</li>
+<li>垃圾收集器的选择：垃圾收集器有很多，比如Serial、ParNew、Parallel Scavenge、CMS、G1等。推荐使用老生代CMS新生代ParNew的组合来应对Eclipse用户交互频繁的情况(<code>-XX:+UseParNewGC</code>、<code>-XX:+UserConcMarkSweepGC</code>)。同时提升CMS的垃圾回收的触发条件：<code>-XX:CMSInitiatingOccupancyFraction=85</code>，进一步降低Full GC的出现。</li>
+</ul>
+
+
+<h4>最终eclipse.ini</h4>
+
+<p><code>
+-startup
+../../../plugins/org.eclipse.equinox.launcher_1.3.0.v20130327-1440.jar
+--launcher.library
+../../../plugins/org.eclipse.equinox.launcher.cocoa.macosx.x86_64_1.1.200.v20130807-1835
+-product
+org.eclipse.epp.package.standard.product
+--launcher.defaultAction
+openFile
+-showsplash
+org.eclipse.platform
+--launcher.XXMaxPermSize
+256m
+--launcher.defaultAction
+openFile
+--launcher.appendVmargs
+-vmargs
+-Dosgi.requiredJavaVersion=1.6
+-XstartOnFirstThread
+-Dorg.eclipse.swt.internal.carbon.smallFonts
+-Xms1024m
+-Xmx1024m
+-Xmn800m
+-Xdock:icon=../Resources/Eclipse.icns
+-XstartOnFirstThread
+-Dorg.eclipse.swt.internal.carbon.smallFonts
+-XX:+TieredCompilation
+-XX:PermSize=256m
+-XX:MaxPermSize=256m
+-XX:+DisableExplicitGC
+-XVerify:none
+-XX:+UseParNewGC
+-XX:+UserConcMarkSweepGC
+-XX:CMSInitiatingOccupancyFraction=85
+</code></p>
+
+<h2>其他参考</h2>
+
+<ul>
+<li><a href="http://www.searchtb.com/2013/07/jvm-gc-introduction-examples.html">《JVM的GC简介和实例》</a> — 搜索技术博客－淘宝.昆仑</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[在Eclipse里查看Java字节码]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2013/10/25/java-bytecode-plugin-for-eclipse/"/>
+    <updated>2013-10-25T04:06:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2013/10/25/java-bytecode-plugin-for-eclipse</id>
+    <content type="html"><![CDATA[<p>要理解Java字节码，比较推荐的方法是自己尝试编写源码对照字节码学习。其中阅读Java字节码的工具必不可少。虽然<code>javap</code>可以以可读的形式展示出.class文件中字节码，但每次改动源码都需调用命令行并不方便。这里介绍一个可以辅助阅读Java字节码的Eclipse插件：<a href="http://andrei.gmxhome.de/bytecode/">bytecode outline</a>。</p>
+
+<p>bytecode outline插件用可读的方式展现了Eclipse的Java编辑器或类文件的字节码内容。它使用了<a href="http://asm.ow2.org/">ASM框 架</a>的部分组建来实现对字节码的展示（ASM框架在另外一篇操纵Java字节码的博文中有提到过：<a href="http://biaobiaoqi.me/blog/2013/09/08/custom-premain-method/">《AOP实践：java.lang.instrument的使用》</a>，是一个轻量级的Java字节码的操纵框架。）。</p>
+
+<!--more-->
+
+
+<h2>插件安装</h2>
+
+<p>直接使用Update manager安装插件，非常简单：</p>
+
+<p><code>Help -&gt; Install new Software... -&gt; Work with:</code></p>
+
+<p>输入url：http://andrei.gmxhome.de/eclipse/</p>
+
+<p>然后在弹框中选择合适的版本即可。</p>
+
+<h2>使用</h2>
+
+<p>在Eclipse中添加相应的查看窗口：</p>
+
+<p><code>Window -&gt; Show View -&gt; Other -&gt; Java -&gt; Bytecode</code></p>
+
+<p>选中某Java源文件，效果如图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/javabytecode1.png" alt="img" /></p>
+
+<p>同时，还可以使用同样的方法，添加Bytecode Reference窗口，用于查询各个Java字节码的文档，示例如下：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/javabytecode2.png" alt="img" /></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[反编译Jar包]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2013/10/21/decompiliation-jar/"/>
+    <updated>2013-10-21T12:16:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2013/10/21/decompiliation-jar</id>
+    <content type="html"><![CDATA[<p>Jar包(Java Archive)是对Java程序的打包，它可能包含源码，也可能没有。</p>
+
+<p>对于有包含源码的Jar包，在Eclipse工程里设定好source code路径后能直接查看到远吗，对于理解代码、调试的帮助很大。而如果Jar包没有打包源码，实际上也可以通过反编译的方法得到源码。道理很简单，Java规范中，生成的.class文件所包含的信息完全能逆向的重构出源码。</p>
+
+<p>当然，一些代码为了防止自身Jar包被人反编译，会做<a href="http://zh.wikipedia.org/wiki/%E4%BB%A3%E7%A0%81%E6%B7%B7%E6%B7%86">代码混淆</a>掩人耳目。其中最简单的一种方法就是是通过修改类名、变量名、方法名等方法让反编译的源码难于阅读理解。不过这个方法在混淆的时候需要特别注意：不能混淆对外提供接口的类。如果混淆了提供给外部的API接口的名字，整个工程就无法被正常使用了。</p>
+
+<p>本文要举例的是对<a href="http://help.aliyun.com/origin?helpId=664">阿里云开放云存储Java SDK</a>的反编译。由于SDK需要暴露接口给其他开发人员调用，本身确实没有做混淆（不理解阿里云为何没有将它开源出来），故可以做简单的反编译来查看源码。</p>
+
+<!--more-->
+
+
+<h2>Jadclipse的安装使用</h2>
+
+<p>Jadclipse插件的反编译功能源于Java反编译工具Jad。但用裸的Jad来命令行执行不太友好，于是就有了Jadclipse。</p>
+
+<h3>1.下载Jad反编译工具</h3>
+
+<p>下载好Jad工具，解压后放在合适的路径下。
+<a href="http://varaneckas.com/jad/">Jad下载链接</a></p>
+
+<h3>2.安装插件</h3>
+
+<p>按照Eclipse版本下载匹配的Jadclipse插件：<a href="http://sourceforge.net/projects/jadclipse/files/?source=navbar">下载链接</a>。（这个插件的最近修改是2007年，只要不是使用的老掉牙的Eclipse，都可以下载最新的插件版本jadclipse3.3）。</p>
+
+<p>解压后，将对应版本的.jar包放入Eclipse的插件目录(eclipse/plugins)下。</p>
+
+<h3>3.配置Jadclipse</h3>
+
+<p>插件中有两个一定要配置好的选项：</p>
+
+<ul>
+<li>Jad执行文件的路径</li>
+<li>.class文件打开时的关联工具</li>
+</ul>
+
+
+<p>以下配置路径的方式可能Windows跟Mac版本的Eclipse各不相同，不过都比较简单，可以自行Google。</p>
+
+<h4>3.1 Jad执行文件路径</h4>
+
+<p>在Eclipse中，依次打开 <code>Preference -&gt; Java -&gt; JadClipse</code>，修改<code>Path to decompiler</code>的值，定位到Jad的执行文件路径。</p>
+
+<h4>3.2 .class关联工具</h4>
+
+<p>由于Eclipse默认.class文件打开使用的是Class File Viewer，如果.class没有关联的源文件，则无法查看源代码。需要将<code>.class without source</code>类型的文件的关联编辑器首选设置为JadClipse Class File Viewer。</p>
+
+<p>打开方式如下： <code>Windows—&gt; Perference—&gt;General-&gt;Editors-&gt;File Associations</code></p>
+
+<h3>4.测试</h3>
+
+<p>配置好后，可能需要重启Eclipse（或许是插件本身不够Robust，博主在没有重启的情况下尝试打开没有附带源代码的.class文件时失败了，重启后一切ok）。</p>
+
+<p>下载阿里云开放云存储SDK：<a href="http://help.aliyun.com/origin?helpId=664">下载链接</a>，解压后，将相应的Jar包加入到工程中。</p>
+
+<p>点击其中的某个.class文件，即可显示出它的源代码。文件的头部会有Jad的相关信息：</p>
+
+<p>```java
+/<em>jadclipse</em>/// Decompiled by Jad v1.5.8g. Copyright 2001 Pavel Kouznetsov.
+// Jad home page: http://www.kpdus.com/jad.html
+// Decompiler options: packimports(3) radix(10) lradix(10)
+// Source File Name:   HmacSHA1Signature.java</p>
+
+<p>…</p>
+
+<p>```</p>
+
+<h3>PS</h3>
+
+<p>后来Google相关内容时，找到了JadClipse在Eclipse Market的版本：<a href="http://marketplace.eclipse.org/content/jadclipse-eclipse-4x">请戳</a>，或许对大家有用=)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Java类、实例的初始化顺序]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2013/09/22/java-initialization/"/>
+    <updated>2013-09-22T21:53:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2013/09/22/java-initialization</id>
+    <content type="html"><![CDATA[<p>今晚是阿里巴巴2013校园招聘的杭州站笔试。下午匆忙看了两张历年试卷，去现场打了瓶酱油。</p>
+
+<p>题目总体考察点偏基础，倒数第二题（Java附加题）比较有趣，考察了Java初始化机制的细节，在此摘录出来。</p>
+
+<h2>题目</h2>
+
+<p>求如下java代码的输出：</p>
+
+<p>``` java</p>
+
+<p>class T  implements Cloneable{</p>
+
+<pre><code>public static int k = 0;
+public static T t1 = new T("t1");
+public static T t2 = new T("t2");
+public static int i = print("i");
+public static int n = 99;
+
+public int j = print("j");
+{
+    print("构造快");
+}
+
+static {
+    print("静态块");
+}
+
+public T(String str) {
+    System.out.println((++k) + ":" + str + "    i=" + i + "  n=" + n);
+    ++n; ++ i;
+}
+
+public static int print(String str){
+    System.out.println((++k) +":" + str + "   i=" + i + "   n=" + n);
+    ++n;
+    return ++ i;
+}
+
+public static void main(String[] args){
+    T t = new T("init");
+}
+</code></pre>
+
+<p>}</p>
+
+<p>```</p>
+
+<!--more-->
+
+
+<h2>分析</h2>
+
+<p>代码主要考察的是类、变量初始化的顺序。</p>
+
+<p>一般的，我们很清楚类需要在被实例化之前初始化，而对象的初始化则是运行构造方法中的代码。</p>
+
+<p>本题的代码显然没有这么简单了。本题中涉及到了<code>static {…}</code> 和 <code>{…}</code>这种形式的代码块，以及在类的静态变量中初始化该类的对象这种交错的逻辑，容易让人焦躁（类似于密集恐惧症吧=(）。实际上，按照<a href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loading-linking-and-initialising/">类的装载、链接和初始化逻辑</a>，以及<a href="http://biaobiaoqi.me/blog/2013/09/08/strange-behavior-using-braces-in-java/">对象初始化的顺序</a>来思考，不难得到答案。</p>
+
+<h3>代码组成</h3>
+
+<ul>
+<li><p>成员变量
+  2~6行的变量是static的，为类T的静态成员变量，需要在类加载的过程中被执行初始化；第8行的<code>int j</code>则为实例成员变量，只再类被实例化的过程中初始化。</p></li>
+<li><p>代码段
+  9~11行为实例化的代码段，在类被实例化的过程中执行；13~15行为静态的代码段，在类被加载、初始化的过程中执行。</p></li>
+<li><p>方法
+  方法<code>public static int print(String str)</code> 为静态方法，其实现中牵涉到k,i,n三个静态成员变量，实际上，这个方法是专门用来标记执行顺序的方法；T的构造方法是个实例化方法，在T被实例化时调用。</p></li>
+<li><p>main方法
+  main方法中实例化了一个T的实例。</p></li>
+</ul>
+
+
+<h3>执行顺序分析</h3>
+
+<p>在一个对象被使用之前，需要经历的过程有：类的装载 -> 链接（验证 -> 准备 -> 解析） -> 初始化 -> 对象实例化。（详情参见<a href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loading-linking-and-initialising/">《Java类的装载、链接和初始化》</a>），这里需要注意的点主要有：</p>
+
+<ul>
+<li>在类链接之后，类初始化完成之前，实际上类已经可以被实例化了。</li>
+</ul>
+
+
+<p>就如此题代码中所述，在众多静态成员变量被初始化完成之前，已经有两个实例的初始化了。实际上，此时对类的实例化，除了无法正常使用类的静态成员变量以外（还没有保证完全被初始化），JVM中已经加载了类的内存结构布局，只是没有执行初始化的过程。比如第3行<code>public static T t1 = new T("t1");</code>，在链接过程中，JVM中已经存在了一个t1，它的值为null，还没有执行<code>new T("t1")</code>。又比如第5行的<code>public static int i = print("i");</code>，在没有执行初始化时，i的值为0，同理n在初始化前值也为0.</p>
+
+<ul>
+<li>类实例化的过程中，先执行父类的构造器，然后执行隐式的构造代码，再执行构造方法中的代码。</li>
+</ul>
+
+
+<p>实际上，在编译Java代码到字节码的过程中，编译器已经将源码中实例化相关的代码集中到了构造方法中。</p>
+
+<p>这里隐式的构造代码包括了<code>{}</code>代码块中的代码，以及实例成员变量声明中的初始化代码。它们的执行顺序以源代码中代码出现的顺序为准。为何不是先执行显示的构造方法中的代码，再执行隐式的代码呢？这也很容易解释：构造方法中可能就需要使用到实例成员变量，而这时候，我们是期待实例变量能正常使用的。</p>
+
+<p>有了如上的分析，也就能推到出最终的输出结果了。实际上，这几个原则都不需要死记硬背，完全能通过理解整个JVM的执行过程来梳理出思路的。</p>
+
+<h2>答案</h2>
+
+<p>```</p>
+
+<p>1:j   i=0   n=0
+2:构造快   i=1   n=1
+3:t1    i=2  n=2
+4:j   i=3   n=3
+5:构造快   i=4   n=4
+6:t2    i=5  n=5
+7:i   i=6   n=6
+8:静态块   i=7   n=99
+9:j   i=8   n=100
+10:构造快   i=9   n=101
+11:init    i=10  n=102</p>
+
+<p>```</p>
+
+<h3>参考：</h3>
+
+<ul>
+<li><a href="http://biaobiaoqi.me/blog/2013/09/08/strange-behavior-using-braces-in-java/">《Java构造方法中的执行顺序》</a></li>
+<li><a href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loading-linking-and-initialising/">《Java类的装载、链接和初始化》</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[对Java字符串的探究]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2013/09/08/string-interning/"/>
+    <updated>2013-09-08T13:01:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2013/09/08/string-interning</id>
+    <content type="html"><![CDATA[<h2>问题的出发点</h2>
+
+<p>在网上看到一道题：</p>
+
+<p><code>java
+String str = new String("abc");
+</code></p>
+
+<p>以上代码执行过程中生成了多少个String对象？</p>
+
+<p>答案写的是两个。"abc"本身是一个，而new又生成了一个。</p>
+
+<h2>"abc"是什么</h2>
+
+<p>查看这句程序的字节码，如下：
+```
+NEW String</p>
+
+<pre><code>DUP  
+LDC "abc"  
+INVOKESPECIAL String.&lt;init&gt;(String) : void  
+ASTORE 1   
+</code></pre>
+
+<p><code>``
+指令</code>ldc indexbyte`的含义：将两字节的值从indexbyte索引的常量池中加载到方法栈上。</p>
+
+<p>指令<code>LDC "abc"</code>说明了"abc"并不是直接以对象存在的，而是存在于常量池的索引中。String的构造函数调用命令实际使用的就是String类型作为参数，那么，栈上应该有一个String类型的索引。</p>
+
+<p>由此我们得出，在字节码中，ldc命令在常量池中找到了能索引到“abc”那个String对象的索引值。</p>
+
+<h2>常量池</h2>
+
+<p>常量池是类文件（.class）文件中的一部分，记录了许多常量信息，索引的字符串信息。</p>
+
+<p>由于Java是动态加载的，类文件并没有包含程序运行时的内存布局，方法调用等无法直接记录出方法的物理位置，常量池通过索引的方法解决了这个问题。</p>
+
+<!--more-->
+
+
+<p>常量池中存着许多表，其中Constant_Utf8_info表中，记录着会被初始化为String对象的字符串的字面值（iteral）。
+而在String 的java doc中，有对String字面值的说明：</p>
+
+<blockquote><p>All string literals in Java programs, such as "abc", are implemented as instances of this class.</p></blockquote>
+
+<p>在Java编译的过程中，确定下来的String字面值都先被优化记录在常量池中（那些双引号字符串，都是以CONSTANT_utf8_info的形式存储在常量池中的）。也就是说，Java源代码文件中出现的那些诸如"abc"字符串，都已经被提前放在了常量池中。</p>
+
+<p>可以使用如下代码验证这一点：</p>
+
+<p>```java
+public class Program<br/>
+{</p>
+
+<pre><code>public static void main(String[] args)  
+{  
+   String str1 = "Hello";    
+   String str2 = "Hello";   
+   System.out.print(str1 == str2);  
+}  
+</code></pre>
+
+<p>}<br/>
+```</p>
+
+<p>输出结果是true.说明"Hello"作为对象是被程序从同一个内存空间读取出来的。</p>
+
+<p>常量池是编译时产生的，存在于类文件中（*.class文件）。运行时，JVM中每个对象都拥有自己的运行时常量池（run time constant pool）。</p>
+
+<h2>字符串池</h2>
+
+<p>我在JDK 6.0源码的String类中，发现了一个有趣的method：intern() ,我翻译如下：</p>
+
+<blockquote><p>当intern方法被调用，如果池中已经拥有一个与该String的字符串值相等（即equals()调用后为true）的String对象时，那么池中的那个String对象会被返回。否则，池中会增加这个对象，并返回当前这个String对象。</p></blockquote>
+
+<p>其中有介绍一个字符串池的东西：字符串池（String pool），初始是空的，由类私有的控制。</p>
+
+<p>查看java.lang.String的源代码，发现Intern()方法是一个native方法，即本地实现的方法，而不是Java方法，这让我们不能直观的看到字符串池的实现细节。不过能够理解字符串池其实是类似于线程池的缓冲器，可以起到节约内存的作用。如下代码可以验证</p>
+
+<p>```java
+package biaobiaoqi.thinkingInJava;</p>
+
+<p>public class Test {</p>
+
+<pre><code>public static void main(String[] args){  
+
+    String strA1 = "ab";  
+    String strA2 = "c";  
+    String strB1 = "a";  
+    String strB2 = "bc" ;  
+    System.out.println((strA1+strA2).intern() == (strB1 + strB2).intern());  
+
+}  
+</code></pre>
+
+<p>}
+```
+输出结果为true。</p>
+
+<p>现代的JVM实现里，考虑到垃圾回收（Garbage Collection）的方便，将内存区域<a href="http://en.wikipedia.org/wiki/Java_Virtual_Machine#Heap">heap</a>划分为三部分： young generation 、 tenured generation（old generation）和 permanent generation(也就是方法区），方法区存储着类、静态变量、常量等信息。字符串池是为了解决字符串重复的问题，存在于方法区中。</p>
+
+<p>回过头来看看文章刚开始的那个问题。</p>
+
+<p><code>java
+String str = new String("abc");
+</code>
+这里确实是有两个String对象生成了。<code>new String("xxx")</code> 创建的String 对象会在堆中生成对象。而如果使用<code>String str = "xxx"</code>则先查看字符串池 是否已经存在，存在则直接返回该String 对象，否则生成新的String 对象，并将它加入字符串池中。</p>
+
+<h2>intern()的应用</h2>
+
+<p>在JDK 源码中查找对String.intern()的调用，发现诸如java.lang.Class中就有方法调用了它：
+```
+ private Field searchFields(Field[] fields, String name) {</p>
+
+<pre><code>    String internedName = name.intern();
+    for (int i = 0; i &lt; fields.length; i++) {
+        if (fields[i].getName() == internedName) {
+            return getReflectionFactory().copyField(fields[i]);
+        }
+    }
+    return null;
+}
+</code></pre>
+
+<p>```
+这里获得的internedName</p>
+
+<h2>总结</h2>
+
+<ul>
+<li><p>编译Java源代码时，源文件中出现的双引号内的字符串都被收纳到常量池中，用CONSTANT_utf8_info项存储着。</p></li>
+<li><p>JVM中，相应的类被加载运行后，常量池对应的映射到JVM的运行时常量池中。其中每项CONSTANT_utf8_info（也就试记录那些字符串的）都会在常量引用解析时，自动生成相应的internal String，记录在字符串池中。</p></li>
+<li><p>尽量使用<code>String str = "abc";</code>，而不是<code>String str = new String("abc")；</code>。用new的方法肯定会开辟新的堆空间，而前者的方法，则会通过string interning优化。</p></li>
+<li><p>JDK的实现也一直在优化，</p></li>
+</ul>
+
+
+<h3>参考资料</h3>
+
+<ul>
+<li><a href="http://www.codeinstructions.com/2009/01/busting-javalangstringintern-myths.html">Busting java.lang.String.intern() Myths</a></li>
+<li><a href="http://www.xyzws.com/Javafaq/what-is-string-literal-pool/3">What is String literal pool? How to create a String</a></li>
+<li><a href="http://stackoverflow.com/questions/4918399/what-type-of-memory-heap-or-stack-string-constant-pool-in-java-gets-stored">What type of memory (Heap or Stack) String constant pool in Java gets stored?</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

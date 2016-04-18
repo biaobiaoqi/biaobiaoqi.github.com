@@ -1,0 +1,472 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>《程序员的思维修炼》 - Biaobiaoqi的博客</title>
+  <meta name="author" content="Biaobiaoqi">
+
+  
+  <meta name="description" content="别鄙视方法论 曾经很长时间里，我这么认为：方法论的东西没什么实际的用处，不过是其他人按照自己的喜好来处理事物的途径而已，何必照着他人的思路。比如，作为一只不靠谱的程序猴子，在一些偏颇的思维习惯的影响下，我甚至对许多图形化的东西比较反感，自以为文本信息已经足以表达清楚事实且更有效率， &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://biaobiaoqi.github.io/blog/2013/05/22/pragmatic-thinking-and-learning-refactor-your-wetware/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Biaobiaoqi的博客" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+
+function addBlankTargetForLinks () {
+
+  $('a[href^="http"]').each(function(){
+
+      $(this).attr('target', '_blank');
+
+  });
+
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+
+  addBlankTargetForLinks();
+
+});
+
+</script>
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F49481ec3305db999013860b0ccb3b16d' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39900036-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Biaobiaoqi的博客</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:biaobiaoqi.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives/">全部文章</a></li>
+  <li><a href="/tag-cloud/">分类阅读</a></li>
+  <li><a href="/resources/">其他推荐</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">《程序员的思维修炼》</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-22T01:14:00+08:00" pubdate data-updated="true">May 22<span>nd</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h3>别鄙视方法论</h3>
+
+<p>曾经很长时间里，我这么认为：方法论的东西没什么实际的用处，不过是其他人按照自己的喜好来处理事物的途径而已，何必照着他人的思路。比如，作为一只不靠谱的程序猴子，在一些偏颇的思维习惯的影响下，我甚至对许多图形化的东西比较反感，自以为文本信息已经足以表达清楚事实且更有效率，从而本能的回避能造成视觉冲击的事物。直到后来，发现自己每每定下的计划都无法完整实施，自然也是没有收到预期的效果。我开始关注到方法本身是否合理，寻找那把平衡效率和体验的钥匙。</p>
+
+<p>这本书给出了一个很好的答案。</p>
+
+<p>虽然标题上赫然是“程序员”几个大字，但其实并没有这么局限。这是一本谈论思维习惯的书，对所有想了解大脑认知过程以更好的发觉其潜能的读者而言，都是可以参考的。虽然自己只是看完了这本书，而没有长期实践的效果证明，但从以往的经验来看，它的观点总能让我信服。</p>
+
+<!--more-->
+
+
+<p>下面是我印象最深刻的观点的总结：</p>
+
+<h2>德雷福斯模型（Dreyfus）</h2>
+
+<p>技能获取领域的模型。这个模型针对于某个技能而言，是一个情景模型。他将技能的掌握分为 5 个阶段：</p>
+
+<ul>
+<li>新手 -> 高级新手 -> 胜任者 -> 精通者 -> 专家</li>
+</ul>
+
+
+<p>新手和专家最主要的区别在于【直觉】：新手需要与情景无关的规则让他们高效工作，而专家则相反，他们更多的使用【情景】相关的直觉。（我不觉得需要记住所有这五个阶段，只需要知道，这是一个不断积累知识、培养思维习惯的过程。）</p>
+
+<h2>认识大脑</h2>
+
+<p>大脑的配置是双 CPU，单主机总线的。</p>
+
+<ul>
+<li>线性模式的 L（左脑）：主要负责线性、【逻辑思维】和【语言处理】。它按部就班的处理指令，相对缓慢，使用了大脑中较少的一部分资源。</li>
+<li>富模式的 R（右脑）：大脑的 Google，负责搜索、模式匹配。它是异步执行的，【非理性】的。可能某个想法几天后才突然跳出来。它不做任何语言处理，这意味着它的结果也不是语言能表达的。它的处理只能邀请，不能强制命令 。我们可以时常记录各种想法，让它运转，以激发它的活跃状态。</li>
+</ul>
+
+
+<p>这两个 CPU 共享通过内存核心的总线（意识），每次只有一个 CPU 可以访问内存。</p>
+
+<p>值得注意的是，积极的情感对学习和创造性思维非常关键。处于“高兴”的状态可以扩展你的思维过程，激活更多的大脑物质。</p>
+
+<p>理解了大脑的工作模式，以及它们的不同和对实际思考能力的作用，就大概知道了平时应该怎么使用它对自己而言更有效。</p>
+
+<h2>充分利用右脑</h2>
+
+<p>需要强调 R 的功能，因为它关系着【直觉】，而这正是成为专家的必经之路。</p>
+
+<ul>
+<li><p>多感官的输入，能获得更高的效率。比如软件工程中使用 CRC 卡片做设计，或者使用积木、乐高玩具做架构设计。</p></li>
+<li><p>大脑善于适应变化的环境。因此，要定期改变环境，满足你的大脑。任何一种感官的参与都可能是有益的。（当年还强迫自己不间断的工作，既累又不讨好>&lt;…）</p></li>
+<li><p>在学习技能时，可以用 R 型探路，掌握全局，而后用 L 型紧跟，两者配合好。（举例参见读书的 SQ3R 方法）</p></li>
+<li><p>隐喻是一种激发创造力的强大技能，它能很好的沟通好 L 和 R 型处理能力。幽默感正是这种从不同的想法中创造新奇的联系的方式，幽默感可以建立更强大的隐喻。</p></li>
+<li><p>大脑在处理不同的输入时，差别并不大。记忆不是永远不变的，每次提取记忆，也会重构记忆。我们可以通过提供给自己有益的暗示，来促进自身进步。</p></li>
+<li><p>一切输入都会被存储。如果被存储的事物之间有好的区分度， 那就更容易在查询时被检索到。举个编程的例子，源代码的阅读次数远远多于它的编写次数，所以通常应该花更多功夫把代码变得适合阅读，让代码风格和注释更易于阅读，会事半功倍。</p></li>
+<li><p>晨写和无目的的散步这种方式，能活跃右脑，增加 R 型工作的机会。</p></li>
+</ul>
+
+
+<h2>调试大脑</h2>
+
+<p>大脑有一些固有的偏见，比如自以为是。我们需要对这些点予以关注。</p>
+
+<ul>
+<li><p>每个人个性倾向不同，处理事儿的方式也不相同。（推荐 <a href="http://www.apesk.com/mbti/">MBTI 测试</a>，这里是我的<a href="http://biaobiaoqi.me/blog/2013/05/12/mbti-test/">测试结果</a>。）</p></li>
+<li><p>重要的是要认识到：在某种情况下，别人的反应行为和你所设想的不一样时，他们并不是疯了、懒惰或者非常难以相处。你也不是。</p></li>
+<li><p>遇到问题，深呼吸，包托变味的空气。深深吸气。数到十。记住你是高级动物。让蜥蜴式的相应过去，请新大脑皮层来处理问题。</p></li>
+<li><p>既然性格和技能水平各异，可能奖励措施也应该各式各样才对。否则奖励反而让获奖人感到不自在。</p></li>
+<li><p>大脑会偷懒，很多时候，我们的看法是基于预测的。</p></li>
+</ul>
+
+
+<h2>主动学习</h2>
+
+<h5>SMART 方法</h5>
+
+<p>学习过程中，使用目标激励的方式会很有效（早年自己没目标，还老找借口说没目标自己也会不断努力的…汗颜）遵循 SMART 方法（这么多条，没必要全记住，核心就在用目标激励前进）：</p>
+
+<ul>
+<li>Specific：将目标具体化</li>
+<li>Measurable：让目标能度量</li>
+<li>Achievable：目标不能是空想，要能够实现</li>
+<li>Relevant：要与自己足够相关，才能更大化其效益</li>
+<li>Time-boxed：时间上可控，有最后期限</li>
+</ul>
+
+
+<h5>学习方式分类</h5>
+
+<p>每个人对学习方式的敏感度不一样，学习者分三类：</p>
+
+<ul>
+<li>视觉型：需要看到学习资料和老师，对图片，图表，老师的肢体语言和面部表情敏感。</li>
+<li>听觉型：需要听到学习材料，对讲座、研讨会、播客敏感</li>
+<li>动觉型：通过活动和触摸来学习，需要亲身感受来学习材料</li>
+</ul>
+
+
+<p>每个人都有自己的默认属性，比如倾向于视觉型或者其他。有时候，尝试不同的学习类型，或许会带来灵感。</p>
+
+<h5>SQ3R</h5>
+
+<p>书面指令的传递一般是最无效的，大脑处理语言相关部分很小，除此以外，大脑整个剩余部分都不懂语言。常规的阅读方式效率很低，这里推荐一种主动阅读方式，大家可以按需参考。</p>
+
+<p>SQ3R 主动看书法：</p>
+
+<ul>
+<li><ol>
+<li>调查（Survey）：扫描目录和每章总结，得出总体看法。</li>
+</ol>
+</li>
+<li><ol>
+<li>问题（Question）：记录所有问题</li>
+</ol>
+</li>
+<li><ol>
+<li>阅读（Read）：阅读内容</li>
+</ol>
+</li>
+<li><ol>
+<li>复述（Recite）：总结</li>
+</ol>
+</li>
+<li><ol>
+<li>回顾（Review）：重读，拓展笔记，与同事讨论。</li>
+</ol>
+</li>
+</ul>
+
+
+<h5>思维导图</h5>
+
+<p>思维导图是一种图表，显示各个主题和它们之间的关系。</p>
+
+<ul>
+<li><p>思维导图的颜色信息、形状信息大大增加了表达的丰富性，让人更容易接受，易于理解。</p></li>
+<li><p>多次迭代思维导图图，可以充分利用起 R 型的思维。</p></li>
+<li><p>当陷入没有明确思路的混沌状态时，思维导图有助于理清思路，指引方向。</p></li>
+<li><p>另外，跟思维导图一样，记录文档也是不错的选择。或许文档不会有人看，但记录的过程，能促进思考。</p></li>
+</ul>
+
+
+<h2>经验</h2>
+
+<ul>
+<li><p>在最后期限面前，对 L 型活动可能有激励，但对 R 型活动是一种灾难。压力扼杀了认知。</p></li>
+<li><p>我们是天生的模仿者，如果身边的人技能水平高，那么我们一般会潜移默化的向他们学习，继而提高自身水平。</p></li>
+<li><p>语言描述不是一个最好的教学方式。人脑只有很少计算资源在做语言处理。用更多形象的，比如声音、图形、动过可以更好的促进学习。</p></li>
+</ul>
+
+
+<h2>注意力</h2>
+
+<p>保持注意力的三点：</p>
+
+<ul>
+<li>1.学会安抚喋喋不休的 L 型思维。</li>
+<li>2.主动在前进中思考和增强思想，即使是不成熟的。</li>
+<li>3.明确情景切换的昂贵代价，尽可能避免。</li>
+</ul>
+
+
+<p>注意力修炼：冥想</p>
+
+<ul>
+<li>寻找一个安静的地方，舒适、清醒的坐着，挺直背</li>
+<li>闭上眼睛，集中注意力到呼吸上</li>
+<li>注意呼吸节奏，不要试图改变它，只是感觉。不要与自己交谈。每当发现自己在思考一些问题或与自己交谈，及时抛弃这些想法，轻轻将注意力回到呼吸上。</li>
+</ul>
+
+
+<p>查邮件等会打扰工作状态，这种打扰，会让之后的二十分钟甚至更长无法进入工作状态。这是一种情景切换，大脑不善于情景切换。</p>
+
+<h2>超越专家</h2>
+
+<p>做到有效的改变很难。以前的习惯依然存在在大脑里。当回到某个旧习惯时，不用懊恼。承认它，大脑就是这样工作的。当意识到它的出现时，重新回到正确的道路上去。</p>
+
+<p>即使成为专家，也要意识到局限性：可能创新不足，过于相信意识等。</p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.io/blog/2013/05/22/pragmatic-thinking-and-learning-refactor-your-wetware/'>http://biaobiaoqi.github.io/blog/2013/05/22/pragmatic-thinking-and-learning-refactor-your-wetware/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Biaobiaoqi</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-22T01:14:00+08:00" pubdate data-updated="true">May 22<span>nd</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/book/'>book</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+    <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+<a class="jiathis_button_tsina"></a>
+<a class="jiathis_button_weixin"></a>
+<a class="jiathis_button_renren"></a>
+<a class="jiathis_button_douban"></a>
+<a class="jiathis_button_googleplus"></a>
+<a href="http://www.jiathis.com/share?uid=1814751" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+	data_track_clickback:true,
+	summary:"",
+	shortUrl:true,
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1814751" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/05/21/the-facebook-effect/" title="Previous Post: 《Facebook效应》">&laquo; 《Facebook效应》</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/05/25/kmp-algorithm/" title="Next Post: KMP算法实现">KMP算法实现 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <!--h1>Comments</h1-->
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>标签云</h1>
+ <br /> 
+  <ul class="tag-cloud">
+    <a style="font-size: 112%" href="/tags/hadoop/">Hadoop</a> &nbsp 
+<a style="font-size: 139%" href="/tags/jvm/">JVM</a> &nbsp 
+<a style="font-size: 144%" href="/tags/java/">Java</a> &nbsp 
+<a style="font-size: 141%" href="/tags/pat/">PAT</a> &nbsp 
+<a style="font-size: 112%" href="/tags/octopress/">octopress</a> &nbsp 
+<a style="font-size: 135%" href="/tags/fen-bu-shi/">分布式</a> &nbsp 
+<a style="font-size: 133%" href="/tags/zi-jie-ma/">字节码</a> &nbsp 
+<a style="font-size: 135%" href="/tags/si-kao/">思考</a> &nbsp 
+<a style="font-size: 180%" href="/tags/ji-zhu/">技术</a> &nbsp 
+<a style="font-size: 124%" href="/tags/fang-fa-lun/">方法论</a> &nbsp 
+<a style="font-size: 106%" href="/tags/fu-wu-qi/">服务器</a> &nbsp 
+<a style="font-size: 137%" href="/tags/sheng-huo/">生活</a> &nbsp 
+<a style="font-size: 148%" href="/tags/suan-fa/">算法</a> &nbsp 
+<a style="font-size: 117%" href="/tags/wang-luo/">网络</a> &nbsp 
+<a style="font-size: 135%" href="/tags/du-shu/">读书</a>
+
+  </ul>
+</section>
+<section>
+  <h1>关于</h1>
+   <p>biaobiaoqi是我的网络id。<br><br>
+   我的博客日志：<a href="http://biaobiaoqi.me/blog/2013/09/01/blog-log/">请戳</a><br><br>
+   更多信息请戳：<a href="http://about.me/biaobiaoqi">about.me</a><br>
+	</p>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - Biaobiaoqi -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  - <span class="credit">Theme by <a href="http://www.gehaxelt.in">Gehaxelt</a></span>
+  <span class="credit">and <a href="http://www.it-solutions-neef.de">IT Solutions Neef</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'biaobiaoqisblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://biaobiaoqi.github.io/blog/2013/05/22/pragmatic-thinking-and-learning-refactor-your-wetware/';
+        var disqus_url = 'http://biaobiaoqi.github.io/blog/2013/05/22/pragmatic-thinking-and-learning-refactor-your-wetware/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

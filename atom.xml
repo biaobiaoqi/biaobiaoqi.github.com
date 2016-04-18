@@ -1,0 +1,2811 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Biaobiaoqi的博客]]></title>
+  <link href="http://biaobiaoqi.github.io/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.github.io/"/>
+  <updated>2016-04-18T10:59:58+08:00</updated>
+  <id>http://biaobiaoqi.github.io/</id>
+  <author>
+    <name><![CDATA[Biaobiaoqi]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Works Applications宣讲会]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2014/05/28/works-applications/"/>
+    <updated>2014-05-28T00:53:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2014/05/28/works-applications</id>
+    <content type="html"><![CDATA[<p>2012 年我本科毕业，Works Applications （缩写 WAP）在上海设立了办公室，在国内第一次招人。这家日本 ERP 公司在此之前并没有被大家锁熟知，神秘的开出 40 万人民币（6m 日元）的入职年薪，颇为诱人。他们的面试流程也与大多数 IT 公司大相径庭。</p>
+
+<p>今晚，WAP 公司到浙大做宣讲。提纲如下：</p>
+
+<ul>
+<li>公司介绍</li>
+<li>上海办公室介绍</li>
+<li>学长经验交流</li>
+<li>招聘流程介绍和公布考题</li>
+</ul>
+
+
+<p>本文做了简单的归纳记录。</p>
+
+<!--more-->
+
+
+<h2>公司介绍</h2>
+
+<p>一位中国的美女姐姐介绍了公司的基本情况。</p>
+
+<h4>公司基本情况</h4>
+
+<ul>
+<li>WAP 于 96 年发家，到现在为止全球有 3.5k 员工。</li>
+<li>总共 9 家子公司，其中 WAP 超过 3k 员工。</li>
+<li>在纽约、新加坡、上海、日本有办公室。员工平均年龄 29 岁。</li>
+<li>国际化：最近 4 年，有 150＋中国员工，50＋印度员工。希望未来一半员工来自海外。</li>
+<li>ERP，Enterprise Resource Planning</li>
+<li>最初做 HR 产品，HR 产品做的很好。</li>
+<li>用户：1／3 的日本大公司。包括 Sony，三菱，星巴克等。</li>
+<li>上海的产品线主要包括：HR、 Group ware</li>
+<li>新加坡的产品是：E-Commerce</li>
+<li>目标：世界五强的软件公司</li>
+<li>终极目标：通过他们的软件的高效，让公司员工实现一周三休（3 days off per week）</li>
+<li>竞争对手：SAP， Oracle</li>
+</ul>
+
+
+<h4>对程序员的要求</h4>
+
+<ul>
+<li>软件的创造者（Software Creator）</li>
+<li>文化里允许失败，鼓励创新</li>
+<li>不看重原来的成绩，看中能力： 在日本有出色的中国员工领导着更高年龄的日本员工。</li>
+<li>职业发展：两条路，specialist 和 manager</li>
+</ul>
+
+
+<h4>待遇</h4>
+
+<ul>
+<li>全球统一 6M 日元/年</li>
+<li>每年两次考评，有机会提升年薪 #应该只是有机会吧</li>
+<li>终生雇佣制</li>
+<li>come back pass ＃针对足够优秀的人才</li>
+<li>女性员工照顾孩子的时间调整</li>
+</ul>
+
+
+<h4>文化</h4>
+
+<ul>
+<li>接近欧美企业</li>
+<li>结构扁平，</li>
+<li>鼓励对 boss 说 no</li>
+<li>鼓励提建议、互相讨论</li>
+<li>弹性工作制</li>
+</ul>
+
+
+<h2>上海办公室介绍</h2>
+
+<p>作主讲的是一个日本中年人，似乎是上海办公室的主管，介绍了上海办公室的情况。由于不太适应他日本口音的英文，相信漏了不少点>&lt;&#8230;</p>
+
+<p>介绍了一个他很喜欢的人才管理系统：CTM（company Talent Management）。</p>
+
+<p>强调了人才的重要性，他相信要成为一个伟大的企业，首先得有足够优秀的员工，得有足够多的国际化的领导着（global leader）。他举了几个中国人在企业中获得成功的例子，并列举了他们的优势，用来展示如何成为一个合格的 global leader。</p>
+
+<ul>
+<li>just coding is not enough</li>
+<li>work and think globally</li>
+<li>create something new</li>
+</ul>
+
+
+<h2>程虓学长介绍</h2>
+
+<p>程虓(xiao)学长是 12 级毕业的浙大学长。在上海办公室表现优异，有出色的交流能力。这一点，从展示中也看得出来。</p>
+
+<p>他先后参与过三个项目，每个项目，他都付出了很多，也从中收获了许多成长。</p>
+
+<ul>
+<li>CLM（Company Learning Management）。6＋1 人。</li>
+<li>CJK ：公司的核心产品，人事与给予。 这是针对大企业（员工大于 1k）的 hr 解决方案。</li>
+<li><p>Global Payroll：跨集团公司的工资发放，管理，会计业务。</p></li>
+<li><p>找工作时，药保持快乐的心情</p></li>
+<li><p>software creator：dev 具有绝对主动权。前期研究，业务模型建立，系统设计，实现</p></li>
+<li><p>focus：给客户带来收益，ROI</p></li>
+<li><p>Cutting edge and free：给传统软件带来新的元素</p></li>
+<li><p>full stack oriented or specialized sharp shooter</p></li>
+</ul>
+
+
+<h4>他眼中的文化</h4>
+
+<ul>
+<li>鼓励挑战：MBM Most Breakthrough Member，公司内最高个人／团队奖项</li>
+<li>欢迎错误：挑战伴随着错误</li>
+<li>扁平管理：领导是顾问，大家在讨论中角色对等</li>
+</ul>
+
+
+<h2>招聘流程介绍和公布考题</h2>
+
+<p>公司 HR 公布了招聘流程，并发放了考题。是两道程序题，选一道完成，Java 和 C++实现均可。要求第一正确，第二程序要精巧和快速。</p>
+
+<ol>
+<li>现场发放考题，5 天之内按规定方式提交。</li>
+<li>30－60min 面试</li>
+<li>9 天 intership 模拟真实工作环境：如何验证自己的想法。面试官扮演客户的角色。可以培养 business sense。@杭州／@北京</li>
+<li>发放 offer；优秀的应聘者可以获得机会去东京总部参观</li>
+</ol>
+
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.io/blog/2014/05/28/works-applications/'>http://biaobiaoqi.github.io/blog/2014/05/28/works-applications/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[最近几天]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2014/05/23/recent-days/"/>
+    <updated>2014-05-23T23:25:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2014/05/23/recent-days</id>
+    <content type="html"><![CDATA[<p>再不写几篇技术博客，本站就彻底沦为个人心情垃圾桶了……在此之前，还是写写这些日子的生活吧 LOL.</p>
+
+<h2>病痛</h2>
+
+<p>这个伤心<del>（让人开心）</del>的故事是这样开始的。4 月底，忍耐了快两年的<code>蛀牙</code>，终于慢慢的被蛀空了，吃东西、喝凉水都疼，迫不得已去看医生。</p>
+
+<p>看牙医的前一天晚上，发现全身起包，瘙痒难当。梦里醒来，模模糊糊的以为是饥渴的蚊子咬的，起床给全身抹了一遍六神，强忍着继续睡了。第二天，包不仅没消，还有疯长的趋势。在牙医的提点下，我又去挂了一个皮肤科，医生很淡然的告诉我这叫<code>过敏</code>。于是，在治疗蛀牙的同时，我又收获了几包抗过敏的药。</p>
+
+<p>医生同时也告诉我，我的蛀牙已经烂到了神经，必须剔除全部神经，大概需要四五个疗程，隔周治疗一次。于是他开始打麻药钻神经了。我对麻药的药效很不敏感，总之我是能感受到那股钻心的疼痛的，咬咬牙忍了。</p>
+
+<!--more-->
+
+
+<p>过了两周，蛀牙的处理进行到后期了，拍牙片准备做牙套。拍片的时候又传来噩耗：<code>智齿横长阻生</code>，医生的建议是：为了避免它影响旁侧待补的蛀牙，拔掉它。于是，我又开起了拔智齿的线程。这颗智齿聪明的把自己埋在肉里，手术过程是：切开肉，敲碎半颗牙，拔出，缝上……手术过程在充分的麻醉下进行，并不疼。只是医生拿着锤子、凿子各路兵器敲敲打打的时候，脑子里感觉还是一阵阵轰鸣眩晕。疼的还属麻药消去的时间，只能吃流食，不能吃太热，不能吐口水……</p>
+
+<p>还没有结束呢。前天下午觉得头痛不舒服，<code>感冒</code>了。我读书少，是个粗人，纯粹的觉得感冒这种小病，运动下就痊愈了吧，于是晚上一个人拿着篮球去投篮玩。久违的自己一个人练练球，可开心了。捡球的时候，<code>崴了脚</code>……去校医院包扎，正好开了感冒药。</p>
+
+<p>下图就是积攒的各种各样的药片啦。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/2014-05-22%2021.49.04.jpg?imageView/2/w/800/h/800" alt="药" /></p>
+
+<h2>心疾</h2>
+
+<p>身体的病，能治的去医院就好，不能治的暂时没碰到。倒是心理的焦躁很难察觉，当它肆意的蔓延开来时，已经留下了一个接一个烂坑等着你爬。这不才是现代人疏于应付的疾病么？最近的我就是一个很好的例子。</p>
+
+<p><del>简单的讲，有时候觉得除了实验室的活儿，其他的事情我都还蛮感兴趣的。</del></p>
+
+<p>客观的原因不提也罢，谁没几个不顺心，让不顺心搞得焦头烂额就是自己的责任了。主观原因则可以归结到自己的人生观、世界观、价值观，太大了也不方便展开。还是想想怎么解决吧。</p>
+
+<p>对于有些人，<code>早起</code>情况能反应精神状态。我原以为我也是这样，于是经常企图用第二天早起来提升士气。后来才发现，我的精神状态指标其实不是早起，而是<code>晚睡</code>。</p>
+
+<p>比如做<a href="http://chahaoyou.com/">查好友</a> iOS 第一版的时候，每天夜里可以编码到凌晨 4、5 点。比如当我决定补充下算法基础时，写 <a href="http://pat.zju.edu.cn/">PAT</a> 和 <a href="https://oj.leetcode.com/problems/">leetcode</a> 也可以通宵。还有一些通宵，是在查自己感兴趣的资料，写有意思的文字和代码。</p>
+
+<p>我对睡眠的驾驭应该远低于平均水平，年少轻狂的一度以此为荣。直到觉得身体有些力不从心。身体是革命的本钱，当身体告诉我不可以，那就绝无可能把晚睡本身作为健康精神状态的指标。其实，这些晚睡无非是那些感兴趣到让我无法自拔的事情在怂恿。</p>
+
+<p>白天在公共场合，各方面因素推着人走，只有晚上独处时，才寻得那点自由。换句话讲，如果一定要说哪些事实能标志自己的精神状态，那就是晚上睡前在做什么了。说白了，也就是自己是不是在做着自己想做的事情。</p>
+
+<p>不过，还是那句话，谁没几个不顺心。让不顺心流淌到全身的血液，那就是幼稚了。</p>
+
+<h2>禁欲</h2>
+
+<p>首先，不要想歪。</p>
+
+<p>大二的某一天，突然想削减上人人的时间，将他们拿来做点更有意思的事情。几经注销、重新登入，成功的让自己养成了在悠闲地不知道做啥时也没了上人人的欲望。</p>
+
+<p>这次，主角变成了<del>新浪</del>微薄。当我意识到一旦思维主动或被动的空闲下来，我就会不假思索的通过<code>cmd+tab(选中 chrome) -&gt; cmd + t (打开新标签) -&gt; 输入 w(自动补全为 weibo.com) -&gt; enter</code>打开微薄页面时，我觉得是时候跟她说再见了。</p>
+
+<p>禁言的头几天，作为思维停顿时的习惯性反射，打开微博的组合动作仍然时有发生。渐渐的就没了兴趣。除了黄海波被抓的时候看看最新的情况，隔三差五处理下艾特自己的内容，微薄淡出了自己的视野。</p>
+
+<p>微薄禁言，似乎是个好的转变。不过触发自己转变的，想必也是比较糟糕的状态了。比如连连宵夜，比如晚上早早的跑回寝室玩耍，比如饭后闲逛网页根本停不下来……而且，也没见自己的士气有多好的提升。</p>
+
+<p>说到底，禁欲不是为了禁谁，而是为了更好的做其他事情。没有后者，前者也只是短效的麻痹而已。</p>
+
+<h2>做和坚持</h2>
+
+<p>最近一段时间，终于完成了一个思维习惯的转变：以前总是事先安排、计划周全再实施，这样容易因兴趣的减退、外因的阻挠错过最好的时间窗口。现在我开始习惯于兴趣驱动，抛开科学的、完善的计划，着重做和坚持。</p>
+
+<p>于是，坚持下来了半年多的健身计划。虽然每周只练两三次，运动量也就每次做做歇歇的半个小时，而且姿势未必标准（什么是标准？），还时常变换网上流传的各种招式，但小六块的腹肌还是能证明点成效了。</p>
+
+<p>于是，因为和妹子都喜欢《夜空中最亮的星》这首歌，在没有乐理背景的条件下，花了一个月照着乐谱学会简单的弹唱。虽然到现在为止还会在扫弦时因按不住弦发出杂音。</p>
+
+<p>Done is better than perfect.</p>
+
+<h2>最后</h2>
+
+<p>很庆幸深夜的现在，我还在码字……可以睡觉啦。<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.io/blog/2014/05/23/recent-days/'>http://biaobiaoqi.github.io/blog/2014/05/23/recent-days/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Facebook学长交流分享]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2014/05/22/facebook-tech-talk-and-workshop/"/>
+    <updated>2014-05-22T22:24:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2014/05/22/facebook-tech-talk-and-workshop</id>
+    <content type="html"><![CDATA[<p>印象中这似乎是 Facebook 第一次来浙大校园做交流。</p>
+
+<p>前不久，也参加了 Google 的校园宣讲，G 的两大宣讲主题是 Google 介绍和模拟面试。印象最深的是无敌的一家三口每年 100w 封顶的豪华医保（配偶不限男女 LOL）。这次 Facebook 的结构类似：</p>
+
+<blockquote><p>Tech Talk: Ranking News Feed for 1.2 Billon People</p>
+
+<p>Workshop: Crush Your Coding Interview</p></blockquote>
+
+<p>两位主讲人都很棒，下面是自己的简要记录。</p>
+
+<!--more-->
+
+
+<h2>Crush Your Coding Interview</h2>
+
+<p>主讲人： Frank Qixing Du。本科复旦，研究生清华、在 fb 做 mobile 开发。</p>
+
+<p>Frank 主要介绍了如何针对性准备 Facebook 的面试，从中可以看得出 F 的企业文化。</p>
+
+<p>面试准备：流程，资料，沟通。主要分四块：</p>
+
+<ol>
+<li>简历</li>
+<li>获得面试</li>
+<li>coding，过去的项目</li>
+<li>面试之后</li>
+</ol>
+
+
+<h4>简历</h4>
+
+<ul>
+<li><p>基础信息：blabla，填写 GPA 最好附上满绩比重（据说有的学校满分是 4，而 ZJU 就是 5），毕业时间（便于 hr 筛选简历）……</p></li>
+<li><p>个人的故事：展现经验、个人影响和对事物的激情。</p>
+
+<p>  经验方面：包括工业界经验，兴趣经验项目，github 等等。侧重三点：</p>
+
+<ol>
+<li>做了什么；</li>
+<li>做的东西的影响；</li>
+<li>具体，简短，一页之内</li>
+</ol>
+
+
+<p>  一些常用表达词汇：build，optimize，improve 等。</p></li>
+<li><p>诚恳的 highlight 自己的成就~</p></li>
+</ul>
+
+
+<h4>获得面试</h4>
+
+<ol>
+<li>chat with recruiter</li>
+<li>一到两轮</li>
+<li>on site ／ 电面 （2015 年会有一批 facebook 员工到中国来现场面试）</li>
+</ol>
+
+
+<h4>面试：stay clam and think out loud</h4>
+
+<ul>
+<li>tackle hard problem 的能力</li>
+<li>trade-offs 的权衡能力</li>
+<li>沟通能力，表达代码的思路</li>
+<li>检测 limits：知识的深度、广度。要坦诚的说自己不知道</li>
+</ul>
+
+
+<p>不会考脑经急转弯，着重在 数据结构、算法实现上。</p>
+
+<ol>
+<li>学会提问题：明确题目的条件限制等</li>
+<li>写出能运行的代码</li>
+<li>不断优化</li>
+</ol>
+
+
+<p>现场出题感受下处理过程： 数组的 size 是 N，存 1－N 之间的数，判断是否有重复。</p>
+
+<ul>
+<li>不要立即写代码，先明确思路，再写代码。</li>
+<li>Done is better than perfect</li>
+</ul>
+
+
+<p>关于项目：</p>
+
+<ul>
+<li>要准备的常见问题：最近做的项目，最有挑战的项目，最喜欢的项目</li>
+<li>context：一两句话交代背景，action：做了什么，result：项目带来的影响</li>
+</ul>
+
+
+<h4>面试之后</h4>
+
+<p>准备一到两个问题：</p>
+
+<ul>
+<li>you are interviewing the company as well</li>
+<li>Focus on what you concerned most</li>
+</ul>
+
+
+<h4>总结</h4>
+
+<ul>
+<li>think out loud</li>
+<li>问许多问题</li>
+<li>检测代码能否运行！corner case 等，debug。清晰，健壮。</li>
+<li>be yourself</li>
+</ul>
+
+
+<h2>Ranking News Feed for 1.2 Billon People</h2>
+
+<p>主讲人：Meihong Wang。本科浙大，现在是 Engineering Manager，团队在做 New Feed。</p>
+
+<p>Meihong 学长从项目组的动机、News Feed 架构以及企业文化三个角度做了介绍。</p>
+
+<h4>MOTIVATION</h4>
+
+<p>一些数据：</p>
+
+<ul>
+<li>550M daily user</li>
+<li>5B page loads／day</li>
+<li>publish &lt;1s</li>
+<li>Fetch Rank time &lt; 200ms</li>
+<li>2000 candidate stories per day per user -> rank them</li>
+</ul>
+
+
+<h4>ARCHITECTURE</h4>
+
+<p>Actor －logging －> user action storage &lt;－ query －> viewer</p>
+
+<p>Pull model：push 耗资源太多</p>
+
+<p>Feed Evaluation：机器学习，概率模型，预测</p>
+
+<h4>Culture</h4>
+
+<ul>
+<li>Make the world more open and connected</li>
+<li>6k 员工，3k 工程师。世界四个工程办公室：Menlo Park，Seattle，New York， London</li>
+<li>THE HACKER WAY：在一个产品上，不断的改进迭代。</li>
+<li>We move fast</li>
+<li>Hackthons：一两个月有一场</li>
+<li>工作一年以上，可以跳到另一个 team 做一个月。鼓励去不同组，了解整个公司。</li>
+<li>公司的架构是扁平、网状的，工程师的 title 一样，就是 Software Engineer</li>
+<li>职业发展：为期 8 周的 Bootcamp；English 1v1 辅导；各种 camp，方便了解公司技术；免费洗衣服，免费食物等……</li>
+</ul>
+
+
+<h2>问题环节</h2>
+
+<p>只摘录了一些来得及和自己感兴趣的问题：</p>
+
+<ul>
+<li>我问道 Facebook 怎么看待“全栈工程师”，Frank 透露了他对业界流行 full-stack 的看法：“full stack is bull shit”，是一个噱头，startup 公司更需要。fb 对此没有特别的倾向性。当然，他们也有厉害的同事确实是 full-stack 的。</li>
+<li>工作强度，比国内大多数公司要清闲，币硅谷大多数公司要强。</li>
+<li>一周一次组会，一周一次 manger 半小时约谈</li>
+<li>2015 年，只要合格就招，没有人数限制。中国学生在 F 的口碑很好。</li>
+<li>工程师级别：3－8。研究生是 3，博士 4， 5 开始是 senior 级别，但是大家 title 都一样。</li>
+<li>工程师文化</li>
+<li>21 天年假</li>
+</ul>
+
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.io/blog/2014/05/22/facebook-tech-talk-and-workshop/'>http://biaobiaoqi.github.io/blog/2014/05/22/facebook-tech-talk-and-workshop/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[智能手环体验：UP24]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2014/05/08/jawbone-up24/"/>
+    <updated>2014-05-08T09:44:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2014/05/08/jawbone-up24</id>
+    <content type="html"><![CDATA[<h2>背景</h2>
+
+<p>穿戴式设备承载了物联网、大数据、健康、智能等各路当下或曾经的热门词汇，其风言风语已经飘荡了两年了。当前市面上比较流行的有国外的 jawbone up 手环、NIKE 的 fuelband 和 fitbit force 手环等，国内也不乏类似产品，比如 bong、咕咚等。</p>
+
+<p>3 月被网络各种消息吹得心痒痒，在同学的怂恿下，终于壮着胆从干瘪的口袋里挤出点钱入了一只 <a href="https://jawbone.com/up">jawbone up24</a>。用了两个月，于昨天二手出掉，原因下面会分析。首先介绍下我对外观和功能的认识。</p>
+
+<!--more-->
+
+
+<h2>外观</h2>
+
+<p>我的是黑色款 M 号，宽松的搭在手腕上，自觉得颇具运动、休闲感，倒是被很多同学喷黑乎乎的一圈不知为何物。想想今年本命年，应该买条红色的才对，这也构成了我两个月后卖掉它的原因之一。</p>
+
+<h2>功能体验</h2>
+
+<p>手环本身只有一个控制按键，通过连续按下的次数来执行响应的功能。而数据展示则完全在手机端（没有网页版）。官方介绍的功能挺多的，我实际使用的也就那么几个。先说说自己觉得鸡肋的功能：</p>
+
+<ul>
+<li>食物摄入量：手动输入吃了哪些食物、喝了多少水，可以通过扫描二维码的方式输入。但我实在对这种繁琐的事情提不起兴趣。自己平时的饮食习惯都处于半失控状态，没心思再来打开应用输入。</li>
+<li>特殊提醒：相当于一个事件闹钟。使用场景也比较窄，大多数情况下，手机闹钟就够了。</li>
+<li>社交功能：让多个朋友一起加入一个团队比拼数据等，但是 up 手环比较小众，国内就更少了，要让社交产生效果，真的很难。毕竟硬件平台的普及相比软件成本、门槛都更高。</li>
+<li>秒表：在跑步等运动时，可以用它来记录事件，但是还得打开手机查看，没有显示屏的劣势显现出来了。自己不怎么跑步，没怎么用过。</li>
+<li>活动警告：设定每完成多少步就进行提醒，还可以在每天设定的时间推送运动摘要。用下来觉得挺烦的，各种提醒消息……</li>
+</ul>
+
+
+<p>下面是自己觉得不错的功能：</p>
+
+<ul>
+<li>记步：可以记录每天是否有行走到目标步数，以此获得成就感。</li>
+<li>睡眠记录：睡眠模式中会通过肢体的活动程度来统计深浅睡眠时间等参数。不过需要手动切换睡眠模式，我碰到好几次睡前忘记切换到睡眠模式，于是丢失了当天的睡眠数据。</li>
+<li>静默闹钟：在学校寝室，这种震动叫醒的方式不会对别人的睡眠造成太大影响，从这个角度来说很方便。</li>
+<li>空闲提醒：设定时间长度，如果超过这个时间长度的静止，就会震动提醒。这个对于我这种长期坐在电脑前的工种意义重大。</li>
+<li>小憩：可以设定小憩时间，或者让手环智能判断需要小憩的时间（需要用户给定一个范围），到点后会震动叫醒。中午在办公场所午睡，用手环震动叫醒还是很方便的。</li>
+</ul>
+
+
+<h2>总结</h2>
+
+<p>购买之前，我查看了不少测评分析。自己对 UP24 的心理定位是：有助于健康保持的小闹钟。</p>
+
+<p>实际上，它也几乎达到了这个要求，只是我自己不争气，维护健康生活作息的意识在新鲜感退去以后也渐渐消散了。加上自己对黑色的外形也越来越不感冒，从最初每天时常查看数据，到后来一个星期也没看一眼手机应用，最终还是将它卖掉了。</p>
+
+<p>市场上唱衰智能手环的声音不少，最近的时间里，听闻 fitbit 已经停产 Force 了，原因是大约有 1%的用户反映佩带手环后皮肤过敏（原本还想试试 Force 的，只能作罢），而 Nike 则宣布不再专注于硬件研发，转而跟苹果合作，注重软件层面。经过两代产品的迭代，UP24 相比 UP 和 UP2 要成熟不少，至少没像 UP2 那样高频的出故障。</p>
+
+<p>Jawbone 还在撑着它的小众市场，但它跟其他竞争对手面临的最大的问题一样，如何聚拢用户感兴趣的功能，如何留住用户。</p>
+
+<p>传闻将于年底发布的 iWatch 或许值得关注。作为穿戴式设备，它背后有足够强大的苹果用户网支撑，相比 Google Glass，它更贴合当下用户的生活场景，而且苹果的产品线从来是互为增益极具粘性。已经等不及了呢 =)</p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.io/blog/2014/05/08/jawbone-up24/'>http://biaobiaoqi.github.io/blog/2014/05/08/jawbone-up24/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[课程助教实战]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2014/05/06/ta-in-practice/"/>
+    <updated>2014-05-06T20:06:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2014/05/06/ta-in-practice</id>
+    <content type="html"><![CDATA[<p>原谅我的标题党啦 LOL，借用 《xx 实战》（xx in practice）这个经典的标题，只为了记录自己第一次助教的体会。</p>
+
+<p>如果把第一次助教的经历看做是一个项目，那这个项目也是在我不断的调优中走上正轨的。</p>
+
+<h2>需求</h2>
+
+<p>导师人很好，给我留的活儿不多，但实践起来还是比预想要复杂一些。助教期间，我主要负责的任务有：</p>
+
+<ul>
+<li><p>平时作业的批改和成绩录入</p>
+
+<p>  每周老师会将所有学生（大约 80 人）的作业本交给我，由我评分、录入成绩后返回给老师。</p></li>
+<li><p>课程实验和大程的指导、评分和成绩录入</p>
+
+<p>  一共有五个课堂实验，要求每周完成一个，以实验报告的形式提交；期末要求完成一个大程序，评分有现场验收和大程报告两部分。</p></li>
+<li><p>协助老师批改期末试卷和成绩录入</p></li>
+</ul>
+
+
+<p>最后的批改试卷是在老师们的指导下完成，有良好的规范和流程。而前面两步中关于作业评分、登分的部分则有较大的自由实现空间。下面介绍的就是个人对这部分内容经验总结。</p>
+
+<!--more-->
+
+
+<h2>初步实现策略</h2>
+
+<p>最朴素的实现方法，会耗费很多的时间，但至少能完成任务：</p>
+
+<ul>
+<li>平时作业的批改和成绩录入</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>//拿到所有作业本后，每周我都需要完成如下过程：
+</span><span class='line'>loop in 80+个作业本
+</span><span class='line'>  拿起笔，翻开每本作业本；
+</span><span class='line'>  在作业本上标记成绩；
+</span><span class='line'>  放下笔，关上作业本；
+</span><span class='line'>  在成绩记录表格上上 CTRL+F 查找到对应的学生；
+</span><span class='line'>  输入成绩;
+</span><span class='line'>end loop</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>课程实验和大程的指导、评分和成绩录入</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>  //邮件查收实验报告
+</span><span class='line'>  loop in 80+个学生的实验报告邮件；
+</span><span class='line'>      保存附件；
+</span><span class='line'>      回复已经收到；
+</span><span class='line'>  end loop
+</span><span class='line'>  
+</span><span class='line'>  //收集齐所有报告后，开始批改报告
+</span><span class='line'>  loop in 80+个学生的实验报告
+</span><span class='line'>      双击打开报告；
+</span><span class='line'>      浏览评分；
+</span><span class='line'>      在成绩记录表格上 CTRL+F 查找到对应的学生；
+</span><span class='line'>      输入成绩；
+</span><span class='line'>      关闭报告；
+</span><span class='line'>  end loop
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>性能调优</h2>
+
+<p>最朴素的方法在使用中带来了巨大的性能瓶颈。</p>
+
+<ul>
+<li>平时作业的批改和成绩录入</li>
+</ul>
+
+
+<p>实践发现，批改平时作业和登分的过程中，会花掉非常多的实践在拿起笔、放下笔上，就像程序的上下文切换，比较耗时。将批改作业和录入成绩分解成两个集中循环过程，就可以避免这一切换的开销。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>  //改作业
+</span><span class='line'>  拿起笔
+</span><span class='line'>  loop in 80+个作业本
+</span><span class='line'>      翻开作业本；
+</span><span class='line'>      在作业本上标记成绩；
+</span><span class='line'>      关闭作业本；
+</span><span class='line'>  end loop
+</span><span class='line'>  放下笔
+</span><span class='line'>  
+</span><span class='line'>  //录入成绩
+</span><span class='line'>  loop in 80+个作业本
+</span><span class='line'>      翻开作业本，查看成绩
+</span><span class='line'>      在成绩记录表格上上 CTRL+F 查找到对应的学生；
+</span><span class='line'>      输入成绩;
+</span><span class='line'>      关闭作业本；
+</span><span class='line'>  end loop
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>以上的实现中，作业登分时还是会有大量的翻开、关闭作业本的操作。实际上，批改作业的等级是非常有限的，一般集中在 A+、A、A- 这几个分数上，其他分数如 B+、B、B-只是极少数。很容易想到桶排序的方式：批改作业时，将不同评分的作业放在专属的作业堆中，录入成绩时，只需要按照不同的作业堆录入，而不用翻开作业本。另外，由于书桌空间有限无法设定较多的作业堆，可以将出现较少的 B+、B、B-等分入到 Else 作业堆，批改时再特殊处理。</p>
+
+<p>在给同学登分时，每次都需要根据学号或者姓名 CTRL+F 查找，比较繁琐。优化的方法是建索引。在成绩录入表中给所有同学设定一个简单的编号，然后在同学的作业本的封皮上标记出来，以后每次登分，直接根据 [1, n]的索引就可以快速检索到了。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>  //预处理
+</span><span class='line'>  给作业本建索引
+</span><span class='line'>
+</span><span class='line'>  //改作业
+</span><span class='line'>  拿起笔
+</span><span class='line'>  loop in 80+个作业本
+</span><span class='line'>      翻开作业本；
+</span><span class='line'>      在作业本上标记成绩；
+</span><span class='line'>      关闭作业本；
+</span><span class='line'>      将作业按照评分放入 A+、A、A-和 Else 这四个堆中
+</span><span class='line'>  end loop
+</span><span class='line'>  放下笔
+</span><span class='line'>  
+</span><span class='line'>  //录入成绩
+</span><span class='line'>  loop in A+、 A、 A-、 Else 这四个作业堆
+</span><span class='line'>      loop in 作业堆
+</span><span class='line'>          if 作业堆 == Else 
+</span><span class='line'>              翻开作业本；
+</span><span class='line'>              查看成绩；
+</span><span class='line'>              关上作业本；
+</span><span class='line'>          end if
+</span><span class='line'>          根据索引查找到学生；
+</span><span class='line'>          输入成绩;
+</span><span class='line'>      end loop
+</span><span class='line'>  end loop
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>课程实验和大程的指导、评分和成绩录入</li>
+</ul>
+
+
+<p>在收集实验报告的时候，每次回复邮件也是很头痛的一件事情，容易漏掉回复或者漏掉保存附件。而给报告评分时，也得不断的点开某个文档，然后录入成绩，再关闭这个文档，容易漏评。虽然以在给所有同学评分完毕后再依次清查漏掉的情况，但这个方法确实不够优美。</p>
+
+<p>改进方法是：放弃使用邮件提交报告的方法，搭建 FTP；使用工具（比如 Acrobat）将所有报告连接成单个 pdf 文件。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>//预处理
+</span><span class='line'>FTP 收集报告
+</span><span class='line'>使用 Acrobat 将所有 pdf 报告连接成一个汇总报告
+</span><span class='line'>
+</span><span class='line'>//批改报告和录入成绩
+</span><span class='line'>双击打开汇总报告；
+</span><span class='line'>loop in 80+个学生的实验报告
+</span><span class='line'>  浏览评分；
+</span><span class='line'>  在成绩记录表格上 CTRL+F 查找到对应的学生；
+</span><span class='line'>  输入成绩；
+</span><span class='line'>end loop
+</span><span class='line'>关闭汇总报告；
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>总结</h2>
+
+<p>以上记录的是可以用工程的优化方法解决的小问题。实际助教的过程中，还有不少是沟通的问题。比如即使告诉过学生们一定使用 pdf 和姓名加学号的命名提交作业，也一定会有学生会使用 doc 格式……还有一些策略权衡的问题，面对几十个学生不比一对一的交流，合适的方法会双方更高效。</p>
+
+<p>做助教容易，做好不易，且行且珍惜。<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.io/blog/2014/05/06/ta-in-practice/'>http://biaobiaoqi.github.io/blog/2014/05/06/ta-in-practice/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[数据集成工具Teiid Designer的环境搭建]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2014/03/08/teiid-designer/"/>
+    <updated>2014-03-08T01:07:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2014/03/08/teiid-designer</id>
+    <content type="html"><![CDATA[<p>由于实验室项目要求的关系，看了些数据汇聚工具 Teiid 的相关知识。这里总结下 Teiid 的可视化配置工具 Teiid Designer 的部署过程。</p>
+
+<h2>背景知识</h2>
+
+<p>数据集成是把不同来源、格式、特点性质的数据在逻辑上或物理上有机地集中，从而为企业提供全面的数据共享。数据集成的方式多种多样，这里介绍的 <a href="http://www.jboss.org/teiid/">Teiid</a> 是其中的一种：通过抽象和联邦技术，实现分布式数据源的实时数据访问和集成，无需从记录系统中复制或移动数据。</p>
+
+<p><a href="http://blogs.ejb.cc/archives/3552/teiid-scalable-information-integration-program">《Teiid 基于数据联邦的集成方案》</a>是一篇关于 Teiid 的中文介绍，比较详细。</p>
+
+<p>由于适配不同数据源和生成虚拟数据库（VDB）需要维护好几个配置文件，直接手动部署 Teiid 比较难受。好在 Teiid 提供了辅助工具 <a href="http://www.jboss.org/teiiddesigner">Teiid Designer</a>，这是一个 Eclipse 插件，能帮助用户可视化的管理数据的集成过程。</p>
+
+<p>接下来记录了 Teiid 和 Teiid Designer 的环境配置步骤，如有纰漏，多谢指出=)。</p>
+
+<h2>环境准备</h2>
+
+<ul>
+<li>操作系统：OS X 10.9.1</li>
+<li>语言版本：Java6</li>
+<li>下载 IDE： <a href="https://www.eclipse.org/downloads/packages/eclipse-standard-431/keplersr1">Eclipse Kepler</a></li>
+<li>下载 <a href="http://www.jboss.org/jbossas/downloads.html">Jboss EAP6.1 Alpha</a></li>
+<li>下载 <a href="http://sourceforge.net/projects/teiid/files/teiid/8.4/Final/teiid-8.4.0.Final-jboss-dist.zip/download">Teiid Runtime 8.4</a></li>
+<li><a href="http://www.jboss.org/teiiddesigner.html">Teiid Designer</a>：作为 Eclipse 插件，将使用 Eclipse 的 install new software 功能在线安装。</li>
+</ul>
+
+
+<!--more-->
+
+
+<h2>Jboss 配置</h2>
+
+<p>配置环境变量 JBOSS_HOME，指向 Jboss 的根路径。在我的 shell 配置文件~/.zshrc 中增加如下行：</p>
+
+<p><code>JBOSS_HOME=~/Development/jboss #jboss 的根路径</code></p>
+
+<p>执行$JBOSS_HOME/bin/add-user.sh，给 Jboss 添加账号，执行过程如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>What type of user do you wish to add?
+</span><span class='line'> a) Management User (mgmt-users.properties)
+</span><span class='line'> b) Application User (application-users.properties)
+</span><span class='line'>(a): b
+</span><span class='line'>
+</span><span class='line'>Enter the details of the new user to add.
+</span><span class='line'>Realm (ApplicationRealm) :
+</span><span class='line'>Username : biaobiaoqi
+</span><span class='line'>Password :
+</span><span class='line'>Re-enter Password :
+</span><span class='line'>What roles do you want this user to belong to? (Please enter a comma separated list, or leave blank for none)[  ]:
+</span><span class='line'>About to add user 'biaobiaoqi' for realm 'ApplicationRealm'
+</span><span class='line'>Is this correct yes/no? yes
+</span><span class='line'>Added user 'biaobiaoqi' to file '/Users/shenyapeng/Development/jboss/standalone/configuration/application-users.properties'
+</span><span class='line'>Added user 'biaobiaoqi' to file '/Users/shenyapeng/Development/jboss/domain/configuration/application-users.properties'
+</span><span class='line'>Added user 'biaobiaoqi' with roles  to file '/Users/shenyapeng/Development/jboss/standalone/configuration/application-roles.properties'
+</span><span class='line'>Added user 'biaobiaoqi' with roles  to file '/Users/shenyapeng/Development/jboss/domain/configuration/application-roles.properties'
+</span><span class='line'>Is this new user going to be used for one AS process to connect to another AS process?
+</span><span class='line'>e.g. for a slave host controller connecting to the master or for a Remoting connection for server to server EJB calls.
+</span><span class='line'>yes/no? no
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Teiid 配置</h2>
+
+<p>解压下载好的 Teiid Runtime 8.4 文件，注意到其目录格式跟 JBoss 很相似。直接将这些文件覆盖到 Jboss 的根目录下。</p>
+
+<h2>Teiid Designer 配置</h2>
+
+<ul>
+<li>1.打开 Eclipse，选择 Help > Install New Software</li>
+<li>2.在弹出的界面中选择 Add，名称输入 Enter JBossASTools（其他的名称也无所谓啦），地址栏输入如下地址，并点击确认。</li>
+</ul>
+
+
+<p><code>http://download.jboss.org/jbosstools/updates/release/kepler/integration-stack/</code></p>
+
+<ul>
+<li>3.接下来展开 Data Virtualization，选择 4 个 Teiid Designer 的功能。</li>
+<li>4.然后点击下一步，直到安装完毕，重启 Eclipse 就可以看到 Teiid Designer 的界面啦。</li>
+</ul>
+
+
+<h2>创建 Teiid server</h2>
+
+<p>Teiid 依托于 Jboss 服务器，在 Teiid Designer 中可以方便的创建 Teiid 服务器，如下图
+<img src="http://biaobiaoqi.u.qiniudn.com/0CD17B0C-7A6C-425B-A12C-0FDA82FDE8F5.png?imageView/2/w/800/h/800" alt="img" /></p>
+
+<p>创 Teiid Server 期间需要的配置有：</p>
+
+<ul>
+<li>Jboss 的版本号（不要选错，这里使用 Jboss EAP6.1，而不是 Jboss AS 6.x）</li>
+<li>Jboss 的根路径；</li>
+<li>启动的配置文件是：standalone-teiid.xml（而不是 standalone.xml，参见<a href="https://community.jboss.org/message/790461">社区提问</a>）</li>
+<li>在 Jboss 服务器的配置页面配置 Management Login Credentials，使用之前注册的账号和密码。如下图
+<img src="http://biaobiaoqi.u.qiniudn.com/A6E53DAD-703B-4D9A-AAFA-39C2AC19A02F.png?imageView/2/w/800/h/800" alt="img" /></li>
+</ul>
+
+
+<p>配置完成后，即可启动服务器。</p>
+
+<p>现在，可以在 Teiid Server 的页面（双击创建的 server）测试管理账号的连接和 JDBC 访问方式的连接是否通畅，如下图：（Test Administration Connection &amp; Test JDBC Connection）</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/B13BC18B-AF6C-44DB-96C9-B18D70EDA1AA.png?imageView/2/w/800/h/800" alt="img" /></p>
+
+<p>JDBC 的用户名和密码默认是 user:user, 在<code>$JBOSS_HOME/standalone/configuration/teiid-security-users.properties</code>中配置。</p>
+
+<p>接下来，就可以配置数据源，享受 Teiid 的数据虚拟化了 =)。可以参见另一篇博文：<a href="http://biaobiaoqi.me/blog/2013/10/19/data-integration-tool-teiid/">《数据集成工具：Teiid 实践》</a></p>
+
+<h2>雷区</h2>
+
+<ul>
+<li>如果是使用 Windows 安装配置，需要使用 32 位的 JVM 运行 Eclipse。</li>
+<li>整个体系耦合比较多，而且暂时多版本兼容不够，下载的各个组件版本号一定要对应。</li>
+</ul>
+
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.io/blog/2014/03/08/teiid-designer/'>http://biaobiaoqi.github.io/blog/2014/03/08/teiid-designer/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[记排查octopress生成时的编码错误]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2014/03/06/troubleshoot-encoding-bugs-in-octopress/"/>
+    <updated>2014-03-06T21:48:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2014/03/06/troubleshoot-encoding-bugs-in-octopress</id>
+    <content type="html"><![CDATA[<p>前些日子经若亮童鞋提醒，我在<a href="http://biaobiaoqi.me/resources/">其他推荐</a>的页面中增加了对 Dropbox 和 Linode 等工具的推荐，一来分享这些好用的产品，二来期望刚接触这些工具的好心的朋友可以不吝啬时间用我的推荐码注册，让我获得一些分享的回报。</p>
+
+<p>改过页面内容后，照常的使用<code>rake preview</code>命令生成预览页面，打开浏览器，得到的却是一行孤零零的</p>
+
+<blockquote><p>Sorry, I can not find /</p></blockquote>
+
+<p><code>rake generate</code>后的结果更悲惨：</p>
+
+<!--more-->
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>biaobiaoqi.github.com git:(source) ✗ rake generate
+</span><span class='line'>## Generating Site with Jekyll
+</span><span class='line'>unchanged sass/screen.scss
+</span><span class='line'>Configuration from /Users/shenyapeng/Development/biaobiaoqi.github.com/_config.yml
+</span><span class='line'>Building site: source -&gt; public
+</span><span class='line'>/Users/shenyapeng/Development/biaobiaoqi.github.com/plugins/raw.rb:11:in `gsub': invalid byte sequence in UTF-8 (ArgumentError)
+</span><span class='line'>     from /Users/shenyapeng/Development/biaobiaoqi.github.com/plugins/raw.rb:11:in `unwrap'
+</span><span class='line'>     from /Users/shenyapeng/Development/biaobiaoqi.github.com/plugins/octopress_filters.rb:18:in `post_filter'
+</span><span class='line'>     from /Users/shenyapeng/Development/biaobiaoqi.github.com/plugins/octopress_filters.rb:33:in `post_render'
+</span><span class='line'>     from /Users/shenyapeng/Development/biaobiaoqi.github.com/plugins/post_filters.rb:124:in `block in post_render'
+</span><span class='line'>     from /Users/shenyapeng/Development/biaobiaoqi.github.com/plugins/post_filters.rb:123:in `each'
+</span><span class='line'>     from /Users/shenyapeng/Development/biaobiaoqi.github.com/plugins/post_filters.rb:123:in `post_render'
+</span><span class='line'>     from /Users/shenyapeng/Development/biaobiaoqi.github.com/plugins/post_filters.rb:151:in `transform'
+</span><span class='line'>     from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/gems/jekyll-0.12.1/lib/jekyll/convertible.rb:88:in `do_layout'
+</span><span class='line'>     from /Users/shenyapeng/Development/biaobiaoqi.github.com/plugins/post_filters.rb:167:in `do_layout'
+</span><span class='line'>     from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/gems/jekyll-0.12.1/lib/jekyll/page.rb:100:in `render'
+</span><span class='line'>     from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/gems/jekyll-0.12.1/lib/jekyll/site.rb:204:in `block in render'
+</span><span class='line'>     from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/gems/jekyll-0.12.1/lib/jekyll/site.rb:203:in `each'
+</span><span class='line'>     from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/gems/jekyll-0.12.1/lib/jekyll/site.rb:203:in `render'
+</span><span class='line'>     from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/gems/jekyll-0.12.1/lib/jekyll/site.rb:41:in `process'
+</span><span class='line'>     from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/gems/jekyll-0.12.1/bin/jekyll:264:in `&lt;top (required)&gt;'
+</span><span class='line'>     from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/bin/jekyll:23:in `load'
+</span><span class='line'>     from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/bin/jekyll:23:in `&lt;main&gt;'
+</span><span class='line'>     from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/bin/ruby_executable_hooks:15:in `eval'
+</span><span class='line'>     from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/bin/ruby_executable_hooks:15:in `&lt;main&gt;’</span></code></pre></td></tr></table></div></figure>
+
+
+<p>似乎是编码的问题：<code>invalid byte sequence in UTF-8</code>，但是我只是修改了普普通通的几行文字而已，怎么会有编码问题呢。</p>
+
+<p>恰逢自己刚因为 SSD 损坏重装了系统，编程环境也是刚刚配好，而且使用 rvm 安装 ruby1.9.3 的时候，提示文字中也有一些 warning。我开始怀疑是不是 ruby1.9.3 没编译好的原因。</p>
+
+<p>设立对照实验，我在另外一台 Ubuntu 机器上 clone 下一个博客的 repo，<code>rake generate</code>，结果竟然一切顺利。一切似乎都在说明就是开发环境的问题。</p>
+
+<p>我删除了之前的 ruby1.9.3，甚至是 rvm，重装后结果依旧。</p>
+
+<p>不能在一棵树上吊死，我不科学的将目标重新定位到 markdown 页面中的编码错误上（没想到后来事实证明奏效了……）。</p>
+
+<p>在 git 中新开启测试分支，在上面做回滚，测试修改页面内容前源码能否 generate</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#&gt;git branch checkError
+</span><span class='line'>#&gt;git checkout checkError
+</span><span class='line'>
+</span><span class='line'>#&gt;git log #找到修改前的提交码
+</span><span class='line'>#&gt;git reset --hard xxx #xxx 为相应的提交码
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>然后<code>rake generate</code>竟然能成功= =#!，看来真的是修改的页面掺入了错误的编码。</p>
+
+<p>接下来是回到原来的分支上，通过 diff 命令定位错误代码：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#&gt;git checkout source 
+</span><span class='line'>#&gt;git branch -d checkError  #删除测试分支
+</span><span class='line'>
+</span><span class='line'>#&gt;git diff  xxx #xxx 为相应的提交码
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>比较结果如下图，果然是有一个奇怪的字符。
+<img src="http://biaobiaoqi.u.qiniudn.com/8BB0BA73-9736-435D-9111-5E3BF8516299.png?imageView/2/w/800/h/800" alt="img" /></p>
+
+<p>查了下，这是<a href="http://zh.wikipedia.org/wiki/%E5%B7%A6%E8%87%B3%E5%8F%B3%E7%AC%A6%E8%99%9F">左至右符号</a>。莫非是从 chrome 浏览器复制地址时，不小心复制了它？</p>
+
+<p>进一步尝试发现，这个字符如果不与)相邻，是不会造成编码问题的。与)相邻时，一旦他们被 markdown 解析后，就出现了这个 bug。</p>
+
+<p>有意思的是，另一台 Ubuntu 服务器上这个有编码隐患的 repo 时能够正常<code>rake generate</code>的。如下图，左边是 mac 上用 vim 打开包含隐患字符的文件截图，右边是 Ubuntu 上的截图。
+<img src="http://biaobiaoqi.u.qiniudn.com/371c00e86e5de776d262fedbce334f7a.jpeg?imageView/2/w/800/h/800" alt="img" /></p>
+
+<p>谁能告诉我理解这一现象的思路呢 >&lt;&#8230;</p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.io/blog/2014/03/06/troubleshoot-encoding-bugs-in-octopress/'>http://biaobiaoqi.github.io/blog/2014/03/06/troubleshoot-encoding-bugs-in-octopress/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[基本排序总结]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2014/02/24/sort-intro/"/>
+    <updated>2014-02-24T23:58:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2014/02/24/sort-intro</id>
+    <content type="html"><![CDATA[<p>最近准备面试，正好把刚接触数据结构时学习的排序整理了一下。算法的实现在 wiki 上都有详细的介绍，这里主要做归纳和总结。</p>
+
+<p>注意对排序算法的稳定性的理解：保证 2 个相等的数在序列的前后位置顺序和排序后它们两个的前后位置顺序相同。换句话说，相等的数值在排序时不断交换位置是不稳定的。</p>
+
+<!--more-->
+
+
+<h2>冒泡排序</h2>
+
+<p>使用冒泡排序为一列数字进行排序的过程如下图：</p>
+
+<p><img src="http://upload.wikimedia.org/wikipedia/commons/3/37/Bubble_sort_animation.gif" alt="冒泡排序" /></p>
+
+<p>Java 实现：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>int temp = 0;
+</span><span class='line'>for (int i = a.length - 1; i &gt; 0; --i) {
+</span><span class='line'>  for (int j = 0; j &lt; i; ++j) {
+</span><span class='line'>    if (a[j + 1] &lt; a[j]) {
+</span><span class='line'>      temp = a[j];
+</span><span class='line'>      a[j] = a[j + 1];
+</span><span class='line'>      a[j + 1] = temp;
+</span><span class='line'>    }
+</span><span class='line'>  }
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>最差时间复杂度：O(n<sup>2)</sup></li>
+<li>最优时间复杂度：O(n)：在遍历时，如果有设定标记，对于已排序的数组，可以实现 O(n)</li>
+<li>平均时间复杂度：O(n<sup>2)</sup></li>
+<li>最差空间复杂度：总共 O(n)，需要辅助空间 O(1)</li>
+<li>稳定性：稳定</li>
+</ul>
+
+
+<h2>插入排序</h2>
+
+<p>使用插入排序为一列数字进行排序的过程如下图：</p>
+
+<p><img src="http://upload.wikimedia.org/wikipedia/commons/2/25/Insertion_sort_animation.gif" alt="" /></p>
+
+<p>Java 实现</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>for(int index=1;index&lt;data.length;index++){  
+</span><span class='line'>  Comparable key = data[index];  
+</span><span class='line'>  int position = index;  
+</span><span class='line'>    //shift larger values to the right  
+</span><span class='line'>    while(position&gt;0&&data[position-1].compareTo(key)&gt;0){  
+</span><span class='line'>      data[position] = data[position-1];  
+</span><span class='line'>        position--;
+</span><span class='line'>      }  
+</span><span class='line'>    data[position]=key;  
+</span><span class='line'>}     </span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>最差时间复杂度：O(n<sup>2)</sup></li>
+<li>最优时间复杂度：O(n)：顺序的情况。</li>
+<li>平均时间复杂度：O(n<sup>2)</sup></li>
+<li>最差空间复杂度：总共 O(n) ，需要辅助空间 O(1)</li>
+<li>稳定性：稳定</li>
+</ul>
+
+
+<h2>选择排序</h2>
+
+<p>使用选择排序为一列数字进行排序的过程如下图：</p>
+
+<p><img src="http://upload.wikimedia.org/wikipedia/commons/b/b0/Selection_sort_animation.gif" alt="" /></p>
+
+<p>Java 实现</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>for (int index = 0; index &lt; array.length - 1; index++) {
+</span><span class='line'>  min = index;
+</span><span class='line'>  for (int time = index + 1; time &lt; array.length; time++) {
+</span><span class='line'>      if (array[time].compareTo(array[min]) &lt; 0) {
+</span><span class='line'>          min = time;
+</span><span class='line'>      }
+</span><span class='line'>  }
+</span><span class='line'>  temp = array[index];
+</span><span class='line'>  array[index] = array[min];
+</span><span class='line'>  array[min] = temp;
+</span><span class='line'>}
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>最差时间复杂度：О(n<sup>2)</sup></li>
+<li>最优时间复杂度：О(n<sup>2):比插入、冒泡都还要弱。</sup></li>
+<li>平均时间复杂度：О(n<sup>2)</sup></li>
+<li>最差空间复杂度：总共 O(n) ，需要辅助空间 O(1)</li>
+<li>稳定性：不稳定。比如对于数组{3,2,3,1}, 第一次交换发生在 [0]和 [3]之间，[0]的 3 被交换到 [2]的 3 之后了。</li>
+</ul>
+
+
+<h2>快速排序</h2>
+
+<p>使用快速排序为一列数字进行排序的过程如下图：（图中取最后一个元素为 pivot，代码实现中取第一个元素为 pivot）</p>
+
+<p><img src="http://upload.wikimedia.org/wikipedia/commons/6/6a/Sorting_quicksort_anim.gif" alt="" /></p>
+
+<p>Java 实现</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>public void sort (int[] input){
+</span><span class='line'>      sort (input, 0, input.length-1);
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>private void sort(int[] input, int lowIndex, int highIndex) { 
+</span><span class='line'>  if (highIndex&lt;=lowIndex){
+</span><span class='line'>      return;
+</span><span class='line'>      }
+</span><span class='line'> 
+</span><span class='line'>  int partIndex=partition (input, lowIndex, highIndex);
+</span><span class='line'> 
+</span><span class='line'>    sort (input, lowIndex, partIndex-1);
+</span><span class='line'>    sort (input, partIndex+1, highIndex);
+</span><span class='line'>}
+</span><span class='line'> 
+</span><span class='line'>private int partition(int[] input, int lowIndex, int highIndex) {
+</span><span class='line'>  int i=lowIndex;
+</span><span class='line'>  int pivotIndex=lowIndex;
+</span><span class='line'>    int j=highIndex+1;
+</span><span class='line'>
+</span><span class='line'>    while (true){
+</span><span class='line'>      while (less(input[++i], input[pivotIndex])){
+</span><span class='line'>          if (i==highIndex) break;
+</span><span class='line'>        }
+</span><span class='line'>
+</span><span class='line'>        while (less (input[pivotIndex], input[--j])){
+</span><span class='line'>          if (j==lowIndex) break;
+</span><span class='line'>        }
+</span><span class='line'>
+</span><span class='line'>        if (i&gt;=j) break;
+</span><span class='line'>
+</span><span class='line'>        exchange(input, i, j);
+</span><span class='line'>  }
+</span><span class='line'>  
+</span><span class='line'>    exchange(input, pivotIndex, j);
+</span><span class='line'>
+</span><span class='line'>    return j;
+</span><span class='line'>}
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>最差时间复杂度：Theta(n<sup>2)：如果选取</sup> pivot 不够科学，在有序或者逆序的情况下会产生 n<sup>2</sup> 的时间开销。</li>
+<li>最优时间复杂度：Theta(n*logn)</li>
+<li>平均时间复杂度：Theta(n*logn)</li>
+<li>最差空间复杂度：根据实现的方式不同而不，基本快排中总共 O(n) ，需要辅助空间 O(1)</li>
+<li>稳定性：不稳定。比如：{5, 10, 11, 3, 3, 3}，后面相等的 3 会被交换到 10 和 11 的位置，而且两者相对位置会变化。</li>
+</ul>
+
+
+<p>快速排序的分治(divide and conquer)思想非常经典。算法实现上，对 pivot 的选取也有不同的策略来做优化。比如可以选取数组的第一个元素、最后一个元素和中间元素中排中间大小的那一个。这里介绍的是快排的基础算法，也叫单基算法，还有<a href="http://www.importnew.com/8445.html">双基、三基快速排序</a>。java.util.Arrays 中对基本类型的排序就使用了双基快排（一般对象类型使用的归并排序）。</p>
+
+<p>虽然快速排序最差时间复杂度有 n<sup>2，不过这种情况很少见，像它的名字那样，是内部排序中最快的。</sup></p>
+
+<p>适用场景：topK：寻找最大的 K 个数</p>
+
+<h2>归并排序</h2>
+
+<p><img src="http://upload.wikimedia.org/wikipedia/commons/c/c5/Merge_sort_animation2.gif" alt="" /></p>
+
+<p>Java 实现</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>public void sort(Integer[] list) {
+</span><span class='line'>  if (list.length == 0) {
+</span><span class='line'>      System.out.println("");
+</span><span class='line'>  } else {
+</span><span class='line'>      Integer[] tmpList = new Integer[list.length];
+</span><span class='line'>      mergeSort(list, 0, list.length - 1, tmpList);
+</span><span class='line'>  }
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>public void mergeSort(Integer[] list, int leftPos, int rightPos,
+</span><span class='line'>      Integer[] tmpList) {
+</span><span class='line'>  if (leftPos &gt;= rightPos)
+</span><span class='line'>      return;
+</span><span class='line'>
+</span><span class='line'>  int center = (leftPos + rightPos) / 2;
+</span><span class='line'>  mergeSort(list, leftPos, center, tmpList);
+</span><span class='line'>  mergeSort(list, center + 1, rightPos, tmpList);
+</span><span class='line'>  merge(list, leftPos, center, rightPos, tmpList);
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>public void merge(Integer[] list, int leftPos, int leftEnd, int rightEnd,
+</span><span class='line'>      Integer[] tmpList) {
+</span><span class='line'>  int leftIndex  = leftPos;
+</span><span class='line'>  int rightIndex = leftEnd + 1;
+</span><span class='line'>  int index = leftIndex;
+</span><span class='line'>  
+</span><span class='line'>  while (leftIndex &lt;= leftEnd && rightIndex &lt;= rightEnd) {
+</span><span class='line'>      if (list[leftIndex] &lt;= list[rightIndex]) {
+</span><span class='line'>          tmpList[index++] = list[leftIndex++];
+</span><span class='line'>      } else {
+</span><span class='line'>          tmpList[index++] = list[rightIndex++];
+</span><span class='line'>      }
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  while (leftIndex &lt;= leftEnd) {
+</span><span class='line'>      tmpList[index++] = list[leftIndex++];
+</span><span class='line'>  }
+</span><span class='line'>  while (rightIndex &lt;= rightEnd) {
+</span><span class='line'>      tmpList[index++] = list[rightIndex++];
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  for (int i = leftPos; i &lt;= rightEnd; i ++) {
+</span><span class='line'>      list[i] = tmpList[i];
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>}
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>最差时间复杂度：Theta(n*logn)</li>
+<li>最优时间复杂度：Theta(n)</li>
+<li>平均时间复杂度：Theta(n*logn)</li>
+<li>最差空间复杂度：总共 O(n)，需要辅助空间 O(1)</li>
+<li>稳定性：稳定</li>
+</ul>
+
+
+<p>Java 的 java.util.Arrays 中对一般对象的排序使用了改良的归并算法：待排序的数组元素少于<code>INSERTIONSORT_THRESHOLD</code>时，执行插入排序。</p>
+
+<p>归并排序比堆稍快，但需要一倍的额外存储空间。经常使用的场景：两个已排序数组合并;单向链表排序。</p>
+
+<h2>堆排序</h2>
+
+<p>Java 实现</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>public int leftChild(int n) {
+</span><span class='line'>  return 2*n + 1;
+</span><span class='line'>} 
+</span><span class='line'>
+</span><span class='line'>public void percolateDown(int[] list, int n, int length) {
+</span><span class='line'>  int tmp;
+</span><span class='line'>  int child;
+</span><span class='line'>  
+</span><span class='line'>  for (tmp = list[n]; leftChild(n) &lt; length; n = child) {
+</span><span class='line'>      child = leftChild(n);
+</span><span class='line'>      
+</span><span class='line'>      if (child + 1 &lt; length && list[child] &lt; list[child + 1]) {
+</span><span class='line'>          child ++;
+</span><span class='line'>      }
+</span><span class='line'>      
+</span><span class='line'>      if (tmp &lt; list[child]) {
+</span><span class='line'>          list[n] = list[child];
+</span><span class='line'>      }else {
+</span><span class='line'>          break;
+</span><span class='line'>      }
+</span><span class='line'>  }
+</span><span class='line'>  
+</span><span class='line'>  list[n] = tmp;
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>public void sort(int[] list) {
+</span><span class='line'>  for (int i = list.length/2; i &gt;= 0; i --) {
+</span><span class='line'>      percolateDown(list, i, list.length);
+</span><span class='line'>  }
+</span><span class='line'>  
+</span><span class='line'>  for (int i = list.length - 1; i &gt; 0; i --) {
+</span><span class='line'>      int tmp = list[i];
+</span><span class='line'>      list[i] = list[0];
+</span><span class='line'>      list[0] = tmp;
+</span><span class='line'>      
+</span><span class='line'>      percolateDown(list, 0, i);
+</span><span class='line'>  }
+</span><span class='line'>}
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>最差时间复杂度：O(n*logn)</li>
+<li>最优时间复杂度：O(n*logn)</li>
+<li>平均时间复杂度：Theta(n*logn)</li>
+<li>最差空间复杂度：总共 O(n)，需要辅助空间 O(1)</li>
+<li>稳定性：不稳定。从堆顶摘掉放入堆尾，如果有跟它相等的值，一定会改变相对位置。比如{3, 27, 36, 27}，对大堆摘掉第一个 27 后，原来在后面的 27 被放到了堆顶。</li>
+</ul>
+
+
+<p>不需要递归、额外空间，适用于数据量特别大的场景，比如海量数据求 topK。除了这里的堆排序外，还需要掌握向堆中插入数据。</p>
+
+<h2>外排序</h2>
+
+<p>通常来说，外排序处理的数据不能一次装入内存，只能放在读写较慢的外存储器（通常是硬盘）上。外排序通常采用的是一种“排序-归并”的策略。在排序阶段，先读入能放在内存中的数据量，将其排序输出到一个临时文件，依此进行，将待排序数据组织为多个有序的临时文件。然后在归并阶段将这些临时文件组合为一个大的有序文件，也即排序结果。</p>
+
+<p>常用思路：</p>
+
+<ol>
+<li>使用快速排序、归并排序、堆排序等算法完成少量数据的排序，生成临时数据文件。</li>
+<li>使用败者树或最小堆，用归并的思路合并 1 中生成的临时文件，并输出为最后的排序结果。</li>
+</ol>
+
+
+<h2>快排为什么那样快</h2>
+
+<p>刘未鹏在<a href="http://mindhacks.cn/2008/06/13/why-is-quicksort-so-quick/">《数学之美番外篇：快排为什么那样快》</a>中从问题域向答案域演进的角度解释了基于比较的排序的时间复杂度极限。</p>
+
+<p>核心思想是：N 个数组的排序，有 N!种可能结果，我们需要在 N!中搜索出唯一正确的结果。基于比较的排序每次能输出的结果只有两种：是或否，一个只有两种输出的问题，最多能将可能性空间切分为两半，要让结果稳定可靠，最好的办法就是平均的切分为 1/2 和 1/2，也就一次比较中 a<b 的概率和 a>b 的概率一样，如果能保证一这一点，就能保证最优下界，也就是 log2(N!)，这个值近似于 NlogN。</p>
+
+<ul>
+<li><p>堆排序比快排慢：堆建立好之后，每次取堆顶，将堆尾的数据放到堆顶向下过滤，实际上，堆顶部的元素几乎肯定较大，而堆尾的数据都比较小，在向下过滤的过程中，浪费了很多次比较，让堆排序的速度变慢了。</p></li>
+<li><p>基数排序比快排快：基数排序不是比较排序，将基数相同的元素放到一个桶里的操作，除了一次与技术本身的比较以外，不同的基数桶自然的形成了排序。这里基数桶用空间换取了时间。</p></li>
+</ul>
+
+
+<h2>参考资料</h2>
+
+<ul>
+<li><a href="http://zh.wikipedia.org/zh-cn/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F">冒泡排序 wiki</a></li>
+<li><a href="http://zh.wikipedia.org/wiki/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F">插入排序</a></li>
+<li><a href="http://zh.wikipedia.org/wiki/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F">选择排序</a></li>
+<li><a href="http://zh.wikipedia.org/wiki/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F">快速排序</a></li>
+<li><a href="http://www.importnew.com/8445.html">本周算法：快速排序—三路快排 vs 双基准</a></li>
+<li><a href="http://zh.wikipedia.org/wiki/%E5%A0%86%E6%8E%92%E5%BA%8F">堆排序</a></li>
+<li><a href="http://zh.wikipedia.org/wiki/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F">希尔排序</a></li>
+<li><a href="http://zh.wikipedia.org/zh-cn/%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F">基数排序</a></li>
+<li><a href="http://zh.wikipedia.org/wiki/%E5%A4%96%E6%8E%92%E5%BA%8F">外部排序</a></li>
+<li><a href="http://zh.wikipedia.org/wiki/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F">归并排序</a></li>
+<li><a href="http://cuijing.org/study/summary-of-sort-in-leetcode.html">leetcode 总结无止境系列之排序</a></li>
+<li><a href="http://mindhacks.cn/2008/06/13/why-is-quicksort-so-quick/">数学之美番外篇：快排为什么那样快</a></li>
+</ul>
+
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.io/blog/2014/02/24/sort-intro/'>http://biaobiaoqi.github.io/blog/2014/02/24/sort-intro/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Linode跨节点迁移：从Tokyo到Fremont]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2014/01/26/migrate-linode-vps-from-tokyo-to-fremont/"/>
+    <updated>2014-01-26T01:45:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2014/01/26/migrate-linode-vps-from-tokyo-to-fremont</id>
+    <content type="html"><![CDATA[<h2>背景</h2>
+
+<p><a href="http://biaobiaoqi.me/blog/2014/01/22/email-3/">上一篇博客</a>交代了如何在 Linode 上搭建邮件服务器，并配置好各种协议、记录来投入实际使用。</p>
+
+<p>由于实践过程中，曾经尝试使用明文协议与服务器交流数据，可能泄露了账号、密码信息，造成之后被攻击发送垃圾邮件(详细情况类似于如下链接：<a href="http://linuxroad.blog.51cto.com/765922/1039676">链接 1</a>,<a href="http://linuxroad.blog.51cto.com/765922/1039675">链接 2</a>)，IP 被上了黑名单，在 <a href="http://www.mail-tester.com">mail-tester.com</a> 上的测试评分为 0 分，同时还收到了 Linode 的警告。</p>
+
+<p>为了能继续使用邮箱服务，我只好想着法子给 Linode 换一个 IP。但原则上 Linode 是不支持换 IP 的。幸运的是，它支持 VPS 的迁移，而且方便快捷。从 Tokyo 节点迁移到 Fremont 节点后 IP 一般会发生变动（对于网络延迟，权衡了下<a href="http://www.v2ex.com/t/62721">大家</a>的说法,Fremont 还不错:<a href="https://www.linode.com/speedtest/">官方测速</a>），这样就可以间接的更换 IP 了。</p>
+
+<p>迁移过程很简单，这里做一下记录。</p>
+
+<!--more-->
+
+
+<h2>迁移准备</h2>
+
+<h3>发出迁移请求</h3>
+
+<p>Linode 有比较完善的 <a href="https://manager.linode.com/support">Support</a>。对于迁移这种情况，可以在 Support 页面发出如下请求：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Hi,
+</span><span class='line'>
+</span><span class='line'>I've met with some problems with my server. And I think it's a solution to migrate my server from Tokyo to Fremont.
+</span><span class='line'>
+</span><span class='line'>Could you please do me a favor?
+</span><span class='line'>
+</span><span class='line'>Thanks a lot!</span></code></pre></td></tr></table></div></figure>
+
+
+<p>1 分钟之后，我就收到了技术支持的回复：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Hello,
+</span><span class='line'>
+</span><span class='line'>Your migration to our Fremont datacenter has been configured. Please log into the Linode Manager, shut down, and click the migrate button to move to your new server. Your disk images will be moved with you. The migration should take approximately 10-15 minutes per gigabyte of data to complete. Please note that any existing backups for this Linode will be purged and will not be recoverable after you initiate the migration.
+</span><span class='line'>
+</span><span class='line'>Your new IP address is: xxx.xxx.xxx.xxx
+</span><span class='line'>
+</span><span class='line'>We ask that you begin this migration within 24 hours and let us know when it is complete. Thanks in advance!
+</span><span class='line'>
+</span><span class='line'>Regards,
+</span><span class='line'>Jack Stitt
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>此时，Linode 控制面板中已经多了一个迁移的提醒：<code>You have a migration pending!</code>。</p>
+
+<p>不过先不要着急迁移，因为迁移过程是不可恢复的，我们需要首先将 VPS 中得重要数据备份到本地。注意如回复中所说，这种备份不同于 Linode 中的备份服务。</p>
+
+<h3>备份数据</h3>
+
+<p>找到一份科学的全盘备份数据方式：<a href="http://www.linode.im/1590.html">linode 用户通过 ssh+dd 命令复制整个磁盘</a>。不可否认 dd 做传输比 scp 一个个拷贝文件快得多，但由于需要将整个盘 5G 数据全部通过网络传输，而家里网速慢，传输数据只有大概 100KB/s 的速度，需要等待太长时间。</p>
+
+<p>实际上，我所需要备份的文件无非是<code>/home</code>目录下得所有数据和部分服务的配置数据（比如 postfix、dovecot、nginx 等），总共大概也就 100MB，于是决定选择性的用 scp 传输备份数据：</p>
+
+<p><code>scp root@vps-ip:/backup /home/backup #vps-ip 替换为服务器 IP 地址</code></p>
+
+<p>同时由于零散的传输文件效率不高，可以考虑先将服务器端所有小文件使用 tar 命令压缩到一个包里：</p>
+
+<p><code>tar zcvf backup.gz /home /etc/nginx/sites-enable</code></p>
+
+<p>在本地的解压缩命令如下：</p>
+
+<p><code>tar zxvf backup.gz</code></p>
+
+<p>当然，实际上我们都不会希望备份数据需要被使用到啦，而迁移 vps 丢失数据的概率应该也是很小的。</p>
+
+<h3>修改 DNS 记录</h3>
+
+<p>由于迁移过程需要大概一个多小时，网站服务的不可访问是无法避免了。只好尽可能将迁移过程放在深夜没有用户访问需求的时候。</p>
+
+<p>从这个角度讲，DNS 的修改也没有特别的及时性要求。在前已完成前修改好 DNS 服务器中的 A 记录、MX 记录等配置即可。</p>
+
+<h2>迁移</h2>
+
+<p>在正式迁移之前，需要关闭服务器。</p>
+
+<p>然后点击 Linode 控制面板中的 migration 按钮。接下来，就是一个多小时的等待。</p>
+
+<h2>后续</h2>
+
+<p>完成迁移之后，开启 VPS，还需要注意修改服务中 IP 相关的配置。比如 shadowsocks 里的 json.config 中的 server ip。</p>
+
+<p>一切顺利完成后，别忘了去 Support 界面回复 Ticket =).</p>
+
+<p>如果你考虑租用 Linode 机器，而又不吝啬使用<a href="https://www.linode.com/?r=06fc7f86359e92800c41177a80c5678ecfcb2568">我的推荐码</a>，本博客不胜感激=).</p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.io/blog/2014/01/26/migrate-linode-vps-from-tokyo-to-fremont/'>http://biaobiaoqi.github.io/blog/2014/01/26/migrate-linode-vps-from-tokyo-to-fremont/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[邮件服务（三）：实践服务器搭建]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2014/01/22/email-3/"/>
+    <updated>2014-01-22T01:14:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2014/01/22/email-3</id>
+    <content type="html"><![CDATA[<h2>背景</h2>
+
+<p><a href="http://biaobiaoqi.me/tags/you-jian-fu-wu/">邮件服务系列博文</a>中，前两篇介绍了邮件系统的基本功能和安全体系，本文记录了搭建邮箱服务器的实践。</p>
+
+<p><a href="http://en.wikipedia.org/wiki/Sendmail">Sendmail</a> 是一种多用途、支援多种协定的跨网络电子邮件传送代理软件，于 1983 年随着 BSD 4.1c 首次发行，2001 年时的调查，互联网上的邮件服务器有 42%使用 Sendmail，但之后由于多次被发现重大的安全性漏洞，且其设定档过于复杂造成较高的学习门槛等因素，导致市占率下滑。</p>
+
+<p><a href="http://www.postfix.org/">Postfix</a> 被 <a href="http://www.porcupine.org/wietse/">Wietse Zweitze Venema</a> 创造出来以取代 Sendmail。本次实践即使用 Postfix 为域名 biaobiaoqi.me 搭建邮箱服务器，服务器是 Linode 上的 VPS，Ubuntu 12.04LTS，DNS 服务器使用 <a href="http://dnspod.com/">DNSPod</a>。</p>
+
+<!--more-->
+
+
+<h2>检查 IP 信用度</h2>
+
+<p>在自建邮件服务器之前，先检查所要使用的 IP 的信用度。如果 IP 已经在垃圾邮件联盟的黑名单里面，意味着这个 IP 在此之前或许被用作发送垃圾邮件，不愿意给这个 IP 擦屁股的话，就换个 IP 好了。</p>
+
+<p>可以点下面的链接查看：</p>
+
+<ul>
+<li><a href="http://anti-spam.org.cn/">http://anti-spam.org.cn/</a></li>
+<li><a href="http://www.justspam.org/check-an-ip">http://www.justspam.org/check-an-ip</a></li>
+<li><a href="http://www.spamhaus.org/query/bl?ip=74.125.129.27">http://www.spamhaus.org/query/bl?ip=74.125.129.27</a> #需要将连接末尾的 IP 替换为邮箱服务器的 IP</li>
+</ul>
+
+
+<h2>域名、IP 相关配置</h2>
+
+<h3>FQDN 配置</h3>
+
+<p>选定的邮箱服务器需要有合适的全名。比如可以设定 biaobiaoqi.me 的邮箱服务器的 FQDN 为 mail.biaobiaoqi.me。修改 FQDN 的命令如下：</p>
+
+<p><code>hostname mail.biaobiaoqi.me</code></p>
+
+<p>查看 FQDN 的命令为：</p>
+
+<p><code>hostname -f</code></p>
+
+<p>FQDN 需要记住，之后配置 DNS 记录时需要。</p>
+
+<h3>MX 记录和 A 记录</h3>
+
+<p>配置 MX 记录指向邮箱服务器 IP。</p>
+
+<p><code>biaobiaoqi.me.     600 IN  MX  10 biaobiaoqi.me.</code></p>
+
+<p>使用如下命令查询：</p>
+
+<p><code>dig mx biaobiaoqi.me</code></p>
+
+<p>在 DNS 服务器里增加针对邮箱服务器的 FQDN 的 A 记录。</p>
+
+<p><code>mail.biaobiaoqi.me.    10  IN  A   106.186.114.43</code></p>
+
+<p>使用如下命令查询：</p>
+
+<p><code>dig a mail.biaobiaoqi.me</code></p>
+
+<h3>PTR 配置</h3>
+
+<p>Linode 的域名反向解析设置教程参见：<a href="https://library.linode.com/dns-manager#sph_setting-reverse-dns">Setting Reverse DNS</a></p>
+
+<p>查看 PTR 的命令如下：</p>
+
+<p><code>dig -x 106.186.114.43</code></p>
+
+<p>得到的结果中有如下项则为正确：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>;; ANSWER SECTION:
+</span><span class='line'>43.114.186.106.in-addr.arpa. 8640 IN  PTR mail.biaobiaoqi.me.</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>SPF 配置</h3>
+
+<p>在 DNSPod 上设置 SPF 记录。由于 DNS 本身不支持 SPF 类型，可以使用 TXT 记录代替：</p>
+
+<p><code>biaobiaoqi.me.     600 IN  TXT "v=spf1 a mx -all"</code></p>
+
+<p>可以通过如下命令查询：</p>
+
+<p><code>dig txt biaobiaoqi.me</code></p>
+
+<p>在线测试 SPF 是否部署成功：<a href="http://www.openspf.org/Why?show-form=1">http://www.openspf.org/Why?show-form=1</a></p>
+
+<h2>Postfix 搭建</h2>
+
+<p>使用 Postfix 做 SMTP 服务器，Dovecot 来做 IMAP/POP3 服务器，并使用 Mysql 存储加盐密码作认证。具体教程如下：</p>
+
+<p><a href="https://library.linode.com/email/postfix/postfix2.9.6-dovecot2.0.19-mysql"><strong>Email with Postfix, Dovecot, and MySQL</strong></a></p>
+
+<p>启动 postfix：</p>
+
+<p><code>sudo service postfix start</code></p>
+
+<p>启动 dovecot：</p>
+
+<p><code>sudo dovecot -c /etc/dovecot/dovecot.conf</code></p>
+
+<p>邮件服务启动后，测试相应的端口是否正常开放：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>netstat -nltp | grep dovecot #查看 POP3 （993）和 IMAP （995）的端口是否运行
+</span><span class='line'>
+</span><span class='line'>netstat -nltp | grep 25 #查看 SMTP（25）的端口是否运行</span></code></pre></td></tr></table></div></figure>
+
+
+<p>对于没有使用 TLS 或者 STARTTLS 的邮件服务器，可以使用 <a href="http://exchange.mvps.org/smtp_frames.htm">telnet</a> 测试 SMTP 是否部署成功。而本次实践中增加了用户认证，telnet 这种明文传输的协议无法作为测试工具，只好直接使用邮件客户端做功能测试。</p>
+
+<h2>DKIM 配置安装</h2>
+
+<p>具体部署过程参照：<a href="https://rtcamp.com/tutorials/mail/dkim-postfix-ubuntu/">dkim-postfix-ubuntu</a></p>
+
+<p>其中需要注意，如果使用的 Postfix 版本不低于 2.6，需要将/etc/postfix/main.cf 中的 milter_protocol 赋值为 6。
+<code>postconf mail_version</code>可以查看 postfix 的版本。</p>
+
+<p>本地测试公钥密钥是否正确：（<a href="http://www.opendkim.org/opendkim-testkey.8.html">opendkim-testkey 命令的介绍</a>）</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>-&gt;#opendkim-testkey -d biaobiaoqi.me -s mail -k /etc/postfix/dkim.key -vvv
+</span><span class='line'>opendkim-testkey: key loaded from /etc/postfix/dkim.key
+</span><span class='line'>opendkim-testkey: checking key 'mail._domainkey.biaobiaoqi.me'
+</span><span class='line'>opendkim-testkey: key not secure #这里大概是用户、权限的问题。不会影响基本功能
+</span><span class='line'>opendkim-testkey: key OK</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>邮箱服务器健康度测试</h2>
+
+<p>完成上述所有步骤后，一个完整的域名邮箱就可以投入使用了。在此之前，可以做一次全面的体检。</p>
+
+<p>推荐使用在线监测服务：<a href="http://www.mail-tester.com/">mail-tester</a>。这是一个全面、界面友好的邮件测试网站。按照要求发送邮件到某邮件地址，然后就可以查到邮件服务器的体检报告了。每项都会有详细的说明。</p>
+
+<h2>遇到的问题记录</h2>
+
+<p>安装部署的过程中，遇到不少问题。简略记录下其中有代表性的一些：</p>
+
+<ul>
+<li><p>能成功发送邮件，但无法接受邮件，在日志中查看，全是 status=deferred。解决：FQDN 的设定错误。</p></li>
+<li><p>使用<code>sudo service opendkim start</code>无法启动 OpenDKIM。解决：不要使用 service 命令，而是用如下命令启动：<code>/etc/init.d/opendkim start</code></p></li>
+<li><p>在使用 Maildir 格式接收邮件时，无法接受邮件。解决：需要自己在用户目录下构建 Maildir/tmp、Maildir/cur、Maildir/new 目录。</p></li>
+<li><p>在使用 Maildir 格式接收邮件时，无法接受邮件。解决：本地 Maildir 的权限会造成 Permission denied。</p></li>
+<li><p>给 qq 邮箱发送邮件，提示『此地址未验证，请注意识别』。解决：这是 qq 的 bug：<a href="http://edm.marketing100.com/service/news_detail.php?ID=126">参见解释</a></p></li>
+</ul>
+
+
+<h2>管理队列中的邮件</h2>
+
+<p>在服务器端管理队列中得邮件使用<code>postqueue</code>和<code>postsuper</code>命令。使用详情参见：</p>
+
+<ul>
+<li><a href="http://www.faqforge.com/linux/server/manage-the-postfix-mailqueue-with-postsuper-postqueue-und-mailq/">Manage the postfix mailqueue with postsuper, postqueue und mailq</a></li>
+<li><a href="http://www.postfix.org/postqueue.1.html">postqueue</a></li>
+<li><a href="http://www.postfix.org/postsuper.1.html">postsuper</a></li>
+</ul>
+
+
+<h2>其他参考资料</h2>
+
+<ul>
+<li><a href="https://rtcamp.com/tutorials/mail/">Emails Tutorials</a></li>
+</ul>
+
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.io/blog/2014/01/22/email-3/'>http://biaobiaoqi.github.io/blog/2014/01/22/email-3/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[邮件服务（二）：安全、认证和垃圾邮件]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2014/01/21/email-2/"/>
+    <updated>2014-01-21T01:38:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2014/01/21/email-2</id>
+    <content type="html"><![CDATA[<h2>背景</h2>
+
+<p><a href="http://biaobiaoqi.me/tags/you-jian-fu-wu/">邮件服务系列博文</a>中<a href="http://biaobiaoqi.me/blog/2014/01/20/email-1/">第一篇博客</a>介绍了邮件服务的基本知识，了解了邮件是如何从发件人的邮件客户端经过不同的传输协议传送到收件人的邮件客户端的。这只是邮件的基本功能实现，但如果发生如下情况，整个邮件系统的生态环境将被扰乱：</p>
+
+<ul>
+<li>被不法分子利用邮箱服务器发送垃圾邮件</li>
+<li>被其他人伪造域名邮箱发送邮件</li>
+<li>被中间人窃取账号密码、甚至重要邮件信息（中间人攻击）</li>
+<li>即使自己拥有邮箱服务器的权限，无限制的滥用这个权利给其他邮箱发送邮件也是不好的</li>
+</ul>
+
+
+<p>为了防止以上的种种情况，电子邮箱体系引入了更多的协议和机制。本文对此做浅显的总结，如有出错，还请指出和补充。</p>
+
+<!--more-->
+
+
+<h2>PTR</h2>
+
+<p><a href="http://en.wikipedia.org/wiki/List_of_DNS_record_types#PTR">PTR</a>(pointer record)是 DNS 记录中的一种。与 A 记录相反，它记录的是由 IP 到 <a href="http://en.wikipedia.org/wiki/Fully_qualified_domain_name">FQDN</a>（fully qualified domain name）的映射。</p>
+
+<p>PTR 并非由 DNS 服务提供商控制，而是通过 IP 提供商来设定。比如博主使用 linode 的 VPS，独立 IP 由 Linode 提供，于是 PTR 也是由 Linode 给予的权限来做设定。</p>
+
+<p>在 DNS 中设置 PTR 能增加邮件的非垃圾邮件权重（不同垃圾邮件黑名单判定机构有不同的判定规则，其中 PTR 是公认的指标之一）。</p>
+
+<p>更多信息参考：<a href="https://rtcamp.com/tutorials/mail/fqdn-reverse-dns-ptr-mx-record-checks/">Checking FQDN, Reverse-DNS/PTR, MX record</a></p>
+
+<h2>SPF</h2>
+
+<p><a href="http://en.wikipedia.org/wiki/Sender_Policy_Framework">SPF</a>(Sender Policy Framework)也是一种 DNS 记录。通过查询发送邮件者的 IP 地址和发送来的邮件地址做对比，进行简单的邮件验证。域名的管理员通过 SPF 记录或 TXT 记录来规定这个域名下哪些 IP 地址是“允许”发送邮件的，这样如果有人用别的 IP 地址来伪造发送的话，收件方可以根据 SPF 来选择拒收这些邮件。</p>
+
+<p>最初的邮件系统没有考虑到各种安全因素，SPF 是在之后的发展过程中提出的。为了兼容不支持 SPF 记录的 DNS 服务器（本博客所使用的 DNSPod 就不支持 SPF 记录。），允许用 TXT 记录来表达 SPF。<a href="www.openspf.org">OpenSPF</a> 建议在这段过渡时期同时添加 SPF 记录和 TXT 记录。</p>
+
+<p>SPF 记录的语法规则见<a href="http://www.openspf.org/SPF_Record_Syntax">链接</a>。这里给出一个简单的例子：</p>
+
+<p><code>v=spf1 a mx -all</code></p>
+
+<p>其中<code>spf1</code>是版本号；<code>a</code>代表把 A 记录对应的 IP 加入信任列表；<code>mx</code>说明把这个域名上的 MX 记录所对应的服务器加入信任列表；<code>-all</code>代表将不是从信任列表发出的邮件强制拒绝(hard fail)。</p>
+
+<p>值得注意的是，经过测试发现 Gmail 并没有对 hard fail 的邮件执行拒绝，只是在 web 界面做出了一些提醒。这里有一篇相关的讨论：<a href="http://www.gossamer-threads.com/lists/spf/discuss/32914">链接</a>。</p>
+
+<p>更多资料参考：<a href="http://t.tt/31/">如何给域名设置 SPF 记录</a></p>
+
+<h2>DKIM</h2>
+
+<p><a href="http://www.dkim.org/">DKIM</a>(DomainKeys Identified Mail)是一种电子邮件的验证技术，使用<a href="http://zh.wikipedia.org/wiki/%E5%85%AC%E5%BC%80%E5%AF%86%E9%92%A5%E5%8A%A0%E5%AF%86">非对称加密</a>为邮件提供了签名与验证的功能。一般来说，发送方会在电子邮件的标头插入 DKIM-Signature 及电子签名，它们由私钥加密。而接收方则透过 DNS 查询得到公开密钥后进行验证。</p>
+
+<p>DKIM 是由 DomainKeys 所改进的协定，大多数的运作方式与 DomainKeys 相同。在 2007 年 2 月时，DKIM 被列入互联网工程工作小组（IETF）的标准提案，并于同年 5 月成为正式标准。</p>
+
+<h2>传输协议</h2>
+
+<p>通过标准的 TCP/IP 做 SMTP 传输，没有任何安全保障，信息容易被截获。为了保证数据的安全，可以使用 SSL/TLS 提供加密链接。对于 IMAP 和 POP3 使用 SSL 加密尚可接受，而 SMTP 会遇到兼容性问题：POP3 和 IMAP 至于 MRA 和 MUA 有关，而使用 SMTP 协议的 MTA 会与其他的 MTA 沟通，除非全世界所有 MTA 节点同时升级为 SSL/TLS 加密的通信协议，否则会出现部分邮件无法中继的状况。</p>
+
+<p><a href="http://en.wikipedia.org/wiki/STARTTLS">STARTTLS</a> 很好的解决了这一问题。STARTTLS 是明文传输协议的扩展，它允许在明文连接的基础上将连接升级为加密连接，而不是使用另外一个加密接口。</p>
+
+<p>一般的，邮箱服务器各协议端口设定如下：</p>
+
+<ul>
+<li>IMAP：明文端口 143，加密端口 993</li>
+<li>POP3：明文端口 110，加密端口 995</li>
+<li>SMTP：明文端口 25，SSL 加密端口 465，STARTTLS 加密端口 587</li>
+</ul>
+
+
+<p>关于 SSL、TLS 和 STARTTLS 的区别，参见<a href="https://www.fastmail.fm/help/technology_ssl_vs_tls_starttls.html">链接</a>。</p>
+
+<h2>查看邮件原始信息</h2>
+
+<p>随着邮件在网络中的中转，邮件头会被加入许多必要信息。理解邮件头能帮助理解邮件服务的整个系统，在遇到垃圾邮件时，也可以助于定位问题所在。</p>
+
+<p>GMAIL 的 Web 端可以查看邮件的详细信息。在邮件内容框里，点击右上角的更多选项，选中 Show original，如图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/emailori-mail.png?imageView/2/w/800/h/800" alt="img" /></p>
+
+<p>下面展示 linode 发送给 someuser@gmail.com 的一封邮件的原始信息：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Delivered-To: someuser@gmail.com
+</span><span class='line'>Received: by 10.114.246.38 with SMTP id xt6csp139967ldc;
+</span><span class='line'>        Mon, 20 Jan 2014 06:53:17 -0800 (PST)
+</span><span class='line'>X-Received: by 10.182.81.197 with SMTP id c5mr7069251oby.40.1390229596297;
+</span><span class='line'>        Mon, 20 Jan 2014 06:53:16 -0800 (PST)
+</span><span class='line'>Return-Path: &lt;support@linode.com&gt;
+</span><span class='line'>Received: from mail2.linode.com (mail2.linode.com. [173.255.198.11])
+</span><span class='line'>        by mx.google.com with ESMTP id f6si835374obr.111.2014.01.20.06.53.15
+</span><span class='line'>        for &lt;someuser@gmail.com&gt;;
+</span><span class='line'>        Mon, 20 Jan 2014 06:53:16 -0800 (PST)
+</span><span class='line'>Received-SPF: pass (google.com: domain of support@linode.com designates 173.255.198.11 as permitted sender) client-ip=173.255.198.11;
+</span><span class='line'>Authentication-Results: mx.google.com;
+</span><span class='line'>       spf=pass (google.com: domain of support@linode.com designates 173.255.198.11 as permitted sender) smtp.mail=support@linode.com
+</span><span class='line'>Received: from li114-242.members.linode.com (li114-242.members.linode.com [69.164.199.242])
+</span><span class='line'>  by mail2.linode.com (Postfix) with ESMTP id 6AF9E26A96;
+</span><span class='line'>  Mon, 20 Jan 2014 09:53:15 -0500 (EST)
+</span><span class='line'>Date: Mon, 20 Jan 2014 09:53:15 -0500 (EST)
+</span><span class='line'>From: support@linode.com
+</span><span class='line'>To: someuser@gmail.com
+</span><span class='line'>Message-ID: &lt;376750868.26764.1390229595437.JavaMail.cfusion@mail2.linode.com&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这封邮件里每项的具体含义如下(<a href="https://support.google.com/mail/answer/29436?hl=en">参考</a>以及 <a href="http://www.ietf.org/rfc/rfc0822.txt">RFC0822</a>)：</p>
+
+<ul>
+<li>Delivered-TO： 发送的目的地邮箱地址。</li>
+<li>Received： 这个字段可以用来追踪邮件的传送路径。字段的基本格式为 from A by B for C。其中 A 为发送方，B 为接收方，C 为收件人邮箱地址。由于邮件可能经过多个 SMTP 服务器中继，故可以有多个 Received 字段。在邮件头中，以自底向上的顺序阅读它们。对于这封邮件，传送路径为：li114-242.members.linode.com -> mail2.linode.com -> mx.google.com -> 10.182.81.197 -> 10.114.246.38.</li>
+<li>Received-SPF： 用于记录 SPF 查询来验证邮件的安全性，参考 <a href="http://www.openspf.org/SPF_Received_Header">SPF Received Header</a></li>
+<li>Return-Path： 邮件的回复地址，来自于 SMTP 中得<code>mail from:</code>命令。</li>
+<li>Date： 邮件的发送时间。</li>
+<li>From： 客户端显示的发件人地址，可以跟 Return-Path 中得地址不同。</li>
+<li>To： 客户端显示的收件人地址。</li>
+</ul>
+
+
+<p>实际上，Google 估计到 IP 地址为敏感信息，某些情况下会隐藏发送邮件标头中得发件人 IP 地址（<a href="https://support.google.com/mail/answer/26903?hl=zh-Hans&amp;hlrm=en">资料链接</a>）。</p>
+
+<p>不同的客户端对这一功能做了不同的实现。比如 QQ 邮箱以前是能够查看邮件原始信息的，而现在已经关闭了这一功能。</p>
+
+<h2>第三方邮件服务</h2>
+
+<p>邮件服务器的基本功能实现虽然看起来简单，但为了让系统拥有足够的稳定性、邮件送达率，还是得付出不小的努力来与复杂的网络环境做斗争。许多公司为了集中注意力于自己的核心业务，会剥离出邮件发送的业务，使用第三方的邮件服务。国内国外涌现了不少第三方的邮件服务解决方案。自己没有相应的使用经验，谨贴出两个不错的介绍，供大家参考：</p>
+
+<ul>
+<li><a href="http://70.io/develop/aws_ses-mailgun-sendcloud.html">邮件发送服务 AWS SES，Mailgun 以及 SendCloud</a></li>
+<li><a href="http://www.zhihu.com/question/20088568">知乎的邮件系统为什么不再用 Amazon SES 了？</a></li>
+</ul>
+
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.io/blog/2014/01/21/email-2/'>http://biaobiaoqi.github.io/blog/2014/01/21/email-2/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[邮件服务（一）：基本框架]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2014/01/20/email-1/"/>
+    <updated>2014-01-20T00:11:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2014/01/20/email-1</id>
+    <content type="html"><![CDATA[<h2>背景</h2>
+
+<p>电子邮件出现在 1960s 晚期，比打开浏览器就要使用的 HTTP 协议早了 20 年左右,是二十世纪人类最伟大的发明之一。这个古老、经典的框架在网络中运行了五十多年，现今仍然是网络中主要的流量类型之一。</p>
+
+<p>不得不提的是，<a href="http://zh.wikipedia.org/wiki/%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6">wiki</a> 上关于中国的第一封电子邮件的记载：1987 年 9 月 14 日 [1]中国第一封电子邮件是由“德国互联网之父”维纳·措恩与王运丰在北京的计算机应用技术研究所发往德国卡尔斯鲁厄大学的，其内容为英文，大意如下：</p>
+
+<blockquote><p>Across the <strong>Great Wall</strong> we can reach every corner in the world.</p></blockquote>
+
+<p>真的是很有远见呢-,-</p>
+
+<p>前几天梳理了电子邮箱相关的协议和框架组件，准备整理成文。一共<a href="http://biaobiaoqi.me/tags/you-jian-fu-wu/">三篇</a>，本文是基本知识总结，第二篇介绍安全认证和防垃圾邮件的规范，第三篇记录了邮件服务器的搭建实践。</p>
+
+<!--more-->
+
+
+<h2>邮件传输所需要的组件</h2>
+
+<p>在解释邮件的传送过程前，先简单介绍一些术语（可以结合）：</p>
+
+<h3>术语</h3>
+
+<h4>Mail Agent</h4>
+
+<p>一般我们将邮件传输中的组件称作 Mail Agent，根据功能的不同，它们包括了：</p>
+
+<ul>
+<li><strong>MUA</strong>（Mail User Agent）：作为客户端程序，负责从服务器接收邮件，向服务器发送邮件。</li>
+<li><strong>MTA</strong>（Mail Transfer Agent）：将邮件发送给目的地址的邮件服务器（目的服务器上也有一个 MTA 来做接收）。一般提到的 Mail Server 就是 MTA。</li>
+<li><strong>MDA</strong>（Mail Delivery Agent）：根据 MTA 收取的邮件，决定邮件的去向（如果本机就是邮件的目的地址，则放入本地用户邮箱，如果不是，则继续转发）。还可以配置过滤垃圾邮件和自动回复等。</li>
+<li><strong>Mailbox</strong>：存储邮件数据。MDA 会将邮件放到不同用户的邮箱中。一般的，有 mbox、Maildir 和 dbmail 等存储格式。mbox 将所有邮件存放到一个文件中，弊端较多。Maildir 则将邮件存为单独的文件。</li>
+<li><strong>MRA</strong>（Mail Retrieval Agent）：负责与 MUA 沟通。</li>
+</ul>
+
+
+<h4>协议</h4>
+
+<p>不同 Agent 之间的数据交通都依赖于协议，这些协议包括：</p>
+
+<ul>
+<li><strong>SMTP</strong>（Simple Mail Transfer Protocol）：端口 25，面向连接的传输协议。用于 MUA 向 MTA 发送邮件，以及 MTA 之间互相发送和接收邮件。严格来说，MTA 其实仅是指 SMTP。</li>
+<li><strong>POP3</strong>（Post Office Protocol3）：离线协议，MUA 从 MRA 获取邮件使用这一协议。首先验证身份，将邮件传输到 MUA 后，用户 Mailbox 中的邮件会被删除。</li>
+<li><strong>IMAP</strong>（Internet Message Access Protocol）：与 POP3 类似，用于从 MRA 收取邮件。不过 MUA 与 MRA 之间双向通信，客户端的改动会反映到服务器上。IMAP 整体上为用户带来更为便捷和可靠的体验，POP3 更易丢失邮件或多次下载相同的邮件，但 IMAP 通过邮件客户端与 webmail 之间的双向同步功能很好地避免了这些问题。</li>
+</ul>
+
+
+<h4>其他</h4>
+
+<ul>
+<li><p><strong>MX 记录</strong>：邮箱服务器 DNS 的 MX 记录指向邮箱服务器。MX 记录可以设定优先级，数字越小的优先级越高。比如如下两条 MX 记录：<code>gmail.com.     1656    IN  MX  5 gmail-smtp-in.l.google.com.</code>，<code>gmail.com.        1656    IN  MX  10 alt1.gmail-smtp-in.l.google.com.</code>  <br/>
+  MTA 会优先选取优先级为 5 的地址发送，如果不成功，再转向优先级低的服务器发送。而较低优先级的服务器只是用作暂存，将邮件保存在待发送的队列中，等主服务器恢复后中继转发到主服务器，以此容错。</p></li>
+<li><p><strong>中继转发</strong>（Relay）：邮件从一台 MTA 转发到下一台 MTA，这个操作就成为邮件中继转发。如果所有人都能使用某台 MTA 做中继转发，则这台 MTA 成为 Open Relay。这是很危险的，容易被互联网的邮件流量拖垮，且可能被记录到邮箱服务器黑名单上，坏处多多。需要仔细配置 Relay 规则。</p></li>
+</ul>
+
+
+<h3>邮件传输实例</h3>
+
+<p>从一个简单的应用场景谈起：Biaobiaoqi（简称 B）使用自己的邮箱 hello@biaobiaoqi.me 登陆了自己的 foxmail 邮件客户端，撰写邮件，发送给 shenyapeng(简称 S)，S 的邮箱地址是 shenyapeng@gmail.com。S 打开自己的邮件客户端，查收了邮件。</p>
+
+<p>从用户的角度来看，只是简单的将邮件从 B 发到了 S，而实际上邮件在网络中经过了多个协议的传输。其大致流程如下：</p>
+
+<ul>
+<li>1.首先邮件需要从 B 的邮件客户端传送到对应的 biaobiaoqi.me 邮箱服务器</li>
+<li>2.biaobiaoqi.me 的邮箱服务器将邮件发送给 gmail.com 邮箱服务器。</li>
+<li>3.S 的邮件客户端从 gmail 邮件服务器获取到信收到的邮件。</li>
+</ul>
+
+
+<p>而更技术的解释如下：</p>
+
+<ul>
+<li>1.B 登陆 PC 上得 MUA（比如 Foxmail、Thunderbird、Outlook 等），撰写邮件。MUA 使用 SMTP 将邮件发送给 B 的邮箱服务器 mail.biaobiaoqi.me。</li>
+<li>2.mail.biaobiaoqi.me 的 MDA 检测邮件头信息，发现需要将邮件发送给 gmail.com 邮箱服务器，于是交予 MTA 来做传输。</li>
+<li>3.MTA 通过 gmail.com 的 DNS 中 MX 记录，查找到邮箱服务器的 IP 地址(<code>dig mx gmail.com</code>)，再向目的地中继转发这封邮件。</li>
+<li>4.到达目的 MTA 后，邮件被 MDA 送到 Mailbox 中。MRA 开始工作，供 MUA 收取邮件。</li>
+<li>5.S 登陆 MUA，使用 POP3 或 IMAP 协议从 gmail.com 的邮箱服务器 MRA 收取邮件。</li>
+</ul>
+
+
+<p>无论是邮件客户端跟邮箱服务器之间认证身份，还是邮件数据的传输，都会进行加密。直接暴露在互联网络中是很危险的。安全认证方面的问题会在下一篇讨论，这里先介绍基本的功能协议。要知道最早发明邮件协议时，也并没有将安全问题考虑在内。</p>
+
+<h2>主要参考资料</h2>
+
+<ul>
+<li><a href="http://vbird.dic.ksu.edu.tw/linux_server/0380mail.php">鸟哥的 Linux 私房菜——服务器架设篇</a></li>
+<li><a href="http://wiki2.dovecot.org/MailServerOverview">MailServerOverview</a></li>
+</ul>
+
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.io/blog/2014/01/20/email-1/'>http://biaobiaoqi.github.io/blog/2014/01/20/email-1/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[JVM参数调优：Eclipse启动实践]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2014/01/17/java-performance-tunning-in-practice/"/>
+    <updated>2014-01-17T11:16:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2014/01/17/java-performance-tunning-in-practice</id>
+    <content type="html"><![CDATA[<p>本文主要参考自<a href="http://book.douban.com/subject/6522893/">《深入理解 Java 虚拟机》</a>。这本书是国人写的难得的不是照搬代码注释的且不是废话连篇的技术书，内容涵盖了 Java 从源码到字节码到执行的整个过程，包括了 JVM（Java Virtual Machine）的架构，垃圾收集的介绍等。这里摘录出关于配置 JVM 基本参数来调优 Eclipse 启动的过程，比较初级，供初学者参考。</p>
+
+<!--more-->
+
+
+<h2>基础知识</h2>
+
+<p>针对 JVM 的参数调优主要集中在数据区大小的控制和垃圾回收策略的选择。关于 JVM 运行机制等更多内容可参考<a href="http://biaobiaoqi.me/tags/jvm/">其他博文</a></p>
+
+<h3>JVM 的运行时数据区</h3>
+
+<p>运行时 JVM 的数据区主要包括各线程私有的栈和程序计数器，线程共享的方法区，以及管理对象的堆（又称回收堆）等。程序运行时，类信息、常量、静态变量等会被加载到方法区。运行过程中几乎所有对象都在堆里，内存占用的空间最大，这也是最值得优化得部分。</p>
+
+<h3>JVM 的垃圾回收策略</h3>
+
+<p>Java 程序中，除了基本类型（primitive types），其他的数据都是以对象的形式存在。对象生命周期有长有短，如果无区别的保留在内存中，会造成内存超载。内存垃圾回收(Garbage Collection, 缩写 GC)就是解决这一问题的策略。</p>
+
+<p><em>注意：JVM 不仅仅只对对象进行垃圾回收，实际上也会对废弃常量和无用的类做回收。</em></p>
+
+<p>垃圾回收首先得找到需要被回收的对象，一般采用根搜索算法来标记处这些过时的对象（另外有一种简单的实现：<a href="http://zh.wikipedia.org/wiki/%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0">引用计数</a>，但存在明显的弊端，即循环引用）。</p>
+
+<p>回收垃圾的过程会消耗计算资源和时间。根据不同的处理方式，垃圾回收有不同的策略，现在常用的是分代收集算法：根据对象的存活周期将堆划分为几代：新生代（Young Generation 或 New Generation）和老生代（Tenured Generation），<a href="http://en.wikipedia.org/wiki/HotSpot">HotSpot 虚拟机</a>里还分出了永生代（基本等同于方法区）。不同代采用不同的垃圾回收策略。</p>
+
+<h4>HotSpot 虚拟机</h4>
+
+<p>HotSpot 虚拟机中，Perm 代指永生代，Old 代指老年代，而新生代使用复制算法，将区域划分为三块：Eden，S0 和 S1（S 是 Survivor 的缩写）。</p>
+
+<p>IBM 研究表明，新生代中的对象 98%是朝生夕死的，三者的比例划分是 8：1：1。对象先分配到 Eden，如果 Eden 中内存占用量达到一定得比例，触发 Minor GC，JVM 会将 Eden 和 S0(或 S1)中存活的对象复制到 S1（或 S0），并清空 Eden 和 S0(或 S1)。如果同时老年代的内存占用量打达到一定比例，会触发 Major GC（也称 Full GC）。通常 Major GC 比 Minor GC 慢 10 倍以上。</p>
+
+<h3>编译过程</h3>
+
+<p>Java 一直号称“Write once, run anywhere”，这个特性正是由 JVM 这一虚拟层来支撑的。</p>
+
+<p>Java 源代码首先编译为 Java 字节码，字节码再被 JVM 加载运行。运行的过程可以是直接针对字节码的解释执行，也可以是经过了 <a href="http://zh.wikipedia.org/wiki/%E5%8D%B3%E6%99%82%E7%B7%A8%E8%AD%AF">JIT</a>（Just in time）编译为机器码后的执行。另外，还有<a href="(http://en.wikipedia.org/wiki/AOT_compiler">静态提前编译器</a>(Ahead Of Time，也缩写为 AOT)，能将源码直接编译为机器码。</p>
+
+<p><a href="http://en.wikipedia.org/wiki/HotSpot">HotSpot 虚拟机</a>的 JIT 编译器有：Client Complier（简称 C1）、Server Complier（简称 C2）以及在 Java7 中堆出的<a href="http://docs.oracle.com/javase/7/docs/technotes/guides/vm/performance-enhancements-7.html">分层编译器</a>。C1 编译器做一些快速的优化，C2 做一些更耗时的优化但是产生更高效的代码，而分层编译器则结合了两者的优点：快速的启动和逐步的优化（brings client startup speeds to the server VM）。</p>
+
+<h3>性能监控和故障处理工具</h3>
+
+<p>对于系统调优和问题定位，周志明在《深入 Java 虚拟机》中总结到</p>
+
+<blockquote><p>给一个系统定位问题的时候，知识、经验是关键基础，数据是依据，工具是运用知识处理数据的手段。这里说的数据包括：运行日志、异常堆栈、GC 日志、线程快照、堆转储快照等……应当意识到工具永远都是知识技能的一层包装，没有什么工具是“秘密武器”。</p></blockquote>
+
+<p>Java 提供了很多工具给开发者来监控和处理运行中的问题。包括命令行工具以及可视化工具</p>
+
+<h4>命令行工具</h4>
+
+<p>比如 jps, jstat, jinfo 等。举例如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>jstat -gcutil xxx #xxx 是 jps 查出的 LVMID，查看 gc 相关数据
+</span><span class='line'>jstat -gccause xxx#查看 gc 的原因
+</span><span class='line'>jinfo  -flag XXX xxx#XXX 是参数名，xxx 是 VMID，查看虚拟机的参数值</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>可视化工具</h4>
+
+<ul>
+<li>JConsole：比较老得分析软件，Java 自带。Windows 下搜 jconsole.exe，Mac 下启动命令为 jconsole</li>
+<li><a href="http://www.eclipse.org/mat/">Eclipse Memory Analyzer Tool</a>：用于分析 dump 下的堆数据</li>
+<li><a href="http://visualvm.java.net/">VisualVM</a>:推荐，很全能的分析工具</li>
+</ul>
+
+
+<h3>JVM 参数</h3>
+
+<p>这里零散的罗列了一些我用到的简单的 JVM 配置参数：</p>
+
+<p>内存大小控制：</p>
+
+<ul>
+<li>-Xmx20M: 堆的最大值</li>
+<li>-Xms10M: 堆的初始分配内存</li>
+<li>-Xmn: 新生代堆的分配内存</li>
+<li>-Xss128k: 线程的栈空间大小</li>
+<li>-XX:PermSize=10M | 方法区初始大小</li>
+<li>-XX:MaxPermSize=10M |方法区最大值</li>
+</ul>
+
+
+<p>编译相关：</p>
+
+<ul>
+<li>-Xint: 关闭 JIT，完全使用解释执行，实践中没什么作用，解释执行很慢。</li>
+<li>-client: 启动 C1 编译器</li>
+<li>-server: 启动 C2 编译器</li>
+<li>-XX:+TieredCompilation: 启动分层编译器</li>
+</ul>
+
+
+<p>其他：</p>
+
+<ul>
+<li>-XX:+DisableExplicitGC: 屏蔽 System.gc()调用</li>
+<li>-PrintGCDetails: 让 jvm 在每次发生 gc 的时候打印日志，利于分析 gc 的原因和状况</li>
+<li>-XX:+HeapDumpOnOutOfMemoryError: 内存溢出时 dump 下 heap，可以通过 Eclipse Memory Analyzer Tool 打开查看。</li>
+<li>-XX:HeapDumpPath=/: dump 下的 heap 文件快照的路径。Eclipse 中默认放到项目的根目录中</li>
+<li>-XVerify:none: 禁止字节码验证</li>
+</ul>
+
+
+<h2>调优 Eclipse 启动的实践</h2>
+
+<h3>实践环境</h3>
+
+<ul>
+<li>CPU： 2.8 GHz Intel Core i7</li>
+<li>内存： 8 GB 1333 MHz DDR3</li>
+<li>操作系统： OS X 10.9.1(64bits)</li>
+<li>Eclipse：Version: Kepler Service Release 1， Build id: 20130919-0819</li>
+<li>Java：java version &#8220;1.7.0_45&#8221;</li>
+</ul>
+
+
+<h3>调优实践</h3>
+
+<p>调优 Eclipse 启动实际上就是调优 Eclipse 在 JVM 中的加载和程序启动阶段的运行。由于默认的 Ecpise 启动配置无法适应所有不同的硬件、软件环境，做针对性的调优是必要的。</p>
+
+<p>Eclipse 的启动配置文件是 eclipse.ini，对 JVM 的参数调优直接在该文件中修改。OS X 下，其文件路径为 $ECLIPSE/Eclipse.app/Contents/MacOS/eclipse.ini（<em>注意不是 Eclipse 文件包根目录下得 eclipse.ini</em>）。</p>
+
+<h4>测 Eclipse 启动时间</h4>
+
+<p>要优化 Eclipse 的启动时间，先要能确定 Eclipse 的启动时间。这里推荐网友实现的一个 Eclipse 插件：<a href="http://empirel.iteye.com/blog/1404226">计算启动时间的 Eclipse 插件</a>。下载后放到 Eclipse 的插件包中，启动 Eclipse 即可看到弹窗显示的启动时间。为了得到一个尽可能公平的测试结果，需要在测试过程中关闭其他程序，避免 CPU 负载带来的误差，并多次测试取平均值。</p>
+
+<h4>调优策略</h4>
+
+<p>使用 VisualVM 查看程序的运行状况来定位瓶颈，尝试调优解决。下图是 VisualVM 的示例图，右边图示展示了 GC 的状态以及编译时间、类加载时间和垃圾回收时间等指标。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/visualvmscreen.png?imageView/2/w/800/h/800" alt="img" /></p>
+
+<p>也可以通过命令行工具查看 GC 的状态，比如：<code>jstat -gc XXX #其中 XXX 是 jps 查出的进程的 LVMID</code>.</p>
+
+<p>我的实践总结如下：</p>
+
+<ul>
+<li>类加载时间过长：禁止加载类时的字节码验证。我们认为 Eclipse 的字节码是可靠的。<code>-XVerify:none</code></li>
+<li>编译时间：<code>-client</code>缩短了编译时间，但长期运行的性能可能受影响，<code>-server</code>编译时间长，而编译优化做得更多，后期使用汇报大，<code>-XX:+TieredCompilation</code>分层编译则集合了前两者的优势。没有特殊需求，可选用这一编译选项。</li>
+<li>Minor GC 次数太多：新生代空间太小，加大新生代的内存大小。<code>-Xmn800m</code>，同时，增大回收堆的总大小上限（<code>-Xmx1024m</code>）。</li>
+<li>Full GC 次数太多：为了避免回收堆由小到大的动态增长增加时间开销，可将其初始大小跟最大上限设定为同一值<code>-Xms1024m</code>，并增加老年代的大小(<code>-XX:PermSize=256m</code>，<code>-XX:MaxPermSize=256m</code>)。</li>
+<li>代码中的 GC 调用：Eclipse 代码中有 System.GC()的调用可能促使 JVM 执行垃圾回收，可以通过<code>-XX:+DisableExplicitGC</code>来防止。</li>
+<li>垃圾收集器的选择：垃圾收集器有很多，比如 Serial、ParNew、Parallel Scavenge、CMS、G1 等。推荐使用老生代 CMS 新生代 ParNew 的组合来应对 Eclipse 用户交互频繁的情况(<code>-XX:+UseParNewGC</code>、<code>-XX:+UserConcMarkSweepGC</code>)。同时提升 CMS 的垃圾回收的触发条件：<code>-XX:CMSInitiatingOccupancyFraction=85</code>，进一步降低 Full GC 的出现。</li>
+</ul>
+
+
+<h4>最终 eclipse.ini</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>-startup
+</span><span class='line'>../../../plugins/org.eclipse.equinox.launcher_1.3.0.v20130327-1440.jar
+</span><span class='line'>--launcher.library
+</span><span class='line'>../../../plugins/org.eclipse.equinox.launcher.cocoa.macosx.x86_64_1.1.200.v20130807-1835
+</span><span class='line'>-product
+</span><span class='line'>org.eclipse.epp.package.standard.product
+</span><span class='line'>--launcher.defaultAction
+</span><span class='line'>openFile
+</span><span class='line'>-showsplash
+</span><span class='line'>org.eclipse.platform
+</span><span class='line'>--launcher.XXMaxPermSize
+</span><span class='line'>256m
+</span><span class='line'>--launcher.defaultAction
+</span><span class='line'>openFile
+</span><span class='line'>--launcher.appendVmargs
+</span><span class='line'>-vmargs
+</span><span class='line'>-Dosgi.requiredJavaVersion=1.6
+</span><span class='line'>-XstartOnFirstThread
+</span><span class='line'>-Dorg.eclipse.swt.internal.carbon.smallFonts
+</span><span class='line'>-Xms1024m
+</span><span class='line'>-Xmx1024m
+</span><span class='line'>-Xmn800m
+</span><span class='line'>-Xdock:icon=../Resources/Eclipse.icns
+</span><span class='line'>-XstartOnFirstThread
+</span><span class='line'>-Dorg.eclipse.swt.internal.carbon.smallFonts
+</span><span class='line'>-XX:+TieredCompilation
+</span><span class='line'>-XX:PermSize=256m
+</span><span class='line'>-XX:MaxPermSize=256m
+</span><span class='line'>-XX:+DisableExplicitGC
+</span><span class='line'>-XVerify:none
+</span><span class='line'>-XX:+UseParNewGC
+</span><span class='line'>-XX:+UserConcMarkSweepGC
+</span><span class='line'>-XX:CMSInitiatingOccupancyFraction=85</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>其他参考</h2>
+
+<ul>
+<li><a href="http://www.searchtb.com/2013/07/jvm-gc-introduction-examples.html">《JVM 的 GC 简介和实例》</a> — 搜索技术博客－淘宝.昆仑</li>
+</ul>
+
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.io/blog/2014/01/17/java-performance-tunning-in-practice/'>http://biaobiaoqi.github.io/blog/2014/01/17/java-performance-tunning-in-practice/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[我的2013]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2014/01/04/happy-new-year/"/>
+    <updated>2014-01-04T14:47:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2014/01/04/happy-new-year</id>
+    <content type="html"><![CDATA[<p>早上十一点，在周六的惬意中起床。窗外的杭州雾霾再次光临，想想几年前还是一种只会在清晨遇到的亲切的朦胧美，到如今已经沦为对环境和未来的担忧，原来已经 2014。</p>
+
+<p>在编程语言界，有个著名的<a href="http://en.wikipedia.org/wiki/Duck_test">鸭子测试</a>，用来明确部分动态语言的多态特性，可以用下面这句话来表达：</p>
+
+<blockquote><p>If it looks like a duck, swims like a duck, and quacks like a duck, then it probably is a duck.</p></blockquote>
+
+<p>实际上，这就是我现在认识的世界。以此开篇，用几个标签介绍 2013 的我。</p>
+
+<!--more-->
+
+
+<h3>读书</h3>
+
+<p>2012 年底入了一只 Kindle Paper White，但实在无法忍受它的翻页速度。我习惯对感兴趣的内容来回翻阅，对我而言，KPW 的阅读体验已经抑制了我对知识的摄取速度，在用它读完一本书后，就将它贱价出给了同学。前不久刚入手的 iPad mini2 倒很是中意，特别是 <a href="http://duokan.com/">多看阅读</a>这个 app，鉴证了一年里它迭代增加的新功能，比如英文查词、网页版同步，越来越能满足自己的需求。一周之内已经在上面完成了两本书的阅读。</p>
+
+<p>一年里，一共看完了 <a href="http://book.douban.com/people/biaobiaoqi/collect">31 本书</a>。将值得推荐的粗略归类如下：</p>
+
+<ul>
+<li><p>思维、心理、认知类：</p>
+
+<p>  《程序员的思维修炼 : 开发认知潜能的九堂课》、《番茄工作法图解 : 简单易行的时间管理方法》、《谁是谷歌想要的人才 : 破解世界最顶尖公司的面试密码》、《暗时间》、《拖拉一点也无妨 : 跟斯坦福萌教授学高效拖延术》</p></li>
+<li><p>社会、商业、科技哲学</p>
+
+<p>  《科技想要什么》、《免费》</p></li>
+<li><p>信息产业</p>
+
+<p>  《沸腾十五年 : 中国互联网 1995-2009》、《Facebook 效应 : 看 Facebook 如何打造无与伦比的社交帝国》、《打造 Facebook : 亲历 Facebook 爆发的 5 年》、《黑客 : 计算机革命的英雄(二十五周年新版)》、《改变未来的九大算法》</p></li>
+<li><p>编程技术</p>
+
+<p>  《计算机网络 : 自顶向下方法与 Internet 特色》、《鸟哥的 Linux 私房菜.基础学习篇（第三版）》、《Sinatra : Up and Running》、《Jump Start Sinatra》、《深入理解 Java 虚拟机 : JVM 高级特性与最佳实践》、《大规模 Web 服务开发技术》、《Effective Java 第二版 中文版/Sun 公司核心技术丛书 : Effective Java Second Edition》、《人人都有好工作 : IT 行业求职面试必读》</p></li>
+<li><p>设计</p>
+
+<p>  《写给大家看的设计书（第 3 版）》</p></li>
+<li><p>自传等</p>
+
+<p>  《随遇而安》、《痛并快乐着》、《看见》、《俞敏洪口述 : 在痛苦的世界中尽力而为》、《我所理解的生活 : 三十岁的韩寒，第一次自我剖析》、《人生元编程》（池大大的《人生元编程》没有纸质出版物）</p></li>
+</ul>
+
+
+<p>发现自己对认知、心理学以及科技哲学的社会科学方向比较感兴趣，未来会更系统化的做学习了解。信息产业和编程技术方向不出意外会一直关注。未来会多看一些经济学相关的读物。</p>
+
+<p>读过的书我都会在<a href="http://book.douban.com/">豆瓣读书</a>做标记，也写了<a href="http://biaobiaoqi.me/tags/du-shu/">几篇书评</a>，大都是读书笔记和简单的感想。挺喜欢豆瓣这个平台的。</p>
+
+<p>无论是物质建设还是文化建设都离不开知识和思想的传播和在群体里的增长，书是知识和思想的一种载体，需要给与他足够的尊敬和激励。在力所能及的范围里，我在逐渐培养自己花钱买书的习惯，连同电脑和手机上得应用。国内的在线书店里书真的已经很便宜了。在爱尔兰交流的时候，看到书店里书的标价的数字根国内差不多，不过是欧元。</p>
+
+<h3>Evernote &amp; Dropbox</h3>
+
+<p>从 2012 年底开始习惯使用 Evernote 来做笔记。现在想想，都不知道没有使用 Evernote 的日子是怎么过来的。根据所记载的内容做了简单分类，设定了多个笔记本。有时候不知道如何归类的就会记入以日期编号的笔记里。</p>
+
+<p>信息爆炸的社会，合理的整合信息，有助益与信息向知识的转变。Evernote 是这样一款产品，很看好它的开放平台，做好根其他产品的生态环境的对接，繁荣应该只是时间问题。</p>
+
+<p>也是从 2012 年底开始习惯使用 Dropbox 来管理资源。从最基础的 2G 空间，到教育网邮箱认证过的 30G+的空间，我将更多的重要资源放到了 Dropbox 里，甚至曾经把它当做博客的图床（后来换到了七牛云存储）。虽然受到某墙的干扰，其核心功能还是足够的。</p>
+
+<h3>编程</h3>
+
+<ul>
+<li><p>Github &amp; stackoverflow</p>
+
+<p>  知识管理用 Evernote，而代码管理则非 Github 莫属了。这一年里开始比较多的使用 github。通过教育网邮箱注册获得的 5 个私有仓库一直没使用，倒是开启了十来个公开代码仓库。开源是一股自由开放的力量，继续努力用自己的方式参与和贡献。</p>
+
+<p>  两年前开始用 stackoverflow，凭借早先在 Java 字节码和 Objc 方面的经验，在社区里混得了 600+的积分，而最近一年反而对社区没有明显的贡献，更多的是从中获取解决问题的答案。来年希望增加对社区的投入。</p></li>
+<li><p>Java &amp; JVM</p>
+
+<p>  虽然一直用 Java 比较多，但实际上使用到多线程和框架类的方面少得可怜。做过一些学习的努力，不过还不够，未来需要加强。</p></li>
+<li><p>HTTP &amp; Ruby &amp; Sinatra</p>
+
+<p>  以前没什么 Web 开发经验，对 HTTP 也不够了解。当需求到来，想法涌出，却发现他们都需要 Web 来支持才能实现价值，于是开始重视对 HTTP 相关内容的实践和学习。</p>
+
+<p>  最早听说 Ruby 是因为 Rails 在 Web 界的异军突起和 Ruby 对程序员的友好，决定学 Ruby 是因为它与 Java 这种强类型静态语言的大相径庭。</p>
+
+<p>  我选择了相对简单的 Sinatra 框架来认识 Ruby，看了源码，缺少实践经验。未来几个月正好拿自己的一个 idea 来练手。</p></li>
+<li><p>大数据 &amp; 云计算</p>
+
+<p>  伴随着这些词从几年前的时髦到现在的烂大街，我也经历了从最初充满兴趣的学习到后来在实验室项目任务的推动下的远离。看过几篇论文，搭过一些环境，做过一些分享，仅此而已。看 Hadoop 源码的计划由于优先级过低在任务堆栈中一直呈现饥饿状态。</p>
+
+<p>  或许年轻人跟着概念走是很危险的一件事情。大公司耗得起不是因为这些概念就是未来，而是他们有钱有人有时间，跟投资一个意思，风险不小。确认自己内心想要的到底是什么，再为之努力，而不是随大流。</p></li>
+<li><p>VPS</p>
+
+<p>  与<a href="http://weibo.com/redow7">@RedDow</a> 和<a href="http://weibo.com/cloudbye">@草原</a>合租了 Linode 的乞丐版。现阶段维护着自己的博客，还搭了 Wiki、OpenVPN、ShadowSocks 等服务，时不时还会放上一些小玩意儿，比如给女友做的个简单的网页 <a href="http://love600.me/">love600.me</a>。实际上，最近正在构思一个产品，构思比较复杂，希望明年能把它完成，以填补两年以来内心的一个期待。</p></li>
+</ul>
+
+
+<h3>博客</h3>
+
+<p>  两年前在 CSDN 开始维护自己的博客，中间断了一阵子。而后 2013 年 4 月底在 Github 上用 Octopress 搭建了新的个人博客，记录技术、工作和生活。8 个月时间里，积累了超过 2.7w 的 PV，超过 1w 的 UV，就像我在<a href="http://biaobiaoqi.me/blog/2013/11/13/blog-migration/">《半年博客小结》</a>中写的，<a href="http://biaobiaoqi.me">http://biaobiaoqi.me</a> 是我阵地。最近一个月，状态并不算太好，只更新了一篇博客。新的一年开始，记博客的习惯还需要坚持。</p>
+
+<h3>兴趣</h3>
+
+<ul>
+<li><p>耳机</p>
+
+<p>  经过不一定靠谱的在线测试，证明我的听力年龄大约在 40 岁左右。过早的老化可能与我经常掏耳朵的习惯有关，第一次让我意识到老去的残酷。而在此之前，我还在耳朵上做出了两笔小投资：购入了一副 AKG K420 和一副 Marshall Minor。不过小五百的耳机也无法改变我是木耳的事实。投资失败。
+  好在 Marshall Minor 的挂耳式耳塞设计适合运动时佩戴，一个人跑步、投篮的时候是个不错的选择。更多的时候，从寝室到实验室的路上，《晓说》、《Teahour》、《Tiny4Voice》周杰伦、王力宏、萧敬腾和陈奕迅的歌陪我度过了一个人的时间。
+  有时候我也会想，这些声音是不是夺去了内心独白的时间。</p></li>
+<li><p>电影</p>
+
+<p>  学校内网的 NexusHD 是一个 pt 神站，拥有大量的高清电影。自己也经常跟妹子，跟基友一起去电影院贡献票房。《看电影的门道（插图第 2 版）》是我在观影方面做出的努力，阅读后看电影的角度确实丰富了一些。</p></li>
+<li><p>死飞</p>
+
+<p>  花了两个月月钱买了辆入门的死飞，是因为向往它的自由、极简：没有刹车，飞轮固定，让机械结构出错的几率减小，可控制车速、倒车让操控感变强。在实验室和寝室之间来回了半年后，现在对它的感受是：骑死飞脚很累损膝盖；对车的掌控度很高确实很爽。另外学会了<a href="http://biaobiaoqi.me/blog/2013/10/20/repair-my-fixed-gear/">补胎、换胎</a>等技能。</p>
+
+<p>  不过一直也没有花时间来研究如何玩出花式的动作。基本的 Mid-Skid 对我来说已经足够了。附上一句：注意安全。</p></li>
+<li><p>运动：篮球、健身、游泳</p>
+
+<p>  夏天实验室提供了游泳卡去校区的游泳场游泳，后来<a href="http://weibo.com/redow7">@ReDow7</a> 提出没有八块肌游泳会被叫大叔，于是下半年在实验室购入了哑铃断断续续的开始了自助健身锻炼。篮球被落下了半年多，直到重温了一遍《灌篮高手》，下半年重新恢复到一周一次。虽然不喜欢“身体是革命的本钱”这种把革命当做终极目标的话，但咱们确实要善待生命的载体。</p></li>
+<li><p>苹果</p>
+
+<p>  妹子一直说我是苹果的脑残粉，其实我没那么宗教般的迷恋，只是喜欢。俗话说得好，“属性不够装备凑”，从 nano、shuffle、classic 到 iPhone、MBP、iPad，都体验了一把。12 年入了一台 11 年底产的 13 寸 MBP，不过 13 年才用的顺心了些，自己 DIY 了 <a href="http://biaobiaoqi.me/blog/2013/11/24/failed-in-replacing-hdd/">RAID0 的双 SSD 硬盘</a>，速度快的飞起，应用软件也用的更成熟了（参见<a href="http://biaobiaoqi.me/blog/2013/11/24/install-software-in-os-x/">《我的 OS X 软件安装索引》</a>）。</p>
+
+<p>  2013 圣诞节，妹子给送了一台 iPad mini 2。作为阅读和网页浏览工具，确实很完美。</p>
+
+<p>  有时候也会觉得 iOS 过于封闭，无法 DIY 一些功能，没有￥600/年的苹果开发者账号甚至都无法将自己写的 App 部署到设备上。但暂时没有放弃使用苹果产品的想法，品牌价值、产品文化和应用的生态环境优势太大！（另附博文<a href="http://biaobiaoqi.me/blog/2013/06/09/something-about-mac-gui/">《Mac 的 GUI 哲学》</a>）</p></li>
+<li><p><del>摄影</del></p>
+
+<p>  将捣鼓了几日的 Canon 600D 给了老爸，彻底断了自己摄影的念头。<a href="http://cocolighter.com/">约哥</a>就不一样了，与他同时买的相机，人家现在动辄出入高端摄影圈。到时候还得仰仗他给拍毕业照来纪念 ZJU 的 7 年时光呢。</p></li>
+<li><p>2K13</p>
+
+<p>  随着篮球在生活中的回归，2K13 和 2K14 也在寝室里重燃战火。我经常拿步行者、开拓者等队与<a href="http://weibo.com/u/2072817314">@洪鑫 komac</a> 的热火队大战，虽说胜负乃兵家常事，不过几次 7 局赛都败了还是让人扼腕。明年会针对性的提升技战术能力。有空向实况足球延伸下也是极好的。</p></li>
+</ul>
+
+
+<h3>最后</h3>
+
+<p>想不到拖拖拉拉还写了半天多流水账。</p>
+
+<p>真诚的对 2013 道一声感激。这一年，遇到了不少事儿，碰上了不少人，都是我的财富。</p>
+
+<p>最后的最后，非常幸运有一个理解我的温柔可爱的妹子一直陪伴着我，顶着“秀恩爱 XXX”的压力说句，永远爱你 =)。</p>
+
+<hr />
+
+<p>有兴趣的同学可以运行如下 Ruby 语句：</p>
+
+<p><code>irb&gt;&gt; "Happy new year to you!".sum</code></p>
+
+<p>其实没什么啦=)，结果是 <code>2014</code>。</p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.io/blog/2014/01/04/happy-new-year/'>http://biaobiaoqi.github.io/blog/2014/01/04/happy-new-year/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[从《僵尸海啸》感受创新]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2013/12/15/zombie-tsunami/"/>
+    <updated>2013-12-15T21:10:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2013/12/15/zombie-tsunami</id>
+    <content type="html"><![CDATA[<p>本文博主自费五毛推荐一款冒险类手游——《僵尸海啸》(Zombie Tsunami)。</p>
+
+<p>游戏玩家控制自己的僵尸军团不断前进。前进路上有障碍物和人。人被僵尸吃掉后会转变为新的僵尸，壮大玩家的僵尸军团，而障碍物则会毁灭掉僵尸。最终游戏以僵尸军团的被全歼结束。行进的路上，还有各种道具和金币。通过收集金币，可以在商店购买技能特效，丰富了游戏的可玩性。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/zombie2013-12-15%2023.44.48.png?imageView/2/w/800/h/800" alt="img" /></p>
+
+<!--more-->
+
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/zombie2013-12-15%2023.51.51.png?imageView/2/w/800/h/800" alt="img" /></p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/zombie2013-12-15%2023.53.41.png?imageView/2/w/800/h/800" alt="img" /></p>
+
+<h3>对冒险类游戏体验的重构</h3>
+
+<p>博主自己并不是一个手游爱好者。可能正是因为自己接触的手游比较少，在接触僵尸海啸这款游戏后，便被它创新的游戏模式所吸引。相比经典的《超级玛丽》《魂斗罗》等冒险类游戏，僵尸海啸重构了经典的冒险类游戏的游戏体验：游戏玩家控制的不是一个角色，而是一个团体。</p>
+
+<p>在经典的冒险类游戏中，每次碰撞障碍物，或者直接挂掉，或者废一滴血。而在僵尸海啸中，会失去僵尸军团中得一只僵尸。这一改变可不是简单的生命值的提升。</p>
+
+<p>首先，游戏过程中，群体行为的设定被配置了一定的不可判定性（跟现实生活很像，群体的智商是低于单个人的）。比如，当僵尸军团的数量达到一定的程度，当游戏角色需要飞跃一个裂谷时，总会有那么几只不听话的僵尸由于慢半拍或者快半拍而坠崖死掉。这种不可判定让游戏从原来的死板一下子变得可爱起来，更加有趣了。</p>
+
+<p>其次，根据僵尸军团数量的大小，行进过程中对障碍的回避策略也需要动态的变化。比如当僵尸军团拥有较多僵尸时，损失个别数量的僵尸并不影响大局。这个时候，当遇到炸弹时可以采取不躲闪的策略。如果跳起躲闪，反而可能因为炸弹后接一个裂谷而坠落，全军覆没。实际上，根据游戏的统计数据，坠崖是我的游戏角色超过 80%的死亡原因。当僵尸军团中僵尸数量本就不多，那就不得不小心谨慎，步步惊心，尽量不能与炸弹碰撞。</p>
+
+<h3>游戏的创新</h3>
+
+<p>在我的印象里，很多冒险类的手游不过是对某成熟的游戏代码稍作修改，更换背景和角色。实践证明，这些换过皮肤的游戏确实能赚钱：游戏只要不是惨不忍睹，总会有人下载，总是有人花时间在上面，总是有人来买单。但与其说这是一种迎合市场需求的有利可图的经营方式，倒不如说是在用当前的获益来透支未来的可能性。虽然游戏玩家们现在会蜂拥而上的耗时间在“换过皮”的游戏上，但这并不意味着他们满足于雷同的游戏内涵。甚至可以肯定的说，玩家们更乐于看到新的东西，来激活他们在千篇一律的游戏中渐渐麻木的神经末梢。</p>
+
+<p>说的更大一些，一个游戏的规则完全可以帮助玩家认识世界。比如经典的冒险类游戏会激发男孩心中的英雄情结，而僵尸海啸中或许就能植根下团队合作、群体效应的影子。从这个角度讲，即使将新的轮子复制的美轮美奂，它的助益也远没有一个创新的游戏规则来的有价值。</p>
+
+<p>BTW，我不太喜欢玩游戏，一方面是因为自己游戏商不够，玩游戏只是任人宰割的份儿-,-，另一方面是因为对虚幻的体系没那么痴迷，不想投入太多的注意力到游戏开发者塑造的世界里。相比之下，就比较喜欢一些写实类的游戏，比如自己所热爱的篮球游戏(NBA Live 系列和 2k 系列)。</p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.io/blog/2013/12/15/zombie-tsunami/'>http://biaobiaoqi.github.io/blog/2013/12/15/zombie-tsunami/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[我的OS X软件安装索引]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2013/11/24/install-software-in-os-x/"/>
+    <updated>2013-11-24T03:28:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2013/11/24/install-software-in-os-x</id>
+    <content type="html"><![CDATA[<p>更换硬盘重装系统时，由于备份数据失败，不得不重新配置系统环境（参见<a href="http://biaobiaoqi.me/blog/2013/11/24/failed-in-replacing-hdd/">《记对 MBP 一次失败的备份和重装》</a>）。在此记录下自己所要在 OS X 上安装的软件的索引。整体分为三类：系统工具、个人和开发。</p>
+
+<p>部分第三方下载的软件在安装时提示“无法打开，来自不受信任的开发者”。解决办法是：</p>
+
+<p>系统偏好设置 －> 安全与隐私 －> 点左下角的小锁头图标然后输入自己的密码 －> 在“通用”标签下点选“任何来源”。</p>
+
+<!--more-->
+
+
+<h2>系统工具</h2>
+
+<p><a href="http://www.groths.org/software/trimenabler/">trim-enabler</a>：安装 SSD 的用户，需要用它开启 TRIM 机制，以提高 SSD 的性能。</p>
+
+<p><a href="http://www.freemacsoft.net/appcleaner/">App cleaner</a>：用来彻底删除应用软件，包括各种相关的配置文件资料等。</p>
+
+<h2>个人</h2>
+
+<p><a href="http://mplayerx.org/download.html">MplayerX</a>：视频播放软件。射手播放器也不错，不过是收费的。</p>
+
+<p><a href="http://selfcontrolapp.com/">Self Control</a> ：时间控制软件，能添加网址黑名单，设定白名单，在规定时间里，以一定的策略阻碍用户访问某些网页，以排除这些网站的干扰，集中精力工作。</p>
+
+<p><a href="https://code.google.com/p/ichm/">iChm</a>：chm 文件浏览器。</p>
+
+<p><a href="http://www.kekaosx.com/zh-cn/">keka</a>：解压缩软件。</p>
+
+<p><a href="http://pinyin.sogou.com/mac/?f=imemac&amp;f=index&amp;r=2015">sougou 拼音</a>：个人比较偏好的搜狗输入法。</p>
+
+<p><a href="https://itunes.apple.com/cn/app/foxmail/id617950461?mt=12">foxmail</a>：国内的很不错的邮件客户端。</p>
+
+<p><a href="https://itunes.apple.com/cn/app/thunder/id463419485?mt=12">迅雷</a>：下载工具。</p>
+
+<p><a href="http://www.utorrent.com/intl/zh_cn/downloads/complete/os/osx">utorrent</a> ：BT 下载工具。</p>
+
+<p><a href="http://www.microsoft.com/zh-cn/download/details.aspx?id=18140">Windows 远程桌面</a></p>
+
+<p><a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a> ：有时候需要处理 Office 文档时，或者网银支付等相关事项，需要使用到虚拟机中的 Windows。</p>
+
+<p><a href="https://itunes.apple.com/cn/app/yin-xiang-bi-ji/id406056744?mt=12">Evernote</a>：个人离不开的效率工具。</p>
+
+<p><a href="http://www.alfredapp.com/">Alfred</a>：让 OS X 在指尖滑动的神器。</p>
+
+<p><a href="https://www.dropbox.com/downloading?os=mac">Dropbox</a>：方便快捷、无缝的同步数据。</p>
+
+<p><a href="https://filezilla-project.org/download.php">FileZilla</a>：免费 FTP 客户端。</p>
+
+<p><a href="https://code.google.com/p/goagent/">GoAgent</a>：没梯子会拖累生产效率的。</p>
+
+<p><a href="http://code.google.com/p/tunnelblick/">Tunnelblick</a>：OpenVPN 客户端，用途同上。</p>
+
+<h2>开发</h2>
+
+<p><a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html">Java7</a>： OS X 10.9 开始系统默认不会安装 Java 了，需要自己安装。</p>
+
+<p><a href="http://www.eclipse.org/downloads/">Eclipse</a>：Java IDE.</p>
+
+<p><a href="http://www.iterm2.com/#/section/downloads">Iterm2</a>：一个不错的终端。</p>
+
+<p><a href="https://itunes.apple.com/cn/app/go2shell/id445770608?mt=12">Go2Shell</a>：把它拖到 Finder 工具栏上，点击后可开启终端到当前路径。可以配合 Iterm2 使用，设置方式如下：</p>
+
+<p><code>$open -a Go2Shell --args config</code></p>
+
+<p><a href="http://www.sublimetext.com/2">Sublimetext</a>：强大的编辑器。创建<code>subl</code>命令行指令：</p>
+
+<p><code>ln -s "/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl" ~/bin/subl</code></p>
+
+<p><a href="http://mouapp.com/">Mou</a>：Mac 下最好的 Markdown 编辑器。</p>
+
+<p><a href="https://itunes.apple.com/cn/app/xcode/id497799835?mt=12">XCode</a>：即使不做 Objective-C 项目开发，也必须安装。它的 Command-Line-Tool 是许多其他开发环境的预配置。</p>
+
+<p><a href="http://brew.sh/">Homebrew</a>：OS X 上主流的强大的包依赖管理工具。很多软件、环境都可以使用 Homebrew 来安装管理。</p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.io/blog/2013/11/24/install-software-in-os-x/'>http://biaobiaoqi.github.io/blog/2013/11/24/install-software-in-os-x/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[记对MBP一次失败的备份和重装]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2013/11/24/failed-in-replacing-hdd/"/>
+    <updated>2013-11-24T02:08:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2013/11/24/failed-in-replacing-hdd</id>
+    <content type="html"><![CDATA[<h2>背景</h2>
+
+<p>大概一年前，给我 11 年底款的 13 寸 MBP 的光驱位替换上了一块 M4 128G 的 SSD，用做系统盘，而机器原本的 HDD 则退化为数据存储盘。</p>
+
+<p>前两天发现 MBP 间歇性的变得很慢，查看 CPU 和内存都没有异常，使用 <a href="http://www.volitans-software.com/smart_utility.php">SMART Utility</a> 检查发现有坏道出现，如下图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/ssdhdd%20bad%20sector.png?imageView/2/w/800/h/800" alt="bad sector" /></p>
+
+<p>硬盘出现坏道后，会给坏道的数据重新分配备用 sector，而这种 sector 是有限的，再者坏道可能会扩散蔓延，这基本意味着 HDD 生命的结束了。只能换硬盘了。</p>
+
+<p>这才意识到自己的使用习惯的不当：平时没有关机的习惯，一般合上盖子就将笔记本放到书包里走人了，而运行状态的 HDD 在颠簸的环境里是很容易出现机械损伤的（相比之下 SSD 则不会）。</p>
+
+<p>考虑到自己没有太大存数据的需求（以前 700G+的 HDD 只存了 200G 不到，其中很多数据还是存了之后几乎没有使用的），决定再入一块 M4 128G 的 SSD，两块 SSD 组 <a href="http://zh.wikipedia.org/zh-cn/RAID#RAID_0">RAID0</a>。</p>
+
+<!--more-->
+
+
+<h2>过程</h2>
+
+<p>总体计划如下：</p>
+
+<ol>
+<li>使用 Time Machine 备份原来系统的数据。</li>
+<li>购买 SSD，组 RAID0(原来 SSD 中的数据会被擦除)</li>
+<li>做一个 U 盘系统恢复盘，用于重装系统。</li>
+<li>重装系统后，通过系统工具迁移助理将备份的数据还原到新系统中。</li>
+</ol>
+
+
+<p>主要参考了<a href="http://v.youku.com/v_show/id_XNDAxODk3MTUy.html">王自如的 RAID0 装配教程</a>。</p>
+
+<h3>1.备份数据</h3>
+
+<p>使用移动硬盘来做数据备份。</p>
+
+<p>用 OS X 的系统工具“磁盘工具”将移动硬盘格式化为 MBP 支持的文件系统格式。启动 Time Machine，设定移动硬盘为备份路径，在 Time Machine 的偏好中，设定备份源排除 HDD。接下来就等系统自动做好备份了。</p>
+
+<p>理论上，通过 Time Machine 合理备份的系统，再也不用担心硬盘挂掉的情况。即使换新机器，也能在新系统中还原出根原来一样的环境（暂不支持跨系统版本的还原）。意外的是，当然企图通过数据迁移还原系统时，发现我备份的数据块无法识别-，-。</p>
+
+<h3>2.拆机，组装</h3>
+
+<p>在天猫上从上次购买的商家处直接又下了一单，买了同样一款的 SSD。（注意，这里必须要使用同款 SSD）。</p>
+
+<p>拆后盖驾轻就熟，倒是在拆卸硬盘时，意外的发现自己没有六角形的 T6 星型螺丝刀，而这是笔记本固定硬盘的四颗螺丝钉的规格。<del>（裤子都脱了，总不能又穿上吧）</del>幸运的是，我在自行车修车摊问师傅借到了老虎钳，顺利拧下了那几颗螺丝。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/ssdmbp.JPG?imageView/2/w/800/h/800" alt="img" /></p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/ssdspike.JPG?imageView/2/w/800/h/800" alt="img" /></p>
+
+<p>换上 SSD 后，需要使用 <a href="http://support.apple.com/kb/HT4848?viewlocale=zh_CN">RecoveryDiskAssistant</a> 制作的 U 盘给两块 SSD 做 RAID0 设定。详情参见王自如的视频。</p>
+
+<h3>3.重装系统</h3>
+
+<p>有两种重装系统的方式：</p>
+
+<ol>
+<li>使用 RecoveryDiskAssistant 的 U 盘，联网安装 OS X 系统；</li>
+<li>根据系统安装文件，制作 U 盘安装盘，参见<a href="http://briian.com/8534/mac-usb-installer.html">《如何製作 Mac OS X 專屬 USB 系統安裝》</a></li>
+</ol>
+
+
+<p>我使用后者安装了系统。</p>
+
+<h3>4.还原备份</h3>
+
+<p>在安装系统的过程中，系统会询问用户是否需要迁移数据，如果跳过这一步，还可以在安装完成系统后，运行“迁移助理”来还原备份。</p>
+
+<p>由于我的操作失误，没有完全备份下整个系统，造成“迁移助理”无法识别备份数据。只能从备份数据中将有用的数据手工的迁移到新系统中，应用软件都得重新下载安装。全是泪啊=(。</p>
+
+<h2>总结</h2>
+
+<p>备份数据只有 60G，而我原来系统的数据总量（包括操作系统本身）大概有 120G，即使考虑有压缩，60G 也相差的很远了。备份时急于求成，没有意识到这一点，造成备份不成功，提醒自己谨小慎微。</p>
+
+<p>顺着这次重配系统环境，我整理了自己的 Mac OS X 软件安装索引，参见博文：<a href="http://biaobiaoqi.me/blog/2013/11/24/install-software-in-os-x/">《我的 OS X 软件安装索引》</a>，当然，希望自己再也不会用到。</p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.io/blog/2013/11/24/failed-in-replacing-hdd/'>http://biaobiaoqi.github.io/blog/2013/11/24/failed-in-replacing-hdd/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[半年博客小结]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2013/11/13/blog-migration/"/>
+    <updated>2013-11-13T23:38:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2013/11/13/blog-migration</id>
+    <content type="html"><![CDATA[<p>上周跟实验室的基友<a href="http://redow.me">@ReDow</a> 和<a href="http://zaumreit.me">@zaumreit</a> 合租了一台最低配置的 <a href="https://www.linode.com/">Linode</a> 的 VPS。把自己的博客搬到了 VPS 上，算是为之前半年的 github pages 博客写作画上个句号。正好半年时间，写点文字记录下心情。</p>
+
+<p>半年下来，博客里粗粗糙糙的攒下了 70 来篇博文。内容泛善可陈，但也赚得了 2 万的浏览量。实际上刚开始的时候，自己定下的目标是在年底达到 1 万 PV，比预想的要好不少=）。当然，最让人兴奋的不是这些冷冰冰的数字，而是博客的内容真真切切的能对一些素未谋面的访客有所帮助的时候。网站只是载体，数字只是表象，我更愿意看到的是本质上的信息的自由流动。这些，我正在用博客来实践。</p>
+
+<p>其实更早的时候曾有在 <a href="http://blog.csdn.net/biaobiaoqi">csdn</a> 上写博客，后来由于密码泄露问题和感受到社区整体氛围的不适放弃了。回过头来看以前的文字，跟昨天的自己一样幼稚和无聊。</p>
+
+<p>觉得幼稚，是因为处在技能和知识积累的上升期。想想也是，贫瘠如我的情况，这一点是很容易实现的。我也乐意看到过去的幼稚，这代表着成长，离目标又近了一步。</p>
+
+<p>觉得无聊，大概是因为在如今的探索和彷徨中，渐渐找到了自心所喜欢的事物，以及自己的力所能的领域。不断的在未知的空间迈出第一步，用实际的感受指导自己的方向。我想只有这种实践，才能在不迷失自我的前提下，扩展自己的可能性。</p>
+
+<p>半年里，我努力去接触和了解了黑客文化，被它开放、自由、探索的精神所吸引。虽然难以成为一个纯粹的黑客，但我非常愿意用自己的方式来践行其中的一些理念。为了提高效率，我看了一些方法论、认知方面的书籍，发现似乎自己对它的好奇心并不止于对它的使用。科技哲学也是一个有意思的方向，KK 思想的奥妙能激发自己的思考。世界从来都不是二元的，我希望找到一个属于自己的着力点。</p>
+
+<p>博客里的每个字，都是我的脚印。想在世界留下痕迹，至少得先让其他人能看到自己的脚印，即使这些印记暂时很浅。而脚印的指向，就是未来的路。</p>
+
+<!--more-->
+
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.io/blog/2013/11/13/blog-migration/'>http://biaobiaoqi.github.io/blog/2013/11/13/blog-migration/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[PAT 1069 - 1072 题解]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2013/11/07/pat-1069-pat-1072/"/>
+    <updated>2013-11-07T00:30:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2013/11/07/pat-1069-pat-1072</id>
+    <content type="html"><![CDATA[<p>来源是 2013 年 11 月 2 日的 PAT 测试。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1069">1069. The Black Hole of Numbers (20)</a></h2>
+
+<h5>题意</h5>
+
+<p>给出一个四位数比如 6767，将它按照每位从小到大(6677)和从大到小(7766)充足，得到两个新四位数，这两者相减将得到一个新的四位数。再按照一样的处理方式处理得出的四位数</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>7766 - 6677 = 1089
+</span><span class='line'>9810 - 0189 = 9621
+</span><span class='line'>9621 - 1269 = 8352
+</span><span class='line'>8532 - 2358 = 6174
+</span><span class='line'>7641 - 1467 = 6174
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最终将得到一个『黑洞数』：6174。</p>
+
+<p>题目给出一个四位数，要求输出它演变出『黑洞数』的过程。</p>
+
+<!--more-->
+
+
+<h5>分析</h5>
+
+<p>简单模拟题，需要留心两个特殊情况的处理：<code>6174</code>，<code>xxxx</code>。</p>
+
+<p>熟练掌握 C 的基本函数也能缩短代码编写，比如<code>atoi()</code> 和 <code>sprintf()</code>， 由于<code>itoa()</code>是依赖于 Windows 的，这里不推荐使用。</p>
+
+<p>pat1069 源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1069.cpp">请戳</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1070">1070. Mooncake (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>给出月饼市场的需求 D&lt;= 500 （按重量计算），给出现有 N &lt;= 1000 种月饼，每种月饼有一定数量的储备（按重量计算）以及这些储备所对应的价格，求一个出售月饼的方式，在容量 D 的市场里，获得最多的销售额。</p>
+
+<h5>分析</h5>
+
+<p>简单的贪心问题。贪心的规则是月饼的单价。注意有一个坑：每种月饼的存货量也需要用<code>double</code>来做存储。</p>
+
+<p>pat1070 源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1070.cpp">请戳</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1071">1071. Speech Patterns (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>给出一个长度不超过 1048576 的字符串。把所有连续的字母或者数字（[0-9 A-Z a-z]）试做单词，且忽略大小写，求其中最高频的单词。</p>
+
+<h5>分析</h5>
+
+<p>使用 map&lt;string, int>做存储，统计出现次数即可。</p>
+
+<p>有些细节需要注意：</p>
+
+<ul>
+<li>使用<code>getline(cin, str)</code>获取正行数据</li>
+<li>使用<code>transform(str.begin(), str.end(), str.begin(), ::tolower);</code>将字符串转换成小写</li>
+<li>遍历字符串获取单词时，注意特殊条件。比如以非字符数字开头的字符串，以字符数字结尾的字符串等。</li>
+</ul>
+
+
+<p>pat1071 源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1071.cpp">请戳</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1072">1072. Gas Station (30)</a></h2>
+
+<h5>题意</h5>
+
+<p>给出一个图，其中有 N &lt;= 10<sup>3</sup> 个节点是居民房，M &lt;= 10 个节点是计划建造加油站的候选点。给出加油站所能服务的最远距离 D。要求计算出合适的位置建造加油站，满足如下优先级条件：</p>
+
+<ol>
+<li>所有居民房必须在加油站的服务距离内。</li>
+<li>所有居民房中距离加油站的最近的居民房与加油站之间的距离是最远的。（大概是安全方面的考虑，加油站要离居民区远一点）</li>
+<li>所有房间距离加油站的最小距离的总和最小。（节约居民加油的总体成本）</li>
+<li>同等条件下，序号越小的加油站优先。</li>
+</ol>
+
+
+<h5>分析</h5>
+
+<p>实际上是求加油站到所有点的最短路径的问题，使用 Dijsktra 可以满足。</p>
+
+<p>另外，需要考虑求最短路径的过程中是否要将其他加油站所构建的路径算入在内。从背景上看，加油站应该在公路边修建，故加油站之间以及居民房和加油站之间都是存在路径的，从给出的数据来看，存在两个加油站之间的路径。所以，计算最短路径时，是需要将所有加油站的节点也计算在内的。</p>
+
+<p>pat1072 源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1072.cpp">请戳</a></p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.io/blog/2013/11/07/pat-1069-pat-1072/'>http://biaobiaoqi.github.io/blog/2013/11/07/pat-1069-pat-1072/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[用Ruby实现的论坛灌水工具：CC98 Post Machine]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2013/11/05/cc98-post-machine/"/>
+    <updated>2013-11-05T15:20:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2013/11/05/cc98-post-machine</id>
+    <content type="html"><![CDATA[<p>ZJU 的校网论坛 CC98 比较活跃。论坛只对校内网开放，而且账号跟学生绑定，每个学生注册的账号数量有限。『十大』是 CC98 的经典页面：基于关注的人数（回帖的用户数而不是回帖的数量）用算法求出 24 小时内最火爆的十个发帖。很多同学都会浏览十大，关注论坛动态。</p>
+
+<p>故事就是从十大引出的。有的社团在宣传活动时，为了扩大宣传面，会发动成员的小马甲顶贴上十大。这种违背社区自然发展轨迹的手段，强奸了关注十大贴的用户的意愿，阻碍了信息的自由流动。</p>
+
+<p>于是萌生了完成一个批量发帖的机器，以其人之道还治其人之身的想法。在下次十大被宣传贴攻占时，能有反击的工具。</p>
+
+<p>工具的用途很简单：使用不同的用户身份模拟真人论坛回帖，增加帖子关注度，以抵抗宣传贴。流程如下：提前收集各路亲朋好友的用户信息作为『预备水军』，『灌水』时，在评论内容文件中输入自定义的评论内容，在命令行参数中制定目标贴，即可实现随机顺序的用户自动顶贴。鉴于现在的功能是顶贴竞争十大，而十大排名是根据关注人数也就是独立用户评论数量做排序的，这里设计的顶贴策略是一个马甲发一条评论。以后可以考虑增加灵活的配置方案，实现更多功能。</p>
+
+<p>项目 Github 地址：<a href="https://github.com/biaobiaoqi/CC98PostMachine/">https://github.com/biaobiaoqi/CC98PostMachine/</a></p>
+
+<p>介于这个工具本身的罪恶的攻击属性，在此强调，工程仅供学习交流和对抗宣传贴。</p>
+
+<!--more-->
+
+
+<h2>使用说明</h2>
+
+<h3>1.准备顶贴用户</h3>
+
+<p>发帖的 HTTP 请求为 POST 请求。系统验证信息中需要有发帖用户的 username，userid 和 hash 后的 password，这些都能从 cookie 中获得。</p>
+
+<p>有两种方式设置水军的信息：</p>
+
+<h4>(1)浏览器中获取 cookie</h4>
+
+<p>在浏览器中，找到 cookie 的内容。将对应的三项信息抽取出来后，填入<code>water_army.yml</code>文件，由于该文件涉及用户隐私信息，项目中设置了.gitignore，不会上传到 repo 中。可以参照<code>water_army.yml.example</code>的格式自行修改。</p>
+
+<h4>(2)使用<code>RegWaterArmy</code>工具导入</h4>
+
+<p>如果不想手动的查找 cookie 信息，也可以将账号、密码输入到<code>pre_water_army.txt</code>文件中，执行命令来获取相关信息。</p>
+
+<p>在<code>pre_water_army.txt</code>文件中，一行为单位输入用户名和密码，中间用空格隔开。同样由于隐私原因，repo 中没有上传该文件，可以自行将<code>pre_water_army.txt.example</code>改为<code>pre_water_army.txt</code>，然后填入内容。</p>
+
+<p>填入账号、密码后，在 src 目录下运行如下命令：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$CC98POSTMACHINE/src/ruby RegWaterArmy.rb</span></code></pre></td></tr></table></div></figure>
+
+
+<p>即可自动获取用户的 cookie 信息，并导入<code>water_army.yml</code>文件中。注意，安全起见，完成这一步后，尽量删除账号、密码等隐私信息。</p>
+
+<h3>2.准备评论</h3>
+
+<p>在<code>comments.txt</code>文件中，设置用户评论的内容，每行一条。现在的设计是保证回帖的顺序与文件中的内容顺序一致。如果用户数量超过了文件中的评论条数，则回复时循环使用<code>comments.txt</code>中的评论。建议自行设计评论，且评论数大于等于水军数量。同样需要用户自行修改<code>comments.txt.example</code>为<code>commnets.txt</code>后使用。</p>
+
+<h3>3.执行</h3>
+
+<p>来到 CC98PostMachine 的 src 目录，执行：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$CC98POSTMACHINE/src/ruby  PostMachine.rb  POST_URL [SPEED]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>其中<code>POST_URL</code>为响应帖子的网址，<code>SPEED</code>是设定的两个回帖之间的间隔时间，实际回帖时间做了如下的模糊：<code>SPEED + random(SPEED)</code>。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>Usage: $CC98POSTMACHINE/src/ruby  PostMachine.rb  POST_URL [SPEED].
+</span><span class='line'>
+</span><span class='line'>    POST_URL is the url address of target post.
+</span><span class='line'>
+</span><span class='line'>    SPEED is the time gap unit between two posts, it may be 1(s), 10(s) or any other number
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>下一步：</h2>
+
+<ul>
+<li><p>修复 bug：第一次执行命令时，都只有一个用户能成功回复。（是服务器端的对 cookie 的记录？）</p></li>
+<li><p>整理代码结构，解耦，增加配置灵活性，写的更 ruby 一点<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.io/blog/2013/11/05/cc98-post-machine/'>http://biaobiaoqi.github.io/blog/2013/11/05/cc98-post-machine/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

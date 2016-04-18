@@ -1,0 +1,486 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>PAT 1031-1040 题解 - Biaobiaoqi的博客</title>
+  <meta name="author" content="Biaobiaoqi">
+
+  
+  <meta name="description" content="PAT 1031, PAT1031,PAT 1032, PAT1032,PAT 1033, PAT1033,PAT 1034, PAT1034,PAT 1035, PAT1035,PAT 1036, PAT1036,PAT 1037, PAT1037,PAT 1038, PAT1038,PAT &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://biaobiaoqi.github.io/blog/2013/08/01/pat-1031-1040-solutions/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Biaobiaoqi的博客" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+
+function addBlankTargetForLinks () {
+
+  $('a[href^="http"]').each(function(){
+
+      $(this).attr('target', '_blank');
+
+  });
+
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+
+  addBlankTargetForLinks();
+
+});
+
+</script>
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F49481ec3305db999013860b0ccb3b16d' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39900036-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Biaobiaoqi的博客</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:biaobiaoqi.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives/">全部文章</a></li>
+  <li><a href="/tag-cloud/">分类阅读</a></li>
+  <li><a href="/resources/">其他推荐</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">PAT 1031-1040 题解</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-01T01:43:00+08:00" pubdate data-updated="true">Aug 1<span>st</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>早期部分代码用 Java 实现。由于 PAT 虽然支持各种语言，但只有 C/C++标程来限定时间，许多题目用 Java 读入数据就已经超时，后来转投 C/C++。浏览全部代码：<a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel">请戳</a></p>
+
+<p>本文谨代表个人思路，欢迎讨论;)</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1031">1031. Hello World for U (20)</a></h2>
+
+<h5>题意</h5>
+
+<p>将给定的字符串打印出 U 型。</p>
+
+<p>比如给定<code>helloworld</code>，打印出</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>h  d
+</span><span class='line'>e  l
+</span><span class='line'>l  r
+</span><span class='line'>lowo
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>设定左边的字符个数为 n1,底边字符个数为 n2,右边字符个数为 n3。需要满足 n1 = n3 = max
+{k|k &lt;= n2 for all 3 &lt;= n2 &lt;= N} with n1 + n2 + n3 -3 = N.</p>
+
+<h5>分析</h5>
+
+<p>简单模拟题。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1032">1032. Sharing (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>为了节省存储空间，单词使用链表实现。比如对于<code>loading</code>和<code>being</code>两个单词，有如下存储结构：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>word1 : -&gt; [l] -&gt; [o] -&gt; [a] -&gt; [d]  
+</span><span class='line'>                                  \
+</span><span class='line'>                                    [i] -&gt; [n] -&gt; [g] -&gt; null
+</span><span class='line'>                                  /
+</span><span class='line'>word2 : -&gt; [b] -&gt; [e] -------------
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>输入中，指定了两个单词的首字符的地址，并给出了 N (&lt;= 10<sup>5)个节点，每个节点包含：物理地址（5</sup> 位的正整数），实际存储的字符以及指向的下一个节点的地址。NULL 的地址是-1.
+要求找到两单词的的公共后缀开始的地址，如果没有，则输出-1.</p>
+
+<h5>分析</h5>
+
+<p>既然是单词，它的长度应该是有限的，也就是链表不会出现环这种情况（实际上这里的处理方式对于有环无环都适用）。对第一个单词链表做遍历，对爬过的节点做好标记。第二个单词链表也同样做标记，一旦遇到已经标记过的节点，则该节点就是结果。</p>
+
+<p>需要注意一点：直接使用 map 做节点的存储最后一个 case 会超时。而鉴于 5 位正整数的数据量，可以直接使用数组，用空间换时间。</p>
+
+<!--more-->
+
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1033">1033. To Fill or Not to Fill (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>高速路从 A 地到 B 地，路途有许多加油站，每个加油站的油价不一样，要求计算一个最优方案，使得以最便宜的开销跑完全程。</p>
+
+<h5>分析</h5>
+
+<p>用贪心算法，理清贪心算法的策略：</p>
+
+<ul>
+<li>1.从 A 加油站出发，在能行走的最大范围内，如果有比 A 站汽油更便宜的 B 站，则保证在 A 站点的加油量刚好满足能到达 B 站点；如果没有比 A 站汽油更便宜的站，则在 A 加满车油行走到【从 A 能走出的范围内】油价【最便宜】的站上，再行计算。</li>
+<li>2.从 A 加油站出发，在能行走的最大范围内，如果没有其他站点，则 A.dist + 一次最大的行走距离 为 impossible 情况下的最大站点。</li>
+</ul>
+
+
+<p> 注意有个陷阱：如果没有距离为 0 的加油站，则无法行驶。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1034">1034. Head of a Gang (30)</a></h2>
+
+<h5>题意</h5>
+
+<p>『gang』翻译过来是『一伙人』。gang 的定义是一群人，至少有 3 个人，这群人中每个人之间都通过通话相连，且整个群体的通话时长超过一个阈值。整个 gang 的团体中，拥有的电话时长最长的人就是头目了。</p>
+
+<p>题目给定了 gang 的阈值 K，以及 N 个通话记录，每条记录包括主叫人、被叫人以及通话时间。要求计算出有几个 gang，并按照 gang 的头目的字母顺序排序输出头目和其中成员数量。</p>
+
+<h5>分析</h5>
+
+<p>本题使用 dfs 求解比较方便。dfs 能简单的实现状态值的记录，比如当前的 gang 的成员数量和权重，如果使用并查集，则相对复杂。</p>
+
+<p>需要注意的坑点：如果建立邻接表时，每个通话记录都在两人头上计算了时间积累的，那么在判定 gang 的权重值是否低于阈值的时候，需要对阈值乘以 2。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1035">1035. Password (20)</a></h2>
+
+<h5>题意</h5>
+
+<p>给定多个字符串，按要求替换其中的某些特殊字符，并按原顺序输出。如果字符串中没有需要修改的字符，则不舒服该字符串。</p>
+
+<h5>分析</h5>
+
+<p>简单的 hash 实现。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1036">1036. Boys vs Girls (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>输入是一批学生的成绩，要求找出其中男生最低的成绩和女生最高的成绩，求其间的差值。如果无法计算，则输出 NA.</p>
+
+<h5>分析</h5>
+
+<p>简单模拟题。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1037">1037. Magic Coupon (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>背景是火星上的神奇的购物券购物策略：每张购物券上有一个整数，可正可负，商店里商品的标价也是一个整数，可正可负的。如果用正值购物券购买正值商品，则可获利两者之积；如果以负值购物券购买负值商品，也可获利两者之积；但其他情况，则会亏损。比如用面值为<code>2</code>的购物券购买面值为<code>3</code>的商品，获利<code>6</code>，用面值为<code>-5</code>的购物券购买面值为<code>-9</code>的商品，获利<code>45</code>，但如果用面值为<code>2</code>的购物券购买面值为<code>-3</code>的商品，则亏损<code>6</code>，</p>
+
+<p>给定一组数量为 NC 购物券面值和一组数量为 NP 的商品面值，1&lt;= NC , NP &lt;= 10<sup>5，要求计算能获利的最大值。</sup></p>
+
+<h5>分析</h5>
+
+<p>同号相乘可获利，异号相乘会亏损。要使获利最大，使用贪心思想计算。实际上，不需要用完购物券或者买完商品，所以只需要将同号的数值乘积算出即可，没有更复杂的情况。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1038">1038. Recover the Smallest Number (30)</a></h2>
+
+<h5>题意</h5>
+
+<p>给定 N(&lt;= 10000)个不超过 8 位的非负整数，要求将其按某个顺序拼接为一个数，使其值最小。</p>
+
+<h5>分析</h5>
+
+<p>容易简单的以为使用字典序排列拼接，实际上有一个特殊的拼接情况需要考虑。</p>
+
+<p>比如数据<code>32 321 3214</code>，这是按字典序排列的，但实际上这并不是最小的拼接方式，最小的拼接方式是：<code>321 3214 32</code>。</p>
+
+<p>比较这个实例，不难找到最小拼接的排序规律：</p>
+
+<ul>
+<li>1.两个字符串做比较时，如果其中一个字符串(a)是另一个字符串(ab)的前缀串，则需要将较长字符串(ab)除去前缀串的部分(b)与较短字符串(a)继续递归比较。比如，321 和 32，需要拿 1 和 32 做比较。又比如 323 和 32 比较，第一次拿 3 和 32 比较，第二次拿 3 和 2 按字典序比较。</li>
+<li>2.其他情况按字典序比较。</li>
+</ul>
+
+
+<p>另外需要注意的一个坑是：如果没有数据，则输出 0。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1039">1039. Course List for Student (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>给出 K(&lt;=2500)门课程，每门课程有 Ni(&lt;=200)名学生，学生编号为四位字符串，前三位为小写英文字母，后一位是数字。另给出 N 个需要查询的学生编号。</p>
+
+<p>要求列出对应查询编号学生的课程。如果有多个课程，需要按升序输出。</p>
+
+<h5>分析</h5>
+
+<p>这个题是个倒排索引的实现。不过在时间上卡的比较严。</p>
+
+<p>使用最简单的思路：map&lt;string, vector<int> students 倒排索引，在没有输出排序的课程列表时最后一个 case 已经超时；优化：将学生姓名的 hash 为 int，减免了 string 的匹配过程，还是超时（map 本身用红黑树实现，效率并不是特别高，还需要对每组数据进行排序），只能改变使用 map 的方式。</p>
+
+<p>最终 AC 的解法是：</p>
+
+<ul>
+<li>构建一个从学生编号字符串到 int 值的 hash 函数，在读入学生编号后，hash 到 int 值做处理。</li>
+<li>不适用 map 结构，根据学生姓名的限制，设定一个<code>vector&lt;int&gt; st[26*26*26*10]</code>的数据结构，读入时直接倒排索引插入。</li>
+</ul>
+
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1040">1040. Longest Symmetric String (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>给定一个字符串，要求输出最长的连续对称子串的长度。比如给定字符串为<code>Is PAT&amp;TAP symmetric?</code>，其中最长对称子串为<code>s PAT&amp;TAP s</code>，所以输出结果 11.</p>
+
+<h5>分析</h5>
+
+<p>这个题就是典型的 Java 实现 timeout，而 Cpp 实现轻松过的类型。需要注意两点：</p>
+
+<ul>
+<li>1.有两种对称情况，一种形如<code>aba</code>，一种形如<code>abba</code>。</li>
+<li>2.循环遍历的过程，以 index 为对称中心向两边扩散比较编码实现简单也更高效。</li>
+</ul>
+
+
+<p>另外，C 读入一整行数据到 char 数组的方法可以用<code>gets(s);</code>。</p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.io/blog/2013/08/01/pat-1031-1040-solutions/'>http://biaobiaoqi.github.io/blog/2013/08/01/pat-1031-1040-solutions/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Biaobiaoqi</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-01T01:43:00+08:00" pubdate data-updated="true">Aug 1<span>st</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+    <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+<a class="jiathis_button_tsina"></a>
+<a class="jiathis_button_weixin"></a>
+<a class="jiathis_button_renren"></a>
+<a class="jiathis_button_douban"></a>
+<a class="jiathis_button_googleplus"></a>
+<a href="http://www.jiathis.com/share?uid=1814751" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+	data_track_clickback:true,
+	summary:"",
+	shortUrl:true,
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1814751" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/08/01/pat-1021-1030-solutions/" title="Previous Post: PAT 1021-1030 题解">&laquo; PAT 1021-1030 题解</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/08/01/pat-1041-1050-solutions/" title="Next Post: PAT 1041-1050 题解">PAT 1041-1050 题解 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <!--h1>Comments</h1-->
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>标签云</h1>
+ <br /> 
+  <ul class="tag-cloud">
+    <a style="font-size: 112%" href="/tags/hadoop/">Hadoop</a> &nbsp 
+<a style="font-size: 139%" href="/tags/jvm/">JVM</a> &nbsp 
+<a style="font-size: 144%" href="/tags/java/">Java</a> &nbsp 
+<a style="font-size: 141%" href="/tags/pat/">PAT</a> &nbsp 
+<a style="font-size: 112%" href="/tags/octopress/">octopress</a> &nbsp 
+<a style="font-size: 135%" href="/tags/fen-bu-shi/">分布式</a> &nbsp 
+<a style="font-size: 133%" href="/tags/zi-jie-ma/">字节码</a> &nbsp 
+<a style="font-size: 135%" href="/tags/si-kao/">思考</a> &nbsp 
+<a style="font-size: 180%" href="/tags/ji-zhu/">技术</a> &nbsp 
+<a style="font-size: 124%" href="/tags/fang-fa-lun/">方法论</a> &nbsp 
+<a style="font-size: 106%" href="/tags/fu-wu-qi/">服务器</a> &nbsp 
+<a style="font-size: 137%" href="/tags/sheng-huo/">生活</a> &nbsp 
+<a style="font-size: 148%" href="/tags/suan-fa/">算法</a> &nbsp 
+<a style="font-size: 117%" href="/tags/wang-luo/">网络</a> &nbsp 
+<a style="font-size: 135%" href="/tags/du-shu/">读书</a>
+
+  </ul>
+</section>
+<section>
+  <h1>关于</h1>
+   <p>biaobiaoqi是我的网络id。<br><br>
+   我的博客日志：<a href="http://biaobiaoqi.me/blog/2013/09/01/blog-log/">请戳</a><br><br>
+   更多信息请戳：<a href="http://about.me/biaobiaoqi">about.me</a><br>
+	</p>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - Biaobiaoqi -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  - <span class="credit">Theme by <a href="http://www.gehaxelt.in">Gehaxelt</a></span>
+  <span class="credit">and <a href="http://www.it-solutions-neef.de">IT Solutions Neef</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'biaobiaoqisblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://biaobiaoqi.github.io/blog/2013/08/01/pat-1031-1040-solutions/';
+        var disqus_url = 'http://biaobiaoqi.github.io/blog/2013/08/01/pat-1031-1040-solutions/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

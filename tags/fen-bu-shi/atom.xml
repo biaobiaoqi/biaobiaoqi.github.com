@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: 分布式 | Biaobiaoqi的博客]]></title>
+  <link href="http://biaobiaoqi.github.io/tags/fen-bu-shi/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.github.io/"/>
+  <updated>2016-04-18T10:59:58+08:00</updated>
+  <id>http://biaobiaoqi.github.io/</id>
+  <author>
+    <name><![CDATA[Biaobiaoqi]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[《大规模Web服务开发技术》]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2013/10/28/scalable-web-service-development/"/>
+    <updated>2013-10-28T01:41:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2013/10/28/scalable-web-service-development</id>
+    <content type="html"><![CDATA[<h2>Web服务开发的心灵鸡汤</h2>
+
+<p><img src="http://img3.douban.com/mpic/s6818566.jpg" alt="img" /></p>
+
+<p>周末去上海陪妹子的两天在路途上看完了这本<a href="http://book.douban.com/subject/6758780/">《大规模Web服务开发技术》</a>。</p>
+
+<p>《大规模Web服务开发技术》是日本的<a href="http://www.hatena.com/">Hetena</a>团队以夏天举办的实习活动的课程讲义为基础整理的开发、运营大规模服务的入门书。书中更多的偏重了Hetena技术团队发展过程中的实践经验总结，将一个系统从无到有的发展过程有条理的展现了出来。读完全书，觉得它更像是一本Web服务开发的心灵鸡汤，有许多靠谱的总结，但相对零散，刚接触的人很难掌握。当然，心灵鸡汤并不是贬义，只是有不同的针对性。</p>
+
+<!--more-->
+
+
+<h2>内容</h2>
+
+<p>经验总结的东西一般很难有板有眼的映射到一个成熟的理论框架下。它的知识点相对零散，互相的耦合性比较强，很难在初步接触时建立起深刻的认识。尽管作者已经尽可能的让书的内容跟着服务端架构从小变大的过程走，具备一定的条理性，但要想通过看这种书来补强不谢知识区域，还是有些牵强。</p>
+
+<p>值得称道的是，作者对Hetena的技术发展史的描绘，能让读者接触到一个真实系统的成长过程。这是比较难得的一次体验。或许某个时刻，我们能在网上看到一篇讲解分布式存储系统的文章，另一个时刻，我们又看到了一篇将数据库划分的文章，但我们不知道在什么场景需要使用它们。这些零散的知识点，都需要融入到一个整体的经验体系、理论体系中，来发挥它们的作用。实践经验能帮助知识点的梳理，达到这一点。</p>
+
+<p>另外，全书的文笔很轻松，所以读起来比较快。时不时会跳出几句卖萌的表达。或许跟主体内容来自讲义有关吧=)。</p>
+
+<h2>定位</h2>
+
+<p>如此的定位，让本书不太适合想打造实际的技能栈的童鞋。换句话说，想通过这本书实际学习到某门技术是不太可行的。倒是挺适合对Web服务端不怎么熟悉，想走走看看了解下概貌，陶冶下情操的童鞋们，把这本书当做闲暇的读物，找找学习的感觉。我就是如此。另外，本身已经有足够的经验，或许也能读读这本书，梳理自己的思路。</p>
+
+<p>这本书让我想起了<a href="http://biaobiaoqi.me/blog/2013/07/19/odps-in-alibaba/">阿里的暑期课堂</a>，不过说实话，阿里的那次开放课堂的内容更多的侧重于宣讲，缺少技术架构的内容。希望更多的国内的企业能开放技术培训，让学生们能更早的接触到实践层的东西，某种角度来看也是一种双赢。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[分布式事务slides]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2013/08/26/distributed-transaction/"/>
+    <updated>2013-08-26T23:49:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2013/08/26/distributed-transaction</id>
+    <content type="html"><![CDATA[<p>最近看了<a href="http://book.douban.com/subject/21624776/">《分布式系统概念与设计 第5版》</a>的分布式事务章节，整理了一份ppt。还有恢复部分没有收录进来，有空再整理啦。</p>
+
+<p>下面是传到deckspeaker上的slides展示:</p>
+
+<script async class="speakerdeck-embed" data-id="aa521420f0a101303be246475d95d052" data-ratio="1.33333333333333" src="http://biaobiaoqi.github.io//speakerdeck.com/assets/embed.js"></script>
+
+
+<p>下载链接：<a href="https://dl.dropboxusercontent.com/u/64021093/slides/distributed%20transcation.pptx">请戳</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[阿里离线数据处理平台2013暑期学校]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2013/07/19/odps-in-alibaba/"/>
+    <updated>2013-07-19T21:31:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2013/07/19/odps-in-alibaba</id>
+    <content type="html"><![CDATA[<p>本周有幸参加了为期两天的<a href="http://102.alibaba.com/competition/dataSummer.htm">阿里离线数据处理平台2013暑期学校</a>的学习。</p>
+
+<p>阿里的前辈们分不同的专题给大家介绍了飞天平台上的离线数据处理服务ODPS（Open Data Processing Service）。
+内容上主要分为两部分，一部分是平台架构，一部分是数据分析。来听课的同学也就分为了两部分，而像我一样关注系统层面的人是少数。</p>
+
+<p>这也正常，用赵本山在『一代宗师』里的话来说，一个是面子，一个是里子。数据分析能直接产生表现层的数据，而系统平台则只是提供支持。
+成功了，大家看得到的是分析出的数据，而一旦失败了，那么系统平台的责任就大了。
+再者越贴近硬件层次的工作也注定越辛苦，深夜被吵醒也不是没有的事儿。好了，吐槽到此结束，下面是总结笔记整理出几页slides：</p>
+
+<script async class="speakerdeck-embed" data-id="e0022eb0d24d013089506e9621fcaf9a" data-ratio="1.33333333333333" src="http://biaobiaoqi.github.io//speakerdeck.com/assets/embed.js"></script>
+
+
+
+
+<!--more-->
+
+
+<p>ppt下载链接：<a href="https://speakerdeck.com/biaobiaoqi/odps-learning-summary">请戳我</a></p>
+
+<p>三巨头BAT都自主研发过大数据平台，另外两家在投入大量资金后面对困难最终关闭了项目，而阿里坚持了下来。通过了解ODPS的系统架构，可以看但工业界的系统和学术圈中提出的概念的差异。这也让我更清晰了之后自己的学习路线。</p>
+
+<p>非常感谢阿里暑期学校给予的这次机会来接触飞天系统，非常感谢各位讲师的介绍，特别是杨少华大哥对我的疑惑的耐心解答。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[SDN：软件定义网络]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2013/06/08/software-defined-network/"/>
+    <updated>2013-06-08T00:39:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2013/06/08/software-defined-network</id>
+    <content type="html"><![CDATA[<p>最近高级网络课的小组任务是在老师给定的范围内自选方向主题研究并做展示报告。我们组选了sdn。原以为这东西会是工业界无人问津的概念化产品，Google了一下却发现其实sdn挺火的，由于它可能带来的可扩展性，一些大互联网企业也在开始涉足相关的研发，比如Google呵Facebook。这里简要的梳理下我对SDN概念性的认识。</p>
+
+<h2>背景</h2>
+
+<h3>虚拟化的大趋势</h3>
+
+<p>近年来，大数据、云计算兴起，虚拟化技术的重要性越发突出。提到虚拟化，不得不提的是计算机行业里的一句老话：</p>
+
+<blockquote><p>计算机世界的绝大部分问题都可以通过分层的方法来解决</p></blockquote>
+
+<p>其实虚拟化也可以理解成一种分层的思想。就拿云计算这个应用场景来说，虚拟化的技术就是在原有的<code>硬件-操作系统-用户</code>层次中，增添了<code>虚拟机</code>这么一层，变成了<code>硬件-虚拟机-操作系统-用户</code>，用虚拟机来管理硬件资源，增加了动态调整硬件资源的语义。</p>
+
+<p>纵观计算机的发展历程，各方面都可以看到通过增加类似的虚拟化层次来提高生产效率的案例。比如高级语言之于汇编，比如图形界面之于命令行。这种添加层次的解决方案，总是能让问题得到更清晰的解决。</p>
+
+<h3>网络虚拟化</h3>
+
+<p>网络经历了<a href="http://article.yeeyan.org/view/100437/70880">数十年的发展</a>，如今在人们的生产、生活中发挥着巨大的作用。全球的网络拓扑结构结构错综复杂，有许多的自制系统组成。数据包从中国的一台PC机发出，访问到美国的主机，需经过一系列的路由、转发，而经由的网络拓扑节点由层层网关、路由器支配，难于控制。一些组织，在架设自身的可扩展、大规模网络环境时，也同样遇到了拓扑结构复杂、难于维护的问题。</p>
+
+<p>如果能剥离开网络的物理拓扑结构，将网络资源虚拟化，隐藏物理结构的复杂性，统一的进行逻辑层的管理控制，就能满足多变的网络需求了。</p>
+
+<p>SDN和OpenFlow就是一个这样的解决方案。</p>
+
+<h2>OpenFlow和SDN</h2>
+
+<p>OpenFlow起源于斯坦福的Ethane项目。该项目试图通过一个集中式的控制器，让网络管理员可以方便地定义基于网络流的安全控制策略，并将这些安全策略应用到各种网络设备中，从而实现对整个网络通讯的安全控制。受到此项目的启发，斯坦福的老师和学生将Ethane的设计更一般化，将传统网络设备的数据转发(data plane)和路由控制(control plane)两个功能模块相分离，通过集中式的控制器(Controller)以标准化的接口对各种网络设备进行管理和配置。2008年，他们提出了OpenFlow的概念。</p>
+
+<p>这种分布式的实现方式，让控制平面可以和转发平面物理的分离开，控制平面完全可以运行在运算能力更强的服务器上，而不是路由器。OpenFlow协议则是分离的两者之间的通信协议。关于OpenFlow的技术细节，<a href="http://network.51cto.com/art/201306/397443.htm">《虚拟化的逆袭：OpenFlow和SDN》</a>一文中有简明介绍。</p>
+
+<p>基于OpenFlow为网络带来的可编程的特性，有研究人员提出了SDN即Software Defined Network（2009年）。在这个概念中，网络中所有的网络设备被视为被管理的资源，以此抽象出一个网络操作系统(Network OS)的概念，这个网络操作系统一方面抽象了底层网络设备的具体细节，同时还为上层应用提供了统一的管理视图和编程接口。SDN的架构细节，参见<a href="http://network.51cto.com/art/201211/366278.htm">《SDN是生意 OpenFlow是技术》</a>。</p>
+
+<p>SDN和OpenFlow的关系，就像互联网之于TCP/IP协议栈。OpenFlow是SDN的核心协议，用于控制转发面设备的控制转发。而SDN是上层的变成界面。</p>
+
+<p>有观点认为，『OpenFlow是技术，SDN是生意』。最近对SDN唱衰的报道也证明了这桩『生意』的前途未仆。</p>
+
+<h2>SDN的发展</h2>
+
+<p>在云计算飞速发展的同时，SDN也喧嚣尘上。Google,Facebook等大公司也结成了产业联盟，来推动其发展。</p>
+
+<p>但其现状也并非一片明朗：</p>
+
+<blockquote><p>根据IDC的研究结果显示，在2013年，整个企业网络行业的市场价值为420亿美元，其中将近一半来自2-3层网络交换机市场。SDN只能产生约37亿美元的价值(8.8%)，而且要到2016年才能达到这个数字。与早前的预测相比，IDC的预测数字有所增加，但从整个网络行业来看，SDN仍然相去甚远。</p></blockquote>
+
+<p>一方面，SDN的性能还有待改善，另一方面，由于SDN的统一平台的思想，会带来硬件设备的同质化，威胁到厂商的利益，将会面临来自厂商锁定的阻力。<a href="http://www.csdn.net/article/2013-06-08/2815714">《理性看待SDN》</a>一文中有较详细的解释。</p>
+
+<p>虽然虚拟化能解放生产力，是大势所趋，但就像功耗更大的复杂指令集在市场上战胜了精简指令集一样，市场是残酷的。只能期待开源和开放的脚步不要停下。</p>
+
+<h3>参考</h3>
+
+<ul>
+<li><a href="http://blog.sina.com.cn/s/blog_72628e9f0100yg3b.html">什么是SDN(Software Defined Networking)？</a>
+*</li>
+<li><a href="http://blog.sina.com.cn/s/blog_5385c0b901010pu3.html">OpenFlow/SDN本质论</a></li>
+<li><a href="http://article.yeeyan.org/view/323168/358956">软件定义网络(SDN)：是什么，如何工作，为什么重要</a></li>
+<li><a href="http://network.51cto.com/art/201305/394648.htm">SDN：仍处于起步阶段</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[《Hadoop技术内幕》学习笔记——RPC和动态代理]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2013/06/08/ipc-in-hadoop/"/>
+    <updated>2013-06-08T00:24:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2013/06/08/ipc-in-hadoop</id>
+    <content type="html"><![CDATA[<p>本文是《hadoop技术内幕——深入解析Hadoop Common和HDFS架构设计与实现原理》第4章的1-3节的学习笔记。内容为Hadoop IPC部分的基础知识介绍。</p>
+
+<h2>知识框架</h2>
+
+<p>由于Hadoop分布式环境需要一个更高效和正对性优化的IPC机制，传统的诸如RMI的解决方案无法满足这一要求，Hadoop自己实现了一套IPC方法。</p>
+
+<p>第4章第1节讲解了RPC的原理，包括Stub-Skeleton的架构等，进而用<code>RMI</code>举例（可以参考的<a href="">演示代码</a>）。RMI的调用实现主要包括了服务器端的registry和客户端的lookup。虽然Hadoop不是使用RMI做IPC，但了解一下其调用方式对感性的认识到如何进行分布式环境下的远程调用还是有作用的。</p>
+
+<p>接下来的2,3小节，简单的介绍了IPC过程所依赖的技术方法：Java的动态代理方式和NIO的网络传输方式。</p>
+
+<p>第2节讲<code>动态代理</code>，这里需要理解面向对象的代理模式和<em>动态</em>的原因。代理模式分很多种，这里用到的是简单的对行为的传递。动态代理的动态特性，则是因为框架能提供动态创建某个接口的实现的能力(可以参考的<a href="">演示代码</a>)。</p>
+
+<p>更系统的看动态代理过程，分为两个阶段：</p>
+
+<ul>
+<li>1.代理接口的实现：静态方法Proxy.newInstance()生成动态对象。</li>
+<li>2.调用转发过程：InvocationHandler实现</li>
+</ul>
+
+
+<p>第3节的<code>NIO</code>，跟传统的套接字(Socket)通信过程做了对比。需要了解Socket通信的特点：同步，阻塞，基于字节，理解这种特点带来的服务器端的线程闲置的压力。对应的，NIO则是可异步的，非阻塞的，基于块的。具体的实现上，需要了解缓冲区(Buffer)的原理和使用方式，通道(Channel)和选择器(Selector)配合的使用方式。</p>
+
+<p>我总结了一份slides，如下：(挂在speackerdeck上，如果加载缓慢，请稍候:))</p>
+
+<script async class="speakerdeck-embed" data-id="fbcb8590b1540130690c2e6f0be13e84" data-ratio="1.33333333333333" src="http://biaobiaoqi.github.io//speakerdeck.com/assets/embed.js"></script>
+
+
+<p>slides下载地址：<a href="https://dl.dropboxusercontent.com/u/64021093/slides/%E8%BF%9C%E7%A8%8B%E8%BF%87%E7%A8%8B%E8%B0%83%E7%94%A8%E5%92%8CNIO.pdf">请戳</a></p>
+]]></content>
+  </entry>
+  
+</feed>

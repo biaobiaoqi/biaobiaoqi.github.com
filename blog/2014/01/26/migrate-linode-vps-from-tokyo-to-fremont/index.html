@@ -1,0 +1,399 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Linode跨节点迁移：从Tokyo到Fremont - Biaobiaoqi的博客</title>
+  <meta name="author" content="Biaobiaoqi">
+
+  
+  <meta name="description" content="">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://biaobiaoqi.github.io/blog/2014/01/26/migrate-linode-vps-from-tokyo-to-fremont/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Biaobiaoqi的博客" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+
+function addBlankTargetForLinks () {
+
+  $('a[href^="http"]').each(function(){
+
+      $(this).attr('target', '_blank');
+
+  });
+
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+
+  addBlankTargetForLinks();
+
+});
+
+</script>
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F49481ec3305db999013860b0ccb3b16d' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39900036-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Biaobiaoqi的博客</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:biaobiaoqi.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives/">全部文章</a></li>
+  <li><a href="/tag-cloud/">分类阅读</a></li>
+  <li><a href="/resources/">其他推荐</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Linode跨节点迁移：从Tokyo到Fremont</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-26T01:45:00+08:00" pubdate data-updated="true">Jan 26<span>th</span>, 2014</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2>背景</h2>
+
+<p><a href="http://biaobiaoqi.me/blog/2014/01/22/email-3/">上一篇博客</a>交代了如何在 Linode 上搭建邮件服务器，并配置好各种协议、记录来投入实际使用。</p>
+
+<p>由于实践过程中，曾经尝试使用明文协议与服务器交流数据，可能泄露了账号、密码信息，造成之后被攻击发送垃圾邮件(详细情况类似于如下链接：<a href="http://linuxroad.blog.51cto.com/765922/1039676">链接 1</a>,<a href="http://linuxroad.blog.51cto.com/765922/1039675">链接 2</a>)，IP 被上了黑名单，在 <a href="http://www.mail-tester.com">mail-tester.com</a> 上的测试评分为 0 分，同时还收到了 Linode 的警告。</p>
+
+<p>为了能继续使用邮箱服务，我只好想着法子给 Linode 换一个 IP。但原则上 Linode 是不支持换 IP 的。幸运的是，它支持 VPS 的迁移，而且方便快捷。从 Tokyo 节点迁移到 Fremont 节点后 IP 一般会发生变动（对于网络延迟，权衡了下<a href="http://www.v2ex.com/t/62721">大家</a>的说法,Fremont 还不错:<a href="https://www.linode.com/speedtest/">官方测速</a>），这样就可以间接的更换 IP 了。</p>
+
+<p>迁移过程很简单，这里做一下记录。</p>
+
+<!--more-->
+
+
+<h2>迁移准备</h2>
+
+<h3>发出迁移请求</h3>
+
+<p>Linode 有比较完善的 <a href="https://manager.linode.com/support">Support</a>。对于迁移这种情况，可以在 Support 页面发出如下请求：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Hi,
+</span><span class='line'>
+</span><span class='line'>I've met with some problems with my server. And I think it's a solution to migrate my server from Tokyo to Fremont.
+</span><span class='line'>
+</span><span class='line'>Could you please do me a favor?
+</span><span class='line'>
+</span><span class='line'>Thanks a lot!</span></code></pre></td></tr></table></div></figure>
+
+
+<p>1 分钟之后，我就收到了技术支持的回复：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Hello,
+</span><span class='line'>
+</span><span class='line'>Your migration to our Fremont datacenter has been configured. Please log into the Linode Manager, shut down, and click the migrate button to move to your new server. Your disk images will be moved with you. The migration should take approximately 10-15 minutes per gigabyte of data to complete. Please note that any existing backups for this Linode will be purged and will not be recoverable after you initiate the migration.
+</span><span class='line'>
+</span><span class='line'>Your new IP address is: xxx.xxx.xxx.xxx
+</span><span class='line'>
+</span><span class='line'>We ask that you begin this migration within 24 hours and let us know when it is complete. Thanks in advance!
+</span><span class='line'>
+</span><span class='line'>Regards,
+</span><span class='line'>Jack Stitt
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>此时，Linode 控制面板中已经多了一个迁移的提醒：<code>You have a migration pending!</code>。</p>
+
+<p>不过先不要着急迁移，因为迁移过程是不可恢复的，我们需要首先将 VPS 中得重要数据备份到本地。注意如回复中所说，这种备份不同于 Linode 中的备份服务。</p>
+
+<h3>备份数据</h3>
+
+<p>找到一份科学的全盘备份数据方式：<a href="http://www.linode.im/1590.html">linode 用户通过 ssh+dd 命令复制整个磁盘</a>。不可否认 dd 做传输比 scp 一个个拷贝文件快得多，但由于需要将整个盘 5G 数据全部通过网络传输，而家里网速慢，传输数据只有大概 100KB/s 的速度，需要等待太长时间。</p>
+
+<p>实际上，我所需要备份的文件无非是<code>/home</code>目录下得所有数据和部分服务的配置数据（比如 postfix、dovecot、nginx 等），总共大概也就 100MB，于是决定选择性的用 scp 传输备份数据：</p>
+
+<p><code>scp root@vps-ip:/backup /home/backup #vps-ip 替换为服务器 IP 地址</code></p>
+
+<p>同时由于零散的传输文件效率不高，可以考虑先将服务器端所有小文件使用 tar 命令压缩到一个包里：</p>
+
+<p><code>tar zcvf backup.gz /home /etc/nginx/sites-enable</code></p>
+
+<p>在本地的解压缩命令如下：</p>
+
+<p><code>tar zxvf backup.gz</code></p>
+
+<p>当然，实际上我们都不会希望备份数据需要被使用到啦，而迁移 vps 丢失数据的概率应该也是很小的。</p>
+
+<h3>修改 DNS 记录</h3>
+
+<p>由于迁移过程需要大概一个多小时，网站服务的不可访问是无法避免了。只好尽可能将迁移过程放在深夜没有用户访问需求的时候。</p>
+
+<p>从这个角度讲，DNS 的修改也没有特别的及时性要求。在前已完成前修改好 DNS 服务器中的 A 记录、MX 记录等配置即可。</p>
+
+<h2>迁移</h2>
+
+<p>在正式迁移之前，需要关闭服务器。</p>
+
+<p>然后点击 Linode 控制面板中的 migration 按钮。接下来，就是一个多小时的等待。</p>
+
+<h2>后续</h2>
+
+<p>完成迁移之后，开启 VPS，还需要注意修改服务中 IP 相关的配置。比如 shadowsocks 里的 json.config 中的 server ip。</p>
+
+<p>一切顺利完成后，别忘了去 Support 界面回复 Ticket =).</p>
+
+<p>如果你考虑租用 Linode 机器，而又不吝啬使用<a href="https://www.linode.com/?r=06fc7f86359e92800c41177a80c5678ecfcb2568">我的推荐码</a>，本博客不胜感激=).</p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.io/blog/2014/01/26/migrate-linode-vps-from-tokyo-to-fremont/'>http://biaobiaoqi.github.io/blog/2014/01/26/migrate-linode-vps-from-tokyo-to-fremont/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Biaobiaoqi</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-26T01:45:00+08:00" pubdate data-updated="true">Jan 26<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+    <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+<a class="jiathis_button_tsina"></a>
+<a class="jiathis_button_weixin"></a>
+<a class="jiathis_button_renren"></a>
+<a class="jiathis_button_douban"></a>
+<a class="jiathis_button_googleplus"></a>
+<a href="http://www.jiathis.com/share?uid=1814751" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+	data_track_clickback:true,
+	summary:"",
+	shortUrl:true,
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1814751" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/01/22/email-3/" title="Previous Post: 邮件服务（三）：实践服务器搭建">&laquo; 邮件服务（三）：实践服务器搭建</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/02/24/sort-intro/" title="Next Post: 基本排序总结">基本排序总结 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <!--h1>Comments</h1-->
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>标签云</h1>
+ <br /> 
+  <ul class="tag-cloud">
+    <a style="font-size: 112%" href="/tags/hadoop/">Hadoop</a> &nbsp 
+<a style="font-size: 139%" href="/tags/jvm/">JVM</a> &nbsp 
+<a style="font-size: 144%" href="/tags/java/">Java</a> &nbsp 
+<a style="font-size: 141%" href="/tags/pat/">PAT</a> &nbsp 
+<a style="font-size: 112%" href="/tags/octopress/">octopress</a> &nbsp 
+<a style="font-size: 135%" href="/tags/fen-bu-shi/">分布式</a> &nbsp 
+<a style="font-size: 133%" href="/tags/zi-jie-ma/">字节码</a> &nbsp 
+<a style="font-size: 135%" href="/tags/si-kao/">思考</a> &nbsp 
+<a style="font-size: 180%" href="/tags/ji-zhu/">技术</a> &nbsp 
+<a style="font-size: 124%" href="/tags/fang-fa-lun/">方法论</a> &nbsp 
+<a style="font-size: 106%" href="/tags/fu-wu-qi/">服务器</a> &nbsp 
+<a style="font-size: 137%" href="/tags/sheng-huo/">生活</a> &nbsp 
+<a style="font-size: 148%" href="/tags/suan-fa/">算法</a> &nbsp 
+<a style="font-size: 117%" href="/tags/wang-luo/">网络</a> &nbsp 
+<a style="font-size: 135%" href="/tags/du-shu/">读书</a>
+
+  </ul>
+</section>
+<section>
+  <h1>关于</h1>
+   <p>biaobiaoqi是我的网络id。<br><br>
+   我的博客日志：<a href="http://biaobiaoqi.me/blog/2013/09/01/blog-log/">请戳</a><br><br>
+   更多信息请戳：<a href="http://about.me/biaobiaoqi">about.me</a><br>
+	</p>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - Biaobiaoqi -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  - <span class="credit">Theme by <a href="http://www.gehaxelt.in">Gehaxelt</a></span>
+  <span class="credit">and <a href="http://www.it-solutions-neef.de">IT Solutions Neef</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'biaobiaoqisblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://biaobiaoqi.github.io/blog/2014/01/26/migrate-linode-vps-from-tokyo-to-fremont/';
+        var disqus_url = 'http://biaobiaoqi.github.io/blog/2014/01/26/migrate-linode-vps-from-tokyo-to-fremont/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
