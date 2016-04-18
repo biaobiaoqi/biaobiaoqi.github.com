@@ -9,7 +9,7 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="别鄙视方法论 曾经很长时间里，我这么认为：方法论的东西没什么实际的用处，不过是其他人按照自己的喜好来处理事物的途径而已，何必照着他人的思路。比如，作为一只不靠谱的程序猴子，在一些偏颇的思维习惯的影响下，我甚至对许多图形化的东西比较反感，自以为文本信息已经足以表达清楚事实且更有效率， &hellip;">
+  <meta name="description" content="本文描述了单模式的字符串匹配的经典算法 KMP 算法的实现。首先对字符串匹配算法做简单的介绍，然后是 KMP 算法的实现描述，最后推荐两道简单的 ACM 模板题做练手用。 字符串匹配算法 字符串匹配(String Matchiing)也称字符串搜索(String Searching) &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -102,6 +102,268 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/25/kmp-algorithm/">KMP算法实现</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-25T21:22:00+08:00" pubdate data-updated="true">May 25<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/05/25/kmp-algorithm/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>本文描述了单模式的字符串匹配的经典算法 KMP 算法的实现。首先对字符串匹配算法做简单的介绍，然后是 KMP 算法的实现描述，最后推荐两道简单的 ACM 模板题做练手用。</p>
+
+<h2>字符串匹配算法</h2>
+
+<p>字符串匹配(String Matchiing)也称字符串搜索(String Searching)是字符串算法中重要的一种，是指从一个大字符串或文本中找到模式串出现的位置。一个基本的字符串匹配算法分类如下：</p>
+
+<ul>
+<li>单模式匹配：即每次算法执行只需匹配出一个模式串。</li>
+<li>有限集合的多模式匹配：即算法需要同时找出多个模式串的匹配结果，而这个模式串集合是有限的。</li>
+<li>无限集合的多模式匹配：如正则表达式的匹配。</li>
+</ul>
+
+
+<p>单模式匹配最容易理解，构造也非常简单。一个最朴素的思路就是从文本的第一个字符顺次比较模式串，不匹配则重新从下一个字符开始匹配，直到文本末尾。Java 实现代码如下：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'> <span class="kd">public</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">bruteforce</span><span class="o">(</span><span class="n">String</span> <span class="n">str1</span><span class="o">,</span> <span class="n">String</span> <span class="n">str2</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>         <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">!=</span> <span class="n">str1</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>               <span class="k">if</span> <span class="o">(</span><span class="n">str1</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">==</span> <span class="n">str2</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">j</span><span class="o">))</span> <span class="o">{</span>
+</span><span class='line'>                    <span class="n">j</span> <span class="o">++;</span>
+</span><span class='line'>                    <span class="n">i</span> <span class="o">++;</span>
+</span><span class='line'>                    <span class="k">if</span> <span class="o">(</span><span class="n">j</span> <span class="o">==</span> <span class="n">str2</span><span class="o">.</span><span class="na">length</span><span class="o">())</span> <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+</span><span class='line'>               <span class="o">}</span><span class="k">else</span> <span class="o">{</span>
+</span><span class='line'>                    <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+</span><span class='line'>                    <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span><span class='line'>               <span class="o">}</span>
+</span><span class='line'>          <span class="o">}</span>
+</span><span class='line'>          <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+</span><span class='line'>     <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>但是这种算法，有明显的效率黑洞。因为每次匹配失败后，都会回到原来的匹配起点的下一个字符开始匹配，这些步骤很多情况下，并不是必要的。</p>
+
+<p>实际上这些字符很有可能已经被读入了一次。理论上，如果我们能对所有被读入过的字符有足够的了解，那就能判定是否能避免再次读入一遍做匹配运算了。经典的 KMP 算法正是基于这点思考，对原有的蛮力算法做出了优化。</p>
+
+<h2>KMP 算法</h2>
+
+<p>网络上关于 KMP 算法的描述很多，其中个人觉得阮一峰老师的<a href="http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html">《字符串匹配的 KMP 算法》</a>对 KMP 的描述最为简明和清晰。图例展示的算法流程更容易让人接受和理解。这里仅记录我所认为重点的知识点。</p>
+
+<h5>算法的思想</h5>
+
+<p>相比蛮力算法，KMP 算法预先计算出了一个哈希表，用来指导在匹配过程中匹配失败后尝试下次匹配的起始位置，以此避免重复的读入和匹配过程。这个哈希表被叫做“部分匹配值表(<strong>Particial match table</strong>)”，它的设计是算法精妙之处。</p>
+
+<h5>部分匹配值表</h5>
+
+<p>要理解部分匹配值表，就得先了解字符串的前缀(prefix)和后缀(postfix)。</p>
+
+<ul>
+<li>前缀:除字符串最后一个字符以外的所有头部串的组合。</li>
+<li>后缀：除字符串第一个字符以外的所有尾部串的组合。</li>
+<li>部分匹配值：一个字符串的前缀和后缀中最长共有元素的长度。</li>
+</ul>
+
+
+<p>举例说明：字符串<code>ABCAB</code></p>
+
+<ul>
+<li>前缀：{A， AB， ABC， ABCA}</li>
+<li>后缀：{BCAB， CAB， AB， B}</li>
+<li>部分匹配值：2 （AB）</li>
+</ul>
+
+
+<p>而所谓的部分匹配值表，则为模式串的所有前缀以及其本身的部分匹配值。</p>
+
+<p>举例如下：还是针对字符串<code>ABCAB</code>，它的部分匹配值表为：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">A</span> <span class="n">B</span> <span class="n">C</span> <span class="n">A</span> <span class="n">B</span>
+</span><span class='line'><span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">2</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这代表着：字符串<code>A B C A B</code> 中，子串<code>A B C</code>的部分匹配值为 0，而子串<code>A B C A</code>的部分匹配值为 1，诸如此理。</p>
+
+<h5>算法实现</h5>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'> <span class="kd">public</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">kmp</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span><span class="o">,</span> <span class="n">String</span> <span class="n">dest</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="kt">int</span><span class="o">[]</span> <span class="n">next</span> <span class="o">=</span>  <span class="n">generateNext</span><span class="o">(</span><span class="n">dest</span><span class="o">);</span>
+</span><span class='line'>      
+</span><span class='line'>      <span class="c1">//i 是 str 的索引，j 是 dest 的索引。</span>
+</span><span class='line'>      <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">str</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span><span class='line'>          <span class="c1">//匹配发生错误时，在 next 数组中向前迭代找到匹配的结果。这是整个算法的核心位置！</span>
+</span><span class='line'>          <span class="k">while</span> <span class="o">(</span><span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">!=</span> <span class="n">dest</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">j</span><span class="o">))</span>
+</span><span class='line'>              <span class="n">j</span> <span class="o">=</span> <span class="n">next</span><span class="o">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="o">];</span>
+</span><span class='line'>
+</span><span class='line'>          <span class="c1">//如果相等，dest 中的索引往后移动一位</span>
+</span><span class='line'>          <span class="k">if</span> <span class="o">(</span><span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">==</span> <span class="n">dest</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">j</span><span class="o">))</span>
+</span><span class='line'>              <span class="n">j</span><span class="o">++;</span>
+</span><span class='line'>          
+</span><span class='line'>          <span class="c1">//dest 数组所有位置均连续的匹配完成</span>
+</span><span class='line'>          <span class="k">if</span> <span class="o">(</span><span class="n">j</span> <span class="o">==</span> <span class="n">dest</span><span class="o">.</span><span class="na">length</span><span class="o">())</span>
+</span><span class='line'>              <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="c1">//生成 next 数组</span>
+</span><span class='line'>  <span class="kd">private</span> <span class="kt">void</span> <span class="nf">generateNext</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="kt">int</span><span class="o">[]</span> <span class="n">next</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">dest</span><span class="o">.</span><span class="na">length</span><span class="o">()];</span>
+</span><span class='line'>        <span class="n">next</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>  <span class="c1">//第一个元素的 next 值为 0。</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">//i 是需要计算的 next 值的下标；在 for 循环的开始，j 记录了上一个元素的部分匹配值，即前缀串中公共部分的最后一位字符的下标。</span>
+</span><span class='line'>        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">str</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="n">i</span> <span class="o">++)</span> <span class="o">{</span>
+</span><span class='line'>          <span class="c1">//当 i 和 j 指向的字符不匹配时，在 next 中往前迭代，直到两字符相等或者 j 为 0.</span>
+</span><span class='line'>            <span class="k">while</span><span class="o">(</span><span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">!=</span> <span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">j</span><span class="o">))</span>
+</span><span class='line'>                <span class="n">j</span> <span class="o">=</span> <span class="n">next</span><span class="o">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="o">];</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="c1">//如果 j 和 i 指向的字符相等，则 j 增加 1.</span>
+</span><span class='line'>            <span class="k">if</span> <span class="o">(</span><span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">==</span> <span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">j</span><span class="o">))</span>
+</span><span class='line'>                <span class="n">j</span> <span class="o">++;</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="n">next</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">j</span><span class="o">;</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>    <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>理解算法实现时，有几点特别需要注意：</p>
+
+<ul>
+<li>在生成部分匹配值数组的 generateNext()方法中，第一层循环内，<code>i</code>是字符串的索引，而<code>j</code>则在每次循环开始时代表了<code>i</code>所指定字符之前的子串的部分匹配值。以部分匹配值为下标的字符，其实也就是相同公共的缀串的下一位字符了。</li>
+<li>generateNext()方法的内层 while()循环，是为了迭代得到让<code>i</code>指定字符匹配到的情况。</li>
+<li>generateNext()方法的 while()循环中，需要特别注意是<code>next[j -1]</code>，这里表达的是：当 j 指向的字符匹配失败，则继续找到 j 前一个字符的部分匹配值。</li>
+<li>kmp()的循环代码和 generateNext()部分匹配值表生成的循环代码很类似。两者使用了相同方式，在字符匹配失败后迭代获取新的可匹配情况，且都是利用了 next 数组。</li>
+</ul>
+
+
+<h2>其他</h2>
+
+<p>KMP 算法虽然能达到 O(M+N)的算法复杂度，但在实际使用中，KMP 算法的性能并不如 <a href="http://www.ruanyifeng.com/blog/2013/05/boyer-moore_string_search_algorithm.html">BM</a> 算法强。</p>
+
+<h2>模板题</h2>
+
+<h4>基础模板题</h4>
+
+<ul>
+<li><p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=2203">HDOJ 的 2203 题</a>是一个能检验算法正确性的模板题。Java 实现的答案代码<a href="https://github.com/biaobiaoqi/CPractice/tree/master/HDOJ/HDOJ2203.java">请戳这里</a>。</p></li>
+<li><p><a href="http://oj.leetcode.com/problems/implement-strstr/">LeetCode: Implement strStr()</a> 是一道裸字符串匹配题，直接使用 KMP。Java 实现的代码<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/algorithm/oj/leetcode/Implement%20strStr(">请戳这里</a>)。</p></li>
+</ul>
+
+
+<h4>延伸模板题</h4>
+
+<ul>
+<li><p><a href="http://poj.org/problem?id=2406">POJ 的 2406 题</a>，对考察点做了巧妙的变形，对更深入的理解 KMP 中的部分匹配表（即 next 数组）很有帮助。Java 实现的答案代码<a href="https://github.com/biaobiaoqi/CPractice/tree/master/POJ/POJ2406.java">请戳这里</a>。</p></li>
+<li><p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1867">HDOJ 的 1867 题</a>也属于 kmp 的变形。要求对 kmp 利用 next 数组进行比较的过程有清晰的认识。Java 实现的答案代码<a href="https://github.com/biaobiaoqi/CPractice/tree/master/HDOJ/HDOJ1867.java">请戳这里</a>。</p></li>
+</ul>
+
+
+<h3>其他参考资料：</h3>
+
+<ul>
+<li><p><a href="http://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm">wiki:Knuth–Morris–Pratt Algorithm</a></p></li>
+<li><p><a href="http://en.wikipedia.org/wiki/String_searching_algorithm">wiki:String Searching Algorithm</a></p></li>
+<li><p><a href="http://www.cppblog.com/converse/archive/2006/07/05/9447.html">《KMP 算法的实现》</a></p></li>
+<li><p><a href="http://wangcong.org/blog/archives/2090">《Linux 内核中的 KMP 实现》</a></p></li>
+</ul>
+
+
+<hr />
+
+<h3>LOG</h3>
+
+<ul>
+<li>2014-4-9：对代码增加了更多注释，便于理解。</li>
+</ul>
+
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.io/blog/2013/05/25/kmp-algorithm/'>http://biaobiaoqi.github.io/blog/2013/05/25/kmp-algorithm/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -523,61 +785,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
     <footer>
       <a rel="full-article" href="/blog/2013/05/12/mbti-test/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/05/12/touch-hadoop/">全分布式的Hadoop初体验</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-12T00:26:00+08:00" pubdate data-updated="true">May 12<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/05/12/touch-hadoop/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>背景</h2>
-
-<p>之前的时间里对 Hadoop 的使用都是基于学长所搭建起的实验环境的，没有完整的自己部署和维护过，最近抽时间初体验了在集群环境下装机、配置、运行的全过程，梳理总结到本文中。</p>
-
-<h2>配置</h2>
-
-<ul>
-<li>内存:8G</li>
-<li>CPU：i5-2400 3.1GHz；</li>
-<li>硬盘：960G</li>
-<li>系统：windows 7 旗舰 64bits</li>
-</ul>
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/05/12/touch-hadoop/">Read on &rarr;</a>
     </footer>
   
 

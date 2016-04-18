@@ -9,8 +9,7 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="背景 邮件服务系列博文中第一篇博客介绍了邮件服务的基本知识，了解了邮件是如何从发件人的邮件客户端经过不同的传输协议传送到收件人的邮件客户端的。这只是邮件的基本功能实现，但如果发生如下情况，整个邮件系统的生态环境将被扰乱： 被不法分子利用邮箱服务器发送垃圾邮件
-被其他人伪造域名邮箱发送邮件 &hellip;">
+  <meta name="description" content="背景 邮件服务系列博文中，前两篇介绍了邮件系统的基本功能和安全体系，本文记录了搭建邮箱服务器的实践。 Sendmail 是一种多用途、支援多种协定的跨网络电子邮件传送代理软件，于 1983 年随着 BSD 4.1c 首次发行，2001 年时的调查，互联网上的邮件服务器有 42%使用 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -103,6 +102,55 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/01/22/email-3/">邮件服务（三）：实践服务器搭建</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-22T01:14:00+08:00" pubdate data-updated="true">Jan 22<span>nd</span>, 2014</time>
+        
+         | <a href="/blog/2014/01/22/email-3/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>背景</h2>
+
+<p><a href="http://biaobiaoqi.me/tags/you-jian-fu-wu/">邮件服务系列博文</a>中，前两篇介绍了邮件系统的基本功能和安全体系，本文记录了搭建邮箱服务器的实践。</p>
+
+<p><a href="http://en.wikipedia.org/wiki/Sendmail">Sendmail</a> 是一种多用途、支援多种协定的跨网络电子邮件传送代理软件，于 1983 年随着 BSD 4.1c 首次发行，2001 年时的调查，互联网上的邮件服务器有 42%使用 Sendmail，但之后由于多次被发现重大的安全性漏洞，且其设定档过于复杂造成较高的学习门槛等因素，导致市占率下滑。</p>
+
+<p><a href="http://www.postfix.org/">Postfix</a> 被 <a href="http://www.porcupine.org/wietse/">Wietse Zweitze Venema</a> 创造出来以取代 Sendmail。本次实践即使用 Postfix 为域名 biaobiaoqi.me 搭建邮箱服务器，服务器是 Linode 上的 VPS，Ubuntu 12.04LTS，DNS 服务器使用 <a href="http://dnspod.com/">DNSPod</a>。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/01/22/email-3/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -568,59 +616,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
     <footer>
       <a rel="full-article" href="/blog/2013/11/07/pat-1069-pat-1072/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/11/05/cc98-post-machine/">用Ruby实现的论坛灌水工具：CC98 Post Machine</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-11-05T15:20:00+08:00" pubdate data-updated="true">Nov 5<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/11/05/cc98-post-machine/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>ZJU 的校网论坛 CC98 比较活跃。论坛只对校内网开放，而且账号跟学生绑定，每个学生注册的账号数量有限。『十大』是 CC98 的经典页面：基于关注的人数（回帖的用户数而不是回帖的数量）用算法求出 24 小时内最火爆的十个发帖。很多同学都会浏览十大，关注论坛动态。</p>
-
-<p>故事就是从十大引出的。有的社团在宣传活动时，为了扩大宣传面，会发动成员的小马甲顶贴上十大。这种违背社区自然发展轨迹的手段，强奸了关注十大贴的用户的意愿，阻碍了信息的自由流动。</p>
-
-<p>于是萌生了完成一个批量发帖的机器，以其人之道还治其人之身的想法。在下次十大被宣传贴攻占时，能有反击的工具。</p>
-
-<p>工具的用途很简单：使用不同的用户身份模拟真人论坛回帖，增加帖子关注度，以抵抗宣传贴。流程如下：提前收集各路亲朋好友的用户信息作为『预备水军』，『灌水』时，在评论内容文件中输入自定义的评论内容，在命令行参数中制定目标贴，即可实现随机顺序的用户自动顶贴。鉴于现在的功能是顶贴竞争十大，而十大排名是根据关注人数也就是独立用户评论数量做排序的，这里设计的顶贴策略是一个马甲发一条评论。以后可以考虑增加灵活的配置方案，实现更多功能。</p>
-
-<p>项目 Github 地址：<a href="https://github.com/biaobiaoqi/CC98PostMachine/">https://github.com/biaobiaoqi/CC98PostMachine/</a></p>
-
-<p>介于这个工具本身的罪恶的攻击属性，在此强调，工程仅供学习交流和对抗宣传贴。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/11/05/cc98-post-machine/">Read on &rarr;</a>
     </footer>
   
 

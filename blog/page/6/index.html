@@ -9,7 +9,7 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="浏览全部代码：请戳 本文谨代表个人思路，欢迎讨论;) 1041. Be Unique (20) 题意 给出 N (&lt;=105)个数（数值范围为 [1, 104]），找到其中不重复的第一个数字。比如给出 5 31 5 88 67 88 17 ， 答案是 31 。 分析 简单模拟题， &hellip;">
+  <meta name="description" content="浏览全部代码：请戳 本文谨代表个人思路，欢迎讨论;) 1051. Pop Sequence (25) 题意 给定 stack 的容量，给定数据的入栈顺序：从 1 开始的正整数序列，在允许随机的出栈操作的情况下，要求判断某出栈序列是否可能。 比如，告知 stack 容量为 5，入栈序列的最大值为 7 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -102,6 +102,111 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/08/01/pat-1051-1060-solutions/">PAT 1051-1060 题解</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-01T01:43:00+08:00" pubdate data-updated="true">Aug 1<span>st</span>, 2013</time>
+        
+         | <a href="/blog/2013/08/01/pat-1051-1060-solutions/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>浏览全部代码：<a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel">请戳</a></p>
+
+<p>本文谨代表个人思路，欢迎讨论;)</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1051">1051. Pop Sequence (25)</a></h2>
+
+<h4>题意</h4>
+
+<p>给定 stack 的容量，给定数据的入栈顺序：从 1 开始的正整数序列，在允许随机的出栈操作的情况下，要求判断某出栈序列是否可能。</p>
+
+<p>比如，告知 stack 容量为 5，入栈序列的最大值为 7。有两个序列需要判断合理性：</p>
+
+<ul>
+<li>{1 2 3 4 5 6 7}： 这个序列是可能的，只需每次入栈时都做出栈操作。</li>
+<li>{3 2 1 7 5 6 4}： 这个序列是不可能的，其中前半部分 3 2 1 是合法的，先将 1 2 3 顺序入栈，然后三次执行出栈操作。而之后的 7 5 6 则是不可能的。</li>
+</ul>
+
+
+<h4>分析</h4>
+
+<p>两种思路：</p>
+
+<h5>第 1 种思路：</h5>
+
+<p>使用 stl 中的 stack 模拟。判定条件有两条：1.栈中数据量不超过栈的容量；2.出栈只能从栈顶取，不应该出现从固定的堆栈中取出其他数据的情况。</p>
+
+<h5>第 2 种思路：</h5>
+
+<p>由于入栈序列数据由小到大排列非常特殊，要通过出栈序列判定可能性是存在简便思路的。
+对比分析题中 Sample 给出的序列，结合上面提到的两条冲突条件入手分析：</p>
+
+<ul>
+<li><p>1.栈中数据量不超过栈的容量：</p>
+
+<p>  只有在入栈时，才会需要考虑栈中数据是否超量。出栈序列中的每个数，都以为着在出栈操作之前，它刚入栈，
+  那么当它入栈的时候能否判定是否超过栈容量呢？可以的，（当前的出栈数值 - 已经执行过的出栈操作数量）就是当前栈中元素的数量。</p></li>
+<li><p>2.出栈只能从栈顶取，不应该出现从固定的堆栈中取出其他数据的情况。</p>
+
+<p>  根据观察分析发现，当某数据 m 出栈之后，比 m 小的数据如果在 m 之后出栈的，它们所组成的序列本身需要保持从大到小的顺序排列。
+  距离如 3 2 1 7 5 6 4 这个序列，在 7 之后有 5 6 4 这个子序列，它们都大于 7，但却没有保持一个递减的顺序，不合法。</p></li>
+</ul>
+
+
+<p>更多分析参见博文<a href="../../../../2013/07/16/verify-pop-sequence-for-stack/">《出栈序列的可能性判定》</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1052">1052. Linked List Sorting (25)</a></h2>
+
+<h4>题意</h4>
+
+<p>链表的节点被表示为{地址， 值， 下一个指针地址}，其中如果 NULL 的地址表示为-1，
+地址为 5 正数，值的范围为[-10<sup>5,</sup> 10<sup>5]。</sup></p>
+
+<p>给定 N(&lt; 10<sup>5)个节点以及其头指针，要求按照每个节点上值的大小重新排序，并按照链表顺序输出每个节点。</sup></p>
+
+<h4>分析</h4>
+
+<p>将链表中的节点按值做 qsort()排序，然后调整每个值的 next 指针即可。需要注意的有：</p>
+
+<ul>
+<li>1.INPUT 中的节点并不保证全是链表中的，先需要过滤掉悬空的节点。</li>
+<li>2.head 直接指向-1(NULL)的情况需要特殊处理。</li>
+</ul>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/08/01/pat-1051-1060-solutions/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -864,243 +969,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
     <footer>
       <a rel="full-article" href="/blog/2013/07/10/cc-license/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/10/decorate-octopress/">定制Octopress</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-10T01:53:00+08:00" pubdate data-updated="true">Jul 10<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/10/decorate-octopress/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>在 github pages 上搭建好 octopress 博客之后，博客的基本功能就能使用了。</p>
-
-<p>如果想让自己的博客充满个性，还可以继续探索定制方法。这里对自己的定制过程做一些总结。</p>
-
-<p>提前声明：</p>
-
-<ul>
-<li><p>不会 Ruby 的童鞋特别注意：配置_ config.yml 的过程中特别注意，配置项『:』后要留空格，否则会报错。</p></li>
-<li><p>由于初期修改时经验不足，这里的一些『土方法』可能并不利于程序的维护可扩展，有空再仔细研究，大家将就着用吧;).</p></li>
-</ul>
-
-
-<h2>0.安装第三方主题</h2>
-
-<p>我使用的第三方主题是<a href="https://github.com/gehaxelt/CSS-WhiteLake">『whitelake』</a>。</p>
-
-<p>安装过程很简单:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ cd octopress
-</span><span class='line'>$ git clone https://github.com/gehaxelt/CSS-WhiteLake.git .themes/whitelake
-</span><span class='line'>$ rake install['whitelake']
-</span><span class='line'>$ rake generate</span></code></pre></td></tr></table></div></figure>
-
-
-<p>注意，执行<code>rake install['whitelake']</code>之后，直接使用<code>rake preview</code>浏览网页会遇到很多瑕疵，<code>rake generate</code>之后再<code>rake preview</code>就没问题了。</p>
-
-<p>更多第三方插件和主题资源，参见<a href="https://github.com/imathis/octopress/wiki">官方 repo 的 wiki</a>.</p>
-
-<h2>1.装饰边栏</h2>
-
-<p>以增加豆瓣展示框为例。参加正反反长大哥的博客 <a href="http://icodeit.org/2012/10/how-to-embed-douban-show-in-your-octopress-site/">How to Embed Douban-Show in Your Octopress Site</a></p>
-
-<h2>2.增加评论和分享功能</h2>
-
-<p>虽然 Octopress 内置的 Disqus 评论系统很不错，但在国内的使用并不普及。相比之下，友言、多说等第三方评论则更接地气，可以利用到微博、人人等 SNS 账号。使用哪个见仁见智，本博客就是从友言切换到 Disqus 上的。下面介绍下如何使用友言和加网的分享标记。</p>
-
-<h3>2.1 友言</h3>
-
-<p>首先注册<a href="http://www.uyan.cc/">友言</a>的账号，如果不注册，虽然也能实现评论功能，但没有后台管理整个站点的评论会十分纠结。注册完成之后，选择获取代码，将这串代码贴入相应的位置，即可实现第三方评论。</p>
-
-<p>在路径<code>$OCTOPRESS/source/_includes/post/</code>上创建文件<code>youyanandjiathis.html</code>，功能代码放入其中。</p>
-
-<h3>2.2 加网</h3>
-
-<p>分享方面，本博客使用了<a href="http://www.jiathis.com/getcode/icon">加网</a>。注册后，在更多高级自定义功能中，可能自定义不同的分享按钮，生成代码后，也将生成的代码贴入<code>$OCTOPRESS/source/_includes/post/youyanandjiathis.html</code>中。</p>
-
-<p>现在，youyanandjiathis.html 的样子如下(需要注意，自己使用时，uid 显然是不一样的啦)</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="c">&lt;!-- JiaThis Button BEGIN --&gt;</span>
-</span><span class='line'><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;jiathis_style_32x32&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&quot;jiathis_button_qzone&quot;</span><span class="nt">&gt;&lt;/a&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&quot;jiathis_button_tsina&quot;</span><span class="nt">&gt;&lt;/a&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&quot;jiathis_button_tqq&quot;</span><span class="nt">&gt;&lt;/a&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&quot;jiathis_button_weixin&quot;</span><span class="nt">&gt;&lt;/a&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&quot;jiathis_button_renren&quot;</span><span class="nt">&gt;&lt;/a&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://www.jiathis.com/share?uid=1814751&quot;</span> <span class="na">class=</span><span class="s">&quot;jiathis jiathis_txt jtico jtico_jiathis&quot;</span> <span class="na">target=</span><span class="s">&quot;_blank&quot;</span><span class="nt">&gt;&lt;/a&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&quot;jiathis_counter_style&quot;</span><span class="nt">&gt;&lt;/a&gt;</span>
-</span><span class='line'><span class="nt">&lt;/div&gt;</span>
-</span><span class='line'><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'><span class="kd">var</span> <span class="nx">jiathis_config</span> <span class="o">=</span> <span class="p">{</span><span class="nx">data_track_clickback</span><span class="o">:</span><span class="s1">&#39;true&#39;</span><span class="p">};</span>
-</span><span class='line'><span class="nt">&lt;/script&gt;</span>
-</span><span class='line'><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;http://v3.jiathis.com/code/jia.js?uid=xxxxxx&quot;</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span><span class='line'><span class="c">&lt;!-- JiaThis Button END --&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">&lt;!-- UY BEGIN --&gt;</span>
-</span><span class='line'><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;uyan_frame&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
-</span><span class='line'><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;http://v2.uyan.cc/code/uyan.js?uid=xxxxxxxx&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span><span class='line'><span class="c">&lt;!-- UY END --&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>2.3 将功能增加到博客中</h3>
-
-<p>功能代码已经都在 youyanandjiathis.html 中了，接下来是让 blog 使用到这些功能代码。</p>
-
-<p>首先在_ config.yml 中增加开关：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#comment and share                                                                                    </span>
-</span><span class='line'><span class="n">comment_and_share</span><span class="p">:</span> <span class="kp">true</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>然后在<code>$OCTOPRESS/source/_includes/post/sharing.html</code>中的，根据开关<code>comment_and_share</code> 引入对应的功能代码<code>post/youyanandjiathis.html</code>，类比于默认实现中的<code>&lt;facebook_like&gt;</code>部分。代码如下（使用时，先去掉反斜杠）：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'>  \{\% if site.comment_and_share \%\}
-</span><span class='line'>      \{\% include post/]youyanandjiathis.html \%\}
-</span><span class='line'>  \{\% endif \%\}
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>2.4 友言验证</h3>
-
-<p>另如果需要在友言的后台处理评论，甚至做一些定制化处理，需要通过友言的验证。详情参见友言的管理员后台界面。大致过程是在自己的 master 分支的根目录下放置一个友言提供的验证文件，让友言网站来检测。</p>
-
-<h2>3.定制域名</h2>
-
-<p>如果你拥有自己的域名，可以 CNAME 到 Github Pages 上。以我的配置为例（我的域名为<code>biaobiaoqi.me</code>）。</p>
-
-<ul>
-<li><p>1.在$Octopress/source 目录下创建 CNAME 文件，输入新域名：<code>biaobiaoqi.me</code></p></li>
-<li><p>2.在购买的域名管理中，创建 A 记录，将顶级域名(<code>biaobiaoqi.me</code>)指向 207.97.227.245 这个地址。（注意不要对顶级域名使用 CNAME 记录，容易造成不可知的副作用）</p></li>
-<li><p>3.对子域名创建 CNAME 记录，比如将<code>www.biaobiaoqi.com</code>指向<code>biaobiaoqi.github.com</code></p></li>
-</ul>
-
-
-<p>这一过程可能需要一定的时间缓冲才能生效。（推荐使用国内的 DNS 服务 <a href="http://www.dnspod.cn/">DNSPod</a>，以得到更快更好的服务）</p>
-
-<h2>4.让博客中连接在新窗口打开</h2>
-
-<p>Markdown 不支持在新的标签页面打开网页链接这一语法，如果每次都要自己用 Html 标签实现，又些违背了 Markdown 以内容为重的立意。</p>
-
-<p>参考博文<a href="http://www.blogjava.net/lishunli/archive/2013/01/20/394478.html">《在 Octopress 中为 markdown 的超链接加上 target=&#8221;_blank&#8221;》</a>，可以通过将如下代码添加到 {OCTOPRESS_HOME}/source/_includes/custom/head.html 文件末尾来实现：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kd">function</span> <span class="nx">addBlankTargetForLinks</span> <span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;a[href^=&quot;http&quot;]&#39;</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;target&#39;</span><span class="p">,</span> <span class="s1">&#39;_blank&#39;</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="p">});</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">bind</span><span class="p">(</span><span class="s1">&#39;DOMNodeInserted&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="nx">addBlankTargetForLinks</span><span class="p">();</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">});</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="err">/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>5.列表的排版</h2>
-
-<p>默认情况，所有文字的排头会对齐，但如果有列表项的情况下也如此，列表头就会冲出文章的主体区块了。</p>
-
-<p>在 octopress/sass/custom/_layout.scss 文件中找到#$indented-lists: true 行，去掉#注释即可。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$indented</span><span class="o">-</span><span class="nx">lists</span><span class="o">:</span> <span class="kc">true</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/07/10/decorate-octopress/">Read on &rarr;</a>
     </footer>
   
 

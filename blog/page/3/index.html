@@ -9,7 +9,7 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="最近随着比特币在互联网上的流行，其他各种电子货币也都增加了曝光率。 昨晚在 v2ex 上看到有人发帖，用 20RMB 换取 2013 年 5 月 1 日前使用过的 github 账号得到的一个验证码。出于好奇，仔细围观了该贴，发现原来 lz 是利用信息不队称在揽入赠送给 github 用户的 &hellip;">
+  <meta name="description" content="ZJU 的校网论坛 CC98 比较活跃。论坛只对校内网开放，而且账号跟学生绑定，每个学生注册的账号数量有限。『十大』是 CC98 的经典页面：基于关注的人数（回帖的用户数而不是回帖的数量）用算法求出 24 小时内最火爆的十个发帖。很多同学都会浏览十大，关注论坛动态。 故事就是从十大引出的。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -102,6 +102,59 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/05/cc98-post-machine/">用Ruby实现的论坛灌水工具：CC98 Post Machine</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-05T15:20:00+08:00" pubdate data-updated="true">Nov 5<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/11/05/cc98-post-machine/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>ZJU 的校网论坛 CC98 比较活跃。论坛只对校内网开放，而且账号跟学生绑定，每个学生注册的账号数量有限。『十大』是 CC98 的经典页面：基于关注的人数（回帖的用户数而不是回帖的数量）用算法求出 24 小时内最火爆的十个发帖。很多同学都会浏览十大，关注论坛动态。</p>
+
+<p>故事就是从十大引出的。有的社团在宣传活动时，为了扩大宣传面，会发动成员的小马甲顶贴上十大。这种违背社区自然发展轨迹的手段，强奸了关注十大贴的用户的意愿，阻碍了信息的自由流动。</p>
+
+<p>于是萌生了完成一个批量发帖的机器，以其人之道还治其人之身的想法。在下次十大被宣传贴攻占时，能有反击的工具。</p>
+
+<p>工具的用途很简单：使用不同的用户身份模拟真人论坛回帖，增加帖子关注度，以抵抗宣传贴。流程如下：提前收集各路亲朋好友的用户信息作为『预备水军』，『灌水』时，在评论内容文件中输入自定义的评论内容，在命令行参数中制定目标贴，即可实现随机顺序的用户自动顶贴。鉴于现在的功能是顶贴竞争十大，而十大排名是根据关注人数也就是独立用户评论数量做排序的，这里设计的顶贴策略是一个马甲发一条评论。以后可以考虑增加灵活的配置方案，实现更多功能。</p>
+
+<p>项目 Github 地址：<a href="https://github.com/biaobiaoqi/CC98PostMachine/">https://github.com/biaobiaoqi/CC98PostMachine/</a></p>
+
+<p>介于这个工具本身的罪恶的攻击属性，在此强调，工程仅供学习交流和对抗宣传贴。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/11/05/cc98-post-machine/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -541,55 +594,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
     <footer>
       <a rel="full-article" href="/blog/2013/10/07/reset-nvram/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/10/03/nine-algorithms-that-changed-the-future/">《改变未来的九大算法》</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-10-03T13:19:00+08:00" pubdate data-updated="true">Oct 3<span>rd</span>, 2013</time>
-        
-         | <a href="/blog/2013/10/03/nine-algorithms-that-changed-the-future/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>不要在意那些细节</h2>
-
-<p>这是一本关于计算机世界的科普读物。豆瓣链接：<a href="http://book.douban.com/subject/24529132/">请戳</a>。</p>
-
-<p>非常推荐刚接触计算机的朋友花上三五小时将全书通读一遍，没有技术细节，没有公式证明，它会告诉作者挑选出的九大算法出现的缘由和发展的过程。这些不关乎实现细节的思想概括，更能体现算法在整个领域中的存在的原因。它们不再是冷冰冰的算法过程，这是阅读大多数的书籍、教材所难以获得的。</p>
-
-<p>至于我的推荐原因，如下全文。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/10/03/nine-algorithms-that-changed-the-future/">Read on &rarr;</a>
     </footer>
   
 
