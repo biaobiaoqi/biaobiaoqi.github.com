@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: Hadoop | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.io/tags/hadoop/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.io/"/>
-  <updated>2016-04-18T12:51:58+08:00</updated>
+  <updated>2016-04-19T00:27:46+08:00</updated>
   <id>http://biaobiaoqi.github.io/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -14,93 +14,282 @@
 
   
   <entry>
-    <title type="html"><![CDATA[《Hadoop技术内幕》学习笔记——RPC和动态代理]]></title>
-    <link href="http://biaobiaoqi.github.io/blog/2013/06/08/ipc-in-hadoop/"/>
-    <updated>2013-06-08T00:24:00+08:00</updated>
-    <id>http://biaobiaoqi.github.io/blog/2013/06/08/ipc-in-hadoop</id>
-    <content type="html"><![CDATA[<p>本文是《hadoop技术内幕——深入解析Hadoop Common和HDFS架构设计与实现原理》第4章的1-3节的学习笔记。内容为Hadoop IPC部分的基础知识介绍。</p>
+    <title type="html"><![CDATA[HadoopDB：混合分布式系统]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2013/05/18/a-hybrid-system-hadoopdb/"/>
+    <updated>2013-05-18T17:58:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2013/05/18/a-hybrid-system-hadoopdb</id>
+    <content type="html"><![CDATA[<p>HadoopDB是一个Mapreduce和传统关系型数据库的结合方案，以充分利用RDBMS的性能和Hadoop的容错、分布特性。2009年被Yale大学教授Abadi提出，继而商业化为<a href="http://hadapt.com/">Hadapt</a>，据称从VC那儿拉到了10M刀投资。</p>
 
-<h2>知识框架</h2>
-
-<p>由于Hadoop分布式环境需要一个更高效和正对性优化的IPC机制，传统的诸如RMI的解决方案无法满足这一要求，Hadoop自己实现了一套IPC方法。</p>
-
-<p>第4章第1节讲解了RPC的原理，包括Stub-Skeleton的架构等，进而用<code>RMI</code>举例（可以参考的<a href="">演示代码</a>）。RMI的调用实现主要包括了服务器端的registry和客户端的lookup。虽然Hadoop不是使用RMI做IPC，但了解一下其调用方式对感性的认识到如何进行分布式环境下的远程调用还是有作用的。</p>
-
-<p>接下来的2,3小节，简单的介绍了IPC过程所依赖的技术方法：Java的动态代理方式和NIO的网络传输方式。</p>
-
-<p>第2节讲<code>动态代理</code>，这里需要理解面向对象的代理模式和<em>动态</em>的原因。代理模式分很多种，这里用到的是简单的对行为的传递。动态代理的动态特性，则是因为框架能提供动态创建某个接口的实现的能力(可以参考的<a href="">演示代码</a>)。</p>
-
-<p>更系统的看动态代理过程，分为两个阶段：</p>
-
-<ul>
-<li>1.代理接口的实现：静态方法Proxy.newInstance()生成动态对象。</li>
-<li>2.调用转发过程：InvocationHandler实现</li>
-</ul>
-
-
-<p>第3节的<code>NIO</code>，跟传统的套接字(Socket)通信过程做了对比。需要了解Socket通信的特点：同步，阻塞，基于字节，理解这种特点带来的服务器端的线程闲置的压力。对应的，NIO则是可异步的，非阻塞的，基于块的。具体的实现上，需要了解缓冲区(Buffer)的原理和使用方式，通道(Channel)和选择器(Selector)配合的使用方式。</p>
-
-<p>我总结了一份slides，如下：(挂在speackerdeck上，如果加载缓慢，请稍候:))</p>
-
-<script async class="speakerdeck-embed" data-id="fbcb8590b1540130690c2e6f0be13e84" data-ratio="1.33333333333333" src="http://biaobiaoqi.github.io//speakerdeck.com/assets/embed.js"></script>
-
-
-<p>slides下载地址：<a href="https://dl.dropboxusercontent.com/u/64021093/slides/%E8%BF%9C%E7%A8%8B%E8%BF%87%E7%A8%8B%E8%B0%83%E7%94%A8%E5%92%8CNIO.pdf">请戳</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Hadoop和RDBMS的混合系统介绍]]></title>
-    <link href="http://biaobiaoqi.github.io/blog/2013/05/20/hybrid-distributed-data-management-system/"/>
-    <updated>2013-05-20T14:52:00+08:00</updated>
-    <id>http://biaobiaoqi.github.io/blog/2013/05/20/hybrid-distributed-data-management-system</id>
-    <content type="html"><![CDATA[<p>现在大数据概念被时常提起，社会各界对其关注度越来越高。往往越是火热的东西，人们越容易忽略它的本质。在slides中，我首先按照自己的理解，简单的理顺数据处理领域的发展历程。之后，落脚点是两个比较有代表性的混合的分布式系统：<a href="http://biaobiaoqi.me/blog/2013/05/18/a-hybrid-system-hadoopdb/">HadoopDB</a>和微软的<a href="http://biaobiaoqi.me/blog/2013/04/25/split-querying-process-in-polybase/">Polybase</a>。由于缺乏实战经验，很多东西由各方论文和博文中得到，有不恰当的地方，欢迎大家拍砖讨论;)</p>
-
-<p>slides的提纲如下：</p>
+<p>本文是对HadoopDB论文的总结。其中不免掺杂些自己的不成熟想法，更详细的内容，还请参见原论文 HadoopDB: An Architectural Hybrid of MapReduce and DBMS Technologies for Analytical Workloads</p>
 
 <!--more-->
 
 
-<h2>提纲</h2>
+<h2>背景</h2>
 
-<h3>背景</h3>
+<h3>PB级数据分析系统的能力要求</h3>
 
 <ul>
-<li>RDBMS的出现</li>
-<li>大数据时代到来</li>
-<li>NoSQL技术</li>
-<li>新时代的挑战</li>
+<li>1.性能：节省开销（时间、资金）。</li>
+<li>2.容错：数据分析系统（即使有故障节点也能顺利工作） 不同于 事务型的系统的容错（从故障中无损的恢复）。节点故障时，原来的查询操作不需要重启。</li>
+<li>3.在异构型环境中运行的能力。即使所有机器硬件一样，但某些机器在某些时候可能因为软件原因、网络原因也会性能降低。分布式操作时，要防止木桶效应。</li>
+<li>4.活的查询接口：商业化的数据分析一般建立在SQL查询上，UDF等non-SQL也是需要的。</li>
 </ul>
 
 
-<h3>HadoopDB</h3>
+<h5>并行数据库</h5>
+
+<p>满足1,4：利用分表的方式，扩散到多个节点。一般情况下节点最多为几十个，原因：1.每增加一个节点，失败率增加；2.并行数据库假设各个机器都是同质化的，但这往往不太可能</p>
+
+<h5>MapReduce</h5>
+
+<p>满足2,3,4：Map - repartition - Reduce原为非结构化数据，但也可以适用结构化数据。</p>
 
 <ul>
-<li>PB级数据分析</li>
-<li>HadoopDB是什么</li>
-<li>框架和组件介绍</li>
-<li>示例</li>
-<li>总结</li>
+<li>2：（错误节点）动态的规划节点执行任务，将错误节点任务发放给新节点。并在本地磁盘做checkpoint存储。</li>
+<li>3：（拖后腿的节点）节点间冗余的执行。执行慢的节点的任务交付给速度快的节点执行</li>
+<li>4：Hive的HQL</li>
 </ul>
 
 
-<h3>Polybase</h3>
+<h5>HadoopDB</h5>
+
+<p>融合了之前两者，做出系统层面的改进，而不仅仅是语言和接口层面。</p>
+
+<p>这三个解决方案对4个指标的关系如下图：</p>
+
+<p><img src="http://dl.dropboxusercontent.com/u/64021093/hadoopDB/QQ%E6%88%AA%E5%9B%BE20130518135802.png" title="compare" alt="alt compare" /></p>
+
+<h2>架构</h2>
+
+<p>如图
+<img src="https://dl.dropboxusercontent.com/u/64021093/hadoopDB/QQ%E6%88%AA%E5%9B%BE20130518135814.png" title="framework" alt="alt framework" /></p>
+
+<h2>组件介绍</h2>
+
+<h5>Databse Connector:</h5>
 
 <ul>
-<li>Polybase总览</li>
-<li>PDW结构</li>
-<li>Polybase的实现</li>
-<li>性能分析</li>
+<li><p>作用</p>
+
+<p>  hadoopTask &lt;-通信-> Database on Node。节点上的DB类似于Hadoop中的数据源HDFS</p></li>
+<li><p>实现</p>
+
+<p>  扩展了Hadoop的InputFormat</p></li>
 </ul>
 
 
-<p>slides在线展示：</p>
+<h5>Catalog：</h5>
 
-<script async class="speakerdeck-embed" data-id="77bdc950a3460130c98a12e3c5740641" data-ratio="1.33333333333333" src="http://biaobiaoqi.github.io//speakerdeck.com/assets/embed.js"></script>
+<ul>
+<li><p>作用</p>
+
+<p>  1.链接参数如数据库位置，驱动类和证书；
+  2.一些元数据如数据簇中的数据集，副本的位置，数据的划分。</p></li>
+<li><p>实现</p>
+
+<p>  HDFS上的XML。希望做成类似于Hadoop的namenode。</p></li>
+</ul>
 
 
-<p>slides下载：
-<a href="https://dl.dropboxusercontent.com/u/64021093/slides/Hybrid%20system.pdf">请戳这里</a></p>
+<h5>Data Loader</h5>
+
+<ul>
+<li><p>作用</p>
+
+<p>  将数据合理划分，从HDFS转移到节点中的本地文件系统</p></li>
+<li><p>实现</p>
+
+<p>  global hasher：分配到不同节点
+  local hasher：继续划分为不同chunks</p></li>
+</ul>
+
+
+<h5>SQL to MapReduce to SQL (SMS) Planner</h5>
+
+<ul>
+<li><p>作用</p>
+
+<p>  将HiveQL转化为特定执行计划，在hadoopDB中执行。原则是尽可能的讲操作推向节点上的RDBMS上执行，以此提高执行效率。</p></li>
+<li><p>实现</p>
+
+<p>  扩展Hive：
+  1.执行查找前，用catolog的信息更新Hive的metastore，定向到节点数据库的表
+  2.执行前，决定划分的键；将部分查询语句推到节点的数据库中执行。</p></li>
+</ul>
+
+
+<h2>示例</h2>
+
+<p>示例参见下文的slides</p>
+
+<h2>总结</h2>
+
+<p>对hadoopDB的一些看法：</p>
+
+<ul>
+<li>其数据预处理代价过高：数据需要进行两次分解和一次数据库加载操作后才能使用；</li>
+<li>将查询推向数据库层只是少数情况，大多数情况下，查询仍由Ｈive完成．因为数据仓库查询往往涉及多表连接，由于连接的复杂性，难以做到在保持连接数据局部性的前提下将参与连接的多张表按照某种模式划分；</li>
+<li>维护代价过高．不仅要维护Ｈadoop系统，还要维护每个数据库节点；</li>
+<li>目前尚不支持数据的动态划分，需要手工一次划分好</li>
+</ul>
+
+
+<p>slides：</p>
+
+<script async class="speakerdeck-embed" data-id="48c5e680a1ab0130e1707290244918d4" data-ratio="1.33333333333333" src="http://biaobiaoqi.github.io//speakerdeck.com/assets/embed.js"></script>
+
+
+<p>下载slides，请猛戳<a href="https://dl.dropboxusercontent.com/u/64021093/hadoopDB/%5B2013-05-18%5DHadoopDB.pptx">这里</a></p>
+
+<h2>参考资料</h2>
+
+<ul>
+<li>HadoopDB: An Architectural Hybrid of MapReduce and DBMS Technologies for Analytical Workloads</li>
+<li><a href="http://dbanotes.net/database/hadoopdb.html">《HadoopDB》 —— Fenng</a></li>
+<li>《架构大数据:挑战、现状与展望》 计算机学报 王珊</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[HadoopDB：混合分布式系统]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2013/05/18/a-hybrid-system-hadoopdb/"/>
+    <updated>2013-05-18T17:58:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2013/05/18/a-hybrid-system-hadoopdb</id>
+    <content type="html"><![CDATA[<p>HadoopDB是一个Mapreduce和传统关系型数据库的结合方案，以充分利用RDBMS的性能和Hadoop的容错、分布特性。2009年被Yale大学教授Abadi提出，继而商业化为<a href="http://hadapt.com/">Hadapt</a>，据称从VC那儿拉到了10M刀投资。</p>
+
+<p>本文是对HadoopDB论文的总结。其中不免掺杂些自己的不成熟想法，更详细的内容，还请参见原论文 HadoopDB: An Architectural Hybrid of MapReduce and DBMS Technologies for Analytical Workloads</p>
+
+<!--more-->
+
+
+<h2>背景</h2>
+
+<h3>PB级数据分析系统的能力要求</h3>
+
+<ul>
+<li>1.性能：节省开销（时间、资金）。</li>
+<li>2.容错：数据分析系统（即使有故障节点也能顺利工作） 不同于 事务型的系统的容错（从故障中无损的恢复）。节点故障时，原来的查询操作不需要重启。</li>
+<li>3.在异构型环境中运行的能力。即使所有机器硬件一样，但某些机器在某些时候可能因为软件原因、网络原因也会性能降低。分布式操作时，要防止木桶效应。</li>
+<li>4.活的查询接口：商业化的数据分析一般建立在SQL查询上，UDF等non-SQL也是需要的。</li>
+</ul>
+
+
+<h5>并行数据库</h5>
+
+<p>满足1,4：利用分表的方式，扩散到多个节点。一般情况下节点最多为几十个，原因：1.每增加一个节点，失败率增加；2.并行数据库假设各个机器都是同质化的，但这往往不太可能</p>
+
+<h5>MapReduce</h5>
+
+<p>满足2,3,4：Map - repartition - Reduce原为非结构化数据，但也可以适用结构化数据。</p>
+
+<ul>
+<li>2：（错误节点）动态的规划节点执行任务，将错误节点任务发放给新节点。并在本地磁盘做checkpoint存储。</li>
+<li>3：（拖后腿的节点）节点间冗余的执行。执行慢的节点的任务交付给速度快的节点执行</li>
+<li>4：Hive的HQL</li>
+</ul>
+
+
+<h5>HadoopDB</h5>
+
+<p>融合了之前两者，做出系统层面的改进，而不仅仅是语言和接口层面。</p>
+
+<p>这三个解决方案对4个指标的关系如下图：</p>
+
+<p><img src="http://dl.dropboxusercontent.com/u/64021093/hadoopDB/QQ%E6%88%AA%E5%9B%BE20130518135802.png" title="compare" alt="alt compare" /></p>
+
+<h2>架构</h2>
+
+<p>如图
+<img src="https://dl.dropboxusercontent.com/u/64021093/hadoopDB/QQ%E6%88%AA%E5%9B%BE20130518135814.png" title="framework" alt="alt framework" /></p>
+
+<h2>组件介绍</h2>
+
+<h5>Databse Connector:</h5>
+
+<ul>
+<li><p>作用</p>
+
+<p>  hadoopTask &lt;-通信-> Database on Node。节点上的DB类似于Hadoop中的数据源HDFS</p></li>
+<li><p>实现</p>
+
+<p>  扩展了Hadoop的InputFormat</p></li>
+</ul>
+
+
+<h5>Catalog：</h5>
+
+<ul>
+<li><p>作用</p>
+
+<p>  1.链接参数如数据库位置，驱动类和证书；
+  2.一些元数据如数据簇中的数据集，副本的位置，数据的划分。</p></li>
+<li><p>实现</p>
+
+<p>  HDFS上的XML。希望做成类似于Hadoop的namenode。</p></li>
+</ul>
+
+
+<h5>Data Loader</h5>
+
+<ul>
+<li><p>作用</p>
+
+<p>  将数据合理划分，从HDFS转移到节点中的本地文件系统</p></li>
+<li><p>实现</p>
+
+<p>  global hasher：分配到不同节点
+  local hasher：继续划分为不同chunks</p></li>
+</ul>
+
+
+<h5>SQL to MapReduce to SQL (SMS) Planner</h5>
+
+<ul>
+<li><p>作用</p>
+
+<p>  将HiveQL转化为特定执行计划，在hadoopDB中执行。原则是尽可能的讲操作推向节点上的RDBMS上执行，以此提高执行效率。</p></li>
+<li><p>实现</p>
+
+<p>  扩展Hive：
+  1.执行查找前，用catolog的信息更新Hive的metastore，定向到节点数据库的表
+  2.执行前，决定划分的键；将部分查询语句推到节点的数据库中执行。</p></li>
+</ul>
+
+
+<h2>示例</h2>
+
+<p>示例参见下文的slides</p>
+
+<h2>总结</h2>
+
+<p>对hadoopDB的一些看法：</p>
+
+<ul>
+<li>其数据预处理代价过高：数据需要进行两次分解和一次数据库加载操作后才能使用；</li>
+<li>将查询推向数据库层只是少数情况，大多数情况下，查询仍由Ｈive完成．因为数据仓库查询往往涉及多表连接，由于连接的复杂性，难以做到在保持连接数据局部性的前提下将参与连接的多张表按照某种模式划分；</li>
+<li>维护代价过高．不仅要维护Ｈadoop系统，还要维护每个数据库节点；</li>
+<li>目前尚不支持数据的动态划分，需要手工一次划分好</li>
+</ul>
+
+
+<p>slides：</p>
+
+<script async class="speakerdeck-embed" data-id="48c5e680a1ab0130e1707290244918d4" data-ratio="1.33333333333333" src="http://biaobiaoqi.github.io//speakerdeck.com/assets/embed.js"></script>
+
+
+<p>下载slides，请猛戳<a href="https://dl.dropboxusercontent.com/u/64021093/hadoopDB/%5B2013-05-18%5DHadoopDB.pptx">这里</a></p>
+
+<h2>参考资料</h2>
+
+<ul>
+<li>HadoopDB: An Architectural Hybrid of MapReduce and DBMS Technologies for Analytical Workloads</li>
+<li><a href="http://dbanotes.net/database/hadoopdb.html">《HadoopDB》 —— Fenng</a></li>
+<li>《架构大数据:挑战、现状与展望》 计算机学报 王珊</li>
+</ul>
+
 ]]></content>
   </entry>
   
@@ -303,361 +492,60 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[全分布式的Hadoop初体验]]></title>
-    <link href="http://biaobiaoqi.github.io/blog/2013/05/12/touch-hadoop/"/>
-    <updated>2013-05-12T00:26:00+08:00</updated>
-    <id>http://biaobiaoqi.github.io/blog/2013/05/12/touch-hadoop</id>
-    <content type="html"><![CDATA[<h2>背景</h2>
+    <title type="html"><![CDATA[CAP和最终一致性]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2013/05/15/cap-and-eventual-consistent/"/>
+    <updated>2013-05-15T00:30:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2013/05/15/cap-and-eventual-consistent</id>
+    <content type="html"><![CDATA[<p>查阅资料整理了最终一致性、CAP相关的内容。由于图省事儿，没有做文字的整理记载，只有slides和一些查阅过的链接，大家将就着看。欢迎指正。</p>
 
-<p>之前的时间里对Hadoop的使用都是基于学长所搭建起的实验环境的，没有完整的自己部署和维护过，最近抽时间初体验了在集群环境下装机、配置、运行的全过程，梳理总结到本文中。</p>
+<p>slides：</p>
 
-<h2>配置</h2>
+<script async class="speakerdeck-embed" data-id="cca07ce09e92013076c646310b996896" data-ratio="1.33333333333333" src="http://biaobiaoqi.github.io//speakerdeck.com/assets/embed.js"></script>
 
-<ul>
-<li>内存:8G</li>
-<li>CPU：i5-2400 3.1GHz；</li>
-<li>硬盘：960G</li>
-<li>系统：windows 7旗舰 64bits</li>
-</ul>
+
 
 
 <!--more-->
 
 
-<ul>
-<li>虚拟机：VMware7.1.1</li>
-<li>虚拟集群：</li>
-<li><ul>
-<li>T （master节点）Ubuntu11.04 32 bits 内存512MB；硬盘100G；单核；</li>
-</ul>
-</li>
-<li><ul>
-<li>T2（slave节点） Ubuntu11.04 32 bits 内存512MB；硬盘100G；单核；</li>
-</ul>
-</li>
-<li><ul>
-<li>T3（slave节点） Ubuntu11.04 32 bits 内存512MB；硬盘100G；单核；</li>
-</ul>
-</li>
-<li><ul>
-<li>T4（slave节点） Ubuntu11.04 32 bits 内存512MB；硬盘100G；单核；</li>
-</ul>
-</li>
-</ul>
+<p>slides链接：<a href="https://speakerdeck.com/biaobiaoqi/cap-and-eventually-consistent">请戳这里</a></p>
 
+<h2>背景</h2>
 
-<h2>环境准备</h2>
+<p>为什么系统要扩张？历史的发展路径是怎么样的？请看<a href="http://rdc.taobao.com/blog/cs/?p=614">《系统可扩展性演化》</a></p>
 
-<h5>1.节点机器的配置</h5>
-
-<p>配置固定IP:修改<code>/etc/nerwork/interfaces</code>
-<code>
-auto lo
-iface lo inet loopback
-address 192.168.108.131
-gateway 192.168.108.2
-netmask 192.168.108.0
-broadcast 192.168.108.0
-</code></p>
-
-<p>为了便于管理，建议按统一约定修改hostname：修改<code>/etc/hostname</code>；同时，Hadoop集群要求每个节点使用同一个账号来管理、运行，所以，也需要设置好公用账号。</p>
-
-<h5>2.集群ssh配置</h5>
-
-<p>ssh相关原理和操作，参见博文<a href="http://biaobiaoqi.me/blog/2013/04/19/use-ssh/">《SSH原理和使用》</a>。</p>
-
-<p>在每台机器上生成密钥对，并将所有机器的公钥集成到master的<code>~/.ssh/authorized_keys</code>中,之后将这个文件分发到集群所有机器上。
-这样，所有机器之间都可以实现免密码的ssh访问了。</p>
-
-<p>使用如下指令，可以将本机的公钥添加到master的authorized_keys文件末尾。当所有节点都执行一遍以后，再将master的authorized_keys发布到各个节点上。
-```</p>
-
-<h1>cat .ssh/id_rsa.pub | ssh T 'cat >> ~/.ssh/authorized_keys'</h1>
-
-<p>```</p>
-
-<h5>3.工具脚本</h5>
-
-<p>在分布式的环境里，运维工作的自动化很有必要。为了方便集群的运维，我写了两个简单的batch脚本。</p>
-
-<h6>统一执行脚本</h6>
-
-<p>在所有节点上执行同样的动作。使用时，在master节点上调用batch脚本，参数为对应的batch执行语句。</p>
-
-<p>```</p>
-
-<h1>!/bin/bash</h1>
-
-<h1>Program:</h1>
-
-<h1>Execute instructions in hosts in slaveslist.</h1>
-
-<h1>Description:</h1>
-
-<h1>2013/5/8 biaobiaoqi First Release</h1>
-
-<p>if [ $# -lt 1 ]; then
-   echo  "usage: $0 COMMAND"
-   exit 0
-fi</p>
-
-<p>for i in <code>cat slaveslist</code>
-do
-   ssh biaobiaoqi@$i "$1"
-done</p>
-
-<p>```</p>
-
-<p>脚本中使用的slaveslist文件保存着所有slave节点的hostname，需要与脚本放在同一个工作目录下。</p>
-
-<h6>统一替部署脚本</h6>
-
-<p>将主节点的某文件或目录统一的更新部署替换到所有节点上（注意，所有节点拥有相同的目录结构，即替换的文件路径相同）。</p>
-
-<p>遇到hadoop集群中节点的增删改动需要修改配置文件的，都可以通过这个脚本便捷的部署。</p>
-
-<p>```</p>
-
-<h1>!/bin/bash</h1>
-
-<h1>Program:</h1>
-
-<h1>Put the dirctory into all nodes of the cluster as the same path.</h1>
-
-<h1>Description:</h1>
-
-<h1>2013/5/10     biaobiaoqi     First Release</h1>
-
-<p>if [ $# -lt 1 ]; then
-   echo "Usage $0 DIR_PATH"
-   exit 0
-fi</p>
-
-<p>for i in <code>cat slaveslist</code>
-do
-   ssh $i "rm ~/tmp -rf"
-   scp -r $1 $i:~/tmp
-   ssh $i "rm -rf $1;  mv ~/tmp $1"
-done</p>
-
-<p>```</p>
-
-<h5>4.配置hosts文件</h5>
-
-<p>由于hadoop体系在处理节点时，是使用的hostname，而非IP，所以必须先配置好hostname和IP的关系。
-在一台机器上修改<code>/etc/hosts</code>
-```</p>
-
-<h1>/etc/hosts</h1>
-
-<p>127.0.0.1     localhost
-192.168.108.128     T3
-192.168.108.129     T2
-192.168.108.130 T
-192.168.108.131 T4
-```
-然后使用统一执行脚本，将它发布到所有节点上。</p>
-
-<p>值得注意的是，在<code>/etc/hostsname</code>中修改了host name之后，如果不同步的修改<code>/etc/hosts</code>中的相关信息，则在sudo操作时出现 <code>sudo: unable to resolve host</code>  的提示。原因是机器无法解析主机名。</p>
-
-<p>修改<code>/etc/hosts</code>时也要特别注意，如果改成<code>127.0.0.1 localhost HOSTNAME</code> (其中HOSTNAME是主机名)的形式，在开启hadoop集群时，会出现datanode无法正常访问namenode，算是个小bug吧。所以得把hosts文件写成如上的形式。</p>
-
-<h5>5.配置Java环境</h5>
-
-<p>Hadoop需要Java1.6或更高版本，记住Java的安装目录，之后需要在hadoop配置过程中用到。</p>
-
-<h2>安装Hadoop</h2>
-
-<h5>1.下载Hadoop</h5>
-
-<p>从官网下载<a href="http://www.apache.org/dyn/closer.cgi/hadoop/common/">Hadoop发布版</a>（博主使用的是较早的稳定版0.20.2）</p>
-
-<p>关于版本选择，推荐阅读：<a href="http://dongxicheng.org/mapreduce-nextgen/how-to-select-hadoop-versions/">Hadoop版本选择探讨</a></p>
-
-<h5>2.部署</h5>
-
-<p>解压下载好的Hadoop，后放到合适的目录下。这里假定放置在/home/USER/ 的目录下</p>
-
-<p>在<code>/home/USER/.bashrc</code>(其中USER为集群的用户名)文件中，增加如下语句，设定Hadoop相关的路径信息：
-<code>
-export JAVA_HOME=/usr/lib/jvm/java-6-openjdk
-export HADOOP_HOME=/home/hadoop/Hadoop
-export HADOOP_CONF=$HADOOP_HOME/conf
-export HADOOP_PATH=$HADOOP_HOME/bin
-export PATH=$HADOOP_PATH:$PATH
-export CLASSPATH=.:$JAVA_HOME/bin:$PATH:$HADOOP_HOME:$HADOOP_HOME/bin
-</code></p>
-
-<h6>Hadoop核心配置修改</h6>
-
-<p>配置文件在<code>$HADOOP_HOME/conf</code>目录下，其中基础配置比较重要的有三个：core-site.xml, hdfs-site.xml, mapred-site.xml。（当然，每个配置文件都有其细节作用，不过在初步实践hadoop时，理解这三个配置文件中的几个重要配置项就够了）</p>
-
-<p>一般的，有三种可选模式。即本地模式、伪分布式模式和全分布式模式。前两种只是在单机环境下，后一种才是生产环境下的常用方式。《Hadoop权威指南》和《Hadoop实战》等书中都有讲到不同方式的配置，这里博主仅描述实验环境下4节点的全分布式配置。</p>
-
-<p>core-site.xml整个hadoop的顶层配置
-```
-&lt;?xml version="1.0"?>
-&lt;?xml-stylesheet type="text/xsl" href="configuration.xsl"?></p>
-
-<!-- Put site-specific property overrides in this file. -->
-
-
-<p><configuration></p>
-
-<pre><code>&lt;property&gt;
-     &lt;name&gt;hadoop.tmp.dir&lt;/name&gt;
-     &lt;value&gt;/home/biaobiaoqi/UDMS/hadoop-data/tmp-base&lt;/value&gt;
-     &lt;description&gt;
-    存放临时目录的路径，默认也被用来存储hdfs的元数据和文件数据，值得注意的是，hadoop账户对所设定的本地路径是否有足够的操作权限。之后再hdfs-site.xml中设定的dfs.data.dir和dfs.name.dir也要注意同样的问题
-    &lt;/description&gt; 
-&lt;/property&gt; 
-
- &lt;property&gt;   
-      &lt;name&gt;fs.default.name&lt;/name&gt; 
-      &lt;value&gt;hdfs://T:9000/&lt;/value&gt;
-      &lt;description&gt;
-    默认文件系统的标记。这个URI标记了文件系统的实现方式。UIR的协议决定了文件系统的实现类，而后面的值决定了文件系统的地址、端口等信息。
-    &lt;/description&gt;
- &lt;/property&gt; 
-</code></pre>
-
-<p></configuration></p>
-
-<p>```</p>
-
-<p>hdfs-site.xml存储HDFS相关的信息</p>
-
-<p>```
-&lt;?xml version="1.0"?>
-&lt;?xml-stylesheet type="text/xsl" href="configuration.xsl"?></p>
-
-<!-- Put site-specific property overrides in this file. -->
-
-
-<p><configuration></p>
-
-<pre><code>&lt;property&gt;   
-      &lt;name&gt;dfs.replication&lt;/name&gt;   
-      &lt;value&gt;3&lt;/value&gt;   
-      &lt;description&gt;默认的块的副本数量。实际的副本数量可以在文件写入的时候确定，默认的副本数则是在没有指定写入副本时被使用。 &lt;/description&gt; 
- &lt;/property&gt;
-&lt;property&gt;
-     &lt;name&gt;dfs.name.dir&lt;/name&gt;
-      &lt;value&gt;/home/hadoop/hadoop-data/meta-data&lt;/value&gt;
-    &lt;description&gt;
-    设定hdfs的元数据信息存储地址。在namenode上。
-    &lt;/description&gt;
- &lt;/property&gt;
- &lt;property&gt;
-      &lt;name&gt;dfs.data.dir&lt;/name&gt;
-      &lt;value&gt;/home/hadoop/hadoop-data/data&lt;/value&gt;
-    &lt;description&gt;
-    设定hdfs的数据存储地址。在datanode上。
-    &lt;/description&gt;
- &lt;/property&gt;
-</code></pre>
-
-<p></configuration></p>
-
-<p>```</p>
-
-<p>mapred-site.xml存储mapreduce作业相关配置
-```
-&lt;?xml version="1.0"?>
-&lt;?xml-stylesheet type="text/xsl" href="configuration.xsl"?></p>
-
-<!-- Put site-specific property overrides in this file. -->
-
-
-<p><configuration></p>
-
-<pre><code>&lt;property&gt;   
-      &lt;name&gt;mapred.job.tracker&lt;/name&gt;
-      &lt;value&gt;T:9001&lt;/value&gt;   
-      &lt;description&gt; Mapreduce 的job tracker所在的节点和端口。&lt;/description&gt; 
- &lt;/property&gt;
-</code></pre>
-
-<p></configuration></p>
-
-<p>```</p>
-
-<p>hosts文件存储了master节点</p>
-
-<p><code>
-T
-</code></p>
-
-<p>slaves文件存储着所有的slaves节点
-<code>
-T2
-T3
-T4
-</code></p>
-
-<h2>启动集群</h2>
-
-<h5>1.格式化namenode</h5>
-
-<p>如果是第一次起动集群，需要先格式化HDFS。</p>
-
-<p>namenode存放了HDFS的元数据，故可以看成是对HDFS的格式化。</p>
-
-<p><code>
-$HADOOP_HOME/bin/hadoop namenode -format
-</code></p>
-
-<h5>2.启动守护进程</h5>
-
-<p><code>
-$HADOOP_HOME/bin/start-all.sh
-</code>
-等价于如下命令执行：
-```</p>
-
-<h1>start dfs daemons</h1>
-
-<p>$"$bin"/start-dfs.sh --config $HADOOP_CONF_DIR</p>
-
-<h1>start mapred daemons</h1>
-
-<p>$"$bin"/start-mapred.sh --config $HADOOP_CONF_DIR</p>
-
-<p>```
-如果成功，打开 http://T:50070 (T为集群master节点)，可以看到HDFS的运行情况，包括节点数量、空间大小等。这是Hadoop自带的HDFS监控页面；同样的，http://T:50030 是Mapreduce的监控界面。</p>
-
-<p>如果没有成功，根据$HADOOP_HOME/logs目录下的日志文件信息debug。</p>
-
-<h5>3.常见问题</h5>
+<h2>CAP理论</h2>
 
 <ul>
-<li>namenode无法启动：</li>
-<li><ul>
-<li>删除掉本地文件系统中HDFS的目录文件，重新格式化HDFS。</li>
-</ul>
-</li>
-<li><ul>
-<li>HDFS目录的权限不够，更改权限设置等。</li>
-</ul>
-</li>
-<li>namenode启动成功，datanode无法连接：检查hosts文件是否设置正确；检查各个配置文件中地址值是否使用了IP而不是hostname。</li>
-<li>namenode启动成功，datanode无法启动：Incompatible namespaceIDs，由于频繁格式化，造成dfs.name.dir/current/VERSION与dfs.data.dir/current/VERSION数据不一致。</li>
-<li>SafeModeException： 分布式系统启动时，会进入安全模式，安全模式下，hadoop是无法执行的。一般的等待一会儿，就可以正常使用了。如果是由于之前集群崩溃造成的无法自动退出安全模式的情况，则需要如下特殊处理了
-<code>
-$/$HADOOP_HOME/bin/hadoop dfsadmin -safemode leave
-</code></li>
+<li><p>CAP理论的提出：分布式系统的CAP理论是2000年左右被提出的概念，直到Dynamo的出现，开始在工业界被广泛实践：
+<a href="http://www.julianbrowne.com/article/viewer/brewers-cap-theorem">《Brewer's CAP Theorem》</a>/<a href="http://code.alibabatech.com/blog/dev_related_728/brewers-cap-theorem.html">中文翻译</a></p></li>
+<li><p>对CAP的理解：<a href="http://www.douban.com/group/topic/11765014/">《谈正确理解CAP理论》</a>\ <a href="http://rdc.taobao.com/blog/cs/?p=631">《CAP理论及分布式系统一致性》</a></p></li>
 </ul>
 
 
-<h2>初体验</h2>
+<h2>BASE理论</h2>
 
-<p>最简单的尝试就是使用Hadoop自带的wordcount程序了，参照<a href="http://www.cnblogs.com/xia520pi/archive/2012/05/16/2504205.html">这篇文章</a>，描述很详细。</p>
+<ul>
+<li>BASE的理论解释：<a href="http://rdc.taobao.com/blog/cs/?p=637">《分布式事务工程实现》</a></li>
+</ul>
 
-<p>其他的一些尝试： <a href="http://www.cnblogs.com/rilley/archive/2012/02/13/2349858.html">动态增删节点</a> 、 <a href="http://www.cnblogs.com/ggjucheng/archive/2012/04/18/2454696.html">修改备份数量</a></p>
 
-<h2>参考</h2>
+<h2>最终一致性</h2>
 
-<p><a href="http://hadoop.apache.org/docs/stable/cluster_setup.html">offical document: Cluster Setup</a></p>
+<ul>
+<li><p>amazon的CTO分析最终一致性：<a href="http://www.allthingsdistributed.com/2008/12/eventually_consistent.html">Eventually Consistent - Revisited</a>/<a href="http://blog.csdn.net/xiaoqiangxx/article/details/7566654">中文翻译</a></p></li>
+<li><p>Dynamo论文：<a href="http://www.read.seas.harvard.edu/~kohler/class/cs239-w08/decandia07dynamo.pdf">Dynamo: Amazon’s Highly Available Key-value Store</a></p>
+
+<p>关于Dynamo的一篇中文简述：<a href="http://www.infoq.com/cn/articles/nosql-dynamo">《解读NoSQL技术代表之作Dynamo》</a></p></li>
+</ul>
+
+
+<h2>引申</h2>
+
+<ul>
+<li>CAP原作者对CAP的反思和澄清：<a href="http://www.infoq.com/cn/articles/cap-twelve-years-later-how-the-rules-have-changed">《CAP十二年回顾：规则变了》</a></li>
+</ul>
+
 ]]></content>
   </entry>
   

@@ -9,10 +9,7 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="背景 之前的时间里对 Hadoop 的使用都是基于学长所搭建起的实验环境的，没有完整的自己部署和维护过，最近抽时间初体验了在集群环境下装机、配置、运行的全过程，梳理总结到本文中。 配置 内存:8G
-CPU：i5-2400 3.1GHz；
-硬盘：960G
-系统：windows 7 旗舰 64bits ">
+  <meta name="description" content="作为一个不太安分的技术男，或多或少会对乔布斯怀有敬意。 我是从《硅谷海盗》这部老片开始了解到乔布斯这个人的，查了下上映日期，竟然是我出生的第二天。那时候觉着演员挺帅啊，后来发现真人更有味道一点。国内的互联网大佬们怎么不见如此气度的-,-。 前天下午，和实验室的基友们一起去看了刚上映的《乔布斯》。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -97,7 +94,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   <li><a href="/">首页</a></li>
   <li><a href="/blog/archives/">全部文章</a></li>
   <li><a href="/tag-cloud/">分类阅读</a></li>
-  <li><a href="/resources/">其他推荐</a></li>
 </ul>
 
 </nav>
@@ -111,7 +107,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/05/12/touch-hadoop/">全分布式的Hadoop初体验</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/09/30/jobs-and-jobs/">Jobs和jobs</a></h1>
     
     
       <p class="meta">
@@ -127,35 +123,31 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
 
 
-<time datetime="2013-05-12T00:26:00+08:00" pubdate data-updated="true">May 12<span>th</span>, 2013</time>
+<time datetime="2013-09-30T11:41:00+08:00" pubdate data-updated="true">Sep 30<span>th</span>, 2013</time>
         
-         | <a href="/blog/2013/05/12/touch-hadoop/#disqus_thread">Comments</a>
+         | <a href="/blog/2013/09/30/jobs-and-jobs/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><h2>背景</h2>
+  <div class="entry-content"><p>作为一个不太安分的技术男，或多或少会对乔布斯怀有敬意。</p>
 
-<p>之前的时间里对 Hadoop 的使用都是基于学长所搭建起的实验环境的，没有完整的自己部署和维护过，最近抽时间初体验了在集群环境下装机、配置、运行的全过程，梳理总结到本文中。</p>
+<p>我是从<a href="http://movie.douban.com/subject/1298084/">《硅谷海盗》</a>这部老片开始了解到乔布斯这个人的，查了下上映日期，竟然是我出生的第二天。那时候觉着演员挺帅啊，后来发现真人更有味道一点。<del>国内的互联网大佬们怎么不见如此气度的-,-。</del></p>
 
-<h2>配置</h2>
+<p>前天下午，和实验室的基友们一起去看了刚上映的<a href="http://movie.douban.com/subject/6877703/">《乔布斯》</a>。由于乔布斯的段子、事迹早已充斥到生活的各个角落，两个小时的观影我几乎是以一种期待下个情节的心情在审视电影的脉络：求学时代开始，Apple1 一炮打响，Apple2 大卖，Lisa 折戟，Macintosh 阻力重重，被赶出苹果，重回苹果，END。我试图将乔布斯真人带给社会的感动融入到电影的观影情绪里，但并不太奏效，电影缺了一些代入感。或许是库切的身体太壮脸太宽了的缘故，也或许是因为广电总局减掉了乔布斯和女友的 1 分钟激情戏。</p>
 
-<ul>
-<li>内存:8G</li>
-<li>CPU：i5-2400 3.1GHz；</li>
-<li>硬盘：960G</li>
-<li>系统：windows 7 旗舰 64bits</li>
-</ul>
+<p>走出 Jobs，心里没有太多涟漪。世界倒是依旧的躁动——最近又迎来了找工作的季节。于是后面的节奏是，江湖上将流传着师兄师姐们的各种牛 offer 的传说，师弟师妹们各种仰慕，筹划着如何准备明年的面试，憧憬着明年的自己，以及抱怨着帝都魔都恶劣的生存条件和充沛的机遇并存的矛盾……充满着成王败寇的腥味，和纸醉金迷的浮躁。</p>
 
+<p>理想和现实的纠缠从来就不曾停息，欲望的高低贵贱也是如此。</p>
+
+<p>一场 Jobs，告诉我们<code>connecting the dolts</code>的感动。大家所追寻的 jobs，<code>dolts</code>在哪里？</p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.io/blog/2013/09/30/jobs-and-jobs/'>http://biaobiaoqi.github.io/blog/2013/09/30/jobs-and-jobs/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
 
 </div>
   
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/05/12/touch-hadoop/">Read on &rarr;</a>
-    </footer>
   
 
 
@@ -166,7 +158,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/05/09/networking-in-virtual-machine/">虚拟机中的网络配置</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/09/22/java-initialization/">Java类、实例的初始化顺序</a></h1>
     
     
       <p class="meta">
@@ -182,126 +174,22 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
 
 
-<time datetime="2013-05-09T22:39:00+08:00" pubdate data-updated="true">May 9<span>th</span>, 2013</time>
+<time datetime="2013-09-22T21:53:00+08:00" pubdate data-updated="true">Sep 22<span>nd</span>, 2013</time>
         
-         | <a href="/blog/2013/05/09/networking-in-virtual-machine/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>本文介绍三种虚拟机中常用的网络配置模式：NAT(网络地址转换模式)、Bridged nerworking（桥接网络模式）和 Host-only（主机模式）。</p>
-
-<h3>Network Address Translation (NAT)</h3>
-
-<p>NAT 模式使用了 <a href="http://zh.wikipedia.org/wiki/%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2">NAT</a> 服务来给虚拟网络提供网络连接。</p>
-
-<p>这种模式下，虚拟机能访问外部网络，外部无法直接连接到内部网络，除非使用端口映射 <a href="http://nxlhero.blog.51cto.com/962631/742140">port forwarding</a>。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/05/09/networking-in-virtual-machine/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/04/27/pat1020-pat1043-rebuild-binary-tree/">根据前中后序和层序重建二叉树</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-27T22:33:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/04/27/pat1020-pat1043-rebuild-binary-tree/#disqus_thread">Comments</a>
+         | <a href="/blog/2013/09/22/java-initialization/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><h2>背景</h2>
+  <div class="entry-content"><p>今晚是阿里巴巴 2013 校园招聘的杭州站笔试。下午匆忙看了两张历年试卷，去现场打了瓶酱油。</p>
 
-<p><a href="/blog/2013/04/27/travsal-binary-tree/">《二叉树的遍历（递归、非递归）分析》</a>总结了二叉树不同遍历方式的递归和非递归实现，本文则讨论如何针对不同遍历方式的组合重建二叉树。为了简化问题的考虑，假定二叉树中不会出现重复值。列入考虑范围的有前序、中序、后序、层序遍历这四种的组合。前中后序比较常见，而层序则相对特殊一点了。</p>
+<p>题目总体考察点偏基础，倒数第二题（Java 附加题）比较有趣，考察了 Java 初始化机制的细节，在此摘录出来。</p>
 
-<p><a href="http://pat.zju.edu.cn/contests/pat-a-practise">PAT</a> 的 1043 和 1020 题是遍历相关的模板题，正好派上用场。</p>
+<h2>题目</h2>
 
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/04/27/pat1020-pat1043-rebuild-binary-tree/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/04/27/travsal-binary-tree/">二叉树的遍历（递归、非递归）分析</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-27T21:03:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/04/27/travsal-binary-tree/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>背景</h2>
-
-<ul>
-<li>2013-10-7 修订部分内容</li>
-<li>2014-5-24 修改后序非递归部分代码</li>
-</ul>
-
-
-<p>本文讨论二叉树的常见遍历方式的代码(Java)实现，包括前序(preorder)、中序(inorder)、后序(postorder)、层序(level order)，进一步考虑递归和非递归的实现方式。</p>
-
-<p>递归的实现方法相对简单，但由于递归的执行方式每次都会产生一个新的方法调用栈，如果递归层级较深，会造成较大的内存开销，相比之下，非递归的方式则可以避免这个问题。递归遍历容易实现，非递归则没那么简单，非递归调用本质上是通过维护一个栈，模拟递归调用的方法调用栈的行为。</p>
-
-<p>在此之前，先简单定义节点的数据结构：</p>
-
-<p>二叉树节点最多只有两个儿子，并保存一个节点的值，为了实验的方便，假定它为 int。同时，我们直接使用 Java 的 System.out.print 方法来输出节点值，以显示遍历结果。</p>
+<p>求如下 java 代码的输出：</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -312,25 +200,69 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Node</span> <span class="o">{</span>
-</span><span class='line'>      <span class="kd">public</span> <span class="kt">int</span> <span class="n">value</span><span class="o">;</span>
-</span><span class='line'>      <span class="kd">public</span> <span class="n">Node</span> <span class="n">leftNode</span><span class="o">;</span>
-</span><span class='line'>      <span class="kd">public</span> <span class="n">Node</span> <span class="n">rightNode</span><span class="o">;</span>
-</span><span class='line'>      
-</span><span class='line'>      <span class="kd">public</span> <span class="nf">Node</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>          <span class="n">value</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
-</span><span class='line'>      <span class="o">}</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">class</span> <span class="nc">T</span>  <span class="kd">implements</span> <span class="n">Cloneable</span><span class="o">{</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="n">T</span> <span class="n">t1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">T</span><span class="o">(</span><span class="s">&quot;t1&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="n">T</span> <span class="n">t2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">T</span><span class="o">(</span><span class="s">&quot;t2&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">print</span><span class="o">(</span><span class="s">&quot;i&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">99</span><span class="o">;</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="kd">public</span> <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">print</span><span class="o">(</span><span class="s">&quot;j&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">{</span>
+</span><span class='line'>      <span class="n">print</span><span class="o">(</span><span class="s">&quot;构造快&quot;</span><span class="o">);</span>
 </span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="kd">static</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">print</span><span class="o">(</span><span class="s">&quot;静态块&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="kd">public</span> <span class="nf">T</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">((++</span><span class="n">k</span><span class="o">)</span> <span class="o">+</span> <span class="s">&quot;:&quot;</span> <span class="o">+</span> <span class="n">str</span> <span class="o">+</span> <span class="s">&quot;    i=&quot;</span> <span class="o">+</span> <span class="n">i</span> <span class="o">+</span> <span class="s">&quot;  n=&quot;</span> <span class="o">+</span> <span class="n">n</span><span class="o">);</span>
+</span><span class='line'>      <span class="o">++</span><span class="n">n</span><span class="o">;</span> <span class="o">++</span> <span class="n">i</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">print</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span><span class="o">){</span>
+</span><span class='line'>      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">((++</span><span class="n">k</span><span class="o">)</span> <span class="o">+</span><span class="s">&quot;:&quot;</span> <span class="o">+</span> <span class="n">str</span> <span class="o">+</span> <span class="s">&quot;   i=&quot;</span> <span class="o">+</span> <span class="n">i</span> <span class="o">+</span> <span class="s">&quot;   n=&quot;</span> <span class="o">+</span> <span class="n">n</span><span class="o">);</span>
+</span><span class='line'>      <span class="o">++</span><span class="n">n</span><span class="o">;</span>
+</span><span class='line'>      <span class="k">return</span> <span class="o">++</span> <span class="n">i</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+</span><span class='line'>      <span class="n">T</span> <span class="n">t</span> <span class="o">=</span> <span class="k">new</span> <span class="n">T</span><span class="o">(</span><span class="s">&quot;init&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>详细代码参见链接:<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/algorithm/basics/tree/BinarySearchTree.java">BST 及其各种便利的详细实现代码</a></p>
+
 
 </div>
   
   
     <footer>
-      <a rel="full-article" href="/blog/2013/04/27/travsal-binary-tree/">Read on &rarr;</a>
+      <a rel="full-article" href="/blog/2013/09/22/java-initialization/">Read on &rarr;</a>
     </footer>
   
 
@@ -342,7 +274,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/04/25/split-querying-process-in-polybase/">PDW中的Split Querying Process</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/09/22/java-initialization/">Java类、实例的初始化顺序</a></h1>
     
     
       <p class="meta">
@@ -358,28 +290,95 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
 
 
-<time datetime="2013-04-25T22:59:00+08:00" pubdate data-updated="true">Apr 25<span>th</span>, 2013</time>
+<time datetime="2013-09-22T21:53:00+08:00" pubdate data-updated="true">Sep 22<span>nd</span>, 2013</time>
         
-         | <a href="/blog/2013/04/25/split-querying-process-in-polybase/#disqus_thread">Comments</a>
+         | <a href="/blog/2013/09/22/java-initialization/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>最近看了关于 SQL Server 的分布式处理方面的论文，觉得它提出的 Polybase 跟之前看过的 HadoopDB 有些神似，这里做个小总结（抽空再把 HadoopDB 的总结贴出来）。</p>
+  <div class="entry-content"><p>今晚是阿里巴巴 2013 校园招聘的杭州站笔试。下午匆忙看了两张历年试卷，去现场打了瓶酱油。</p>
 
-<p>不算翻译，只是挑出自己认为是重点的部分。详细情况，还请论文查阅原文，引用中有写明出处。文章末尾有我总结的 slides，可以辅助查阅。</p>
+<p>题目总体考察点偏基础，倒数第二题（Java 附加题）比较有趣，考察了 Java 初始化机制的细节，在此摘录出来。</p>
 
-<p>由于缺乏实践经验，很多东西未必能理解其本质。如有其他观点，还请多指教。</p>
+<h2>题目</h2>
 
-<p>当下的计划就是开始自己搭环境，实践起来!~</p>
+<p>求如下 java 代码的输出：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">class</span> <span class="nc">T</span>  <span class="kd">implements</span> <span class="n">Cloneable</span><span class="o">{</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="n">T</span> <span class="n">t1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">T</span><span class="o">(</span><span class="s">&quot;t1&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="n">T</span> <span class="n">t2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">T</span><span class="o">(</span><span class="s">&quot;t2&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">print</span><span class="o">(</span><span class="s">&quot;i&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">99</span><span class="o">;</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="kd">public</span> <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">print</span><span class="o">(</span><span class="s">&quot;j&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">{</span>
+</span><span class='line'>      <span class="n">print</span><span class="o">(</span><span class="s">&quot;构造快&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="kd">static</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">print</span><span class="o">(</span><span class="s">&quot;静态块&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="kd">public</span> <span class="nf">T</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">((++</span><span class="n">k</span><span class="o">)</span> <span class="o">+</span> <span class="s">&quot;:&quot;</span> <span class="o">+</span> <span class="n">str</span> <span class="o">+</span> <span class="s">&quot;    i=&quot;</span> <span class="o">+</span> <span class="n">i</span> <span class="o">+</span> <span class="s">&quot;  n=&quot;</span> <span class="o">+</span> <span class="n">n</span><span class="o">);</span>
+</span><span class='line'>      <span class="o">++</span><span class="n">n</span><span class="o">;</span> <span class="o">++</span> <span class="n">i</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">print</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span><span class="o">){</span>
+</span><span class='line'>      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">((++</span><span class="n">k</span><span class="o">)</span> <span class="o">+</span><span class="s">&quot;:&quot;</span> <span class="o">+</span> <span class="n">str</span> <span class="o">+</span> <span class="s">&quot;   i=&quot;</span> <span class="o">+</span> <span class="n">i</span> <span class="o">+</span> <span class="s">&quot;   n=&quot;</span> <span class="o">+</span> <span class="n">n</span><span class="o">);</span>
+</span><span class='line'>      <span class="o">++</span><span class="n">n</span><span class="o">;</span>
+</span><span class='line'>      <span class="k">return</span> <span class="o">++</span> <span class="n">i</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+</span><span class='line'>      <span class="n">T</span> <span class="n">t</span> <span class="o">=</span> <span class="k">new</span> <span class="n">T</span><span class="o">(</span><span class="s">&quot;init&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
 
 </div>
   
   
     <footer>
-      <a rel="full-article" href="/blog/2013/04/25/split-querying-process-in-polybase/">Read on &rarr;</a>
+      <a rel="full-article" href="/blog/2013/09/22/java-initialization/">Read on &rarr;</a>
     </footer>
   
 
@@ -391,7 +390,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/04/23/winsock-kills-internet/">Winsock出错引起的断网</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/09/22/java-initialization/">Java类、实例的初始化顺序</a></h1>
     
     
       <p class="meta">
@@ -407,25 +406,148 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
 
 
-<time datetime="2013-04-23T22:24:00+08:00" pubdate data-updated="true">Apr 23<span>rd</span>, 2013</time>
+<time datetime="2013-09-22T21:53:00+08:00" pubdate data-updated="true">Sep 22<span>nd</span>, 2013</time>
         
-         | <a href="/blog/2013/04/23/winsock-kills-internet/#disqus_thread">Comments</a>
+         | <a href="/blog/2013/09/22/java-initialization/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><h3>背景</h3>
+  <div class="entry-content"><p>今晚是阿里巴巴 2013 校园招聘的杭州站笔试。下午匆忙看了两张历年试卷，去现场打了瓶酱油。</p>
 
-<p>实验室有二十来台 PC 机，30+的服务器集群，网络拓扑比较复杂。简单地说，有网关连着校网，校网无法直接访问学校外的网络，只能通过拨 vpn 来实现外网访问。而校网最近也不稳定，时常断网。</p>
+<p>题目总体考察点偏基础，倒数第二题（Java 附加题）比较有趣，考察了 Java 初始化机制的细节，在此摘录出来。</p>
 
-<p>今天，实验室的一台电脑今天突然出无法上网了，而其他人则在正常上网。症状很奇怪：</p>
+<h2>题目</h2>
+
+<p>求如下 java 代码的输出：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">class</span> <span class="nc">T</span>  <span class="kd">implements</span> <span class="n">Cloneable</span><span class="o">{</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="n">T</span> <span class="n">t1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">T</span><span class="o">(</span><span class="s">&quot;t1&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="n">T</span> <span class="n">t2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">T</span><span class="o">(</span><span class="s">&quot;t2&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">print</span><span class="o">(</span><span class="s">&quot;i&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">99</span><span class="o">;</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="kd">public</span> <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">print</span><span class="o">(</span><span class="s">&quot;j&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">{</span>
+</span><span class='line'>      <span class="n">print</span><span class="o">(</span><span class="s">&quot;构造快&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="kd">static</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">print</span><span class="o">(</span><span class="s">&quot;静态块&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="kd">public</span> <span class="nf">T</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">((++</span><span class="n">k</span><span class="o">)</span> <span class="o">+</span> <span class="s">&quot;:&quot;</span> <span class="o">+</span> <span class="n">str</span> <span class="o">+</span> <span class="s">&quot;    i=&quot;</span> <span class="o">+</span> <span class="n">i</span> <span class="o">+</span> <span class="s">&quot;  n=&quot;</span> <span class="o">+</span> <span class="n">n</span><span class="o">);</span>
+</span><span class='line'>      <span class="o">++</span><span class="n">n</span><span class="o">;</span> <span class="o">++</span> <span class="n">i</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">print</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span><span class="o">){</span>
+</span><span class='line'>      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">((++</span><span class="n">k</span><span class="o">)</span> <span class="o">+</span><span class="s">&quot;:&quot;</span> <span class="o">+</span> <span class="n">str</span> <span class="o">+</span> <span class="s">&quot;   i=&quot;</span> <span class="o">+</span> <span class="n">i</span> <span class="o">+</span> <span class="s">&quot;   n=&quot;</span> <span class="o">+</span> <span class="n">n</span><span class="o">);</span>
+</span><span class='line'>      <span class="o">++</span><span class="n">n</span><span class="o">;</span>
+</span><span class='line'>      <span class="k">return</span> <span class="o">++</span> <span class="n">i</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+</span><span class='line'>      <span class="n">T</span> <span class="n">t</span> <span class="o">=</span> <span class="k">new</span> <span class="n">T</span><span class="o">(</span><span class="s">&quot;init&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/09/22/java-initialization/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/09/10/scientifically-surfing-the-internet/">关于科学上网</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-10T12:11:00+08:00" pubdate data-updated="true">Sep 10<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/09/10/scientifically-surfing-the-internet/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>为了防止被某墙 fuck，暂且称其为『很棒的防火墙』吧，你懂的-,-.</p>
+
+<p>在 teahour 上听了 <a href="http://teahour.fm/2013/07/09/gfw-and-vpncloud.html">***技术研究和云梯产品故事</a>，有感于之前几天修改本地 hosts 的策略再次失效，切换到 goagent 模式，在此，基于这期 teahour 对<a href="https://twitter.com/kgen">@Kgen</a> 的访谈内容，对很棒的防火墙做份简单的笔记：</p>
+
+<p>很棒的防火墙有用大量的服务器，并由一大只团队维护和升级。它的目的是让大部分的互联网用户无法接触到“有害”的网络资源，“净化”国内的网络环境。同时，它需要尽可能的减少商业上的影响，比如为了不阻碍外企的 VPN 工作环境，很棒的防火墙并没有直接对 VPN 进行封堵。在这个前提上，留给我们的可能性也是一直存在的。</p>
+
+<h2>防御策略</h2>
+
+<p>很棒的防火墙一直在茁壮成长着。一个方校长倒下了，千千万万 X 校长站起来了。他们背负着一辈子的骂名，忍辱负重的为祖国奉献着生命，死而后已。总之，前赴后继的技术人员不断的在补全着很棒的防火墙的防御规则，因此，应对策略也需要不断的调整和改进。整体来看，防御策略主要有如下几种：</p>
 
 <ul>
-<li>浏览器只能上 google，其他任何网站都上不去。</li>
-<li>QQ、ftp 等各种需要连网的软件也都无法正常连网。</li>
-<li>一切的发生，只是在 PC 使用者认为正常的操作中发生：上网，连网下围棋，聊 QQ，然后…</li>
+<li><h4>1.DNS 污染</h4>
+
+<p>  DNS 协议本身并没有安全认证功能，很棒的防火墙检测到相应 dns 请求后，会返回一个错误的 IP 地址，造成无法正常访问。解决方案有使用第三方 DNS 服务或者修改本地 hosts 文件。</p></li>
+<li><h4>2.IP 拦截</h4>
+
+<p>  对于特定敏感网站，很棒的防火墙会直接侦察到相应的 IP 地址施行拦截。简单的 DNS 修改无法解决 IP 层的问题，只能通过代理等手段绕过这些 IP 进行访问。常用的应对方式有：使用 VPN、ssh 代理和 GAE 上搭建 <a href="http://zhoudemin.com/goagent.html">GoAgent</a> 服务等。至于为什么一些国内用户说自己的 GoAgent 速度很快，而又有很多人在抱怨自己的 GAE 速度很慢，原因在于 GAE 应用会不受控制的部署到 Google 不同的服务器节点上，而国内网络环境复杂，不同地区的网络连入国外不同服务器的线路不尽相同，速度也差异明显。同样的情况也发生在 VPS 的使用速度差异上。</p></li>
 </ul>
 
 
@@ -433,7 +555,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
   
     <footer>
-      <a rel="full-article" href="/blog/2013/04/23/winsock-kills-internet/">Read on &rarr;</a>
+      <a rel="full-article" href="/blog/2013/09/10/scientifically-surfing-the-internet/">Read on &rarr;</a>
     </footer>
   
 
@@ -445,7 +567,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/04/20/are-you-smart-enough-to-work-at-google/">《谁是谷歌想要的人才？》</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/09/10/scientifically-surfing-the-internet/">关于科学上网</a></h1>
     
     
       <p class="meta">
@@ -461,30 +583,40 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
 
 
-<time datetime="2013-04-20T00:47:00+08:00" pubdate data-updated="true">Apr 20<span>th</span>, 2013</time>
+<time datetime="2013-09-10T12:11:00+08:00" pubdate data-updated="true">Sep 10<span>th</span>, 2013</time>
         
-         | <a href="/blog/2013/04/20/are-you-smart-enough-to-work-at-google/#disqus_thread">Comments</a>
+         | <a href="/blog/2013/09/10/scientifically-surfing-the-internet/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p><em>道理都明白，还得靠自己</em></p>
+  <div class="entry-content"><p>为了防止被某墙 fuck，暂且称其为『很棒的防火墙』吧，你懂的-,-.</p>
 
-<h3>关于本书</h3>
+<p>在 teahour 上听了 <a href="http://teahour.fm/2013/07/09/gfw-and-vpncloud.html">***技术研究和云梯产品故事</a>，有感于之前几天修改本地 hosts 的策略再次失效，切换到 goagent 模式，在此，基于这期 teahour 对<a href="https://twitter.com/kgen">@Kgen</a> 的访谈内容，对很棒的防火墙做份简单的笔记：</p>
 
-<p>藉由大多数程序员天然的对 google 怀有的朝圣般的向往和喜爱，开始看<a href="http://book.douban.com/subject/21329264/">这本书</a>。</p>
+<p>很棒的防火墙有用大量的服务器，并由一大只团队维护和升级。它的目的是让大部分的互联网用户无法接触到“有害”的网络资源，“净化”国内的网络环境。同时，它需要尽可能的减少商业上的影响，比如为了不阻碍外企的 VPN 工作环境，很棒的防火墙并没有直接对 VPN 进行封堵。在这个前提上，留给我们的可能性也是一直存在的。</p>
 
-<p><img class="left" src="http://img.cnbeta.com/upimg/121231/raymon725_1451506190985.jpg" width="250" height="400" title="Place Kitten #2" ></p>
+<h2>防御策略</h2>
 
-<p>书中的中文版序的标题就是“跳出框框来思考”，这种观点倒不是第一次见到了，甚至可以说，这些观点充斥于互联网上的各种流传、经验贴中。但这并不意味着我们不需要再花时间在这种书上。道理都懂，就是做不好已经成为这个信息通畅的时代的特征之一。正所谓“纸上得来终觉浅，绝知此事要躬行”。</p>
+<p>很棒的防火墙一直在茁壮成长着。一个方校长倒下了，千千万万 X 校长站起来了。他们背负着一辈子的骂名，忍辱负重的为祖国奉献着生命，死而后已。总之，前赴后继的技术人员不断的在补全着很棒的防火墙的防御规则，因此，应对策略也需要不断的调整和改进。整体来看，防御策略主要有如下几种：</p>
+
+<ul>
+<li><h4>1.DNS 污染</h4>
+
+<p>  DNS 协议本身并没有安全认证功能，很棒的防火墙检测到相应 dns 请求后，会返回一个错误的 IP 地址，造成无法正常访问。解决方案有使用第三方 DNS 服务或者修改本地 hosts 文件。</p></li>
+<li><h4>2.IP 拦截</h4>
+
+<p>  对于特定敏感网站，很棒的防火墙会直接侦察到相应的 IP 地址施行拦截。简单的 DNS 修改无法解决 IP 层的问题，只能通过代理等手段绕过这些 IP 进行访问。常用的应对方式有：使用 VPN、ssh 代理和 GAE 上搭建 <a href="http://zhoudemin.com/goagent.html">GoAgent</a> 服务等。至于为什么一些国内用户说自己的 GoAgent 速度很快，而又有很多人在抱怨自己的 GAE 速度很慢，原因在于 GAE 应用会不受控制的部署到 Google 不同的服务器节点上，而国内网络环境复杂，不同地区的网络连入国外不同服务器的线路不尽相同，速度也差异明显。同样的情况也发生在 VPS 的使用速度差异上。</p></li>
+</ul>
+
 
 </div>
   
   
     <footer>
-      <a rel="full-article" href="/blog/2013/04/20/are-you-smart-enough-to-work-at-google/">Read on &rarr;</a>
+      <a rel="full-article" href="/blog/2013/09/10/scientifically-surfing-the-internet/">Read on &rarr;</a>
     </footer>
   
 
@@ -496,7 +628,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/04/19/use-ssh/">SSH原理和使用</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/09/10/scientifically-surfing-the-internet/">关于科学上网</a></h1>
     
     
       <p class="meta">
@@ -512,29 +644,40 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
 
 
-<time datetime="2013-04-19T21:44:00+08:00" pubdate data-updated="true">Apr 19<span>th</span>, 2013</time>
+<time datetime="2013-09-10T12:11:00+08:00" pubdate data-updated="true">Sep 10<span>th</span>, 2013</time>
         
-         | <a href="/blog/2013/04/19/use-ssh/#disqus_thread">Comments</a>
+         | <a href="/blog/2013/09/10/scientifically-surfing-the-internet/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><h2>ssh 是什么</h2>
+  <div class="entry-content"><p>为了防止被某墙 fuck，暂且称其为『很棒的防火墙』吧，你懂的-,-.</p>
 
-<p>在 linux 上工作，ssh 是必须要了解的技术方法。它可以建立起多台主机之间的安全的加密传输，以进行远程的访问、操控、传输数据。</p>
+<p>在 teahour 上听了 <a href="http://teahour.fm/2013/07/09/gfw-and-vpncloud.html">***技术研究和云梯产品故事</a>，有感于之前几天修改本地 hosts 的策略再次失效，切换到 goagent 模式，在此，基于这期 teahour 对<a href="https://twitter.com/kgen">@Kgen</a> 的访谈内容，对很棒的防火墙做份简单的笔记：</p>
 
-<p>SSH 為 Secure Shell 的縮寫。為建立在应用层和传输层基础上的安全协议。</p>
+<p>很棒的防火墙有用大量的服务器，并由一大只团队维护和升级。它的目的是让大部分的互联网用户无法接触到“有害”的网络资源，“净化”国内的网络环境。同时，它需要尽可能的减少商业上的影响，比如为了不阻碍外企的 VPN 工作环境，很棒的防火墙并没有直接对 VPN 进行封堵。在这个前提上，留给我们的可能性也是一直存在的。</p>
 
-<p>传统的网络服务程序，如 FTP、POP 和 Telnet 其本质上都是不安全的；因为它们在网络上用明文传送数据、用户帐号和用户口令，很容易受到中间人（man-in-the-middle）攻击方式的攻击。就是存在另一个人或者一台机器冒充真正的服务器接收用户传给服务器的数据，然后再冒充用户把数据传给真正的服务器。
-而 SSH 是目前较可靠，專为远程登录会话和其他网络服务提供安全性的协议。利用 SSH 协议可以有效防止远程管理过程中的信息泄露问题。透過 SSH 可以對所有传输的数据进行加密，也能够防止 DNS 欺骗和 IP 欺骗。</p>
+<h2>防御策略</h2>
+
+<p>很棒的防火墙一直在茁壮成长着。一个方校长倒下了，千千万万 X 校长站起来了。他们背负着一辈子的骂名，忍辱负重的为祖国奉献着生命，死而后已。总之，前赴后继的技术人员不断的在补全着很棒的防火墙的防御规则，因此，应对策略也需要不断的调整和改进。整体来看，防御策略主要有如下几种：</p>
+
+<ul>
+<li><h4>1.DNS 污染</h4>
+
+<p>  DNS 协议本身并没有安全认证功能，很棒的防火墙检测到相应 dns 请求后，会返回一个错误的 IP 地址，造成无法正常访问。解决方案有使用第三方 DNS 服务或者修改本地 hosts 文件。</p></li>
+<li><h4>2.IP 拦截</h4>
+
+<p>  对于特定敏感网站，很棒的防火墙会直接侦察到相应的 IP 地址施行拦截。简单的 DNS 修改无法解决 IP 层的问题，只能通过代理等手段绕过这些 IP 进行访问。常用的应对方式有：使用 VPN、ssh 代理和 GAE 上搭建 <a href="http://zhoudemin.com/goagent.html">GoAgent</a> 服务等。至于为什么一些国内用户说自己的 GoAgent 速度很快，而又有很多人在抱怨自己的 GAE 速度很慢，原因在于 GAE 应用会不受控制的部署到 Google 不同的服务器节点上，而国内网络环境复杂，不同地区的网络连入国外不同服务器的线路不尽相同，速度也差异明显。同样的情况也发生在 VPS 的使用速度差异上。</p></li>
+</ul>
+
 
 </div>
   
   
     <footer>
-      <a rel="full-article" href="/blog/2013/04/19/use-ssh/">Read on &rarr;</a>
+      <a rel="full-article" href="/blog/2013/09/10/scientifically-surfing-the-internet/">Read on &rarr;</a>
     </footer>
   
 
@@ -546,7 +689,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/04/18/some-opinions-about-software-engineering/">关于软件工程的一些看法</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/09/08/string-interning/">对Java字符串的探究</a></h1>
     
     
       <p class="meta">
@@ -562,24 +705,62 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
 
 
-<time datetime="2013-04-18T18:03:00+08:00" pubdate data-updated="true">Apr 18<span>th</span>, 2013</time>
+<time datetime="2013-09-08T13:01:00+08:00" pubdate data-updated="true">Sep 8<span>th</span>, 2013</time>
         
-         | <a href="/blog/2013/04/18/some-opinions-about-software-engineering/#disqus_thread">Comments</a>
+         | <a href="/blog/2013/09/08/string-interning/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>标题党了，其实实际的内容是[自己的项目经验总结和反思]。</p>
+  <div class="entry-content"><h2>问题的出发点</h2>
 
-<p>今天在高级软件工程课上，做了一次关于项目经验的展示。展示的主题围绕自己参与的移动互联网团队开发经验展开。借此机会，我整理了一下思路，于是有了以下的 slides。没时间码字，就先把 slides 直接贴上来啦:)</p>
+<p>在网上看到一道题：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">String</span> <span class="n">str</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="s">&quot;abc&quot;</span><span class="o">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>以上代码执行过程中生成了多少个 String 对象？</p>
+
+<p>答案写的是两个。&#8221;abc&#8221;本身是一个，而 new 又生成了一个。</p>
+
+<h2>&#8220;abc&#8221;是什么</h2>
+
+<p>查看这句程序的字节码，如下：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">NEW</span> <span class="n">String</span>
+</span><span class='line'>    <span class="n">DUP</span>
+</span><span class='line'>    <span class="n">LDC</span> <span class="s">&quot;abc&quot;</span>
+</span><span class='line'>    <span class="n">INVOKESPECIAL</span> <span class="n">String</span><span class="o">.&lt;</span><span class="n">init</span><span class="o">&gt;(</span><span class="n">String</span><span class="o">)</span> <span class="o">:</span> <span class="kt">void</span>
+</span><span class='line'>    <span class="n">ASTORE</span> <span class="mi">1</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>指令<code>ldc indexbyte</code>的含义：将两字节的值从 indexbyte 索引的常量池中加载到方法栈上。</p>
+
+<p>指令<code>LDC "abc"</code>说明了&#8221;abc&#8221;并不是直接以对象存在的，而是存在于常量池的索引中。String 的构造函数调用命令实际使用的就是 String 类型作为参数，那么，栈上应该有一个 String 类型的索引。</p>
+
+<p>由此我们得出，在字节码中，ldc 命令在常量池中找到了能索引到“abc”那个 String 对象的索引值。</p>
+
+<h2>常量池</h2>
+
+<p>常量池是类文件（.class）文件中的一部分，记录了许多常量信息，索引的字符串信息。</p>
+
+<p>由于 Java 是动态加载的，类文件并没有包含程序运行时的内存布局，方法调用等无法直接记录出方法的物理位置，常量池通过索引的方法解决了这个问题。</p>
 
 </div>
   
   
     <footer>
-      <a rel="full-article" href="/blog/2013/04/18/some-opinions-about-software-engineering/">Read on &rarr;</a>
+      <a rel="full-article" href="/blog/2013/09/08/string-interning/">Read on &rarr;</a>
     </footer>
   
 
@@ -591,7 +772,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/04/07/goodbye-seeme/">再见，Seeme</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/09/08/string-interning/">对Java字符串的探究</a></h1>
     
     
       <p class="meta">
@@ -607,22 +788,145 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
 
 
-<time datetime="2013-04-07T23:26:00+08:00" pubdate data-updated="true">Apr 7<span>th</span>, 2013</time>
+<time datetime="2013-09-08T13:01:00+08:00" pubdate data-updated="true">Sep 8<span>th</span>, 2013</time>
         
-         | <a href="/blog/2013/04/07/goodbye-seeme/#disqus_thread">Comments</a>
+         | <a href="/blog/2013/09/08/string-interning/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>过年算是仪式感最强的节日之一了。不想将过年作为成熟的时间节点，因为生命总是在时间里沉淀。但社会的周期运作确确实实的依着四季来过度，于是总有些决定、变化需要在此执行和接受。真诚的向过去的一切道一声感谢。</p>
+  <div class="entry-content"><h2>问题的出发点</h2>
+
+<p>在网上看到一道题：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">String</span> <span class="n">str</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="s">&quot;abc&quot;</span><span class="o">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>以上代码执行过程中生成了多少个 String 对象？</p>
+
+<p>答案写的是两个。&#8221;abc&#8221;本身是一个，而 new 又生成了一个。</p>
+
+<h2>&#8220;abc&#8221;是什么</h2>
+
+<p>查看这句程序的字节码，如下：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">NEW</span> <span class="n">String</span>
+</span><span class='line'>    <span class="n">DUP</span>
+</span><span class='line'>    <span class="n">LDC</span> <span class="s">&quot;abc&quot;</span>
+</span><span class='line'>    <span class="n">INVOKESPECIAL</span> <span class="n">String</span><span class="o">.&lt;</span><span class="n">init</span><span class="o">&gt;(</span><span class="n">String</span><span class="o">)</span> <span class="o">:</span> <span class="kt">void</span>
+</span><span class='line'>    <span class="n">ASTORE</span> <span class="mi">1</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>指令<code>ldc indexbyte</code>的含义：将两字节的值从 indexbyte 索引的常量池中加载到方法栈上。</p>
+
+<p>指令<code>LDC "abc"</code>说明了&#8221;abc&#8221;并不是直接以对象存在的，而是存在于常量池的索引中。String 的构造函数调用命令实际使用的就是 String 类型作为参数，那么，栈上应该有一个 String 类型的索引。</p>
+
+<p>由此我们得出，在字节码中，ldc 命令在常量池中找到了能索引到“abc”那个 String 对象的索引值。</p>
+
+<h2>常量池</h2>
+
+<p>常量池是类文件（.class）文件中的一部分，记录了许多常量信息，索引的字符串信息。</p>
+
+<p>由于 Java 是动态加载的，类文件并没有包含程序运行时的内存布局，方法调用等无法直接记录出方法的物理位置，常量池通过索引的方法解决了这个问题。</p>
 
 </div>
   
   
     <footer>
-      <a rel="full-article" href="/blog/2013/04/07/goodbye-seeme/">Read on &rarr;</a>
+      <a rel="full-article" href="/blog/2013/09/08/string-interning/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/09/08/string-interning/">对Java字符串的探究</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-08T13:01:00+08:00" pubdate data-updated="true">Sep 8<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/09/08/string-interning/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>问题的出发点</h2>
+
+<p>在网上看到一道题：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">String</span> <span class="n">str</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="s">&quot;abc&quot;</span><span class="o">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>以上代码执行过程中生成了多少个 String 对象？</p>
+
+<p>答案写的是两个。&#8221;abc&#8221;本身是一个，而 new 又生成了一个。</p>
+
+<h2>&#8220;abc&#8221;是什么</h2>
+
+<p>查看这句程序的字节码，如下：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">NEW</span> <span class="n">String</span>
+</span><span class='line'>    <span class="n">DUP</span>
+</span><span class='line'>    <span class="n">LDC</span> <span class="s">&quot;abc&quot;</span>
+</span><span class='line'>    <span class="n">INVOKESPECIAL</span> <span class="n">String</span><span class="o">.&lt;</span><span class="n">init</span><span class="o">&gt;(</span><span class="n">String</span><span class="o">)</span> <span class="o">:</span> <span class="kt">void</span>
+</span><span class='line'>    <span class="n">ASTORE</span> <span class="mi">1</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>指令<code>ldc indexbyte</code>的含义：将两字节的值从 indexbyte 索引的常量池中加载到方法栈上。</p>
+
+<p>指令<code>LDC "abc"</code>说明了&#8221;abc&#8221;并不是直接以对象存在的，而是存在于常量池的索引中。String 的构造函数调用命令实际使用的就是 String 类型作为参数，那么，栈上应该有一个 String 类型的索引。</p>
+
+<p>由此我们得出，在字节码中，ldc 命令在常量池中找到了能索引到“abc”那个 String 对象的索引值。</p>
+
+<h2>常量池</h2>
+
+<p>常量池是类文件（.class）文件中的一部分，记录了许多常量信息，索引的字符串信息。</p>
+
+<p>由于 Java 是动态加载的，类文件并没有包含程序运行时的内存布局，方法调用等无法直接记录出方法的物理位置，常量池通过索引的方法解决了这个问题。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/09/08/string-interning/">Read on &rarr;</a>
     </footer>
   
 
@@ -645,29 +949,28 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   <h1>标签云</h1>
  <br /> 
   <ul class="tag-cloud">
-    <a style="font-size: 112%" href="/tags/hadoop/">Hadoop</a> &nbsp 
-<a style="font-size: 139%" href="/tags/jvm/">JVM</a> &nbsp 
-<a style="font-size: 144%" href="/tags/java/">Java</a> &nbsp 
-<a style="font-size: 141%" href="/tags/pat/">PAT</a> &nbsp 
-<a style="font-size: 112%" href="/tags/octopress/">octopress</a> &nbsp 
-<a style="font-size: 135%" href="/tags/fen-bu-shi/">分布式</a> &nbsp 
-<a style="font-size: 133%" href="/tags/zi-jie-ma/">字节码</a> &nbsp 
-<a style="font-size: 135%" href="/tags/si-kao/">思考</a> &nbsp 
+    <a style="font-size: 143%" href="/tags/jvm/">JVM</a> &nbsp 
+<a style="font-size: 147%" href="/tags/java/">Java</a> &nbsp 
+<a style="font-size: 145%" href="/tags/pat/">PAT</a> &nbsp 
+<a style="font-size: 109%" href="/tags/octopress/">octopress</a> &nbsp 
+<a style="font-size: 115%" href="/tags/fen-bu-shi/">分布式</a> &nbsp 
+<a style="font-size: 137%" href="/tags/zi-jie-ma/">字节码</a> &nbsp 
+<a style="font-size: 137%" href="/tags/si-kao/">思考</a> &nbsp 
 <a style="font-size: 180%" href="/tags/ji-zhu/">技术</a> &nbsp 
-<a style="font-size: 124%" href="/tags/fang-fa-lun/">方法论</a> &nbsp 
-<a style="font-size: 106%" href="/tags/fu-wu-qi/">服务器</a> &nbsp 
-<a style="font-size: 137%" href="/tags/sheng-huo/">生活</a> &nbsp 
-<a style="font-size: 148%" href="/tags/suan-fa/">算法</a> &nbsp 
-<a style="font-size: 117%" href="/tags/wang-luo/">网络</a> &nbsp 
-<a style="font-size: 135%" href="/tags/du-shu/">读书</a>
+<a style="font-size: 128%" href="/tags/fang-fa-lun/">方法论</a> &nbsp 
+<a style="font-size: 109%" href="/tags/fu-wu-qi/">服务器</a> &nbsp 
+<a style="font-size: 139%" href="/tags/sheng-huo/">生活</a> &nbsp 
+<a style="font-size: 153%" href="/tags/suan-fa/">算法</a> &nbsp 
+<a style="font-size: 109%" href="/tags/wang-luo/">网络</a> &nbsp 
+<a style="font-size: 139%" href="/tags/du-shu/">读书</a> &nbsp 
+<a style="font-size: 109%" href="/tags/you-jian-fu-wu/">邮件服务</a>
 
   </ul>
 </section>
 <section>
   <h1>关于</h1>
    <p>biaobiaoqi是我的网络id。<br><br>
-   我的博客日志：<a href="http://biaobiaoqi.me/blog/2013/09/01/blog-log/">请戳</a><br><br>
-   更多信息请戳：<a href="http://about.me/biaobiaoqi">about.me</a><br>
+   我的博客日志：<a href="http://biaobiaoqi.github.io/blog/2013/09/01/blog-log/">请戳</a><br><br>
 	</p>
 </section>
 

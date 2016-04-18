@@ -94,7 +94,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   <li><a href="/">首页</a></li>
   <li><a href="/blog/archives/">全部文章</a></li>
   <li><a href="/tag-cloud/">分类阅读</a></li>
-  <li><a href="/resources/">其他推荐</a></li>
 </ul>
 
 </nav>
@@ -130,7 +129,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   </header>
 
 
-<div class="entry-content"><p><a href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loading-linking-and-initialising/">《Java 类的装载、链接和初始化》</a>中提到，链接的最后一步是解析，即对符号引用的解析。但这不是必须的，可以等到相应的符号引用第一次使用时再解析。</p>
+<div class="entry-content"><p><a href="http://biaobiaoqi.github.io/blog/2013/09/08/java-class-loading-linking-and-initialising/">《Java 类的装载、链接和初始化》</a>中提到，链接的最后一步是解析，即对符号引用的解析。但这不是必须的，可以等到相应的符号引用第一次使用时再解析。</p>
 
 <p>而类的初始化是在链接之后的（注意了，根据不同 JVM 有不同的实现方式，在类初始化的时候，可能已经完成了所有的符号引用的解析，也可能没有），本文所写的就是类的初始化的时机问题。</p>
 
@@ -309,7 +308,7 @@ var jiathis_config={
         <a class="basic-alignment left" href="/blog/2013/09/08/three-principles-of-classloader-operation/" title="Previous Post: 类加载器操作三原则[译]">&laquo; 类加载器操作三原则[译]</a>
       
       
-        <a class="basic-alignment right" href="/blog/2013/09/08/initliate-objects-in-java/" title="Next Post: Java类的实例化总结">Java类的实例化总结 &raquo;</a>
+        <a class="basic-alignment right" href="/blog/2013/09/08/late-initialising-in-java/" title="Next Post: Java类加载的延迟初始化">Java类加载的延迟初始化 &raquo;</a>
       
     </p>
   </footer>
@@ -329,29 +328,28 @@ var jiathis_config={
   <h1>标签云</h1>
  <br /> 
   <ul class="tag-cloud">
-    <a style="font-size: 112%" href="/tags/hadoop/">Hadoop</a> &nbsp 
-<a style="font-size: 139%" href="/tags/jvm/">JVM</a> &nbsp 
-<a style="font-size: 144%" href="/tags/java/">Java</a> &nbsp 
-<a style="font-size: 141%" href="/tags/pat/">PAT</a> &nbsp 
-<a style="font-size: 112%" href="/tags/octopress/">octopress</a> &nbsp 
-<a style="font-size: 135%" href="/tags/fen-bu-shi/">分布式</a> &nbsp 
-<a style="font-size: 133%" href="/tags/zi-jie-ma/">字节码</a> &nbsp 
-<a style="font-size: 135%" href="/tags/si-kao/">思考</a> &nbsp 
+    <a style="font-size: 143%" href="/tags/jvm/">JVM</a> &nbsp 
+<a style="font-size: 147%" href="/tags/java/">Java</a> &nbsp 
+<a style="font-size: 145%" href="/tags/pat/">PAT</a> &nbsp 
+<a style="font-size: 109%" href="/tags/octopress/">octopress</a> &nbsp 
+<a style="font-size: 115%" href="/tags/fen-bu-shi/">分布式</a> &nbsp 
+<a style="font-size: 137%" href="/tags/zi-jie-ma/">字节码</a> &nbsp 
+<a style="font-size: 137%" href="/tags/si-kao/">思考</a> &nbsp 
 <a style="font-size: 180%" href="/tags/ji-zhu/">技术</a> &nbsp 
-<a style="font-size: 124%" href="/tags/fang-fa-lun/">方法论</a> &nbsp 
-<a style="font-size: 106%" href="/tags/fu-wu-qi/">服务器</a> &nbsp 
-<a style="font-size: 137%" href="/tags/sheng-huo/">生活</a> &nbsp 
-<a style="font-size: 148%" href="/tags/suan-fa/">算法</a> &nbsp 
-<a style="font-size: 117%" href="/tags/wang-luo/">网络</a> &nbsp 
-<a style="font-size: 135%" href="/tags/du-shu/">读书</a>
+<a style="font-size: 128%" href="/tags/fang-fa-lun/">方法论</a> &nbsp 
+<a style="font-size: 109%" href="/tags/fu-wu-qi/">服务器</a> &nbsp 
+<a style="font-size: 139%" href="/tags/sheng-huo/">生活</a> &nbsp 
+<a style="font-size: 153%" href="/tags/suan-fa/">算法</a> &nbsp 
+<a style="font-size: 109%" href="/tags/wang-luo/">网络</a> &nbsp 
+<a style="font-size: 139%" href="/tags/du-shu/">读书</a> &nbsp 
+<a style="font-size: 109%" href="/tags/you-jian-fu-wu/">邮件服务</a>
 
   </ul>
 </section>
 <section>
   <h1>关于</h1>
    <p>biaobiaoqi是我的网络id。<br><br>
-   我的博客日志：<a href="http://biaobiaoqi.me/blog/2013/09/01/blog-log/">请戳</a><br><br>
-   更多信息请戳：<a href="http://about.me/biaobiaoqi">about.me</a><br>
+   我的博客日志：<a href="http://biaobiaoqi.github.io/blog/2013/09/01/blog-log/">请戳</a><br><br>
 	</p>
 </section>
 

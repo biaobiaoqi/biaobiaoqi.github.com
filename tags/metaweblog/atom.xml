@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: metaweblog | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.io/tags/metaweblog/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.io/"/>
-  <updated>2016-04-18T12:51:58+08:00</updated>
+  <updated>2016-04-19T00:27:46+08:00</updated>
   <id>http://biaobiaoqi.github.io/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -12,6 +12,126 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[octopress第三方插件：博文同步工具syncPost]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2013/08/31/octopress-3rd-party-plugin-syncpost/"/>
+    <updated>2013-08-31T19:30:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2013/08/31/octopress-3rd-party-plugin-syncpost</id>
+    <content type="html"><![CDATA[<p>为了增加外链等考虑，独立博客往往有将博文同步到其他博客社区的需求。自己人肉黏贴的方式笨拙、重复，对于程序猿而言，着实不可取。</p>
+
+<p>我在github上找到了<a href="https://github.com/huangbowen521/octopress-syncPost">syncPost</a>这个针对octopress的第三方工具，能够通过一些论坛提供的<a href="http://en.wikipedia.org/wiki/MetaWeblog">metaWeblog</a>服务实现octopress最新一篇博文的同步提交。</p>
+
+<p>这大概就是我要找的东西吧。不过，其中有些细节并不是我想要的：</p>
+
+<ul>
+<li>1.在本地配置文件存储论坛账户的密码。虽然可以设置为ignore不提交到git代码库中，但这也并不安全。</li>
+<li>2.只能同步最新的一篇博客，没有整体的博文搬家功能。</li>
+<li>3.先比其他的octopress插件，原来版本的代码结构难于维护，比如有自己单独的配置文件，而不是使用全局的<code>_config.yml</code>(在那个版本中大概是为了不把明文密码提交到版本库中)，比如ruby文件单独在一个<code>_custom</code>文件夹下等</li>
+</ul>
+
+
+<p>基于这些点，我fork了<a href="http://huangbowen.net/">huangbowen</a>大哥的代码，定制成了它<a href="https://github.com/biaobiaoqi/octopress-syncPost">现在的样子</a>。</p>
+
+<!--more-->
+
+
+<h2>功能</h2>
+
+<p>通过rake的方式实现同步功能：</p>
+
+<ul>
+<li>1.同步所有octopress的博文到目标博客。 (<code>rake sync_all_posts</code>)</li>
+<li>2.同步最新一篇博文到目标博客。(<code>rake sync_lates_post</code>)</li>
+</ul>
+
+
+<h2>开发</h2>
+
+<p>这个octopress插件的结构很简单：</p>
+
+<ul>
+<li>安装<code>nokogiri</code>和 <code>metaweblog</code>两个gem。前者实现对octopress生成的html页面的解析，找到对应的博文。提供了客户端发起MetaWeblog请求的功能。</li>
+<li>在全局配置文件<code>_config.yml</code>中配置了目标博客MetaWeblog的服务地址、用户的账号信息。</li>
+<li>octopress/plugins/sync_*.rb三个文件则是代码实现。其中sync_post.rb中包含了post类，是主要的逻辑代码所在，sync_all_posts.rb和sync_latest_post.rb则是对前者的调用。</li>
+<li>修改了octopress的Rakefile，通过rake的方式实现功能。</li>
+</ul>
+
+
+<h2>下一步</h2>
+
+<p>希望能进一步完善这个插件，现在考虑到的有：</p>
+
+<ul>
+<li>增加同步所有博文功能中，对目标博客中已有博文的查重功能。即对于已经同步过去的博客，不再发送请求，或者实现编辑功能的同步功能。由于站点的MetaWeblog服务大多对请求有时限控制，同步过程中可能出现中断，此时部分博文已经同步过去，而部分没有，这种情况下，暂时没有好的解决方式。</li>
+<li>测试其他有MetaWeblog服务的博客站点（现在仅测试了cnblog）。</li>
+<li><del>cnblog的博文显示中，似乎不支持octopress的代码块样式。</del> (注：原作者huangbowen大哥已经解释了是css样式的问题)</li>
+</ul>
+
+
+<p>欢迎感兴趣的朋友参与到这个repo中来:)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[octopress第三方插件：博文同步工具syncPost]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2013/08/31/octopress-3rd-party-plugin-syncpost/"/>
+    <updated>2013-08-31T19:30:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2013/08/31/octopress-3rd-party-plugin-syncpost</id>
+    <content type="html"><![CDATA[<p>为了增加外链等考虑，独立博客往往有将博文同步到其他博客社区的需求。自己人肉黏贴的方式笨拙、重复，对于程序猿而言，着实不可取。</p>
+
+<p>我在github上找到了<a href="https://github.com/huangbowen521/octopress-syncPost">syncPost</a>这个针对octopress的第三方工具，能够通过一些论坛提供的<a href="http://en.wikipedia.org/wiki/MetaWeblog">metaWeblog</a>服务实现octopress最新一篇博文的同步提交。</p>
+
+<p>这大概就是我要找的东西吧。不过，其中有些细节并不是我想要的：</p>
+
+<ul>
+<li>1.在本地配置文件存储论坛账户的密码。虽然可以设置为ignore不提交到git代码库中，但这也并不安全。</li>
+<li>2.只能同步最新的一篇博客，没有整体的博文搬家功能。</li>
+<li>3.先比其他的octopress插件，原来版本的代码结构难于维护，比如有自己单独的配置文件，而不是使用全局的<code>_config.yml</code>(在那个版本中大概是为了不把明文密码提交到版本库中)，比如ruby文件单独在一个<code>_custom</code>文件夹下等</li>
+</ul>
+
+
+<p>基于这些点，我fork了<a href="http://huangbowen.net/">huangbowen</a>大哥的代码，定制成了它<a href="https://github.com/biaobiaoqi/octopress-syncPost">现在的样子</a>。</p>
+
+<!--more-->
+
+
+<h2>功能</h2>
+
+<p>通过rake的方式实现同步功能：</p>
+
+<ul>
+<li>1.同步所有octopress的博文到目标博客。 (<code>rake sync_all_posts</code>)</li>
+<li>2.同步最新一篇博文到目标博客。(<code>rake sync_lates_post</code>)</li>
+</ul>
+
+
+<h2>开发</h2>
+
+<p>这个octopress插件的结构很简单：</p>
+
+<ul>
+<li>安装<code>nokogiri</code>和 <code>metaweblog</code>两个gem。前者实现对octopress生成的html页面的解析，找到对应的博文。提供了客户端发起MetaWeblog请求的功能。</li>
+<li>在全局配置文件<code>_config.yml</code>中配置了目标博客MetaWeblog的服务地址、用户的账号信息。</li>
+<li>octopress/plugins/sync_*.rb三个文件则是代码实现。其中sync_post.rb中包含了post类，是主要的逻辑代码所在，sync_all_posts.rb和sync_latest_post.rb则是对前者的调用。</li>
+<li>修改了octopress的Rakefile，通过rake的方式实现功能。</li>
+</ul>
+
+
+<h2>下一步</h2>
+
+<p>希望能进一步完善这个插件，现在考虑到的有：</p>
+
+<ul>
+<li>增加同步所有博文功能中，对目标博客中已有博文的查重功能。即对于已经同步过去的博客，不再发送请求，或者实现编辑功能的同步功能。由于站点的MetaWeblog服务大多对请求有时限控制，同步过程中可能出现中断，此时部分博文已经同步过去，而部分没有，这种情况下，暂时没有好的解决方式。</li>
+<li>测试其他有MetaWeblog服务的博客站点（现在仅测试了cnblog）。</li>
+<li><del>cnblog的博文显示中，似乎不支持octopress的代码块样式。</del> (注：原作者huangbowen大哥已经解释了是css样式的问题)</li>
+</ul>
+
+
+<p>欢迎感兴趣的朋友参与到这个repo中来:)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[octopress第三方插件：博文同步工具syncPost]]></title>

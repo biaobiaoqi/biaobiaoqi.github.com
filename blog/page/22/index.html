@@ -1,0 +1,698 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Biaobiaoqi的博客</title>
+  <meta name="author" content="Biaobiaoqi">
+
+  
+  <meta name="description" content="背景 实验室有二十来台 PC 机，30+的服务器集群，网络拓扑比较复杂。简单地说，有网关连着校网，校网无法直接访问学校外的网络，只能通过拨 vpn 来实现外网访问。而校网最近也不稳定，时常断网。 今天，实验室的一台电脑今天突然出无法上网了，而其他人则在正常上网。症状很奇怪： 浏览器只能上 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://biaobiaoqi.github.io/blog/page/22/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Biaobiaoqi的博客" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+
+function addBlankTargetForLinks () {
+
+  $('a[href^="http"]').each(function(){
+
+      $(this).attr('target', '_blank');
+
+  });
+
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+
+  addBlankTargetForLinks();
+
+});
+
+</script>
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F49481ec3305db999013860b0ccb3b16d' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39900036-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Biaobiaoqi的博客</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:biaobiaoqi.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives/">全部文章</a></li>
+  <li><a href="/tag-cloud/">分类阅读</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/23/winsock-kills-internet/">Winsock出错引起的断网</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-23T22:24:00+08:00" pubdate data-updated="true">Apr 23<span>rd</span>, 2013</time>
+        
+         | <a href="/blog/2013/04/23/winsock-kills-internet/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>背景</h3>
+
+<p>实验室有二十来台 PC 机，30+的服务器集群，网络拓扑比较复杂。简单地说，有网关连着校网，校网无法直接访问学校外的网络，只能通过拨 vpn 来实现外网访问。而校网最近也不稳定，时常断网。</p>
+
+<p>今天，实验室的一台电脑今天突然出无法上网了，而其他人则在正常上网。症状很奇怪：</p>
+
+<ul>
+<li>浏览器只能上 google，其他任何网站都上不去。</li>
+<li>QQ、ftp 等各种需要连网的软件也都无法正常连网。</li>
+<li>一切的发生，只是在 PC 使用者认为正常的操作中发生：上网，连网下围棋，聊 QQ，然后…</li>
+</ul>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/04/23/winsock-kills-internet/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/23/winsock-kills-internet/">Winsock出错引起的断网</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-23T22:24:00+08:00" pubdate data-updated="true">Apr 23<span>rd</span>, 2013</time>
+        
+         | <a href="/blog/2013/04/23/winsock-kills-internet/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>背景</h3>
+
+<p>实验室有二十来台 PC 机，30+的服务器集群，网络拓扑比较复杂。简单地说，有网关连着校网，校网无法直接访问学校外的网络，只能通过拨 vpn 来实现外网访问。而校网最近也不稳定，时常断网。</p>
+
+<p>今天，实验室的一台电脑今天突然出无法上网了，而其他人则在正常上网。症状很奇怪：</p>
+
+<ul>
+<li>浏览器只能上 google，其他任何网站都上不去。</li>
+<li>QQ、ftp 等各种需要连网的软件也都无法正常连网。</li>
+<li>一切的发生，只是在 PC 使用者认为正常的操作中发生：上网，连网下围棋，聊 QQ，然后…</li>
+</ul>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/04/23/winsock-kills-internet/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/23/winsock-kills-internet/">Winsock出错引起的断网</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-23T22:24:00+08:00" pubdate data-updated="true">Apr 23<span>rd</span>, 2013</time>
+        
+         | <a href="/blog/2013/04/23/winsock-kills-internet/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>背景</h3>
+
+<p>实验室有二十来台 PC 机，30+的服务器集群，网络拓扑比较复杂。简单地说，有网关连着校网，校网无法直接访问学校外的网络，只能通过拨 vpn 来实现外网访问。而校网最近也不稳定，时常断网。</p>
+
+<p>今天，实验室的一台电脑今天突然出无法上网了，而其他人则在正常上网。症状很奇怪：</p>
+
+<ul>
+<li>浏览器只能上 google，其他任何网站都上不去。</li>
+<li>QQ、ftp 等各种需要连网的软件也都无法正常连网。</li>
+<li>一切的发生，只是在 PC 使用者认为正常的操作中发生：上网，连网下围棋，聊 QQ，然后…</li>
+</ul>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/04/23/winsock-kills-internet/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/20/are-you-smart-enough-to-work-at-google/">《谁是谷歌想要的人才？》</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-20T00:47:00+08:00" pubdate data-updated="true">Apr 20<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/04/20/are-you-smart-enough-to-work-at-google/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><em>道理都明白，还得靠自己</em></p>
+
+<h3>关于本书</h3>
+
+<p>藉由大多数程序员天然的对 google 怀有的朝圣般的向往和喜爱，开始看<a href="http://book.douban.com/subject/21329264/">这本书</a>。</p>
+
+<p><img class="left" src="http://img.cnbeta.com/upimg/121231/raymon725_1451506190985.jpg" width="250" height="400" title="Place Kitten #2" ></p>
+
+<p>书中的中文版序的标题就是“跳出框框来思考”，这种观点倒不是第一次见到了，甚至可以说，这些观点充斥于互联网上的各种流传、经验贴中。但这并不意味着我们不需要再花时间在这种书上。道理都懂，就是做不好已经成为这个信息通畅的时代的特征之一。正所谓“纸上得来终觉浅，绝知此事要躬行”。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/04/20/are-you-smart-enough-to-work-at-google/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/20/are-you-smart-enough-to-work-at-google/">《谁是谷歌想要的人才？》</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-20T00:47:00+08:00" pubdate data-updated="true">Apr 20<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/04/20/are-you-smart-enough-to-work-at-google/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><em>道理都明白，还得靠自己</em></p>
+
+<h3>关于本书</h3>
+
+<p>藉由大多数程序员天然的对 google 怀有的朝圣般的向往和喜爱，开始看<a href="http://book.douban.com/subject/21329264/">这本书</a>。</p>
+
+<p><img class="left" src="http://img.cnbeta.com/upimg/121231/raymon725_1451506190985.jpg" width="250" height="400" title="Place Kitten #2" ></p>
+
+<p>书中的中文版序的标题就是“跳出框框来思考”，这种观点倒不是第一次见到了，甚至可以说，这些观点充斥于互联网上的各种流传、经验贴中。但这并不意味着我们不需要再花时间在这种书上。道理都懂，就是做不好已经成为这个信息通畅的时代的特征之一。正所谓“纸上得来终觉浅，绝知此事要躬行”。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/04/20/are-you-smart-enough-to-work-at-google/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/20/are-you-smart-enough-to-work-at-google/">《谁是谷歌想要的人才？》</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-20T00:47:00+08:00" pubdate data-updated="true">Apr 20<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/04/20/are-you-smart-enough-to-work-at-google/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><em>道理都明白，还得靠自己</em></p>
+
+<h3>关于本书</h3>
+
+<p>藉由大多数程序员天然的对 google 怀有的朝圣般的向往和喜爱，开始看<a href="http://book.douban.com/subject/21329264/">这本书</a>。</p>
+
+<p><img class="left" src="http://img.cnbeta.com/upimg/121231/raymon725_1451506190985.jpg" width="250" height="400" title="Place Kitten #2" ></p>
+
+<p>书中的中文版序的标题就是“跳出框框来思考”，这种观点倒不是第一次见到了，甚至可以说，这些观点充斥于互联网上的各种流传、经验贴中。但这并不意味着我们不需要再花时间在这种书上。道理都懂，就是做不好已经成为这个信息通畅的时代的特征之一。正所谓“纸上得来终觉浅，绝知此事要躬行”。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/04/20/are-you-smart-enough-to-work-at-google/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/19/use-ssh/">SSH原理和使用</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-19T21:44:00+08:00" pubdate data-updated="true">Apr 19<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/04/19/use-ssh/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>ssh 是什么</h2>
+
+<p>在 linux 上工作，ssh 是必须要了解的技术方法。它可以建立起多台主机之间的安全的加密传输，以进行远程的访问、操控、传输数据。</p>
+
+<p>SSH 為 Secure Shell 的縮寫。為建立在应用层和传输层基础上的安全协议。</p>
+
+<p>传统的网络服务程序，如 FTP、POP 和 Telnet 其本质上都是不安全的；因为它们在网络上用明文传送数据、用户帐号和用户口令，很容易受到中间人（man-in-the-middle）攻击方式的攻击。就是存在另一个人或者一台机器冒充真正的服务器接收用户传给服务器的数据，然后再冒充用户把数据传给真正的服务器。
+而 SSH 是目前较可靠，專为远程登录会话和其他网络服务提供安全性的协议。利用 SSH 协议可以有效防止远程管理过程中的信息泄露问题。透過 SSH 可以對所有传输的数据进行加密，也能够防止 DNS 欺骗和 IP 欺骗。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/04/19/use-ssh/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/19/use-ssh/">SSH原理和使用</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-19T21:44:00+08:00" pubdate data-updated="true">Apr 19<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/04/19/use-ssh/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>ssh 是什么</h2>
+
+<p>在 linux 上工作，ssh 是必须要了解的技术方法。它可以建立起多台主机之间的安全的加密传输，以进行远程的访问、操控、传输数据。</p>
+
+<p>SSH 為 Secure Shell 的縮寫。為建立在应用层和传输层基础上的安全协议。</p>
+
+<p>传统的网络服务程序，如 FTP、POP 和 Telnet 其本质上都是不安全的；因为它们在网络上用明文传送数据、用户帐号和用户口令，很容易受到中间人（man-in-the-middle）攻击方式的攻击。就是存在另一个人或者一台机器冒充真正的服务器接收用户传给服务器的数据，然后再冒充用户把数据传给真正的服务器。
+而 SSH 是目前较可靠，專为远程登录会话和其他网络服务提供安全性的协议。利用 SSH 协议可以有效防止远程管理过程中的信息泄露问题。透過 SSH 可以對所有传输的数据进行加密，也能够防止 DNS 欺骗和 IP 欺骗。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/04/19/use-ssh/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/19/use-ssh/">SSH原理和使用</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-19T21:44:00+08:00" pubdate data-updated="true">Apr 19<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/04/19/use-ssh/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>ssh 是什么</h2>
+
+<p>在 linux 上工作，ssh 是必须要了解的技术方法。它可以建立起多台主机之间的安全的加密传输，以进行远程的访问、操控、传输数据。</p>
+
+<p>SSH 為 Secure Shell 的縮寫。為建立在应用层和传输层基础上的安全协议。</p>
+
+<p>传统的网络服务程序，如 FTP、POP 和 Telnet 其本质上都是不安全的；因为它们在网络上用明文传送数据、用户帐号和用户口令，很容易受到中间人（man-in-the-middle）攻击方式的攻击。就是存在另一个人或者一台机器冒充真正的服务器接收用户传给服务器的数据，然后再冒充用户把数据传给真正的服务器。
+而 SSH 是目前较可靠，專为远程登录会话和其他网络服务提供安全性的协议。利用 SSH 协议可以有效防止远程管理过程中的信息泄露问题。透過 SSH 可以對所有传输的数据进行加密，也能够防止 DNS 欺骗和 IP 欺骗。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/04/19/use-ssh/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/18/some-opinions-about-software-engineering/">关于软件工程的一些看法</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-18T18:03:00+08:00" pubdate data-updated="true">Apr 18<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/04/18/some-opinions-about-software-engineering/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>标题党了，其实实际的内容是[自己的项目经验总结和反思]。</p>
+
+<p>今天在高级软件工程课上，做了一次关于项目经验的展示。展示的主题围绕自己参与的移动互联网团队开发经验展开。借此机会，我整理了一下思路，于是有了以下的 slides。没时间码字，就先把 slides 直接贴上来啦:)</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/04/18/some-opinions-about-software-engineering/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/23/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/blog/page/21/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>标签云</h1>
+ <br /> 
+  <ul class="tag-cloud">
+    <a style="font-size: 143%" href="/tags/jvm/">JVM</a> &nbsp 
+<a style="font-size: 147%" href="/tags/java/">Java</a> &nbsp 
+<a style="font-size: 145%" href="/tags/pat/">PAT</a> &nbsp 
+<a style="font-size: 109%" href="/tags/octopress/">octopress</a> &nbsp 
+<a style="font-size: 115%" href="/tags/fen-bu-shi/">分布式</a> &nbsp 
+<a style="font-size: 137%" href="/tags/zi-jie-ma/">字节码</a> &nbsp 
+<a style="font-size: 137%" href="/tags/si-kao/">思考</a> &nbsp 
+<a style="font-size: 180%" href="/tags/ji-zhu/">技术</a> &nbsp 
+<a style="font-size: 128%" href="/tags/fang-fa-lun/">方法论</a> &nbsp 
+<a style="font-size: 109%" href="/tags/fu-wu-qi/">服务器</a> &nbsp 
+<a style="font-size: 139%" href="/tags/sheng-huo/">生活</a> &nbsp 
+<a style="font-size: 153%" href="/tags/suan-fa/">算法</a> &nbsp 
+<a style="font-size: 109%" href="/tags/wang-luo/">网络</a> &nbsp 
+<a style="font-size: 139%" href="/tags/du-shu/">读书</a> &nbsp 
+<a style="font-size: 109%" href="/tags/you-jian-fu-wu/">邮件服务</a>
+
+  </ul>
+</section>
+<section>
+  <h1>关于</h1>
+   <p>biaobiaoqi是我的网络id。<br><br>
+   我的博客日志：<a href="http://biaobiaoqi.github.io/blog/2013/09/01/blog-log/">请戳</a><br><br>
+	</p>
+</section>
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - Biaobiaoqi -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  - <span class="credit">Theme by <a href="http://www.gehaxelt.in">Gehaxelt</a></span>
+  <span class="credit">and <a href="http://www.it-solutions-neef.de">IT Solutions Neef</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'biaobiaoqisblog';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -9,7 +9,7 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="背景 邮件服务系列博文中，前两篇介绍了邮件系统的基本功能和安全体系，本文记录了搭建邮箱服务器的实践。 Sendmail 是一种多用途、支援多种协定的跨网络电子邮件传送代理软件，于 1983 年随着 BSD 4.1c 首次发行，2001 年时的调查，互联网上的邮件服务器有 42%使用 &hellip;">
+  <meta name="description" content="原谅我的标题党啦 LOL，借用 《xx 实战》（xx in practice）这个经典的标题，只为了记录自己第一次助教的体会。 如果把第一次助教的经历看做是一个项目，那这个项目也是在我不断的调优中走上正轨的。 需求 导师人很好，给我留的活儿不多，但实践起来还是比预想要复杂一些。助教期间， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -94,7 +94,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   <li><a href="/">首页</a></li>
   <li><a href="/blog/archives/">全部文章</a></li>
   <li><a href="/tag-cloud/">分类阅读</a></li>
-  <li><a href="/resources/">其他推荐</a></li>
 </ul>
 
 </nav>
@@ -108,7 +107,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/01/22/email-3/">邮件服务（三）：实践服务器搭建</a></h1>
+      <h1 class="entry-title"><a href="/blog/2014/05/06/ta-in-practice/">课程助教实战</a></h1>
     
     
       <p class="meta">
@@ -124,83 +123,41 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
 
 
-<time datetime="2014-01-22T01:14:00+08:00" pubdate data-updated="true">Jan 22<span>nd</span>, 2014</time>
+<time datetime="2014-05-06T20:06:00+08:00" pubdate data-updated="true">May 6<span>th</span>, 2014</time>
         
-         | <a href="/blog/2014/01/22/email-3/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>背景</h2>
-
-<p><a href="http://biaobiaoqi.me/tags/you-jian-fu-wu/">邮件服务系列博文</a>中，前两篇介绍了邮件系统的基本功能和安全体系，本文记录了搭建邮箱服务器的实践。</p>
-
-<p><a href="http://en.wikipedia.org/wiki/Sendmail">Sendmail</a> 是一种多用途、支援多种协定的跨网络电子邮件传送代理软件，于 1983 年随着 BSD 4.1c 首次发行，2001 年时的调查，互联网上的邮件服务器有 42%使用 Sendmail，但之后由于多次被发现重大的安全性漏洞，且其设定档过于复杂造成较高的学习门槛等因素，导致市占率下滑。</p>
-
-<p><a href="http://www.postfix.org/">Postfix</a> 被 <a href="http://www.porcupine.org/wietse/">Wietse Zweitze Venema</a> 创造出来以取代 Sendmail。本次实践即使用 Postfix 为域名 biaobiaoqi.me 搭建邮箱服务器，服务器是 Linode 上的 VPS，Ubuntu 12.04LTS，DNS 服务器使用 <a href="http://dnspod.com/">DNSPod</a>。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/01/22/email-3/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/01/21/email-2/">邮件服务（二）：安全、认证和垃圾邮件</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-01-21T01:38:00+08:00" pubdate data-updated="true">Jan 21<span>st</span>, 2014</time>
-        
-         | <a href="/blog/2014/01/21/email-2/#disqus_thread">Comments</a>
+         | <a href="/blog/2014/05/06/ta-in-practice/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><h2>背景</h2>
+  <div class="entry-content"><p>原谅我的标题党啦 LOL，借用 《xx 实战》（xx in practice）这个经典的标题，只为了记录自己第一次助教的体会。</p>
 
-<p><a href="http://biaobiaoqi.me/tags/you-jian-fu-wu/">邮件服务系列博文</a>中<a href="http://biaobiaoqi.me/blog/2014/01/20/email-1/">第一篇博客</a>介绍了邮件服务的基本知识，了解了邮件是如何从发件人的邮件客户端经过不同的传输协议传送到收件人的邮件客户端的。这只是邮件的基本功能实现，但如果发生如下情况，整个邮件系统的生态环境将被扰乱：</p>
+<p>如果把第一次助教的经历看做是一个项目，那这个项目也是在我不断的调优中走上正轨的。</p>
+
+<h2>需求</h2>
+
+<p>导师人很好，给我留的活儿不多，但实践起来还是比预想要复杂一些。助教期间，我主要负责的任务有：</p>
 
 <ul>
-<li>被不法分子利用邮箱服务器发送垃圾邮件</li>
-<li>被其他人伪造域名邮箱发送邮件</li>
-<li>被中间人窃取账号密码、甚至重要邮件信息（中间人攻击）</li>
-<li>即使自己拥有邮箱服务器的权限，无限制的滥用这个权利给其他邮箱发送邮件也是不好的</li>
+<li><p>平时作业的批改和成绩录入</p>
+
+<p>  每周老师会将所有学生（大约 80 人）的作业本交给我，由我评分、录入成绩后返回给老师。</p></li>
+<li><p>课程实验和大程的指导、评分和成绩录入</p>
+
+<p>  一共有五个课堂实验，要求每周完成一个，以实验报告的形式提交；期末要求完成一个大程序，评分有现场验收和大程报告两部分。</p></li>
+<li><p>协助老师批改期末试卷和成绩录入</p></li>
 </ul>
 
 
-<p>为了防止以上的种种情况，电子邮箱体系引入了更多的协议和机制。本文对此做浅显的总结，如有出错，还请指出和补充。</p>
+<p>最后的批改试卷是在老师们的指导下完成，有良好的规范和流程。而前面两步中关于作业评分、登分的部分则有较大的自由实现空间。下面介绍的就是个人对这部分内容经验总结。</p>
 
 </div>
   
   
     <footer>
-      <a rel="full-article" href="/blog/2014/01/21/email-2/">Read on &rarr;</a>
+      <a rel="full-article" href="/blog/2014/05/06/ta-in-practice/">Read on &rarr;</a>
     </footer>
   
 
@@ -212,7 +169,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/01/20/email-1/">邮件服务（一）：基本框架</a></h1>
+      <h1 class="entry-title"><a href="/blog/2014/05/06/ta-in-practice/">课程助教实战</a></h1>
     
     
       <p class="meta">
@@ -228,9 +185,353 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
 
 
-<time datetime="2014-01-20T00:11:00+08:00" pubdate data-updated="true">Jan 20<span>th</span>, 2014</time>
+<time datetime="2014-05-06T20:06:00+08:00" pubdate data-updated="true">May 6<span>th</span>, 2014</time>
         
-         | <a href="/blog/2014/01/20/email-1/#disqus_thread">Comments</a>
+         | <a href="/blog/2014/05/06/ta-in-practice/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>原谅我的标题党啦 LOL，借用 《xx 实战》（xx in practice）这个经典的标题，只为了记录自己第一次助教的体会。</p>
+
+<p>如果把第一次助教的经历看做是一个项目，那这个项目也是在我不断的调优中走上正轨的。</p>
+
+<h2>需求</h2>
+
+<p>导师人很好，给我留的活儿不多，但实践起来还是比预想要复杂一些。助教期间，我主要负责的任务有：</p>
+
+<ul>
+<li><p>平时作业的批改和成绩录入</p>
+
+<p>  每周老师会将所有学生（大约 80 人）的作业本交给我，由我评分、录入成绩后返回给老师。</p></li>
+<li><p>课程实验和大程的指导、评分和成绩录入</p>
+
+<p>  一共有五个课堂实验，要求每周完成一个，以实验报告的形式提交；期末要求完成一个大程序，评分有现场验收和大程报告两部分。</p></li>
+<li><p>协助老师批改期末试卷和成绩录入</p></li>
+</ul>
+
+
+<p>最后的批改试卷是在老师们的指导下完成，有良好的规范和流程。而前面两步中关于作业评分、登分的部分则有较大的自由实现空间。下面介绍的就是个人对这部分内容经验总结。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/05/06/ta-in-practice/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/03/06/troubleshoot-encoding-bugs-in-octopress/">记排查octopress生成时的编码错误</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-06T21:48:00+08:00" pubdate data-updated="true">Mar 6<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/03/06/troubleshoot-encoding-bugs-in-octopress/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>前些日子经若亮童鞋提醒，我在<a href="http://biaobiaoqi.github.io/resources/">其他推荐</a>的页面中增加了对 Dropbox 和 Linode 等工具的推荐，一来分享这些好用的产品，二来期望刚接触这些工具的好心的朋友可以不吝啬时间用我的推荐码注册，让我获得一些分享的回报。</p>
+
+<p>改过页面内容后，照常的使用<code>rake preview</code>命令生成预览页面，打开浏览器，得到的却是一行孤零零的</p>
+
+<blockquote><p>Sorry, I can not find /</p></blockquote>
+
+<p><code>rake generate</code>后的结果更悲惨：</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/03/06/troubleshoot-encoding-bugs-in-octopress/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/03/06/troubleshoot-encoding-bugs-in-octopress/">记排查octopress生成时的编码错误</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-06T21:48:00+08:00" pubdate data-updated="true">Mar 6<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/03/06/troubleshoot-encoding-bugs-in-octopress/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>前些日子经若亮童鞋提醒，我在<a href="http://biaobiaoqi.github.io/resources/">其他推荐</a>的页面中增加了对 Dropbox 和 Linode 等工具的推荐，一来分享这些好用的产品，二来期望刚接触这些工具的好心的朋友可以不吝啬时间用我的推荐码注册，让我获得一些分享的回报。</p>
+
+<p>改过页面内容后，照常的使用<code>rake preview</code>命令生成预览页面，打开浏览器，得到的却是一行孤零零的</p>
+
+<blockquote><p>Sorry, I can not find /</p></blockquote>
+
+<p><code>rake generate</code>后的结果更悲惨：</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/03/06/troubleshoot-encoding-bugs-in-octopress/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/03/06/troubleshoot-encoding-bugs-in-octopress/">记排查octopress生成时的编码错误</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-06T21:48:00+08:00" pubdate data-updated="true">Mar 6<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/03/06/troubleshoot-encoding-bugs-in-octopress/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>前些日子经若亮童鞋提醒，我在<a href="http://biaobiaoqi.github.io/resources/">其他推荐</a>的页面中增加了对 Dropbox 和 Linode 等工具的推荐，一来分享这些好用的产品，二来期望刚接触这些工具的好心的朋友可以不吝啬时间用我的推荐码注册，让我获得一些分享的回报。</p>
+
+<p>改过页面内容后，照常的使用<code>rake preview</code>命令生成预览页面，打开浏览器，得到的却是一行孤零零的</p>
+
+<blockquote><p>Sorry, I can not find /</p></blockquote>
+
+<p><code>rake generate</code>后的结果更悲惨：</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/03/06/troubleshoot-encoding-bugs-in-octopress/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/02/24/sort-intro/">基本排序总结</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-24T23:58:00+08:00" pubdate data-updated="true">Feb 24<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/02/24/sort-intro/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>最近准备面试，正好把刚接触数据结构时学习的排序整理了一下。算法的实现在 wiki 上都有详细的介绍，这里主要做归纳和总结。</p>
+
+<p>注意对排序算法的稳定性的理解：保证 2 个相等的数在序列的前后位置顺序和排序后它们两个的前后位置顺序相同。换句话说，相等的数值在排序时不断交换位置是不稳定的。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/02/24/sort-intro/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/02/24/sort-intro/">基本排序总结</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-24T23:58:00+08:00" pubdate data-updated="true">Feb 24<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/02/24/sort-intro/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>最近准备面试，正好把刚接触数据结构时学习的排序整理了一下。算法的实现在 wiki 上都有详细的介绍，这里主要做归纳和总结。</p>
+
+<p>注意对排序算法的稳定性的理解：保证 2 个相等的数在序列的前后位置顺序和排序后它们两个的前后位置顺序相同。换句话说，相等的数值在排序时不断交换位置是不稳定的。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/02/24/sort-intro/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/02/24/sort-intro/">基本排序总结</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-24T23:58:00+08:00" pubdate data-updated="true">Feb 24<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/02/24/sort-intro/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>最近准备面试，正好把刚接触数据结构时学习的排序整理了一下。算法的实现在 wiki 上都有详细的介绍，这里主要做归纳和总结。</p>
+
+<p>注意对排序算法的稳定性的理解：保证 2 个相等的数在序列的前后位置顺序和排序后它们两个的前后位置顺序相同。换句话说，相等的数值在排序时不断交换位置是不稳定的。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/02/24/sort-intro/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/01/26/migrate-linode-vps-from-tokyo-to-fremont/">Linode跨节点迁移：从Tokyo到Fremont</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-26T01:45:00+08:00" pubdate data-updated="true">Jan 26<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/01/26/migrate-linode-vps-from-tokyo-to-fremont/#disqus_thread">Comments</a>
         
       </p>
     
@@ -239,21 +540,19 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
   <div class="entry-content"><h2>背景</h2>
 
-<p>电子邮件出现在 1960s 晚期，比打开浏览器就要使用的 HTTP 协议早了 20 年左右,是二十世纪人类最伟大的发明之一。这个古老、经典的框架在网络中运行了五十多年，现今仍然是网络中主要的流量类型之一。</p>
+<p><a href="http://biaobiaoqi.github.io/blog/2014/01/22/email-3/">上一篇博客</a>交代了如何在 Linode 上搭建邮件服务器，并配置好各种协议、记录来投入实际使用。</p>
 
-<p>不得不提的是，<a href="http://zh.wikipedia.org/wiki/%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6">wiki</a> 上关于中国的第一封电子邮件的记载：1987 年 9 月 14 日 [1]中国第一封电子邮件是由“德国互联网之父”维纳·措恩与王运丰在北京的计算机应用技术研究所发往德国卡尔斯鲁厄大学的，其内容为英文，大意如下：</p>
+<p>由于实践过程中，曾经尝试使用明文协议与服务器交流数据，可能泄露了账号、密码信息，造成之后被攻击发送垃圾邮件(详细情况类似于如下链接：<a href="http://linuxroad.blog.51cto.com/765922/1039676">链接 1</a>,<a href="http://linuxroad.blog.51cto.com/765922/1039675">链接 2</a>)，IP 被上了黑名单，在 <a href="http://www.mail-tester.com">mail-tester.com</a> 上的测试评分为 0 分，同时还收到了 Linode 的警告。</p>
 
-<blockquote><p>Across the <strong>Great Wall</strong> we can reach every corner in the world.</p></blockquote>
+<p>为了能继续使用邮箱服务，我只好想着法子给 Linode 换一个 IP。但原则上 Linode 是不支持换 IP 的。幸运的是，它支持 VPS 的迁移，而且方便快捷。从 Tokyo 节点迁移到 Fremont 节点后 IP 一般会发生变动（对于网络延迟，权衡了下<a href="http://www.v2ex.com/t/62721">大家</a>的说法,Fremont 还不错:<a href="https://www.linode.com/speedtest/">官方测速</a>），这样就可以间接的更换 IP 了。</p>
 
-<p>真的是很有远见呢-,-</p>
-
-<p>前几天梳理了电子邮箱相关的协议和框架组件，准备整理成文。一共<a href="http://biaobiaoqi.me/tags/you-jian-fu-wu/">三篇</a>，本文是基本知识总结，第二篇介绍安全认证和防垃圾邮件的规范，第三篇记录了邮件服务器的搭建实践。</p>
+<p>迁移过程很简单，这里做一下记录。</p>
 
 </div>
   
   
     <footer>
-      <a rel="full-article" href="/blog/2014/01/20/email-1/">Read on &rarr;</a>
+      <a rel="full-article" href="/blog/2014/01/26/migrate-linode-vps-from-tokyo-to-fremont/">Read on &rarr;</a>
     </footer>
   
 
@@ -265,7 +564,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/01/17/java-performance-tunning-in-practice/">JVM参数调优：Eclipse启动实践</a></h1>
+      <h1 class="entry-title"><a href="/blog/2014/01/26/migrate-linode-vps-from-tokyo-to-fremont/">Linode跨节点迁移：从Tokyo到Fremont</a></h1>
     
     
       <p class="meta">
@@ -281,195 +580,9 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
 
 
-<time datetime="2014-01-17T11:16:00+08:00" pubdate data-updated="true">Jan 17<span>th</span>, 2014</time>
+<time datetime="2014-01-26T01:45:00+08:00" pubdate data-updated="true">Jan 26<span>th</span>, 2014</time>
         
-         | <a href="/blog/2014/01/17/java-performance-tunning-in-practice/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>本文主要参考自<a href="http://book.douban.com/subject/6522893/">《深入理解 Java 虚拟机》</a>。这本书是国人写的难得的不是照搬代码注释的且不是废话连篇的技术书，内容涵盖了 Java 从源码到字节码到执行的整个过程，包括了 JVM（Java Virtual Machine）的架构，垃圾收集的介绍等。这里摘录出关于配置 JVM 基本参数来调优 Eclipse 启动的过程，比较初级，供初学者参考。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/01/17/java-performance-tunning-in-practice/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/01/04/happy-new-year/">我的2013</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-01-04T14:47:00+08:00" pubdate data-updated="true">Jan 4<span>th</span>, 2014</time>
-        
-         | <a href="/blog/2014/01/04/happy-new-year/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>早上十一点，在周六的惬意中起床。窗外的杭州雾霾再次光临，想想几年前还是一种只会在清晨遇到的亲切的朦胧美，到如今已经沦为对环境和未来的担忧，原来已经 2014。</p>
-
-<p>在编程语言界，有个著名的<a href="http://en.wikipedia.org/wiki/Duck_test">鸭子测试</a>，用来明确部分动态语言的多态特性，可以用下面这句话来表达：</p>
-
-<blockquote><p>If it looks like a duck, swims like a duck, and quacks like a duck, then it probably is a duck.</p></blockquote>
-
-<p>实际上，这就是我现在认识的世界。以此开篇，用几个标签介绍 2013 的我。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/01/04/happy-new-year/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/12/15/zombie-tsunami/">从《僵尸海啸》感受创新</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-12-15T21:10:00+08:00" pubdate data-updated="true">Dec 15<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/12/15/zombie-tsunami/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>本文博主自费五毛推荐一款冒险类手游——《僵尸海啸》(Zombie Tsunami)。</p>
-
-<p>游戏玩家控制自己的僵尸军团不断前进。前进路上有障碍物和人。人被僵尸吃掉后会转变为新的僵尸，壮大玩家的僵尸军团，而障碍物则会毁灭掉僵尸。最终游戏以僵尸军团的被全歼结束。行进的路上，还有各种道具和金币。通过收集金币，可以在商店购买技能特效，丰富了游戏的可玩性。</p>
-
-<p><img src="http://biaobiaoqi.u.qiniudn.com/zombie2013-12-15%2023.44.48.png?imageView/2/w/800/h/800" alt="img" /></p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/12/15/zombie-tsunami/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/11/24/install-software-in-os-x/">我的OS X软件安装索引</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-11-24T03:28:00+08:00" pubdate data-updated="true">Nov 24<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/11/24/install-software-in-os-x/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>更换硬盘重装系统时，由于备份数据失败，不得不重新配置系统环境（参见<a href="http://biaobiaoqi.me/blog/2013/11/24/failed-in-replacing-hdd/">《记对 MBP 一次失败的备份和重装》</a>）。在此记录下自己所要在 OS X 上安装的软件的索引。整体分为三类：系统工具、个人和开发。</p>
-
-<p>部分第三方下载的软件在安装时提示“无法打开，来自不受信任的开发者”。解决办法是：</p>
-
-<p>系统偏好设置 －> 安全与隐私 －> 点左下角的小锁头图标然后输入自己的密码 －> 在“通用”标签下点选“任何来源”。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/11/24/install-software-in-os-x/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/11/24/failed-in-replacing-hdd/">记对MBP一次失败的备份和重装</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-11-24T02:08:00+08:00" pubdate data-updated="true">Nov 24<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/11/24/failed-in-replacing-hdd/#disqus_thread">Comments</a>
+         | <a href="/blog/2014/01/26/migrate-linode-vps-from-tokyo-to-fremont/#disqus_thread">Comments</a>
         
       </p>
     
@@ -478,144 +591,19 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
   <div class="entry-content"><h2>背景</h2>
 
-<p>大概一年前，给我 11 年底款的 13 寸 MBP 的光驱位替换上了一块 M4 128G 的 SSD，用做系统盘，而机器原本的 HDD 则退化为数据存储盘。</p>
+<p><a href="http://biaobiaoqi.github.io/blog/2014/01/22/email-3/">上一篇博客</a>交代了如何在 Linode 上搭建邮件服务器，并配置好各种协议、记录来投入实际使用。</p>
 
-<p>前两天发现 MBP 间歇性的变得很慢，查看 CPU 和内存都没有异常，使用 <a href="http://www.volitans-software.com/smart_utility.php">SMART Utility</a> 检查发现有坏道出现，如下图：</p>
+<p>由于实践过程中，曾经尝试使用明文协议与服务器交流数据，可能泄露了账号、密码信息，造成之后被攻击发送垃圾邮件(详细情况类似于如下链接：<a href="http://linuxroad.blog.51cto.com/765922/1039676">链接 1</a>,<a href="http://linuxroad.blog.51cto.com/765922/1039675">链接 2</a>)，IP 被上了黑名单，在 <a href="http://www.mail-tester.com">mail-tester.com</a> 上的测试评分为 0 分，同时还收到了 Linode 的警告。</p>
 
-<p><img src="http://biaobiaoqi.u.qiniudn.com/ssdhdd%20bad%20sector.png?imageView/2/w/800/h/800" alt="bad sector" /></p>
+<p>为了能继续使用邮箱服务，我只好想着法子给 Linode 换一个 IP。但原则上 Linode 是不支持换 IP 的。幸运的是，它支持 VPS 的迁移，而且方便快捷。从 Tokyo 节点迁移到 Fremont 节点后 IP 一般会发生变动（对于网络延迟，权衡了下<a href="http://www.v2ex.com/t/62721">大家</a>的说法,Fremont 还不错:<a href="https://www.linode.com/speedtest/">官方测速</a>），这样就可以间接的更换 IP 了。</p>
 
-<p>硬盘出现坏道后，会给坏道的数据重新分配备用 sector，而这种 sector 是有限的，再者坏道可能会扩散蔓延，这基本意味着 HDD 生命的结束了。只能换硬盘了。</p>
-
-<p>这才意识到自己的使用习惯的不当：平时没有关机的习惯，一般合上盖子就将笔记本放到书包里走人了，而运行状态的 HDD 在颠簸的环境里是很容易出现机械损伤的（相比之下 SSD 则不会）。</p>
-
-<p>考虑到自己没有太大存数据的需求（以前 700G+的 HDD 只存了 200G 不到，其中很多数据还是存了之后几乎没有使用的），决定再入一块 M4 128G 的 SSD，两块 SSD 组 <a href="http://zh.wikipedia.org/zh-cn/RAID#RAID_0">RAID0</a>。</p>
+<p>迁移过程很简单，这里做一下记录。</p>
 
 </div>
   
   
     <footer>
-      <a rel="full-article" href="/blog/2013/11/24/failed-in-replacing-hdd/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/11/13/blog-migration/">半年博客小结</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-11-13T23:38:00+08:00" pubdate data-updated="true">Nov 13<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/11/13/blog-migration/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>上周跟实验室的基友<a href="http://redow.me">@ReDow</a> 和<a href="http://zaumreit.me">@zaumreit</a> 合租了一台最低配置的 <a href="https://www.linode.com/">Linode</a> 的 VPS。把自己的博客搬到了 VPS 上，算是为之前半年的 github pages 博客写作画上个句号。正好半年时间，写点文字记录下心情。</p>
-
-<p>半年下来，博客里粗粗糙糙的攒下了 70 来篇博文。内容泛善可陈，但也赚得了 2 万的浏览量。实际上刚开始的时候，自己定下的目标是在年底达到 1 万 PV，比预想的要好不少=）。当然，最让人兴奋的不是这些冷冰冰的数字，而是博客的内容真真切切的能对一些素未谋面的访客有所帮助的时候。网站只是载体，数字只是表象，我更愿意看到的是本质上的信息的自由流动。这些，我正在用博客来实践。</p>
-
-<p>其实更早的时候曾有在 <a href="http://blog.csdn.net/biaobiaoqi">csdn</a> 上写博客，后来由于密码泄露问题和感受到社区整体氛围的不适放弃了。回过头来看以前的文字，跟昨天的自己一样幼稚和无聊。</p>
-
-<p>觉得幼稚，是因为处在技能和知识积累的上升期。想想也是，贫瘠如我的情况，这一点是很容易实现的。我也乐意看到过去的幼稚，这代表着成长，离目标又近了一步。</p>
-
-<p>觉得无聊，大概是因为在如今的探索和彷徨中，渐渐找到了自心所喜欢的事物，以及自己的力所能的领域。不断的在未知的空间迈出第一步，用实际的感受指导自己的方向。我想只有这种实践，才能在不迷失自我的前提下，扩展自己的可能性。</p>
-
-<p>半年里，我努力去接触和了解了黑客文化，被它开放、自由、探索的精神所吸引。虽然难以成为一个纯粹的黑客，但我非常愿意用自己的方式来践行其中的一些理念。为了提高效率，我看了一些方法论、认知方面的书籍，发现似乎自己对它的好奇心并不止于对它的使用。科技哲学也是一个有意思的方向，KK 思想的奥妙能激发自己的思考。世界从来都不是二元的，我希望找到一个属于自己的着力点。</p>
-
-<p>博客里的每个字，都是我的脚印。想在世界留下痕迹，至少得先让其他人能看到自己的脚印，即使这些印记暂时很浅。而脚印的指向，就是未来的路。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/11/13/blog-migration/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/11/07/pat-1069-pat-1072/">PAT 1069 - 1072 题解</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-11-07T00:30:00+08:00" pubdate data-updated="true">Nov 7<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/11/07/pat-1069-pat-1072/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>来源是 2013 年 11 月 2 日的 PAT 测试。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1069">1069. The Black Hole of Numbers (20)</a></h2>
-
-<h5>题意</h5>
-
-<p>给出一个四位数比如 6767，将它按照每位从小到大(6677)和从大到小(7766)充足，得到两个新四位数，这两者相减将得到一个新的四位数。再按照一样的处理方式处理得出的四位数</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>7766 - 6677 = 1089
-</span><span class='line'>9810 - 0189 = 9621
-</span><span class='line'>9621 - 1269 = 8352
-</span><span class='line'>8532 - 2358 = 6174
-</span><span class='line'>7641 - 1467 = 6174
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>最终将得到一个『黑洞数』：6174。</p>
-
-<p>题目给出一个四位数，要求输出它演变出『黑洞数』的过程。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/11/07/pat-1069-pat-1072/">Read on &rarr;</a>
+      <a rel="full-article" href="/blog/2014/01/26/migrate-linode-vps-from-tokyo-to-fremont/">Read on &rarr;</a>
     </footer>
   
 
@@ -638,29 +626,28 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   <h1>标签云</h1>
  <br /> 
   <ul class="tag-cloud">
-    <a style="font-size: 112%" href="/tags/hadoop/">Hadoop</a> &nbsp 
-<a style="font-size: 139%" href="/tags/jvm/">JVM</a> &nbsp 
-<a style="font-size: 144%" href="/tags/java/">Java</a> &nbsp 
-<a style="font-size: 141%" href="/tags/pat/">PAT</a> &nbsp 
-<a style="font-size: 112%" href="/tags/octopress/">octopress</a> &nbsp 
-<a style="font-size: 135%" href="/tags/fen-bu-shi/">分布式</a> &nbsp 
-<a style="font-size: 133%" href="/tags/zi-jie-ma/">字节码</a> &nbsp 
-<a style="font-size: 135%" href="/tags/si-kao/">思考</a> &nbsp 
+    <a style="font-size: 143%" href="/tags/jvm/">JVM</a> &nbsp 
+<a style="font-size: 147%" href="/tags/java/">Java</a> &nbsp 
+<a style="font-size: 145%" href="/tags/pat/">PAT</a> &nbsp 
+<a style="font-size: 109%" href="/tags/octopress/">octopress</a> &nbsp 
+<a style="font-size: 115%" href="/tags/fen-bu-shi/">分布式</a> &nbsp 
+<a style="font-size: 137%" href="/tags/zi-jie-ma/">字节码</a> &nbsp 
+<a style="font-size: 137%" href="/tags/si-kao/">思考</a> &nbsp 
 <a style="font-size: 180%" href="/tags/ji-zhu/">技术</a> &nbsp 
-<a style="font-size: 124%" href="/tags/fang-fa-lun/">方法论</a> &nbsp 
-<a style="font-size: 106%" href="/tags/fu-wu-qi/">服务器</a> &nbsp 
-<a style="font-size: 137%" href="/tags/sheng-huo/">生活</a> &nbsp 
-<a style="font-size: 148%" href="/tags/suan-fa/">算法</a> &nbsp 
-<a style="font-size: 117%" href="/tags/wang-luo/">网络</a> &nbsp 
-<a style="font-size: 135%" href="/tags/du-shu/">读书</a>
+<a style="font-size: 128%" href="/tags/fang-fa-lun/">方法论</a> &nbsp 
+<a style="font-size: 109%" href="/tags/fu-wu-qi/">服务器</a> &nbsp 
+<a style="font-size: 139%" href="/tags/sheng-huo/">生活</a> &nbsp 
+<a style="font-size: 153%" href="/tags/suan-fa/">算法</a> &nbsp 
+<a style="font-size: 109%" href="/tags/wang-luo/">网络</a> &nbsp 
+<a style="font-size: 139%" href="/tags/du-shu/">读书</a> &nbsp 
+<a style="font-size: 109%" href="/tags/you-jian-fu-wu/">邮件服务</a>
 
   </ul>
 </section>
 <section>
   <h1>关于</h1>
    <p>biaobiaoqi是我的网络id。<br><br>
-   我的博客日志：<a href="http://biaobiaoqi.me/blog/2013/09/01/blog-log/">请戳</a><br><br>
-   更多信息请戳：<a href="http://about.me/biaobiaoqi">about.me</a><br>
+   我的博客日志：<a href="http://biaobiaoqi.github.io/blog/2013/09/01/blog-log/">请戳</a><br><br>
 	</p>
 </section>
 

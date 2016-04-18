@@ -9,7 +9,7 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="浏览全部代码：请戳 本文谨代表个人思路，欢迎讨论;) 1051. Pop Sequence (25) 题意 给定 stack 的容量，给定数据的入栈顺序：从 1 开始的正整数序列，在允许随机的出栈操作的情况下，要求判断某出栈序列是否可能。 比如，告知 stack 容量为 5，入栈序列的最大值为 7 &hellip;">
+  <meta name="description" content="ZJU 的校网论坛 CC98 比较活跃。论坛只对校内网开放，而且账号跟学生绑定，每个学生注册的账号数量有限。『十大』是 CC98 的经典页面：基于关注的人数（回帖的用户数而不是回帖的数量）用算法求出 24 小时内最火爆的十个发帖。很多同学都会浏览十大，关注论坛动态。 故事就是从十大引出的。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -94,7 +94,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   <li><a href="/">首页</a></li>
   <li><a href="/blog/archives/">全部文章</a></li>
   <li><a href="/tag-cloud/">分类阅读</a></li>
-  <li><a href="/resources/">其他推荐</a></li>
 </ul>
 
 </nav>
@@ -108,7 +107,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/08/01/pat-1051-1060-solutions/">PAT 1051-1060 题解</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/11/05/cc98-post-machine/">用Ruby实现的论坛灌水工具：CC98 Post Machine</a></h1>
     
     
       <p class="meta">
@@ -124,84 +123,32 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
 
 
-<time datetime="2013-08-01T01:43:00+08:00" pubdate data-updated="true">Aug 1<span>st</span>, 2013</time>
+<time datetime="2013-11-05T15:20:00+08:00" pubdate data-updated="true">Nov 5<span>th</span>, 2013</time>
         
-         | <a href="/blog/2013/08/01/pat-1051-1060-solutions/#disqus_thread">Comments</a>
+         | <a href="/blog/2013/11/05/cc98-post-machine/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>浏览全部代码：<a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel">请戳</a></p>
+  <div class="entry-content"><p>ZJU 的校网论坛 CC98 比较活跃。论坛只对校内网开放，而且账号跟学生绑定，每个学生注册的账号数量有限。『十大』是 CC98 的经典页面：基于关注的人数（回帖的用户数而不是回帖的数量）用算法求出 24 小时内最火爆的十个发帖。很多同学都会浏览十大，关注论坛动态。</p>
 
-<p>本文谨代表个人思路，欢迎讨论;)</p>
+<p>故事就是从十大引出的。有的社团在宣传活动时，为了扩大宣传面，会发动成员的小马甲顶贴上十大。这种违背社区自然发展轨迹的手段，强奸了关注十大贴的用户的意愿，阻碍了信息的自由流动。</p>
 
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1051">1051. Pop Sequence (25)</a></h2>
+<p>于是萌生了完成一个批量发帖的机器，以其人之道还治其人之身的想法。在下次十大被宣传贴攻占时，能有反击的工具。</p>
 
-<h4>题意</h4>
+<p>工具的用途很简单：使用不同的用户身份模拟真人论坛回帖，增加帖子关注度，以抵抗宣传贴。流程如下：提前收集各路亲朋好友的用户信息作为『预备水军』，『灌水』时，在评论内容文件中输入自定义的评论内容，在命令行参数中制定目标贴，即可实现随机顺序的用户自动顶贴。鉴于现在的功能是顶贴竞争十大，而十大排名是根据关注人数也就是独立用户评论数量做排序的，这里设计的顶贴策略是一个马甲发一条评论。以后可以考虑增加灵活的配置方案，实现更多功能。</p>
 
-<p>给定 stack 的容量，给定数据的入栈顺序：从 1 开始的正整数序列，在允许随机的出栈操作的情况下，要求判断某出栈序列是否可能。</p>
+<p>项目 Github 地址：<a href="https://github.com/biaobiaoqi/CC98PostMachine/">https://github.com/biaobiaoqi/CC98PostMachine/</a></p>
 
-<p>比如，告知 stack 容量为 5，入栈序列的最大值为 7。有两个序列需要判断合理性：</p>
-
-<ul>
-<li>{1 2 3 4 5 6 7}： 这个序列是可能的，只需每次入栈时都做出栈操作。</li>
-<li>{3 2 1 7 5 6 4}： 这个序列是不可能的，其中前半部分 3 2 1 是合法的，先将 1 2 3 顺序入栈，然后三次执行出栈操作。而之后的 7 5 6 则是不可能的。</li>
-</ul>
-
-
-<h4>分析</h4>
-
-<p>两种思路：</p>
-
-<h5>第 1 种思路：</h5>
-
-<p>使用 stl 中的 stack 模拟。判定条件有两条：1.栈中数据量不超过栈的容量；2.出栈只能从栈顶取，不应该出现从固定的堆栈中取出其他数据的情况。</p>
-
-<h5>第 2 种思路：</h5>
-
-<p>由于入栈序列数据由小到大排列非常特殊，要通过出栈序列判定可能性是存在简便思路的。
-对比分析题中 Sample 给出的序列，结合上面提到的两条冲突条件入手分析：</p>
-
-<ul>
-<li><p>1.栈中数据量不超过栈的容量：</p>
-
-<p>  只有在入栈时，才会需要考虑栈中数据是否超量。出栈序列中的每个数，都以为着在出栈操作之前，它刚入栈，
-  那么当它入栈的时候能否判定是否超过栈容量呢？可以的，（当前的出栈数值 - 已经执行过的出栈操作数量）就是当前栈中元素的数量。</p></li>
-<li><p>2.出栈只能从栈顶取，不应该出现从固定的堆栈中取出其他数据的情况。</p>
-
-<p>  根据观察分析发现，当某数据 m 出栈之后，比 m 小的数据如果在 m 之后出栈的，它们所组成的序列本身需要保持从大到小的顺序排列。
-  距离如 3 2 1 7 5 6 4 这个序列，在 7 之后有 5 6 4 这个子序列，它们都大于 7，但却没有保持一个递减的顺序，不合法。</p></li>
-</ul>
-
-
-<p>更多分析参见博文<a href="../../../../2013/07/16/verify-pop-sequence-for-stack/">《出栈序列的可能性判定》</a></p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1052">1052. Linked List Sorting (25)</a></h2>
-
-<h4>题意</h4>
-
-<p>链表的节点被表示为{地址， 值， 下一个指针地址}，其中如果 NULL 的地址表示为-1，
-地址为 5 正数，值的范围为[-10<sup>5,</sup> 10<sup>5]。</sup></p>
-
-<p>给定 N(&lt; 10<sup>5)个节点以及其头指针，要求按照每个节点上值的大小重新排序，并按照链表顺序输出每个节点。</sup></p>
-
-<h4>分析</h4>
-
-<p>将链表中的节点按值做 qsort()排序，然后调整每个值的 next 指针即可。需要注意的有：</p>
-
-<ul>
-<li>1.INPUT 中的节点并不保证全是链表中的，先需要过滤掉悬空的节点。</li>
-<li>2.head 直接指向-1(NULL)的情况需要特殊处理。</li>
-</ul>
-
+<p>介于这个工具本身的罪恶的攻击属性，在此强调，工程仅供学习交流和对抗宣传贴。</p>
 
 </div>
   
   
     <footer>
-      <a rel="full-article" href="/blog/2013/08/01/pat-1051-1060-solutions/">Read on &rarr;</a>
+      <a rel="full-article" href="/blog/2013/11/05/cc98-post-machine/">Read on &rarr;</a>
     </footer>
   
 
@@ -213,7 +160,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/08/01/pat-1041-1050-solutions/">PAT 1041-1050 题解</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/10/28/get-ripple-from-github-account/">用Github账号领Ripple币</a></h1>
     
     
       <p class="meta">
@@ -229,50 +176,24 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
 
 
-<time datetime="2013-08-01T01:43:00+08:00" pubdate data-updated="true">Aug 1<span>st</span>, 2013</time>
+<time datetime="2013-10-28T12:46:00+08:00" pubdate data-updated="true">Oct 28<span>th</span>, 2013</time>
         
-         | <a href="/blog/2013/08/01/pat-1041-1050-solutions/#disqus_thread">Comments</a>
+         | <a href="/blog/2013/10/28/get-ripple-from-github-account/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>浏览全部代码：<a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel">请戳</a></p>
+  <div class="entry-content"><p>最近随着<a href="http://zh.wikipedia.org/wiki/%E6%AF%94%E7%89%B9%E5%B8%81">比特币</a>在互联网上的流行，其他各种电子货币也都增加了曝光率。</p>
 
-<p>本文谨代表个人思路，欢迎讨论;)</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1041">1041. Be Unique (20)</a></h2>
-
-<h5>题意</h5>
-
-<p>给出 N (&lt;=105)个数（数值范围为 [1, 10<sup>4]），找到其中不重复的第一个数字。比如给出</sup> <code>5 31 5 88 67 88 17</code> ， 答案是 <code>31</code> 。</p>
-
-<h5>分析</h5>
-
-<p>简单模拟题，开一个大数组<code>int a[10001];</code>，以读入的数为下标，记录 count:<code>a[index] ++;</code>。结果输出第一个存储为 1 的下标:<code>if (a[index] == 1)</code>。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1042">1042. Shuffling Machine (20)</a></h2>
-
-<h5>题意</h5>
-
-<p>背景是洗牌机的洗牌过程。过程是给定洗牌的每张牌的位置替换序列，由原来的次序算出最后的牌的平排列。</p>
-
-<p>比如原有的次序为<code>S3, H5, C1, D13, J2</code>，
-给定的洗牌顺序为<code>4, 2, 5 ,3 ,1</code>，那么一次洗牌的结果为：<code>J2, H5, D13, S3, C1</code>。
-如果需要两次洗牌，则结果为<code>C1, H5, S3, J2, D13</code>。</p>
-
-<p>输入为对一整副牌（54 张）的洗牌策略，以及洗牌次数 N，要求计算出最后的洗牌结果。</p>
-
-<h5>分析</h5>
-
-<p>简单 hash 题。</p>
+<p>昨晚在 v2ex 上看到有人<a href="http://v2ex.com/t/87062">发帖</a>，用 20RMB 换取 2013 年 5 月 1 日前使用过的 github 账号得到的一个验证码。出于好奇，仔细围观了该贴，发现原来 lz 是利用信息不队称在揽入赠送给 github 用户的 ripple 币。而实际上，给 github 用户赠送的 2020 的 ripple 币按当时汇率这算人民币大概价值 70 元！这种『天上掉馅饼』的事情确实激发了我对电子货币的好奇，于是查阅了相关资料，也成功提现了自己的那部分 Ripple 币。</p>
 
 </div>
   
   
     <footer>
-      <a rel="full-article" href="/blog/2013/08/01/pat-1041-1050-solutions/">Read on &rarr;</a>
+      <a rel="full-article" href="/blog/2013/10/28/get-ripple-from-github-account/">Read on &rarr;</a>
     </footer>
   
 
@@ -284,7 +205,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/08/01/pat-1031-1040-solutions/">PAT 1031-1040 题解</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/10/28/get-ripple-from-github-account/">用Github账号领Ripple币</a></h1>
     
     
       <p class="meta">
@@ -300,80 +221,24 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
 
 
-<time datetime="2013-08-01T01:43:00+08:00" pubdate data-updated="true">Aug 1<span>st</span>, 2013</time>
+<time datetime="2013-10-28T12:46:00+08:00" pubdate data-updated="true">Oct 28<span>th</span>, 2013</time>
         
-         | <a href="/blog/2013/08/01/pat-1031-1040-solutions/#disqus_thread">Comments</a>
+         | <a href="/blog/2013/10/28/get-ripple-from-github-account/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>早期部分代码用 Java 实现。由于 PAT 虽然支持各种语言，但只有 C/C++标程来限定时间，许多题目用 Java 读入数据就已经超时，后来转投 C/C++。浏览全部代码：<a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel">请戳</a></p>
+  <div class="entry-content"><p>最近随着<a href="http://zh.wikipedia.org/wiki/%E6%AF%94%E7%89%B9%E5%B8%81">比特币</a>在互联网上的流行，其他各种电子货币也都增加了曝光率。</p>
 
-<p>本文谨代表个人思路，欢迎讨论;)</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1031">1031. Hello World for U (20)</a></h2>
-
-<h5>题意</h5>
-
-<p>将给定的字符串打印出 U 型。</p>
-
-<p>比如给定<code>helloworld</code>，打印出</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>
-</span><span class='line'>h  d
-</span><span class='line'>e  l
-</span><span class='line'>l  r
-</span><span class='line'>lowo
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>设定左边的字符个数为 n1,底边字符个数为 n2,右边字符个数为 n3。需要满足 n1 = n3 = max
-{k|k &lt;= n2 for all 3 &lt;= n2 &lt;= N} with n1 + n2 + n3 -3 = N.</p>
-
-<h5>分析</h5>
-
-<p>简单模拟题。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1032">1032. Sharing (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>为了节省存储空间，单词使用链表实现。比如对于<code>loading</code>和<code>being</code>两个单词，有如下存储结构：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>word1 : -&gt; [l] -&gt; [o] -&gt; [a] -&gt; [d]  
-</span><span class='line'>                                  \
-</span><span class='line'>                                    [i] -&gt; [n] -&gt; [g] -&gt; null
-</span><span class='line'>                                  /
-</span><span class='line'>word2 : -&gt; [b] -&gt; [e] -------------
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>输入中，指定了两个单词的首字符的地址，并给出了 N (&lt;= 10<sup>5)个节点，每个节点包含：物理地址（5</sup> 位的正整数），实际存储的字符以及指向的下一个节点的地址。NULL 的地址是-1.
-要求找到两单词的的公共后缀开始的地址，如果没有，则输出-1.</p>
-
-<h5>分析</h5>
-
-<p>既然是单词，它的长度应该是有限的，也就是链表不会出现环这种情况（实际上这里的处理方式对于有环无环都适用）。对第一个单词链表做遍历，对爬过的节点做好标记。第二个单词链表也同样做标记，一旦遇到已经标记过的节点，则该节点就是结果。</p>
-
-<p>需要注意一点：直接使用 map 做节点的存储最后一个 case 会超时。而鉴于 5 位正整数的数据量，可以直接使用数组，用空间换时间。</p>
+<p>昨晚在 v2ex 上看到有人<a href="http://v2ex.com/t/87062">发帖</a>，用 20RMB 换取 2013 年 5 月 1 日前使用过的 github 账号得到的一个验证码。出于好奇，仔细围观了该贴，发现原来 lz 是利用信息不队称在揽入赠送给 github 用户的 ripple 币。而实际上，给 github 用户赠送的 2020 的 ripple 币按当时汇率这算人民币大概价值 70 元！这种『天上掉馅饼』的事情确实激发了我对电子货币的好奇，于是查阅了相关资料，也成功提现了自己的那部分 Ripple 币。</p>
 
 </div>
   
   
     <footer>
-      <a rel="full-article" href="/blog/2013/08/01/pat-1031-1040-solutions/">Read on &rarr;</a>
+      <a rel="full-article" href="/blog/2013/10/28/get-ripple-from-github-account/">Read on &rarr;</a>
     </footer>
   
 
@@ -385,7 +250,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/08/01/pat-1021-1030-solutions/">PAT 1021-1030 题解</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/10/28/get-ripple-from-github-account/">用Github账号领Ripple币</a></h1>
     
     
       <p class="meta">
@@ -401,82 +266,24 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
 
 
-<time datetime="2013-08-01T01:43:00+08:00" pubdate data-updated="true">Aug 1<span>st</span>, 2013</time>
+<time datetime="2013-10-28T12:46:00+08:00" pubdate data-updated="true">Oct 28<span>th</span>, 2013</time>
         
-         | <a href="/blog/2013/08/01/pat-1021-1030-solutions/#disqus_thread">Comments</a>
+         | <a href="/blog/2013/10/28/get-ripple-from-github-account/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>早期部分代码用 Java 实现。由于 PAT 虽然支持各种语言，但只有 C/C++标程来限定时间，许多题目用 Java 读入数据就已经超时，后来转投 C/C++。浏览全部代码：<a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel">请戳</a></p>
+  <div class="entry-content"><p>最近随着<a href="http://zh.wikipedia.org/wiki/%E6%AF%94%E7%89%B9%E5%B8%81">比特币</a>在互联网上的流行，其他各种电子货币也都增加了曝光率。</p>
 
-<p>本文谨代表个人思路，欢迎讨论;)</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1021">1021. Deepest Root (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>无环连通图也可以视为一棵树，选定图中任意一点作为根，如果这时候整个树的深度最大，则称其为 deepest root。
-给定一个图，按升序输出所有 deepest root。如果给定的图有多个连通分量，则输出连通分量的数量。</p>
-
-<h5>分析</h5>
-
-<p>算法实现的步骤如下：</p>
-
-<ul>
-<li>1.使用并查集判断图是否为连通的。</li>
-<li>2.任意选取一点，做 dfs 搜索，选取其中一个最远距离的点 A，再做一次 dfs，找到的所有距离最远的点以及点 A 都是 deepest root。</li>
-</ul>
-
-
-<p>判定图是否连通使用 union-find set 即可。更关键的点在于找到 deepest root。实际上，使用两次 dfs 就可以实现。
-证明之前，先介绍两个概念，一个是直径，树的 deepest root 到最远叶子的路径我们暂称直径，而 deepest root 和最远叶子节点则成为端点。
-注明关键在于以下两点：</p>
-
-<ul>
-<li><p>从任意一个点 dfs 得到的最远点都是直径的端点。证明如下：</p>
-
-<p>  任意选一点 A，做 dfs 查找距离 A 最远的点，因为是 dfs，所以肯定会经过某直径上的点 B，从 B 出发最远的点是直径上的端点 C。
-  那么，这个端点 C 为何一定是 A 的最远居里点呢？可以反证证明，如果有一个点 D，A->D 不经过直径，且 length(A->D) > length(A->C)，
-  那么，从 C 所在直径上构造出经过 D 的比原直径更长的直径，得证。</p></li>
-<li><p>所有的树的直径都交于一点（或者公用段路径上的几点）。
-于是，从 B 点 dfs 出发的所有最长距离的点即为 deepest root。证明如下：</p>
-
-<p>  如果两条直径不相交，而树上任意两点肯定连通，则从两直径上，可以选取两点连通以组成更长的直径；如果三条直径相较于不同的两点，也可以根据相交截断的长度组合出更长的直径。</p></li>
-</ul>
-
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1022">1022. Digital Library (30)</a></h2>
-
-<h5>题意</h5>
-
-<p>给定 N (&lt;=10000) 本书的信息，包括 7 位 ID，最多 80 字符的书名，最多 80 字符的作者名，
-多个最多 10 字符的关键词，最多 80 字符的出版商和属于 [1000, 3000]的出版时间。
-另给出 M (&lt;=1000) 的查询请求，按照查询格式分为：</p>
-
-<ul>
-<li>1: 书名</li>
-<li>2: 作者</li>
-<li>3: 关键词</li>
-<li>4: 出版商</li>
-<li>5: 年份</li>
-</ul>
-
-
-<p>输出查询结果。如果有多个结果，按照书的 ID 的升序排列。</p>
-
-<h5>分析</h5>
-
-<p>简单模拟题。在使用 Map 结构来构建倒排索引的过程中，可以讨巧的避免根据不同查询类型使用两层 map，
-直接通过在 key 中增加查询标记来实现。另外 C++的 priority_queue 支持对常规数据类型的最小堆实现：<code>priority_queue&lt;string, vector&lt;string&gt;, greater&lt;string&gt;&gt;</code>，方便了结果输出。</p>
+<p>昨晚在 v2ex 上看到有人<a href="http://v2ex.com/t/87062">发帖</a>，用 20RMB 换取 2013 年 5 月 1 日前使用过的 github 账号得到的一个验证码。出于好奇，仔细围观了该贴，发现原来 lz 是利用信息不队称在揽入赠送给 github 用户的 ripple 币。而实际上，给 github 用户赠送的 2020 的 ripple 币按当时汇率这算人民币大概价值 70 元！这种『天上掉馅饼』的事情确实激发了我对电子货币的好奇，于是查阅了相关资料，也成功提现了自己的那部分 Ripple 币。</p>
 
 </div>
   
   
     <footer>
-      <a rel="full-article" href="/blog/2013/08/01/pat-1021-1030-solutions/">Read on &rarr;</a>
+      <a rel="full-article" href="/blog/2013/10/28/get-ripple-from-github-account/">Read on &rarr;</a>
     </footer>
   
 
@@ -488,7 +295,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/07/31/pat-1011-1020-solutions/">PAT 1011-1020 题解</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/10/28/scalable-web-service-development/">《大规模Web服务开发技术》</a></h1>
     
     
       <p class="meta">
@@ -504,50 +311,28 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
 
 
-<time datetime="2013-07-31T23:41:00+08:00" pubdate data-updated="true">Jul 31<span>st</span>, 2013</time>
+<time datetime="2013-10-28T01:41:00+08:00" pubdate data-updated="true">Oct 28<span>th</span>, 2013</time>
         
-         | <a href="/blog/2013/07/31/pat-1011-1020-solutions/#disqus_thread">Comments</a>
+         | <a href="/blog/2013/10/28/scalable-web-service-development/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>早期部分代码用 Java 实现。由于 PAT 虽然支持各种语言，但只有 C/C++标程来限定时间，许多题目用 Java 读入数据就已经超时，后来转投 C/C++。浏览全部代码：<a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel">请戳</a></p>
+  <div class="entry-content"><h2>Web 服务开发的心灵鸡汤</h2>
 
-<p>本文谨代表个人思路，欢迎讨论;)</p>
+<p><img src="http://img3.douban.com/mpic/s6818566.jpg" alt="img" /></p>
 
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1011">1011. World Cup Betting (20)</a></h2>
+<p>周末去上海陪妹子的两天在路途上看完了这本<a href="http://book.douban.com/subject/6758780/">《大规模 Web 服务开发技术》</a>。</p>
 
-<h5>题意</h5>
-
-<p>给定一个 3*3 的矩阵，找到每行的最大值，格式化输出一个运算结果。</p>
-
-<h5>分析</h5>
-
-<p>非常简单的模拟题。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1012">1012. The Best Rank (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>给定学生的学号和三个科目的分数，查询输出对应学生单门科目排名和总分排名中最高的那个排名。</p>
-
-<h5>分析</h5>
-
-<p>C 里 stdlib.h 中的 qsort()和 C++里 algorithm 中的 sort()函数都能实现快排，应对编程题中的排序一般比自己手写的要快。
-分别为三个单科和总分做排序，并将 rank 值记录到 map 结构中去，便于之后的查找。</p>
-
-<p>需要注意并列排名的情况。比如<code>1 2 2 4</code>，由于并列第 2 的都两人，那之后的那个人就是第 4 而不是第 3 了。</p>
-
-<p>另外，由于有多个需要分别排序、排名的项，抽象出公共逻辑到一个函数里比较必要，否则代码分散难于 debug 和维护。
-这里稍微特殊点的用法是使用了<a href="http://blog.csdn.net/dyx1024/article/details/7562786">函数指针</a>做参数。</p>
+<p>《大规模 Web 服务开发技术》是日本的 <a href="http://www.hatena.com/">Hetena</a> 团队以夏天举办的实习活动的课程讲义为基础整理的开发、运营大规模服务的入门书。书中更多的偏重了 Hetena 技术团队发展过程中的实践经验总结，将一个系统从无到有的发展过程有条理的展现了出来。读完全书，觉得它更像是一本 Web 服务开发的心灵鸡汤，有许多靠谱的总结，但相对零散，刚接触的人很难掌握。当然，心灵鸡汤并不是贬义，只是有不同的针对性。</p>
 
 </div>
   
   
     <footer>
-      <a rel="full-article" href="/blog/2013/07/31/pat-1011-1020-solutions/">Read on &rarr;</a>
+      <a rel="full-article" href="/blog/2013/10/28/scalable-web-service-development/">Read on &rarr;</a>
     </footer>
   
 
@@ -559,7 +344,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/07/31/pat-1001-1010-solutions/">PAT 1001-1010 题解</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/10/28/scalable-web-service-development/">《大规模Web服务开发技术》</a></h1>
     
     
       <p class="meta">
@@ -575,54 +360,28 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
 
 
-<time datetime="2013-07-31T02:03:00+08:00" pubdate data-updated="true">Jul 31<span>st</span>, 2013</time>
+<time datetime="2013-10-28T01:41:00+08:00" pubdate data-updated="true">Oct 28<span>th</span>, 2013</time>
         
-         | <a href="/blog/2013/07/31/pat-1001-1010-solutions/#disqus_thread">Comments</a>
+         | <a href="/blog/2013/10/28/scalable-web-service-development/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>早期部分代码用 Java 实现。由于 PAT 虽然支持各种语言，但只有 C/C++标程来限定时间，许多题目用 Java 读入数据就已经超时，后来转投 C/C++。浏览全部代码：<a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel">请戳</a></p>
+  <div class="entry-content"><h2>Web 服务开发的心灵鸡汤</h2>
 
-<p>本文谨代表个人思路，欢迎讨论;)</p>
+<p><img src="http://img3.douban.com/mpic/s6818566.jpg" alt="img" /></p>
 
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1001">1001. A+B Format (20)</a></h2>
+<p>周末去上海陪妹子的两天在路途上看完了这本<a href="http://book.douban.com/subject/6758780/">《大规模 Web 服务开发技术》</a>。</p>
 
-<h5>题意</h5>
-
-<p>格式化输出两数之和。</p>
-
-<h5>分析</h5>
-
-<p>理清输出逻辑即可。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1002">1002. A+B for Polynomials (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>给定两多项式，相加并格式化输出结果。</p>
-
-<h5>分析</h5>
-
-<p>两种思路</p>
-
-<ul>
-<li>1.采用链表的处理方式；</li>
-<li>2.预设好 int[1005]的数组，用下标表示次方，数组中元素值表示对应系数。</li>
-</ul>
-
-
-<p>第一种方法某种程度上看能节省空间，实现上需要注意操作链表时，循环时的越界问题；
-方法二用空间换取时间，且实现上更不容易出错。同时，由于浮点数本身精确位数不够，在判定两浮点数相加是否为 0 时，
-需要对结果值取绝对值后，与 1e-6 做对比。</p>
+<p>《大规模 Web 服务开发技术》是日本的 <a href="http://www.hatena.com/">Hetena</a> 团队以夏天举办的实习活动的课程讲义为基础整理的开发、运营大规模服务的入门书。书中更多的偏重了 Hetena 技术团队发展过程中的实践经验总结，将一个系统从无到有的发展过程有条理的展现了出来。读完全书，觉得它更像是一本 Web 服务开发的心灵鸡汤，有许多靠谱的总结，但相对零散，刚接触的人很难掌握。当然，心灵鸡汤并不是贬义，只是有不同的针对性。</p>
 
 </div>
   
   
     <footer>
-      <a rel="full-article" href="/blog/2013/07/31/pat-1001-1010-solutions/">Read on &rarr;</a>
+      <a rel="full-article" href="/blog/2013/10/28/scalable-web-service-development/">Read on &rarr;</a>
     </footer>
   
 
@@ -634,7 +393,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/07/29/after-pat-practice/">终于算完了这道『1+1』</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/10/28/scalable-web-service-development/">《大规模Web服务开发技术》</a></h1>
     
     
       <p class="meta">
@@ -650,34 +409,28 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
 
 
-<time datetime="2013-07-29T22:12:00+08:00" pubdate data-updated="true">Jul 29<span>th</span>, 2013</time>
+<time datetime="2013-10-28T01:41:00+08:00" pubdate data-updated="true">Oct 28<span>th</span>, 2013</time>
         
-         | <a href="/blog/2013/07/29/after-pat-practice/#disqus_thread">Comments</a>
+         | <a href="/blog/2013/10/28/scalable-web-service-development/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>在<a href="http://weibo.com/redow7">@ReDow</a>、<a href="http://weibo.com/cloudbye">@麦迪的小腿</a>和<a href="http://weibo.com/linest">@linest</a> 等小伙伴的帮助下，终于断断续续的爬完了 <a href="http://pat.zju.edu.cn/">PAT</a> 的 Basic Level 和 Advanced Level，阶段性填补了自己惨白的算法短板。在 cs 的圈子里，说 PAT 是入门的『1 + 1』不为过。刚完成『1 + 1』，作为五年科班的人，确实不够光彩。不过现在能做的也只是尽力弥补本科时间里的虚度。</p>
+  <div class="entry-content"><h2>Web 服务开发的心灵鸡汤</h2>
 
-<p>从亲手挖的坑里往外爬，需要付出比其他人更多的努力。没时间享受题目 ac 之后的快感（画外音：这么简单的题会有快感么=.=#），倒会时不时蹦出一股脑的蛋疼：『你当初干 XX 啥去了！』。</p>
+<p><img src="http://img3.douban.com/mpic/s6818566.jpg" alt="img" /></p>
 
-<h2>当初&#8230;</h2>
+<p>周末去上海陪妹子的两天在路途上看完了这本<a href="http://book.douban.com/subject/6758780/">《大规模 Web 服务开发技术》</a>。</p>
 
-<p>记得大一的时候，每天花好几个小时泡图书馆看各种 IT 杂志和技术书籍。在刚开始学 C 语言编程的时间里，我看着中间件、系统软件、终端融合、东软和用友金蝶之争等一系列摸不着头脑的东西，在对数据还没概念的时候，看着数据库的范式和 E-R 图…总之，就是一直在门外徘徊。</p>
-
-<p>之后专业课多了起来，我又兴高采烈的混在工高大神的队伍里，早上集结同学每天早上五点多轮流爬起来去自习室占座，以看似端正实则不专注的令人发指的学习态度在 GPA 榜单上持续退步着。浑浑噩噩的搞过数模，无果。当然，以『学渣』的水平充着『学霸』也是有好处的，就是沾染了大神的精神气，比如记忆犹新的有在 CMU 念书的鑫磊大神的专注、冷静和每天 4 小时的睡眠。同时，我还风风火火的参加了 ASES 和求是强鹰，搀和着所谓的创业。大四在爱尔兰的交流，除了英语和专业课，其他的倒是学的挺多，比如烧饭，单反和旅游……本科唯一做的跟编程有关的说得出口的，也就写了个 Android 程序在比赛里获了个奖，不提也罢的那种。</p>
-
-<h2>变</h2>
-
-<p>在《<a href="http://book.douban.com/subject/1048007/">高效能认识的七个习惯</a>》里看过一个观点：每个人都有属于自己的『关注圈』和『影响圈』。影响圈是个人对外界产出的途径，关注圈则意味着个人对外界的期许。可以想见，关注圈大于影响圈。正确的成长方式是尽力扩大影响圈，以此催生关注圈的扩大。而我则是走在了相反的方向：一直致力于开发自己的关注圈，后果是影响圈不见长进。一度我开始注意遏制自己这方面的好高骛远，不过事实证明，我还是比较喜欢在学爬得时候看走路的教学视频。</p>
+<p>《大规模 Web 服务开发技术》是日本的 <a href="http://www.hatena.com/">Hetena</a> 团队以夏天举办的实习活动的课程讲义为基础整理的开发、运营大规模服务的入门书。书中更多的偏重了 Hetena 技术团队发展过程中的实践经验总结，将一个系统从无到有的发展过程有条理的展现了出来。读完全书，觉得它更像是一本 Web 服务开发的心灵鸡汤，有许多靠谱的总结，但相对零散，刚接触的人很难掌握。当然，心灵鸡汤并不是贬义，只是有不同的针对性。</p>
 
 </div>
   
   
     <footer>
-      <a rel="full-article" href="/blog/2013/07/29/after-pat-practice/">Read on &rarr;</a>
+      <a rel="full-article" href="/blog/2013/10/28/scalable-web-service-development/">Read on &rarr;</a>
     </footer>
   
 
@@ -689,7 +442,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/07/19/odps-in-alibaba/">阿里离线数据处理平台2013暑期学校</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/10/25/java-bytecode-plugin-for-eclipse/">在Eclipse里查看Java字节码</a></h1>
     
     
       <p class="meta">
@@ -705,34 +458,24 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
 
 
-<time datetime="2013-07-19T21:31:00+08:00" pubdate data-updated="true">Jul 19<span>th</span>, 2013</time>
+<time datetime="2013-10-25T04:06:00+08:00" pubdate data-updated="true">Oct 25<span>th</span>, 2013</time>
         
-         | <a href="/blog/2013/07/19/odps-in-alibaba/#disqus_thread">Comments</a>
+         | <a href="/blog/2013/10/25/java-bytecode-plugin-for-eclipse/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>本周有幸参加了为期两天的<a href="http://102.alibaba.com/competition/dataSummer.htm">阿里离线数据处理平台 2013 暑期学校</a>的学习。</p>
+  <div class="entry-content"><p>要理解 Java 字节码，比较推荐的方法是自己尝试编写源码对照字节码学习。其中阅读 Java 字节码的工具必不可少。虽然<code>javap</code>可以以可读的形式展示出.class 文件中字节码，但每次改动源码都需调用命令行并不方便。这里介绍一个可以辅助阅读 Java 字节码的 Eclipse 插件：<a href="http://andrei.gmxhome.de/bytecode/">bytecode outline</a>。</p>
 
-<p>阿里的前辈们分不同的专题给大家介绍了飞天平台上的离线数据处理服务 ODPS（Open Data Processing Service）。
-内容上主要分为两部分，一部分是平台架构，一部分是数据分析。来听课的同学也就分为了两部分，而像我一样关注系统层面的人是少数。</p>
-
-<p>这也正常，用赵本山在『一代宗师』里的话来说，一个是面子，一个是里子。数据分析能直接产生表现层的数据，而系统平台则只是提供支持。
-成功了，大家看得到的是分析出的数据，而一旦失败了，那么系统平台的责任就大了。
-再者越贴近硬件层次的工作也注定越辛苦，深夜被吵醒也不是没有的事儿。好了，吐槽到此结束，下面是总结笔记整理出几页 slides：</p>
-
-<script async class="speakerdeck-embed" data-id="e0022eb0d24d013089506e9621fcaf9a" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
-
-
-
+<p>bytecode outline 插件用可读的方式展现了 Eclipse 的 Java 编辑器或类文件的字节码内容。它使用了 <a href="http://asm.ow2.org/">ASM 框 架</a>的部分组建来实现对字节码的展示（ASM 框架在另外一篇操纵 Java 字节码的博文中有提到过：<a href="http://biaobiaoqi.github.io/blog/2013/09/08/custom-premain-method/">《AOP 实践：java.lang.instrument 的使用》</a>，是一个轻量级的 Java 字节码的操纵框架。）。</p>
 
 </div>
   
   
     <footer>
-      <a rel="full-article" href="/blog/2013/07/19/odps-in-alibaba/">Read on &rarr;</a>
+      <a rel="full-article" href="/blog/2013/10/25/java-bytecode-plugin-for-eclipse/">Read on &rarr;</a>
     </footer>
   
 
@@ -744,7 +487,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/07/16/verify-pop-sequence-for-stack/">出栈序列的可能性判定</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/10/25/java-bytecode-plugin-for-eclipse/">在Eclipse里查看Java字节码</a></h1>
     
     
       <p class="meta">
@@ -760,128 +503,24 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
 
 
-<time datetime="2013-07-16T01:32:00+08:00" pubdate data-updated="true">Jul 16<span>th</span>, 2013</time>
+<time datetime="2013-10-25T04:06:00+08:00" pubdate data-updated="true">Oct 25<span>th</span>, 2013</time>
         
-         | <a href="/blog/2013/07/16/verify-pop-sequence-for-stack/#disqus_thread">Comments</a>
+         | <a href="/blog/2013/10/25/java-bytecode-plugin-for-eclipse/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><h2>问题说明</h2>
+  <div class="entry-content"><p>要理解 Java 字节码，比较推荐的方法是自己尝试编写源码对照字节码学习。其中阅读 Java 字节码的工具必不可少。虽然<code>javap</code>可以以可读的形式展示出.class 文件中字节码，但每次改动源码都需调用命令行并不方便。这里介绍一个可以辅助阅读 Java 字节码的 Eclipse 插件：<a href="http://andrei.gmxhome.de/bytecode/">bytecode outline</a>。</p>
 
-<p><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1051">PAT1051</a>：给定 stack 的容量，给定数据的入栈顺序：从 1 开始的正整数序列，在允许随机的出栈操作的情况下，要求判断某出栈序列是否可能。</p>
-
-<p>比如，告知 stack 容量为 5，入栈序列的最大值为 7。有两个序列需要判断合理性：</p>
-
-<ul>
-<li><code>1 2 3 4 5 6 7</code>： 这个序列是可能的，只需每次入栈时都做出栈操作。</li>
-<li><code>3 2 1 7 5 6 4</code>： 这个序列是不可能的，其中前半部分<code>3 2 1</code>是合法的，先将<code>1 2 3</code>顺序入栈，然后三次执行出栈操作。而之后的<code>7 5 6</code>则是不可能的。</li>
-</ul>
-
-
-<p>要完成判定过程，常规思路是直接使用的 stack 数据结构模拟出栈序列做操作，然后判定是否会触犯条件。但考虑到 PAT1051 中时间限制只有 10ms，虽然常规方法是线性的，似乎也无法保障（事实证明是错误的，用常规方法也能在 PAT 上 AC），我想到从序列本身的特性入手，找规律，于是有了一种效率更高的判定逻辑。</p>
-
-<h2>常规思路</h2>
-
-<p>直接使用出栈序列指导 stack 模拟操作。判定条件有两条：</p>
-
-<ul>
-<li>1.栈中数据量不超过栈的容量。</li>
-<li>2.出栈只能从栈顶取，不应该出现从固定的堆栈中取出其他数据的情况。</li>
-</ul>
-
-
-<p>算法描述如下：</p>
-
-<p>用游标记录当前已知压栈的最大数据 cur。如果新的读入数据 tmp（即出栈序列中的某数据）大于 cur，则将 cur 到 tmp 之间的数据顺序压入栈中，更新 cur 并执行检查 1；如果新的读入数据 tmp 小于 cur，则一定是直接出栈获得的，执行检查 2。</p>
-
-<p>如果能顺利完成就是合理的，如果操作过程违背了一些规则，则判定为不合理。C++实现代码如下：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cp">#include&lt;stdio.h&gt;</span>
-</span><span class='line'><span class="cp">#include&lt;stack&gt;</span>
-</span><span class='line'><span class="k">using</span> <span class="k">namespace</span><span class="o">::</span><span class="n">std</span><span class="p">;</span>
-</span><span class='line'><span class="kt">int</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">tmp</span><span class="p">,</span> <span class="n">cur</span><span class="p">;</span>
-</span><span class='line'><span class="kt">bool</span> <span class="n">flag</span><span class="p">;</span>
-</span><span class='line'><span class="n">stack</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">s</span><span class="p">;</span>
-</span><span class='line'><span class="kt">int</span> <span class="n">main</span><span class="p">()</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%d %d %d&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">m</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">n</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">k</span><span class="p">);</span>
-</span><span class='line'>    <span class="k">while</span><span class="p">(</span><span class="n">k</span> <span class="o">--</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">flag</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-</span><span class='line'>        <span class="n">cur</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-</span><span class='line'>        <span class="n">s</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-</span><span class='line'>        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">n</span><span class="p">;</span> <span class="o">++</span> <span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%d&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">tmp</span><span class="p">);</span>
-</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="n">tmp</span> <span class="o">&gt;</span> <span class="n">cur</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>                <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">cur</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">tmp</span><span class="p">;</span> <span class="o">++</span> <span class="n">j</span><span class="p">)</span>
-</span><span class='line'>                    <span class="n">s</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">j</span><span class="p">);</span>
-</span><span class='line'>                <span class="k">if</span> <span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">m</span><span class="p">)</span> <span class="n">flag</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-</span><span class='line'>                <span class="n">cur</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
-</span><span class='line'>            <span class="p">}</span><span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>                <span class="k">if</span> <span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">top</span><span class="p">()</span> <span class="o">!=</span> <span class="n">tmp</span><span class="p">)</span>
-</span><span class='line'>                    <span class="n">flag</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-</span><span class='line'>            <span class="p">}</span>
-</span><span class='line'>            <span class="n">s</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="n">flag</span><span class="p">)</span> <span class="n">printf</span><span class="p">(</span><span class="s">&quot;YES</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-</span><span class='line'>        <span class="k">else</span> <span class="n">printf</span><span class="p">(</span><span class="s">&quot;NO</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>更高效的判定逻辑</h2>
-
-<p>实际上，在 PAT1051 的题目中，入栈序列的每个数值是由小到大排列的，这个情况非常特殊，要通过出栈序列判定可能性是存在简便思路的。</p>
-
-<p>对比分析题中 Sample 给出的序列，结合上面提到的两条冲突条件入手分析：</p>
-
-<ul>
-<li><p>1.某个数出栈时，能判定在它出站前，栈中的数据总数不得超过栈的容量：</p>
-
-<p>  出栈的每个数，都曾经入栈过。而通过出栈序列，能计算出在它刚入栈时栈中所包含的元素的数量（当前的出栈数值 - 已经执行过的出栈操作数量 == 当前栈中元素的数量），这个值不得超过栈的容量。</p></li>
-</ul>
-
+<p>bytecode outline 插件用可读的方式展现了 Eclipse 的 Java 编辑器或类文件的字节码内容。它使用了 <a href="http://asm.ow2.org/">ASM 框 架</a>的部分组建来实现对字节码的展示（ASM 框架在另外一篇操纵 Java 字节码的博文中有提到过：<a href="http://biaobiaoqi.github.io/blog/2013/09/08/custom-premain-method/">《AOP 实践：java.lang.instrument 的使用》</a>，是一个轻量级的 Java 字节码的操纵框架。）。</p>
 
 </div>
   
   
     <footer>
-      <a rel="full-article" href="/blog/2013/07/16/verify-pop-sequence-for-stack/">Read on &rarr;</a>
+      <a rel="full-article" href="/blog/2013/10/25/java-bytecode-plugin-for-eclipse/">Read on &rarr;</a>
     </footer>
   
 
@@ -893,7 +532,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/07/10/cc-license/">给博客签上CC协议</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/10/25/java-bytecode-plugin-for-eclipse/">在Eclipse里查看Java字节码</a></h1>
     
     
       <p class="meta">
@@ -909,66 +548,24 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
 
 
-<time datetime="2013-07-10T22:37:00+08:00" pubdate data-updated="true">Jul 10<span>th</span>, 2013</time>
+<time datetime="2013-10-25T04:06:00+08:00" pubdate data-updated="true">Oct 25<span>th</span>, 2013</time>
         
-         | <a href="/blog/2013/07/10/cc-license/#disqus_thread">Comments</a>
+         | <a href="/blog/2013/10/25/java-bytecode-plugin-for-eclipse/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>大家都知道开源软件。通过开放源代码的方式，允许用户学习、修改、增进提高这些软件质量。软件界的开源协议很多，比如常见的 Apache，BSD，GPL 等等。这是一种充分利用网络的便利性，鼓励分享和创新的协议潮流。从这个层面上来说，Creative Commons 也是如此。</p>
+  <div class="entry-content"><p>要理解 Java 字节码，比较推荐的方法是自己尝试编写源码对照字节码学习。其中阅读 Java 字节码的工具必不可少。虽然<code>javap</code>可以以可读的形式展示出.class 文件中字节码，但每次改动源码都需调用命令行并不方便。这里介绍一个可以辅助阅读 Java 字节码的 Eclipse 插件：<a href="http://andrei.gmxhome.de/bytecode/">bytecode outline</a>。</p>
 
-<p>这是一个非营利性组织，也是一种创作的授权方式。简称 CC 协议，中国大陆正式名称为知识共享。次组织的主要宗旨是增加创意作品的流通可及性，作为其他人据以创作及共享的基础，并寻找适当的法律以确保上述理念。</p>
-
-<h2>CC 协议的起源</h2>
-
-<p>Creative Commons 最先是 2002 年的 12 月 16 号在美国首次发布的。这个协议最初是根据美国版权法设计出来的。技术的发展，网络的发展，出现了开放共享的需求，而传统的作品保护的模式，对作品的使用和内容的开放带来一些限制。怎么样满足这种需求，同时又尊重权利人的著作权？传统的保护模式不能实现这样的作用，它可能关注于保护的时候可能忽略了对公众的，尤其网络环境下对知识文化这样分享的需求。CC 协议的设计实际上是基于这样一种大的背景，在这样一个大的网络环境下应运而生，它是来倡导一种合法的分享。</p>
-
-<h2>CC 协议内容</h2>
-
-<p>CC 协议可以分为四个部分。每个部分对使用者有不同程度的限定。</p>
-
-<ul>
-<li><p>1.署名（BY）：作品上必须附有作品的归属。如此之后，作品可以被修改，分发，复制和其它用途。</p></li>
-<li><p>2.非商业性使用（NC）：作品可以被修改、分发等等，但不能用于商业目的。</p></li>
-<li><p>3.禁止演绎（ND）：这意味着你可以复制和分发它们，但你不能以任何方式修改它们，或基于它们进行二次创作。</p></li>
-<li><p>4.相同方式共享（SA）：作品可以被修改、分发或其它操作，但所有的衍生品都要置于 CC 许可协议下。</p></li>
-</ul>
-
-
-<p>实际使用时，需要对这四种条件分别作出约束。不同的条件共有 16 种组合方式，其中有的组合方式互斥，简化后剩下了 6 种常用协议：</p>
-
-<h5>署名（BY）</h5>
-
-<p>此协议最为宽松，只需署名，其他无约束。</p>
-
-<h5>署名（BY）-禁止演绎（ND）</h5>
-
-<p>署名的同时，不得对作品进行改动。但可以用于商业或非商业用途。</p>
-
-<h5>署名（BY）-非商业性使用（NC）</h5>
-
-<p>署名的同时，可以修改作品，但不能用于商业用途。</p>
-
-<h5>署名（BY）-非商业性使用（NC）-禁止演绎（ND）</h5>
-
-<p>署名，且不得用于商业用途和修改。</p>
-
-<h5>署名（BY）-非商业性使用（NC）-相同方式共享（SA）</h5>
-
-<p>署名，不能商用，但可以演绎，且演绎后的内容必须是同样的共享方式。</p>
-
-<h5>署名（BY）-相同方式共享（SA）</h5>
-
-<p>署名，可以商用，可以演绎，但演绎后的作品必须是同样的共享方式。</p>
+<p>bytecode outline 插件用可读的方式展现了 Eclipse 的 Java 编辑器或类文件的字节码内容。它使用了 <a href="http://asm.ow2.org/">ASM 框 架</a>的部分组建来实现对字节码的展示（ASM 框架在另外一篇操纵 Java 字节码的博文中有提到过：<a href="http://biaobiaoqi.github.io/blog/2013/09/08/custom-premain-method/">《AOP 实践：java.lang.instrument 的使用》</a>，是一个轻量级的 Java 字节码的操纵框架。）。</p>
 
 </div>
   
   
     <footer>
-      <a rel="full-article" href="/blog/2013/07/10/cc-license/">Read on &rarr;</a>
+      <a rel="full-article" href="/blog/2013/10/25/java-bytecode-plugin-for-eclipse/">Read on &rarr;</a>
     </footer>
   
 
@@ -991,29 +588,28 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   <h1>标签云</h1>
  <br /> 
   <ul class="tag-cloud">
-    <a style="font-size: 112%" href="/tags/hadoop/">Hadoop</a> &nbsp 
-<a style="font-size: 139%" href="/tags/jvm/">JVM</a> &nbsp 
-<a style="font-size: 144%" href="/tags/java/">Java</a> &nbsp 
-<a style="font-size: 141%" href="/tags/pat/">PAT</a> &nbsp 
-<a style="font-size: 112%" href="/tags/octopress/">octopress</a> &nbsp 
-<a style="font-size: 135%" href="/tags/fen-bu-shi/">分布式</a> &nbsp 
-<a style="font-size: 133%" href="/tags/zi-jie-ma/">字节码</a> &nbsp 
-<a style="font-size: 135%" href="/tags/si-kao/">思考</a> &nbsp 
+    <a style="font-size: 143%" href="/tags/jvm/">JVM</a> &nbsp 
+<a style="font-size: 147%" href="/tags/java/">Java</a> &nbsp 
+<a style="font-size: 145%" href="/tags/pat/">PAT</a> &nbsp 
+<a style="font-size: 109%" href="/tags/octopress/">octopress</a> &nbsp 
+<a style="font-size: 115%" href="/tags/fen-bu-shi/">分布式</a> &nbsp 
+<a style="font-size: 137%" href="/tags/zi-jie-ma/">字节码</a> &nbsp 
+<a style="font-size: 137%" href="/tags/si-kao/">思考</a> &nbsp 
 <a style="font-size: 180%" href="/tags/ji-zhu/">技术</a> &nbsp 
-<a style="font-size: 124%" href="/tags/fang-fa-lun/">方法论</a> &nbsp 
-<a style="font-size: 106%" href="/tags/fu-wu-qi/">服务器</a> &nbsp 
-<a style="font-size: 137%" href="/tags/sheng-huo/">生活</a> &nbsp 
-<a style="font-size: 148%" href="/tags/suan-fa/">算法</a> &nbsp 
-<a style="font-size: 117%" href="/tags/wang-luo/">网络</a> &nbsp 
-<a style="font-size: 135%" href="/tags/du-shu/">读书</a>
+<a style="font-size: 128%" href="/tags/fang-fa-lun/">方法论</a> &nbsp 
+<a style="font-size: 109%" href="/tags/fu-wu-qi/">服务器</a> &nbsp 
+<a style="font-size: 139%" href="/tags/sheng-huo/">生活</a> &nbsp 
+<a style="font-size: 153%" href="/tags/suan-fa/">算法</a> &nbsp 
+<a style="font-size: 109%" href="/tags/wang-luo/">网络</a> &nbsp 
+<a style="font-size: 139%" href="/tags/du-shu/">读书</a> &nbsp 
+<a style="font-size: 109%" href="/tags/you-jian-fu-wu/">邮件服务</a>
 
   </ul>
 </section>
 <section>
   <h1>关于</h1>
    <p>biaobiaoqi是我的网络id。<br><br>
-   我的博客日志：<a href="http://biaobiaoqi.me/blog/2013/09/01/blog-log/">请戳</a><br><br>
-   更多信息请戳：<a href="http://about.me/biaobiaoqi">about.me</a><br>
+   我的博客日志：<a href="http://biaobiaoqi.github.io/blog/2013/09/01/blog-log/">请戳</a><br><br>
 	</p>
 </section>
 
