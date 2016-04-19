@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: 字节码 | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.io/tags/zi-jie-ma/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.io/"/>
-  <updated>2016-04-19T00:27:46+08:00</updated>
+  <updated>2016-04-19T08:49:46+08:00</updated>
   <id>http://biaobiaoqi.github.io/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -52,82 +52,6 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[在Eclipse里查看Java字节码]]></title>
-    <link href="http://biaobiaoqi.github.io/blog/2013/10/25/java-bytecode-plugin-for-eclipse/"/>
-    <updated>2013-10-25T04:06:00+08:00</updated>
-    <id>http://biaobiaoqi.github.io/blog/2013/10/25/java-bytecode-plugin-for-eclipse</id>
-    <content type="html"><![CDATA[<p>要理解Java字节码，比较推荐的方法是自己尝试编写源码对照字节码学习。其中阅读Java字节码的工具必不可少。虽然<code>javap</code>可以以可读的形式展示出.class文件中字节码，但每次改动源码都需调用命令行并不方便。这里介绍一个可以辅助阅读Java字节码的Eclipse插件：<a href="http://andrei.gmxhome.de/bytecode/">bytecode outline</a>。</p>
-
-<p>bytecode outline插件用可读的方式展现了Eclipse的Java编辑器或类文件的字节码内容。它使用了<a href="http://asm.ow2.org/">ASM框 架</a>的部分组建来实现对字节码的展示（ASM框架在另外一篇操纵Java字节码的博文中有提到过：<a href="http://biaobiaoqi.github.io/blog/2013/09/08/custom-premain-method/">《AOP实践：java.lang.instrument的使用》</a>，是一个轻量级的Java字节码的操纵框架。）。</p>
-
-<!--more-->
-
-
-<h2>插件安装</h2>
-
-<p>直接使用Update manager安装插件，非常简单：</p>
-
-<p><code>Help -&gt; Install new Software... -&gt; Work with:</code></p>
-
-<p>输入url：http://andrei.gmxhome.de/eclipse/</p>
-
-<p>然后在弹框中选择合适的版本即可。</p>
-
-<h2>使用</h2>
-
-<p>在Eclipse中添加相应的查看窗口：</p>
-
-<p><code>Window -&gt; Show View -&gt; Other -&gt; Java -&gt; Bytecode</code></p>
-
-<p>选中某Java源文件，效果如图：</p>
-
-<p><img src="http://biaobiaoqi.u.qiniudn.com/javabytecode1.png" alt="img" /></p>
-
-<p>同时，还可以使用同样的方法，添加Bytecode Reference窗口，用于查询各个Java字节码的文档，示例如下：</p>
-
-<p><img src="http://biaobiaoqi.u.qiniudn.com/javabytecode2.png" alt="img" /></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[在Eclipse里查看Java字节码]]></title>
-    <link href="http://biaobiaoqi.github.io/blog/2013/10/25/java-bytecode-plugin-for-eclipse/"/>
-    <updated>2013-10-25T04:06:00+08:00</updated>
-    <id>http://biaobiaoqi.github.io/blog/2013/10/25/java-bytecode-plugin-for-eclipse</id>
-    <content type="html"><![CDATA[<p>要理解Java字节码，比较推荐的方法是自己尝试编写源码对照字节码学习。其中阅读Java字节码的工具必不可少。虽然<code>javap</code>可以以可读的形式展示出.class文件中字节码，但每次改动源码都需调用命令行并不方便。这里介绍一个可以辅助阅读Java字节码的Eclipse插件：<a href="http://andrei.gmxhome.de/bytecode/">bytecode outline</a>。</p>
-
-<p>bytecode outline插件用可读的方式展现了Eclipse的Java编辑器或类文件的字节码内容。它使用了<a href="http://asm.ow2.org/">ASM框 架</a>的部分组建来实现对字节码的展示（ASM框架在另外一篇操纵Java字节码的博文中有提到过：<a href="http://biaobiaoqi.github.io/blog/2013/09/08/custom-premain-method/">《AOP实践：java.lang.instrument的使用》</a>，是一个轻量级的Java字节码的操纵框架。）。</p>
-
-<!--more-->
-
-
-<h2>插件安装</h2>
-
-<p>直接使用Update manager安装插件，非常简单：</p>
-
-<p><code>Help -&gt; Install new Software... -&gt; Work with:</code></p>
-
-<p>输入url：http://andrei.gmxhome.de/eclipse/</p>
-
-<p>然后在弹框中选择合适的版本即可。</p>
-
-<h2>使用</h2>
-
-<p>在Eclipse中添加相应的查看窗口：</p>
-
-<p><code>Window -&gt; Show View -&gt; Other -&gt; Java -&gt; Bytecode</code></p>
-
-<p>选中某Java源文件，效果如图：</p>
-
-<p><img src="http://biaobiaoqi.u.qiniudn.com/javabytecode1.png" alt="img" /></p>
-
-<p>同时，还可以使用同样的方法，添加Bytecode Reference窗口，用于查询各个Java字节码的文档，示例如下：</p>
-
-<p><img src="http://biaobiaoqi.u.qiniudn.com/javabytecode2.png" alt="img" /></p>
-]]></content>
-  </entry>
-  
-  <entry>
     <title type="html"><![CDATA[对Java字符串的探究]]></title>
     <link href="http://biaobiaoqi.github.io/blog/2013/09/08/string-interning/"/>
     <updated>2013-09-08T13:01:00+08:00</updated>
@@ -280,154 +204,354 @@ String str = new String("abc");
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[对Java字符串的探究]]></title>
-    <link href="http://biaobiaoqi.github.io/blog/2013/09/08/string-interning/"/>
+    <title type="html"><![CDATA[AOP实践：java.lang.instrument的使用]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2013/09/08/custom-premain-method/"/>
     <updated>2013-09-08T13:01:00+08:00</updated>
-    <id>http://biaobiaoqi.github.io/blog/2013/09/08/string-interning</id>
-    <content type="html"><![CDATA[<h2>问题的出发点</h2>
+    <id>http://biaobiaoqi.github.io/blog/2013/09/08/custom-premain-method</id>
+    <content type="html"><![CDATA[<h2>背景</h2>
 
-<p>在网上看到一道题：</p>
+<p>在<a href="https://github.com/biaobiaoqi/rcjp">rcjp</a>项目中，需要调用ASM API（用于字节码处理的开源库）对字节码进行处理，目标是实现对Java程序运行时各种对象的动态跟踪，并进一步分析各个对象之间的关系。在此之前，需要考虑如何获取程序运行的入口。</p>
 
-<p><code>java
-String str = new String("abc");
-</code></p>
+<p>首先，我考虑到了自定义类加载器（详情见参考资料），即在程序的main入口处，首先加载自定义的类加载器，然后通过反射技术使用这个类加载器加载并调用测试程序。这个方法缺点是：每次都必须先找到测试程序的入口类，而对于有的封装成jar的程序集合，这一点相对比较难控制。</p>
 
-<p>以上代码执行过程中生成了多少个String对象？</p>
+<p>于是，有了这里介绍的方法：通过 <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/instrument/package-summary.html">java.lang.instrument</a> 实现的java agent对象操作字节码，是一种<a href="http://en.wikipedia.org/wiki/Aspect-oriented_programming">AOP</a>的方法。</p>
 
-<p>答案写的是两个。"abc"本身是一个，而new又生成了一个。</p>
-
-<h2>"abc"是什么</h2>
-
-<p>查看这句程序的字节码，如下：
-```
-NEW String</p>
-
-<pre><code>DUP  
-LDC "abc"  
-INVOKESPECIAL String.&lt;init&gt;(String) : void  
-ASTORE 1   
-</code></pre>
-
-<p><code>``
-指令</code>ldc indexbyte`的含义：将两字节的值从indexbyte索引的常量池中加载到方法栈上。</p>
-
-<p>指令<code>LDC "abc"</code>说明了"abc"并不是直接以对象存在的，而是存在于常量池的索引中。String的构造函数调用命令实际使用的就是String类型作为参数，那么，栈上应该有一个String类型的索引。</p>
-
-<p>由此我们得出，在字节码中，ldc命令在常量池中找到了能索引到“abc”那个String对象的索引值。</p>
-
-<h2>常量池</h2>
-
-<p>常量池是类文件（.class）文件中的一部分，记录了许多常量信息，索引的字符串信息。</p>
-
-<p>由于Java是动态加载的，类文件并没有包含程序运行时的内存布局，方法调用等无法直接记录出方法的物理位置，常量池通过索引的方法解决了这个问题。</p>
+<p>程序中，除了ASMAgent 以外的所有类都是调用ASM API 实现对测试程序中各个对象的构造、方法调用、属性赋值等操作行为的记录（其中对Collection子类的处理着实费了一番心血= =，字节码操作很细节，容易出错）。</p>
 
 <!--more-->
 
 
-<p>常量池中存着许多表，其中Constant_Utf8_info表中，记录着会被初始化为String对象的字符串的字面值（iteral）。
-而在String 的java doc中，有对String字面值的说明：</p>
+<h2>原理</h2>
 
-<blockquote><p>All string literals in Java programs, such as "abc", are implemented as instances of this class.</p></blockquote>
+<p><a href="http://www.ibm.com/developerworks/cn/java/j-lo-jse61/index.html#N100A7">JVMTI（Java Virtual Machine Tool Interface）</a>是一套本地编程接口集合，它提供了一套『代理』机制，可以支持第三方工具程序以代理的方式连接和访问 JVM，并利用 JVMTI 提供的丰富的编程接口，完成很多跟 JVM 相关的功能。</p>
 
-<p>在Java编译的过程中，确定下来的String字面值都先被优化记录在常量池中（那些双引号字符串，都是以CONSTANT_utf8_info的形式存储在常量池中的）。也就是说，Java源代码文件中出现的那些诸如"abc"字符串，都已经被提前放在了常量池中。</p>
+<p>java.lang.instrument 包的实现，也就是基于这种机制的：在 Instrumentation 的实现当中，存在一个 JVMTI 的代理程序，通过调用 JVMTI 当中 Java 类相关的函数来完成 Java 类的动态操作。</p>
 
-<p>可以使用如下代码验证这一点：</p>
+<p>Instrumentation 的最大作用就是类定义的动态改变和操作。在 Java SE 5 及其后续版本当中，开发者可以在一个普通 Java 程序（带有 main 函数的 Java 类）运行时，通过 – javaagent参数指定一个特定的 jar 文件（包含 Instrumentation 代理）来启动 Instrumentation 的代理程序。</p>
+
+<h2>步骤</h2>
+
+<h3>1.编写java代理类</h3>
+
+<p>这个类中，premain方法是关键，对比于一般的入口main一样，这里的premain是在main之前执行的。它会告诉JVM如何处理加载上来的java字节码。如下例：</p>
 
 <p>```java
-public class Program<br/>
+public static void premain(String agentArgs, Instrumentation inst) {</p>
+
+<pre><code>                Trace.BeginTrace(); // it's important for trace files  
+        inst.addTransformer(new ASMAgent());  
+    }  
+</code></pre>
+
+<p>```</p>
+
+<p>值得注意的是，addTransformer实现了对字节码处理的方法的回调。</p>
+
+<p><code>java
+inst.addTransformer(new ASMAgent());  
+</code></p>
+
+<p>类ASMAgent包含着实现对java字节码处理的方法：transform()。它来自于ClassFileTransformer接口。为了方便，这里将对ClassFileTransformer接口的实现跟ASMAgent类放在了一起。其中classfileBuffer是类文件加载时的原始的字节码，retVal则是经过处理后的字节码。</p>
+
+<p>```java
+public byte[] transform(ClassLoader loader, String className,Class&lt;?> classBeingRedefined,</p>
+
+<pre><code>                                    ProtectionDomain protectionDomain,byte[] classfileBuffer)  
+        throws IllegalClassFormatException {  
+        byte[] retVal = null;  
+
+        if(isInstrumentable(className)){    
+            ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);  
+            ASMClassAdapter mca = new ASMClassAdapter(cw);   
+            ClassReader cr = new ClassReader(classfileBuffer);  
+            cr.accept(mca, 0);  
+            retVal = cw.toByteArray();  
+        }else{  
+                retVal = classfileBuffer ;  
+            }  
+
+        return retVal;  
+}  
+</code></pre>
+
+<p>```</p>
+
+<h3>2.打包代理类</h3>
+
+<p>只有合理打包并在manifest文件中记录下相应的键值对之后，才能正常执行premain的内容。
+manifest文件中需要添加的键值对是：
+<code>
+Premain-Class : biaobiaoqi.asm.ASMAgent  
+</code></p>
+
+<p>如果对字节码的处理有应用到了其他的类，需要在manifest中增加路径。比如使用到了asm-3.0.jar，则增加如下语句：
+<code>
+Class-Path: asm-3.0.jar  
+</code></p>
+
+<h3>3.执行</h3>
+
+<p>执行测试程序时，添加“-javaagent:代理类的jar[=传入premain的参数]”选项。</p>
+
+<p>比如，对于博主的程序，就是</p>
+
+<p><code>java -javaagent:ASMInstrument.jar   -jar XXXX.jar  xxxx</code></p>
+
+<p>其中ASMInstrument.jar 是第二步中打包的程序，  XXX.jar是需要测试的程序， xxx是XXX.jar 执行时可能的命令行参数。</p>
+
+<p>如果只是执行某.class文件中的类，我们假设是在当前目录下的一个XXXX类，则是：
+<code>java -javaagent:ASMInstrument.jar   -cp ./  XXXX xxx</code></p>
+
+<p>其中xxx是可能的命令行参数。</p>
+
+<h3>参考资料</h3>
+
+<ul>
+<li><a href="http://www.ibm.com/developerworks/cn/java/j-lo-jse61/index.html">《Java SE 6 新特性: Instrumentation 新功能》</a></li>
+<li><a href="http://biaobiaoqi.github.io/blog/2013/09/08/java-class-loader-in-practice/">《Java类加载器编程实践》</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Java构造方法中的执行顺序]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2013/09/08/strange-behavior-using-braces-in-java/"/>
+    <updated>2013-09-08T12:58:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2013/09/08/strange-behavior-using-braces-in-java</id>
+    <content type="html"><![CDATA[<p>这道题来自<a href="http://stackoverflow.com/questions/8185780/strange-behavior-using-braces-in-java/8186881#8186881">stackoverflow</a>。</p>
+
+<h2>问题描述：</h2>
+
+<p>有如下代码，求其输出内容。</p>
+
+<p>```java
+public class Test<br/>
 {</p>
 
-<pre><code>public static void main(String[] args)  
+<pre><code>public int a = 10;  
+Test(){System.out.println("1");}  
+
+{System.out.println("2");}  
+
+static{System.out.println("3");}  
+
+public static void main(String args[])  
 {  
-   String str1 = "Hello";    
-   String str2 = "Hello";   
-   System.out.print(str1 == str2);  
+    new Test();  
+}  
+</code></pre>
+
+<p>}
+```</p>
+
+<h2>分析</h2>
+
+<p>作为静态区段的语句，容易知道，3是会最先出现的。容易弄错的一点是1和2的出现顺序。</p>
+
+<p>我们可以参考字节码来分析。在eclipse中使用ASM bytecode 插件，得到相应的字节码：</p>
+
+<p>```java
+// class version 50.0 (50)<br/>
+// access flags 0x21<br/>
+public class Test {<br/>
+  // compiled from: Test.java<br/>
+  static <clinit>() : void</p>
+
+<pre><code>GETSTATIC System.out : PrintStream  
+LDC "3"  
+INVOKEVIRTUAL PrintStream.println(String) : void  
+RETURN  
+</code></pre>
+
+<p>  <init>() : void</p>
+
+<pre><code>ALOAD 0: this  
+INVOKESPECIAL Object.&lt;init&gt;() : void  
+ALOAD 0: this  
+BIPUSH 10  
+PUTFIELD Test.a : int  
+GETSTATIC System.out : PrintStream  
+LDC "2"  
+INVOKEVIRTUAL PrintStream.println(String) : void  
+GETSTATIC System.out : PrintStream  
+LDC "1"  
+INVOKEVIRTUAL PrintStream.println(String) : void  
+RETURN  
+</code></pre>
+
+<p>  public static main(String[]) : void</p>
+
+<pre><code>NEW Test  
+INVOKESPECIAL Test.&lt;init&gt;() : void  
+RETURN  
+</code></pre>
+
+<p>}
+```</p>
+
+<p>正如我们所想，3是被放在类构造方法中，这是类的初始化函数，固然在类的初始化时出现。</p>
+
+<!--more-->
+
+
+<p>而在构造方法中先出现2，之后才是1。问题的核心集中到对象构造方法的指令顺序问题。实际上，在对象构造方法中，会先执行一些隐性的指令，比如父类的构造方法、{}区段的内容等，然后再执行显性的构造方法中的指令：</p>
+
+<ol>
+<li>Java编译时，对象构造方法里先嵌入隐式的指令，完毕之后，再执行Java源代码中显示的代码。</li>
+<li>那些隐式的指令，包括父类的构造方法、变量的初始化、{}区段里的内容，并严格按照这个顺序嵌入到对象的构造方法中。</li>
+<li>{}区段里的内容和变量的初始化语句的执行顺序，依据源代码中本身的顺序执行。</li>
+</ol>
+
+
+<p>相关文章参见：<a href="http://biaobiaoqi.github.io/blog/2013/09/22/java-initialization/">《Java类、实例的初始化顺序》</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Java类的实例化总结]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2013/09/08/initliate-objects-in-java/"/>
+    <updated>2013-09-08T02:03:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2013/09/08/initliate-objects-in-java</id>
+    <content type="html"><![CDATA[<p>java类的实例化(instantiation)具有显性的和隐性的区别。</p>
+
+<p>写Java代码时，我们所使用new的方法实例化最简单直接的显性实例化。而隐性的实例化则出现在java程序的整个生命周期中，包括String、Class，StringBuffer 或者StringBuilder 的实例化等等。</p>
+
+<h2>显性的实例化</h2>
+
+<h3>new关键字实例化对象</h3>
+
+<p>调用相应的构造函数完成实例化。（类中的非静态成员变量如果有初始化语句，都会被隐式的加入到构造函数中）代码如下：
+```java</p>
+
+<p>public class Test  {</p>
+
+<pre><code>String strA = "xyz";  
+String strB ;  
+
+public Test(String str){  
+    strB = str ;  
+}  
+public static void main(String[] args){  
+        Test t = new Test("abc");  
 }  
 </code></pre>
 
 <p>}<br/>
 ```</p>
 
-<p>输出结果是true.说明"Hello"作为对象是被程序从同一个内存空间读取出来的。</p>
+<p>在eclipse中装了<a href="http://asm.ow2.org/">ASM bytecode</a>插件后，观察.class文件中的构造函数对应的字节码如下：</p>
 
-<p>常量池是编译时产生的，存在于类文件中（*.class文件）。运行时，JVM中每个对象都拥有自己的运行时常量池（run time constant pool）。</p>
+<!--more-->
 
-<h2>字符串池</h2>
 
-<p>我在JDK 6.0源码的String类中，发现了一个有趣的method：intern() ,我翻译如下：</p>
+<p><code>
+INVOKESPECIAL Object.&lt;init&gt;() : void  
+   ALOAD 0: this  
+   LDC "xyz"  
+   PUTFIELD Test.strA : String  
+   ALOAD 0: this  
+   ALOAD 1: str  
+   PUTFIELD Test.strB : String  
+   RETURN  
+</code></p>
 
-<blockquote><p>当intern方法被调用，如果池中已经拥有一个与该String的字符串值相等（即equals()调用后为true）的String对象时，那么池中的那个String对象会被返回。否则，池中会增加这个对象，并返回当前这个String对象。</p></blockquote>
+<p>关键在于<code>LDC"xyz"</code>这条指令，明显可以看出，这是用于strA初始化的字符串。</p>
 
-<p>其中有介绍一个字符串池的东西：字符串池（String pool），初始是空的，由类私有的控制。</p>
+<p>由此我们可以归纳出，在没有调用本类中其他的构造函数的情况下，每次类的构造函数中都会按如下顺序进行：</p>
 
-<p>查看java.lang.String的源代码，发现Intern()方法是一个native方法，即本地实现的方法，而不是Java方法，这让我们不能直观的看到字符串池的实现细节。不过能够理解字符串池其实是类似于线程池的缓冲器，可以起到节约内存的作用。如下代码可以验证</p>
+<ul>
+<li>a)隐式（或显性）的调用父类的构造函数</li>
+<li>b)然后执行写在构造函数外的成员变量的初始化赋值</li>
+<li>c)最后再执行构造函数中的命令。</li>
+</ul>
+
+
+<p>如果是有显性的调用本类其他构造函数（必须是放在构造函数第一步执行），那么对于这个构造函数，处理过程就简单些了：</p>
+
+<ul>
+<li>a)调用那个构造函数。</li>
+<li>b)执行之后的代码。</li>
+</ul>
+
+
+<h3>利用java反射机制</h3>
+
+<p>反射机制是是java动态性中的关键之一，调用java.lang.reflect.Constructor的newInstance()方法能创建对象。</p>
 
 <p>```java
-package biaobiaoqi.thinkingInJava;</p>
+public class Test  {</p>
 
-<p>public class Test {</p>
+<pre><code>public Test(){  
+    System.out.println("Created by invoking newInstance()");  
+}  
 
-<pre><code>public static void main(String[] args){  
+public Test(String str){  
+    System.out.println(str);  
+}  
 
-    String strA1 = "ab";  
-    String strA2 = "c";  
-    String strB1 = "a";  
-    String strB2 = "bc" ;  
-    System.out.println((strA1+strA2).intern() == (strB1 + strB2).intern());  
-
+public static void main(String[] args)  
+                throws ClassNotFoundException , InstantiationException ,  
+                IllegalAccessException  {  
+        Test t1 = new Test("Created with new"); //常规的方法  
+        Class myClass = Class.forName("Test");  //获得了对应于Test类的Class对象，如果没有加载，会先加载这个类，再返回。  
+        Test t2 = (Test)myClass.newInstance(); //调用newInstance()创建对象。  
 }  
 </code></pre>
 
-<p>}
-```
-输出结果为true。</p>
+<p>}<br/>
+```</p>
 
-<p>现代的JVM实现里，考虑到垃圾回收（Garbage Collection）的方便，将内存区域<a href="http://en.wikipedia.org/wiki/Java_Virtual_Machine#Heap">heap</a>划分为三部分： young generation 、 tenured generation（old generation）和 permanent generation(也就是方法区），方法区存储着类、静态变量、常量等信息。字符串池是为了解决字符串重复的问题，存在于方法区中。</p>
+<h3>其他</h3>
 
-<p>回过头来看看文章刚开始的那个问题。</p>
+<p>其他还有对象的clone()方法，以及串行化后的解串行化过程。</p>
 
-<p><code>java
-String str = new String("abc");
-</code>
-这里确实是有两个String对象生成了。<code>new String("xxx")</code> 创建的String 对象会在堆中生成对象。而如果使用<code>String str = "xxx"</code>则先查看字符串池 是否已经存在，存在则直接返回该String 对象，否则生成新的String 对象，并将它加入字符串池中。</p>
+<h2>隐性的实例化</h2>
 
-<h2>intern()的应用</h2>
+<p>隐性的实例化主要有如下几类：</p>
 
-<p>在JDK 源码中查找对String.intern()的调用，发现诸如java.lang.Class中就有方法调用了它：
-```
- private Field searchFields(Field[] fields, String name) {</p>
+<ul>
+<li>1.String和String数组。main(String[] args)中拥有的args参数为String数组类型，这些command line参数将会首先被实例化。</li>
+<li>2.Class的实例化。由于类的加载过程中，会生成相应类的Class对象，这些也会被隐性的实例化。</li>
+<li>3.JVM在执行类加载的过程中，对常量池中的CONSTANT_String_info项会实例化出对应的String对象。这里涉及到常量池解析的知识。</li>
+<li>4.在String的操作中，可能存在隐性的StringBuffer 或者StringBuilder的实例化。</li>
+<li>5.int和Integer这些类型转化过程中的装箱、拆箱。</li>
+</ul>
 
-<pre><code>    String internedName = name.intern();
-    for (int i = 0; i &lt; fields.length; i++) {
-        if (fields[i].getName() == internedName) {
-            return getReflectionFactory().copyField(fields[i]);
-        }
-    }
-    return null;
-}
+
+<p>比如如下代码：
+``` java
+public class Test  {</p>
+
+<pre><code>public static void main(String[] args){  
+        String str1 = "abc";  
+        String str2 = "def";  
+        String str = str1 + str2 ;  
+}  
 </code></pre>
 
-<p>```
-这里获得的internedName</p>
+<p>}<br/>
+```</p>
 
-<h2>总结</h2>
+<p>在eclipse中装了ASM bytecode插件后，直接观察.class文件对应的字节码：
+```
+NEW StringBuilder</p>
 
-<ul>
-<li><p>编译Java源代码时，源文件中出现的双引号内的字符串都被收纳到常量池中，用CONSTANT_utf8_info项存储着。</p></li>
-<li><p>JVM中，相应的类被加载运行后，常量池对应的映射到JVM的运行时常量池中。其中每项CONSTANT_utf8_info（也就试记录那些字符串的）都会在常量引用解析时，自动生成相应的internal String，记录在字符串池中。</p></li>
-<li><p>尽量使用<code>String str = "abc";</code>，而不是<code>String str = new String("abc")；</code>。用new的方法肯定会开辟新的堆空间，而前者的方法，则会通过string interning优化。</p></li>
-<li><p>JDK的实现也一直在优化，</p></li>
-</ul>
+<pre><code>DUP  
+ALOAD 1: str1  
+INVOKESTATIC String.valueOf(Object) : String  
+INVOKESPECIAL StringBuilder.&lt;init&gt;(String) : void  
+ALOAD 2: str2  
+INVOKEVIRTUAL StringBuilder.append(String) : StringBuilder  
+INVOKEVIRTUAL StringBuilder.toString() : String  
+ASTORE 3  
+</code></pre>
 
+<p>```</p>
 
-<h3>参考资料</h3>
+<p>实际上，这里str1 和 str2合并的过程，是使用了StringBuilder来间接完成的，首先以str1的值构造一个StringBuilder，然后调用其中的append()方法，将str2串联上来。</p>
 
-<ul>
-<li><a href="http://www.codeinstructions.com/2009/01/busting-javalangstringintern-myths.html">Busting java.lang.String.intern() Myths</a></li>
-<li><a href="http://www.xyzws.com/Javafaq/what-is-string-literal-pool/3">What is String literal pool? How to create a String</a></li>
-<li><a href="http://stackoverflow.com/questions/4918399/what-type-of-memory-heap-or-stack-string-constant-pool-in-java-gets-stored">What type of memory (Heap or Stack) String constant pool in Java gets stored?</a></li>
-</ul>
-
+<p>值得注意的是：老版本的java使用StringBuffer完成这一步，但StringBuffer是线程安全的，效率略低，于是在新版本java中出现了非线程安全的StringBuilder，这类似于Hashtable 和 hashset的关系。</p>
 ]]></content>
   </entry>
   

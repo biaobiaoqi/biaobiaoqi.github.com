@@ -9,7 +9,7 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="这次的题目来源是 2013 年 10 月 7 日下午的浙大计算机研究生招生机试题。 这次题目的难度，按姥姥的说法是：『比普通的 PAT 要难了 0.5 个点。我是把自己的题目从 1.0 到 5.0 以 0.5 的间距分难度级别的，PAT(A)难度一般在 1.5-4.5 之间，保研考试一般在 2.0 &hellip;">
+  <meta name="description" content="背景 实验室有二十来台 PC 机，30+的服务器集群，网络拓扑比较复杂。简单地说，有网关连着校网，校网无法直接访问学校外的网络，只能通过拨 vpn 来实现外网访问。而校网最近也不稳定，时常断网。 今天，实验室的一台电脑今天突然出无法上网了，而其他人则在正常上网。症状很奇怪： 浏览器只能上 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -107,7 +107,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/10/08/pat-1065-pat-1068/">PAT 1065 - 1068 题解</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/04/23/winsock-kills-internet/">Winsock出错引起的断网</a></h1>
     
     
       <p class="meta">
@@ -123,28 +123,33 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
 
 
-<time datetime="2013-10-08T13:46:00+08:00" pubdate data-updated="true">Oct 8<span>th</span>, 2013</time>
+<time datetime="2013-04-23T22:24:00+08:00" pubdate data-updated="true">Apr 23<span>rd</span>, 2013</time>
         
-         | <a href="/blog/2013/10/08/pat-1065-pat-1068/#disqus_thread">Comments</a>
+         | <a href="/blog/2013/04/23/winsock-kills-internet/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>这次的题目来源是 2013 年 10 月 7 日下午的浙大计算机研究生招生机试题。</p>
+  <div class="entry-content"><h3>背景</h3>
 
-<p>这次题目的难度，按姥姥的说法是：『比普通的 PAT 要难了 0.5 个点。我是把自己的题目从 1.0 到 5.0 以 0.5 的间距分难度级别的，PAT(A)难度一般在 1.5-4.5 之间，保研考试一般在 2.0-5.0 之间。PAT(B)大概是 1.0-2.5 的难度。』。</p>
+<p>实验室有二十来台 PC 机，30+的服务器集群，网络拓扑比较复杂。简单地说，有网关连着校网，校网无法直接访问学校外的网络，只能通过拨 vpn 来实现外网访问。而校网最近也不稳定，时常断网。</p>
 
-<p>个人认为，其中 1066 模拟 AVL 插入的实现有些细节容易弄错，而 1068 只要会简单的 DP，也就没有问题了，1065 和 1066 都还是很简单的实现。</p>
+<p>今天，实验室的一台电脑今天突然出无法上网了，而其他人则在正常上网。症状很奇怪：</p>
 
-<p>下面是各个题的分析（PAT advanced level 本人实现的全部源码：<a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel">请戳</a>）。</p>
+<ul>
+<li>浏览器只能上 google，其他任何网站都上不去。</li>
+<li>QQ、ftp 等各种需要连网的软件也都无法正常连网。</li>
+<li>一切的发生，只是在 PC 使用者认为正常的操作中发生：上网，连网下围棋，聊 QQ，然后…</li>
+</ul>
+
 
 </div>
   
   
     <footer>
-      <a rel="full-article" href="/blog/2013/10/08/pat-1065-pat-1068/">Read on &rarr;</a>
+      <a rel="full-article" href="/blog/2013/04/23/winsock-kills-internet/">Read on &rarr;</a>
     </footer>
   
 
@@ -156,7 +161,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/10/08/pat-1065-pat-1068/">PAT 1065 - 1068 题解</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/04/20/are-you-smart-enough-to-work-at-google/">《谁是谷歌想要的人才？》</a></h1>
     
     
       <p class="meta">
@@ -172,28 +177,30 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
 
 
-<time datetime="2013-10-08T13:46:00+08:00" pubdate data-updated="true">Oct 8<span>th</span>, 2013</time>
+<time datetime="2013-04-20T00:47:00+08:00" pubdate data-updated="true">Apr 20<span>th</span>, 2013</time>
         
-         | <a href="/blog/2013/10/08/pat-1065-pat-1068/#disqus_thread">Comments</a>
+         | <a href="/blog/2013/04/20/are-you-smart-enough-to-work-at-google/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>这次的题目来源是 2013 年 10 月 7 日下午的浙大计算机研究生招生机试题。</p>
+  <div class="entry-content"><p><em>道理都明白，还得靠自己</em></p>
 
-<p>这次题目的难度，按姥姥的说法是：『比普通的 PAT 要难了 0.5 个点。我是把自己的题目从 1.0 到 5.0 以 0.5 的间距分难度级别的，PAT(A)难度一般在 1.5-4.5 之间，保研考试一般在 2.0-5.0 之间。PAT(B)大概是 1.0-2.5 的难度。』。</p>
+<h3>关于本书</h3>
 
-<p>个人认为，其中 1066 模拟 AVL 插入的实现有些细节容易弄错，而 1068 只要会简单的 DP，也就没有问题了，1065 和 1066 都还是很简单的实现。</p>
+<p>藉由大多数程序员天然的对 google 怀有的朝圣般的向往和喜爱，开始看<a href="http://book.douban.com/subject/21329264/">这本书</a>。</p>
 
-<p>下面是各个题的分析（PAT advanced level 本人实现的全部源码：<a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel">请戳</a>）。</p>
+<p><img class="left" src="http://img.cnbeta.com/upimg/121231/raymon725_1451506190985.jpg" width="250" height="400" title="Place Kitten #2" ></p>
+
+<p>书中的中文版序的标题就是“跳出框框来思考”，这种观点倒不是第一次见到了，甚至可以说，这些观点充斥于互联网上的各种流传、经验贴中。但这并不意味着我们不需要再花时间在这种书上。道理都懂，就是做不好已经成为这个信息通畅的时代的特征之一。正所谓“纸上得来终觉浅，绝知此事要躬行”。</p>
 
 </div>
   
   
     <footer>
-      <a rel="full-article" href="/blog/2013/10/08/pat-1065-pat-1068/">Read on &rarr;</a>
+      <a rel="full-article" href="/blog/2013/04/20/are-you-smart-enough-to-work-at-google/">Read on &rarr;</a>
     </footer>
   
 
@@ -205,7 +212,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/10/07/reset-nvram/">重置MBP的NVRAM</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/04/19/use-ssh/">SSH原理和使用</a></h1>
     
     
       <p class="meta">
@@ -221,30 +228,29 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
 
 
-<time datetime="2013-10-07T23:25:00+08:00" pubdate data-updated="true">Oct 7<span>th</span>, 2013</time>
+<time datetime="2013-04-19T21:44:00+08:00" pubdate data-updated="true">Apr 19<span>th</span>, 2013</time>
         
-         | <a href="/blog/2013/10/07/reset-nvram/#disqus_thread">Comments</a>
+         | <a href="/blog/2013/04/19/use-ssh/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><h3>遇到问题</h3>
+  <div class="entry-content"><h2>ssh 是什么</h2>
 
-<p>今天的中国好声音决赛之夜，我的 Mac 突然无法发出声响了=(，在此之前，刚看过一些视频，音频输出正常。</p>
+<p>在 linux 上工作，ssh 是必须要了解的技术方法。它可以建立起多台主机之间的安全的加密传输，以进行远程的访问、操控、传输数据。</p>
 
-<p>我尝试了使用 MBP 内建的外放和插入 iphone4s 的耳机并将音量调整到最大，没有任何声响。网上查阅了一些相关异常的资料，发现可能是 NVRAM 的问题。官方资料见链接：<a href="http://support.apple.com/kb/HT1379?viewlocale=zh_CN">《关于 NVRAM 和 PRAM》</a>。</p>
+<p>SSH 為 Secure Shell 的縮寫。為建立在应用层和传输层基础上的安全协议。</p>
 
-<p>按照重置 NVRAM 的方法操作后，果然 Mac 又拥有了声音，可以看好声音啊=)</p>
-
-<p>这里对 NVRAM 做一些记录：</p>
+<p>传统的网络服务程序，如 FTP、POP 和 Telnet 其本质上都是不安全的；因为它们在网络上用明文传送数据、用户帐号和用户口令，很容易受到中间人（man-in-the-middle）攻击方式的攻击。就是存在另一个人或者一台机器冒充真正的服务器接收用户传给服务器的数据，然后再冒充用户把数据传给真正的服务器。
+而 SSH 是目前较可靠，專为远程登录会话和其他网络服务提供安全性的协议。利用 SSH 协议可以有效防止远程管理过程中的信息泄露问题。透過 SSH 可以對所有传输的数据进行加密，也能够防止 DNS 欺骗和 IP 欺骗。</p>
 
 </div>
   
   
     <footer>
-      <a rel="full-article" href="/blog/2013/10/07/reset-nvram/">Read on &rarr;</a>
+      <a rel="full-article" href="/blog/2013/04/19/use-ssh/">Read on &rarr;</a>
     </footer>
   
 
@@ -256,7 +262,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/10/07/reset-nvram/">重置MBP的NVRAM</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/04/18/some-opinions-about-software-engineering/">关于软件工程的一些看法</a></h1>
     
     
       <p class="meta">
@@ -272,30 +278,24 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
 
 
-<time datetime="2013-10-07T23:25:00+08:00" pubdate data-updated="true">Oct 7<span>th</span>, 2013</time>
+<time datetime="2013-04-18T18:03:00+08:00" pubdate data-updated="true">Apr 18<span>th</span>, 2013</time>
         
-         | <a href="/blog/2013/10/07/reset-nvram/#disqus_thread">Comments</a>
+         | <a href="/blog/2013/04/18/some-opinions-about-software-engineering/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><h3>遇到问题</h3>
+  <div class="entry-content"><p>标题党了，其实实际的内容是[自己的项目经验总结和反思]。</p>
 
-<p>今天的中国好声音决赛之夜，我的 Mac 突然无法发出声响了=(，在此之前，刚看过一些视频，音频输出正常。</p>
-
-<p>我尝试了使用 MBP 内建的外放和插入 iphone4s 的耳机并将音量调整到最大，没有任何声响。网上查阅了一些相关异常的资料，发现可能是 NVRAM 的问题。官方资料见链接：<a href="http://support.apple.com/kb/HT1379?viewlocale=zh_CN">《关于 NVRAM 和 PRAM》</a>。</p>
-
-<p>按照重置 NVRAM 的方法操作后，果然 Mac 又拥有了声音，可以看好声音啊=)</p>
-
-<p>这里对 NVRAM 做一些记录：</p>
+<p>今天在高级软件工程课上，做了一次关于项目经验的展示。展示的主题围绕自己参与的移动互联网团队开发经验展开。借此机会，我整理了一下思路，于是有了以下的 slides。没时间码字，就先把 slides 直接贴上来啦:)</p>
 
 </div>
   
   
     <footer>
-      <a rel="full-article" href="/blog/2013/10/07/reset-nvram/">Read on &rarr;</a>
+      <a rel="full-article" href="/blog/2013/04/18/some-opinions-about-software-engineering/">Read on &rarr;</a>
     </footer>
   
 
@@ -307,7 +307,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/10/07/reset-nvram/">重置MBP的NVRAM</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/04/07/goodbye-seeme/">再见，Seeme</a></h1>
     
     
       <p class="meta">
@@ -323,30 +323,22 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
 
 
-<time datetime="2013-10-07T23:25:00+08:00" pubdate data-updated="true">Oct 7<span>th</span>, 2013</time>
+<time datetime="2013-04-07T23:26:00+08:00" pubdate data-updated="true">Apr 7<span>th</span>, 2013</time>
         
-         | <a href="/blog/2013/10/07/reset-nvram/#disqus_thread">Comments</a>
+         | <a href="/blog/2013/04/07/goodbye-seeme/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><h3>遇到问题</h3>
-
-<p>今天的中国好声音决赛之夜，我的 Mac 突然无法发出声响了=(，在此之前，刚看过一些视频，音频输出正常。</p>
-
-<p>我尝试了使用 MBP 内建的外放和插入 iphone4s 的耳机并将音量调整到最大，没有任何声响。网上查阅了一些相关异常的资料，发现可能是 NVRAM 的问题。官方资料见链接：<a href="http://support.apple.com/kb/HT1379?viewlocale=zh_CN">《关于 NVRAM 和 PRAM》</a>。</p>
-
-<p>按照重置 NVRAM 的方法操作后，果然 Mac 又拥有了声音，可以看好声音啊=)</p>
-
-<p>这里对 NVRAM 做一些记录：</p>
+  <div class="entry-content"><p>过年算是仪式感最强的节日之一了。不想将过年作为成熟的时间节点，因为生命总是在时间里沉淀。但社会的周期运作确确实实的依着四季来过度，于是总有些决定、变化需要在此执行和接受。真诚的向过去的一切道一声感谢。</p>
 
 </div>
   
   
     <footer>
-      <a rel="full-article" href="/blog/2013/10/07/reset-nvram/">Read on &rarr;</a>
+      <a rel="full-article" href="/blog/2013/04/07/goodbye-seeme/">Read on &rarr;</a>
     </footer>
   
 
@@ -358,7 +350,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/10/03/nine-algorithms-that-changed-the-future/">《改变未来的九大算法》</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/04/05/maximum-subsequence-sum/">分治、时间空间的权衡:最大合的连续字串问题</a></h1>
     
     
       <p class="meta">
@@ -374,28 +366,28 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
 
 
-<time datetime="2013-10-03T13:19:00+08:00" pubdate data-updated="true">Oct 3<span>rd</span>, 2013</time>
+<time datetime="2013-04-05T20:16:00+08:00" pubdate data-updated="true">Apr 5<span>th</span>, 2013</time>
         
-         | <a href="/blog/2013/10/03/nine-algorithms-that-changed-the-future/#disqus_thread">Comments</a>
+         | <a href="/blog/2013/04/05/maximum-subsequence-sum/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><h2>不要在意那些细节</h2>
+  <div class="entry-content"><p><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1007">PAT1007</a>：给定一个整数串，找出连续子串中合最大的子串。</p>
 
-<p>这是一本关于计算机世界的科普读物。豆瓣链接：<a href="http://book.douban.com/subject/24529132/">请戳</a>。</p>
+<p>《编程珠玑》中用专门的一章对这个问题进行了讲解。（《编程珠玑（第 2 版）》P73 第 8 章 算法设计技术）</p>
 
-<p>非常推荐刚接触计算机的朋友花上三五小时将全书通读一遍，没有技术细节，没有公式证明，它会告诉作者挑选出的九大算法出现的缘由和发展的过程。这些不关乎实现细节的思想概括，更能体现算法在整个领域中的存在的原因。它们不再是冷冰冰的算法过程，这是阅读大多数的书籍、教材所难以获得的。</p>
+<p>第一次在 PAT 上遇到这个题目时，我的思路如下：</p>
 
-<p>至于我的推荐原因，如下全文。</p>
+<p><del>最简单的淡然是一个三层循环咯，O(n3)，肯定会超时。节省时间的话，用动态规划吧。但简单的动态规划，显然是会超出内存限制的。有没有更巧妙的子问题划分方法呢？</del>先找到子问题：因为要求的串必须连续，分治的时候需要考虑如何延续这个连续性，那么每个子问题中就得考虑找出三个串：1.即左端连续的最大串，2.右端连续的最大串，3.整个串中的最大串.<del>由于每个问题都有三个量要维护，难道我得造出三个表来？卡主:(</del></p>
 
 </div>
   
   
     <footer>
-      <a rel="full-article" href="/blog/2013/10/03/nine-algorithms-that-changed-the-future/">Read on &rarr;</a>
+      <a rel="full-article" href="/blog/2013/04/05/maximum-subsequence-sum/">Read on &rarr;</a>
     </footer>
   
 
@@ -407,7 +399,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/10/03/nine-algorithms-that-changed-the-future/">《改变未来的九大算法》</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/04/05/tong-bing-kuai-le-zhe/">《痛并快乐着》</a></h1>
     
     
       <p class="meta">
@@ -423,28 +415,28 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
 
 
-<time datetime="2013-10-03T13:19:00+08:00" pubdate data-updated="true">Oct 3<span>rd</span>, 2013</time>
+<time datetime="2013-04-05T02:30:00+08:00" pubdate data-updated="true">Apr 5<span>th</span>, 2013</time>
         
-         | <a href="/blog/2013/10/03/nine-algorithms-that-changed-the-future/#disqus_thread">Comments</a>
+         | <a href="/blog/2013/04/05/tong-bing-kuai-le-zhe/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><h2>不要在意那些细节</h2>
+  <div class="entry-content"><h2>儿时没烙印下的痛与快乐</h2>
 
-<p>这是一本关于计算机世界的科普读物。豆瓣链接：<a href="http://book.douban.com/subject/24529132/">请戳</a>。</p>
+<p><img class="left" src="http://img3.douban.com/lpic/s4599357.jpg" width="150" height="250" title="Place Kitten #2" ></p>
 
-<p>非常推荐刚接触计算机的朋友花上三五小时将全书通读一遍，没有技术细节，没有公式证明，它会告诉作者挑选出的九大算法出现的缘由和发展的过程。这些不关乎实现细节的思想概括，更能体现算法在整个领域中的存在的原因。它们不再是冷冰冰的算法过程，这是阅读大多数的书籍、教材所难以获得的。</p>
+<p>这是一本让我内心平静的书。或许是因为他所讲，都是那十年来有亲身经历到过的。</p>
 
-<p>至于我的推荐原因，如下全文。</p>
+<p>《痛并快乐着》有二十来篇文章，每篇一个主题。所有的主题都围着个人在中国二十世纪后十年中的发展和社会的变迁中展开。文中，描述了白岩松如何从大学毕业后，几经波折获得了一个并非自己当初所想的工作，又如何在计划之外的点点滴滴中，将人生的珠子穿成了一根线。</p>
 
 </div>
   
   
     <footer>
-      <a rel="full-article" href="/blog/2013/10/03/nine-algorithms-that-changed-the-future/">Read on &rarr;</a>
+      <a rel="full-article" href="/blog/2013/04/05/tong-bing-kuai-le-zhe/">Read on &rarr;</a>
     </footer>
   
 
@@ -456,7 +448,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/10/03/nine-algorithms-that-changed-the-future/">《改变未来的九大算法》</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/04/04/pat-basic-level-1001-1010/">PAT Basic Level 1001-1010</a></h1>
     
     
       <p class="meta">
@@ -472,28 +464,27 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
 
 
-<time datetime="2013-10-03T13:19:00+08:00" pubdate data-updated="true">Oct 3<span>rd</span>, 2013</time>
+<time datetime="2013-04-04T01:50:00+08:00" pubdate data-updated="true">Apr 4<span>th</span>, 2013</time>
         
-         | <a href="/blog/2013/10/03/nine-algorithms-that-changed-the-future/#disqus_thread">Comments</a>
+         | <a href="/blog/2013/04/04/pat-basic-level-1001-1010/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><h2>不要在意那些细节</h2>
+  <div class="entry-content"><h2>背景</h2>
 
-<p>这是一本关于计算机世界的科普读物。豆瓣链接：<a href="http://book.douban.com/subject/24529132/">请戳</a>。</p>
+<p>算法开始练手了。从最简单的做起。这部分代码都是由 Java 实现。
+<strong><a href="http://pat.zju.edu.cn/contests/pat-b-practise">题目看这里</a></strong></p>
 
-<p>非常推荐刚接触计算机的朋友花上三五小时将全书通读一遍，没有技术细节，没有公式证明，它会告诉作者挑选出的九大算法出现的缘由和发展的过程。这些不关乎实现细节的思想概括，更能体现算法在整个领域中的存在的原因。它们不再是冷冰冰的算法过程，这是阅读大多数的书籍、教材所难以获得的。</p>
-
-<p>至于我的推荐原因，如下全文。</p>
+<p>我把所有 AC 过的<strong><a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/basiclevel">解题代码都贴到了我的 github</a></strong>上，就不贴到 blog 里啦。（确切的说，这个博客本身就是在 github 里，不是么:)）</p>
 
 </div>
   
   
     <footer>
-      <a rel="full-article" href="/blog/2013/10/03/nine-algorithms-that-changed-the-future/">Read on &rarr;</a>
+      <a rel="full-article" href="/blog/2013/04/04/pat-basic-level-1001-1010/">Read on &rarr;</a>
     </footer>
   
 
@@ -505,7 +496,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/09/30/jobs-and-jobs/">Jobs和jobs</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/03/17/kai-pian/">开篇</a></h1>
     
     
       <p class="meta">
@@ -521,79 +512,24 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
 
 
-<time datetime="2013-09-30T11:41:00+08:00" pubdate data-updated="true">Sep 30<span>th</span>, 2013</time>
+<time datetime="2013-03-17T10:18:00+08:00" pubdate data-updated="true">Mar 17<span>th</span>, 2013</time>
         
-         | <a href="/blog/2013/09/30/jobs-and-jobs/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>作为一个不太安分的技术男，或多或少会对乔布斯怀有敬意。</p>
-
-<p>我是从<a href="http://movie.douban.com/subject/1298084/">《硅谷海盗》</a>这部老片开始了解到乔布斯这个人的，查了下上映日期，竟然是我出生的第二天。那时候觉着演员挺帅啊，后来发现真人更有味道一点。<del>国内的互联网大佬们怎么不见如此气度的-,-。</del></p>
-
-<p>前天下午，和实验室的基友们一起去看了刚上映的<a href="http://movie.douban.com/subject/6877703/">《乔布斯》</a>。由于乔布斯的段子、事迹早已充斥到生活的各个角落，两个小时的观影我几乎是以一种期待下个情节的心情在审视电影的脉络：求学时代开始，Apple1 一炮打响，Apple2 大卖，Lisa 折戟，Macintosh 阻力重重，被赶出苹果，重回苹果，END。我试图将乔布斯真人带给社会的感动融入到电影的观影情绪里，但并不太奏效，电影缺了一些代入感。或许是库切的身体太壮脸太宽了的缘故，也或许是因为广电总局减掉了乔布斯和女友的 1 分钟激情戏。</p>
-
-<p>走出 Jobs，心里没有太多涟漪。世界倒是依旧的躁动——最近又迎来了找工作的季节。于是后面的节奏是，江湖上将流传着师兄师姐们的各种牛 offer 的传说，师弟师妹们各种仰慕，筹划着如何准备明年的面试，憧憬着明年的自己，以及抱怨着帝都魔都恶劣的生存条件和充沛的机遇并存的矛盾……充满着成王败寇的腥味，和纸醉金迷的浮躁。</p>
-
-<p>理想和现实的纠缠从来就不曾停息，欲望的高低贵贱也是如此。</p>
-
-<p>一场 Jobs，告诉我们<code>connecting the dolts</code>的感动。大家所追寻的 jobs，<code>dolts</code>在哪里？</p>
-
-<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.io/blog/2013/09/30/jobs-and-jobs/'>http://biaobiaoqi.github.io/blog/2013/09/30/jobs-and-jobs/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/09/30/jobs-and-jobs/">Jobs和jobs</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-30T11:41:00+08:00" pubdate data-updated="true">Sep 30<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/09/30/jobs-and-jobs/#disqus_thread">Comments</a>
+         | <a href="/blog/2013/03/17/kai-pian/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>作为一个不太安分的技术男，或多或少会对乔布斯怀有敬意。</p>
+  <div class="entry-content"><p>花了一下午时间，终于搭起了这个博客。</p>
 
-<p>我是从<a href="http://movie.douban.com/subject/1298084/">《硅谷海盗》</a>这部老片开始了解到乔布斯这个人的，查了下上映日期，竟然是我出生的第二天。那时候觉着演员挺帅啊，后来发现真人更有味道一点。<del>国内的互联网大佬们怎么不见如此气度的-,-。</del></p>
+<p>我会陆续将原来 csdn 博客中的内容筛选过来，将这个博客作为主博客。</p>
 
-<p>前天下午，和实验室的基友们一起去看了刚上映的<a href="http://movie.douban.com/subject/6877703/">《乔布斯》</a>。由于乔布斯的段子、事迹早已充斥到生活的各个角落，两个小时的观影我几乎是以一种期待下个情节的心情在审视电影的脉络：求学时代开始，Apple1 一炮打响，Apple2 大卖，Lisa 折戟，Macintosh 阻力重重，被赶出苹果，重回苹果，END。我试图将乔布斯真人带给社会的感动融入到电影的观影情绪里，但并不太奏效，电影缺了一些代入感。或许是库切的身体太壮脸太宽了的缘故，也或许是因为广电总局减掉了乔布斯和女友的 1 分钟激情戏。</p>
+<p>github 真是神器啊。感谢 github，『感谢』tc 最终没有封锁 github，让我得以有机会搭建这个独立博客。</p>
 
-<p>走出 Jobs，心里没有太多涟漪。世界倒是依旧的躁动——最近又迎来了找工作的季节。于是后面的节奏是，江湖上将流传着师兄师姐们的各种牛 offer 的传说，师弟师妹们各种仰慕，筹划着如何准备明年的面试，憧憬着明年的自己，以及抱怨着帝都魔都恶劣的生存条件和充沛的机遇并存的矛盾……充满着成王败寇的腥味，和纸醉金迷的浮躁。</p>
+<p>希望五年、十年、二十年过后，回过头来，依然能在这个博客中找到自己的脚印和梦想。</p>
 
-<p>理想和现实的纠缠从来就不曾停息，欲望的高低贵贱也是如此。</p>
-
-<p>一场 Jobs，告诉我们<code>connecting the dolts</code>的感动。大家所追寻的 jobs，<code>dolts</code>在哪里？</p>
-
-<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.io/blog/2013/09/30/jobs-and-jobs/'>http://biaobiaoqi.github.io/blog/2013/09/30/jobs-and-jobs/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.io/blog/2013/03/17/kai-pian/'>http://biaobiaoqi.github.io/blog/2013/03/17/kai-pian/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
 
 </div>
   
@@ -603,8 +539,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     </article>
   
   <div class="pagination">
-    
-      <a class="prev" href="/blog/page/9/">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     

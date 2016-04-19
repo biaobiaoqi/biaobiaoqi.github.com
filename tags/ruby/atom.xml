@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: ruby | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.io/tags/ruby/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.io/"/>
-  <updated>2016-04-19T00:27:46+08:00</updated>
+  <updated>2016-04-19T08:49:46+08:00</updated>
   <id>http://biaobiaoqi.github.io/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -114,206 +114,6 @@ Building site: source -> public
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[记排查octopress生成时的编码错误]]></title>
-    <link href="http://biaobiaoqi.github.io/blog/2014/03/06/troubleshoot-encoding-bugs-in-octopress/"/>
-    <updated>2014-03-06T21:48:00+08:00</updated>
-    <id>http://biaobiaoqi.github.io/blog/2014/03/06/troubleshoot-encoding-bugs-in-octopress</id>
-    <content type="html"><![CDATA[<p>前些日子经若亮童鞋提醒，我在<a href="http://biaobiaoqi.github.io/resources/">其他推荐</a>的页面中增加了对Dropbox和Linode等工具的推荐，一来分享这些好用的产品，二来期望刚接触这些工具的好心的朋友可以不吝啬时间用我的推荐码注册，让我获得一些分享的回报。</p>
-
-<p>改过页面内容后，照常的使用<code>rake preview</code>命令生成预览页面，打开浏览器，得到的却是一行孤零零的</p>
-
-<blockquote><p>Sorry, I can not find /</p></blockquote>
-
-<p><code>rake generate</code>后的结果更悲惨：</p>
-
-<!--more-->
-
-
-<p>```<br/>
-biaobiaoqi.github.com git:(source) ✗ rake generate</p>
-
-<h2>Generating Site with Jekyll</h2>
-
-<p>unchanged sass/screen.scss
-Configuration from /Users/shenyapeng/Development/biaobiaoqi.github.com/_config.yml
-Building site: source -> public
-/Users/shenyapeng/Development/biaobiaoqi.github.com/plugins/raw.rb:11:in `gsub': invalid byte sequence in UTF-8 (ArgumentError)</p>
-
-<pre><code> from /Users/shenyapeng/Development/biaobiaoqi.github.com/plugins/raw.rb:11:in `unwrap'
- from /Users/shenyapeng/Development/biaobiaoqi.github.com/plugins/octopress_filters.rb:18:in `post_filter'
- from /Users/shenyapeng/Development/biaobiaoqi.github.com/plugins/octopress_filters.rb:33:in `post_render'
- from /Users/shenyapeng/Development/biaobiaoqi.github.com/plugins/post_filters.rb:124:in `block in post_render'
- from /Users/shenyapeng/Development/biaobiaoqi.github.com/plugins/post_filters.rb:123:in `each'
- from /Users/shenyapeng/Development/biaobiaoqi.github.com/plugins/post_filters.rb:123:in `post_render'
- from /Users/shenyapeng/Development/biaobiaoqi.github.com/plugins/post_filters.rb:151:in `transform'
- from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/gems/jekyll-0.12.1/lib/jekyll/convertible.rb:88:in `do_layout'
- from /Users/shenyapeng/Development/biaobiaoqi.github.com/plugins/post_filters.rb:167:in `do_layout'
- from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/gems/jekyll-0.12.1/lib/jekyll/page.rb:100:in `render'
- from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/gems/jekyll-0.12.1/lib/jekyll/site.rb:204:in `block in render'
- from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/gems/jekyll-0.12.1/lib/jekyll/site.rb:203:in `each'
- from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/gems/jekyll-0.12.1/lib/jekyll/site.rb:203:in `render'
- from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/gems/jekyll-0.12.1/lib/jekyll/site.rb:41:in `process'
- from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/gems/jekyll-0.12.1/bin/jekyll:264:in `&lt;top (required)&gt;'
- from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/bin/jekyll:23:in `load'
- from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/bin/jekyll:23:in `&lt;main&gt;'
- from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/bin/ruby_executable_hooks:15:in `eval'
- from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/bin/ruby_executable_hooks:15:in `&lt;main&gt;’
-</code></pre>
-
-<p><code>``
-似乎是编码的问题：</code>invalid byte sequence in UTF-8`，但是我只是修改了普普通通的几行文字而已，怎么会有编码问题呢。</p>
-
-<p>恰逢自己刚因为SSD损坏重装了系统，编程环境也是刚刚配好，而且使用rvm安装ruby1.9.3的时候，提示文字中也有一些warning。我开始怀疑是不是ruby1.9.3没编译好的原因。</p>
-
-<p>设立对照实验，我在另外一台Ubuntu机器上clone下一个博客的repo，<code>rake generate</code>，结果竟然一切顺利。一切似乎都在说明就是开发环境的问题。</p>
-
-<p>我删除了之前的ruby1.9.3，甚至是rvm，重装后结果依旧。</p>
-
-<p>不能在一棵树上吊死，我不科学的将目标重新定位到markdown页面中的编码错误上（没想到后来事实证明奏效了……）。</p>
-
-<p>在git中新开启测试分支，在上面做回滚，测试修改页面内容前源码能否generate</p>
-
-<p>```</p>
-
-<h1>>git branch checkError</h1>
-
-<h1>>git checkout checkError</h1>
-
-<h1>>git log #找到修改前的提交码</h1>
-
-<h1>>git reset --hard xxx #xxx为相应的提交码</h1>
-
-<p>```</p>
-
-<p>然后<code>rake generate</code>竟然能成功= =#!，看来真的是修改的页面掺入了错误的编码。</p>
-
-<p>接下来是回到原来的分支上，通过diff命令定位错误代码：</p>
-
-<p>```</p>
-
-<h1>>git checkout source</h1>
-
-<h1>>git branch -d checkError  #删除测试分支</h1>
-
-<h1>>git diff  xxx #xxx为相应的提交码</h1>
-
-<p>```</p>
-
-<p>比较结果如下图，果然是有一个奇怪的字符。
-<img src="http://biaobiaoqi.u.qiniudn.com/8BB0BA73-9736-435D-9111-5E3BF8516299.png?imageView/2/w/800/h/800" alt="img" /></p>
-
-<p>查了下，这是<a href="http://zh.wikipedia.org/wiki/%E5%B7%A6%E8%87%B3%E5%8F%B3%E7%AC%A6%E8%99%9F">左至右符号</a>。莫非是从chrome浏览器复制地址时，不小心复制了它？</p>
-
-<p>进一步尝试发现，这个字符如果不与)相邻，是不会造成编码问题的。与)相邻时，一旦他们被markdown解析后，就出现了这个bug。</p>
-
-<p>有意思的是，另一台Ubuntu服务器上这个有编码隐患的repo时能够正常<code>rake generate</code>的。如下图，左边是mac上用vim打开包含隐患字符的文件截图，右边是Ubuntu上的截图。
-<img src="http://biaobiaoqi.u.qiniudn.com/371c00e86e5de776d262fedbce334f7a.jpeg?imageView/2/w/800/h/800" alt="img" /></p>
-
-<p>谁能告诉我理解这一现象的思路呢 >&lt;...</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[记排查octopress生成时的编码错误]]></title>
-    <link href="http://biaobiaoqi.github.io/blog/2014/03/06/troubleshoot-encoding-bugs-in-octopress/"/>
-    <updated>2014-03-06T21:48:00+08:00</updated>
-    <id>http://biaobiaoqi.github.io/blog/2014/03/06/troubleshoot-encoding-bugs-in-octopress</id>
-    <content type="html"><![CDATA[<p>前些日子经若亮童鞋提醒，我在<a href="http://biaobiaoqi.github.io/resources/">其他推荐</a>的页面中增加了对Dropbox和Linode等工具的推荐，一来分享这些好用的产品，二来期望刚接触这些工具的好心的朋友可以不吝啬时间用我的推荐码注册，让我获得一些分享的回报。</p>
-
-<p>改过页面内容后，照常的使用<code>rake preview</code>命令生成预览页面，打开浏览器，得到的却是一行孤零零的</p>
-
-<blockquote><p>Sorry, I can not find /</p></blockquote>
-
-<p><code>rake generate</code>后的结果更悲惨：</p>
-
-<!--more-->
-
-
-<p>```<br/>
-biaobiaoqi.github.com git:(source) ✗ rake generate</p>
-
-<h2>Generating Site with Jekyll</h2>
-
-<p>unchanged sass/screen.scss
-Configuration from /Users/shenyapeng/Development/biaobiaoqi.github.com/_config.yml
-Building site: source -> public
-/Users/shenyapeng/Development/biaobiaoqi.github.com/plugins/raw.rb:11:in `gsub': invalid byte sequence in UTF-8 (ArgumentError)</p>
-
-<pre><code> from /Users/shenyapeng/Development/biaobiaoqi.github.com/plugins/raw.rb:11:in `unwrap'
- from /Users/shenyapeng/Development/biaobiaoqi.github.com/plugins/octopress_filters.rb:18:in `post_filter'
- from /Users/shenyapeng/Development/biaobiaoqi.github.com/plugins/octopress_filters.rb:33:in `post_render'
- from /Users/shenyapeng/Development/biaobiaoqi.github.com/plugins/post_filters.rb:124:in `block in post_render'
- from /Users/shenyapeng/Development/biaobiaoqi.github.com/plugins/post_filters.rb:123:in `each'
- from /Users/shenyapeng/Development/biaobiaoqi.github.com/plugins/post_filters.rb:123:in `post_render'
- from /Users/shenyapeng/Development/biaobiaoqi.github.com/plugins/post_filters.rb:151:in `transform'
- from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/gems/jekyll-0.12.1/lib/jekyll/convertible.rb:88:in `do_layout'
- from /Users/shenyapeng/Development/biaobiaoqi.github.com/plugins/post_filters.rb:167:in `do_layout'
- from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/gems/jekyll-0.12.1/lib/jekyll/page.rb:100:in `render'
- from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/gems/jekyll-0.12.1/lib/jekyll/site.rb:204:in `block in render'
- from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/gems/jekyll-0.12.1/lib/jekyll/site.rb:203:in `each'
- from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/gems/jekyll-0.12.1/lib/jekyll/site.rb:203:in `render'
- from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/gems/jekyll-0.12.1/lib/jekyll/site.rb:41:in `process'
- from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/gems/jekyll-0.12.1/bin/jekyll:264:in `&lt;top (required)&gt;'
- from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/bin/jekyll:23:in `load'
- from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/bin/jekyll:23:in `&lt;main&gt;'
- from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/bin/ruby_executable_hooks:15:in `eval'
- from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/bin/ruby_executable_hooks:15:in `&lt;main&gt;’
-</code></pre>
-
-<p><code>``
-似乎是编码的问题：</code>invalid byte sequence in UTF-8`，但是我只是修改了普普通通的几行文字而已，怎么会有编码问题呢。</p>
-
-<p>恰逢自己刚因为SSD损坏重装了系统，编程环境也是刚刚配好，而且使用rvm安装ruby1.9.3的时候，提示文字中也有一些warning。我开始怀疑是不是ruby1.9.3没编译好的原因。</p>
-
-<p>设立对照实验，我在另外一台Ubuntu机器上clone下一个博客的repo，<code>rake generate</code>，结果竟然一切顺利。一切似乎都在说明就是开发环境的问题。</p>
-
-<p>我删除了之前的ruby1.9.3，甚至是rvm，重装后结果依旧。</p>
-
-<p>不能在一棵树上吊死，我不科学的将目标重新定位到markdown页面中的编码错误上（没想到后来事实证明奏效了……）。</p>
-
-<p>在git中新开启测试分支，在上面做回滚，测试修改页面内容前源码能否generate</p>
-
-<p>```</p>
-
-<h1>>git branch checkError</h1>
-
-<h1>>git checkout checkError</h1>
-
-<h1>>git log #找到修改前的提交码</h1>
-
-<h1>>git reset --hard xxx #xxx为相应的提交码</h1>
-
-<p>```</p>
-
-<p>然后<code>rake generate</code>竟然能成功= =#!，看来真的是修改的页面掺入了错误的编码。</p>
-
-<p>接下来是回到原来的分支上，通过diff命令定位错误代码：</p>
-
-<p>```</p>
-
-<h1>>git checkout source</h1>
-
-<h1>>git branch -d checkError  #删除测试分支</h1>
-
-<h1>>git diff  xxx #xxx为相应的提交码</h1>
-
-<p>```</p>
-
-<p>比较结果如下图，果然是有一个奇怪的字符。
-<img src="http://biaobiaoqi.u.qiniudn.com/8BB0BA73-9736-435D-9111-5E3BF8516299.png?imageView/2/w/800/h/800" alt="img" /></p>
-
-<p>查了下，这是<a href="http://zh.wikipedia.org/wiki/%E5%B7%A6%E8%87%B3%E5%8F%B3%E7%AC%A6%E8%99%9F">左至右符号</a>。莫非是从chrome浏览器复制地址时，不小心复制了它？</p>
-
-<p>进一步尝试发现，这个字符如果不与)相邻，是不会造成编码问题的。与)相邻时，一旦他们被markdown解析后，就出现了这个bug。</p>
-
-<p>有意思的是，另一台Ubuntu服务器上这个有编码隐患的repo时能够正常<code>rake generate</code>的。如下图，左边是mac上用vim打开包含隐患字符的文件截图，右边是Ubuntu上的截图。
-<img src="http://biaobiaoqi.u.qiniudn.com/371c00e86e5de776d262fedbce334f7a.jpeg?imageView/2/w/800/h/800" alt="img" /></p>
-
-<p>谁能告诉我理解这一现象的思路呢 >&lt;...</p>
-]]></content>
-  </entry>
-  
-  <entry>
     <title type="html"><![CDATA[用Ruby实现的论坛灌水工具：CC98 Post Machine]]></title>
     <link href="http://biaobiaoqi.github.io/blog/2013/11/05/cc98-post-machine/"/>
     <updated>2013-11-05T15:20:00+08:00</updated>
@@ -393,81 +193,62 @@ SPEED is the time gap unit between two posts, it may be 1(s), 10(s) or any other
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[用Ruby实现的论坛灌水工具：CC98 Post Machine]]></title>
-    <link href="http://biaobiaoqi.github.io/blog/2013/11/05/cc98-post-machine/"/>
-    <updated>2013-11-05T15:20:00+08:00</updated>
-    <id>http://biaobiaoqi.github.io/blog/2013/11/05/cc98-post-machine</id>
-    <content type="html"><![CDATA[<p>ZJU的校网论坛CC98比较活跃。论坛只对校内网开放，而且账号跟学生绑定，每个学生注册的账号数量有限。『十大』是CC98的经典页面：基于关注的人数（回帖的用户数而不是回帖的数量）用算法求出24小时内最火爆的十个发帖。很多同学都会浏览十大，关注论坛动态。</p>
+    <title type="html"><![CDATA[octopress第三方插件：博文同步工具syncPost]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2013/08/31/octopress-3rd-party-plugin-syncpost/"/>
+    <updated>2013-08-31T19:30:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2013/08/31/octopress-3rd-party-plugin-syncpost</id>
+    <content type="html"><![CDATA[<p>为了增加外链等考虑，独立博客往往有将博文同步到其他博客社区的需求。自己人肉黏贴的方式笨拙、重复，对于程序猿而言，着实不可取。</p>
 
-<p>故事就是从十大引出的。有的社团在宣传活动时，为了扩大宣传面，会发动成员的小马甲顶贴上十大。这种违背社区自然发展轨迹的手段，强奸了关注十大贴的用户的意愿，阻碍了信息的自由流动。</p>
+<p>我在github上找到了<a href="https://github.com/huangbowen521/octopress-syncPost">syncPost</a>这个针对octopress的第三方工具，能够通过一些论坛提供的<a href="http://en.wikipedia.org/wiki/MetaWeblog">metaWeblog</a>服务实现octopress最新一篇博文的同步提交。</p>
 
-<p>于是萌生了完成一个批量发帖的机器，以其人之道还治其人之身的想法。在下次十大被宣传贴攻占时，能有反击的工具。</p>
+<p>这大概就是我要找的东西吧。不过，其中有些细节并不是我想要的：</p>
 
-<p>工具的用途很简单：使用不同的用户身份模拟真人论坛回帖，增加帖子关注度，以抵抗宣传贴。流程如下：提前收集各路亲朋好友的用户信息作为『预备水军』，『灌水』时，在评论内容文件中输入自定义的评论内容，在命令行参数中制定目标贴，即可实现随机顺序的用户自动顶贴。鉴于现在的功能是顶贴竞争十大，而十大排名是根据关注人数也就是独立用户评论数量做排序的，这里设计的顶贴策略是一个马甲发一条评论。以后可以考虑增加灵活的配置方案，实现更多功能。</p>
+<ul>
+<li>1.在本地配置文件存储论坛账户的密码。虽然可以设置为ignore不提交到git代码库中，但这也并不安全。</li>
+<li>2.只能同步最新的一篇博客，没有整体的博文搬家功能。</li>
+<li>3.先比其他的octopress插件，原来版本的代码结构难于维护，比如有自己单独的配置文件，而不是使用全局的<code>_config.yml</code>(在那个版本中大概是为了不把明文密码提交到版本库中)，比如ruby文件单独在一个<code>_custom</code>文件夹下等</li>
+</ul>
 
-<p>项目Github地址：<a href="https://github.com/biaobiaoqi/CC98PostMachine/">https://github.com/biaobiaoqi/CC98PostMachine/</a></p>
 
-<p>介于这个工具本身的罪恶的攻击属性，在此强调，工程仅供学习交流和对抗宣传贴。</p>
+<p>基于这些点，我fork了<a href="http://huangbowen.net/">huangbowen</a>大哥的代码，定制成了它<a href="https://github.com/biaobiaoqi/octopress-syncPost">现在的样子</a>。</p>
 
 <!--more-->
 
 
-<h2>使用说明</h2>
+<h2>功能</h2>
 
-<h3>1.准备顶贴用户</h3>
-
-<p>发帖的HTTP请求为POST请求。系统验证信息中需要有发帖用户的username，userid和hash后的password，这些都能从cookie中获得。</p>
-
-<p>有两种方式设置水军的信息：</p>
-
-<h4>(1)浏览器中获取cookie</h4>
-
-<p>在浏览器中，找到cookie的内容。将对应的三项信息抽取出来后，填入<code>water_army.yml</code>文件，由于该文件涉及用户隐私信息，项目中设置了.gitignore，不会上传到repo中。可以参照<code>water_army.yml.example</code>的格式自行修改。</p>
-
-<h4>(2)使用<code>RegWaterArmy</code>工具导入</h4>
-
-<p>如果不想手动的查找cookie信息，也可以将账号、密码输入到<code>pre_water_army.txt</code>文件中，执行命令来获取相关信息。</p>
-
-<p>在<code>pre_water_army.txt</code>文件中，一行为单位输入用户名和密码，中间用空格隔开。同样由于隐私原因，repo中没有上传该文件，可以自行将<code>pre_water_army.txt.example</code>改为<code>pre_water_army.txt</code>，然后填入内容。</p>
-
-<p>填入账号、密码后，在src目录下运行如下命令：
-<code>
-$CC98POSTMACHINE/src/ruby RegWaterArmy.rb
-</code>
-即可自动获取用户的cookie信息，并导入<code>water_army.yml</code>文件中。注意，安全起见，完成这一步后，尽量删除账号、密码等隐私信息。</p>
-
-<h3>2.准备评论</h3>
-
-<p>在<code>comments.txt</code>文件中，设置用户评论的内容，每行一条。现在的设计是保证回帖的顺序与文件中的内容顺序一致。如果用户数量超过了文件中的评论条数，则回复时循环使用<code>comments.txt</code>中的评论。建议自行设计评论，且评论数大于等于水军数量。同样需要用户自行修改<code>comments.txt.example</code>为<code>commnets.txt</code>后使用。</p>
-
-<h3>3.执行</h3>
-
-<p>来到CC98PostMachine的src目录，执行：</p>
-
-<p><code>
-$CC98POSTMACHINE/src/ruby  PostMachine.rb  POST_URL [SPEED]
-</code></p>
-
-<p>其中<code>POST_URL</code>为响应帖子的网址，<code>SPEED</code>是设定的两个回帖之间的间隔时间，实际回帖时间做了如下的模糊：<code>SPEED + random(SPEED)</code>。</p>
-
-<p>```</p>
-
-<p>Usage: $CC98POSTMACHINE/src/ruby  PostMachine.rb  POST_URL [SPEED].</p>
-
-<pre><code>POST_URL is the url address of target post.
-
-SPEED is the time gap unit between two posts, it may be 1(s), 10(s) or any other number
-</code></pre>
-
-<p>```</p>
-
-<h2>下一步：</h2>
+<p>通过rake的方式实现同步功能：</p>
 
 <ul>
-<li><p>修复bug：第一次执行命令时，都只有一个用户能成功回复。（是服务器端的对cookie的记录？）</p></li>
-<li><p>整理代码结构，解耦，增加配置灵活性，写的更ruby一点</p></li>
+<li>1.同步所有octopress的博文到目标博客。 (<code>rake sync_all_posts</code>)</li>
+<li>2.同步最新一篇博文到目标博客。(<code>rake sync_lates_post</code>)</li>
 </ul>
 
+
+<h2>开发</h2>
+
+<p>这个octopress插件的结构很简单：</p>
+
+<ul>
+<li>安装<code>nokogiri</code>和 <code>metaweblog</code>两个gem。前者实现对octopress生成的html页面的解析，找到对应的博文。提供了客户端发起MetaWeblog请求的功能。</li>
+<li>在全局配置文件<code>_config.yml</code>中配置了目标博客MetaWeblog的服务地址、用户的账号信息。</li>
+<li>octopress/plugins/sync_*.rb三个文件则是代码实现。其中sync_post.rb中包含了post类，是主要的逻辑代码所在，sync_all_posts.rb和sync_latest_post.rb则是对前者的调用。</li>
+<li>修改了octopress的Rakefile，通过rake的方式实现功能。</li>
+</ul>
+
+
+<h2>下一步</h2>
+
+<p>希望能进一步完善这个插件，现在考虑到的有：</p>
+
+<ul>
+<li>增加同步所有博文功能中，对目标博客中已有博文的查重功能。即对于已经同步过去的博客，不再发送请求，或者实现编辑功能的同步功能。由于站点的MetaWeblog服务大多对请求有时限控制，同步过程中可能出现中断，此时部分博文已经同步过去，而部分没有，这种情况下，暂时没有好的解决方式。</li>
+<li>测试其他有MetaWeblog服务的博客站点（现在仅测试了cnblog）。</li>
+<li><del>cnblog的博文显示中，似乎不支持octopress的代码块样式。</del> (注：原作者huangbowen大哥已经解释了是css样式的问题)</li>
+</ul>
+
+
+<p>欢迎感兴趣的朋友参与到这个repo中来:)</p>
 ]]></content>
   </entry>
   

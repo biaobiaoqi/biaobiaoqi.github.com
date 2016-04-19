@@ -9,7 +9,7 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="《黑客：计算机革命的英雄》不是一本新书，创作于上世纪 80 年代。 这本书我断断续续花了几个月才看完。大量的传奇黑客人物穿插其中，说实话容量略大，到头来也没记住几个名字，不过这不是重点。全书将对整个计算机发展史有深刻影响的黑客文化分三个阶段的娓娓道来，让我重新审视对黑客的看法认识。 &hellip;">
+  <meta name="description" content="本文描述了单模式的字符串匹配的经典算法 KMP 算法的实现。首先对字符串匹配算法做简单的介绍，然后是 KMP 算法的实现描述，最后推荐两道简单的 ACM 模板题做练手用。 字符串匹配算法 字符串匹配(String Matchiing)也称字符串搜索(String Searching) &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -107,7 +107,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/10/21/hacker/">《黑客：计算机革命的英雄》</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/05/25/kmp-algorithm/">KMP算法实现</a></h1>
     
     
       <p class="meta">
@@ -123,430 +123,242 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
 
 
-<time datetime="2013-10-21T22:19:00+08:00" pubdate data-updated="true">Oct 21<span>st</span>, 2013</time>
+<time datetime="2013-05-25T21:22:00+08:00" pubdate data-updated="true">May 25<span>th</span>, 2013</time>
         
-         | <a href="/blog/2013/10/21/hacker/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="http://img3.douban.com/mpic/s6951030.jpg" alt="img" /></p>
-
-<p>《<a href="http://book.douban.com/subject/6860890/">黑客：计算机革命的英雄</a>》不是一本新书，创作于上世纪 80 年代。</p>
-
-<p>这本书我断断续续花了几个月才看完。大量的传奇黑客人物穿插其中，说实话容量略大，到头来也没记住几个名字，不过这不是重点。全书将对整个计算机发展史有深刻影响的黑客文化分三个阶段的娓娓道来，让我重新审视对黑客的看法认识。下面是我对全书的笔记摘要。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/10/21/hacker/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/10/21/hacker/">《黑客：计算机革命的英雄》</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-10-21T22:19:00+08:00" pubdate data-updated="true">Oct 21<span>st</span>, 2013</time>
-        
-         | <a href="/blog/2013/10/21/hacker/#disqus_thread">Comments</a>
+         | <a href="/blog/2013/05/25/kmp-algorithm/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p><img src="http://img3.douban.com/mpic/s6951030.jpg" alt="img" /></p>
+  <div class="entry-content"><p>本文描述了单模式的字符串匹配的经典算法 KMP 算法的实现。首先对字符串匹配算法做简单的介绍，然后是 KMP 算法的实现描述，最后推荐两道简单的 ACM 模板题做练手用。</p>
 
-<p>《<a href="http://book.douban.com/subject/6860890/">黑客：计算机革命的英雄</a>》不是一本新书，创作于上世纪 80 年代。</p>
+<h2>字符串匹配算法</h2>
 
-<p>这本书我断断续续花了几个月才看完。大量的传奇黑客人物穿插其中，说实话容量略大，到头来也没记住几个名字，不过这不是重点。全书将对整个计算机发展史有深刻影响的黑客文化分三个阶段的娓娓道来，让我重新审视对黑客的看法认识。下面是我对全书的笔记摘要。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/10/21/hacker/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/10/21/hacker/">《黑客：计算机革命的英雄》</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-10-21T22:19:00+08:00" pubdate data-updated="true">Oct 21<span>st</span>, 2013</time>
-        
-         | <a href="/blog/2013/10/21/hacker/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="http://img3.douban.com/mpic/s6951030.jpg" alt="img" /></p>
-
-<p>《<a href="http://book.douban.com/subject/6860890/">黑客：计算机革命的英雄</a>》不是一本新书，创作于上世纪 80 年代。</p>
-
-<p>这本书我断断续续花了几个月才看完。大量的传奇黑客人物穿插其中，说实话容量略大，到头来也没记住几个名字，不过这不是重点。全书将对整个计算机发展史有深刻影响的黑客文化分三个阶段的娓娓道来，让我重新审视对黑客的看法认识。下面是我对全书的笔记摘要。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/10/21/hacker/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/10/21/decompiliation-jar/">反编译Jar包</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-10-21T12:16:00+08:00" pubdate data-updated="true">Oct 21<span>st</span>, 2013</time>
-        
-         | <a href="/blog/2013/10/21/decompiliation-jar/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Jar 包(Java Archive)是对 Java 程序的打包，它可能包含源码，也可能没有。</p>
-
-<p>对于有包含源码的 Jar 包，在 Eclipse 工程里设定好 source code 路径后能直接查看到远吗，对于理解代码、调试的帮助很大。而如果 Jar 包没有打包源码，实际上也可以通过反编译的方法得到源码。道理很简单，Java 规范中，生成的.class 文件所包含的信息完全能逆向的重构出源码。</p>
-
-<p>当然，一些代码为了防止自身 Jar 包被人反编译，会做<a href="http://zh.wikipedia.org/wiki/%E4%BB%A3%E7%A0%81%E6%B7%B7%E6%B7%86">代码混淆</a>掩人耳目。其中最简单的一种方法就是是通过修改类名、变量名、方法名等方法让反编译的源码难于阅读理解。不过这个方法在混淆的时候需要特别注意：不能混淆对外提供接口的类。如果混淆了提供给外部的 API 接口的名字，整个工程就无法被正常使用了。</p>
-
-<p>本文要举例的是对<a href="http://help.aliyun.com/origin?helpId=664">阿里云开放云存储 Java SDK</a> 的反编译。由于 SDK 需要暴露接口给其他开发人员调用，本身确实没有做混淆（不理解阿里云为何没有将它开源出来），故可以做简单的反编译来查看源码。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/10/21/decompiliation-jar/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/10/21/decompiliation-jar/">反编译Jar包</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-10-21T12:16:00+08:00" pubdate data-updated="true">Oct 21<span>st</span>, 2013</time>
-        
-         | <a href="/blog/2013/10/21/decompiliation-jar/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Jar 包(Java Archive)是对 Java 程序的打包，它可能包含源码，也可能没有。</p>
-
-<p>对于有包含源码的 Jar 包，在 Eclipse 工程里设定好 source code 路径后能直接查看到远吗，对于理解代码、调试的帮助很大。而如果 Jar 包没有打包源码，实际上也可以通过反编译的方法得到源码。道理很简单，Java 规范中，生成的.class 文件所包含的信息完全能逆向的重构出源码。</p>
-
-<p>当然，一些代码为了防止自身 Jar 包被人反编译，会做<a href="http://zh.wikipedia.org/wiki/%E4%BB%A3%E7%A0%81%E6%B7%B7%E6%B7%86">代码混淆</a>掩人耳目。其中最简单的一种方法就是是通过修改类名、变量名、方法名等方法让反编译的源码难于阅读理解。不过这个方法在混淆的时候需要特别注意：不能混淆对外提供接口的类。如果混淆了提供给外部的 API 接口的名字，整个工程就无法被正常使用了。</p>
-
-<p>本文要举例的是对<a href="http://help.aliyun.com/origin?helpId=664">阿里云开放云存储 Java SDK</a> 的反编译。由于 SDK 需要暴露接口给其他开发人员调用，本身确实没有做混淆（不理解阿里云为何没有将它开源出来），故可以做简单的反编译来查看源码。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/10/21/decompiliation-jar/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/10/21/decompiliation-jar/">反编译Jar包</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-10-21T12:16:00+08:00" pubdate data-updated="true">Oct 21<span>st</span>, 2013</time>
-        
-         | <a href="/blog/2013/10/21/decompiliation-jar/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Jar 包(Java Archive)是对 Java 程序的打包，它可能包含源码，也可能没有。</p>
-
-<p>对于有包含源码的 Jar 包，在 Eclipse 工程里设定好 source code 路径后能直接查看到远吗，对于理解代码、调试的帮助很大。而如果 Jar 包没有打包源码，实际上也可以通过反编译的方法得到源码。道理很简单，Java 规范中，生成的.class 文件所包含的信息完全能逆向的重构出源码。</p>
-
-<p>当然，一些代码为了防止自身 Jar 包被人反编译，会做<a href="http://zh.wikipedia.org/wiki/%E4%BB%A3%E7%A0%81%E6%B7%B7%E6%B7%86">代码混淆</a>掩人耳目。其中最简单的一种方法就是是通过修改类名、变量名、方法名等方法让反编译的源码难于阅读理解。不过这个方法在混淆的时候需要特别注意：不能混淆对外提供接口的类。如果混淆了提供给外部的 API 接口的名字，整个工程就无法被正常使用了。</p>
-
-<p>本文要举例的是对<a href="http://help.aliyun.com/origin?helpId=664">阿里云开放云存储 Java SDK</a> 的反编译。由于 SDK 需要暴露接口给其他开发人员调用，本身确实没有做混淆（不理解阿里云为何没有将它开源出来），故可以做简单的反编译来查看源码。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/10/21/decompiliation-jar/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/10/20/repair-my-fixed-gear/">修车记</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-10-20T21:58:00+08:00" pubdate data-updated="true">Oct 20<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/10/20/repair-my-fixed-gear/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>三个多月前，入手了这辆死飞。</p>
-
-<p>倒不是像中学生渴望它可搭配的绚丽色彩和特立独行，而是喜欢自由、简单的理念。以至于我基本全黑的配色被同学形容为『最不骚的死飞』。自己平时骑车并不快，代步而已，也没有花心思学些炫酷的平花动作（虽然很想学），除了能 mid skid 刹车和一直蹬脚踏板累了些，在操作上也确实没啥不同了。被女朋友形容为骑车一辆『功能退化』
-的自行车-，-</p>
-
-<p>一直还没来得及写篇博文记录下，借这次修车的过程，给它留个影。</p>
+<p>字符串匹配(String Matchiing)也称字符串搜索(String Searching)是字符串算法中重要的一种，是指从一个大字符串或文本中找到模式串出现的位置。一个基本的字符串匹配算法分类如下：</p>
 
 <ul>
-<li>起因：后胎漏气，半小时漏光的节奏</li>
-<li>处理：用 DUUTI 补胎套件补胎，顺道紧了一把链条。</li>
+<li>单模式匹配：即每次算法执行只需匹配出一个模式串。</li>
+<li>有限集合的多模式匹配：即算法需要同时找出多个模式串的匹配结果，而这个模式串集合是有限的。</li>
+<li>无限集合的多模式匹配：如正则表达式的匹配。</li>
 </ul>
 
 
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/10/20/repair-my-fixed-gear/">Read on &rarr;</a>
-    </footer>
-  
+<p>单模式匹配最容易理解，构造也非常简单。一个最朴素的思路就是从文本的第一个字符顺次比较模式串，不匹配则重新从下一个字符开始匹配，直到文本末尾。Java 实现代码如下：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'> <span class="kd">public</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">bruteforce</span><span class="o">(</span><span class="n">String</span> <span class="n">str1</span><span class="o">,</span> <span class="n">String</span> <span class="n">str2</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>         <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">!=</span> <span class="n">str1</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>               <span class="k">if</span> <span class="o">(</span><span class="n">str1</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">==</span> <span class="n">str2</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">j</span><span class="o">))</span> <span class="o">{</span>
+</span><span class='line'>                    <span class="n">j</span> <span class="o">++;</span>
+</span><span class='line'>                    <span class="n">i</span> <span class="o">++;</span>
+</span><span class='line'>                    <span class="k">if</span> <span class="o">(</span><span class="n">j</span> <span class="o">==</span> <span class="n">str2</span><span class="o">.</span><span class="na">length</span><span class="o">())</span> <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+</span><span class='line'>               <span class="o">}</span><span class="k">else</span> <span class="o">{</span>
+</span><span class='line'>                    <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+</span><span class='line'>                    <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span><span class='line'>               <span class="o">}</span>
+</span><span class='line'>          <span class="o">}</span>
+</span><span class='line'>          <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+</span><span class='line'>     <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/10/20/repair-my-fixed-gear/">修车记</a></h1>
-    
-    
-      <p class="meta">
-        
+<p>但是这种算法，有明显的效率黑洞。因为每次匹配失败后，都会回到原来的匹配起点的下一个字符开始匹配，这些步骤很多情况下，并不是必要的。</p>
 
+<p>实际上这些字符很有可能已经被读入了一次。理论上，如果我们能对所有被读入过的字符有足够的了解，那就能判定是否能避免再次读入一遍做匹配运算了。经典的 KMP 算法正是基于这点思考，对原有的蛮力算法做出了优化。</p>
 
+<h2>KMP 算法</h2>
 
+<p>网络上关于 KMP 算法的描述很多，其中个人觉得阮一峰老师的<a href="http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html">《字符串匹配的 KMP 算法》</a>对 KMP 的描述最为简明和清晰。图例展示的算法流程更容易让人接受和理解。这里仅记录我所认为重点的知识点。</p>
 
+<h5>算法的思想</h5>
 
+<p>相比蛮力算法，KMP 算法预先计算出了一个哈希表，用来指导在匹配过程中匹配失败后尝试下次匹配的起始位置，以此避免重复的读入和匹配过程。这个哈希表被叫做“部分匹配值表(<strong>Particial match table</strong>)”，它的设计是算法精妙之处。</p>
 
+<h5>部分匹配值表</h5>
 
-
-  
-
-
-<time datetime="2013-10-20T21:58:00+08:00" pubdate data-updated="true">Oct 20<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/10/20/repair-my-fixed-gear/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>三个多月前，入手了这辆死飞。</p>
-
-<p>倒不是像中学生渴望它可搭配的绚丽色彩和特立独行，而是喜欢自由、简单的理念。以至于我基本全黑的配色被同学形容为『最不骚的死飞』。自己平时骑车并不快，代步而已，也没有花心思学些炫酷的平花动作（虽然很想学），除了能 mid skid 刹车和一直蹬脚踏板累了些，在操作上也确实没啥不同了。被女朋友形容为骑车一辆『功能退化』
-的自行车-，-</p>
-
-<p>一直还没来得及写篇博文记录下，借这次修车的过程，给它留个影。</p>
+<p>要理解部分匹配值表，就得先了解字符串的前缀(prefix)和后缀(postfix)。</p>
 
 <ul>
-<li>起因：后胎漏气，半小时漏光的节奏</li>
-<li>处理：用 DUUTI 补胎套件补胎，顺道紧了一把链条。</li>
+<li>前缀:除字符串最后一个字符以外的所有头部串的组合。</li>
+<li>后缀：除字符串第一个字符以外的所有尾部串的组合。</li>
+<li>部分匹配值：一个字符串的前缀和后缀中最长共有元素的长度。</li>
 </ul>
 
 
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/10/20/repair-my-fixed-gear/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/10/20/repair-my-fixed-gear/">修车记</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-10-20T21:58:00+08:00" pubdate data-updated="true">Oct 20<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/10/20/repair-my-fixed-gear/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>三个多月前，入手了这辆死飞。</p>
-
-<p>倒不是像中学生渴望它可搭配的绚丽色彩和特立独行，而是喜欢自由、简单的理念。以至于我基本全黑的配色被同学形容为『最不骚的死飞』。自己平时骑车并不快，代步而已，也没有花心思学些炫酷的平花动作（虽然很想学），除了能 mid skid 刹车和一直蹬脚踏板累了些，在操作上也确实没啥不同了。被女朋友形容为骑车一辆『功能退化』
-的自行车-，-</p>
-
-<p>一直还没来得及写篇博文记录下，借这次修车的过程，给它留个影。</p>
+<p>举例说明：字符串<code>ABCAB</code></p>
 
 <ul>
-<li>起因：后胎漏气，半小时漏光的节奏</li>
-<li>处理：用 DUUTI 补胎套件补胎，顺道紧了一把链条。</li>
+<li>前缀：{A， AB， ABC， ABCA}</li>
+<li>后缀：{BCAB， CAB， AB， B}</li>
+<li>部分匹配值：2 （AB）</li>
 </ul>
 
 
+<p>而所谓的部分匹配值表，则为模式串的所有前缀以及其本身的部分匹配值。</p>
+
+<p>举例如下：还是针对字符串<code>ABCAB</code>，它的部分匹配值表为：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">A</span> <span class="n">B</span> <span class="n">C</span> <span class="n">A</span> <span class="n">B</span>
+</span><span class='line'><span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">2</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这代表着：字符串<code>A B C A B</code> 中，子串<code>A B C</code>的部分匹配值为 0，而子串<code>A B C A</code>的部分匹配值为 1，诸如此理。</p>
+
+<h5>算法实现</h5>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'> <span class="kd">public</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">kmp</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span><span class="o">,</span> <span class="n">String</span> <span class="n">dest</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="kt">int</span><span class="o">[]</span> <span class="n">next</span> <span class="o">=</span>  <span class="n">generateNext</span><span class="o">(</span><span class="n">dest</span><span class="o">);</span>
+</span><span class='line'>      
+</span><span class='line'>      <span class="c1">//i 是 str 的索引，j 是 dest 的索引。</span>
+</span><span class='line'>      <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">str</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span><span class='line'>          <span class="c1">//匹配发生错误时，在 next 数组中向前迭代找到匹配的结果。这是整个算法的核心位置！</span>
+</span><span class='line'>          <span class="k">while</span> <span class="o">(</span><span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">!=</span> <span class="n">dest</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">j</span><span class="o">))</span>
+</span><span class='line'>              <span class="n">j</span> <span class="o">=</span> <span class="n">next</span><span class="o">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="o">];</span>
+</span><span class='line'>
+</span><span class='line'>          <span class="c1">//如果相等，dest 中的索引往后移动一位</span>
+</span><span class='line'>          <span class="k">if</span> <span class="o">(</span><span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">==</span> <span class="n">dest</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">j</span><span class="o">))</span>
+</span><span class='line'>              <span class="n">j</span><span class="o">++;</span>
+</span><span class='line'>          
+</span><span class='line'>          <span class="c1">//dest 数组所有位置均连续的匹配完成</span>
+</span><span class='line'>          <span class="k">if</span> <span class="o">(</span><span class="n">j</span> <span class="o">==</span> <span class="n">dest</span><span class="o">.</span><span class="na">length</span><span class="o">())</span>
+</span><span class='line'>              <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="c1">//生成 next 数组</span>
+</span><span class='line'>  <span class="kd">private</span> <span class="kt">void</span> <span class="nf">generateNext</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="kt">int</span><span class="o">[]</span> <span class="n">next</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">dest</span><span class="o">.</span><span class="na">length</span><span class="o">()];</span>
+</span><span class='line'>        <span class="n">next</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>  <span class="c1">//第一个元素的 next 值为 0。</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">//i 是需要计算的 next 值的下标；在 for 循环的开始，j 记录了上一个元素的部分匹配值，即前缀串中公共部分的最后一位字符的下标。</span>
+</span><span class='line'>        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">str</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="n">i</span> <span class="o">++)</span> <span class="o">{</span>
+</span><span class='line'>          <span class="c1">//当 i 和 j 指向的字符不匹配时，在 next 中往前迭代，直到两字符相等或者 j 为 0.</span>
+</span><span class='line'>            <span class="k">while</span><span class="o">(</span><span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">!=</span> <span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">j</span><span class="o">))</span>
+</span><span class='line'>                <span class="n">j</span> <span class="o">=</span> <span class="n">next</span><span class="o">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="o">];</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="c1">//如果 j 和 i 指向的字符相等，则 j 增加 1.</span>
+</span><span class='line'>            <span class="k">if</span> <span class="o">(</span><span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">==</span> <span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">j</span><span class="o">))</span>
+</span><span class='line'>                <span class="n">j</span> <span class="o">++;</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="n">next</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">j</span><span class="o">;</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>    <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>理解算法实现时，有几点特别需要注意：</p>
+
+<ul>
+<li>在生成部分匹配值数组的 generateNext()方法中，第一层循环内，<code>i</code>是字符串的索引，而<code>j</code>则在每次循环开始时代表了<code>i</code>所指定字符之前的子串的部分匹配值。以部分匹配值为下标的字符，其实也就是相同公共的缀串的下一位字符了。</li>
+<li>generateNext()方法的内层 while()循环，是为了迭代得到让<code>i</code>指定字符匹配到的情况。</li>
+<li>generateNext()方法的 while()循环中，需要特别注意是<code>next[j -1]</code>，这里表达的是：当 j 指向的字符匹配失败，则继续找到 j 前一个字符的部分匹配值。</li>
+<li>kmp()的循环代码和 generateNext()部分匹配值表生成的循环代码很类似。两者使用了相同方式，在字符匹配失败后迭代获取新的可匹配情况，且都是利用了 next 数组。</li>
+</ul>
+
+
+<h2>其他</h2>
+
+<p>KMP 算法虽然能达到 O(M+N)的算法复杂度，但在实际使用中，KMP 算法的性能并不如 <a href="http://www.ruanyifeng.com/blog/2013/05/boyer-moore_string_search_algorithm.html">BM</a> 算法强。</p>
+
+<h2>模板题</h2>
+
+<h4>基础模板题</h4>
+
+<ul>
+<li><p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=2203">HDOJ 的 2203 题</a>是一个能检验算法正确性的模板题。Java 实现的答案代码<a href="https://github.com/biaobiaoqi/CPractice/tree/master/HDOJ/HDOJ2203.java">请戳这里</a>。</p></li>
+<li><p><a href="http://oj.leetcode.com/problems/implement-strstr/">LeetCode: Implement strStr()</a> 是一道裸字符串匹配题，直接使用 KMP。Java 实现的代码<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/algorithm/oj/leetcode/Implement%20strStr(">请戳这里</a>)。</p></li>
+</ul>
+
+
+<h4>延伸模板题</h4>
+
+<ul>
+<li><p><a href="http://poj.org/problem?id=2406">POJ 的 2406 题</a>，对考察点做了巧妙的变形，对更深入的理解 KMP 中的部分匹配表（即 next 数组）很有帮助。Java 实现的答案代码<a href="https://github.com/biaobiaoqi/CPractice/tree/master/POJ/POJ2406.java">请戳这里</a>。</p></li>
+<li><p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1867">HDOJ 的 1867 题</a>也属于 kmp 的变形。要求对 kmp 利用 next 数组进行比较的过程有清晰的认识。Java 实现的答案代码<a href="https://github.com/biaobiaoqi/CPractice/tree/master/HDOJ/HDOJ1867.java">请戳这里</a>。</p></li>
+</ul>
+
+
+<h3>其他参考资料：</h3>
+
+<ul>
+<li><p><a href="http://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm">wiki:Knuth–Morris–Pratt Algorithm</a></p></li>
+<li><p><a href="http://en.wikipedia.org/wiki/String_searching_algorithm">wiki:String Searching Algorithm</a></p></li>
+<li><p><a href="http://www.cppblog.com/converse/archive/2006/07/05/9447.html">《KMP 算法的实现》</a></p></li>
+<li><p><a href="http://wangcong.org/blog/archives/2090">《Linux 内核中的 KMP 实现》</a></p></li>
+</ul>
+
+
+<hr />
+
+<h3>LOG</h3>
+
+<ul>
+<li>2014-4-9：对代码增加了更多注释，便于理解。</li>
+</ul>
+
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.io/blog/2013/05/25/kmp-algorithm/'>http://biaobiaoqi.github.io/blog/2013/05/25/kmp-algorithm/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
 </div>
   
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/10/20/repair-my-fixed-gear/">Read on &rarr;</a>
-    </footer>
   
 
 
@@ -557,7 +369,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/10/08/pat-1065-pat-1068/">PAT 1065 - 1068 题解</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/05/22/pragmatic-thinking-and-learning-refactor-your-wetware/">《程序员的思维修炼》</a></h1>
     
     
       <p class="meta">
@@ -573,28 +385,438 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
 
 
-<time datetime="2013-10-08T13:46:00+08:00" pubdate data-updated="true">Oct 8<span>th</span>, 2013</time>
+<time datetime="2013-05-22T01:14:00+08:00" pubdate data-updated="true">May 22<span>nd</span>, 2013</time>
         
-         | <a href="/blog/2013/10/08/pat-1065-pat-1068/#disqus_thread">Comments</a>
+         | <a href="/blog/2013/05/22/pragmatic-thinking-and-learning-refactor-your-wetware/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>这次的题目来源是 2013 年 10 月 7 日下午的浙大计算机研究生招生机试题。</p>
+  <div class="entry-content"><h3>别鄙视方法论</h3>
 
-<p>这次题目的难度，按姥姥的说法是：『比普通的 PAT 要难了 0.5 个点。我是把自己的题目从 1.0 到 5.0 以 0.5 的间距分难度级别的，PAT(A)难度一般在 1.5-4.5 之间，保研考试一般在 2.0-5.0 之间。PAT(B)大概是 1.0-2.5 的难度。』。</p>
+<p>曾经很长时间里，我这么认为：方法论的东西没什么实际的用处，不过是其他人按照自己的喜好来处理事物的途径而已，何必照着他人的思路。比如，作为一只不靠谱的程序猴子，在一些偏颇的思维习惯的影响下，我甚至对许多图形化的东西比较反感，自以为文本信息已经足以表达清楚事实且更有效率，从而本能的回避能造成视觉冲击的事物。直到后来，发现自己每每定下的计划都无法完整实施，自然也是没有收到预期的效果。我开始关注到方法本身是否合理，寻找那把平衡效率和体验的钥匙。</p>
 
-<p>个人认为，其中 1066 模拟 AVL 插入的实现有些细节容易弄错，而 1068 只要会简单的 DP，也就没有问题了，1065 和 1066 都还是很简单的实现。</p>
+<p>这本书给出了一个很好的答案。</p>
 
-<p>下面是各个题的分析（PAT advanced level 本人实现的全部源码：<a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel">请戳</a>）。</p>
+<p>虽然标题上赫然是“程序员”几个大字，但其实并没有这么局限。这是一本谈论思维习惯的书，对所有想了解大脑认知过程以更好的发觉其潜能的读者而言，都是可以参考的。虽然自己只是看完了这本书，而没有长期实践的效果证明，但从以往的经验来看，它的观点总能让我信服。</p>
 
 </div>
   
   
     <footer>
-      <a rel="full-article" href="/blog/2013/10/08/pat-1065-pat-1068/">Read on &rarr;</a>
+      <a rel="full-article" href="/blog/2013/05/22/pragmatic-thinking-and-learning-refactor-your-wetware/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/21/the-facebook-effect/">《Facebook效应》</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-21T00:23:00+08:00" pubdate data-updated="true">May 21<span>st</span>, 2013</time>
+        
+         | <a href="/blog/2013/05/21/the-facebook-effect/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>前两年风靡了一阵子的电影《社交网络》毕竟是电影，一种艺术的方式的表达。虽然无法完全的印证《Facebook 效应》一书中记载的正确性，但其细节足以给人启示。</p>
+
+<p>电影中，主人公炫酷的人生经历能催生观者产生极强的代入感，不少同学看后可能就会想着自己在寝室特立独行的捣鼓几下，也来做出个震惊世界的产品。且慢。细读本书，就会了解到，成功并非像电影中所描述的那么轻松愉快和力所能及。</p>
+
+<p>以下是我的一些总结。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/05/21/the-facebook-effect/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/18/distributed-consistency/">分布式一致性</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-18T18:58:00+08:00" pubdate data-updated="true">May 18<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/05/18/distributed-consistency/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>本文来自<a href="http://book.douban.com/subject/3108801/">《分布式原理与泛型》</a>的一致性章节笔记。由于缺乏实践经验，这本书对我来说太过理论，难于理解，现在已经暂停该书的阅读，转而加强实践。另有相关博文<a href="http://biaobiaoqi.github.io/blog/2013/05/15/cap-and-eventual-consistent/">《CAP 和最终一致性》</a>，可供参考阅读。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/05/18/distributed-consistency/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/18/a-hybrid-system-hadoopdb/">HadoopDB：混合分布式系统</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-18T17:58:00+08:00" pubdate data-updated="true">May 18<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/05/18/a-hybrid-system-hadoopdb/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>HadoopDB 是一个 Mapreduce 和传统关系型数据库的结合方案，以充分利用 RDBMS 的性能和 Hadoop 的容错、分布特性。2009 年被 Yale 大学教授 Abadi 提出，继而商业化为 <a href="http://hadapt.com/">Hadapt</a>，据称从 VC 那儿拉到了 10M 刀投资。</p>
+
+<p>本文是对 HadoopDB 论文的总结。其中不免掺杂些自己的不成熟想法，更详细的内容，还请参见原论文 HadoopDB: An Architectural Hybrid of MapReduce and DBMS Technologies for Analytical Workloads</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/05/18/a-hybrid-system-hadoopdb/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/17/jail-break-your-ios/">iOS的安全性和越狱</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-17T00:10:00+08:00" pubdate data-updated="true">May 17<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/05/17/jail-break-your-ios/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="https://dl.dropboxusercontent.com/u/64021093/2013-5-16.jpg" title="Jailbrek" alt="alt jailbreak" /></p>
+
+<p>提到<a href="http://en.wikipedia.org/wiki/IOS_jailbreaking#Security.2C_privacy.2C_and_stability">越狱</a>，很多人第一反应大概是免费的游戏和 app。</p>
+
+<p>作为软件从业人员，深知中国的大环境的特殊性。内有用户想吃免费午餐的不良付费习惯，外有行业内大头诸如某讯对创新的绞杀。大家对越狱是为了免费、盗版软件的认识，也就不奇怪了。</p>
+
+<p>还有另一派人。越狱对他们来说，意味着开放。个人认为这也是 Hack 精神的精髓之一。事实上，iOS 越狱也有自己的生态圈：Cydia 就是越狱设备上 App Store。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/05/17/jail-break-your-ios/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/15/cap-and-eventual-consistent/">CAP和最终一致性</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-15T00:30:00+08:00" pubdate data-updated="true">May 15<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/05/15/cap-and-eventual-consistent/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>查阅资料整理了最终一致性、CAP 相关的内容。由于图省事儿，没有做文字的整理记载，只有 slides 和一些查阅过的链接，大家将就着看。欢迎指正。</p>
+
+<p>slides：</p>
+
+<script async class="speakerdeck-embed" data-id="cca07ce09e92013076c646310b996896" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+
+
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/05/15/cap-and-eventual-consistent/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/13/free-the-bit-economics/">《免费》</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-13T00:46:00+08:00" pubdate data-updated="true">May 13<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/05/13/free-the-bit-economics/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>比特经济的到来</h2>
+
+<p><a href="http://en.wikipedia.org/wiki/Chris_Andersen">克里斯·安德森</a>人称鸟人安德森，现效力于热火队，一直以来都是值得信赖的角色球员，板凳匪徒，内线尖兵。好了，不扯了……回到另外一个<a href="http://t.cn/akRhip">克里斯·安德森</a>的思想世界来。</p>
+
+<p>长尾理论早就为人熟知了，最早就是由安德森提出的，用于解释 Amazon 和 Netflix 的商业和经济模式。虽然没有阅读过原书，只是从网络接收了一些二手甚至三手的相关观点，但也可以从当今互联网的新兴中发现许多端倪。</p>
+
+<p>按作者的话来说，“免费”是<a href="http://book.douban.com/subject/1919072/">《长尾理论》</a>没讨论完的话题，它并非新生事物，但是一直在变化，它的变化促使我们要反思人类行为和经济动因方面最根深蒂固的一些观念。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/05/13/free-the-bit-economics/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/27/pat1020-pat1043-rebuild-binary-tree/">根据前中后序和层序重建二叉树</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-27T22:33:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/04/27/pat1020-pat1043-rebuild-binary-tree/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>背景</h2>
+
+<p><a href="/blog/2013/04/27/travsal-binary-tree/">《二叉树的遍历（递归、非递归）分析》</a>总结了二叉树不同遍历方式的递归和非递归实现，本文则讨论如何针对不同遍历方式的组合重建二叉树。为了简化问题的考虑，假定二叉树中不会出现重复值。列入考虑范围的有前序、中序、后序、层序遍历这四种的组合。前中后序比较常见，而层序则相对特殊一点了。</p>
+
+<p><a href="http://pat.zju.edu.cn/contests/pat-a-practise">PAT</a> 的 1043 和 1020 题是遍历相关的模板题，正好派上用场。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/04/27/pat1020-pat1043-rebuild-binary-tree/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/27/travsal-binary-tree/">二叉树的遍历（递归、非递归）分析</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-27T21:03:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/04/27/travsal-binary-tree/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>背景</h2>
+
+<ul>
+<li>2013-10-7 修订部分内容</li>
+<li>2014-5-24 修改后序非递归部分代码</li>
+</ul>
+
+
+<p>本文讨论二叉树的常见遍历方式的代码(Java)实现，包括前序(preorder)、中序(inorder)、后序(postorder)、层序(level order)，进一步考虑递归和非递归的实现方式。</p>
+
+<p>递归的实现方法相对简单，但由于递归的执行方式每次都会产生一个新的方法调用栈，如果递归层级较深，会造成较大的内存开销，相比之下，非递归的方式则可以避免这个问题。递归遍历容易实现，非递归则没那么简单，非递归调用本质上是通过维护一个栈，模拟递归调用的方法调用栈的行为。</p>
+
+<p>在此之前，先简单定义节点的数据结构：</p>
+
+<p>二叉树节点最多只有两个儿子，并保存一个节点的值，为了实验的方便，假定它为 int。同时，我们直接使用 Java 的 System.out.print 方法来输出节点值，以显示遍历结果。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Node</span> <span class="o">{</span>
+</span><span class='line'>      <span class="kd">public</span> <span class="kt">int</span> <span class="n">value</span><span class="o">;</span>
+</span><span class='line'>      <span class="kd">public</span> <span class="n">Node</span> <span class="n">leftNode</span><span class="o">;</span>
+</span><span class='line'>      <span class="kd">public</span> <span class="n">Node</span> <span class="n">rightNode</span><span class="o">;</span>
+</span><span class='line'>      
+</span><span class='line'>      <span class="kd">public</span> <span class="nf">Node</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>          <span class="n">value</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>  <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>详细代码参见链接:<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/algorithm/basics/tree/BinarySearchTree.java">BST 及其各种便利的详细实现代码</a></p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/04/27/travsal-binary-tree/">Read on &rarr;</a>
     </footer>
   
 
