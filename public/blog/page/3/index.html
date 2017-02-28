@@ -9,7 +9,7 @@
   <meta name="author" content="Biaobiaoqi">
 
   
-  <meta name="description" content="《黑客：计算机革命的英雄》不是一本新书，创作于上世纪 80 年代。 这本书我断断续续花了几个月才看完。大量的传奇黑客人物穿插其中，说实话容量略大，到头来也没记住几个名字，不过这不是重点。全书将对整个计算机发展史有深刻影响的黑客文化分三个阶段的娓娓道来，让我重新审视对黑客的看法认识。 &hellip;">
+  <meta name="description" content="应该叫『清单宣言』 在 Amazon 上『满 100 送一本』的活动中随手挑到了它。鉴于其空洞的标题，被束之高阁半年多，最近关注个人管理方面的知识，才拍拍灰尘读起来。 书的英文原名是『The Checklist Manifesto: How to Get Things Right』，直译成『 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -107,7 +107,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/10/21/hacker/">《黑客：计算机革命的英雄》</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/07/05/checklist-manifesto/">《清单革命》</a></h1>
     
     
       <p class="meta">
@@ -123,129 +123,272 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
 
 
-<time datetime="2013-10-21T22:19:00+08:00" pubdate data-updated="true">Oct 21<span>st</span>, 2013</time>
+<time datetime="2013-07-05T00:54:00+08:00" pubdate data-updated="true">Jul 5<span>th</span>, 2013</time>
         
-         | <a href="/blog/2013/10/21/hacker/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="http://img3.douban.com/mpic/s6951030.jpg" alt="img" /></p>
-
-<p>《<a href="http://book.douban.com/subject/6860890/">黑客：计算机革命的英雄</a>》不是一本新书，创作于上世纪 80 年代。</p>
-
-<p>这本书我断断续续花了几个月才看完。大量的传奇黑客人物穿插其中，说实话容量略大，到头来也没记住几个名字，不过这不是重点。全书将对整个计算机发展史有深刻影响的黑客文化分三个阶段的娓娓道来，让我重新审视对黑客的看法认识。下面是我对全书的笔记摘要。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/10/21/hacker/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/10/21/decompiliation-jar/">反编译Jar包</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-10-21T12:16:00+08:00" pubdate data-updated="true">Oct 21<span>st</span>, 2013</time>
-        
-         | <a href="/blog/2013/10/21/decompiliation-jar/#disqus_thread">Comments</a>
+         | <a href="/blog/2013/07/05/checklist-manifesto/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>Jar 包(Java Archive)是对 Java 程序的打包，它可能包含源码，也可能没有。</p>
+  <div class="entry-content"><h2>应该叫『清单宣言』</h2>
 
-<p>对于有包含源码的 Jar 包，在 Eclipse 工程里设定好 source code 路径后能直接查看到远吗，对于理解代码、调试的帮助很大。而如果 Jar 包没有打包源码，实际上也可以通过反编译的方法得到源码。道理很简单，Java 规范中，生成的.class 文件所包含的信息完全能逆向的重构出源码。</p>
+<p>在 Amazon 上『满 100 送一本』的活动中随手挑到了它。鉴于其空洞的标题，被束之高阁半年多，最近关注个人管理方面的知识，才拍拍灰尘读起来。</p>
 
-<p>当然，一些代码为了防止自身 Jar 包被人反编译，会做<a href="http://zh.wikipedia.org/wiki/%E4%BB%A3%E7%A0%81%E6%B7%B7%E6%B7%86">代码混淆</a>掩人耳目。其中最简单的一种方法就是是通过修改类名、变量名、方法名等方法让反编译的源码难于阅读理解。不过这个方法在混淆的时候需要特别注意：不能混淆对外提供接口的类。如果混淆了提供给外部的 API 接口的名字，整个工程就无法被正常使用了。</p>
+<p>书的英文原名是『The Checklist Manifesto: How to Get Things Right』，直译成『清单宣言』在我看来更贴切，而非充满噱头的『清单革命』。正如一个小功能难以做成独立的产品，一个方法改进也难以成就革命。『清单能大大的改善效率，降低失败概率』这一观点，在医生出生的作者手中翻来覆去的被各种事例证明着，案例的行业背景从医学到建筑，到航天，再到投资，实在乏味。当然，这不妨碍『清单』这一工具对生活工作的助力所带给我们的思考。</p>
 
-<p>本文要举例的是对<a href="http://help.aliyun.com/origin?helpId=664">阿里云开放云存储 Java SDK</a> 的反编译。由于 SDK 需要暴露接口给其他开发人员调用，本身确实没有做混淆（不理解阿里云为何没有将它开源出来），故可以做简单的反编译来查看源码。</p>
+<h2>三类问题</h2>
 
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/10/21/decompiliation-jar/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/10/20/repair-my-fixed-gear/">修车记</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-10-20T21:58:00+08:00" pubdate data-updated="true">Oct 20<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/10/20/repair-my-fixed-gear/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>三个多月前，入手了这辆死飞。</p>
-
-<p>倒不是像中学生渴望它可搭配的绚丽色彩和特立独行，而是喜欢自由、简单的理念。以至于我基本全黑的配色被同学形容为『最不骚的死飞』。自己平时骑车并不快，代步而已，也没有花心思学些炫酷的平花动作（虽然很想学），除了能 mid skid 刹车和一直蹬脚踏板累了些，在操作上也确实没啥不同了。被女朋友形容为骑车一辆『功能退化』
-的自行车-，-</p>
-
-<p>一直还没来得及写篇博文记录下，借这次修车的过程，给它留个影。</p>
+<p>清单作为处理问题的工具，需要从问题的分类谈起。问题大致可分为三类：简单问题、复杂问题和极端复杂的问题。</p>
 
 <ul>
-<li>起因：后胎漏气，半小时漏光的节奏</li>
-<li>处理：用 DUUTI 补胎套件补胎，顺道紧了一把链条。</li>
+<li>简单问题，诸如洪培蛋糕，只需要知道流程，就可以独立完成，没有复杂的过程和细节。</li>
+<li>复杂问题，比如火箭发射升空。通过耐心分解，复杂问题能划分成很多的简单问题，进而得到解决。这时候，需要借助集体的力量。</li>
+<li>极端复杂的问题，比如子女的抚养。问题的领域极其宽广和复杂，充满了不确定性，理性的分析难以完全掌控。</li>
 </ul>
 
 
+<p>这三种类型的问题由简单到复杂的梯度递增。</p>
+
+<h2>实践经验：清单</h2>
+
+<p>实践领域的失败分为两种，一种是无知之错，俗话说得好，『不知者无罪』；另一种是无能之错，即按照知识储备，完全能成功解决问题，最终却因为各种原因失败了。随着社会的发展，后者的出现频率越来越高。造成这一现象的原因容易理解，社会复杂度越来越高，各种问题的实施难度加大，远超过个人能力的范围了。这个时候『清单』的重要性凸显了出来。</p>
+
+<p>人脑有一个认知防护网，体现在如下认知缺陷上：</p>
+
+<ul>
+<li>记忆不完整</li>
+<li>注意力不集中</li>
+<li>惰性思维</li>
+</ul>
+
+
+<p>清单能帮助人处理问题：</p>
+
+<ul>
+<li>重压之下，人脑容易忽视某些细节。</li>
+<li>人脑对于熟知的事实，思考时容易跳过一些事项。</li>
+</ul>
+
+
+<p>使用清单时，特别注意需要保证清单的简单、可测、高效。清单是给人用的，基于人脑局限性，复杂和模糊的认知难以帮助事情的发展。</p>
+
+<blockquote><p>清单需要简单、可测、高效</p></blockquote>
+
+<p>当然，清单也有显而易见的缺点：死板。它是一张纸条上的几行文字，不会知道水的冷暖。那么，当意外发生，需要应变的就是执行者本人。生活中，事物总是充满着变化，清单的控制也需要注意及时的应变。</p>
+
+<blockquote><p>制定清单、执行清单的过程，也需要灵活应变。</p></blockquote>
+
+<h2>用清单处理问题</h2>
+
+<ul>
+<li>简单问题： 简单的问题可以通过清单提高效率和成功率。</li>
+<li>复杂问题： 可以拆分为许多的简单问题，分由多人管理和复杂，再辅以清单解决。另外，需要注意人与人之间沟通，这能降低出错的可能性，提高个人效率。</li>
+<li>极端复杂的问题：更多的需要不断的试错、调整。</li>
+</ul>
+
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.io/blog/2013/07/05/checklist-manifesto/'>http://biaobiaoqi.github.io/blog/2013/07/05/checklist-manifesto/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/11/the-non-designers-design-book/">《写给大家看的设计书》</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-11T13:58:00+08:00" pubdate data-updated="true">Jun 11<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/06/11/the-non-designers-design-book/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>从 iOS7 的扁平化谈起</h3>
+
+<p>昨晚看了 WWDC2013 的直播，iOS7 以扁平化 UI 的方式展现在世人面前。于是接下来进入了微博吐槽时间。</p>
+
+<p>大象要跳舞是很难的，这正是苹果面临的情况。现在无论是 Android 还是 Winphone，与 iOS 系统体验上的差异已经不是难以企及的，甚至有些方面更能为大众接受。于是 Ive 带领他的团队开始拥抱<strong> Flat Design</strong>。乔布斯子不知道会怎么想，他可是坚持了一辈子的拟物风格。当然，无论乔老爷子怎么想，时势如此，由不得苹果不变。</p>
+
+<p>从微博疯狂的 iOS7 刷屏中挑出了些有价值的信息，关于扁平化和拟物化的：</p>
+
+<ul>
+<li><a href="http://www.zhihu.com/question/20881633">什么是扁平化设计（Flat Design）？扁平化设计是未来的趋势吗？</a></li>
+<li><a href="http://www.inside.com.tw/2013/03/25/flat-design">UI 美學趨勢備忘錄─淺析扁平化設計</a></li>
+<li><a href="http://www.oschina.net/translate/flat-design-principles">扁平化设计原则</a></li>
+</ul>
+
+
+<p>看完这些已经晕头了。人的思维总是有惰性的，倾向于接受自己头脑中已经有条理的思维结果。不情愿的说，这些略显专业的介绍已经超出了我对设计的思考范畴了，我看到的只是零散的观点，而找不到源头。</p>
+
+<p>于是想起了《写给大家看的设计书》。作为非设计人员，这本书够接地气。一个多月前看完，让自己对设计的认识从一个完全的小白提升为一个略有喜好和观点的小白了。还是先聊这本书吧。</p>
+
+<h2>设计的基本原则</h2>
+
+<p>读这本书之前，在不同平台上看见它的好多推荐了。不过鉴于大多数设计类书都是『手把手教你画马』的效果（详情参见下图），一直不太感冒。</p>
+
+<p><img src="https://dl.dropboxusercontent.com/u/64021093/Pics/307-12110Q62915932.jpg" title="画马" alt="怎样画马" /></p>
+
+<p>后来码代码太烦躁，抱着试一试的态度在多看上下载了下来，一着眼便被吸引住了。书本本身的排版设计就透露着简洁明了的设计感，配色也恰到好处的清新。</p>
+
+<p>全书循序渐进的从设计的四大基本原则讲起，结合丰富的案例分析，延伸到具体的主题设计技巧中。这部分是最让我觉得受益的部分。当然，不仅仅只是这些，还有涉及到颜色的运用、字体的设计等内容，本着『不要在意这些细节』的原则，它们被我匆匆略过。</p>
+
+<p>可以这么夸张的说，设计的『四项基本原则』是我有自主意识以来觉得最受用的『条条框框』：</p>
+
+<h3>原则一：亲密性</h3>
+
+<p>亲密性的根本目的是组织性。还有个副产品，利用亲密性可以使空白更美观。</p>
+
+<ul>
+<li>将相关的项组织在一起。</li>
+<li>物理位置的接近就意味着存在关联。</li>
+</ul>
+
+
+<h3>原则二：对齐</h3>
+
+<p>对齐的根本目的是使页面统一而有条理。不论创建精美的、正式的、有趣的还是严肃的外观，通常都可以利用一种明确的对齐来达到目的。</p>
+
+<ul>
+<li>任何元素都不能在页面上随意安放。每一项都应当与页面上的某个内容存在某种视觉联系。</li>
+<li>对齐的项会形成一个内聚的单元。</li>
+<li>居中对齐显得正式、稳重，但一般不要用居中对齐。</li>
+<li>一定要坚持页面上只使用一种文本对齐，避免混合使用多种文本对齐。</li>
+<li>可以适时的打破规则，但在此之前得清楚什么是规则。</li>
+</ul>
+
+
+<h3>原则三：重复</h3>
+
+<p>重复的根本目的是统一，并增强视觉效果。</p>
+
+<ul>
+<li>设计的某些方面需要在整个作品中重复</li>
+<li>重复是一种全局的一致性，比如杂志每页的标题都使用同样的字体大小。这有利于信息的组织。</li>
+<li>重复也一定程度给作品带来专业性和权威性。</li>
+<li>要避免太多的重复，重复太多会让人厌烦。注意对比的价值</li>
+</ul>
+
+
+<h3>原则四：对比</h3>
+
+<p>根本目的有两方面。一个目的是增强页面效果，如果一个页面看起来很有意思，往往更有可读性；另一个目的是有助于信息的组织。</p>
+
+<ul>
+<li>如果两项不完全相同，就应当使之不同，而且应当是截然不同。</li>
+<li>对比一定要强烈。</li>
+</ul>
+
+
+<h3>应用设计原则</h3>
+
+<p>优秀的设计就这么容易：</p>
+
+<ul>
+<li>1.学习 4 大基本原则;</li>
+<li>2.认识到自己没有运用这些原则；</li>
+<li>3.应用基本原则。</li>
+</ul>
+
+
+<p>这四个基本设计原则是相互关联的，只应用某一个原则的情况很少。当对应着一个个的举例体验过四条基本原则的威力后，接下来就是在自己身边实践这些原则了。</p>
+
+<p>一方面，可以观察四项原则在现有设计中的应用：比如当前所打开的网页，是否足够清晰、明确的展示了它所要表达的意图；手头的书本，排版是否跟内容在情感上吻合。</p>
+
+<p>另一方面，时常会有些文档、写报告、为展示写 slides 的需求，自己在创作的过程中，也可以应用起这四条原则，慢慢体会，慢慢修炼。</p>
+
+<h2>体会</h2>
+
+<p>歌德在《浮士德》中提到过这么一句话：『理论是灰色的，生活之树常青』。在我看来，所有的事物都是如此，人性使然。抛开这四条原则本身，它们归结起来都是要实现意图的传递：</p>
+
+<blockquote><p>将信息从设计者准确无误的传递给目标用户</p></blockquote>
+
+<p>设计作为一种原始信息的载体，本身的形式上会带来附加的信息量，如何让这些设计自身的附加量不混淆了核心的原始信息，是设计好坏的根本。更进一步，设计的更高层次应该是让设计的附加量起到正相关的增益效果。《写给大家看的设计书》中的四个原则正是最基础的实践。</p>
+
+<p>现在是信息的时代，信息量的暴增让信息的简洁展示和选择变得越发关键。前文提到的扁平化的设计风格的崛起，就是一个例证:</p>
+
+<p>『扁平化设计具有一种给你让人心醉的美丽，没有大量的修饰，它能以一个简单直白的方式传达一个信息或者帮助一个产品以及思想变得更加深入人心……扁平化设计正是通过放弃任何附加效果的方式，创建一个「零」3D 属性的设计方案。在这里，没有阴影效果、斜角、浮雕、渐变等其他方法来帮助元素产生相对于屏幕的凹凸效果。不带有羽化边缘以及阴影效果的图标和 UI 元素也都看起来非常鲜明。』</p>
+
+<p>相对而言，乔布斯推崇的拟物风格中，所秉承的是让所有用户能快速的学会如何使用它。而随着时代的发展，这种降低学习成本的方式渐渐的不是必须，数码产品充斥着生活，大多数人已经有足够的经验来应对新的操作体验。从这个角度讲，扁平化在现阶段或许是更有好的选择。</p>
+
+<p>不管怎么样，WWDC 以后，苹果股价已经持续下跌了，祝福苹果吧，希望 Ive 不要成为苹果的罪人，据说他是最懂乔布斯的人呢。</p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.io/blog/2013/06/11/the-non-designers-design-book/'>http://biaobiaoqi.github.io/blog/2013/06/11/the-non-designers-design-book/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/22/pragmatic-thinking-and-learning-refactor-your-wetware/">《程序员的思维修炼》</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-22T01:14:00+08:00" pubdate data-updated="true">May 22<span>nd</span>, 2013</time>
+        
+         | <a href="/blog/2013/05/22/pragmatic-thinking-and-learning-refactor-your-wetware/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>别鄙视方法论</h3>
+
+<p>曾经很长时间里，我这么认为：方法论的东西没什么实际的用处，不过是其他人按照自己的喜好来处理事物的途径而已，何必照着他人的思路。比如，作为一只不靠谱的程序猴子，在一些偏颇的思维习惯的影响下，我甚至对许多图形化的东西比较反感，自以为文本信息已经足以表达清楚事实且更有效率，从而本能的回避能造成视觉冲击的事物。直到后来，发现自己每每定下的计划都无法完整实施，自然也是没有收到预期的效果。我开始关注到方法本身是否合理，寻找那把平衡效率和体验的钥匙。</p>
+
+<p>这本书给出了一个很好的答案。</p>
+
+<p>虽然标题上赫然是“程序员”几个大字，但其实并没有这么局限。这是一本谈论思维习惯的书，对所有想了解大脑认知过程以更好的发觉其潜能的读者而言，都是可以参考的。虽然自己只是看完了这本书，而没有长期实践的效果证明，但从以往的经验来看，它的观点总能让我信服。</p>
+
 </div>
   
   
     <footer>
-      <a rel="full-article" href="/blog/2013/10/20/repair-my-fixed-gear/">Read on &rarr;</a>
+      <a rel="full-article" href="/blog/2013/05/22/pragmatic-thinking-and-learning-refactor-your-wetware/">Read on &rarr;</a>
     </footer>
   
 
@@ -257,7 +400,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/10/08/pat-1065-pat-1068/">PAT 1065 - 1068 题解</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/05/21/the-facebook-effect/">《Facebook效应》</a></h1>
     
     
       <p class="meta">
@@ -273,28 +416,26 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
 
 
-<time datetime="2013-10-08T13:46:00+08:00" pubdate data-updated="true">Oct 8<span>th</span>, 2013</time>
+<time datetime="2013-05-21T00:23:00+08:00" pubdate data-updated="true">May 21<span>st</span>, 2013</time>
         
-         | <a href="/blog/2013/10/08/pat-1065-pat-1068/#disqus_thread">Comments</a>
+         | <a href="/blog/2013/05/21/the-facebook-effect/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>这次的题目来源是 2013 年 10 月 7 日下午的浙大计算机研究生招生机试题。</p>
+  <div class="entry-content"><p>前两年风靡了一阵子的电影《社交网络》毕竟是电影，一种艺术的方式的表达。虽然无法完全的印证《Facebook 效应》一书中记载的正确性，但其细节足以给人启示。</p>
 
-<p>这次题目的难度，按姥姥的说法是：『比普通的 PAT 要难了 0.5 个点。我是把自己的题目从 1.0 到 5.0 以 0.5 的间距分难度级别的，PAT(A)难度一般在 1.5-4.5 之间，保研考试一般在 2.0-5.0 之间。PAT(B)大概是 1.0-2.5 的难度。』。</p>
+<p>电影中，主人公炫酷的人生经历能催生观者产生极强的代入感，不少同学看后可能就会想着自己在寝室特立独行的捣鼓几下，也来做出个震惊世界的产品。且慢。细读本书，就会了解到，成功并非像电影中所描述的那么轻松愉快和力所能及。</p>
 
-<p>个人认为，其中 1066 模拟 AVL 插入的实现有些细节容易弄错，而 1068 只要会简单的 DP，也就没有问题了，1065 和 1066 都还是很简单的实现。</p>
-
-<p>下面是各个题的分析（PAT advanced level 本人实现的全部源码：<a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel">请戳</a>）。</p>
+<p>以下是我的一些总结。</p>
 
 </div>
   
   
     <footer>
-      <a rel="full-article" href="/blog/2013/10/08/pat-1065-pat-1068/">Read on &rarr;</a>
+      <a rel="full-article" href="/blog/2013/05/21/the-facebook-effect/">Read on &rarr;</a>
     </footer>
   
 
@@ -306,7 +447,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/10/07/reset-nvram/">重置MBP的NVRAM</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/05/13/free-the-bit-economics/">《免费》</a></h1>
     
     
       <p class="meta">
@@ -322,30 +463,28 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
 
 
-<time datetime="2013-10-07T23:25:00+08:00" pubdate data-updated="true">Oct 7<span>th</span>, 2013</time>
+<time datetime="2013-05-13T00:46:00+08:00" pubdate data-updated="true">May 13<span>th</span>, 2013</time>
         
-         | <a href="/blog/2013/10/07/reset-nvram/#disqus_thread">Comments</a>
+         | <a href="/blog/2013/05/13/free-the-bit-economics/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><h3>遇到问题</h3>
+  <div class="entry-content"><h2>比特经济的到来</h2>
 
-<p>今天的中国好声音决赛之夜，我的 Mac 突然无法发出声响了=(，在此之前，刚看过一些视频，音频输出正常。</p>
+<p><a href="http://en.wikipedia.org/wiki/Chris_Andersen">克里斯·安德森</a>人称鸟人安德森，现效力于热火队，一直以来都是值得信赖的角色球员，板凳匪徒，内线尖兵。好了，不扯了……回到另外一个<a href="http://t.cn/akRhip">克里斯·安德森</a>的思想世界来。</p>
 
-<p>我尝试了使用 MBP 内建的外放和插入 iphone4s 的耳机并将音量调整到最大，没有任何声响。网上查阅了一些相关异常的资料，发现可能是 NVRAM 的问题。官方资料见链接：<a href="http://support.apple.com/kb/HT1379?viewlocale=zh_CN">《关于 NVRAM 和 PRAM》</a>。</p>
+<p>长尾理论早就为人熟知了，最早就是由安德森提出的，用于解释 Amazon 和 Netflix 的商业和经济模式。虽然没有阅读过原书，只是从网络接收了一些二手甚至三手的相关观点，但也可以从当今互联网的新兴中发现许多端倪。</p>
 
-<p>按照重置 NVRAM 的方法操作后，果然 Mac 又拥有了声音，可以看好声音啊=)</p>
-
-<p>这里对 NVRAM 做一些记录：</p>
+<p>按作者的话来说，“免费”是<a href="http://book.douban.com/subject/1919072/">《长尾理论》</a>没讨论完的话题，它并非新生事物，但是一直在变化，它的变化促使我们要反思人类行为和经济动因方面最根深蒂固的一些观念。</p>
 
 </div>
   
   
     <footer>
-      <a rel="full-article" href="/blog/2013/10/07/reset-nvram/">Read on &rarr;</a>
+      <a rel="full-article" href="/blog/2013/05/13/free-the-bit-economics/">Read on &rarr;</a>
     </footer>
   
 
@@ -357,7 +496,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/10/03/nine-algorithms-that-changed-the-future/">《改变未来的九大算法》</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/04/27/travsal-binary-tree/">二叉树的遍历（递归、非递归）分析</a></h1>
     
     
       <p class="meta">
@@ -373,122 +512,30 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
 
 
-<time datetime="2013-10-03T13:19:00+08:00" pubdate data-updated="true">Oct 3<span>rd</span>, 2013</time>
+<time datetime="2013-04-27T21:03:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2013</time>
         
-         | <a href="/blog/2013/10/03/nine-algorithms-that-changed-the-future/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>不要在意那些细节</h2>
-
-<p>这是一本关于计算机世界的科普读物。豆瓣链接：<a href="http://book.douban.com/subject/24529132/">请戳</a>。</p>
-
-<p>非常推荐刚接触计算机的朋友花上三五小时将全书通读一遍，没有技术细节，没有公式证明，它会告诉作者挑选出的九大算法出现的缘由和发展的过程。这些不关乎实现细节的思想概括，更能体现算法在整个领域中的存在的原因。它们不再是冷冰冰的算法过程，这是阅读大多数的书籍、教材所难以获得的。</p>
-
-<p>至于我的推荐原因，如下全文。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/10/03/nine-algorithms-that-changed-the-future/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/09/30/jobs-and-jobs/">Jobs和jobs</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-30T11:41:00+08:00" pubdate data-updated="true">Sep 30<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/09/30/jobs-and-jobs/#disqus_thread">Comments</a>
+         | <a href="/blog/2013/04/27/travsal-binary-tree/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>作为一个不太安分的技术男，或多或少会对乔布斯怀有敬意。</p>
+  <div class="entry-content"><h2>背景</h2>
 
-<p>我是从<a href="http://movie.douban.com/subject/1298084/">《硅谷海盗》</a>这部老片开始了解到乔布斯这个人的，查了下上映日期，竟然是我出生的第二天。那时候觉着演员挺帅啊，后来发现真人更有味道一点。<del>国内的互联网大佬们怎么不见如此气度的-,-。</del></p>
-
-<p>前天下午，和实验室的基友们一起去看了刚上映的<a href="http://movie.douban.com/subject/6877703/">《乔布斯》</a>。由于乔布斯的段子、事迹早已充斥到生活的各个角落，两个小时的观影我几乎是以一种期待下个情节的心情在审视电影的脉络：求学时代开始，Apple1 一炮打响，Apple2 大卖，Lisa 折戟，Macintosh 阻力重重，被赶出苹果，重回苹果，END。我试图将乔布斯真人带给社会的感动融入到电影的观影情绪里，但并不太奏效，电影缺了一些代入感。或许是库切的身体太壮脸太宽了的缘故，也或许是因为广电总局减掉了乔布斯和女友的 1 分钟激情戏。</p>
-
-<p>走出 Jobs，心里没有太多涟漪。世界倒是依旧的躁动——最近又迎来了找工作的季节。于是后面的节奏是，江湖上将流传着师兄师姐们的各种牛 offer 的传说，师弟师妹们各种仰慕，筹划着如何准备明年的面试，憧憬着明年的自己，以及抱怨着帝都魔都恶劣的生存条件和充沛的机遇并存的矛盾……充满着成王败寇的腥味，和纸醉金迷的浮躁。</p>
-
-<p>理想和现实的纠缠从来就不曾停息，欲望的高低贵贱也是如此。</p>
-
-<p>一场 Jobs，告诉我们<code>connecting the dolts</code>的感动。大家所追寻的 jobs，<code>dolts</code>在哪里？</p>
-
-<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.io/blog/2013/09/30/jobs-and-jobs/'>http://biaobiaoqi.github.io/blog/2013/09/30/jobs-and-jobs/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
-
-</div>
-  
-  
+<ul>
+<li>2013-10-7 修订部分内容</li>
+<li>2014-5-24 修改后序非递归部分代码</li>
+</ul>
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/09/22/java-initialization/">Java类、实例的初始化顺序</a></h1>
-    
-    
-      <p class="meta">
-        
+<p>本文讨论二叉树的常见遍历方式的代码(Java)实现，包括前序(preorder)、中序(inorder)、后序(postorder)、层序(level order)，进一步考虑递归和非递归的实现方式。</p>
 
+<p>递归的实现方法相对简单，但由于递归的执行方式每次都会产生一个新的方法调用栈，如果递归层级较深，会造成较大的内存开销，相比之下，非递归的方式则可以避免这个问题。递归遍历容易实现，非递归则没那么简单，非递归调用本质上是通过维护一个栈，模拟递归调用的方法调用栈的行为。</p>
 
+<p>在此之前，先简单定义节点的数据结构：</p>
 
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-22T21:53:00+08:00" pubdate data-updated="true">Sep 22<span>nd</span>, 2013</time>
-        
-         | <a href="/blog/2013/09/22/java-initialization/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>今晚是阿里巴巴 2013 校园招聘的杭州站笔试。下午匆忙看了两张历年试卷，去现场打了瓶酱油。</p>
-
-<p>题目总体考察点偏基础，倒数第二题（Java 附加题）比较有趣，考察了 Java 初始化机制的细节，在此摘录出来。</p>
-
-<h2>题目</h2>
-
-<p>求如下 java 代码的输出：</p>
+<p>二叉树节点最多只有两个儿子，并保存一个节点的值，为了实验的方便，假定它为 int。同时，我们直接使用 Java 的 System.out.print 方法来输出节点值，以显示遍历结果。</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -499,69 +546,25 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">class</span> <span class="nc">T</span>  <span class="kd">implements</span> <span class="n">Cloneable</span><span class="o">{</span>
-</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="n">T</span> <span class="n">t1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">T</span><span class="o">(</span><span class="s">&quot;t1&quot;</span><span class="o">);</span>
-</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="n">T</span> <span class="n">t2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">T</span><span class="o">(</span><span class="s">&quot;t2&quot;</span><span class="o">);</span>
-</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">print</span><span class="o">(</span><span class="s">&quot;i&quot;</span><span class="o">);</span>
-</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">99</span><span class="o">;</span>
-</span><span class='line'>  
-</span><span class='line'>  <span class="kd">public</span> <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">print</span><span class="o">(</span><span class="s">&quot;j&quot;</span><span class="o">);</span>
-</span><span class='line'>  <span class="o">{</span>
-</span><span class='line'>      <span class="n">print</span><span class="o">(</span><span class="s">&quot;构造快&quot;</span><span class="o">);</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Node</span> <span class="o">{</span>
+</span><span class='line'>      <span class="kd">public</span> <span class="kt">int</span> <span class="n">value</span><span class="o">;</span>
+</span><span class='line'>      <span class="kd">public</span> <span class="n">Node</span> <span class="n">leftNode</span><span class="o">;</span>
+</span><span class='line'>      <span class="kd">public</span> <span class="n">Node</span> <span class="n">rightNode</span><span class="o">;</span>
+</span><span class='line'>      
+</span><span class='line'>      <span class="kd">public</span> <span class="nf">Node</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>          <span class="n">value</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
+</span><span class='line'>      <span class="o">}</span>
 </span><span class='line'>  <span class="o">}</span>
-</span><span class='line'>  
-</span><span class='line'>  <span class="kd">static</span> <span class="o">{</span>
-</span><span class='line'>      <span class="n">print</span><span class="o">(</span><span class="s">&quot;静态块&quot;</span><span class="o">);</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'>  
-</span><span class='line'>  <span class="kd">public</span> <span class="nf">T</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">((++</span><span class="n">k</span><span class="o">)</span> <span class="o">+</span> <span class="s">&quot;:&quot;</span> <span class="o">+</span> <span class="n">str</span> <span class="o">+</span> <span class="s">&quot;    i=&quot;</span> <span class="o">+</span> <span class="n">i</span> <span class="o">+</span> <span class="s">&quot;  n=&quot;</span> <span class="o">+</span> <span class="n">n</span><span class="o">);</span>
-</span><span class='line'>      <span class="o">++</span><span class="n">n</span><span class="o">;</span> <span class="o">++</span> <span class="n">i</span><span class="o">;</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'>  
-</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">print</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span><span class="o">){</span>
-</span><span class='line'>      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">((++</span><span class="n">k</span><span class="o">)</span> <span class="o">+</span><span class="s">&quot;:&quot;</span> <span class="o">+</span> <span class="n">str</span> <span class="o">+</span> <span class="s">&quot;   i=&quot;</span> <span class="o">+</span> <span class="n">i</span> <span class="o">+</span> <span class="s">&quot;   n=&quot;</span> <span class="o">+</span> <span class="n">n</span><span class="o">);</span>
-</span><span class='line'>      <span class="o">++</span><span class="n">n</span><span class="o">;</span>
-</span><span class='line'>      <span class="k">return</span> <span class="o">++</span> <span class="n">i</span><span class="o">;</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'>  
-</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
-</span><span class='line'>      <span class="n">T</span> <span class="n">t</span> <span class="o">=</span> <span class="k">new</span> <span class="n">T</span><span class="o">(</span><span class="s">&quot;init&quot;</span><span class="o">);</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-
+<p>详细代码参见链接:<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/algorithm/basics/tree/BinarySearchTree.java">BST 及其各种便利的详细实现代码</a></p>
 
 </div>
   
   
     <footer>
-      <a rel="full-article" href="/blog/2013/09/22/java-initialization/">Read on &rarr;</a>
+      <a rel="full-article" href="/blog/2013/04/27/travsal-binary-tree/">Read on &rarr;</a>
     </footer>
   
 
@@ -573,7 +576,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/09/10/scientifically-surfing-the-internet/">关于科学上网</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/04/20/are-you-smart-enough-to-work-at-google/">《谁是谷歌想要的人才？》</a></h1>
     
     
       <p class="meta">
@@ -589,40 +592,30 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
 
 
-<time datetime="2013-09-10T12:11:00+08:00" pubdate data-updated="true">Sep 10<span>th</span>, 2013</time>
+<time datetime="2013-04-20T00:47:00+08:00" pubdate data-updated="true">Apr 20<span>th</span>, 2013</time>
         
-         | <a href="/blog/2013/09/10/scientifically-surfing-the-internet/#disqus_thread">Comments</a>
+         | <a href="/blog/2013/04/20/are-you-smart-enough-to-work-at-google/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>为了防止被某墙 fuck，暂且称其为『很棒的防火墙』吧，你懂的-,-.</p>
+  <div class="entry-content"><p><em>道理都明白，还得靠自己</em></p>
 
-<p>在 teahour 上听了 <a href="http://teahour.fm/2013/07/09/gfw-and-vpncloud.html">***技术研究和云梯产品故事</a>，有感于之前几天修改本地 hosts 的策略再次失效，切换到 goagent 模式，在此，基于这期 teahour 对<a href="https://twitter.com/kgen">@Kgen</a> 的访谈内容，对很棒的防火墙做份简单的笔记：</p>
+<h3>关于本书</h3>
 
-<p>很棒的防火墙有用大量的服务器，并由一大只团队维护和升级。它的目的是让大部分的互联网用户无法接触到“有害”的网络资源，“净化”国内的网络环境。同时，它需要尽可能的减少商业上的影响，比如为了不阻碍外企的 VPN 工作环境，很棒的防火墙并没有直接对 VPN 进行封堵。在这个前提上，留给我们的可能性也是一直存在的。</p>
+<p>藉由大多数程序员天然的对 google 怀有的朝圣般的向往和喜爱，开始看<a href="http://book.douban.com/subject/21329264/">这本书</a>。</p>
 
-<h2>防御策略</h2>
+<p><img class="left" src="http://img.cnbeta.com/upimg/121231/raymon725_1451506190985.jpg" width="250" height="400" title="Place Kitten #2" ></p>
 
-<p>很棒的防火墙一直在茁壮成长着。一个方校长倒下了，千千万万 X 校长站起来了。他们背负着一辈子的骂名，忍辱负重的为祖国奉献着生命，死而后已。总之，前赴后继的技术人员不断的在补全着很棒的防火墙的防御规则，因此，应对策略也需要不断的调整和改进。整体来看，防御策略主要有如下几种：</p>
-
-<ul>
-<li><h4>1.DNS 污染</h4>
-
-<p>  DNS 协议本身并没有安全认证功能，很棒的防火墙检测到相应 dns 请求后，会返回一个错误的 IP 地址，造成无法正常访问。解决方案有使用第三方 DNS 服务或者修改本地 hosts 文件。</p></li>
-<li><h4>2.IP 拦截</h4>
-
-<p>  对于特定敏感网站，很棒的防火墙会直接侦察到相应的 IP 地址施行拦截。简单的 DNS 修改无法解决 IP 层的问题，只能通过代理等手段绕过这些 IP 进行访问。常用的应对方式有：使用 VPN、ssh 代理和 GAE 上搭建 <a href="http://zhoudemin.com/goagent.html">GoAgent</a> 服务等。至于为什么一些国内用户说自己的 GoAgent 速度很快，而又有很多人在抱怨自己的 GAE 速度很慢，原因在于 GAE 应用会不受控制的部署到 Google 不同的服务器节点上，而国内网络环境复杂，不同地区的网络连入国外不同服务器的线路不尽相同，速度也差异明显。同样的情况也发生在 VPS 的使用速度差异上。</p></li>
-</ul>
-
+<p>书中的中文版序的标题就是“跳出框框来思考”，这种观点倒不是第一次见到了，甚至可以说，这些观点充斥于互联网上的各种流传、经验贴中。但这并不意味着我们不需要再花时间在这种书上。道理都懂，就是做不好已经成为这个信息通畅的时代的特征之一。正所谓“纸上得来终觉浅，绝知此事要躬行”。</p>
 
 </div>
   
   
     <footer>
-      <a rel="full-article" href="/blog/2013/09/10/scientifically-surfing-the-internet/">Read on &rarr;</a>
+      <a rel="full-article" href="/blog/2013/04/20/are-you-smart-enough-to-work-at-google/">Read on &rarr;</a>
     </footer>
   
 
@@ -634,7 +627,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/09/08/string-interning/">对Java字符串的探究</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/04/05/tong-bing-kuai-le-zhe/">《痛并快乐着》</a></h1>
     
     
       <p class="meta">
@@ -650,62 +643,28 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   
 
 
-<time datetime="2013-09-08T13:01:00+08:00" pubdate data-updated="true">Sep 8<span>th</span>, 2013</time>
+<time datetime="2013-04-05T02:30:00+08:00" pubdate data-updated="true">Apr 5<span>th</span>, 2013</time>
         
-         | <a href="/blog/2013/09/08/string-interning/#disqus_thread">Comments</a>
+         | <a href="/blog/2013/04/05/tong-bing-kuai-le-zhe/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><h2>问题的出发点</h2>
+  <div class="entry-content"><h2>儿时没烙印下的痛与快乐</h2>
 
-<p>在网上看到一道题：</p>
+<p><img class="left" src="http://img3.douban.com/lpic/s4599357.jpg" width="150" height="250" title="Place Kitten #2" ></p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">String</span> <span class="n">str</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="s">&quot;abc&quot;</span><span class="o">);</span>
-</span></code></pre></td></tr></table></div></figure>
+<p>这是一本让我内心平静的书。或许是因为他所讲，都是那十年来有亲身经历到过的。</p>
 
-
-<p>以上代码执行过程中生成了多少个 String 对象？</p>
-
-<p>答案写的是两个。&#8221;abc&#8221;本身是一个，而 new 又生成了一个。</p>
-
-<h2>&#8220;abc&#8221;是什么</h2>
-
-<p>查看这句程序的字节码，如下：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">NEW</span> <span class="n">String</span>
-</span><span class='line'>    <span class="n">DUP</span>
-</span><span class='line'>    <span class="n">LDC</span> <span class="s">&quot;abc&quot;</span>
-</span><span class='line'>    <span class="n">INVOKESPECIAL</span> <span class="n">String</span><span class="o">.&lt;</span><span class="n">init</span><span class="o">&gt;(</span><span class="n">String</span><span class="o">)</span> <span class="o">:</span> <span class="kt">void</span>
-</span><span class='line'>    <span class="n">ASTORE</span> <span class="mi">1</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>指令<code>ldc indexbyte</code>的含义：将两字节的值从 indexbyte 索引的常量池中加载到方法栈上。</p>
-
-<p>指令<code>LDC "abc"</code>说明了&#8221;abc&#8221;并不是直接以对象存在的，而是存在于常量池的索引中。String 的构造函数调用命令实际使用的就是 String 类型作为参数，那么，栈上应该有一个 String 类型的索引。</p>
-
-<p>由此我们得出，在字节码中，ldc 命令在常量池中找到了能索引到“abc”那个 String 对象的索引值。</p>
-
-<h2>常量池</h2>
-
-<p>常量池是类文件（.class）文件中的一部分，记录了许多常量信息，索引的字符串信息。</p>
-
-<p>由于 Java 是动态加载的，类文件并没有包含程序运行时的内存布局，方法调用等无法直接记录出方法的物理位置，常量池通过索引的方法解决了这个问题。</p>
+<p>《痛并快乐着》有二十来篇文章，每篇一个主题。所有的主题都围着个人在中国二十世纪后十年中的发展和社会的变迁中展开。文中，描述了白岩松如何从大学毕业后，几经波折获得了一个并非自己当初所想的工作，又如何在计划之外的点点滴滴中，将人生的珠子穿成了一根线。</p>
 
 </div>
   
   
     <footer>
-      <a rel="full-article" href="/blog/2013/09/08/string-interning/">Read on &rarr;</a>
+      <a rel="full-article" href="/blog/2013/04/05/tong-bing-kuai-le-zhe/">Read on &rarr;</a>
     </footer>
   
 
@@ -713,8 +672,6 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     </article>
   
   <div class="pagination">
-    
-      <a class="prev" href="/blog/page/4/">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -728,21 +685,21 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   <h1>标签云</h1>
  <br /> 
   <ul class="tag-cloud">
-    <a style="font-size: 143%" href="/tags/jvm/">JVM</a> &nbsp 
-<a style="font-size: 147%" href="/tags/java/">Java</a> &nbsp 
-<a style="font-size: 145%" href="/tags/pat/">PAT</a> &nbsp 
-<a style="font-size: 109%" href="/tags/octopress/">octopress</a> &nbsp 
-<a style="font-size: 115%" href="/tags/fen-bu-shi/">分布式</a> &nbsp 
-<a style="font-size: 137%" href="/tags/zi-jie-ma/">字节码</a> &nbsp 
-<a style="font-size: 137%" href="/tags/si-kao/">思考</a> &nbsp 
+    <a style="font-size: 70%" href="/tags/aop/">AOP</a> &nbsp 
+<a style="font-size: 161%" href="/tags/jvm/">JVM</a> &nbsp 
+<a style="font-size: 161%" href="/tags/java/">Java</a> &nbsp 
+<a style="font-size: 70%" href="/tags/ui/">UI</a> &nbsp 
+<a style="font-size: 98%" href="/tags/ruby/">ruby</a> &nbsp 
+<a style="font-size: 98%" href="/tags/qi-ye-jia-jing-shen/">企业家精神</a> &nbsp 
+<a style="font-size: 114%" href="/tags/xie-yi/">协议</a> &nbsp 
+<a style="font-size: 152%" href="/tags/zi-jie-ma/">字节码</a> &nbsp 
+<a style="font-size: 134%" href="/tags/si-kao/">思考</a> &nbsp 
 <a style="font-size: 180%" href="/tags/ji-zhu/">技术</a> &nbsp 
-<a style="font-size: 128%" href="/tags/fang-fa-lun/">方法论</a> &nbsp 
-<a style="font-size: 109%" href="/tags/fu-wu-qi/">服务器</a> &nbsp 
-<a style="font-size: 139%" href="/tags/sheng-huo/">生活</a> &nbsp 
-<a style="font-size: 153%" href="/tags/suan-fa/">算法</a> &nbsp 
-<a style="font-size: 109%" href="/tags/wang-luo/">网络</a> &nbsp 
-<a style="font-size: 139%" href="/tags/du-shu/">读书</a> &nbsp 
-<a style="font-size: 109%" href="/tags/you-jian-fu-wu/">邮件服务</a>
+<a style="font-size: 134%" href="/tags/fang-fa-lun/">方法论</a> &nbsp 
+<a style="font-size: 114%" href="/tags/fu-wu-qi/">服务器</a> &nbsp 
+<a style="font-size: 125%" href="/tags/suan-fa/">算法</a> &nbsp 
+<a style="font-size: 165%" href="/tags/du-shu/">读书</a> &nbsp 
+<a style="font-size: 114%" href="/tags/you-jian-fu-wu/">邮件服务</a>
 
   </ul>
 </section>
@@ -762,7 +719,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2016 - Biaobiaoqi -
+  Copyright &copy; 2017 - Biaobiaoqi -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
   - <span class="credit">Theme by <a href="http://www.gehaxelt.in">Gehaxelt</a></span>
   <span class="credit">and <a href="http://www.it-solutions-neef.de">IT Solutions Neef</a></span>

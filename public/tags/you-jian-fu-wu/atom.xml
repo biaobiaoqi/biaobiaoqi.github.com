@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: 邮件服务 | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.io/tags/you-jian-fu-wu/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.io/"/>
-  <updated>2016-04-19T08:49:46+08:00</updated>
+  <updated>2017-02-28T19:27:43+08:00</updated>
   <id>http://biaobiaoqi.github.io/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -12,99 +12,6 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
-  
-  <entry>
-    <title type="html"><![CDATA[Linode跨节点迁移：从Tokyo到Fremont]]></title>
-    <link href="http://biaobiaoqi.github.io/blog/2014/01/26/migrate-linode-vps-from-tokyo-to-fremont/"/>
-    <updated>2014-01-26T01:45:00+08:00</updated>
-    <id>http://biaobiaoqi.github.io/blog/2014/01/26/migrate-linode-vps-from-tokyo-to-fremont</id>
-    <content type="html"><![CDATA[<h2>背景</h2>
-
-<p><a href="http://biaobiaoqi.github.io/blog/2014/01/22/email-3/">上一篇博客</a>交代了如何在Linode上搭建邮件服务器，并配置好各种协议、记录来投入实际使用。</p>
-
-<p>由于实践过程中，曾经尝试使用明文协议与服务器交流数据，可能泄露了账号、密码信息，造成之后被攻击发送垃圾邮件(详细情况类似于如下链接：<a href="http://linuxroad.blog.51cto.com/765922/1039676">链接1</a>,<a href="http://linuxroad.blog.51cto.com/765922/1039675">链接2</a>)，IP被上了黑名单，在<a href="http://www.mail-tester.com">mail-tester.com</a>上的测试评分为0分，同时还收到了Linode的警告。</p>
-
-<p>为了能继续使用邮箱服务，我只好想着法子给Linode换一个IP。但原则上Linode是不支持换IP的。幸运的是，它支持VPS的迁移，而且方便快捷。从Tokyo节点迁移到Fremont节点后IP一般会发生变动（对于网络延迟，权衡了下<a href="http://www.v2ex.com/t/62721">大家</a>的说法,Fremont还不错:<a href="https://www.linode.com/speedtest/">官方测速</a>），这样就可以间接的更换IP了。</p>
-
-<p>迁移过程很简单，这里做一下记录。</p>
-
-<!--more-->
-
-
-<h2>迁移准备</h2>
-
-<h3>发出迁移请求</h3>
-
-<p>Linode有比较完善的<a href="https://manager.linode.com/support">Support</a>。对于迁移这种情况，可以在Support页面发出如下请求：</p>
-
-<p>```
-Hi,</p>
-
-<p>I've met with some problems with my server. And I think it's a solution to migrate my server from Tokyo to Fremont.</p>
-
-<p>Could you please do me a favor?</p>
-
-<p>Thanks a lot!
-```
-1分钟之后，我就收到了技术支持的回复：</p>
-
-<p>```
-Hello,</p>
-
-<p>Your migration to our Fremont datacenter has been configured. Please log into the Linode Manager, shut down, and click the migrate button to move to your new server. Your disk images will be moved with you. The migration should take approximately 10-15 minutes per gigabyte of data to complete. Please note that any existing backups for this Linode will be purged and will not be recoverable after you initiate the migration.</p>
-
-<p>Your new IP address is: xxx.xxx.xxx.xxx</p>
-
-<p>We ask that you begin this migration within 24 hours and let us know when it is complete. Thanks in advance!</p>
-
-<p>Regards,
-Jack Stitt</p>
-
-<p>```</p>
-
-<p>此时，Linode控制面板中已经多了一个迁移的提醒：<code>You have a migration pending!</code>。</p>
-
-<p>不过先不要着急迁移，因为迁移过程是不可恢复的，我们需要首先将VPS中得重要数据备份到本地。注意如回复中所说，这种备份不同于Linode中的备份服务。</p>
-
-<h3>备份数据</h3>
-
-<p>找到一份科学的全盘备份数据方式：<a href="http://www.linode.im/1590.html">linode用户通过ssh+dd命令复制整个磁盘</a>。不可否认dd做传输比scp一个个拷贝文件快得多，但由于需要将整个盘5G数据全部通过网络传输，而家里网速慢，传输数据只有大概100KB/s的速度，需要等待太长时间。</p>
-
-<p>实际上，我所需要备份的文件无非是<code>/home</code>目录下得所有数据和部分服务的配置数据（比如postfix、dovecot、nginx等），总共大概也就100MB，于是决定选择性的用scp传输备份数据：</p>
-
-<p><code>scp root@vps-ip:/backup /home/backup #vps-ip替换为服务器IP地址</code></p>
-
-<p>同时由于零散的传输文件效率不高，可以考虑先将服务器端所有小文件使用tar命令压缩到一个包里：</p>
-
-<p><code>tar zcvf backup.gz /home /etc/nginx/sites-enable</code></p>
-
-<p>在本地的解压缩命令如下：</p>
-
-<p><code>tar zxvf backup.gz</code></p>
-
-<p>当然，实际上我们都不会希望备份数据需要被使用到啦，而迁移vps丢失数据的概率应该也是很小的。</p>
-
-<h3>修改DNS记录</h3>
-
-<p>由于迁移过程需要大概一个多小时，网站服务的不可访问是无法避免了。只好尽可能将迁移过程放在深夜没有用户访问需求的时候。</p>
-
-<p>从这个角度讲，DNS的修改也没有特别的及时性要求。在前已完成前修改好DNS服务器中的A记录、MX记录等配置即可。</p>
-
-<h2>迁移</h2>
-
-<p>在正式迁移之前，需要关闭服务器。</p>
-
-<p>然后点击Linode控制面板中的migration按钮。接下来，就是一个多小时的等待。</p>
-
-<h2>后续</h2>
-
-<p>完成迁移之后，开启VPS，还需要注意修改服务中IP相关的配置。比如shadowsocks里的json.config中的server ip。</p>
-
-<p>一切顺利完成后，别忘了去Support界面回复Ticket =).</p>
-
-<p>如果你考虑租用Linode机器，而又不吝啬使用<a href="https://www.linode.com/?r=06fc7f86359e92800c41177a80c5678ecfcb2568">我的推荐码</a>，本博客不胜感激=).</p>
-]]></content>
-  </entry>
   
   <entry>
     <title type="html"><![CDATA[邮件服务（三）：实践服务器搭建]]></title>
@@ -367,7 +274,7 @@ Received: by 10.114.246.38 with SMTP id xt6csp139967ldc;</p>
 <pre><code>    Mon, 20 Jan 2014 06:53:16 -0800 (PST)
 </code></pre>
 
-<p>Return-Path: <a href="&#109;&#97;&#105;&#x6c;&#x74;&#x6f;&#x3a;&#x73;&#117;&#112;&#112;&#x6f;&#114;&#116;&#x40;&#x6c;&#x69;&#x6e;&#x6f;&#x64;&#x65;&#46;&#x63;&#111;&#109;">&#x73;&#117;&#112;&#x70;&#x6f;&#114;&#x74;&#x40;&#108;&#105;&#x6e;&#111;&#x64;&#101;&#46;&#99;&#111;&#x6d;</a>
+<p>Return-Path: <a href="&#x6d;&#x61;&#105;&#x6c;&#116;&#x6f;&#58;&#x73;&#x75;&#x70;&#x70;&#x6f;&#x72;&#x74;&#64;&#x6c;&#105;&#x6e;&#x6f;&#100;&#x65;&#x2e;&#x63;&#111;&#109;">&#x73;&#117;&#x70;&#112;&#111;&#114;&#x74;&#64;&#108;&#105;&#110;&#x6f;&#100;&#x65;&#46;&#x63;&#111;&#x6d;</a>
 Received: from mail2.linode.com (mail2.linode.com. [173.255.198.11])</p>
 
 <pre><code>    by mx.google.com with ESMTP id f6si835374obr.111.2014.01.20.06.53.15
@@ -390,7 +297,7 @@ Mon, 20 Jan 2014 09:53:15 -0500 (EST)
 <p>Date: Mon, 20 Jan 2014 09:53:15 -0500 (EST)
 From: support@linode.com
 To: someuser@gmail.com
-Message-ID: <a href="&#109;&#97;&#105;&#x6c;&#116;&#111;&#58;&#x33;&#x37;&#54;&#55;&#x35;&#x30;&#x38;&#x36;&#x38;&#46;&#x32;&#x36;&#x37;&#54;&#52;&#46;&#x31;&#51;&#x39;&#x30;&#50;&#x32;&#x39;&#x35;&#x39;&#53;&#52;&#x33;&#55;&#46;&#x4a;&#x61;&#x76;&#97;&#x4d;&#97;&#x69;&#108;&#46;&#99;&#102;&#x75;&#x73;&#x69;&#x6f;&#x6e;&#x40;&#x6d;&#x61;&#x69;&#108;&#x32;&#46;&#108;&#x69;&#110;&#111;&#x64;&#x65;&#46;&#x63;&#111;&#x6d;">&#51;&#55;&#54;&#55;&#x35;&#48;&#56;&#x36;&#56;&#x2e;&#x32;&#x36;&#x37;&#54;&#x34;&#46;&#49;&#51;&#57;&#x30;&#50;&#50;&#57;&#53;&#57;&#x35;&#x34;&#51;&#55;&#46;&#x4a;&#97;&#118;&#x61;&#x4d;&#97;&#x69;&#x6c;&#x2e;&#x63;&#x66;&#117;&#x73;&#105;&#x6f;&#110;&#64;&#x6d;&#97;&#105;&#108;&#50;&#x2e;&#x6c;&#x69;&#x6e;&#111;&#100;&#101;&#x2e;&#99;&#x6f;&#x6d;</a>
+Message-ID: <a href="&#x6d;&#x61;&#105;&#108;&#116;&#x6f;&#x3a;&#51;&#55;&#54;&#x37;&#x35;&#48;&#56;&#x36;&#56;&#46;&#x32;&#54;&#x37;&#x36;&#52;&#46;&#x31;&#x33;&#57;&#x30;&#x32;&#50;&#x39;&#53;&#x39;&#x35;&#52;&#x33;&#x37;&#x2e;&#74;&#x61;&#118;&#97;&#77;&#x61;&#x69;&#108;&#46;&#x63;&#102;&#x75;&#x73;&#x69;&#x6f;&#x6e;&#x40;&#109;&#97;&#105;&#x6c;&#x32;&#46;&#x6c;&#x69;&#x6e;&#111;&#100;&#101;&#x2e;&#x63;&#111;&#109;">&#x33;&#55;&#54;&#55;&#x35;&#48;&#56;&#54;&#56;&#46;&#x32;&#x36;&#x37;&#54;&#x34;&#x2e;&#49;&#x33;&#x39;&#x30;&#x32;&#50;&#x39;&#53;&#57;&#x35;&#52;&#x33;&#55;&#46;&#x4a;&#97;&#118;&#x61;&#77;&#97;&#x69;&#x6c;&#46;&#x63;&#x66;&#117;&#115;&#105;&#111;&#x6e;&#x40;&#x6d;&#97;&#105;&#108;&#x32;&#46;&#x6c;&#x69;&#110;&#111;&#x64;&#x65;&#x2e;&#x63;&#111;&#x6d;</a>
 ```
 这封邮件里每项的具体含义如下(<a href="https://support.google.com/mail/answer/29436?hl=en">参考</a>以及<a href="http://www.ietf.org/rfc/rfc0822.txt">RFC0822</a>)：</p>
 
