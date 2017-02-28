@@ -1,0 +1,32 @@
+<div class="highlight"><pre><span class="cp">#include&lt;stdio.h&gt;</span>
+<span class="cp">#include&lt;stack&gt;</span>
+<span class="k">using</span> <span class="k">namespace</span><span class="o">::</span><span class="n">std</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">tmp</span><span class="p">,</span> <span class="n">cur</span><span class="p">;</span>
+<span class="kt">bool</span> <span class="n">flag</span><span class="p">;</span>
+<span class="n">stack</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">s</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%d %d %d&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">m</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">n</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">k</span><span class="p">);</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">k</span> <span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">flag</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="n">cur</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="n">s</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">n</span><span class="p">;</span> <span class="o">++</span> <span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%d&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">tmp</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">tmp</span> <span class="o">&gt;</span> <span class="n">cur</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">cur</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">tmp</span><span class="p">;</span> <span class="o">++</span> <span class="n">j</span><span class="p">)</span>
+                    <span class="n">s</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">j</span><span class="p">);</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">m</span><span class="p">)</span> <span class="n">flag</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+                <span class="n">cur</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+            <span class="p">}</span><span class="k">else</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">top</span><span class="p">()</span> <span class="o">!=</span> <span class="n">tmp</span><span class="p">)</span>
+                    <span class="n">flag</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="n">s</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">flag</span><span class="p">)</span> <span class="n">printf</span><span class="p">(</span><span class="s">&quot;YES</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+        <span class="k">else</span> <span class="n">printf</span><span class="p">(</span><span class="s">&quot;NO</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>

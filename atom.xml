@@ -1,0 +1,2178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Biaobiaoqi的博客]]></title>
+  <link href="http://biaobiaoqi.me/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.me/"/>
+  <updated>2013-11-07T02:33:21+08:00</updated>
+  <id>http://biaobiaoqi.me/</id>
+  <author>
+    <name><![CDATA[Biaobiaoqi]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[PAT 1069 - 1072 题解]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/11/07/pat-1069-pat-1072/"/>
+    <updated>2013-11-07T00:30:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/11/07/pat-1069-pat-1072</id>
+    <content type="html"><![CDATA[<p>来源是 2013 年 11 月 2 日的 PAT 测试。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1069">1069. The Black Hole of Numbers (20)</a></h2>
+
+<h5>题意</h5>
+
+<p>给出一个四位数比如 6767，将它按照每位从小到大(6677)和从大到小(7766)充足，得到两个新四位数，这两者相减将得到一个新的四位数。再按照一样的处理方式处理得出的四位数</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>7766 - 6677 = 1089
+</span><span class='line'>9810 - 0189 = 9621
+</span><span class='line'>9621 - 1269 = 8352
+</span><span class='line'>8532 - 2358 = 6174
+</span><span class='line'>7641 - 1467 = 6174
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最终将得到一个『黑洞数』：6174。</p>
+
+<p>题目给出一个四位数，要求输出它演变出『黑洞数』的过程。</p>
+
+<!--more-->
+
+
+<h5>分析</h5>
+
+<p>简单模拟题，需要留心两个特殊情况的处理：<code>6174</code>，<code>xxxx</code>。</p>
+
+<p>熟练掌握 C 的基本函数也能缩短代码编写，比如<code>atoi()</code> 和 <code>sprintf()</code>， 由于<code>itoa()</code>是依赖于 Windows 的，这里不推荐使用。</p>
+
+<p>pat1069 源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1069.cpp">请戳</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1070">1070. Mooncake (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>给出月饼市场的需求 D&lt;= 500 （按重量计算），给出现有 N &lt;= 1000 种月饼，每种月饼有一定数量的储备（按重量计算）以及这些储备所对应的价格，求一个出售月饼的方式，在容量 D 的市场里，获得最多的销售额。</p>
+
+<h5>分析</h5>
+
+<p>简单的贪心问题。贪心的规则是月饼的单价。注意有一个坑：每种月饼的存货量也需要用<code>double</code>来做存储。</p>
+
+<p>pat1070 源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1070.cpp">请戳</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1071">1071. Speech Patterns (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>给出一个长度不超过 1048576 的字符串。把所有连续的字母或者数字（[0-9 A-Z a-z]）试做单词，且忽略大小写，求其中最高频的单词。</p>
+
+<h5>分析</h5>
+
+<p>使用 map&lt;string, int>做存储，统计出现次数即可。</p>
+
+<p>有些细节需要注意：</p>
+
+<ul>
+<li>使用<code>getline(cin, str)</code>获取正行数据</li>
+<li>使用<code>transform(str.begin(), str.end(), str.begin(), ::tolower);</code>将字符串转换成小写</li>
+<li>遍历字符串获取单词时，注意特殊条件。比如以非字符数字开头的字符串，以字符数字结尾的字符串等。</li>
+</ul>
+
+
+<p>pat1071 源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1071.cpp">请戳</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1072">1072. Gas Station (30)</a></h2>
+
+<h5>题意</h5>
+
+<p>给出一个图，其中有 N &lt;= 10<sup>3</sup> 个节点是居民房，M &lt;= 10 个节点是计划建造加油站的候选点。给出加油站所能服务的最远距离 D。要求计算出合适的位置建造加油站，满足如下优先级条件：</p>
+
+<ol>
+<li>所有居民房必须在加油站的服务距离内。</li>
+<li>所有居民房中距离加油站的最近的居民房与加油站之间的距离是最远的。（大概是安全方面的考虑，加油站要离居民区远一点）</li>
+<li>所有房间距离加油站的最小距离的总和最小。（节约居民加油的总体成本）</li>
+<li>同等条件下，序号越小的加油站优先。</li>
+</ol>
+
+
+<h5>分析</h5>
+
+<p>实际上是求加油站到所有点的最短路径的问题，使用 Dijsktra 可以满足。</p>
+
+<p>另外，需要考虑求最短路径的过程中是否要将其他加油站所构建的路径算入在内。从背景上看，加油站应该在公路边修建，故加油站之间以及居民房和加油站之间都是存在路径的，从给出的数据来看，存在两个加油站之间的路径。所以，计算最短路径时，是需要将所有加油站的节点也计算在内的。</p>
+
+<p>pat1072 源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1072.cpp">请戳</a></p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/11/07/pat-1069-pat-1072/'>http://biaobiaoqi.me/blog/2013/11/07/pat-1069-pat-1072/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[用Ruby实现的论坛灌水工具：CC98 Post Machine]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/11/05/cc98-post-machine/"/>
+    <updated>2013-11-05T15:20:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/11/05/cc98-post-machine</id>
+    <content type="html"><![CDATA[<h2>介绍</h2>
+
+<p>ZJU 的校网论坛 CC98 比较活跃。论坛只对校内网开放，而且账号跟学生绑定，每个学生注册的账号数量有限。『十大』是 CC98 的经典页面：基于关注的人数（回帖的用户数而不是回帖的数量）用算法求出 24 小时内最火爆的十个发帖。很多同学都会浏览十大，关注论坛动态。</p>
+
+<p>故事就是从十大引出的。有的社团在宣传活动时，为了扩大宣传面，会发动成员的小马甲顶贴上十大。这种违背社区自然发展轨迹的手段，强奸了关注十大贴的用户的意愿，阻碍了信息的自由流动。</p>
+
+<p>于是萌生了完成一个批量发帖的机器，以其人之道还治其人之身的想法。在下次十大被宣传贴攻占时，能有反击的工具。</p>
+
+<p>工具的用途很简单：使用不同的用户身份模拟真人论坛回帖，增加帖子关注度，以抵抗宣传贴。流程如下：提前收集各路亲朋好友的用户信息作为『预备水军』，『灌水』时，在评论内容文件中输入自定义的评论内容，在命令行参数中制定目标贴，即可实现随机顺序的用户自动顶贴。鉴于现在的功能是顶贴竞争十大，而十大排名是根据关注人数也就是独立用户评论数量做排序的，这里设计的顶贴策略是一个马甲发一条评论。以后可以考虑增加灵活的配置方案，实现更多功能。</p>
+
+<p>项目 Github 地址：<a href="https://github.com/biaobiaoqi/CC98PostMachine/">https://github.com/biaobiaoqi/CC98PostMachine/</a></p>
+
+<p>介于这个工具本身的罪恶的攻击属性，在此强调，工程仅供学习交流和对抗宣传贴。</p>
+
+<!--more-->
+
+
+<h2>使用说明</h2>
+
+<h3>1.准备顶贴用户</h3>
+
+<p>发帖的 HTTP 请求为 POST 请求。系统验证信息中需要有发帖用户的 username，userid 和 hash 后的 password，这些都能从 cookie 中获得。</p>
+
+<p>有两种方式设置水军的信息：</p>
+
+<h4>(1)浏览器中获取 cookie</h4>
+
+<p>在浏览器中，找到 cookie 的内容。将对应的三项信息抽取出来后，填入<code>water_army.yml</code>文件，由于该文件涉及用户隐私信息，项目中设置了.gitignore，不会上传到 repo 中。可以参照<code>water_army.yml.example</code>的格式自行修改。</p>
+
+<h4>(2)使用<code>RegWaterArmy</code>工具导入</h4>
+
+<p>如果不想手动的查找 cookie 信息，也可以将账号、密码输入到<code>pre_water_army.txt</code>文件中，执行命令来获取相关信息。</p>
+
+<p>在<code>pre_water_army.txt</code>文件中，一行为单位输入用户名和密码，中间用空格隔开。同样由于隐私原因，repo 中没有上传该文件，可以自行将<code>pre_water_army.txt.example</code>改为<code>pre_water_army.txt</code>，然后填入内容。</p>
+
+<p>填入账号、密码后，在 src 目录下运行如下命令：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$CC98POSTMACHINE/src/ruby RegWaterArmy.rb</span></code></pre></td></tr></table></div></figure>
+
+
+<p>即可自动获取用户的 cookie 信息，并导入<code>water_army.yml</code>文件中。注意，安全起见，完成这一步后，尽量删除账号、密码等隐私信息。</p>
+
+<h3>2.准备评论</h3>
+
+<p>在<code>comments.txt</code>文件中，设置用户评论的内容，每行一条。现在的设计是保证回帖的顺序与文件中的内容顺序一致。如果用户数量超过了文件中的评论条数，则回复时循环使用<code>comments.txt</code>中的评论。建议自行设计评论，且评论数大于等于水军数量。同样需要用户自行修改<code>comments.txt.example</code>为<code>commnets.txt</code>后使用。</p>
+
+<h3>3.执行</h3>
+
+<p>来到 CC98PostMachine 的 src 目录，执行：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$CC98POSTMACHINE/src/ruby  PostMachine.rb  POST_URL [SPEED]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>其中<code>POST_URL</code>为响应帖子的网址，<code>SPEED</code>是设定的两个回帖之间的间隔时间，实际回帖时间做了如下的模糊：<code>SPEED + random(SPEED)</code>。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>Usage: $CC98POSTMACHINE/src/ruby  PostMachine.rb  POST_URL [SPEED].
+</span><span class='line'>
+</span><span class='line'>    POST_URL is the url address of target post.
+</span><span class='line'>
+</span><span class='line'>    SPEED is the time gap unit between two posts, it may be 1(s), 10(s) or any other number
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>下一步：</h2>
+
+<ul>
+<li><p>修复 bug：第一次执行命令时，都只有一个用户能成功回复。（是服务器端的对 cookie 的记录？）</p></li>
+<li><p>整理代码结构，解耦，增加配置灵活性，写的更 ruby 一点<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/11/05/cc98-post-machine/'>http://biaobiaoqi.me/blog/2013/11/05/cc98-post-machine/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[用Github账号领Ripple币]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/10/28/get-ripple-from-github-account/"/>
+    <updated>2013-10-28T12:46:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/10/28/get-ripple-from-github-account</id>
+    <content type="html"><![CDATA[<p>最近随着<a href="http://zh.wikipedia.org/wiki/%E6%AF%94%E7%89%B9%E5%B8%81">比特币</a>在互联网上的流行，其他各种电子货币也都增加了曝光率。</p>
+
+<p>昨晚在 v2ex 上看到有人<a href="http://v2ex.com/t/87062">发帖</a>，用 20RMB 换取 2013 年 5 月 1 日前使用过的 github 账号得到的一个验证码。出于好奇，仔细围观了该贴，发现原来 lz 是利用信息不队称在揽入赠送给 github 用户的 ripple 币。而实际上，给 github 用户赠送的 2020 的 ripple 币按当时汇率这算人民币大概价值 70 元！这种『天上掉馅饼』的事情确实激发了我对电子货币的好奇，于是查阅了相关资料，也成功提现了自己的那部分 Ripple 币。</p>
+
+<!--more-->
+
+
+<h2>Ripple 介绍</h2>
+
+<p>Ripple 是一种电子的虚拟货币，与人尽皆知的比特币类似，它也立足于创建一种去中心化的的虚拟货币系统。实际上，Ripple 项目的起源时间甚至早于比特币，04 年就有了初版。比较特别的是，Ripple 承诺货币总量为 1000 亿，且永不增发，也就是不能像比特币那样挖矿。Ripple 被缩写为 XRP，有人称之为人品币（RP 币），这也一语双关的表明了它的实现本身所依赖的信任机制。</p>
+
+<p>更多信息，参考如下网页：</p>
+
+<ul>
+<li>基本理解：<a href="http://www.btc38.com/xrp/xrp_learning/46.html">《新手必读：什么是 Ripple》</a></li>
+<li>深度分析：<a href="http://ec.iresearch.cn/e-payment/20131016/215495.shtml">《个人货币“幽灵”Ripple：比比特币更疯狂》</a>，<a href="http://www.huxiu.com/article/13252/1.html">《Ripple，比比特币更激进的虚拟货币幽灵》</a></li>
+</ul>
+
+
+<h2>通过 Github 套现步骤</h2>
+
+<p>Ripple 最近给开发者发福利：</p>
+
+<blockquote><p>Any GitHub account older than May 1, 2013, 00:00:00 UTC that has some public code-writing activity before that date is eligible to receive 2020 XRP.</p>
+
+<p>Additionally, accounts which have watched or starred any of Ripple&#8217;s major repositories (ripple-client, ripple-lib, or rippled) as of October 3, 2013, 21:15:00 UTC are eligible for twice the amount.</p>
+
+<p>(These rules are subject to change without notice.)</p></blockquote>
+
+<p>凡是 2013 年 5 月 1 日前注册且有公开代码读写的 Github 用户将获得 2020XRP，如果在 2013 年 10 月 3 日前 star 或者 watch 了 ripple 在 Github 的官方账号上的任何 repo 的，获得的 XRP 将翻倍！</p>
+
+<p>如果你满足，就可以通过如下流程获得这些 XRP 啦。</p>
+
+<h3>0.注册</h3>
+
+<p>如果你没有 Ripple 的注册账户，请先<a href="https://ripple.com/client/#/register">注册</a>。</p>
+
+<p>注册流程没有什么特别的。最后需要记录下自己的钱包（Wallet）地址，待会儿领取 XRP 要用到。在 Ripple 网页顶栏的 Received 标签下。比如我的是<code>rst5AjSCVJx7VZb6KRNt5Ekdp33KTrEx1G</code></p>
+
+<p>注意，这里注册完毕后不需要激活。之后提取到 XRP 后账号本身自然会被激活的。实际上，只要账号中 Ripple 币的总额大于 100 就 OK，而我们能从这次活动中提取至少 2020XRP 呢。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/ripple1.png" alt="img" /></p>
+
+<h3>1.验证 Github 账号，提取 XRP</h3>
+
+<p>点击链接 <a href="https://giveaway.ripple.com/">https://giveaway.ripple.com/</a>，在这里通过 Github 授权领取 XRP。具体流程流程是：</p>
+
+<h4>1.1 Github 授权</h4>
+
+<p>点击 Log in with Github 按钮，一步步走下去。（前提是确定自己的 Github 账号满足了领取的要求）</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/ripple3.png" alt="img" /></p>
+
+<h4>1.2 生成提取码（giveaway code）</h4>
+
+<p>授权完毕后，来到如下界面：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/ripple2.png" alt="img" /></p>
+
+<p>在第一个输入框中，输入自己的钱包地址（在注册一步中记下的地址），下面两行的 passphrase 大概用于在忘记提取码时找回，一般的，点击 randomize 直接随机生成一个即可。</p>
+
+<p>最后，点击 Get your code，即可获得一长串的提取码。这个编码已经与你的钱包地址绑定，只有你的 ripple 账号能拿到这笔钱了。</p>
+
+<p>我的提取码如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>This is your giveaway code. Don't lose it!
+</span><span class='line'>sYBhVavSjbtp45GLNA8NnxYtK7FEUUEmUFM5g4DS5uTzrucCuV8wv6RnmETCjNmzo1FNXVqrULdZCmnDU5oLGbHwjXNqwmJsd1ZqjCNrqzyBxTp6JaRuc6Kwu33495dSQgaY4B3DzHtsNjL8sTyGgcMhuQcK1mSz4fpQXKpRWjAohYXmB8FP5MhpCymuLhW1jFw77sySh1s3sHRkJ4BBdT9KH2GgNwzWmQi57o5wMEbNWFfJe8ctun3ieD1WLnA6L5L4MmLYhdnirPvKmSxg4sEiw9VAPpz5nSg3RaA1PHTdKCokcvzVbbAnsCYWRKF5ZZo1mx3zzNRuwrQRgU1jPM7KUi7fUNpVz2aRofXmrovn5KQ8EYC1HwqiXB3HnPR7GJ84f9Q4oQ8q1sT</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>1.3 提取 XRP</h4>
+
+<p>之后，依然在原来的链接里，在如下方框里输入之前生成的提取码，点击 Redeem（兑现）。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/ripple3.png" alt="img" /></p>
+
+<p>提取 XRP 过程完毕。</p>
+
+<h3>2.兑换为人民币</h3>
+
+<p>对于急于想看看这个天上掉的馅饼到底长什么样的人来说，是没有耐心把 XRP 放着不提现的;)。如果想提现为人民币，首先得通过交易把 XRP 换成人民币。</p>
+
+<p>XRP 兑换 CNY（人民币）的过程，需要在网关中进行。这里的网关（gateway）跟网络中的网关没关系，是 Ripple 货币体系中重要的一环，可以理解为交易中心。</p>
+
+<p>中国有两个交易中心：RippleChina 和 RippleCN。不同的网关成交价格都可能不相同，建议对比后再做交易。</p>
+
+<p>RippleChina 和 RippleCN 都提供了相应的教程：</p>
+
+<ul>
+<li><a href="https://trade.ripplechina.net/gateway-course">RippleChina 交易</a></li>
+<li><a href="http://ripplecn.com/gateway/">RippleCN 交易</a></li>
+</ul>
+
+
+<p>注意，在使用 XRP 买入 CNY 时，需要设定为<code>XRP/CNY</code>，那个框是可以自己输入的，而不是下拉选择的。</p>
+
+<h3>3.提现到支付宝</h3>
+
+<p>最后一步提现到支付宝，建议使用 RippleCN，RippleChina 竟然对我收费 5 块，而 RippleCN 是承诺免费的。</p>
+
+<p>教程链接：<a href="http://ripplecn.com/tixian/">ripplecn 提现</a></p>
+
+<h2>后记</h2>
+
+<p>在微博上看到 github 精选这个账号发起的一个活动：<a href="http://t.github8.com/">『GitHub 账号免费领 30 元现金活动』</a>。美其名曰转发送 T，还略详实的介绍了 ripple 获取的规则，但却意图明显的隐藏了 XRP 折算人民币的币值。不得不感叹让不明真相的群众有种被人卖了还数钱的感觉。实在不怎么欣赏这种价值观。</p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/10/28/get-ripple-from-github-account/'>http://biaobiaoqi.me/blog/2013/10/28/get-ripple-from-github-account/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[《大规模Web服务开发技术》]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/10/28/scalable-web-service-development/"/>
+    <updated>2013-10-28T01:41:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/10/28/scalable-web-service-development</id>
+    <content type="html"><![CDATA[<h2>Web 服务开发的心灵鸡汤</h2>
+
+<p><img src="http://img3.douban.com/mpic/s6818566.jpg" alt="img" /></p>
+
+<p>周末去上海陪妹子的两天在路途上看完了这本<a href="http://book.douban.com/subject/6758780/">《大规模 Web 服务开发技术》</a>。</p>
+
+<p>《大规模 Web 服务开发技术》是日本的 <a href="http://www.hatena.com/">Hetena</a> 团队以夏天举办的实习活动的课程讲义为基础整理的开发、运营大规模服务的入门书。书中更多的偏重了 Hetena 技术团队发展过程中的实践经验总结，将一个系统从无到有的发展过程有条理的展现了出来。读完全书，觉得它更像是一本 Web 服务开发的心灵鸡汤，有许多靠谱的总结，但相对零散，刚接触的人很难掌握。当然，心灵鸡汤并不是贬义，只是有不同的针对性。</p>
+
+<!--more-->
+
+
+<h2>内容</h2>
+
+<p>经验总结的东西一般很难有板有眼的映射到一个成熟的理论框架下。它的知识点相对零散，互相的耦合性比较强，很难在初步接触时建立起深刻的认识。尽管作者已经尽可能的让书的内容跟着服务端架构从小变大的过程走，具备一定的条理性，但要想通过看这种书来补强不谢知识区域，还是有些牵强。</p>
+
+<p>值得称道的是，作者对 Hetena 的技术发展史的描绘，能让读者接触到一个真实系统的成长过程。这是比较难得的一次体验。或许某个时刻，我们能在网上看到一篇讲解分布式存储系统的文章，另一个时刻，我们又看到了一篇将数据库划分的文章，但我们不知道在什么场景需要使用它们。这些零散的知识点，都需要融入到一个整体的经验体系、理论体系中，来发挥它们的作用。实践经验能帮助知识点的梳理，达到这一点。</p>
+
+<p>另外，全书的文笔很轻松，所以读起来比较快。时不时会跳出几句卖萌的表达。或许跟主体内容来自讲义有关吧=)。</p>
+
+<h2>定位</h2>
+
+<p>如此的定位，让本书不太适合想打造实际的技能栈的童鞋。换句话说，想通过这本书实际学习到某门技术是不太可行的。倒是挺适合对 Web 服务端不怎么熟悉，想走走看看了解下概貌，陶冶下情操的童鞋们，把这本书当做闲暇的读物，找找学习的感觉。我就是如此。另外，本身已经有足够的经验，或许也能读读这本书，梳理自己的思路。</p>
+
+<p>这本书让我想起了<a href="http://biaobiaoqi.me/blog/2013/07/19/odps-in-alibaba/">阿里的暑期课堂</a>，不过说实话，阿里的那次开放课堂的内容更多的侧重于宣讲，缺少技术架构的内容。希望更多的国内的企业能开放技术培训，让学生们能更早的接触到实践层的东西，某种角度来看也是一种双赢。</p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/10/28/scalable-web-service-development/'>http://biaobiaoqi.me/blog/2013/10/28/scalable-web-service-development/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[在Eclipse里查看Java字节码]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/10/25/java-bytecode-plugin-for-eclipse/"/>
+    <updated>2013-10-25T04:06:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/10/25/java-bytecode-plugin-for-eclipse</id>
+    <content type="html"><![CDATA[<p>要理解 Java 字节码，比较推荐的方法是自己尝试编写源码对照字节码学习。其中阅读 Java 字节码的工具必不可少。虽然<code>javap</code>可以以可读的形式展示出.class 文件中字节码，但每次改动源码都需调用命令行并不方便。这里介绍一个可以辅助阅读 Java 字节码的 Eclipse 插件：<a href="http://andrei.gmxhome.de/bytecode/">bytecode outline</a>。</p>
+
+<p>bytecode outline 插件用可读的方式展现了 Eclipse 的 Java 编辑器或类文件的字节码内容。它使用了 <a href="http://asm.ow2.org/">ASM 框 架</a>的部分组建来实现对字节码的展示（ASM 框架在另外一篇操纵 Java 字节码的博文中有提到过：<a href="http://biaobiaoqi.me/blog/2013/09/08/custom-premain-method/">《AOP 实践：java.lang.instrument 的使用》</a>，是一个轻量级的 Java 字节码的操纵框架。）。</p>
+
+<!--more-->
+
+
+<h2>插件安装</h2>
+
+<p>直接使用 Update manager 安装插件，非常简单：</p>
+
+<p><code>Help -&gt; Install new Software... -&gt; Work with:</code></p>
+
+<p>输入 url：http://andrei.gmxhome.de/eclipse/</p>
+
+<p>然后在弹框中选择合适的版本即可。</p>
+
+<h2>使用</h2>
+
+<p>在 Eclipse 中添加相应的查看窗口：</p>
+
+<p><code>Window -&gt; Show View -&gt; Other -&gt; Java -&gt; Bytecode</code></p>
+
+<p>选中某 Java 源文件，效果如图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/javabytecode1.png" alt="img" /></p>
+
+<p>同时，还可以使用同样的方法，添加 Bytecode Reference 窗口，用于查询各个 Java 字节码的文档，示例如下：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/javabytecode2.png" alt="img" /><p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/10/25/java-bytecode-plugin-for-eclipse/'>http://biaobiaoqi.me/blog/2013/10/25/java-bytecode-plugin-for-eclipse/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[《黑客：计算机革命的英雄》]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/10/21/hacker/"/>
+    <updated>2013-10-21T22:19:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/10/21/hacker</id>
+    <content type="html"><![CDATA[<p><img src="http://img3.douban.com/mpic/s6951030.jpg" alt="img" /></p>
+
+<p>《<a href="http://book.douban.com/subject/6860890/">黑客：计算机革命的英雄</a>》不是一本新书，创作于上世纪 80 年代。</p>
+
+<p>这本书我断断续续花了几个月才看完。大量的传奇黑客人物穿插其中，说实话容量略大，到头来也没记住几个名字，不过这不是重点。全书将对整个计算机发展史有深刻影响的黑客文化分三个阶段的娓娓道来，让我重新审视对黑客的看法认识。下面是我对全书的笔记摘要。</p>
+
+<!--more-->
+
+
+<h2>第一代黑客：MIT 黑客</h2>
+
+<p>他们是最早的黑客，活跃在 20 世纪 50-60 年代。黑客主义刚刚在 MIT 出现的时候主要是专注于体验计算机的魅力；探索和扩展那些迷人的系统的精髓，并利用这些完美的逻辑系统来创造一种文化和一种生活方式。</p>
+
+<p>MIT 的技术模型火车俱乐部（TMRC）发明了很多英文单词。hack 是其中一个，如果一个正在进行的项目或正在构建的产品不仅仅是为了实现某个建设性目标，而且只要参与进来，就会有莫大的乐趣，那么这个项目就叫一个 Hack。</p>
+
+<p>这些黑客们探索事物的本质，掌握它们。通过将东西拆开，了解它们的工作原理，并根据这种理解创造新奇的甚至更有趣的东西，可以学习到关于系统（关于世界）的重要知识。</p>
+
+<p>那时候的计算机非常古老，古老到我只从文字里见到过，比如在纸带上写程序，比如一间房间大小的操作系统，预约时间才能上机，比如批处理系统等。</p>
+
+<p>那时候计算机管理严格，想给系统增加汇编指令，得经过长时间的审批操作，MIT 的黑客们为了节省时间，晚上偷偷的潜入机房改装计算机。当黑客们需要某些东西来帮助他们创造、探索或修理时，他才不管“知识产权”这种在他们看来荒谬的说辞呢。他们市场潜入办公室，拿到需要的工具，用完后再放回去。当然，他们是不以经济利益为目的的。</p>
+
+<p>在黑客们看来，没有任何一个系统是完成了的，总能让它变得更好。他们不断的改进系统，在系统上开发具有挑战性的应用。黑客通过了解和建立各种几乎被所有其他人漠视的系统来改善整个世界的愿望非常强烈。</p>
+
+<h2>第二代黑客：硬件黑客</h2>
+
+<p>源于大名鼎鼎的家酿计算机俱乐部（<a href="http://en.wikipedia.org/wiki/Homebrew_Computer_Club">homebrew computer club</a>）。理念是：互助，分享，恪守黑客道德，反对狭隘的所有权和自私行为。</p>
+
+<p>黑客们从与众不同和贴近群众的角度去看待计算机怎样改变人民的生活。他们对计算机的传播更感兴趣。将原先的庞然大物带入了寻常百姓家。探索精神和自己动手的行为成为这里主要的价值观。</p>
+
+<p>苹果和微软都在这个时期诞生。也是在这个时期，黑客文化开始接受商业的冲突，集中体现在大家对软件版权问题的理解上。这与原有的朴素的共享原则发生了冲突。在原来的观点中，软件属于全人类，是不需要有版权保护的（即使到后来 Stallman 也不认同版权的存在）。</p>
+
+<h2>第三代黑客：游戏黑客</h2>
+
+<p>第三代黑客生活的时代，黑客到的已经大打折扣。一切都是金钱在作怪。黑客道德的一条要旨是电脑本身不会考虑信息产权，但在那个年代，信息产权已经越发的成熟和深入到各个层面。</p>
+
+<p>20 世纪 80 年代，黑客游戏是唯一具有商业价值的艺术形式。黑客必须自己做导演：独立构思、编剧、指挥、执行并美化、最终完成一部杰作。第三代黑客看重的是艺术性。他们中，很多人成为了新闻人物，他们是文华英雄，突破限制并探索电脑系统。</p>
+
+<p>计算机游戏的发展充斥着商业气息，程序员的角色也在滚滚金钱利益关系中被削弱，比如最早游戏编写者所能获得的版权 30%，后来越来越低。</p>
+
+<p>实际上，越往后，商业和黑客主义的并存局面越明显。现在的黑客是在黑客主义和商业两种价值观并不对立的环境中成长起来的。他们正在影响着黑客运动的未来。</p>
+
+<p>保罗格拉汉姆(<a href="http://paulgraham.com/">Paul Graham</a>)认为，黑客主义的价值观不会受到商业的威胁……他们一定能够战胜商业。依靠直觉解决问题，分散化作出决策，强调工作质量，这些都是黑客的理念，而且他们在工作中一直遵循这些理念。</p>
+
+<p>黑客精神开始向企业家精神转变。</p>
+
+<h2>黑客道德</h2>
+
+<p>作者总结的七条『黑客道德准则』：</p>
+
+<ol>
+<li>Access to computers and anything which might teach you something about the way the world works should be unlimited and total.
+(接触电脑和任何能教会你世界运转方式的通道都应该完全向任何人开放。)</li>
+<li>Always yield to the Hands on Imperative!<br/>
+(永远践行亲自动电脑操作的指令。)</li>
+<li>All information should be free.
+(所有信息都应该是免费的。)</li>
+<li>Mistrust authority promote decentralization.
+(不信任权威，致力于推动反中央集权式统治。)</li>
+<li>Hackers should be judged by their hacking, not bogus criteria such as degrees, age, race or position.
+(黑客只受其黑客技术水平评价，而不是受制于他们的学位、种族、年龄或社会地位影响。)</li>
+<li>You can create art and beauty on a computer.
+(计算机可以创造艺术和美感。)</li>
+<li>Computers can change your life for the better.
+(计算机能让人们的生活变得更美好。)</li>
+</ol>
+
+
+<p>其中，对第三条容易产生误读。实际上，这一条最早出现在黑客道德的未来会议上。布兰德说</p>
+
+<blockquote><p>一方面，信息应该是昂贵的，因为它非常有价值。你在正确的地方得到正确的信息，就会改变你的人生。另一方面，信息应该是免费的，因为获得信息的成本不断地降低。这就是两者的矛盾所在。</p></blockquote>
+
+<p>在黑客文化的发展过程中，黑客道德是原则性的一环。</p>
+
+<p>最早，黑客们认为，对计算机的访问（以及任何可能帮助你认识我们这个世界的事物）应该是不受限制的、完全的。任何人都有动手尝试的权利。『信息应该是自由的』这种信念最直接的体现在优秀的计算机或计算机程序中。</p>
+
+<p>而后随着计算机的发展，出现了分权的思想。这根政治的分权或许有千丝万缕的联系，但更多的是体现了黑客精神中对计算机民主平等的追求。而黑客的信息自由和分权思想甚至对 Internet 的前身 ARPAnet 有重大的影响。</p>
+
+<p>到如今，商业化席卷全球。硅谷一些科技公司也在追寻黑客道德，比如风头正劲的 Facebook 一直以来所阐述的黑客之道（The Hacker Way）。在面临着新的时代，黑客道德也在不停的适应新的挑战。</p>
+
+<p>计算机先驱费尔森斯坦说</p>
+
+<blockquote><p>技术绝不仅仅是死气沉沉的硬件。它还是人们思想的展现。……人们仅仅是活着，而人性更加珍贵，也更加脆弱。所以我们必须要向那些墨守成规的文化挑战，用我们自身的创造力向它挑战。要并且用我们自己的创造力去取得突破……这才是实质</p></blockquote>
+
+<p>这就是黑客道德的实质。</p>
+
+<p>世界都将会从黑客道德中受益。</p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/10/21/hacker/'>http://biaobiaoqi.me/blog/2013/10/21/hacker/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[反编译Jar包]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/10/21/decompiliation-jar/"/>
+    <updated>2013-10-21T12:16:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/10/21/decompiliation-jar</id>
+    <content type="html"><![CDATA[<p>Jar 包(Java Archive)是对 Java 程序的打包，它可能包含源码，也可能没有。</p>
+
+<p>对于有包含源码的 Jar 包，在 Eclipse 工程里设定好 source code 路径后能直接查看到远吗，对于理解代码、调试的帮助很大。而如果 Jar 包没有打包源码，实际上也可以通过反编译的方法得到源码。道理很简单，Java 规范中，生成的.class 文件所包含的信息完全能逆向的重构出源码。</p>
+
+<p>当然，一些代码为了防止自身 Jar 包被人反编译，会做<a href="http://zh.wikipedia.org/wiki/%E4%BB%A3%E7%A0%81%E6%B7%B7%E6%B7%86">代码混淆</a>掩人耳目。其中最简单的一种方法就是是通过修改类名、变量名、方法名等方法让反编译的源码难于阅读理解。不过这个方法在混淆的时候需要特别注意：不能混淆对外提供接口的类。如果混淆了提供给外部的 API 接口的名字，整个工程就无法被正常使用了。</p>
+
+<p>本文要举例的是对<a href="http://help.aliyun.com/origin?helpId=664">阿里云开放云存储 Java SDK</a> 的反编译。由于 SDK 需要暴露接口给其他开发人员调用，本身确实没有做混淆（不理解阿里云为何没有将它开源出来），故可以做简单的反编译来查看源码。</p>
+
+<!--more-->
+
+
+<h2>Jadclipse 的安装使用</h2>
+
+<p>Jadclipse 插件的反编译功能源于 Java 反编译工具 Jad。但用裸的 Jad 来命令行执行不太友好，于是就有了 Jadclipse。</p>
+
+<h3>1.下载 Jad 反编译工具</h3>
+
+<p>下载好 Jad 工具，解压后放在合适的路径下。
+<a href="http://varaneckas.com/jad/">Jad 下载链接</a></p>
+
+<h3>2.安装插件</h3>
+
+<p>按照 Eclipse 版本下载匹配的 Jadclipse 插件：<a href="http://sourceforge.net/projects/jadclipse/files/?source=navbar">下载链接</a>。（这个插件的最近修改是 2007 年，只要不是使用的老掉牙的 Eclipse，都可以下载最新的插件版本 jadclipse3.3）。</p>
+
+<p>解压后，将对应版本的.jar 包放入 Eclipse 的插件目录(eclipse/plugins)下。</p>
+
+<h3>3.配置 Jadclipse</h3>
+
+<p>插件中有两个一定要配置好的选项：</p>
+
+<ul>
+<li>Jad 执行文件的路径</li>
+<li>.class 文件打开时的关联工具</li>
+</ul>
+
+
+<p>以下配置路径的方式可能 Windows 跟 Mac 版本的 Eclipse 各不相同，不过都比较简单，可以自行 Google。</p>
+
+<h4>3.1 Jad 执行文件路径</h4>
+
+<p>在 Eclipse 中，依次打开 <code>Preference -&gt; Java -&gt; JadClipse</code>，修改<code>Path to decompiler</code>的值，定位到 Jad 的执行文件路径。</p>
+
+<h4>3.2 .class 关联工具</h4>
+
+<p>由于 Eclipse 默认.class 文件打开使用的是 Class File Viewer，如果.class 没有关联的源文件，则无法查看源代码。需要将<code>.class without source</code>类型的文件的关联编辑器首选设置为 JadClipse Class File Viewer。</p>
+
+<p>打开方式如下： <code>Windows—&gt; Perference—&gt;General-&gt;Editors-&gt;File Associations</code></p>
+
+<h3>4.测试</h3>
+
+<p>配置好后，可能需要重启 Eclipse（或许是插件本身不够 Robust，博主在没有重启的情况下尝试打开没有附带源代码的.class 文件时失败了，重启后一切 ok）。</p>
+
+<p>下载阿里云开放云存储 SDK：<a href="http://help.aliyun.com/origin?helpId=664">下载链接</a>，解压后，将相应的 Jar 包加入到工程中。</p>
+
+<p>点击其中的某个.class 文件，即可显示出它的源代码。文件的头部会有 Jad 的相关信息：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="cm">/*jadclipse*/</span><span class="c1">// Decompiled by Jad v1.5.8g. Copyright 2001 Pavel Kouznetsov.</span>
+</span><span class='line'><span class="c1">// Jad home page: http://www.kpdus.com/jad.html</span>
+</span><span class='line'><span class="c1">// Decompiler options: packimports(3) radix(10) lradix(10) </span>
+</span><span class='line'><span class="c1">// Source File Name:   HmacSHA1Signature.java</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">…</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>PS</h3>
+
+<p>后来 Google 相关内容时，找到了 JadClipse 在 Eclipse Market 的版本：<a href="http://marketplace.eclipse.org/content/jadclipse-eclipse-4x">请戳</a>，或许对大家有用=)<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/10/21/decompiliation-jar/'>http://biaobiaoqi.me/blog/2013/10/21/decompiliation-jar/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[修车记]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/10/20/repair-my-fixed-gear/"/>
+    <updated>2013-10-20T21:58:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/10/20/repair-my-fixed-gear</id>
+    <content type="html"><![CDATA[<p>三个多月前，入手了这辆死飞。</p>
+
+<p>倒不是像中学生渴望它可搭配的绚丽色彩和特立独行，而是喜欢自由、简单的理念。以至于我基本全黑的配色被同学形容为『最不骚的死飞』。自己平时骑车并不快，代步而已，也没有花心思学些炫酷的平花动作（虽然很想学），除了能 mid skid 刹车和一直蹬脚踏板累了些，在操作上也确实没啥不同了。被女朋友形容为骑车一辆『功能退化』
+的自行车-，-</p>
+
+<p>一直还没来得及写篇博文记录下，借这次修车的过程，给它留个影。</p>
+
+<ul>
+<li>起因：后胎漏气，半小时漏光的节奏</li>
+<li>处理：用 DUUTI 补胎套件补胎，顺道紧了一把链条。</li>
+</ul>
+
+
+<!--more-->
+
+
+<p>先来个全景照：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/fixedgearIMG_1010.JPG?imageView/2/w/800/h/800" alt="img" /></p>
+
+<p>自己先捣鼓了下买车时卖家送的 DUUTI 补胎套件，撬胎棒、打磨片、胶、贴片、充气筒都是齐全的。倒是自己下不了手用力把外胎撬开，害怕姿势不对把轮圈弄破。只能求助杨康童鞋，他的动手能力很厉害，以下照片里的童鞋就是他了。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/fixedgearIMG_1007.JPG?imageView/2/w/800/h/800" alt="img" /></p>
+
+<h3>1.撬开外胎</h3>
+
+<p>先放完需要补胎的内胎里的气，方便操作。</p>
+
+<p>把撬胎棒的尖端插进外胎一侧，用力翘起，固定好，同时撬起连续的三个点（每个点间距二十公分左右），即可轻松的掰开外胎了。注意撬外胎最终状态是，外胎的一侧落在轮圈放置内胎的卡槽之外，另一侧伦在轮圈的卡槽中。
+<img src="http://biaobiaoqi.u.qiniudn.com/fixedgearIMG_1121.JPG?imageView/2/w/800/h/800" alt="img" /></p>
+
+<h3>2.检查内胎</h3>
+
+<p>外胎撬开之后，拉出内胎。接一盆水，方便检测漏气点。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/fixedgearIMG_1122.JPG?imageView/2/w/800/h/800" alt="img" /></p>
+
+<p>将内胎充满气，一节一节放入水中按压，检查是否有气泡。有气泡连续冒出的点即为漏气点，标记好位置。如下图</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/fixedgearIMG_1123.JPG?imageView/2/w/800/h/800" alt="img" /></p>
+
+<h3>3.打磨</h3>
+
+<p>使用打磨片打磨漏气点的四周，窃以为一方面可以将内胎外侧的纹路磨光，方便贴补胎片，另一方面也为涂抹胶水创造粗糙易粘附的条件。</p>
+
+<h3>4.涂胶水</h3>
+
+<p>使用 Duuti 胶水，涂抹其上。一定注意要吹干，再继续下一步。</p>
+
+<h3>5.贴补胎片</h3>
+
+<p>类似于手机贴膜（不知道够不够形象-，-）。</p>
+
+<p>注意摆正位置，让漏气空处于中间位置。贴好后用力按压贴片周围，防止内胎充气膨胀后，贴片在两边有曲度处翘起。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/fixedgearIMG_1124.JPG?imageView/2/w/800/h/800" alt="img" /></p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/fixedgearIMG_1125.JPG?imageView/2/w/800/h/800" alt="img" /></p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/fixedgearIMG_1126.JPG?imageView/2/w/800/h/800" alt="img" /></p>
+
+<h3>6.重新测试</h3>
+
+<p>贴好后，最好重新充气、放回水里检测。（我们就是第二次才成功的。。。）</p>
+
+<h3>7.装胎</h3>
+
+<p>首先将内胎放回轮圈的卡槽里，然后沿着轮圈，一点点将外胎悬在外部的一侧往轮圈卡槽里塞。注意，刚开始的时候比较轻松，越往后塞的时候需要的力量越大。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/fixedgearIMG_1127.JPG?imageView/2/w/800/h/800" alt="img" /></p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/fixedgearIMG_1128.JPG?imageView/2/w/800/h/800" alt="img" /></p>
+
+<h3>PS：紧链条</h3>
+
+<p>康帅发现我的链条有些松，于是将后轮固定的位置往后推了一点点，让链条能绷得紧一点。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/fixedgearIMG_1129.JPG?imageView/2/w/800/h/800" alt="img" /></p>
+
+<p>我的车后轮固定处的结构如下图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/fixedgearIMG_1130.JPG?imageView/2/w/800/h/800" alt="img" /></p>
+
+<p>冒出的带弹簧的螺钉用于控制后轮与牙盘的相对位置。移动后轮的时候，还需要注意两边的螺钉需要平衡的移动，否则容易使后轮左右倾斜。</p>
+
+<h3>鸣谢</h3>
+
+<p>再次鸣谢杨康童鞋的指导=)</p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/10/20/repair-my-fixed-gear/'>http://biaobiaoqi.me/blog/2013/10/20/repair-my-fixed-gear/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[数据集成工具：Teiid实践]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/10/19/data-integration-tool-teiid/"/>
+    <updated>2013-10-19T23:58:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/10/19/data-integration-tool-teiid</id>
+    <content type="html"><![CDATA[<p>数据集成是把不同来源、格式、特点性质的数据在逻辑上或物理上有机地集中，从而为企业提供全面的数据共享。数据集成的方式多种多样，这里介绍的 <a href="http://www.jboss.org/teiid/">Teiid</a> 是其中的一种：通过抽象和联邦技术，实现分布式数据源的实时数据访问和集成，无需从记录系统中复制或移动数据。</p>
+
+<p><a href="http://blogs.ejb.cc/archives/3552/teiid-scalable-information-integration-program">链接</a>是一篇关于 Teiid 的中文介绍，比较详细。</p>
+
+<p>由于适配不同数据源和生成虚拟数据库（VDB）需要维护好几个配置文件，直接手动部署 Teiid 比较难受。好在 Teiid 提供了辅助工具 <a href="http://www.jboss.org/teiiddesigner">Teiid Designer</a>，这是一个 Eclipse 插件，能帮助用户可视化的管理数据的集成过程。</p>
+
+<ul>
+<li><p>安装配置</p>
+
+<p>  参见官网的 Downloads 界面的详细介绍（注意：环境配置中，各组件需严格遵循官网指定版本，实践经验表明，Teiid 本身并不够鲁棒，容不得小差错）。</p></li>
+</ul>
+
+
+<p>接下来，我们用一个简单的应用场景实践 Teiid 的数据集成功能。</p>
+
+<!--more-->
+
+
+<h2>应用场景</h2>
+
+<p>书店主营图书销售，并维护者一个用户对图书评价的数据库。技术上说，书店拥有三个数据模块：</p>
+
+<ul>
+<li><p>MySQL 数据库，存储用户信息和用户对某书的评价</p>
+
+<p>  表结构如下：</p></li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>create database library;
+</span><span class='line'>use library;
+</span><span class='line'>create table users (
+</span><span class='line'>     id int primary key,
+</span><span class='line'>     name char(20) not null,
+</span><span class='line'>     passwd char(20)) not null,
+</span><span class='line'>);
+</span><span class='line'>create table comments(
+</span><span class='line'>     cid int primary key,
+</span><span class='line'>     uid int ,
+</span><span class='line'>     bookid int not null,
+</span><span class='line'>     content char(255),
+</span><span class='line'>     foreign key (uid) references users(id)
+</span><span class='line'>);</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>EXCEL 表格，店主用于记录销售量、记录销售单价</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>book_id,price,sales
+</span><span class='line'>1,89.00,1000
+</span><span class='line'>2,52.00,9999
+</span><span class='line'>3,30.00,10000
+</span><span class='line'>4,9800,5555
+</span><span class='line'>5,69.00,1234</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>XML 文件记录书籍信息，包括</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="cp">&lt;?xml version= &quot;1.0&quot; encoding =&quot;UTF-8&quot;?&gt;</span>
+</span><span class='line'><span class="nt">&lt;BooksInfo&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;Book</span> <span class="na">id =</span> <span class="s">&quot;1&quot;</span> <span class="nt">&gt;</span>
+</span><span class='line'>               <span class="nt">&lt;Title&gt;</span> Hadoop: The Definitive Guide <span class="nt">&lt;/Title&gt;</span>
+</span><span class='line'>               <span class="nt">&lt;Author&gt;</span> Tom White<span class="nt">&lt;/Author &gt;</span>
+</span><span class='line'>               <span class="nt">&lt;publisher&gt;</span> O&#39;Reilly<span class="nt">&lt;/ publisher&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/Book&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;Book</span> <span class="na">id =</span> <span class="s">&quot;2&quot;</span> <span class="nt">&gt;</span>
+</span><span class='line'>               <span class="nt">&lt;Title&gt;</span> Effective Java<span class="nt">&lt;/Title &gt;</span>
+</span><span class='line'>               <span class="nt">&lt;Autorh&gt;</span> Joshua Bloch<span class="nt">&lt;/Autorh&gt;</span>
+</span><span class='line'>               <span class="nt">&lt;publisher&gt;</span> HZ Books<span class="nt">&lt;/ publisher&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/Book&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;Book</span> <span class="na">id =</span> <span class="s">&quot;3&quot;</span> <span class="nt">&gt;</span>
+</span><span class='line'>               <span class="nt">&lt;Title&gt;</span> C Programming Language<span class="nt">&lt;/Title &gt;</span>
+</span><span class='line'>               <span class="nt">&lt;Autorh&gt;</span> Kernighan, Ritchie <span class="nt">&lt;/Autorh&gt;</span>
+</span><span class='line'>               <span class="nt">&lt;publisher&gt;</span> HZ Books<span class="nt">&lt;/ publisher&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/Book&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;Book</span> <span class="na">id =</span> <span class="s">&quot;4&quot;</span> <span class="nt">&gt;</span>
+</span><span class='line'>               <span class="nt">&lt;Title&gt;</span> Head First: Design Pattern<span class="nt">&lt;/Title &gt;</span>
+</span><span class='line'>               <span class="nt">&lt;Autorh&gt;</span> Freeman<span class="nt">&lt;/ Autorh&gt;</span>
+</span><span class='line'>               <span class="nt">&lt;publisher&gt;</span> Turning Education<span class="nt">&lt;/publisher &gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/Book&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;Book</span> <span class="na">id =</span> <span class="s">&quot;5&quot;</span> <span class="nt">&gt;</span>
+</span><span class='line'>               <span class="nt">&lt;Title&gt;</span> Refactoring: Improving the Design of Existing Code <span class="nt">&lt;/Title&gt;</span>
+</span><span class='line'>               <span class="nt">&lt;Autorh&gt;</span> Martin Fowler <span class="nt">&lt;/Autorh&gt;</span>
+</span><span class='line'>               <span class="nt">&lt;publisher&gt;</span> O&#39;Reilly<span class="nt">&lt;/ publisher&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/Book&gt;</span>
+</span><span class='line'><span class="nt">&lt;/BooksInfo&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>实践</h2>
+
+<h3>1.创建工程</h3>
+
+<p>打开配置好 Teiid Designer 插件的 Eclipse，在 Teiid Designer 视图的 Guides 中，找到 Define Teiid Model Project 选项，如下图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid1.png" alt="img" /></p>
+
+<p>一路点击 next，在如下界面勾选 sources 和 views 即可，designer guid 会帮助生成这两个目录，其他目录在此项目中不需要。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid2.png" alt="img" /></p>
+
+<h3>2.导入 MyQL 数据源</h3>
+
+<p>在 Guides 界面，选择 JDBC 数据源</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid3.png" alt="img" /></p>
+
+<p>第一个步骤 Define Teiid Model Project 在上一步中已经完成了，现在需要创建一个 JDBC 链接，选择 Create JDBC connection，在弹出的窗口中，选择 Mysql 数据库，然后点下一步</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid4.png" alt="img" /></p>
+
+<p>选择 mysql 驱动，配置好 Mysql 数据源的的 url、用户名、密码，点下一步。（在这里，mysql 的端口为默认的 3306，library 为之前配置好的 mysql 数据库）。点击 test connection 测试与 mysql 的链接能否建立。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid5.png" alt="img" /></p>
+
+<p>接下来需要给数据源创建源模型（source model）了。同样在 Guides 试图上双击 Create source model for JDBC data source，一路下一步，直到选择数据库和表，选择 library 数据库中的所有表，如下图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid6.png" alt="img" /></p>
+
+<p>创建源模型的最后一步如下图，可以自定义 Model Name，为了让之后的 sql 查询过程更可读，我将以数据源类型命名它（mysql.xmi）。其他无关配置暂时不用理会。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid7.png" alt="img" /></p>
+
+<p>finish 后，就生成了一个元模型，如下图。图中可视化的显示了数据库所建的两张表</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid8.png" alt="img" /></p>
+
+<p>接下来可以测试数据是否可读，双击 Guides 中的 Preview Data，在弹框中选择需要 preview 的表或者 precedure（procedure 在本工程里这里不会被用到）查询结果显示在了 eclipse 下方的 SQL Result 框中，如下图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid9.png" alt="img" /></p>
+
+<p>接下先来不用着急 Define VDB，我们先把所有数据源配置完成后再一起来定义虚拟数据库。</p>
+
+<h3>3.导入 FlatFile 数据源（CSV）</h3>
+
+<p>跟之前一个步骤一样，只需要沿着 Guides 里的路线一步一步操作。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid10.png" alt="img" /></p>
+
+<p>首先创建连接，配置好后 test connection 确保链接无误</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid12.png" alt="img" /></p>
+
+<p>链接建立后，需要创建元模型。如下图，提示有错，只需要选定 Source Model Definition 的文件的存储位置即可。存放在项目的 sources 目录中</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid13.png" alt="img" /></p>
+
+<p>按照默认配置，不断下一步，在 Flat File Demilited Columns Parser Settings 这一步，可以注意到下方有生成一串 SQL 语句。这些语句告诉 Teiid 需要如何将 csv 文件中的数据映射为关系型数据。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid14.png" alt="img" /></p>
+
+<p>继续下一步，view model definition 界面，提示创建的 tableview 名字包含不合法字符。原来由于将 flat file 命名为 sales.csv,它自动生成了 price.csvView 作为 table name，但名字中是不能出现<code>.</code>的，于是修改为 salesview，finish。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid15.png" alt="img" /></p>
+
+<p>之后测试数据能否读取。在选择所要 preview 的数据时，需要选择相应的 table，而不是模型（这里需要选择 salesView，而不是上层的 price_view.xmi）。如下图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid16.png" alt="img" /></p>
+
+<h3>4.导入 xml 数据</h3>
+
+<p>大部分步骤跟之前的步骤类似，在设定源模型时，需要注意配置好 xml 数据到关系型数据的映射关系，如下图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid17.png" alt="img" /></p>
+
+<p>XML File Contents 中会根据 xml 文件中的数据解析出整体的层次结构。我们需要将其中的 Book 里的信息，添加到右边的 Column Info 中。虽然有很多 Book 数据列表显示在左边一栏里，但实际上只需要添加一次相关信息到右边的列信息中。值得注意的是，这里自动生成的 Root Path 是错误的，需要修改为 BooksInfo/Book。其他没有什么特别的，一路下一步。</p>
+
+<p>现在整个项目如下图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid18.png" alt="img" /></p>
+
+<h3>5.生成虚拟数据库</h3>
+
+<p>点击 Guides 中的 Define VDB，将三个数据源的模型加入到 VDB 中:MySQL 的源模型，XML 和 CSV 的视图模型（注意：不可以加入另外两个源模型的 xmi 文件，博主如此操作后遇到了一些莫名其妙的问题）。</p>
+
+<p>如此就完成了在 Teiid Designer 中的多数据源集成的配置了。</p>
+
+<h3>6.部署和使用</h3>
+
+<p>通过 Teiid Designer，我们能方便的部署 VDB 到 Jboss 服务器。</p>
+
+<p>在 Guides 界面下，有 execute vdb 选项，双击即可。正式运行之前，需要运行 Jboss server，如果没有启动服务器，Teiid Designer 会弹框提醒的。</p>
+
+<p>最后，尝试一下通过 Teiid 集成查询多个数据源。将 sql 语句输入到执行框中，刷蓝->右键->执行选中的语句。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'>&gt; select * from &quot;csv&quot;.&quot;sales&quot; as A join &quot;xml&quot;.&quot;booksinfo&quot; as B on A.book_id = B.id
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>结果如图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/teiid19.png" alt="img" /></p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/10/19/data-integration-tool-teiid/'>http://biaobiaoqi.me/blog/2013/10/19/data-integration-tool-teiid/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[PAT 1065 - 1068 题解]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/10/08/pat-1065-pat-1068/"/>
+    <updated>2013-10-08T13:46:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/10/08/pat-1065-pat-1068</id>
+    <content type="html"><![CDATA[<p>这次的题目来源是 2013 年 10 月 7 日下午的浙大计算机研究生招生机试题。</p>
+
+<p>这次题目的难度，按姥姥的说法是：『比普通的 PAT 要难了 0.5 个点。我是把自己的题目从 1.0 到 5.0 以 0.5 的间距分难度级别的，PAT(A)难度一般在 1.5-4.5 之间，保研考试一般在 2.0-5.0 之间。PAT(B)大概是 1.0-2.5 的难度。』。</p>
+
+<p>个人认为，其中 1066 模拟 AVL 插入的实现有些细节容易弄错，而 1068 只要会简单的 DP，也就没有问题了，1065 和 1066 都还是很简单的实现。</p>
+
+<p>下面是各个题的分析（PAT advanced level 本人实现的全部源码：<a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel">请戳</a>）。</p>
+
+<!--more-->
+
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1065">1065. A+B and C (64bit) (20)</a></h2>
+
+<h5>题意</h5>
+
+<p>输入三个数 a，b，c，取值范围是 [<code>-2^63</code>, <code>2^63</code>]，要求判断<code>a + b &lt; c</code> 是否为真。</p>
+
+<h5>分析</h5>
+
+<p>很简单的签到题，想到两种方法：一是用 Java 的 Big Decimal 实现（应该不会超时吧-,-），二是对 a+b 造成的 long long 溢出的情况做特殊处理。</p>
+
+<p>对于分情况的实现方式，实际上也就两种特殊情况，即 a，b 同号且两者之和溢出了（绝对值超过了 2<sup>63）。此时两者之和与</sup> c 的值的相对关系也是确定的。</p>
+
+<ul>
+<li><code>a &lt; 0 &amp;&amp; b &lt; 0 &amp;&amp; a + b &gt;= 0</code>: a + b 必小于 c</li>
+<li><code>a &gt; 0 &amp;&amp; b &gt; 0 &amp;&amp; a + b &lt;= 0</code>: a + b 必大于 c</li>
+</ul>
+
+
+<p>另在 98 看见有大神说可以用 long double 水过去-,-.</p>
+
+<p>pat1065 源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1065.cpp">请戳</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1066">1066. Root of AVL Tree (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>实现 <a href="http://en.wikipedia.org/wiki/AVL_tree">AVL 树</a>的插入方法，给定 N(&lt;=20)个数，要求输出依次插入后的 AVL 树的根。</p>
+
+<h5>分析</h5>
+
+<p>由于节点少，可以使用相对简单的递归实现方法：</p>
+
+<ul>
+<li>每个节点维护一个高度值，用在递归插入后检测子树是否平衡</li>
+<li>完成 4 个旋转方法（参见 <a href="http://en.wikipedia.org/wiki/AVL_tree">AVL Tree wikipedia</a> 中的示意图）</li>
+<li>在递归插入方法中，完成对子树的插入后，检测子树高度差，根据子树的结构特点，做出相应的旋转</li>
+<li>旋转后记得更新节点的高度值</li>
+</ul>
+
+
+<p>机试时似乎没有人完全 AC 这道题，看来代码实现和 Debug 能力缺乏还是比较普遍的问题。</p>
+
+<p>pat1066 源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1066.cpp">请戳</a></p>
+
+<!--more-->
+
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1067">1067. Sort with Swap(0,*) (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>给定 N(&lt;=<code>10^5</code>)以及一个{0,1,…,N-1}的打乱的数列。</p>
+
+<p>定义了一种交换方式：<code>Swap(0,*)</code>，表示将 0 和任意数进行位置交换。</p>
+
+<p>限定只能使用<code>Swap(0,*)</code>，要求输出最少需要多少次交换操作，来完成整体的排序。</p>
+
+<h5>分析</h5>
+
+<p>很好玩的模拟题，从题目的两个测试数据入手，找到所需要的交换次数的特点：</p>
+
+<p>假设用数组 a 存储输入的数组，数组的坐标为 [0, N - 1]，而元素的所有值也是 [0, N - 1]。</p>
+
+<ol>
+<li><p>输入的序列中本就在自己位置上的数字，是不用被交换的（比如序列<code>{4, 0, 2, 1, 3}</code>中 2 就是不用被交换），0 除外</p></li>
+<li><p>0 最终肯定会被放回到 0 的位置上，但交换过程中，0 也可能被提前交换到了 0 的位置上，此时还有其他数没有处于正确的位置上（参见 Sample Input<code>{10 3 5 7 2 6 4 9 0 8 1}</code>的情况）。此时需要多费一步将 0 和某一个处于不正确位置的数交换位置，来继续排序。</p></li>
+<li><p>每次的交换，0 其实只是一个过渡作用。实际的交换过程遵循的链式关系如下所述：设定 a[x] == b， 而 b != x，则需要将 a[x]的值移动到 a[b]上，此时 a[b] == c, 那么接着又需要将 a[b]的值移动到 a[c]上，以此类推，肯定能获得一个循环，且节点数 M 小于等于 N。如果循环中包含了 0，那么这个循环中的数排序所需要的交换次数为 M - 1, 如果循环中不包含 0，那么首先需要一次交换将 0 移动到循环链中，此时整个循环链节点数增加了 1，于是共需要开销 M + 1 次交换。</p></li>
+<li><p>根据 3 的分析，在 2 的情况下，0 与不同的不在正确位置的数的交换，是不会影响最终的结果的。</p></li>
+</ol>
+
+
+<p>综上所述，用类似 dfs 或者并查集的思路找到集合中的所有循环链路，记录下他们的大小，即可计算出所需要的交换次数。</p>
+
+<p>pat1067 源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1067.cpp">请戳</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1068">1068. Find More Coins (30)</a></h2>
+
+<h5>题意</h5>
+
+<p>给定 N(&lt;=<code>10^4</code>) 枚硬币和一个价格 M(&lt;=100)。</p>
+
+<p>要求用这 N 枚硬币组合出价格 M，如果有多种组合，输出排序后硬币面值字典序最小的组合，如果没有组合，则输出 No Solution.</p>
+
+<h5>分析</h5>
+
+<p>裸背包问题，相关资料参见 dd 大神的总结：<a href="http://cuitianyi.com/blog/%E3%80%8A%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E4%B9%9D%E8%AE%B2%E3%80%8B2-0-alpha1/">《背包问题九讲》</a></p>
+
+<p>按照常规的背包思路，构建 10001 * 101 的二维数组 f[i][j]，状态 f[i][j] 表示前 i 枚硬币能拼凑出的小于等于 j 的最大值（j 这里代表一个价格）。</p>
+
+<p>状态转移方程为：<code>f[i][j] = max(f[i - 1][j], f[i - 1][j - c[i]] + c[i])</code>， 其中 c[i]为第 i 枚硬币的面值，c[i]为排序过的硬币面值数组。</p>
+
+<p>由于最终的输出要求是排序的币值的字典序最小的组合，可以对 c[i]做从大到小的排序，并另开一个数组 has[i][j] 来记录当前状态下，是否有包含 c[i]。同时注意，当<code>f[i - 1][j] == f[i - 1][j - c[i]] + c[i]</code>时，采纳当前的 c[i]，以满足字典序。</p>
+
+<p>pat1068 源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1068.cpp">请戳</a></p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/10/08/pat-1065-pat-1068/'>http://biaobiaoqi.me/blog/2013/10/08/pat-1065-pat-1068/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[重置MBP的NVRAM]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/10/07/reset-nvram/"/>
+    <updated>2013-10-07T23:25:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/10/07/reset-nvram</id>
+    <content type="html"><![CDATA[<h3>遇到问题</h3>
+
+<p>今天的中国好声音决赛之夜，我的 Mac 突然无法发出声响了=(，在此之前，刚看过一些视频，音频输出正常。</p>
+
+<p>我尝试了使用 MBP 内建的外放和插入 iphone4s 的耳机并将音量调整到最大，没有任何声响。网上查阅了一些相关异常的资料，发现可能是 NVRAM 的问题。官方资料见链接：<a href="http://support.apple.com/kb/HT1379?viewlocale=zh_CN">《关于 NVRAM 和 PRAM》</a>。</p>
+
+<p>按照重置 NVRAM 的方法操作后，果然 Mac 又拥有了声音，可以看好声音啊=)</p>
+
+<p>这里对 NVRAM 做一些记录：</p>
+
+<!--more-->
+
+
+<h3>NVRAM</h3>
+
+<p>Mac 会将某些设置储存在特殊内存区域中，而且即使关机这些设置也不会丢失。在基于 Intel 的 Mac 上，存储位置是称为 NVRAM 的内存。NVRAM 为 Non-Volatile Random Access Memory 的缩写。</p>
+
+<p>存储在 NVRAM/PRAM 中的信息包括：</p>
+
+<ul>
+<li>扬声器音量</li>
+<li>屏幕分辨率</li>
+<li>启动磁盘选择</li>
+<li>最近的内核崩溃信息（如果有的话）</li>
+</ul>
+
+
+<!--MORE-->
+
+
+<p>也就是说，如果机器存在声音、屏幕分辨率、启动速度等方面的异常时，可以尝试使用重置的方式做恢复。同时，官方资料中也提到，『如果您正在故障诊断网络问题，重置不会有任何帮助』。</p>
+
+<h3>配置 NVRAM</h3>
+
+<p>实际上，也可以在 shell 中命令配置 nvram。比如，可以通过<code>nvram -xp</code>命令查看到 xml 格式的配置表示。我的如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ nvram -xp
+</span><span class='line'>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+</span><span class='line'>&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;
+</span><span class='line'>&lt;plist version="1.0"&gt;
+</span><span class='line'>&lt;dict&gt;
+</span><span class='line'>  &lt;key&gt;LocationServicesEnabled&lt;/key&gt;
+</span><span class='line'>  &lt;data&gt;
+</span><span class='line'>  AQ==
+</span><span class='line'>  &lt;/data&gt;
+</span><span class='line'>  &lt;key&gt;SystemAudioVolume&lt;/key&gt;
+</span><span class='line'>  &lt;data&gt;
+</span><span class='line'>  Xw==
+</span><span class='line'>  &lt;/data&gt;
+</span><span class='line'>  &lt;key&gt;backlight-level&lt;/key&gt;
+</span><span class='line'>  &lt;data&gt;
+</span><span class='line'>  9wA=
+</span><span class='line'>  &lt;/data&gt;
+</span><span class='line'>  &lt;key&gt;fmm-computer-name&lt;/key&gt;
+</span><span class='line'>  &lt;data&gt;
+</span><span class='line'>  Ymlhb2JpYW9xaQ==
+</span><span class='line'>  &lt;/data&gt;
+</span><span class='line'>&lt;/dict&gt;
+</span><span class='line'>&lt;/plist&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>其他参考</h3>
+
+<ul>
+<li><a href="http://blog.csdn.net/afatgoat/article/details/3851554">Mac OS X: 系统 nvram 启动参数</a></li>
+<li><a href="http://support.apple.com/kb/HT1895?viewlocale=zh_CN">何时要重置 NVRAM 或 PRAM</a></li>
+<li><a href="http://en.wikipedia.org/wiki/Non-volatile_random-access_memory">NVRAM wikipedia</a></li>
+</ul>
+
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/10/07/reset-nvram/'>http://biaobiaoqi.me/blog/2013/10/07/reset-nvram/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[《改变未来的九大算法》]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/10/03/nine-algorithms-that-changed-the-future/"/>
+    <updated>2013-10-03T13:19:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/10/03/nine-algorithms-that-changed-the-future</id>
+    <content type="html"><![CDATA[<h2>不要在意那些细节</h2>
+
+<p>这是一本关于计算机世界的科普读物。豆瓣链接：<a href="http://book.douban.com/subject/24529132/">请戳</a>。</p>
+
+<p>非常推荐刚接触计算机的朋友花上三五小时将全书通读一遍，没有技术细节，没有公式证明，它会告诉作者挑选出的九大算法出现的缘由和发展的过程。这些不关乎实现细节的思想概括，更能体现算法在整个领域中的存在的原因。它们不再是冷冰冰的算法过程，这是阅读大多数的书籍、教材所难以获得的。</p>
+
+<p>至于我的推荐原因，如下全文。</p>
+
+<!--more-->
+
+
+<h3>课程学习之弊</h3>
+
+<p>大二大三的那两年，在学校上过了网络、操作系统、数据库、算法设计等诸多计算机领域的基础必修课程。由于生性愚钝加之令人头大的砖头书的体系化、理论化，对于知识的掌握顶多处于知其然却不知其所以然的程度。在这种情况下，学习就退化为了填鸭式的记忆。比如我记得 RSA 的公钥加密流程，却无法理解为何要套用这么一大堆的数学方法来得到如此神奇的效果，比如，我知道数据库有一套日志机制，却不知道它是如何与其他的组件共同构建起一个系统的……没有来龙去脉，就没有对技术发展的感知，没有对技术本质的理解和认识。</p>
+
+<p>经过了四年多的摸爬滚打，到现在对这些基础知识的认识自然远好于当年上课的理解水平，不是因为我在反复的学习课程内容，而是从实践中获得了新的认识。</p>
+
+<h3>从生活出发</h3>
+
+<p>大多数人的思维习惯，倾向于从已知的事物中衍生对新事物的认识，这是一种类推。而高校的大多数教材和教授方式较少考虑到这一点，一种简单粗暴的直入主题的方式被大量的使用，排斥了知识的前因后果，技术的来龙去脉，剩下的只是新体系本身。这增加了学习曲线的入门坡度。</p>
+
+<blockquote><p>理论是灰色的，生活之树常青</p></blockquote>
+
+<p>《改变未来的九大算法》是对歌德这句话的良好实践。</p>
+
+<!--more-->
+
+
+<p>比如在阐述公钥加密机制时，作者从生活中的寄信讲起，一步步类比到计算机的通信上，并用染料配色的方式举例了迪菲赫尔曼机制。生动形象的描述了算法的原理和来由。</p>
+
+<h3>抛开细节实现</h3>
+
+<p>过往的教材一旦陷入对某些实现细节的阐释，就失去了对全局上下文的把握。就像镜头对焦到了一个点上，造成了周边景物的模糊化效果。</p>
+
+<p>《改变未来的九大算法》全书很少涉及到技术的实现细节，这正是它的优势所在。比如数据库的一致性章节，从一个银行转账的实例讲起，通过所面临的一系列问题的解决方案的描述，让人对数据库的整体实现有了全局的把握。在理解的前提下，更深入的学习也变得更有动力和方向。</p>
+
+<p>奈何自己已经过了朦朦胧胧的那几年，在此将本书强烈推荐给初涉计算机领域的朋友们。当然，其他人粗读一遍，也是对自己知识体系的一次小梳理啦;)。</p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/10/03/nine-algorithms-that-changed-the-future/'>http://biaobiaoqi.me/blog/2013/10/03/nine-algorithms-that-changed-the-future/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Jobs和jobs]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/09/30/jobs-and-jobs/"/>
+    <updated>2013-09-30T11:41:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/09/30/jobs-and-jobs</id>
+    <content type="html"><![CDATA[<p>作为一个不太安分的技术男，或多或少会对乔布斯怀有敬意。</p>
+
+<p>我是从<a href="http://movie.douban.com/subject/1298084/">《硅谷海盗》</a>这部老片开始了解到乔布斯这个人的，查了下上映日期，竟然是我出生的第二天。那时候觉着演员挺帅啊，后来发现真人更有味道一点。<del>国内的互联网大佬们怎么不见如此气度的-,-。</del></p>
+
+<p>前天下午，和实验室的基友们一起去看了刚上映的<a href="http://movie.douban.com/subject/6877703/">《乔布斯》</a>。由于乔布斯的段子、事迹早已充斥到生活的各个角落，两个小时的观影我几乎是以一种期待下个情节的心情在审视电影的脉络：求学时代开始，Apple1 一炮打响，Apple2 大卖，Lisa 折戟，Macintosh 阻力重重，被赶出苹果，重回苹果，END。我试图将乔布斯真人带给社会的感动融入到电影的观影情绪里，但并不太奏效，电影缺了一些代入感。或许是库切的身体太壮脸太宽了的缘故，也或许是因为广电总局减掉了乔布斯和女友的 1 分钟激情戏。</p>
+
+<p>走出 Jobs，心里没有太多涟漪。世界倒是依旧的躁动——最近又迎来了找工作的季节。于是后面的节奏是，江湖上将流传着师兄师姐们的各种牛 offer 的传说，师弟师妹们各种仰慕，筹划着如何准备明年的面试，憧憬着明年的自己，以及抱怨着帝都魔都恶劣的生存条件和充沛的机遇并存的矛盾……充满着成王败寇的腥味，和纸醉金迷的浮躁。</p>
+
+<p>理想和现实的纠缠从来就不曾停息，欲望的高低贵贱也是如此。</p>
+
+<p>一场 Jobs，告诉我们<code>connecting the dolts</code>的感动。大家所追寻的 jobs，<code>dolts</code>在哪里？</p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/09/30/jobs-and-jobs/'>http://biaobiaoqi.me/blog/2013/09/30/jobs-and-jobs/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Java类、实例的初始化顺序]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/09/22/java-initialization/"/>
+    <updated>2013-09-22T21:53:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/09/22/java-initialization</id>
+    <content type="html"><![CDATA[<p>今晚是阿里巴巴 2013 校园招聘的杭州站笔试。下午匆忙看了两张历年试卷，去现场打了瓶酱油。</p>
+
+<p>题目总体考察点偏基础，倒数第二题（Java 附加题）比较有趣，考察了 Java 初始化机制的细节，在此摘录出来。</p>
+
+<h2>题目</h2>
+
+<p>求如下 java 代码的输出：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">class</span> <span class="nc">T</span>  <span class="kd">implements</span> <span class="n">Cloneable</span><span class="o">{</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="n">T</span> <span class="n">t1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">T</span><span class="o">(</span><span class="s">&quot;t1&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="n">T</span> <span class="n">t2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">T</span><span class="o">(</span><span class="s">&quot;t2&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">print</span><span class="o">(</span><span class="s">&quot;i&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">99</span><span class="o">;</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="kd">public</span> <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">print</span><span class="o">(</span><span class="s">&quot;j&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">{</span>
+</span><span class='line'>      <span class="n">print</span><span class="o">(</span><span class="s">&quot;构造快&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="kd">static</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">print</span><span class="o">(</span><span class="s">&quot;静态块&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="kd">public</span> <span class="nf">T</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">((++</span><span class="n">k</span><span class="o">)</span> <span class="o">+</span> <span class="s">&quot;:&quot;</span> <span class="o">+</span> <span class="n">str</span> <span class="o">+</span> <span class="s">&quot;    i=&quot;</span> <span class="o">+</span> <span class="n">i</span> <span class="o">+</span> <span class="s">&quot;  n=&quot;</span> <span class="o">+</span> <span class="n">n</span><span class="o">);</span>
+</span><span class='line'>      <span class="o">++</span><span class="n">n</span><span class="o">;</span> <span class="o">++</span> <span class="n">i</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">print</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span><span class="o">){</span>
+</span><span class='line'>      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">((++</span><span class="n">k</span><span class="o">)</span> <span class="o">+</span><span class="s">&quot;:&quot;</span> <span class="o">+</span> <span class="n">str</span> <span class="o">+</span> <span class="s">&quot;   i=&quot;</span> <span class="o">+</span> <span class="n">i</span> <span class="o">+</span> <span class="s">&quot;   n=&quot;</span> <span class="o">+</span> <span class="n">n</span><span class="o">);</span>
+</span><span class='line'>      <span class="o">++</span><span class="n">n</span><span class="o">;</span>
+</span><span class='line'>      <span class="k">return</span> <span class="o">++</span> <span class="n">i</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+</span><span class='line'>      <span class="n">T</span> <span class="n">t</span> <span class="o">=</span> <span class="k">new</span> <span class="n">T</span><span class="o">(</span><span class="s">&quot;init&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<!--more-->
+
+
+<h2>分析</h2>
+
+<p>代码主要考察的是类、变量初始化的顺序。</p>
+
+<p>一般的，我们很清楚类需要在被实例化之前初始化，而对象的初始化则是运行构造方法中的代码。</p>
+
+<p>本题的代码显然没有这么简单了。本题中涉及到了<code>static {…}</code> 和 <code>{…}</code>这种形式的代码块，以及在类的静态变量中初始化该类的对象这种交错的逻辑，容易让人焦躁（类似于密集恐惧症吧=(）。实际上，按照<a href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loading-linking-and-initialising/">类的装载、链接和初始化逻辑</a>，以及<a href="http://biaobiaoqi.me/blog/2013/09/08/strange-behavior-using-braces-in-java/">对象初始化的顺序</a>来思考，不难得到答案。</p>
+
+<h3>代码组成</h3>
+
+<ul>
+<li><p>成员变量
+  2~6 行的变量是 static 的，为类 T 的静态成员变量，需要在类加载的过程中被执行初始化；第 8 行的<code>int j</code>则为实例成员变量，只再类被实例化的过程中初始化。</p></li>
+<li><p>代码段
+  9~11 行为实例化的代码段，在类被实例化的过程中执行；13~15 行为静态的代码段，在类被加载、初始化的过程中执行。</p></li>
+<li><p>方法
+  方法<code>public static int print(String str)</code> 为静态方法，其实现中牵涉到 k,i,n 三个静态成员变量，实际上，这个方法是专门用来标记执行顺序的方法；T 的构造方法是个实例化方法，在 T 被实例化时调用。</p></li>
+<li><p>main 方法
+  main 方法中实例化了一个 T 的实例。</p></li>
+</ul>
+
+
+<h3>执行顺序分析</h3>
+
+<p>在一个对象被使用之前，需要经历的过程有：类的装载 -> 链接（验证 -> 准备 -> 解析） -> 初始化 -> 对象实例化。（详情参见<a href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loading-linking-and-initialising/">《Java 类的装载、链接和初始化》</a>），这里需要注意的点主要有：</p>
+
+<ul>
+<li><p>在类链接之后，类初始化之前，实际上类已经可以被实例化了。</p>
+
+<p>  就如此题代码中所述，在众多静态成员变量被初始化完成之前，已经有两个实例的初始化了。实际上，此时对类的实例化，除了无法正常使用类的静态承运变量以外（还没有保证完全被初始化），JVM 中已经加载了类的内存结构布局，只是没有执行初始化的过程。比如第 3 行<code>public static T t1 = new T("t1");</code>，在链接过程中，JVM 中已经存在了一个 t1，它的值为 null，还没有执行<code>new T("t1")</code>。又比如第 5 行的<code>public static int i = print("i");</code>，在没有执行初始化时，i 的值为 0，同理 n 在初始化前值也为 0.</p></li>
+<li><p>先执行成员变量自身初始化，后执行<code>static {…}</code>、<code>{…}</code>代码块中的内容。</p>
+
+<p>  如此策略的意义在于让代码块能处理成员变量相关的逻辑。如果不使用这种策略，而是相反先执行代码块，那么在执行代码块的过程中，成员变量并没有意义，代码块的执行也是多余。</p></li>
+<li><p>类实例化的过程中，先执行隐式的构造代码，再执行构造方法中的代码
+  这里隐式的构造代码包括了<code>{}</code>代码块中的代码，以及实例成员变量声明中的初始化代码，以及父类的对应的代码（还好本题中没有考察到父类这一继承关系，否则更复杂;)）。为何不是先执行显示的构造方法中的代码，再执行隐式的代码呢？这也很容易解释：构造方法中可能就需要使用到实例成员变量，而这时候，我们是期待实例变量能正常使用的。</p></li>
+</ul>
+
+
+<p>有了如上的分析，也就能推到出最终的输出结果了。实际上，这几个原则都不需要死记硬背，完全能通过理解整个 JVM 的执行过程来梳理出思路的。</p>
+
+<h2>答案</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="mi">1</span><span class="o">:</span><span class="n">j</span>   <span class="n">i</span><span class="o">=</span><span class="mi">0</span>   <span class="n">n</span><span class="o">=</span><span class="mi">0</span>
+</span><span class='line'><span class="mi">2</span><span class="o">:</span><span class="err">构造快</span>   <span class="n">i</span><span class="o">=</span><span class="mi">1</span>   <span class="n">n</span><span class="o">=</span><span class="mi">1</span>
+</span><span class='line'><span class="mi">3</span><span class="o">:</span><span class="n">t1</span>    <span class="n">i</span><span class="o">=</span><span class="mi">2</span>  <span class="n">n</span><span class="o">=</span><span class="mi">2</span>
+</span><span class='line'><span class="mi">4</span><span class="o">:</span><span class="n">j</span>   <span class="n">i</span><span class="o">=</span><span class="mi">3</span>   <span class="n">n</span><span class="o">=</span><span class="mi">3</span>
+</span><span class='line'><span class="mi">5</span><span class="o">:</span><span class="err">构造快</span>   <span class="n">i</span><span class="o">=</span><span class="mi">4</span>   <span class="n">n</span><span class="o">=</span><span class="mi">4</span>
+</span><span class='line'><span class="mi">6</span><span class="o">:</span><span class="n">t2</span>    <span class="n">i</span><span class="o">=</span><span class="mi">5</span>  <span class="n">n</span><span class="o">=</span><span class="mi">5</span>
+</span><span class='line'><span class="mi">7</span><span class="o">:</span><span class="n">i</span>   <span class="n">i</span><span class="o">=</span><span class="mi">6</span>   <span class="n">n</span><span class="o">=</span><span class="mi">6</span>
+</span><span class='line'><span class="mi">8</span><span class="o">:</span><span class="err">静态块</span>   <span class="n">i</span><span class="o">=</span><span class="mi">7</span>   <span class="n">n</span><span class="o">=</span><span class="mi">99</span>
+</span><span class='line'><span class="mi">9</span><span class="o">:</span><span class="n">j</span>   <span class="n">i</span><span class="o">=</span><span class="mi">8</span>   <span class="n">n</span><span class="o">=</span><span class="mi">100</span>
+</span><span class='line'><span class="mi">10</span><span class="o">:</span><span class="err">构造快</span>   <span class="n">i</span><span class="o">=</span><span class="mi">9</span>   <span class="n">n</span><span class="o">=</span><span class="mi">101</span>
+</span><span class='line'><span class="mi">11</span><span class="o">:</span><span class="n">init</span>    <span class="n">i</span><span class="o">=</span><span class="mi">10</span>  <span class="n">n</span><span class="o">=</span><span class="mi">102</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>参考：</h3>
+
+<ul>
+<li><a href="http://biaobiaoqi.me/blog/2013/09/08/strange-behavior-using-braces-in-java/">《Java 构造方法中的执行顺序》</a></li>
+<li><a href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loading-linking-and-initialising/">《Java 类的装载、链接和初始化》</a></li>
+</ul>
+
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/09/22/java-initialization/'>http://biaobiaoqi.me/blog/2013/09/22/java-initialization/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[关于科学上网]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/09/10/scientifically-surfing-the-internet/"/>
+    <updated>2013-09-10T12:11:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/09/10/scientifically-surfing-the-internet</id>
+    <content type="html"><![CDATA[<p>为了防止被某墙 fuck，暂且称其为『很棒的防火墙』吧，你懂的-,-.</p>
+
+<p>在 teahour 上听了 <a href="http://teahour.fm/2013/07/09/gfw-and-vpncloud.html">***技术研究和云梯产品故事</a>，有感于之前几天修改本地 hosts 的策略再次失效，切换到 goagent 模式，在此，基于这期 teahour 对<a href="https://twitter.com/kgen">@Kgen</a> 的访谈内容，对很棒的防火墙做份简单的笔记：</p>
+
+<p>很棒的防火墙有用大量的服务器，并由一大只团队维护和升级。它的目的是让大部分的互联网用户无法接触到“有害”的网络资源，“净化”国内的网络环境。同时，它需要尽可能的减少商业上的影响，比如为了不阻碍外企的 VPN 工作环境，很棒的防火墙并没有直接对 VPN 进行封堵。在这个前提上，留给我们的可能性也是一直存在的。</p>
+
+<h2>防御策略</h2>
+
+<p>很棒的防火墙一直在茁壮成长着。一个方校长倒下了，千千万万 X 校长站起来了。他们背负着一辈子的骂名，忍辱负重的为祖国奉献着生命，死而后已。总之，前赴后继的技术人员不断的在补全着很棒的防火墙的防御规则，因此，应对策略也需要不断的调整和改进。整体来看，防御策略主要有如下几种：</p>
+
+<ul>
+<li><h4>1.DNS 污染</h4>
+
+<p>  DNS 协议本身并没有安全认证功能，很棒的防火墙检测到相应 dns 请求后，会返回一个错误的 IP 地址，造成无法正常访问。解决方案有使用第三方 DNS 服务或者修改本地 hosts 文件。</p></li>
+<li><h4>2.IP 拦截</h4>
+
+<p>  对于特定敏感网站，很棒的防火墙会直接侦察到相应的 IP 地址施行拦截。简单的 DNS 修改无法解决 IP 层的问题，只能通过代理等手段绕过这些 IP 进行访问。常用的应对方式有：使用 VPN、ssh 代理和 GAE 上搭建 <a href="http://zhoudemin.com/goagent.html">GoAgent</a> 服务等。至于为什么一些国内用户说自己的 GoAgent 速度很快，而又有很多人在抱怨自己的 GAE 速度很慢，原因在于 GAE 应用会不受控制的部署到 Google 不同的服务器节点上，而国内网络环境复杂，不同地区的网络连入国外不同服务器的线路不尽相同，速度也差异明显。同样的情况也发生在 VPS 的使用速度差异上。</p></li>
+</ul>
+
+
+<!--more-->
+
+
+<ul>
+<li><h4>3.端口封锁：比如 ssh 端口</h4>
+
+<p>  <a href="http://biaobiaoqi.me/blog/2013/04/19/use-ssh/">ssh</a> 是一种安全的加密的网络通信协议，通过 ssh 可以施行对远程主机的操控。部分网民通过在很棒的防火墙外的 VPS（虚拟主机）做代理，使用 ssh 服务上网。针对这一情况，最近两年，很棒的防火墙开始实现对 ssh 端口的封锁。当 ssh 链接被鉴定为非正常流量，则相应端口会受到封锁。如果频繁切换端口，可能整个 IP 都将被封锁。</p></li>
+<li><h4>4.http 请求明文内容检测和中断</h4>
+
+<p>  使用 Google 搜索某些敏感内容时，链接会被重置，就是因为很棒的防火墙侦测到了敏感内容，给用户浏览器发送了重置消息，扰乱了链接。</p></li>
+<li><h4>5.https 间歇性中断</h4>
+
+<p>  https 的链接本身是安全的、加密的。在无法侦测内容的前提下，很棒的防火墙采用了不讲道理的间歇性中断策略。</p></li>
+</ul>
+
+
+<p>更多关于很棒的防火墙的资料，请先翻过墙去查看;)</p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/09/10/scientifically-surfing-the-internet/'>http://biaobiaoqi.me/blog/2013/09/10/scientifically-surfing-the-internet/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[对Java字符串的探究]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/09/08/string-interning/"/>
+    <updated>2013-09-08T13:01:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/09/08/string-interning</id>
+    <content type="html"><![CDATA[<h2>问题的出发点</h2>
+
+<p>在网上看到一道题：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">String</span> <span class="n">str</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="s">&quot;abc&quot;</span><span class="o">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>以上代码执行过程中生成了多少个 String 对象？</p>
+
+<p>答案写的是两个。&#8221;abc&#8221;本身是一个，而 new 又生成了一个。</p>
+
+<h2>&#8220;abc&#8221;是什么</h2>
+
+<p>查看这句程序的字节码，如下：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">NEW</span> <span class="n">String</span>
+</span><span class='line'>    <span class="n">DUP</span>
+</span><span class='line'>    <span class="n">LDC</span> <span class="s">&quot;abc&quot;</span>
+</span><span class='line'>    <span class="n">INVOKESPECIAL</span> <span class="n">String</span><span class="o">.&lt;</span><span class="n">init</span><span class="o">&gt;(</span><span class="n">String</span><span class="o">)</span> <span class="o">:</span> <span class="kt">void</span>
+</span><span class='line'>    <span class="n">ASTORE</span> <span class="mi">1</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>指令<code>ldc indexbyte</code>的含义：将两字节的值从 indexbyte 索引的常量池中的项中推到方法栈上。</p>
+
+<p>指令<code>LDC "abc"</code>说明了&#8221;abc&#8221;并不是直接以对象存在的，而是存在于常量池的索引中。String 的构造函数调用命令实际使用的就是 String 类型作为参数，那么，栈上应该有一个 String 类型的索引。</p>
+
+<p>由此我们得出，在字节码中，ldc 命令在常量池中找到了能索引到“abc”那个 String 对象的索引值。</p>
+
+<h2>常量池</h2>
+
+<p>常量池是类文件（.class）文件中的一部分，记录了许多常量信息，索引的字符串信息。</p>
+
+<p>由于 Java 是动态加载的，类文件并没有包含程序运行时的内存布局，方法调用等无法直接记录出方法的物理位置，常量池通过索引的方法解决了这个问题。</p>
+
+<!--more-->
+
+
+<p>常量池中存着许多表，其中 Constant_Utf8_info 表中，记录着会被初始化为 String 对象的字符串的字面值（iteral）。
+而在 String 的 java doc 中，有对 String 字面值的说明：</p>
+
+<blockquote><p>All string literals in Java programs, such as &#8220;abc&#8221;, are implemented as instances of this class.</p></blockquote>
+
+<p>在 Java 编译的过程中，确定下来的 String 字面值都先被优化记录在常量池中（那些双引号字符串，都是以 CONSTANT_utf8_info 的形式存储在常量池中的）。也就是说，Java 源代码文件中出现的那些诸如&#8221;abc&#8221;字符串，都已经被提前放在了常量池中。</p>
+
+<p>可以使用如下代码验证这一点：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Program</span>
+</span><span class='line'><span class="o">{</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span>
+</span><span class='line'>    <span class="o">{</span>
+</span><span class='line'>       <span class="n">String</span> <span class="n">str1</span> <span class="o">=</span> <span class="s">&quot;Hello&quot;</span><span class="o">;</span>
+</span><span class='line'>       <span class="n">String</span> <span class="n">str2</span> <span class="o">=</span> <span class="s">&quot;Hello&quot;</span><span class="o">;</span>
+</span><span class='line'>       <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">str1</span> <span class="o">==</span> <span class="n">str2</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>输出结果是 true.说明&#8221;Hello&#8221;作为对象是被程序从同一个内存空间读取出来的。</p>
+
+<p>常量池是编译时产生的，存在于类文件中（*.class 文件）。运行时，JVM 中每个对象都拥有自己的运行时常量池（run time constant pool）。</p>
+
+<h2>字符串池</h2>
+
+<p>我在 String 的 java doc 中又发现了一个有趣的 method：intern() ,我翻译如下：</p>
+
+<blockquote><p>当 intern 方法被调用，如果池中已经拥有一个与该 String 的字符串值相等（即 equals()调用后为 true）的 String 对象时，那么池中的那个 String 对象会被返回。否则，池中会增加这个对象，并返回当前这个 String 对象。</p></blockquote>
+
+<p>其中有介绍一个字符串池的东西：字符串池（String pool），初始是空的，由类私有的控制。</p>
+
+<p>查看 java.lang.String 的源代码，发现 Intern()方法是一个 native 方法，即本地实现的方法，而不是一个 java 方法，这让我们不能直观的看到字符串池的实现细节。不过能够理解字符串池其实是类似于线程池的缓冲器，可以起到节约内存的作用。如下代码可以验证</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kn">package</span> <span class="n">biaobiaoqi</span><span class="o">.</span><span class="na">thinkingInJava</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">String</span> <span class="n">strA1</span> <span class="o">=</span> <span class="s">&quot;ab&quot;</span><span class="o">;</span>
+</span><span class='line'>        <span class="n">String</span> <span class="n">strA2</span> <span class="o">=</span> <span class="s">&quot;c&quot;</span><span class="o">;</span>
+</span><span class='line'>        <span class="n">String</span> <span class="n">strB1</span> <span class="o">=</span> <span class="s">&quot;a&quot;</span><span class="o">;</span>
+</span><span class='line'>        <span class="n">String</span> <span class="n">strB2</span> <span class="o">=</span> <span class="s">&quot;bc&quot;</span> <span class="o">;</span>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">((</span><span class="n">strA1</span><span class="o">+</span><span class="n">strA2</span><span class="o">).</span><span class="na">intern</span><span class="o">()</span> <span class="o">==</span> <span class="o">(</span><span class="n">strB1</span> <span class="o">+</span> <span class="n">strB2</span><span class="o">).</span><span class="na">intern</span><span class="o">());</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>输出结果为 true。</p>
+
+<p>现代的 JVM 实现里，考虑到垃圾回收（Garbage Collection）的方便，将内存区域 <a href="http://en.wikipedia.org/wiki/Java_Virtual_Machine#Heap">heap</a> 划分为三部分： young generation 、 tenured generation（old generation）和 permanent generation( permgen )</p>
+
+<p>字符串池是为了解决字符串重复的问题，生命周期长，它存在于 permgen 中。</p>
+
+<h2>总结</h2>
+
+<p>编译 Java 源代码时，源文件中出现的双引号内的字符串都被收纳到常量池中，用 CONSTANT_utf8_info 项存储着。</p>
+
+<p>JVM 中，相应的类被加载运行后，常量池对应的映射到 JVM 的运行时常量池中。其中每项 CONSTANT_utf8_info（也就试记录那些字符串的）都会在常量引用解析时，自动生成相应的 internal String，记录在字符串池中。</p>
+
+<p>回过头来看看文章刚开始的那个问题。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">String</span> <span class="n">str</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="s">&quot;abc&quot;</span><span class="o">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这里确实是有两个 String 对象生成了。</p>
+
+<p><code>new String("xxx")</code> 创建的 String 对象会在 heap 中重新生成新的 String 对象，绕过字符串池的管辖。而如果使用<code>String str = "xxx"</code>则先查看字符串池 是否已经存在，存在则直接返回 PermGen 中的该 String 对象，否则生成新的 String 对象，并将它加入字符串池中。</p>
+
+<blockquote><p>尽量使用<code>String str = "abc";</code>，而不是<code>String str = new String("abc")；</code>用 new 的方法肯定会开辟新的 heap 空间，而前者的方法，则会通过 string interning 优化。</p></blockquote>
+
+<h3>参考资料</h3>
+
+<ul>
+<li><a href="http://www.codeinstructions.com/2009/01/busting-javalangstringintern-myths.html">Busting java.lang.String.intern() Myths</a></li>
+<li><a href="http://book.douban.com/subject/1788390/">Inside the JAVA2 virtual machine</a></li>
+<li><a href="http://book.douban.com/subject/1610251/">Programming for the java virtual machine</a></li>
+<li><a href="http://www.xyzws.com/Javafaq/what-is-string-literal-pool/3">What is String literal pool? How to create a String</a></li>
+<li><a href="http://stackoverflow.com/questions/4918399/what-type-of-memory-heap-or-stack-string-constant-pool-in-java-gets-stored">What type of memory (Heap or Stack) String constant pool in Java gets stored?</a></li>
+</ul>
+
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/09/08/string-interning/'>http://biaobiaoqi.me/blog/2013/09/08/string-interning/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[AOP实践：java.lang.instrument的使用]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/09/08/custom-premain-method/"/>
+    <updated>2013-09-08T13:01:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/09/08/custom-premain-method</id>
+    <content type="html"><![CDATA[<h2>背景</h2>
+
+<p>在 <a href="https://github.com/biaobiaoqi/rcjp">rcjp</a> 项目中，需要调用 ASM API（用于字节码处理的开源库）对字节码进行处理，目标是实现对 Java 程序运行时各种对象的动态跟踪，并进一步分析各个对象之间的关系。在此之前，需要考虑如何获取程序运行的入口。</p>
+
+<p>首先，我考虑到了自定义类加载器（详情见参考资料），即在程序的 main 入口处，首先加载自定义的类加载器，然后通过反射技术使用这个类加载器加载并调用测试程序。这个方法缺点是：每次都必须先找到测试程序的入口类，而对于有的封装成 jar 的程序集合，这一点相对比较难控制。</p>
+
+<p>于是，有了这里介绍的方法：通过 <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/instrument/package-summary.html">java.lang.instrument</a> 实现的 java agent 对象操作字节码，是一种 <a href="http://en.wikipedia.org/wiki/Aspect-oriented_programming">AOP</a> 的方法。</p>
+
+<p>程序中，除了 ASMAgent 以外的所有类都是调用 ASM API 实现对测试程序中各个对象的构造、方法调用、属性赋值等操作行为的记录（其中对 Collection 子类的处理着实费了一番心血= =，字节码操作很细节，容易出错）。</p>
+
+<!--more-->
+
+
+<h2>原理</h2>
+
+<p><a href="http://www.ibm.com/developerworks/cn/java/j-lo-jse61/index.html#N100A7">JVMTI（Java Virtual Machine Tool Interface）</a>是一套本地编程接口集合，它提供了一套『代理』机制，可以支持第三方工具程序以代理的方式连接和访问 JVM，并利用 JVMTI 提供的丰富的编程接口，完成很多跟 JVM 相关的功能。</p>
+
+<p>java.lang.instrument 包的实现，也就是基于这种机制的：在 Instrumentation 的实现当中，存在一个 JVMTI 的代理程序，通过调用 JVMTI 当中 Java 类相关的函数来完成 Java 类的动态操作。</p>
+
+<p>Instrumentation 的最大作用就是类定义的动态改变和操作。在 Java SE 5 及其后续版本当中，开发者可以在一个普通 Java 程序（带有 main 函数的 Java 类）运行时，通过 – javaagent 参数指定一个特定的 jar 文件（包含 Instrumentation 代理）来启动 Instrumentation 的代理程序。</p>
+
+<h2>步骤</h2>
+
+<h3>1.编写 java 代理类</h3>
+
+<p>这个类中，premain 方法是关键，对比于一般的入口 main 一样，这里的 premain 是在 main 之前执行的。它会告诉 JVM 如何处理加载上来的 java 字节码。如下例：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">premain</span><span class="o">(</span><span class="n">String</span> <span class="n">agentArgs</span><span class="o">,</span> <span class="n">Instrumentation</span> <span class="n">inst</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>                    <span class="n">Trace</span><span class="o">.</span><span class="na">BeginTrace</span><span class="o">();</span> <span class="c1">// it&#39;s important for trace files  </span>
+</span><span class='line'>            <span class="n">inst</span><span class="o">.</span><span class="na">addTransformer</span><span class="o">(</span><span class="k">new</span> <span class="n">ASMAgent</span><span class="o">());</span>
+</span><span class='line'>        <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>值得注意的是，addTransformer 实现了对字节码处理的方法的回调。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">inst</span><span class="o">.</span><span class="na">addTransformer</span><span class="o">(</span><span class="k">new</span> <span class="n">ASMAgent</span><span class="o">());</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>类 ASMAgent 包含着实现对 java 字节码处理的方法：transform()。它来自于 ClassFileTransformer 接口。为了方便，这里将对 ClassFileTransformer 接口的实现跟 ASMAgent 类放在了一起。其中 classfileBuffer 是类文件加载时的原始的字节码，retVal 则是经过处理后的字节码。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kt">byte</span><span class="o">[]</span> <span class="nf">transform</span><span class="o">(</span><span class="n">ClassLoader</span> <span class="n">loader</span><span class="o">,</span> <span class="n">String</span> <span class="n">className</span><span class="o">,</span><span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">classBeingRedefined</span><span class="o">,</span>
+</span><span class='line'>                                        <span class="n">ProtectionDomain</span> <span class="n">protectionDomain</span><span class="o">,</span><span class="kt">byte</span><span class="o">[]</span> <span class="n">classfileBuffer</span><span class="o">)</span>
+</span><span class='line'>            <span class="kd">throws</span> <span class="n">IllegalClassFormatException</span> <span class="o">{</span>
+</span><span class='line'>            <span class="kt">byte</span><span class="o">[]</span> <span class="n">retVal</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="k">if</span><span class="o">(</span><span class="n">isInstrumentable</span><span class="o">(</span><span class="n">className</span><span class="o">)){</span>
+</span><span class='line'>                <span class="n">ClassWriter</span> <span class="n">cw</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ClassWriter</span><span class="o">(</span><span class="n">ClassWriter</span><span class="o">.</span><span class="na">COMPUTE_FRAMES</span><span class="o">);</span>
+</span><span class='line'>                <span class="n">ASMClassAdapter</span> <span class="n">mca</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ASMClassAdapter</span><span class="o">(</span><span class="n">cw</span><span class="o">);</span>
+</span><span class='line'>                <span class="n">ClassReader</span> <span class="n">cr</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ClassReader</span><span class="o">(</span><span class="n">classfileBuffer</span><span class="o">);</span>
+</span><span class='line'>                <span class="n">cr</span><span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="n">mca</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+</span><span class='line'>                <span class="n">retVal</span> <span class="o">=</span> <span class="n">cw</span><span class="o">.</span><span class="na">toByteArray</span><span class="o">();</span>
+</span><span class='line'>            <span class="o">}</span><span class="k">else</span><span class="o">{</span>
+</span><span class='line'>                    <span class="n">retVal</span> <span class="o">=</span> <span class="n">classfileBuffer</span> <span class="o">;</span>
+</span><span class='line'>                <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="k">return</span> <span class="n">retVal</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>2.打包代理类</h3>
+
+<p>只有合理打包并在 manifest 文件中记录下相应的键值对之后，才能正常执行 premain 的内容。
+manifest 文件中需要添加的键值对是：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">Premain</span><span class="o">-</span><span class="n">Class</span> <span class="o">:</span> <span class="n">biaobiaoqi</span><span class="o">.</span><span class="na">asm</span><span class="o">.</span><span class="na">ASMAgent</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果对字节码的处理有应用到了其他的类，需要在 manifest 中增加路径。比如使用到了 asm-3.0.jar，则增加如下语句：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">Class</span><span class="o">-</span><span class="nl">Path:</span> <span class="n">asm</span><span class="o">-</span><span class="mf">3.0</span><span class="o">.</span><span class="na">jar</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>3.执行</h3>
+
+<p>执行测试程序时，添加“-javaagent:代理类的 jar[=传入 premain 的参数]”选项。</p>
+
+<p>比如，对于博主的程序，就是</p>
+
+<p><code>java -javaagent:ASMInstrument.jar   -jar XXXX.jar  xxxx</code></p>
+
+<p>其中 ASMInstrument.jar 是第二步中打包的程序，  XXX.jar 是需要测试的程序， xxx 是 XXX.jar 执行时可能的命令行参数。</p>
+
+<p>如果只是执行某.class 文件中的类，我们假设是在当前目录下的一个 XXXX 类，则是：
+<code>java -javaagent:ASMInstrument.jar   -cp ./  XXXX xxx</code></p>
+
+<p>其中 xxx 是可能的命令行参数。</p>
+
+<h3>参考资料</h3>
+
+<ul>
+<li><a href="http://www.ibm.com/developerworks/cn/java/j-lo-jse61/index.html">《Java SE 6 新特性: Instrumentation 新功能》</a></li>
+<li><a href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loader-in-practice/">《Java 类加载器编程实践》</a></li>
+</ul>
+
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/09/08/custom-premain-method/'>http://biaobiaoqi.me/blog/2013/09/08/custom-premain-method/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Java构造方法中的执行顺序]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/09/08/strange-behavior-using-braces-in-java/"/>
+    <updated>2013-09-08T12:58:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/09/08/strange-behavior-using-braces-in-java</id>
+    <content type="html"><![CDATA[<p>这道题来自 <a href="http://stackoverflow.com/questions/8185780/strange-behavior-using-braces-in-java/8186881#8186881">stackoverflow</a>。</p>
+
+<h2>问题描述：</h2>
+
+<p>有如下代码，求其输出内容。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span>
+</span><span class='line'><span class="o">{</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span>
+</span><span class='line'>    <span class="n">Test</span><span class="o">(){</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;1&quot;</span><span class="o">);}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="o">{</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;2&quot;</span><span class="o">);}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">static</span><span class="o">{</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;3&quot;</span><span class="o">);}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span> <span class="n">args</span><span class="o">[])</span>
+</span><span class='line'>    <span class="o">{</span>
+</span><span class='line'>        <span class="k">new</span> <span class="nf">Test</span><span class="o">();</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>分析</h2>
+
+<p>作为静态区段的语句，容易知道，3 是会最先出现的。容易弄错的一点是 到底是 1 和 2 的出现顺序。</p>
+
+<p>我们可以参考字节码来分析。在 eclipse 中使用 ASM bytecode 插件，得到相应的字节码：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="c1">// class version 50.0 (50)  </span>
+</span><span class='line'><span class="c1">// access flags 0x21  </span>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
+</span><span class='line'>  <span class="c1">// compiled from: Test.java  </span>
+</span><span class='line'>  <span class="kd">static</span> <span class="o">&lt;</span><span class="n">clinit</span><span class="o">&gt;()</span> <span class="o">:</span> <span class="kt">void</span>
+</span><span class='line'>    <span class="n">GETSTATIC</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span> <span class="o">:</span> <span class="n">PrintStream</span>
+</span><span class='line'>    <span class="n">LDC</span> <span class="s">&quot;3&quot;</span>
+</span><span class='line'>    <span class="n">INVOKEVIRTUAL</span> <span class="n">PrintStream</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">String</span><span class="o">)</span> <span class="o">:</span> <span class="kt">void</span>
+</span><span class='line'>    <span class="n">RETURN</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="o">&lt;</span><span class="n">init</span><span class="o">&gt;()</span> <span class="o">:</span> <span class="kt">void</span>
+</span><span class='line'>    <span class="n">ALOAD</span> <span class="mi">0</span><span class="o">:</span> <span class="k">this</span>
+</span><span class='line'>    <span class="n">INVOKESPECIAL</span> <span class="n">Object</span><span class="o">.&lt;</span><span class="n">init</span><span class="o">&gt;()</span> <span class="o">:</span> <span class="kt">void</span>
+</span><span class='line'>    <span class="n">ALOAD</span> <span class="mi">0</span><span class="o">:</span> <span class="k">this</span>
+</span><span class='line'>    <span class="n">BIPUSH</span> <span class="mi">10</span>
+</span><span class='line'>    <span class="n">PUTFIELD</span> <span class="n">Test</span><span class="o">.</span><span class="na">a</span> <span class="o">:</span> <span class="kt">int</span>
+</span><span class='line'>    <span class="n">GETSTATIC</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span> <span class="o">:</span> <span class="n">PrintStream</span>
+</span><span class='line'>    <span class="n">LDC</span> <span class="s">&quot;2&quot;</span>
+</span><span class='line'>    <span class="n">INVOKEVIRTUAL</span> <span class="n">PrintStream</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">String</span><span class="o">)</span> <span class="o">:</span> <span class="kt">void</span>
+</span><span class='line'>    <span class="n">GETSTATIC</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span> <span class="o">:</span> <span class="n">PrintStream</span>
+</span><span class='line'>    <span class="n">LDC</span> <span class="s">&quot;1&quot;</span>
+</span><span class='line'>    <span class="n">INVOKEVIRTUAL</span> <span class="n">PrintStream</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">String</span><span class="o">)</span> <span class="o">:</span> <span class="kt">void</span>
+</span><span class='line'>    <span class="n">RETURN</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[])</span> <span class="o">:</span> <span class="kt">void</span>
+</span><span class='line'>    <span class="n">NEW</span> <span class="n">Test</span>
+</span><span class='line'>    <span class="n">INVOKESPECIAL</span> <span class="n">Test</span><span class="o">.&lt;</span><span class="n">init</span><span class="o">&gt;()</span> <span class="o">:</span> <span class="kt">void</span>
+</span><span class='line'>    <span class="n">RETURN</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>正如我们所想，3 是被放在类构造方法中，这是类的初始化函数，固然在类的初始化时出现。</p>
+
+<!--more-->
+
+
+<p>而在构造方法中先出现 2，之后才是 1。问题的核心集中到对象构造方法的指令顺序问题。实际上，在对象构造方法中，会先执行一些隐性的指令，比如父类的构造方法、{}区段的内容等，然后在执行显性的构造方法中的指令：</p>
+
+<ul>
+<li><ol>
+<li>Java 编译时，对象构造方法里先嵌入隐式的指令，完毕之后，再执行 Java 源代码中显示的代码。</li>
+</ol>
+</li>
+<li>2.那些隐式的指令，包括父类的构造方法、变量的初始化、{}区段里的内容，并严格按照这个顺序嵌入到对象的构造方法中。</li>
+</ul>
+
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/09/08/strange-behavior-using-braces-in-java/'>http://biaobiaoqi.me/blog/2013/09/08/strange-behavior-using-braces-in-java/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Java类的实例化总结]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/09/08/initliate-objects-in-java/"/>
+    <updated>2013-09-08T02:03:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/09/08/initliate-objects-in-java</id>
+    <content type="html"><![CDATA[<p>java 类的实例化(instantiation)具有显性的和隐性的区别。</p>
+
+<p>写 Java 代码时，我们所使用 new 的方法实例化最简单直接的显性实例化。而隐性的实例化则出现在 java 程序的整个生命周期中，包括 String、Class，StringBuffer 或者 StringBuilder 的实例化等等。</p>
+
+<h2>显性的实例化</h2>
+
+<h3>new 关键字实例化对象</h3>
+
+<p>调用相应的构造函数完成实例化。（类中的非静态成员变量如果有初始化语句，都会被隐式的加入到构造函数中）代码如下：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span>  <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">String</span> <span class="n">strA</span> <span class="o">=</span> <span class="s">&quot;xyz&quot;</span><span class="o">;</span>
+</span><span class='line'>    <span class="n">String</span> <span class="n">strB</span> <span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="nf">Test</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span><span class="o">){</span>
+</span><span class='line'>        <span class="n">strB</span> <span class="o">=</span> <span class="n">str</span> <span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+</span><span class='line'>            <span class="n">Test</span> <span class="n">t</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Test</span><span class="o">(</span><span class="s">&quot;abc&quot;</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在 eclipse 中装了 <a href="http://asm.ow2.org/">ASM bytecode</a> 插件后，观察.class 文件中的构造函数对应的字节码如下：</p>
+
+<!--more-->
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">INVOKESPECIAL</span> <span class="n">Object</span><span class="o">.&lt;</span><span class="n">init</span><span class="o">&gt;()</span> <span class="o">:</span> <span class="kt">void</span>
+</span><span class='line'>   <span class="n">ALOAD</span> <span class="mi">0</span><span class="o">:</span> <span class="k">this</span>
+</span><span class='line'>   <span class="n">LDC</span> <span class="s">&quot;xyz&quot;</span>
+</span><span class='line'>   <span class="n">PUTFIELD</span> <span class="n">Test</span><span class="o">.</span><span class="na">strA</span> <span class="o">:</span> <span class="n">String</span>
+</span><span class='line'>   <span class="n">ALOAD</span> <span class="mi">0</span><span class="o">:</span> <span class="k">this</span>
+</span><span class='line'>   <span class="n">ALOAD</span> <span class="mi">1</span><span class="o">:</span> <span class="n">str</span>
+</span><span class='line'>   <span class="n">PUTFIELD</span> <span class="n">Test</span><span class="o">.</span><span class="na">strB</span> <span class="o">:</span> <span class="n">String</span>
+</span><span class='line'>   <span class="n">RETURN</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>关键在于<code>LDC"xyz"</code>这条指令，明显可以看出，这是用于 strA 初始化的字符串。</p>
+
+<p>由此我们可以归纳出，在没有调用本类中其他的构造函数的情况下，每次类的构造函数中都会按如下顺序进行：</p>
+
+<ul>
+<li>a)隐式（或显性）的调用父类的构造函数</li>
+<li>b)然后执行写在构造函数外的成员变量的初始化赋值</li>
+<li>c)最后再执行构造函数中的命令。</li>
+</ul>
+
+
+<p>如果是有显性的调用本类其他构造函数（必须是放在构造函数第一步执行），那么对于这个构造函数，处理过程就简单些了：</p>
+
+<ul>
+<li>a)调用那个构造函数。</li>
+<li>b)执行之后的代码。</li>
+</ul>
+
+
+<h3>利用 java 反射机制</h3>
+
+<p>反射机制是是 java 动态性中的关键之一，调用 java.lang.reflect.Constructor 的 newInstance()方法能创建对象。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span>  <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="nf">Test</span><span class="o">(){</span>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Created by invoking newInstance()&quot;</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="nf">Test</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span><span class="o">){</span>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span>
+</span><span class='line'>                    <span class="kd">throws</span> <span class="n">ClassNotFoundException</span> <span class="o">,</span> <span class="n">InstantiationException</span> <span class="o">,</span>
+</span><span class='line'>                    <span class="n">IllegalAccessException</span>  <span class="o">{</span>
+</span><span class='line'>            <span class="n">Test</span> <span class="n">t1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Test</span><span class="o">(</span><span class="s">&quot;Created with new&quot;</span><span class="o">);</span> <span class="c1">//常规的方法  </span>
+</span><span class='line'>            <span class="n">Class</span> <span class="n">myClass</span> <span class="o">=</span> <span class="n">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="s">&quot;Test&quot;</span><span class="o">);</span>  <span class="c1">//获得了对应于 Test 类的 Class 对象，如果没有加载，会先加载这个类，再返回。  </span>
+</span><span class='line'>            <span class="n">Test</span> <span class="n">t2</span> <span class="o">=</span> <span class="o">(</span><span class="n">Test</span><span class="o">)</span><span class="n">myClass</span><span class="o">.</span><span class="na">newInstance</span><span class="o">();</span> <span class="c1">//调用 newInstance()创建对象。  </span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>其他</h3>
+
+<p>其他还有对象的 clone()方法，以及串行化后的解串行化过程。</p>
+
+<h2>隐性的实例化</h2>
+
+<p>隐性的实例化主要有如下几类：</p>
+
+<ul>
+<li>1.String 和 String 数组。main(String[] args)中拥有的 args 参数为 String 数组类型，这些 command line 参数将会首先被实例化。</li>
+<li>2.Class 的实例化。由于类的加载过程中，会生成相应类的 Class 对象，这些也会被隐性的实例化。</li>
+<li>3.JVM 在执行类加载的过程中，对常量池中的 CONSTANT_String_info 项会实例化出对应的 String 对象。这里涉及到常量池解析的知识。</li>
+<li>4.在 String 的操作中，可能存在隐性的 StringBuffer 或者 StringBuilder 的实例化。</li>
+<li>5.int 和 Integer 这些类型转化过程中的装箱、拆箱。</li>
+</ul>
+
+
+<p>比如如下代码：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span>  <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+</span><span class='line'>            <span class="n">String</span> <span class="n">str1</span> <span class="o">=</span> <span class="s">&quot;abc&quot;</span><span class="o">;</span>
+</span><span class='line'>            <span class="n">String</span> <span class="n">str2</span> <span class="o">=</span> <span class="s">&quot;def&quot;</span><span class="o">;</span>
+</span><span class='line'>            <span class="n">String</span> <span class="n">str</span> <span class="o">=</span> <span class="n">str1</span> <span class="o">+</span> <span class="n">str2</span> <span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在 eclipse 中装了 ASM bytecode 插件后，直接观察.class 文件对应的字节码：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">NEW</span> <span class="n">StringBuilder</span>
+</span><span class='line'>    <span class="n">DUP</span>
+</span><span class='line'>    <span class="n">ALOAD</span> <span class="mi">1</span><span class="o">:</span> <span class="n">str1</span>
+</span><span class='line'>    <span class="n">INVOKESTATIC</span> <span class="n">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">Object</span><span class="o">)</span> <span class="o">:</span> <span class="n">String</span>
+</span><span class='line'>    <span class="n">INVOKESPECIAL</span> <span class="n">StringBuilder</span><span class="o">.&lt;</span><span class="n">init</span><span class="o">&gt;(</span><span class="n">String</span><span class="o">)</span> <span class="o">:</span> <span class="kt">void</span>
+</span><span class='line'>    <span class="n">ALOAD</span> <span class="mi">2</span><span class="o">:</span> <span class="n">str2</span>
+</span><span class='line'>    <span class="n">INVOKEVIRTUAL</span> <span class="n">StringBuilder</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">String</span><span class="o">)</span> <span class="o">:</span> <span class="n">StringBuilder</span>
+</span><span class='line'>    <span class="n">INVOKEVIRTUAL</span> <span class="n">StringBuilder</span><span class="o">.</span><span class="na">toString</span><span class="o">()</span> <span class="o">:</span> <span class="n">String</span>
+</span><span class='line'>    <span class="n">ASTORE</span> <span class="mi">3</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>实际上，这里 str1 和 str2 合并的过程，是使用了 StringBuilder 来间接完成的，首先以 str1 的值构造一个 StringBuilder，然后调用其中的 append()方法，将 str2 串联上来。</p>
+
+<p>值得注意的是：老版本的 java 使用 StringBuffer 完成这一步，但 StringBuffer 是线程安全的，效率略低，于是在新版本 java 中出现了非线程安全的 StringBuilder，这类似于 Hashtable 和 hashset 的关系。</p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/09/08/initliate-objects-in-java/'>http://biaobiaoqi.me/blog/2013/09/08/initliate-objects-in-java/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Java类加载的延迟初始化]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/09/08/late-initialising-in-java/"/>
+    <updated>2013-09-08T02:00:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/09/08/late-initialising-in-java</id>
+    <content type="html"><![CDATA[<p><a href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loading-linking-and-initialising/">《Java 类的装载、链接和初始化》</a>中提到，链接的最后一步是解析，即对符号引用的解析。但这不是必须的，可以等到相应的符号引用第一次使用时再解析。</p>
+
+<p>而类的初始化是在链接之后的（注意了，根据不同 JVM 有不同的实现方式，在类初始化的时候，可能已经完成了所有的符号引用的解析，也可能没有），本文所写的就是类的初始化的时机问题。</p>
+
+<p>Java 类的动态加载机制规定，在类被主动使用(active use)之前，必须已经完成类的初始化。既然有主动调用，那么就有被动调用了。这两者有哪些区别呢？</p>
+
+<p>下面列出所有主动使用的情况，用以区分两者：</p>
+
+<ul>
+<li>1.创造该类的一个新的实例</li>
+<li>2.调用这个类中的静态方法</li>
+<li>3.获取类或者接口中的非常量的静态变量</li>
+<li>4.利用反射调用方法</li>
+<li>5.初始化该类的某子类</li>
+<li>6.被制定为 JVM 开始运行时必须初始化的类</li>
+</ul>
+
+
+<p>注意，3 中为何是“非常量的静态变量”。如果是常量，即声明为 final 的话，并不会出现对类的构造，虽然调用时有类名出现，但实际调用会直接使用常量，绕过了类的限制（详情见相关常量池和运行时常量池的知识）。</p>
+
+<p>只有当一个非常量的静态变量被显示的在类或接口中声明时，它的调用才属于主动调用。对于父类中某非常量静态变量的调用属于被动使用(positive use)。</p>
+
+<!--more-->
+
+
+<p>如下代码</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Parent</span> <span class="o">{</span>
+</span><span class='line'>     <span class="kd">static</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>     <span class="kd">static</span><span class="o">{</span>
+</span><span class='line'>            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Parent initiate&quot;</span><span class="o">);</span>
+</span><span class='line'>     <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">func</span><span class="o">(){</span>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;func&quot;</span><span class="o">);</span>
+</span><span class='line'>     <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Son</span> <span class="kd">extends</span> <span class="n">Parent</span><span class="o">{</span>
+</span><span class='line'>    <span class="kd">static</span><span class="o">{</span>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Son initiate&quot;</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
+</span><span class='line'>    <span class="kd">static</span><span class="o">{</span>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Test initiate&quot;</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">Son</span><span class="o">.</span><span class="na">i</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">Son</span><span class="o">.</span><span class="na">func</span><span class="o">();</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>运行的结果是：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">Test</span> <span class="n">initiate</span>
+</span><span class='line'><span class="n">Parent</span> <span class="n">initiate</span>
+</span><span class='line'><span class="mi">10</span>
+</span><span class='line'><span class="n">func</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>虽然有出现 Son，但 Son.i 访问的是父类的非常量静态变量。于是没有对 Son 类进行初始化，而只是初始化了明确的声明静态变量的 Parent 类。</p>
+
+<p>由此可见，一般的，我们在某个类中定义了其他类的成员变量引用，只要该变量没有 new 出一个新的对象，则 JVM 也不会初始化这个类，类此时只是被加载了而已，而没有链接和初始化。</p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/09/08/late-initialising-in-java/'>http://biaobiaoqi.me/blog/2013/09/08/late-initialising-in-java/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+]]></content>
+  </entry>
+  
+</feed>

@@ -11,23 +11,23 @@ footer: true
 
 本博客使用tags整理内容，没有严格的分类界限。以下整理出侧重相对明显的几块：
 
-* [技术](http://biaobiaoqi.me/tags/ji-zhu/)：互联网、软件技术相关的博文。
+* [技术](http://biaobiaoqi.github.io/tags/ji-zhu/)：互联网、软件技术相关的博文。
 
-* [读书](http://biaobiaoqi.me/tags/du-shu/)：看过的不错的书的总结或推荐。
+* [读书](http://biaobiaoqi.github.io/tags/du-shu/)：看过的不错的书的总结或推荐。
 
-* [生活](http://biaobiaoqi.me/tags/sheng-huo/)：记录生活中的点点滴滴。
+* [生活](http://biaobiaoqi.github.io/tags/sheng-huo/)：记录生活中的点点滴滴。
 
-* [狂想](http://biaobiaoqi.me/tags/kuang-xiang/)：自己的一些点子，慢慢积累，慢慢实现。
+* [狂想](http://biaobiaoqi.github.io/tags/kuang-xiang/)：自己的一些点子，慢慢积累，慢慢实现。
 
 ##小专题
 
 渐渐发现有的文章综合在一起，也能产生点1+1>=2的力量了，整理为专题如下：
 
-* [PAT题解](http://biaobiaoqi.me/tags/pat/)：PAT是一个ZJU的比较简单的算法OJ系统。
+* [算法小题](http://biaobiaoqi.github.io/tags/pat/)：PAT是一个ZJU的比较简单的算法OJ系统，做了些题，做了些记录。
 
-* [Java学习](http://biaobiaoqi.me/tags/java/)：Java、JVM相关的学习笔记。
+* [Java](http://biaobiaoqi.github.io/tags/java/)：Java、JVM相关的学习笔记。
 
-* [分布式](http://biaobiaoqi.me/tags/fen-bu-shi/)：分布式相关的学习笔记。
+
 
 
 ##标签云

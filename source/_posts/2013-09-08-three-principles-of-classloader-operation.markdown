@@ -74,4 +74,4 @@ Systm-ClassPath classloader加载了MyApp.MyApp，而这个类创造了一个jav
 
 注意，虽然java的加载实现中，对于bootstrap classloader 、extensions classloader 和 system classloader来说，他们的关系是parent-first，也就是像原则一中所说的那样，需要向上委托，但用户自定义的classloader完全可以跳出这个圈子，自己实现parent-lastclassloader。比如Websphere中就有相关配置。
 
-更具体的类加载器编程实例，请见另外一篇博文：[《Java类加载器编程实践》](http://biaobiaoqi.me/blog/2013/09/08/java-class-loader-in-practice/)
+更具体的类加载器编程实例，请见另外一篇博文：[《Java类加载器编程实践》](http://biaobiaoqi.github.io/blog/2013/09/08/java-class-loader-in-practice/)

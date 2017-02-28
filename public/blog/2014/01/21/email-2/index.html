@@ -1,0 +1,440 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>邮件服务（二）：安全、认证和垃圾邮件 - Biaobiaoqi的博客</title>
+  <meta name="author" content="Biaobiaoqi">
+
+  
+  <meta name="description" content="邮件服务器如何保证邮箱的安全？本文总结了尝试用的方法策略。">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://biaobiaoqi.github.io/blog/2014/01/21/email-2/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Biaobiaoqi的博客" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+
+function addBlankTargetForLinks () {
+
+  $('a[href^="http"]').each(function(){
+
+      $(this).attr('target', '_blank');
+
+  });
+
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+
+  addBlankTargetForLinks();
+
+});
+
+</script>
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F49481ec3305db999013860b0ccb3b16d' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39900036-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Biaobiaoqi的博客</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:biaobiaoqi.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives/">全部文章</a></li>
+  <li><a href="/tag-cloud/">分类阅读</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">邮件服务（二）：安全、认证和垃圾邮件</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-21T01:38:00+08:00" pubdate data-updated="true">Jan 21<span>st</span>, 2014</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2>背景</h2>
+
+<p><a href="http://biaobiaoqi.github.io/tags/you-jian-fu-wu/">邮件服务系列博文</a>中<a href="http://biaobiaoqi.github.io/blog/2014/01/20/email-1/">第一篇博客</a>介绍了邮件服务的基本知识，了解了邮件是如何从发件人的邮件客户端经过不同的传输协议传送到收件人的邮件客户端的。这只是邮件的基本功能实现，但如果发生如下情况，整个邮件系统的生态环境将被扰乱：</p>
+
+<ul>
+<li>被不法分子利用邮箱服务器发送垃圾邮件</li>
+<li>被其他人伪造域名邮箱发送邮件</li>
+<li>被中间人窃取账号密码、甚至重要邮件信息（中间人攻击）</li>
+<li>即使自己拥有邮箱服务器的权限，无限制的滥用这个权利给其他邮箱发送邮件也是不好的</li>
+</ul>
+
+
+<p>为了防止以上的种种情况，电子邮箱体系引入了更多的协议和机制。本文对此做浅显的总结，如有出错，还请指出和补充。</p>
+
+<!--more-->
+
+
+<h2>PTR</h2>
+
+<p><a href="http://en.wikipedia.org/wiki/List_of_DNS_record_types#PTR">PTR</a>(pointer record)是 DNS 记录中的一种。与 A 记录相反，它记录的是由 IP 到 <a href="http://en.wikipedia.org/wiki/Fully_qualified_domain_name">FQDN</a>（fully qualified domain name）的映射。</p>
+
+<p>PTR 并非由 DNS 服务提供商控制，而是通过 IP 提供商来设定。比如博主使用 linode 的 VPS，独立 IP 由 Linode 提供，于是 PTR 也是由 Linode 给予的权限来做设定。</p>
+
+<p>在 DNS 中设置 PTR 能增加邮件的非垃圾邮件权重（不同垃圾邮件黑名单判定机构有不同的判定规则，其中 PTR 是公认的指标之一）。</p>
+
+<p>更多信息参考：<a href="https://rtcamp.com/tutorials/mail/fqdn-reverse-dns-ptr-mx-record-checks/">Checking FQDN, Reverse-DNS/PTR, MX record</a></p>
+
+<h2>SPF</h2>
+
+<p><a href="http://en.wikipedia.org/wiki/Sender_Policy_Framework">SPF</a>(Sender Policy Framework)也是一种 DNS 记录。通过查询发送邮件者的 IP 地址和发送来的邮件地址做对比，进行简单的邮件验证。域名的管理员通过 SPF 记录或 TXT 记录来规定这个域名下哪些 IP 地址是“允许”发送邮件的，这样如果有人用别的 IP 地址来伪造发送的话，收件方可以根据 SPF 来选择拒收这些邮件。</p>
+
+<p>最初的邮件系统没有考虑到各种安全因素，SPF 是在之后的发展过程中提出的。为了兼容不支持 SPF 记录的 DNS 服务器（本博客所使用的 DNSPod 就不支持 SPF 记录。），允许用 TXT 记录来表达 SPF。<a href="www.openspf.org">OpenSPF</a> 建议在这段过渡时期同时添加 SPF 记录和 TXT 记录。</p>
+
+<p>SPF 记录的语法规则见<a href="http://www.openspf.org/SPF_Record_Syntax">链接</a>。这里给出一个简单的例子：</p>
+
+<p><code>v=spf1 a mx -all</code></p>
+
+<p>其中<code>spf1</code>是版本号；<code>a</code>代表把 A 记录对应的 IP 加入信任列表；<code>mx</code>说明把这个域名上的 MX 记录所对应的服务器加入信任列表；<code>-all</code>代表将不是从信任列表发出的邮件强制拒绝(hard fail)。</p>
+
+<p>值得注意的是，经过测试发现 Gmail 并没有对 hard fail 的邮件执行拒绝，只是在 web 界面做出了一些提醒。这里有一篇相关的讨论：<a href="http://www.gossamer-threads.com/lists/spf/discuss/32914">链接</a>。</p>
+
+<p>更多资料参考：<a href="http://t.tt/31/">如何给域名设置 SPF 记录</a></p>
+
+<h2>DKIM</h2>
+
+<p><a href="http://www.dkim.org/">DKIM</a>(DomainKeys Identified Mail)是一种电子邮件的验证技术，使用<a href="http://zh.wikipedia.org/wiki/%E5%85%AC%E5%BC%80%E5%AF%86%E9%92%A5%E5%8A%A0%E5%AF%86">非对称加密</a>为邮件提供了签名与验证的功能。一般来说，发送方会在电子邮件的标头插入 DKIM-Signature 及电子签名，它们由私钥加密。而接收方则透过 DNS 查询得到公开密钥后进行验证。</p>
+
+<p>DKIM 是由 DomainKeys 所改进的协定，大多数的运作方式与 DomainKeys 相同。在 2007 年 2 月时，DKIM 被列入互联网工程工作小组（IETF）的标准提案，并于同年 5 月成为正式标准。</p>
+
+<h2>传输协议</h2>
+
+<p>通过标准的 TCP/IP 做 SMTP 传输，没有任何安全保障，信息容易被截获。为了保证数据的安全，可以使用 SSL/TLS 提供加密链接。对于 IMAP 和 POP3 使用 SSL 加密尚可接受，而 SMTP 会遇到兼容性问题：POP3 和 IMAP 至于 MRA 和 MUA 有关，而使用 SMTP 协议的 MTA 会与其他的 MTA 沟通，除非全世界所有 MTA 节点同时升级为 SSL/TLS 加密的通信协议，否则会出现部分邮件无法中继的状况。</p>
+
+<p><a href="http://en.wikipedia.org/wiki/STARTTLS">STARTTLS</a> 很好的解决了这一问题。STARTTLS 是明文传输协议的扩展，它允许在明文连接的基础上将连接升级为加密连接，而不是使用另外一个加密接口。</p>
+
+<p>一般的，邮箱服务器各协议端口设定如下：</p>
+
+<ul>
+<li>IMAP：明文端口 143，加密端口 993</li>
+<li>POP3：明文端口 110，加密端口 995</li>
+<li>SMTP：明文端口 25，SSL 加密端口 465，STARTTLS 加密端口 587</li>
+</ul>
+
+
+<p>关于 SSL、TLS 和 STARTTLS 的区别，参见<a href="https://www.fastmail.fm/help/technology_ssl_vs_tls_starttls.html">链接</a>。</p>
+
+<h2>查看邮件原始信息</h2>
+
+<p>随着邮件在网络中的中转，邮件头会被加入许多必要信息。理解邮件头能帮助理解邮件服务的整个系统，在遇到垃圾邮件时，也可以助于定位问题所在。</p>
+
+<p>GMAIL 的 Web 端可以查看邮件的详细信息。在邮件内容框里，点击右上角的更多选项，选中 Show original，如图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/emailori-mail.png?imageView/2/w/800/h/800" alt="img" /></p>
+
+<p>下面展示 linode 发送给 someuser@gmail.com 的一封邮件的原始信息：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Delivered-To: someuser@gmail.com
+</span><span class='line'>Received: by 10.114.246.38 with SMTP id xt6csp139967ldc;
+</span><span class='line'>        Mon, 20 Jan 2014 06:53:17 -0800 (PST)
+</span><span class='line'>X-Received: by 10.182.81.197 with SMTP id c5mr7069251oby.40.1390229596297;
+</span><span class='line'>        Mon, 20 Jan 2014 06:53:16 -0800 (PST)
+</span><span class='line'>Return-Path: &lt;support@linode.com&gt;
+</span><span class='line'>Received: from mail2.linode.com (mail2.linode.com. [173.255.198.11])
+</span><span class='line'>        by mx.google.com with ESMTP id f6si835374obr.111.2014.01.20.06.53.15
+</span><span class='line'>        for &lt;someuser@gmail.com&gt;;
+</span><span class='line'>        Mon, 20 Jan 2014 06:53:16 -0800 (PST)
+</span><span class='line'>Received-SPF: pass (google.com: domain of support@linode.com designates 173.255.198.11 as permitted sender) client-ip=173.255.198.11;
+</span><span class='line'>Authentication-Results: mx.google.com;
+</span><span class='line'>       spf=pass (google.com: domain of support@linode.com designates 173.255.198.11 as permitted sender) smtp.mail=support@linode.com
+</span><span class='line'>Received: from li114-242.members.linode.com (li114-242.members.linode.com [69.164.199.242])
+</span><span class='line'>  by mail2.linode.com (Postfix) with ESMTP id 6AF9E26A96;
+</span><span class='line'>  Mon, 20 Jan 2014 09:53:15 -0500 (EST)
+</span><span class='line'>Date: Mon, 20 Jan 2014 09:53:15 -0500 (EST)
+</span><span class='line'>From: support@linode.com
+</span><span class='line'>To: someuser@gmail.com
+</span><span class='line'>Message-ID: &lt;376750868.26764.1390229595437.JavaMail.cfusion@mail2.linode.com&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这封邮件里每项的具体含义如下(<a href="https://support.google.com/mail/answer/29436?hl=en">参考</a>以及 <a href="http://www.ietf.org/rfc/rfc0822.txt">RFC0822</a>)：</p>
+
+<ul>
+<li>Delivered-TO： 发送的目的地邮箱地址。</li>
+<li>Received： 这个字段可以用来追踪邮件的传送路径。字段的基本格式为 from A by B for C。其中 A 为发送方，B 为接收方，C 为收件人邮箱地址。由于邮件可能经过多个 SMTP 服务器中继，故可以有多个 Received 字段。在邮件头中，以自底向上的顺序阅读它们。对于这封邮件，传送路径为：li114-242.members.linode.com -> mail2.linode.com -> mx.google.com -> 10.182.81.197 -> 10.114.246.38.</li>
+<li>Received-SPF： 用于记录 SPF 查询来验证邮件的安全性，参考 <a href="http://www.openspf.org/SPF_Received_Header">SPF Received Header</a></li>
+<li>Return-Path： 邮件的回复地址，来自于 SMTP 中得<code>mail from:</code>命令。</li>
+<li>Date： 邮件的发送时间。</li>
+<li>From： 客户端显示的发件人地址，可以跟 Return-Path 中得地址不同。</li>
+<li>To： 客户端显示的收件人地址。</li>
+</ul>
+
+
+<p>实际上，Google 估计到 IP 地址为敏感信息，某些情况下会隐藏发送邮件标头中得发件人 IP 地址（<a href="https://support.google.com/mail/answer/26903?hl=zh-Hans&amp;hlrm=en">资料链接</a>）。</p>
+
+<p>不同的客户端对这一功能做了不同的实现。比如 QQ 邮箱以前是能够查看邮件原始信息的，而现在已经关闭了这一功能。</p>
+
+<h2>第三方邮件服务</h2>
+
+<p>邮件服务器的基本功能实现虽然看起来简单，但为了让系统拥有足够的稳定性、邮件送达率，还是得付出不小的努力来与复杂的网络环境做斗争。许多公司为了集中注意力于自己的核心业务，会剥离出邮件发送的业务，使用第三方的邮件服务。国内国外涌现了不少第三方的邮件服务解决方案。自己没有相应的使用经验，谨贴出两个不错的介绍，供大家参考：</p>
+
+<ul>
+<li><a href="http://70.io/develop/aws_ses-mailgun-sendcloud.html">邮件发送服务 AWS SES，Mailgun 以及 SendCloud</a></li>
+<li><a href="http://www.zhihu.com/question/20088568">知乎的邮件系统为什么不再用 Amazon SES 了？</a></li>
+</ul>
+
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.io/blog/2014/01/21/email-2/'>http://biaobiaoqi.github.io/blog/2014/01/21/email-2/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Biaobiaoqi</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-21T01:38:00+08:00" pubdate data-updated="true">Jan 21<span>st</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+    <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+<a class="jiathis_button_tsina"></a>
+<a class="jiathis_button_weixin"></a>
+<a class="jiathis_button_renren"></a>
+<a class="jiathis_button_douban"></a>
+<a class="jiathis_button_googleplus"></a>
+<a href="http://www.jiathis.com/share?uid=1814751" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+	data_track_clickback:true,
+	summary:"",
+	shortUrl:true,
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1814751" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/01/20/email-1/" title="Previous Post: 邮件服务（一）：基本框架">&laquo; 邮件服务（一）：基本框架</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/01/22/email-3/" title="Next Post: 邮件服务（三）：实践服务器搭建">邮件服务（三）：实践服务器搭建 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <!--h1>Comments</h1-->
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>标签云</h1>
+ <br /> 
+  <ul class="tag-cloud">
+    <a style="font-size: 143%" href="/tags/jvm/">JVM</a> &nbsp 
+<a style="font-size: 147%" href="/tags/java/">Java</a> &nbsp 
+<a style="font-size: 145%" href="/tags/pat/">PAT</a> &nbsp 
+<a style="font-size: 109%" href="/tags/octopress/">octopress</a> &nbsp 
+<a style="font-size: 115%" href="/tags/fen-bu-shi/">分布式</a> &nbsp 
+<a style="font-size: 137%" href="/tags/zi-jie-ma/">字节码</a> &nbsp 
+<a style="font-size: 137%" href="/tags/si-kao/">思考</a> &nbsp 
+<a style="font-size: 180%" href="/tags/ji-zhu/">技术</a> &nbsp 
+<a style="font-size: 128%" href="/tags/fang-fa-lun/">方法论</a> &nbsp 
+<a style="font-size: 109%" href="/tags/fu-wu-qi/">服务器</a> &nbsp 
+<a style="font-size: 139%" href="/tags/sheng-huo/">生活</a> &nbsp 
+<a style="font-size: 153%" href="/tags/suan-fa/">算法</a> &nbsp 
+<a style="font-size: 109%" href="/tags/wang-luo/">网络</a> &nbsp 
+<a style="font-size: 139%" href="/tags/du-shu/">读书</a> &nbsp 
+<a style="font-size: 109%" href="/tags/you-jian-fu-wu/">邮件服务</a>
+
+  </ul>
+</section>
+<section>
+  <h1>关于</h1>
+   <p>biaobiaoqi是我的网络id。<br><br>
+   我的博客日志：<a href="http://biaobiaoqi.github.io/blog/2013/09/01/blog-log/">请戳</a><br><br>
+	</p>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - Biaobiaoqi -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  - <span class="credit">Theme by <a href="http://www.gehaxelt.in">Gehaxelt</a></span>
+  <span class="credit">and <a href="http://www.it-solutions-neef.de">IT Solutions Neef</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'biaobiaoqisblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://biaobiaoqi.github.io/blog/2014/01/21/email-2/';
+        var disqus_url = 'http://biaobiaoqi.github.io/blog/2014/01/21/email-2/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

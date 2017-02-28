@@ -1,0 +1,320 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>《大规模Web服务开发技术》 - Biaobiaoqi的博客</title>
+  <meta name="author" content="Biaobiaoqi">
+
+  
+  <meta name="description" content="《大规模Web服务开发技术》是日本的Hetena团队以夏天举办的实习活动的课程讲义为基础整理的开发、运营大规模服务的入门书。书中更多的偏重了Hetena技术团队发展过程中的实践经验总结，将一个系统从无到有的发展过程有条理的展现了出来。读完全书，觉得它更像是一本Web服务开发的心灵鸡汤， &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://biaobiaoqi.github.io/blog/2013/10/28/scalable-web-service-development/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Biaobiaoqi的博客" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+
+function addBlankTargetForLinks () {
+
+  $('a[href^="http"]').each(function(){
+
+      $(this).attr('target', '_blank');
+
+  });
+
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+
+  addBlankTargetForLinks();
+
+});
+
+</script>
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F49481ec3305db999013860b0ccb3b16d' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39900036-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Biaobiaoqi的博客</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:biaobiaoqi.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives/">全部文章</a></li>
+  <li><a href="/tag-cloud/">分类阅读</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">《大规模Web服务开发技术》</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-28T01:41:00+08:00" pubdate data-updated="true">Oct 28<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2>Web 服务开发的心灵鸡汤</h2>
+
+<p><img src="http://img3.douban.com/mpic/s6818566.jpg" alt="img" /></p>
+
+<p>周末去上海陪妹子的两天在路途上看完了这本<a href="http://book.douban.com/subject/6758780/">《大规模 Web 服务开发技术》</a>。</p>
+
+<p>《大规模 Web 服务开发技术》是日本的 <a href="http://www.hatena.com/">Hetena</a> 团队以夏天举办的实习活动的课程讲义为基础整理的开发、运营大规模服务的入门书。书中更多的偏重了 Hetena 技术团队发展过程中的实践经验总结，将一个系统从无到有的发展过程有条理的展现了出来。读完全书，觉得它更像是一本 Web 服务开发的心灵鸡汤，有许多靠谱的总结，但相对零散，刚接触的人很难掌握。当然，心灵鸡汤并不是贬义，只是有不同的针对性。</p>
+
+<!--more-->
+
+
+<h2>内容</h2>
+
+<p>经验总结的东西一般很难有板有眼的映射到一个成熟的理论框架下。它的知识点相对零散，互相的耦合性比较强，很难在初步接触时建立起深刻的认识。尽管作者已经尽可能的让书的内容跟着服务端架构从小变大的过程走，具备一定的条理性，但要想通过看这种书来补强不谢知识区域，还是有些牵强。</p>
+
+<p>值得称道的是，作者对 Hetena 的技术发展史的描绘，能让读者接触到一个真实系统的成长过程。这是比较难得的一次体验。或许某个时刻，我们能在网上看到一篇讲解分布式存储系统的文章，另一个时刻，我们又看到了一篇将数据库划分的文章，但我们不知道在什么场景需要使用它们。这些零散的知识点，都需要融入到一个整体的经验体系、理论体系中，来发挥它们的作用。实践经验能帮助知识点的梳理，达到这一点。</p>
+
+<p>另外，全书的文笔很轻松，所以读起来比较快。时不时会跳出几句卖萌的表达。或许跟主体内容来自讲义有关吧=)。</p>
+
+<h2>定位</h2>
+
+<p>如此的定位，让本书不太适合想打造实际的技能栈的童鞋。换句话说，想通过这本书实际学习到某门技术是不太可行的。倒是挺适合对 Web 服务端不怎么熟悉，想走走看看了解下概貌，陶冶下情操的童鞋们，把这本书当做闲暇的读物，找找学习的感觉。我就是如此。另外，本身已经有足够的经验，或许也能读读这本书，梳理自己的思路。</p>
+
+<p>这本书让我想起了<a href="http://biaobiaoqi.github.io/blog/2013/07/19/odps-in-alibaba/">阿里的暑期课堂</a>，不过说实话，阿里的那次开放课堂的内容更多的侧重于宣讲，缺少技术架构的内容。希望更多的国内的企业能开放技术培训，让学生们能更早的接触到实践层的东西，某种角度来看也是一种双赢。</p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.io/blog/2013/10/28/scalable-web-service-development/'>http://biaobiaoqi.github.io/blog/2013/10/28/scalable-web-service-development/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Biaobiaoqi</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-28T01:41:00+08:00" pubdate data-updated="true">Oct 28<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/book/'>book</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+    <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+<a class="jiathis_button_tsina"></a>
+<a class="jiathis_button_weixin"></a>
+<a class="jiathis_button_renren"></a>
+<a class="jiathis_button_douban"></a>
+<a class="jiathis_button_googleplus"></a>
+<a href="http://www.jiathis.com/share?uid=1814751" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+	data_track_clickback:true,
+	summary:"",
+	shortUrl:true,
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1814751" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/10/25/java-bytecode-plugin-for-eclipse/" title="Previous Post: 在Eclipse里查看Java字节码">&laquo; 在Eclipse里查看Java字节码</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/10/28/get-ripple-from-github-account/" title="Next Post: 用Github账号领Ripple币">用Github账号领Ripple币 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <!--h1>Comments</h1-->
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>标签云</h1>
+ <br /> 
+  <ul class="tag-cloud">
+    <a style="font-size: 143%" href="/tags/jvm/">JVM</a> &nbsp 
+<a style="font-size: 147%" href="/tags/java/">Java</a> &nbsp 
+<a style="font-size: 145%" href="/tags/pat/">PAT</a> &nbsp 
+<a style="font-size: 109%" href="/tags/octopress/">octopress</a> &nbsp 
+<a style="font-size: 115%" href="/tags/fen-bu-shi/">分布式</a> &nbsp 
+<a style="font-size: 137%" href="/tags/zi-jie-ma/">字节码</a> &nbsp 
+<a style="font-size: 137%" href="/tags/si-kao/">思考</a> &nbsp 
+<a style="font-size: 180%" href="/tags/ji-zhu/">技术</a> &nbsp 
+<a style="font-size: 128%" href="/tags/fang-fa-lun/">方法论</a> &nbsp 
+<a style="font-size: 109%" href="/tags/fu-wu-qi/">服务器</a> &nbsp 
+<a style="font-size: 139%" href="/tags/sheng-huo/">生活</a> &nbsp 
+<a style="font-size: 153%" href="/tags/suan-fa/">算法</a> &nbsp 
+<a style="font-size: 109%" href="/tags/wang-luo/">网络</a> &nbsp 
+<a style="font-size: 139%" href="/tags/du-shu/">读书</a> &nbsp 
+<a style="font-size: 109%" href="/tags/you-jian-fu-wu/">邮件服务</a>
+
+  </ul>
+</section>
+<section>
+  <h1>关于</h1>
+   <p>biaobiaoqi是我的网络id。<br><br>
+   我的博客日志：<a href="http://biaobiaoqi.github.io/blog/2013/09/01/blog-log/">请戳</a><br><br>
+	</p>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - Biaobiaoqi -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  - <span class="credit">Theme by <a href="http://www.gehaxelt.in">Gehaxelt</a></span>
+  <span class="credit">and <a href="http://www.it-solutions-neef.de">IT Solutions Neef</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'biaobiaoqisblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://biaobiaoqi.github.io/blog/2013/10/28/scalable-web-service-development/';
+        var disqus_url = 'http://biaobiaoqi.github.io/blog/2013/10/28/scalable-web-service-development/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

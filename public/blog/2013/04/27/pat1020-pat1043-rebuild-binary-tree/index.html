@@ -1,0 +1,398 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>根据前中后序和层序重建二叉树 - Biaobiaoqi的博客</title>
+  <meta name="author" content="Biaobiaoqi">
+
+  
+  <meta name="description" content="[《二叉树的遍历（递归、非递归）分析》](/blog/2013/04/27/travsal-binary-tree/)总结了二叉树不同遍历方式的递归和非递归实现，本文则讨论如何针对不同遍历方式的组合重建二叉树。为了简化问题的考虑，假定二叉树中不会出现重复值。列入考虑范围的有前序、中序、后序、 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://biaobiaoqi.github.io/blog/2013/04/27/pat1020-pat1043-rebuild-binary-tree/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Biaobiaoqi的博客" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+
+function addBlankTargetForLinks () {
+
+  $('a[href^="http"]').each(function(){
+
+      $(this).attr('target', '_blank');
+
+  });
+
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+
+  addBlankTargetForLinks();
+
+});
+
+</script>
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F49481ec3305db999013860b0ccb3b16d' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39900036-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Biaobiaoqi的博客</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:biaobiaoqi.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives/">全部文章</a></li>
+  <li><a href="/tag-cloud/">分类阅读</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">根据前中后序和层序重建二叉树</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-27T22:33:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2>背景</h2>
+
+<p><a href="/blog/2013/04/27/travsal-binary-tree/">《二叉树的遍历（递归、非递归）分析》</a>总结了二叉树不同遍历方式的递归和非递归实现，本文则讨论如何针对不同遍历方式的组合重建二叉树。为了简化问题的考虑，假定二叉树中不会出现重复值。列入考虑范围的有前序、中序、后序、层序遍历这四种的组合。前中后序比较常见，而层序则相对特殊一点了。</p>
+
+<p><a href="http://pat.zju.edu.cn/contests/pat-a-practise">PAT</a> 的 1043 和 1020 题是遍历相关的模板题，正好派上用场。</p>
+
+<!--more-->
+
+
+<h2>中序+前序</h2>
+
+<h5>算法描述：</h5>
+
+<ul>
+<li><p>初始：用前序遍历序列确定根节点，在中序遍历序列中找到该根节点，则左右子树分别为中序中该节点左右的序列。</p></li>
+<li><p>迭代：对各个子树分别执行三步操作，1.在前序序列中找子树的根节点；2。在中序序列中找子树的根节点，并划分开根节点的左右子树；3.根据新生成的左右子树，在前序序列中划分开这些节点，从而得到了两颗子树的前序、中序序列。</p></li>
+</ul>
+
+
+<h5>练习：<a href="http://pat.zju.edu.cn/contests/pat-a-practise/1043">PAT1043:Is It a Binary Search Tree</a></h5>
+
+<h5>题意：</h5>
+
+<p>输入一个树的前序遍历序列，判定这个树是否是二叉搜索树或者 BST 的镜像树，如果是，则用后序序列输出。</p>
+
+<h5>解题思路：</h5>
+
+<ul>
+<li><p>1.BST 很特殊，实质上 BST 的所有节点的顺序排列就是中序遍历了。</p></li>
+<li><p>2.要检查树是否是 BST 或者镜像 BST，只需按照重建树的思路，在每次重建的过程中做适当检查即可。检查思路是：检查前序遍历序列中，根节点之后的节点排序是否符合 BST 的二分规则（即前一段都是小于根节点的，后一段都是大于根节点的）。</p></li>
+<li><p>3.最后的输出是后序遍历。过程中其实并不用构建整个树，直接在处理过程中，按后序的方式存储节点到队列中即可。</p></li>
+</ul>
+
+
+<p>有了这些考虑，就可以写出代码啦。详细解题代码见链接 <a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1043.cpp">PAT1043</a></p>
+
+<h2>中序+后序</h2>
+
+<h5>算法描述：</h5>
+
+<ul>
+<li><p>初始：用后序遍历序列确定根节点，在中序遍历序列中找到该根节点，则左右子树分别为中序中该节点左右的序列。</p></li>
+<li><p>迭代：对各个子树分别执行三步操作，1.在后序序列中找子树的根节点；2。在中序序列中找子树的根节点，并划分开根节点的左右子树；3.根据新生成的左右子树，在后序序列中划分开这些节点，从而得到了两颗子树的后序、中序序列。</p></li>
+</ul>
+
+
+<h5>练习：<a href="http://pat.zju.edu.cn/contests/pat-a-practise/1020">PAT1020:Tree Traversals</a></h5>
+
+<h5>题意：</h5>
+
+<p>输入为一棵二叉树的后序遍历序列和中序遍历序列。求树的前序遍历序列。</p>
+
+<h5>解题思路：</h5>
+
+<ul>
+<li><p>1.有了中序和后序，就能重建树。</p></li>
+<li><p>2.最后的输出是层序遍历。过程中其实并不用构建整个树。直接在处理过程中，按层序的方式存储节点到队列中即可。</p></li>
+</ul>
+
+
+<p>详细解题代码见链接 <a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel/APAT1020.java">PAT1020</a></p>
+
+<h2>中序+层序</h2>
+
+<h5>算法描述：</h5>
+
+<ul>
+<li><p>初始：用层序遍历确定顶节点，在中序遍历中，利用顶节点划分出左右子树。</p></li>
+<li><p>迭代：对各个子树分别执行三步操作，1.在层序序列中，找出子树节点集合中，最靠前的节点，这个节点即为子树的顶节点；2.在中序序列中找 1 中得到的顶节点，并划分开顶节点的左右子树；</p></li>
+<li><p>跟（中序+前序）和（中序+后序）不同之处在于没有迭代的第 3 步，层序是无法直接划分得到左右子树的节点集合的。但这并不妨碍正常的处理。层序是用来找到子树的顶节点的，而顶节点即是所有子树的节点中，在层序遍历中最靠前的节点。</p></li>
+</ul>
+
+
+<h2><del>前序+后序</del></h2>
+
+<p>这个组合是<strong>无法</strong>重建确定的二叉树的。</p>
+
+<p>对于满二叉树，利用子树节点的排列顺序能区分开左右子树节点集合，构建是没有问题的。但一旦有单个叶子的节点存在，则无法确定叶子是左儿子还是右儿子。因为无论是前序还是后序序列，都无法体现单个儿子情况下，儿子的位置。前序会将左右子树的点置于节点之后，后序则是将左右子树的点置于节点之前。</p>
+
+<ul>
+<li>举个简单的反例：</li>
+</ul>
+
+
+<blockquote><p>给出如下的前序序列和后序序列：
+preorder: A, B;
+postorder: B, A</p>
+
+<p>能构建的二叉树有两种可能，1.A 是根节点，B 是 A 左儿子； 2.A 是根节点， B 是 A 的右儿子。无法得到一个唯一的结果。</p></blockquote>
+
+<h2><del>前序+层序</del></h2>
+
+<p>这个组合也是无法重建确定的二叉树的。同样于后序+层序的情况。</p>
+
+<p>道理跟（前序+后序）的道理一样，无论是前序、后序，还是层序，都是无法确定单个儿子节点情况下儿子节点的顺序。</p>
+
+<h2>总结</h2>
+
+<ul>
+<li>中序遍历配合另外任何一个遍历，能重建二叉树。其他的任意两个序列的组合都不能唯一的确定重建的二叉树。</li>
+</ul>
+
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.io/blog/2013/04/27/pat1020-pat1043-rebuild-binary-tree/'>http://biaobiaoqi.github.io/blog/2013/04/27/pat1020-pat1043-rebuild-binary-tree/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Biaobiaoqi</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-27T22:33:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+    <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+<a class="jiathis_button_tsina"></a>
+<a class="jiathis_button_weixin"></a>
+<a class="jiathis_button_renren"></a>
+<a class="jiathis_button_douban"></a>
+<a class="jiathis_button_googleplus"></a>
+<a href="http://www.jiathis.com/share?uid=1814751" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+	data_track_clickback:true,
+	summary:"",
+	shortUrl:true,
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1814751" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/04/27/travsal-binary-tree/" title="Previous Post: 二叉树的遍历（递归、非递归）分析">&laquo; 二叉树的遍历（递归、非递归）分析</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/05/13/free-the-bit-economics/" title="Next Post: 《免费》">《免费》 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <!--h1>Comments</h1-->
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>标签云</h1>
+ <br /> 
+  <ul class="tag-cloud">
+    <a style="font-size: 143%" href="/tags/jvm/">JVM</a> &nbsp 
+<a style="font-size: 147%" href="/tags/java/">Java</a> &nbsp 
+<a style="font-size: 145%" href="/tags/pat/">PAT</a> &nbsp 
+<a style="font-size: 109%" href="/tags/octopress/">octopress</a> &nbsp 
+<a style="font-size: 115%" href="/tags/fen-bu-shi/">分布式</a> &nbsp 
+<a style="font-size: 137%" href="/tags/zi-jie-ma/">字节码</a> &nbsp 
+<a style="font-size: 137%" href="/tags/si-kao/">思考</a> &nbsp 
+<a style="font-size: 180%" href="/tags/ji-zhu/">技术</a> &nbsp 
+<a style="font-size: 128%" href="/tags/fang-fa-lun/">方法论</a> &nbsp 
+<a style="font-size: 109%" href="/tags/fu-wu-qi/">服务器</a> &nbsp 
+<a style="font-size: 139%" href="/tags/sheng-huo/">生活</a> &nbsp 
+<a style="font-size: 153%" href="/tags/suan-fa/">算法</a> &nbsp 
+<a style="font-size: 109%" href="/tags/wang-luo/">网络</a> &nbsp 
+<a style="font-size: 139%" href="/tags/du-shu/">读书</a> &nbsp 
+<a style="font-size: 109%" href="/tags/you-jian-fu-wu/">邮件服务</a>
+
+  </ul>
+</section>
+<section>
+  <h1>关于</h1>
+   <p>biaobiaoqi是我的网络id。<br><br>
+   我的博客日志：<a href="http://biaobiaoqi.github.io/blog/2013/09/01/blog-log/">请戳</a><br><br>
+	</p>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - Biaobiaoqi -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  - <span class="credit">Theme by <a href="http://www.gehaxelt.in">Gehaxelt</a></span>
+  <span class="credit">and <a href="http://www.it-solutions-neef.de">IT Solutions Neef</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'biaobiaoqisblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://biaobiaoqi.github.io/blog/2013/04/27/pat1020-pat1043-rebuild-binary-tree/';
+        var disqus_url = 'http://biaobiaoqi.github.io/blog/2013/04/27/pat1020-pat1043-rebuild-binary-tree/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

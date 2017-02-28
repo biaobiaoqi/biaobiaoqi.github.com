@@ -13,8 +13,8 @@ description: "Java类加载器，自定义类加载器。ASM，操纵Java字节�
 
 阅读此文前，需要了解Java类加载的基本原理，参见如下两篇博文：
 
-* [《Java类加载器浅析》](http://biaobiaoqi.me/blog/2013/09/07/java-classloader/)
-* [《Java类加载器三原则》](http://biaobiaoqi.me/blog/2013/09/08/three-principles-of-classloader-operation/)
+* [《Java类加载器浅析》](http://biaobiaoqi.github.io/blog/2013/09/07/java-classloader/)
+* [《Java类加载器三原则》](http://biaobiaoqi.github.io/blog/2013/09/08/three-principles-of-classloader-operation/)
 
 
 以上博文中所提及的Java类加载机制，都是Java1.2及以后的版本，而在最早的Java1.1中类加载器是没有父子关系的模式的。这里将分别对Java1.1和Java1.2及以后的类加载版本进行展示。

@@ -1,0 +1,348 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>octopress第三方插件：博文同步工具syncPost - Biaobiaoqi的博客</title>
+  <meta name="author" content="Biaobiaoqi">
+
+  
+  <meta name="description" content="octopress第三方插件，基于metaWeblog的博文同步工具syncPost, 开源托管在github上。正在进一步开发中。">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://biaobiaoqi.github.io/blog/2013/08/31/octopress-3rd-party-plugin-syncpost/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Biaobiaoqi的博客" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+
+function addBlankTargetForLinks () {
+
+  $('a[href^="http"]').each(function(){
+
+      $(this).attr('target', '_blank');
+
+  });
+
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+
+  addBlankTargetForLinks();
+
+});
+
+</script>
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F49481ec3305db999013860b0ccb3b16d' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39900036-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Biaobiaoqi的博客</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:biaobiaoqi.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives/">全部文章</a></li>
+  <li><a href="/tag-cloud/">分类阅读</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">octopress第三方插件：博文同步工具syncPost</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-31T19:30:00+08:00" pubdate data-updated="true">Aug 31<span>st</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>为了增加外链等考虑，独立博客往往有将博文同步到其他博客社区的需求。自己人肉黏贴的方式笨拙、重复，对于程序猿而言，着实不可取。</p>
+
+<p>我在 github 上找到了 <a href="https://github.com/huangbowen521/octopress-syncPost">syncPost</a> 这个针对 octopress 的第三方工具，能够通过一些论坛提供的 <a href="http://en.wikipedia.org/wiki/MetaWeblog">metaWeblog</a> 服务实现 octopress 最新一篇博文的同步提交。</p>
+
+<p>这大概就是我要找的东西吧。不过，其中有些细节并不是我想要的：</p>
+
+<ul>
+<li>1.在本地配置文件存储论坛账户的密码。虽然可以设置为 ignore 不提交到 git 代码库中，但这也并不安全。</li>
+<li>2.只能同步最新的一篇博客，没有整体的博文搬家功能。</li>
+<li>3.先比其他的 octopress 插件，原来版本的代码结构难于维护，比如有自己单独的配置文件，而不是使用全局的<code>_config.yml</code>(在那个版本中大概是为了不把明文密码提交到版本库中)，比如 ruby 文件单独在一个<code>_custom</code>文件夹下等</li>
+</ul>
+
+
+<p>基于这些点，我 fork 了 <a href="http://huangbowen.net/">huangbowen</a> 大哥的代码，定制成了它<a href="https://github.com/biaobiaoqi/octopress-syncPost">现在的样子</a>。</p>
+
+<!--more-->
+
+
+<h2>功能</h2>
+
+<p>通过 rake 的方式实现同步功能：</p>
+
+<ul>
+<li>1.同步所有 octopress 的博文到目标博客。 (<code>rake sync_all_posts</code>)</li>
+<li>2.同步最新一篇博文到目标博客。(<code>rake sync_lates_post</code>)</li>
+</ul>
+
+
+<h2>开发</h2>
+
+<p>这个 octopress 插件的结构很简单：</p>
+
+<ul>
+<li>安装<code>nokogiri</code>和 <code>metaweblog</code>两个 gem。前者实现对 octopress 生成的 html 页面的解析，找到对应的博文。提供了客户端发起 MetaWeblog 请求的功能。</li>
+<li>在全局配置文件<code>_config.yml</code>中配置了目标博客 MetaWeblog 的服务地址、用户的账号信息。</li>
+<li>octopress/plugins/sync_*.rb 三个文件则是代码实现。其中 sync_post.rb 中包含了 post 类，是主要的逻辑代码所在，sync_all_posts.rb 和 sync_latest_post.rb 则是对前者的调用。</li>
+<li>修改了 octopress 的 Rakefile，通过 rake 的方式实现功能。</li>
+</ul>
+
+
+<h2>下一步</h2>
+
+<p>希望能进一步完善这个插件，现在考虑到的有：</p>
+
+<ul>
+<li>增加同步所有博文功能中，对目标博客中已有博文的查重功能。即对于已经同步过去的博客，不再发送请求，或者实现编辑功能的同步功能。由于站点的 MetaWeblog 服务大多对请求有时限控制，同步过程中可能出现中断，此时部分博文已经同步过去，而部分没有，这种情况下，暂时没有好的解决方式。</li>
+<li>测试其他有 MetaWeblog 服务的博客站点（现在仅测试了 cnblog）。</li>
+<li><del>cnblog 的博文显示中，似乎不支持 octopress 的代码块样式。</del> (注：原作者 huangbowen 大哥已经解释了是 css 样式的问题)</li>
+</ul>
+
+
+<p>欢迎感兴趣的朋友参与到这个 repo 中来:)</p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.io/blog/2013/08/31/octopress-3rd-party-plugin-syncpost/'>http://biaobiaoqi.github.io/blog/2013/08/31/octopress-3rd-party-plugin-syncpost/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Biaobiaoqi</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-31T19:30:00+08:00" pubdate data-updated="true">Aug 31<span>st</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+    <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+<a class="jiathis_button_tsina"></a>
+<a class="jiathis_button_weixin"></a>
+<a class="jiathis_button_renren"></a>
+<a class="jiathis_button_douban"></a>
+<a class="jiathis_button_googleplus"></a>
+<a href="http://www.jiathis.com/share?uid=1814751" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+	data_track_clickback:true,
+	summary:"",
+	shortUrl:true,
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1814751" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/08/31/pat-1061-pat-1064/" title="Previous Post: PAT 1061 - 1064 题解">&laquo; PAT 1061 - 1064 题解</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/09/01/blog-log/" title="Next Post: biaobiaoqi的博客日志">biaobiaoqi的博客日志 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <!--h1>Comments</h1-->
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>标签云</h1>
+ <br /> 
+  <ul class="tag-cloud">
+    <a style="font-size: 143%" href="/tags/jvm/">JVM</a> &nbsp 
+<a style="font-size: 147%" href="/tags/java/">Java</a> &nbsp 
+<a style="font-size: 145%" href="/tags/pat/">PAT</a> &nbsp 
+<a style="font-size: 109%" href="/tags/octopress/">octopress</a> &nbsp 
+<a style="font-size: 115%" href="/tags/fen-bu-shi/">分布式</a> &nbsp 
+<a style="font-size: 137%" href="/tags/zi-jie-ma/">字节码</a> &nbsp 
+<a style="font-size: 137%" href="/tags/si-kao/">思考</a> &nbsp 
+<a style="font-size: 180%" href="/tags/ji-zhu/">技术</a> &nbsp 
+<a style="font-size: 128%" href="/tags/fang-fa-lun/">方法论</a> &nbsp 
+<a style="font-size: 109%" href="/tags/fu-wu-qi/">服务器</a> &nbsp 
+<a style="font-size: 139%" href="/tags/sheng-huo/">生活</a> &nbsp 
+<a style="font-size: 153%" href="/tags/suan-fa/">算法</a> &nbsp 
+<a style="font-size: 109%" href="/tags/wang-luo/">网络</a> &nbsp 
+<a style="font-size: 139%" href="/tags/du-shu/">读书</a> &nbsp 
+<a style="font-size: 109%" href="/tags/you-jian-fu-wu/">邮件服务</a>
+
+  </ul>
+</section>
+<section>
+  <h1>关于</h1>
+   <p>biaobiaoqi是我的网络id。<br><br>
+   我的博客日志：<a href="http://biaobiaoqi.github.io/blog/2013/09/01/blog-log/">请戳</a><br><br>
+	</p>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - Biaobiaoqi -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  - <span class="credit">Theme by <a href="http://www.gehaxelt.in">Gehaxelt</a></span>
+  <span class="credit">and <a href="http://www.it-solutions-neef.de">IT Solutions Neef</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'biaobiaoqisblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://biaobiaoqi.github.io/blog/2013/08/31/octopress-3rd-party-plugin-syncpost/';
+        var disqus_url = 'http://biaobiaoqi.github.io/blog/2013/08/31/octopress-3rd-party-plugin-syncpost/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

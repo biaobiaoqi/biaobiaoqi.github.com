@@ -1,0 +1,412 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>记排查octopress生成时的编码错误 - Biaobiaoqi的博客</title>
+  <meta name="author" content="Biaobiaoqi">
+
+  
+  <meta name="description" content="octopress出现Sorry, I can not find /，debug发现是混入了错误的编码字符 U+200E">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://biaobiaoqi.github.io/blog/2014/03/06/troubleshoot-encoding-bugs-in-octopress/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Biaobiaoqi的博客" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+
+function addBlankTargetForLinks () {
+
+  $('a[href^="http"]').each(function(){
+
+      $(this).attr('target', '_blank');
+
+  });
+
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+
+  addBlankTargetForLinks();
+
+});
+
+</script>
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F49481ec3305db999013860b0ccb3b16d' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39900036-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Biaobiaoqi的博客</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:biaobiaoqi.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives/">全部文章</a></li>
+  <li><a href="/tag-cloud/">分类阅读</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">记排查octopress生成时的编码错误</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-06T21:48:00+08:00" pubdate data-updated="true">Mar 6<span>th</span>, 2014</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>前些日子经若亮童鞋提醒，我在<a href="http://biaobiaoqi.github.io/resources/">其他推荐</a>的页面中增加了对 Dropbox 和 Linode 等工具的推荐，一来分享这些好用的产品，二来期望刚接触这些工具的好心的朋友可以不吝啬时间用我的推荐码注册，让我获得一些分享的回报。</p>
+
+<p>改过页面内容后，照常的使用<code>rake preview</code>命令生成预览页面，打开浏览器，得到的却是一行孤零零的</p>
+
+<blockquote><p>Sorry, I can not find /</p></blockquote>
+
+<p><code>rake generate</code>后的结果更悲惨：</p>
+
+<!--more-->
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>biaobiaoqi.github.com git:(source) ✗ rake generate
+</span><span class='line'>## Generating Site with Jekyll
+</span><span class='line'>unchanged sass/screen.scss
+</span><span class='line'>Configuration from /Users/shenyapeng/Development/biaobiaoqi.github.com/_config.yml
+</span><span class='line'>Building site: source -&gt; public
+</span><span class='line'>/Users/shenyapeng/Development/biaobiaoqi.github.com/plugins/raw.rb:11:in `gsub': invalid byte sequence in UTF-8 (ArgumentError)
+</span><span class='line'>     from /Users/shenyapeng/Development/biaobiaoqi.github.com/plugins/raw.rb:11:in `unwrap'
+</span><span class='line'>     from /Users/shenyapeng/Development/biaobiaoqi.github.com/plugins/octopress_filters.rb:18:in `post_filter'
+</span><span class='line'>     from /Users/shenyapeng/Development/biaobiaoqi.github.com/plugins/octopress_filters.rb:33:in `post_render'
+</span><span class='line'>     from /Users/shenyapeng/Development/biaobiaoqi.github.com/plugins/post_filters.rb:124:in `block in post_render'
+</span><span class='line'>     from /Users/shenyapeng/Development/biaobiaoqi.github.com/plugins/post_filters.rb:123:in `each'
+</span><span class='line'>     from /Users/shenyapeng/Development/biaobiaoqi.github.com/plugins/post_filters.rb:123:in `post_render'
+</span><span class='line'>     from /Users/shenyapeng/Development/biaobiaoqi.github.com/plugins/post_filters.rb:151:in `transform'
+</span><span class='line'>     from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/gems/jekyll-0.12.1/lib/jekyll/convertible.rb:88:in `do_layout'
+</span><span class='line'>     from /Users/shenyapeng/Development/biaobiaoqi.github.com/plugins/post_filters.rb:167:in `do_layout'
+</span><span class='line'>     from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/gems/jekyll-0.12.1/lib/jekyll/page.rb:100:in `render'
+</span><span class='line'>     from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/gems/jekyll-0.12.1/lib/jekyll/site.rb:204:in `block in render'
+</span><span class='line'>     from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/gems/jekyll-0.12.1/lib/jekyll/site.rb:203:in `each'
+</span><span class='line'>     from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/gems/jekyll-0.12.1/lib/jekyll/site.rb:203:in `render'
+</span><span class='line'>     from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/gems/jekyll-0.12.1/lib/jekyll/site.rb:41:in `process'
+</span><span class='line'>     from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/gems/jekyll-0.12.1/bin/jekyll:264:in `&lt;top (required)&gt;'
+</span><span class='line'>     from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/bin/jekyll:23:in `load'
+</span><span class='line'>     from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/bin/jekyll:23:in `&lt;main&gt;'
+</span><span class='line'>     from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/bin/ruby_executable_hooks:15:in `eval'
+</span><span class='line'>     from /Users/shenyapeng/.rvm/gems/ruby-1.9.3-p545/bin/ruby_executable_hooks:15:in `&lt;main&gt;’</span></code></pre></td></tr></table></div></figure>
+
+
+<p>似乎是编码的问题：<code>invalid byte sequence in UTF-8</code>，但是我只是修改了普普通通的几行文字而已，怎么会有编码问题呢。</p>
+
+<p>恰逢自己刚因为 SSD 损坏重装了系统，编程环境也是刚刚配好，而且使用 rvm 安装 ruby1.9.3 的时候，提示文字中也有一些 warning。我开始怀疑是不是 ruby1.9.3 没编译好的原因。</p>
+
+<p>设立对照实验，我在另外一台 Ubuntu 机器上 clone 下一个博客的 repo，<code>rake generate</code>，结果竟然一切顺利。一切似乎都在说明就是开发环境的问题。</p>
+
+<p>我删除了之前的 ruby1.9.3，甚至是 rvm，重装后结果依旧。</p>
+
+<p>不能在一棵树上吊死，我不科学的将目标重新定位到 markdown 页面中的编码错误上（没想到后来事实证明奏效了……）。</p>
+
+<p>在 git 中新开启测试分支，在上面做回滚，测试修改页面内容前源码能否 generate</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#&gt;git branch checkError
+</span><span class='line'>#&gt;git checkout checkError
+</span><span class='line'>
+</span><span class='line'>#&gt;git log #找到修改前的提交码
+</span><span class='line'>#&gt;git reset --hard xxx #xxx 为相应的提交码
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>然后<code>rake generate</code>竟然能成功= =#!，看来真的是修改的页面掺入了错误的编码。</p>
+
+<p>接下来是回到原来的分支上，通过 diff 命令定位错误代码：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#&gt;git checkout source 
+</span><span class='line'>#&gt;git branch -d checkError  #删除测试分支
+</span><span class='line'>
+</span><span class='line'>#&gt;git diff  xxx #xxx 为相应的提交码
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>比较结果如下图，果然是有一个奇怪的字符。
+<img src="http://biaobiaoqi.u.qiniudn.com/8BB0BA73-9736-435D-9111-5E3BF8516299.png?imageView/2/w/800/h/800" alt="img" /></p>
+
+<p>查了下，这是<a href="http://zh.wikipedia.org/wiki/%E5%B7%A6%E8%87%B3%E5%8F%B3%E7%AC%A6%E8%99%9F">左至右符号</a>。莫非是从 chrome 浏览器复制地址时，不小心复制了它？</p>
+
+<p>进一步尝试发现，这个字符如果不与)相邻，是不会造成编码问题的。与)相邻时，一旦他们被 markdown 解析后，就出现了这个 bug。</p>
+
+<p>有意思的是，另一台 Ubuntu 服务器上这个有编码隐患的 repo 时能够正常<code>rake generate</code>的。如下图，左边是 mac 上用 vim 打开包含隐患字符的文件截图，右边是 Ubuntu 上的截图。
+<img src="http://biaobiaoqi.u.qiniudn.com/371c00e86e5de776d262fedbce334f7a.jpeg?imageView/2/w/800/h/800" alt="img" /></p>
+
+<p>谁能告诉我理解这一现象的思路呢 >&lt;&#8230;</p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.io/blog/2014/03/06/troubleshoot-encoding-bugs-in-octopress/'>http://biaobiaoqi.github.io/blog/2014/03/06/troubleshoot-encoding-bugs-in-octopress/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Biaobiaoqi</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-06T21:48:00+08:00" pubdate data-updated="true">Mar 6<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+    <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+<a class="jiathis_button_tsina"></a>
+<a class="jiathis_button_weixin"></a>
+<a class="jiathis_button_renren"></a>
+<a class="jiathis_button_douban"></a>
+<a class="jiathis_button_googleplus"></a>
+<a href="http://www.jiathis.com/share?uid=1814751" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+	data_track_clickback:true,
+	summary:"",
+	shortUrl:true,
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1814751" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/02/24/sort-intro/" title="Previous Post: 基本排序总结">&laquo; 基本排序总结</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/05/06/ta-in-practice/" title="Next Post: 课程助教实战">课程助教实战 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <!--h1>Comments</h1-->
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>标签云</h1>
+ <br /> 
+  <ul class="tag-cloud">
+    <a style="font-size: 143%" href="/tags/jvm/">JVM</a> &nbsp 
+<a style="font-size: 147%" href="/tags/java/">Java</a> &nbsp 
+<a style="font-size: 145%" href="/tags/pat/">PAT</a> &nbsp 
+<a style="font-size: 109%" href="/tags/octopress/">octopress</a> &nbsp 
+<a style="font-size: 115%" href="/tags/fen-bu-shi/">分布式</a> &nbsp 
+<a style="font-size: 137%" href="/tags/zi-jie-ma/">字节码</a> &nbsp 
+<a style="font-size: 137%" href="/tags/si-kao/">思考</a> &nbsp 
+<a style="font-size: 180%" href="/tags/ji-zhu/">技术</a> &nbsp 
+<a style="font-size: 128%" href="/tags/fang-fa-lun/">方法论</a> &nbsp 
+<a style="font-size: 109%" href="/tags/fu-wu-qi/">服务器</a> &nbsp 
+<a style="font-size: 139%" href="/tags/sheng-huo/">生活</a> &nbsp 
+<a style="font-size: 153%" href="/tags/suan-fa/">算法</a> &nbsp 
+<a style="font-size: 109%" href="/tags/wang-luo/">网络</a> &nbsp 
+<a style="font-size: 139%" href="/tags/du-shu/">读书</a> &nbsp 
+<a style="font-size: 109%" href="/tags/you-jian-fu-wu/">邮件服务</a>
+
+  </ul>
+</section>
+<section>
+  <h1>关于</h1>
+   <p>biaobiaoqi是我的网络id。<br><br>
+   我的博客日志：<a href="http://biaobiaoqi.github.io/blog/2013/09/01/blog-log/">请戳</a><br><br>
+	</p>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - Biaobiaoqi -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  - <span class="credit">Theme by <a href="http://www.gehaxelt.in">Gehaxelt</a></span>
+  <span class="credit">and <a href="http://www.it-solutions-neef.de">IT Solutions Neef</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'biaobiaoqisblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://biaobiaoqi.github.io/blog/2014/03/06/troubleshoot-encoding-bugs-in-octopress/';
+        var disqus_url = 'http://biaobiaoqi.github.io/blog/2014/03/06/troubleshoot-encoding-bugs-in-octopress/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

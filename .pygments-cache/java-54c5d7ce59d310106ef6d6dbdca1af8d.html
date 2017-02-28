@@ -1,0 +1,18 @@
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">byte</span><span class="o">[]</span> <span class="nf">transform</span><span class="o">(</span><span class="n">ClassLoader</span> <span class="n">loader</span><span class="o">,</span> <span class="n">String</span> <span class="n">className</span><span class="o">,</span><span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">classBeingRedefined</span><span class="o">,</span>   
+                                        <span class="n">ProtectionDomain</span> <span class="n">protectionDomain</span><span class="o">,</span><span class="kt">byte</span><span class="o">[]</span> <span class="n">classfileBuffer</span><span class="o">)</span>  
+            <span class="kd">throws</span> <span class="n">IllegalClassFormatException</span> <span class="o">{</span>  
+            <span class="kt">byte</span><span class="o">[]</span> <span class="n">retVal</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>  
+      
+            <span class="k">if</span><span class="o">(</span><span class="n">isInstrumentable</span><span class="o">(</span><span class="n">className</span><span class="o">)){</span>    
+                <span class="n">ClassWriter</span> <span class="n">cw</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ClassWriter</span><span class="o">(</span><span class="n">ClassWriter</span><span class="o">.</span><span class="na">COMPUTE_FRAMES</span><span class="o">);</span>  
+                <span class="n">ASMClassAdapter</span> <span class="n">mca</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ASMClassAdapter</span><span class="o">(</span><span class="n">cw</span><span class="o">);</span>   
+                <span class="n">ClassReader</span> <span class="n">cr</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ClassReader</span><span class="o">(</span><span class="n">classfileBuffer</span><span class="o">);</span>  
+                <span class="n">cr</span><span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="n">mca</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>  
+                <span class="n">retVal</span> <span class="o">=</span> <span class="n">cw</span><span class="o">.</span><span class="na">toByteArray</span><span class="o">();</span>  
+            <span class="o">}</span><span class="k">else</span><span class="o">{</span>  
+                    <span class="n">retVal</span> <span class="o">=</span> <span class="n">classfileBuffer</span> <span class="o">;</span>  
+                <span class="o">}</span>  
+  
+            <span class="k">return</span> <span class="n">retVal</span><span class="o">;</span>  
+    <span class="o">}</span>  
+</pre></div>

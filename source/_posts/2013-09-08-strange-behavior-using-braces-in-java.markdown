@@ -77,4 +77,4 @@ public class Test {
 2. 那些隐式的指令，包括父类的构造方法、变量的初始化、{}区段里的内容，并严格按照这个顺序嵌入到对象的构造方法中。
 3. {}区段里的内容和变量的初始化语句的执行顺序，依据源代码中本身的顺序执行。
 
-相关文章参见：[《Java类、实例的初始化顺序》](http://biaobiaoqi.me/blog/2013/09/22/java-initialization/)
+相关文章参见：[《Java类、实例的初始化顺序》](http://biaobiaoqi.github.io/blog/2013/09/22/java-initialization/)

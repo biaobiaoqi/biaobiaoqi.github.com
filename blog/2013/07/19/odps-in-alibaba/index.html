@@ -1,0 +1,322 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>阿里离线数据处理平台2013暑期学校 - Biaobiaoqi的博客</title>
+  <meta name="author" content="Biaobiaoqi">
+
+  
+  <meta name="description" content="阿里离线数据处理平台2013暑期学校，描述了阿里云系统：飞天系统中的离线处理部分：ODPS（Open Data Processing Service）。">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://biaobiaoqi.me/blog/2013/07/19/odps-in-alibaba/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Biaobiaoqi的博客" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+
+function addBlankTargetForLinks () {
+
+  $('a[href^="http"]').each(function(){
+
+      $(this).attr('target', '_blank');
+
+  });
+
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+
+  addBlankTargetForLinks();
+
+});
+
+</script>
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F49481ec3305db999013860b0ccb3b16d' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39900036-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Biaobiaoqi的博客</a></h1>
+  
+    <h2>做一个互联网世界的匠人</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:biaobiaoqi.me" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives/">全部文章</a></li>
+  <li><a href="/tag-cloud/">分类阅读</a></li>
+  <li><a href="/resources/">其他推荐</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">阿里离线数据处理平台2013暑期学校</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-19T21:31:00+08:00" pubdate data-updated="true">Jul 19<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>本周有幸参加了为期两天的<a href="http://102.alibaba.com/competition/dataSummer.htm">阿里离线数据处理平台 2013 暑期学校</a>的学习。</p>
+
+<p>阿里的前辈们分不同的专题给大家介绍了飞天平台上的离线数据处理服务 ODPS（Open Data Processing Service）。
+内容上主要分为两部分，一部分是平台架构，一部分是数据分析。来听课的同学也就分为了两部分，而像我一样关注系统层面的人是少数。</p>
+
+<p>这也正常，用赵本山在『一代宗师』里的话来说，一个是面子，一个是里子。数据分析能直接产生表现层的数据，而系统平台则只是提供支持。
+成功了，大家看得到的是分析出的数据，而一旦失败了，那么系统平台的责任就大了。
+再者越贴近硬件层次的工作也注定越辛苦，深夜被吵醒也不是没有的事儿。好了，吐槽到此结束，下面是总结笔记整理出几页 slides：</p>
+
+<script async class="speakerdeck-embed" data-id="e0022eb0d24d013089506e9621fcaf9a" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+
+
+
+
+<!--more-->
+
+
+<p>ppt 下载链接：<a href="https://speakerdeck.com/biaobiaoqi/odps-learning-summary">请戳我</a></p>
+
+<p>三巨头 BAT 都自主研发过大数据平台，另外两家在投入大量资金后面对困难最终关闭了项目，而阿里坚持了下来。通过了解 ODPS 的系统架构，可以看但工业界的系统和学术圈中提出的概念的差异。这也让我更清晰了之后自己的学习路线。</p>
+
+<p>非常感谢阿里暑期学校给予的这次机会来接触飞天系统，非常感谢各位讲师的介绍，特别是杨少华大哥对我的疑惑的耐心解答。</p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/07/19/odps-in-alibaba/'>http://biaobiaoqi.me/blog/2013/07/19/odps-in-alibaba/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Biaobiaoqi</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-19T21:31:00+08:00" pubdate data-updated="true">Jul 19<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+    <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+<a class="jiathis_button_tsina"></a>
+<a class="jiathis_button_weixin"></a>
+<a class="jiathis_button_renren"></a>
+<a class="jiathis_button_douban"></a>
+<a class="jiathis_button_googleplus"></a>
+<a href="http://www.jiathis.com/share?uid=1814751" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+	data_track_clickback:true,
+	summary:"",
+	shortUrl:true,
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1814751" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/07/16/verify-pop-sequence-for-stack/" title="Previous Post: 出栈序列的可能性判定">&laquo; 出栈序列的可能性判定</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/07/29/after-pat-practice/" title="Next Post: 终于算完了这道『1+1』">终于算完了这道『1+1』 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <!--h1>Comments</h1-->
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>标签云</h1>
+ <br /> 
+  <ul class="tag-cloud">
+    <a style="font-size: 113%" href="/tags/hadoop/">Hadoop</a> &nbsp 
+<a style="font-size: 139%" href="/tags/jvm/">JVM</a> &nbsp 
+<a style="font-size: 145%" href="/tags/java/">Java</a> &nbsp 
+<a style="font-size: 143%" href="/tags/pat/">PAT</a> &nbsp 
+<a style="font-size: 107%" href="/tags/octopress/">octopress</a> &nbsp 
+<a style="font-size: 137%" href="/tags/fen-bu-shi/">分布式</a> &nbsp 
+<a style="font-size: 135%" href="/tags/zi-jie-ma/">字节码</a> &nbsp 
+<a style="font-size: 135%" href="/tags/si-kao/">思考</a> &nbsp 
+<a style="font-size: 180%" href="/tags/ji-zhu/">技术</a> &nbsp 
+<a style="font-size: 107%" href="/tags/cao-zuo-xi-tong/">操作系统</a> &nbsp 
+<a style="font-size: 126%" href="/tags/fang-fa-lun/">方法论</a> &nbsp 
+<a style="font-size: 129%" href="/tags/sheng-huo/">生活</a> &nbsp 
+<a style="font-size: 148%" href="/tags/suan-fa/">算法</a> &nbsp 
+<a style="font-size: 118%" href="/tags/wang-luo/">网络</a> &nbsp 
+<a style="font-size: 135%" href="/tags/du-shu/">读书</a>
+
+  </ul>
+</section>
+<section>
+  <h1>关于</h1>
+   <p>biaobiaoqi是我的网络id。<br><br>
+   我的博客日志：<a href="http://biaobiaoqi.me/blog/2013/09/01/blog-log/">请戳</a><br><br>
+   更多信息请戳：<a href="http://about.me/biaobiaoqi">about.me</a><br>
+	</p>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Biaobiaoqi -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  - <span class="credit">Theme by <a href="http://www.gehaxelt.in">Gehaxelt</a></span>
+  <span class="credit">and <a href="http://www.it-solutions-neef.de">IT Solutions Neef</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'biaobiaoqisblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://biaobiaoqi.me/blog/2013/07/19/odps-in-alibaba/';
+        var disqus_url = 'http://biaobiaoqi.me/blog/2013/07/19/odps-in-alibaba/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

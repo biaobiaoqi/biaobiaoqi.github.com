@@ -1,0 +1,535 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>课程助教实战 - Biaobiaoqi的博客</title>
+  <meta name="author" content="Biaobiaoqi">
+
+  
+  <meta name="description" content="原谅我的标题党啦 LOL，借用 《xx 实战》（xx in practice）这个经典的标题，只为了记录自己第一次助教的体会。 如果把第一次助教的经历看做是一个项目，那这个项目也是在我不断的调优中走上正轨的。 需求 导师人很好，给我留的活儿不多，但实践起来还是比预想要复杂一些。助教期间， &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://biaobiaoqi.github.io/blog/2014/05/06/ta-in-practice/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Biaobiaoqi的博客" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+
+function addBlankTargetForLinks () {
+
+  $('a[href^="http"]').each(function(){
+
+      $(this).attr('target', '_blank');
+
+  });
+
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+
+  addBlankTargetForLinks();
+
+});
+
+</script>
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F49481ec3305db999013860b0ccb3b16d' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39900036-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Biaobiaoqi的博客</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:biaobiaoqi.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives/">全部文章</a></li>
+  <li><a href="/tag-cloud/">分类阅读</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">课程助教实战</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-06T20:06:00+08:00" pubdate data-updated="true">May 6<span>th</span>, 2014</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>原谅我的标题党啦 LOL，借用 《xx 实战》（xx in practice）这个经典的标题，只为了记录自己第一次助教的体会。</p>
+
+<p>如果把第一次助教的经历看做是一个项目，那这个项目也是在我不断的调优中走上正轨的。</p>
+
+<h2>需求</h2>
+
+<p>导师人很好，给我留的活儿不多，但实践起来还是比预想要复杂一些。助教期间，我主要负责的任务有：</p>
+
+<ul>
+<li><p>平时作业的批改和成绩录入</p>
+
+<p>  每周老师会将所有学生（大约 80 人）的作业本交给我，由我评分、录入成绩后返回给老师。</p></li>
+<li><p>课程实验和大程的指导、评分和成绩录入</p>
+
+<p>  一共有五个课堂实验，要求每周完成一个，以实验报告的形式提交；期末要求完成一个大程序，评分有现场验收和大程报告两部分。</p></li>
+<li><p>协助老师批改期末试卷和成绩录入</p></li>
+</ul>
+
+
+<p>最后的批改试卷是在老师们的指导下完成，有良好的规范和流程。而前面两步中关于作业评分、登分的部分则有较大的自由实现空间。下面介绍的就是个人对这部分内容经验总结。</p>
+
+<!--more-->
+
+
+<h2>初步实现策略</h2>
+
+<p>最朴素的实现方法，会耗费很多的时间，但至少能完成任务：</p>
+
+<ul>
+<li>平时作业的批改和成绩录入</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>//拿到所有作业本后，每周我都需要完成如下过程：
+</span><span class='line'>loop in 80+个作业本
+</span><span class='line'>  拿起笔，翻开每本作业本；
+</span><span class='line'>  在作业本上标记成绩；
+</span><span class='line'>  放下笔，关上作业本；
+</span><span class='line'>  在成绩记录表格上上 CTRL+F 查找到对应的学生；
+</span><span class='line'>  输入成绩;
+</span><span class='line'>end loop</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>课程实验和大程的指导、评分和成绩录入</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>  //邮件查收实验报告
+</span><span class='line'>  loop in 80+个学生的实验报告邮件；
+</span><span class='line'>      保存附件；
+</span><span class='line'>      回复已经收到；
+</span><span class='line'>  end loop
+</span><span class='line'>  
+</span><span class='line'>  //收集齐所有报告后，开始批改报告
+</span><span class='line'>  loop in 80+个学生的实验报告
+</span><span class='line'>      双击打开报告；
+</span><span class='line'>      浏览评分；
+</span><span class='line'>      在成绩记录表格上 CTRL+F 查找到对应的学生；
+</span><span class='line'>      输入成绩；
+</span><span class='line'>      关闭报告；
+</span><span class='line'>  end loop
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>性能调优</h2>
+
+<p>最朴素的方法在使用中带来了巨大的性能瓶颈。</p>
+
+<ul>
+<li>平时作业的批改和成绩录入</li>
+</ul>
+
+
+<p>实践发现，批改平时作业和登分的过程中，会花掉非常多的实践在拿起笔、放下笔上，就像程序的上下文切换，比较耗时。将批改作业和录入成绩分解成两个集中循环过程，就可以避免这一切换的开销。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>  //改作业
+</span><span class='line'>  拿起笔
+</span><span class='line'>  loop in 80+个作业本
+</span><span class='line'>      翻开作业本；
+</span><span class='line'>      在作业本上标记成绩；
+</span><span class='line'>      关闭作业本；
+</span><span class='line'>  end loop
+</span><span class='line'>  放下笔
+</span><span class='line'>  
+</span><span class='line'>  //录入成绩
+</span><span class='line'>  loop in 80+个作业本
+</span><span class='line'>      翻开作业本，查看成绩
+</span><span class='line'>      在成绩记录表格上上 CTRL+F 查找到对应的学生；
+</span><span class='line'>      输入成绩;
+</span><span class='line'>      关闭作业本；
+</span><span class='line'>  end loop
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>以上的实现中，作业登分时还是会有大量的翻开、关闭作业本的操作。实际上，批改作业的等级是非常有限的，一般集中在 A+、A、A- 这几个分数上，其他分数如 B+、B、B-只是极少数。很容易想到桶排序的方式：批改作业时，将不同评分的作业放在专属的作业堆中，录入成绩时，只需要按照不同的作业堆录入，而不用翻开作业本。另外，由于书桌空间有限无法设定较多的作业堆，可以将出现较少的 B+、B、B-等分入到 Else 作业堆，批改时再特殊处理。</p>
+
+<p>在给同学登分时，每次都需要根据学号或者姓名 CTRL+F 查找，比较繁琐。优化的方法是建索引。在成绩录入表中给所有同学设定一个简单的编号，然后在同学的作业本的封皮上标记出来，以后每次登分，直接根据 [1, n]的索引就可以快速检索到了。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>  //预处理
+</span><span class='line'>  给作业本建索引
+</span><span class='line'>
+</span><span class='line'>  //改作业
+</span><span class='line'>  拿起笔
+</span><span class='line'>  loop in 80+个作业本
+</span><span class='line'>      翻开作业本；
+</span><span class='line'>      在作业本上标记成绩；
+</span><span class='line'>      关闭作业本；
+</span><span class='line'>      将作业按照评分放入 A+、A、A-和 Else 这四个堆中
+</span><span class='line'>  end loop
+</span><span class='line'>  放下笔
+</span><span class='line'>  
+</span><span class='line'>  //录入成绩
+</span><span class='line'>  loop in A+、 A、 A-、 Else 这四个作业堆
+</span><span class='line'>      loop in 作业堆
+</span><span class='line'>          if 作业堆 == Else 
+</span><span class='line'>              翻开作业本；
+</span><span class='line'>              查看成绩；
+</span><span class='line'>              关上作业本；
+</span><span class='line'>          end if
+</span><span class='line'>          根据索引查找到学生；
+</span><span class='line'>          输入成绩;
+</span><span class='line'>      end loop
+</span><span class='line'>  end loop
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>课程实验和大程的指导、评分和成绩录入</li>
+</ul>
+
+
+<p>在收集实验报告的时候，每次回复邮件也是很头痛的一件事情，容易漏掉回复或者漏掉保存附件。而给报告评分时，也得不断的点开某个文档，然后录入成绩，再关闭这个文档，容易漏评。虽然以在给所有同学评分完毕后再依次清查漏掉的情况，但这个方法确实不够优美。</p>
+
+<p>改进方法是：放弃使用邮件提交报告的方法，搭建 FTP；使用工具（比如 Acrobat）将所有报告连接成单个 pdf 文件。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>//预处理
+</span><span class='line'>FTP 收集报告
+</span><span class='line'>使用 Acrobat 将所有 pdf 报告连接成一个汇总报告
+</span><span class='line'>
+</span><span class='line'>//批改报告和录入成绩
+</span><span class='line'>双击打开汇总报告；
+</span><span class='line'>loop in 80+个学生的实验报告
+</span><span class='line'>  浏览评分；
+</span><span class='line'>  在成绩记录表格上 CTRL+F 查找到对应的学生；
+</span><span class='line'>  输入成绩；
+</span><span class='line'>end loop
+</span><span class='line'>关闭汇总报告；
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>总结</h2>
+
+<p>以上记录的是可以用工程的优化方法解决的小问题。实际助教的过程中，还有不少是沟通的问题。比如即使告诉过学生们一定使用 pdf 和姓名加学号的命名提交作业，也一定会有学生会使用 doc 格式……还有一些策略权衡的问题，面对几十个学生不比一对一的交流，合适的方法会双方更高效。</p>
+
+<p>做助教容易，做好不易，且行且珍惜。</p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.io/blog/2014/05/06/ta-in-practice/'>http://biaobiaoqi.github.io/blog/2014/05/06/ta-in-practice/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Biaobiaoqi</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-06T20:06:00+08:00" pubdate data-updated="true">May 6<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/life/'>life</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+    <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+<a class="jiathis_button_tsina"></a>
+<a class="jiathis_button_weixin"></a>
+<a class="jiathis_button_renren"></a>
+<a class="jiathis_button_douban"></a>
+<a class="jiathis_button_googleplus"></a>
+<a href="http://www.jiathis.com/share?uid=1814751" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+	data_track_clickback:true,
+	summary:"",
+	shortUrl:true,
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1814751" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/03/06/troubleshoot-encoding-bugs-in-octopress/" title="Previous Post: 记排查octopress生成时的编码错误">&laquo; 记排查octopress生成时的编码错误</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/05/08/jawbone-up24/" title="Next Post: 智能手环体验：UP24">智能手环体验：UP24 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <!--h1>Comments</h1-->
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>标签云</h1>
+ <br /> 
+  <ul class="tag-cloud">
+    <a style="font-size: 143%" href="/tags/jvm/">JVM</a> &nbsp 
+<a style="font-size: 147%" href="/tags/java/">Java</a> &nbsp 
+<a style="font-size: 145%" href="/tags/pat/">PAT</a> &nbsp 
+<a style="font-size: 109%" href="/tags/octopress/">octopress</a> &nbsp 
+<a style="font-size: 115%" href="/tags/fen-bu-shi/">分布式</a> &nbsp 
+<a style="font-size: 137%" href="/tags/zi-jie-ma/">字节码</a> &nbsp 
+<a style="font-size: 137%" href="/tags/si-kao/">思考</a> &nbsp 
+<a style="font-size: 180%" href="/tags/ji-zhu/">技术</a> &nbsp 
+<a style="font-size: 128%" href="/tags/fang-fa-lun/">方法论</a> &nbsp 
+<a style="font-size: 109%" href="/tags/fu-wu-qi/">服务器</a> &nbsp 
+<a style="font-size: 139%" href="/tags/sheng-huo/">生活</a> &nbsp 
+<a style="font-size: 153%" href="/tags/suan-fa/">算法</a> &nbsp 
+<a style="font-size: 109%" href="/tags/wang-luo/">网络</a> &nbsp 
+<a style="font-size: 139%" href="/tags/du-shu/">读书</a> &nbsp 
+<a style="font-size: 109%" href="/tags/you-jian-fu-wu/">邮件服务</a>
+
+  </ul>
+</section>
+<section>
+  <h1>关于</h1>
+   <p>biaobiaoqi是我的网络id。<br><br>
+   我的博客日志：<a href="http://biaobiaoqi.github.io/blog/2013/09/01/blog-log/">请戳</a><br><br>
+	</p>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - Biaobiaoqi -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  - <span class="credit">Theme by <a href="http://www.gehaxelt.in">Gehaxelt</a></span>
+  <span class="credit">and <a href="http://www.it-solutions-neef.de">IT Solutions Neef</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'biaobiaoqisblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://biaobiaoqi.github.io/blog/2014/05/06/ta-in-practice/';
+        var disqus_url = 'http://biaobiaoqi.github.io/blog/2014/05/06/ta-in-practice/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

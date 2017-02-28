@@ -1,0 +1,11 @@
+<div class="highlight"><pre><span class="k">try</span> <span class="o">{</span>  
+    <span class="k">if</span> <span class="o">(</span><span class="n">parent</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>  
+       <span class="n">c</span> <span class="o">=</span> <span class="n">parent</span><span class="o">.</span><span class="na">loadClass</span><span class="o">(</span><span class="n">name</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span>  
+    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>  
+       <span class="n">c</span> <span class="o">=</span> <span class="n">findBootstrapClassOrNull</span><span class="o">(</span><span class="n">name</span><span class="o">);</span>  
+    <span class="o">}</span>  
+<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">ClassNotFoundException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>  
+   <span class="c1">// ClassNotFoundException thrown if class not found  </span>
+     <span class="c1">// from the non-null parent class loader  </span>
+<span class="o">}</span> 
+</pre></div>

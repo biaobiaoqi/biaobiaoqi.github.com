@@ -52,7 +52,7 @@ description: "biaobiaoqi的2013年小结"
 
 发现自己对认知、心理学以及科技哲学的社会科学方向比较感兴趣，未来会更系统化的做学习了解。信息产业和编程技术方向不出意外会一直关注。未来会多看一些经济学相关的读物。
 
-读过的书我都会在[豆瓣读书](http://book.douban.com/)做标记，也写了[几篇书评](http://biaobiaoqi.me/tags/du-shu/)，大都是读书笔记和简单的感想。挺喜欢豆瓣这个平台的。
+读过的书我都会在[豆瓣读书](http://book.douban.com/)做标记，也写了[几篇书评](http://biaobiaoqi.github.io/tags/du-shu/)，大都是读书笔记和简单的感想。挺喜欢豆瓣这个平台的。
 
 
 无论是物质建设还是文化建设都离不开知识和思想的传播和在群体里的增长，书是知识和思想的一种载体，需要给与他足够的尊敬和激励。在力所能及的范围里，我在逐渐培养自己花钱买书的习惯，连同电脑和手机上得应用。国内的在线书店里书真的已经很便宜了。在爱尔兰交流的时候，看到书店里书的标价的数字根国内差不多，不过是欧元。
@@ -101,7 +101,7 @@ description: "biaobiaoqi的2013年小结"
 
 ###博客
 
-  两年前在CSDN开始维护自己的博客，中间断了一阵子。而后2013年4月底在Github上用Octopress搭建了新的个人博客，记录技术、工作和生活。8个月时间里，积累了超过2.7w的PV，超过1w的UV，就像我在[《半年博客小结》](http://biaobiaoqi.me/blog/2013/11/13/blog-migration/)中写的，[http://biaobiaoqi.me](http://biaobiaoqi.me) 是我阵地。最近一个月，状态并不算太好，只更新了一篇博客。新的一年开始，记博客的习惯还需要坚持。
+  两年前在CSDN开始维护自己的博客，中间断了一阵子。而后2013年4月底在Github上用Octopress搭建了新的个人博客，记录技术、工作和生活。8个月时间里，积累了超过2.7w的PV，超过1w的UV，就像我在[《半年博客小结》](http://biaobiaoqi.github.io/blog/2013/11/13/blog-migration/)中写的，[http://biaobiaoqi.github.io](http://biaobiaoqi.github.io) 是我阵地。最近一个月，状态并不算太好，只更新了一篇博客。新的一年开始，记博客的习惯还需要坚持。
 
 
 ###兴趣
@@ -119,7 +119,7 @@ description: "biaobiaoqi的2013年小结"
 
 * 死飞
 	
-	花了两个月月钱买了辆入门的死飞，是因为向往它的自由、极简：没有刹车，飞轮固定，让机械结构出错的几率减小，可控制车速、倒车让操控感变强。在实验室和寝室之间来回了半年后，现在对它的感受是：骑死飞脚很累损膝盖；对车的掌控度很高确实很爽。另外学会了[补胎、换胎](http://biaobiaoqi.me/blog/2013/10/20/repair-my-fixed-gear/)等技能。
+	花了两个月月钱买了辆入门的死飞，是因为向往它的自由、极简：没有刹车，飞轮固定，让机械结构出错的几率减小，可控制车速、倒车让操控感变强。在实验室和寝室之间来回了半年后，现在对它的感受是：骑死飞脚很累损膝盖；对车的掌控度很高确实很爽。另外学会了[补胎、换胎](http://biaobiaoqi.github.io/blog/2013/10/20/repair-my-fixed-gear/)等技能。
 	
 	不过一直也没有花时间来研究如何玩出花式的动作。基本的Mid-Skid对我来说已经足够了。附上一句：注意安全。
 	
@@ -129,11 +129,11 @@ description: "biaobiaoqi的2013年小结"
 
 * 苹果
 
-	妹子一直说我是苹果的脑残粉，其实我没那么宗教般的迷恋，只是喜欢。俗话说得好，“属性不够装备凑”，从nano、shuffle、classic到iPhone、MBP、iPad，都体验了一把。12年入了一台11年底产的13寸MBP，不过13年才用的顺心了些，自己DIY了[RAID0的双SSD硬盘](http://biaobiaoqi.me/blog/2013/11/24/failed-in-replacing-hdd/)，速度快的飞起，应用软件也用的更成熟了（参见[《我的OS X软件安装索引》](http://biaobiaoqi.me/blog/2013/11/24/install-software-in-os-x/)）。
+	妹子一直说我是苹果的脑残粉，其实我没那么宗教般的迷恋，只是喜欢。俗话说得好，“属性不够装备凑”，从nano、shuffle、classic到iPhone、MBP、iPad，都体验了一把。12年入了一台11年底产的13寸MBP，不过13年才用的顺心了些，自己DIY了[RAID0的双SSD硬盘](http://biaobiaoqi.github.io/blog/2013/11/24/failed-in-replacing-hdd/)，速度快的飞起，应用软件也用的更成熟了（参见[《我的OS X软件安装索引》](http://biaobiaoqi.github.io/blog/2013/11/24/install-software-in-os-x/)）。
 	
 	2013圣诞节，妹子给送了一台iPad mini 2。作为阅读和网页浏览工具，确实很完美。
 	
-	有时候也会觉得iOS过于封闭，无法DIY一些功能，没有￥600/年的苹果开发者账号甚至都无法将自己写的App部署到设备上。但暂时没有放弃使用苹果产品的想法，品牌价值、产品文化和应用的生态环境优势太大！（另附博文[《Mac的GUI哲学》](http://biaobiaoqi.me/blog/2013/06/09/something-about-mac-gui/)）
+	有时候也会觉得iOS过于封闭，无法DIY一些功能，没有￥600/年的苹果开发者账号甚至都无法将自己写的App部署到设备上。但暂时没有放弃使用苹果产品的想法，品牌价值、产品文化和应用的生态环境优势太大！（另附博文[《Mac的GUI哲学》](http://biaobiaoqi.github.io/blog/2013/06/09/something-about-mac-gui/)）
 
 * ~~~摄影~~~
 

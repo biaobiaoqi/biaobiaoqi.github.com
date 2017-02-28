@@ -9,7 +9,7 @@ description: "octopress出现Sorry, I can not find /，debug发现是混入了�
 
 ---
 
-前些日子经若亮童鞋提醒，我在[其他推荐](http://biaobiaoqi.me/resources/)的页面中增加了对Dropbox和Linode等工具的推荐，一来分享这些好用的产品，二来期望刚接触这些工具的好心的朋友可以不吝啬时间用我的推荐码注册，让我获得一些分享的回报。
+前些日子经若亮童鞋提醒，我在[其他推荐](http://biaobiaoqi.github.io/resources/)的页面中增加了对Dropbox和Linode等工具的推荐，一来分享这些好用的产品，二来期望刚接触这些工具的好心的朋友可以不吝啬时间用我的推荐码注册，让我获得一些分享的回报。
 
 改过页面内容后，照常的使用`rake preview`命令生成预览页面，打开浏览器，得到的却是一行孤零零的
 

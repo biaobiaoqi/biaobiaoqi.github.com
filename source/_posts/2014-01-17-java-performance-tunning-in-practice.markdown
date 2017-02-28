@@ -12,7 +12,7 @@ tags: [Java, JVM, Eclipse]
 <!--more-->
 ##基础知识
 
-针对JVM的参数调优主要集中在数据区大小的控制和垃圾回收策略的选择。关于JVM运行机制等更多内容可参考[其他博文](http://biaobiaoqi.me/tags/jvm/)
+针对JVM的参数调优主要集中在数据区大小的控制和垃圾回收策略的选择。关于JVM运行机制等更多内容可参考[其他博文](http://biaobiaoqi.github.io/tags/jvm/)
 
 ###JVM的运行时数据区
 

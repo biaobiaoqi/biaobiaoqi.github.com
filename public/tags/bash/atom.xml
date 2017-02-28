@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: Bash | Biaobiaoqi的博客]]></title>
+  <link href="http://biaobiaoqi.github.io/tags/bash/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.github.io/"/>
+  <updated>2016-04-19T08:49:46+08:00</updated>
+  <id>http://biaobiaoqi.github.io/</id>
+  <author>
+    <name><![CDATA[Biaobiaoqi]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[SSH原理和使用]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2013/04/19/use-ssh/"/>
+    <updated>2013-04-19T21:44:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2013/04/19/use-ssh</id>
+    <content type="html"><![CDATA[<h2>ssh是什么</h2>
+
+<p>在linux上工作，ssh是必须要了解的技术方法。它可以建立起多台主机之间的安全的加密传输，以进行远程的访问、操控、传输数据。</p>
+
+<p>SSH為Secure Shell的縮寫。為建立在应用层和传输层基础上的安全协议。</p>
+
+<p>传统的网络服务程序，如FTP、POP和Telnet其本质上都是不安全的；因为它们在网络上用明文传送数据、用户帐号和用户口令，很容易受到中间人（man-in-the-middle）攻击方式的攻击。就是存在另一个人或者一台机器冒充真正的服务器接收用户传给服务器的数据，然后再冒充用户把数据传给真正的服务器。
+而SSH是目前较可靠，專为远程登录会话和其他网络服务提供安全性的协议。利用SSH协议可以有效防止远程管理过程中的信息泄露问题。透過SSH可以對所有传输的数据进行加密，也能够防止DNS欺骗和IP欺骗。</p>
+
+<!--more-->
+
+
+<p>SSH之另一項優點為其传输的数据是经过压缩的，所以可以加快传输的速度。SSH有很多功能，它既可以代替Telnet，又可以为FTP、POP、甚至为PPP提供一个安全的「通道」。
+了解这么多就好了，其实ssh连接也就是可以理解成经过加密的远程访问啦。</p>
+
+<p>---（来自中文维基）</p>
+
+<h2>ssh连接的验证、加密方式</h2>
+
+<p>ssh连接是CS模型（客户端-服务器），客户端发出连接申请，服务器对客户端进行验证，再考虑是否接受连接申请。</p>
+
+<p>ssh的安全加密方式的理论基础是非对称加密体系。而非对称加密中，常见的一种就是RSA加密算法。在使用ssh，务必先弄清楚非对称加密和rsa的算法流程。详情参见<a href="http://zh.wikipedia.org/wiki/RSA%E5%8A%A0%E5%AF%86%E6%BC%94%E7%AE%97%E6%B3%95">RSA加密算法</a>。</p>
+
+<p>ssh有两种级别的安全验证：账户口令验证、rsa加密验证。详细参数，可以在sshd_config配置文件中设置(Ubuntu是/etc/ssh/sshd_config，mac下是/etc/sshd_config)</p>
+
+<h3>账号口令验证</h3>
+
+<p>直接输入所要登陆的用户的口令是默认的方式。不需要修改配置文件。</p>
+
+<p>如果直接从客户端将用户密码传输到服务器，那么密码信息很容易被中间人截获，从而实现重放攻击。ssh的实现方式是：</p>
+
+<ul>
+<li>1.客户端向ssh服务器发出请求，服务器将自己的公钥返回给客户端；</li>
+<li>2.客户端用服务器的公钥加密自己的登录密码，再将信息发送给服务器；</li>
+<li>3.服务器接收到客户端传送的密码，用自己的私钥解码，如果结果正确，则同意登录，建立起连接。</li>
+</ul>
+
+
+<p>这种方式还是有漏洞的，中间人可以假扮成服务器，骗取客户端的密码。</p>
+
+<h3>RSA加密验证</h3>
+
+<p>rsa加密验证方式，充分利用了非对称加密体系的优势，不需要在网络传输密码，完全杜绝了中间人攻击的可能。步骤如下：</p>
+
+<h5>准备工作</h5>
+
+<ul>
+<li>-1.客户端先使用 ssh-keygen 命令，生成私钥和公钥。按照默认配置，私钥会被保存在~/.ssh/id_rsa中，公钥则在~/.ssh/id_rsa.pub中。(一般别修改这里的文件)</li>
+<li>0.客户端通过安全的方式将公钥发送给服务器。在服务器端，将客户端发的公钥写入到~/.ssh/authorized_keys文件末尾。</li>
+</ul>
+
+
+<h5>建立连接</h5>
+
+<ul>
+<li>1.客户端发出申请。服务器产生session密钥对，返回通过对应客户端的公钥加密后的session公钥。</li>
+<li>2.客户端用自己的密钥解密信息，得到session公钥。</li>
+<li>3.之后的数据交互，都通过对方方公钥加密，对方收到信息后，用其私钥解密，实现安全加密过程。</li>
+</ul>
+
+
+<h2>免密码的RSA加密方式实施过程</h2>
+
+<ul>
+<li>1.安装ssh</li>
+</ul>
+
+
+<p>mac下自带的有，ubuntu下直接sudo apt-get install ssh。</p>
+
+<ul>
+<li>2.在客户端生成私钥公钥</li>
+</ul>
+
+
+<p>使用ssh-keygen命令生成密钥对。遇到提示都直接回车（其中passphrase是保护rsa密钥的另一套加密方式）。</p>
+
+<p><code>
+$ ssh-keygen   
+Generating public/private rsa key pair.  
+Enter file in which to save the key (/Users/biaobiaoqi/.ssh/id_rsa): /Users/biaobiaoqi/.ssh/id_rsa  
+Enter passphrase (empty for no passphrase):   
+Enter same passphrase again:   
+Your identification has been saved in /Users/biaobiaoqi/.ssh/id_rsa.  
+Your public key has been saved in /Users/biaobiaoqi/.ssh/id_rsa.pub.  
+The key fingerprint is:  
+b7:c2:5c:3f:83:5e:5e:93:a4:42:db:51:d8:ac:07:66 biaobiaoqi@biaobiaoqi.local  
+The key's randomart image is:  
++--[ RSA 2048]----+  
+|                 |  
+|             +   |  
+|            E +  |  
+|           o +   |  
+|        S + o o  |  
+|       o + * = . |  
+|        + = B +  |  
+|         o + + . |  
+|          . .    |  
++-----------------+  
+</code></p>
+
+<p>结果是在~/.ssh/下生成了 id_rsa（私钥）和id_rsa.pub（公钥）</p>
+
+<ul>
+<li>3.将客户端的公钥id_rsa.pub传递给服务器</li>
+</ul>
+
+
+<p>传送id_rsa.pub到服务器上，并将其内容写入到~/.ssh/authorized_keys文件尾。</p>
+
+<p>可以物理的用U盘转运（似乎更安全），也可以使用scp指令（这个时候就需要运用到口令验证的ssh方式)</p>
+
+<p><code>
+$scp ~/.ssh/id_rsa.pub user@host:~/.ssh/tmp_id_rsa.pub
+$ssh user@host "cat ~./ssh/tmp_id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys"
+</code></p>
+
+<p>在执行scp传输的过程中，如果是第一次ssh连接到服务器，客户端会提示是否信任这个主机，比如：
+<code>
+$scp ~/.ssh/id_rsa.pub user@host:~/.ssh/tmp_id_rsa.pub
+The authenticity of host XXX can't be established.
+ECDSA key fingerprint is xxxxxxxxxxxxxxxxxxxxxx.
+Are you sure you want to continue connecting (yes/no)?
+</code>
+原因是，客户端不确定所连接的host是否是真正的host。一般情况，直接输入yes，继续就好了。这里有较详细的解释：<a href="http://stackoverflow.com/questions/3663895/ssh-the-authenticity-of-host-hostname-cant-be-established">点击连接</a></p>
+
+<p>然后就可以免密码、更安全的登录啦
+<code>
+ ssh xxxx@hostAddress
+</code></p>
+
+<p>在ssh登录服务器时，如果出现如下问题：<em>Agent admitted failure to sign using the key</em>则需要手工将客户端私钥加入到ssh管理体系中。使用 ssh-add 指令。（具体机理还不太清楚）
+<code>
+$ssh-add   ~/.ssh/id_rsa
+</code></p>
+
+<h2>and one more thing;)</h2>
+
+<h4>ssh+firefox+autoproy</h4>
+
+<p>看看wall外面的世界，是多么美好的事情。ssh能帮我们做到，只要有一台在wall外的主机做代理。
+具体方式参见博文：<a href="http://reverland.bitbucket.org/ssh_climbe.html">ssh+firefox-autoproxy</a></p>
+
+<h4>SCP命令加密赋值数据</h4>
+
+<p>```</p>
+
+<h1>将本地文件复制到远程主机上</h1>
+
+<p>$scp ~./tmp user@rehost:~/tmp</p>
+
+<h1>见远程主机上的文件复制到本地</h1>
+
+<p>$scp user@rehost:~/tmp ~./tmp</p>
+
+<h1>复制的是目录，需要迭代，添加-r参数</h1>
+
+<p>$scp -r user@rehost:~/tmpDir ~./tmpDir
+```</p>
+
+<h4>SSH的配置</h4>
+
+<p>具体参数细节参见博文：<a href="http://www.ibm.com/developerworks/cn/aix/library/au-sshsecurity/">SSH 安全性和配置入门</a>
+<a href="http://blog.licess.org/sshd_config/">sshd_config配置 详解</a></p>
+
+<h2>推荐阅读：</h2>
+
+<ul>
+<li><a href="http://blog.lizhigang.net/archives/249">《linux ssh 使用深度解析（key登录详解）》</a></li>
+<li><a href="http://wiki.tuna.tsinghua.edu.cn/SshKeyHowto">《使用 RSA 密钥对进行 SSH 登录验证》</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2011/12/ssh_remote_login.html">《SSH原理与运用（一）：远程登录》</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2011/12/ssh_port_forwarding.html">《SSH原理与运用（二）：远程操作与端口转发》</a></li>
+<li><a href="http://reverland.bitbucket.org/ssh_climbe.html">ssh+firefox-autoproxy</a></li>
+<li><a href="http://www.ibm.com/developerworks/cn/aix/library/au-sshsecurity/">SSH 安全性和配置入门</a></li>
+<li><a href="http://blog.licess.org/sshd_config/">sshd_config配置 详解</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

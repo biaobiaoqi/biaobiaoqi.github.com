@@ -9,7 +9,7 @@ description: "Java类的动态加载机制规定，在类被主动使用(active 
 
 ---
 
-[《Java类的装载、链接和初始化》](http://biaobiaoqi.me/blog/2013/09/08/java-class-loading-linking-and-initialising/)中提到，链接的最后一步是解析，即对符号引用的解析。但这不是必须的，可以等到相应的符号引用第一次使用时再解析。
+[《Java类的装载、链接和初始化》](http://biaobiaoqi.github.io/blog/2013/09/08/java-class-loading-linking-and-initialising/)中提到，链接的最后一步是解析，即对符号引用的解析。但这不是必须的，可以等到相应的符号引用第一次使用时再解析。
 
 而类的初始化是在链接之后的（注意了，根据不同JVM有不同的实现方式，在类初始化的时候，可能已经完成了所有的符号引用的解析，也可能没有），本文所写的就是类的初始化的时机问题。
 

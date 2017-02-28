@@ -1,0 +1,405 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>PAT 1065 - 1068 题解 - Biaobiaoqi的博客</title>
+  <meta name="author" content="Biaobiaoqi">
+
+  
+  <meta name="description" content="浙大2013保研上机考试，PAT1065， PAT1066， PAT1067， PAT1086，PAT 1065， PAT 1066， PAT 1067， PAT 1086，比普通的PAT要难了0.5个点">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://biaobiaoqi.me/blog/2013/10/08/pat-1065-pat-1068/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Biaobiaoqi的博客" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+
+function addBlankTargetForLinks () {
+
+  $('a[href^="http"]').each(function(){
+
+      $(this).attr('target', '_blank');
+
+  });
+
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+
+  addBlankTargetForLinks();
+
+});
+
+</script>
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F49481ec3305db999013860b0ccb3b16d' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39900036-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Biaobiaoqi的博客</a></h1>
+  
+    <h2>做一个互联网世界的匠人</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:biaobiaoqi.me" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives/">全部文章</a></li>
+  <li><a href="/tag-cloud/">分类阅读</a></li>
+  <li><a href="/resources/">其他推荐</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">PAT 1065 - 1068 题解</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-08T13:46:00+08:00" pubdate data-updated="true">Oct 8<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>这次的题目来源是 2013 年 10 月 7 日下午的浙大计算机研究生招生机试题。</p>
+
+<p>这次题目的难度，按姥姥的说法是：『比普通的 PAT 要难了 0.5 个点。我是把自己的题目从 1.0 到 5.0 以 0.5 的间距分难度级别的，PAT(A)难度一般在 1.5-4.5 之间，保研考试一般在 2.0-5.0 之间。PAT(B)大概是 1.0-2.5 的难度。』。</p>
+
+<p>个人认为，其中 1066 模拟 AVL 插入的实现有些细节容易弄错，而 1068 只要会简单的 DP，也就没有问题了，1065 和 1066 都还是很简单的实现。</p>
+
+<p>下面是各个题的分析（PAT advanced level 本人实现的全部源码：<a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel">请戳</a>）。</p>
+
+<!--more-->
+
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1065">1065. A+B and C (64bit) (20)</a></h2>
+
+<h5>题意</h5>
+
+<p>输入三个数 a，b，c，取值范围是 [<code>-2^63</code>, <code>2^63</code>]，要求判断<code>a + b &lt; c</code> 是否为真。</p>
+
+<h5>分析</h5>
+
+<p>很简单的签到题，想到两种方法：一是用 Java 的 Big Decimal 实现（应该不会超时吧-,-），二是对 a+b 造成的 long long 溢出的情况做特殊处理。</p>
+
+<p>对于分情况的实现方式，实际上也就两种特殊情况，即 a，b 同号且两者之和溢出了（绝对值超过了 2<sup>63）。此时两者之和与</sup> c 的值的相对关系也是确定的。</p>
+
+<ul>
+<li><code>a &lt; 0 &amp;&amp; b &lt; 0 &amp;&amp; a + b &gt;= 0</code>: a + b 必小于 c</li>
+<li><code>a &gt; 0 &amp;&amp; b &gt; 0 &amp;&amp; a + b &lt;= 0</code>: a + b 必大于 c</li>
+</ul>
+
+
+<p>另在 98 看见有大神说可以用 long double 水过去-,-.</p>
+
+<p>pat1065 源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1065.cpp">请戳</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1066">1066. Root of AVL Tree (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>实现 <a href="http://en.wikipedia.org/wiki/AVL_tree">AVL 树</a>的插入方法，给定 N(&lt;=20)个数，要求输出依次插入后的 AVL 树的根。</p>
+
+<h5>分析</h5>
+
+<p>由于节点少，可以使用相对简单的递归实现方法：</p>
+
+<ul>
+<li>每个节点维护一个高度值，用在递归插入后检测子树是否平衡</li>
+<li>完成 4 个旋转方法（参见 <a href="http://en.wikipedia.org/wiki/AVL_tree">AVL Tree wikipedia</a> 中的示意图）</li>
+<li>在递归插入方法中，完成对子树的插入后，检测子树高度差，根据子树的结构特点，做出相应的旋转</li>
+<li>旋转后记得更新节点的高度值</li>
+</ul>
+
+
+<p>机试时似乎没有人完全 AC 这道题，看来代码实现和 Debug 能力缺乏还是比较普遍的问题。</p>
+
+<p>pat1066 源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1066.cpp">请戳</a></p>
+
+<!--more-->
+
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1067">1067. Sort with Swap(0,*) (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>给定 N(&lt;=<code>10^5</code>)以及一个{0,1,…,N-1}的打乱的数列。</p>
+
+<p>定义了一种交换方式：<code>Swap(0,*)</code>，表示将 0 和任意数进行位置交换。</p>
+
+<p>限定只能使用<code>Swap(0,*)</code>，要求输出最少需要多少次交换操作，来完成整体的排序。</p>
+
+<h5>分析</h5>
+
+<p>很好玩的模拟题，从题目的两个测试数据入手，找到所需要的交换次数的特点：</p>
+
+<p>假设用数组 a 存储输入的数组，数组的坐标为 [0, N - 1]，而元素的所有值也是 [0, N - 1]。</p>
+
+<ol>
+<li><p>输入的序列中本就在自己位置上的数字，是不用被交换的（比如序列<code>{4, 0, 2, 1, 3}</code>中 2 就是不用被交换），0 除外</p></li>
+<li><p>0 最终肯定会被放回到 0 的位置上，但交换过程中，0 也可能被提前交换到了 0 的位置上，此时还有其他数没有处于正确的位置上（参见 Sample Input<code>{10 3 5 7 2 6 4 9 0 8 1}</code>的情况）。此时需要多费一步将 0 和某一个处于不正确位置的数交换位置，来继续排序。</p></li>
+<li><p>每次的交换，0 其实只是一个过渡作用。实际的交换过程遵循的链式关系如下所述：设定 a[x] == b， 而 b != x，则需要将 a[x]的值移动到 a[b]上，此时 a[b] == c, 那么接着又需要将 a[b]的值移动到 a[c]上，以此类推，肯定能获得一个循环，且节点数 M 小于等于 N。如果循环中包含了 0，那么这个循环中的数排序所需要的交换次数为 M - 1, 如果循环中不包含 0，那么首先需要一次交换将 0 移动到循环链中，此时整个循环链节点数增加了 1，于是共需要开销 M + 1 次交换。</p></li>
+<li><p>根据 3 的分析，在 2 的情况下，0 与不同的不在正确位置的数的交换，是不会影响最终的结果的。</p></li>
+</ol>
+
+
+<p>综上所述，用类似 dfs 或者并查集的思路找到集合中的所有循环链路，记录下他们的大小，即可计算出所需要的交换次数。</p>
+
+<p>pat1067 源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1067.cpp">请戳</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1068">1068. Find More Coins (30)</a></h2>
+
+<h5>题意</h5>
+
+<p>给定 N(&lt;=<code>10^4</code>) 枚硬币和一个价格 M(&lt;=100)。</p>
+
+<p>要求用这 N 枚硬币组合出价格 M，如果有多种组合，输出排序后硬币面值字典序最小的组合，如果没有组合，则输出 No Solution.</p>
+
+<h5>分析</h5>
+
+<p>裸背包问题，相关资料参见 dd 大神的总结：<a href="http://cuitianyi.com/blog/%E3%80%8A%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E4%B9%9D%E8%AE%B2%E3%80%8B2-0-alpha1/">《背包问题九讲》</a></p>
+
+<p>按照常规的背包思路，构建 10001 * 101 的二维数组 f[i][j]，状态 f[i][j] 表示前 i 枚硬币能拼凑出的小于等于 j 的最大值（j 这里代表一个价格）。</p>
+
+<p>状态转移方程为：<code>f[i][j] = max(f[i - 1][j], f[i - 1][j - c[i]] + c[i])</code>， 其中 c[i]为第 i 枚硬币的面值，c[i]为排序过的硬币面值数组。</p>
+
+<p>由于最终的输出要求是排序的币值的字典序最小的组合，可以对 c[i]做从大到小的排序，并另开一个数组 has[i][j] 来记录当前状态下，是否有包含 c[i]。同时注意，当<code>f[i - 1][j] == f[i - 1][j - c[i]] + c[i]</code>时，采纳当前的 c[i]，以满足字典序。</p>
+
+<p>pat1068 源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1068.cpp">请戳</a></p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/10/08/pat-1065-pat-1068/'>http://biaobiaoqi.me/blog/2013/10/08/pat-1065-pat-1068/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Biaobiaoqi</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-08T13:46:00+08:00" pubdate data-updated="true">Oct 8<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+    <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+<a class="jiathis_button_tsina"></a>
+<a class="jiathis_button_weixin"></a>
+<a class="jiathis_button_renren"></a>
+<a class="jiathis_button_douban"></a>
+<a class="jiathis_button_googleplus"></a>
+<a href="http://www.jiathis.com/share?uid=1814751" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+	data_track_clickback:true,
+	summary:"",
+	shortUrl:true,
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1814751" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/10/07/reset-nvram/" title="Previous Post: 重置MBP的NVRAM">&laquo; 重置MBP的NVRAM</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/10/19/data-integration-tool-teiid/" title="Next Post: 数据集成工具：Teiid实践">数据集成工具：Teiid实践 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <!--h1>Comments</h1-->
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>标签云</h1>
+ <br /> 
+  <ul class="tag-cloud">
+    <a style="font-size: 113%" href="/tags/hadoop/">Hadoop</a> &nbsp 
+<a style="font-size: 139%" href="/tags/jvm/">JVM</a> &nbsp 
+<a style="font-size: 145%" href="/tags/java/">Java</a> &nbsp 
+<a style="font-size: 143%" href="/tags/pat/">PAT</a> &nbsp 
+<a style="font-size: 107%" href="/tags/octopress/">octopress</a> &nbsp 
+<a style="font-size: 137%" href="/tags/fen-bu-shi/">分布式</a> &nbsp 
+<a style="font-size: 135%" href="/tags/zi-jie-ma/">字节码</a> &nbsp 
+<a style="font-size: 135%" href="/tags/si-kao/">思考</a> &nbsp 
+<a style="font-size: 180%" href="/tags/ji-zhu/">技术</a> &nbsp 
+<a style="font-size: 107%" href="/tags/cao-zuo-xi-tong/">操作系统</a> &nbsp 
+<a style="font-size: 126%" href="/tags/fang-fa-lun/">方法论</a> &nbsp 
+<a style="font-size: 129%" href="/tags/sheng-huo/">生活</a> &nbsp 
+<a style="font-size: 148%" href="/tags/suan-fa/">算法</a> &nbsp 
+<a style="font-size: 118%" href="/tags/wang-luo/">网络</a> &nbsp 
+<a style="font-size: 135%" href="/tags/du-shu/">读书</a>
+
+  </ul>
+</section>
+<section>
+  <h1>关于</h1>
+   <p>biaobiaoqi是我的网络id。<br><br>
+   我的博客日志：<a href="http://biaobiaoqi.me/blog/2013/09/01/blog-log/">请戳</a><br><br>
+   更多信息请戳：<a href="http://about.me/biaobiaoqi">about.me</a><br>
+	</p>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Biaobiaoqi -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  - <span class="credit">Theme by <a href="http://www.gehaxelt.in">Gehaxelt</a></span>
+  <span class="credit">and <a href="http://www.it-solutions-neef.de">IT Solutions Neef</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'biaobiaoqisblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://biaobiaoqi.me/blog/2013/10/08/pat-1065-pat-1068/';
+        var disqus_url = 'http://biaobiaoqi.me/blog/2013/10/08/pat-1065-pat-1068/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -62,7 +62,7 @@ class T  implements Cloneable{
 
 一般的，我们很清楚类需要在被实例化之前初始化，而对象的初始化则是运行构造方法中的代码。
 
-本题的代码显然没有这么简单了。本题中涉及到了`static {…}` 和 `{…}`这种形式的代码块，以及在类的静态变量中初始化该类的对象这种交错的逻辑，容易让人焦躁（类似于密集恐惧症吧=(）。实际上，按照[类的装载、链接和初始化逻辑](http://biaobiaoqi.me/blog/2013/09/08/java-class-loading-linking-and-initialising/)，以及[对象初始化的顺序](http://biaobiaoqi.me/blog/2013/09/08/strange-behavior-using-braces-in-java/)来思考，不难得到答案。
+本题的代码显然没有这么简单了。本题中涉及到了`static {…}` 和 `{…}`这种形式的代码块，以及在类的静态变量中初始化该类的对象这种交错的逻辑，容易让人焦躁（类似于密集恐惧症吧=(）。实际上，按照[类的装载、链接和初始化逻辑](http://biaobiaoqi.github.io/blog/2013/09/08/java-class-loading-linking-and-initialising/)，以及[对象初始化的顺序](http://biaobiaoqi.github.io/blog/2013/09/08/strange-behavior-using-braces-in-java/)来思考，不难得到答案。
 
 
 ###代码组成
@@ -82,7 +82,7 @@ class T  implements Cloneable{
 
 ###执行顺序分析
 
-在一个对象被使用之前，需要经历的过程有：类的装载 -> 链接（验证 -> 准备 -> 解析） -> 初始化 -> 对象实例化。（详情参见[《Java类的装载、链接和初始化》](http://biaobiaoqi.me/blog/2013/09/08/java-class-loading-linking-and-initialising/)），这里需要注意的点主要有：
+在一个对象被使用之前，需要经历的过程有：类的装载 -> 链接（验证 -> 准备 -> 解析） -> 初始化 -> 对象实例化。（详情参见[《Java类的装载、链接和初始化》](http://biaobiaoqi.github.io/blog/2013/09/08/java-class-loading-linking-and-initialising/)），这里需要注意的点主要有：
 
 * 在类链接之后，类初始化完成之前，实际上类已经可以被实例化了。
 	
@@ -118,5 +118,5 @@ class T  implements Cloneable{
 
 ###参考：
 
-* [《Java构造方法中的执行顺序》](http://biaobiaoqi.me/blog/2013/09/08/strange-behavior-using-braces-in-java/)
-* [《Java类的装载、链接和初始化》](http://biaobiaoqi.me/blog/2013/09/08/java-class-loading-linking-and-initialising/)
+* [《Java构造方法中的执行顺序》](http://biaobiaoqi.github.io/blog/2013/09/08/strange-behavior-using-braces-in-java/)
+* [《Java类的装载、链接和初始化》](http://biaobiaoqi.github.io/blog/2013/09/08/java-class-loading-linking-and-initialising/)

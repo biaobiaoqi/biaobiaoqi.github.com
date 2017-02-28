@@ -12,7 +12,7 @@ description: "Java字节码查看，Eclipse插件，bytecode outline，ASM框架
 要理解Java字节码，比较推荐的方法是自己尝试编写源码对照字节码学习。其中阅读Java字节码的工具必不可少。虽然`javap`可以以可读的形式展示出.class文件中字节码，但每次改动源码都需调用命令行并不方便。这里介绍一个可以辅助阅读Java字节码的Eclipse插件：[bytecode outline](http://andrei.gmxhome.de/bytecode/)。
 
 
-bytecode outline插件用可读的方式展现了Eclipse的Java编辑器或类文件的字节码内容。它使用了[ASM框 架](http://asm.ow2.org/)的部分组建来实现对字节码的展示（ASM框架在另外一篇操纵Java字节码的博文中有提到过：[《AOP实践：java.lang.instrument的使用》](http://biaobiaoqi.me/blog/2013/09/08/custom-premain-method/)，是一个轻量级的Java字节码的操纵框架。）。
+bytecode outline插件用可读的方式展现了Eclipse的Java编辑器或类文件的字节码内容。它使用了[ASM框 架](http://asm.ow2.org/)的部分组建来实现对字节码的展示（ASM框架在另外一篇操纵Java字节码的博文中有提到过：[《AOP实践：java.lang.instrument的使用》](http://biaobiaoqi.github.io/blog/2013/09/08/custom-premain-method/)，是一个轻量级的Java字节码的操纵框架。）。
 
 <!--more-->
 

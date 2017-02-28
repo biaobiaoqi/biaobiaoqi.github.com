@@ -1,0 +1,452 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>PAT 1001-1010 题解 - Biaobiaoqi的博客</title>
+  <meta name="author" content="Biaobiaoqi">
+
+  
+  <meta name="description" content="PAT 1001, PAT1001,PAT 1002, PAT1002,PAT 1003, PAT1003,PAT 1004, PAT1004,PAT 1005, PAT1005,PAT 1006, PAT1006,PAT 1007, PAT1007,PAT 1008, PAT1008,PAT &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://biaobiaoqi.me/blog/2013/07/31/pat-1001-1010-solutions/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Biaobiaoqi的博客" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+
+function addBlankTargetForLinks () {
+
+  $('a[href^="http"]').each(function(){
+
+      $(this).attr('target', '_blank');
+
+  });
+
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+
+  addBlankTargetForLinks();
+
+});
+
+</script>
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F49481ec3305db999013860b0ccb3b16d' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39900036-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Biaobiaoqi的博客</a></h1>
+  
+    <h2>做一个互联网世界的匠人</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:biaobiaoqi.me" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives/">全部文章</a></li>
+  <li><a href="/tag-cloud/">分类阅读</a></li>
+  <li><a href="/resources/">其他推荐</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">PAT 1001-1010 题解</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-31T02:03:00+08:00" pubdate data-updated="true">Jul 31<span>st</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>早期部分代码用 Java 实现。由于 PAT 虽然支持各种语言，但只有 C/C++标程来限定时间，许多题目用 Java 读入数据就已经超时，后来转投 C/C++。浏览全部代码：<a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel">请戳</a></p>
+
+<p>本文谨代表个人思路，欢迎讨论;)</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1001">1001. A+B Format (20)</a></h2>
+
+<h5>题意</h5>
+
+<p>格式化输出两数之和。</p>
+
+<h5>分析</h5>
+
+<p>理清输出逻辑即可。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1002">1002. A+B for Polynomials (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>给定两多项式，相加并格式化输出结果。</p>
+
+<h5>分析</h5>
+
+<p>两种思路</p>
+
+<ul>
+<li>1.采用链表的处理方式；</li>
+<li>2.预设好 int[1005]的数组，用下标表示次方，数组中元素值表示对应系数。</li>
+</ul>
+
+
+<p>第一种方法某种程度上看能节省空间，实现上需要注意操作链表时，循环时的越界问题；
+方法二用空间换取时间，且实现上更不容易出错。同时，由于浮点数本身精确位数不够，在判定两浮点数相加是否为 0 时，
+需要对结果值取绝对值后，与 1e-6 做对比。</p>
+
+<!--more-->
+
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1003">1003. Emergency (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>求两个城市之间的加权最短路径。在有多个最短路径记录的情况下，选择路径中所有节点的权重值之和最小的。</p>
+
+<h5>分析</h5>
+
+<p>Dijkstra 算法的变型实现。两种思路：</p>
+
+<ul>
+<li>1.计算最短路时，在每个节点上用链表 preList 记下所有最短路径的前节点。
+完成计算后，对 preList 做 dfs 获得每条最短路径的权重值之和，比较后得到结果；</li>
+<li>2.计算最短路径时，在节点上，除了记录最短路径中前一个节点 preNode 之外，还对应的记录当前的最短路径上所有节点的权重值之和，
+这就不用在 Dij 完成之后再做 dfs 了，过程中已经找到了最优解。</li>
+</ul>
+
+
+<p>相比之下，方法 2 明显更简洁。当然，虽然方法 2 的思路很通用，还需要确定，这一加权的判定条件是能够迭代处理的。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1004">1004. Counting Leaves (30)</a></h2>
+
+<h5>题意</h5>
+
+<p>计算给定的树各个层级叶子节点的个数</p>
+
+<h5>分析</h5>
+
+<p>先构建树，鉴于题目的空间限制不严格，可以使用邻接矩阵的方式定义树结构。然后使用 dfs 遍历树的节点，并记录每层的叶子节点数量。
+可以看到，时间空间的 trade-off 不仅仅是性能上的提升，也会影响带代码实现的复杂程度。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1005">1005. Spell It Right (20)</a></h2>
+
+<h5>题意</h5>
+
+<p>计算一个数（&lt;=10<sup>100）的各个位数之和，并用英语按位输出。比如</sup> 15 输出为 one five.</p>
+
+<h5>分析</h5>
+
+<p>简单题，输出的实现上实际上就用到了 Hash 思想。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1006">1006. Sign In and Sign Out (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>每个人来到实验室和离开实验室的时间都有记录。找到其中最早来实验室和最晚离开实验室的时间。</p>
+
+<h5>分析</h5>
+
+<p>逻辑上很简单的一个题，遍历所有数据，找到其中最大和最小的值即可。稍微要处理的就是时间。
+由于 input 中给出的是 HH:MM:SS 的格式，在比较时需要将其换算为 int 值。实际上，使用 C 语言读入更方便，<code>scanf("%d:%d:%d", &amp;h, &amp;m, &amp;s);</code>
+然后计算出<code>time = 3600*h + 60*m + s</code>，时间比较就没有问题了。在最终的输出时再做对应的转换即可。
+而在 Java 语言中，使用到了 String 的 split 方法划分子串和 Integer.parseInt()转 String 为 int。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1007">1007. Maximum Subsequence Sum (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>给出一组由正负整数组成的序列，求出拥有最大和的连续子序列。</p>
+
+<h5>分析</h5>
+
+<p>最暴力的算法是两个循环的 O(n<sup>2)；进一步要使用分治的思想，可以得到</sup> O(n*logn)；更好的方法可以达到 O(n)，也可以将它看做分治思想。关键在于数学归纳的证明，编程实现非常简单：假定 [0, n-1]的最大连续子串已经求出了，要求 [0,n]的最大连续子串。</p>
+
+<ul>
+<li>1.如果 [0, n-1]中最大子串不包含最右的数字，则判定<code>原最大子串的和</code>与<code>包含最右点的最大子串 + a[n]的和</code>的大小。取大的那个作为 [0, n]的最大子串，并保持一个<code>包含最右点的最大子串</code>。</li>
+<li>2.如果 [0, n-1]中最大子串包含最右的数字，则 [0, n]的最大子串为原最大子串+a[n]。</li>
+</ul>
+
+
+<p>实际上，算法的核心是维持了两个量的记录，即当前的<code>最大子串</code>，以及当前<code>包含最右点的最大子串</code>。</p>
+
+<p>更多讨论参见博文<a href="../../../../2013/04/05/maximum-subsequence-sum/">《分治、时间空间的权衡:最大合的连续字串问题 (PAT 1007)
+》</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1008">1008. Elevator (20)</a></h2>
+
+<h5>题意</h5>
+
+<p>给出电梯的行进路径，上下的速度和每层停留时间，计算总时间。</p>
+
+<h5>分析</h5>
+
+<p>简单的模拟题。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1009">1009. Product of Polynomials (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>求两个多项式的乘积。</p>
+
+<h5>分析</h5>
+
+<p>参见 PAT1002，使用数组存储虽然空间占用稍大，但比链表实现要便捷很多。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1010">1010. Radix (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>给定两个数，其中单个位置上的数值范围可以为 [0-z]。指定其中一个数的进制，试确定是否存在可能的进制让两数的实际值相等。</p>
+
+<h5>分析</h5>
+
+<p>此题没有交代清楚 input 中 radix 的取值范围以及对一位数有多重可能 radix 的情况如何输出，坑比较大。下面是需要注意的点。</p>
+
+<ul>
+<li>1.input 中两个数字可以是 10 位数，虽然没有告诉 radix 的范围，但在<code>9*10^10 10 1 200</code>这个示例中，可以看到结果的 radix 也可以是很大的。从这个角度看，代码中将 radix 和两个数值都设定为 longlong 是合适的选择。</li>
+<li>2.在计算另一个数的 radix 时，简单的遍历 [2, 10<sup>18]会超时。单调的区间很自然想到使用二分查找。</sup></li>
+<li>3.二分查找的上下界确定能减少耗时：下界选数字的所有位上的最大值+1；上界容易想当然的认为就是题中给定了 radix 的数的值。实际上，示例<code>11 b 1 10</code>就是一个反例，原因在于这个假设忽略了一位数的可能性，解决方案是在取给定 radix 的数值和下界中较大的那个数。</li>
+<li>4.在二分查找时，不可直接计算出某个 radix 下数的值，因为可能会 longlong 溢出。于是需要用特定的 compare 函数，在累加的过程中判定是否大于另一个数。算是一种剪枝。</li>
+<li>5.还有一个条件：当两个数都是 1 时，输出 2.当两个数相等且不为 1 时，输出题中给出的 radix。（这是从其他人的结题报告中看到的，完全不理解=。=）</li>
+</ul>
+
+
+<p>注意好这些方面，应该能 ac 了。保重。</p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/07/31/pat-1001-1010-solutions/'>http://biaobiaoqi.me/blog/2013/07/31/pat-1001-1010-solutions/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Biaobiaoqi</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-31T02:03:00+08:00" pubdate data-updated="true">Jul 31<span>st</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+    <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+<a class="jiathis_button_tsina"></a>
+<a class="jiathis_button_weixin"></a>
+<a class="jiathis_button_renren"></a>
+<a class="jiathis_button_douban"></a>
+<a class="jiathis_button_googleplus"></a>
+<a href="http://www.jiathis.com/share?uid=1814751" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+	data_track_clickback:true,
+	summary:"",
+	shortUrl:true,
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1814751" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/07/29/after-pat-practice/" title="Previous Post: 终于算完了这道『1+1』">&laquo; 终于算完了这道『1+1』</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/07/31/pat-1011-1020-solutions/" title="Next Post: PAT 1011-1020 题解">PAT 1011-1020 题解 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <!--h1>Comments</h1-->
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>标签云</h1>
+ <br /> 
+  <ul class="tag-cloud">
+    <a style="font-size: 113%" href="/tags/hadoop/">Hadoop</a> &nbsp 
+<a style="font-size: 139%" href="/tags/jvm/">JVM</a> &nbsp 
+<a style="font-size: 145%" href="/tags/java/">Java</a> &nbsp 
+<a style="font-size: 143%" href="/tags/pat/">PAT</a> &nbsp 
+<a style="font-size: 107%" href="/tags/octopress/">octopress</a> &nbsp 
+<a style="font-size: 137%" href="/tags/fen-bu-shi/">分布式</a> &nbsp 
+<a style="font-size: 135%" href="/tags/zi-jie-ma/">字节码</a> &nbsp 
+<a style="font-size: 135%" href="/tags/si-kao/">思考</a> &nbsp 
+<a style="font-size: 180%" href="/tags/ji-zhu/">技术</a> &nbsp 
+<a style="font-size: 107%" href="/tags/cao-zuo-xi-tong/">操作系统</a> &nbsp 
+<a style="font-size: 126%" href="/tags/fang-fa-lun/">方法论</a> &nbsp 
+<a style="font-size: 129%" href="/tags/sheng-huo/">生活</a> &nbsp 
+<a style="font-size: 148%" href="/tags/suan-fa/">算法</a> &nbsp 
+<a style="font-size: 118%" href="/tags/wang-luo/">网络</a> &nbsp 
+<a style="font-size: 135%" href="/tags/du-shu/">读书</a>
+
+  </ul>
+</section>
+<section>
+  <h1>关于</h1>
+   <p>biaobiaoqi是我的网络id。<br><br>
+   我的博客日志：<a href="http://biaobiaoqi.me/blog/2013/09/01/blog-log/">请戳</a><br><br>
+   更多信息请戳：<a href="http://about.me/biaobiaoqi">about.me</a><br>
+	</p>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Biaobiaoqi -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  - <span class="credit">Theme by <a href="http://www.gehaxelt.in">Gehaxelt</a></span>
+  <span class="credit">and <a href="http://www.it-solutions-neef.de">IT Solutions Neef</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'biaobiaoqisblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://biaobiaoqi.me/blog/2013/07/31/pat-1001-1010-solutions/';
+        var disqus_url = 'http://biaobiaoqi.me/blog/2013/07/31/pat-1001-1010-solutions/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

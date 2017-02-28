@@ -1,0 +1,386 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>PAT 1069 - 1072 题解 - Biaobiaoqi的博客</title>
+  <meta name="author" content="Biaobiaoqi">
+
+  
+  <meta name="description" content="pat题解：pat 1069 pat 1070 pat 1071 pat 1072 pat1069 pat1070 pat1071 pat1072">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://biaobiaoqi.github.io/blog/2013/11/07/pat-1069-pat-1072/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Biaobiaoqi的博客" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+
+function addBlankTargetForLinks () {
+
+  $('a[href^="http"]').each(function(){
+
+      $(this).attr('target', '_blank');
+
+  });
+
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+
+  addBlankTargetForLinks();
+
+});
+
+</script>
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F49481ec3305db999013860b0ccb3b16d' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39900036-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Biaobiaoqi的博客</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:biaobiaoqi.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives/">全部文章</a></li>
+  <li><a href="/tag-cloud/">分类阅读</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">PAT 1069 - 1072 题解</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-07T00:30:00+08:00" pubdate data-updated="true">Nov 7<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>来源是 2013 年 11 月 2 日的 PAT 测试。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1069">1069. The Black Hole of Numbers (20)</a></h2>
+
+<h5>题意</h5>
+
+<p>给出一个四位数比如 6767，将它按照每位从小到大(6677)和从大到小(7766)充足，得到两个新四位数，这两者相减将得到一个新的四位数。再按照一样的处理方式处理得出的四位数</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>7766 - 6677 = 1089
+</span><span class='line'>9810 - 0189 = 9621
+</span><span class='line'>9621 - 1269 = 8352
+</span><span class='line'>8532 - 2358 = 6174
+</span><span class='line'>7641 - 1467 = 6174
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最终将得到一个『黑洞数』：6174。</p>
+
+<p>题目给出一个四位数，要求输出它演变出『黑洞数』的过程。</p>
+
+<!--more-->
+
+
+<h5>分析</h5>
+
+<p>简单模拟题，需要留心两个特殊情况的处理：<code>6174</code>，<code>xxxx</code>。</p>
+
+<p>熟练掌握 C 的基本函数也能缩短代码编写，比如<code>atoi()</code> 和 <code>sprintf()</code>， 由于<code>itoa()</code>是依赖于 Windows 的，这里不推荐使用。</p>
+
+<p>pat1069 源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1069.cpp">请戳</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1070">1070. Mooncake (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>给出月饼市场的需求 D&lt;= 500 （按重量计算），给出现有 N &lt;= 1000 种月饼，每种月饼有一定数量的储备（按重量计算）以及这些储备所对应的价格，求一个出售月饼的方式，在容量 D 的市场里，获得最多的销售额。</p>
+
+<h5>分析</h5>
+
+<p>简单的贪心问题。贪心的规则是月饼的单价。注意有一个坑：每种月饼的存货量也需要用<code>double</code>来做存储。</p>
+
+<p>pat1070 源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1070.cpp">请戳</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1071">1071. Speech Patterns (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>给出一个长度不超过 1048576 的字符串。把所有连续的字母或者数字（[0-9 A-Z a-z]）试做单词，且忽略大小写，求其中最高频的单词。</p>
+
+<h5>分析</h5>
+
+<p>使用 map&lt;string, int>做存储，统计出现次数即可。</p>
+
+<p>有些细节需要注意：</p>
+
+<ul>
+<li>使用<code>getline(cin, str)</code>获取正行数据</li>
+<li>使用<code>transform(str.begin(), str.end(), str.begin(), ::tolower);</code>将字符串转换成小写</li>
+<li>遍历字符串获取单词时，注意特殊条件。比如以非字符数字开头的字符串，以字符数字结尾的字符串等。</li>
+</ul>
+
+
+<p>pat1071 源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1071.cpp">请戳</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1072">1072. Gas Station (30)</a></h2>
+
+<h5>题意</h5>
+
+<p>给出一个图，其中有 N &lt;= 10<sup>3</sup> 个节点是居民房，M &lt;= 10 个节点是计划建造加油站的候选点。给出加油站所能服务的最远距离 D。要求计算出合适的位置建造加油站，满足如下优先级条件：</p>
+
+<ol>
+<li>所有居民房必须在加油站的服务距离内。</li>
+<li>所有居民房中距离加油站的最近的居民房与加油站之间的距离是最远的。（大概是安全方面的考虑，加油站要离居民区远一点）</li>
+<li>所有房间距离加油站的最小距离的总和最小。（节约居民加油的总体成本）</li>
+<li>同等条件下，序号越小的加油站优先。</li>
+</ol>
+
+
+<h5>分析</h5>
+
+<p>实际上是求加油站到所有点的最短路径的问题，使用 Dijsktra 可以满足。</p>
+
+<p>另外，需要考虑求最短路径的过程中是否要将其他加油站所构建的路径算入在内。从背景上看，加油站应该在公路边修建，故加油站之间以及居民房和加油站之间都是存在路径的，从给出的数据来看，存在两个加油站之间的路径。所以，计算最短路径时，是需要将所有加油站的节点也计算在内的。</p>
+
+<p>pat1072 源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1072.cpp">请戳</a></p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.io/blog/2013/11/07/pat-1069-pat-1072/'>http://biaobiaoqi.github.io/blog/2013/11/07/pat-1069-pat-1072/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Biaobiaoqi</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-07T00:30:00+08:00" pubdate data-updated="true">Nov 7<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+    <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+<a class="jiathis_button_tsina"></a>
+<a class="jiathis_button_weixin"></a>
+<a class="jiathis_button_renren"></a>
+<a class="jiathis_button_douban"></a>
+<a class="jiathis_button_googleplus"></a>
+<a href="http://www.jiathis.com/share?uid=1814751" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+	data_track_clickback:true,
+	summary:"",
+	shortUrl:true,
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1814751" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/11/05/cc98-post-machine/" title="Previous Post: 用Ruby实现的论坛灌水工具：CC98 Post Machine">&laquo; 用Ruby实现的论坛灌水工具：CC98 Post Machine</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/11/13/blog-migration/" title="Next Post: 半年博客小结">半年博客小结 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <!--h1>Comments</h1-->
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>标签云</h1>
+ <br /> 
+  <ul class="tag-cloud">
+    <a style="font-size: 143%" href="/tags/jvm/">JVM</a> &nbsp 
+<a style="font-size: 147%" href="/tags/java/">Java</a> &nbsp 
+<a style="font-size: 145%" href="/tags/pat/">PAT</a> &nbsp 
+<a style="font-size: 109%" href="/tags/octopress/">octopress</a> &nbsp 
+<a style="font-size: 115%" href="/tags/fen-bu-shi/">分布式</a> &nbsp 
+<a style="font-size: 137%" href="/tags/zi-jie-ma/">字节码</a> &nbsp 
+<a style="font-size: 137%" href="/tags/si-kao/">思考</a> &nbsp 
+<a style="font-size: 180%" href="/tags/ji-zhu/">技术</a> &nbsp 
+<a style="font-size: 128%" href="/tags/fang-fa-lun/">方法论</a> &nbsp 
+<a style="font-size: 109%" href="/tags/fu-wu-qi/">服务器</a> &nbsp 
+<a style="font-size: 139%" href="/tags/sheng-huo/">生活</a> &nbsp 
+<a style="font-size: 153%" href="/tags/suan-fa/">算法</a> &nbsp 
+<a style="font-size: 109%" href="/tags/wang-luo/">网络</a> &nbsp 
+<a style="font-size: 139%" href="/tags/du-shu/">读书</a> &nbsp 
+<a style="font-size: 109%" href="/tags/you-jian-fu-wu/">邮件服务</a>
+
+  </ul>
+</section>
+<section>
+  <h1>关于</h1>
+   <p>biaobiaoqi是我的网络id。<br><br>
+   我的博客日志：<a href="http://biaobiaoqi.github.io/blog/2013/09/01/blog-log/">请戳</a><br><br>
+	</p>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - Biaobiaoqi -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  - <span class="credit">Theme by <a href="http://www.gehaxelt.in">Gehaxelt</a></span>
+  <span class="credit">and <a href="http://www.it-solutions-neef.de">IT Solutions Neef</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'biaobiaoqisblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://biaobiaoqi.github.io/blog/2013/11/07/pat-1069-pat-1072/';
+        var disqus_url = 'http://biaobiaoqi.github.io/blog/2013/11/07/pat-1069-pat-1072/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

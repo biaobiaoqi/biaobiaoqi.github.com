@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: life | Biaobiaoqi的博客]]></title>
+  <link href="http://biaobiaoqi.me/blog/categories/life/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.me/"/>
+  <updated>2013-11-07T02:33:21+08:00</updated>
+  <id>http://biaobiaoqi.me/</id>
+  <author>
+    <name><![CDATA[Biaobiaoqi]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[用Github账号领Ripple币]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/10/28/get-ripple-from-github-account/"/>
+    <updated>2013-10-28T12:46:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/10/28/get-ripple-from-github-account</id>
+    <content type="html"><![CDATA[<p>最近随着<a href="http://zh.wikipedia.org/wiki/%E6%AF%94%E7%89%B9%E5%B8%81">比特币</a>在互联网上的流行，其他各种电子货币也都增加了曝光率。</p>
+
+<p>昨晚在v2ex上看到有人<a href="http://v2ex.com/t/87062">发帖</a>，用20RMB换取2013年5月1日前使用过的github账号得到的一个验证码。出于好奇，仔细围观了该贴，发现原来lz是利用信息不队称在揽入赠送给github用户的ripple币。而实际上，给github用户赠送的2020的ripple币按当时汇率这算人民币大概价值70元！这种『天上掉馅饼』的事情确实激发了我对电子货币的好奇，于是查阅了相关资料，也成功提现了自己的那部分Ripple币。</p>
+
+<!--more-->
+
+
+<h2>Ripple介绍</h2>
+
+<p>Ripple是一种电子的虚拟货币，与人尽皆知的比特币类似，它也立足于创建一种去中心化的的虚拟货币系统。实际上，Ripple项目的起源时间甚至早于比特币，04年就有了初版。比较特别的是，Ripple承诺货币总量为1000亿，且永不增发，也就是不能像比特币那样挖矿。Ripple被缩写为XRP，有人称之为人品币（RP币），这也一语双关的表明了它的实现本身所依赖的信任机制。</p>
+
+<p>更多信息，参考如下网页：</p>
+
+<ul>
+<li>基本理解：<a href="http://www.btc38.com/xrp/xrp_learning/46.html">《新手必读：什么是Ripple》</a></li>
+<li>深度分析：<a href="http://ec.iresearch.cn/e-payment/20131016/215495.shtml">《个人货币“幽灵”Ripple：比比特币更疯狂》</a>，<a href="http://www.huxiu.com/article/13252/1.html">《Ripple，比比特币更激进的虚拟货币幽灵》</a></li>
+</ul>
+
+
+<h2>通过Github套现步骤</h2>
+
+<p>Ripple最近给开发者发福利：</p>
+
+<blockquote><p>Any GitHub account older than May 1, 2013, 00:00:00 UTC that has some public code-writing activity before that date is eligible to receive 2020 XRP.</p>
+
+<p>Additionally, accounts which have watched or starred any of Ripple's major repositories (ripple-client, ripple-lib, or rippled) as of October 3, 2013, 21:15:00 UTC are eligible for twice the amount.</p>
+
+<p>(These rules are subject to change without notice.)</p></blockquote>
+
+<p>凡是2013年5月1日前注册且有公开代码读写的Github用户将获得2020XRP，如果在2013年10月3日前star或者watch了ripple在Github的官方账号上的任何repo的，获得的XRP将翻倍！</p>
+
+<p>如果你满足，就可以通过如下流程获得这些XRP啦。</p>
+
+<h3>0.注册</h3>
+
+<p>如果你没有Ripple的注册账户，请先<a href="https://ripple.com/client/#/register">注册</a>。</p>
+
+<p>注册流程没有什么特别的。最后需要记录下自己的钱包（Wallet）地址，待会儿领取XRP要用到。在Ripple网页顶栏的Received标签下。比如我的是<code>rst5AjSCVJx7VZb6KRNt5Ekdp33KTrEx1G</code></p>
+
+<p>注意，这里注册完毕后不需要激活。之后提取到XRP后账号本身自然会被激活的。实际上，只要账号中Ripple币的总额大于100就OK，而我们能从这次活动中提取至少2020XRP呢。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/ripple1.png" alt="img" /></p>
+
+<h3>1.验证Github账号，提取XRP</h3>
+
+<p>点击链接<a href="https://giveaway.ripple.com/">https://giveaway.ripple.com/</a>，在这里通过Github授权领取XRP。具体流程流程是：</p>
+
+<h4>1.1 Github授权</h4>
+
+<p>点击Log in with Github 按钮，一步步走下去。（前提是确定自己的Github账号满足了领取的要求）</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/ripple3.png" alt="img" /></p>
+
+<h4>1.2 生成提取码（giveaway code）</h4>
+
+<p>授权完毕后，来到如下界面：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/ripple2.png" alt="img" /></p>
+
+<p>在第一个输入框中，输入自己的钱包地址（在注册一步中记下的地址），下面两行的passphrase大概用于在忘记提取码时找回，一般的，点击randomize直接随机生成一个即可。</p>
+
+<p>最后，点击Get your code，即可获得一长串的提取码。这个编码已经与你的钱包地址绑定，只有你的ripple账号能拿到这笔钱了。</p>
+
+<p>我的提取码如下：
+<code>
+This is your giveaway code. Don't lose it!
+sYBhVavSjbtp45GLNA8NnxYtK7FEUUEmUFM5g4DS5uTzrucCuV8wv6RnmETCjNmzo1FNXVqrULdZCmnDU5oLGbHwjXNqwmJsd1ZqjCNrqzyBxTp6JaRuc6Kwu33495dSQgaY4B3DzHtsNjL8sTyGgcMhuQcK1mSz4fpQXKpRWjAohYXmB8FP5MhpCymuLhW1jFw77sySh1s3sHRkJ4BBdT9KH2GgNwzWmQi57o5wMEbNWFfJe8ctun3ieD1WLnA6L5L4MmLYhdnirPvKmSxg4sEiw9VAPpz5nSg3RaA1PHTdKCokcvzVbbAnsCYWRKF5ZZo1mx3zzNRuwrQRgU1jPM7KUi7fUNpVz2aRofXmrovn5KQ8EYC1HwqiXB3HnPR7GJ84f9Q4oQ8q1sT
+</code></p>
+
+<h4>1.3 提取XRP</h4>
+
+<p>之后，依然在原来的链接里，在如下方框里输入之前生成的提取码，点击Redeem（兑现）。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/ripple3.png" alt="img" /></p>
+
+<p>提取XRP过程完毕。</p>
+
+<h3>2.兑换为人民币</h3>
+
+<p>对于急于想看看这个天上掉的馅饼到底长什么样的人来说，是没有耐心把XRP放着不提现的;)。如果想提现为人民币，首先得通过交易把XRP换成人民币。</p>
+
+<p>XRP兑换CNY（人民币）的过程，需要在网关中进行。这里的网关（gateway）跟网络中的网关没关系，是Ripple货币体系中重要的一环，可以理解为交易中心。</p>
+
+<p>中国有两个交易中心：RippleChina 和 RippleCN。不同的网关成交价格都可能不相同，建议对比后再做交易。</p>
+
+<p>RippleChina和RippleCN都提供了相应的教程：</p>
+
+<ul>
+<li><a href="https://trade.ripplechina.net/gateway-course">RippleChina交易</a></li>
+<li><a href="http://ripplecn.com/gateway/">RippleCN交易</a></li>
+</ul>
+
+
+<p>注意，在使用XRP买入CNY时，需要设定为<code>XRP/CNY</code>，那个框是可以自己输入的，而不是下拉选择的。</p>
+
+<h3>3.提现到支付宝</h3>
+
+<p>最后一步提现到支付宝，建议使用RippleCN，RippleChina竟然对我收费5块，而RippleCN是承诺免费的。</p>
+
+<p>教程链接：<a href="http://ripplecn.com/tixian/">ripplecn提现</a></p>
+
+<h2>后记</h2>
+
+<p>在微博上看到github精选这个账号发起的一个活动：<a href="http://t.github8.com/">『GitHub账号免费领30元现金活动』</a>。美其名曰转发送T，还略详实的介绍了ripple获取的规则，但却意图明显的隐藏了XRP折算人民币的币值。不得不感叹让不明真相的群众有种被人卖了还数钱的感觉。实在不怎么欣赏这种价值观。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[修车记]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/10/20/repair-my-fixed-gear/"/>
+    <updated>2013-10-20T21:58:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/10/20/repair-my-fixed-gear</id>
+    <content type="html"><![CDATA[<p>三个多月前，入手了这辆死飞。</p>
+
+<p>倒不是像中学生渴望它可搭配的绚丽色彩和特立独行，而是喜欢自由、简单的理念。以至于我基本全黑的配色被同学形容为『最不骚的死飞』。自己平时骑车并不快，代步而已，也没有花心思学些炫酷的平花动作（虽然很想学），除了能mid skid刹车和一直蹬脚踏板累了些，在操作上也确实没啥不同了。被女朋友形容为骑车一辆『功能退化』
+的自行车-，-</p>
+
+<p>一直还没来得及写篇博文记录下，借这次修车的过程，给它留个影。</p>
+
+<ul>
+<li>起因：后胎漏气，半小时漏光的节奏</li>
+<li>处理：用DUUTI补胎套件补胎，顺道紧了一把链条。</li>
+</ul>
+
+
+<!--more-->
+
+
+<p>先来个全景照：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/fixedgearIMG_1010.JPG?imageView/2/w/800/h/800" alt="img" /></p>
+
+<p>自己先捣鼓了下买车时卖家送的DUUTI补胎套件，撬胎棒、打磨片、胶、贴片、充气筒都是齐全的。倒是自己下不了手用力把外胎撬开，害怕姿势不对把轮圈弄破。只能求助杨康童鞋，他的动手能力很厉害，以下照片里的童鞋就是他了。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/fixedgearIMG_1007.JPG?imageView/2/w/800/h/800" alt="img" /></p>
+
+<h3>1.撬开外胎</h3>
+
+<p>先放完需要补胎的内胎里的气，方便操作。</p>
+
+<p>把撬胎棒的尖端插进外胎一侧，用力翘起，固定好，同时撬起连续的三个点（每个点间距二十公分左右），即可轻松的掰开外胎了。注意撬外胎最终状态是，外胎的一侧落在轮圈放置内胎的卡槽之外，另一侧伦在轮圈的卡槽中。
+<img src="http://biaobiaoqi.u.qiniudn.com/fixedgearIMG_1121.JPG?imageView/2/w/800/h/800" alt="img" /></p>
+
+<h3>2.检查内胎</h3>
+
+<p>外胎撬开之后，拉出内胎。接一盆水，方便检测漏气点。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/fixedgearIMG_1122.JPG?imageView/2/w/800/h/800" alt="img" /></p>
+
+<p>将内胎充满气，一节一节放入水中按压，检查是否有气泡。有气泡连续冒出的点即为漏气点，标记好位置。如下图</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/fixedgearIMG_1123.JPG?imageView/2/w/800/h/800" alt="img" /></p>
+
+<h3>3.打磨</h3>
+
+<p>使用打磨片打磨漏气点的四周，窃以为一方面可以将内胎外侧的纹路磨光，方便贴补胎片，另一方面也为涂抹胶水创造粗糙易粘附的条件。</p>
+
+<h3>4.涂胶水</h3>
+
+<p>使用Duuti胶水，涂抹其上。一定注意要吹干，再继续下一步。</p>
+
+<h3>5.贴补胎片</h3>
+
+<p>类似于手机贴膜（不知道够不够形象-，-）。</p>
+
+<p>注意摆正位置，让漏气空处于中间位置。贴好后用力按压贴片周围，防止内胎充气膨胀后，贴片在两边有曲度处翘起。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/fixedgearIMG_1124.JPG?imageView/2/w/800/h/800" alt="img" /></p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/fixedgearIMG_1125.JPG?imageView/2/w/800/h/800" alt="img" /></p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/fixedgearIMG_1126.JPG?imageView/2/w/800/h/800" alt="img" /></p>
+
+<h3>6.重新测试</h3>
+
+<p>贴好后，最好重新充气、放回水里检测。（我们就是第二次才成功的。。。）</p>
+
+<h3>7.装胎</h3>
+
+<p>首先将内胎放回轮圈的卡槽里，然后沿着轮圈，一点点将外胎悬在外部的一侧往轮圈卡槽里塞。注意，刚开始的时候比较轻松，越往后塞的时候需要的力量越大。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/fixedgearIMG_1127.JPG?imageView/2/w/800/h/800" alt="img" /></p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/fixedgearIMG_1128.JPG?imageView/2/w/800/h/800" alt="img" /></p>
+
+<h3>PS：紧链条</h3>
+
+<p>康帅发现我的链条有些松，于是将后轮固定的位置往后推了一点点，让链条能绷得紧一点。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/fixedgearIMG_1129.JPG?imageView/2/w/800/h/800" alt="img" /></p>
+
+<p>我的车后轮固定处的结构如下图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/fixedgearIMG_1130.JPG?imageView/2/w/800/h/800" alt="img" /></p>
+
+<p>冒出的带弹簧的螺钉用于控制后轮与牙盘的相对位置。移动后轮的时候，还需要注意两边的螺钉需要平衡的移动，否则容易使后轮左右倾斜。</p>
+
+<h3>鸣谢</h3>
+
+<p>再次鸣谢杨康童鞋的指导=)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Jobs和jobs]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/09/30/jobs-and-jobs/"/>
+    <updated>2013-09-30T11:41:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/09/30/jobs-and-jobs</id>
+    <content type="html"><![CDATA[<p>作为一个不太安分的技术男，或多或少会对乔布斯怀有敬意。</p>
+
+<p>我是从<a href="http://movie.douban.com/subject/1298084/">《硅谷海盗》</a>这部老片开始了解到乔布斯这个人的，查了下上映日期，竟然是我出生的第二天。那时候觉着演员挺帅啊，后来发现真人更有味道一点。<del>国内的互联网大佬们怎么不见如此气度的-,-。</del></p>
+
+<p>前天下午，和实验室的基友们一起去看了刚上映的<a href="http://movie.douban.com/subject/6877703/">《乔布斯》</a>。由于乔布斯的段子、事迹早已充斥到生活的各个角落，两个小时的观影我几乎是以一种期待下个情节的心情在审视电影的脉络：求学时代开始，Apple1一炮打响，Apple2大卖，Lisa折戟，Macintosh阻力重重，被赶出苹果，重回苹果，END。我试图将乔布斯真人带给社会的感动融入到电影的观影情绪里，但并不太奏效，电影缺了一些代入感。或许是库切的身体太壮脸太宽了的缘故，也或许是因为广电总局减掉了乔布斯和女友的1分钟激情戏。</p>
+
+<p>走出Jobs，心里没有太多涟漪。世界倒是依旧的躁动——最近又迎来了找工作的季节。于是后面的节奏是，江湖上将流传着师兄师姐们的各种牛offer的传说，师弟师妹们各种仰慕，筹划着如何准备明年的面试，憧憬着明年的自己，以及抱怨着帝都魔都恶劣的生存条件和充沛的机遇并存的矛盾……充满着成王败寇的腥味，和纸醉金迷的浮躁。</p>
+
+<p>理想和现实的纠缠从来就不曾停息，欲望的高低贵贱也是如此。</p>
+
+<p>一场Jobs，告诉我们<code>connecting the dolts</code>的感动。大家所追寻的jobs，<code>dolts</code>在哪里？</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[终于算完了这道『1+1』]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/07/29/after-pat-practice/"/>
+    <updated>2013-07-29T22:12:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/07/29/after-pat-practice</id>
+    <content type="html"><![CDATA[<p>在<a href="http://weibo.com/redow7">@ReDow</a>、<a href="http://weibo.com/cloudbye">@麦迪的小腿</a>和<a href="http://weibo.com/linest">@linest</a>等小伙伴的帮助下，终于断断续续的爬完了<a href="http://pat.zju.edu.cn/">PAT</a>的Basic Level和Advanced Level，阶段性填补了自己惨白的算法短板。在cs的圈子里，说PAT是入门的『1 + 1』不为过。刚完成『1 + 1』，作为五年科班的人，确实不够光彩。不过现在能做的也只是尽力弥补本科时间里的虚度。</p>
+
+<p>从亲手挖的坑里往外爬，需要付出比其他人更多的努力。没时间享受题目ac之后的快感（画外音：这么简单的题会有快感么=.=#），倒会时不时蹦出一股脑的蛋疼：『你当初干XX啥去了！』。</p>
+
+<h2>当初...</h2>
+
+<p>记得大一的时候，每天花好几个小时泡图书馆看各种IT杂志和技术书籍。在刚开始学C语言编程的时间里，我看着中间件、系统软件、终端融合、东软和用友金蝶之争等一系列摸不着头脑的东西，在对数据还没概念的时候，看着数据库的范式和E-R图…总之，就是一直在门外徘徊。</p>
+
+<p>之后专业课多了起来，我又兴高采烈的混在工高大神的队伍里，早上集结同学每天早上五点多轮流爬起来去自习室占座，以看似端正实则不专注的令人发指的学习态度在GPA榜单上持续退步着。浑浑噩噩的搞过数模，无果。当然，以『学渣』的水平充着『学霸』也是有好处的，就是沾染了大神的精神气，比如记忆犹新的有在CMU念书的鑫磊大神的专注、冷静和每天4小时的睡眠。同时，我还风风火火的参加了ASES和求是强鹰，搀和着所谓的创业。大四在爱尔兰的交流，除了英语和专业课，其他的倒是学的挺多，比如烧饭，单反和旅游……本科唯一做的跟编程有关的说得出口的，也就写了个Android程序在比赛里获了个奖，不提也罢的那种。</p>
+
+<h2>变</h2>
+
+<p>在《<a href="http://book.douban.com/subject/1048007/">高效能认识的七个习惯</a>》里看过一个观点：每个人都有属于自己的『关注圈』和『影响圈』。影响圈是个人对外界产出的途径，关注圈则意味着个人对外界的期许。可以想见，关注圈大于影响圈。正确的成长方式是尽力扩大影响圈，以此催生关注圈的扩大。而我则是走在了相反的方向：一直致力于开发自己的关注圈，后果是影响圈不见长进。一度我开始注意遏制自己这方面的好高骛远，不过事实证明，我还是比较喜欢在学爬得时候看走路的教学视频。</p>
+
+<!--more-->
+
+
+<p>后来听闻了杨绛先生的一则小事。大概是说，一个年轻人写信给杨绛，说自己平时许多问题想不明白，想请教下怎么应对。杨绛回复说『是你看书太少，想的太多』。第一眼看到这个故事，我的想法就是：那不是在说的我么。对我而言，『书』指的更泛一些，理解为阅历或许更恰当。让可能性禁锢了思想，不值得，不如踏出去，自己去找答案。</p>
+
+<p>研究生的一年又过去，很难说我这一年达到了自己的预期。不过也没怎样，世界变化这么快，也容不得静态的计划。至少，我渐渐的逼近了自己喜欢的生活节奏。</p>
+
+<h2>信仰</h2>
+
+<p>都说现在的国人根子里没有信仰，年岁越长也渐渐有些自己的体会。面对远超过big-data量级的选择，我时常彷徨，我不敢说自己有信仰。我只是一直在坚持找寻。</p>
+
+<p>用乔老爷子著名的斯坦福演讲中的一句话结束：</p>
+
+<blockquote><p>You can't connect the dots looking forward. You can only connect them looking backwards, so you have to trust that the dots will somehow connect in your future. You have to trust in something--your gut, destiny, life, karma,whatever--because believing that the dots will connect down the road will give you the confidence to follow your heart, even when it leads you off the well-worn path, and that will make all the difference.</p></blockquote>
+
+<h3>PS：</h3>
+
+<p>据我所知网上的资料没有对PAT题型整体的把握和讲解。接下来的时间，我会整理下自己的代码和解题思路，将整理结果放到博客上来，也算自己的复习。链接都准备好了：<a href="http://biaobiaoqi.me/blog/2013/08/03/overcome-pat/">《PAT练习题概览》</a>。如果是404Error，就请再耐心等待几天吧;)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[给女朋友的礼物]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/06/11/gift-to-girl-friend/"/>
+    <updated>2013-06-11T17:12:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/06/11/gift-to-girl-friend</id>
+    <content type="html"><![CDATA[<h2>背景</h2>
+
+<p>一个月前发现了<a href="http://v2ex.com">V2EX</a>这个网站，用创始人<a href="http://www.v2ex.com/member/Livid">Livid</a>的话来说，『这是一个主要关于做事儿的地方』。确实如此，我在这里收获了很多想法和灵感。</p>
+
+<p>本文所记的，也是得益于某天的对<a href="http://www.v2ex.com/t/69145">某个主题</a>的浏览。帖子中，大家分享了很多给女朋友做的网页，说『技术宅改变世界』太过了，但拥有这样一个礼物，确实是一种属于程序员的快乐和程序员的女友的幸福。</p>
+
+<p>快到我跟我妹子恋爱四周年的日子了，也正逢她本科毕业，无论如何都是个有趣的时间点。受了那个帖子的刺激，我也筹划着给女朋友做一个小网页，以示纪念。</p>
+
+<p>遗憾的是，我自己从来没有写过网页，javascript和css只知道概念，html也只是知道一些简单的标签，这些可是完成一个小网页所必备的技能呢。技术能力直接阻碍了创造性成果出现的可能:(。于是，解决方案只能是搜集开源代码，然后自己做定制了。实际上，最后的产出，也就是三份代码的拼接。</p>
+
+<h2>资料搜集</h2>
+
+<p>通过各方搜寻，我找到了如下几个网页：</p>
+
+<ul>
+<li>1.<a href="http://love.hackerzhou.me/">复旦的学长hackzhou的爱心动画</a>，<a href="https://github.com/hackerzhou/Love">github托管代码</a>。</li>
+</ul>
+
+
+<p>网页用到了html5的一些特性实现了动态的心形花的绘制和类似程序代码敲击的文字呈现形式。由于内容仅仅是文字的，可定制性强。如下图：
+<img src="https://dl.dropboxusercontent.com/u/64021093/Pics/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202013-06-11%20%E4%B8%8B%E5%8D%888.12.01.png" title="hackerzhou's page" alt="hackerzhou's love project" /></p>
+
+<ul>
+<li>2.<a href="http://carfieldloverita.sinaapp.com/">一对异国情侣的Google地图应用</a>，<a href="https://github.com/wong2/lovegift">github托管代码</a>。</li>
+</ul>
+
+
+<p>网页调用了Google地图的API，可以定义聚焦的地理位置和坐标尺，显示照片，像日记一样记录了点点滴滴，有背景音乐。最后还以地点输入框的形式做了表白。很有创意！
+<img src="https://dl.dropboxusercontent.com/u/64021093/Pics/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202013-06-11%20%E4%B8%8B%E5%8D%888.12.18.png" title="Googlemap app" alt="Google map app" /></p>
+
+<ul>
+<li>3.<a href="http://liumeijun.com/">v2ex上某童鞋基于百度地图的应用</a>。</li>
+</ul>
+
+
+<p>跟2类似，调用了百度API，配上『Lemon tree』的背景音乐，很有调调！
+<img src="https://dl.dropboxusercontent.com/u/64021093/Pics/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202013-06-11%20%E4%B8%8B%E5%8D%888.16.00.png" title="baidumap app" alt="baidumap app" /></p>
+
+<h2>定制计划</h2>
+
+<p>限于没有前端的基础，开发效率会很低，只能硬顶着拿着前面的三个项目做混搭了。其中项目1和2都有在github上开源代码，而3则在v2ex的帖子里被作者授权直接查源码使用了。</p>
+
+<p>我做了简单的混搭修改计划：</p>
+
+<ul>
+<li>1.以hackzhou的项目为基础，修改文字内容和基本布局。</li>
+<li>2.添加加载等待过程，加载背景音乐。</li>
+<li>3.加载完成后，出现开始按钮，按开始按钮播放背景音乐，进入动画效果。</li>
+<li>4.增加全屏效果。</li>
+</ul>
+
+
+<h2>实施</h2>
+
+<h5>1.项目启动</h5>
+
+<p>我在github上fork了<a href="https://github.com/hackerzhou/Love">hackerzhou的代码</a>。(<a href="https://github.com/biaobiaoqi/Love">我fork的版本</a>)</p>
+
+<p>clone到本地，尝试阅读js代码，尝试做小改动，找到动画开始的调用。</p>
+
+<h5>2.尝试添加背景音乐</h5>
+
+<p>网上查资料，找到了<code>&lt;embeded&gt;</code>可以用来添加背景音乐，测试成功。但这个音乐播放无法支持同步的加载，不可控，在网络环境差的情况下，如果没有配乐动画过程会缺少表现力。放弃这种方案。</p>
+
+<p>在<a href="http://liumeijun.com/">v2ex上某童鞋基于百度地图的应用</a>源码中找到了一个第三方音乐播放库：<a href="http://www.schillmania.com/projects/soundmanager2/">soundmanager2</a>。查看官方文档，确认能满足项目需求，于是加入到代码中。</p>
+
+<p>为了让页面展现更加顺畅，需要音乐文件越小越好。我尝试了MIDI格式，但是很多浏览器并不支持，作罢。而soundmanager似乎对wma的支持有问题，于是只剩下mp3文件。我选择了JJ的『小酒窝』做背景音乐，在mac下使用ocenaudio将原来3MB的mp3文件截取了前一半，并导出为不同设定采样率的版本，经过测试，发现56kb采样率下，音质没有受到大的影响，且大小也足够小了，于是确定用这种格式的mp3。最终MP3文件的大小为500KB！</p>
+
+<h5>3.加载逻辑和开始按键</h5>
+
+<p>需求：加载过程需要隐藏前景内容，在音乐加载完成后，显示开始按钮，开始按钮能触发动画效果。</p>
+
+<p>通过Google找到了使用js隐藏和显示内容的方式</p>
+
+<p>```</p>
+
+<pre><code>document.getElementById('hint').style.display = "none"; //hide hint
+document.getElementById('start_btn').style.display = ""; //show start button
+</code></pre>
+
+<p>```</p>
+
+<p>虽然不是特别理解js引擎的单线程运作机制，但经过简单的试错、调试后，就完成了加载等待和开始按钮触发的原型。</p>
+
+<p>之后是对按钮和加载提示配置css。由于懒得理解css的一些细节，直接使用了<a href="https://github.com/wong2/lovegift">这份项目</a>中的css代码。</p>
+
+<h5>4.部署</h5>
+
+<p>github为每个项目提供了静态网页展示的功能，应付这个项目的网页展示完全够了。具体操作流程参见<a href="http://www.worldhello.net/gotgithub/03-project-hosting/050-homepage.html#project-homepage">《GotGithub》3.5.2. 创建项目主页</a>。实际上，链接中介绍的几种创造干净的gh-pages分支的方法，在这个项目的发布里是不必的。因为项目主页的展示代码跟master分支里的代码本身就是一样的，那么需要做的就只是开启gh-pages分支，并提交代码了。</p>
+
+<p>项目成果：<a href="http://biaobiaoqi.me/Love">请戳这里</a></p>
+
+<h2>结语</h2>
+
+<p>感谢v2ex，感谢hackerzhou、loo2k和wong2童鞋，我参考了你们很多代码。</p>
+
+<p>创造力需要靠技术手段实现。混迹在互联网上，没有自己建站的能力实在是很苦逼的一件事情。之后自己准备花些时间在RoR上。积累技术实力，努力做出好产品;)</p>
+]]></content>
+  </entry>
+  
+</feed>

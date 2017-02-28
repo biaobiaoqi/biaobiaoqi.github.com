@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: 服务器 | Biaobiaoqi的博客]]></title>
+  <link href="http://biaobiaoqi.github.io/tags/fu-wu-qi/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.github.io/"/>
+  <updated>2016-04-19T08:49:46+08:00</updated>
+  <id>http://biaobiaoqi.github.io/</id>
+  <author>
+    <name><![CDATA[Biaobiaoqi]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Linode跨节点迁移：从Tokyo到Fremont]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2014/01/26/migrate-linode-vps-from-tokyo-to-fremont/"/>
+    <updated>2014-01-26T01:45:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2014/01/26/migrate-linode-vps-from-tokyo-to-fremont</id>
+    <content type="html"><![CDATA[<h2>背景</h2>
+
+<p><a href="http://biaobiaoqi.github.io/blog/2014/01/22/email-3/">上一篇博客</a>交代了如何在Linode上搭建邮件服务器，并配置好各种协议、记录来投入实际使用。</p>
+
+<p>由于实践过程中，曾经尝试使用明文协议与服务器交流数据，可能泄露了账号、密码信息，造成之后被攻击发送垃圾邮件(详细情况类似于如下链接：<a href="http://linuxroad.blog.51cto.com/765922/1039676">链接1</a>,<a href="http://linuxroad.blog.51cto.com/765922/1039675">链接2</a>)，IP被上了黑名单，在<a href="http://www.mail-tester.com">mail-tester.com</a>上的测试评分为0分，同时还收到了Linode的警告。</p>
+
+<p>为了能继续使用邮箱服务，我只好想着法子给Linode换一个IP。但原则上Linode是不支持换IP的。幸运的是，它支持VPS的迁移，而且方便快捷。从Tokyo节点迁移到Fremont节点后IP一般会发生变动（对于网络延迟，权衡了下<a href="http://www.v2ex.com/t/62721">大家</a>的说法,Fremont还不错:<a href="https://www.linode.com/speedtest/">官方测速</a>），这样就可以间接的更换IP了。</p>
+
+<p>迁移过程很简单，这里做一下记录。</p>
+
+<!--more-->
+
+
+<h2>迁移准备</h2>
+
+<h3>发出迁移请求</h3>
+
+<p>Linode有比较完善的<a href="https://manager.linode.com/support">Support</a>。对于迁移这种情况，可以在Support页面发出如下请求：</p>
+
+<p>```
+Hi,</p>
+
+<p>I've met with some problems with my server. And I think it's a solution to migrate my server from Tokyo to Fremont.</p>
+
+<p>Could you please do me a favor?</p>
+
+<p>Thanks a lot!
+```
+1分钟之后，我就收到了技术支持的回复：</p>
+
+<p>```
+Hello,</p>
+
+<p>Your migration to our Fremont datacenter has been configured. Please log into the Linode Manager, shut down, and click the migrate button to move to your new server. Your disk images will be moved with you. The migration should take approximately 10-15 minutes per gigabyte of data to complete. Please note that any existing backups for this Linode will be purged and will not be recoverable after you initiate the migration.</p>
+
+<p>Your new IP address is: xxx.xxx.xxx.xxx</p>
+
+<p>We ask that you begin this migration within 24 hours and let us know when it is complete. Thanks in advance!</p>
+
+<p>Regards,
+Jack Stitt</p>
+
+<p>```</p>
+
+<p>此时，Linode控制面板中已经多了一个迁移的提醒：<code>You have a migration pending!</code>。</p>
+
+<p>不过先不要着急迁移，因为迁移过程是不可恢复的，我们需要首先将VPS中得重要数据备份到本地。注意如回复中所说，这种备份不同于Linode中的备份服务。</p>
+
+<h3>备份数据</h3>
+
+<p>找到一份科学的全盘备份数据方式：<a href="http://www.linode.im/1590.html">linode用户通过ssh+dd命令复制整个磁盘</a>。不可否认dd做传输比scp一个个拷贝文件快得多，但由于需要将整个盘5G数据全部通过网络传输，而家里网速慢，传输数据只有大概100KB/s的速度，需要等待太长时间。</p>
+
+<p>实际上，我所需要备份的文件无非是<code>/home</code>目录下得所有数据和部分服务的配置数据（比如postfix、dovecot、nginx等），总共大概也就100MB，于是决定选择性的用scp传输备份数据：</p>
+
+<p><code>scp root@vps-ip:/backup /home/backup #vps-ip替换为服务器IP地址</code></p>
+
+<p>同时由于零散的传输文件效率不高，可以考虑先将服务器端所有小文件使用tar命令压缩到一个包里：</p>
+
+<p><code>tar zcvf backup.gz /home /etc/nginx/sites-enable</code></p>
+
+<p>在本地的解压缩命令如下：</p>
+
+<p><code>tar zxvf backup.gz</code></p>
+
+<p>当然，实际上我们都不会希望备份数据需要被使用到啦，而迁移vps丢失数据的概率应该也是很小的。</p>
+
+<h3>修改DNS记录</h3>
+
+<p>由于迁移过程需要大概一个多小时，网站服务的不可访问是无法避免了。只好尽可能将迁移过程放在深夜没有用户访问需求的时候。</p>
+
+<p>从这个角度讲，DNS的修改也没有特别的及时性要求。在前已完成前修改好DNS服务器中的A记录、MX记录等配置即可。</p>
+
+<h2>迁移</h2>
+
+<p>在正式迁移之前，需要关闭服务器。</p>
+
+<p>然后点击Linode控制面板中的migration按钮。接下来，就是一个多小时的等待。</p>
+
+<h2>后续</h2>
+
+<p>完成迁移之后，开启VPS，还需要注意修改服务中IP相关的配置。比如shadowsocks里的json.config中的server ip。</p>
+
+<p>一切顺利完成后，别忘了去Support界面回复Ticket =).</p>
+
+<p>如果你考虑租用Linode机器，而又不吝啬使用<a href="https://www.linode.com/?r=06fc7f86359e92800c41177a80c5678ecfcb2568">我的推荐码</a>，本博客不胜感激=).</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[邮件服务（三）：实践服务器搭建]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2014/01/22/email-3/"/>
+    <updated>2014-01-22T01:14:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2014/01/22/email-3</id>
+    <content type="html"><![CDATA[<h2>背景</h2>
+
+<p><a href="http://biaobiaoqi.github.io/tags/you-jian-fu-wu/">邮件服务系列博文</a>中，前两篇介绍了邮件系统的基本功能和安全体系，本文记录了搭建邮箱服务器的实践。</p>
+
+<p><a href="http://en.wikipedia.org/wiki/Sendmail">Sendmail</a>是一种多用途、支援多种协定的跨网络电子邮件传送代理软件，于1983年随着BSD 4.1c首次发行，2001年时的调查，互联网上的邮件服务器有42%使用Sendmail，但之后由于多次被发现重大的安全性漏洞，且其设定档过于复杂造成较高的学习门槛等因素，导致市占率下滑。</p>
+
+<p><a href="http://www.postfix.org/">Postfix</a>被<a href="http://www.porcupine.org/wietse/">Wietse Zweitze Venema</a>创造出来以取代Sendmail。本次实践即使用Postfix为域名biaobiaoqi.me搭建邮箱服务器，服务器是Linode上的VPS，Ubuntu 12.04LTS，DNS服务器使用<a href="http://dnspod.com/">DNSPod</a>。</p>
+
+<!--more-->
+
+
+<h2>检查IP信用度</h2>
+
+<p>在自建邮件服务器之前，先检查所要使用的IP的信用度。如果IP已经在垃圾邮件联盟的黑名单里面，意味着这个IP在此之前或许被用作发送垃圾邮件，不愿意给这个IP擦屁股的话，就换个IP好了。</p>
+
+<p>可以点下面的链接查看：</p>
+
+<ul>
+<li><a href="http://anti-spam.org.cn/">http://anti-spam.org.cn/</a></li>
+<li><a href="http://www.justspam.org/check-an-ip">http://www.justspam.org/check-an-ip</a></li>
+<li><a href="http://www.spamhaus.org/query/bl?ip=74.125.129.27">http://www.spamhaus.org/query/bl?ip=74.125.129.27</a> #需要将连接末尾的IP替换为邮箱服务器的IP</li>
+</ul>
+
+
+<h2>域名、IP相关配置</h2>
+
+<h3>FQDN配置</h3>
+
+<p>选定的邮箱服务器需要有合适的全名。比如可以设定biaobiaoqi.me的邮箱服务器的FQDN为mail.biaobiaoqi.me。修改FQDN的命令如下：</p>
+
+<p><code>hostname mail.biaobiaoqi.me</code></p>
+
+<p>查看FQDN的命令为：</p>
+
+<p><code>hostname -f</code></p>
+
+<p>FQDN需要记住，之后配置DNS记录时需要。</p>
+
+<h3>MX记录和A记录</h3>
+
+<p>配置MX记录指向邮箱服务器IP。</p>
+
+<p><code>biaobiaoqi.me.     600 IN  MX  10 biaobiaoqi.me.</code></p>
+
+<p>使用如下命令查询：</p>
+
+<p><code>dig mx biaobiaoqi.me</code></p>
+
+<p>在DNS服务器里增加针对邮箱服务器的FQDN的A记录。</p>
+
+<p><code>mail.biaobiaoqi.me.    10  IN  A   106.186.114.43</code></p>
+
+<p>使用如下命令查询：</p>
+
+<p><code>dig a mail.biaobiaoqi.me</code></p>
+
+<h3>PTR配置</h3>
+
+<p>Linode的域名反向解析设置教程参见：<a href="https://library.linode.com/dns-manager#sph_setting-reverse-dns">Setting Reverse DNS</a></p>
+
+<p>查看PTR的命令如下：</p>
+
+<p><code>dig -x 106.186.114.43</code></p>
+
+<p>得到的结果中有如下项则为正确：</p>
+
+<p><code>
+;; ANSWER SECTION:
+43.114.186.106.in-addr.arpa. 8640 IN    PTR mail.biaobiaoqi.me.
+</code></p>
+
+<h3>SPF配置</h3>
+
+<p>在DNSPod上设置SPF记录。由于DNS本身不支持SPF类型，可以使用TXT记录代替：</p>
+
+<p><code>biaobiaoqi.me.     600 IN  TXT "v=spf1 a mx -all"</code></p>
+
+<p>可以通过如下命令查询：</p>
+
+<p><code>dig txt biaobiaoqi.me</code></p>
+
+<p>在线测试SPF是否部署成功：<a href="http://www.openspf.org/Why?show-form=1">http://www.openspf.org/Why?show-form=1</a></p>
+
+<h2>Postfix搭建</h2>
+
+<p>使用Postfix做SMTP服务器，Dovecot来做IMAP/POP3服务器，并使用Mysql存储加盐密码作认证。具体教程如下：</p>
+
+<p><a href="https://library.linode.com/email/postfix/postfix2.9.6-dovecot2.0.19-mysql"><strong>Email with Postfix, Dovecot, and MySQL</strong></a></p>
+
+<p>启动postfix：</p>
+
+<p><code>sudo service postfix start</code></p>
+
+<p>启动dovecot：</p>
+
+<p><code>sudo dovecot -c /etc/dovecot/dovecot.conf</code></p>
+
+<p>邮件服务启动后，测试相应的端口是否正常开放：</p>
+
+<p>```
+netstat -nltp | grep dovecot #查看POP3 （993）和IMAP （995）的端口是否运行</p>
+
+<p>netstat -nltp | grep 25 #查看SMTP（25）的端口是否运行
+```</p>
+
+<p>对于没有使用TLS或者STARTTLS的邮件服务器，可以使用<a href="http://exchange.mvps.org/smtp_frames.htm">telnet</a>测试SMTP是否部署成功。而本次实践中增加了用户认证，telnet这种明文传输的协议无法作为测试工具，只好直接使用邮件客户端做功能测试。</p>
+
+<h2>DKIM配置安装</h2>
+
+<p>具体部署过程参照：<a href="https://rtcamp.com/tutorials/mail/dkim-postfix-ubuntu/">dkim-postfix-ubuntu</a></p>
+
+<p>其中需要注意，如果使用的Postfix版本不低于2.6，需要将/etc/postfix/main.cf中的milter_protocol赋值为6。
+<code>postconf mail_version</code>可以查看postfix的版本。</p>
+
+<p>本地测试公钥密钥是否正确：（<a href="http://www.opendkim.org/opendkim-testkey.8.html">opendkim-testkey命令的介绍</a>）</p>
+
+<p><code>
+-&gt;#opendkim-testkey -d biaobiaoqi.me -s mail -k /etc/postfix/dkim.key -vvv
+opendkim-testkey: key loaded from /etc/postfix/dkim.key
+opendkim-testkey: checking key 'mail._domainkey.biaobiaoqi.me'
+opendkim-testkey: key not secure #这里大概是用户、权限的问题。不会影响基本功能
+opendkim-testkey: key OK
+</code></p>
+
+<h2>邮箱服务器健康度测试</h2>
+
+<p>完成上述所有步骤后，一个完整的域名邮箱就可以投入使用了。在此之前，可以做一次全面的体检。</p>
+
+<p>推荐使用在线监测服务：<a href="http://www.mail-tester.com/">mail-tester</a>。这是一个全面、界面友好的邮件测试网站。按照要求发送邮件到某邮件地址，然后就可以查到邮件服务器的体检报告了。每项都会有详细的说明。</p>
+
+<h2>遇到的问题记录</h2>
+
+<p>安装部署的过程中，遇到不少问题。简略记录下其中有代表性的一些：</p>
+
+<ul>
+<li><p>能成功发送邮件，但无法接受邮件，在日志中查看，全是status=deferred。解决：FQDN的设定错误。</p></li>
+<li><p>使用<code>sudo service opendkim start</code>无法启动OpenDKIM。解决：不要使用service命令，而是用如下命令启动：<code>/etc/init.d/opendkim start</code></p></li>
+<li><p>在使用Maildir格式接收邮件时，无法接受邮件。解决：需要自己在用户目录下构建Maildir/tmp、Maildir/cur、Maildir/new目录。</p></li>
+<li><p>在使用Maildir格式接收邮件时，无法接受邮件。解决：本地Maildir的权限会造成Permission denied。</p></li>
+<li><p>给qq邮箱发送邮件，提示『此地址未验证，请注意识别』。解决：这是qq的bug：<a href="http://edm.marketing100.com/service/news_detail.php?ID=126">参见解释</a></p></li>
+</ul>
+
+
+<h2>管理队列中的邮件</h2>
+
+<p>在服务器端管理队列中得邮件使用<code>postqueue</code>和<code>postsuper</code>命令。使用详情参见：</p>
+
+<ul>
+<li><a href="http://www.faqforge.com/linux/server/manage-the-postfix-mailqueue-with-postsuper-postqueue-und-mailq/">Manage the postfix mailqueue with postsuper, postqueue und mailq</a></li>
+<li><a href="http://www.postfix.org/postqueue.1.html">postqueue</a></li>
+<li><a href="http://www.postfix.org/postsuper.1.html">postsuper</a></li>
+</ul>
+
+
+<h2>其他参考资料</h2>
+
+<ul>
+<li><a href="https://rtcamp.com/tutorials/mail/">Emails Tutorials</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[邮件服务（二）：安全、认证和垃圾邮件]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2014/01/21/email-2/"/>
+    <updated>2014-01-21T01:38:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2014/01/21/email-2</id>
+    <content type="html"><![CDATA[<h2>背景</h2>
+
+<p><a href="http://biaobiaoqi.github.io/tags/you-jian-fu-wu/">邮件服务系列博文</a>中<a href="http://biaobiaoqi.github.io/blog/2014/01/20/email-1/">第一篇博客</a>介绍了邮件服务的基本知识，了解了邮件是如何从发件人的邮件客户端经过不同的传输协议传送到收件人的邮件客户端的。这只是邮件的基本功能实现，但如果发生如下情况，整个邮件系统的生态环境将被扰乱：</p>
+
+<ul>
+<li>被不法分子利用邮箱服务器发送垃圾邮件</li>
+<li>被其他人伪造域名邮箱发送邮件</li>
+<li>被中间人窃取账号密码、甚至重要邮件信息（中间人攻击）</li>
+<li>即使自己拥有邮箱服务器的权限，无限制的滥用这个权利给其他邮箱发送邮件也是不好的</li>
+</ul>
+
+
+<p>为了防止以上的种种情况，电子邮箱体系引入了更多的协议和机制。本文对此做浅显的总结，如有出错，还请指出和补充。</p>
+
+<!--more-->
+
+
+<h2>PTR</h2>
+
+<p><a href="http://en.wikipedia.org/wiki/List_of_DNS_record_types#PTR">PTR</a>(pointer record)是DNS记录中的一种。与A记录相反，它记录的是由IP到<a href="http://en.wikipedia.org/wiki/Fully_qualified_domain_name">FQDN</a>（fully qualified domain name）的映射。</p>
+
+<p>PTR并非由DNS服务提供商控制，而是通过IP提供商来设定。比如博主使用linode的VPS，独立IP 由Linode提供，于是PTR也是由Linode给予的权限来做设定。</p>
+
+<p>在DNS中设置PTR能增加邮件的非垃圾邮件权重（不同垃圾邮件黑名单判定机构有不同的判定规则，其中PTR是公认的指标之一）。</p>
+
+<p>更多信息参考：<a href="https://rtcamp.com/tutorials/mail/fqdn-reverse-dns-ptr-mx-record-checks/">Checking FQDN, Reverse-DNS/PTR, MX record</a></p>
+
+<h2>SPF</h2>
+
+<p><a href="http://en.wikipedia.org/wiki/Sender_Policy_Framework">SPF</a>(Sender Policy Framework)也是一种DNS记录。通过查询发送邮件者的 IP 地址和发送来的邮件地址做对比，进行简单的邮件验证。域名的管理员通过 SPF 记录或 TXT 记录来规定这个域名下哪些 IP 地址是“允许”发送邮件的，这样如果有人用别的 IP 地址来伪造发送的话，收件方可以根据 SPF 来选择拒收这些邮件。</p>
+
+<p>最初的邮件系统没有考虑到各种安全因素，SPF是在之后的发展过程中提出的。为了兼容不支持SPF记录的DNS服务器（本博客所使用的DNSPod就不支持SPF记录。），允许用TXT记录来表达SPF。<a href="www.openspf.org">OpenSPF</a> 建议在这段过渡时期同时添加 SPF 记录和 TXT 记录。</p>
+
+<p>SPF记录的语法规则见<a href="http://www.openspf.org/SPF_Record_Syntax">链接</a>。这里给出一个简单的例子：</p>
+
+<p><code>v=spf1 a mx -all</code></p>
+
+<p>其中<code>spf1</code>是版本号；<code>a</code>代表把A记录对应的IP加入信任列表；<code>mx</code>说明把这个域名上的 MX 记录所对应的服务器加入信任列表；<code>-all</code>代表将不是从信任列表发出的邮件强制拒绝(hard fail)。</p>
+
+<p>值得注意的是，经过测试发现Gmail并没有对hard fail的邮件执行拒绝，只是在web界面做出了一些提醒。这里有一篇相关的讨论：<a href="http://www.gossamer-threads.com/lists/spf/discuss/32914">链接</a>。</p>
+
+<p>更多资料参考：<a href="http://t.tt/31/">如何给域名设置 SPF 记录</a></p>
+
+<h2>DKIM</h2>
+
+<p><a href="http://www.dkim.org/">DKIM</a>(DomainKeys Identified Mail)是一种电子邮件的验证技术，使用<a href="http://zh.wikipedia.org/wiki/%E5%85%AC%E5%BC%80%E5%AF%86%E9%92%A5%E5%8A%A0%E5%AF%86">非对称加密</a>为邮件提供了签名与验证的功能。一般来说，发送方会在电子邮件的标头插入DKIM-Signature及电子签名，它们由私钥加密。而接收方则透过DNS查询得到公开密钥后进行验证。</p>
+
+<p>DKIM是由DomainKeys所改进的协定，大多数的运作方式与DomainKeys相同。在2007年2月时，DKIM被列入互联网工程工作小组（IETF）的标准提案，并于同年5月成为正式标准。</p>
+
+<h2>传输协议</h2>
+
+<p>通过标准的TCP/IP做SMTP传输，没有任何安全保障，信息容易被截获。为了保证数据的安全，可以使用SSL/TLS提供加密链接。对于IMAP和POP3使用SSL加密尚可接受，而SMTP会遇到兼容性问题：POP3和IMAP至于MRA和MUA有关，而使用SMTP协议的MTA会与其他的MTA沟通，除非全世界所有MTA节点同时升级为SSL/TLS加密的通信协议，否则会出现部分邮件无法中继的状况。</p>
+
+<p><a href="http://en.wikipedia.org/wiki/STARTTLS">STARTTLS</a>很好的解决了这一问题。STARTTLS是明文传输协议的扩展，它允许在明文连接的基础上将连接升级为加密连接，而不是使用另外一个加密接口。</p>
+
+<p>一般的，邮箱服务器各协议端口设定如下：</p>
+
+<ul>
+<li>IMAP：明文端口143，加密端口993</li>
+<li>POP3：明文端口110，加密端口995</li>
+<li>SMTP：明文端口 25，SSL加密端口465，STARTTLS加密端口587</li>
+</ul>
+
+
+<p>关于SSL、TLS和STARTTLS的区别，参见<a href="https://www.fastmail.fm/help/technology_ssl_vs_tls_starttls.html">链接</a>。</p>
+
+<h2>查看邮件原始信息</h2>
+
+<p>随着邮件在网络中的中转，邮件头会被加入许多必要信息。理解邮件头能帮助理解邮件服务的整个系统，在遇到垃圾邮件时，也可以助于定位问题所在。</p>
+
+<p>GMAIL的Web端可以查看邮件的详细信息。在邮件内容框里，点击右上角的更多选项，选中Show original，如图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/emailori-mail.png?imageView/2/w/800/h/800" alt="img" /></p>
+
+<p>下面展示linode发送给someuser@gmail.com的一封邮件的原始信息：</p>
+
+<p>```                                                                                                                                                                                                                                                     <br/>
+Delivered-To: someuser@gmail.com
+Received: by 10.114.246.38 with SMTP id xt6csp139967ldc;</p>
+
+<pre><code>    Mon, 20 Jan 2014 06:53:17 -0800 (PST)
+</code></pre>
+
+<p>X-Received: by 10.182.81.197 with SMTP id c5mr7069251oby.40.1390229596297;</p>
+
+<pre><code>    Mon, 20 Jan 2014 06:53:16 -0800 (PST)
+</code></pre>
+
+<p>Return-Path: <a href="&#x6d;&#x61;&#105;&#x6c;&#116;&#111;&#58;&#115;&#x75;&#x70;&#x70;&#x6f;&#114;&#x74;&#x40;&#x6c;&#x69;&#x6e;&#x6f;&#x64;&#101;&#46;&#99;&#111;&#x6d;">&#x73;&#117;&#112;&#x70;&#x6f;&#x72;&#116;&#64;&#108;&#x69;&#x6e;&#111;&#100;&#x65;&#x2e;&#x63;&#111;&#109;</a>
+Received: from mail2.linode.com (mail2.linode.com. [173.255.198.11])</p>
+
+<pre><code>    by mx.google.com with ESMTP id f6si835374obr.111.2014.01.20.06.53.15
+    for &lt;someuser@gmail.com&gt;;
+    Mon, 20 Jan 2014 06:53:16 -0800 (PST)
+</code></pre>
+
+<p>Received-SPF: pass (google.com: domain of support@linode.com designates 173.255.198.11 as permitted sender) client-ip=173.255.198.11;
+Authentication-Results: mx.google.com;</p>
+
+<pre><code>   spf=pass (google.com: domain of support@linode.com designates 173.255.198.11 as permitted sender) smtp.mail=support@linode.com
+</code></pre>
+
+<p>Received: from li114-242.members.linode.com (li114-242.members.linode.com [69.164.199.242])</p>
+
+<pre><code>by mail2.linode.com (Postfix) with ESMTP id 6AF9E26A96;
+Mon, 20 Jan 2014 09:53:15 -0500 (EST)
+</code></pre>
+
+<p>Date: Mon, 20 Jan 2014 09:53:15 -0500 (EST)
+From: support@linode.com
+To: someuser@gmail.com
+Message-ID: <a href="&#x6d;&#x61;&#x69;&#108;&#116;&#111;&#x3a;&#x33;&#x37;&#54;&#55;&#x35;&#x30;&#x38;&#x36;&#x38;&#46;&#50;&#54;&#x37;&#x36;&#52;&#46;&#49;&#51;&#57;&#x30;&#x32;&#x32;&#x39;&#x35;&#57;&#53;&#52;&#51;&#55;&#x2e;&#74;&#x61;&#118;&#97;&#x4d;&#x61;&#x69;&#108;&#46;&#99;&#x66;&#117;&#115;&#105;&#x6f;&#x6e;&#64;&#x6d;&#x61;&#x69;&#108;&#x32;&#46;&#x6c;&#105;&#x6e;&#x6f;&#x64;&#x65;&#x2e;&#99;&#x6f;&#x6d;">&#51;&#x37;&#54;&#x37;&#53;&#x30;&#x38;&#54;&#56;&#x2e;&#x32;&#54;&#x37;&#54;&#52;&#46;&#x31;&#x33;&#x39;&#48;&#50;&#50;&#x39;&#x35;&#57;&#53;&#52;&#x33;&#55;&#46;&#74;&#97;&#x76;&#x61;&#x4d;&#97;&#105;&#108;&#46;&#99;&#x66;&#x75;&#115;&#105;&#x6f;&#110;&#x40;&#x6d;&#97;&#105;&#x6c;&#50;&#46;&#108;&#x69;&#110;&#111;&#x64;&#101;&#46;&#x63;&#111;&#109;</a>
+```
+这封邮件里每项的具体含义如下(<a href="https://support.google.com/mail/answer/29436?hl=en">参考</a>以及<a href="http://www.ietf.org/rfc/rfc0822.txt">RFC0822</a>)：</p>
+
+<ul>
+<li>Delivered-TO： 发送的目的地邮箱地址。</li>
+<li>Received： 这个字段可以用来追踪邮件的传送路径。字段的基本格式为 from A by B for C。其中A为发送方，B为接收方，C为收件人邮箱地址。由于邮件可能经过多个SMTP服务器中继，故可以有多个Received字段。在邮件头中，以自底向上的顺序阅读它们。对于这封邮件，传送路径为：li114-242.members.linode.com -> mail2.linode.com -> mx.google.com -> 10.182.81.197 -> 10.114.246.38.</li>
+<li>Received-SPF： 用于记录SPF查询来验证邮件的安全性，参考<a href="http://www.openspf.org/SPF_Received_Header">SPF Received Header</a></li>
+<li>Return-Path： 邮件的回复地址，来自于SMTP中得<code>mail from:</code>命令。</li>
+<li>Date： 邮件的发送时间。</li>
+<li>From： 客户端显示的发件人地址，可以跟Return-Path中得地址不同。</li>
+<li>To： 客户端显示的收件人地址。</li>
+</ul>
+
+
+<p>实际上，Google估计到IP地址为敏感信息，某些情况下会隐藏发送邮件标头中得发件人IP地址（<a href="https://support.google.com/mail/answer/26903?hl=zh-Hans&amp;hlrm=en">资料链接</a>）。</p>
+
+<p>不同的客户端对这一功能做了不同的实现。比如QQ邮箱以前是能够查看邮件原始信息的，而现在已经关闭了这一功能。</p>
+
+<h2>第三方邮件服务</h2>
+
+<p>邮件服务器的基本功能实现虽然看起来简单，但为了让系统拥有足够的稳定性、邮件送达率，还是得付出不小的努力来与复杂的网络环境做斗争。许多公司为了集中注意力于自己的核心业务，会剥离出邮件发送的业务，使用第三方的邮件服务。国内国外涌现了不少第三方的邮件服务解决方案。自己没有相应的使用经验，谨贴出两个不错的介绍，供大家参考：</p>
+
+<ul>
+<li><a href="http://70.io/develop/aws_ses-mailgun-sendcloud.html">邮件发送服务AWS SES，Mailgun以及SendCloud</a></li>
+<li><a href="http://www.zhihu.com/question/20088568">知乎的邮件系统为什么不再用 Amazon SES 了？</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[邮件服务（一）：基本框架]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2014/01/20/email-1/"/>
+    <updated>2014-01-20T00:11:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2014/01/20/email-1</id>
+    <content type="html"><![CDATA[<h2>背景</h2>
+
+<p>电子邮件出现在1960s晚期，比打开浏览器就要使用的HTTP协议早了20年左右,是二十世纪人类最伟大的发明之一。这个古老、经典的框架在网络中运行了五十多年，现今仍然是网络中主要的流量类型之一。</p>
+
+<p>不得不提的是，<a href="http://zh.wikipedia.org/wiki/%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6">wiki</a>上关于中国的第一封电子邮件的记载：1987年9月14日[1]中国第一封电子邮件是由“德国互联网之父”维纳·措恩与王运丰在北京的计算机应用技术研究所发往德国卡尔斯鲁厄大学的，其内容为英文，大意如下：</p>
+
+<blockquote><p>Across the <strong>Great Wall</strong> we can reach every corner in the world.</p></blockquote>
+
+<p>真的是很有远见呢-,-</p>
+
+<p>前几天梳理了电子邮箱相关的协议和框架组件，准备整理成文。一共<a href="http://biaobiaoqi.github.io/tags/you-jian-fu-wu/">三篇</a>，本文是基本知识总结，第二篇介绍安全认证和防垃圾邮件的规范，第三篇记录了邮件服务器的搭建实践。</p>
+
+<!--more-->
+
+
+<h2>邮件传输所需要的组件</h2>
+
+<p>在解释邮件的传送过程前，先简单介绍一些术语（可以结合）：</p>
+
+<h3>术语</h3>
+
+<h4>Mail Agent</h4>
+
+<p>一般我们将邮件传输中的组件称作Mail Agent，根据功能的不同，它们包括了：</p>
+
+<ul>
+<li><strong>MUA</strong>（Mail User Agent）：作为客户端程序，负责从服务器接收邮件，向服务器发送邮件。</li>
+<li><strong>MTA</strong>（Mail Transfer Agent）：将邮件发送给目的地址的邮件服务器（目的服务器上也有一个MTA来做接收）。一般提到的Mail Server就是MTA。</li>
+<li><strong>MDA</strong>（Mail Delivery Agent）：根据MTA收取的邮件，决定邮件的去向（如果本机就是邮件的目的地址，则放入本地用户邮箱，如果不是，则继续转发）。还可以配置过滤垃圾邮件和自动回复等。</li>
+<li><strong>Mailbox</strong>：存储邮件数据。MDA会将邮件放到不同用户的邮箱中。一般的，有mbox、Maildir和dbmail等存储格式。mbox将所有邮件存放到一个文件中，弊端较多。Maildir则将邮件存为单独的文件。</li>
+<li><strong>MRA</strong>（Mail Retrieval Agent）：负责与MUA沟通。</li>
+</ul>
+
+
+<h4>协议</h4>
+
+<p>不同Agent之间的数据交通都依赖于协议，这些协议包括：</p>
+
+<ul>
+<li><strong>SMTP</strong>（Simple Mail Transfer Protocol）：端口25，面向连接的传输协议。用于MUA向MTA发送邮件，以及MTA之间互相发送和接收邮件。严格来说，MTA其实仅是指SMTP。</li>
+<li><strong>POP3</strong>（Post Office Protocol3）：离线协议，MUA从MRA获取邮件使用这一协议。首先验证身份，将邮件传输到MUA后，用户Mailbox中的邮件会被删除。</li>
+<li><strong>IMAP</strong>（Internet Message Access Protocol）：与POP3类似，用于从MRA收取邮件。不过MUA与MRA之间双向通信，客户端的改动会反映到服务器上。IMAP 整体上为用户带来更为便捷和可靠的体验，POP3 更易丢失邮件或多次下载相同的邮件，但 IMAP 通过邮件客户端与webmail 之间的双向同步功能很好地避免了这些问题。</li>
+</ul>
+
+
+<h4>其他</h4>
+
+<ul>
+<li><p><strong>MX记录</strong>：邮箱服务器DNS的MX记录指向邮箱服务器。MX记录可以设定优先级，数字越小的优先级越高。比如如下两条MX记录：<code>gmail.com.     1656    IN  MX  5 gmail-smtp-in.l.google.com.</code>，<code>gmail.com.        1656    IN  MX  10 alt1.gmail-smtp-in.l.google.com.</code>  <br/>
+  MTA会优先选取优先级为5的地址发送，如果不成功，再转向优先级低的服务器发送。而较低优先级的服务器只是用作暂存，将邮件保存在待发送的队列中，等主服务器恢复后中继转发到主服务器，以此容错。</p></li>
+<li><p><strong>中继转发</strong>（Relay）：邮件从一台MTA转发到下一台MTA，这个操作就成为邮件中继转发。如果所有人都能使用某台MTA做中继转发，则这台MTA成为Open Relay。这是很危险的，容易被互联网的邮件流量拖垮，且可能被记录到邮箱服务器黑名单上，坏处多多。需要仔细配置Relay规则。</p></li>
+</ul>
+
+
+<h3>邮件传输实例</h3>
+
+<p>从一个简单的应用场景谈起：Biaobiaoqi（简称B）使用自己的邮箱hello@biaobiaoqi.me登陆了自己的foxmail邮件客户端，撰写邮件，发送给shenyapeng(简称S)，S的邮箱地址是shenyapeng@gmail.com。S打开自己的邮件客户端，查收了邮件。</p>
+
+<p>从用户的角度来看，只是简单的将邮件从B发到了S，而实际上邮件在网络中经过了多个协议的传输。其大致流程如下：</p>
+
+<ul>
+<li>1.首先邮件需要从B的邮件客户端传送到对应的biaobiaoqi.me邮箱服务器</li>
+<li>2.biaobiaoqi.me的邮箱服务器将邮件发送给gmail.com邮箱服务器。</li>
+<li>3.S的邮件客户端从gmail邮件服务器获取到信收到的邮件。</li>
+</ul>
+
+
+<p>而更技术的解释如下：</p>
+
+<ul>
+<li>1.B登陆PC上得MUA（比如Foxmail、Thunderbird、Outlook等），撰写邮件。MUA使用SMTP将邮件发送给B的邮箱服务器mail.biaobiaoqi.me。</li>
+<li>2.mail.biaobiaoqi.me的MDA检测邮件头信息，发现需要将邮件发送给gmail.com邮箱服务器，于是交予MTA来做传输。</li>
+<li>3.MTA通过gmail.com的DNS中MX记录，查找到邮箱服务器的IP地址(<code>dig mx gmail.com</code>)，再向目的地中继转发这封邮件。</li>
+<li>4.到达目的MTA后，邮件被MDA送到Mailbox中。MRA开始工作，供MUA收取邮件。</li>
+<li>5.S登陆MUA，使用POP3或IMAP协议从gmail.com的邮箱服务器MRA收取邮件。</li>
+</ul>
+
+
+<p>无论是邮件客户端跟邮箱服务器之间认证身份，还是邮件数据的传输，都会进行加密。直接暴露在互联网络中是很危险的。安全认证方面的问题会在下一篇讨论，这里先介绍基本的功能协议。要知道最早发明邮件协议时，也并没有将安全问题考虑在内。</p>
+
+<h2>主要参考资料</h2>
+
+<ul>
+<li><a href="http://vbird.dic.ksu.edu.tw/linux_server/0380mail.php">鸟哥的Linux私房菜——服务器架设篇</a></li>
+<li><a href="http://wiki2.dovecot.org/MailServerOverview">MailServerOverview</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,371 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>反编译Jar包 - Biaobiaoqi的博客</title>
+  <meta name="author" content="Biaobiaoqi">
+
+  
+  <meta name="description" content="jadclipse，Jar包反编译">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://biaobiaoqi.me/blog/2013/10/21/decompiliation-jar/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Biaobiaoqi的博客" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+
+function addBlankTargetForLinks () {
+
+  $('a[href^="http"]').each(function(){
+
+      $(this).attr('target', '_blank');
+
+  });
+
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+
+  addBlankTargetForLinks();
+
+});
+
+</script>
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F49481ec3305db999013860b0ccb3b16d' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39900036-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Biaobiaoqi的博客</a></h1>
+  
+    <h2>做一个互联网世界的匠人</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:biaobiaoqi.me" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives/">全部文章</a></li>
+  <li><a href="/tag-cloud/">分类阅读</a></li>
+  <li><a href="/resources/">其他推荐</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">反编译Jar包</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-21T12:16:00+08:00" pubdate data-updated="true">Oct 21<span>st</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Jar 包(Java Archive)是对 Java 程序的打包，它可能包含源码，也可能没有。</p>
+
+<p>对于有包含源码的 Jar 包，在 Eclipse 工程里设定好 source code 路径后能直接查看到远吗，对于理解代码、调试的帮助很大。而如果 Jar 包没有打包源码，实际上也可以通过反编译的方法得到源码。道理很简单，Java 规范中，生成的.class 文件所包含的信息完全能逆向的重构出源码。</p>
+
+<p>当然，一些代码为了防止自身 Jar 包被人反编译，会做<a href="http://zh.wikipedia.org/wiki/%E4%BB%A3%E7%A0%81%E6%B7%B7%E6%B7%86">代码混淆</a>掩人耳目。其中最简单的一种方法就是是通过修改类名、变量名、方法名等方法让反编译的源码难于阅读理解。不过这个方法在混淆的时候需要特别注意：不能混淆对外提供接口的类。如果混淆了提供给外部的 API 接口的名字，整个工程就无法被正常使用了。</p>
+
+<p>本文要举例的是对<a href="http://help.aliyun.com/origin?helpId=664">阿里云开放云存储 Java SDK</a> 的反编译。由于 SDK 需要暴露接口给其他开发人员调用，本身确实没有做混淆（不理解阿里云为何没有将它开源出来），故可以做简单的反编译来查看源码。</p>
+
+<!--more-->
+
+
+<h2>Jadclipse 的安装使用</h2>
+
+<p>Jadclipse 插件的反编译功能源于 Java 反编译工具 Jad。但用裸的 Jad 来命令行执行不太友好，于是就有了 Jadclipse。</p>
+
+<h3>1.下载 Jad 反编译工具</h3>
+
+<p>下载好 Jad 工具，解压后放在合适的路径下。
+<a href="http://varaneckas.com/jad/">Jad 下载链接</a></p>
+
+<h3>2.安装插件</h3>
+
+<p>按照 Eclipse 版本下载匹配的 Jadclipse 插件：<a href="http://sourceforge.net/projects/jadclipse/files/?source=navbar">下载链接</a>。（这个插件的最近修改是 2007 年，只要不是使用的老掉牙的 Eclipse，都可以下载最新的插件版本 jadclipse3.3）。</p>
+
+<p>解压后，将对应版本的.jar 包放入 Eclipse 的插件目录(eclipse/plugins)下。</p>
+
+<h3>3.配置 Jadclipse</h3>
+
+<p>插件中有两个一定要配置好的选项：</p>
+
+<ul>
+<li>Jad 执行文件的路径</li>
+<li>.class 文件打开时的关联工具</li>
+</ul>
+
+
+<p>以下配置路径的方式可能 Windows 跟 Mac 版本的 Eclipse 各不相同，不过都比较简单，可以自行 Google。</p>
+
+<h4>3.1 Jad 执行文件路径</h4>
+
+<p>在 Eclipse 中，依次打开 <code>Preference -&gt; Java -&gt; JadClipse</code>，修改<code>Path to decompiler</code>的值，定位到 Jad 的执行文件路径。</p>
+
+<h4>3.2 .class 关联工具</h4>
+
+<p>由于 Eclipse 默认.class 文件打开使用的是 Class File Viewer，如果.class 没有关联的源文件，则无法查看源代码。需要将<code>.class without source</code>类型的文件的关联编辑器首选设置为 JadClipse Class File Viewer。</p>
+
+<p>打开方式如下： <code>Windows—&gt; Perference—&gt;General-&gt;Editors-&gt;File Associations</code></p>
+
+<h3>4.测试</h3>
+
+<p>配置好后，可能需要重启 Eclipse（或许是插件本身不够 Robust，博主在没有重启的情况下尝试打开没有附带源代码的.class 文件时失败了，重启后一切 ok）。</p>
+
+<p>下载阿里云开放云存储 SDK：<a href="http://help.aliyun.com/origin?helpId=664">下载链接</a>，解压后，将相应的 Jar 包加入到工程中。</p>
+
+<p>点击其中的某个.class 文件，即可显示出它的源代码。文件的头部会有 Jad 的相关信息：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="cm">/*jadclipse*/</span><span class="c1">// Decompiled by Jad v1.5.8g. Copyright 2001 Pavel Kouznetsov.</span>
+</span><span class='line'><span class="c1">// Jad home page: http://www.kpdus.com/jad.html</span>
+</span><span class='line'><span class="c1">// Decompiler options: packimports(3) radix(10) lradix(10) </span>
+</span><span class='line'><span class="c1">// Source File Name:   HmacSHA1Signature.java</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">…</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>PS</h3>
+
+<p>后来 Google 相关内容时，找到了 JadClipse 在 Eclipse Market 的版本：<a href="http://marketplace.eclipse.org/content/jadclipse-eclipse-4x">请戳</a>，或许对大家有用=)<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/10/21/decompiliation-jar/'>http://biaobiaoqi.me/blog/2013/10/21/decompiliation-jar/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Biaobiaoqi</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-21T12:16:00+08:00" pubdate data-updated="true">Oct 21<span>st</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+    <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+<a class="jiathis_button_tsina"></a>
+<a class="jiathis_button_weixin"></a>
+<a class="jiathis_button_renren"></a>
+<a class="jiathis_button_douban"></a>
+<a class="jiathis_button_googleplus"></a>
+<a href="http://www.jiathis.com/share?uid=1814751" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+	data_track_clickback:true,
+	summary:"",
+	shortUrl:true,
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1814751" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/10/20/repair-my-fixed-gear/" title="Previous Post: 修车记">&laquo; 修车记</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/10/21/hacker/" title="Next Post: 《黑客：计算机革命的英雄》">《黑客：计算机革命的英雄》 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <!--h1>Comments</h1-->
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>标签云</h1>
+ <br /> 
+  <ul class="tag-cloud">
+    <a style="font-size: 113%" href="/tags/hadoop/">Hadoop</a> &nbsp 
+<a style="font-size: 139%" href="/tags/jvm/">JVM</a> &nbsp 
+<a style="font-size: 145%" href="/tags/java/">Java</a> &nbsp 
+<a style="font-size: 143%" href="/tags/pat/">PAT</a> &nbsp 
+<a style="font-size: 107%" href="/tags/octopress/">octopress</a> &nbsp 
+<a style="font-size: 137%" href="/tags/fen-bu-shi/">分布式</a> &nbsp 
+<a style="font-size: 135%" href="/tags/zi-jie-ma/">字节码</a> &nbsp 
+<a style="font-size: 135%" href="/tags/si-kao/">思考</a> &nbsp 
+<a style="font-size: 180%" href="/tags/ji-zhu/">技术</a> &nbsp 
+<a style="font-size: 107%" href="/tags/cao-zuo-xi-tong/">操作系统</a> &nbsp 
+<a style="font-size: 126%" href="/tags/fang-fa-lun/">方法论</a> &nbsp 
+<a style="font-size: 129%" href="/tags/sheng-huo/">生活</a> &nbsp 
+<a style="font-size: 148%" href="/tags/suan-fa/">算法</a> &nbsp 
+<a style="font-size: 118%" href="/tags/wang-luo/">网络</a> &nbsp 
+<a style="font-size: 135%" href="/tags/du-shu/">读书</a>
+
+  </ul>
+</section>
+<section>
+  <h1>关于</h1>
+   <p>biaobiaoqi是我的网络id。<br><br>
+   我的博客日志：<a href="http://biaobiaoqi.me/blog/2013/09/01/blog-log/">请戳</a><br><br>
+   更多信息请戳：<a href="http://about.me/biaobiaoqi">about.me</a><br>
+	</p>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Biaobiaoqi -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  - <span class="credit">Theme by <a href="http://www.gehaxelt.in">Gehaxelt</a></span>
+  <span class="credit">and <a href="http://www.it-solutions-neef.de">IT Solutions Neef</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'biaobiaoqisblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://biaobiaoqi.me/blog/2013/10/21/decompiliation-jar/';
+        var disqus_url = 'http://biaobiaoqi.me/blog/2013/10/21/decompiliation-jar/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

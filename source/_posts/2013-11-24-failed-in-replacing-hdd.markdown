@@ -74,5 +74,5 @@ description: "主要依据王自如的视频指导双SSD组件RAID0的MBP，Time
 
 备份数据只有60G，而我原来系统的数据总量（包括操作系统本身）大概有120G，即使考虑有压缩，60G也相差的很远了。备份时急于求成，没有意识到这一点，造成备份不成功，提醒自己谨小慎微。
 
-顺着这次重配系统环境，我整理了自己的Mac OS X软件安装索引，参见博文：[《我的OS X软件安装索引》](http://biaobiaoqi.me/blog/2013/11/24/install-software-in-os-x/)，当然，希望自己再也不会用到。
+顺着这次重配系统环境，我整理了自己的Mac OS X软件安装索引，参见博文：[《我的OS X软件安装索引》](http://biaobiaoqi.github.io/blog/2013/11/24/install-software-in-os-x/)，当然，希望自己再也不会用到。
 

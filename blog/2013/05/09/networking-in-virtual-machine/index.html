@@ -1,0 +1,400 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>虚拟机中的网络配置 - Biaobiaoqi的博客</title>
+  <meta name="author" content="Biaobiaoqi">
+
+  
+  <meta name="description" content="本文介绍三种虚拟机中常用的网络配置模式：NAT(网络地址转换模式)、Bridged nerworking（桥接网络模式）和Host-only（主机模式）。">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://biaobiaoqi.me/blog/2013/05/09/networking-in-virtual-machine/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Biaobiaoqi的博客" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+
+function addBlankTargetForLinks () {
+
+  $('a[href^="http"]').each(function(){
+
+      $(this).attr('target', '_blank');
+
+  });
+
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+
+  addBlankTargetForLinks();
+
+});
+
+</script>
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F49481ec3305db999013860b0ccb3b16d' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39900036-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Biaobiaoqi的博客</a></h1>
+  
+    <h2>做一个互联网世界的匠人</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:biaobiaoqi.me" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives/">全部文章</a></li>
+  <li><a href="/tag-cloud/">分类阅读</a></li>
+  <li><a href="/resources/">其他推荐</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">虚拟机中的网络配置</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-09T22:39:00+08:00" pubdate data-updated="true">May 9<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>本文介绍三种虚拟机中常用的网络配置模式：NAT(网络地址转换模式)、Bridged nerworking（桥接网络模式）和 Host-only（主机模式）。</p>
+
+<h3>Network Address Translation (NAT)</h3>
+
+<p>NAT 模式使用了 <a href="http://zh.wikipedia.org/wiki/%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2">NAT</a> 服务来给虚拟网络提供网络连接。</p>
+
+<p>这种模式下，虚拟机能访问外部网络，外部无法直接连接到内部网络，除非使用端口映射 <a href="http://nxlhero.blog.51cto.com/962631/742140">port forwarding</a>。</p>
+
+<!--more-->
+
+
+<p>NAT 一般与 <a href="http://zh.wikipedia.org/wiki/DHCP">DHCP</a> 一起使用，以动态分配虚拟机内网 IP，无序手动配置内外部网络环境。当然，为了让虚拟机每次开机时拥有固定的 IP，也可以关闭掉 DHCP 服务，转而自己配置虚拟机的网络。虚拟机是 linux 的情况下，可以通过修改/etc/network/interfaces 实现开机固定 IP，示例如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># This file describes the network interfaces available on your system
+</span><span class='line'># and how to activate them. For more information, see interfaces(5).
+</span><span class='line'>
+</span><span class='line'># The loopback network interface
+</span><span class='line'>auto lo
+</span><span class='line'>iface lo inet loopback
+</span><span class='line'>
+</span><span class='line'>auto eth0
+</span><span class='line'>iface eth0 inet static
+</span><span class='line'>address 172.21.2.43
+</span><span class='line'>netmask 255.255.0.0
+</span><span class='line'>gateway 172.21.1.1
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>实现原理如图：</p>
+
+<p><img src="http://dl.dropboxusercontent.com/u/64021093/network/2.jpg"></p>
+
+<h3>Bridged networking(桥接)</h3>
+
+<p>在桥接模式下，本地物理网卡和虚拟网卡通过虚拟交换机进行桥接（无需在 host 上再开启新的虚拟网卡），物理网卡和虚拟网卡在拓扑图上处于同等地位，虚拟机就像是一台真实主机一样存在于局域网中。</p>
+
+<p>桥接模式无法与 DHCP 一起使用，需要手动的配置虚拟机的网络参数，包括 IP、网关、子网掩码和 dns。其中网关、子网掩码、dns 都应该与 host 设置相同值。在 linux 虚拟机中的设置示例如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#设置 ip、子网掩码
+</span><span class='line'>$ifconfig eth0 172.21.2.43 netmask 255.255.0.0
+</span><span class='line'>
+</span><span class='line'>#设置默认网关
+</span><span class='line'>$route add default gw 172.21.1.1
+</span><span class='line'>
+</span><span class='line'>#设置 dns
+</span><span class='line'>$sudo vim /etc/resolv.conf
+</span><span class='line'>nameserver 172.21.1.1
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>实现原理如图：</p>
+
+<p><img src="http://dl.dropboxusercontent.com/u/64021093/network/1.jpg"></p>
+
+<p>相比 NAT，桥接模式有一个前提条件，就是要获得另外一个 host 所在网段的 IP。在内网环境中还很容易，如果是 ADSL 宽带就比较麻烦了，ISP 一般是不会大方的多提供一个公网 IP 的，那种情况下，使用 NAT 或许是更好的选择。</p>
+
+<p><a href="http://blog.chinaunix.net/uid-26212859-id-3051291.html">VMware 的桥接网络配置</a></p>
+
+<h3>Host-only networking(主机)</h3>
+
+<p>以 host 为网关建立了新的虚拟网络，虚拟机无法访问外部网络，因此很安全。</p>
+
+<p>和 NAT 一样，也使用了 DHCP 服务做虚拟网络内的 IP 自动分配。</p>
+
+<p>另外，host-only 模式下也可以进行扩展配置，让虚拟网络的机器也能访问到外网，比如自定制 nat 和 dhcp 的使用等等。</p>
+
+<p>如图：</p>
+
+<p><img src="http://dl.dropboxusercontent.com/u/64021093/network/3.jpg"></p>
+
+<h2>参考资料</h2>
+
+<ul>
+<li><p><a href="http://networking.ctocio.com.cn/tips/110/8897610.shtml">解析虚拟 VMware 三种网络模式根本区别</a></p></li>
+<li><p><a href="http://www.virtualbox.org/manual/ch06.html">virtualbox 的网络模式详解</a></p></li>
+</ul>
+
+
+<p>图片引用自 ：<a href="http://networking.ctocio.com.cn/tips/110/8897610.shtml">解析虚拟 VMware 三种网络模式根本区别</a></p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/05/09/networking-in-virtual-machine/'>http://biaobiaoqi.me/blog/2013/05/09/networking-in-virtual-machine/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Biaobiaoqi</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-09T22:39:00+08:00" pubdate data-updated="true">May 9<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+    <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+<a class="jiathis_button_tsina"></a>
+<a class="jiathis_button_weixin"></a>
+<a class="jiathis_button_renren"></a>
+<a class="jiathis_button_douban"></a>
+<a class="jiathis_button_googleplus"></a>
+<a href="http://www.jiathis.com/share?uid=1814751" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+	data_track_clickback:true,
+	summary:"",
+	shortUrl:true,
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1814751" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/04/27/pat1020-pat1043-rebuild-binary-tree/" title="Previous Post: 根据前中后序和层序重建二叉树">&laquo; 根据前中后序和层序重建二叉树</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/05/12/touch-hadoop/" title="Next Post: 全分布式的Hadoop初体验">全分布式的Hadoop初体验 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <!--h1>Comments</h1-->
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>标签云</h1>
+ <br /> 
+  <ul class="tag-cloud">
+    <a style="font-size: 113%" href="/tags/hadoop/">Hadoop</a> &nbsp 
+<a style="font-size: 139%" href="/tags/jvm/">JVM</a> &nbsp 
+<a style="font-size: 145%" href="/tags/java/">Java</a> &nbsp 
+<a style="font-size: 143%" href="/tags/pat/">PAT</a> &nbsp 
+<a style="font-size: 107%" href="/tags/octopress/">octopress</a> &nbsp 
+<a style="font-size: 137%" href="/tags/fen-bu-shi/">分布式</a> &nbsp 
+<a style="font-size: 135%" href="/tags/zi-jie-ma/">字节码</a> &nbsp 
+<a style="font-size: 135%" href="/tags/si-kao/">思考</a> &nbsp 
+<a style="font-size: 180%" href="/tags/ji-zhu/">技术</a> &nbsp 
+<a style="font-size: 107%" href="/tags/cao-zuo-xi-tong/">操作系统</a> &nbsp 
+<a style="font-size: 126%" href="/tags/fang-fa-lun/">方法论</a> &nbsp 
+<a style="font-size: 129%" href="/tags/sheng-huo/">生活</a> &nbsp 
+<a style="font-size: 148%" href="/tags/suan-fa/">算法</a> &nbsp 
+<a style="font-size: 118%" href="/tags/wang-luo/">网络</a> &nbsp 
+<a style="font-size: 135%" href="/tags/du-shu/">读书</a>
+
+  </ul>
+</section>
+<section>
+  <h1>关于</h1>
+   <p>biaobiaoqi是我的网络id。<br><br>
+   我的博客日志：<a href="http://biaobiaoqi.me/blog/2013/09/01/blog-log/">请戳</a><br><br>
+   更多信息请戳：<a href="http://about.me/biaobiaoqi">about.me</a><br>
+	</p>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Biaobiaoqi -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  - <span class="credit">Theme by <a href="http://www.gehaxelt.in">Gehaxelt</a></span>
+  <span class="credit">and <a href="http://www.it-solutions-neef.de">IT Solutions Neef</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'biaobiaoqisblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://biaobiaoqi.me/blog/2013/05/09/networking-in-virtual-machine/';
+        var disqus_url = 'http://biaobiaoqi.me/blog/2013/05/09/networking-in-virtual-machine/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

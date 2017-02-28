@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: 分布式 | Biaobiaoqi的博客]]></title>
+  <link href="http://biaobiaoqi.github.io/tags/fen-bu-shi/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.github.io/"/>
+  <updated>2016-04-19T08:49:46+08:00</updated>
+  <id>http://biaobiaoqi.github.io/</id>
+  <author>
+    <name><![CDATA[Biaobiaoqi]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[《大规模Web服务开发技术》]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2013/10/28/scalable-web-service-development/"/>
+    <updated>2013-10-28T01:41:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2013/10/28/scalable-web-service-development</id>
+    <content type="html"><![CDATA[<h2>Web服务开发的心灵鸡汤</h2>
+
+<p><img src="http://img3.douban.com/mpic/s6818566.jpg" alt="img" /></p>
+
+<p>周末去上海陪妹子的两天在路途上看完了这本<a href="http://book.douban.com/subject/6758780/">《大规模Web服务开发技术》</a>。</p>
+
+<p>《大规模Web服务开发技术》是日本的<a href="http://www.hatena.com/">Hetena</a>团队以夏天举办的实习活动的课程讲义为基础整理的开发、运营大规模服务的入门书。书中更多的偏重了Hetena技术团队发展过程中的实践经验总结，将一个系统从无到有的发展过程有条理的展现了出来。读完全书，觉得它更像是一本Web服务开发的心灵鸡汤，有许多靠谱的总结，但相对零散，刚接触的人很难掌握。当然，心灵鸡汤并不是贬义，只是有不同的针对性。</p>
+
+<!--more-->
+
+
+<h2>内容</h2>
+
+<p>经验总结的东西一般很难有板有眼的映射到一个成熟的理论框架下。它的知识点相对零散，互相的耦合性比较强，很难在初步接触时建立起深刻的认识。尽管作者已经尽可能的让书的内容跟着服务端架构从小变大的过程走，具备一定的条理性，但要想通过看这种书来补强不谢知识区域，还是有些牵强。</p>
+
+<p>值得称道的是，作者对Hetena的技术发展史的描绘，能让读者接触到一个真实系统的成长过程。这是比较难得的一次体验。或许某个时刻，我们能在网上看到一篇讲解分布式存储系统的文章，另一个时刻，我们又看到了一篇将数据库划分的文章，但我们不知道在什么场景需要使用它们。这些零散的知识点，都需要融入到一个整体的经验体系、理论体系中，来发挥它们的作用。实践经验能帮助知识点的梳理，达到这一点。</p>
+
+<p>另外，全书的文笔很轻松，所以读起来比较快。时不时会跳出几句卖萌的表达。或许跟主体内容来自讲义有关吧=)。</p>
+
+<h2>定位</h2>
+
+<p>如此的定位，让本书不太适合想打造实际的技能栈的童鞋。换句话说，想通过这本书实际学习到某门技术是不太可行的。倒是挺适合对Web服务端不怎么熟悉，想走走看看了解下概貌，陶冶下情操的童鞋们，把这本书当做闲暇的读物，找找学习的感觉。我就是如此。另外，本身已经有足够的经验，或许也能读读这本书，梳理自己的思路。</p>
+
+<p>这本书让我想起了<a href="http://biaobiaoqi.github.io/blog/2013/07/19/odps-in-alibaba/">阿里的暑期课堂</a>，不过说实话，阿里的那次开放课堂的内容更多的侧重于宣讲，缺少技术架构的内容。希望更多的国内的企业能开放技术培训，让学生们能更早的接触到实践层的东西，某种角度来看也是一种双赢。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[关于毕业季照片分享的思考]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2013/05/25/some-ideas-about-using-bt-protocol-to-sync/"/>
+    <updated>2013-05-25T22:47:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2013/05/25/some-ideas-about-using-bt-protocol-to-sync</id>
+    <content type="html"><![CDATA[<h2>背景</h2>
+
+<p>毕业季到了，女朋友跟班里同学们一起拍了很多照片。由于照片分散在不同的人的手机、相机里，她也无法立即给我传来她的照片。这个情景一年前我也遇到过，只是当时自己比较忙，加上考虑着还会在本校读研，也没太在意毕业季照片的手机这一需求，以至于到现在我的电脑里甚至没有一张我穿学士服的照片:-=。而现在，当我想看看gf的照片时，这个需求横亘在我面前，让我特别的想解决掉它。</p>
+
+<p>让我们从事实出发，理清问题的思路。</p>
+
+<h2>需求的产生</h2>
+
+<p>大学生拍毕业季照的现状：</p>
+
+<ul>
+<li>1.大学生在毕业季拍照留念是刚需，几乎平日爱拍照、不爱拍照的所有人都会参与其中。</li>
+<li>2.拍照一般以小团体为基本单元进行。多是班级、社团这种常见的凝聚力较强的团体。</li>
+<li>3.随着科技的发展和生活水平的提高，越来越多的人具备了拍出高质量照片的设备和实力。</li>
+</ul>
+
+
+<p>由于这种以小团体为单位的照片的大量产生，每个团体中的照片会交叉散落在较多人手中。在这种分散的格局面前，单独挑选出自己的照片并保存的成本巨大，直接导致了大家最终需求的统一：</p>
+
+<ul>
+<li>将所有的照片分发到所有人手中。</li>
+</ul>
+
+
+<h2>原有解决方案</h2>
+
+<p>现有的解决方案主要方案归纳为如下四种：</p>
+
+<ul>
+<li><p>1.用移动硬盘等设备人力拷贝</p>
+
+<p>  这种方式太过古老和原始，缺点费时费力。</p></li>
+<li><p>2.使用公邮、网盘、QQ群共享等方式统一上传、下载</p>
+
+<p>  主要缺点是外网网速限制；另外，网速的限制让用户上传和下载的门槛变高，影响了上传积极性，如果有人迟迟不上传，最终下载完整数据的时间也会一直拖延，带来消极的体验；如果注册一次性账号，这也不见得是环保的行为（或许这想法有点数据洁癖吧>&lt;），如果使用非一次性账号，那么权限管理将比较头疼。</p></li>
+<li><p>3.使用内网BT资源站分别打包上传、下载</p>
+
+<p>  优点是利用了内网网速的优势。缺点是每个人都打包做种，会让资源分散的很厉害，难于汇集。且做种等步骤对于部分用户而言，有操作门槛。</p></li>
+<li><p>4.先使用1中方法，统一手机照片数据，然后按照2或3的方法发布数据</p>
+
+<p>  这大概是最靠谱的方式了，缺点集中在需要有人费时费力的手机数据上。当然，如果班里有一个任劳任怨的好班长，这个问题就解决了。</p></li>
+</ul>
+
+
+<h4>总结：</h4>
+
+<p>对于一个懒人而言，现有的解决方案都是蹩脚的。这些解决方案都不约而同的希望首先将数据聚合到一个外部空间中，然后再统一的分发给大家。这个步骤必要吗？实际上，我们只是需要每个人都方便、快捷的获得所有照片。</p>
+
+<h2>一个简单的设计</h2>
+
+<p>我将问题抽象为：</p>
+
+<ul>
+<li>完整的数据分散在10至20个数据拥有者手中，需要通过一定手段，让每个个体都不重复的拥有完整的数据。</li>
+</ul>
+
+
+<p>由于外网网速的限制，基于校园内网建立的工具就有了天然的优势。但如果使用内网，就不得不抛弃各大公司免费提供的邮箱存储空间、网盘存储空间。而校内的资源是有限的，没有自己的服务器，没有足够的空间存储大家的数据，这也就迫使我们考虑到了p2p的系统架构。于是，有了这样的解决方案，设定代号为BBT：</p>
+
+<ul>
+<li>PC机安装BBT工具软件后，可以设定<code>共享目录</code>和对应的<code>分享ID</code></li>
+<li>放入特定<code>共享目录</code>的文件，将使用基于p2p同步的方式，在拥有相同的<code>分享ID</code>的<code>共享目录</code>间同步数据，目的是让所有人都获得到每个人的数据</li>
+</ul>
+
+
+<p>在跟阿豪童鞋的交流中，他建议为了进一步简化用户操作，可以尝试这样一种体验方式：</p>
+
+<ul>
+<li>班级内所有人在同一个链接下载工具软件。保证这一链接下载的软件能互相通信，实现数据同步。这杨就节省了用户自己设定相同的<code>分享ID</code>的流程，而将这一过程转移到班长请求下载链接的过程中。</li>
+</ul>
+
+
+<p>确实够简洁，很赞，实现成本还需要调研。</p>
+
+<h6>BitTorrent Sync</h6>
+
+<p>在构思的过程中，突然想起前几天在start up news上看到了一个基于BT协议的同步软件<a href="http://labs.bittorrent.com/experiments/sync.html">BitTorrent Sync</a>。</p>
+
+<p><img src="http://labs.bittorrent.com/img/wide/sync.png" title="BitTorrent Sync" alt="BitTorrent Sync" /></p>
+
+<p>它的实现方式大概是我们所需要的。可惜的是，由于它的功能全面，界面略显复杂。而同时，它并没有开放二次开发接口。</p>
+
+<p>或许我需要自己搭建一个p2p的系统？</p>
+
+<h6>PS:</h6>
+
+<p>BT的优势，在于利用了所有节点的存储和传输能力，节点数量越多，下载越快</p>
+
+<p>BitTorrent  Sync的优势，则在于能动态的集合分散在不同节点中的数据</p>
+
+<p>感觉这种去中心化的分布式系统，前景大大的有啊;)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[分布式一致性]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2013/05/18/distributed-consistency/"/>
+    <updated>2013-05-18T18:58:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2013/05/18/distributed-consistency</id>
+    <content type="html"><![CDATA[<p>本文来自<a href="http://book.douban.com/subject/3108801/">《分布式原理与泛型》</a>的一致性章节笔记。由于缺乏实践经验，这本书对我来说太过理论，难于理解，现在已经暂停该书的阅读，转而加强实践。另有相关博文<a href="http://biaobiaoqi.github.io/blog/2013/05/15/cap-and-eventual-consistent/">《CAP和最终一致性》</a>，可供参考阅读。</p>
+
+<!--more-->
+
+
+<h3>1.分布式的一致性概述</h3>
+
+<p>分布式系统的一个重要问题是数据的复制。对数据的复制一般有两个原因：</p>
+
+<ul>
+<li>1.增加系统的可靠性，防止单点失效的问题；</li>
+<li>2.提高系统性能，利用不同地理位置的副本迅速响应用户需求。</li>
+</ul>
+
+
+<p>数据复制的主要难题是保持各个副本的一致性。即在更新一个副本时，必须确保同时更新其他的副本，否则数据的各个副本将不再相同。</p>
+
+<h3>2.以数据为中心的一致性模型</h3>
+
+<p>一致性模型实质上是进程和数据存储之间的一个约定。正常情况下，一个数据项上执行读操作时，它期待该操作返回的是该数据在其最后一次写操作之后的结果。在没有全局时钟的情况下，精确的定义哪次写操作是最后一次写操作是十分困难的。于是就产生了一系列用其他方式定义的一致性模型。</p>
+
+<h4>2.1 持续一致性</h4>
+
+<p>有人提定义了区分不一致性的三个互相独立的坐标轴：副本之间的数值偏差，副本之间新旧程度偏差以及更新操作顺序的偏差。</p>
+
+<p>数值偏差可以这样理解：已应用于其他的副本，但还没有应用于给定副本的更新数目。</p>
+
+<p>文中使用了<a href="http://en.wikipedia.org/wiki/Vector_clock">向量时钟</a>来举例对一致性单元进行持续抑制性分析，</p>
+
+<h4>2.2 严格一致性</h4>
+
+<p>任意read(x)操作都要读到最新的write(x)的结果。
+依赖于绝对的全局时钟，实际系统不可能做到。</p>
+
+<h4>2.3顺序一致性</h4>
+
+<p>对于一些读写写操作的集合，所有进程看到的都是同样的顺序。也就是将并行的操作序列化，而且每个进程得到的序列都相同。</p>
+
+<p>那么，很自然对于同一个进程执行的操作，必然要按照它们执行的顺序出现。</p>
+
+<h4>2.4因果一致性（Casual Consitency）</h4>
+
+<p>要求：</p>
+
+<p>有因果关系的写操作必须按照它们的因果关系的顺序被看到，没有因果关系的写操作可以以任意顺序被别的进程看到。</p>
+
+<p>例如：(其中[....]是占位符，表示没有操作)</p>
+
+<blockquote><p>进程1  W(x)a 将x写成a
+进程2  [..]R(x)a W(x)b
+进程3  [....]R(x)a R(x)b
+进程4  [....]R(x)b R(x)a</p></blockquote>
+
+<p>进程3和1、2是满足因果一致性的，加上4就不满足了。因为进程2是由于读到x=a才把x写成b的，所以W(x)a和W(x)b之间有因果关系，必须按照因果的顺序出现。</p>
+
+<p>相比顺序一致性，去掉了那些没有联系的操作达成一致顺序观点的要求，只是保留那些必要的顺序（有因果关系的）。</p>
+
+<h4>2.5入口一致性（Entry Consistency）</h4>
+
+<p>其实也就是对每个共享数据定义一个同步变量（即：锁）。当然，没有进行同步就进行的读操作结果是不保证的。</p>
+
+<h3>3 客户为中心的一致性</h3>
+
+<p>也就是从用户视角来看数据是一致的。只是关心数据最终会一致（eventually consitent）。</p>
+
+<p>只要保证对于同一个用户，他访问到的数据是一致的就可以了。如果用户只是访问一个副本，这个就很好实现，否则就需要一定策略了。当没有更多的更新的时候，要保证当前的更新会最终传播到所有的副本上。著名的例子有：DNS系统，万维网。</p>
+
+<p>但最终一致性需要注意一个典型的问题。即当客户访问不同的副本时，问题就出现了。更具体的例子比如，博客作者更改了一篇博文内容，在A地的用户先访问到最新的内容，而B地由于离博客服务器远，看到的还是原先的内容。</p>
+
+<p>对于最终一致性的的数据存储而言，这个示例很有代表性。问题是由用户有时可能对不同的副本进行操作的事实引起的。以客户为中心的一致性分为如下几大类：</p>
+
+<h4>3.1 单调读（Monotonic Reads）</h4>
+
+<p>当进程从一个地方读出数据x，那么这个以后再读到的x应该是和当前x相同或比当前更新的版本。也就是如果进程迁移到了别的位置，那么对x的更新应该比进程先到达。这里的客户就是指这个进程。</p>
+
+<h4>3.2 单调写（Monotonic Writes）</h4>
+
+<p>跟单调读相应，如果一个进程写一个数据x，那么它在本地或者迁移到别的地方再进行写操作的时候，原来的写操作必须要先传播到这个位置。也就是进程要在任何地方至少和上一次写一样新的数据。</p>
+
+<h4>3.3 Read your writes</h4>
+
+<p>一个进程对于数据x的写操作，那么进程无论到任何副本上都应该看到这个写操作的影响，也就是看到和自己写操作的影响或者更新的值。</p>
+
+<h4>3.4 Writes follow reads</h4>
+
+<p>顾名思义了，也就是在读操作后面的写操作要是基于至少跟上一次读出来一样新的值。也就是如果进程在地点1读了x，那么在地点2要写x的副本的话，至少写的时候应该是基于至少和地点1读出的一样新的值。</p>
+
+<h3>4 副本放置（Replica Placement）</h3>
+
+<h4>4.1 放置的三个方法</h4>
+
+<p>Permanent replica/永久副本: 选几个固定位置放置副本，镜像呈现。</p>
+
+<p>Server-initiated/服务端发起: 服务端动态决定什么时候向什么地方分发副本，又称push cache</p>
+
+<p>Client-initiated/客户端发起: 客户端缓存,client cache</p>
+
+<h4>4.2 更新传播</h4>
+
+<h5>4.2.1 传播什么？</h5>
+
+<ul>
+<li>可以是更新的通知（客户自己来取）</li>
+<li>可以是更新后的数据</li>
+<li>可以是更新的操作</li>
+</ul>
+
+
+<h5>4.2.2 谁来传播</h5>
+
+<ul>
+<li>服务器push或客户pull</li>
+</ul>
+
+
+<h5>4.2.3 传播协议？</h5>
+
+<ul>
+<li>保证最终会收敛到一致</li>
+</ul>
+
+
+<h4>4.3 复制协议（Replication Protocols）</h4>
+
+<h5>4.3.1 远程写（Remote-Write）协议</h5>
+
+<p>对于数据x有一个主副本，当没有x副本的服务器操作x的时候就会得到一个x的副本。而有x副本的服务器响应客户读请求的时候可以立刻返回。而当客户进行写操作的时候，写操作首先在主副本完成，然后再通知其他副本更新。</p>
+
+<h5>4.3.2 本地写（Local-Write）协议</h5>
+
+<p>和远程写比较类似，不同点是当一个服务器得到了副本以后就成了新的主副本，以后的写操作首先在本地完成，然后再通知其他的副本，本地写的名字由此而来。</p>
+
+<h5>4.3.3 主动复制（Active Replication）</h5>
+
+<p>对于副本的操作要设计到另外一个单一对象。比如，n个副本代理对象C的一个接口，如果向所有副本发出请求，每个副本都会发一个请求到C，那么同样的操作就执行了n次。所以需要一个协调者。另外，多副本返回值的时候也会有同样的情况。所以这种只执行一次的动作需要副本种有一个协调者，保证操作只被执行一次或者只返回一次。</p>
+
+<h5>3.3.4 基于候选团（Quorum-Based）协议</h5>
+
+<p>也就是读操作要得到r个服务器的同意，写操作要得到w个进程的同意。总共有n个进程。r和w要满足以下条件：</p>
+
+<ul>
+<li>r＋w > n 这样就不可能同时发生读写，并且读到的server肯定有一个以上被更新过的</li>
+<li>w > n/2   这样就不可能同时发生两个写</li>
+</ul>
+
+
+<p>也就是类似于投票获得读写的锁。在Dynamo系统中可以配置这种wrn参数以自持特定的一致性。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[HadoopDB：混合分布式系统]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2013/05/18/a-hybrid-system-hadoopdb/"/>
+    <updated>2013-05-18T17:58:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2013/05/18/a-hybrid-system-hadoopdb</id>
+    <content type="html"><![CDATA[<p>HadoopDB是一个Mapreduce和传统关系型数据库的结合方案，以充分利用RDBMS的性能和Hadoop的容错、分布特性。2009年被Yale大学教授Abadi提出，继而商业化为<a href="http://hadapt.com/">Hadapt</a>，据称从VC那儿拉到了10M刀投资。</p>
+
+<p>本文是对HadoopDB论文的总结。其中不免掺杂些自己的不成熟想法，更详细的内容，还请参见原论文 HadoopDB: An Architectural Hybrid of MapReduce and DBMS Technologies for Analytical Workloads</p>
+
+<!--more-->
+
+
+<h2>背景</h2>
+
+<h3>PB级数据分析系统的能力要求</h3>
+
+<ul>
+<li>1.性能：节省开销（时间、资金）。</li>
+<li>2.容错：数据分析系统（即使有故障节点也能顺利工作） 不同于 事务型的系统的容错（从故障中无损的恢复）。节点故障时，原来的查询操作不需要重启。</li>
+<li>3.在异构型环境中运行的能力。即使所有机器硬件一样，但某些机器在某些时候可能因为软件原因、网络原因也会性能降低。分布式操作时，要防止木桶效应。</li>
+<li>4.活的查询接口：商业化的数据分析一般建立在SQL查询上，UDF等non-SQL也是需要的。</li>
+</ul>
+
+
+<h5>并行数据库</h5>
+
+<p>满足1,4：利用分表的方式，扩散到多个节点。一般情况下节点最多为几十个，原因：1.每增加一个节点，失败率增加；2.并行数据库假设各个机器都是同质化的，但这往往不太可能</p>
+
+<h5>MapReduce</h5>
+
+<p>满足2,3,4：Map - repartition - Reduce原为非结构化数据，但也可以适用结构化数据。</p>
+
+<ul>
+<li>2：（错误节点）动态的规划节点执行任务，将错误节点任务发放给新节点。并在本地磁盘做checkpoint存储。</li>
+<li>3：（拖后腿的节点）节点间冗余的执行。执行慢的节点的任务交付给速度快的节点执行</li>
+<li>4：Hive的HQL</li>
+</ul>
+
+
+<h5>HadoopDB</h5>
+
+<p>融合了之前两者，做出系统层面的改进，而不仅仅是语言和接口层面。</p>
+
+<p>这三个解决方案对4个指标的关系如下图：</p>
+
+<p><img src="http://dl.dropboxusercontent.com/u/64021093/hadoopDB/QQ%E6%88%AA%E5%9B%BE20130518135802.png" title="compare" alt="alt compare" /></p>
+
+<h2>架构</h2>
+
+<p>如图
+<img src="https://dl.dropboxusercontent.com/u/64021093/hadoopDB/QQ%E6%88%AA%E5%9B%BE20130518135814.png" title="framework" alt="alt framework" /></p>
+
+<h2>组件介绍</h2>
+
+<h5>Databse Connector:</h5>
+
+<ul>
+<li><p>作用</p>
+
+<p>  hadoopTask &lt;-通信-> Database on Node。节点上的DB类似于Hadoop中的数据源HDFS</p></li>
+<li><p>实现</p>
+
+<p>  扩展了Hadoop的InputFormat</p></li>
+</ul>
+
+
+<h5>Catalog：</h5>
+
+<ul>
+<li><p>作用</p>
+
+<p>  1.链接参数如数据库位置，驱动类和证书；
+  2.一些元数据如数据簇中的数据集，副本的位置，数据的划分。</p></li>
+<li><p>实现</p>
+
+<p>  HDFS上的XML。希望做成类似于Hadoop的namenode。</p></li>
+</ul>
+
+
+<h5>Data Loader</h5>
+
+<ul>
+<li><p>作用</p>
+
+<p>  将数据合理划分，从HDFS转移到节点中的本地文件系统</p></li>
+<li><p>实现</p>
+
+<p>  global hasher：分配到不同节点
+  local hasher：继续划分为不同chunks</p></li>
+</ul>
+
+
+<h5>SQL to MapReduce to SQL (SMS) Planner</h5>
+
+<ul>
+<li><p>作用</p>
+
+<p>  将HiveQL转化为特定执行计划，在hadoopDB中执行。原则是尽可能的讲操作推向节点上的RDBMS上执行，以此提高执行效率。</p></li>
+<li><p>实现</p>
+
+<p>  扩展Hive：
+  1.执行查找前，用catolog的信息更新Hive的metastore，定向到节点数据库的表
+  2.执行前，决定划分的键；将部分查询语句推到节点的数据库中执行。</p></li>
+</ul>
+
+
+<h2>示例</h2>
+
+<p>示例参见下文的slides</p>
+
+<h2>总结</h2>
+
+<p>对hadoopDB的一些看法：</p>
+
+<ul>
+<li>其数据预处理代价过高：数据需要进行两次分解和一次数据库加载操作后才能使用；</li>
+<li>将查询推向数据库层只是少数情况，大多数情况下，查询仍由Ｈive完成．因为数据仓库查询往往涉及多表连接，由于连接的复杂性，难以做到在保持连接数据局部性的前提下将参与连接的多张表按照某种模式划分；</li>
+<li>维护代价过高．不仅要维护Ｈadoop系统，还要维护每个数据库节点；</li>
+<li>目前尚不支持数据的动态划分，需要手工一次划分好</li>
+</ul>
+
+
+<p>slides：</p>
+
+<script async class="speakerdeck-embed" data-id="48c5e680a1ab0130e1707290244918d4" data-ratio="1.33333333333333" src="http://biaobiaoqi.github.io//speakerdeck.com/assets/embed.js"></script>
+
+
+<p>下载slides，请猛戳<a href="https://dl.dropboxusercontent.com/u/64021093/hadoopDB/%5B2013-05-18%5DHadoopDB.pptx">这里</a></p>
+
+<h2>参考资料</h2>
+
+<ul>
+<li>HadoopDB: An Architectural Hybrid of MapReduce and DBMS Technologies for Analytical Workloads</li>
+<li><a href="http://dbanotes.net/database/hadoopdb.html">《HadoopDB》 —— Fenng</a></li>
+<li>《架构大数据:挑战、现状与展望》 计算机学报 王珊</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[CAP和最终一致性]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2013/05/15/cap-and-eventual-consistent/"/>
+    <updated>2013-05-15T00:30:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2013/05/15/cap-and-eventual-consistent</id>
+    <content type="html"><![CDATA[<p>查阅资料整理了最终一致性、CAP相关的内容。由于图省事儿，没有做文字的整理记载，只有slides和一些查阅过的链接，大家将就着看。欢迎指正。</p>
+
+<p>slides：</p>
+
+<script async class="speakerdeck-embed" data-id="cca07ce09e92013076c646310b996896" data-ratio="1.33333333333333" src="http://biaobiaoqi.github.io//speakerdeck.com/assets/embed.js"></script>
+
+
+
+
+<!--more-->
+
+
+<p>slides链接：<a href="https://speakerdeck.com/biaobiaoqi/cap-and-eventually-consistent">请戳这里</a></p>
+
+<h2>背景</h2>
+
+<p>为什么系统要扩张？历史的发展路径是怎么样的？请看<a href="http://rdc.taobao.com/blog/cs/?p=614">《系统可扩展性演化》</a></p>
+
+<h2>CAP理论</h2>
+
+<ul>
+<li><p>CAP理论的提出：分布式系统的CAP理论是2000年左右被提出的概念，直到Dynamo的出现，开始在工业界被广泛实践：
+<a href="http://www.julianbrowne.com/article/viewer/brewers-cap-theorem">《Brewer's CAP Theorem》</a>/<a href="http://code.alibabatech.com/blog/dev_related_728/brewers-cap-theorem.html">中文翻译</a></p></li>
+<li><p>对CAP的理解：<a href="http://www.douban.com/group/topic/11765014/">《谈正确理解CAP理论》</a>\ <a href="http://rdc.taobao.com/blog/cs/?p=631">《CAP理论及分布式系统一致性》</a></p></li>
+</ul>
+
+
+<h2>BASE理论</h2>
+
+<ul>
+<li>BASE的理论解释：<a href="http://rdc.taobao.com/blog/cs/?p=637">《分布式事务工程实现》</a></li>
+</ul>
+
+
+<h2>最终一致性</h2>
+
+<ul>
+<li><p>amazon的CTO分析最终一致性：<a href="http://www.allthingsdistributed.com/2008/12/eventually_consistent.html">Eventually Consistent - Revisited</a>/<a href="http://blog.csdn.net/xiaoqiangxx/article/details/7566654">中文翻译</a></p></li>
+<li><p>Dynamo论文：<a href="http://www.read.seas.harvard.edu/~kohler/class/cs239-w08/decandia07dynamo.pdf">Dynamo: Amazon’s Highly Available Key-value Store</a></p>
+
+<p>关于Dynamo的一篇中文简述：<a href="http://www.infoq.com/cn/articles/nosql-dynamo">《解读NoSQL技术代表之作Dynamo》</a></p></li>
+</ul>
+
+
+<h2>引申</h2>
+
+<ul>
+<li>CAP原作者对CAP的反思和澄清：<a href="http://www.infoq.com/cn/articles/cap-twelve-years-later-how-the-rules-have-changed">《CAP十二年回顾：规则变了》</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

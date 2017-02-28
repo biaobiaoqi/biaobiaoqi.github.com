@@ -89,7 +89,7 @@ clone到本地，尝试阅读js代码，尝试做小改动，找到动画开始�
 
 github为每个项目提供了静态网页展示的功能，应付这个项目的网页展示完全够了。具体操作流程参见[《GotGithub》3.5.2. 创建项目主页](http://www.worldhello.net/gotgithub/03-project-hosting/050-homepage.html#project-homepage)。实际上，链接中介绍的几种创造干净的gh-pages分支的方法，在这个项目的发布里是不必的。因为项目主页的展示代码跟master分支里的代码本身就是一样的，那么需要做的就只是开启gh-pages分支，并提交代码了。
 
-项目成果：[请戳这里](http://biaobiaoqi.me/Love)
+项目成果：[请戳这里](http://biaobiaoqi.github.io/Love)
 
 
 

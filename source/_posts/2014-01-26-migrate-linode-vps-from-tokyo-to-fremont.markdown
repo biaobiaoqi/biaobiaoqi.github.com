@@ -11,7 +11,7 @@ description: ""
 
 ##背景
 
-[上一篇博客](http://biaobiaoqi.me/blog/2014/01/22/email-3/)交代了如何在Linode上搭建邮件服务器，并配置好各种协议、记录来投入实际使用。
+[上一篇博客](http://biaobiaoqi.github.io/blog/2014/01/22/email-3/)交代了如何在Linode上搭建邮件服务器，并配置好各种协议、记录来投入实际使用。
 
 由于实践过程中，曾经尝试使用明文协议与服务器交流数据，可能泄露了账号、密码信息，造成之后被攻击发送垃圾邮件(详细情况类似于如下链接：[链接1](http://linuxroad.blog.51cto.com/765922/1039676),[链接2](http://linuxroad.blog.51cto.com/765922/1039675))，IP被上了黑名单，在[mail-tester.com](http://www.mail-tester.com)上的测试评分为0分，同时还收到了Linode的警告。
 

@@ -1,0 +1,33 @@
+<div class="highlight"><pre>  <span class="n">A</span><span class="o">.</span><span class="na">loadClass</span><span class="o">()</span>  
+       <span class="o">|</span>  
+   <span class="o">(</span><span class="n">not</span><span class="o">-</span><span class="n">found</span><span class="o">?)</span> <span class="o">(</span><span class="n">by</span> <span class="n">findLoadedClass</span><span class="o">)</span>  
+       <span class="o">|</span>  
+  <span class="n">B</span><span class="o">.</span><span class="na">loadClass</span><span class="o">()</span>  
+       <span class="o">|</span>  
+   <span class="o">(</span><span class="n">not</span> <span class="n">found</span><span class="o">?)</span> <span class="o">(</span><span class="n">by</span> <span class="n">findLoadedClass</span><span class="o">)</span>  
+       <span class="o">|</span>  
+<span class="n">systemclassloader</span><span class="o">.</span><span class="na">loadClass</span>  <span class="o">(</span><span class="n">Bs</span> <span class="n">parent</span><span class="o">,</span> <span class="n">also</span> <span class="n">can</span> <span class="n">be</span>   
+       <span class="o">|</span>                  <span class="n">called</span> <span class="n">classpath</span> <span class="n">classloader</span><span class="o">)</span>  
+       <span class="o">|</span>  
+   <span class="o">(</span><span class="n">not</span> <span class="n">found</span><span class="o">?)</span> <span class="o">(</span><span class="n">by</span> <span class="n">findLoadedClass</span><span class="o">)</span>  
+       <span class="o">|</span>  
+<span class="n">bootstrap</span> <span class="n">classloader</span><span class="o">.</span><span class="na">loadClass</span> <span class="o">(</span><span class="n">the</span> <span class="n">bootstrap</span> <span class="n">classloader</span><span class="o">,</span>   
+       <span class="o">|</span>                   <span class="o">(</span><span class="k">this</span> <span class="n">has</span> <span class="n">no</span> <span class="n">parent</span><span class="o">)</span>  
+       <span class="o">|</span>  
+   <span class="o">(</span><span class="n">not</span> <span class="n">found</span><span class="o">?)</span>  
+       <span class="o">|</span>  
+<span class="n">systemclassloader</span><span class="o">.</span><span class="na">findClass</span>  <span class="o">(</span><span class="n">on</span> <span class="n">system</span> <span class="n">classloader</span><span class="o">,</span>   
+       <span class="o">|</span>                   <span class="n">will</span> <span class="k">try</span> <span class="n">to</span> <span class="s">&quot;find&quot;</span> <span class="kd">class</span> <span class="nc">in</span> <span class="s">&quot;classpath&quot;</span><span class="o">)</span>  
+       <span class="o">|</span>  
+   <span class="o">(</span><span class="n">not</span> <span class="n">found</span><span class="o">?)</span> <span class="n">ClassNotFoundException</span>  
+       <span class="o">|</span>  
+   <span class="n">B</span><span class="o">.</span><span class="na">findClass</span>  
+       <span class="o">|</span>  
+   <span class="o">(</span><span class="n">not</span> <span class="n">found</span><span class="o">?)</span> <span class="n">ClassNotFoundException</span>  
+       <span class="o">|</span>  
+   <span class="n">A</span><span class="o">.</span><span class="na">findClass</span>  
+       <span class="o">|</span>  
+    <span class="o">(</span><span class="n">not</span> <span class="n">found</span><span class="o">?)</span>  
+       <span class="o">|</span>  
+   <span class="n">ClassNotFoundException</span>  
+</pre></div>

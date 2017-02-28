@@ -100,4 +100,4 @@ Class-Path: asm-3.0.jar
 ###参考资料
 
 * [《Java SE 6 新特性: Instrumentation 新功能》](http://www.ibm.com/developerworks/cn/java/j-lo-jse61/index.html)
-* [《Java类加载器编程实践》](http://biaobiaoqi.me/blog/2013/09/08/java-class-loader-in-practice/)
+* [《Java类加载器编程实践》](http://biaobiaoqi.github.io/blog/2013/09/08/java-class-loader-in-practice/)

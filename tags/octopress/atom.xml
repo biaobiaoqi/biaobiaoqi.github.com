@@ -1,0 +1,533 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: octopress | Biaobiaoqi的博客]]></title>
+  <link href="http://biaobiaoqi.me/tags/octopress/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.me/"/>
+  <updated>2013-11-07T02:33:21+08:00</updated>
+  <id>http://biaobiaoqi.me/</id>
+  <author>
+    <name><![CDATA[Biaobiaoqi]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[biaobiaoqi的博客日志]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/09/01/blog-log/"/>
+    <updated>2013-09-01T01:40:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/09/01/blog-log</id>
+    <content type="html"><![CDATA[<p>鉴于友言的客服不搭理的态度和时而无法正常显示以及管理界面的难以使用，决定将评论系统切换到disqus上。</p>
+
+<p>最近一直在更改博客的定制。就像一个人一样，产品也是由生命的，她的脚印就是她价值的体现。于是我萌生了将她的改变全部记录下来的想法，只恨没有在四个月前刚建起博客时就意识到这一点。</p>
+
+<p>这就是本文的初衷了。</p>
+
+<p>-- 2013/9/1</p>
+
+<h2>历史</h2>
+
+<ul>
+<li><p>2013/4 octopress博客在github上成功搭建</p></li>
+<li><p>2013/5 拟定了『首页』、『技术』、『生活』、『关于』的顶栏tag结构，增加了友言评论功能，jiathis分享功能，侧边栏的微博秀和豆瓣秀。</p></li>
+<li><p>2013/7 侧边栏增加标签云，并增加了『标签云』顶栏tag。取消侧边栏微博秀。</p></li>
+<li><p>2013/8 更换博客主题为whitelake。</p></li>
+</ul>
+
+
+<!--more-->
+
+
+<ul>
+<li><p>2013/9/1 取消友言评论功能，采用disqus评论系统。</p></li>
+<li><p>2013/9/10 顶栏增加『推荐』，推荐我所收集的学习资源。</p></li>
+<li><p>2013/9/12 将侧边栏的友情链接挪到『推荐』中。</p></li>
+<li><p>2013/9/17 取消顶栏的『关于』选项卡；将侧边栏的『最近发表』替换为『关于』，简述自己的身份；替换侧边栏的『我的社区』内容为我的所有社区ID的链接。</p></li>
+<li><p>2013/10/8 修改网站slogan：从『自由、共享、和平』到『追随自心·学徒』，这是从空泛的口号主意向更具体的生活层次的一个转变，意再提醒自己不要再纷杂的诱惑中迷失自我。</p></li>
+<li><p>2013/10/8 顶栏增加『狂想』，位于『读书』之后，『标签云』之前，是跟『技术』、『生活』、『读书』并列的文章主题。回顾之前的时间，脑子里冒出的东西倒不少，一直没有整理和形成输出。希望『狂想』（idea）成为这样一片天地。有感于category的纵向切割文章做分类的方法比较死板，准备之后逐步迁移到完全使用tags标记文章的方法。</p></li>
+<li><p>2013/10/14 修改网站slogon，修改关于的内容。</p></li>
+<li><p>2013/10/17 修改侧边栏 『关于』，删除了『我的社区』，化繁为简，将更多信息迁移到about.me上。</p></li>
+<li><p>2013/10/28 将所有tag转换为中文，并决定完全使用tag，放弃使用category（其实这违背了octopress的初衷啦）</p></li>
+<li><p>2013/10/29 重新设置博客顶栏，顶栏tab有：『首页』，『全部文章』，『分类阅读』，『其他推荐』。其中『分类阅读』继承和扩展了『标签云』的内容。</p></li>
+<li><p>2013/10/30 发现『分类阅读』中部分链接url错误，迅速修改过来-，-。</p></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[octopress第三方插件：博文同步工具syncPost]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/08/31/octopress-3rd-party-plugin-syncpost/"/>
+    <updated>2013-08-31T19:30:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/08/31/octopress-3rd-party-plugin-syncpost</id>
+    <content type="html"><![CDATA[<p>为了增加外链等考虑，独立博客往往有将博文同步到其他博客社区的需求。自己人肉黏贴的方式笨拙、重复，对于程序猿而言，着实不可取。</p>
+
+<p>我在github上找到了<a href="https://github.com/huangbowen521/octopress-syncPost">syncPost</a>这个针对octopress的第三方工具，能够通过一些论坛提供的<a href="http://en.wikipedia.org/wiki/MetaWeblog">metaWeblog</a>服务实现octopress最新一篇博文的同步提交。</p>
+
+<p>这大概就是我要找的东西吧。不过，其中有些细节并不是我想要的：</p>
+
+<ul>
+<li>1.在本地配置文件存储论坛账户的密码。虽然可以设置为ignore不提交到git代码库中，但这也并不安全。</li>
+<li>2.只能同步最新的一篇博客，没有整体的博文搬家功能。</li>
+<li>3.先比其他的octopress插件，原来版本的代码结构难于维护，比如有自己单独的配置文件，而不是使用全局的<code>_config.yml</code>(在那个版本中大概是为了不把明文密码提交到版本库中)，比如ruby文件单独在一个<code>_custom</code>文件夹下等</li>
+</ul>
+
+
+<p>基于这些点，我fork了<a href="http://huangbowen.net/">huangbowen</a>大哥的代码，定制成了它<a href="https://github.com/biaobiaoqi/octopress-syncPost">现在的样子</a>。</p>
+
+<!--more-->
+
+
+<h2>功能</h2>
+
+<p>通过rake的方式实现同步功能：</p>
+
+<ul>
+<li>1.同步所有octopress的博文到目标博客。 (<code>rake sync_all_posts</code>)</li>
+<li>2.同步最新一篇博文到目标博客。(<code>rake sync_lates_post</code>)</li>
+</ul>
+
+
+<h2>开发</h2>
+
+<p>这个octopress插件的结构很简单：</p>
+
+<ul>
+<li>安装<code>nokogiri</code>和 <code>metaweblog</code>两个gem。前者实现对octopress生成的html页面的解析，找到对应的博文。提供了客户端发起MetaWeblog请求的功能。</li>
+<li>在全局配置文件<code>_config.yml</code>中配置了目标博客MetaWeblog的服务地址、用户的账号信息。</li>
+<li>octopress/plugins/sync_*.rb三个文件则是代码实现。其中sync_post.rb中包含了post类，是主要的逻辑代码所在，sync_all_posts.rb和sync_latest_post.rb则是对前者的调用。</li>
+<li>修改了octopress的Rakefile，通过rake的方式实现功能。</li>
+</ul>
+
+
+<h2>下一步</h2>
+
+<p>希望能进一步完善这个插件，现在考虑到的有：</p>
+
+<ul>
+<li>增加同步所有博文功能中，对目标博客中已有博文的查重功能。即对于已经同步过去的博客，不再发送请求，或者实现编辑功能的同步功能。由于站点的MetaWeblog服务大多对请求有时限控制，同步过程中可能出现中断，此时部分博文已经同步过去，而部分没有，这种情况下，暂时没有好的解决方式。</li>
+<li>测试其他有MetaWeblog服务的博客站点（现在仅测试了cnblog）。</li>
+<li><del>cnblog的博文显示中，似乎不支持octopress的代码块样式。</del> (注：原作者huangbowen大哥已经解释了是css样式的问题)</li>
+</ul>
+
+
+<p>欢迎感兴趣的朋友参与到这个repo中来:)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[定制Octopress]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/07/10/decorate-octopress/"/>
+    <updated>2013-07-10T01:53:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/07/10/decorate-octopress</id>
+    <content type="html"><![CDATA[<p>在github pages上搭建好octopress博客之后，博客的基本功能就能使用了。如果想自己定制也是没问题的，octopress有较详尽的官方文档，原则上有问题求助官方即可：<a href="http://octopress.org/help/">octopress-help</a>。官方没有包纳的也可以去询问<a href="http://stackoverflow.com/questions/tagged/octopress">stackoverflow</a>。 当然，中文的看起来总会省事儿点。我做了如下一些总结;)</p>
+
+<p>不会ruby的童鞋特别注意：配置_config.yml的过程中特别注意，配置项『:』后要留空格，否则会报错。</p>
+
+<p>另外，一些『土方法』可能并不利于程序的维护可扩展，有空再仔细研究，大家将就着用吧;).</p>
+
+<h2>0.安装第三方主题</h2>
+
+<p>之所以把这一点标记为0，是因为在博主刚刚经历了博客主题的更新后，惨烈的发现需要重新配置包括评论、百度统计在内的不少东西。</p>
+
+<p>应该是自己在做定制化的过程中乱修改源码（这是一种很不可取维护方式，使软件难以持续扩展）造成的，又或者octopress框架本身对定制化扩展的支持比较弱（对ruby不熟，对octopress也一知半解，我不确定是不是这个原因）。</p>
+
+<p>简而言之，初接触octopress的朋友们，建议先安装第三方主题，再参考以下定制方法。</p>
+
+<p>我使用的第三方主题是<a href="https://github.com/gehaxelt/CSS-WhiteLake">『whitelake』</a>。</p>
+
+<p>安装过程很简单:</p>
+
+<p><code>
+$ cd octopress
+$ git clone https://github.com/gehaxelt/CSS-WhiteLake.git .themes/whitelake
+$ rake install['whitelake']
+$ rake generate
+</code>
+注意，执行<code>rake install['whitelake']</code>之后，直接使用<code>rake preview</code>浏览网页会遇到很多瑕疵，<code>rake generate</code>之后再<code>rake preview</code>就没问题了。</p>
+
+<p>更多第三方插件和主题资源，参见<a href="https://github.com/imathis/octopress/wiki">官方repo的wiki</a>.</p>
+
+<h2>1.装饰边栏</h2>
+
+<p>以增加豆瓣展示框为例。参加正反反长大哥的博客<a href="http://icodeit.org/2012/10/how-to-embed-douban-show-in-your-octopress-site/">How to Embed Douban-Show in Your Octopress Site</a></p>
+
+<h2>2.增加评论和分享功能</h2>
+
+<p>虽然octopress内置的disqus评论系统很不错，但在国内的使用并不普及。相比之下，友言、多说等第三方评论则更接地气，可以利用到微博、人人等SNS账号。</p>
+
+<h3>2.1友言</h3>
+
+<p>本博客采用了友言。首先注册<a href="http://www.uyan.cc/">友言</a>的账号，如果不注册，虽然也能实现评论功能，但没有后台管理整个站点的评论会十分纠结。注册完成之后，选择获取代码，将这串代码贴入相应的位置，即可实现第三方评论。</p>
+
+<p>在路径<code>$OCTOPRESS/source/_includes/post/</code>上创建文件<code>youyanandjiathis.html</code>，功能代码放入其中。</p>
+
+<h3>2.2加网</h3>
+
+<p>分享方面，本博客使用了<a href="http://www.jiathis.com/getcode/icon">加网</a>。注册后，在更多高级自定义功能中，可能自定义不同的分享按钮，生成代码后，也将生成的代码贴入<code>$OCTOPRESS/source/_includes/post/youyanandjiathis.html</code>中。</p>
+
+<p>现在，youyanandjiathis.html的样子如下(需要注意，自己使用时，uid显然是不一样的啦)</p>
+
+<p>``` html</p>
+
+<!-- JiaThis Button BEGIN -->
+
+
+<div class="jiathis_style_32x32">
+    <a class="jiathis_button_qzone"></a>
+    <a class="jiathis_button_tsina"></a>
+    <a class="jiathis_button_tqq"></a>
+    <a class="jiathis_button_weixin"></a>
+    <a class="jiathis_button_renren"></a>
+    <a href="http://www.jiathis.com/share?uid=1814751" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+    <a class="jiathis_counter_style"></a>
+</div>
+
+
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+
+
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=xxxxxx" charset="utf-8"></script>
+
+
+<!-- JiaThis Button END -->
+
+
+
+
+<!-- UY BEGIN -->
+
+
+<div id="uyan_frame"></div>
+
+
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=xxxxxxxx"></script>
+
+
+<!-- UY END -->
+
+
+<p>```</p>
+
+<h3>2.3将功能增加到博客中</h3>
+
+<p>功能代码已经都在youyanandjiathis.html中了，接下来是让blog使用到这些功能代码。</p>
+
+<p>首先在_config.yml中增加开关：
+``` ruby</p>
+
+<h1>comment and share</h1>
+
+<p>comment_and_share: true
+```</p>
+
+<p>然后在<code>$OCTOPRESS/source/_includes/post/sharing.html</code>中的，根据开关<code>comment_and_share</code> 引入对应的功能代码<code>post/youyanandjiathis.html</code>，类比于默认实现中的<code>&lt;facebook_like&gt;</code>部分。代码如下（使用时，先去掉反斜杠）：</p>
+
+<p>``` html</p>
+
+<p>  {\% if site.comment_and_share \%}</p>
+
+<pre><code>  \{\% include post/]youyanandjiathis.html \%\}
+</code></pre>
+
+<p>  {\% endif \%}</p>
+
+<p>```</p>
+
+<h3>2.4友言验证</h3>
+
+<p>另外，需要在友言的后台处理评论，甚至做一些定制化处理，需要通过友言的验证。详情在友言的管理员后台可见。</p>
+
+<h2>3.定制域名</h2>
+
+<p>如果你拥有自己的域名，可以CNAME到github pages上。以我的配置为例（我的域名为<code>biaobiaoqi.me</code>）。</p>
+
+<p>1.在octopress的source目录下创建CNAME文件，并输入新域名：biaobiaoqi.com</p>
+
+<p>2.在域名管理中，创建或修改A记录，指向207.97.227.245这个地址。</p>
+
+<p>3.创建CNAME记录，www.biaobiaoqi.com -> biaobiaoqi.github.com</p>
+
+<p>这一过程可能需要好几天才能生效，请耐心等待:)</p>
+
+<h2>4.让博客中连接在新窗口打开</h2>
+
+<p>由于markdown不支持这一语法，如果要自己用html标签实现，又有些违背了markdown以内容为重的立意。</p>
+
+<p>参考博文<a href="http://www.blogjava.net/lishunli/archive/2013/01/20/394478.html">《在Octopress中为markdown的超链接加上target="_blank"》</a>，可以通过将如下代码添加到 {OCTOPRESS_HOME}/source/_includes/custom/head.html文件末尾来实现：</p>
+
+<p>``` javascript</p>
+
+<script type="text/javascript">
+
+function addBlankTargetForLinks () {
+
+  $('a[href^="http"]').each(function(){
+
+      $(this).attr('target', '_blank');
+
+  });
+
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+
+  addBlankTargetForLinks();
+
+});
+
+</script>
+
+
+<p>```</p>
+
+<h2>5.列表的排版</h2>
+
+<p>默认情况，所有文字的排头会对齐，但如果有列表项的情况下也如此，列表头就会冲出文章的主体区块了。</p>
+
+<p>在octopress/sass/custom/_layout.scss文件中找到#$indented-lists: true行，去掉#注释即可。</p>
+
+<p>```
+$indented-lists: true</p>
+
+<p>```</p>
+
+<!--more-->
+
+
+<h2>6.404ERROR页面</h2>
+
+<p>在ocotopress/source目录下，增加404.markdown，并做出自定义的呃编辑。本博客使用了腾讯公益404，推荐大家使用，为社会贡献一分正能量。<a href="http://www.qq.com/404/">公益404</a></p>
+
+<h2>``` </h2>
+
+<p>layout: page</p>
+
+<p>title: "404 Error"</p>
+
+<p>date: 2013-4-21 02:35</p>
+
+<p>comments: false</p>
+
+<p>sharing: false</p>
+
+<p>footer: false</p>
+
+<hr />
+
+<script type="text/javascript" src="http://www.qq.com/404/search_children.js" charset="utf-8"></script>
+
+
+<p>```</p>
+
+<h2>7.在侧边栏增加标签云(tag cloud)</h2>
+
+<p>octopress默认只有分类，没有标签。这对于博文的组织和管理很不友好。有人开源出了自己定制的tag生成和tag cloud展现的代码，可以引入到自己的博客中来。</p>
+
+<p>详细操作参见博文：<a href="http://codemacro.com/2012/07/18/add-tag-to-octopress/">《为octopress添加tag Cloud》</a>。不过博文中没有讲解标签云的UI配置参数的使用，为了让UI适应页面，请参考原作者的官方说明:<a href="https://github.com/robbyedwards/octopress-tag-cloud">octopress-tag-cloud</a>。我所实践出的较合理的参数值如下
+``` ruby</p>
+
+<h1>注意，下面一行的escape反斜杠在正常使用时需要去掉</h1>
+
+<p>{\% tag_cloud font-size: 70-180%, limit: 15, order: rand, style: para  { &amp;nbsp }\%}
+```</p>
+
+<p>如果想将文章分类（category）也放在侧边栏，可以参考这篇博文：<a href="http://paz.am/blog/blog/2012/06/25/octopress-category-list-plugin/">《Octopress - Category List Plug-in》</a></p>
+
+<h2>8.在顶栏增加标签云页面tab</h2>
+
+<p>1.生成新网页
+<code>ruby
+rake new_page["tag-cloud"] #在octopress/source/中将生成tag-cloud/文件夹
+</code></p>
+
+<p>2.在顶栏增加新页面</p>
+
+<p>修改<code>source/_includes/custom/navigation.html</code></p>
+
+<p>```</p>
+
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/categories/tech/">技术</a></li>
+  <li><a href="/blog/categories/life/">生活</a></li>
+  <li><a href="/blog/categories/book/">读书</a></li>
+  <li><a href="/tag-cloud/">标签云</a></li>
+  <li><a href="/about">关于</a></li>
+</ul>
+
+
+<p><code>``
+在需要的位置增加</code><li><a href="/tag-cloud/">标签云</a></li>`。如此一来，可以在网页顶栏看到『标签云』一栏了。不过此时，点击进入，页面为空。</p>
+
+<p>3.修改标签云页面内容。</p>
+
+<p>修改<code>octopress/source/tag-cloud/index.markdown</code>，增加标签云执行脚本。</p>
+
+<p>```</p>
+
+<hr />
+
+<p>layout: page
+title: "标签云"
+date: 2013-07-10 02:53
+comments: true
+sharing: true</p>
+
+<h2>footer: true</h2>
+
+<h1>注意，代码中的escape反斜杠在正常使用时需要去掉</h1>
+
+<h1>另外，这几个语句不能使用换行。在我的测试环境下，使用换行后，最终的页面上对换行进行了错误的解码，给增加了一个<code>标签，造成了错误的显示。</h1>
+
+<ul class="tag-cloud">\{\% tag_cloud font-size: 90-210%, limit: 1000, style: para \%\}</ul>
+
+
+<p>```</p>
+
+<h2>9.博客末尾增加原文链接、版权等</h2>
+
+<p>最近发现有其他小网站未经授权直接copy我的博客内容，在违章的末尾加上版权、原文链接变得很有必要了。</p>
+
+<p>详情参见博客<a href="http://codemacro.com/2012/07/26/post-footer-plugin-for-octopress/">《为octopress每篇文章添加一个文章信息》</a>。</p>
+
+<p>值得注意的是，插件代码中如下几行需要去掉缩进和换行符。原因跟第8节所讲一样，换行符引起了错误的解码，造成了错误的显示。</p>
+
+<p>``` ruby
+post.content + %Q[<p class='post-footer'></p>
+
+<pre><code>        #{pre or "original link:"}
+        &lt;a href='#{post.full_url}'&gt;#{post.full_url}&lt;/a&gt;&lt;br/&gt;
+        &amp;nbsp;written by &lt;a href='#{url}'&gt;#{author}&lt;/a&gt;
+        &amp;nbsp;posted at &lt;a href='#{url}'&gt;#{url}&lt;/a&gt;
+        &lt;/p&gt;]
+</code></pre>
+
+<p>```
+最后，kevin没有提及的是，为了做好美化，还需要增加一段针这块区域的css：</p>
+
+<p>编辑<code>sass/custom/_style.scss</code>，在末尾增加如下内容：</p>
+
+<p><code>css
+.post-footer{margin-top:10px;padding:5px;background:none repeat scroll 0pt 0pt #eee;font-size:90%;color:gray}
+</code>
+这样，原文链接和版权信息就能很好的和正文内容分离开了。</p>
+
+<h2>10.给中英文之间加空格</h2>
+
+<p>参见博文<a href="http://xoyo.name/2012/04/auto-spacing-for-octopress/">《给中英文间加个空格》</a>。</p>
+
+<p>特别注意ruby文件的编码：复制博文中的代码时，需要去掉前几行的描述性注释，让<code>#encoding:UTF-8</code>语句暴露在.rb文件的第一句。否则，<code>rake generate</code>时，会报错无法识别<code>\p{Han}</code>。</p>
+
+<h2>Tips</h2>
+
+<p>既然是个博客站点，就算是web产品啦，可以考虑下SEO。推荐博文<a href="http://codemacro.com/2012/09/06/octopress-seo/">《Octopress中的SEO》</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[在github上搭建octopress博客 mac]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/03/21/building-octopress-in-github-mac/"/>
+    <updated>2013-03-21T23:43:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/03/21/building-octopress-in-github-mac</id>
+    <content type="html"><![CDATA[<p><img src="http://pikipity.github.com/images/post/octopress.jpg"></p>
+
+<p>最早的时候，是看见了<a href="http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/">唐巧大哥的博客</a>，UI上已是觉得耳目一新。后来读到过<a href="http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html">阮一峰的博文</a>，当知道这是搭建在Github这个程序员的facebook上时，更是心头一震，什么时候自己也搭这么个博客呢。直接用github托管代码，完全不用自己租服务器，实在方便。自己之前也有在csdn上维护了一个博客，虽然那已经是一年前的事情了。</p>
+
+<!--more-->
+
+
+<p>深刻的记得，当时想将自己的weibo账户贴到博客页面上，却发现它不支持一般用户嵌入javascript代码:(。这更让我对octopress的感情与日俱增。</p>
+
+<p>今天终于动手啦。自己从网上搜到了很多中文的博客描述如何安装配置octopress，有些博客讲得算是清晰，但终归每台电脑有不同的环境，每个人的叙述也或多或少的主观。最要命的是，我发现好几篇博文所讲述的命令都不太一样，走了不少弯路之后，倒腾了一下午，最终还是官网救了我。这也让我进一步认识到，信息的流通中的失真在所难免，最好的方法还是直接探寻最权威的内容。</p>
+
+<p>如果对octopress不太了解，不用急着动手，首先看看几个概念。（当然，lz现在也并非精通这几点，初来乍到的，先做出来再说，以后不断学习...）</p>
+
+<blockquote><ul>
+<li> Ruby：octopress框架的实现语言。rvm（ruby version manager）是用于管理ruby版本的，rake是ruby中类似于make工具。</li>
+<li> 静态站点生成工具：简单地说，不用数据库，直接生成网页文件。Jekyll就是这样的工具，而octopress是构建于它的上层的框架。</li>
+<li> Git：我主观的认为完虐svn的分布式版本控制工具。git官网貌似被gfw墙了=.=</li>
+<li> <a href="https://github.com/">Github</a>：程序员的Facebook,为程序员托管了很多代码的站点。</li>
+<li> <a href="https://help.github.com/categories/20/articles">Github pages</a>:github推出的，给与程序员自由创造静态网页的功能。支持Jekyll，因此也支持octopress。</li>
+<li> <a href="http://mxcl.github.com/homebrew/">homebrew</a>：mac os下的软件包管理工具，类似于linux下的dpkg。它使用ruby脚本，mac os下自带了ruby。</li>
+<li> <a href="http://octopress.org/">octopress</a> 其官网的help中有搭建octopress的足够的权威指导</li>
+<li><a href="http://www.ibm.com/developerworks/cn/xml/x-cn-yamlintro/">YAML</a>: YAML 试图用一种比 XML 更敏捷的方式，来完成 XML 所完成的任务。在octopress中，是使用yaml做配置文件的书写的。</li>
+</ul>
+</blockquote>
+
+<p>窃以为，最好的学习方式还是从最源头的资料入手。这里仅针对我的配置过程做简单描述，经验浅薄，有差错的地方还请指教:)</p>
+
+<h1>1. 配环境</h1>
+
+<h3>1.0 homebrew</h3>
+
+<p>万事开头难，第一步还是配环境。为了软件包安装的方便，可以先安装好homebrew.</p>
+
+<p><code>
+$ ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
+</code></p>
+
+<p>其使用方法，参见<a href="http://mxcl.github.com/homebrew/">官网</a>。</p>
+
+<h3>1.1 ruby</h3>
+
+<p>mac os x 10.8.1 的系统自带了Ruby，但是版本是1.8.3，而octopress官网所支持的最新版是1.9.3（2013.3），兼容起见，先对版本进行升级。</p>
+
+<p><code>
+$ rvm install 1.9.3 &amp;&amp; rvm use 1.9.3
+$ rvm ruby gems latest
+</code></p>
+
+<p>lz在升级过程中遇到了奇怪的错误，于是又参考<a href="http://www.iteye.com/blog/1118672">另一篇博文</a>，重新安装了rvm，再升级ruby到1.9.3版本。</p>
+
+<h3>1.2 git</h3>
+
+<p>使用homebrew安装git。</p>
+
+<p><code>
+$ brew install git
+</code></p>
+
+<h1>2. 搭建octopress</h1>
+
+<p>环境配置完成后，就可以开始参照<a href="http://octopress.org/help/">官网</a>的指导搭建octopress，并在github建代码仓库，同步管理啦。</p>
+
+<h1>3. 发博文和在线部署</h1>
+
+<p>同样的，参考<a href="http://octopress.org/help/">官网</a>即可。
+这里大致的列出我所常用到的几条命令：</p>
+
+<p>```</p>
+
+<h1>创建一篇博文</h1>
+
+<p>rake new_post["post title"] #octopress将在工作目录的source/_post/目录下生成相应的markdown文件。然后可以使用mou工具去修改编辑内容。</p>
+
+<h1>生成预览</h1>
+
+<p>rake preview #可以通过localhost:4000在本机实时观察最新的编辑效果。</p>
+
+<h1>在线发布</h1>
+
+<p>rake deploy #完成编辑后，可以将最新的内容部署到github上去。成功后，即可在线访问。</p>
+
+<h1>向github提交源文件更新</h1>
+
+<p>git add -A
+git commit -m "提交内容"
+git push</p>
+
+<p>```</p>
+
+<p>其中推荐到的<a href="http://mouapp.com/">mou</a>，是一个mac下的markdown编辑器。试用后发现有些格式兼容问题，但似乎mac下也只有他这个可视化工具了=。=</p>
+
+<p>另附<a href="http://wowubuntu.com/markdown/index.html">markdown语法</a></p>
+
+<p>进一步的octopress博客定制，参见博客<a href="/blog/2013/07/10/decorate-octopress/">《定制自己的octopress》</a></p>
+]]></content>
+  </entry>
+  
+</feed>

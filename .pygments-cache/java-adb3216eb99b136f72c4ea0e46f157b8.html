@@ -1,0 +1,9 @@
+<div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ClassLoaderTest</span> <span class="o">{</span>    
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>    
+        <span class="n">ClassLoader</span> <span class="n">loader</span> <span class="o">=</span> <span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getContextClassLoader</span><span class="o">();</span>    
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;current loader:&quot;</span><span class="o">+</span><span class="n">loader</span><span class="o">);</span>    
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;parent loader:&quot;</span><span class="o">+</span><span class="n">loader</span><span class="o">.</span><span class="na">getParent</span><span class="o">());</span>    
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;grandparent loader:&quot;</span><span class="o">+</span><span class="n">loader</span><span class="o">.</span><span class="na">getParent</span><span class="o">().</span><span class="na">getParent</span><span class="o">());</span>    
+    <span class="o">}</span>    
+<span class="o">}</span>    
+</pre></div>

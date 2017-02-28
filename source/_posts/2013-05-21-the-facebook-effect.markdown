@@ -111,7 +111,7 @@ Facebook不怕流量因此被分流，他们希望Facebook成为一个基础架�
 
 ##Facebook的定位
 
-社交需求的理论基础是馈赠型经济。更多介绍，参见[《免费》中关于非货币市场章节描述](http://biaobiaoqi.me/blog/2013/05/13/free-the-bit-economics/)
+社交需求的理论基础是馈赠型经济。更多介绍，参见[《免费》中关于非货币市场章节描述](http://biaobiaoqi.github.io/blog/2013/05/13/free-the-bit-economics/)
 
 
 扎克伯格的梦想是赋予每个人权利，对于他自己来说，Facebook能解决的最重要的问题就是给人们提供工具，让他们更好的交流。

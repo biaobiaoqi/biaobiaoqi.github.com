@@ -2,6 +2,848 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c337146-3d33-466d-b487-9267ead3da49" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.preview-mode" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/a31baacec3b8e662098936edb4e864987e846691/_alternating-rows-and-columns.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/5cf39c70020ba818d50934168d8e437f4fb46dd9/_appearance.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/462871df435b9731e04f254b61381211b8a3f5b1/_archive.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/5cf39c70020ba818d50934168d8e437f4fb46dd9/_background-clip.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/5cf39c70020ba818d50934168d8e437f4fb46dd9/_background-origin.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/5cf39c70020ba818d50934168d8e437f4fb46dd9/_background-size.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/de47d8667d000f9718223a5a889d84d24931ba90/_base.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/f4c07d1640e4607e22026c69ad706c7661a36040/_base.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/faf1a56bd6bbc28389ac926e6b60ac09d6129753/_base.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/462871df435b9731e04f254b61381211b8a3f5b1/_blog.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/5cf39c70020ba818d50934168d8e437f4fb46dd9/_border-radius.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/a31baacec3b8e662098936edb4e864987e846691/_borders.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/5cf39c70020ba818d50934168d8e437f4fb46dd9/_box-shadow.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/5cf39c70020ba818d50934168d8e437f4fb46dd9/_box-sizing.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/5cf39c70020ba818d50934168d8e437f4fb46dd9/_box.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/e168009cc95be917dbf90b3db7288a580db6a265/_bullets.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/37f3be6ee8f5c63689079dd976ffc8a24e8fa1e0/_clearfix.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/82bdeff5a16d26681693e3c5df47f2f7f10a8e60/_color.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/1bfc04e410ef427885509d3248d641370e8594b0/_colors.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/5cf39c70020ba818d50934168d8e437f4fb46dd9/_columns.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/cbc04b1979cb1082b55a8db870140d83d5363d40/_compass.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/d3499664a3adc8d0d34f23ba92c230cd99dc8fed/_contrast.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/46372f5d90c3713b76a35e23bf35feca1fb9ac99/_css3.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/f4c07d1640e4607e22026c69ad706c7661a36040/_delicious.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/1f685ac5fc8ff75356f541e48a2b30fa60f22e54/_ellipsis.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/5cf39c70020ba818d50934168d8e437f4fb46dd9/_filter.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/37f3be6ee8f5c63689079dd976ffc8a24e8fa1e0/_float.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/5cf39c70020ba818d50934168d8e437f4fb46dd9/_font-face.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/1bfc04e410ef427885509d3248d641370e8594b0/_fonts.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/462871df435b9731e04f254b61381211b8a3f5b1/_footer.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/1f685ac5fc8ff75356f541e48a2b30fa60f22e54/_force-wrap.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/82bdeff5a16d26681693e3c5df47f2f7f10a8e60/_general.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/f4c07d1640e4607e22026c69ad706c7661a36040/_googleplus.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/db9015ad49e195f532366025ae890ed94e0a0cc6/_grid-background.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/37f3be6ee8f5c63689079dd976ffc8a24e8fa1e0/_hacks.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/462871df435b9731e04f254b61381211b8a3f5b1/_header.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/e168009cc95be917dbf90b3db7288a580db6a265/_horizontal-list.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/312856d7ac0c9202acce01d01b748e14b42a872f/_hover-link.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/5cf39c70020ba818d50934168d8e437f4fb46dd9/_hyphenation.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/5cf39c70020ba818d50934168d8e437f4fb46dd9/_images.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/e168009cc95be917dbf90b3db7288a580db6a265/_inline-block-list.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/5cf39c70020ba818d50934168d8e437f4fb46dd9/_inline-block.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/e168009cc95be917dbf90b3db7288a580db6a265/_inline-list.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/1bfc04e410ef427885509d3248d641370e8594b0/_layout.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/3e8d09b6071ca1edc1d57602947f9b3d6e76d535/_layout.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/312856d7ac0c9202acce01d01b748e14b42a872f/_link-colors.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/b47275cb744c6083ace98ff486b15cef29f8bb32/_links.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/b47275cb744c6083ace98ff486b15cef29f8bb32/_lists.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/37f3be6ee8f5c63689079dd976ffc8a24e8fa1e0/_min.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/462871df435b9731e04f254b61381211b8a3f5b1/_navigation.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/1f685ac5fc8ff75356f541e48a2b30fa60f22e54/_nowrap.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/5cf39c70020ba818d50934168d8e437f4fb46dd9/_opacity.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/faf1a56bd6bbc28389ac926e6b60ac09d6129753/_partials.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/f4c07d1640e4607e22026c69ad706c7661a36040/_pinboard.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/5cf39c70020ba818d50934168d8e437f4fb46dd9/_regions.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/1f685ac5fc8ff75356f541e48a2b30fa60f22e54/_replacement.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/37f3be6ee8f5c63689079dd976ffc8a24e8fa1e0/_reset.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/a31baacec3b8e662098936edb4e864987e846691/_scaffolding.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/5cf39c70020ba818d50934168d8e437f4fb46dd9/_shared.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/462871df435b9731e04f254b61381211b8a3f5b1/_sharing.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/462871df435b9731e04f254b61381211b8a3f5b1/_sidebar.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/3e8d09b6071ca1edc1d57602947f9b3d6e76d535/_solarized.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/de47d8667d000f9718223a5a889d84d24931ba90/_sprite-img.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/82bdeff5a16d26681693e3c5df47f2f7f10a8e60/_sprites.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/1bfc04e410ef427885509d3248d641370e8594b0/_styles.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/46372f5d90c3713b76a35e23bf35feca1fb9ac99/_support.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/462871df435b9731e04f254b61381211b8a3f5b1/_syntax.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/82bdeff5a16d26681693e3c5df47f2f7f10a8e60/_tables.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/37f3be6ee8f5c63689079dd976ffc8a24e8fa1e0/_tag-cloud.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/5cf39c70020ba818d50934168d8e437f4fb46dd9/_text-shadow.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/b47275cb744c6083ace98ff486b15cef29f8bb32/_text.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/3e8d09b6071ca1edc1d57602947f9b3d6e76d535/_theme.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/5cf39c70020ba818d50934168d8e437f4fb46dd9/_transform.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/5cf39c70020ba818d50934168d8e437f4fb46dd9/_transition.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/f4c07d1640e4607e22026c69ad706c7661a36040/_twitter.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/3e8d09b6071ca1edc1d57602947f9b3d6e76d535/_typography.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/46372f5d90c3713b76a35e23bf35feca1fb9ac99/_typography.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/312856d7ac0c9202acce01d01b748e14b42a872f/_unstyled-link.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/19803f83f2351e85549e554ea3d61989b07cc36b/_utilities.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/3e8d09b6071ca1edc1d57602947f9b3d6e76d535/_utilities.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/46372f5d90c3713b76a35e23bf35feca1fb9ac99/_utilities.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/b47275cb744c6083ace98ff486b15cef29f8bb32/_vertical_rhythm.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/3e8d09b6071ca1edc1d57602947f9b3d6e76d535/_whitelake.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/jwplayer/glow/controlbar/background.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/jwplayer/glow/display/background.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/jwplayer/glow/controlbar/background.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/jwplayer/glow/display/background.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/bird_32_gray.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/bird_32_gray.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/bird_32_gray_fail.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/bird_32_gray_fail.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/jwplayer/glow/controlbar/blankButton.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/jwplayer/glow/controlbar/blankButton.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/jwplayer/glow/display/bufferIcon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/jwplayer/glow/display/bufferIcon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/jwplayer/glow/dock/button.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/jwplayer/glow/dock/button.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/code_bg.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/code_bg.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/jwplayer/glow/controlbar/divider.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/jwplayer/glow/controlbar/divider.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/dotted-border.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/dotted-border.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/email.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/email.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/jwplayer/glow/sharing/embedIcon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/jwplayer/glow/sharing/embedIcon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/jwplayer/glow/sharing/embedScreen.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/jwplayer/glow/sharing/embedScreen.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/favicon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/favicon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/jwplayer/glow/controlbar/fullscreenButton.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/jwplayer/glow/controlbar/fullscreenButton.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/jwplayer/glow/controlbar/fullscreenButtonOver.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/jwplayer/glow/controlbar/fullscreenButtonOver.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/jwplayer/glow/playlist/item.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/jwplayer/glow/playlist/item.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/jwplayer/glow/playlist/itemOver.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/jwplayer/glow/playlist/itemOver.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/line-tile.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/line-tile.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/jwplayer/glow/controlbar/muteButton.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/jwplayer/glow/controlbar/muteButton.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/jwplayer/glow/controlbar/muteButtonOver.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/jwplayer/glow/controlbar/muteButtonOver.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/jwplayer/glow/display/muteIcon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/jwplayer/glow/display/muteIcon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/noise.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/noise.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/jwplayer/glow/controlbar/normalscreenButton.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/jwplayer/glow/controlbar/normalscreenButton.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/jwplayer/glow/controlbar/normalscreenButtonOver.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/jwplayer/glow/controlbar/normalscreenButtonOver.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/jwplayer/glow/controlbar/pauseButton.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/jwplayer/glow/controlbar/pauseButton.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/jwplayer/glow/controlbar/pauseButtonOver.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/jwplayer/glow/controlbar/pauseButtonOver.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/jwplayer/glow/controlbar/playButton.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/jwplayer/glow/controlbar/playButton.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/jwplayer/glow/controlbar/playButtonOver.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/jwplayer/glow/controlbar/playButtonOver.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/jwplayer/glow/display/playIcon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/jwplayer/glow/display/playIcon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/jwplayer/player.swf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/jwplayer/player.swf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/rss.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/rss.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.sass-cache/faf1a56bd6bbc28389ac926e6b60ac09d6129753/screen.scssc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/search.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/search.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/jwplayer/glow/sharing/shareIcon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/jwplayer/glow/sharing/shareIcon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/jwplayer/glow/sharing/shareScreen.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/jwplayer/glow/sharing/shareScreen.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/jwplayer/glow/playlist/sliderCapBottom.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/jwplayer/glow/playlist/sliderCapBottom.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/jwplayer/glow/playlist/sliderCapTop.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/jwplayer/glow/playlist/sliderCapTop.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/jwplayer/glow/playlist/sliderRail.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/jwplayer/glow/playlist/sliderRail.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/jwplayer/glow/playlist/sliderThumb.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/jwplayer/glow/playlist/sliderThumb.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/jwplayer/glow/controlbar/timeSliderBuffer.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/jwplayer/glow/controlbar/timeSliderBuffer.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/jwplayer/glow/controlbar/timeSliderCapLeft.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/jwplayer/glow/controlbar/timeSliderCapLeft.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/jwplayer/glow/controlbar/timeSliderCapRight.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/jwplayer/glow/controlbar/timeSliderCapRight.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/jwplayer/glow/controlbar/timeSliderProgress.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/jwplayer/glow/controlbar/timeSliderProgress.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/jwplayer/glow/controlbar/timeSliderRail.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/jwplayer/glow/controlbar/timeSliderRail.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/jwplayer/glow/controlbar/unmuteButton.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/jwplayer/glow/controlbar/unmuteButton.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/jwplayer/glow/controlbar/unmuteButtonOver.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/jwplayer/glow/controlbar/unmuteButtonOver.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/_posts/2016-04-12-restart.markdown" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/404.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/404.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/CNAME" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/categories/book/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/categories/life/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/categories/tech/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/categories/book/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/categories/life/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/categories/tech/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/categories/think/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/[?]-zhi-xing/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/a-li-ba-ba/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/an-quan/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/android/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/aop/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/asm/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/ban-quan/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/bash/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/bei-fen/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/bi-te-bi/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/bian-ma/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/bing-fa/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/bo-ke/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/cao-zuo-xi-tong/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/career/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/chan-pin/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/chuan-dai-she-bei/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/chuang-xin/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/da-gui-mo/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/da-shu-ju/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/debug/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/dian-zi-huo-bi/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/du-shu/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/eclipse/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/facebook/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/fang-fa-lun/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/fen-bu-shi/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/fen-xiang/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/fu-wu-qi/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/git/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/gong-ju/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/gong-si/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/guan-xi-xing-shu-ju-ku/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/hadoop/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/hei-ke/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/http/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/io/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/ios/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/java/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/ji-zhu/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/jia-gou/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/jian-kang/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/jiang-zuo/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/jing-ji/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/jing-yan/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/js/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/jvm/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/kai-fa/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/ke-pu/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/kuang-xiang/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/la-ji-you-jian/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/lao-tao/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/li-lun/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/linode/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/linux/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/mac/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/mapreduce/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/mbp/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/metaweblog/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/mian-fei/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/ni-xiang-gong-cheng/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/octopress/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/os-x/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/p2p/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/pai-xu/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/pat/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/qi-ye-jia-jing-shen/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/ripple/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/ruan-jian/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/ruan-jian-gong-cheng/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/ruby/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/she-ji/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/sheng-huo/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/shi-jian/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/shi-wu/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/shu-ju-ji-cheng/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/si-fei/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/si-kao/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/ssd/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/ssh/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/suan-fa/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/suo-sui/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/teiid/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/ti-yan/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/tuan-dui/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/ui/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/up24/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/wang-luo/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/wap/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/web/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/webservice/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/wei-lai/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/wei-ruan/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/windows/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/xie-yi/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/xin-qing/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/xin-xi/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/xing-qu/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/you-jian-fu-wu/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/you-xi/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/zhi-neng-shou-huan/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/zhu-jiao/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/zi-jie-ma/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/zong-jie/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/[?]-zhi-xing/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/a-li-ba-ba/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/an-quan/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/android/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/aop/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/asm/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/ban-quan/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/bash/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/bi-te-bi/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/bing-fa/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/bo-ke/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/cao-zuo-xi-tong/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/chan-pin/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/da-gui-mo/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/da-shu-ju/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/dian-zi-huo-bi/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/du-shu/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/facebook/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/fang-fa-lun/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/fen-bu-shi/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/fen-xiang/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/git/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/gong-ju/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/guan-xi-xing-shu-ju-ku/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/hadoop/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/hei-ke/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/http/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/ios/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/java/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/ji-zhu/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/jia-gou/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/jing-ji/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/js/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/jvm/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/kai-fa/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/ke-pu/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/kuang-xiang/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/li-lun/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/linux/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/mac/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/mapreduce/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/metaweblog/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/mian-fei/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/ni-xiang-gong-cheng/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/octopress/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/p2p/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/pat/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/qi-ye-jia-jing-shen/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/ripple/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/ruan-jian-gong-cheng/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/ruby/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/she-ji/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/sheng-huo/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/shi-jian/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/shi-wu/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/shu-ju-ji-cheng/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/si-fei/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/si-kao/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/ssh/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/suan-fa/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/teiid/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/tuan-dui/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/ui/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/wang-luo/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/web/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/webservice/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/wei-lai/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/wei-ruan/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/windows/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/xin-xi/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/xing-qu/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/zi-jie-ma/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/zong-jie/atom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/cpp-85e50b3b4ff9b66c305271ee7d3e979e.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/cpp-f23e1aff9007dba4f9bc2bef8a67191b.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/css-8b0cdd8279835fc76ff968becb59e839.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/javascripts/ender.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/javascripts/libs/ender.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/ender.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/libs/ender.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/javascripts/github.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/github.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/jwplayer/glow/glow.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/jwplayer/glow/glow.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/html-3bc787e074c11af650990570c4bc8b29.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/html-7461f45c31fb2ca72dcec79aa101f113.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/03/17/kai-pian/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/03/21/building-octopress-in-github-mac/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/04/04/pat-basic-level-1001-1010/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/04/05/maximum-subsequence-sum/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/04/05/tong-bing-kuai-le-zhe/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/04/07/goodbye-seeme/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/04/18/some-opinions-about-software-engineering/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/04/19/use-ssh/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/04/20/are-you-smart-enough-to-work-at-google/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/04/23/winsock-kills-internet/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/04/25/split-querying-process-in-polybase/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/04/27/pat1020-pat1043-rebuild-binary-tree/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/04/27/travsal-binary-tree/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/05/09/networking-in-virtual-machine/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/05/12/mbti-test/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/05/12/touch-hadoop/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/05/13/free-the-bit-economics/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/05/15/cap-and-eventual-consistent/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/05/17/jail-break-your-ios/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/05/18/a-hybrid-system-hadoopdb/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/05/18/distributed-consistency/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/05/20/hybrid-distributed-data-management-system/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/05/21/the-facebook-effect/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/05/22/pragmatic-thinking-and-learning-refactor-your-wetware/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/05/25/kmp-algorithm/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/05/25/some-ideas-about-using-bt-protocol-to-sync/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/06/02/virtual-dispatch-and-method-table-in-java/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/06/08/ipc-in-hadoop/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/06/08/software-defined-network/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/06/09/something-about-mac-gui/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/06/11/gift-to-girl-friend/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/06/11/the-non-designers-design-book/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/07/05/checklist-manifesto/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/07/07/yuminhong/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/07/10/cc-license/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/07/10/decorate-octopress/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/07/16/verify-pop-sequence-for-stack/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/07/19/odps-in-alibaba/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/07/29/after-pat-practice/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/07/31/pat-1001-1010-solutions/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/07/31/pat-1011-1020-solutions/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/08/01/pat-1021-1030-solutions/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/08/01/pat-1031-1040-solutions/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/08/01/pat-1041-1050-solutions/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/08/01/pat-1051-1060-solutions/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/08/03/overcome-pat/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/08/26/distributed-transaction/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/08/31/octopress-3rd-party-plugin-syncpost/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/08/31/pat-1061-pat-1064/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/09/01/blog-log/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/09/05/google-android-challenge-2011/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/09/06/kongfu-snake-project-summary/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/09/07/java-classloader/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/09/08/custom-premain-method/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/09/08/initliate-objects-in-java/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/09/08/java-class-loader-in-practice/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/09/08/java-class-loading-linking-and-initialising/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/09/08/late-initialising-in-java/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/09/08/strange-behavior-using-braces-in-java/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/09/08/string-interning/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/09/08/three-principles-of-classloader-operation/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/09/10/scientifically-surfing-the-internet/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/09/22/java-initialization/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/09/30/jobs-and-jobs/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/10/03/nine-algorithms-that-changed-the-future/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/10/07/reset-nvram/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/10/08/pat-1065-pat-1068/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/10/19/data-integration-tool-teiid/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/10/20/repair-my-fixed-gear/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/10/21/decompiliation-jar/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/10/21/hacker/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/10/25/java-bytecode-plugin-for-eclipse/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/10/28/get-ripple-from-github-account/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/10/28/scalable-web-service-development/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/11/05/cc98-post-machine/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/2013/11/07/pat-1069-pat-1072/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/archives/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/categories/book/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/categories/life/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/categories/tech/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/page/2/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/page/3/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/page/4/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/page/5/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/page/6/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/page/7/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/blog/page/8/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/03/17/kai-pian/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/03/21/building-octopress-in-github-mac/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/04/04/pat-basic-level-1001-1010/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/04/05/maximum-subsequence-sum/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/04/05/tong-bing-kuai-le-zhe/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/04/07/goodbye-seeme/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/04/18/some-opinions-about-software-engineering/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/04/19/use-ssh/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/04/20/are-you-smart-enough-to-work-at-google/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/04/23/winsock-kills-internet/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/04/25/split-querying-process-in-polybase/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/04/27/pat1020-pat1043-rebuild-binary-tree/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/04/27/travsal-binary-tree/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/05/04/recursive-to-non-recursive/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/05/09/networking-in-virtual-machine/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/05/12/mbti-test/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/05/12/touch-hadoop/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/05/13/free-the-bit-economics/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/05/15/cap-and-eventual-consistent/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/05/17/jail-break-your-ios/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/05/18/a-hybrid-system-hadoopdb/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/05/18/distributed-consistency/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/05/20/hybrid-distributed-data-management-system/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/05/21/the-facebook-effect/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/05/22/pragmatic-thinking-and-learning-refactor-your-wetware/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/05/25/kmp-algorithm/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/05/25/some-ideas-about-using-bt-protocol-to-sync/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/06/02/virtual-dispatch-and-method-table-in-java/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/06/08/ipc-in-hadoop/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/06/08/software-defined-network/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/06/09/something-about-mac-gui/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/06/11/gift-to-girl-friend/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/06/11/the-non-designers-design-book/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/07/05/checklist-manifesto/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/07/07/yuminhong/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/07/10/cc-license/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/07/10/decorate-octopress/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/07/16/verify-pop-sequence-for-stack/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/07/19/odps-in-alibaba/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/07/29/after-pat-practice/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/07/31/pat-1001-1010-solutions/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/07/31/pat-1011-1020-solutions/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/08/01/pat-1021-1030-solutions/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/08/01/pat-1031-1040-solutions/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/08/01/pat-1041-1050-solutions/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/08/01/pat-1051-1060-solutions/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/08/03/overcome-pat/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/08/26/distributed-transaction/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/08/31/octopress-3rd-party-plugin-syncpost/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/08/31/pat-1061-pat-1064/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/09/01/blog-log/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/09/05/google-android-challenge-2011/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/09/06/kongfu-snake-project-summary/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/09/07/java-classloader/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/09/08/custom-premain-method/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/09/08/initliate-objects-in-java/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/09/08/java-class-loader-in-practice/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/09/08/java-class-loading-linking-and-initialising/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/09/08/late-initialising-in-java/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/09/08/strange-behavior-using-braces-in-java/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/09/08/string-interning/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/09/08/three-principles-of-classloader-operation/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/09/10/scientifically-surfing-the-internet/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/09/22/java-initialization/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/09/30/jobs-and-jobs/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/10/03/nine-algorithms-that-changed-the-future/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/10/04/summary-of-basic-sort-algorithms/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/10/07/reset-nvram/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/10/08/pat-1065-pat-1068/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/10/19/data-integration-tool-teiid/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/10/20/repair-my-fixed-gear/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/10/21/decompiliation-jar/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/10/21/hacker/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/10/25/java-bytecode-plugin-for-eclipse/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/10/28/get-ripple-from-github-account/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/10/28/scalable-web-service-development/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/11/05/cc98-post-machine/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/11/07/pat-1069-pat-1072/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/11/13/blog-migration/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/11/24/failed-in-replacing-hdd/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/11/24/install-software-in-os-x/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2013/12/15/zombie-tsunami/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2014/01/04/happy-new-year/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2014/01/17/java-performance-tunning-in-practice/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2014/01/20/email-1/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2014/01/21/email-2/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2014/01/22/email-3/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2014/01/26/migrate-linode-vps-from-tokyo-to-fremont/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2014/02/24/sort-intro/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2014/03/06/troubleshoot-encoding-bugs-in-octopress/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2014/03/08/teiid-designer/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2014/05/06/ta-in-practice/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2014/05/08/jawbone-up24/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2014/05/22/facebook-tech-talk-and-workshop/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2014/05/23/recent-days/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2014/05/28/works-applications/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/2016/04/12/restart/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/archives/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/categories/book/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/categories/life/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/categories/tech/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/categories/think/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/page/10/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/page/2/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/page/3/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/page/4/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/page/5/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/page/6/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/page/7/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/page/8/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/blog/page/9/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/resources/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tag-cloud/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/[?]-zhi-xing/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/a-li-ba-ba/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/an-quan/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/android/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/aop/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/asm/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/ban-quan/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/bash/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/bei-fen/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/bi-te-bi/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/bian-ma/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/bing-fa/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/bo-ke/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/cao-zuo-xi-tong/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/career/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/chan-pin/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/chuan-dai-she-bei/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/chuang-xin/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/da-gui-mo/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/da-shu-ju/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/debug/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/dian-zi-huo-bi/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/du-shu/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/eclipse/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/facebook/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/fang-fa-lun/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/fen-bu-shi/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/fen-xiang/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/fu-wu-qi/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/git/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/gong-ju/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/gong-si/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/guan-xi-xing-shu-ju-ku/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/hadoop/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/hei-ke/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/http/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/io/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/ios/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/java/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/ji-zhu/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/jia-gou/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/jian-kang/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/jiang-zuo/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/jing-ji/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/jing-yan/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/js/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/jvm/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/kai-fa/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/ke-pu/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/kuang-xiang/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/la-ji-you-jian/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/lao-tao/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/li-lun/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/linode/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/linux/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/mac/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/mapreduce/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/mbp/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/metaweblog/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/mian-fei/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/ni-xiang-gong-cheng/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/octopress/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/os-x/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/p2p/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/pai-xu/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/pat/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/qi-ye-jia-jing-shen/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/ripple/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/ruan-jian/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/ruan-jian-gong-cheng/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/ruby/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/she-ji/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/sheng-huo/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/shi-jian/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/shi-wu/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/shu-ju-ji-cheng/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/si-fei/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/si-kao/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/ssd/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/ssh/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/suan-fa/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/suo-sui/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/teiid/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/ti-yan/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/tuan-dui/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/ui/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/up24/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/wang-luo/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/wap/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/web/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/webservice/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/wei-lai/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/wei-ruan/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/windows/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/xie-yi/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/xin-qing/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/xin-xi/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/xing-qu/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/you-jian-fu-wu/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/you-xi/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/zhi-neng-shou-huan/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/zhu-jiao/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/zi-jie-ma/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/tags/zong-jie/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tag-cloud/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/[?]-zhi-xing/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/a-li-ba-ba/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/an-quan/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/android/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/aop/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/asm/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/ban-quan/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/bash/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/bi-te-bi/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/bing-fa/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/bo-ke/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/cao-zuo-xi-tong/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/chan-pin/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/da-gui-mo/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/da-shu-ju/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/dian-zi-huo-bi/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/du-shu/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/facebook/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/fang-fa-lun/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/fen-bu-shi/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/fen-xiang/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/git/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/gong-ju/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/guan-xi-xing-shu-ju-ku/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/hadoop/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/hei-ke/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/http/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/ios/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/java/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/ji-zhu/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/jia-gou/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/jing-ji/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/js/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/jvm/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/kai-fa/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/ke-pu/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/kuang-xiang/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/li-lun/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/linux/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/mac/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/mapreduce/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/metaweblog/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/mian-fei/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/ni-xiang-gong-cheng/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/octopress/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/p2p/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/pat/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/qi-ye-jia-jing-shen/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/ripple/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/ruan-jian-gong-cheng/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/ruby/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/she-ji/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/sheng-huo/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/shi-jian/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/shi-wu/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/shu-ju-ji-cheng/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/si-fei/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/si-kao/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/ssh/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/suan-fa/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/teiid/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/tuan-dui/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/ui/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/wang-luo/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/web/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/webservice/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/wei-lai/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/wei-ruan/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/windows/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/xin-xi/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/xing-qu/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/zi-jie-ma/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tags/zong-jie/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/javascripts/libs/jXHR.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/libs/jXHR.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/java-091b02d35dfedbcfe2705a9998b56199.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/java-173cbc3f554a1b85abaf3230ec8f0834.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/java-1c63968d0275423d067c0a3f2ffdb002.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/java-21a6f8d732697c079adc0ec5be9773e5.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/java-224f38ab7b53a9accd536a357dbe73c7.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/java-337cef2d01e155e227c0d56fd94bebc0.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/java-4262a6b7a90d16a52af47f23aa1986ed.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/java-448c77b1a9b2c44de784c85619f7dadc.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/java-53aaf356588ad94c96f98c0dfd8c1ccd.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/java-54c5d7ce59d310106ef6d6dbdca1af8d.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/java-5acdf053c4bb990ccceebfcc9d571c6c.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/java-5e0464ae393abeb94d754bb0d40c5ee4.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/java-5f29018344040158fafdee9354bb50c1.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/java-65b2ba15fa7f8aac3fa49f8541ab05a4.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/java-757fc6ce96713366bb3412da5a69c408.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/java-788f659118253d0009c445f109706952.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/java-83d3c663893ae3c4de02b500ba42f35a.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/java-86ad20cb306c05bc4a184ea5f35e2c39.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/java-8a133cf6587cb243f77b97ecdde2ad14.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/java-8c43fcfc1c99f7825c4a02a1d4637652.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/java-975ceabeae9204e27b59daa7674088fd.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/java-9f26195e5cc249e5dc93c0a164194fbe.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/java-a0661ba37480a44797ff0f42e78f8c9a.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/java-a3bb6d59c2afb191a57729c1b5a83fea.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/java-a3d30fd564f115d7cef305468debc7b7.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/java-a546c041290aec37ae19de688f22aceb.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/java-a728473d1250da1afd26c4c1cd1215bb.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/java-a853399078535131796b642c9375dcb8.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/java-ac138848ab3fac1564c345f8e1d48cfc.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/java-adb3216eb99b136f72c4ea0e46f157b8.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/java-b0610fad005e79a526f40aa99e180aab.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/java-b59e8150a856dec685ff0190b2ecab5b.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/java-b5e8da3de9b6672a5b534a78b2546c6c.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/java-b8f7052d928d0b44d2f24b3fb9fb7659.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/java-bb91be0008ffbbe7dcff4f7568d63c67.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/java-bd96b1018701b3e3f5ca2bbd7cedd876.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/java-c60672c031767e2053544891f04cc734.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/java-d10ed2b4ff77b2925db2663234b39c47.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/java-d2e984b3eb2bb64809ed57c9c6a2705d.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/java-d53dc5bc222ee7dc7a344040e85ddfb7.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/java-d584b7335c605343f77c9947951906e0.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/java-d8872e64582af551c551df8e0b790e37.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/java-e058cdbee1dbd5ffef09d01cb95a8ebf.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/java-e110911399be3a091f414b4ccc9246a8.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/java-e270b9d8c0a9128c6638bdac38b5fa06.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/java-e7207aa99ca0b255c4e3041fb824d343.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/java-e7269739efaf0cb6a5fa9cd3769cc882.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/java-f589dd5429f644f44376f071680f3405.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/javascript-66f11ef759903a5230564e51bbdc33ef.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/javascript-855d9fd1ecd892938eeece30fa1d0bfd.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/javascript-cc021a78d22e787769b8739a6c5b36fd.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/javascripts/libs/jquery.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/libs/jquery.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/javascripts/modernizr-2.0.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/modernizr-2.0.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/javascripts/octopress.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/octopress.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/javascripts/pinboard.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/pinboard.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/robots.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/robots.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/ruby-19cd25d07fa4d2606a4783670f77bb1d.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/ruby-4711d3cf6792f1b280c1ba6dec842ec1.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/ruby-4974ce35be36d223e48fcde506710350.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/ruby-b8330381ad83b67570fd7f614f32c4c2.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/ruby-d1fd6fc8e1c569be9b6852e8c214d06d.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/ruby-e07a36179cfa5a1ff9fb7eeb3728dfaa.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/ruby-e624207823ebbd3d49dc08321b22a616.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/stylesheets/screen.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/stylesheets/screen.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/stylesheets/screen.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sitemap.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/sitemap.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/javascripts/libs/swfobject-dynamic.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/libs/swfobject-dynamic.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/javascripts/twitter.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/twitter.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/xml-dc679a6bc9b624b588a159eeb41b0b17.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.pygments-cache/xml-fb79d66d16fc7e87573cc49a429da3ac.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="biaobiaoqi.github.com.iws" />
@@ -31,8 +873,8 @@
       <file leaf-file-name="Rakefile" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Rakefile">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8098434" vertical-offset="3583" max-vertical-offset="6240">
-              <caret line="263" column="43" selection-start-line="263" selection-start-column="43" selection-end-line="263" selection-end-column="43" />
+            <state vertical-scroll-proportion="0.31982476" vertical-offset="3623" max-vertical-offset="6240">
+              <caret line="261" column="41" selection-start-line="261" selection-start-column="41" selection-end-line="261" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -92,7 +934,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -114,6 +955,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -238,6 +1080,11 @@
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <pass-parent-envs>true</pass-parent-envs>
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="FlashRunConfigurationType" factoryName="Flash App">
@@ -395,42 +1242,43 @@
       <option name="number" value="Default" />
       <updated>1460947240508</updated>
       <workItem from="1460947245055" duration="1717000" />
+      <workItem from="1460949543813" duration="735000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1717000" />
+    <option name="totallyTimeSpent" value="2452000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-241" y="-1057" width="1920" height="1057" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4941427" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.49309245" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24973376" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -455,11 +1303,18 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Rakefile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="100">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/config.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="447">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -475,14 +1330,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="447">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Rakefile">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8098434" vertical-offset="3583" max-vertical-offset="6240">
-          <caret line="263" column="43" selection-start-line="263" selection-start-column="43" selection-end-line="263" selection-end-column="43" />
+        <state vertical-scroll-proportion="0.31982476" vertical-offset="3623" max-vertical-offset="6240">
+          <caret line="261" column="41" selection-start-line="261" selection-start-column="41" selection-end-line="261" selection-end-column="41" />
           <folding />
         </state>
       </provider>

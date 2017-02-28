@@ -1,0 +1,705 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Biaobiaoqi的博客</title>
+  <meta name="author" content="Biaobiaoqi">
+
+  
+  <meta name="description" content="来源是 2013 年 11 月 2 日的 PAT 测试。 1069. The Black Hole of Numbers (20) 题意 给出一个四位数比如 6767，将它按照每位从小到大(6677)和从大到小(7766)充足，得到两个新四位数，这两者相减将得到一个新的四位数。 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://biaobiaoqi.me/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Biaobiaoqi的博客" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+
+function addBlankTargetForLinks () {
+
+  $('a[href^="http"]').each(function(){
+
+      $(this).attr('target', '_blank');
+
+  });
+
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+
+  addBlankTargetForLinks();
+
+});
+
+</script>
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F49481ec3305db999013860b0ccb3b16d' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39900036-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Biaobiaoqi的博客</a></h1>
+  
+    <h2>做一个互联网世界的匠人</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:biaobiaoqi.me" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives/">全部文章</a></li>
+  <li><a href="/tag-cloud/">分类阅读</a></li>
+  <li><a href="/resources/">其他推荐</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/07/pat-1069-pat-1072/">PAT 1069 - 1072 题解</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-07T00:30:00+08:00" pubdate data-updated="true">Nov 7<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/11/07/pat-1069-pat-1072/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>来源是 2013 年 11 月 2 日的 PAT 测试。</p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1069">1069. The Black Hole of Numbers (20)</a></h2>
+
+<h5>题意</h5>
+
+<p>给出一个四位数比如 6767，将它按照每位从小到大(6677)和从大到小(7766)充足，得到两个新四位数，这两者相减将得到一个新的四位数。再按照一样的处理方式处理得出的四位数</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>7766 - 6677 = 1089
+</span><span class='line'>9810 - 0189 = 9621
+</span><span class='line'>9621 - 1269 = 8352
+</span><span class='line'>8532 - 2358 = 6174
+</span><span class='line'>7641 - 1467 = 6174
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最终将得到一个『黑洞数』：6174。</p>
+
+<p>题目给出一个四位数，要求输出它演变出『黑洞数』的过程。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/11/07/pat-1069-pat-1072/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/05/cc98-post-machine/">用Ruby实现的论坛灌水工具：CC98 Post Machine</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-05T15:20:00+08:00" pubdate data-updated="true">Nov 5<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/11/05/cc98-post-machine/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>介绍</h2>
+
+<p>ZJU 的校网论坛 CC98 比较活跃。论坛只对校内网开放，而且账号跟学生绑定，每个学生注册的账号数量有限。『十大』是 CC98 的经典页面：基于关注的人数（回帖的用户数而不是回帖的数量）用算法求出 24 小时内最火爆的十个发帖。很多同学都会浏览十大，关注论坛动态。</p>
+
+<p>故事就是从十大引出的。有的社团在宣传活动时，为了扩大宣传面，会发动成员的小马甲顶贴上十大。这种违背社区自然发展轨迹的手段，强奸了关注十大贴的用户的意愿，阻碍了信息的自由流动。</p>
+
+<p>于是萌生了完成一个批量发帖的机器，以其人之道还治其人之身的想法。在下次十大被宣传贴攻占时，能有反击的工具。</p>
+
+<p>工具的用途很简单：使用不同的用户身份模拟真人论坛回帖，增加帖子关注度，以抵抗宣传贴。流程如下：提前收集各路亲朋好友的用户信息作为『预备水军』，『灌水』时，在评论内容文件中输入自定义的评论内容，在命令行参数中制定目标贴，即可实现随机顺序的用户自动顶贴。鉴于现在的功能是顶贴竞争十大，而十大排名是根据关注人数也就是独立用户评论数量做排序的，这里设计的顶贴策略是一个马甲发一条评论。以后可以考虑增加灵活的配置方案，实现更多功能。</p>
+
+<p>项目 Github 地址：<a href="https://github.com/biaobiaoqi/CC98PostMachine/">https://github.com/biaobiaoqi/CC98PostMachine/</a></p>
+
+<p>介于这个工具本身的罪恶的攻击属性，在此强调，工程仅供学习交流和对抗宣传贴。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/11/05/cc98-post-machine/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/10/28/get-ripple-from-github-account/">用Github账号领Ripple币</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-28T12:46:00+08:00" pubdate data-updated="true">Oct 28<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/10/28/get-ripple-from-github-account/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>最近随着<a href="http://zh.wikipedia.org/wiki/%E6%AF%94%E7%89%B9%E5%B8%81">比特币</a>在互联网上的流行，其他各种电子货币也都增加了曝光率。</p>
+
+<p>昨晚在 v2ex 上看到有人<a href="http://v2ex.com/t/87062">发帖</a>，用 20RMB 换取 2013 年 5 月 1 日前使用过的 github 账号得到的一个验证码。出于好奇，仔细围观了该贴，发现原来 lz 是利用信息不队称在揽入赠送给 github 用户的 ripple 币。而实际上，给 github 用户赠送的 2020 的 ripple 币按当时汇率这算人民币大概价值 70 元！这种『天上掉馅饼』的事情确实激发了我对电子货币的好奇，于是查阅了相关资料，也成功提现了自己的那部分 Ripple 币。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/10/28/get-ripple-from-github-account/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/10/28/scalable-web-service-development/">《大规模Web服务开发技术》</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-28T01:41:00+08:00" pubdate data-updated="true">Oct 28<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/10/28/scalable-web-service-development/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Web 服务开发的心灵鸡汤</h2>
+
+<p><img src="http://img3.douban.com/mpic/s6818566.jpg" alt="img" /></p>
+
+<p>周末去上海陪妹子的两天在路途上看完了这本<a href="http://book.douban.com/subject/6758780/">《大规模 Web 服务开发技术》</a>。</p>
+
+<p>《大规模 Web 服务开发技术》是日本的 <a href="http://www.hatena.com/">Hetena</a> 团队以夏天举办的实习活动的课程讲义为基础整理的开发、运营大规模服务的入门书。书中更多的偏重了 Hetena 技术团队发展过程中的实践经验总结，将一个系统从无到有的发展过程有条理的展现了出来。读完全书，觉得它更像是一本 Web 服务开发的心灵鸡汤，有许多靠谱的总结，但相对零散，刚接触的人很难掌握。当然，心灵鸡汤并不是贬义，只是有不同的针对性。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/10/28/scalable-web-service-development/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/10/25/java-bytecode-plugin-for-eclipse/">在Eclipse里查看Java字节码</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-25T04:06:00+08:00" pubdate data-updated="true">Oct 25<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/10/25/java-bytecode-plugin-for-eclipse/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>要理解 Java 字节码，比较推荐的方法是自己尝试编写源码对照字节码学习。其中阅读 Java 字节码的工具必不可少。虽然<code>javap</code>可以以可读的形式展示出.class 文件中字节码，但每次改动源码都需调用命令行并不方便。这里介绍一个可以辅助阅读 Java 字节码的 Eclipse 插件：<a href="http://andrei.gmxhome.de/bytecode/">bytecode outline</a>。</p>
+
+<p>bytecode outline 插件用可读的方式展现了 Eclipse 的 Java 编辑器或类文件的字节码内容。它使用了 <a href="http://asm.ow2.org/">ASM 框 架</a>的部分组建来实现对字节码的展示（ASM 框架在另外一篇操纵 Java 字节码的博文中有提到过：<a href="http://biaobiaoqi.me/blog/2013/09/08/custom-premain-method/">《AOP 实践：java.lang.instrument 的使用》</a>，是一个轻量级的 Java 字节码的操纵框架。）。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/10/25/java-bytecode-plugin-for-eclipse/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/10/21/hacker/">《黑客：计算机革命的英雄》</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-21T22:19:00+08:00" pubdate data-updated="true">Oct 21<span>st</span>, 2013</time>
+        
+         | <a href="/blog/2013/10/21/hacker/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="http://img3.douban.com/mpic/s6951030.jpg" alt="img" /></p>
+
+<p>《<a href="http://book.douban.com/subject/6860890/">黑客：计算机革命的英雄</a>》不是一本新书，创作于上世纪 80 年代。</p>
+
+<p>这本书我断断续续花了几个月才看完。大量的传奇黑客人物穿插其中，说实话容量略大，到头来也没记住几个名字，不过这不是重点。全书将对整个计算机发展史有深刻影响的黑客文化分三个阶段的娓娓道来，让我重新审视对黑客的看法认识。下面是我对全书的笔记摘要。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/10/21/hacker/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/10/21/decompiliation-jar/">反编译Jar包</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-21T12:16:00+08:00" pubdate data-updated="true">Oct 21<span>st</span>, 2013</time>
+        
+         | <a href="/blog/2013/10/21/decompiliation-jar/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Jar 包(Java Archive)是对 Java 程序的打包，它可能包含源码，也可能没有。</p>
+
+<p>对于有包含源码的 Jar 包，在 Eclipse 工程里设定好 source code 路径后能直接查看到远吗，对于理解代码、调试的帮助很大。而如果 Jar 包没有打包源码，实际上也可以通过反编译的方法得到源码。道理很简单，Java 规范中，生成的.class 文件所包含的信息完全能逆向的重构出源码。</p>
+
+<p>当然，一些代码为了防止自身 Jar 包被人反编译，会做<a href="http://zh.wikipedia.org/wiki/%E4%BB%A3%E7%A0%81%E6%B7%B7%E6%B7%86">代码混淆</a>掩人耳目。其中最简单的一种方法就是是通过修改类名、变量名、方法名等方法让反编译的源码难于阅读理解。不过这个方法在混淆的时候需要特别注意：不能混淆对外提供接口的类。如果混淆了提供给外部的 API 接口的名字，整个工程就无法被正常使用了。</p>
+
+<p>本文要举例的是对<a href="http://help.aliyun.com/origin?helpId=664">阿里云开放云存储 Java SDK</a> 的反编译。由于 SDK 需要暴露接口给其他开发人员调用，本身确实没有做混淆（不理解阿里云为何没有将它开源出来），故可以做简单的反编译来查看源码。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/10/21/decompiliation-jar/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/10/20/repair-my-fixed-gear/">修车记</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-20T21:58:00+08:00" pubdate data-updated="true">Oct 20<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/10/20/repair-my-fixed-gear/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>三个多月前，入手了这辆死飞。</p>
+
+<p>倒不是像中学生渴望它可搭配的绚丽色彩和特立独行，而是喜欢自由、简单的理念。以至于我基本全黑的配色被同学形容为『最不骚的死飞』。自己平时骑车并不快，代步而已，也没有花心思学些炫酷的平花动作（虽然很想学），除了能 mid skid 刹车和一直蹬脚踏板累了些，在操作上也确实没啥不同了。被女朋友形容为骑车一辆『功能退化』
+的自行车-，-</p>
+
+<p>一直还没来得及写篇博文记录下，借这次修车的过程，给它留个影。</p>
+
+<ul>
+<li>起因：后胎漏气，半小时漏光的节奏</li>
+<li>处理：用 DUUTI 补胎套件补胎，顺道紧了一把链条。</li>
+</ul>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/10/20/repair-my-fixed-gear/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/10/19/data-integration-tool-teiid/">数据集成工具：Teiid实践</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-19T23:58:00+08:00" pubdate data-updated="true">Oct 19<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/10/19/data-integration-tool-teiid/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>数据集成是把不同来源、格式、特点性质的数据在逻辑上或物理上有机地集中，从而为企业提供全面的数据共享。数据集成的方式多种多样，这里介绍的 <a href="http://www.jboss.org/teiid/">Teiid</a> 是其中的一种：通过抽象和联邦技术，实现分布式数据源的实时数据访问和集成，无需从记录系统中复制或移动数据。</p>
+
+<p><a href="http://blogs.ejb.cc/archives/3552/teiid-scalable-information-integration-program">链接</a>是一篇关于 Teiid 的中文介绍，比较详细。</p>
+
+<p>由于适配不同数据源和生成虚拟数据库（VDB）需要维护好几个配置文件，直接手动部署 Teiid 比较难受。好在 Teiid 提供了辅助工具 <a href="http://www.jboss.org/teiiddesigner">Teiid Designer</a>，这是一个 Eclipse 插件，能帮助用户可视化的管理数据的集成过程。</p>
+
+<ul>
+<li><p>安装配置</p>
+
+<p>  参见官网的 Downloads 界面的详细介绍（注意：环境配置中，各组件需严格遵循官网指定版本，实践经验表明，Teiid 本身并不够鲁棒，容不得小差错）。</p></li>
+</ul>
+
+
+<p>接下来，我们用一个简单的应用场景实践 Teiid 的数据集成功能。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/10/19/data-integration-tool-teiid/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/10/08/pat-1065-pat-1068/">PAT 1065 - 1068 题解</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-08T13:46:00+08:00" pubdate data-updated="true">Oct 8<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/10/08/pat-1065-pat-1068/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>这次的题目来源是 2013 年 10 月 7 日下午的浙大计算机研究生招生机试题。</p>
+
+<p>这次题目的难度，按姥姥的说法是：『比普通的 PAT 要难了 0.5 个点。我是把自己的题目从 1.0 到 5.0 以 0.5 的间距分难度级别的，PAT(A)难度一般在 1.5-4.5 之间，保研考试一般在 2.0-5.0 之间。PAT(B)大概是 1.0-2.5 的难度。』。</p>
+
+<p>个人认为，其中 1066 模拟 AVL 插入的实现有些细节容易弄错，而 1068 只要会简单的 DP，也就没有问题了，1065 和 1066 都还是很简单的实现。</p>
+
+<p>下面是各个题的分析（PAT advanced level 本人实现的全部源码：<a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel">请戳</a>）。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/10/08/pat-1065-pat-1068/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/2/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>标签云</h1>
+ <br /> 
+  <ul class="tag-cloud">
+    <a style="font-size: 113%" href="/tags/hadoop/">Hadoop</a> &nbsp 
+<a style="font-size: 139%" href="/tags/jvm/">JVM</a> &nbsp 
+<a style="font-size: 145%" href="/tags/java/">Java</a> &nbsp 
+<a style="font-size: 143%" href="/tags/pat/">PAT</a> &nbsp 
+<a style="font-size: 107%" href="/tags/octopress/">octopress</a> &nbsp 
+<a style="font-size: 137%" href="/tags/fen-bu-shi/">分布式</a> &nbsp 
+<a style="font-size: 135%" href="/tags/zi-jie-ma/">字节码</a> &nbsp 
+<a style="font-size: 135%" href="/tags/si-kao/">思考</a> &nbsp 
+<a style="font-size: 180%" href="/tags/ji-zhu/">技术</a> &nbsp 
+<a style="font-size: 107%" href="/tags/cao-zuo-xi-tong/">操作系统</a> &nbsp 
+<a style="font-size: 126%" href="/tags/fang-fa-lun/">方法论</a> &nbsp 
+<a style="font-size: 129%" href="/tags/sheng-huo/">生活</a> &nbsp 
+<a style="font-size: 148%" href="/tags/suan-fa/">算法</a> &nbsp 
+<a style="font-size: 118%" href="/tags/wang-luo/">网络</a> &nbsp 
+<a style="font-size: 135%" href="/tags/du-shu/">读书</a>
+
+  </ul>
+</section>
+<section>
+  <h1>关于</h1>
+   <p>biaobiaoqi是我的网络id。<br><br>
+   我的博客日志：<a href="http://biaobiaoqi.me/blog/2013/09/01/blog-log/">请戳</a><br><br>
+   更多信息请戳：<a href="http://about.me/biaobiaoqi">about.me</a><br>
+	</p>
+</section>
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Biaobiaoqi -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  - <span class="credit">Theme by <a href="http://www.gehaxelt.in">Gehaxelt</a></span>
+  <span class="credit">and <a href="http://www.it-solutions-neef.de">IT Solutions Neef</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'biaobiaoqisblog';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

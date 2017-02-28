@@ -1,0 +1,426 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>PAT 1061 - 1064 题解 - Biaobiaoqi的博客</title>
+  <meta name="author" content="Biaobiaoqi">
+
+  
+  <meta name="description" content="pat1061题解, pat1062题解, pat1063题解, pat1064题解，pat 1061题解, pat 1062题解, pat 1063题解, pat 1064题解">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://biaobiaoqi.github.io/blog/2013/08/31/pat-1061-pat-1064/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Biaobiaoqi的博客" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+
+function addBlankTargetForLinks () {
+
+  $('a[href^="http"]').each(function(){
+
+      $(this).attr('target', '_blank');
+
+  });
+
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+
+  addBlankTargetForLinks();
+
+});
+
+</script>
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F49481ec3305db999013860b0ccb3b16d' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39900036-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Biaobiaoqi的博客</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:biaobiaoqi.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives/">全部文章</a></li>
+  <li><a href="/tag-cloud/">分类阅读</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">PAT 1061 - 1064 题解</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-31T13:32:00+08:00" pubdate data-updated="true">Aug 31<span>st</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>这四道题来自 13 年 08 月 30 的 PAT 测试。</p>
+
+<p>代码量不大，思路也比较直接。不过第一题的处理逻辑不太清晰，需要好好把握。稍有不慎就掉进坑里了（很多人被这道 20‘的题坑了一个多小时心慌意乱我会乱说-，-？）。</p>
+
+<p>PAT advanced level 全部源码：<a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel">请戳</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1061">1061. Dating (20)</a></h2>
+
+<h5>题意</h5>
+
+<p>题意比较模糊，需要仔细对照 Sample 的数据理清思路。给定四个字符串，每个不超过 60 个字符，不含空格。要求从中找到符合如下规定的三个字符（或者它们的位置），并转化成一个时间的表达：</p>
+
+<ol>
+<li><p>依次比较前两个字符串中每个位置的元素，找到第一个相等的字符，且该字符属于[&#8216;A&#8217;, &#8216;G&#8217;]的字母，注意大小写敏感。转换成一周七天输出。</p></li>
+<li><p>在 1 中的字符出现之后，继续比较前两个串，找到一个相等的字符，使它属于[&#8216;0&#8217;, &#8216;9&#8217;] || [&#8216;A&#8217;, &#8216;N&#8217;]，同样，大小写敏感。转换成一天 24 小时的小时数输出。</p></li>
+<li><p>比较后两个字符串，找到第一个相等的字母（isalpha()），将它在数组中的位置值转换分钟数输出。</p></li>
+</ol>
+
+
+<p>为了便于理解，给出 Sample 数据:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Sample Input:
+</span><span class='line'>
+</span><span class='line'>3485djDkxh4hhGE 
+</span><span class='line'>2984akDfkkkkggEdsb 
+</span><span class='line'>s&hgsfdk 
+</span><span class='line'>d&Hyscvnm
+</span><span class='line'>
+</span><span class='line'>Sample Output:
+</span><span class='line'>
+</span><span class='line'>THU 14:04
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h5>分析</h5>
+
+<p>理清题目的逻辑以后，实现起来是很简单的。</p>
+
+<p>pat1061 源码:<a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel/APAT1061.cpp">请戳</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1062">1062. Talent and Virtue (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>给定一堆人，每个人有三条记录：id，道德值(v)，才能值(t)。给出两个值 L 和 H，用作对这堆人的分类。按照如下规则输出排序结果：</p>
+
+<!--more-->
+
+
+<ol>
+<li><p>过滤掉 v 和 t 都小于 L 的人</p></li>
+<li><p>v 和 t 都不小于 H 的人是圣人，属于最高的层级，排序在其他层级之前。</p></li>
+<li><p>v 不小于 H，而 t 小于 H 的人是君子，这个层级排在圣人之后。</p></li>
+<li><p>剩下的人中，v 不小于 t 的人是愚人，层级关系里排第三，排在所有圣人和君子之后。</p></li>
+<li><p>最后剩下的人是小人，是最低的层级。</p></li>
+<li><p>排名时，相同层级的人的排序关系是 1.按照 v+t 的总分 non-increasing 排序；2.按照 v 的分值按 non-increasing 排序；3.找到 id 按 increasing 排序。</p></li>
+</ol>
+
+
+<h5>分析</h5>
+
+<p>题意梳理清楚以后，定制比较函数用 qsort()能很快的实现。</p>
+
+<p>经测试，使用<code>cout</code>，<code>cin</code>会超时，改用&#8217;printf() scanf()&#8217;轻松过。</p>
+
+<p>pat1062 源码:<a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel/APAT1062.cpp">请戳</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1063">1063. Set Similarity (25)</a></h2>
+
+<h5>题意</h5>
+
+<p>题目给出了 N(&lt;=50)个正整数集合（实际上不是真正意义上的 set，有重复数值），每个集合最多存 M(&lt;10<sup>4)个元素，其中数值范围是</sup> [0, 10<sup>9]。给出</sup> K 次查询，每次查询条件为两个集合，要求求出两集合的相似度。</p>
+
+<p>这里集合相似度的定义是 Nc/Nt*100%，其中 Nc 为两集合的交集元素数量，Nt 为两集合的并集的元素数量。</p>
+
+<h5>分析</h5>
+
+<p>思路一：</p>
+
+<p>利用<code>sort()</code>对数组做排序，然后遍历去重。计算交集时，直接用两个游标对数组遍历进行比较操作，并集等于两者的大小之和减去交集的大小。复杂度为 O(M<em>K + N</em>M*logM)。这种游标遍历的思想，还是很 common sense 的处理方式，精妙之处在于循环判断和内部的判断逻辑的分离，让代码清晰明了。</p>
+
+<p>思路二：</p>
+
+<p>有不愿意透露姓名的<a href="http://weibo.com/cloudbye">@草原</a>同学提出，使用 set 做去重是没问题的。</p>
+
+<p>pat1063 源码:<a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel/APAT1063.cpp">请戳</a></p>
+
+<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1064">1064. Complete Binary Search Tree (30)</a></h2>
+
+<h5>题意</h5>
+
+<p>给定一串数据，要求构建完全二叉搜索树。</p>
+
+<h5>分析</h5>
+
+<p>常规思路：</p>
+
+<ul>
+<li>对数据排序</li>
+<li>递归的构建二叉搜索树，递归条件为根据有序数组找到子树顶点，顶点位置需要满足完全二叉树的结构。</li>
+<li>最后用 queue 输出层序遍历。</li>
+</ul>
+
+
+<p>实现起来需要注意各种边界条件的判定，坑比较多，且代码量比较大（我的参考代码里写了 70 行）。后来<a href="http://weibo.com/redow7">@Redow7</a> 给介绍了一种更有趣的方法：</p>
+
+<ol>
+<li>对数据排序，等待操作。</li>
+<li>首先构建好完全二叉树。</li>
+<li>利用二叉搜索树的中序遍历的有序性，在中序遍历的过程中，将排序好的数据插入其中。</li>
+</ol>
+
+
+<p>如此一来，难点就转移到了构建完全二叉树上。</p>
+
+<p>联想到最大堆的数组实现：父节点坐标为 n 时，左儿子为 2<em>n，右儿子为 2</em>n+1。对的，数组实现的二叉树就是满足完全二叉树的特点的。构建完全二叉树的步骤直接缩减为定义一个一定长度的数组。</p>
+
+<p>于是，使用数组实现的二叉树做迭代的思路就出来了，30 行搞定。</p>
+
+<p>pat1064 源码:<a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel/APAT1064.cpp">请戳</a></p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.io/blog/2013/08/31/pat-1061-pat-1064/'>http://biaobiaoqi.github.io/blog/2013/08/31/pat-1061-pat-1064/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Biaobiaoqi</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-31T13:32:00+08:00" pubdate data-updated="true">Aug 31<span>st</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+    <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+<a class="jiathis_button_tsina"></a>
+<a class="jiathis_button_weixin"></a>
+<a class="jiathis_button_renren"></a>
+<a class="jiathis_button_douban"></a>
+<a class="jiathis_button_googleplus"></a>
+<a href="http://www.jiathis.com/share?uid=1814751" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+	data_track_clickback:true,
+	summary:"",
+	shortUrl:true,
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1814751" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/08/03/overcome-pat/" title="Previous Post: PAT练习题概览">&laquo; PAT练习题概览</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/08/31/octopress-3rd-party-plugin-syncpost/" title="Next Post: octopress第三方插件：博文同步工具syncPost">octopress第三方插件：博文同步工具syncPost &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <!--h1>Comments</h1-->
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>标签云</h1>
+ <br /> 
+  <ul class="tag-cloud">
+    <a style="font-size: 143%" href="/tags/jvm/">JVM</a> &nbsp 
+<a style="font-size: 147%" href="/tags/java/">Java</a> &nbsp 
+<a style="font-size: 145%" href="/tags/pat/">PAT</a> &nbsp 
+<a style="font-size: 109%" href="/tags/octopress/">octopress</a> &nbsp 
+<a style="font-size: 115%" href="/tags/fen-bu-shi/">分布式</a> &nbsp 
+<a style="font-size: 137%" href="/tags/zi-jie-ma/">字节码</a> &nbsp 
+<a style="font-size: 137%" href="/tags/si-kao/">思考</a> &nbsp 
+<a style="font-size: 180%" href="/tags/ji-zhu/">技术</a> &nbsp 
+<a style="font-size: 128%" href="/tags/fang-fa-lun/">方法论</a> &nbsp 
+<a style="font-size: 109%" href="/tags/fu-wu-qi/">服务器</a> &nbsp 
+<a style="font-size: 139%" href="/tags/sheng-huo/">生活</a> &nbsp 
+<a style="font-size: 153%" href="/tags/suan-fa/">算法</a> &nbsp 
+<a style="font-size: 109%" href="/tags/wang-luo/">网络</a> &nbsp 
+<a style="font-size: 139%" href="/tags/du-shu/">读书</a> &nbsp 
+<a style="font-size: 109%" href="/tags/you-jian-fu-wu/">邮件服务</a>
+
+  </ul>
+</section>
+<section>
+  <h1>关于</h1>
+   <p>biaobiaoqi是我的网络id。<br><br>
+   我的博客日志：<a href="http://biaobiaoqi.github.io/blog/2013/09/01/blog-log/">请戳</a><br><br>
+	</p>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - Biaobiaoqi -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  - <span class="credit">Theme by <a href="http://www.gehaxelt.in">Gehaxelt</a></span>
+  <span class="credit">and <a href="http://www.it-solutions-neef.de">IT Solutions Neef</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'biaobiaoqisblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://biaobiaoqi.github.io/blog/2013/08/31/pat-1061-pat-1064/';
+        var disqus_url = 'http://biaobiaoqi.github.io/blog/2013/08/31/pat-1061-pat-1064/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

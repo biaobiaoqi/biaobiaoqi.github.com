@@ -11,7 +11,7 @@ description: "在Linode VPS（Ubuntu12.04TLS）上使用Postfix，dovcot，opend
 
 ##背景
 
-[邮件服务系列博文](http://biaobiaoqi.me/tags/you-jian-fu-wu/)中，前两篇介绍了邮件系统的基本功能和安全体系，本文记录了搭建邮箱服务器的实践。
+[邮件服务系列博文](http://biaobiaoqi.github.io/tags/you-jian-fu-wu/)中，前两篇介绍了邮件系统的基本功能和安全体系，本文记录了搭建邮箱服务器的实践。
 
 [Sendmail](http://en.wikipedia.org/wiki/Sendmail)是一种多用途、支援多种协定的跨网络电子邮件传送代理软件，于1983年随着BSD 4.1c首次发行，2001年时的调查，互联网上的邮件服务器有42%使用Sendmail，但之后由于多次被发现重大的安全性漏洞，且其设定档过于复杂造成较高的学习门槛等因素，导致市占率下滑。
 

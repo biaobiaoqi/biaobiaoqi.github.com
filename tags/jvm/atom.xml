@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: JVM | Biaobiaoqi的博客]]></title>
+  <link href="http://biaobiaoqi.me/tags/jvm/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.me/"/>
+  <updated>2013-11-07T02:33:21+08:00</updated>
+  <id>http://biaobiaoqi.me/</id>
+  <author>
+    <name><![CDATA[Biaobiaoqi]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[在Eclipse里查看Java字节码]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/10/25/java-bytecode-plugin-for-eclipse/"/>
+    <updated>2013-10-25T04:06:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/10/25/java-bytecode-plugin-for-eclipse</id>
+    <content type="html"><![CDATA[<p>要理解Java字节码，比较推荐的方法是自己尝试编写源码对照字节码学习。其中阅读Java字节码的工具必不可少。虽然<code>javap</code>可以以可读的形式展示出.class文件中字节码，但每次改动源码都需调用命令行并不方便。这里介绍一个可以辅助阅读Java字节码的Eclipse插件：<a href="http://andrei.gmxhome.de/bytecode/">bytecode outline</a>。</p>
+
+<p>bytecode outline插件用可读的方式展现了Eclipse的Java编辑器或类文件的字节码内容。它使用了<a href="http://asm.ow2.org/">ASM框 架</a>的部分组建来实现对字节码的展示（ASM框架在另外一篇操纵Java字节码的博文中有提到过：<a href="http://biaobiaoqi.me/blog/2013/09/08/custom-premain-method/">《AOP实践：java.lang.instrument的使用》</a>，是一个轻量级的Java字节码的操纵框架。）。</p>
+
+<!--more-->
+
+
+<h2>插件安装</h2>
+
+<p>直接使用Update manager安装插件，非常简单：</p>
+
+<p><code>Help -&gt; Install new Software... -&gt; Work with:</code></p>
+
+<p>输入url：http://andrei.gmxhome.de/eclipse/</p>
+
+<p>然后在弹框中选择合适的版本即可。</p>
+
+<h2>使用</h2>
+
+<p>在Eclipse中添加相应的查看窗口：</p>
+
+<p><code>Window -&gt; Show View -&gt; Other -&gt; Java -&gt; Bytecode</code></p>
+
+<p>选中某Java源文件，效果如图：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/javabytecode1.png" alt="img" /></p>
+
+<p>同时，还可以使用同样的方法，添加Bytecode Reference窗口，用于查询各个Java字节码的文档，示例如下：</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/javabytecode2.png" alt="img" /></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[反编译Jar包]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/10/21/decompiliation-jar/"/>
+    <updated>2013-10-21T12:16:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/10/21/decompiliation-jar</id>
+    <content type="html"><![CDATA[<p>Jar包(Java Archive)是对Java程序的打包，它可能包含源码，也可能没有。</p>
+
+<p>对于有包含源码的Jar包，在Eclipse工程里设定好source code路径后能直接查看到远吗，对于理解代码、调试的帮助很大。而如果Jar包没有打包源码，实际上也可以通过反编译的方法得到源码。道理很简单，Java规范中，生成的.class文件所包含的信息完全能逆向的重构出源码。</p>
+
+<p>当然，一些代码为了防止自身Jar包被人反编译，会做<a href="http://zh.wikipedia.org/wiki/%E4%BB%A3%E7%A0%81%E6%B7%B7%E6%B7%86">代码混淆</a>掩人耳目。其中最简单的一种方法就是是通过修改类名、变量名、方法名等方法让反编译的源码难于阅读理解。不过这个方法在混淆的时候需要特别注意：不能混淆对外提供接口的类。如果混淆了提供给外部的API接口的名字，整个工程就无法被正常使用了。</p>
+
+<p>本文要举例的是对<a href="http://help.aliyun.com/origin?helpId=664">阿里云开放云存储Java SDK</a>的反编译。由于SDK需要暴露接口给其他开发人员调用，本身确实没有做混淆（不理解阿里云为何没有将它开源出来），故可以做简单的反编译来查看源码。</p>
+
+<!--more-->
+
+
+<h2>Jadclipse的安装使用</h2>
+
+<p>Jadclipse插件的反编译功能源于Java反编译工具Jad。但用裸的Jad来命令行执行不太友好，于是就有了Jadclipse。</p>
+
+<h3>1.下载Jad反编译工具</h3>
+
+<p>下载好Jad工具，解压后放在合适的路径下。
+<a href="http://varaneckas.com/jad/">Jad下载链接</a></p>
+
+<h3>2.安装插件</h3>
+
+<p>按照Eclipse版本下载匹配的Jadclipse插件：<a href="http://sourceforge.net/projects/jadclipse/files/?source=navbar">下载链接</a>。（这个插件的最近修改是2007年，只要不是使用的老掉牙的Eclipse，都可以下载最新的插件版本jadclipse3.3）。</p>
+
+<p>解压后，将对应版本的.jar包放入Eclipse的插件目录(eclipse/plugins)下。</p>
+
+<h3>3.配置Jadclipse</h3>
+
+<p>插件中有两个一定要配置好的选项：</p>
+
+<ul>
+<li>Jad执行文件的路径</li>
+<li>.class文件打开时的关联工具</li>
+</ul>
+
+
+<p>以下配置路径的方式可能Windows跟Mac版本的Eclipse各不相同，不过都比较简单，可以自行Google。</p>
+
+<h4>3.1 Jad执行文件路径</h4>
+
+<p>在Eclipse中，依次打开 <code>Preference -&gt; Java -&gt; JadClipse</code>，修改<code>Path to decompiler</code>的值，定位到Jad的执行文件路径。</p>
+
+<h4>3.2 .class关联工具</h4>
+
+<p>由于Eclipse默认.class文件打开使用的是Class File Viewer，如果.class没有关联的源文件，则无法查看源代码。需要将<code>.class without source</code>类型的文件的关联编辑器首选设置为JadClipse Class File Viewer。</p>
+
+<p>打开方式如下： <code>Windows—&gt; Perference—&gt;General-&gt;Editors-&gt;File Associations</code></p>
+
+<h3>4.测试</h3>
+
+<p>配置好后，可能需要重启Eclipse（或许是插件本身不够Robust，博主在没有重启的情况下尝试打开没有附带源代码的.class文件时失败了，重启后一切ok）。</p>
+
+<p>下载阿里云开放云存储SDK：<a href="http://help.aliyun.com/origin?helpId=664">下载链接</a>，解压后，将相应的Jar包加入到工程中。</p>
+
+<p>点击其中的某个.class文件，即可显示出它的源代码。文件的头部会有Jad的相关信息：</p>
+
+<p>```java
+/<em>jadclipse</em>/// Decompiled by Jad v1.5.8g. Copyright 2001 Pavel Kouznetsov.
+// Jad home page: http://www.kpdus.com/jad.html
+// Decompiler options: packimports(3) radix(10) lradix(10)
+// Source File Name:   HmacSHA1Signature.java</p>
+
+<p>…</p>
+
+<p>```</p>
+
+<h3>PS</h3>
+
+<p>后来Google相关内容时，找到了JadClipse在Eclipse Market的版本：<a href="http://marketplace.eclipse.org/content/jadclipse-eclipse-4x">请戳</a>，或许对大家有用=)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Java类、实例的初始化顺序]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/09/22/java-initialization/"/>
+    <updated>2013-09-22T21:53:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/09/22/java-initialization</id>
+    <content type="html"><![CDATA[<p>今晚是阿里巴巴2013校园招聘的杭州站笔试。下午匆忙看了两张历年试卷，去现场打了瓶酱油。</p>
+
+<p>题目总体考察点偏基础，倒数第二题（Java附加题）比较有趣，考察了Java初始化机制的细节，在此摘录出来。</p>
+
+<h2>题目</h2>
+
+<p>求如下java代码的输出：</p>
+
+<p>``` java</p>
+
+<p>class T  implements Cloneable{</p>
+
+<pre><code>public static int k = 0;
+public static T t1 = new T("t1");
+public static T t2 = new T("t2");
+public static int i = print("i");
+public static int n = 99;
+
+public int j = print("j");
+{
+    print("构造快");
+}
+
+static {
+    print("静态块");
+}
+
+public T(String str) {
+    System.out.println((++k) + ":" + str + "    i=" + i + "  n=" + n);
+    ++n; ++ i;
+}
+
+public static int print(String str){
+    System.out.println((++k) +":" + str + "   i=" + i + "   n=" + n);
+    ++n;
+    return ++ i;
+}
+
+public static void main(String[] args){
+    T t = new T("init");
+}
+</code></pre>
+
+<p>}</p>
+
+<p>```</p>
+
+<!--more-->
+
+
+<h2>分析</h2>
+
+<p>代码主要考察的是类、变量初始化的顺序。</p>
+
+<p>一般的，我们很清楚类需要在被实例化之前初始化，而对象的初始化则是运行构造方法中的代码。</p>
+
+<p>本题的代码显然没有这么简单了。本题中涉及到了<code>static {…}</code> 和 <code>{…}</code>这种形式的代码块，以及在类的静态变量中初始化该类的对象这种交错的逻辑，容易让人焦躁（类似于密集恐惧症吧=(）。实际上，按照<a href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loading-linking-and-initialising/">类的装载、链接和初始化逻辑</a>，以及<a href="http://biaobiaoqi.me/blog/2013/09/08/strange-behavior-using-braces-in-java/">对象初始化的顺序</a>来思考，不难得到答案。</p>
+
+<h3>代码组成</h3>
+
+<ul>
+<li><p>成员变量
+  2~6行的变量是static的，为类T的静态成员变量，需要在类加载的过程中被执行初始化；第8行的<code>int j</code>则为实例成员变量，只再类被实例化的过程中初始化。</p></li>
+<li><p>代码段
+  9~11行为实例化的代码段，在类被实例化的过程中执行；13~15行为静态的代码段，在类被加载、初始化的过程中执行。</p></li>
+<li><p>方法
+  方法<code>public static int print(String str)</code> 为静态方法，其实现中牵涉到k,i,n三个静态成员变量，实际上，这个方法是专门用来标记执行顺序的方法；T的构造方法是个实例化方法，在T被实例化时调用。</p></li>
+<li><p>main方法
+  main方法中实例化了一个T的实例。</p></li>
+</ul>
+
+
+<h3>执行顺序分析</h3>
+
+<p>在一个对象被使用之前，需要经历的过程有：类的装载 -> 链接（验证 -> 准备 -> 解析） -> 初始化 -> 对象实例化。（详情参见<a href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loading-linking-and-initialising/">《Java类的装载、链接和初始化》</a>），这里需要注意的点主要有：</p>
+
+<ul>
+<li><p>在类链接之后，类初始化之前，实际上类已经可以被实例化了。</p>
+
+<p>  就如此题代码中所述，在众多静态成员变量被初始化完成之前，已经有两个实例的初始化了。实际上，此时对类的实例化，除了无法正常使用类的静态承运变量以外（还没有保证完全被初始化），JVM中已经加载了类的内存结构布局，只是没有执行初始化的过程。比如第3行<code>public static T t1 = new T("t1");</code>，在链接过程中，JVM中已经存在了一个t1，它的值为null，还没有执行<code>new T("t1")</code>。又比如第5行的<code>public static int i = print("i");</code>，在没有执行初始化时，i的值为0，同理n在初始化前值也为0.</p></li>
+<li><p>先执行成员变量自身初始化，后执行<code>static {…}</code>、<code>{…}</code>代码块中的内容。</p>
+
+<p>  如此策略的意义在于让代码块能处理成员变量相关的逻辑。如果不使用这种策略，而是相反先执行代码块，那么在执行代码块的过程中，成员变量并没有意义，代码块的执行也是多余。</p></li>
+<li><p>类实例化的过程中，先执行隐式的构造代码，再执行构造方法中的代码
+  这里隐式的构造代码包括了<code>{}</code>代码块中的代码，以及实例成员变量声明中的初始化代码，以及父类的对应的代码（还好本题中没有考察到父类这一继承关系，否则更复杂;)）。为何不是先执行显示的构造方法中的代码，再执行隐式的代码呢？这也很容易解释：构造方法中可能就需要使用到实例成员变量，而这时候，我们是期待实例变量能正常使用的。</p></li>
+</ul>
+
+
+<p>有了如上的分析，也就能推到出最终的输出结果了。实际上，这几个原则都不需要死记硬背，完全能通过理解整个JVM的执行过程来梳理出思路的。</p>
+
+<h2>答案</h2>
+
+<p>```</p>
+
+<p>1:j   i=0   n=0
+2:构造快   i=1   n=1
+3:t1    i=2  n=2
+4:j   i=3   n=3
+5:构造快   i=4   n=4
+6:t2    i=5  n=5
+7:i   i=6   n=6
+8:静态块   i=7   n=99
+9:j   i=8   n=100
+10:构造快   i=9   n=101
+11:init    i=10  n=102</p>
+
+<p>```</p>
+
+<h3>参考：</h3>
+
+<ul>
+<li><a href="http://biaobiaoqi.me/blog/2013/09/08/strange-behavior-using-braces-in-java/">《Java构造方法中的执行顺序》</a></li>
+<li><a href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loading-linking-and-initialising/">《Java类的装载、链接和初始化》</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[对Java字符串的探究]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/09/08/string-interning/"/>
+    <updated>2013-09-08T13:01:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/09/08/string-interning</id>
+    <content type="html"><![CDATA[<h2>问题的出发点</h2>
+
+<p>在网上看到一道题：</p>
+
+<p><code>java
+String str = new String("abc");  
+</code></p>
+
+<p>以上代码执行过程中生成了多少个String对象？</p>
+
+<p>答案写的是两个。"abc"本身是一个，而new又生成了一个。</p>
+
+<h2>"abc"是什么</h2>
+
+<p>查看这句程序的字节码，如下：
+```
+NEW String</p>
+
+<pre><code>DUP  
+LDC "abc"  
+INVOKESPECIAL String.&lt;init&gt;(String) : void  
+ASTORE 1   
+</code></pre>
+
+<p><code>``
+指令</code>ldc indexbyte`的含义：将两字节的值从indexbyte索引的常量池中的项中推到方法栈上。</p>
+
+<p>指令<code>LDC "abc"</code>说明了"abc"并不是直接以对象存在的，而是存在于常量池的索引中。String的构造函数调用命令实际使用的就是String类型作为参数，那么，栈上应该有一个String类型的索引。</p>
+
+<p>由此我们得出，在字节码中，ldc命令在常量池中找到了能索引到“abc”那个String对象的索引值。</p>
+
+<h2>常量池</h2>
+
+<p>常量池是类文件（.class）文件中的一部分，记录了许多常量信息，索引的字符串信息。</p>
+
+<p>由于Java是动态加载的，类文件并没有包含程序运行时的内存布局，方法调用等无法直接记录出方法的物理位置，常量池通过索引的方法解决了这个问题。</p>
+
+<!--more-->
+
+
+<p>常量池中存着许多表，其中Constant_Utf8_info表中，记录着会被初始化为String对象的字符串的字面值（iteral）。
+而在String 的java doc中，有对String字面值的说明：</p>
+
+<blockquote><p>All string literals in Java programs, such as "abc", are implemented as instances of this class.</p></blockquote>
+
+<p>在Java编译的过程中，确定下来的String字面值都先被优化记录在常量池中（那些双引号字符串，都是以CONSTANT_utf8_info的形式存储在常量池中的）。也就是说，Java源代码文件中出现的那些诸如"abc"字符串，都已经被提前放在了常量池中。</p>
+
+<p>可以使用如下代码验证这一点：</p>
+
+<p>```java
+public class Program<br/>
+{</p>
+
+<pre><code>public static void main(String[] args)  
+{  
+   String str1 = "Hello";    
+   String str2 = "Hello";   
+   System.out.print(str1 == str2);  
+}  
+</code></pre>
+
+<p>}<br/>
+```</p>
+
+<p>输出结果是true.说明"Hello"作为对象是被程序从同一个内存空间读取出来的。</p>
+
+<p>常量池是编译时产生的，存在于类文件中（*.class文件）。运行时，JVM中每个对象都拥有自己的运行时常量池（run time constant pool）。</p>
+
+<h2>字符串池</h2>
+
+<p>我在String 的java doc中又发现了一个有趣的method：intern() ,我翻译如下：</p>
+
+<blockquote><p>当intern方法被调用，如果池中已经拥有一个与该String的字符串值相等（即equals()调用后为true）的String对象时，那么池中的那个String对象会被返回。否则，池中会增加这个对象，并返回当前这个String对象。</p></blockquote>
+
+<p>其中有介绍一个字符串池的东西：字符串池（String pool），初始是空的，由类私有的控制。</p>
+
+<p>查看java.lang.String的源代码，发现Intern()方法是一个native方法，即本地实现的方法，而不是一个java方法，这让我们不能直观的看到字符串池的实现细节。不过能够理解字符串池其实是类似于线程池的缓冲器，可以起到节约内存的作用。如下代码可以验证</p>
+
+<p>```java
+package biaobiaoqi.thinkingInJava;</p>
+
+<p>public class Test {</p>
+
+<pre><code>public static void main(String[] args){  
+
+    String strA1 = "ab";  
+    String strA2 = "c";  
+    String strB1 = "a";  
+    String strB2 = "bc" ;  
+    System.out.println((strA1+strA2).intern() == (strB1 + strB2).intern());  
+
+}  
+</code></pre>
+
+<p>}
+```
+输出结果为true。</p>
+
+<p>现代的JVM实现里，考虑到垃圾回收（Garbage Collection）的方便，将内存区域<a href="http://en.wikipedia.org/wiki/Java_Virtual_Machine#Heap">heap</a>划分为三部分： young generation 、 tenured generation（old generation）和 permanent generation( permgen )</p>
+
+<p>字符串池是为了解决字符串重复的问题，生命周期长，它存在于permgen中。</p>
+
+<h2>总结</h2>
+
+<p>编译Java源代码时，源文件中出现的双引号内的字符串都被收纳到常量池中，用CONSTANT_utf8_info项存储着。</p>
+
+<p>JVM中，相应的类被加载运行后，常量池对应的映射到JVM的运行时常量池中。其中每项CONSTANT_utf8_info（也就试记录那些字符串的）都会在常量引用解析时，自动生成相应的internal String，记录在字符串池中。</p>
+
+<p>回过头来看看文章刚开始的那个问题。</p>
+
+<p><code>java
+String str = new String("abc");
+</code>
+这里确实是有两个String对象生成了。</p>
+
+<p><code>new String("xxx")</code> 创建的String 对象会在heap 中重新生成新的String 对象，绕过字符串池的管辖。而如果使用<code>String str = "xxx"</code>则先查看字符串池 是否已经存在，存在则直接返回PermGen中的该String 对象，否则生成新的String 对象，并将它加入字符串池中。</p>
+
+<blockquote><p>尽量使用<code>String str = "abc";</code>，而不是<code>String str = new String("abc")；</code>用new的方法肯定会开辟新的heap空间，而前者的方法，则会通过string interning优化。</p></blockquote>
+
+<h3>参考资料</h3>
+
+<ul>
+<li><a href="http://www.codeinstructions.com/2009/01/busting-javalangstringintern-myths.html">Busting java.lang.String.intern() Myths</a></li>
+<li><a href="http://book.douban.com/subject/1788390/">Inside the JAVA2 virtual machine</a></li>
+<li><a href="http://book.douban.com/subject/1610251/">Programming for the java virtual machine</a></li>
+<li><a href="http://www.xyzws.com/Javafaq/what-is-string-literal-pool/3">What is String literal pool? How to create a String</a></li>
+<li><a href="http://stackoverflow.com/questions/4918399/what-type-of-memory-heap-or-stack-string-constant-pool-in-java-gets-stored">What type of memory (Heap or Stack) String constant pool in Java gets stored?</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[AOP实践：java.lang.instrument的使用]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/09/08/custom-premain-method/"/>
+    <updated>2013-09-08T13:01:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/09/08/custom-premain-method</id>
+    <content type="html"><![CDATA[<h2>背景</h2>
+
+<p>在<a href="https://github.com/biaobiaoqi/rcjp">rcjp</a>项目中，需要调用ASM API（用于字节码处理的开源库）对字节码进行处理，目标是实现对Java程序运行时各种对象的动态跟踪，并进一步分析各个对象之间的关系。在此之前，需要考虑如何获取程序运行的入口。</p>
+
+<p>首先，我考虑到了自定义类加载器（详情见参考资料），即在程序的main入口处，首先加载自定义的类加载器，然后通过反射技术使用这个类加载器加载并调用测试程序。这个方法缺点是：每次都必须先找到测试程序的入口类，而对于有的封装成jar的程序集合，这一点相对比较难控制。</p>
+
+<p>于是，有了这里介绍的方法：通过 <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/instrument/package-summary.html">java.lang.instrument</a> 实现的java agent对象操作字节码，是一种<a href="http://en.wikipedia.org/wiki/Aspect-oriented_programming">AOP</a>的方法。</p>
+
+<p>程序中，除了ASMAgent 以外的所有类都是调用ASM API 实现对测试程序中各个对象的构造、方法调用、属性赋值等操作行为的记录（其中对Collection子类的处理着实费了一番心血= =，字节码操作很细节，容易出错）。</p>
+
+<!--more-->
+
+
+<h2>原理</h2>
+
+<p><a href="http://www.ibm.com/developerworks/cn/java/j-lo-jse61/index.html#N100A7">JVMTI（Java Virtual Machine Tool Interface）</a>是一套本地编程接口集合，它提供了一套『代理』机制，可以支持第三方工具程序以代理的方式连接和访问 JVM，并利用 JVMTI 提供的丰富的编程接口，完成很多跟 JVM 相关的功能。</p>
+
+<p>java.lang.instrument 包的实现，也就是基于这种机制的：在 Instrumentation 的实现当中，存在一个 JVMTI 的代理程序，通过调用 JVMTI 当中 Java 类相关的函数来完成 Java 类的动态操作。</p>
+
+<p>Instrumentation 的最大作用就是类定义的动态改变和操作。在 Java SE 5 及其后续版本当中，开发者可以在一个普通 Java 程序（带有 main 函数的 Java 类）运行时，通过 – javaagent参数指定一个特定的 jar 文件（包含 Instrumentation 代理）来启动 Instrumentation 的代理程序。</p>
+
+<h2>步骤</h2>
+
+<h3>1.编写java代理类</h3>
+
+<p>这个类中，premain方法是关键，对比于一般的入口main一样，这里的premain是在main之前执行的。它会告诉JVM如何处理加载上来的java字节码。如下例：</p>
+
+<p>```java
+public static void premain(String agentArgs, Instrumentation inst) {</p>
+
+<pre><code>                Trace.BeginTrace(); // it's important for trace files  
+        inst.addTransformer(new ASMAgent());  
+    }  
+</code></pre>
+
+<p>```</p>
+
+<p>值得注意的是，addTransformer实现了对字节码处理的方法的回调。</p>
+
+<p><code>java
+inst.addTransformer(new ASMAgent());  
+</code></p>
+
+<p>类ASMAgent包含着实现对java字节码处理的方法：transform()。它来自于ClassFileTransformer接口。为了方便，这里将对ClassFileTransformer接口的实现跟ASMAgent类放在了一起。其中classfileBuffer是类文件加载时的原始的字节码，retVal则是经过处理后的字节码。</p>
+
+<p>```java
+public byte[] transform(ClassLoader loader, String className,Class&lt;?> classBeingRedefined,</p>
+
+<pre><code>                                    ProtectionDomain protectionDomain,byte[] classfileBuffer)  
+        throws IllegalClassFormatException {  
+        byte[] retVal = null;  
+
+        if(isInstrumentable(className)){    
+            ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);  
+            ASMClassAdapter mca = new ASMClassAdapter(cw);   
+            ClassReader cr = new ClassReader(classfileBuffer);  
+            cr.accept(mca, 0);  
+            retVal = cw.toByteArray();  
+        }else{  
+                retVal = classfileBuffer ;  
+            }  
+
+        return retVal;  
+}  
+</code></pre>
+
+<p>```</p>
+
+<h3>2.打包代理类</h3>
+
+<p>只有合理打包并在manifest文件中记录下相应的键值对之后，才能正常执行premain的内容。
+manifest文件中需要添加的键值对是：
+<code>
+Premain-Class : biaobiaoqi.asm.ASMAgent  
+</code></p>
+
+<p>如果对字节码的处理有应用到了其他的类，需要在manifest中增加路径。比如使用到了asm-3.0.jar，则增加如下语句：
+<code>
+Class-Path: asm-3.0.jar  
+</code></p>
+
+<h3>3.执行</h3>
+
+<p>执行测试程序时，添加“-javaagent:代理类的jar[=传入premain的参数]”选项。</p>
+
+<p>比如，对于博主的程序，就是</p>
+
+<p><code>java -javaagent:ASMInstrument.jar   -jar XXXX.jar  xxxx</code></p>
+
+<p>其中ASMInstrument.jar 是第二步中打包的程序，  XXX.jar是需要测试的程序， xxx是XXX.jar 执行时可能的命令行参数。</p>
+
+<p>如果只是执行某.class文件中的类，我们假设是在当前目录下的一个XXXX类，则是：
+<code>java -javaagent:ASMInstrument.jar   -cp ./  XXXX xxx</code></p>
+
+<p>其中xxx是可能的命令行参数。</p>
+
+<h3>参考资料</h3>
+
+<ul>
+<li><a href="http://www.ibm.com/developerworks/cn/java/j-lo-jse61/index.html">《Java SE 6 新特性: Instrumentation 新功能》</a></li>
+<li><a href="http://biaobiaoqi.me/blog/2013/09/08/java-class-loader-in-practice/">《Java类加载器编程实践》</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

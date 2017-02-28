@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: Linux | Biaobiaoqi的博客]]></title>
+  <link href="http://biaobiaoqi.me/tags/linux/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.me/"/>
+  <updated>2013-11-07T02:33:21+08:00</updated>
+  <id>http://biaobiaoqi.me/</id>
+  <author>
+    <name><![CDATA[Biaobiaoqi]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[全分布式的Hadoop初体验]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/05/12/touch-hadoop/"/>
+    <updated>2013-05-12T00:26:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/05/12/touch-hadoop</id>
+    <content type="html"><![CDATA[<h2>背景</h2>
+
+<p>之前的时间里对Hadoop的使用都是基于学长所搭建起的实验环境的，没有完整的自己部署和维护过，最近抽时间初体验了在集群环境下装机、配置、运行的全过程，梳理总结到本文中。</p>
+
+<h2>配置</h2>
+
+<ul>
+<li>内存:8G</li>
+<li>CPU：i5-2400 3.1GHz；</li>
+<li>硬盘：960G</li>
+<li>系统：windows 7旗舰 64bits</li>
+</ul>
+
+
+<!--more-->
+
+
+<ul>
+<li>虚拟机：VMware7.1.1</li>
+<li>虚拟集群：</li>
+<li><ul>
+<li>T （master节点）Ubuntu11.04 32 bits 内存512MB；硬盘100G；单核；</li>
+</ul>
+</li>
+<li><ul>
+<li>T2（slave节点） Ubuntu11.04 32 bits 内存512MB；硬盘100G；单核；</li>
+</ul>
+</li>
+<li><ul>
+<li>T3（slave节点） Ubuntu11.04 32 bits 内存512MB；硬盘100G；单核；</li>
+</ul>
+</li>
+<li><ul>
+<li>T4（slave节点） Ubuntu11.04 32 bits 内存512MB；硬盘100G；单核；</li>
+</ul>
+</li>
+</ul>
+
+
+<h2>环境准备</h2>
+
+<h5>1.节点机器的配置</h5>
+
+<p>配置固定IP:修改<code>/etc/nerwork/interfaces</code>
+<code>
+auto lo
+iface lo inet loopback
+address 192.168.108.131
+gateway 192.168.108.2
+netmask 192.168.108.0
+broadcast 192.168.108.0
+</code></p>
+
+<p>为了便于管理，建议按统一约定修改hostname：修改<code>/etc/hostname</code>；同时，Hadoop集群要求每个节点使用同一个账号来管理、运行，所以，也需要设置好公用账号。</p>
+
+<h5>2.集群ssh配置</h5>
+
+<p>ssh相关原理和操作，参见博文<a href="http://biaobiaoqi.me/blog/2013/04/19/use-ssh/">《SSH原理和使用》</a>。</p>
+
+<p>在每台机器上生成密钥对，并将所有机器的公钥集成到master的<code>~/.ssh/authorized_keys</code>中,之后将这个文件分发到集群所有机器上。
+这样，所有机器之间都可以实现免密码的ssh访问了。</p>
+
+<p>使用如下指令，可以将本机的公钥添加到master的authorized_keys文件末尾。当所有节点都执行一遍以后，再将master的authorized_keys发布到各个节点上。
+```</p>
+
+<h1>cat .ssh/id_rsa.pub | ssh T 'cat >> ~/.ssh/authorized_keys'</h1>
+
+<p>```</p>
+
+<h5>3.工具脚本</h5>
+
+<p>在分布式的环境里，运维工作的自动化很有必要。为了方便集群的运维，我写了两个简单的batch脚本。</p>
+
+<h6>统一执行脚本</h6>
+
+<p>在所有节点上执行同样的动作。使用时，在master节点上调用batch脚本，参数为对应的batch执行语句。</p>
+
+<p>```</p>
+
+<h1>!/bin/bash</h1>
+
+<h1>Program:</h1>
+
+<h1>Execute instructions in hosts in slaveslist.</h1>
+
+<h1>Description:</h1>
+
+<h1>2013/5/8 biaobiaoqi First Release</h1>
+
+<p>if [ $# -lt 1 ]; then
+   echo  "usage: $0 COMMAND"
+   exit 0
+fi</p>
+
+<p>for i in <code>cat slaveslist</code>
+do
+   ssh biaobiaoqi@$i "$1"
+done</p>
+
+<p>```</p>
+
+<p>脚本中使用的slaveslist文件保存着所有slave节点的hostname，需要与脚本放在同一个工作目录下。</p>
+
+<h6>统一替部署脚本</h6>
+
+<p>将主节点的某文件或目录统一的更新部署替换到所有节点上（注意，所有节点拥有相同的目录结构，即替换的文件路径相同）。</p>
+
+<p>遇到hadoop集群中节点的增删改动需要修改配置文件的，都可以通过这个脚本便捷的部署。</p>
+
+<p>```</p>
+
+<h1>!/bin/bash</h1>
+
+<h1>Program:</h1>
+
+<h1>Put the dirctory into all nodes of the cluster as the same path.</h1>
+
+<h1>Description:</h1>
+
+<h1>2013/5/10     biaobiaoqi     First Release</h1>
+
+<p>if [ $# -lt 1 ]; then
+   echo "Usage $0 DIR_PATH"
+   exit 0
+fi</p>
+
+<p>for i in <code>cat slaveslist</code>
+do
+   ssh $i "rm ~/tmp -rf"
+   scp -r $1 $i:~/tmp
+   ssh $i "rm -rf $1;  mv ~/tmp $1"
+done</p>
+
+<p>```</p>
+
+<h5>4.配置hosts文件</h5>
+
+<p>由于hadoop体系在处理节点时，是使用的hostname，而非IP，所以必须先配置好hostname和IP的关系。
+在一台机器上修改<code>/etc/hosts</code>
+```</p>
+
+<h1>/etc/hosts</h1>
+
+<p>127.0.0.1     localhost
+192.168.108.128     T3
+192.168.108.129     T2
+192.168.108.130 T
+192.168.108.131 T4
+```
+然后使用统一执行脚本，将它发布到所有节点上。</p>
+
+<p>值得注意的是，在<code>/etc/hostsname</code>中修改了host name之后，如果不同步的修改<code>/etc/hosts</code>中的相关信息，则在sudo操作时出现 <code>sudo: unable to resolve host</code>  的提示。原因是机器无法解析主机名。</p>
+
+<p>修改<code>/etc/hosts</code>时也要特别注意，如果改成<code>127.0.0.1 localhost HOSTNAME</code> (其中HOSTNAME是主机名)的形式，在开启hadoop集群时，会出现datanode无法正常访问namenode，算是个小bug吧。所以得把hosts文件写成如上的形式。</p>
+
+<h5>5.配置Java环境</h5>
+
+<p>Hadoop需要Java1.6或更高版本，记住Java的安装目录，之后需要在hadoop配置过程中用到。</p>
+
+<h2>安装Hadoop</h2>
+
+<h5>1.下载Hadoop</h5>
+
+<p>从官网下载<a href="http://www.apache.org/dyn/closer.cgi/hadoop/common/">Hadoop发布版</a>（博主使用的是较早的稳定版0.20.2）</p>
+
+<p>关于版本选择，推荐阅读：<a href="http://dongxicheng.org/mapreduce-nextgen/how-to-select-hadoop-versions/">Hadoop版本选择探讨</a></p>
+
+<h5>2.部署</h5>
+
+<p>解压下载好的Hadoop，后放到合适的目录下。这里假定放置在/home/USER/ 的目录下</p>
+
+<p>在<code>/home/USER/.bashrc</code>(其中USER为集群的用户名)文件中，增加如下语句，设定Hadoop相关的路径信息：
+<code>
+export JAVA_HOME=/usr/lib/jvm/java-6-openjdk
+export HADOOP_HOME=/home/hadoop/Hadoop
+export HADOOP_CONF=$HADOOP_HOME/conf
+export HADOOP_PATH=$HADOOP_HOME/bin
+export PATH=$HADOOP_PATH:$PATH
+export CLASSPATH=.:$JAVA_HOME/bin:$PATH:$HADOOP_HOME:$HADOOP_HOME/bin
+</code></p>
+
+<h6>Hadoop核心配置修改</h6>
+
+<p>配置文件在<code>$HADOOP_HOME/conf</code>目录下，其中基础配置比较重要的有三个：core-site.xml, hdfs-site.xml, mapred-site.xml。（当然，每个配置文件都有其细节作用，不过在初步实践hadoop时，理解这三个配置文件中的几个重要配置项就够了）</p>
+
+<p>一般的，有三种可选模式。即本地模式、伪分布式模式和全分布式模式。前两种只是在单机环境下，后一种才是生产环境下的常用方式。《Hadoop权威指南》和《Hadoop实战》等书中都有讲到不同方式的配置，这里博主仅描述实验环境下4节点的全分布式配置。</p>
+
+<p>core-site.xml整个hadoop的顶层配置
+```
+&lt;?xml version="1.0"?>
+&lt;?xml-stylesheet type="text/xsl" href="configuration.xsl"?></p>
+
+<!-- Put site-specific property overrides in this file. -->
+
+
+<p><configuration></p>
+
+<pre><code>&lt;property&gt;
+     &lt;name&gt;hadoop.tmp.dir&lt;/name&gt;
+     &lt;value&gt;/home/biaobiaoqi/UDMS/hadoop-data/tmp-base&lt;/value&gt;
+     &lt;description&gt;
+    存放临时目录的路径，默认也被用来存储hdfs的元数据和文件数据，值得注意的是，hadoop账户对所设定的本地路径是否有足够的操作权限。之后再hdfs-site.xml中设定的dfs.data.dir和dfs.name.dir也要注意同样的问题
+    &lt;/description&gt; 
+&lt;/property&gt; 
+
+ &lt;property&gt;   
+      &lt;name&gt;fs.default.name&lt;/name&gt; 
+      &lt;value&gt;hdfs://T:9000/&lt;/value&gt;
+      &lt;description&gt;
+    默认文件系统的标记。这个URI标记了文件系统的实现方式。UIR的协议决定了文件系统的实现类，而后面的值决定了文件系统的地址、端口等信息。
+    &lt;/description&gt;
+ &lt;/property&gt; 
+</code></pre>
+
+<p></configuration></p>
+
+<p>```</p>
+
+<p>hdfs-site.xml存储HDFS相关的信息</p>
+
+<p>```
+&lt;?xml version="1.0"?>
+&lt;?xml-stylesheet type="text/xsl" href="configuration.xsl"?></p>
+
+<!-- Put site-specific property overrides in this file. -->
+
+
+<p><configuration></p>
+
+<pre><code>&lt;property&gt;   
+      &lt;name&gt;dfs.replication&lt;/name&gt;   
+      &lt;value&gt;3&lt;/value&gt;   
+      &lt;description&gt;默认的块的副本数量。实际的副本数量可以在文件写入的时候确定，默认的副本数则是在没有指定写入副本时被使用。 &lt;/description&gt; 
+ &lt;/property&gt;
+&lt;property&gt;
+     &lt;name&gt;dfs.name.dir&lt;/name&gt;
+      &lt;value&gt;/home/hadoop/hadoop-data/meta-data&lt;/value&gt;
+    &lt;description&gt;
+    设定hdfs的元数据信息存储地址。在namenode上。
+    &lt;/description&gt;
+ &lt;/property&gt;
+ &lt;property&gt;
+      &lt;name&gt;dfs.data.dir&lt;/name&gt;
+      &lt;value&gt;/home/hadoop/hadoop-data/data&lt;/value&gt;
+    &lt;description&gt;
+    设定hdfs的数据存储地址。在datanode上。
+    &lt;/description&gt;
+ &lt;/property&gt;
+</code></pre>
+
+<p></configuration></p>
+
+<p>```</p>
+
+<p>mapred-site.xml存储mapreduce作业相关配置
+```
+&lt;?xml version="1.0"?>
+&lt;?xml-stylesheet type="text/xsl" href="configuration.xsl"?></p>
+
+<!-- Put site-specific property overrides in this file. -->
+
+
+<p><configuration></p>
+
+<pre><code>&lt;property&gt;   
+      &lt;name&gt;mapred.job.tracker&lt;/name&gt;
+      &lt;value&gt;T:9001&lt;/value&gt;   
+      &lt;description&gt; Mapreduce 的job tracker所在的节点和端口。&lt;/description&gt; 
+ &lt;/property&gt;
+</code></pre>
+
+<p></configuration></p>
+
+<p>```</p>
+
+<p>hosts文件存储了master节点</p>
+
+<p><code>
+T
+</code></p>
+
+<p>slaves文件存储着所有的slaves节点
+<code>
+T2
+T3
+T4
+</code></p>
+
+<h2>启动集群</h2>
+
+<h5>1.格式化namenode</h5>
+
+<p>如果是第一次起动集群，需要先格式化HDFS。</p>
+
+<p>namenode存放了HDFS的元数据，故可以看成是对HDFS的格式化。</p>
+
+<p><code>
+$HADOOP_HOME/bin/hadoop namenode -format
+</code></p>
+
+<h5>2.启动守护进程</h5>
+
+<p><code>
+$HADOOP_HOME/bin/start-all.sh
+</code>
+等价于如下命令执行：
+```</p>
+
+<h1>start dfs daemons</h1>
+
+<p>$"$bin"/start-dfs.sh --config $HADOOP_CONF_DIR</p>
+
+<h1>start mapred daemons</h1>
+
+<p>$"$bin"/start-mapred.sh --config $HADOOP_CONF_DIR</p>
+
+<p>```
+如果成功，打开 http://T:50070 (T为集群master节点)，可以看到HDFS的运行情况，包括节点数量、空间大小等。这是Hadoop自带的HDFS监控页面；同样的，http://T:50030 是Mapreduce的监控界面。</p>
+
+<p>如果没有成功，根据$HADOOP_HOME/logs目录下的日志文件信息debug。</p>
+
+<h5>3.常见问题</h5>
+
+<ul>
+<li>namenode无法启动：</li>
+<li><ul>
+<li>删除掉本地文件系统中HDFS的目录文件，重新格式化HDFS。</li>
+</ul>
+</li>
+<li><ul>
+<li>HDFS目录的权限不够，更改权限设置等。</li>
+</ul>
+</li>
+<li>namenode启动成功，datanode无法连接：检查hosts文件是否设置正确；检查各个配置文件中地址值是否使用了IP而不是hostname。</li>
+<li>namenode启动成功，datanode无法启动：Incompatible namespaceIDs，由于频繁格式化，造成dfs.name.dir/current/VERSION与dfs.data.dir/current/VERSION数据不一致。</li>
+<li>SafeModeException： 分布式系统启动时，会进入安全模式，安全模式下，hadoop是无法执行的。一般的等待一会儿，就可以正常使用了。如果是由于之前集群崩溃造成的无法自动退出安全模式的情况，则需要如下特殊处理了
+<code>
+$/$HADOOP_HOME/bin/hadoop dfsadmin -safemode leave
+</code></li>
+</ul>
+
+
+<h2>初体验</h2>
+
+<p>最简单的尝试就是使用Hadoop自带的wordcount程序了，参照<a href="http://www.cnblogs.com/xia520pi/archive/2012/05/16/2504205.html">这篇文章</a>，描述很详细。</p>
+
+<p>其他的一些尝试： <a href="http://www.cnblogs.com/rilley/archive/2012/02/13/2349858.html">动态增删节点</a> 、 <a href="http://www.cnblogs.com/ggjucheng/archive/2012/04/18/2454696.html">修改备份数量</a></p>
+
+<h2>参考</h2>
+
+<p><a href="http://hadoop.apache.org/docs/stable/cluster_setup.html">offical document: Cluster Setup</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[SSH原理和使用]]></title>
+    <link href="http://biaobiaoqi.me/blog/2013/04/19/use-ssh/"/>
+    <updated>2013-04-19T21:44:00+08:00</updated>
+    <id>http://biaobiaoqi.me/blog/2013/04/19/use-ssh</id>
+    <content type="html"><![CDATA[<h2>ssh是什么</h2>
+
+<p>在linux上工作，ssh是必须要了解的技术方法。它可以建立起多台主机之间的安全的加密传输，以进行远程的访问、操控、传输数据。</p>
+
+<p>SSH為Secure Shell的縮寫。為建立在应用层和传输层基础上的安全协议。</p>
+
+<p>传统的网络服务程序，如FTP、POP和Telnet其本质上都是不安全的；因为它们在网络上用明文传送数据、用户帐号和用户口令，很容易受到中间人（man-in-the-middle）攻击方式的攻击。就是存在另一个人或者一台机器冒充真正的服务器接收用户传给服务器的数据，然后再冒充用户把数据传给真正的服务器。
+而SSH是目前较可靠，專为远程登录会话和其他网络服务提供安全性的协议。利用SSH协议可以有效防止远程管理过程中的信息泄露问题。透過SSH可以對所有传输的数据进行加密，也能够防止DNS欺骗和IP欺骗。</p>
+
+<!--more-->
+
+
+<p>SSH之另一項優點為其传输的数据是经过压缩的，所以可以加快传输的速度。SSH有很多功能，它既可以代替Telnet，又可以为FTP、POP、甚至为PPP提供一个安全的「通道」。
+了解这么多就好了，其实ssh连接也就是可以理解成经过加密的远程访问啦。</p>
+
+<p>---（来自中文维基）</p>
+
+<h2>ssh连接的验证、加密方式</h2>
+
+<p>ssh连接是CS模型（客户端-服务器），客户端发出连接申请，服务器对客户端进行验证，再考虑是否接受连接申请。</p>
+
+<p>ssh的安全加密方式的理论基础是非对称加密体系。而非对称加密中，常见的一种就是RSA加密算法。在使用ssh，务必先弄清楚非对称加密和rsa的算法流程。详情参见<a href="http://zh.wikipedia.org/wiki/RSA%E5%8A%A0%E5%AF%86%E6%BC%94%E7%AE%97%E6%B3%95">RSA加密算法</a>。</p>
+
+<p>ssh有两种级别的安全验证：账户口令验证、rsa加密验证。详细参数，可以在sshd_config配置文件中设置(Ubuntu是/etc/ssh/sshd_config，mac下是/etc/sshd_config)</p>
+
+<h3>账号口令验证</h3>
+
+<p>直接输入所要登陆的用户的口令是默认的方式。不需要修改配置文件。</p>
+
+<p>如果直接从客户端将用户密码传输到服务器，那么密码信息很容易被中间人截获，从而实现重放攻击。ssh的实现方式是：</p>
+
+<ul>
+<li>1.客户端向ssh服务器发出请求，服务器将自己的公钥返回给客户端；</li>
+<li>2.客户端用服务器的公钥加密自己的登录密码，再将信息发送给服务器；</li>
+<li>3.服务器接收到客户端传送的密码，用自己的私钥解码，如果结果正确，则同意登录，建立起连接。</li>
+</ul>
+
+
+<p>这种方式还是有漏洞的，中间人可以假扮成服务器，骗取客户端的密码。</p>
+
+<h3>RSA加密验证</h3>
+
+<p>rsa加密验证方式，充分利用了非对称加密体系的优势，不需要在网络传输密码，完全杜绝了中间人攻击的可能。步骤如下：</p>
+
+<h5>准备工作</h5>
+
+<ul>
+<li>-1.客户端先使用 ssh-keygen 命令，生成私钥和公钥。按照默认配置，私钥会被保存在~/.ssh/id_rsa中，公钥则在~/.ssh/id_rsa.pub中。(一般别修改这里的文件)</li>
+<li>0.客户端通过安全的方式将公钥发送给服务器。在服务器端，将客户端发的公钥写入到~/.ssh/authorized_keys文件末尾。</li>
+</ul>
+
+
+<h5>建立连接</h5>
+
+<ul>
+<li>1.客户端发出申请。服务器产生session密钥对，返回通过对应客户端的公钥加密后的session公钥。</li>
+<li>2.客户端用自己的密钥解密信息，得到session公钥。</li>
+<li>3.之后的数据交互，都通过对方方公钥加密，对方收到信息后，用其私钥解密，实现安全加密过程。</li>
+</ul>
+
+
+<h2>免密码的RSA加密方式实施过程</h2>
+
+<ul>
+<li>1.安装ssh</li>
+</ul>
+
+
+<p>mac下自带的有，ubuntu下直接sudo apt-get install ssh。</p>
+
+<ul>
+<li>2.在客户端生成私钥公钥</li>
+</ul>
+
+
+<p>使用ssh-keygen命令生成密钥对。遇到提示都直接回车（其中passphrase是保护rsa密钥的另一套加密方式）。</p>
+
+<p><code>
+$ ssh-keygen   
+Generating public/private rsa key pair.  
+Enter file in which to save the key (/Users/biaobiaoqi/.ssh/id_rsa): /Users/biaobiaoqi/.ssh/id_rsa  
+Enter passphrase (empty for no passphrase):   
+Enter same passphrase again:   
+Your identification has been saved in /Users/biaobiaoqi/.ssh/id_rsa.  
+Your public key has been saved in /Users/biaobiaoqi/.ssh/id_rsa.pub.  
+The key fingerprint is:  
+b7:c2:5c:3f:83:5e:5e:93:a4:42:db:51:d8:ac:07:66 biaobiaoqi@biaobiaoqi.local  
+The key's randomart image is:  
++--[ RSA 2048]----+  
+|                 |  
+|             +   |  
+|            E +  |  
+|           o +   |  
+|        S + o o  |  
+|       o + * = . |  
+|        + = B +  |  
+|         o + + . |  
+|          . .    |  
++-----------------+  
+</code></p>
+
+<p>结果是在~/.ssh/下生成了 id_rsa（私钥）和id_rsa.pub（公钥）</p>
+
+<ul>
+<li>3.将客户端的公钥id_rsa.pub传递给服务器</li>
+</ul>
+
+
+<p>传送id_rsa.pub到服务器上，并将其内容写入到~/.ssh/authorized_keys文件尾。</p>
+
+<p>可以物理的用U盘转运（似乎更安全），也可以使用scp指令（这个时候就需要运用到口令验证的ssh方式)</p>
+
+<p><code>
+$scp ~/.ssh/id_rsa.pub user@host:~/.ssh/tmp_id_rsa.pub
+$ssh user@host "cat ~./ssh/tmp_id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys"
+</code></p>
+
+<p>在执行scp传输的过程中，如果是第一次ssh连接到服务器，客户端会提示是否信任这个主机，比如：
+<code>
+$scp ~/.ssh/id_rsa.pub user@host:~/.ssh/tmp_id_rsa.pub
+The authenticity of host XXX can't be established.
+ECDSA key fingerprint is xxxxxxxxxxxxxxxxxxxxxx.
+Are you sure you want to continue connecting (yes/no)?
+</code>
+原因是，客户端不确定所连接的host是否是真正的host。一般情况，直接输入yes，继续就好了。这里有较详细的解释：<a href="http://stackoverflow.com/questions/3663895/ssh-the-authenticity-of-host-hostname-cant-be-established">点击连接</a></p>
+
+<p>然后就可以免密码、更安全的登录啦
+<code>
+ ssh xxxx@hostAddress
+</code></p>
+
+<p>在ssh登录服务器时，如果出现如下问题：<em>Agent admitted failure to sign using the key</em>则需要手工将客户端私钥加入到ssh管理体系中。使用 ssh-add 指令。（具体机理还不太清楚）
+<code>
+$ssh-add   ~/.ssh/id_rsa
+</code></p>
+
+<h2>and one more thing;)</h2>
+
+<h4>ssh+firefox+autoproy</h4>
+
+<p>看看wall外面的世界，是多么美好的事情。ssh能帮我们做到，只要有一台在wall外的主机做代理。
+具体方式参见博文：<a href="http://reverland.bitbucket.org/ssh_climbe.html">ssh+firefox-autoproxy</a></p>
+
+<h4>SCP命令加密赋值数据</h4>
+
+<p>```</p>
+
+<h1>将本地文件复制到远程主机上</h1>
+
+<p>$scp ~./tmp user@rehost:~/tmp</p>
+
+<h1>见远程主机上的文件复制到本地</h1>
+
+<p>$scp user@rehost:~/tmp ~./tmp</p>
+
+<h1>复制的是目录，需要迭代，添加-r参数</h1>
+
+<p>$scp -r user@rehost:~/tmpDir ~./tmpDir
+```</p>
+
+<h4>SSH的配置</h4>
+
+<p>具体参数细节参见博文：<a href="http://www.ibm.com/developerworks/cn/aix/library/au-sshsecurity/">SSH 安全性和配置入门</a>
+<a href="http://blog.licess.org/sshd_config/">sshd_config配置 详解</a></p>
+
+<h2>推荐阅读：</h2>
+
+<ul>
+<li><a href="http://blog.lizhigang.net/archives/249">《linux ssh 使用深度解析（key登录详解）》</a></li>
+<li><a href="http://wiki.tuna.tsinghua.edu.cn/SshKeyHowto">《使用 RSA 密钥对进行 SSH 登录验证》</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2011/12/ssh_remote_login.html">《SSH原理与运用（一）：远程登录》</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2011/12/ssh_port_forwarding.html">《SSH原理与运用（二）：远程操作与端口转发》</a></li>
+<li><a href="http://reverland.bitbucket.org/ssh_climbe.html">ssh+firefox-autoproxy</a></li>
+<li><a href="http://www.ibm.com/developerworks/cn/aix/library/au-sshsecurity/">SSH 安全性和配置入门</a></li>
+<li><a href="http://blog.licess.org/sshd_config/">sshd_config配置 详解</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

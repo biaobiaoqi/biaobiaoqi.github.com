@@ -1,0 +1,673 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>二叉树的遍历（递归、非递归）分析 - Biaobiaoqi的博客</title>
+  <meta name="author" content="Biaobiaoqi">
+
+  
+  <meta name="description" content="二叉树，递归，非递归，中序遍历，前序遍历，后序遍历">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://biaobiaoqi.github.io/blog/2013/04/27/travsal-binary-tree/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Biaobiaoqi的博客" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+
+function addBlankTargetForLinks () {
+
+  $('a[href^="http"]').each(function(){
+
+      $(this).attr('target', '_blank');
+
+  });
+
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+
+  addBlankTargetForLinks();
+
+});
+
+</script>
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F49481ec3305db999013860b0ccb3b16d' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39900036-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Biaobiaoqi的博客</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:biaobiaoqi.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives/">全部文章</a></li>
+  <li><a href="/tag-cloud/">分类阅读</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">二叉树的遍历（递归、非递归）分析</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-27T21:03:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2>背景</h2>
+
+<ul>
+<li>2013-10-7 修订部分内容</li>
+<li>2014-5-24 修改后序非递归部分代码</li>
+</ul>
+
+
+<p>本文讨论二叉树的常见遍历方式的代码(Java)实现，包括前序(preorder)、中序(inorder)、后序(postorder)、层序(level order)，进一步考虑递归和非递归的实现方式。</p>
+
+<p>递归的实现方法相对简单，但由于递归的执行方式每次都会产生一个新的方法调用栈，如果递归层级较深，会造成较大的内存开销，相比之下，非递归的方式则可以避免这个问题。递归遍历容易实现，非递归则没那么简单，非递归调用本质上是通过维护一个栈，模拟递归调用的方法调用栈的行为。</p>
+
+<p>在此之前，先简单定义节点的数据结构：</p>
+
+<p>二叉树节点最多只有两个儿子，并保存一个节点的值，为了实验的方便，假定它为 int。同时，我们直接使用 Java 的 System.out.print 方法来输出节点值，以显示遍历结果。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Node</span> <span class="o">{</span>
+</span><span class='line'>      <span class="kd">public</span> <span class="kt">int</span> <span class="n">value</span><span class="o">;</span>
+</span><span class='line'>      <span class="kd">public</span> <span class="n">Node</span> <span class="n">leftNode</span><span class="o">;</span>
+</span><span class='line'>      <span class="kd">public</span> <span class="n">Node</span> <span class="n">rightNode</span><span class="o">;</span>
+</span><span class='line'>      
+</span><span class='line'>      <span class="kd">public</span> <span class="nf">Node</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>          <span class="n">value</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>  <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>详细代码参见链接:<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/algorithm/basics/tree/BinarySearchTree.java">BST 及其各种便利的详细实现代码</a></p>
+
+<!--more-->
+
+
+<h2>前序遍历</h2>
+
+<h4>递归实现</h4>
+
+<p>递归实现很简单，在每次访问到某个节点时，先输出节点值，然后再依次递归的对左儿子、右儿子调用遍历的方法。代码如下</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">preOrderTrav</span><span class="o">(</span><span class="n">Node</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">value</span> <span class="o">+</span> <span class="s">&quot; &quot;</span><span class="o">);</span>
+</span><span class='line'>      <span class="n">preOrderTrav</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">leftNode</span><span class="o">);</span>
+</span><span class='line'>      <span class="n">preOrderTrav</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">rightNode</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>非递归调实现</h4>
+
+<h5>方法 1</h5>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">preOrderTravNoRecur</span><span class="o">(</span><span class="n">Node</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;</span> <span class="n">stack</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;();</span>
+</span><span class='line'>  <span class="n">stack</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">root</span><span class="o">);</span>
+</span><span class='line'>  <span class="k">while</span> <span class="o">(!</span><span class="n">stack</span><span class="o">.</span><span class="na">empty</span><span class="o">())</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">Node</span> <span class="n">t</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="na">pop</span><span class="o">();</span>
+</span><span class='line'>      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">t</span><span class="o">.</span><span class="na">value</span> <span class="o">+</span> <span class="s">&quot; &quot;</span><span class="o">);</span>
+</span><span class='line'>      <span class="k">if</span> <span class="o">(</span><span class="n">t</span><span class="o">.</span><span class="na">rightNode</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+</span><span class='line'>          <span class="n">stack</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">t</span><span class="o">.</span><span class="na">rightNode</span><span class="o">);</span>
+</span><span class='line'>      <span class="k">if</span> <span class="o">(</span><span class="n">t</span><span class="o">.</span><span class="na">leftNode</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+</span><span class='line'>          <span class="n">stack</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">t</span><span class="o">.</span><span class="na">leftNode</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><p>描述</p>
+
+<p>  维护一个栈，将根节点压入栈中。此后，每次从栈中读出栈顶的节点，作为对节点的访问，然后将该节点的儿子节点按照先右后左的顺序，压入栈中，实现递归模拟。</p></li>
+<li><p>分析</p>
+
+<p>  这个栈的递归策略不具备很好的扩展性，其他的遍历方式无法使用这种策略。实际上，它并不是对程序调用栈的模拟，而是针对先序遍历的特殊实现：先序遍历先对当前节点做出访问后，然后递归的调用对儿子节点的遍历，不需要在对儿子节点遍历结束后再回过头来处理当前节点。于是模拟的递归中也不需要存储之前的调用栈信息，只需要类似的生成一个未来的儿子节点的访问计划即可。</p></li>
+</ul>
+
+
+<h5>方法 2</h5>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">preOrderTravNoRecurII</span><span class="o">(</span><span class="n">Node</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;No Recursive: &quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;();</span>
+</span><span class='line'>  <span class="k">while</span> <span class="o">(</span><span class="n">n</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">|</span> <span class="o">!</span><span class="n">s</span><span class="o">.</span><span class="na">empty</span><span class="o">()){</span>
+</span><span class='line'>      <span class="k">while</span> <span class="o">(</span><span class="n">n</span><span class="o">!=</span><span class="kc">null</span> <span class="o">){</span>
+</span><span class='line'>          <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">value</span> <span class="o">+</span> <span class="s">&quot; &quot;</span><span class="o">);</span>
+</span><span class='line'>          <span class="n">s</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">n</span><span class="o">);</span>
+</span><span class='line'>          <span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="na">leftNode</span><span class="o">;</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>      <span class="n">n</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="na">pop</span><span class="o">();</span>
+</span><span class='line'>      <span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="na">rightNode</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><p>描述</p>
+
+<p>  1.维护一个栈 s 和一个当前节点 n。初始时将 n 赋值为根节点。</p>
+
+<p>  2.逐个访问当前节点 n 的左子链上的节点，并推入栈中，直到没有左儿子。</p>
+
+<p>  3.取出栈顶的节点，将 n 赋值为该节点的右儿子。</p>
+
+<p>  4.不断执行 2，3，直到栈为空且当前节点也为空。</p></li>
+<li><p>分析</p>
+
+<p>  该方法模拟了递归的前序遍历中程序调用栈的行为过程：在调用栈中，会不断的递归进入左儿子链中，直到没有左儿子，再进入对右儿子的处理中。与递归方法的调用栈的不同之处在于，内层 while 循环将递归方法中针对左儿子链上所有节点的递归过程集中到了一起。</p></li>
+</ul>
+
+
+<h2>中序遍历</h2>
+
+<h4>递归实现</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">inorderTrav</span><span class="o">(</span><span class="n">Node</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">inorderTrav</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">leftNode</span><span class="o">);</span>
+</span><span class='line'>      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">value</span> <span class="o">+</span> <span class="s">&quot; &quot;</span><span class="o">);</span>
+</span><span class='line'>      <span class="n">inorderTrav</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">rightNode</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>非递归实现</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">inorderTravNoRecu</span><span class="o">(</span><span class="n">Node</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;No Recursive: &quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;();</span>
+</span><span class='line'>  <span class="k">while</span> <span class="o">(</span><span class="n">n</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">|</span> <span class="o">!</span><span class="n">s</span><span class="o">.</span><span class="na">empty</span><span class="o">()){</span>
+</span><span class='line'>      <span class="k">while</span> <span class="o">(</span><span class="n">n</span><span class="o">!=</span><span class="kc">null</span> <span class="o">){</span>
+</span><span class='line'>          <span class="n">s</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">n</span><span class="o">);</span>
+</span><span class='line'>          <span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="na">leftNode</span><span class="o">;</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>      <span class="n">n</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="na">pop</span><span class="o">();</span>
+</span><span class='line'>      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">value</span> <span class="o">+</span> <span class="s">&quot; &quot;</span><span class="o">);</span>
+</span><span class='line'>      <span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="na">rightNode</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><p>描述</p>
+
+<p>  1.维护一个栈 s 和一个当前节点 n。初始时将 n 赋值为根节点。</p>
+
+<p>  2.将当前节点 n 的左子链上的节点逐个推入栈中，直到没有左儿子。</p>
+
+<p>  3.取出栈顶的节点，访问该节点，将 n 赋值为该节点的右儿子。</p>
+
+<p>  4.不断执行 2，3，直到栈为空且当前节点也为空。</p></li>
+<li><p>分析</p>
+
+<p>  跟前序遍历的非递归实现方法二很类似。唯一的不同是访问当前节点的时机：前序遍历在入栈前访问，而中序遍历在出栈后访问。</p></li>
+</ul>
+
+
+<h2>后序遍历</h2>
+
+<h4>递归实现</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">postOrderTrav</span><span class="o">(</span><span class="n">Node</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>          <span class="n">inorderTrav</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">leftNode</span><span class="o">);</span>
+</span><span class='line'>          <span class="n">inorderTrav</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">rightNode</span><span class="o">);</span>
+</span><span class='line'>          <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">value</span> <span class="o">+</span> <span class="s">&quot; &quot;</span><span class="o">);</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>  <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>非递归实现</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">postOrderTravNoRecu</span><span class="o">(</span><span class="n">Node</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>     
+</span><span class='line'>      <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;</span> <span class="n">stack</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;();</span>
+</span><span class='line'>      <span class="kt">int</span><span class="o">[]</span> <span class="n">flag</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">max</span><span class="o">];</span>
+</span><span class='line'>      
+</span><span class='line'>      <span class="k">while</span> <span class="o">(</span><span class="n">n</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>          <span class="n">stack</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">n</span><span class="o">);</span>
+</span><span class='line'>          <span class="n">flag</span><span class="o">[</span><span class="n">stack</span><span class="o">.</span><span class="na">size</span><span class="o">()]</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span><span class='line'>          <span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="na">leftNode</span><span class="o">;</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>      
+</span><span class='line'>      <span class="k">while</span> <span class="o">(!</span><span class="n">stack</span><span class="o">.</span><span class="na">empty</span><span class="o">())</span> <span class="o">{</span>
+</span><span class='line'>          <span class="n">n</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="na">peek</span><span class="o">();</span>
+</span><span class='line'>          <span class="k">while</span> <span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">rightNode</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">flag</span><span class="o">[</span><span class="n">stack</span><span class="o">.</span><span class="na">size</span><span class="o">()]</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>              <span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="na">rightNode</span><span class="o">;</span>
+</span><span class='line'>              <span class="n">flag</span><span class="o">[</span><span class="n">stack</span><span class="o">.</span><span class="na">size</span><span class="o">()]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+</span><span class='line'>              <span class="k">while</span> <span class="o">(</span><span class="n">n</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>                  <span class="n">stack</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">n</span><span class="o">);</span>
+</span><span class='line'>                  <span class="n">flag</span><span class="o">[</span><span class="n">stack</span><span class="o">.</span><span class="na">size</span><span class="o">()]</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span><span class='line'>                  <span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="na">leftNode</span><span class="o">;</span>
+</span><span class='line'>              <span class="o">}</span>
+</span><span class='line'>              <span class="n">n</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="na">peek</span><span class="o">();</span>
+</span><span class='line'>          <span class="o">}</span>
+</span><span class='line'>          <span class="n">n</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="na">pop</span><span class="o">();</span>
+</span><span class='line'>          <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">value</span> <span class="o">+</span> <span class="s">&quot; &quot;</span><span class="o">);</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>      
+</span><span class='line'>  <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><p>描述</p>
+
+<p>  1.维护一个栈 stack、当前节点 n 和一个标记数组 flag。将根节点的左儿子链上的所有节点压入 stack 中，并将标记数组对因为值置为 0.</p>
+
+<p>  2.将当前节点赋值为栈顶的节点。如果节点有右儿子，且没有被处理过（通过标记数组判定），则将右子树的根节点及其左儿子全部压入栈中。</p>
+
+<p>  3.将当前节点付志伟栈顶的节点，访问它，并将该节点从栈中 pop 出。</p>
+
+<p>  4.循环 2，3 两步，直到栈为空。</p></li>
+<li><p>分析</p>
+
+<p>  在非递归方法中用栈模拟程序调用栈，碰到的最大的问题就是模拟递归方法所处的状态。编码维护的栈能记录节点，但无法记录在如何处理该节点。这里使用了一个<code>flag</code>数组来记录节点的右子树是否被访问过，对每个节点进行访问的时候，都保证已经处理完了左右子树（通过先压入左边儿子链为主线，处理栈中的每个节点时，再压入右边儿子来实现）。</p></li>
+</ul>
+
+
+<h2>层序遍历</h2>
+
+<h4>无法使用递归方法</h4>
+
+<p>层序遍历不同于其他的遍历，无法使用递归实现。</p>
+
+<ul>
+<li><p>反证法证明</p>
+
+<p>  如果能实现对 A 节点的层序递归，在对 A 节点处理的过程中，应该递归的对两个儿子 B 和 C 分别调用了层序遍历。在这种情况下，我们无法让 B 和 C 的同一个层级的儿子在集中的时间中被遍历到，换言之，B 的第一层儿子在对 B 的调用中被遍历，而 C 的第一层儿子，则在对 C 的调用中遍历，这是分离开的。不成立，得证。</p></li>
+</ul>
+
+
+<h4>非递归方法</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">levelOrderTrav</span><span class="o">(</span><span class="n">Node</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&quot;Level OrderTrav: &quot;</span><span class="o">);</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="n">Queue</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;</span> <span class="n">q</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedList</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;();</span>
+</span><span class='line'>  <span class="n">q</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">n</span><span class="o">);</span>
+</span><span class='line'>  <span class="k">while</span> <span class="o">(</span><span class="n">q</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">n</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span>
+</span><span class='line'>      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">n</span><span class="o">.</span><span class="na">value</span><span class="o">);</span>
+</span><span class='line'>      <span class="k">if</span> <span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">leftNode</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+</span><span class='line'>          <span class="n">q</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">leftNode</span><span class="o">);</span>
+</span><span class='line'>      <span class="k">if</span> <span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">rightNode</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+</span><span class='line'>          <span class="n">q</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">rightNode</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><p>分析</p>
+
+<p>  用一个队列实现层序遍历，拓扑排序中也有用到这种方式。</p></li>
+</ul>
+
+
+<h2>总结</h2>
+
+<p>非递归实现的代码相对来说没有递归实现的直观。其核心都是维护了一个栈来保存状态，避免了产生过多方法调用栈浪费内存空间。</p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.io/blog/2013/04/27/travsal-binary-tree/'>http://biaobiaoqi.github.io/blog/2013/04/27/travsal-binary-tree/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Biaobiaoqi</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-27T21:03:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+    <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+<a class="jiathis_button_tsina"></a>
+<a class="jiathis_button_weixin"></a>
+<a class="jiathis_button_renren"></a>
+<a class="jiathis_button_douban"></a>
+<a class="jiathis_button_googleplus"></a>
+<a href="http://www.jiathis.com/share?uid=1814751" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+	data_track_clickback:true,
+	summary:"",
+	shortUrl:true,
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1814751" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/04/23/winsock-kills-internet/" title="Previous Post: winsock出错引起的断网">&laquo; winsock出错引起的断网</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/04/27/pat1020-pat1043-rebuild-binary-tree/" title="Next Post: 根据前中后序和层序重建二叉树">根据前中后序和层序重建二叉树 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <!--h1>Comments</h1-->
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>标签云</h1>
+ <br /> 
+  <ul class="tag-cloud">
+    <a style="font-size: 143%" href="/tags/jvm/">JVM</a> &nbsp 
+<a style="font-size: 147%" href="/tags/java/">Java</a> &nbsp 
+<a style="font-size: 145%" href="/tags/pat/">PAT</a> &nbsp 
+<a style="font-size: 109%" href="/tags/octopress/">octopress</a> &nbsp 
+<a style="font-size: 115%" href="/tags/fen-bu-shi/">分布式</a> &nbsp 
+<a style="font-size: 137%" href="/tags/zi-jie-ma/">字节码</a> &nbsp 
+<a style="font-size: 137%" href="/tags/si-kao/">思考</a> &nbsp 
+<a style="font-size: 180%" href="/tags/ji-zhu/">技术</a> &nbsp 
+<a style="font-size: 128%" href="/tags/fang-fa-lun/">方法论</a> &nbsp 
+<a style="font-size: 109%" href="/tags/fu-wu-qi/">服务器</a> &nbsp 
+<a style="font-size: 139%" href="/tags/sheng-huo/">生活</a> &nbsp 
+<a style="font-size: 153%" href="/tags/suan-fa/">算法</a> &nbsp 
+<a style="font-size: 109%" href="/tags/wang-luo/">网络</a> &nbsp 
+<a style="font-size: 139%" href="/tags/du-shu/">读书</a> &nbsp 
+<a style="font-size: 109%" href="/tags/you-jian-fu-wu/">邮件服务</a>
+
+  </ul>
+</section>
+<section>
+  <h1>关于</h1>
+   <p>biaobiaoqi是我的网络id。<br><br>
+   我的博客日志：<a href="http://biaobiaoqi.github.io/blog/2013/09/01/blog-log/">请戳</a><br><br>
+	</p>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - Biaobiaoqi -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  - <span class="credit">Theme by <a href="http://www.gehaxelt.in">Gehaxelt</a></span>
+  <span class="credit">and <a href="http://www.it-solutions-neef.de">IT Solutions Neef</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'biaobiaoqisblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://biaobiaoqi.github.io/blog/2013/04/27/travsal-binary-tree/';
+        var disqus_url = 'http://biaobiaoqi.github.io/blog/2013/04/27/travsal-binary-tree/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

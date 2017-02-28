@@ -1,0 +1,20 @@
+<div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span>  <span class="o">{</span>  
+  
+    <span class="kd">public</span> <span class="nf">Test</span><span class="o">(){</span>  
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Created by invoking newInstance()&quot;</span><span class="o">);</span>  
+    <span class="o">}</span>  
+      
+    <span class="kd">public</span> <span class="nf">Test</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span><span class="o">){</span>  
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str</span><span class="o">);</span>  
+    <span class="o">}</span>  
+      
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span>  
+                    <span class="kd">throws</span> <span class="n">ClassNotFoundException</span> <span class="o">,</span> <span class="n">InstantiationException</span> <span class="o">,</span>  
+                    <span class="n">IllegalAccessException</span>  <span class="o">{</span>  
+            <span class="n">Test</span> <span class="n">t1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Test</span><span class="o">(</span><span class="s">&quot;Created with new&quot;</span><span class="o">);</span> <span class="c1">//常规的方法  </span>
+            <span class="n">Class</span> <span class="n">myClass</span> <span class="o">=</span> <span class="n">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="s">&quot;Test&quot;</span><span class="o">);</span>  <span class="c1">//获得了对应于 Test 类的 Class 对象，如果没有加载，会先加载这个类，再返回。  </span>
+            <span class="n">Test</span> <span class="n">t2</span> <span class="o">=</span> <span class="o">(</span><span class="n">Test</span><span class="o">)</span><span class="n">myClass</span><span class="o">.</span><span class="na">newInstance</span><span class="o">();</span> <span class="c1">//调用 newInstance()创建对象。  </span>
+    <span class="o">}</span>  
+      
+<span class="o">}</span>  
+</pre></div>

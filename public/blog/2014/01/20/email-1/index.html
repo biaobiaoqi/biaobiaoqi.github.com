@@ -1,0 +1,383 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>邮件服务（一）：基本框架 - Biaobiaoqi的博客</title>
+  <meta name="author" content="Biaobiaoqi">
+
+  
+  <meta name="description" content="">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://biaobiaoqi.github.io/blog/2014/01/20/email-1/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Biaobiaoqi的博客" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+
+function addBlankTargetForLinks () {
+
+  $('a[href^="http"]').each(function(){
+
+      $(this).attr('target', '_blank');
+
+  });
+
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+
+  addBlankTargetForLinks();
+
+});
+
+</script>
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F49481ec3305db999013860b0ccb3b16d' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39900036-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Biaobiaoqi的博客</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:biaobiaoqi.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives/">全部文章</a></li>
+  <li><a href="/tag-cloud/">分类阅读</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">邮件服务（一）：基本框架</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-20T00:11:00+08:00" pubdate data-updated="true">Jan 20<span>th</span>, 2014</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2>背景</h2>
+
+<p>电子邮件出现在 1960s 晚期，比打开浏览器就要使用的 HTTP 协议早了 20 年左右,是二十世纪人类最伟大的发明之一。这个古老、经典的框架在网络中运行了五十多年，现今仍然是网络中主要的流量类型之一。</p>
+
+<p>不得不提的是，<a href="http://zh.wikipedia.org/wiki/%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6">wiki</a> 上关于中国的第一封电子邮件的记载：1987 年 9 月 14 日 [1]中国第一封电子邮件是由“德国互联网之父”维纳·措恩与王运丰在北京的计算机应用技术研究所发往德国卡尔斯鲁厄大学的，其内容为英文，大意如下：</p>
+
+<blockquote><p>Across the <strong>Great Wall</strong> we can reach every corner in the world.</p></blockquote>
+
+<p>真的是很有远见呢-,-</p>
+
+<p>前几天梳理了电子邮箱相关的协议和框架组件，准备整理成文。一共<a href="http://biaobiaoqi.github.io/tags/you-jian-fu-wu/">三篇</a>，本文是基本知识总结，第二篇介绍安全认证和防垃圾邮件的规范，第三篇记录了邮件服务器的搭建实践。</p>
+
+<!--more-->
+
+
+<h2>邮件传输所需要的组件</h2>
+
+<p>在解释邮件的传送过程前，先简单介绍一些术语（可以结合）：</p>
+
+<h3>术语</h3>
+
+<h4>Mail Agent</h4>
+
+<p>一般我们将邮件传输中的组件称作 Mail Agent，根据功能的不同，它们包括了：</p>
+
+<ul>
+<li><strong>MUA</strong>（Mail User Agent）：作为客户端程序，负责从服务器接收邮件，向服务器发送邮件。</li>
+<li><strong>MTA</strong>（Mail Transfer Agent）：将邮件发送给目的地址的邮件服务器（目的服务器上也有一个 MTA 来做接收）。一般提到的 Mail Server 就是 MTA。</li>
+<li><strong>MDA</strong>（Mail Delivery Agent）：根据 MTA 收取的邮件，决定邮件的去向（如果本机就是邮件的目的地址，则放入本地用户邮箱，如果不是，则继续转发）。还可以配置过滤垃圾邮件和自动回复等。</li>
+<li><strong>Mailbox</strong>：存储邮件数据。MDA 会将邮件放到不同用户的邮箱中。一般的，有 mbox、Maildir 和 dbmail 等存储格式。mbox 将所有邮件存放到一个文件中，弊端较多。Maildir 则将邮件存为单独的文件。</li>
+<li><strong>MRA</strong>（Mail Retrieval Agent）：负责与 MUA 沟通。</li>
+</ul>
+
+
+<h4>协议</h4>
+
+<p>不同 Agent 之间的数据交通都依赖于协议，这些协议包括：</p>
+
+<ul>
+<li><strong>SMTP</strong>（Simple Mail Transfer Protocol）：端口 25，面向连接的传输协议。用于 MUA 向 MTA 发送邮件，以及 MTA 之间互相发送和接收邮件。严格来说，MTA 其实仅是指 SMTP。</li>
+<li><strong>POP3</strong>（Post Office Protocol3）：离线协议，MUA 从 MRA 获取邮件使用这一协议。首先验证身份，将邮件传输到 MUA 后，用户 Mailbox 中的邮件会被删除。</li>
+<li><strong>IMAP</strong>（Internet Message Access Protocol）：与 POP3 类似，用于从 MRA 收取邮件。不过 MUA 与 MRA 之间双向通信，客户端的改动会反映到服务器上。IMAP 整体上为用户带来更为便捷和可靠的体验，POP3 更易丢失邮件或多次下载相同的邮件，但 IMAP 通过邮件客户端与 webmail 之间的双向同步功能很好地避免了这些问题。</li>
+</ul>
+
+
+<h4>其他</h4>
+
+<ul>
+<li><p><strong>MX 记录</strong>：邮箱服务器 DNS 的 MX 记录指向邮箱服务器。MX 记录可以设定优先级，数字越小的优先级越高。比如如下两条 MX 记录：<code>gmail.com.     1656    IN  MX  5 gmail-smtp-in.l.google.com.</code>，<code>gmail.com.        1656    IN  MX  10 alt1.gmail-smtp-in.l.google.com.</code>  <br/>
+  MTA 会优先选取优先级为 5 的地址发送，如果不成功，再转向优先级低的服务器发送。而较低优先级的服务器只是用作暂存，将邮件保存在待发送的队列中，等主服务器恢复后中继转发到主服务器，以此容错。</p></li>
+<li><p><strong>中继转发</strong>（Relay）：邮件从一台 MTA 转发到下一台 MTA，这个操作就成为邮件中继转发。如果所有人都能使用某台 MTA 做中继转发，则这台 MTA 成为 Open Relay。这是很危险的，容易被互联网的邮件流量拖垮，且可能被记录到邮箱服务器黑名单上，坏处多多。需要仔细配置 Relay 规则。</p></li>
+</ul>
+
+
+<h3>邮件传输实例</h3>
+
+<p>从一个简单的应用场景谈起：Biaobiaoqi（简称 B）使用自己的邮箱 hello@biaobiaoqi.me 登陆了自己的 foxmail 邮件客户端，撰写邮件，发送给 shenyapeng(简称 S)，S 的邮箱地址是 shenyapeng@gmail.com。S 打开自己的邮件客户端，查收了邮件。</p>
+
+<p>从用户的角度来看，只是简单的将邮件从 B 发到了 S，而实际上邮件在网络中经过了多个协议的传输。其大致流程如下：</p>
+
+<ul>
+<li>1.首先邮件需要从 B 的邮件客户端传送到对应的 biaobiaoqi.me 邮箱服务器</li>
+<li>2.biaobiaoqi.me 的邮箱服务器将邮件发送给 gmail.com 邮箱服务器。</li>
+<li>3.S 的邮件客户端从 gmail 邮件服务器获取到信收到的邮件。</li>
+</ul>
+
+
+<p>而更技术的解释如下：</p>
+
+<ul>
+<li>1.B 登陆 PC 上得 MUA（比如 Foxmail、Thunderbird、Outlook 等），撰写邮件。MUA 使用 SMTP 将邮件发送给 B 的邮箱服务器 mail.biaobiaoqi.me。</li>
+<li>2.mail.biaobiaoqi.me 的 MDA 检测邮件头信息，发现需要将邮件发送给 gmail.com 邮箱服务器，于是交予 MTA 来做传输。</li>
+<li>3.MTA 通过 gmail.com 的 DNS 中 MX 记录，查找到邮箱服务器的 IP 地址(<code>dig mx gmail.com</code>)，再向目的地中继转发这封邮件。</li>
+<li>4.到达目的 MTA 后，邮件被 MDA 送到 Mailbox 中。MRA 开始工作，供 MUA 收取邮件。</li>
+<li>5.S 登陆 MUA，使用 POP3 或 IMAP 协议从 gmail.com 的邮箱服务器 MRA 收取邮件。</li>
+</ul>
+
+
+<p>无论是邮件客户端跟邮箱服务器之间认证身份，还是邮件数据的传输，都会进行加密。直接暴露在互联网络中是很危险的。安全认证方面的问题会在下一篇讨论，这里先介绍基本的功能协议。要知道最早发明邮件协议时，也并没有将安全问题考虑在内。</p>
+
+<h2>主要参考资料</h2>
+
+<ul>
+<li><a href="http://vbird.dic.ksu.edu.tw/linux_server/0380mail.php">鸟哥的 Linux 私房菜——服务器架设篇</a></li>
+<li><a href="http://wiki2.dovecot.org/MailServerOverview">MailServerOverview</a></li>
+</ul>
+
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.github.io/blog/2014/01/20/email-1/'>http://biaobiaoqi.github.io/blog/2014/01/20/email-1/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Biaobiaoqi</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-20T00:11:00+08:00" pubdate data-updated="true">Jan 20<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+    <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+<a class="jiathis_button_tsina"></a>
+<a class="jiathis_button_weixin"></a>
+<a class="jiathis_button_renren"></a>
+<a class="jiathis_button_douban"></a>
+<a class="jiathis_button_googleplus"></a>
+<a href="http://www.jiathis.com/share?uid=1814751" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+	data_track_clickback:true,
+	summary:"",
+	shortUrl:true,
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1814751" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/01/17/java-performance-tunning-in-practice/" title="Previous Post: JVM参数调优：Eclipse启动实践">&laquo; JVM参数调优：Eclipse启动实践</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/01/21/email-2/" title="Next Post: 邮件服务（二）：安全、认证和垃圾邮件">邮件服务（二）：安全、认证和垃圾邮件 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <!--h1>Comments</h1-->
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>标签云</h1>
+ <br /> 
+  <ul class="tag-cloud">
+    <a style="font-size: 143%" href="/tags/jvm/">JVM</a> &nbsp 
+<a style="font-size: 147%" href="/tags/java/">Java</a> &nbsp 
+<a style="font-size: 145%" href="/tags/pat/">PAT</a> &nbsp 
+<a style="font-size: 109%" href="/tags/octopress/">octopress</a> &nbsp 
+<a style="font-size: 115%" href="/tags/fen-bu-shi/">分布式</a> &nbsp 
+<a style="font-size: 137%" href="/tags/zi-jie-ma/">字节码</a> &nbsp 
+<a style="font-size: 137%" href="/tags/si-kao/">思考</a> &nbsp 
+<a style="font-size: 180%" href="/tags/ji-zhu/">技术</a> &nbsp 
+<a style="font-size: 128%" href="/tags/fang-fa-lun/">方法论</a> &nbsp 
+<a style="font-size: 109%" href="/tags/fu-wu-qi/">服务器</a> &nbsp 
+<a style="font-size: 139%" href="/tags/sheng-huo/">生活</a> &nbsp 
+<a style="font-size: 153%" href="/tags/suan-fa/">算法</a> &nbsp 
+<a style="font-size: 109%" href="/tags/wang-luo/">网络</a> &nbsp 
+<a style="font-size: 139%" href="/tags/du-shu/">读书</a> &nbsp 
+<a style="font-size: 109%" href="/tags/you-jian-fu-wu/">邮件服务</a>
+
+  </ul>
+</section>
+<section>
+  <h1>关于</h1>
+   <p>biaobiaoqi是我的网络id。<br><br>
+   我的博客日志：<a href="http://biaobiaoqi.github.io/blog/2013/09/01/blog-log/">请戳</a><br><br>
+	</p>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - Biaobiaoqi -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  - <span class="credit">Theme by <a href="http://www.gehaxelt.in">Gehaxelt</a></span>
+  <span class="credit">and <a href="http://www.it-solutions-neef.de">IT Solutions Neef</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'biaobiaoqisblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://biaobiaoqi.github.io/blog/2014/01/20/email-1/';
+        var disqus_url = 'http://biaobiaoqi.github.io/blog/2014/01/20/email-1/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

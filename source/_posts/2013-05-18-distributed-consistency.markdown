@@ -3,12 +3,12 @@ layout: post
 title: "分布式一致性"
 date: 2013-05-18 18:58
 comments: true
-description: "本文来自[《分布式原理与泛型》](http://book.douban.com/subject/3108801/)的一致性章节笔记。由于缺乏实践经验，这本书对我来说太过理论，难于理解，现在已经暂停该书的阅读，转而加强实践。另有相关博文[《CAP和最终一致性》](http://biaobiaoqi.me/blog/2013/05/15/cap-and-eventual-consistent/)，偏应用，可参考阅读。"
+description: "本文来自[《分布式原理与泛型》](http://book.douban.com/subject/3108801/)的一致性章节笔记。由于缺乏实践经验，这本书对我来说太过理论，难于理解，现在已经暂停该书的阅读，转而加强实践。另有相关博文[《CAP和最终一致性》](http://biaobiaoqi.github.io/blog/2013/05/15/cap-and-eventual-consistent/)，偏应用，可参考阅读。"
 categories: [tech]
 tags: [分布式, 理论, 一致性, 技术]
 
 ---
-本文来自[《分布式原理与泛型》](http://book.douban.com/subject/3108801/)的一致性章节笔记。由于缺乏实践经验，这本书对我来说太过理论，难于理解，现在已经暂停该书的阅读，转而加强实践。另有相关博文[《CAP和最终一致性》](http://biaobiaoqi.me/blog/2013/05/15/cap-and-eventual-consistent/)，可供参考阅读。
+本文来自[《分布式原理与泛型》](http://book.douban.com/subject/3108801/)的一致性章节笔记。由于缺乏实践经验，这本书对我来说太过理论，难于理解，现在已经暂停该书的阅读，转而加强实践。另有相关博文[《CAP和最终一致性》](http://biaobiaoqi.github.io/blog/2013/05/15/cap-and-eventual-consistent/)，可供参考阅读。
 
 <!--more-->
 

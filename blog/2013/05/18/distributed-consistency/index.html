@@ -1,0 +1,447 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>分布式一致性 - Biaobiaoqi的博客</title>
+  <meta name="author" content="Biaobiaoqi">
+
+  
+  <meta name="description" content="本文来自[《分布式原理与泛型》](http://book.douban.com/subject/3108801/)的一致性章节笔记。由于缺乏实践经验，这本书对我来说太过理论，难于理解，现在已经暂停该书的阅读，转而加强实践。另有相关博文[《CAP和最终一致性》](http://biaobiaoqi. &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://biaobiaoqi.me/blog/2013/05/18/distributed-consistency/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Biaobiaoqi的博客" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+
+function addBlankTargetForLinks () {
+
+  $('a[href^="http"]').each(function(){
+
+      $(this).attr('target', '_blank');
+
+  });
+
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+
+  addBlankTargetForLinks();
+
+});
+
+</script>
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F49481ec3305db999013860b0ccb3b16d' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39900036-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Biaobiaoqi的博客</a></h1>
+  
+    <h2>做一个互联网世界的匠人</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:biaobiaoqi.me" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives/">全部文章</a></li>
+  <li><a href="/tag-cloud/">分类阅读</a></li>
+  <li><a href="/resources/">其他推荐</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">分布式一致性</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-18T18:58:00+08:00" pubdate data-updated="true">May 18<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>本文来自<a href="http://book.douban.com/subject/3108801/">《分布式原理与泛型》</a>的一致性章节笔记。由于缺乏实践经验，这本书对我来说太过理论，难于理解，现在已经暂停该书的阅读，转而加强实践。另有相关博文<a href="http://biaobiaoqi.me/blog/2013/05/15/cap-and-eventual-consistent/">《CAP 和最终一致性》</a>，可供参考阅读。</p>
+
+<!--more-->
+
+
+<h3>1.分布式的一致性概述</h3>
+
+<p>分布式系统的一个重要问题是数据的复制。对数据的复制一般有两个原因：</p>
+
+<ul>
+<li>1.增加系统的可靠性，防止单点失效的问题；</li>
+<li>2.提高系统性能，利用不同地理位置的副本迅速响应用户需求。</li>
+</ul>
+
+
+<p>数据复制的主要难题是保持各个副本的一致性。即在更新一个副本时，必须确保同时更新其他的副本，否则数据的各个副本将不再相同。</p>
+
+<h3>2.以数据为中心的一致性模型</h3>
+
+<p>一致性模型实质上是进程和数据存储之间的一个约定。正常情况下，一个数据项上执行读操作时，它期待该操作返回的是该数据在其最后一次写操作之后的结果。在没有全局时钟的情况下，精确的定义哪次写操作是最后一次写操作是十分困难的。于是就产生了一系列用其他方式定义的一致性模型。</p>
+
+<h4>2.1 持续一致性</h4>
+
+<p>有人提定义了区分不一致性的三个互相独立的坐标轴：副本之间的数值偏差，副本之间新旧程度偏差以及更新操作顺序的偏差。</p>
+
+<p>数值偏差可以这样理解：已应用于其他的副本，但还没有应用于给定副本的更新数目。</p>
+
+<p>文中使用了<a href="http://en.wikipedia.org/wiki/Vector_clock">向量时钟</a>来举例对一致性单元进行持续抑制性分析，</p>
+
+<h4>2.2 严格一致性</h4>
+
+<p>任意 read(x)操作都要读到最新的 write(x)的结果。
+依赖于绝对的全局时钟，实际系统不可能做到。</p>
+
+<h4>2.3 顺序一致性</h4>
+
+<p>对于一些读写写操作的集合，所有进程看到的都是同样的顺序。也就是将并行的操作序列化，而且每个进程得到的序列都相同。</p>
+
+<p>那么，很自然对于同一个进程执行的操作，必然要按照它们执行的顺序出现。</p>
+
+<h4>2.4 因果一致性（Casual Consitency）</h4>
+
+<p>要求：</p>
+
+<p>有因果关系的写操作必须按照它们的因果关系的顺序被看到，没有因果关系的写操作可以以任意顺序被别的进程看到。</p>
+
+<p>例如：(其中[&#8230;.]是占位符，表示没有操作)</p>
+
+<blockquote><p>进程 1  W(x)a 将 x 写成 a
+进程 2  [..]R(x)a W(x)b
+进程 3  [&#8230;.]R(x)a R(x)b
+进程 4  [&#8230;.]R(x)b R(x)a</p></blockquote>
+
+<p>进程 3 和 1、2 是满足因果一致性的，加上 4 就不满足了。因为进程 2 是由于读到 x=a 才把 x 写成 b 的，所以 W(x)a 和 W(x)b 之间有因果关系，必须按照因果的顺序出现。</p>
+
+<p>相比顺序一致性，去掉了那些没有联系的操作达成一致顺序观点的要求，只是保留那些必要的顺序（有因果关系的）。</p>
+
+<h4>2.5 入口一致性（Entry Consistency）</h4>
+
+<p>其实也就是对每个共享数据定义一个同步变量（即：锁）。当然，没有进行同步就进行的读操作结果是不保证的。</p>
+
+<h3>3 客户为中心的一致性</h3>
+
+<p>也就是从用户视角来看数据是一致的。只是关心数据最终会一致（eventually consitent）。</p>
+
+<p>只要保证对于同一个用户，他访问到的数据是一致的就可以了。如果用户只是访问一个副本，这个就很好实现，否则就需要一定策略了。当没有更多的更新的时候，要保证当前的更新会最终传播到所有的副本上。著名的例子有：DNS 系统，万维网。</p>
+
+<p>但最终一致性需要注意一个典型的问题。即当客户访问不同的副本时，问题就出现了。更具体的例子比如，博客作者更改了一篇博文内容，在 A 地的用户先访问到最新的内容，而 B 地由于离博客服务器远，看到的还是原先的内容。</p>
+
+<p>对于最终一致性的的数据存储而言，这个示例很有代表性。问题是由用户有时可能对不同的副本进行操作的事实引起的。以客户为中心的一致性分为如下几大类：</p>
+
+<h4>3.1 单调读（Monotonic Reads）</h4>
+
+<p>当进程从一个地方读出数据 x，那么这个以后再读到的 x 应该是和当前 x 相同或比当前更新的版本。也就是如果进程迁移到了别的位置，那么对 x 的更新应该比进程先到达。这里的客户就是指这个进程。</p>
+
+<h4>3.2 单调写（Monotonic Writes）</h4>
+
+<p>跟单调读相应，如果一个进程写一个数据 x，那么它在本地或者迁移到别的地方再进行写操作的时候，原来的写操作必须要先传播到这个位置。也就是进程要在任何地方至少和上一次写一样新的数据。</p>
+
+<h4>3.3 Read your writes</h4>
+
+<p>一个进程对于数据 x 的写操作，那么进程无论到任何副本上都应该看到这个写操作的影响，也就是看到和自己写操作的影响或者更新的值。</p>
+
+<h4>3.4 Writes follow reads</h4>
+
+<p>顾名思义了，也就是在读操作后面的写操作要是基于至少跟上一次读出来一样新的值。也就是如果进程在地点 1 读了 x，那么在地点 2 要写 x 的副本的话，至少写的时候应该是基于至少和地点 1 读出的一样新的值。</p>
+
+<h3>4 副本放置（Replica Placement）</h3>
+
+<h4>4.1 放置的三个方法</h4>
+
+<p>Permanent replica/永久副本: 选几个固定位置放置副本，镜像呈现。</p>
+
+<p>Server-initiated/服务端发起: 服务端动态决定什么时候向什么地方分发副本，又称 push cache</p>
+
+<p>Client-initiated/客户端发起: 客户端缓存,client cache</p>
+
+<h4>4.2 更新传播</h4>
+
+<h5>4.2.1 传播什么？</h5>
+
+<ul>
+<li>可以是更新的通知（客户自己来取）</li>
+<li>可以是更新后的数据</li>
+<li>可以是更新的操作</li>
+</ul>
+
+
+<h5>4.2.2 谁来传播</h5>
+
+<ul>
+<li>服务器 push 或客户 pull</li>
+</ul>
+
+
+<h5>4.2.3 传播协议？</h5>
+
+<ul>
+<li>保证最终会收敛到一致</li>
+</ul>
+
+
+<h4>4.3 复制协议（Replication Protocols）</h4>
+
+<h5>4.3.1 远程写（Remote-Write）协议</h5>
+
+<p>对于数据 x 有一个主副本，当没有 x 副本的服务器操作 x 的时候就会得到一个 x 的副本。而有 x 副本的服务器响应客户读请求的时候可以立刻返回。而当客户进行写操作的时候，写操作首先在主副本完成，然后再通知其他副本更新。</p>
+
+<h5>4.3.2 本地写（Local-Write）协议</h5>
+
+<p>和远程写比较类似，不同点是当一个服务器得到了副本以后就成了新的主副本，以后的写操作首先在本地完成，然后再通知其他的副本，本地写的名字由此而来。</p>
+
+<h5>4.3.3 主动复制（Active Replication）</h5>
+
+<p>对于副本的操作要设计到另外一个单一对象。比如，n 个副本代理对象 C 的一个接口，如果向所有副本发出请求，每个副本都会发一个请求到 C，那么同样的操作就执行了 n 次。所以需要一个协调者。另外，多副本返回值的时候也会有同样的情况。所以这种只执行一次的动作需要副本种有一个协调者，保证操作只被执行一次或者只返回一次。</p>
+
+<h5>3.3.4 基于候选团（Quorum-Based）协议</h5>
+
+<p>也就是读操作要得到 r 个服务器的同意，写操作要得到 w 个进程的同意。总共有 n 个进程。r 和 w 要满足以下条件：</p>
+
+<ul>
+<li>r＋w > n 这样就不可能同时发生读写，并且读到的 server 肯定有一个以上被更新过的</li>
+<li>w > n/2   这样就不可能同时发生两个写</li>
+</ul>
+
+
+<p>也就是类似于投票获得读写的锁。在 Dynamo 系统中可以配置这种 wrn 参数以自持特定的一致性。</p>
+
+<p class='post-footer'>&nbsp;原文地址：<a href='http://biaobiaoqi.me/blog/2013/05/18/distributed-consistency/'>http://biaobiaoqi.me/blog/2013/05/18/distributed-consistency/</a><br/>&nbsp;版权声明：自由转载-非商用-非衍生-保持署名| <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>Creative Commons BY-NC-ND 3.0</a></p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Biaobiaoqi</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-18T18:58:00+08:00" pubdate data-updated="true">May 18<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+    <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+<a class="jiathis_button_tsina"></a>
+<a class="jiathis_button_weixin"></a>
+<a class="jiathis_button_renren"></a>
+<a class="jiathis_button_douban"></a>
+<a class="jiathis_button_googleplus"></a>
+<a href="http://www.jiathis.com/share?uid=1814751" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+	data_track_clickback:true,
+	summary:"",
+	shortUrl:true,
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1814751" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/05/18/a-hybrid-system-hadoopdb/" title="Previous Post: HadoopDB：混合分布式系统">&laquo; HadoopDB：混合分布式系统</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/05/20/hybrid-distributed-data-management-system/" title="Next Post: Hadoop和RDBMS的混合系统介绍">Hadoop和RDBMS的混合系统介绍 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <!--h1>Comments</h1-->
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>标签云</h1>
+ <br /> 
+  <ul class="tag-cloud">
+    <a style="font-size: 113%" href="/tags/hadoop/">Hadoop</a> &nbsp 
+<a style="font-size: 139%" href="/tags/jvm/">JVM</a> &nbsp 
+<a style="font-size: 145%" href="/tags/java/">Java</a> &nbsp 
+<a style="font-size: 143%" href="/tags/pat/">PAT</a> &nbsp 
+<a style="font-size: 107%" href="/tags/octopress/">octopress</a> &nbsp 
+<a style="font-size: 137%" href="/tags/fen-bu-shi/">分布式</a> &nbsp 
+<a style="font-size: 135%" href="/tags/zi-jie-ma/">字节码</a> &nbsp 
+<a style="font-size: 135%" href="/tags/si-kao/">思考</a> &nbsp 
+<a style="font-size: 180%" href="/tags/ji-zhu/">技术</a> &nbsp 
+<a style="font-size: 107%" href="/tags/cao-zuo-xi-tong/">操作系统</a> &nbsp 
+<a style="font-size: 126%" href="/tags/fang-fa-lun/">方法论</a> &nbsp 
+<a style="font-size: 129%" href="/tags/sheng-huo/">生活</a> &nbsp 
+<a style="font-size: 148%" href="/tags/suan-fa/">算法</a> &nbsp 
+<a style="font-size: 118%" href="/tags/wang-luo/">网络</a> &nbsp 
+<a style="font-size: 135%" href="/tags/du-shu/">读书</a>
+
+  </ul>
+</section>
+<section>
+  <h1>关于</h1>
+   <p>biaobiaoqi是我的网络id。<br><br>
+   我的博客日志：<a href="http://biaobiaoqi.me/blog/2013/09/01/blog-log/">请戳</a><br><br>
+   更多信息请戳：<a href="http://about.me/biaobiaoqi">about.me</a><br>
+	</p>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Biaobiaoqi -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  - <span class="credit">Theme by <a href="http://www.gehaxelt.in">Gehaxelt</a></span>
+  <span class="credit">and <a href="http://www.it-solutions-neef.de">IT Solutions Neef</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'biaobiaoqisblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://biaobiaoqi.me/blog/2013/05/18/distributed-consistency/';
+        var disqus_url = 'http://biaobiaoqi.me/blog/2013/05/18/distributed-consistency/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

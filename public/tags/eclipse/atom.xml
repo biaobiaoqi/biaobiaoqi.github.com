@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: Eclipse | Biaobiaoqi的博客]]></title>
+  <link href="http://biaobiaoqi.github.io/tags/eclipse/atom.xml" rel="self"/>
+  <link href="http://biaobiaoqi.github.io/"/>
+  <updated>2016-04-19T08:49:46+08:00</updated>
+  <id>http://biaobiaoqi.github.io/</id>
+  <author>
+    <name><![CDATA[Biaobiaoqi]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[JVM参数调优：Eclipse启动实践]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2014/01/17/java-performance-tunning-in-practice/"/>
+    <updated>2014-01-17T11:16:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2014/01/17/java-performance-tunning-in-practice</id>
+    <content type="html"><![CDATA[<p>本文主要参考自<a href="http://book.douban.com/subject/6522893/">《深入理解Java虚拟机》</a>。这本书是国人写的难得的不是照搬代码注释的且不是废话连篇的技术书，内容涵盖了Java从源码到字节码到执行的整个过程，包括了JVM（Java Virtual Machine）的架构，垃圾收集的介绍等。这里摘录出关于配置JVM基本参数来调优Eclipse启动的过程，比较初级，供初学者参考。</p>
+
+<!--more-->
+
+
+<h2>基础知识</h2>
+
+<p>针对JVM的参数调优主要集中在数据区大小的控制和垃圾回收策略的选择。关于JVM运行机制等更多内容可参考<a href="http://biaobiaoqi.github.io/tags/jvm/">其他博文</a></p>
+
+<h3>JVM的运行时数据区</h3>
+
+<p>运行时JVM的数据区主要包括各线程私有的栈和程序计数器，线程共享的方法区，以及管理对象的堆（又称回收堆）等。程序运行时，类信息、常量、静态变量等会被加载到方法区。运行过程中几乎所有对象都在堆里，内存占用的空间最大，这也是最值得优化得部分。</p>
+
+<h3>JVM的垃圾回收策略</h3>
+
+<p>Java程序中，除了基本类型（primitive types），其他的数据都是以对象的形式存在。对象生命周期有长有短，如果无区别的保留在内存中，会造成内存超载。内存垃圾回收(Garbage Collection, 缩写GC)就是解决这一问题的策略。</p>
+
+<p><em>注意：JVM不仅仅只对对象进行垃圾回收，实际上也会对废弃常量和无用的类做回收。</em></p>
+
+<p>垃圾回收首先得找到需要被回收的对象，一般采用根搜索算法来标记处这些过时的对象（另外有一种简单的实现：<a href="http://zh.wikipedia.org/wiki/%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0">引用计数</a>，但存在明显的弊端，即循环引用）。</p>
+
+<p>回收垃圾的过程会消耗计算资源和时间。根据不同的处理方式，垃圾回收有不同的策略，现在常用的是分代收集算法：根据对象的存活周期将堆划分为几代：新生代（Young Generation或New Generation）和老生代（Tenured Generation），<a href="http://en.wikipedia.org/wiki/HotSpot">HotSpot虚拟机</a>里还分出了永生代（基本等同于方法区）。不同代采用不同的垃圾回收策略。</p>
+
+<h4>HotSpot虚拟机</h4>
+
+<p>HotSpot虚拟机中，Perm代指永生代，Old代指老年代，而新生代使用复制算法，将区域划分为三块：Eden，S0和S1（S是Survivor的缩写）。</p>
+
+<p>IBM研究表明，新生代中的对象98%是朝生夕死的，三者的比例划分是8：1：1。对象先分配到Eden，如果Eden中内存占用量达到一定得比例，触发Minor GC，JVM会将Eden和S0(或S1)中存活的对象复制到S1（或S0），并清空Eden和S0(或S1)。如果同时老年代的内存占用量打达到一定比例，会触发Major GC（也称Full GC）。通常Major GC比Minor GC慢10倍以上。</p>
+
+<h3>编译过程</h3>
+
+<p>Java一直号称“Write once, run anywhere”，这个特性正是由JVM这一虚拟层来支撑的。</p>
+
+<p>Java源代码首先编译为Java字节码，字节码再被JVM加载运行。运行的过程可以是直接针对字节码的解释执行，也可以是经过了<a href="http://zh.wikipedia.org/wiki/%E5%8D%B3%E6%99%82%E7%B7%A8%E8%AD%AF">JIT</a>（Just in time）编译为机器码后的执行。另外，还有<a href="(http://en.wikipedia.org/wiki/AOT_compiler">静态提前编译器</a>(Ahead Of Time，也缩写为AOT)，能将源码直接编译为机器码。</p>
+
+<p><a href="http://en.wikipedia.org/wiki/HotSpot">HotSpot虚拟机</a>的JIT编译器有：Client Complier（简称C1）、Server Complier（简称C2）以及在Java7中堆出的<a href="http://docs.oracle.com/javase/7/docs/technotes/guides/vm/performance-enhancements-7.html">分层编译器</a>。C1编译器做一些快速的优化，C2做一些更耗时的优化但是产生更高效的代码，而分层编译器则结合了两者的优点：快速的启动和逐步的优化（brings client startup speeds to the server VM）。</p>
+
+<h3>性能监控和故障处理工具</h3>
+
+<p>对于系统调优和问题定位，周志明在《深入Java虚拟机》中总结到</p>
+
+<blockquote><p>给一个系统定位问题的时候，知识、经验是关键基础，数据是依据，工具是运用知识处理数据的手段。这里说的数据包括：运行日志、异常堆栈、GC日志、线程快照、堆转储快照等……应当意识到工具永远都是知识技能的一层包装，没有什么工具是“秘密武器”。</p></blockquote>
+
+<p>Java提供了很多工具给开发者来监控和处理运行中的问题。包括命令行工具以及可视化工具</p>
+
+<h4>命令行工具</h4>
+
+<p>比如jps, jstat, jinfo等。举例如下：</p>
+
+<p><code>
+jstat -gcutil xxx #xxx是jps查出的LVMID，查看gc相关数据
+jstat -gccause xxx#查看gc的原因
+jinfo  -flag XXX xxx#XXX是参数名，xxx是VMID，查看虚拟机的参数值
+</code></p>
+
+<h4>可视化工具</h4>
+
+<ul>
+<li>JConsole：比较老得分析软件，Java自带。Windows下搜jconsole.exe，Mac下启动命令为jconsole</li>
+<li><a href="http://www.eclipse.org/mat/">Eclipse Memory Analyzer Tool</a>：用于分析dump下的堆数据</li>
+<li><a href="http://visualvm.java.net/">VisualVM</a>:推荐，很全能的分析工具</li>
+</ul>
+
+
+<h3>JVM参数</h3>
+
+<p>这里零散的罗列了一些我用到的简单的JVM配置参数：</p>
+
+<p>内存大小控制：</p>
+
+<ul>
+<li>-Xmx20M: 堆的最大值</li>
+<li>-Xms10M: 堆的初始分配内存</li>
+<li>-Xmn: 新生代堆的分配内存</li>
+<li>-Xss128k: 线程的栈空间大小</li>
+<li>-XX:PermSize=10M | 方法区初始大小</li>
+<li>-XX:MaxPermSize=10M |方法区最大值</li>
+</ul>
+
+
+<p>编译相关：</p>
+
+<ul>
+<li>-Xint: 关闭JIT，完全使用解释执行，实践中没什么作用，解释执行很慢。</li>
+<li>-client: 启动C1编译器</li>
+<li>-server: 启动C2编译器</li>
+<li>-XX:+TieredCompilation: 启动分层编译器</li>
+</ul>
+
+
+<p>其他：</p>
+
+<ul>
+<li>-XX:+DisableExplicitGC: 屏蔽System.gc()调用</li>
+<li>-PrintGCDetails: 让jvm在每次发生gc的时候打印日志，利于分析gc的原因和状况</li>
+<li>-XX:+HeapDumpOnOutOfMemoryError: 内存溢出时dump下heap，可以通过Eclipse Memory Analyzer Tool打开查看。</li>
+<li>-XX:HeapDumpPath=/: dump下的heap文件快照的路径。Eclipse中默认放到项目的根目录中</li>
+<li>-XVerify:none: 禁止字节码验证</li>
+</ul>
+
+
+<h2>调优Eclipse启动的实践</h2>
+
+<h3>实践环境</h3>
+
+<ul>
+<li>CPU： 2.8 GHz Intel Core i7</li>
+<li>内存： 8 GB 1333 MHz DDR3</li>
+<li>操作系统： OS X 10.9.1(64bits)</li>
+<li>Eclipse：Version: Kepler Service Release 1， Build id: 20130919-0819</li>
+<li>Java：java version "1.7.0_45"</li>
+</ul>
+
+
+<h3>调优实践</h3>
+
+<p>调优Eclipse启动实际上就是调优Eclipse在JVM中的加载和程序启动阶段的运行。由于默认的Ecpise启动配置无法适应所有不同的硬件、软件环境，做针对性的调优是必要的。</p>
+
+<p>Eclipse的启动配置文件是eclipse.ini，对JVM的参数调优直接在该文件中修改。OS X下，其文件路径为 $ECLIPSE/Eclipse.app/Contents/MacOS/eclipse.ini（<em>注意不是Eclipse文件包根目录下得eclipse.ini</em>）。</p>
+
+<h4>测Eclipse启动时间</h4>
+
+<p>要优化Eclipse的启动时间，先要能确定Eclipse的启动时间。这里推荐网友实现的一个Eclipse插件：<a href="http://empirel.iteye.com/blog/1404226">计算启动时间的Eclipse插件</a>。下载后放到Eclipse的插件包中，启动Eclipse即可看到弹窗显示的启动时间。为了得到一个尽可能公平的测试结果，需要在测试过程中关闭其他程序，避免CPU负载带来的误差，并多次测试取平均值。</p>
+
+<h4>调优策略</h4>
+
+<p>使用VisualVM查看程序的运行状况来定位瓶颈，尝试调优解决。下图是VisualVM的示例图，右边图示展示了GC的状态以及编译时间、类加载时间和垃圾回收时间等指标。</p>
+
+<p><img src="http://biaobiaoqi.u.qiniudn.com/visualvmscreen.png?imageView/2/w/800/h/800" alt="img" /></p>
+
+<p>也可以通过命令行工具查看GC的状态，比如：<code>jstat -gc XXX #其中XXX是jps查出的进程的LVMID</code>.</p>
+
+<p>我的实践总结如下：</p>
+
+<ul>
+<li>类加载时间过长：禁止加载类时的字节码验证。我们认为Eclipse的字节码是可靠的。<code>-XVerify:none</code></li>
+<li>编译时间：<code>-client</code>缩短了编译时间，但长期运行的性能可能受影响，<code>-server</code>编译时间长，而编译优化做得更多，后期使用汇报大，<code>-XX:+TieredCompilation</code>分层编译则集合了前两者的优势。没有特殊需求，可选用这一编译选项。</li>
+<li>Minor GC次数太多：新生代空间太小，加大新生代的内存大小。<code>-Xmn800m</code>，同时，增大回收堆的总大小上限（<code>-Xmx1024m</code>）。</li>
+<li>Full GC次数太多：为了避免回收堆由小到大的动态增长增加时间开销，可将其初始大小跟最大上限设定为同一值<code>-Xms1024m</code>，并增加老年代的大小(<code>-XX:PermSize=256m</code>，<code>-XX:MaxPermSize=256m</code>)。</li>
+<li>代码中的GC调用：Eclipse代码中有System.GC()的调用可能促使JVM执行垃圾回收，可以通过<code>-XX:+DisableExplicitGC</code>来防止。</li>
+<li>垃圾收集器的选择：垃圾收集器有很多，比如Serial、ParNew、Parallel Scavenge、CMS、G1等。推荐使用老生代CMS新生代ParNew的组合来应对Eclipse用户交互频繁的情况(<code>-XX:+UseParNewGC</code>、<code>-XX:+UserConcMarkSweepGC</code>)。同时提升CMS的垃圾回收的触发条件：<code>-XX:CMSInitiatingOccupancyFraction=85</code>，进一步降低Full GC的出现。</li>
+</ul>
+
+
+<h4>最终eclipse.ini</h4>
+
+<p><code>
+-startup
+../../../plugins/org.eclipse.equinox.launcher_1.3.0.v20130327-1440.jar
+--launcher.library
+../../../plugins/org.eclipse.equinox.launcher.cocoa.macosx.x86_64_1.1.200.v20130807-1835
+-product
+org.eclipse.epp.package.standard.product
+--launcher.defaultAction
+openFile
+-showsplash
+org.eclipse.platform
+--launcher.XXMaxPermSize
+256m
+--launcher.defaultAction
+openFile
+--launcher.appendVmargs
+-vmargs
+-Dosgi.requiredJavaVersion=1.6
+-XstartOnFirstThread
+-Dorg.eclipse.swt.internal.carbon.smallFonts
+-Xms1024m
+-Xmx1024m
+-Xmn800m
+-Xdock:icon=../Resources/Eclipse.icns
+-XstartOnFirstThread
+-Dorg.eclipse.swt.internal.carbon.smallFonts
+-XX:+TieredCompilation
+-XX:PermSize=256m
+-XX:MaxPermSize=256m
+-XX:+DisableExplicitGC
+-XVerify:none
+-XX:+UseParNewGC
+-XX:+UserConcMarkSweepGC
+-XX:CMSInitiatingOccupancyFraction=85
+</code></p>
+
+<h2>其他参考</h2>
+
+<ul>
+<li><a href="http://www.searchtb.com/2013/07/jvm-gc-introduction-examples.html">《JVM的GC简介和实例》</a> — 搜索技术博客－淘宝.昆仑</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>
