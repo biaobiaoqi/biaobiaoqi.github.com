@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: 技术 | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.io/tags/ji-zhu/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.io/"/>
-  <updated>2016-04-19T08:49:46+08:00</updated>
+  <updated>2017-02-28T19:29:00+08:00</updated>
   <id>http://biaobiaoqi.github.io/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -12,99 +12,6 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
-  
-  <entry>
-    <title type="html"><![CDATA[Linode跨节点迁移：从Tokyo到Fremont]]></title>
-    <link href="http://biaobiaoqi.github.io/blog/2014/01/26/migrate-linode-vps-from-tokyo-to-fremont/"/>
-    <updated>2014-01-26T01:45:00+08:00</updated>
-    <id>http://biaobiaoqi.github.io/blog/2014/01/26/migrate-linode-vps-from-tokyo-to-fremont</id>
-    <content type="html"><![CDATA[<h2>背景</h2>
-
-<p><a href="http://biaobiaoqi.github.io/blog/2014/01/22/email-3/">上一篇博客</a>交代了如何在Linode上搭建邮件服务器，并配置好各种协议、记录来投入实际使用。</p>
-
-<p>由于实践过程中，曾经尝试使用明文协议与服务器交流数据，可能泄露了账号、密码信息，造成之后被攻击发送垃圾邮件(详细情况类似于如下链接：<a href="http://linuxroad.blog.51cto.com/765922/1039676">链接1</a>,<a href="http://linuxroad.blog.51cto.com/765922/1039675">链接2</a>)，IP被上了黑名单，在<a href="http://www.mail-tester.com">mail-tester.com</a>上的测试评分为0分，同时还收到了Linode的警告。</p>
-
-<p>为了能继续使用邮箱服务，我只好想着法子给Linode换一个IP。但原则上Linode是不支持换IP的。幸运的是，它支持VPS的迁移，而且方便快捷。从Tokyo节点迁移到Fremont节点后IP一般会发生变动（对于网络延迟，权衡了下<a href="http://www.v2ex.com/t/62721">大家</a>的说法,Fremont还不错:<a href="https://www.linode.com/speedtest/">官方测速</a>），这样就可以间接的更换IP了。</p>
-
-<p>迁移过程很简单，这里做一下记录。</p>
-
-<!--more-->
-
-
-<h2>迁移准备</h2>
-
-<h3>发出迁移请求</h3>
-
-<p>Linode有比较完善的<a href="https://manager.linode.com/support">Support</a>。对于迁移这种情况，可以在Support页面发出如下请求：</p>
-
-<p>```
-Hi,</p>
-
-<p>I've met with some problems with my server. And I think it's a solution to migrate my server from Tokyo to Fremont.</p>
-
-<p>Could you please do me a favor?</p>
-
-<p>Thanks a lot!
-```
-1分钟之后，我就收到了技术支持的回复：</p>
-
-<p>```
-Hello,</p>
-
-<p>Your migration to our Fremont datacenter has been configured. Please log into the Linode Manager, shut down, and click the migrate button to move to your new server. Your disk images will be moved with you. The migration should take approximately 10-15 minutes per gigabyte of data to complete. Please note that any existing backups for this Linode will be purged and will not be recoverable after you initiate the migration.</p>
-
-<p>Your new IP address is: xxx.xxx.xxx.xxx</p>
-
-<p>We ask that you begin this migration within 24 hours and let us know when it is complete. Thanks in advance!</p>
-
-<p>Regards,
-Jack Stitt</p>
-
-<p>```</p>
-
-<p>此时，Linode控制面板中已经多了一个迁移的提醒：<code>You have a migration pending!</code>。</p>
-
-<p>不过先不要着急迁移，因为迁移过程是不可恢复的，我们需要首先将VPS中得重要数据备份到本地。注意如回复中所说，这种备份不同于Linode中的备份服务。</p>
-
-<h3>备份数据</h3>
-
-<p>找到一份科学的全盘备份数据方式：<a href="http://www.linode.im/1590.html">linode用户通过ssh+dd命令复制整个磁盘</a>。不可否认dd做传输比scp一个个拷贝文件快得多，但由于需要将整个盘5G数据全部通过网络传输，而家里网速慢，传输数据只有大概100KB/s的速度，需要等待太长时间。</p>
-
-<p>实际上，我所需要备份的文件无非是<code>/home</code>目录下得所有数据和部分服务的配置数据（比如postfix、dovecot、nginx等），总共大概也就100MB，于是决定选择性的用scp传输备份数据：</p>
-
-<p><code>scp root@vps-ip:/backup /home/backup #vps-ip替换为服务器IP地址</code></p>
-
-<p>同时由于零散的传输文件效率不高，可以考虑先将服务器端所有小文件使用tar命令压缩到一个包里：</p>
-
-<p><code>tar zcvf backup.gz /home /etc/nginx/sites-enable</code></p>
-
-<p>在本地的解压缩命令如下：</p>
-
-<p><code>tar zxvf backup.gz</code></p>
-
-<p>当然，实际上我们都不会希望备份数据需要被使用到啦，而迁移vps丢失数据的概率应该也是很小的。</p>
-
-<h3>修改DNS记录</h3>
-
-<p>由于迁移过程需要大概一个多小时，网站服务的不可访问是无法避免了。只好尽可能将迁移过程放在深夜没有用户访问需求的时候。</p>
-
-<p>从这个角度讲，DNS的修改也没有特别的及时性要求。在前已完成前修改好DNS服务器中的A记录、MX记录等配置即可。</p>
-
-<h2>迁移</h2>
-
-<p>在正式迁移之前，需要关闭服务器。</p>
-
-<p>然后点击Linode控制面板中的migration按钮。接下来，就是一个多小时的等待。</p>
-
-<h2>后续</h2>
-
-<p>完成迁移之后，开启VPS，还需要注意修改服务中IP相关的配置。比如shadowsocks里的json.config中的server ip。</p>
-
-<p>一切顺利完成后，别忘了去Support界面回复Ticket =).</p>
-
-<p>如果你考虑租用Linode机器，而又不吝啬使用<a href="https://www.linode.com/?r=06fc7f86359e92800c41177a80c5678ecfcb2568">我的推荐码</a>，本博客不胜感激=).</p>
-]]></content>
-  </entry>
   
   <entry>
     <title type="html"><![CDATA[邮件服务（三）：实践服务器搭建]]></title>
@@ -367,7 +274,7 @@ Received: by 10.114.246.38 with SMTP id xt6csp139967ldc;</p>
 <pre><code>    Mon, 20 Jan 2014 06:53:16 -0800 (PST)
 </code></pre>
 
-<p>Return-Path: <a href="&#x6d;&#x61;&#x69;&#108;&#116;&#x6f;&#58;&#x73;&#x75;&#x70;&#112;&#x6f;&#x72;&#x74;&#x40;&#108;&#105;&#110;&#x6f;&#x64;&#101;&#x2e;&#x63;&#x6f;&#x6d;">&#x73;&#x75;&#x70;&#112;&#111;&#114;&#116;&#x40;&#108;&#105;&#110;&#x6f;&#100;&#x65;&#46;&#99;&#x6f;&#x6d;</a>
+<p>Return-Path: <a href="&#109;&#97;&#105;&#x6c;&#x74;&#111;&#58;&#115;&#117;&#x70;&#x70;&#111;&#x72;&#x74;&#x40;&#108;&#105;&#x6e;&#x6f;&#x64;&#101;&#x2e;&#x63;&#111;&#x6d;">&#x73;&#117;&#x70;&#112;&#x6f;&#114;&#116;&#x40;&#108;&#x69;&#x6e;&#x6f;&#100;&#x65;&#x2e;&#x63;&#111;&#109;</a>
 Received: from mail2.linode.com (mail2.linode.com. [173.255.198.11])</p>
 
 <pre><code>    by mx.google.com with ESMTP id f6si835374obr.111.2014.01.20.06.53.15
@@ -390,7 +297,7 @@ Mon, 20 Jan 2014 09:53:15 -0500 (EST)
 <p>Date: Mon, 20 Jan 2014 09:53:15 -0500 (EST)
 From: support@linode.com
 To: someuser@gmail.com
-Message-ID: <a href="&#x6d;&#97;&#x69;&#x6c;&#116;&#x6f;&#x3a;&#x33;&#x37;&#54;&#55;&#53;&#x30;&#56;&#x36;&#56;&#46;&#x32;&#54;&#55;&#x36;&#52;&#46;&#x31;&#x33;&#x39;&#48;&#50;&#x32;&#x39;&#x35;&#57;&#x35;&#52;&#x33;&#x37;&#x2e;&#74;&#97;&#118;&#97;&#77;&#97;&#x69;&#108;&#x2e;&#x63;&#x66;&#x75;&#115;&#x69;&#111;&#110;&#64;&#x6d;&#97;&#x69;&#x6c;&#50;&#46;&#108;&#x69;&#110;&#x6f;&#100;&#x65;&#46;&#x63;&#111;&#109;">&#51;&#55;&#54;&#55;&#53;&#x30;&#56;&#x36;&#56;&#x2e;&#x32;&#x36;&#x37;&#54;&#x34;&#46;&#49;&#51;&#x39;&#48;&#50;&#x32;&#x39;&#53;&#57;&#x35;&#52;&#51;&#x37;&#46;&#74;&#x61;&#118;&#97;&#x4d;&#97;&#x69;&#x6c;&#46;&#x63;&#102;&#x75;&#x73;&#x69;&#x6f;&#110;&#x40;&#x6d;&#x61;&#105;&#x6c;&#x32;&#x2e;&#x6c;&#105;&#x6e;&#111;&#100;&#x65;&#x2e;&#99;&#x6f;&#109;</a>
+Message-ID: <a href="&#109;&#x61;&#x69;&#108;&#x74;&#111;&#x3a;&#51;&#x37;&#54;&#55;&#x35;&#x30;&#x38;&#x36;&#56;&#x2e;&#50;&#x36;&#55;&#54;&#x34;&#x2e;&#x31;&#51;&#x39;&#48;&#50;&#50;&#57;&#53;&#57;&#x35;&#x34;&#51;&#55;&#46;&#x4a;&#x61;&#x76;&#x61;&#x4d;&#97;&#x69;&#108;&#x2e;&#x63;&#102;&#x75;&#115;&#105;&#x6f;&#110;&#x40;&#109;&#97;&#x69;&#108;&#50;&#x2e;&#108;&#105;&#110;&#x6f;&#100;&#101;&#46;&#99;&#111;&#x6d;">&#x33;&#x37;&#54;&#x37;&#53;&#48;&#56;&#54;&#56;&#x2e;&#50;&#54;&#x37;&#54;&#52;&#x2e;&#x31;&#x33;&#57;&#x30;&#50;&#50;&#57;&#53;&#57;&#53;&#x34;&#51;&#55;&#x2e;&#x4a;&#x61;&#118;&#x61;&#77;&#x61;&#x69;&#108;&#x2e;&#99;&#x66;&#x75;&#115;&#105;&#111;&#110;&#64;&#x6d;&#x61;&#105;&#108;&#50;&#46;&#108;&#105;&#110;&#111;&#x64;&#101;&#46;&#99;&#x6f;&#x6d;</a>
 ```
 这封邮件里每项的具体含义如下(<a href="https://support.google.com/mail/answer/29436?hl=en">参考</a>以及<a href="http://www.ietf.org/rfc/rfc0822.txt">RFC0822</a>)：</p>
 
@@ -517,84 +424,126 @@ Message-ID: <a href="&#x6d;&#97;&#x69;&#x6c;&#116;&#x6f;&#x3a;&#x33;&#x37;&#54;&
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[记对MBP一次失败的备份和重装]]></title>
-    <link href="http://biaobiaoqi.github.io/blog/2013/11/24/failed-in-replacing-hdd/"/>
-    <updated>2013-11-24T02:08:00+08:00</updated>
-    <id>http://biaobiaoqi.github.io/blog/2013/11/24/failed-in-replacing-hdd</id>
-    <content type="html"><![CDATA[<h2>背景</h2>
+    <title type="html"><![CDATA[用Ruby实现的论坛灌水工具：CC98 Post Machine]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2013/11/05/cc98-post-machine/"/>
+    <updated>2013-11-05T15:20:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2013/11/05/cc98-post-machine</id>
+    <content type="html"><![CDATA[<p>ZJU的校网论坛CC98比较活跃。论坛只对校内网开放，而且账号跟学生绑定，每个学生注册的账号数量有限。『十大』是CC98的经典页面：基于关注的人数（回帖的用户数而不是回帖的数量）用算法求出24小时内最火爆的十个发帖。很多同学都会浏览十大，关注论坛动态。</p>
 
-<p>大概一年前，给我11年底款的13寸MBP的光驱位替换上了一块M4 128G的SSD，用做系统盘，而机器原本的HDD则退化为数据存储盘。</p>
+<p>故事就是从十大引出的。有的社团在宣传活动时，为了扩大宣传面，会发动成员的小马甲顶贴上十大。这种违背社区自然发展轨迹的手段，强奸了关注十大贴的用户的意愿，阻碍了信息的自由流动。</p>
 
-<p>前两天发现MBP间歇性的变得很慢，查看CPU和内存都没有异常，使用<a href="http://www.volitans-software.com/smart_utility.php">SMART Utility</a>检查发现有坏道出现，如下图：</p>
+<p>于是萌生了完成一个批量发帖的机器，以其人之道还治其人之身的想法。在下次十大被宣传贴攻占时，能有反击的工具。</p>
 
-<p><img src="http://biaobiaoqi.u.qiniudn.com/ssdhdd%20bad%20sector.png?imageView/2/w/800/h/800" alt="bad sector" /></p>
+<p>工具的用途很简单：使用不同的用户身份模拟真人论坛回帖，增加帖子关注度，以抵抗宣传贴。流程如下：提前收集各路亲朋好友的用户信息作为『预备水军』，『灌水』时，在评论内容文件中输入自定义的评论内容，在命令行参数中制定目标贴，即可实现随机顺序的用户自动顶贴。鉴于现在的功能是顶贴竞争十大，而十大排名是根据关注人数也就是独立用户评论数量做排序的，这里设计的顶贴策略是一个马甲发一条评论。以后可以考虑增加灵活的配置方案，实现更多功能。</p>
 
-<p>硬盘出现坏道后，会给坏道的数据重新分配备用sector，而这种sector是有限的，再者坏道可能会扩散蔓延，这基本意味着HDD生命的结束了。只能换硬盘了。</p>
+<p>项目Github地址：<a href="https://github.com/biaobiaoqi/CC98PostMachine/">https://github.com/biaobiaoqi/CC98PostMachine/</a></p>
 
-<p>这才意识到自己的使用习惯的不当：平时没有关机的习惯，一般合上盖子就将笔记本放到书包里走人了，而运行状态的HDD在颠簸的环境里是很容易出现机械损伤的（相比之下SSD则不会）。</p>
-
-<p>考虑到自己没有太大存数据的需求（以前700G+的HDD只存了200G不到，其中很多数据还是存了之后几乎没有使用的），决定再入一块M4 128G的SSD，两块SSD组<a href="http://zh.wikipedia.org/zh-cn/RAID#RAID_0">RAID0</a>。</p>
+<p>介于这个工具本身的罪恶的攻击属性，在此强调，工程仅供学习交流和对抗宣传贴。</p>
 
 <!--more-->
 
 
-<h2>过程</h2>
+<h2>使用说明</h2>
 
-<p>总体计划如下：</p>
+<h3>1.准备顶贴用户</h3>
 
-<ol>
-<li>使用Time Machine 备份原来系统的数据。</li>
-<li>购买SSD，组RAID0(原来SSD中的数据会被擦除)</li>
-<li>做一个U盘系统恢复盘，用于重装系统。</li>
-<li>重装系统后，通过系统工具迁移助理将备份的数据还原到新系统中。</li>
-</ol>
+<p>发帖的HTTP请求为POST请求。系统验证信息中需要有发帖用户的username，userid和hash后的password，这些都能从cookie中获得。</p>
+
+<p>有两种方式设置水军的信息：</p>
+
+<h4>(1)浏览器中获取cookie</h4>
+
+<p>在浏览器中，找到cookie的内容。将对应的三项信息抽取出来后，填入<code>water_army.yml</code>文件，由于该文件涉及用户隐私信息，项目中设置了.gitignore，不会上传到repo中。可以参照<code>water_army.yml.example</code>的格式自行修改。</p>
+
+<h4>(2)使用<code>RegWaterArmy</code>工具导入</h4>
+
+<p>如果不想手动的查找cookie信息，也可以将账号、密码输入到<code>pre_water_army.txt</code>文件中，执行命令来获取相关信息。</p>
+
+<p>在<code>pre_water_army.txt</code>文件中，一行为单位输入用户名和密码，中间用空格隔开。同样由于隐私原因，repo中没有上传该文件，可以自行将<code>pre_water_army.txt.example</code>改为<code>pre_water_army.txt</code>，然后填入内容。</p>
+
+<p>填入账号、密码后，在src目录下运行如下命令：
+<code>
+$CC98POSTMACHINE/src/ruby RegWaterArmy.rb
+</code>
+即可自动获取用户的cookie信息，并导入<code>water_army.yml</code>文件中。注意，安全起见，完成这一步后，尽量删除账号、密码等隐私信息。</p>
+
+<h3>2.准备评论</h3>
+
+<p>在<code>comments.txt</code>文件中，设置用户评论的内容，每行一条。现在的设计是保证回帖的顺序与文件中的内容顺序一致。如果用户数量超过了文件中的评论条数，则回复时循环使用<code>comments.txt</code>中的评论。建议自行设计评论，且评论数大于等于水军数量。同样需要用户自行修改<code>comments.txt.example</code>为<code>commnets.txt</code>后使用。</p>
+
+<h3>3.执行</h3>
+
+<p>来到CC98PostMachine的src目录，执行：</p>
+
+<p><code>
+$CC98POSTMACHINE/src/ruby  PostMachine.rb  POST_URL [SPEED]
+</code></p>
+
+<p>其中<code>POST_URL</code>为响应帖子的网址，<code>SPEED</code>是设定的两个回帖之间的间隔时间，实际回帖时间做了如下的模糊：<code>SPEED + random(SPEED)</code>。</p>
+
+<p>```</p>
+
+<p>Usage: $CC98POSTMACHINE/src/ruby  PostMachine.rb  POST_URL [SPEED].</p>
+
+<pre><code>POST_URL is the url address of target post.
+
+SPEED is the time gap unit between two posts, it may be 1(s), 10(s) or any other number
+</code></pre>
+
+<p>```</p>
+
+<h2>下一步：</h2>
+
+<ul>
+<li><p>修复bug：第一次执行命令时，都只有一个用户能成功回复。（是服务器端的对cookie的记录？）</p></li>
+<li><p>整理代码结构，解耦，增加配置灵活性，写的更ruby一点</p></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[《改变未来的九大算法》]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2013/10/03/nine-algorithms-that-changed-the-future/"/>
+    <updated>2013-10-03T13:19:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2013/10/03/nine-algorithms-that-changed-the-future</id>
+    <content type="html"><![CDATA[<h2>不要在意那些细节</h2>
+
+<p>这是一本关于计算机世界的科普读物。豆瓣链接：<a href="http://book.douban.com/subject/24529132/">请戳</a>。</p>
+
+<p>非常推荐刚接触计算机的朋友花上三五小时将全书通读一遍，没有技术细节，没有公式证明，它会告诉作者挑选出的九大算法出现的缘由和发展的过程。这些不关乎实现细节的思想概括，更能体现算法在整个领域中的存在的原因。它们不再是冷冰冰的算法过程，这是阅读大多数的书籍、教材所难以获得的。</p>
+
+<p>至于我的推荐原因，如下全文。</p>
+
+<!--more-->
 
 
-<p>主要参考了<a href="http://v.youku.com/v_show/id_XNDAxODk3MTUy.html">王自如的RAID0装配教程</a>。</p>
+<h3>课程学习之弊</h3>
 
-<h3>1.备份数据</h3>
+<p>大二大三的那两年，在学校上过了网络、操作系统、数据库、算法设计等诸多计算机领域的基础必修课程。由于生性愚钝加之令人头大的砖头书的体系化、理论化，对于知识的掌握顶多处于知其然却不知其所以然的程度。在这种情况下，学习就退化为了填鸭式的记忆。比如我记得RSA的公钥加密流程，却无法理解为何要套用这么一大堆的数学方法来得到如此神奇的效果，比如，我知道数据库有一套日志机制，却不知道它是如何与其他的组件共同构建起一个系统的……没有来龙去脉，就没有对技术发展的感知，没有对技术本质的理解和认识。</p>
 
-<p>使用移动硬盘来做数据备份。</p>
+<p>经过了四年多的摸爬滚打，到现在对这些基础知识的认识自然远好于当年上课的理解水平，不是因为我在反复的学习课程内容，而是从实践中获得了新的认识。</p>
 
-<p>用OS X的系统工具“磁盘工具”将移动硬盘格式化为MBP支持的文件系统格式。启动Time Machine，设定移动硬盘为备份路径，在Time Machine的偏好中，设定备份源排除HDD。接下来就等系统自动做好备份了。</p>
+<h3>从生活出发</h3>
 
-<p>理论上，通过Time Machine合理备份的系统，再也不用担心硬盘挂掉的情况。即使换新机器，也能在新系统中还原出根原来一样的环境（暂不支持跨系统版本的还原）。意外的是，当然企图通过数据迁移还原系统时，发现我备份的数据块无法识别-，-。</p>
+<p>大多数人的思维习惯，倾向于从已知的事物中衍生对新事物的认识，这是一种类推。而高校的大多数教材和教授方式较少考虑到这一点，一种简单粗暴的直入主题的方式被大量的使用，排斥了知识的前因后果，技术的来龙去脉，剩下的只是新体系本身。这增加了学习曲线的入门坡度。</p>
 
-<h3>2.拆机，组装</h3>
+<blockquote><p>理论是灰色的，生活之树常青</p></blockquote>
 
-<p>在天猫上从上次购买的商家处直接又下了一单，买了同样一款的SSD。（注意，这里必须要使用同款SSD）。</p>
+<p>《改变未来的九大算法》是对歌德这句话的良好实践。</p>
 
-<p>拆后盖驾轻就熟，倒是在拆卸硬盘时，意外的发现自己没有六角形的T6星型螺丝刀，而这是笔记本固定硬盘的四颗螺丝钉的规格。<del>（裤子都脱了，总不能又穿上吧）</del>幸运的是，我在自行车修车摊问师傅借到了老虎钳，顺利拧下了那几颗螺丝。</p>
-
-<p><img src="http://biaobiaoqi.u.qiniudn.com/ssdmbp.JPG?imageView/2/w/800/h/800" alt="img" /></p>
-
-<p><img src="http://biaobiaoqi.u.qiniudn.com/ssdspike.JPG?imageView/2/w/800/h/800" alt="img" /></p>
-
-<p>换上SSD后，需要使用<a href="http://support.apple.com/kb/HT4848?viewlocale=zh_CN">RecoveryDiskAssistant</a>制作的U盘给两块SSD做RAID0设定。详情参见王自如的视频。</p>
-
-<h3>3.重装系统</h3>
-
-<p>有两种重装系统的方式：</p>
-
-<ol>
-<li>使用RecoveryDiskAssistant的U盘，联网安装OS X系统；</li>
-<li>根据系统安装文件，制作U盘安装盘，参见<a href="http://briian.com/8534/mac-usb-installer.html">《如何製作 Mac OS X 專屬 USB 系統安裝》</a></li>
-</ol>
+<!--more-->
 
 
-<p>我使用后者安装了系统。</p>
+<p>比如在阐述公钥加密机制时，作者从生活中的寄信讲起，一步步类比到计算机的通信上，并用染料配色的方式举例了迪菲赫尔曼机制。生动形象的描述了算法的原理和来由。</p>
 
-<h3>4.还原备份</h3>
+<h3>抛开细节实现</h3>
 
-<p>在安装系统的过程中，系统会询问用户是否需要迁移数据，如果跳过这一步，还可以在安装完成系统后，运行“迁移助理”来还原备份。</p>
+<p>过往的教材一旦陷入对某些实现细节的阐释，就失去了对全局上下文的把握。就像镜头对焦到了一个点上，造成了周边景物的模糊化效果。</p>
 
-<p>由于我的操作失误，没有完全备份下整个系统，造成“迁移助理”无法识别备份数据。只能从备份数据中将有用的数据手工的迁移到新系统中，应用软件都得重新下载安装。全是泪啊=(。</p>
+<p>《改变未来的九大算法》全书很少涉及到技术的实现细节，这正是它的优势所在。比如数据库的一致性章节，从一个银行转账的实例讲起，通过所面临的一系列问题的解决方案的描述，让人对数据库的整体实现有了全局的把握。在理解的前提下，更深入的学习也变得更有动力和方向。</p>
 
-<h2>总结</h2>
-
-<p>备份数据只有60G，而我原来系统的数据总量（包括操作系统本身）大概有120G，即使考虑有压缩，60G也相差的很远了。备份时急于求成，没有意识到这一点，造成备份不成功，提醒自己谨小慎微。</p>
-
-<p>顺着这次重配系统环境，我整理了自己的Mac OS X软件安装索引，参见博文：<a href="http://biaobiaoqi.github.io/blog/2013/11/24/install-software-in-os-x/">《我的OS X软件安装索引》</a>，当然，希望自己再也不会用到。</p>
+<p>奈何自己已经过了朦朦胧胧的那几年，在此将本书强烈推荐给初涉计算机领域的朋友们。当然，其他人粗读一遍，也是对自己知识体系的一次小梳理啦;)。</p>
 ]]></content>
   </entry>
   

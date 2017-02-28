@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: 算法 | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.io/tags/suan-fa/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.io/"/>
-  <updated>2016-04-19T08:49:46+08:00</updated>
+  <updated>2017-02-28T19:29:00+08:00</updated>
   <id>http://biaobiaoqi.github.io/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -12,186 +12,6 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
-  
-  <entry>
-    <title type="html"><![CDATA[课程助教实战]]></title>
-    <link href="http://biaobiaoqi.github.io/blog/2014/05/06/ta-in-practice/"/>
-    <updated>2014-05-06T20:06:00+08:00</updated>
-    <id>http://biaobiaoqi.github.io/blog/2014/05/06/ta-in-practice</id>
-    <content type="html"><![CDATA[<p>原谅我的标题党啦LOL，借用 《xx 实战》（xx in practice）这个经典的标题，只为了记录自己第一次助教的体会。</p>
-
-<p>如果把第一次助教的经历看做是一个项目，那这个项目也是在我不断的调优中走上正轨的。</p>
-
-<h2>需求</h2>
-
-<p>导师人很好，给我留的活儿不多，但实践起来还是比预想要复杂一些。助教期间，我主要负责的任务有：</p>
-
-<ul>
-<li><p>平时作业的批改和成绩录入</p>
-
-<p>  每周老师会将所有学生（大约80人）的作业本交给我，由我评分、录入成绩后返回给老师。</p></li>
-<li><p>课程实验和大程的指导、评分和成绩录入</p>
-
-<p>  一共有五个课堂实验，要求每周完成一个，以实验报告的形式提交；期末要求完成一个大程序，评分有现场验收和大程报告两部分。</p></li>
-<li><p>协助老师批改期末试卷和成绩录入</p></li>
-</ul>
-
-
-<p>最后的批改试卷是在老师们的指导下完成，有良好的规范和流程。而前面两步中关于作业评分、登分的部分则有较大的自由实现空间。下面介绍的就是个人对这部分内容经验总结。</p>
-
-<!--more-->
-
-
-<h2>初步实现策略</h2>
-
-<p>最朴素的实现方法，会耗费很多的时间，但至少能完成任务：</p>
-
-<ul>
-<li>平时作业的批改和成绩录入</li>
-</ul>
-
-
-<p>```</p>
-
-<pre><code>//拿到所有作业本后，每周我都需要完成如下过程：
-loop in 80+个作业本
-    拿起笔，翻开每本作业本；
-    在作业本上标记成绩；
-    放下笔，关上作业本；
-    在成绩记录表格上上CTRL+F 查找到对应的学生；
-    输入成绩;
-end loop
-</code></pre>
-
-<p>```</p>
-
-<ul>
-<li>课程实验和大程的指导、评分和成绩录入</li>
-</ul>
-
-
-<p>```</p>
-
-<pre><code>//邮件查收实验报告
-loop in 80+个学生的实验报告邮件；
-    保存附件；
-    回复已经收到；
-end loop
-
-//收集齐所有报告后，开始批改报告
-loop in 80+个学生的实验报告
-    双击打开报告；
-    浏览评分；
-    在成绩记录表格上CTRL+F 查找到对应的学生；
-    输入成绩；
-    关闭报告；
-end loop
-</code></pre>
-
-<p>```</p>
-
-<h2>性能调优</h2>
-
-<p>最朴素的方法在使用中带来了巨大的性能瓶颈。</p>
-
-<ul>
-<li>平时作业的批改和成绩录入</li>
-</ul>
-
-
-<p>实践发现，批改平时作业和登分的过程中，会花掉非常多的实践在拿起笔、放下笔上，就像程序的上下文切换，比较耗时。将批改作业和录入成绩分解成两个集中循环过程，就可以避免这一切换的开销。</p>
-
-<p>```</p>
-
-<pre><code>//改作业
-拿起笔
-loop in 80+个作业本
-    翻开作业本；
-    在作业本上标记成绩；
-    关闭作业本；
-end loop
-放下笔
-
-//录入成绩
-loop in 80+个作业本
-    翻开作业本，查看成绩
-    在成绩记录表格上上CTRL+F 查找到对应的学生；
-    输入成绩;
-    关闭作业本；
-end loop
-</code></pre>
-
-<p>```</p>
-
-<p>以上的实现中，作业登分时还是会有大量的翻开、关闭作业本的操作。实际上，批改作业的等级是非常有限的，一般集中在A+、A、A- 这几个分数上，其他分数如B+、B、B-只是极少数。很容易想到桶排序的方式：批改作业时，将不同评分的作业放在专属的作业堆中，录入成绩时，只需要按照不同的作业堆录入，而不用翻开作业本。另外，由于书桌空间有限无法设定较多的作业堆，可以将出现较少的B+、B、B-等分入到Else作业堆，批改时再特殊处理。</p>
-
-<p>在给同学登分时，每次都需要根据学号或者姓名 CTRL+F查找，比较繁琐。优化的方法是建索引。在成绩录入表中给所有同学设定一个简单的编号，然后在同学的作业本的封皮上标记出来，以后每次登分，直接根据[1, n]的索引就可以快速检索到了。</p>
-
-<p>```</p>
-
-<pre><code>//预处理
-给作业本建索引
-
-//改作业
-拿起笔
-loop in 80+个作业本
-    翻开作业本；
-    在作业本上标记成绩；
-    关闭作业本；
-    将作业按照评分放入 A+、A、A-和Else 这四个堆中
-end loop
-放下笔
-
-//录入成绩
-loop in A+、 A、 A-、 Else 这四个作业堆
-    loop in 作业堆
-        if 作业堆 == Else 
-            翻开作业本；
-            查看成绩；
-            关上作业本；
-        end if
-        根据索引查找到学生；
-        输入成绩;
-    end loop
-end loop
-</code></pre>
-
-<p>```</p>
-
-<ul>
-<li>课程实验和大程的指导、评分和成绩录入</li>
-</ul>
-
-
-<p>在收集实验报告的时候，每次回复邮件也是很头痛的一件事情，容易漏掉回复或者漏掉保存附件。而给报告评分时，也得不断的点开某个文档，然后录入成绩，再关闭这个文档，容易漏评。虽然以在给所有同学评分完毕后再依次清查漏掉的情况，但这个方法确实不够优美。</p>
-
-<p>改进方法是：放弃使用邮件提交报告的方法，搭建FTP；使用工具（比如 Acrobat）将所有报告连接成单个pdf文件。</p>
-
-<p>```</p>
-
-<pre><code>//预处理
-FTP收集报告
-使用Acrobat 将所有pdf报告连接成一个汇总报告
-
-//批改报告和录入成绩
-双击打开汇总报告；
-loop in 80+个学生的实验报告
-    浏览评分；
-    在成绩记录表格上CTRL+F 查找到对应的学生；
-    输入成绩；
-end loop
-关闭汇总报告；
-</code></pre>
-
-<p>```</p>
-
-<h2>总结</h2>
-
-<p>以上记录的是可以用工程的优化方法解决的小问题。实际助教的过程中，还有不少是沟通的问题。比如即使告诉过学生们一定使用pdf和姓名加学号的命名提交作业，也一定会有学生会使用doc格式……还有一些策略权衡的问题，面对几十个学生不比一对一的交流，合适的方法会双方更高效。</p>
-
-<p>做助教容易，做好不易，且行且珍惜。</p>
-]]></content>
-  </entry>
   
   <entry>
     <title type="html"><![CDATA[基本排序总结]]></title>
@@ -568,213 +388,6 @@ for (int i = list.length - 1; i &gt; 0; i --) {
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[PAT 1069 - 1072 题解]]></title>
-    <link href="http://biaobiaoqi.github.io/blog/2013/11/07/pat-1069-pat-1072/"/>
-    <updated>2013-11-07T00:30:00+08:00</updated>
-    <id>http://biaobiaoqi.github.io/blog/2013/11/07/pat-1069-pat-1072</id>
-    <content type="html"><![CDATA[<p>来源是 2013 年 11 月 2 日的PAT测试。</p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1069">1069. The Black Hole of Numbers (20)</a></h2>
-
-<h5>题意</h5>
-
-<p>给出一个四位数比如6767，将它按照每位从小到大(6677)和从大到小(7766)充足，得到两个新四位数，这两者相减将得到一个新的四位数。再按照一样的处理方式处理得出的四位数</p>
-
-<p>```
-7766 - 6677 = 1089
-9810 - 0189 = 9621
-9621 - 1269 = 8352
-8532 - 2358 = 6174
-7641 - 1467 = 6174</p>
-
-<p>```</p>
-
-<p>最终将得到一个『黑洞数』：6174。</p>
-
-<p>题目给出一个四位数，要求输出它演变出『黑洞数』的过程。</p>
-
-<!--more-->
-
-
-<h5>分析</h5>
-
-<p>简单模拟题，需要留心两个特殊情况的处理：<code>6174</code>，<code>xxxx</code>。</p>
-
-<p>熟练掌握 C 的基本函数也能缩短代码编写，比如<code>atoi()</code> 和 <code>sprintf()</code>， 由于<code>itoa()</code>是依赖于Windows的，这里不推荐使用。</p>
-
-<p>pat1069源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1069.cpp">请戳</a></p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1070">1070. Mooncake (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>给出月饼市场的需求 D&lt;= 500 （按重量计算），给出现有 N &lt;= 1000 种月饼，每种月饼有一定数量的储备（按重量计算）以及这些储备所对应的价格，求一个出售月饼的方式，在容量D的市场里，获得最多的销售额。</p>
-
-<h5>分析</h5>
-
-<p>简单的贪心问题。贪心的规则是月饼的单价。注意有一个坑：每种月饼的存货量也需要用<code>double</code>来做存储。</p>
-
-<p>pat1070源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1070.cpp">请戳</a></p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1071">1071. Speech Patterns (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>给出一个长度不超过 1048576 的字符串。把所有连续的字母或者数字（[0-9 A-Z a-z]）试做单词，且忽略大小写，求其中最高频的单词。</p>
-
-<h5>分析</h5>
-
-<p>使用map&lt;string, int>做存储，统计出现次数即可。</p>
-
-<p>有些细节需要注意：</p>
-
-<ul>
-<li>使用<code>getline(cin, str)</code>获取正行数据</li>
-<li>使用<code>transform(str.begin(), str.end(), str.begin(), ::tolower);</code>将字符串转换成小写</li>
-<li>遍历字符串获取单词时，注意特殊条件。比如以非字符数字开头的字符串，以字符数字结尾的字符串等。</li>
-</ul>
-
-
-<p>pat1071源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1071.cpp">请戳</a></p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1072">1072. Gas Station (30)</a></h2>
-
-<h5>题意</h5>
-
-<p>给出一个图，其中有 N &lt;= 10<sup>3</sup> 个节点是居民房，M &lt;= 10 个节点是计划建造加油站的候选点。给出加油站所能服务的最远距离 D。要求计算出合适的位置建造加油站，满足如下优先级条件：</p>
-
-<ol>
-<li>所有居民房必须在加油站的服务距离内。</li>
-<li>所有居民房中距离加油站的最近的居民房与加油站之间的距离是最远的。（大概是安全方面的考虑，加油站要离居民区远一点）</li>
-<li>所有房间距离加油站的最小距离的总和最小。（节约居民加油的总体成本）</li>
-<li>同等条件下，序号越小的加油站优先。</li>
-</ol>
-
-
-<h5>分析</h5>
-
-<p>实际上是求加油站到所有点的最短路径的问题，使用Dijsktra可以满足。</p>
-
-<p>另外，需要考虑求最短路径的过程中是否要将其他加油站所构建的路径算入在内。从背景上看，加油站应该在公路边修建，故加油站之间以及居民房和加油站之间都是存在路径的，从给出的数据来看，存在两个加油站之间的路径。所以，计算最短路径时，是需要将所有加油站的节点也计算在内的。</p>
-
-<p>pat1072源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1072.cpp">请戳</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[PAT 1065 - 1068 题解]]></title>
-    <link href="http://biaobiaoqi.github.io/blog/2013/10/08/pat-1065-pat-1068/"/>
-    <updated>2013-10-08T13:46:00+08:00</updated>
-    <id>http://biaobiaoqi.github.io/blog/2013/10/08/pat-1065-pat-1068</id>
-    <content type="html"><![CDATA[<p>这次的题目来源是2013年10月7日下午的浙大计算机研究生招生机试题。</p>
-
-<p>这次题目的难度，按姥姥的说法是：『比普通的PAT要难了0.5个点。我是把自己的题目从1.0到5.0以0.5的间距分难度级别的，PAT(A)难度一般在1.5-4.5之间，保研考试一般在2.0-5.0之间。PAT(B)大概是1.0-2.5的难度。』。</p>
-
-<p>个人认为，其中1066模拟AVL插入的实现有些细节容易弄错，而1068只要会简单的DP，也就没有问题了，1065和1066都还是很简单的实现。</p>
-
-<p>下面是各个题的分析（PAT advanced level本人实现的全部源码：<a href="https://github.com/biaobiaoqi/CPractice/tree/master/PAT/advancedlevel">请戳</a>）。</p>
-
-<!--more-->
-
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1065">1065. A+B and C (64bit) (20)</a></h2>
-
-<h5>题意</h5>
-
-<p>输入三个数a，b，c，取值范围是 [<code>-2^63</code>, <code>2^63</code>]，要求判断<code>a + b &lt; c</code> 是否为真。</p>
-
-<h5>分析</h5>
-
-<p>很简单的签到题，想到两种方法：一是用Java的Big Decimal实现（应该不会超时吧-,-），二是对a+b造成的long long溢出的情况做特殊处理。</p>
-
-<p>对于分情况的实现方式，实际上也就两种特殊情况，即a，b同号且两者之和溢出了（绝对值超过了2<sup>63）。此时两者之和与c的值的相对关系也是确定的。</sup></p>
-
-<ul>
-<li><code>a &lt; 0 &amp;&amp; b &lt; 0 &amp;&amp; a + b &gt;= 0</code>: a + b 必小于c</li>
-<li><code>a &gt; 0 &amp;&amp; b &gt; 0 &amp;&amp; a + b &lt;= 0</code>: a + b 必大于c</li>
-</ul>
-
-
-<p>另在98看见有大神说可以用long double水过去-,-.</p>
-
-<p>pat1065源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1065.cpp">请戳</a></p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1066">1066. Root of AVL Tree (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>实现<a href="http://en.wikipedia.org/wiki/AVL_tree">AVL树</a>的插入方法，给定N(&lt;=20)个数，要求输出依次插入后的AVL树的根。</p>
-
-<h5>分析</h5>
-
-<p>由于节点少，可以使用相对简单的递归实现方法：</p>
-
-<ul>
-<li>每个节点维护一个高度值，用在递归插入后检测子树是否平衡</li>
-<li>完成4个旋转方法（参见<a href="http://en.wikipedia.org/wiki/AVL_tree">AVL Tree wikipedia</a>中的示意图）</li>
-<li>在递归插入方法中，完成对子树的插入后，检测子树高度差，根据子树的结构特点，做出相应的旋转</li>
-<li>旋转后记得更新节点的高度值</li>
-</ul>
-
-
-<p>机试时似乎没有人完全AC这道题，看来代码实现和Debug能力缺乏还是比较普遍的问题。</p>
-
-<p>pat1066源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1066.cpp">请戳</a></p>
-
-<!--more-->
-
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1067">1067. Sort with Swap(0,*) (25)</a></h2>
-
-<h5>题意</h5>
-
-<p>给定N(&lt;=<code>10^5</code>)以及一个{0,1,…,N-1}的打乱的数列。</p>
-
-<p>定义了一种交换方式：<code>Swap(0,*)</code>，表示将0和任意数进行位置交换。</p>
-
-<p>限定只能使用<code>Swap(0,*)</code>，要求输出最少需要多少次交换操作，来完成整体的排序。</p>
-
-<h5>分析</h5>
-
-<p>很好玩的模拟题，从题目的两个测试数据入手，找到所需要的交换次数的特点：</p>
-
-<p>假设用数组a存储输入的数组，数组的坐标为[0, N - 1]，而元素的所有值也是[0, N - 1]。</p>
-
-<ol>
-<li><p>输入的序列中本就在自己位置上的数字，是不用被交换的（比如序列<code>{4, 0, 2, 1, 3}</code>中2就是不用被交换），0除外</p></li>
-<li><p>0最终肯定会被放回到0的位置上，但交换过程中，0也可能被提前交换到了0的位置上，此时还有其他数没有处于正确的位置上（参见Sample Input<code>{10 3 5 7 2 6 4 9 0 8 1}</code>的情况）。此时需要多费一步将0和某一个处于不正确位置的数交换位置，来继续排序。</p></li>
-<li><p>每次的交换，0其实只是一个过渡作用。实际的交换过程遵循的链式关系如下所述：设定a[x] == b， 而 b != x，则需要将a[x]的值移动到a[b]上，此时a[b] == c, 那么接着又需要将 a[b]的值移动到a[c]上，以此类推，肯定能获得一个循环，且节点数 M 小于等于 N。如果循环中包含了0，那么这个循环中的数排序所需要的交换次数为 M - 1, 如果循环中不包含0，那么首先需要一次交换将0移动到循环链中，此时整个循环链节点数增加了1，于是共需要开销 M + 1 次交换。</p></li>
-<li><p>根据3的分析，在2的情况下，0与不同的不在正确位置的数的交换，是不会影响最终的结果的。</p></li>
-</ol>
-
-
-<p>综上所述，用类似dfs或者并查集的思路找到集合中的所有循环链路，记录下他们的大小，即可计算出所需要的交换次数。</p>
-
-<p>pat1067源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1067.cpp">请戳</a></p>
-
-<h2><a href="http://pat.zju.edu.cn/contests/pat-a-practise/1068">1068. Find More Coins (30)</a></h2>
-
-<h5>题意</h5>
-
-<p>给定 N(&lt;=<code>10^4</code>) 枚硬币和一个价格 M(&lt;=100)。</p>
-
-<p>要求用这 N 枚硬币组合出价格 M，如果有多种组合，输出排序后硬币面值字典序最小的组合，如果没有组合，则输出 No Solution.</p>
-
-<h5>分析</h5>
-
-<p>裸背包问题，相关资料参见dd大神的总结：<a href="http://cuitianyi.com/blog/%E3%80%8A%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E4%B9%9D%E8%AE%B2%E3%80%8B2-0-alpha1/">《背包问题九讲》</a></p>
-
-<p>按照常规的背包思路，构建10001 * 101 的二维数组f[i][j]，状态f[i][j]表示前i枚硬币能拼凑出的小于等于j的最大值（j这里代表一个价格）。</p>
-
-<p>状态转移方程为：<code>f[i][j] = max(f[i - 1][j], f[i - 1][j - c[i]] + c[i])</code>， 其中c[i]为第i枚硬币的面值，c[i]为排序过的硬币面值数组。</p>
-
-<p>由于最终的输出要求是排序的币值的字典序最小的组合，可以对c[i]做从大到小的排序，并另开一个数组has[i][j]来记录当前状态下，是否有包含c[i]。同时注意，当<code>f[i - 1][j] == f[i - 1][j - c[i]] + c[i]</code>时，采纳当前的c[i]，以满足字典序。</p>
-
-<p>pat1068源码:<a href="https://github.com/biaobiaoqi/CPractice/blob/master/PAT/advancedlevel/APAT1068.cpp">请戳</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
     <title type="html"><![CDATA[《改变未来的九大算法》]]></title>
     <link href="http://biaobiaoqi.github.io/blog/2013/10/03/nine-algorithms-that-changed-the-future/"/>
     <updated>2013-10-03T13:19:00+08:00</updated>
@@ -816,6 +429,407 @@ for (int i = list.length - 1; i &gt; 0; i --) {
 <p>《改变未来的九大算法》全书很少涉及到技术的实现细节，这正是它的优势所在。比如数据库的一致性章节，从一个银行转账的实例讲起，通过所面临的一系列问题的解决方案的描述，让人对数据库的整体实现有了全局的把握。在理解的前提下，更深入的学习也变得更有动力和方向。</p>
 
 <p>奈何自己已经过了朦朦胧胧的那几年，在此将本书强烈推荐给初涉计算机领域的朋友们。当然，其他人粗读一遍，也是对自己知识体系的一次小梳理啦;)。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[二叉树的遍历（递归、非递归）分析]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2013/04/27/travsal-binary-tree/"/>
+    <updated>2013-04-27T21:03:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2013/04/27/travsal-binary-tree</id>
+    <content type="html"><![CDATA[<h2>背景</h2>
+
+<ul>
+<li>2013-10-7 修订部分内容</li>
+<li>2014-5-24 修改后序非递归部分代码</li>
+</ul>
+
+
+<p>本文讨论二叉树的常见遍历方式的代码(Java)实现，包括前序(preorder)、中序(inorder)、后序(postorder)、层序(level order)，进一步考虑递归和非递归的实现方式。</p>
+
+<p>递归的实现方法相对简单，但由于递归的执行方式每次都会产生一个新的方法调用栈，如果递归层级较深，会造成较大的内存开销，相比之下，非递归的方式则可以避免这个问题。递归遍历容易实现，非递归则没那么简单，非递归调用本质上是通过维护一个栈，模拟递归调用的方法调用栈的行为。</p>
+
+<p>在此之前，先简单定义节点的数据结构：</p>
+
+<p>二叉树节点最多只有两个儿子，并保存一个节点的值，为了实验的方便，假定它为int。同时，我们直接使用Java的System.out.print方法来输出节点值，以显示遍历结果。</p>
+
+<p>```java
+public class Node {</p>
+
+<pre><code>    public int value;
+    public Node leftNode;
+    public Node rightNode;
+
+    public Node(int i) {
+        value = i;
+    }
+}
+</code></pre>
+
+<p>```</p>
+
+<p>详细代码参见链接:<a href="https://github.com/biaobiaoqi/biaobiaoqiCode/blob/master/src/biaobiaoqi/algorithm/basics/tree/BinarySearchTree.java">BST及其各种便利的详细实现代码</a></p>
+
+<!--more-->
+
+
+<h2>前序遍历</h2>
+
+<h4>递归实现</h4>
+
+<p>递归实现很简单，在每次访问到某个节点时，先输出节点值，然后再依次递归的对左儿子、右儿子调用遍历的方法。代码如下</p>
+
+<p>```java</p>
+
+<pre><code>public void preOrderTrav(Node n) {
+    if (n != null) {
+        System.out.print(n.value + " ");
+        preOrderTrav(n.leftNode);
+        preOrderTrav(n.rightNode);
+    }
+}
+</code></pre>
+
+<p>```</p>
+
+<h4>非递归调实现</h4>
+
+<h5>方法1</h5>
+
+<p>```java</p>
+
+<pre><code>public void preOrderTravNoRecur(Node n) {
+    Stack&lt;Node&gt; stack = new Stack&lt;Node&gt;();
+    stack.add(root);
+    while (!stack.empty()) {
+        Node t = stack.pop();
+        System.out.print(t.value + " ");
+        if (t.rightNode != null)
+            stack.add(t.rightNode);
+        if (t.leftNode != null)
+            stack.add(t.leftNode);
+    }
+}
+</code></pre>
+
+<p>```</p>
+
+<ul>
+<li><p>描述</p>
+
+<p>  维护一个栈，将根节点压入栈中。此后，每次从栈中读出栈顶的节点，作为对节点的访问，然后将该节点的儿子节点按照先右后左的顺序，压入栈中，实现递归模拟。</p></li>
+<li><p>分析</p>
+
+<p>  这个栈的递归策略不具备很好的扩展性，其他的遍历方式无法使用这种策略。实际上，它并不是对程序调用栈的模拟，而是针对先序遍历的特殊实现：先序遍历先对当前节点做出访问后，然后递归的调用对儿子节点的遍历，不需要在对儿子节点遍历结束后再回过头来处理当前节点。于是模拟的递归中也不需要存储之前的调用栈信息，只需要类似的生成一个未来的儿子节点的访问计划即可。</p></li>
+</ul>
+
+
+<h5>方法2</h5>
+
+<p>```java</p>
+
+<pre><code>public void preOrderTravNoRecurII(Node n) {
+    System.out.println("No Recursive: ");
+    Stack&lt;Node&gt; s = new Stack&lt;Node&gt;();
+    while (n != null | !s.empty()){
+        while (n!=null ){
+            System.out.print(n.value + " ");
+            s.add(n);
+            n = n.leftNode;
+        }
+        n = s.pop();
+        n = n.rightNode;
+    }
+    System.out.println();
+}
+</code></pre>
+
+<p>```
+* 描述</p>
+
+<pre><code>1.维护一个栈s和一个当前节点n。初始时将n赋值为根节点。
+
+2.逐个访问当前节点n的左子链上的节点，并推入栈中，直到没有左儿子。
+
+3.取出栈顶的节点，将n赋值为该节点的右儿子。
+
+4.不断执行2，3，直到栈为空且当前节点也为空。
+</code></pre>
+
+<ul>
+<li><p>分析</p>
+
+<p>  该方法模拟了递归的前序遍历中程序调用栈的行为过程：在调用栈中，会不断的递归进入左儿子链中，直到没有左儿子，再进入对右儿子的处理中。与递归方法的调用栈的不同之处在于，内层while循环将递归方法中针对左儿子链上所有节点的递归过程集中到了一起。</p></li>
+</ul>
+
+
+<h2>中序遍历</h2>
+
+<h4>递归实现</h4>
+
+<p>```java</p>
+
+<pre><code>public void inorderTrav(Node n) {
+    if (n != null) {
+        inorderTrav(n.leftNode);
+        System.out.print(n.value + " ");
+        inorderTrav(n.rightNode);
+    }
+}
+</code></pre>
+
+<p>```</p>
+
+<h4>非递归实现</h4>
+
+<p>```java</p>
+
+<pre><code>public void inorderTravNoRecu(Node n) {
+    System.out.println("No Recursive: ");
+    Stack&lt;Node&gt; s = new Stack&lt;Node&gt;();
+    while (n != null | !s.empty()){
+        while (n!=null ){
+            s.add(n);
+            n = n.leftNode;
+        }
+        n = s.pop();
+        System.out.print(n.value + " ");
+        n = n.rightNode;
+    }
+}
+</code></pre>
+
+<p>```</p>
+
+<ul>
+<li><p>描述</p>
+
+<p>  1.维护一个栈s和一个当前节点n。初始时将n赋值为根节点。</p>
+
+<p>  2.将当前节点n的左子链上的节点逐个推入栈中，直到没有左儿子。</p>
+
+<p>  3.取出栈顶的节点，访问该节点，将n赋值为该节点的右儿子。</p>
+
+<p>  4.不断执行2，3，直到栈为空且当前节点也为空。</p></li>
+<li><p>分析</p>
+
+<p>  跟前序遍历的非递归实现方法二很类似。唯一的不同是访问当前节点的时机：前序遍历在入栈前访问，而中序遍历在出栈后访问。</p></li>
+</ul>
+
+
+<h2>后序遍历</h2>
+
+<h4>递归实现</h4>
+
+<p>```java
+public void postOrderTrav(Node n) {</p>
+
+<pre><code>    if (n != null) {
+        inorderTrav(n.leftNode);
+        inorderTrav(n.rightNode);
+        System.out.print(n.value + " ");
+    }
+}
+</code></pre>
+
+<p>```</p>
+
+<h4>非递归实现</h4>
+
+<p>```java
+public void postOrderTravNoRecu(Node n) {</p>
+
+<pre><code>    Stack&lt;Node&gt; stack = new Stack&lt;Node&gt;();
+    int[] flag = new int[max];
+
+    while (n != null) {
+        stack.push(n);
+        flag[stack.size()] = 0;
+        n = n.leftNode;
+    }
+
+    while (!stack.empty()) {
+        n = stack.peek();
+        while (n.rightNode != null &amp;&amp; flag[stack.size()] == 0) {
+            n = n.rightNode;
+            flag[stack.size()] = 1;
+            while (n != null) {
+                stack.push(n);
+                flag[stack.size()] = 0;
+                n = n.leftNode;
+            }
+            n = stack.peek();
+        }
+        n = stack.pop();
+        System.out.print(n.value + " ");
+    }
+
+}
+</code></pre>
+
+<p>```</p>
+
+<ul>
+<li><p>描述</p>
+
+<p>  1.维护一个栈stack、当前节点n和一个标记数组flag。将根节点的左儿子链上的所有节点压入stack中，并将标记数组对因为值置为0.</p>
+
+<p>  2.将当前节点赋值为栈顶的节点。如果节点有右儿子，且没有被处理过（通过标记数组判定），则将右子树的根节点及其左儿子全部压入栈中。</p>
+
+<p>  3.将当前节点付志伟栈顶的节点，访问它，并将该节点从栈中pop出。</p>
+
+<p>  4.循环2，3两步，直到栈为空。</p></li>
+<li><p>分析</p>
+
+<p>  在非递归方法中用栈模拟程序调用栈，碰到的最大的问题就是模拟递归方法所处的状态。编码维护的栈能记录节点，但无法记录在如何处理该节点。这里使用了一个<code>flag</code>数组来记录节点的右子树是否被访问过，对每个节点进行访问的时候，都保证已经处理完了左右子树（通过先压入左边儿子链为主线，处理栈中的每个节点时，再压入右边儿子来实现）。</p></li>
+</ul>
+
+
+<h2>层序遍历</h2>
+
+<h4>无法使用递归方法</h4>
+
+<p>层序遍历不同于其他的遍历，无法使用递归实现。</p>
+
+<ul>
+<li><p>反证法证明</p>
+
+<p>  如果能实现对A节点的层序递归，在对A节点处理的过程中，应该递归的对两个儿子B和C分别调用了层序遍历。在这种情况下，我们无法让B和C的同一个层级的儿子在集中的时间中被遍历到，换言之，B的第一层儿子在对B的调用中被遍历，而C的第一层儿子，则在对C的调用中遍历，这是分离开的。不成立，得证。</p></li>
+</ul>
+
+
+<h4>非递归方法</h4>
+
+<p>```java</p>
+
+<pre><code>public void levelOrderTrav(Node n) {
+    System.out.print("Level OrderTrav: ");
+
+    Queue&lt;Node&gt; q = new LinkedList&lt;Node&gt;();
+    q.add(n);
+    while (q.size() != 0) {
+        n = q.poll();
+        System.out.print(" " + n.value);
+        if (n.leftNode != null) 
+            q.add(n.leftNode);
+        if (n.rightNode != null)
+            q.add(n.rightNode);
+
+    }
+}
+</code></pre>
+
+<p>```</p>
+
+<ul>
+<li><p>分析</p>
+
+<p>  用一个队列实现层序遍历，拓扑排序中也有用到这种方式。</p></li>
+</ul>
+
+
+<h2>总结</h2>
+
+<p>非递归实现的代码相对来说没有递归实现的直观。其核心都是维护了一个栈来保存状态，避免了产生过多方法调用栈浪费内存空间。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[《谁是谷歌想要的人才？》]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2013/04/20/are-you-smart-enough-to-work-at-google/"/>
+    <updated>2013-04-20T00:47:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2013/04/20/are-you-smart-enough-to-work-at-google</id>
+    <content type="html"><![CDATA[<p><em>道理都明白，还得靠自己</em></p>
+
+<h3>关于本书</h3>
+
+<p>藉由大多数程序员天然的对google怀有的朝圣般的向往和喜爱，开始看<a href="http://book.douban.com/subject/21329264/">这本书</a>。</p>
+
+<p><img class="left" src="http://img.cnbeta.com/upimg/121231/raymon725_1451506190985.jpg" width="250" height="400" title="Place Kitten #2" ></p>
+
+<p>书中的中文版序的标题就是“跳出框框来思考”，这种观点倒不是第一次见到了，甚至可以说，这些观点充斥于互联网上的各种流传、经验贴中。但这并不意味着我们不需要再花时间在这种书上。道理都懂，就是做不好已经成为这个信息通畅的时代的特征之一。正所谓“纸上得来终觉浅，绝知此事要躬行”。</p>
+
+<!--more-->
+
+
+<p>而如果有一个“躬行”过的人再将他的感受娓娓道来，辅以自己的用心体会，或许会事半功倍呢。这就是我想通过这本书得到的。如下几点，让这个想法成为可能：</p>
+
+<ul>
+<li>1.这本书并不单单是一个题集，大约有一般的篇目是在讲述题记，另外一半的篇目，则是代入感颇强的为什么要这么思考的叙述。后者看似无关功利，但却可以给人足够的心理暗示和支撑，以提升良好思考习惯在内心的重要性。</li>
+<li>2.作者庞德斯通写过不少充满思维的力量书。</li>
+</ul>
+
+
+<p>认同归认同，关键的还是自己的所得。下面是我的一些思考。</p>
+
+<h3>我的思考</h3>
+
+<ul>
+<li>1.解决问题的思路：问题域 --> 结果</li>
+<li><ul>
+<li>问题域：需要慎重思考，充分利用资源，限定问题域的边界。往往很多题目是在没有弄清楚题意的情况下开始解答而得不到好的答案。</li>
+</ul>
+</li>
+<li><ul>
+<li>问题域向结果推演：首先是发散式的头脑风暴（发现尽可能多的维度的才想），然后再依次的理性分析，找本质规律，内在联系，向结果靠拢。</li>
+</ul>
+</li>
+</ul>
+
+
+<hr />
+
+<ul>
+<li>2.分析过程中，有些需要注意的点：</li>
+<li><ul>
+<li>用尽可能的条件。</li>
+</ul>
+</li>
+<li><ul>
+<li>图形化思维（可能人体对这种视觉层次的抽象更敏锐），</li>
+</ul>
+</li>
+<li><ul>
+<li>第一个想出来的一般都不够优美。但是或许可以从中吸取观点，不断提炼优化，得到更好的答案。这是一个过程。</li>
+</ul>
+</li>
+<li><ul>
+<li>切记“瞎猜”数据，注意发散思维和逻辑思维之间的界定。（费米问题）</li>
+</ul>
+</li>
+<li><ul>
+<li>极限思想是发散思维中容易套用的方式。往往可以将它作为启发的源泉，再深入挖掘。</li>
+</ul>
+</li>
+<li><ul>
+<li>多跟面试官交流，脑子有时候会跟着嘴巴走。别说的太绝对，显示自己的反思。（不单就面试而言，包括一些场合的交流讨论）</li>
+</ul>
+</li>
+</ul>
+
+
+<hr />
+
+<ul>
+<li>3.知识性的东西：</li>
+<li><ul>
+<li>算法：最近看算法跟最早算法课上的感觉，完全不一样。随着对计算机技术整体的把握越来越细，对算法的理解也变得更深刻了。</li>
+</ul>
+</li>
+<li><ul>
+<li>概率论:很多情况下，我们会根据经验来算概率，而不依从概率模型、概率论的理论体系，但人的感性认知是有局限性的。理论体系能支撑更多复杂的情况的分析。</li>
+</ul>
+</li>
+<li><ul>
+<li>常识:或许在面对费米问题等时，掌握一些尝试，更有利。</li>
+</ul>
+</li>
+</ul>
+
+
+<hr />
+
+<p>PS：书中有几个小错误，比如.P208 4题的答案的笔误，以及P210 第5题解题思路中的纰漏。不过，无伤大雅，译者翻译的已经很是舒畅了。</p>
 ]]></content>
   </entry>
   
