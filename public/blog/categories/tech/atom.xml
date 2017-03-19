@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tech | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.io/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.io/"/>
-  <updated>2017-02-28T19:40:31+08:00</updated>
+  <updated>2017-03-19T22:49:15+08:00</updated>
   <id>http://biaobiaoqi.github.io/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -14,376 +14,62 @@
 
   
   <entry>
-    <title type="html"><![CDATA[基本排序总结]]></title>
-    <link href="http://biaobiaoqi.github.io/blog/2014/02/24/sort-intro/"/>
-    <updated>2014-02-24T23:58:00+08:00</updated>
-    <id>http://biaobiaoqi.github.io/blog/2014/02/24/sort-intro</id>
-    <content type="html"><![CDATA[<p>最近准备面试，正好把刚接触数据结构时学习的排序整理了一下。算法的实现在wiki上都有详细的介绍，这里主要做归纳和总结。</p>
+    <title type="html"><![CDATA[[译] 设计一个现代的缓存]]></title>
+    <link href="http://biaobiaoqi.github.io/blog/2017/03/19/design-of-a-modern-cache/"/>
+    <updated>2017-03-19T22:43:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2017/03/19/design-of-a-modern-cache</id>
+    <content type="html"><![CDATA[<blockquote><p>原文：http://highscalability.com/blog/2016/1/25/design-of-a-modern-cache.html</p></blockquote>
 
-<p>注意对排序算法的稳定性的理解：保证2个相等的数在序列的前后位置顺序和排序后它们两个的前后位置顺序相同。换句话说，相等的数值在排序时不断交换位置是不稳定的。</p>
+<p>缓存是提升性能的通用方法，现在大多数的缓存实现都使用了经典的技术。这篇文章中，我们会发掘<a href="https://github.com/ben-manes/caffeine">Caffeine</a>中的现代的实现方法。Caffeine是一个开源的Java缓存库，它能提供高命中率和出色的并发能力。期望读者们能被这些想法激发，进而将它们应用到任何你喜欢的编程语言中。</p>
 
-<!--more-->
+<h2>驱逐策略</h2>
 
+<p>缓存的<strong>驱逐策略是为了预测哪些数据在短期内最可能被再次用到</strong>，从而提升缓存的命中率。由于简洁的实现、高效的运行时表现以及在常规的使用场景下有不错的命中率，LRU（Least Recently Used）策略或许是最流行的驱逐策略。但LRU通过历史数据来预测未来是局限的，它会认为最后到来的数据是最可能被再次访问的，从而给与它最高的优先级。</p>
 
-<h2>冒泡排序</h2>
+<p>现代缓存扩展了对历史数据的使用，结合就近程度（recency）和访问频次（frequency）来更好的预测数据。其中一种保留历史信息的方式是使用popularity sketch（一种压缩、概率性的数据结构）来从一大堆访问事件中定位频繁的访问者。可以参考<a href="http://dimacs.rutgers.edu/~graham/pubs/papers/cmsoft.pdf">CountMin Sketch</a>算法，它由计数矩阵和多个哈希方法实现。发生一次读取时，矩阵中每行对应的计数器增加计数，估算频率时，取数据对应是所有行中计数的最小值。这个方法让我们从空间、效率、以及适配矩阵的长宽引起的哈希碰撞的错误率上做权衡。</p>
 
-<p>使用冒泡排序为一列数字进行排序的过程如下图：</p>
+<p><img src="http://biaobiaoqi.u.qiniudn.com/CountMinSketch%E7%AE%97%E6%B3%95.jpg" alt="CountMinSketch算法.jpg" /></p>
 
-<p><img src="http://upload.wikimedia.org/wikipedia/commons/3/37/Bubble_sort_animation.gif" alt="冒泡排序" /></p>
+<p><a href="https://arxiv.org/pdf/1512.00727.pdf">Window TinyLFU</a>（W-TinyLFU）算法将sketch作为过滤器，当新来的数据比要驱逐的数据高频时，这个数据才会被缓存接纳。这个许可窗口给予每个数据项积累热度的机会，而不是立即过滤掉。这避免了持续的未命中，特别是在突然流量暴涨的的场景中，一些短暂的重复流量就不会被长期保留。为了刷新历史数据，一个时间衰减进程被周期性或增量的执行，给所有计数器减半。
+<img src="http://biaobiaoqi.u.qiniudn.com/Window%20TinyLFU.jpg" alt="Window TinyLFU.jpg" /></p>
 
-<p>Java实现：</p>
+<p>对于长期保留的数据，W-TinyLFU使用了分段LRU（Segmented LRU，缩写SLRU）策略。起初，一个数据项存储被存储在试用段（probationary segment）中，在后续被访问到时，它会被提升到保护段（protected segment）中（保护段占总容量的80%）。保护段满后，有的数据会被淘汰回试用段，这也可能级联的触发试用段的淘汰。这套机制确保了访问间隔小的热数据被保存下来，而被重复访问少的冷数据则被回收。</p>
 
-<p>```</p>
+<p><img src="http://biaobiaoqi.u.qiniudn.com/%E7%BC%93%E5%AD%98%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C.jpg" alt="缓存测试结果.jpg" /></p>
 
-<pre><code>int temp = 0;
-for (int i = a.length - 1; i &gt; 0; --i) {
-  for (int j = 0; j &lt; i; ++j) {
-    if (a[j + 1] &lt; a[j]) {
-      temp = a[j];
-      a[j] = a[j + 1];
-      a[j + 1] = temp;
-    }
-  }
-}
-</code></pre>
+<p>如图中数据库和搜索场景的结果展示，通过考虑就近程度和频率能大大提升LRU的表现。一些高级的策略，像<a href="https://www.usenix.org/legacy/event/fast03/tech/full_papers/megiddo/megiddo.pdf">ARC</a>，<a href="http://web.cse.ohio-state.edu/hpcs/WWW/HTML/publications/papers/TR-02-6.pdf">LIRS</a>和<a href="https://arxiv.org/pdf/1512.00727.pdf">W-TinyLFU</a>都提供了接近最理想的命中率。想看更多的场景测试，请查看相应的论文，也可以在使用<a href="https://github.com/ben-manes/caffeine/wiki/Simulator">simulator</a>来测试自己的场景。</p>
 
-<p>```</p>
+<h2>过期策略</h2>
 
-<ul>
-<li>最差时间复杂度：O(n<sup>2)</sup></li>
-<li>最优时间复杂度：O(n)：在遍历时，如果有设定标记，对于已排序的数组，可以实现O(n)</li>
-<li>平均时间复杂度：O(n<sup>2)</sup></li>
-<li>最差空间复杂度：总共O(n)，需要辅助空间O(1)</li>
-<li>稳定性：稳定</li>
-</ul>
+<p>过期的实现里，往往每个数据项拥有不同的过期时间。因为容量的限制，过期后数据需要被懒淘汰，否则这些已过期的脏数据会污染到整个缓存。一般缓存中会启用专有的清扫线程周期性的遍历清理缓存。这个策略相比在每次读写操作时按照过期时间排序的优先队列来清理过期缓存要好，因为后台线程隐藏了的过期数据清除的时间开销。</p>
 
+<p>鉴于大多数场景里不同数据项使用的都是固定的过期时长，Caffien采用了统一过期时间的方式。这个限制让用O（1）的有序队列组织数据成为可能。针对数据的写后过期，维护了一个写入顺序队列，针对读后过期，维护了一个读取顺序队列。缓存能复用驱逐策略下的队列以及下面将要介绍的并发机制，让过期的数据项在缓存的维护阶段被抛弃掉。</p>
 
-<h2>插入排序</h2>
+<h2>并发</h2>
 
-<p>使用插入排序为一列数字进行排序的过程如下图：</p>
+<p>由于在大多数的缓存策略中，数据的读取都会伴随对缓存状态的写操作，并发的缓存读取被视为一个难点问题。传统的解决方式是用同步锁。这可以通过将缓存的数据划成多个分区来进行锁拆分优化。不幸的是热点数据所持有的锁会比其他数据更常的被占有，在这种场景下锁拆分的性能提升也就没那么好了。当单个锁的竞争成为瓶颈后，接下来的经典的优化方式是只更新单个数据的元数据信息，以及使用<a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.110.8469&amp;rep=rep1&amp;type=pdf">随机采样</a>、<a href="https://en.wikipedia.org/wiki/Page_replacement_algorithm#Second-chance">基于FIFO</a>的驱逐策略来减少数据操作。这些策略会带来高性能的读和低性能的写，同时在选择驱逐对象时也比较困难。</p>
 
-<p><img src="http://upload.wikimedia.org/wikipedia/commons/2/25/Insertion_sort_animation.gif" alt="" /></p>
+<p>另一种<a href="http://web.cse.ohio-state.edu/hpcs/WWW/HTML/publications/papers/TR-09-1.pdf">可行方案</a>来自于数据库理论，通过提交日志的方式来扩展写的性能。写入操作先记入日志中，随后异步的批量执行，而不是立即写入到数据结构中。这种思想可以应用到缓存中，执行哈希表的操作，将操作记录到缓冲区，然后在合适的时机执行缓冲区中的内容。这个策略依然需要同步锁或者tryLock，不同的是把对锁的竞争转移到对缓冲区的追加写上。</p>
 
-<p>Java实现</p>
+<p>在Caffeine中，有一组缓冲区被用来记录读写。一次访问首先会被因线程而异的哈希到stripped ring buffer上，当检测到竞争时，缓冲区会自动扩容。一个ring buffer容量满载后，会触发异步的执行操作，而后续的对该ring buffer的写入会被丢弃，直到这个ring buffer可被使用。虽然因为ring buffer容量满而无法被记录该访问，但缓存值依然会返回给调用方。这种策略信息的丢失不会带来大的影响，因为W-TinyLFU能识别出我们希望保存的热点数据。通过使用因线程而异的哈希算法替代在数据项的键上做哈希，缓存避免了瞬时的热点key的竞争问题。</p>
 
-<p>```
-for(int index=1;index&lt;data.length;index++){</p>
+<p><img src="http://biaobiaoqi.u.qiniudn.com/StippedReadBuffer.jpg" alt="StippedReadBuffer.jpg" /></p>
 
-<pre><code>Comparable key = data[index];  
-int position = index;  
-//shift larger values to the right  
-while(position&gt;0&amp;&amp;data[position-1].compareTo(key)&gt;0){  
-    data[position] = data[position-1];  
-    position--;
-}  
-data[position]=key;  
-</code></pre>
+<p>写数据时，采用更传统的并发队列，每次变更会引起一次立即的执行。虽然数据的损失是不可接受的，但我们仍然有很多方法可以来优化写缓冲区。所有类型的缓冲区都被多个的线程写入，但却通过单个线程来执行。这种多生产者/单个消费者的模式允许了更简单、高效的算法来实现。</p>
 
-<p>}   <br/>
-```</p>
+<p>缓冲区和细粒度的写带来了单个数据项的操作乱序的竞态条件。插入、读取、更新、删除都可能被各种顺序的重放，如果这个策略控制的不合适，则可能引起悬垂索引。解决方案是通过状态机来定义单个数据项的生命周期。</p>
 
-<ul>
-<li>最差时间复杂度：O(n<sup>2)</sup></li>
-<li>最优时间复杂度：O(n)：顺序的情况。</li>
-<li>平均时间复杂度：O(n<sup>2)</sup></li>
-<li>最差空间复杂度：总共O(n) ，需要辅助空间O(1)</li>
-<li>稳定性：稳定</li>
-</ul>
+<p><img src="http://biaobiaoqi.u.qiniudn.com/%E6%95%B0%E6%8D%AE%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.jpg" alt="StippedReadBuffer.jpg" /></p>
 
+<p>在<a href="https://github.com/ben-manes/caffeine/wiki/Benchmarks#read-100-1">基准测试</a>中，缓冲区随着哈希表的增长而增长，它的的使用相对更节省资源。读的性能随着CPU的核数线性增长，是哈希表吞吐量的33%。写入有10%的性能损耗，这是因为更新哈希表时的竞争是最主要的开销。</p>
 
-<h2>选择排序</h2>
+<p><img src="http://biaobiaoqi.u.qiniudn.com/%E5%B9%B6%E5%8F%91%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95.jpg" alt="并发基准测试.jpg" /></p>
 
-<p>使用选择排序为一列数字进行排序的过程如下图：</p>
+<h2>结论</h2>
 
-<p><img src="http://upload.wikimedia.org/wikipedia/commons/b/b0/Selection_sort_animation.gif" alt="" /></p>
+<p>还有许多实用的话题没有被覆盖到。包括最小化内存的技巧，当复杂度上升时保证质量的测试技术以及确定优化是否值得的性能分析方法。这些都是缓存的实践者需要关注的点，因为一旦这些被忽视，就很难重拾掌控缓存带来的复杂度的信心。</p>
 
-<p>Java实现</p>
-
-<p>```
-for (int index = 0; index &lt; array.length - 1; index++) {</p>
-
-<pre><code>min = index;
-for (int time = index + 1; time &lt; array.length; time++) {
-    if (array[time].compareTo(array[min]) &lt; 0) {
-        min = time;
-    }
-}
-temp = array[index];
-array[index] = array[min];
-array[min] = temp;
-</code></pre>
-
-<p>}</p>
-
-<p>```</p>
-
-<ul>
-<li>最差时间复杂度：О(n<sup>2)</sup></li>
-<li>最优时间复杂度：О(n<sup>2):比插入、冒泡都还要弱。</sup></li>
-<li>平均时间复杂度：О(n<sup>2)</sup></li>
-<li>最差空间复杂度：总共O(n) ，需要辅助空间O(1)</li>
-<li>稳定性：不稳定。比如对于数组{3,2,3,1}, 第一次交换发生在[0]和[3]之间，[0]的3被交换到[2]的3之后了。</li>
-</ul>
-
-
-<h2>快速排序</h2>
-
-<p>使用快速排序为一列数字进行排序的过程如下图：（图中取最后一个元素为pivot，代码实现中取第一个元素为pivot）</p>
-
-<p><img src="http://upload.wikimedia.org/wikipedia/commons/6/6a/Sorting_quicksort_anim.gif" alt="" /></p>
-
-<p>Java实现</p>
-
-<p>```
-public void sort (int[] input){</p>
-
-<pre><code>  sort (input, 0, input.length-1);
-</code></pre>
-
-<p>}</p>
-
-<p>private void sort(int[] input, int lowIndex, int highIndex) {</p>
-
-<pre><code>if (highIndex&lt;=lowIndex){
-    return;
-}
-
-int partIndex=partition (input, lowIndex, highIndex);
-
-sort (input, lowIndex, partIndex-1);
-sort (input, partIndex+1, highIndex);
-</code></pre>
-
-<p>}</p>
-
-<p>private int partition(int[] input, int lowIndex, int highIndex) {</p>
-
-<pre><code>int i=lowIndex;
-int pivotIndex=lowIndex;
-int j=highIndex+1;
-
-while (true){
-    while (less(input[++i], input[pivotIndex])){
-        if (i==highIndex) break;
-    }
-
-    while (less (input[pivotIndex], input[--j])){
-        if (j==lowIndex) break;
-    }
-
-    if (i&gt;=j) break;
-
-    exchange(input, i, j);
-}
-
-exchange(input, pivotIndex, j);
-
-return j;
-</code></pre>
-
-<p>}</p>
-
-<p>```</p>
-
-<ul>
-<li>最差时间复杂度：Theta(n<sup>2)：如果选取pivot不够科学，在有序或者逆序的情况下会产生n<sup>2的时间开销。</sup></sup></li>
-<li>最优时间复杂度：Theta(n*logn)</li>
-<li>平均时间复杂度：Theta(n*logn)</li>
-<li>最差空间复杂度：根据实现的方式不同而不，基本快排中总共O(n) ，需要辅助空间O(1)</li>
-<li>稳定性：不稳定。比如：{5, 10, 11, 3, 3, 3}，后面相等的3会被交换到10和11的位置，而且两者相对位置会变化。</li>
-</ul>
-
-
-<p>快速排序的分治(divide and conquer)思想非常经典。算法实现上，对pivot的选取也有不同的策略来做优化。比如可以选取数组的第一个元素、最后一个元素和中间元素中排中间大小的那一个。这里介绍的是快排的基础算法，也叫单基算法，还有<a href="http://www.importnew.com/8445.html">双基、三基快速排序</a>。java.util.Arrays中对基本类型的排序就使用了双基快排（一般对象类型使用的归并排序）。</p>
-
-<p>虽然快速排序最差时间复杂度有n<sup>2，不过这种情况很少见，像它的名字那样，是内部排序中最快的。</sup></p>
-
-<p>适用场景：topK：寻找最大的K个数</p>
-
-<h2>归并排序</h2>
-
-<p><img src="http://upload.wikimedia.org/wikipedia/commons/c/c5/Merge_sort_animation2.gif" alt="" /></p>
-
-<p>Java实现</p>
-
-<p>```
-public void sort(Integer[] list) {</p>
-
-<pre><code>if (list.length == 0) {
-    System.out.println("");
-} else {
-    Integer[] tmpList = new Integer[list.length];
-    mergeSort(list, 0, list.length - 1, tmpList);
-}
-</code></pre>
-
-<p>}</p>
-
-<p>public void mergeSort(Integer[] list, int leftPos, int rightPos,</p>
-
-<pre><code>    Integer[] tmpList) {
-if (leftPos &gt;= rightPos)
-    return;
-
-int center = (leftPos + rightPos) / 2;
-mergeSort(list, leftPos, center, tmpList);
-mergeSort(list, center + 1, rightPos, tmpList);
-merge(list, leftPos, center, rightPos, tmpList);
-</code></pre>
-
-<p>}</p>
-
-<p>public void merge(Integer[] list, int leftPos, int leftEnd, int rightEnd,</p>
-
-<pre><code>    Integer[] tmpList) {
-int leftIndex  = leftPos;
-int rightIndex = leftEnd + 1;
-int index = leftIndex;
-
-while (leftIndex &lt;= leftEnd &amp;&amp; rightIndex &lt;= rightEnd) {
-    if (list[leftIndex] &lt;= list[rightIndex]) {
-        tmpList[index++] = list[leftIndex++];
-    } else {
-        tmpList[index++] = list[rightIndex++];
-    }
-}
-
-while (leftIndex &lt;= leftEnd) {
-    tmpList[index++] = list[leftIndex++];
-}
-while (rightIndex &lt;= rightEnd) {
-    tmpList[index++] = list[rightIndex++];
-}
-
-for (int i = leftPos; i &lt;= rightEnd; i ++) {
-    list[i] = tmpList[i];
-}
-</code></pre>
-
-<p>}</p>
-
-<p>```</p>
-
-<ul>
-<li>最差时间复杂度：Theta(n*logn)</li>
-<li>最优时间复杂度：Theta(n)</li>
-<li>平均时间复杂度：Theta(n*logn)</li>
-<li>最差空间复杂度：总共O(n)，需要辅助空间O(1)</li>
-<li>稳定性：稳定</li>
-</ul>
-
-
-<p>Java的java.util.Arrays中对一般对象的排序使用了改良的归并算法：待排序的数组元素少于<code>INSERTIONSORT_THRESHOLD</code>时，执行插入排序。</p>
-
-<p>归并排序比堆稍快，但需要一倍的额外存储空间。经常使用的场景：两个已排序数组合并;单向链表排序。</p>
-
-<h2>堆排序</h2>
-
-<p>Java实现</p>
-
-<p>```
-public int leftChild(int n) {</p>
-
-<pre><code>return 2*n + 1;
-</code></pre>
-
-<p>}</p>
-
-<p>public void percolateDown(int[] list, int n, int length) {</p>
-
-<pre><code>int tmp;
-int child;
-
-for (tmp = list[n]; leftChild(n) &lt; length; n = child) {
-    child = leftChild(n);
-
-    if (child + 1 &lt; length &amp;&amp; list[child] &lt; list[child + 1]) {
-        child ++;
-    }
-
-    if (tmp &lt; list[child]) {
-        list[n] = list[child];
-    }else {
-        break;
-    }
-}
-
-list[n] = tmp;
-</code></pre>
-
-<p>}</p>
-
-<p>public void sort(int[] list) {</p>
-
-<pre><code>for (int i = list.length/2; i &gt;= 0; i --) {
-    percolateDown(list, i, list.length);
-}
-
-for (int i = list.length - 1; i &gt; 0; i --) {
-    int tmp = list[i];
-    list[i] = list[0];
-    list[0] = tmp;
-
-    percolateDown(list, 0, i);
-}
-</code></pre>
-
-<p>}</p>
-
-<p>```</p>
-
-<ul>
-<li>最差时间复杂度：O(n*logn)</li>
-<li>最优时间复杂度：O(n*logn)</li>
-<li>平均时间复杂度：Theta(n*logn)</li>
-<li>最差空间复杂度：总共O(n)，需要辅助空间O(1)</li>
-<li>稳定性：不稳定。从堆顶摘掉放入堆尾，如果有跟它相等的值，一定会改变相对位置。比如{3, 27, 36, 27}，对大堆摘掉第一个27后，原来在后面的27被放到了堆顶。</li>
-</ul>
-
-
-<p>不需要递归、额外空间，适用于数据量特别大的场景，比如海量数据求topK。除了这里的堆排序外，还需要掌握向堆中插入数据。</p>
-
-<h2>外排序</h2>
-
-<p>通常来说，外排序处理的数据不能一次装入内存，只能放在读写较慢的外存储器（通常是硬盘）上。外排序通常采用的是一种“排序-归并”的策略。在排序阶段，先读入能放在内存中的数据量，将其排序输出到一个临时文件，依此进行，将待排序数据组织为多个有序的临时文件。然后在归并阶段将这些临时文件组合为一个大的有序文件，也即排序结果。</p>
-
-<p>常用思路：</p>
-
-<ol>
-<li>使用快速排序、归并排序、堆排序等算法完成少量数据的排序，生成临时数据文件。</li>
-<li>使用败者树或最小堆，用归并的思路合并1中生成的临时文件，并输出为最后的排序结果。</li>
-</ol>
-
-
-<h2>快排为什么那样快</h2>
-
-<p>刘未鹏在<a href="http://mindhacks.cn/2008/06/13/why-is-quicksort-so-quick/">《数学之美番外篇：快排为什么那样快》</a>中从问题域向答案域演进的角度解释了基于比较的排序的时间复杂度极限。</p>
-
-<p>核心思想是：N个数组的排序，有N!种可能结果，我们需要在N!中搜索出唯一正确的结果。基于比较的排序每次能输出的结果只有两种：是或否，一个只有两种输出的问题，最多能将可能性空间切分为两半，要让结果稳定可靠，最好的办法就是平均的切分为1/2和1/2，也就一次比较中a&lt;b的概率和a>b的概率一样，如果能保证一这一点，就能保证最优下界，也就是log2(N!)，这个值近似于NlogN。</p>
-
-<ul>
-<li><p>堆排序比快排慢：堆建立好之后，每次取堆顶，将堆尾的数据放到堆顶向下过滤，实际上，堆顶部的元素几乎肯定较大，而堆尾的数据都比较小，在向下过滤的过程中，浪费了很多次比较，让堆排序的速度变慢了。</p></li>
-<li><p>基数排序比快排快：基数排序不是比较排序，将基数相同的元素放到一个桶里的操作，除了一次与技术本身的比较以外，不同的基数桶自然的形成了排序。这里基数桶用空间换取了时间。</p></li>
-</ul>
-
-
-<h2>参考资料</h2>
-
-<ul>
-<li><a href="http://zh.wikipedia.org/zh-cn/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F">冒泡排序wiki</a></li>
-<li><a href="http://zh.wikipedia.org/wiki/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F">插入排序</a></li>
-<li><a href="http://zh.wikipedia.org/wiki/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F">选择排序</a></li>
-<li><a href="http://zh.wikipedia.org/wiki/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F">快速排序</a></li>
-<li><a href="http://www.importnew.com/8445.html">本周算法：快速排序—三路快排 vs 双基准</a></li>
-<li><a href="http://zh.wikipedia.org/wiki/%E5%A0%86%E6%8E%92%E5%BA%8F">堆排序</a></li>
-<li><a href="http://zh.wikipedia.org/wiki/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F">希尔排序</a></li>
-<li><a href="http://zh.wikipedia.org/zh-cn/%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F">基数排序</a></li>
-<li><a href="http://zh.wikipedia.org/wiki/%E5%A4%96%E6%8E%92%E5%BA%8F">外部排序</a></li>
-<li><a href="http://zh.wikipedia.org/wiki/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F">归并排序</a></li>
-<li><a href="http://cuijing.org/study/summary-of-sort-in-leetcode.html">leetcode总结无止境系列之排序</a></li>
-<li><a href="http://mindhacks.cn/2008/06/13/why-is-quicksort-so-quick/">数学之美番外篇：快排为什么那样快</a></li>
-</ul>
-
+<p>Caffeine的设计实现来自于大量的洞见和许多贡献者的共同努力。它这些年的演化离不开一些人的帮助：Charles Fry, Adam Zell, Gil Einziger, Roy Friedman, Kevin Bourrillion, Bob Lee, Doug Lea, Josh Bloch, Bob Lane, Nitsan Wakart, Thomas Müeller, Dominic Tootell, Louis Wasserman, and Vladimir Blagojevic. Thanks to Nitsan Wakart, Adam Zell, Roy Friedman, and Will Chu for their feedback on drafts of this article.</p>
 ]]></content>
   </entry>
   
@@ -648,7 +334,7 @@ Received: by 10.114.246.38 with SMTP id xt6csp139967ldc;</p>
 <pre><code>    Mon, 20 Jan 2014 06:53:16 -0800 (PST)
 </code></pre>
 
-<p>Return-Path: <a href="&#x6d;&#x61;&#x69;&#x6c;&#x74;&#111;&#58;&#x73;&#117;&#x70;&#112;&#111;&#x72;&#116;&#64;&#108;&#105;&#x6e;&#x6f;&#100;&#x65;&#46;&#99;&#111;&#x6d;">&#x73;&#117;&#x70;&#x70;&#111;&#x72;&#116;&#64;&#108;&#105;&#x6e;&#111;&#100;&#101;&#x2e;&#x63;&#111;&#x6d;</a>
+<p>Return-Path: <a href="&#109;&#x61;&#x69;&#108;&#x74;&#x6f;&#58;&#x73;&#x75;&#112;&#x70;&#x6f;&#114;&#116;&#x40;&#x6c;&#105;&#x6e;&#x6f;&#100;&#x65;&#46;&#99;&#x6f;&#109;">&#x73;&#117;&#112;&#112;&#x6f;&#x72;&#116;&#64;&#108;&#105;&#x6e;&#x6f;&#100;&#101;&#46;&#99;&#x6f;&#x6d;</a>
 Received: from mail2.linode.com (mail2.linode.com. [173.255.198.11])</p>
 
 <pre><code>    by mx.google.com with ESMTP id f6si835374obr.111.2014.01.20.06.53.15
@@ -671,7 +357,7 @@ Mon, 20 Jan 2014 09:53:15 -0500 (EST)
 <p>Date: Mon, 20 Jan 2014 09:53:15 -0500 (EST)
 From: support@linode.com
 To: someuser@gmail.com
-Message-ID: <a href="&#109;&#97;&#x69;&#x6c;&#116;&#x6f;&#58;&#51;&#55;&#54;&#55;&#53;&#x30;&#56;&#54;&#56;&#x2e;&#x32;&#x36;&#x37;&#x36;&#52;&#x2e;&#49;&#51;&#57;&#48;&#x32;&#x32;&#57;&#x35;&#57;&#53;&#52;&#x33;&#x37;&#x2e;&#x4a;&#x61;&#x76;&#97;&#77;&#x61;&#x69;&#108;&#46;&#99;&#x66;&#x75;&#x73;&#105;&#111;&#x6e;&#64;&#109;&#97;&#105;&#108;&#x32;&#x2e;&#108;&#105;&#x6e;&#111;&#x64;&#101;&#x2e;&#99;&#111;&#x6d;">&#51;&#55;&#x36;&#x37;&#x35;&#x30;&#x38;&#x36;&#56;&#46;&#x32;&#54;&#55;&#54;&#52;&#46;&#49;&#51;&#57;&#48;&#50;&#50;&#57;&#x35;&#x39;&#x35;&#52;&#51;&#55;&#46;&#x4a;&#97;&#118;&#97;&#x4d;&#x61;&#x69;&#x6c;&#x2e;&#x63;&#x66;&#117;&#115;&#105;&#111;&#110;&#64;&#x6d;&#x61;&#x69;&#x6c;&#x32;&#x2e;&#x6c;&#105;&#110;&#x6f;&#100;&#x65;&#x2e;&#99;&#111;&#x6d;</a>
+Message-ID: <a href="&#x6d;&#x61;&#105;&#108;&#x74;&#x6f;&#58;&#51;&#55;&#54;&#55;&#x35;&#48;&#x38;&#x36;&#x38;&#x2e;&#50;&#54;&#55;&#54;&#52;&#46;&#x31;&#x33;&#x39;&#48;&#x32;&#x32;&#x39;&#53;&#57;&#x35;&#52;&#x33;&#55;&#x2e;&#x4a;&#97;&#118;&#x61;&#77;&#x61;&#x69;&#108;&#x2e;&#99;&#x66;&#x75;&#115;&#x69;&#111;&#110;&#64;&#x6d;&#x61;&#x69;&#x6c;&#50;&#46;&#x6c;&#105;&#x6e;&#111;&#100;&#101;&#46;&#99;&#x6f;&#x6d;">&#51;&#55;&#x36;&#x37;&#x35;&#x30;&#56;&#54;&#x38;&#46;&#50;&#54;&#55;&#x36;&#52;&#x2e;&#49;&#x33;&#x39;&#x30;&#50;&#50;&#x39;&#x35;&#57;&#53;&#x34;&#51;&#55;&#46;&#x4a;&#97;&#118;&#x61;&#x4d;&#x61;&#105;&#108;&#x2e;&#x63;&#102;&#117;&#115;&#105;&#x6f;&#110;&#x40;&#x6d;&#97;&#105;&#108;&#50;&#46;&#108;&#x69;&#110;&#111;&#100;&#x65;&#46;&#99;&#111;&#109;</a>
 ```
 这封邮件里每项的具体含义如下(<a href="https://support.google.com/mail/answer/29436?hl=en">参考</a>以及<a href="http://www.ietf.org/rfc/rfc0822.txt">RFC0822</a>)：</p>
 
