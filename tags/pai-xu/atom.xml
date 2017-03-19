@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: 排序 | Biaobiaoqi的博客]]></title>
   <link href="http://biaobiaoqi.github.io/tags/pai-xu/atom.xml" rel="self"/>
   <link href="http://biaobiaoqi.github.io/"/>
-  <updated>2017-02-28T19:29:00+08:00</updated>
+  <updated>2017-03-19T22:49:15+08:00</updated>
   <id>http://biaobiaoqi.github.io/</id>
   <author>
     <name><![CDATA[Biaobiaoqi]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[基本排序总结]]></title>
-    <link href="http://biaobiaoqi.github.io/blog/2014/02/24/sort-intro/"/>
-    <updated>2014-02-24T23:58:00+08:00</updated>
-    <id>http://biaobiaoqi.github.io/blog/2014/02/24/sort-intro</id>
+    <link href="http://biaobiaoqi.github.io/blog/2013/04/30/sort-intro/"/>
+    <updated>2013-04-30T23:58:00+08:00</updated>
+    <id>http://biaobiaoqi.github.io/blog/2013/04/30/sort-intro</id>
     <content type="html"><![CDATA[<p>最近准备面试，正好把刚接触数据结构时学习的排序整理了一下。算法的实现在wiki上都有详细的介绍，这里主要做归纳和总结。</p>
 
 <p>注意对排序算法的稳定性的理解：保证2个相等的数在序列的前后位置顺序和排序后它们两个的前后位置顺序相同。换句话说，相等的数值在排序时不断交换位置是不稳定的。</p>
